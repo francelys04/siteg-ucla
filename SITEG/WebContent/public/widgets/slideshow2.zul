@@ -1,0 +1,10 @@
+<zk>
+	  <html>
+				<ul id="diapos">
+			        <li><img src="public/imagenes/portal/decanato.jpg" alt="" width="500" height="150" /></li>
+			        <li><img src="public/imagenes/portal/decanato2.jpg" alt="" width="500" height="150" /></li>
+			        <li><img src="public/imagenes/portal/logoIterator.png" alt="" width="500" height="150" /></li>
+			    </ul>
+	</html>
+	
+</zk>

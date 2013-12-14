@@ -1,0 +1,81 @@
+<window title="Cargar Estudiantes" border="normal" width="100%"
+	height="200px" closable="true" apply="controlador.CCargarEstudiante">
+
+	<style dynamic="true">
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+	</style>
+
+	<style id="estilo">
+
+		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
+		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
+		transparent; border-left: 1px solid transparent; border-top: 1px
+		solid transparent; }
+
+		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
+		transparent; }
+
+		.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd { background: white }
+
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
+		background: white; border-top: none; }
+
+
+	</style>
+
+	<separator />
+	<separator />
+	<label value="(*) "
+		style="font-weight:bold;color:red;margin-left:2%">
+	</label>
+	<label value="Campos Obligatorios"></label>
+	<separator />
+	<separator />
+	<separator />
+
+	<groupbox width="600px" style="margin-left:2%"> 
+	<grid sclass="fgrid" style="margin-left:2%">
+		<columns>
+			<column width="150px" height="30px" />
+		</columns>
+		<rows>
+
+			<row>
+
+				<hlayout>
+					<label value="*"
+						style="font-weight:bold;color:red">
+					</label>
+					<label value="Lista de Estudiantes:"
+						style="color:black" />
+
+				</hlayout>
+
+
+				<button id="btnCargarListaEstudiantes" label="Examinar">
+
+				</button>
+				<separator />
+
+
+			</row>
+		</rows>
+	</grid>
+	</groupbox>
+
+
+	<separator />
+	<separator />
+
+</window>

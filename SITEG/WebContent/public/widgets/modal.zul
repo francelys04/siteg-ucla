@@ -1,0 +1,41 @@
+<window title="Archivos" width="70%" closable="true" mode="modal">
+ <grid>
+ 				        
+            <columns>
+            	<column width="20%" label="Programas" align="center" />
+                <column width="50%" label="Reglamentos" align="center" />
+                <column width="30%" label="Normativas TEG" align="center" />
+            </columns>
+            <rows>
+                <row>
+                    <label value="Matematica" />
+                    <button label="Descargar">
+									    <attribute name="onClick"><![CDATA[
+									        Filedownload.save("/documents/NORMATIVA.doc", null);
+									    ]]></attribute>
+					</button>
+					<button label="Descargar">
+									    <attribute name="onClick"><![CDATA[
+									        Filedownload.save("/documents/NORMATIVA.doc", null);
+									    ]]></attribute>
+					</button>
+                    
+                </row>
+                <row>
+                    <label value="Produccion" />
+                    <button label="Descargar">
+									    <attribute name="onClick"><![CDATA[
+									        Filedownload.save("/documents/NORMATIVA.doc", null);
+									    ]]></attribute>
+					</button>
+					<button label="Descargar">
+									    <attribute name="onClick"><![CDATA[
+									        Filedownload.save("/documents/NORMATIVA.doc", null);
+									    ]]></attribute>
+					</button>
+                    
+                </row>
+                
+            </rows>
+        </grid>
+</window>

@@ -1,0 +1,36 @@
+<window title="Catalogo Tipo Jurado" border="normal" width="50%"
+		id="wdwCatalogoTipoJurado"
+		apply="controlador.CTipoJurado"
+		closable="true">
+		<listbox id="ltbTipoJurado">
+			<auxhead >
+			 	<auxheader label="Tipos de Jurados" colspan="6" />
+			</auxhead>
+			<auxhead sclass="category-center">
+				<auxheader colspan="1">
+						<image
+							src="/widgets/listbox/data_filter/img/funnel.png" />
+						<textbox instant="true" width="50%" id="txtNombreMostrarTipoJurado"
+							/>
+				</auxheader>
+				<auxheader colspan="1">
+						<image
+							src="/widgets/listbox/data_filter/img/funnel.png" />
+						<textbox instant="true" width="50%" id="txtDescripcionMostrarTipoJurado"
+							 />
+			  	</auxheader>
+			</auxhead>
+			<listhead>
+				<listheader label="Nombre" align="center" width="50%" />
+				<listheader label="Descripción" align="center" width="50%" />
+			</listhead>
+		
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.descripcion}" />
+				</listitem>
+			</template>
+		</listbox>
+</window>

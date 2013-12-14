@@ -1,0 +1,39 @@
+<?page id="wdwCatalogoPrograma"  title="Catalogo Programa" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Catalogo Programa" border="normal" width="800px"
+		id="wdwCatalogoPrograma" apply="controlador.CPrograma" closable="true">
+		<listbox id="ltbPrograma" width="100%">
+			<auxhead>
+				<auxheader label="Programas" colspan="2" />
+			</auxhead>
+			<auxhead sclass="category-center">
+				<auxheader colspan="1">
+					<image
+						src="/widgets/listbox/data_filter/img/funnel.png" />
+					<textbox instant="true" width="80%"
+						id="txtNombreMostrarPrograma" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image
+						src="/widgets/listbox/data_filter/img/funnel.png" />
+					<textbox instant="true" width="80%"
+						id="txtDescripcionMostrarPrograma" />
+				</auxheader>
+
+			</auxhead>
+			<listhead>
+				<listheader label="Nombre" align="center" />
+				<listheader label="Descripcion" align="center" />
+
+			</listhead>
+
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.descripcion}" />
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>

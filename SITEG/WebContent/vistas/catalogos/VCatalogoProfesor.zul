@@ -1,0 +1,64 @@
+<?page id="wdwCatalogoProfesor"  title="Catalogo Profesor" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Catalogo Profesor" border="normal" width="800px"
+		id="wdwCatalogoProfesor"
+		apply="controlador.CProfesor"
+		closable="true">
+		<listbox id="ltbProfesor" width="100%" >
+			<auxhead >
+					<auxheader label="Profesores" colspan="6" />
+				</auxhead>
+				<auxhead sclass="category-center">
+					<auxheader colspan="1">
+						<image
+							src="/widgets/listbox/data_filter/img/funnel.png" />
+						<textbox instant="true" width="100px" id="txtCedulaMostrarProfesor"
+							/>
+					</auxheader>
+					<auxheader colspan="1">
+						<image
+							src="/widgets/listbox/data_filter/img/funnel.png" />
+						<textbox instant="true" width="100px" id="txtNombreMostrarProfesor"
+							 />
+					</auxheader>
+					<auxheader colspan="1">
+						<image
+							src="/widgets/listbox/data_filter/img/funnel.png" />
+						<textbox instant="true" width="100px" id="txtApellidoMostrarProfesor"
+							 />
+					</auxheader>
+					<auxheader colspan="1">
+						<image
+							src="/widgets/listbox/data_filter/img/funnel.png" />
+						<textbox instant="true" width="100px" id="txtCorreoMostrarProfesor"
+							 />
+					</auxheader>
+					<auxheader colspan="1">
+						<image
+							src="/widgets/grid/data_filter/img/funnel.png" />
+						<textbox instant="true" width="100px" id="txtCategoriaMostrarProfesor"
+							 />
+					</auxheader>
+				</auxhead>
+			<listhead>
+				<listheader label="Cedula" align="center"/>
+				<listheader label="Nombre" align="center"/>
+				<listheader label="Apellido" align="center"/>
+				<listheader label="Correo" align="center"/>
+				<listheader label="Categoria" align="center"/>
+			
+			</listhead>
+		
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.cedula}" />
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.apellido}" />
+					<listcell label="${each.correoElectronico}" />
+					<listcell label="${each.categoria.nombre}" />
+			</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>

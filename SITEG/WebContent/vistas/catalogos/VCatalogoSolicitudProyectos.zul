@@ -1,0 +1,197 @@
+<window title="Solicitudes de Proyectos" border="normal" width="100%"
+	height="500px" closable="true">
+	<separator />
+	<separator />
+	<separator />
+
+	<listbox mold="paging" pageSize="6"
+		style="margin-left:10px;margin-right:10px">
+
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox placeholder="" instant="true" width="70%"
+					value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox placeholder="" instant="true" width="70%"
+					value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox placeholder="" instant="true" width="70%"
+					value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox placeholder="" instant="true" width="80%"
+					value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox placeholder="" instant="true" width="70%"
+					value="" onChange="" />
+			</auxheader>
+
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox placeholder="" instant="true" width="70%"
+					value="" onChange="" />
+			</auxheader>
+
+
+		</auxhead>
+
+		<listhead>
+			<listheader label="Fecha" align="center" />
+			<listheader label="Área" align="center" />
+			<listheader label="Temática" align="center" />
+			<listheader label="Título" align="center" width="25%" />
+			<listheader label="Nombre Tutor" align="center" />
+			<listheader label="Apellido Tutor" align="center" />
+		</listhead>
+
+
+		<listitem id="verificarSolicitudes"
+			apply="controlador.CInicio">
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label="20/11/2013"></listcell>
+			<listcell label="Matematica aplicada"></listcell>
+			<listcell label="Grafos"></listcell>
+			<listcell
+				label="Implementacion de los grafos en la fisica">
+			</listcell>
+			<listcell label="Luis"></listcell>
+			<listcell label="Garcia"></listcell>
+		</listitem>
+
+	</listbox>
+
+	<separator />
+	<separator />
+	<separator />
+
+
+
+</window>

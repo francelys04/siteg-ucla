@@ -1,0 +1,19 @@
+<grid width="100%" style="overflow-y:auto;">
+					        <auxhead>
+					            <auxheader colspan="2" label="Cronograma de Actividades" />
+					        </auxhead>
+					        <columns>
+					            <column  width="40%">Fecha</column>
+					            <column  width="60%">Actividades</column>
+					        </columns>
+					        <rows sclass="narrow">
+					            <row>
+					                <label value="02/11/2013" /> <!-- Cargar las fechas -->
+					                <label value="Inscripcion Proyectos" /> <!--Cargar las actividades  -->
+					        </row>
+					            <row>
+					                <label value="02/02/2014" />
+					            	 <label value="Inscripcion del TEG" />
+					            </row>
+					        </rows>
+					    </grid>
