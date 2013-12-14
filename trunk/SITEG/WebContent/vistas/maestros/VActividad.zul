@@ -1,6 +1,5 @@
-<window id="wdwActividad" title="Actividad" border="normal"
-	width="100%" height="85%" closable="true"
-    apply="controlador.CActividad">
+<window id="wdwActividad" title="Actividad" border="normal" width="100%"
+	height="380px" closable="true" apply="controlador.CActividad">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -45,7 +44,28 @@
 	<separator />
 	<separator />
 
-	<groupbox width="80%" height="200px"
+	<!-- Lista de popus -->
+	<popup id="pupNombreActividad">
+        <toolbarbutton label="Solo se permite el ingreso de letras" />
+    </popup>
+    <popup id="pupDescripcionActividad">
+     	<toolbarbutton label="Solo se permite el ingreso de nÃºmeros" />
+    </popup>
+     <popup id="pupGuardarActividad">
+     	<toolbarbutton label="Presione aqui para guardar una actividad" />
+    </popup>
+     <popup id="pupCancelarActividad">
+     	<toolbarbutton label="Presione aqui para limpar los campos" />
+    </popup>
+     <popup id="pupEliminarActividad">
+     	<toolbarbutton label="Presione aqui para eliminar una actividad" />
+    </popup>
+    <popup id="pupCatalogoActividad">
+     	<toolbarbutton label="Presione aqui para ver la lista de actividades" />
+    </popup>
+    <!-- Fin de popus -->    
+
+	<groupbox width="95%" height="200px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -59,35 +79,35 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Nombre:" style="font-weight:bold" />
+						<label value="Nombre:" style="color:black" />
 					</hlayout>
 
 					<hbox>
 
-						<textbox id="txtNombreActividad" width="120%" />
+						<textbox id="txtNombreActividad" width="120%"
+							tooltip="pupNombreActividad" />
+
 
 						<button id="btnCatalogoActividad"
-							image="public/imagenes/iconos/catalogo.png" style="margin-left:40px">
+							image="/imagenes/catalogo.png" style="margin-left:40px"
+							tooltip="pupCatalogoActividad">
 						</button>
 
 					</hbox>
 				</row>
 
 				<row>
-
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Descripción:"
-							style="font-weight:bold" />
+						<label value="DescripciÃ³n:" style="color:black" />
 					</hlayout>
 
 					<textbox id="txtDescripcionActividad" rows="5"
-						cols="100" width="52%" tabindex="8" />
-
+						cols="100" width="52%" tabindex="8"
+						tooltip="pupDescripcionActividad" />
 				</row>
-
 
 			</rows>
 		</grid>
@@ -97,19 +117,22 @@
 	<separator />
 	<separator />
 
-	<panel border="normal" width="80%"
+	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:3%">
 		<panelchildren>
 			<div align="center">
 				<separator />
 
-				<button id="btnGuardarActividad" label="Guardar"
+				<button id="btnGuardarActividad"
+					tooltip="pupGuardarActividad" label="Guardar"
 					image="/imagenes/guardar.png" tabindex="13">
 				</button>
 				<button id="btnCancelarActividad" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="14">
+					tooltip="pupCancelarActividad" image="/imagenes/limpiar.png"
+					tabindex="14">
 				</button>
 				<button id="btnEliminarActividad" label="Eliminar"
+					tooltip="pupEliminarActividad" disabled="true"
 					image="/imagenes/eliminar.png" tabindex="15">
 				</button>
 				<separator />
