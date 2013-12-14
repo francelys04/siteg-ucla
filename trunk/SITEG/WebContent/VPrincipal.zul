@@ -1,0 +1,290 @@
+<?page title="Bienvenido" contentType="text/html;charset=UTF-8"  ?>
+<zk>
+	<?meta name="viewport" content="width=device-width, initial-scale=1.0" ?>
+	<style src="public/css/style.css" />
+	<style src="public/css/bootstrap.css" />
+	<style src="public/css/bootstrap-responsive.css" />
+	<style src="public/css/slider.css" />
+	<html>
+		<script type="text/javascript" src="js/DP.js"></script>
+
+		<script type="text/javascript" defer="true">
+			window.onload = DP.inicio;
+		</script>
+	</html>
+
+	<borderlayout style="overflow-y:scroll; overflow-x:scroll;"  >
+		<!-- norte y Encabezado -->
+		<north size="18%">
+
+			<!-- Inicio del Encabezado -->
+			<div sclass="header">
+				<div>
+					<image src="public/imagenes/portal/banner.png" width="100%" height="80px" />
+				</div>
+
+				<!-- Fin del encabezado -->
+				<!-- Inicio del Menu -->
+
+ 
+				<div>
+					<menubar id="menubar" autodrop="true">
+						<menuitem label="Inicio" onClick="alert(self.label)" />
+						<menuitem label="Quienes somos" onClick="alert(self.label)" />
+						<menuitem label="Contactanos" onClick="alert(self.label)" />
+						<menuitem label="Ayuda" onClick="alert(self.label)" />
+					</menubar>
+				</div>
+				<!--Fin del Menu -->
+			</div>
+		</north>
+		<!-- inicio del centro -->
+		<center style="margin-top:10px;" >
+		<div>
+<vbox>			
+<div>
+<hbox>
+
+	<!-- inicio Slide -->	
+				<div style="text-align:center;">
+					<html>
+						<ul id="diapos" style="margin-top:7px;">
+							<li>
+								<img class="img" src="public/imagenes/portal/noticias.png" alt=""/>
+							</li>
+							<li>
+								<img class="img" src="public/imagenes/portal/12.jpg" alt=""/>
+							</li>
+							<li>
+								<img class="img" src="public/imagenes/portal/Noticia2.png" alt="" />
+							</li>
+						</ul>
+					</html>
+				</div>
+		<!-- fin slide-->
+	</hbox>					
+	</div>			
+	<!-- inicio consulta status-->
+			<div sclass="label-info" style="float:center; width:100%; position:absolute; margin-top:10px;">
+					<panel height="80px" width="100%" border="rounded">
+						<panelchildren sclass="btn-info">
+												
+						<vbox>			
+						<hbox>
+						<div style="margin-top:10px; text-align:center;"><textbox placeholder="Ingrese aqui su cedula" id="cedulaEstatus"/></div>						
+						<div style="margin-top:10px; text-align:center"><button sclass="btn btn-primary" href="new_file4.zul">Consultar</button></div>
+						<div style="margin-left:20px;margin-top:10px; text-align:center"><label value="Consulta el estado de tu TEG" style="font-size:12px;" /></div>
+							
+							</hbox>
+						</vbox>
+						</panelchildren>
+					</panel>
+				</div>
+	<!--Fin consulta status-->	
+	
+<hbox>		
+	<!-- inicio Solicita tu tutor -->
+<div style="float:left;margin-top:90px;">
+
+<panel height="300px" width="100%" border="rounded" framable="true"  >
+<panelchildren >
+<vbox>
+
+<div style=" text-align:center;" sclass="btn-primary"><label style="font-size: 10px; font: oblique bold 90% cursive;">Solicita tu tutor </label></div>
+<div  style=" text-align:center;"><image src="public/imagenes/portal/tutor.jpg" width="60%" height="80%" /></div>
+<div style=" text-align:center;"><label style="background-color:#fff; font-size: 12px;">Realiza una peticion de tutoria para comenzar tu proyecto de TEG</label></div>
+<div style="text-align:center;"><button sclass="btn btn-primary" id="botonSolicitarTutor"  label="Haz click aqui"  width="125px" dir="reverse"/></div>
+							
+							</vbox>
+						</panelchildren>
+					</panel>
+				</div>
+	<!-- Fin Solicita tu tutor -->	
+	
+	<!-- inicio informacion de interes-->
+
+			<div style="margin-top:90px; background-color:#A9E2F3;" width="100%">			
+			<panel height="300px" width="100%" border="rounded" framable="true" >
+			<panelchildren style="overflow-y:scroll;"  >
+
+<vbox>			
+			<div style=" text-align:center;" sclass="btn-primary"><label style="font-size: 10px; font: oblique bold 90% cursive; " value="Infomacion de interes"/></div>
+			<div style=" text-align:center;"><label style="background-color:#fff; font-size: 12px;">Aqui puedes buscar toda la informacion para realizar tu TEG</label></div>
+				<div  style=" text-align:center;"><image src="public/imagenes/portal/buscarinfo.jpeg" width="40%" height="30%" /></div>
+			<!--  INICIO MENU INFO -->
+			<div>
+			 <menubar id="menubar_ver" orient="vertical" autodrop="true">
+					            <menu label="Tutores disponibles">
+					            <menupopup>
+					               	<menuseparator></menuseparator>
+					                <menuitem label="Licenciatura en Matematica" onClick="alert(self.label)" />
+					                <menuitem label="Ingenieria de Produccion" onClick="alert(self.label)" />
+					                
+					            </menupopup>
+					        </menu>
+					        
+					           <menu label="Areas de Investigacion">
+					            <menupopup>
+					               	<menuseparator></menuseparator>
+					                <menuitem label="Licenciatura en Matematica" onClick="alert(self.label)" />
+					                <menuitem label="Ingenieria de Produccion" onClick="alert(self.label)" />
+					                
+					            </menupopup>
+					        </menu>
+					           <menu label="Requisitos">
+					            <menupopup>
+					               	<menuseparator></menuseparator>
+					                <menuitem label="Licenciatura en Matematica" onClick="alert(self.label)" />
+					                <menuitem label="Ingenieria de Produccion" onClick="alert(self.label)" />
+					                
+					            </menupopup>
+					        </menu>
+					          <menu label="Descargas">
+					            <menupopup>
+					               	<menuseparator></menuseparator>
+					                <menuitem label="Licenciatura en Matematica" onClick="alert(self.label)" />
+					                <menuitem label="Ingenieria de Produccion" onClick="alert(self.label)" />
+					                
+					            </menupopup>
+					        </menu>
+			   
+					        </menubar>
+			
+			
+			
+			
+			</div>
+			</vbox>
+			<!-- FIN MENU INFO -->
+			
+			
+		
+			
+			</panelchildren>
+			</panel>
+				</div>
+					<!-- fin informacion de interes-->
+<!--Inicio Biblioteca -->	
+
+						<div style="float:left;margin-top:90px;">
+						
+						<panel height="300px" width="100%" border="rounded" framable="true"  >
+						<panelchildren >
+						<vbox>
+						
+						<div style=" text-align:center;" sclass="btn-primary"><label style="font-size: 10px; font: oblique bold 90% cursive;">Biblioteca virtual </label></div>
+							<div  style=" text-align:center;"><image src="public/imagenes/portal/biblioteca.jpeg" width="60%" height="80%" /></div>
+							<div style=" text-align:center;"><label style="background-color:#fff; font-size: 12px;">Consulta aqui proyectos realizados anteriormente</label></div>
+						 <div style="text-align:center;"><button apply="controlador.CInicio" sclass="btn btn-primary" label="Haz click aqui"  width="125px" dir="reverse"/></div>
+							
+							</vbox>
+						</panelchildren>
+					</panel>
+				</div>
+
+
+<!--FIN Biblioteca -->				
+			
+				</hbox>	
+			
+			</vbox>
+			</div>
+		</center>
+
+		<east title="" sclass="body_left" size="30%" flex="true"
+			style="margin-top:10px;">
+			<vlayout style="overflow:auto;">
+				<window title="Iniciar Sesion" border="normal" width="100%">
+					<vlayout>
+						<hlayout width="100%">
+<!--Inicio sesion  -->
+						<h:form id="f" name="f" action="j_spring_security_check"
+			method="POST" xmlns:h="native">
+							<textbox placeholder="Usuario" id="log_usuario" name="j_username" hflex="1" />
+							<textbox placeholder="Clave" id="log_clave" hflex="1" type="password" name="j_password" />
+							<h:input sclass="btn btn-primary" type="submit" value="Entrar" />
+							<h:input sclass="btn btn-primary" type="reset" value="Limpiar" />
+							</h:form>
+						</hlayout>
+					</vlayout>
+				</window>
+				<!-- Inicio del cronograma de actividades -->
+				<window title="Cronograma de actividades" border="normal">
+					<tabbox id="tb" width="100%" height="200px" mold="accordion">
+						<tabs>
+							<tab label="Matematica" />
+							<tab label="Produccion" />
+						</tabs>
+						<tabpanels>
+							<tabpanel>
+								<grid width="100%" vflex="1" style="overflow-y:auto;">
+
+									<columns>
+										<column width="25%">
+											Fecha
+										</column>
+										<column width="50%">
+											Actividades
+										</column>
+										<column width="25%">
+											Requisitos
+										</column>
+									</columns>
+									<rows sclass="narrow">
+										<row>
+											<label value="02/11/2013" />
+											<!-- Cargar las fechas -->
+											<label value="Inscripcion Proyectos" />
+											<!--Cargar las actividades -->
+											<label value="ver requisitos" />
+										</row>
+										<row>
+											<label value="02/02/2014" />
+											<label value="Inscripcion del TEG" />
+											<label value="ver requisitos" />
+										</row>
+									
+									</rows>
+								</grid>
+							</tabpanel>
+							<tabpanel>
+								<grid width="100%" vflex="1" style="overflow-y:auto;">
+
+									<columns>
+										<column width="40%">
+											Fecha
+										</column>
+										<column width="60%">
+											Actividades
+										</column>
+									</columns>
+									<rows sclass="narrow">
+										<row>
+											<label value="02/11/2013" />
+											<!-- Cargar las fechas -->
+											<label value="Inscripcion Proyectos" />
+											<!--Cargar las actividades -->
+										</row>
+										<row>
+											<label value="02/02/2014" />
+											<label value="Inscripcion del TEG" />
+										</row>
+									</rows>
+								</grid>
+							</tabpanel>
+						</tabpanels>
+					</tabbox>
+				</window>
+				<!-- Fin del cronograma de actividades -->
+
+
+				<window title="Timeline" border="normal" width="100%" vflex="1"
+					contentStyle="overflow:auto;">
+					<include src="public/widgets/twitter.html" />
+				</window>
+
+			</vlayout>
+		</east>
+	
+	</borderlayout>
+</zk>

@@ -1,0 +1,416 @@
+<window title="Configurar Programa" border="normal" width="100%"
+	height="585px" closable="true" apply="controlador.CConfigurarPrograma">
+	<separator />
+
+	<style dynamic="true">
+		.GridLayoutNoBorder tr.z-row td.z-row-inner,
+		tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right:
+		none; border-bottom: none; }
+
+	</style>
+
+	<style id="estilo">
+
+		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
+		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right:
+		none; border-bottom: none; }
+
+		.fgrid .z-grid-odd .fgrid
+		.z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7;
+		border-bottom: 1px solid
+		transparent; border-left: 1px solid
+		transparent; border-top: 1px
+		solid transparent; }
+
+		.fgrid .z-grid-odd
+		.fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd {
+		background: none repeat scroll 0 0
+		transparent; }
+
+		.fgrid tr.z-grid-odd
+		td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd {
+		background: white }
+
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row
+		.z-cell {
+		background: white; border-top: none; }
+
+		.pointer { cursor:
+		pointer; } .actionColumn { margin: 70px 34px;
+
+
+	</style>
+	<separator />
+
+	<label value="(*) " style="font-weight:bold;color:red;margin-left:2%">
+	</label>
+	<label value="Campos Obligatorios"></label>
+	<separator />
+	<separator />
+	<separator />
+
+
+	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+		<columns>
+			<column width="80%" height="30px" />
+		</columns>
+		<rows>
+
+			<row>
+				<hbox>
+					<hlayout>
+						<label value="*" style="font-weight:bold;color:red" />
+						<label value="Lapso:" style="color:black" />
+					</hlayout>
+
+					<combobox id="cmbLapsoConfigurarPrograma" autodrop="true"
+						width="120px" tabindex="12" style="margin-left:55px">
+						<template name="model">
+							<comboitem label="${each.nombre}" />
+						</template>
+					</combobox>
+				</hbox>
+
+			</row>
+
+			<row>
+				<hbox>
+					<hlayout>
+						<label value="*" style="font-weight:bold;color:red" />
+						<label value="Programa:" style="color:black" />
+					</hlayout>
+
+					<combobox id="cmbProgramaConfigurarPrograma" autodrop="true"
+						width="170px" tabindex="12" style="margin-left:35px">
+						<template name="model">
+							<comboitem label="${each.nombre}" />
+						</template>
+					</combobox>
+
+				</hbox>
+
+			</row>
+
+		</rows>
+	</grid>
+
+	<separator />
+	<separator />
+	<separator />
+
+
+	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
+		height="320px">
+		<tabs>
+			<tab label="Areas de Investigación" />
+			<tab label="Requisitos" />
+			<tab label="Items" />
+			<tab label="Condiciones" />
+		</tabs>
+		<tabpanels>
+
+			<tabpanel height="350px">
+				<separator />
+				<separator />
+				<separator />
+				<separator />
+
+
+				<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+					<columns>
+						<column width="98%" height="30%" />
+					</columns>
+					<rows>
+
+						<row>
+							<hbox>
+								<panel title="Áreas Disponibles" width="260px">
+									<panelchildren>
+										<listbox id="ltbAreasDisponibles" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true">
+											<listhead>
+												<listheader label="Nombre" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+									</panelchildren>
+								</panel>
+
+
+								<panel width="60px" style="margin-left:20px;margin-top:80px">
+									<panelchildren>
+										<div>
+
+											<button id="btnAgregarAreas" sclass="pointer"
+												image="/imagenes/right.png" tooltiptext="Agregar Items"
+												width="35px" />
+											<separator />
+											<button sclass="pointer" id="btnRemoverAreas" image="/imagenes/left.png"
+												tooltiptext="Quitar Items" width="35px" />
+
+										</div>
+									</panelchildren>
+								</panel>
+
+								<panel title="Áreas Seleccionadas" width="260px">
+									<panelchildren>
+										<listbox id="ltbAreasSeleccionadas" height="200px"
+											mold="paging" pageSize="4" oddRowSclass="non-odd" checkmark="true">
+											<listhead>
+												<listheader label="Nombre" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+												</listitem>
+											</template>
+
+
+										</listbox>
+									</panelchildren>
+								</panel>
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+
+
+			</tabpanel>
+
+			<tabpanel height="350px">
+				<separator />
+				<separator />
+				<separator />
+				<separator />
+
+
+				<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+					<columns>
+						<column width="98%" height="30%" />
+					</columns>
+					<rows>
+
+						<row>
+							<hbox>
+								<panel title="Requisitos Disponibles" width="260px">
+									<panelchildren>
+										<listbox id="ltbRequisitosDisponibles" height="200px"
+											mold="paging" pageSize="4" oddRowSclass="non-odd" checkmark="true">
+											<listhead>
+												<listheader label="Nombre" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+									</panelchildren>
+								</panel>
+
+
+								<panel width="60px" style="margin-left:20px;margin-top:80px">
+									<panelchildren>
+										<div>
+
+											<button id="btnAgregarRequisitos" sclass="pointer"
+												image="/imagenes/right.png" tooltiptext="Agregar Items"
+												width="35px" />
+											<separator />
+											<button sclass="pointer" id="btnRemoverRequisitos"
+												image="/imagenes/left.png" tooltiptext="Quitar Items" width="35px" />
+
+										</div>
+									</panelchildren>
+								</panel>
+
+								<panel title="Requisitos Seleccionados" width="260px">
+									<panelchildren>
+										<listbox id="ltbRequisitosSeleccionados" height="200px"
+											mold="paging" pageSize="4" oddRowSclass="non-odd" checkmark="true">
+											<listhead>
+												<listheader label="Nombre" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+												</listitem>
+											</template>
+
+										</listbox>
+									</panelchildren>
+								</panel>
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+			</tabpanel>
+
+			<tabpanel height="350px">
+				<separator />
+				<separator />
+				<separator />
+				<separator />
+
+
+				<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+					<columns>
+						<column width="98%" height="30%" />
+					</columns>
+					<rows>
+
+						<row>
+							<hbox>
+								<panel title="Items Disponibles" width="260px">
+									<panelchildren>
+										<listbox id="ltbItemsDisponibles" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true">
+											<listhead>
+												<listheader label="Nombre" />
+												<listheader label="Tipo" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell label="${each.tipo}">
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+									</panelchildren>
+								</panel>
+
+
+								<panel width="60px" style="margin-left:20px;margin-top:80px">
+									<panelchildren>
+										<div>
+
+											<button id="btnAgregarItems" sclass="pointer"
+												image="/imagenes/right.png" tooltiptext="Agregar Items"
+												width="35px" />
+											<separator />
+											<button sclass="pointer" id="btnRemoverItems" image="/imagenes/left.png"
+												tooltiptext="Quitar Items" width="35px" />
+
+										</div>
+									</panelchildren>
+								</panel>
+
+								<panel title="Items Seleccionados" width="260px">
+									<panelchildren>
+										<listbox id="ltbItemsSeleccionados" height="200px"
+											mold="paging" pageSize="4" oddRowSclass="non-odd" checkmark="true">
+											<listhead>
+												<listheader label="Nombre" />
+												<listheader label="Tipo" />
+											</listhead>
+
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell label="${each.tipo}">
+													</listcell>
+												</listitem>
+											</template>
+
+										</listbox>
+									</panelchildren>
+								</panel>
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+			</tabpanel>
+
+			<tabpanel height="350px">
+				<separator />
+				<separator />
+				<separator />
+				<separator />
+
+
+				<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+					<columns>
+						<column width="98%" height="30%" />
+					</columns>
+					<rows>
+
+						<row>
+							<hbox>
+								<panel title="Condiciones Seleccionadas" width="270px">
+									<panelchildren>
+
+										<listbox id="ltbCondiciones" mold="paging"
+											pageSize="2">
+											<listhead>
+												<listheader label="Condicion" width="60%" align="center" />
+												<listheader label="Valor" align="center" />
+
+											</listhead>
+
+												<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													<div class='text-center'><spinner inplace="true"
+                           							width="98%"/></div>
+													</listcell>
+													<listcell label="${each.valor}">
+													</listcell>
+												</listitem>
+											</template>
+
+										</listbox>
+									</panelchildren>
+								</panel>
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+
+
+			</tabpanel>
+
+		</tabpanels>
+	</tabbox>
+
+	<separator />
+	<separator />
+
+
+	<panel border="normal" width="95%" style="margin-left:2%;margin-right:2%">
+		<panelchildren>
+			<div align="center">
+				<separator />
+				<button id="btnGuardarConfiguracionPrograma" label="Guardar"
+					image="/imagenes/guardar.png" tabindex="12">
+				</button>
+				<button id="btnCancelarConfigurarPrograma" label="Cancelar"
+					image="/imagenes/limpiar.png" tabindex="13">
+				</button>
+
+				<separator />
+
+			</div>
+		</panelchildren>
+	</panel>
+
+	<separator />
+</window>

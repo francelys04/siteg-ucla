@@ -1,0 +1,53 @@
+<zk><?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<window id="uploadVideo" border="none" height="100%" apply="fiddle.TestVM" >
+	<style>
+		IMG.displayed { display: block; margin:0 auto; padding : 150px;
+	</style>
+	<borderlayout sclass="complex-layout" height="99%">
+		<north size="100px" border="normal">
+		<div>
+				<image src="/images/banner.png" width="100%"
+					height="100px" />
+			</div>
+		</north>
+		<!-- Inicio del menu (Árbol)-->
+		<west size="25%" flex="true" maxsize="250" splittable="true"
+			collapsible="true">
+			<tree id="treeMenu" width="99%">			
+				<template name="model">
+					<treeitem context="menupopup">
+						<treerow >
+							<treecell label="${each.label}" />							
+						</treerow>
+					</treeitem>
+				</template>
+			</tree>	
+		</west>
+		<!-- Fin del banner de contenido-->
+		<center border="none">
+			<borderlayout sclass="complex-layout" height="99%">
+				<north size="30px" border="none">
+					<div align="right"
+						style="margin-right:20px;padding:5px">
+						<label style="color: red" value="Usuario: ${desktop.execution.userPrincipal.name}" />
+						<a href="../j_spring_security_logout" style="color: blue"> Cerrar Sesion</a>
+					</div>
+				</north>
+				<center>
+					<div>
+						<include id="formularios"></include>
+					</div>
+				</center>
+			</borderlayout>
+		</center>
+		<south height="3%" border="normal"
+			class="nav nav-pills alert-info">
+			<div align="center">
+				<label
+					value=" SITEG Â© 2013 Elaborado por Singleton - Todos los Derechos Reservados">
+				</label>
+			</div>
+		</south>
+	</borderlayout>
+</window>
+</zk>

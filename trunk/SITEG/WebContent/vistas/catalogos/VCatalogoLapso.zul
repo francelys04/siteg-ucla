@@ -1,0 +1,38 @@
+<?page id="wdwCatalogoLapso"  title="Catalogo Lapso" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Catálogo Lapso Académico" border="normal" width="800px"
+		id="wdwCatalogoLapso"
+		apply="controlador.CLapso"
+		closable="true">
+		<listbox id="ltbLapso" width="100%" >
+			<auxhead >
+					<auxheader label="Lapsos Académicos" colspan="6" />
+				</auxhead>
+				<auxhead sclass="category-center">
+					<auxheader colspan="1">
+						<image
+							src="/widgets/listbox/data_filter/img/funnel.png" />
+						<textbox instant="true" width="100px" id="txtNombreMostrarLapso"
+							/>
+					</auxheader>
+					<auxheader colspan="1">
+					</auxheader>
+					<auxheader colspan="1">
+					</auxheader>
+				</auxhead>
+			<listhead>
+				<listheader label="Nombre" align="center"/>
+				<listheader label="Fecha Inicio" align="center"/>
+				<listheader label="Fecha Fin" align="center"/>			
+			</listhead>
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.fechaInicial}" />
+					<listcell label="${each.fechaFinal}" />
+			</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>

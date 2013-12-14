@@ -1,0 +1,40 @@
+<?page id="wdwCatalogoActividad"  title="Catalogo Actividad" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Catalogo Actividad" border="normal" width="400px"
+		id="wdwCatalogoActividad"
+		apply="controlador.CActividad"
+	
+		closable="true">
+		<listbox id="ltbActividad" width="100%" >
+			<auxhead >
+					<auxheader label="Actividad" colspan="1" />
+				</auxhead>
+				<auxhead sclass="category-center">
+					<auxheader colspan="1">
+						<image
+							src="/widgets/listbox/data_filter/img/funnel.png" />
+						<textbox instant="true" width="200px" id="txtNombreMostrarActividad"
+							/>
+					</auxheader>
+					<auxheader colspan="1">
+						<image
+							src="/widgets/listbox/data_filter/img/funnel.png" />
+						<textbox instant="true" width="200px" id="txtDescripcionMostrarActividad"
+							 />
+					</auxheader>
+				</auxhead>
+			<listhead>
+				<listheader label="Nombre" align="center"/>
+				<listheader label="Decripcion" align="center"/>
+			</listhead>
+		
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.descripcion}" />
+			</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>

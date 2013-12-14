@@ -1,0 +1,5 @@
+<zk>
+<label style="color: red; font-size: 24px" value="Usuario o Contraseña Incorrectos" />
+<space/>
+<a href="/VPrincipal.zul"> Volver al principal</a>
+</zk>

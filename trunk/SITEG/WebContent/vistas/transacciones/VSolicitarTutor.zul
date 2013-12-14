@@ -1,0 +1,421 @@
+<window title="Solicitar Tutor" border="normal" width="700px"
+	height="730px" closable="true">
+	<separator />
+
+	<style dynamic="true">
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+	</style>
+
+	<style id="estilo">
+
+		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
+		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
+		transparent; border-left: 1px solid transparent; border-top: 1px
+		solid transparent; }
+
+		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
+		transparent; }
+
+		.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd { background: white }
+
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
+		background: white; border-top: none; }
+
+	</style>
+
+
+
+	<label value="(*) "
+		style="font-weight:bold;color:red;margin-left:2%">
+	</label>
+	<label value="Campos Obligatorios"></label>
+	<separator />
+	<separator />
+
+	<div align="right">
+		<label value="Fecha:" style="margin-right:10px"></label>
+		<datebox id="db1" cols="12" style="margin-right:40px"
+			format="short" onCreate="self.value = new Date()" mold="rounded">
+		</datebox>
+	</div>
+
+	<separator />
+	<separator />
+	<separator />
+
+
+	<groupbox width="95%" height="520px"
+		style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
+
+
+		<grid sclass="fgrid" style="margin-left:2%">
+			<columns>
+				<column width="580px" height="20px" />
+			</columns>
+			<rows>
+				<row>
+					<hbox>
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red" />
+							<label value="Programa:"
+								style="font-weight:bold" />
+						</hlayout>
+
+						<combobox id="cmbProgramaSolicitud"
+							autodrop="true" width="150px" style="margin-left:60px"
+							tabindex="10">
+							<comboitem label="Infórmatica" />
+							<comboitem label="Producción" />
+							<comboitem label="Analisis de sistemas" />
+							<comboitem label="Matemáticas" />
+						</combobox>
+					</hbox>
+				</row>
+
+				<row>
+					<hbox>
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red">
+							</label>
+							<label value="Area:"
+								style="font-weight:bold" />
+						</hlayout>
+
+						<combobox id="cmbAreaSolicitud" autodrop="true"
+							width="150px" style="margin-left:90px" tabindex="10">
+							<comboitem label="Matematica Pura" />
+							<comboitem label="Matemaatica Aplicada" />
+						</combobox>
+
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red;margin-left:30px">
+							</label>
+							<label value="Temática:"
+								style="font-weight:bold" />
+						</hlayout>
+
+						<combobox id="cmbTematicaSolicitud"
+							autodrop="true" width="150px" tabindex="10"
+							style="margin-left:25px">
+							<comboitem label="Algebra" />
+							<comboitem label="Grafos" />
+							<comboitem label="Ecuaciones Diferenciales" />
+						</combobox>
+					</hbox>
+				</row>
+
+				<row>
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Descripción (Título Tentativo):"
+							style="font-weight:bold" />
+					</hlayout>
+				</row>
+
+				<row>
+					<textbox id="txtTituloSolicitud" width="500px"
+						rows="3" cols="100" />
+				</row>
+
+
+			</rows>
+		</grid>
+
+		<separator />
+		<separator />
+
+		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
+			height="300px">
+			<tabs>
+				<tab label="Datos del Estudiante" />
+				<tab label="Datos del Tutor" />
+			</tabs>
+			<tabpanels>
+				<tabpanel height="150px">
+					<separator />
+					<separator />
+					<grid sclass="fgrid" style="margin-left:2%">
+						<columns>
+							<column width="20%" height="30%" />
+						</columns>
+						<rows>
+							<row>
+								<hlayout>
+									<label value="*"
+										style="font-weight:bold;color:red">
+									</label>
+									<label value="Cedula:"
+										style="font-weight:bold" />
+								</hlayout>
+
+								<textbox id="txtCedulaEstudiante"
+									width="20%" />
+							</row>
+							<row>
+								<hlayout>
+									<label value="*"
+										style="font-weight:bold;color:red" />
+									<label value="Nombre:"
+										style="font-weight:bold" />
+								</hlayout>
+
+								<hbox>
+									<textbox id="txtNombreEstudiante"
+										width="90%" tabindex="2" />
+
+									<hlayout>
+										<label value="*"
+											style="font-weight:bold;color:red;margin-left:5px" />
+										<label value="Apellido:"
+											style="font-weight:bold" />
+									</hlayout>
+
+									<textbox id="txtApellidoEstudiante"
+										width="90%" style="margin-left:10px" tabindex="3" />
+								</hbox>
+							</row>
+
+							<row>
+
+								<hlayout>
+									<label value="*"
+										style="font-weight:bold;color:red" />
+									<label value="Correo:"
+										style="font-weight:bold" />
+								</hlayout>
+
+								<textbox id="txtCorreoEstudiante"
+									width="35%" tabindex="11" />
+
+
+							</row>
+
+						</rows>
+					</grid>
+
+					<separator />
+					<separator />
+
+					<grid sclass="fgrid"
+						style="margin-left:2%;margin-right:1%">
+						<columns>
+							<column width="100%" height="30%" />
+						</columns>
+						<rows>
+
+							<row>
+								<hbox>
+									<panel>
+										<panelchildren>
+											<listbox mold="paging"
+												pageSize="2" width="100%">
+
+												<listhead>
+													<listheader
+														label="Cédula" align="center" />
+													<listheader
+														label="Nombre" align="center" />
+													<listheader
+														label="Apellido" align="center" />
+													<listheader
+														label="Correo" align="center" width="30%" />
+												</listhead>
+
+												<listitem>
+													<listcell
+														label="">
+													</listcell>
+													<listcell
+														label="">
+													</listcell>
+													<listcell
+														label="">
+													</listcell>
+													<listcell
+														label="">
+													</listcell>
+												</listitem>
+
+												<listitem>
+													<listcell
+														label="">
+													</listcell>
+													<listcell
+														label="">
+													</listcell>
+													<listcell
+														label="">
+													</listcell>
+													<listcell
+														label="">
+													</listcell>
+												</listitem>
+
+												<listitem>
+													<listcell
+														label="">
+													</listcell>
+													<listcell
+														label="">
+													</listcell>
+													<listcell
+														label="">
+													</listcell>
+													<listcell
+														label="">
+													</listcell>
+												</listitem>
+
+											</listbox>
+										</panelchildren>
+									</panel>
+
+
+									<panel width="70px">
+										<panelchildren>
+											<div
+												style="margin:0 auto;padding:20px;">
+
+												<image
+													src="/imagenes/agregar.png">
+												</image>
+												<separator
+													height="15px" />
+												<image
+													src="/imagenes/quitar.png">
+
+												</image>
+
+											</div>
+										</panelchildren>
+									</panel>
+
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+
+				</tabpanel>
+
+				<tabpanel height="150px">
+					<separator />
+					<separator />
+					<grid sclass="fgrid" style="margin-left:2%">
+						<columns>
+							<column width="20%" height="30px" />
+						</columns>
+						<rows>
+							<row>
+								<hlayout>
+									<label value="*"
+										style="font-weight:bold;color:red">
+									</label>
+									<label value="Cedula:"
+										style="font-weight:bold" />
+								</hlayout>
+
+								<hbox>
+
+									<textbox id="txtCedulaProfesor"
+										width="100px" />
+
+									<button id="btnCatalogoProfesorArea"
+										style="margin-left:10px" image="/imagenes/catalogo.png">
+									</button>
+
+								</hbox>
+
+							</row>
+							<row>
+								<hlayout>
+									<label value="*"
+										style="font-weight:bold;color:red" />
+									<label value="Nombre:"
+										style="font-weight:bold" />
+								</hlayout>
+
+								<hbox>
+									<textbox id="txtNombreProfesor"
+										width="90%" tabindex="2" />
+
+									<hlayout>
+										<label value="*"
+											style="font-weight:bold;color:red;margin-left:5px" />
+										<label value="Apellido:"
+											style="font-weight:bold" />
+									</hlayout>
+
+									<textbox id="txtApellidoProfesor"
+										width="90%" style="margin-left:10px" tabindex="3" />
+								</hbox>
+							</row>
+
+							<row>
+
+								<hlayout>
+									<label value="*"
+										style="font-weight:bold;color:red" />
+									<label value="Correo:"
+										style="font-weight:bold" />
+								</hlayout>
+
+								<textbox id="txtCorreoProfesor"
+									width="35%" tabindex="11" />
+
+
+							</row>
+
+						</rows>
+					</grid>
+
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+
+	</groupbox>
+
+	<separator />
+	<separator />
+
+	<panel border="normal" width="95%"
+		style="margin-left:2%;margin-right:3%">
+		<panelchildren>
+			<div align="center">
+				<separator />
+
+				<button id="btnEnviarSolicitudtutoria" label="Enviar"
+					image="/imagenes/enviar.png" tabindex="13">
+				</button>
+				<button id="btnCancelarSolicitudTutoria"
+					label="Cancelar" image="/imagenes/limpiar.png" tabindex="14">
+				</button>
+				<separator />
+
+			</div>
+		</panelchildren>
+	</panel>
+
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+
+</window>

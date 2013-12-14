@@ -1,0 +1,282 @@
+<window title="Crear Cronograma" border="normal" width="100%"
+	height="500px" closable="true">
+
+	<separator />
+
+	<style dynamic="true">
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+	</style>
+
+	<style id="estilo">
+
+		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
+		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
+		transparent; border-left: 1px solid transparent; border-top: 1px
+		solid transparent; }
+
+		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
+		transparent; }
+
+		.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd { background: white }
+
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
+		background: white; border-top: none; }
+
+	</style>
+	<separator />
+
+	<label value="(*) "
+		style="font-weight:bold;color:red;margin-left:2%">
+	</label>
+	<label value="Campos Obligatorios"></label>
+	<separator />
+	<separator />
+	<separator />
+
+
+	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+		<columns>
+			<column width="12%" height="30%" />
+		</columns>
+		<rows>
+
+			<row>
+				<hlayout>
+					<label value="*"
+						style="font-weight:bold;color:red">
+					</label>
+					<label value="Programa:" style="font-weight:bold" />
+				</hlayout>
+
+				<textbox id="txtProgramaCronograma" width="150px"
+					style="margin-left:20px" />
+			</row>
+
+			<row>
+				<hlayout>
+					<label value="*"
+						style="font-weight:bold;color:red">
+					</label>
+					<label value="Lapso:" style="font-weight:bold" />
+				</hlayout>
+
+				<combobox id="cmbLapsoCronograma"
+					style="margin-left:20px" autodrop="true" width="10%"
+					tabindex="12">
+					<comboitem label="2013-1" />
+					<comboitem label="2013-2" />
+					<comboitem label="2014-1" />
+					<comboitem label="2014-2" />
+				</combobox>
+			</row>
+		</rows>
+
+	</grid>
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+
+
+	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+		<columns>
+			<column width="95%" height="30%" />
+		</columns>
+		<rows>
+
+			<row>
+				<hbox>
+					<panel title="Actividades Disponibles"
+						width="240px">
+						<panelchildren>
+							<listbox id="left" mold="paging"
+								pageSize="5" multiple="true" checkmark="true">
+								<listitem>
+									<listcell
+										label="solicitud de tutorías" />
+								</listitem>
+								<listitem>
+									<listcell
+										label="Recepción de Proyectos" />
+								</listitem>
+								<listitem>
+									<listcell label="Recepción de TEG" />
+								</listitem>
+								<listitem>
+									<listcell
+										label="solicitudes de Defensa" />
+								</listitem>
+
+							</listbox>
+						</panelchildren>
+					</panel>
+
+					<panel width="30px"
+						style="margin:0 auto;padding:35px;">
+						<panelchildren>
+							<div>
+
+								<image src="/imagenes/right.png"></image>
+								<separator height="15px" />
+								<image src="/imagenes/left.png">
+
+								</image>
+
+							</div>
+						</panelchildren>
+					</panel>
+
+
+					<panel title="Actividades Seleccionadas"
+						width="320px">
+						<panelchildren>
+
+							<listbox mold="paging" pageSize="2">
+								<listhead>
+									<listheader label="" align="center"
+										width="10%" />
+									<listheader label="Actividad"
+										width="40%" align="center" />
+									<listheader label="Fecha Inicio"
+										align="center" />
+									<listheader label="Fecha Fin"
+										align="center" />
+								</listhead>
+
+
+								<listitem>
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell
+										label="Recepción Cartas de compromiso">
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+
+								</listitem>
+
+								<listitem>
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell
+										label="Recepción Cartas de compromiso">
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+
+								</listitem>
+
+								<listitem id="evaluarSolicitudes">
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell
+										label="Recepción Cartas de compromiso">
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+								</listitem>
+								<listitem id="evaluarSolicitudes3">
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell
+										label="Recepción Cartas de compromiso">
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+								</listitem>
+								<listitem id="evaluarSolicitudes1">
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell
+										label="Recepción Cartas de compromiso">
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+								</listitem>
+								<listitem id="evaluarSolicitudes2">
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell
+										label="Recepción Cartas de compromiso">
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+									<listcell>
+										<datebox width="100%" />
+									</listcell>
+								</listitem>
+							</listbox>
+						</panelchildren>
+					</panel>
+				</hbox>
+			</row>
+		</rows>
+	</grid>
+
+
+
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+
+
+
+	<panel border="normal" width="95%"
+		style="margin-left:2%;margin-right:2%">
+		<panelchildren>
+			<div align="center">
+				<separator />
+				<button id="btnCrearCronograma" label="Crear Cronograma"
+					image="/imagenes/cronograma.png" tabindex="12">
+				</button>
+				<button id="btnCancelarCronograma" label="Cancelar"
+					image="/imagenes/limpiar.png" tabindex="13">
+				</button>
+				<separator />
+
+			</div>
+		</panelchildren>
+	</panel>
+
+	<separator />
+</window>
