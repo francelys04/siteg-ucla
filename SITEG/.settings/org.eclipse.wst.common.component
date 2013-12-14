@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="anteriorSiteg">
+    <wb-module deploy-name="SITEG">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/Siteg/build/classes"/>
-        <property name="context-root" value="anteriorSiteg"/>
+        <property name="java-output-path" value="/SITEG/build/classes"/>
+        <property name="context-root" value="SITEG"/>
     </wb-module>
 </project-modules>
