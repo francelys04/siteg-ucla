@@ -67,7 +67,7 @@
 						<textbox id="txtNombreActividad" width="120%" />
 
 						<button id="btnCatalogoActividad"
-							image="/imagenes/catalogo.png" style="margin-left:40px">
+							image="public/imagenes/iconos/catalogo.png" style="margin-left:40px">
 						</button>
 
 					</hbox>
