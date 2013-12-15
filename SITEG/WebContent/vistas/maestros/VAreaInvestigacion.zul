@@ -66,13 +66,11 @@
 					</hlayout>
 
 					<hbox>
-						
 						<textbox id="txtNombreArea" width="120%" />
 
 							<button id="btnBuscarArea"
 								image="/imagenes/catalogo.png" style="margin-left:40px">
 							</button>
-
 					</hbox>
 				</row>
 
