@@ -1,5 +1,6 @@
 package controlador;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Grid;
@@ -44,7 +46,7 @@ import servicio.SActividad;
 public class CActividad extends CGeneral {
 
 	SActividad servicioActividad = GeneradorBeans.getServicioActividad();
-
+  CCatalogoActividad catalogo = new CCatalogoActividad();
 	@Wire
 	private Textbox txtNombreActividad;
 	@Wire
@@ -57,6 +59,12 @@ public class CActividad extends CGeneral {
 	private Listbox ltbActividad;
 	@Wire
 	private Window wdwCatalogoActividad;
+	@Wire
+	private Button btnEliminarActividad;
+	
+	@Wire
+	private Button btnGuardarActividad;
+	
 	private long id = 0;
 
 	/** Metodo heredado del controlador CGeneral que permite inicializar los
@@ -108,6 +116,7 @@ public class CActividad extends CGeneral {
 				txtNombreActividad.setValue(actividad2.getNombre());
 				txtDescripcionActividad.setValue(actividad2.getDescripcion());
 				id = actividad2.getId();
+				btnEliminarActividad.setDisabled(false);
 				map.clear();
 				map = null;
 			}
@@ -119,7 +128,10 @@ public class CActividad extends CGeneral {
 	public void buscarActividad() {
 
 		Window window = (Window) Executions.createComponents(
+
 				"/vistas/catalogos/VCatalogoActividad.zul", null, null);
+		 catalogo.recibir("maestros/VActividad");
+				
 		window.doModal();
 
 	}
@@ -134,54 +146,33 @@ public class CActividad extends CGeneral {
 		servicioActividad.guardar(actividad);
 		cancelarActividad();
 		alert("Actividades Guardadas");
+		
 		id = 0;
 	}
 
 	// Aca se eliminan logicamente las actividades
 	@Listen("onClick = #btnEliminarActividad")
 	public void eliminarActividad() {
+		btnEliminarActividad.setDisabled(false);
 		System.out.println("Tipo de Jurado Eliminado");
 		Actividad actividad = servicioActividad.buscarActividad(id);
 		actividad.setEstatus(false);
 		servicioActividad.guardar(actividad);
 		cancelarActividad();
 		alert("Actividad Eliminada");
+		
 	}
 
 	// Aca se mandan a limpiar los campos de textos de la vista
 	@Listen("onClick = #btnCancelarActividad")
 	public void cancelarActividad() {
+		btnEliminarActividad.setDisabled(true);
 		id = 0;
 		txtNombreActividad.setValue("");
 		txtDescripcionActividad.setValue("");
+		
 	}
 
-	// Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
-	// descripcion
-	@Listen("onChange = #txtNombreMostrarActividad,#txtDescripcionMostrarActividad")
-	public void filtrarDatosCatalogo() {
-		List<Actividad> actividad1 = servicioActividad.buscarActivos();
-		List<Actividad> actividad2 = new ArrayList<Actividad>();
-
-		for (Actividad actividad : actividad1) {
-			if (actividad
-					.getNombre()
-					.toLowerCase()
-					.contains(
-							txtNombreMostrarActividad.getValue().toLowerCase())
-					&& actividad
-							.getDescripcion()
-							.toLowerCase()
-							.contains(
-									txtDescripcionMostrarActividad.getValue()
-											.toLowerCase())) {
-				actividad2.add(actividad);
-			}
-		}
-
-		ltbActividad.setModel(new ListModelList<Actividad>(actividad2));
-
-	}
 
 	// Aca se selecciona una actividad del catalogo
 	@Listen("onDoubleClick = #ltbActividad")
@@ -198,4 +189,5 @@ public class CActividad extends CGeneral {
 		wdwCatalogoActividad.onClose();
 
 	}
+
 }
