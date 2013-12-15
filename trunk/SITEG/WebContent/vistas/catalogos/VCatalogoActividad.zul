@@ -1,31 +1,28 @@
 <?page id="wdwCatalogoActividad"  title="Catalogo Actividad" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Catalogo Actividad" border="normal" width="400px"
+	<window title="Catalogo Actividad" border="normal" width="800px"
 		id="wdwCatalogoActividad"
 		apply="controlador.CActividad"
 	
 		closable="true">
-		<listbox id="ltbActividad" width="100%" >
-			<auxhead >
-					<auxheader label="Actividad" colspan="1" />
-				</auxhead>
+		<listbox id="ltbActividad" width="100%"  mold="paging" pageSize="10">
 				<auxhead sclass="category-center">
 					<auxheader colspan="1">
 						<image
-							src="/widgets/listbox/data_filter/img/funnel.png" />
-						<textbox instant="true" width="200px" id="txtNombreMostrarActividad"
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtNombreMostrarActividad"
 							/>
 					</auxheader>
 					<auxheader colspan="1">
 						<image
-							src="/widgets/listbox/data_filter/img/funnel.png" />
-						<textbox instant="true" width="200px" id="txtDescripcionMostrarActividad"
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtDescripcionMostrarActividad"
 							 />
 					</auxheader>
 				</auxhead>
 			<listhead>
 				<listheader label="Nombre" align="center"/>
-				<listheader label="Decripcion" align="center"/>
+				<listheader label="Descripción" align="center"/>
 			</listhead>
 		
 

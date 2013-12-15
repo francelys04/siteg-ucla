@@ -4,20 +4,25 @@
 		id="wdwCatalogoLapso"
 		apply="controlador.CLapso"
 		closable="true">
-		<listbox id="ltbLapso" width="100%" >
-			<auxhead >
-					<auxheader label="Lapsos Académicos" colspan="6" />
-				</auxhead>
+		<listbox id="ltbLapso" width="100%" mold="paging" pageSize="10">
 				<auxhead sclass="category-center">
 					<auxheader colspan="1">
 						<image
-							src="/widgets/listbox/data_filter/img/funnel.png" />
-						<textbox instant="true" width="100px" id="txtNombreMostrarLapso"
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtNombreMostrarLapso"
 							/>
 					</auxheader>
 					<auxheader colspan="1">
+					<image
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtNombreMostrarInicioLapso"
+							/>
 					</auxheader>
 					<auxheader colspan="1">
+					<image
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtNombreMostrarFinLapso"
+							/>
 					</auxheader>
 				</auxhead>
 			<listhead>

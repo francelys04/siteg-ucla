@@ -114,7 +114,7 @@ public class CTematica extends CGeneral {
 	public void buscarTematica() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoTematica.zul", null, null);
+				"/vistas/catalogos/VCatalogoTematica.zul", null, null);
 		window.doModal();
 
 	}
@@ -199,7 +199,7 @@ public class CTematica extends CGeneral {
 		Tematica tematicaDatosCatalogo = (Tematica) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", tematicaDatosCatalogo.getId());
-		String vista = "VTematica";
+		String vista = "maestros/VTematica";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");

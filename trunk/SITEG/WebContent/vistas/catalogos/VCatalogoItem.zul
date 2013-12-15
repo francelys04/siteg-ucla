@@ -4,28 +4,26 @@
 		id="wdwCatalogoItem"
 		apply="controlador.CItem"
 		closable="true">
-		<listbox id="ltbItem" width="100%" >
-			<auxhead >
-					<auxheader label="Items" colspan="6" />
-				</auxhead>
+		
+		<listbox id="ltbItem" width="100%"  mold="paging" pageSize="10">
 				<auxhead sclass="category-center">
 					<auxheader colspan="1">
 						<image
-							src="/widgets/listbox/data_filter/img/funnel.png" />
-						<textbox instant="true" width="100px" id="txtNombreMostrarItem"
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtNombreMostrarItem"
 							/>
 					</auxheader>
 					<auxheader colspan="1">
 						<image
-							src="/widgets/listbox/data_filter/img/funnel.png" />
-						<textbox instant="true" width="100px" id="txtDescripcionMostrarItem"
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtDescripcionMostrarItem"
 							 />
 					</auxheader>				
 					
 				</auxhead>
 			<listhead>
 				<listheader label="Nombre" align="center"/>
-				<listheader label="Descripcion" align="center"/>
+				<listheader label="Descripción" align="center"/>
 				
 			</listhead>
 		

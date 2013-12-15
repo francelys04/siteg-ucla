@@ -91,7 +91,7 @@ public class CTipoJurado extends CGeneral {
 	public void buscarTipoJurado() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoTipoJurado.zul", null, null);
+				"/vistas/catalogos/VCatalogoTipoJurado.zul", null, null);
 		window.doModal();
 
 	}
@@ -163,7 +163,7 @@ public class CTipoJurado extends CGeneral {
 		TipoJurado tipoJuradoDatosCatalogo = (TipoJurado) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", tipoJuradoDatosCatalogo.getId());
-		String vista = "VTipoJurado";
+		String vista = "maestros/VTipoJurado";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");

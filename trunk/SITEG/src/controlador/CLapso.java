@@ -103,7 +103,7 @@ public class CLapso extends CGeneral {
 	public void buscarLapso() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoLapso.zul", null, null);
+				"/vistas/catalogos/VCatalogoLapso.zul", null, null);
 		window.doModal();
 
 	}
@@ -165,7 +165,7 @@ public class CLapso extends CGeneral {
 		Lapso lapsoDatosCatalogo = (Lapso) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", lapsoDatosCatalogo.getId());
-		String vista = "VLapsoAcademico";
+		String vista = "maestros/VLapsoAcademico";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
