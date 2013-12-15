@@ -46,7 +46,7 @@ public class CCatalogoActividad extends CGeneral {
 	@Wire
 	private Window wdwActividad;
 	
-	private String vistaRecibida;
+	private static String vistaRecibida;
 
 	/**
 	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
@@ -86,34 +86,11 @@ public class CCatalogoActividad extends CGeneral {
 		 * Validacion para vaciar la informacion del VActividad a la vista
 		 * VActividad.zul si la varible map tiene algun dato contenido
 		 */
-		if (map != null) {
-			if (map.get("id") != null) {
-
-				long codigo = (Long) map.get("id");
-				Actividad actividad2 = servicioActividad
-						.buscarActividad(codigo);
-				txtNombreActividad.setValue(actividad2.getNombre());
-				txtDescripcionActividad.setValue(actividad2.getDescripcion());
-				id = actividad2.getId();
-				map.clear();
-				map = null;
-			}
-		}
+		
+		
 	}
 
-	/**
-	 * Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
-	 * descripcion
-	 * 
-	 * @date 09-12-2013
-	 */
 	
-
-	/**
-	 * Aca se selecciona una actividad del catalogo
-	 * 
-	 * @date 09-12-2013
-	 */
 	public void recibir (String vista)
 	{
 		vistaRecibida = vista;
@@ -158,8 +135,8 @@ public class CCatalogoActividad extends CGeneral {
 		Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", actividadDatosCatalogo.getId());
-		
-		map.put("vistaRecibida", vistaRecibida);
+		String vista = vistaRecibida;
+		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		 Executions.sendRedirect("/vistas/arbol.zul");
 		
