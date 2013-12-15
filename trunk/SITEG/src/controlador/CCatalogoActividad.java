@@ -25,7 +25,7 @@ import servicio.SActividad;
 import configuracion.GeneradorBeans;
 
 @Controller
-public class CCatalogoActividad extends SelectorComposer<Component> {
+public class CCatalogoActividad extends CGeneral {
 
 	SActividad servicioActividad = GeneradorBeans
 			.getServicioActividad();
@@ -54,8 +54,7 @@ public class CCatalogoActividad extends SelectorComposer<Component> {
 	 * 
 	 * @date 09-12-2013
 	 */
-	public void doAfterCompose(Component comp) throws Exception {
-		super.doAfterCompose(comp);
+	void inicializar(Component comp) {
 
 		/*
 		 * Listado de todos las actividades que se encuentran activos, cuyo
