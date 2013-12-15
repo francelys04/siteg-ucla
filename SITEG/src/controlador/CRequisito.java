@@ -85,7 +85,7 @@ public class CRequisito extends CGeneral {
 	public void buscarRequisito() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoRequisito.zul", null, null);
+				"/vistas/catalogos/VCatalogoRequisito.zul", null, null);
 		window.doModal();
 
 	}
@@ -155,7 +155,7 @@ public class CRequisito extends CGeneral {
 		
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", requisitoDatosCatalogo.getId());
-		String vista = "VRequisito";
+		String vista = "maestros/VRequisito";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");

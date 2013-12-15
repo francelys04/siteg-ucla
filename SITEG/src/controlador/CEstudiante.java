@@ -136,7 +136,7 @@ public class CEstudiante extends CGeneral {
 	public void buscarEstudiante() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoEstudiante.zul", null, null);
+				"/vistas/catalogos/VCatalogoEstudiante.zul", null, null);
 		window.doModal();
 
 	}
@@ -256,7 +256,7 @@ public class CEstudiante extends CGeneral {
 		Estudiante estudianteDatosCatalogo = (Estudiante) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("cedula", estudianteDatosCatalogo.getCedula());
-		String vista = "VActividad";
+		String vista = "maestros/VActividad";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");

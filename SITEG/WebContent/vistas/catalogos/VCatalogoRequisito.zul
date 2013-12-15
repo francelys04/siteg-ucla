@@ -1,30 +1,28 @@
 <?page id="wdwCatalogoRequisito"  title="Catalogo Requisito" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Catalogo Requisito" border="normal" width="50%"
+	<window title="Catalogo Requisito" border="normal" width="800px"
 		id="wdwCatalogoRequisito"
 		apply="controlador.CRequisito"
 		closable="true">
-		<listbox id="ltbRequisito" width="100%" >
-				<auxhead >
-					<auxheader label="Requisitos" colspan="2" />
-				</auxhead>
+		
+		<listbox id="ltbRequisito" width="100%"  mold="paging" pageSize="10">
 				<auxhead sclass="category-center">
 					<auxheader colspan="1">
 						<image
-							src="/widgets/listbox/data_filter/img/funnel.png" />
-						<textbox instant="true" width="85%" id="txtNombreMostrarRequisito"
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtNombreMostrarRequisito"
 							/>
 					</auxheader>
 					<auxheader colspan="1">
 						<image
-							src="/widgets/listbox/data_filter/img/funnel.png" />
-						<textbox instant="true" width="85%" id="txtDescripcionMostrarRequisito"
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtDescripcionMostrarRequisito"
 							 />
 					</auxheader>
 				</auxhead>
 			<listhead>
 				<listheader label="Nombre" align="center"/>
-				<listheader label="Descripcion" align="center"/>
+				<listheader label="Descripción" align="center"/>
 			</listhead>
 		
 

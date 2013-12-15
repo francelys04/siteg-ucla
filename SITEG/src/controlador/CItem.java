@@ -114,7 +114,7 @@ public class CItem extends CGeneral {
 	public void buscarItem() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoItem.zul", null, null);
+				"/vistas/catalogos/VCatalogoItem.zul", null, null);
 		window.doModal();
 
 	}
@@ -123,7 +123,7 @@ public class CItem extends CGeneral {
 	public void mostrarDatosCatalogo() {
 		Listitem listItem = ltbItem.getSelectedItem();
 		ItemEvaluacion itemDatosCatalogo = (ItemEvaluacion) listItem.getValue();
-		String vista = "VItem";
+		String vista = "maestros/VItem";
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", itemDatosCatalogo.getId());
 		map.put("vista", vista);

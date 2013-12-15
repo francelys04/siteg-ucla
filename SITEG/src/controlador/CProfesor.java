@@ -120,7 +120,7 @@ public class CProfesor extends CGeneral {
 	public void buscarProfesor() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoProfesor.zul", null, null);
+				"/vistas/catalogos/VCatalogoProfesor.zul", null, null);
 		window.doModal();
 
 	}
@@ -229,7 +229,7 @@ public class CProfesor extends CGeneral {
 			alert("no hay gente");
 		}
 		else{
-		String vista="VProfesor";
+		String vista="maestros/VProfesor";
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("cedula", profesorDatosCatalogo.getCedula());
 		map.put("vista", vista);
