@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.1.10
 -- Dumped by pg_dump version 9.1.10
--- Started on 2013-12-14 20:47:18 VET
+-- Started on 2013-12-14 21:00:53 VET
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -755,9 +755,7 @@ ALTER TABLE public.usuario OWNER TO postgres;
 -- Data for Name: actividad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY actividad (id, descripcion, estatus, nombre) FROM stdin;
-1	plant	t	planteamiento
-\.
+INSERT INTO actividad (id, descripcion, estatus, nombre) VALUES (1, 'plant', true, 'planteamiento');
 
 
 --
@@ -766,8 +764,6 @@ COPY actividad (id, descripcion, estatus, nombre) FROM stdin;
 -- Data for Name: actividad_requisito; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY actividad_requisito (actividad_id, requisito_id, lapso_id) FROM stdin;
-\.
 
 
 --
@@ -776,53 +772,51 @@ COPY actividad_requisito (actividad_id, requisito_id, lapso_id) FROM stdin;
 -- Data for Name: arbol; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY arbol (id, hijo, nombre, url) FROM stdin;
-33	0	Trabajo Especial de Grado	arbol
-37	33	Solicitar Defensa	\N
-40	0	Portal Web	arbol
-1	0	Archivos	arbol
-2	1	Datos Basicos	arbol
-17	1	Configuraciones	arbol
-44	0	Seguridad	arbol
-3	2	Programas	maestros/VPrograma
-4	2	Areas de Investigacion	maestros/VAreaInvestigacion
-5	2	Tematicas	maestros/VTematica
-6	2	Requisitos	maestros/VRequisito
-11	9	Profesores Por Lotes	maestros/VCargarProfesor
-7	2	Actividades	maestros/VActividad
-14	12	Estudiantes Por Lotes	maestros/VCargarEstudiante
-15	2	Tipos de Jurado	maestros/VTipoJurado
-19	17	Configurar Programas	maestros/VConfigurarPrograma
-21	17	Configurar Condiciones	maestros/VCondicionPrograma
-20	17	Configurar Actividades	maestros/VRequisitoActividad
-18	17	Configurar Profesores	maestros/VProfesorArea
-25	24	Atender Solicitudes de Tutor	transacciones/VEvaluarTutorias
-26	24	Registrar Proyecto	transacciones/VRegistrarProyecto
-27	24	Atender Solicitudes de Proyecto	transacciones/VVerificarSolicitudProyecto
-28	24	Asignar Comision Evaluadora	transacciones/VAsignarComision
-29	24	Evaluar Factibilidad	transacciones/VEvaluarFactibilidad
-30	24	Registrar Factibilidad	transacciones/VRegistrarFactibilidad
-31	24	Registrar Avances	transacciones/VRegistrarAvances
-32	24	Evaluar Avances	transacciones/VEvaluarAvances
-34	33	Registrar Trabajo	transacciones/VRegistrarTrabajo
-35	33	Registrar Revisiones	transacciones/VRegistrarRevisiones
-36	33	Evaluar Revisiones	transacciones/VEvaluarRevisiones
-38	33	Atender Solicitudes de Defensa	transacciones/VAtenderDefensa
-39	33	Calificar Defensa	transacciones/VCalificarDefensa
-41	40	Crear Noticias	maestros/VCrearNoticia
-8	2	Items de Evaluacion	maestros/VItem
-42	40	Crear Enlaces	maestros/VCrearEnlace
-43	40	Descargas	maestros/VDescarga
-9	2	Profesores	arbol
-45	44	Crear Usuario	maestros/VCrearUsuario
-46	44	Crear Grupo	maestros/VCrearGrupo
-10	9	Profesores Individual	maestros/VProfesor
-12	2	Estudiantes	arbol
-13	12	Estudiantes Individual	maestros/VEstudiante
-16	2	Lapsos Academicos	maestros/VLapsoAcademico
-22	17	Configurar Cronograma	maestros/VCrearCronograma
-24	0	Proyecto	arbol
-\.
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (33, 0, 'Trabajo Especial de Grado', 'arbol');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (37, 33, 'Solicitar Defensa', NULL);
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (40, 0, 'Portal Web', 'arbol');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (1, 0, 'Archivos', 'arbol');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (2, 1, 'Datos Basicos', 'arbol');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (17, 1, 'Configuraciones', 'arbol');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (44, 0, 'Seguridad', 'arbol');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (3, 2, 'Programas', 'maestros/VPrograma');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (4, 2, 'Areas de Investigacion', 'maestros/VAreaInvestigacion');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (5, 2, 'Tematicas', 'maestros/VTematica');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (6, 2, 'Requisitos', 'maestros/VRequisito');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (11, 9, 'Profesores Por Lotes', 'maestros/VCargarProfesor');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (7, 2, 'Actividades', 'maestros/VActividad');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (14, 12, 'Estudiantes Por Lotes', 'maestros/VCargarEstudiante');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (15, 2, 'Tipos de Jurado', 'maestros/VTipoJurado');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (19, 17, 'Configurar Programas', 'maestros/VConfigurarPrograma');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (21, 17, 'Configurar Condiciones', 'maestros/VCondicionPrograma');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (20, 17, 'Configurar Actividades', 'maestros/VRequisitoActividad');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (18, 17, 'Configurar Profesores', 'maestros/VProfesorArea');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (25, 24, 'Atender Solicitudes de Tutor', 'transacciones/VEvaluarTutorias');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (26, 24, 'Registrar Proyecto', 'transacciones/VRegistrarProyecto');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (27, 24, 'Atender Solicitudes de Proyecto', 'transacciones/VVerificarSolicitudProyecto');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (28, 24, 'Asignar Comision Evaluadora', 'transacciones/VAsignarComision');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (29, 24, 'Evaluar Factibilidad', 'transacciones/VEvaluarFactibilidad');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (30, 24, 'Registrar Factibilidad', 'transacciones/VRegistrarFactibilidad');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (31, 24, 'Registrar Avances', 'transacciones/VRegistrarAvances');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (32, 24, 'Evaluar Avances', 'transacciones/VEvaluarAvances');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (34, 33, 'Registrar Trabajo', 'transacciones/VRegistrarTrabajo');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (35, 33, 'Registrar Revisiones', 'transacciones/VRegistrarRevisiones');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (36, 33, 'Evaluar Revisiones', 'transacciones/VEvaluarRevisiones');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (38, 33, 'Atender Solicitudes de Defensa', 'transacciones/VAtenderDefensa');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (39, 33, 'Calificar Defensa', 'transacciones/VCalificarDefensa');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (41, 40, 'Crear Noticias', 'maestros/VCrearNoticia');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (8, 2, 'Items de Evaluacion', 'maestros/VItem');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (42, 40, 'Crear Enlaces', 'maestros/VCrearEnlace');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (43, 40, 'Descargas', 'maestros/VDescarga');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (9, 2, 'Profesores', 'arbol');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (45, 44, 'Crear Usuario', 'maestros/VCrearUsuario');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (46, 44, 'Crear Grupo', 'maestros/VCrearGrupo');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (10, 9, 'Profesores Individual', 'maestros/VProfesor');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (12, 2, 'Estudiantes', 'arbol');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (13, 12, 'Estudiantes Individual', 'maestros/VEstudiante');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (16, 2, 'Lapsos Academicos', 'maestros/VLapsoAcademico');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (22, 17, 'Configurar Cronograma', 'maestros/VCrearCronograma');
+INSERT INTO arbol (id, hijo, nombre, url) VALUES (24, 0, 'Proyecto', 'arbol');
 
 
 --
@@ -831,56 +825,54 @@ COPY arbol (id, hijo, nombre, url) FROM stdin;
 -- Data for Name: arbol_grupo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY arbol_grupo (grupo_id, arbol_id) FROM stdin;
-101	1
-101	2
-101	3
-101	4
-101	5
-101	6
-101	7
-101	8
-101	9
-101	10
-101	11
-101	12
-101	13
-101	14
-101	15
-101	16
-101	17
-101	18
-101	19
-101	20
-101	21
-101	22
-101	44
-101	45
-101	46
-102	44
-102	45
-102	46
-102	24
-102	25
-102	26
-102	27
-102	28
-102	29
-102	30
-102	31
-102	32
-102	33
-102	34
-102	35
-102	36
-102	37
-102	38
-102	39
-102	40
-102	41
-102	42
-102	43
-\.
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 1);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 2);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 3);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 4);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 5);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 6);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 7);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 8);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 9);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 10);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 11);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 12);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 13);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 14);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 15);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 16);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 17);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 18);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 19);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 20);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 21);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 22);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 44);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 45);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (101, 46);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 44);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 45);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 46);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 24);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 25);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 26);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 27);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 28);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 29);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 30);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 31);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 32);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 33);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 34);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 35);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 36);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 37);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 38);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 39);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 40);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 41);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 42);
+INSERT INTO arbol_grupo (grupo_id, arbol_id) VALUES (102, 43);
 
 
 --
@@ -889,8 +881,6 @@ COPY arbol_grupo (grupo_id, arbol_id) FROM stdin;
 -- Data for Name: area_investigacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY area_investigacion (id, descripcion, estatus, nombre) FROM stdin;
-\.
 
 
 --
@@ -899,8 +889,6 @@ COPY area_investigacion (id, descripcion, estatus, nombre) FROM stdin;
 -- Data for Name: area_programa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY area_programa (programa_id, area_id) FROM stdin;
-\.
 
 
 --
@@ -909,8 +897,6 @@ COPY area_programa (programa_id, area_id) FROM stdin;
 -- Data for Name: avance; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY avance (id, estatus, fecha, observacion, teg_id) FROM stdin;
-\.
 
 
 --
@@ -919,8 +905,6 @@ COPY avance (id, estatus, fecha, observacion, teg_id) FROM stdin;
 -- Data for Name: categoria; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY categoria (id, descripcion, estatus, nombre) FROM stdin;
-\.
 
 
 --
@@ -929,8 +913,6 @@ COPY categoria (id, descripcion, estatus, nombre) FROM stdin;
 -- Data for Name: comision; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY comision (teg_id, profesor_cedula) FROM stdin;
-\.
 
 
 --
@@ -939,8 +921,6 @@ COPY comision (teg_id, profesor_cedula) FROM stdin;
 -- Data for Name: condicion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY condicion (id, descripcion, estatus, nombre) FROM stdin;
-\.
 
 
 --
@@ -949,8 +929,6 @@ COPY condicion (id, descripcion, estatus, nombre) FROM stdin;
 -- Data for Name: condicion_programa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY condicion_programa (valor, condicion_id, programa_id, lapso_id) FROM stdin;
-\.
 
 
 --
@@ -959,8 +937,6 @@ COPY condicion_programa (valor, condicion_id, programa_id, lapso_id) FROM stdin;
 -- Data for Name: cronograma; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY cronograma (estatus, fecha_fin, fecha_inicio, lapso_id, programa_id, actividad_id) FROM stdin;
-\.
 
 
 --
@@ -969,8 +945,6 @@ COPY cronograma (estatus, fecha_fin, fecha_inicio, lapso_id, programa_id, activi
 -- Data for Name: defensa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY defensa (id, estatus, fecha, hora, lugar, nota, teg_id, profesor_cedula) FROM stdin;
-\.
 
 
 --
@@ -979,8 +953,6 @@ COPY defensa (id, estatus, fecha, hora, lugar, nota, teg_id, profesor_cedula) FR
 -- Data for Name: estudiante; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY estudiante (cedula, apellido, correo_electronico, direcion, estatus, nombre, sexo, telefono_fijo, telefono_movil, programa_id) FROM stdin;
-\.
 
 
 --
@@ -989,8 +961,6 @@ COPY estudiante (cedula, apellido, correo_electronico, direcion, estatus, nombre
 -- Data for Name: estudiante_teg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY estudiante_teg (teg_id, estudiante_cedula) FROM stdin;
-\.
 
 
 --
@@ -999,8 +969,6 @@ COPY estudiante_teg (teg_id, estudiante_cedula) FROM stdin;
 -- Data for Name: etapa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY etapa (id, descripcion, duracion, estatus, nombre) FROM stdin;
-\.
 
 
 --
@@ -1009,8 +977,6 @@ COPY etapa (id, descripcion, duracion, estatus, nombre) FROM stdin;
 -- Data for Name: evaluacion_defensa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY evaluacion_defensa (id, nota_individual, observaciones, defensa_id, profesor_cedula) FROM stdin;
-\.
 
 
 --
@@ -1019,8 +985,6 @@ COPY evaluacion_defensa (id, nota_individual, observaciones, defensa_id, profeso
 -- Data for Name: evaluacion_factibilidad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY evaluacion_factibilidad (id, estatus, fecha_evaluacion, observacion) FROM stdin;
-\.
 
 
 --
@@ -1029,8 +993,6 @@ COPY evaluacion_factibilidad (id, estatus, fecha_evaluacion, observacion) FROM s
 -- Data for Name: factibilidad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY factibilidad (id, estatus, fecha, observacion, profesor_cedula, teg_id) FROM stdin;
-\.
 
 
 --
@@ -1039,10 +1001,8 @@ COPY factibilidad (id, estatus, fecha, observacion, profesor_cedula, teg_id) FRO
 -- Data for Name: grupo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY grupo (id, estatus, nombre) FROM stdin;
-101	t	ROLE_USER
-102	t	ROLE_ADMIN
-\.
+INSERT INTO grupo (id, estatus, nombre) VALUES (101, true, 'ROLE_USER');
+INSERT INTO grupo (id, estatus, nombre) VALUES (102, true, 'ROLE_ADMIN');
 
 
 --
@@ -1051,10 +1011,8 @@ COPY grupo (id, estatus, nombre) FROM stdin;
 -- Data for Name: grupo_usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY grupo_usuario (usuario_id, grupo_id) FROM stdin;
-100	101
-112	102
-\.
+INSERT INTO grupo_usuario (usuario_id, grupo_id) VALUES (100, 101);
+INSERT INTO grupo_usuario (usuario_id, grupo_id) VALUES (112, 102);
 
 
 --
@@ -1072,8 +1030,6 @@ SELECT pg_catalog.setval('hibernate_sequence', 3, true);
 -- Data for Name: item_defensa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY item_defensa (ponderacion, evaluacion_defensa_id, item_id, defensa_id) FROM stdin;
-\.
 
 
 --
@@ -1082,8 +1038,6 @@ COPY item_defensa (ponderacion, evaluacion_defensa_id, item_id, defensa_id) FROM
 -- Data for Name: item_evaluacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY item_evaluacion (id, descripcion, estatus, nombre, valor, tipo) FROM stdin;
-\.
 
 
 --
@@ -1092,8 +1046,6 @@ COPY item_evaluacion (id, descripcion, estatus, nombre, valor, tipo) FROM stdin;
 -- Data for Name: item_programa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY item_programa (programa_id, item_id) FROM stdin;
-\.
 
 
 --
@@ -1102,8 +1054,6 @@ COPY item_programa (programa_id, item_id) FROM stdin;
 -- Data for Name: jurado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY jurado (ponderacion, teg_id, factibilidad_id, item_evaluacion_id, profesor_cedula, tipo_jurado_id) FROM stdin;
-\.
 
 
 --
@@ -1112,8 +1062,6 @@ COPY jurado (ponderacion, teg_id, factibilidad_id, item_evaluacion_id, profesor_
 -- Data for Name: lapso; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY lapso (id, estatus, fecha_final, fecha_inicial, nombre) FROM stdin;
-\.
 
 
 --
@@ -1122,8 +1070,6 @@ COPY lapso (id, estatus, fecha_final, fecha_inicial, nombre) FROM stdin;
 -- Data for Name: profesor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY profesor (cedula, apellido, correo_electronico, direccion, estatus, nombre, sexo, telefono_fijo, telefono_movil, categoria_id) FROM stdin;
-\.
 
 
 --
@@ -1132,8 +1078,6 @@ COPY profesor (cedula, apellido, correo_electronico, direccion, estatus, nombre,
 -- Data for Name: profesor_area; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY profesor_area (profesor_cedula, area_id) FROM stdin;
-\.
 
 
 --
@@ -1142,10 +1086,8 @@ COPY profesor_area (profesor_cedula, area_id) FROM stdin;
 -- Data for Name: programa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY programa (id, descripcion, estatus, nombre) FROM stdin;
-2	aaaa	t	matematica
-3	aaaaa	t	aa
-\.
+INSERT INTO programa (id, descripcion, estatus, nombre) VALUES (2, 'aaaa', true, 'matematica');
+INSERT INTO programa (id, descripcion, estatus, nombre) VALUES (3, 'aaaaa', true, 'aa');
 
 
 --
@@ -1154,8 +1096,6 @@ COPY programa (id, descripcion, estatus, nombre) FROM stdin;
 -- Data for Name: programa_area; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY programa_area (area_investigacion_id, programa_id, lapso_id) FROM stdin;
-\.
 
 
 --
@@ -1164,8 +1104,6 @@ COPY programa_area (area_investigacion_id, programa_id, lapso_id) FROM stdin;
 -- Data for Name: programa_item; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY programa_item (item_evaluacion_id, programa_id, lapso_id) FROM stdin;
-\.
 
 
 --
@@ -1174,8 +1112,6 @@ COPY programa_item (item_evaluacion_id, programa_id, lapso_id) FROM stdin;
 -- Data for Name: programa_requisito; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY programa_requisito (requisito_id, programa_id, lapso_id) FROM stdin;
-\.
 
 
 --
@@ -1184,8 +1120,6 @@ COPY programa_requisito (requisito_id, programa_id, lapso_id) FROM stdin;
 -- Data for Name: requisito; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY requisito (id, descripcion, estatus, nombre) FROM stdin;
-\.
 
 
 --
@@ -1194,8 +1128,6 @@ COPY requisito (id, descripcion, estatus, nombre) FROM stdin;
 -- Data for Name: requisito_actividad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY requisito_actividad (actividad_id, requisito_id) FROM stdin;
-\.
 
 
 --
@@ -1204,8 +1136,6 @@ COPY requisito_actividad (actividad_id, requisito_id) FROM stdin;
 -- Data for Name: requisito_programa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY requisito_programa (programa_id, requisito_id) FROM stdin;
-\.
 
 
 --
@@ -1214,8 +1144,6 @@ COPY requisito_programa (programa_id, requisito_id) FROM stdin;
 -- Data for Name: solicitud_tutoria; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY solicitud_tutoria (id, descripcion, estado, fecha, profesor_cedula, tematica_id) FROM stdin;
-\.
 
 
 --
@@ -1224,8 +1152,6 @@ COPY solicitud_tutoria (id, descripcion, estado, fecha, profesor_cedula, tematic
 -- Data for Name: solicitud_tutoria_estudiante; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY solicitud_tutoria_estudiante (solicitud_id, estudiante_cedula) FROM stdin;
-\.
 
 
 --
@@ -1234,8 +1160,6 @@ COPY solicitud_tutoria_estudiante (solicitud_id, estudiante_cedula) FROM stdin;
 -- Data for Name: teg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY teg (id, descripcion, duracion, estatus, fecha_entrega, fecha_inicio, titulo, tematica_id, tutor_cedula) FROM stdin;
-\.
 
 
 --
@@ -1244,8 +1168,6 @@ COPY teg (id, descripcion, duracion, estatus, fecha_entrega, fecha_inicio, titul
 -- Data for Name: teg_etapa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY teg_etapa (fecha, teg_id, etapa_id) FROM stdin;
-\.
 
 
 --
@@ -1254,8 +1176,6 @@ COPY teg_etapa (fecha, teg_id, etapa_id) FROM stdin;
 -- Data for Name: teg_requisito; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY teg_requisito (estado, fecha_entrega, teg_id, requisito_id) FROM stdin;
-\.
 
 
 --
@@ -1264,8 +1184,6 @@ COPY teg_requisito (estado, fecha_entrega, teg_id, requisito_id) FROM stdin;
 -- Data for Name: tematica; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY tematica (id, descripcion, estatus, nombre, area_investigacion_id) FROM stdin;
-\.
 
 
 --
@@ -1274,8 +1192,6 @@ COPY tematica (id, descripcion, estatus, nombre, area_investigacion_id) FROM std
 -- Data for Name: tipo_jurado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY tipo_jurado (id, descripcion, estatus, nombre) FROM stdin;
-\.
 
 
 --
@@ -1284,12 +1200,10 @@ COPY tipo_jurado (id, descripcion, estatus, nombre) FROM stdin;
 -- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY usuario (id, estatus, nombre, password) FROM stdin;
-112	t	ysol	$2a$10$2ShZ2y.Els2iizZJvufUYO7uUh6499bK6NXoOYb.CXFelvJ8MHpMS
-100	t	willi	$2a$10$sxSyH2JPrTtqXVffHFQnnOrxVNriHrG8DnlYf/ZN7LNifovQ2MoIC
-6	t	cindy	$2a$10$ZQ7P6OO/UexmfNCWoSxaAuiaaD4CUKG8TIgUKkt4BnXXuUvcH9Kz.
-7	t	ramon	$2a$10$ySesxrhAy6Q9KKcWVOr2zu8g3RZmExT0xNVHMsRSvhqOEelZ/uFXy
-\.
+INSERT INTO usuario (id, estatus, nombre, password) VALUES (112, true, 'ysol', '$2a$10$2ShZ2y.Els2iizZJvufUYO7uUh6499bK6NXoOYb.CXFelvJ8MHpMS');
+INSERT INTO usuario (id, estatus, nombre, password) VALUES (100, true, 'willi', '$2a$10$sxSyH2JPrTtqXVffHFQnnOrxVNriHrG8DnlYf/ZN7LNifovQ2MoIC');
+INSERT INTO usuario (id, estatus, nombre, password) VALUES (6, true, 'cindy', '$2a$10$ZQ7P6OO/UexmfNCWoSxaAuiaaD4CUKG8TIgUKkt4BnXXuUvcH9Kz.');
+INSERT INTO usuario (id, estatus, nombre, password) VALUES (7, true, 'ramon', '$2a$10$ySesxrhAy6Q9KKcWVOr2zu8g3RZmExT0xNVHMsRSvhqOEelZ/uFXy');
 
 
 --
@@ -2374,7 +2288,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2013-12-14 20:47:18 VET
+-- Completed on 2013-12-14 21:00:54 VET
 
 --
 -- PostgreSQL database dump complete
