@@ -110,5 +110,8 @@ public class Requisito {
 	public void setProgramasRequisitos(Set<ProgramaRequisito> programasRequisitos) {
 		this.programasRequisitos = programasRequisitos;
 	}
-	
+	@Override
+	public String toString() {
+		return this.nombre.toUpperCase();
+	}
 }
