@@ -65,6 +65,7 @@ public class CActividad extends CGeneral {
 	@Wire
 	private Button btnGuardarActividad;
 	
+	
 	private long id = 0;
 
 	/** Metodo heredado del controlador CGeneral que permite inicializar los
@@ -130,10 +131,10 @@ public class CActividad extends CGeneral {
 		Window window = (Window) Executions.createComponents(
 
 				"/vistas/catalogos/VCatalogoActividad.zul", null, null);
-		 catalogo.recibir("maestros/VActividad");
+		 
 				
 		window.doModal();
-
+		catalogo.recibir("maestros/VActividad");
 	}
 
 	// Aca se guardan las actividades
@@ -174,20 +175,5 @@ public class CActividad extends CGeneral {
 	}
 
 
-	// Aca se selecciona una actividad del catalogo
-	@Listen("onDoubleClick = #ltbActividad")
-	public void mostrarDatosCatalogo() {
-
-		Listitem listItem = ltbActividad.getSelectedItem();
-		Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", actividadDatosCatalogo.getId());
-		String vista = "maestros/VActividad";
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoActividad.onClose();
-
-	}
 
 }
