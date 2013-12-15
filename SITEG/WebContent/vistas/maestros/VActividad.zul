@@ -46,19 +46,19 @@
 
 	<!-- Lista de popus -->
 	<popup id="pupNombreActividad">
-        <toolbarbutton label="Solo se permite el ingreso de letras" />
+        <toolbarbutton label="Ingrese aquí el nombre de la actividad" />
     </popup>
     <popup id="pupDescripcionActividad">
-     	<toolbarbutton label="Solo se permite el ingreso de nÃºmeros" />
+     	<toolbarbutton label="Ingrese aquí la descripción de la actividad" />
     </popup>
      <popup id="pupGuardarActividad">
-     	<toolbarbutton label="Presione aqui para guardar una actividad" />
+     	<toolbarbutton label="Presione aquí para guardar los datos de una actividad" />
     </popup>
      <popup id="pupCancelarActividad">
-     	<toolbarbutton label="Presione aqui para limpar los campos" />
+     	<toolbarbutton label="Presione aquí para limpar los campos" />
     </popup>
      <popup id="pupEliminarActividad">
-     	<toolbarbutton label="Presione aqui para eliminar una actividad" />
+     	<toolbarbutton label="Presione aqui para eliminar los datos de una actividad" />
     </popup>
     <popup id="pupCatalogoActividad">
      	<toolbarbutton label="Presione aqui para ver la lista de actividades" />

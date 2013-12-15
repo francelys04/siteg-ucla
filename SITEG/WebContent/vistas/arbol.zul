@@ -24,7 +24,7 @@
 			</tree>	
 		</west>
 		<!-- Fin del banner de contenido-->
-		<center border="none">
+		<center border="none" autoscroll="true">
 			<borderlayout sclass="complex-layout" height="99%">
 				<north size="30px" border="none">
 					<div align="right"

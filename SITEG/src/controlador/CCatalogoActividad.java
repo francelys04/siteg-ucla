@@ -89,7 +89,7 @@ public class CCatalogoActividad extends CGeneral {
 		if (map != null) {
 			if (map.get("id") != null) {
 
-				long codigo = (long) map.get("id");
+				long codigo = (Long) map.get("id");
 				Actividad actividad2 = servicioActividad
 						.buscarActividad(codigo);
 				txtNombreActividad.setValue(actividad2.getNombre());
@@ -161,11 +161,12 @@ public class CCatalogoActividad extends CGeneral {
 		
 		map.put("vistaRecibida", vistaRecibida);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-       //Executions.sendRedirect("/vistas/maestros/VActividad.zul");
 		 Executions.sendRedirect("/vistas/arbol.zul");
 		
 		wdwCatalogoActividad.onClose();
 
 	}
 
+	
+	
 }
