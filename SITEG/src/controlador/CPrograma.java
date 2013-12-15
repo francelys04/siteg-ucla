@@ -133,7 +133,7 @@ public class CPrograma extends CGeneral {
 	public void buscarPrograma() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoPrograma.zul", null, null);
+				"/vistas/catalogos/VCatalogoPrograma.zul", null, null);
 		window.doModal();
 
 	}
@@ -249,7 +249,7 @@ public class CPrograma extends CGeneral {
 		 * utilizando Sessions, setiandolo para posteriormente retornar su valor
 		 * y asi transportar los datos a la vista VPrograma
 		 */
-		String vista = "VPrograma";
+		String vista = "maestros/VPrograma";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		// Permite abrir la vista VPrograma
