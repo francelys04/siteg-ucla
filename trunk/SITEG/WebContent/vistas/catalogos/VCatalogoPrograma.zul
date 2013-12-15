@@ -2,28 +2,26 @@
 <zk>
 	<window title="Catalogo Programa" border="normal" width="800px"
 		id="wdwCatalogoPrograma" apply="controlador.CPrograma" closable="true">
-		<listbox id="ltbPrograma" width="100%">
-			<auxhead>
-				<auxheader label="Programas" colspan="2" />
-			</auxhead>
+		
+		<listbox id="ltbPrograma" width="100%" mold="paging" pageSize="10">
 			<auxhead sclass="category-center">
 				<auxheader colspan="1">
 					<image
-						src="/widgets/listbox/data_filter/img/funnel.png" />
-					<textbox instant="true" width="80%"
+						src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="90%"
 						id="txtNombreMostrarPrograma" />
 				</auxheader>
 				<auxheader colspan="1">
 					<image
-						src="/widgets/listbox/data_filter/img/funnel.png" />
-					<textbox instant="true" width="80%"
+						src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="90%"
 						id="txtDescripcionMostrarPrograma" />
 				</auxheader>
 
 			</auxhead>
 			<listhead>
 				<listheader label="Nombre" align="center" />
-				<listheader label="Descripcion" align="center" />
+				<listheader label="Descripción" align="center" />
 
 			</listhead>
 
