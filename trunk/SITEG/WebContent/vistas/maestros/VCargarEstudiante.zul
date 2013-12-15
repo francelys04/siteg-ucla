@@ -44,7 +44,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="600px" style="margin-left:2%"> 
+	<groupbox width="96%" style="margin-left:2%"> 
 	<grid sclass="fgrid" style="margin-left:2%">
 		<columns>
 			<column width="150px" height="30px" />

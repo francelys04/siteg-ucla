@@ -4,21 +4,19 @@
 		id="wdwCatalogoArea"
 		apply="controlador.CAreaInvestigacion"
 		closable="true">
-		<listbox id="ltbArea" width="100%" >
-			<auxhead >
-					<auxheader label="Areas de Investigacion" colspan="2" />
-				</auxhead>
+		<listbox id="ltbArea" width="100%"  mold="paging" pageSize="10">
+		
 				<auxhead sclass="category-center">
 					<auxheader colspan="1">
 						<image
-							src="/widgets/listbox/data_filter/img/funnel.png" />
-						<textbox instant="true" width="100px" id="txtNombreMostrarArea"
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtNombreMostrarArea"
 							/>
 					</auxheader>
 					<auxheader colspan="1">
 						<image
-							src="/widgets/listbox/data_filter/img/funnel.png" />
-						<textbox instant="true" width="100px" id="txtDescripcionMostrarArea"
+						src="/public/imagenes/iconos/filtro.png" />
+						<textbox instant="true" width="90%" id="txtDescripcionMostrarArea"
 							 />
 					</auxheader>
 					
@@ -26,7 +24,7 @@
 				</auxhead>
 			<listhead>
 				<listheader label="Nombre" align="center"/>
-				<listheader label="Descripcion" align="center"/>
+				<listheader label="Descripción" align="center"/>
 			
 			</listhead>
 		
