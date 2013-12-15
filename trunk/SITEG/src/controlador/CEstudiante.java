@@ -40,6 +40,9 @@ import configuracion.GeneradorBeans;
 
 @Controller
 public class CEstudiante extends CGeneral {
+	
+	CCatalogoEstudiante catalogo = new CCatalogoEstudiante();
+	
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
@@ -137,7 +140,9 @@ public class CEstudiante extends CGeneral {
 
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoEstudiante.zul", null, null);
+		
 		window.doModal();
+		catalogo.recibir("maestros/VEstudiante");
 
 	}
 
@@ -196,71 +201,6 @@ public class CEstudiante extends CGeneral {
 		txtTelefonoFijoEstudiante.setValue("");
 		txtCorreoEstudiante.setValue("");
 		cmbProgramaEstudiante.setValue("");
-
-	}
-
-	// Metodo que permite el filtrado en el catalogo, por medio de los
-	// diferentes campos que este posee
-	@Listen("onChange = #txtCedulaMostrarEstudiante,#txtNombreMostrarEstudiante,#txtApellidoMostrarEstudiante,#txtCorreoMostrarEstudiante,#txtProgramaMostrarEstudiante")
-	public void filtrarDatosCatalogo() {
-		List<Estudiante> estudiantes1 = servicioEstudiante.buscarActivos();
-		List<Estudiante> estudiantes2 = new ArrayList<Estudiante>();
-
-		for (Estudiante estudiante : estudiantes1) {
-			if (estudiante
-					.getCedula()
-					.toLowerCase()
-					.contains(
-							txtCedulaMostrarEstudiante.getValue().toLowerCase())
-					&& estudiante
-							.getNombre()
-							.toLowerCase()
-							.contains(
-									txtNombreMostrarEstudiante.getValue()
-											.toLowerCase())
-					&& estudiante
-							.getApellido()
-							.toLowerCase()
-							.contains(
-									txtApellidoMostrarEstudiante.getValue()
-											.toLowerCase())
-					&& estudiante
-							.getCorreoElectronico()
-							.toLowerCase()
-							.contains(
-									txtCorreoMostrarEstudiante.getValue()
-											.toLowerCase())
-					&& estudiante
-							.getPrograma()
-							.getNombre()
-							.toLowerCase()
-							.contains(
-									txtProgramaMostrarEstudiante.getValue()
-											.toLowerCase())) {
-				estudiantes2.add(estudiante);
-			}
-
-		}
-
-		ltbEstudiante.setModel(new ListModelList<Estudiante>(estudiantes2));
-
-	}
-
-	// Metodo que luego de presionar doble click sobre una fila del catalogo
-	// almacena los datos en un mapa, para luego colocarlos en la vista
-	// correspondiente
-	@Listen("onDoubleClick = #ltbEstudiante")
-	public void mostrarDatosCatalogo() {
-
-		Listitem listItem = ltbEstudiante.getSelectedItem();
-		Estudiante estudianteDatosCatalogo = (Estudiante) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("cedula", estudianteDatosCatalogo.getCedula());
-		String vista = "maestros/VActividad";
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoEstudiante.onClose();
 
 	}
 }
