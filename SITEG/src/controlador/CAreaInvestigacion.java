@@ -102,7 +102,7 @@ public class CAreaInvestigacion extends CGeneral {
 	public void buscarArea() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoArea.zul", null, null);
+				"/vistas/catalogos/VCatalogoArea.zul", null, null);
 		window.doModal();
 
 	}
@@ -177,7 +177,7 @@ public class CAreaInvestigacion extends CGeneral {
 		AreaInvestigacion areaDatosCatalogo = (AreaInvestigacion) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", areaDatosCatalogo.getId());
-		String vista = "VAreaInvestigacion";
+		String vista = "maestros/VAreaInvestigacion";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");

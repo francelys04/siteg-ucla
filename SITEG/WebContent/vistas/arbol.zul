@@ -6,11 +6,11 @@
 	<borderlayout sclass="complex-layout" height="99%">
 		<north size="100px" border="normal">
 		<div>
-				<image src="/images/banner.png" width="100%"
+				<image src="/public/imagenes/portal/banner.png" width="100%"
 					height="100px" />
 			</div>
 		</north>
-		<!-- Inicio del menu (Árbol)-->
+		<!-- Inicio del menu (Ãrbol)-->
 		<west size="25%" flex="true" maxsize="250" splittable="true"
 			collapsible="true">
 			<tree id="treeMenu" width="99%">			
@@ -42,9 +42,9 @@
 		</center>
 		<south height="3%" border="normal"
 			class="nav nav-pills alert-info">
-			<div align="center">
+			<div align="center" style="margin:0 auto;padding:5px">
 				<label
-					value=" SITEG Â© 2013 Elaborado por Singleton - Todos los Derechos Reservados">
+					value=" SITEG © 2013 Elaborado por Singleton - Todos los Derechos Reservados">
 				</label>
 			</div>
 		</south>
