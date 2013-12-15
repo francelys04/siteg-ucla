@@ -2,7 +2,7 @@
 <zk>
 	<window title="Catalogo Actividad" border="normal" width="800px"
 		id="wdwCatalogoActividad"
-		apply="controlador.CActividad"
+		apply="controlador.CCatalogoActividad"
 	
 		closable="true">
 		<listbox id="ltbActividad" width="100%"  mold="paging" pageSize="10">
