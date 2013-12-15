@@ -119,7 +119,7 @@ public class CActividad extends CGeneral {
 	public void buscarActividad() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoActividad.zul", null, null);
+				"/vistas/catalogos/VCatalogoActividad.zul", null, null);
 		window.doModal();
 
 	}
@@ -191,7 +191,7 @@ public class CActividad extends CGeneral {
 		Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", actividadDatosCatalogo.getId());
-		String vista = "VActividad";
+		String vista = "maestros/VActividad";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
