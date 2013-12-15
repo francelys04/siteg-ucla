@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.Actividad;
 import modelo.Requisito;
 
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,8 @@ import servicio.SRequisito;
 public class CRequisito extends CGeneral {
 	SRequisito servicioRequisito = GeneradorBeans
 			.getServicioRequisito();
+	
+	CCatalogoRequisito catalogo = new CCatalogoRequisito();
 
 	@Wire
 	private Textbox txtNombreRequisito;
@@ -84,8 +87,11 @@ public class CRequisito extends CGeneral {
 	@Listen("onClick = #btnBuscarRequisito")
 	public void buscarRequisito() {
 
+			
+		
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoRequisito.zul", null, null);
+		 catalogo.recibir("maestros/VRequisito");
 		window.doModal();
 
 	}
@@ -162,4 +168,7 @@ public class CRequisito extends CGeneral {
 		wdwCatalogoRequisito.onClose();
 
 	}
+
+	
+	
 }
