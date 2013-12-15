@@ -2,7 +2,7 @@
 <zk>
 	<window title="Catalogo Profesor" border="normal" width="800px"
 		id="wdwCatalogoProfesor"
-		apply="controlador.CProfesor"
+		apply="controlador.CCatalogoProfesor"
 		closable="true">
 		<listbox id="ltbProfesor" width="100%" mold="paging" pageSize="10">
 				<auxhead sclass="category-center">

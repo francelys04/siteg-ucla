@@ -35,7 +35,7 @@ public class CProfesor extends CGeneral {
 
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SCategoria servicioCategoria = GeneradorBeans.getServicioCategoria();
-	
+	CCatalogoProfesor catalogo = new CCatalogoProfesor();
 	@Wire
 	private Combobox cmbCategoriaProfesor;
 	@Wire
@@ -123,6 +123,8 @@ public class CProfesor extends CGeneral {
 				"/vistas/catalogos/VCatalogoProfesor.zul", null, null);
 		window.doModal();
 
+		 catalogo.recibir("maestros/VProfesor");
+		
 	}
 
 	@Listen("onClick = #btnGuardarProfesor")
@@ -174,68 +176,5 @@ public class CProfesor extends CGeneral {
 		System.out.println("Estudiante Eliminado");
 	}
 	
-	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor,#txtProgramaMostrarProfesor")
-	public void filtrarDatosCatalogo() {
-		List<Profesor> profesores = servicioProfesor.buscarActivos();
-		List<Profesor> profesores2 = new ArrayList<Profesor>();
 
-		for (Profesor profesor : profesores) {
-			if (profesor
-					.getCedula()
-					.toLowerCase()
-					.contains(
-							txtCedulaMostrarProfesor.getValue().toLowerCase())
-					&& profesor
-							.getNombre()
-							.toLowerCase()
-							.contains(
-									txtNombreMostrarProfesor.getValue()
-											.toLowerCase())
-					&& profesor
-							.getApellido()
-							.toLowerCase()
-							.contains(
-									txtApellidoMostrarProfesor.getValue()
-											.toLowerCase())
-					&& profesor
-							.getCorreoElectronico()
-							.toLowerCase()
-							.contains(
-									txtCorreoMostrarProfesor.getValue()
-											.toLowerCase())
-					&& profesor
-							.getCategoria()
-							.getNombre()
-							.toLowerCase()
-							.contains(
-									txtCategoriaMostrarProfesor.getValue()
-											.toLowerCase())) {
-				profesores2.add(profesor);
-			}
-
-		}
-
-		ltbProfesor.setModel(new ListModelList<Profesor>(profesores2));
-
-	}
-
-	@Listen("onDoubleClick = #ltbProfesor")
-	public void mostrarDatosCatalogo() {
-
-		Listitem listItem = ltbProfesor.getSelectedItem();
-		Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
-		if(profesorDatosCatalogo==null)
-		{
-			alert("no hay gente");
-		}
-		else{
-		String vista="maestros/VProfesor";
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("cedula", profesorDatosCatalogo.getCedula());
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoProfesor.onClose();
-		}
-	}
 }
