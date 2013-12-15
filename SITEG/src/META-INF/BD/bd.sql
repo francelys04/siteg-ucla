@@ -2,19 +2,18 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.3.0
--- Dumped by pg_dump version 9.3.0
--- Started on 2013-12-14 17:05:47
+-- Dumped from database version 9.1.10
+-- Dumped by pg_dump version 9.1.10
+-- Started on 2013-12-14 20:47:18 VET
 
 SET statement_timeout = 0;
-SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- TOC entry 214 (class 3079 OID 11750)
+-- TOC entry 205 (class 3079 OID 11720)
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -22,8 +21,8 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2318 (class 0 OID 0)
--- Dependencies: 214
+-- TOC entry 2316 (class 0 OID 0)
+-- Dependencies: 205
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
@@ -37,7 +36,8 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 173 (class 1259 OID 25510)
+-- TOC entry 161 (class 1259 OID 16534)
+-- Dependencies: 6
 -- Name: actividad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -52,7 +52,8 @@ CREATE TABLE actividad (
 ALTER TABLE public.actividad OWNER TO postgres;
 
 --
--- TOC entry 210 (class 1259 OID 25979)
+-- TOC entry 162 (class 1259 OID 16540)
+-- Dependencies: 6
 -- Name: actividad_requisito; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -66,7 +67,8 @@ CREATE TABLE actividad_requisito (
 ALTER TABLE public.actividad_requisito OWNER TO postgres;
 
 --
--- TOC entry 208 (class 1259 OID 25956)
+-- TOC entry 163 (class 1259 OID 16543)
+-- Dependencies: 6
 -- Name: arbol; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -81,7 +83,8 @@ CREATE TABLE arbol (
 ALTER TABLE public.arbol OWNER TO postgres;
 
 --
--- TOC entry 209 (class 1259 OID 25964)
+-- TOC entry 164 (class 1259 OID 16549)
+-- Dependencies: 6
 -- Name: arbol_grupo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -94,7 +97,8 @@ CREATE TABLE arbol_grupo (
 ALTER TABLE public.arbol_grupo OWNER TO postgres;
 
 --
--- TOC entry 174 (class 1259 OID 25518)
+-- TOC entry 165 (class 1259 OID 16552)
+-- Dependencies: 6
 -- Name: area_investigacion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -109,7 +113,8 @@ CREATE TABLE area_investigacion (
 ALTER TABLE public.area_investigacion OWNER TO postgres;
 
 --
--- TOC entry 175 (class 1259 OID 25526)
+-- TOC entry 166 (class 1259 OID 16558)
+-- Dependencies: 6
 -- Name: area_programa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -122,7 +127,8 @@ CREATE TABLE area_programa (
 ALTER TABLE public.area_programa OWNER TO postgres;
 
 --
--- TOC entry 176 (class 1259 OID 25531)
+-- TOC entry 167 (class 1259 OID 16561)
+-- Dependencies: 6
 -- Name: avance; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -138,7 +144,8 @@ CREATE TABLE avance (
 ALTER TABLE public.avance OWNER TO postgres;
 
 --
--- TOC entry 177 (class 1259 OID 25536)
+-- TOC entry 168 (class 1259 OID 16564)
+-- Dependencies: 6
 -- Name: categoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -153,7 +160,8 @@ CREATE TABLE categoria (
 ALTER TABLE public.categoria OWNER TO postgres;
 
 --
--- TOC entry 178 (class 1259 OID 25544)
+-- TOC entry 169 (class 1259 OID 16570)
+-- Dependencies: 6
 -- Name: comision; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -166,7 +174,8 @@ CREATE TABLE comision (
 ALTER TABLE public.comision OWNER TO postgres;
 
 --
--- TOC entry 179 (class 1259 OID 25549)
+-- TOC entry 170 (class 1259 OID 16573)
+-- Dependencies: 6
 -- Name: condicion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -181,7 +190,8 @@ CREATE TABLE condicion (
 ALTER TABLE public.condicion OWNER TO postgres;
 
 --
--- TOC entry 180 (class 1259 OID 25557)
+-- TOC entry 171 (class 1259 OID 16579)
+-- Dependencies: 6
 -- Name: condicion_programa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -196,7 +206,8 @@ CREATE TABLE condicion_programa (
 ALTER TABLE public.condicion_programa OWNER TO postgres;
 
 --
--- TOC entry 181 (class 1259 OID 25562)
+-- TOC entry 172 (class 1259 OID 16582)
+-- Dependencies: 6
 -- Name: cronograma; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -213,7 +224,8 @@ CREATE TABLE cronograma (
 ALTER TABLE public.cronograma OWNER TO postgres;
 
 --
--- TOC entry 182 (class 1259 OID 25567)
+-- TOC entry 173 (class 1259 OID 16585)
+-- Dependencies: 6
 -- Name: defensa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -232,7 +244,8 @@ CREATE TABLE defensa (
 ALTER TABLE public.defensa OWNER TO postgres;
 
 --
--- TOC entry 183 (class 1259 OID 25572)
+-- TOC entry 174 (class 1259 OID 16591)
+-- Dependencies: 6
 -- Name: estudiante; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -253,7 +266,8 @@ CREATE TABLE estudiante (
 ALTER TABLE public.estudiante OWNER TO postgres;
 
 --
--- TOC entry 184 (class 1259 OID 25580)
+-- TOC entry 175 (class 1259 OID 16597)
+-- Dependencies: 6
 -- Name: estudiante_teg; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -266,7 +280,8 @@ CREATE TABLE estudiante_teg (
 ALTER TABLE public.estudiante_teg OWNER TO postgres;
 
 --
--- TOC entry 185 (class 1259 OID 25585)
+-- TOC entry 176 (class 1259 OID 16600)
+-- Dependencies: 6
 -- Name: etapa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -282,7 +297,8 @@ CREATE TABLE etapa (
 ALTER TABLE public.etapa OWNER TO postgres;
 
 --
--- TOC entry 186 (class 1259 OID 25593)
+-- TOC entry 177 (class 1259 OID 16606)
+-- Dependencies: 6
 -- Name: evaluacion_defensa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -298,7 +314,8 @@ CREATE TABLE evaluacion_defensa (
 ALTER TABLE public.evaluacion_defensa OWNER TO postgres;
 
 --
--- TOC entry 187 (class 1259 OID 25601)
+-- TOC entry 178 (class 1259 OID 16612)
+-- Dependencies: 6
 -- Name: evaluacion_factibilidad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -313,7 +330,8 @@ CREATE TABLE evaluacion_factibilidad (
 ALTER TABLE public.evaluacion_factibilidad OWNER TO postgres;
 
 --
--- TOC entry 188 (class 1259 OID 25606)
+-- TOC entry 179 (class 1259 OID 16615)
+-- Dependencies: 6
 -- Name: factibilidad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -330,7 +348,8 @@ CREATE TABLE factibilidad (
 ALTER TABLE public.factibilidad OWNER TO postgres;
 
 --
--- TOC entry 170 (class 1259 OID 25467)
+-- TOC entry 180 (class 1259 OID 16621)
+-- Dependencies: 6
 -- Name: grupo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -344,7 +363,8 @@ CREATE TABLE grupo (
 ALTER TABLE public.grupo OWNER TO postgres;
 
 --
--- TOC entry 172 (class 1259 OID 25495)
+-- TOC entry 181 (class 1259 OID 16624)
+-- Dependencies: 6
 -- Name: grupo_usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -357,7 +377,8 @@ CREATE TABLE grupo_usuario (
 ALTER TABLE public.grupo_usuario OWNER TO postgres;
 
 --
--- TOC entry 207 (class 1259 OID 25953)
+-- TOC entry 182 (class 1259 OID 16627)
+-- Dependencies: 6
 -- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -372,7 +393,8 @@ CREATE SEQUENCE hibernate_sequence
 ALTER TABLE public.hibernate_sequence OWNER TO postgres;
 
 --
--- TOC entry 189 (class 1259 OID 25614)
+-- TOC entry 183 (class 1259 OID 16629)
+-- Dependencies: 6
 -- Name: item_defensa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -387,7 +409,8 @@ CREATE TABLE item_defensa (
 ALTER TABLE public.item_defensa OWNER TO postgres;
 
 --
--- TOC entry 190 (class 1259 OID 25619)
+-- TOC entry 184 (class 1259 OID 16632)
+-- Dependencies: 6
 -- Name: item_evaluacion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -404,7 +427,8 @@ CREATE TABLE item_evaluacion (
 ALTER TABLE public.item_evaluacion OWNER TO postgres;
 
 --
--- TOC entry 191 (class 1259 OID 25627)
+-- TOC entry 185 (class 1259 OID 16638)
+-- Dependencies: 6
 -- Name: item_programa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -417,7 +441,8 @@ CREATE TABLE item_programa (
 ALTER TABLE public.item_programa OWNER TO postgres;
 
 --
--- TOC entry 192 (class 1259 OID 25632)
+-- TOC entry 186 (class 1259 OID 16641)
+-- Dependencies: 6
 -- Name: jurado; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -434,7 +459,8 @@ CREATE TABLE jurado (
 ALTER TABLE public.jurado OWNER TO postgres;
 
 --
--- TOC entry 193 (class 1259 OID 25637)
+-- TOC entry 187 (class 1259 OID 16644)
+-- Dependencies: 6
 -- Name: lapso; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -450,7 +476,8 @@ CREATE TABLE lapso (
 ALTER TABLE public.lapso OWNER TO postgres;
 
 --
--- TOC entry 194 (class 1259 OID 25642)
+-- TOC entry 188 (class 1259 OID 16647)
+-- Dependencies: 6
 -- Name: profesor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -471,7 +498,8 @@ CREATE TABLE profesor (
 ALTER TABLE public.profesor OWNER TO postgres;
 
 --
--- TOC entry 195 (class 1259 OID 25650)
+-- TOC entry 189 (class 1259 OID 16653)
+-- Dependencies: 6
 -- Name: profesor_area; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -484,7 +512,8 @@ CREATE TABLE profesor_area (
 ALTER TABLE public.profesor_area OWNER TO postgres;
 
 --
--- TOC entry 196 (class 1259 OID 25655)
+-- TOC entry 190 (class 1259 OID 16656)
+-- Dependencies: 6
 -- Name: programa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -499,7 +528,8 @@ CREATE TABLE programa (
 ALTER TABLE public.programa OWNER TO postgres;
 
 --
--- TOC entry 211 (class 1259 OID 25987)
+-- TOC entry 191 (class 1259 OID 16662)
+-- Dependencies: 6
 -- Name: programa_area; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -513,7 +543,8 @@ CREATE TABLE programa_area (
 ALTER TABLE public.programa_area OWNER TO postgres;
 
 --
--- TOC entry 212 (class 1259 OID 25992)
+-- TOC entry 192 (class 1259 OID 16665)
+-- Dependencies: 6
 -- Name: programa_item; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -527,7 +558,8 @@ CREATE TABLE programa_item (
 ALTER TABLE public.programa_item OWNER TO postgres;
 
 --
--- TOC entry 213 (class 1259 OID 25997)
+-- TOC entry 193 (class 1259 OID 16668)
+-- Dependencies: 6
 -- Name: programa_requisito; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -541,7 +573,8 @@ CREATE TABLE programa_requisito (
 ALTER TABLE public.programa_requisito OWNER TO postgres;
 
 --
--- TOC entry 197 (class 1259 OID 25663)
+-- TOC entry 194 (class 1259 OID 16671)
+-- Dependencies: 6
 -- Name: requisito; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -556,7 +589,8 @@ CREATE TABLE requisito (
 ALTER TABLE public.requisito OWNER TO postgres;
 
 --
--- TOC entry 198 (class 1259 OID 25671)
+-- TOC entry 195 (class 1259 OID 16677)
+-- Dependencies: 6
 -- Name: requisito_actividad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -569,7 +603,8 @@ CREATE TABLE requisito_actividad (
 ALTER TABLE public.requisito_actividad OWNER TO postgres;
 
 --
--- TOC entry 199 (class 1259 OID 25676)
+-- TOC entry 196 (class 1259 OID 16680)
+-- Dependencies: 6
 -- Name: requisito_programa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -582,7 +617,8 @@ CREATE TABLE requisito_programa (
 ALTER TABLE public.requisito_programa OWNER TO postgres;
 
 --
--- TOC entry 200 (class 1259 OID 25681)
+-- TOC entry 197 (class 1259 OID 16683)
+-- Dependencies: 6
 -- Name: solicitud_tutoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -599,7 +635,8 @@ CREATE TABLE solicitud_tutoria (
 ALTER TABLE public.solicitud_tutoria OWNER TO postgres;
 
 --
--- TOC entry 201 (class 1259 OID 25689)
+-- TOC entry 198 (class 1259 OID 16689)
+-- Dependencies: 6
 -- Name: solicitud_tutoria_estudiante; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -612,7 +649,8 @@ CREATE TABLE solicitud_tutoria_estudiante (
 ALTER TABLE public.solicitud_tutoria_estudiante OWNER TO postgres;
 
 --
--- TOC entry 202 (class 1259 OID 25694)
+-- TOC entry 199 (class 1259 OID 16692)
+-- Dependencies: 6
 -- Name: teg; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -632,7 +670,8 @@ CREATE TABLE teg (
 ALTER TABLE public.teg OWNER TO postgres;
 
 --
--- TOC entry 203 (class 1259 OID 25702)
+-- TOC entry 200 (class 1259 OID 16698)
+-- Dependencies: 6
 -- Name: teg_etapa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -646,7 +685,8 @@ CREATE TABLE teg_etapa (
 ALTER TABLE public.teg_etapa OWNER TO postgres;
 
 --
--- TOC entry 204 (class 1259 OID 25707)
+-- TOC entry 201 (class 1259 OID 16701)
+-- Dependencies: 6
 -- Name: teg_requisito; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -661,7 +701,8 @@ CREATE TABLE teg_requisito (
 ALTER TABLE public.teg_requisito OWNER TO postgres;
 
 --
--- TOC entry 205 (class 1259 OID 25712)
+-- TOC entry 202 (class 1259 OID 16704)
+-- Dependencies: 6
 -- Name: tematica; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -677,7 +718,8 @@ CREATE TABLE tematica (
 ALTER TABLE public.tematica OWNER TO postgres;
 
 --
--- TOC entry 206 (class 1259 OID 25720)
+-- TOC entry 203 (class 1259 OID 16710)
+-- Dependencies: 6
 -- Name: tipo_jurado; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -692,7 +734,8 @@ CREATE TABLE tipo_jurado (
 ALTER TABLE public.tipo_jurado OWNER TO postgres;
 
 --
--- TOC entry 171 (class 1259 OID 25487)
+-- TOC entry 204 (class 1259 OID 16716)
+-- Dependencies: 6
 -- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -707,274 +750,316 @@ CREATE TABLE usuario (
 ALTER TABLE public.usuario OWNER TO postgres;
 
 --
--- TOC entry 2270 (class 0 OID 25510)
--- Dependencies: 173
+-- TOC entry 2265 (class 0 OID 16534)
+-- Dependencies: 161 2309
 -- Data for Name: actividad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO actividad VALUES (1, 'plant', true, 'planteamiento');
+COPY actividad (id, descripcion, estatus, nombre) FROM stdin;
+1	plant	t	planteamiento
+\.
 
 
 --
--- TOC entry 2307 (class 0 OID 25979)
--- Dependencies: 210
+-- TOC entry 2266 (class 0 OID 16540)
+-- Dependencies: 162 2309
 -- Data for Name: actividad_requisito; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY actividad_requisito (actividad_id, requisito_id, lapso_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2305 (class 0 OID 25956)
--- Dependencies: 208
+-- TOC entry 2267 (class 0 OID 16543)
+-- Dependencies: 163 2309
 -- Data for Name: arbol; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO arbol VALUES (31, 24, 'Registrar Avances', 'VRegistrarAvances');
-INSERT INTO arbol VALUES (32, 24, 'Evaluar Avances', 'VEvaluarAvances');
-INSERT INTO arbol VALUES (33, 0, 'Trabajo Especial de Grado', 'arbol');
-INSERT INTO arbol VALUES (34, 33, 'Registrar Trabajo', 'VRegistrarTrabajo');
-INSERT INTO arbol VALUES (36, 33, 'Evaluar Revisiones', 'VEvaluarRevisiones');
-INSERT INTO arbol VALUES (37, 33, 'Solicitar Defensa', NULL);
-INSERT INTO arbol VALUES (38, 33, 'Atender Solicitudes de Defensa', 'VAtenderDefensa');
-INSERT INTO arbol VALUES (39, 33, 'Calificar Defensa', 'VCalificarDefensa');
-INSERT INTO arbol VALUES (40, 0, 'Portal Web', 'arbol');
-INSERT INTO arbol VALUES (1, 0, 'Archivos', 'arbol');
-INSERT INTO arbol VALUES (2, 1, 'Datos Basicos', 'arbol');
-INSERT INTO arbol VALUES (3, 2, 'Programas', 'VPrograma');
-INSERT INTO arbol VALUES (4, 2, 'Areas de Investigacion', 'VAreaInvestigacion');
-INSERT INTO arbol VALUES (5, 2, 'Tematica', 'VTematica');
-INSERT INTO arbol VALUES (6, 2, 'Requisitos', 'VRequisito');
-INSERT INTO arbol VALUES (8, 2, 'Items de Evaluacion', 'VItem');
-INSERT INTO arbol VALUES (9, 2, 'Profesores', 'arbol');
-INSERT INTO arbol VALUES (12, 2, 'Estudiantes', 'arbol');
-INSERT INTO arbol VALUES (17, 1, 'Configuraciones', 'arbol');
-INSERT INTO arbol VALUES (41, 40, 'Crear Noticias', NULL);
-INSERT INTO arbol VALUES (24, 0, 'Proyecto', 'arbol');
-INSERT INTO arbol VALUES (26, 24, 'Registrar Proyecto', 'VRegistrarProyecto');
-INSERT INTO arbol VALUES (42, 40, 'Crear Enlaces', NULL);
-INSERT INTO arbol VALUES (28, 24, 'Asignar Comision Evaluadora', 'VAsignarComision');
-INSERT INTO arbol VALUES (43, 40, 'Descargas', NULL);
-INSERT INTO arbol VALUES (29, 24, 'Evaluar Factibilidad', 'VEvaluarFactibilidad');
-INSERT INTO arbol VALUES (30, 24, 'Registrar Factibilidad', 'VRegistrarFactibilidad');
-INSERT INTO arbol VALUES (25, 24, 'Atender Solicitudes de Tutor', 'VEvaluarTutorias');
-INSERT INTO arbol VALUES (27, 24, 'Atender Solicitudes de Proyecto', 'VVerificarSolicitudProyecto');
-INSERT INTO arbol VALUES (35, 33, 'Registrar Revisiones', 'VRegistrarRevisiones');
-INSERT INTO arbol VALUES (45, 44, 'Crear Usuario', 'VCrearUsuario');
-INSERT INTO arbol VALUES (44, 0, 'Seguridad', 'arbol');
-INSERT INTO arbol VALUES (46, 44, 'Crear Grupo', 'VCrearGrupo');
-INSERT INTO arbol VALUES (13, 12, 'Estudiantes Individuales', 'VEstudiante');
-INSERT INTO arbol VALUES (10, 9, 'Profesores Individuales', 'VProfesor');
-INSERT INTO arbol VALUES (11, 9, 'Profesores Por Lotes', 'VCargarProfesor');
-INSERT INTO arbol VALUES (14, 12, 'Estudiantes Por Lotes', 'VCargarEstudiante');
-INSERT INTO arbol VALUES (15, 2, 'Tipos de Jurado', 'VTipoJurado');
-INSERT INTO arbol VALUES (16, 2, 'Lapsos Academicos', 'VLapsoAcademico');
-INSERT INTO arbol VALUES (18, 17, 'Configurar Profesores', 'VProfesorArea');
-INSERT INTO arbol VALUES (19, 17, 'Configurar Programas', 'VConfigurarPrograma');
-INSERT INTO arbol VALUES (20, 17, 'Configurar Actividades', 'VRequisitoActividad');
-INSERT INTO arbol VALUES (21, 17, 'Configurar Condiciones', 'VCondicionPrograma');
-INSERT INTO arbol VALUES (22, 17, 'Configurar Cronograma', 'VCrearCronograma');
-INSERT INTO arbol VALUES (7, 2, 'Actividades', 'maestros/VActividad');
+COPY arbol (id, hijo, nombre, url) FROM stdin;
+33	0	Trabajo Especial de Grado	arbol
+37	33	Solicitar Defensa	\N
+40	0	Portal Web	arbol
+1	0	Archivos	arbol
+2	1	Datos Basicos	arbol
+17	1	Configuraciones	arbol
+44	0	Seguridad	arbol
+3	2	Programas	maestros/VPrograma
+4	2	Areas de Investigacion	maestros/VAreaInvestigacion
+5	2	Tematicas	maestros/VTematica
+6	2	Requisitos	maestros/VRequisito
+11	9	Profesores Por Lotes	maestros/VCargarProfesor
+7	2	Actividades	maestros/VActividad
+14	12	Estudiantes Por Lotes	maestros/VCargarEstudiante
+15	2	Tipos de Jurado	maestros/VTipoJurado
+19	17	Configurar Programas	maestros/VConfigurarPrograma
+21	17	Configurar Condiciones	maestros/VCondicionPrograma
+20	17	Configurar Actividades	maestros/VRequisitoActividad
+18	17	Configurar Profesores	maestros/VProfesorArea
+25	24	Atender Solicitudes de Tutor	transacciones/VEvaluarTutorias
+26	24	Registrar Proyecto	transacciones/VRegistrarProyecto
+27	24	Atender Solicitudes de Proyecto	transacciones/VVerificarSolicitudProyecto
+28	24	Asignar Comision Evaluadora	transacciones/VAsignarComision
+29	24	Evaluar Factibilidad	transacciones/VEvaluarFactibilidad
+30	24	Registrar Factibilidad	transacciones/VRegistrarFactibilidad
+31	24	Registrar Avances	transacciones/VRegistrarAvances
+32	24	Evaluar Avances	transacciones/VEvaluarAvances
+34	33	Registrar Trabajo	transacciones/VRegistrarTrabajo
+35	33	Registrar Revisiones	transacciones/VRegistrarRevisiones
+36	33	Evaluar Revisiones	transacciones/VEvaluarRevisiones
+38	33	Atender Solicitudes de Defensa	transacciones/VAtenderDefensa
+39	33	Calificar Defensa	transacciones/VCalificarDefensa
+41	40	Crear Noticias	maestros/VCrearNoticia
+8	2	Items de Evaluacion	maestros/VItem
+42	40	Crear Enlaces	maestros/VCrearEnlace
+43	40	Descargas	maestros/VDescarga
+9	2	Profesores	arbol
+45	44	Crear Usuario	maestros/VCrearUsuario
+46	44	Crear Grupo	maestros/VCrearGrupo
+10	9	Profesores Individual	maestros/VProfesor
+12	2	Estudiantes	arbol
+13	12	Estudiantes Individual	maestros/VEstudiante
+16	2	Lapsos Academicos	maestros/VLapsoAcademico
+22	17	Configurar Cronograma	maestros/VCrearCronograma
+24	0	Proyecto	arbol
+\.
 
 
 --
--- TOC entry 2306 (class 0 OID 25964)
--- Dependencies: 209
+-- TOC entry 2268 (class 0 OID 16549)
+-- Dependencies: 164 2309
 -- Data for Name: arbol_grupo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO arbol_grupo VALUES (101, 1);
-INSERT INTO arbol_grupo VALUES (101, 2);
-INSERT INTO arbol_grupo VALUES (101, 3);
-INSERT INTO arbol_grupo VALUES (101, 4);
-INSERT INTO arbol_grupo VALUES (101, 5);
-INSERT INTO arbol_grupo VALUES (101, 6);
-INSERT INTO arbol_grupo VALUES (101, 7);
-INSERT INTO arbol_grupo VALUES (101, 8);
-INSERT INTO arbol_grupo VALUES (101, 9);
-INSERT INTO arbol_grupo VALUES (101, 10);
-INSERT INTO arbol_grupo VALUES (101, 11);
-INSERT INTO arbol_grupo VALUES (101, 12);
-INSERT INTO arbol_grupo VALUES (101, 13);
-INSERT INTO arbol_grupo VALUES (101, 14);
-INSERT INTO arbol_grupo VALUES (101, 15);
-INSERT INTO arbol_grupo VALUES (101, 16);
-INSERT INTO arbol_grupo VALUES (101, 17);
-INSERT INTO arbol_grupo VALUES (101, 18);
-INSERT INTO arbol_grupo VALUES (101, 19);
-INSERT INTO arbol_grupo VALUES (101, 20);
-INSERT INTO arbol_grupo VALUES (101, 21);
-INSERT INTO arbol_grupo VALUES (101, 22);
-INSERT INTO arbol_grupo VALUES (101, 44);
-INSERT INTO arbol_grupo VALUES (101, 45);
-INSERT INTO arbol_grupo VALUES (101, 46);
-INSERT INTO arbol_grupo VALUES (102, 44);
-INSERT INTO arbol_grupo VALUES (102, 45);
-INSERT INTO arbol_grupo VALUES (102, 46);
-INSERT INTO arbol_grupo VALUES (102, 24);
-INSERT INTO arbol_grupo VALUES (102, 25);
-INSERT INTO arbol_grupo VALUES (102, 26);
-INSERT INTO arbol_grupo VALUES (102, 27);
-INSERT INTO arbol_grupo VALUES (102, 28);
-INSERT INTO arbol_grupo VALUES (102, 29);
-INSERT INTO arbol_grupo VALUES (102, 30);
-INSERT INTO arbol_grupo VALUES (102, 31);
-INSERT INTO arbol_grupo VALUES (102, 32);
-INSERT INTO arbol_grupo VALUES (102, 33);
-INSERT INTO arbol_grupo VALUES (102, 34);
-INSERT INTO arbol_grupo VALUES (102, 35);
-INSERT INTO arbol_grupo VALUES (102, 36);
-INSERT INTO arbol_grupo VALUES (102, 37);
-INSERT INTO arbol_grupo VALUES (102, 38);
-INSERT INTO arbol_grupo VALUES (102, 39);
-INSERT INTO arbol_grupo VALUES (102, 40);
-INSERT INTO arbol_grupo VALUES (102, 41);
-INSERT INTO arbol_grupo VALUES (102, 42);
-INSERT INTO arbol_grupo VALUES (102, 43);
+COPY arbol_grupo (grupo_id, arbol_id) FROM stdin;
+101	1
+101	2
+101	3
+101	4
+101	5
+101	6
+101	7
+101	8
+101	9
+101	10
+101	11
+101	12
+101	13
+101	14
+101	15
+101	16
+101	17
+101	18
+101	19
+101	20
+101	21
+101	22
+101	44
+101	45
+101	46
+102	44
+102	45
+102	46
+102	24
+102	25
+102	26
+102	27
+102	28
+102	29
+102	30
+102	31
+102	32
+102	33
+102	34
+102	35
+102	36
+102	37
+102	38
+102	39
+102	40
+102	41
+102	42
+102	43
+\.
 
 
 --
--- TOC entry 2271 (class 0 OID 25518)
--- Dependencies: 174
+-- TOC entry 2269 (class 0 OID 16552)
+-- Dependencies: 165 2309
 -- Data for Name: area_investigacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY area_investigacion (id, descripcion, estatus, nombre) FROM stdin;
+\.
 
 
 --
--- TOC entry 2272 (class 0 OID 25526)
--- Dependencies: 175
+-- TOC entry 2270 (class 0 OID 16558)
+-- Dependencies: 166 2309
 -- Data for Name: area_programa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY area_programa (programa_id, area_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2273 (class 0 OID 25531)
--- Dependencies: 176
+-- TOC entry 2271 (class 0 OID 16561)
+-- Dependencies: 167 2309
 -- Data for Name: avance; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY avance (id, estatus, fecha, observacion, teg_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2274 (class 0 OID 25536)
--- Dependencies: 177
+-- TOC entry 2272 (class 0 OID 16564)
+-- Dependencies: 168 2309
 -- Data for Name: categoria; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY categoria (id, descripcion, estatus, nombre) FROM stdin;
+\.
 
 
 --
--- TOC entry 2275 (class 0 OID 25544)
--- Dependencies: 178
+-- TOC entry 2273 (class 0 OID 16570)
+-- Dependencies: 169 2309
 -- Data for Name: comision; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY comision (teg_id, profesor_cedula) FROM stdin;
+\.
 
 
 --
--- TOC entry 2276 (class 0 OID 25549)
--- Dependencies: 179
+-- TOC entry 2274 (class 0 OID 16573)
+-- Dependencies: 170 2309
 -- Data for Name: condicion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY condicion (id, descripcion, estatus, nombre) FROM stdin;
+\.
 
 
 --
--- TOC entry 2277 (class 0 OID 25557)
--- Dependencies: 180
+-- TOC entry 2275 (class 0 OID 16579)
+-- Dependencies: 171 2309
 -- Data for Name: condicion_programa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY condicion_programa (valor, condicion_id, programa_id, lapso_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2278 (class 0 OID 25562)
--- Dependencies: 181
+-- TOC entry 2276 (class 0 OID 16582)
+-- Dependencies: 172 2309
 -- Data for Name: cronograma; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY cronograma (estatus, fecha_fin, fecha_inicio, lapso_id, programa_id, actividad_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2279 (class 0 OID 25567)
--- Dependencies: 182
+-- TOC entry 2277 (class 0 OID 16585)
+-- Dependencies: 173 2309
 -- Data for Name: defensa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY defensa (id, estatus, fecha, hora, lugar, nota, teg_id, profesor_cedula) FROM stdin;
+\.
 
 
 --
--- TOC entry 2280 (class 0 OID 25572)
--- Dependencies: 183
+-- TOC entry 2278 (class 0 OID 16591)
+-- Dependencies: 174 2309
 -- Data for Name: estudiante; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY estudiante (cedula, apellido, correo_electronico, direcion, estatus, nombre, sexo, telefono_fijo, telefono_movil, programa_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2281 (class 0 OID 25580)
--- Dependencies: 184
+-- TOC entry 2279 (class 0 OID 16597)
+-- Dependencies: 175 2309
 -- Data for Name: estudiante_teg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY estudiante_teg (teg_id, estudiante_cedula) FROM stdin;
+\.
 
 
 --
--- TOC entry 2282 (class 0 OID 25585)
--- Dependencies: 185
+-- TOC entry 2280 (class 0 OID 16600)
+-- Dependencies: 176 2309
 -- Data for Name: etapa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY etapa (id, descripcion, duracion, estatus, nombre) FROM stdin;
+\.
 
 
 --
--- TOC entry 2283 (class 0 OID 25593)
--- Dependencies: 186
+-- TOC entry 2281 (class 0 OID 16606)
+-- Dependencies: 177 2309
 -- Data for Name: evaluacion_defensa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY evaluacion_defensa (id, nota_individual, observaciones, defensa_id, profesor_cedula) FROM stdin;
+\.
 
 
 --
--- TOC entry 2284 (class 0 OID 25601)
--- Dependencies: 187
+-- TOC entry 2282 (class 0 OID 16612)
+-- Dependencies: 178 2309
 -- Data for Name: evaluacion_factibilidad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY evaluacion_factibilidad (id, estatus, fecha_evaluacion, observacion) FROM stdin;
+\.
 
 
 --
--- TOC entry 2285 (class 0 OID 25606)
--- Dependencies: 188
+-- TOC entry 2283 (class 0 OID 16615)
+-- Dependencies: 179 2309
 -- Data for Name: factibilidad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY factibilidad (id, estatus, fecha, observacion, profesor_cedula, teg_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2267 (class 0 OID 25467)
--- Dependencies: 170
+-- TOC entry 2284 (class 0 OID 16621)
+-- Dependencies: 180 2309
 -- Data for Name: grupo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO grupo VALUES (101, true, 'ROLE_USER');
-INSERT INTO grupo VALUES (102, true, 'ROLE_ADMIN');
+COPY grupo (id, estatus, nombre) FROM stdin;
+101	t	ROLE_USER
+102	t	ROLE_ADMIN
+\.
 
 
 --
--- TOC entry 2269 (class 0 OID 25495)
--- Dependencies: 172
+-- TOC entry 2285 (class 0 OID 16624)
+-- Dependencies: 181 2309
 -- Data for Name: grupo_usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO grupo_usuario VALUES (100, 101);
-INSERT INTO grupo_usuario VALUES (112, 102);
+COPY grupo_usuario (usuario_id, grupo_id) FROM stdin;
+100	101
+112	102
+\.
 
 
 --
--- TOC entry 2319 (class 0 OID 0)
--- Dependencies: 207
+-- TOC entry 2317 (class 0 OID 0)
+-- Dependencies: 182
 -- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -982,189 +1067,234 @@ SELECT pg_catalog.setval('hibernate_sequence', 3, true);
 
 
 --
--- TOC entry 2286 (class 0 OID 25614)
--- Dependencies: 189
+-- TOC entry 2287 (class 0 OID 16629)
+-- Dependencies: 183 2309
 -- Data for Name: item_defensa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY item_defensa (ponderacion, evaluacion_defensa_id, item_id, defensa_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2287 (class 0 OID 25619)
--- Dependencies: 190
+-- TOC entry 2288 (class 0 OID 16632)
+-- Dependencies: 184 2309
 -- Data for Name: item_evaluacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY item_evaluacion (id, descripcion, estatus, nombre, valor, tipo) FROM stdin;
+\.
 
 
 --
--- TOC entry 2288 (class 0 OID 25627)
--- Dependencies: 191
+-- TOC entry 2289 (class 0 OID 16638)
+-- Dependencies: 185 2309
 -- Data for Name: item_programa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY item_programa (programa_id, item_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2289 (class 0 OID 25632)
--- Dependencies: 192
+-- TOC entry 2290 (class 0 OID 16641)
+-- Dependencies: 186 2309
 -- Data for Name: jurado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY jurado (ponderacion, teg_id, factibilidad_id, item_evaluacion_id, profesor_cedula, tipo_jurado_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2290 (class 0 OID 25637)
--- Dependencies: 193
+-- TOC entry 2291 (class 0 OID 16644)
+-- Dependencies: 187 2309
 -- Data for Name: lapso; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY lapso (id, estatus, fecha_final, fecha_inicial, nombre) FROM stdin;
+\.
 
 
 --
--- TOC entry 2291 (class 0 OID 25642)
--- Dependencies: 194
+-- TOC entry 2292 (class 0 OID 16647)
+-- Dependencies: 188 2309
 -- Data for Name: profesor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY profesor (cedula, apellido, correo_electronico, direccion, estatus, nombre, sexo, telefono_fijo, telefono_movil, categoria_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2292 (class 0 OID 25650)
--- Dependencies: 195
+-- TOC entry 2293 (class 0 OID 16653)
+-- Dependencies: 189 2309
 -- Data for Name: profesor_area; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY profesor_area (profesor_cedula, area_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2293 (class 0 OID 25655)
--- Dependencies: 196
+-- TOC entry 2294 (class 0 OID 16656)
+-- Dependencies: 190 2309
 -- Data for Name: programa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO programa VALUES (2, 'aaaa', true, 'matematica');
-INSERT INTO programa VALUES (3, 'aaaaa', true, 'aa');
+COPY programa (id, descripcion, estatus, nombre) FROM stdin;
+2	aaaa	t	matematica
+3	aaaaa	t	aa
+\.
 
 
 --
--- TOC entry 2308 (class 0 OID 25987)
--- Dependencies: 211
+-- TOC entry 2295 (class 0 OID 16662)
+-- Dependencies: 191 2309
 -- Data for Name: programa_area; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY programa_area (area_investigacion_id, programa_id, lapso_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2309 (class 0 OID 25992)
--- Dependencies: 212
+-- TOC entry 2296 (class 0 OID 16665)
+-- Dependencies: 192 2309
 -- Data for Name: programa_item; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY programa_item (item_evaluacion_id, programa_id, lapso_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2310 (class 0 OID 25997)
--- Dependencies: 213
+-- TOC entry 2297 (class 0 OID 16668)
+-- Dependencies: 193 2309
 -- Data for Name: programa_requisito; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY programa_requisito (requisito_id, programa_id, lapso_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2294 (class 0 OID 25663)
--- Dependencies: 197
+-- TOC entry 2298 (class 0 OID 16671)
+-- Dependencies: 194 2309
 -- Data for Name: requisito; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY requisito (id, descripcion, estatus, nombre) FROM stdin;
+\.
 
 
 --
--- TOC entry 2295 (class 0 OID 25671)
--- Dependencies: 198
+-- TOC entry 2299 (class 0 OID 16677)
+-- Dependencies: 195 2309
 -- Data for Name: requisito_actividad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY requisito_actividad (actividad_id, requisito_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2296 (class 0 OID 25676)
--- Dependencies: 199
+-- TOC entry 2300 (class 0 OID 16680)
+-- Dependencies: 196 2309
 -- Data for Name: requisito_programa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY requisito_programa (programa_id, requisito_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2297 (class 0 OID 25681)
--- Dependencies: 200
+-- TOC entry 2301 (class 0 OID 16683)
+-- Dependencies: 197 2309
 -- Data for Name: solicitud_tutoria; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY solicitud_tutoria (id, descripcion, estado, fecha, profesor_cedula, tematica_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2298 (class 0 OID 25689)
--- Dependencies: 201
+-- TOC entry 2302 (class 0 OID 16689)
+-- Dependencies: 198 2309
 -- Data for Name: solicitud_tutoria_estudiante; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY solicitud_tutoria_estudiante (solicitud_id, estudiante_cedula) FROM stdin;
+\.
 
 
 --
--- TOC entry 2299 (class 0 OID 25694)
--- Dependencies: 202
+-- TOC entry 2303 (class 0 OID 16692)
+-- Dependencies: 199 2309
 -- Data for Name: teg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY teg (id, descripcion, duracion, estatus, fecha_entrega, fecha_inicio, titulo, tematica_id, tutor_cedula) FROM stdin;
+\.
 
 
 --
--- TOC entry 2300 (class 0 OID 25702)
--- Dependencies: 203
+-- TOC entry 2304 (class 0 OID 16698)
+-- Dependencies: 200 2309
 -- Data for Name: teg_etapa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY teg_etapa (fecha, teg_id, etapa_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2301 (class 0 OID 25707)
--- Dependencies: 204
+-- TOC entry 2305 (class 0 OID 16701)
+-- Dependencies: 201 2309
 -- Data for Name: teg_requisito; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY teg_requisito (estado, fecha_entrega, teg_id, requisito_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2302 (class 0 OID 25712)
--- Dependencies: 205
+-- TOC entry 2306 (class 0 OID 16704)
+-- Dependencies: 202 2309
 -- Data for Name: tematica; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY tematica (id, descripcion, estatus, nombre, area_investigacion_id) FROM stdin;
+\.
 
 
 --
--- TOC entry 2303 (class 0 OID 25720)
--- Dependencies: 206
+-- TOC entry 2307 (class 0 OID 16710)
+-- Dependencies: 203 2309
 -- Data for Name: tipo_jurado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+COPY tipo_jurado (id, descripcion, estatus, nombre) FROM stdin;
+\.
 
 
 --
--- TOC entry 2268 (class 0 OID 25487)
--- Dependencies: 171
+-- TOC entry 2308 (class 0 OID 16716)
+-- Dependencies: 204 2309
 -- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO usuario VALUES (112, true, 'ysol', '$2a$10$2ShZ2y.Els2iizZJvufUYO7uUh6499bK6NXoOYb.CXFelvJ8MHpMS');
-INSERT INTO usuario VALUES (100, true, 'willi', '$2a$10$sxSyH2JPrTtqXVffHFQnnOrxVNriHrG8DnlYf/ZN7LNifovQ2MoIC');
-INSERT INTO usuario VALUES (6, true, 'cindy', '$2a$10$ZQ7P6OO/UexmfNCWoSxaAuiaaD4CUKG8TIgUKkt4BnXXuUvcH9Kz.');
-INSERT INTO usuario VALUES (7, true, 'ramon', '$2a$10$ySesxrhAy6Q9KKcWVOr2zu8g3RZmExT0xNVHMsRSvhqOEelZ/uFXy');
+COPY usuario (id, estatus, nombre, password) FROM stdin;
+112	t	ysol	$2a$10$2ShZ2y.Els2iizZJvufUYO7uUh6499bK6NXoOYb.CXFelvJ8MHpMS
+100	t	willi	$2a$10$sxSyH2JPrTtqXVffHFQnnOrxVNriHrG8DnlYf/ZN7LNifovQ2MoIC
+6	t	cindy	$2a$10$ZQ7P6OO/UexmfNCWoSxaAuiaaD4CUKG8TIgUKkt4BnXXuUvcH9Kz.
+7	t	ramon	$2a$10$ySesxrhAy6Q9KKcWVOr2zu8g3RZmExT0xNVHMsRSvhqOEelZ/uFXy
+\.
 
 
 --
--- TOC entry 2017 (class 2606 OID 25517)
+-- TOC entry 2015 (class 2606 OID 16723)
+-- Dependencies: 161 161 2310
 -- Name: actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1173,7 +1303,8 @@ ALTER TABLE ONLY actividad
 
 
 --
--- TOC entry 2089 (class 2606 OID 25983)
+-- TOC entry 2017 (class 2606 OID 16725)
+-- Dependencies: 162 162 162 2310
 -- Name: actividad_requisito_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1182,7 +1313,8 @@ ALTER TABLE ONLY actividad_requisito
 
 
 --
--- TOC entry 2087 (class 2606 OID 25968)
+-- TOC entry 2021 (class 2606 OID 16727)
+-- Dependencies: 164 164 164 2310
 -- Name: arbol_grupo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1191,7 +1323,8 @@ ALTER TABLE ONLY arbol_grupo
 
 
 --
--- TOC entry 2085 (class 2606 OID 25963)
+-- TOC entry 2019 (class 2606 OID 16729)
+-- Dependencies: 163 163 2310
 -- Name: arbol_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1200,7 +1333,8 @@ ALTER TABLE ONLY arbol
 
 
 --
--- TOC entry 2019 (class 2606 OID 25525)
+-- TOC entry 2023 (class 2606 OID 16731)
+-- Dependencies: 165 165 2310
 -- Name: area_investigacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1209,7 +1343,8 @@ ALTER TABLE ONLY area_investigacion
 
 
 --
--- TOC entry 2021 (class 2606 OID 25530)
+-- TOC entry 2025 (class 2606 OID 16733)
+-- Dependencies: 166 166 166 2310
 -- Name: area_programa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1218,7 +1353,8 @@ ALTER TABLE ONLY area_programa
 
 
 --
--- TOC entry 2023 (class 2606 OID 25535)
+-- TOC entry 2027 (class 2606 OID 16735)
+-- Dependencies: 167 167 2310
 -- Name: avance_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1227,7 +1363,8 @@ ALTER TABLE ONLY avance
 
 
 --
--- TOC entry 2025 (class 2606 OID 25543)
+-- TOC entry 2029 (class 2606 OID 16737)
+-- Dependencies: 168 168 2310
 -- Name: categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1236,7 +1373,8 @@ ALTER TABLE ONLY categoria
 
 
 --
--- TOC entry 2027 (class 2606 OID 25548)
+-- TOC entry 2031 (class 2606 OID 16739)
+-- Dependencies: 169 169 169 2310
 -- Name: comision_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1245,7 +1383,8 @@ ALTER TABLE ONLY comision
 
 
 --
--- TOC entry 2029 (class 2606 OID 25556)
+-- TOC entry 2033 (class 2606 OID 16741)
+-- Dependencies: 170 170 2310
 -- Name: condicion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1254,7 +1393,8 @@ ALTER TABLE ONLY condicion
 
 
 --
--- TOC entry 2031 (class 2606 OID 25561)
+-- TOC entry 2035 (class 2606 OID 16743)
+-- Dependencies: 171 171 171 2310
 -- Name: condicion_programa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1263,7 +1403,8 @@ ALTER TABLE ONLY condicion_programa
 
 
 --
--- TOC entry 2033 (class 2606 OID 25566)
+-- TOC entry 2037 (class 2606 OID 16745)
+-- Dependencies: 172 172 172 2310
 -- Name: cronograma_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1272,7 +1413,8 @@ ALTER TABLE ONLY cronograma
 
 
 --
--- TOC entry 2035 (class 2606 OID 25571)
+-- TOC entry 2039 (class 2606 OID 16747)
+-- Dependencies: 173 173 2310
 -- Name: defensa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1281,7 +1423,8 @@ ALTER TABLE ONLY defensa
 
 
 --
--- TOC entry 2037 (class 2606 OID 25579)
+-- TOC entry 2041 (class 2606 OID 16749)
+-- Dependencies: 174 174 2310
 -- Name: estudiante_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1290,7 +1433,8 @@ ALTER TABLE ONLY estudiante
 
 
 --
--- TOC entry 2039 (class 2606 OID 25584)
+-- TOC entry 2043 (class 2606 OID 16751)
+-- Dependencies: 175 175 175 2310
 -- Name: estudiante_teg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1299,7 +1443,8 @@ ALTER TABLE ONLY estudiante_teg
 
 
 --
--- TOC entry 2041 (class 2606 OID 25592)
+-- TOC entry 2045 (class 2606 OID 16753)
+-- Dependencies: 176 176 2310
 -- Name: etapa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1308,7 +1453,8 @@ ALTER TABLE ONLY etapa
 
 
 --
--- TOC entry 2043 (class 2606 OID 25600)
+-- TOC entry 2047 (class 2606 OID 16755)
+-- Dependencies: 177 177 2310
 -- Name: evaluacion_defensa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1317,7 +1463,8 @@ ALTER TABLE ONLY evaluacion_defensa
 
 
 --
--- TOC entry 2045 (class 2606 OID 25605)
+-- TOC entry 2049 (class 2606 OID 16757)
+-- Dependencies: 178 178 2310
 -- Name: evaluacion_factibilidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1326,7 +1473,8 @@ ALTER TABLE ONLY evaluacion_factibilidad
 
 
 --
--- TOC entry 2047 (class 2606 OID 25613)
+-- TOC entry 2051 (class 2606 OID 16759)
+-- Dependencies: 179 179 2310
 -- Name: factibilidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1335,7 +1483,8 @@ ALTER TABLE ONLY factibilidad
 
 
 --
--- TOC entry 2011 (class 2606 OID 25471)
+-- TOC entry 2053 (class 2606 OID 16761)
+-- Dependencies: 180 180 2310
 -- Name: grupo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1344,7 +1493,8 @@ ALTER TABLE ONLY grupo
 
 
 --
--- TOC entry 2015 (class 2606 OID 25499)
+-- TOC entry 2055 (class 2606 OID 16763)
+-- Dependencies: 181 181 181 2310
 -- Name: grupo_usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1353,7 +1503,8 @@ ALTER TABLE ONLY grupo_usuario
 
 
 --
--- TOC entry 2049 (class 2606 OID 25618)
+-- TOC entry 2057 (class 2606 OID 16765)
+-- Dependencies: 183 183 183 2310
 -- Name: item_defensa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1362,7 +1513,8 @@ ALTER TABLE ONLY item_defensa
 
 
 --
--- TOC entry 2051 (class 2606 OID 25626)
+-- TOC entry 2059 (class 2606 OID 16767)
+-- Dependencies: 184 184 2310
 -- Name: item_evaluacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1371,7 +1523,8 @@ ALTER TABLE ONLY item_evaluacion
 
 
 --
--- TOC entry 2053 (class 2606 OID 25631)
+-- TOC entry 2061 (class 2606 OID 16769)
+-- Dependencies: 185 185 185 2310
 -- Name: item_programa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1380,7 +1533,8 @@ ALTER TABLE ONLY item_programa
 
 
 --
--- TOC entry 2055 (class 2606 OID 25636)
+-- TOC entry 2063 (class 2606 OID 16771)
+-- Dependencies: 186 186 186 2310
 -- Name: jurado_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1389,7 +1543,8 @@ ALTER TABLE ONLY jurado
 
 
 --
--- TOC entry 2057 (class 2606 OID 25641)
+-- TOC entry 2065 (class 2606 OID 16773)
+-- Dependencies: 187 187 2310
 -- Name: lapso_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1398,7 +1553,8 @@ ALTER TABLE ONLY lapso
 
 
 --
--- TOC entry 2061 (class 2606 OID 25654)
+-- TOC entry 2069 (class 2606 OID 16775)
+-- Dependencies: 189 189 189 2310
 -- Name: profesor_area_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1407,7 +1563,8 @@ ALTER TABLE ONLY profesor_area
 
 
 --
--- TOC entry 2059 (class 2606 OID 25649)
+-- TOC entry 2067 (class 2606 OID 16777)
+-- Dependencies: 188 188 2310
 -- Name: profesor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1416,7 +1573,8 @@ ALTER TABLE ONLY profesor
 
 
 --
--- TOC entry 2091 (class 2606 OID 25991)
+-- TOC entry 2073 (class 2606 OID 16779)
+-- Dependencies: 191 191 191 2310
 -- Name: programa_area_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1425,7 +1583,8 @@ ALTER TABLE ONLY programa_area
 
 
 --
--- TOC entry 2093 (class 2606 OID 25996)
+-- TOC entry 2075 (class 2606 OID 16781)
+-- Dependencies: 192 192 192 2310
 -- Name: programa_item_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1434,7 +1593,8 @@ ALTER TABLE ONLY programa_item
 
 
 --
--- TOC entry 2063 (class 2606 OID 25662)
+-- TOC entry 2071 (class 2606 OID 16783)
+-- Dependencies: 190 190 2310
 -- Name: programa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1443,7 +1603,8 @@ ALTER TABLE ONLY programa
 
 
 --
--- TOC entry 2095 (class 2606 OID 26001)
+-- TOC entry 2077 (class 2606 OID 16785)
+-- Dependencies: 193 193 193 2310
 -- Name: programa_requisito_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1452,7 +1613,8 @@ ALTER TABLE ONLY programa_requisito
 
 
 --
--- TOC entry 2067 (class 2606 OID 25675)
+-- TOC entry 2081 (class 2606 OID 16787)
+-- Dependencies: 195 195 195 2310
 -- Name: requisito_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1461,7 +1623,8 @@ ALTER TABLE ONLY requisito_actividad
 
 
 --
--- TOC entry 2065 (class 2606 OID 25670)
+-- TOC entry 2079 (class 2606 OID 16789)
+-- Dependencies: 194 194 2310
 -- Name: requisito_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1470,7 +1633,8 @@ ALTER TABLE ONLY requisito
 
 
 --
--- TOC entry 2069 (class 2606 OID 25680)
+-- TOC entry 2083 (class 2606 OID 16791)
+-- Dependencies: 196 196 196 2310
 -- Name: requisito_programa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1479,7 +1643,8 @@ ALTER TABLE ONLY requisito_programa
 
 
 --
--- TOC entry 2073 (class 2606 OID 25693)
+-- TOC entry 2087 (class 2606 OID 16793)
+-- Dependencies: 198 198 198 2310
 -- Name: solicitud_tutoria_estudiante_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1488,7 +1653,8 @@ ALTER TABLE ONLY solicitud_tutoria_estudiante
 
 
 --
--- TOC entry 2071 (class 2606 OID 25688)
+-- TOC entry 2085 (class 2606 OID 16795)
+-- Dependencies: 197 197 2310
 -- Name: solicitud_tutoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1497,7 +1663,8 @@ ALTER TABLE ONLY solicitud_tutoria
 
 
 --
--- TOC entry 2077 (class 2606 OID 25706)
+-- TOC entry 2091 (class 2606 OID 16797)
+-- Dependencies: 200 200 200 2310
 -- Name: teg_etapa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1506,7 +1673,8 @@ ALTER TABLE ONLY teg_etapa
 
 
 --
--- TOC entry 2075 (class 2606 OID 25701)
+-- TOC entry 2089 (class 2606 OID 16799)
+-- Dependencies: 199 199 2310
 -- Name: teg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1515,7 +1683,8 @@ ALTER TABLE ONLY teg
 
 
 --
--- TOC entry 2079 (class 2606 OID 25711)
+-- TOC entry 2093 (class 2606 OID 16801)
+-- Dependencies: 201 201 201 2310
 -- Name: teg_requisito_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1524,7 +1693,8 @@ ALTER TABLE ONLY teg_requisito
 
 
 --
--- TOC entry 2081 (class 2606 OID 25719)
+-- TOC entry 2095 (class 2606 OID 16803)
+-- Dependencies: 202 202 2310
 -- Name: tematica_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1533,7 +1703,8 @@ ALTER TABLE ONLY tematica
 
 
 --
--- TOC entry 2083 (class 2606 OID 25727)
+-- TOC entry 2097 (class 2606 OID 16805)
+-- Dependencies: 203 203 2310
 -- Name: tipo_jurado_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1542,7 +1713,8 @@ ALTER TABLE ONLY tipo_jurado
 
 
 --
--- TOC entry 2013 (class 2606 OID 25494)
+-- TOC entry 2099 (class 2606 OID 16807)
+-- Dependencies: 204 204 2310
 -- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1551,7 +1723,8 @@ ALTER TABLE ONLY usuario
 
 
 --
--- TOC entry 2141 (class 2606 OID 25928)
+-- TOC entry 2159 (class 2606 OID 16808)
+-- Dependencies: 199 200 2088 2310
 -- Name: fk1b5cb59a49ebaa52; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1560,7 +1733,8 @@ ALTER TABLE ONLY teg_etapa
 
 
 --
--- TOC entry 2142 (class 2606 OID 25933)
+-- TOC entry 2160 (class 2606 OID 16813)
+-- Dependencies: 2044 176 200 2310
 -- Name: fk1b5cb59a76d87132; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1569,7 +1743,8 @@ ALTER TABLE ONLY teg_etapa
 
 
 --
--- TOC entry 2139 (class 2606 OID 25918)
+-- TOC entry 2157 (class 2606 OID 16818)
+-- Dependencies: 202 199 2094 2310
 -- Name: fk1c01681f0a162; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1578,7 +1753,8 @@ ALTER TABLE ONLY teg
 
 
 --
--- TOC entry 2140 (class 2606 OID 25923)
+-- TOC entry 2158 (class 2606 OID 16823)
+-- Dependencies: 199 188 2066 2310
 -- Name: fk1c016a4f276e3; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1587,7 +1763,8 @@ ALTER TABLE ONLY teg
 
 
 --
--- TOC entry 2133 (class 2606 OID 25888)
+-- TOC entry 2151 (class 2606 OID 16828)
+-- Dependencies: 196 194 2078 2310
 -- Name: fk1c892919857aa532; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1596,7 +1773,8 @@ ALTER TABLE ONLY requisito_programa
 
 
 --
--- TOC entry 2134 (class 2606 OID 25893)
+-- TOC entry 2152 (class 2606 OID 16833)
+-- Dependencies: 190 196 2070 2310
 -- Name: fk1c892919caebb742; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1605,7 +1783,8 @@ ALTER TABLE ONLY requisito_programa
 
 
 --
--- TOC entry 2096 (class 2606 OID 25500)
+-- TOC entry 2125 (class 2606 OID 16838)
+-- Dependencies: 2098 181 204 2310
 -- Name: fk1ecb2d584241c752; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1614,7 +1793,8 @@ ALTER TABLE ONLY grupo_usuario
 
 
 --
--- TOC entry 2097 (class 2606 OID 25505)
+-- TOC entry 2126 (class 2606 OID 16843)
+-- Dependencies: 181 2052 180 2310
 -- Name: fk1ecb2d58ff112f72; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1623,7 +1803,8 @@ ALTER TABLE ONLY grupo_usuario
 
 
 --
--- TOC entry 2150 (class 2606 OID 26012)
+-- TOC entry 2100 (class 2606 OID 16848)
+-- Dependencies: 187 2064 162 2310
 -- Name: fk228a90817b0dd4b2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1632,7 +1813,8 @@ ALTER TABLE ONLY actividad_requisito
 
 
 --
--- TOC entry 2149 (class 2606 OID 26007)
+-- TOC entry 2101 (class 2606 OID 16853)
+-- Dependencies: 2078 194 162 2310
 -- Name: fk228a9081857aa532; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1641,7 +1823,8 @@ ALTER TABLE ONLY actividad_requisito
 
 
 --
--- TOC entry 2148 (class 2606 OID 26002)
+-- TOC entry 2102 (class 2606 OID 16858)
+-- Dependencies: 2014 161 162 2310
 -- Name: fk228a9081d101c2f2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1650,7 +1833,8 @@ ALTER TABLE ONLY actividad_requisito
 
 
 --
--- TOC entry 2153 (class 2606 OID 26042)
+-- TOC entry 2140 (class 2606 OID 16863)
+-- Dependencies: 191 187 2064 2310
 -- Name: fk32e5c92f7b0dd4b2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1659,7 +1843,8 @@ ALTER TABLE ONLY programa_area
 
 
 --
--- TOC entry 2151 (class 2606 OID 26032)
+-- TOC entry 2141 (class 2606 OID 16868)
+-- Dependencies: 165 2022 191 2310
 -- Name: fk32e5c92fb5e71917; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1668,7 +1853,8 @@ ALTER TABLE ONLY programa_area
 
 
 --
--- TOC entry 2152 (class 2606 OID 26037)
+-- TOC entry 2142 (class 2606 OID 16873)
+-- Dependencies: 191 2070 190 2310
 -- Name: fk32e5c92fcaebb742; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1677,7 +1863,8 @@ ALTER TABLE ONLY programa_area
 
 
 --
--- TOC entry 2156 (class 2606 OID 26057)
+-- TOC entry 2143 (class 2606 OID 16878)
+-- Dependencies: 192 2064 187 2310
 -- Name: fk32e973b57b0dd4b2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1686,7 +1873,8 @@ ALTER TABLE ONLY programa_item
 
 
 --
--- TOC entry 2155 (class 2606 OID 26052)
+-- TOC entry 2144 (class 2606 OID 16883)
+-- Dependencies: 2070 190 192 2310
 -- Name: fk32e973b5caebb742; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1695,7 +1883,8 @@ ALTER TABLE ONLY programa_item
 
 
 --
--- TOC entry 2154 (class 2606 OID 26047)
+-- TOC entry 2145 (class 2606 OID 16888)
+-- Dependencies: 192 2058 184 2310
 -- Name: fk32e973b5ec331a89; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1704,7 +1893,8 @@ ALTER TABLE ONLY programa_item
 
 
 --
--- TOC entry 2115 (class 2606 OID 25803)
+-- TOC entry 2121 (class 2606 OID 16893)
+-- Dependencies: 188 2066 177 2310
 -- Name: fk4c1844ea4638e5af; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1713,7 +1903,8 @@ ALTER TABLE ONLY evaluacion_defensa
 
 
 --
--- TOC entry 2114 (class 2606 OID 25798)
+-- TOC entry 2122 (class 2606 OID 16898)
+-- Dependencies: 173 177 2038 2310
 -- Name: fk4c1844ea8be4492; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1722,7 +1913,8 @@ ALTER TABLE ONLY evaluacion_defensa
 
 
 --
--- TOC entry 2135 (class 2606 OID 25898)
+-- TOC entry 2153 (class 2606 OID 16903)
+-- Dependencies: 188 197 2066 2310
 -- Name: fk56ac30334638e5af; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1731,7 +1923,8 @@ ALTER TABLE ONLY solicitud_tutoria
 
 
 --
--- TOC entry 2136 (class 2606 OID 25903)
+-- TOC entry 2154 (class 2606 OID 16908)
+-- Dependencies: 197 202 2094 2310
 -- Name: fk56ac303381f0a162; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1740,7 +1933,8 @@ ALTER TABLE ONLY solicitud_tutoria
 
 
 --
--- TOC entry 2159 (class 2606 OID 26072)
+-- TOC entry 2146 (class 2606 OID 16913)
+-- Dependencies: 187 193 2064 2310
 -- Name: fk5788eaa17b0dd4b2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1749,7 +1943,8 @@ ALTER TABLE ONLY programa_requisito
 
 
 --
--- TOC entry 2157 (class 2606 OID 26062)
+-- TOC entry 2147 (class 2606 OID 16918)
+-- Dependencies: 193 2078 194 2310
 -- Name: fk5788eaa1857aa532; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1758,7 +1953,8 @@ ALTER TABLE ONLY programa_requisito
 
 
 --
--- TOC entry 2158 (class 2606 OID 26067)
+-- TOC entry 2148 (class 2606 OID 16923)
+-- Dependencies: 2070 193 190 2310
 -- Name: fk5788eaa1caebb742; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1767,7 +1963,8 @@ ALTER TABLE ONLY programa_requisito
 
 
 --
--- TOC entry 2110 (class 2606 OID 26022)
+-- TOC entry 2116 (class 2606 OID 16928)
+-- Dependencies: 2066 173 188 2310
 -- Name: fk5c158e3c4638e5af; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1776,7 +1973,8 @@ ALTER TABLE ONLY defensa
 
 
 --
--- TOC entry 2109 (class 2606 OID 25778)
+-- TOC entry 2117 (class 2606 OID 16933)
+-- Dependencies: 2088 173 199 2310
 -- Name: fk5c158e3c49ebaa52; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1785,7 +1983,8 @@ ALTER TABLE ONLY defensa
 
 
 --
--- TOC entry 2105 (class 2606 OID 26017)
+-- TOC entry 2110 (class 2606 OID 16938)
+-- Dependencies: 171 2064 187 2310
 -- Name: fk5d6696707b0dd4b2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1794,7 +1993,8 @@ ALTER TABLE ONLY condicion_programa
 
 
 --
--- TOC entry 2103 (class 2606 OID 25753)
+-- TOC entry 2111 (class 2606 OID 16943)
+-- Dependencies: 171 170 2032 2310
 -- Name: fk5d66967081fb8492; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1803,7 +2003,8 @@ ALTER TABLE ONLY condicion_programa
 
 
 --
--- TOC entry 2104 (class 2606 OID 25758)
+-- TOC entry 2112 (class 2606 OID 16948)
+-- Dependencies: 2070 190 171 2310
 -- Name: fk5d669670caebb742; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1812,7 +2013,8 @@ ALTER TABLE ONLY condicion_programa
 
 
 --
--- TOC entry 2106 (class 2606 OID 25763)
+-- TOC entry 2113 (class 2606 OID 16953)
+-- Dependencies: 172 2064 187 2310
 -- Name: fk7bac5e97b0dd4b2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1821,7 +2023,8 @@ ALTER TABLE ONLY cronograma
 
 
 --
--- TOC entry 2107 (class 2606 OID 25768)
+-- TOC entry 2114 (class 2606 OID 16958)
+-- Dependencies: 172 190 2070 2310
 -- Name: fk7bac5e9caebb742; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1830,7 +2033,8 @@ ALTER TABLE ONLY cronograma
 
 
 --
--- TOC entry 2108 (class 2606 OID 25773)
+-- TOC entry 2115 (class 2606 OID 16963)
+-- Dependencies: 2014 172 161 2310
 -- Name: fk7bac5e9d101c2f2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1839,7 +2043,8 @@ ALTER TABLE ONLY cronograma
 
 
 --
--- TOC entry 2130 (class 2606 OID 25873)
+-- TOC entry 2138 (class 2606 OID 16968)
+-- Dependencies: 188 189 2066 2310
 -- Name: fk8bc6b5c24638e5af; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1848,7 +2053,8 @@ ALTER TABLE ONLY profesor_area
 
 
 --
--- TOC entry 2129 (class 2606 OID 25868)
+-- TOC entry 2139 (class 2606 OID 16973)
+-- Dependencies: 165 189 2022 2310
 -- Name: fk8bc6b5c266e3cd8b; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1857,7 +2063,8 @@ ALTER TABLE ONLY profesor_area
 
 
 --
--- TOC entry 2138 (class 2606 OID 25913)
+-- TOC entry 2155 (class 2606 OID 16978)
+-- Dependencies: 197 2084 198 2310
 -- Name: fk9ab055eb8fe1ec8; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1866,7 +2073,8 @@ ALTER TABLE ONLY solicitud_tutoria_estudiante
 
 
 --
--- TOC entry 2137 (class 2606 OID 25908)
+-- TOC entry 2156 (class 2606 OID 16983)
+-- Dependencies: 2040 198 174 2310
 -- Name: fk9ab055ebf20a6af; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1875,7 +2083,8 @@ ALTER TABLE ONLY solicitud_tutoria_estudiante
 
 
 --
--- TOC entry 2120 (class 2606 OID 26027)
+-- TOC entry 2127 (class 2606 OID 16988)
+-- Dependencies: 183 2038 173 2310
 -- Name: fka3fed108be4492; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1884,7 +2093,8 @@ ALTER TABLE ONLY item_defensa
 
 
 --
--- TOC entry 2119 (class 2606 OID 25823)
+-- TOC entry 2128 (class 2606 OID 16993)
+-- Dependencies: 183 184 2058 2310
 -- Name: fka3fed10bdeb82cf; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1893,7 +2103,8 @@ ALTER TABLE ONLY item_defensa
 
 
 --
--- TOC entry 2118 (class 2606 OID 25818)
+-- TOC entry 2129 (class 2606 OID 16998)
+-- Dependencies: 2046 177 183 2310
 -- Name: fka3fed10db92af77; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1902,7 +2113,8 @@ ALTER TABLE ONLY item_defensa
 
 
 --
--- TOC entry 2100 (class 2606 OID 25738)
+-- TOC entry 2107 (class 2606 OID 17003)
+-- Dependencies: 199 2088 167 2310
 -- Name: fkac32ab0449ebaa52; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1911,7 +2123,8 @@ ALTER TABLE ONLY avance
 
 
 --
--- TOC entry 2145 (class 2606 OID 25948)
+-- TOC entry 2163 (class 2606 OID 17008)
+-- Dependencies: 165 202 2022 2310
 -- Name: fkb06b2ad8b5e71917; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1920,7 +2133,8 @@ ALTER TABLE ONLY tematica
 
 
 --
--- TOC entry 2116 (class 2606 OID 25808)
+-- TOC entry 2123 (class 2606 OID 17013)
+-- Dependencies: 2066 179 188 2310
 -- Name: fkb7a6c2e64638e5af; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1929,7 +2143,8 @@ ALTER TABLE ONLY factibilidad
 
 
 --
--- TOC entry 2117 (class 2606 OID 25813)
+-- TOC entry 2124 (class 2606 OID 17018)
+-- Dependencies: 179 2088 199 2310
 -- Name: fkb7a6c2e649ebaa52; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1938,7 +2153,8 @@ ALTER TABLE ONLY factibilidad
 
 
 --
--- TOC entry 2131 (class 2606 OID 25878)
+-- TOC entry 2149 (class 2606 OID 17023)
+-- Dependencies: 2078 195 194 2310
 -- Name: fkba8c9101857aa532; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1947,7 +2163,8 @@ ALTER TABLE ONLY requisito_actividad
 
 
 --
--- TOC entry 2132 (class 2606 OID 25883)
+-- TOC entry 2150 (class 2606 OID 17028)
+-- Dependencies: 195 161 2014 2310
 -- Name: fkba8c9101d101c2f2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1956,7 +2173,8 @@ ALTER TABLE ONLY requisito_actividad
 
 
 --
--- TOC entry 2126 (class 2606 OID 25853)
+-- TOC entry 2132 (class 2606 OID 17033)
+-- Dependencies: 2066 186 188 2310
 -- Name: fkbb87bac54638e5af; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1965,7 +2183,8 @@ ALTER TABLE ONLY jurado
 
 
 --
--- TOC entry 2123 (class 2606 OID 25838)
+-- TOC entry 2133 (class 2606 OID 17038)
+-- Dependencies: 199 186 2088 2310
 -- Name: fkbb87bac549ebaa52; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1974,7 +2193,8 @@ ALTER TABLE ONLY jurado
 
 
 --
--- TOC entry 2124 (class 2606 OID 25843)
+-- TOC entry 2134 (class 2606 OID 17043)
+-- Dependencies: 179 186 2050 2310
 -- Name: fkbb87bac579a06aa2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1983,7 +2203,8 @@ ALTER TABLE ONLY jurado
 
 
 --
--- TOC entry 2127 (class 2606 OID 25858)
+-- TOC entry 2135 (class 2606 OID 17048)
+-- Dependencies: 203 186 2096 2310
 -- Name: fkbb87bac5cafdd94b; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1992,7 +2213,8 @@ ALTER TABLE ONLY jurado
 
 
 --
--- TOC entry 2125 (class 2606 OID 25848)
+-- TOC entry 2136 (class 2606 OID 17053)
+-- Dependencies: 184 186 2058 2310
 -- Name: fkbb87bac5ec331a89; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2001,7 +2223,8 @@ ALTER TABLE ONLY jurado
 
 
 --
--- TOC entry 2128 (class 2606 OID 25863)
+-- TOC entry 2137 (class 2606 OID 17058)
+-- Dependencies: 168 188 2028 2310
 -- Name: fkc440f5eaf6339732; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2010,7 +2233,8 @@ ALTER TABLE ONLY profesor
 
 
 --
--- TOC entry 2143 (class 2606 OID 25938)
+-- TOC entry 2161 (class 2606 OID 17063)
+-- Dependencies: 199 201 2088 2310
 -- Name: fkd54ee51a49ebaa52; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2019,7 +2243,8 @@ ALTER TABLE ONLY teg_requisito
 
 
 --
--- TOC entry 2144 (class 2606 OID 25943)
+-- TOC entry 2162 (class 2606 OID 17068)
+-- Dependencies: 194 201 2078 2310
 -- Name: fkd54ee51a857aa532; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2028,7 +2253,8 @@ ALTER TABLE ONLY teg_requisito
 
 
 --
--- TOC entry 2121 (class 2606 OID 25828)
+-- TOC entry 2130 (class 2606 OID 17073)
+-- Dependencies: 184 185 2058 2310
 -- Name: fkdb762e09bdeb82cf; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2037,7 +2263,8 @@ ALTER TABLE ONLY item_programa
 
 
 --
--- TOC entry 2122 (class 2606 OID 25833)
+-- TOC entry 2131 (class 2606 OID 17078)
+-- Dependencies: 190 185 2070 2310
 -- Name: fkdb762e09caebb742; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2046,7 +2273,8 @@ ALTER TABLE ONLY item_programa
 
 
 --
--- TOC entry 2101 (class 2606 OID 25743)
+-- TOC entry 2108 (class 2606 OID 17083)
+-- Dependencies: 188 169 2066 2310
 -- Name: fkdbe5c9bd4638e5af; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2055,7 +2283,8 @@ ALTER TABLE ONLY comision
 
 
 --
--- TOC entry 2102 (class 2606 OID 25748)
+-- TOC entry 2109 (class 2606 OID 17088)
+-- Dependencies: 169 2088 199 2310
 -- Name: fkdbe5c9bd49ebaa52; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2064,7 +2293,8 @@ ALTER TABLE ONLY comision
 
 
 --
--- TOC entry 2098 (class 2606 OID 25728)
+-- TOC entry 2105 (class 2606 OID 17093)
+-- Dependencies: 2022 166 165 2310
 -- Name: fke48961cf66e3cd8b; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2073,7 +2303,8 @@ ALTER TABLE ONLY area_programa
 
 
 --
--- TOC entry 2099 (class 2606 OID 25733)
+-- TOC entry 2106 (class 2606 OID 17098)
+-- Dependencies: 166 2070 190 2310
 -- Name: fke48961cfcaebb742; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2082,7 +2313,8 @@ ALTER TABLE ONLY area_programa
 
 
 --
--- TOC entry 2113 (class 2606 OID 25793)
+-- TOC entry 2119 (class 2606 OID 17103)
+-- Dependencies: 175 2088 199 2310
 -- Name: fkea10a42949ebaa52; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2091,7 +2323,8 @@ ALTER TABLE ONLY estudiante_teg
 
 
 --
--- TOC entry 2112 (class 2606 OID 25788)
+-- TOC entry 2120 (class 2606 OID 17108)
+-- Dependencies: 2040 174 175 2310
 -- Name: fkea10a429bf20a6af; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2100,7 +2333,8 @@ ALTER TABLE ONLY estudiante_teg
 
 
 --
--- TOC entry 2111 (class 2606 OID 25783)
+-- TOC entry 2118 (class 2606 OID 17113)
+-- Dependencies: 190 2070 174 2310
 -- Name: fkeb92edd2caebb742; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2109,7 +2343,8 @@ ALTER TABLE ONLY estudiante
 
 
 --
--- TOC entry 2146 (class 2606 OID 25969)
+-- TOC entry 2103 (class 2606 OID 17118)
+-- Dependencies: 2018 164 163 2310
 -- Name: fkf94f7cd86ef9c552; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2118,7 +2353,8 @@ ALTER TABLE ONLY arbol_grupo
 
 
 --
--- TOC entry 2147 (class 2606 OID 25974)
+-- TOC entry 2104 (class 2606 OID 17123)
+-- Dependencies: 180 2052 164 2310
 -- Name: fkf94f7cd8ff112f72; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2127,8 +2363,8 @@ ALTER TABLE ONLY arbol_grupo
 
 
 --
--- TOC entry 2317 (class 0 OID 0)
--- Dependencies: 5
+-- TOC entry 2315 (class 0 OID 0)
+-- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
 
@@ -2138,7 +2374,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2013-12-14 17:05:49
+-- Completed on 2013-12-14 20:47:18 VET
 
 --
 -- PostgreSQL database dump complete
