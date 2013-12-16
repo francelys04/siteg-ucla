@@ -172,7 +172,7 @@ public class CTematica extends CGeneral {
 	// elimina al darle clic
 	@Listen("onClick = #btnEliminarTematica")
 	public void eliminarTematica() {
-		Messagebox.show("Desea eliminar los datos del requisito?",
+		Messagebox.show("¿Desea eliminar los datos de la tematica?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
