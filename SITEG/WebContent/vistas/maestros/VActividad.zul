@@ -85,12 +85,12 @@
 					<hbox>
 
 						<textbox id="txtNombreActividad" width="120%"
-							tooltip="pupNombreActividad" />
+							tooltip="pupNombreActividad" constraint = "no empty" />
 
 
 						<button id="btnCatalogoActividad"
 							image="/public/imagenes/iconos/catalogo.png" style="margin-left:40px"
-							tooltip="pupCatalogoActividad">
+							tooltip="pupCatalogoActividad" constraint = "no empty">
 						</button>
 
 					</hbox>
