@@ -63,7 +63,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 
 		}
 		//filtra el catalogo en este caso solo por nombre y descripcion
-		@Listen("onChange = #txtNombreMostrarArea")
+		@Listen("onChange = #txtNombreMostrarArea, #txtDescripcionMostrarArea")
 		public void filtrarDatosCatalogo() {
 			List<AreaInvestigacion> area1 = servicioArea.buscarActivos();
 			List<AreaInvestigacion> area2 = new ArrayList<AreaInvestigacion>();
