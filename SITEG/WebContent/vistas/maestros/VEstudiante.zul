@@ -34,6 +34,45 @@
 		background: white; border-top: none; }
 
 	</style>
+	
+		<!-- Lista de popus -->
+	<popup id="pupCedulaEstudiante">
+        <toolbarbutton label="Ingrese aqui la cedula del estudiante" />
+    </popup>
+    <popup id="pupProgramaEstudiante">
+        <toolbarbutton label="Seleccione el programa del estudiante" />
+    </popup>
+	<popup id="pupNombreEstudiante">
+        <toolbarbutton label="Ingrese aqui el nombre del estudiante" />
+    </popup>
+    <popup id="pupApellidoEstudiante">
+        <toolbarbutton label="Ingrese aqui el apellido del estudiante" />
+    </popup>
+    <popup id="pupDireccionEstudiante">
+     	<toolbarbutton label="Ingrese aqui la direccion del estudiante" />
+    </popup> 	
+    <popup id="pupTelefonoMovilEstudiante">
+        <toolbarbutton label="Ingrese aqui el telefono movil del estudiante" />
+    </popup>
+    <popup id="pupTelefonoFijoEstudiante">
+        <toolbarbutton label="Ingrese aqui el telefono fijo del estudiante" />
+    </popup>
+    <popup id="pupCorreoEstudiante">
+     	<toolbarbutton label="Ingrese aqui el correo del estudiante" />
+    </popup>    
+     <popup id="pupGuardarEstudiante">
+     	<toolbarbutton label="Presione aqui para guardar los datos del estudiante" />
+    </popup>
+     <popup id="pupCancelarEstudiante">
+     	<toolbarbutton label="Presione aqui para limpiar los campos" />
+    </popup>
+     <popup id="pupEliminarEstudiante">
+     	<toolbarbutton label="Presione aqui para eliminar los datos del estudiante" />
+    </popup>
+    <popup id="pupCatalogoEstudiante">
+     	<toolbarbutton label="Presione aqui para ver la lista de estudiantes" />
+    </popup>
+    <!-- Fin de popus -->
 
 	<separator />
 	<separator />
@@ -46,7 +85,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" style="margin-left:2%;margin-right:1%">
+		<groupbox width="95%" style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
 		<grid sclass="fgrid" style="margin-left:2%">
@@ -62,7 +101,7 @@
 						<label value="Programa:"
 							style="color:black" />
 					</hlayout>
-					<combobox id="cmbProgramaEstudiante">
+					<combobox id="cmbProgramaEstudiante" tooltip="pupProgramaEstudiante">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
@@ -79,10 +118,13 @@
 					<hbox>
 
 						<textbox id="txtCedulaEstudiante" width="90%"
-							tabindex="2" />
+							tabindex="2" 
+							tooltip="pupCedulaEstudiante"/>
+
 
 						<button id="btnCatalogoEstudiante"
-							image="/public/imagenes/iconos/catalogo.png" tabindex="13" />
+							image="/public/imagenes/iconos/catalogo.png" tabindex="13" 
+							tooltip="pupCatalogoEstudiante"/>
 
 					</hbox>
 
@@ -97,7 +139,8 @@
 
 					<hbox>
 						<textbox id="txtNombreEstudiante" width="90%"
-							tabindex="3" />
+							tabindex="3" 
+							tooltip="pupNombreEstudiante"/>
 
 						<hlayout>
 							<label value="*"
@@ -107,7 +150,8 @@
 						</hlayout>
 
 						<textbox id="txtApellidoEstudiante" width="90%"
-							style="margin-left:10px" tabindex="4" />
+							style="margin-left:10px" tabindex="4" 
+							tooltip="pupApellidoEstudiante" />
 					</hbox>
 				</row>
 
@@ -143,7 +187,8 @@
 					</hlayout>
 
 					<textbox id="txtDireccionEstudiante" width="52%"
-						rows="2" cols="100" tabindex="7" />
+						rows="2" cols="100" tabindex="7" 
+						tooltip="pupDireccionEstudiante"/>
 
 				</row>
 
@@ -157,16 +202,18 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtTelefonoMovilEstudiante"
-							width="90%" tabindex="8" />
+						<intbox id="itbTelefonoMovilEstudiante"
+							width="90%" tabindex="8" 
+							tooltip="pupTelefonoMovilEstudiante" constraint="no negative" />
 
 						<hlayout>
 							<label value="Teléfono Fijo:"
 								style="color:black;margin-left:15px" />
 						</hlayout>
 
-						<textbox id="txtTelefonoFijoEstudiante"
-							width="90%" style="margin-left:15px" tabindex="9" />
+						<intbox id="itbTelefonoFijoEstudiante"
+							width="90%" style="margin-left:15px" tabindex="9"
+							tooltip="pupTelefonoFijoEstudiante" constraint="no negative"/>
 					</hbox>
 				</row>
 
@@ -178,7 +225,8 @@
 					</hlayout>
 
 					<textbox id="txtCorreoEstudiante" width="25%"
-						tabindex="10" />
+						tabindex="10" 
+						tooltip="pupCorreoEstudiante" />
 				</row>
 
 			</rows>
@@ -199,13 +247,13 @@
 				<separator />
 
 				<button id="btnGuardarEstudiante" label="Guardar"
-					image="/public/imagenes/iconos/guardar.png" tabindex="13">
+					image="/public/imagenes/iconos/guardar.png" tabindex="13" tooltip="pupGuradaroEstudiante">
 				</button>
 				<button id="btnCancelarEstudiante" label="Cancelar"
-					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					image="/public/imagenes/iconos/limpiar.png" tabindex="14" tooltip="pupCancelarEstudiante">
 				</button>
 				<button id="btnEliminarEstudiante" label="Eliminar"
-					image="/public/imagenes/iconos/eliminar.png" tabindex="15">
+					image="/public/imagenes/iconos/eliminar.png" tabindex="15" disabled="true" tooltip="pupEliminarEstudiante">
 				</button>
 
 				<separator />
