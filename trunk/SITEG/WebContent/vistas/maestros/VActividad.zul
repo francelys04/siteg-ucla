@@ -46,24 +46,28 @@
 
 	<!-- Lista de popus -->
 	<popup id="pupNombreActividad">
-        <toolbarbutton label="Ingrese aquí el nombre de la actividad" />
-    </popup>
-    <popup id="pupDescripcionActividad">
-     	<toolbarbutton label="Ingrese aquí la descripción de la actividad" />
-    </popup>
-     <popup id="pupGuardarActividad">
-     	<toolbarbutton label="Presione aquí para guardar los datos de una actividad" />
-    </popup>
-     <popup id="pupCancelarActividad">
-     	<toolbarbutton label="Presione aquí para limpar los campos" />
-    </popup>
-     <popup id="pupEliminarActividad">
-     	<toolbarbutton label="Presione aqui para eliminar los datos de una actividad" />
-    </popup>
-    <popup id="pupCatalogoActividad">
-     	<toolbarbutton label="Presione aqui para ver la lista de actividades" />
-    </popup>
-    <!-- Fin de popus -->    
+		<toolbarbutton label="Ingrese aquí el nombre de la actividad" />
+	</popup>
+	<popup id="pupDescripcionActividad">
+		<toolbarbutton
+			label="Ingrese aquí la descripción de la actividad" />
+	</popup>
+	<popup id="pupGuardarActividad">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos de una actividad" />
+	</popup>
+	<popup id="pupCancelarActividad">
+		<toolbarbutton label="Presione aquí para limpar los campos" />
+	</popup>
+	<popup id="pupEliminarActividad">
+		<toolbarbutton
+			label="Presione aqui para eliminar los datos de una actividad" />
+	</popup>
+	<popup id="pupCatalogoActividad">
+		<toolbarbutton
+			label="Presione aqui para ver la lista de actividades" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<groupbox width="95%" height="200px"
 		style="margin-left:2%;margin-right:1%">
@@ -85,12 +89,12 @@
 					<hbox>
 
 						<textbox id="txtNombreActividad" width="120%"
-							tooltip="pupNombreActividad" constraint = "no empty" />
+							tooltip="pupNombreActividad" tabindex="1" />
 
 
-						<button id="btnCatalogoActividad"
-							image="/public/imagenes/iconos/catalogo.png" style="margin-left:40px"
-							tooltip="pupCatalogoActividad" >
+						<button id="btnCatalogoActividad" tabindex="6"
+							image="/public/imagenes/iconos/catalogo.png"
+							style="margin-left:40px" tooltip="pupCatalogoActividad">
 						</button>
 
 					</hbox>
@@ -105,8 +109,8 @@
 					</hlayout>
 
 					<textbox id="txtDescripcionActividad" rows="5"
-						cols="100" width="52%" tabindex="8"
-						tooltip="pupDescripcionActividad" constraint = "no empty" />
+						tabindex="2" cols="100" width="52%" 
+						tooltip="pupDescripcionActividad" />
 				</row>
 
 			</rows>
@@ -123,17 +127,17 @@
 			<div align="center">
 				<separator />
 
-				<button id="btnGuardarActividad"
+				<button id="btnGuardarActividad" tabindex="3"
 					tooltip="pupGuardarActividad" label="Guardar"
-					image="/public/imagenes/iconos/guardar.png" tabindex="13">
+					image="/public/imagenes/iconos/guardar.png">
 				</button>
 				<button id="btnCancelarActividad" label="Cancelar"
-					tooltip="pupCancelarActividad" image="/public/imagenes/iconos/limpiar.png"
-					tabindex="14">
+					tabindex="4" tooltip="pupCancelarActividad"
+					image="/public/imagenes/iconos/limpiar.png">
 				</button>
 				<button id="btnEliminarActividad" label="Eliminar"
 					tooltip="pupEliminarActividad" disabled="true"
-					image="/public/imagenes/iconos/eliminar.png" tabindex="15">
+					image="/public/imagenes/iconos/eliminar.png" tabindex="5">
 				</button>
 				<separator />
 

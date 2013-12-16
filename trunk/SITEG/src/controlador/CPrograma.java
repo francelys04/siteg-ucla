@@ -155,14 +155,14 @@ public class CPrograma extends CGeneral {
 	// Metodo para guardar un programa
 		@Listen("onClick = #btnGuardarPrograma")
 		public void guardarPrograma() {
-			if (txtNombrePrograma.getValue() == ""
-					|| txtDescripcionPrograma.getValue() == "") {
+			if ((txtNombrePrograma.getText().compareTo("") == 0)
+					|| (txtDescripcionPrograma.getText().compareTo("") == 0)) {
 				Messagebox.show("Debe completar todos los campos", "Error",
 						Messagebox.OK, Messagebox.ERROR);
 
 			} else {
-				Messagebox.show("Desea guardar el programa?",
-						"Dialogo de confirmacion", Messagebox.OK
+				Messagebox.show("¿Desea guardar los datos del programa?",
+						"Dialogo de confirmación", Messagebox.OK
 								| Messagebox.CANCEL, Messagebox.QUESTION,
 						new org.zkoss.zk.ui.event.EventListener() {
 							public void onEvent(Event evt)
@@ -186,8 +186,8 @@ public class CPrograma extends CGeneral {
 		// Metodo para eliminar un programa dado su id
 		@Listen("onClick = #btnEliminarPrograma")
 		public void eliminarPrograma() {
-			Messagebox.show("Desea eliminar el programa?",
-					"Dialogo de confirmaciï¿½n", Messagebox.OK | Messagebox.CANCEL,
+			Messagebox.show("¿Desea eliminar los datos del programa?",
+					"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
 					Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt) throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -207,7 +207,7 @@ public class CPrograma extends CGeneral {
 			id = 0;
 			txtNombrePrograma.setValue("");
 			txtDescripcionPrograma.setValue("");
-			btnEliminarPrograma.setDisabled(false);
+			btnEliminarPrograma.setDisabled(true);
 
 		}
 
