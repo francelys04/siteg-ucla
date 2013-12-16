@@ -44,6 +44,27 @@
 	<separator />
 	<separator />
 	<separator />
+<!-- Lista de popus -->
+	<popup id="pupNombrePrograma">
+        <toolbarbutton label="Ingresa aquí el nombre del programa" />
+    </popup>
+    <popup id="pupDescripcionPrograma">
+     	<toolbarbutton label="Ingresa aquí la descripción del programa" />
+    </popup>
+     <popup id="pupGuardarPrograma">
+     	<toolbarbutton label="Presione aqui para guardar los datos de un programa" />
+    </popup>
+     <popup id="pupCancelarPrograma">
+     	<toolbarbutton label="Presione aqui para limpar los campos" />
+    </popup>
+     <popup id="pupEliminarPrograma">
+     	<toolbarbutton label="Presione aqui para eliminar los datos de un programa" />
+    </popup>
+    <popup id="pupCatalogoPrograma">
+     	<toolbarbutton label="Presione aqui para ver la lista de programas" />
+    </popup>
+    <!-- Fin de popus -->    
+
 
 	<groupbox width="95%" height="200px"
 		style="margin-left:2%;margin-right:1%">
@@ -63,8 +84,8 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtNombrePrograma" width="120%" />
-						<button id="btnBuscarPrograma"
+						<textbox id="txtNombrePrograma" width="120%" tooltip="pupNombrePrograma" />
+						<button id="btnBuscarPrograma" tooltip="pupCatalogoPrograma"
 							image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:40px">
 						</button>
@@ -79,7 +100,7 @@
 						<label value="Descripción:" style="color:black" />
 					</hlayout>
 
-					<textbox id="txtDescripcionPrograma" rows="5"
+					<textbox id="txtDescripcionPrograma" rows="5" tooltip="pupDescripcionPrograma"
 						cols="100" width="52%" tabindex="8" />
 				</row>
 			</rows>
@@ -95,13 +116,15 @@
 			<div align="center">
 				<separator />
 
-				<button id="btnGuardarPrograma" label="Guardar"
+				<button id="btnGuardarPrograma" label="Guardar" tooltip="pupGuardarPrograma"
 					image="/public/imagenes/iconos/guardar.png" tabindex="13">
 				</button>
-				<button id="btnCancelarPrograma" label="Cancelar"
+				<button id="btnCancelarPrograma" label="Cancelar" tooltip="pupCancelarPrograma"
 					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 				</button>
-				<button id="btnEliminarPrograma" label="Eliminar"
+				<button id="btnEliminarPrograma" label="Eliminar" 
+tooltip="pupEliminarPrograma" disabled="true"
+
 					image="/public/imagenes/iconos/eliminar.png" tabindex="15">
 				</button>
 				<separator />

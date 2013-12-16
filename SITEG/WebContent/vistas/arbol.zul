@@ -10,7 +10,7 @@
 					height="100px" />
 			</div>
 		</north>
-		<!-- Inicio del menu (Ãrbol)-->
+		<!-- Inicio del menu (ÃƒÂ�rbol)-->
 		<west size="25%" flex="true" maxsize="250" splittable="true"
 			collapsible="true">
 			<tree id="treeMenu" width="99%">			
@@ -25,7 +25,7 @@
 		</west>
 		<!-- Fin del banner de contenido-->
 		<center border="none" autoscroll="true">
-			<borderlayout sclass="complex-layout" height="99%">
+			<borderlayout sclass="complex-layout" style="overflow-y:scroll;" height="99%">
 				<north size="30px" border="none">
 					<div align="right"
 						style="margin-right:20px;padding:5px">
@@ -44,7 +44,7 @@
 			class="nav nav-pills alert-info">
 			<div align="center" style="margin:0 auto;padding:5px">
 				<label
-					value=" SITEG © 2013 Elaborado por Singleton - Todos los Derechos Reservados">
+					value=" SITEG Â© 2013 Elaborado por Singleton - Todos los Derechos Reservados">
 				</label>
 			</div>
 		</south>

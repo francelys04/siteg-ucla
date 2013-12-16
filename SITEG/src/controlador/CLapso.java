@@ -22,6 +22,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Grid;
@@ -64,6 +65,12 @@ public class CLapso extends CGeneral {
 	private Textbox txtFechaInicialMostrarLapso;
 	@Wire
 	private Textbox txtFechaFinalMostrarLapso;
+	
+	@Wire
+	private Button btnEliminarLapso;
+	
+	@Wire
+	private Button btnGuardarLapso;
 	private long id = 0;
 	//Metodo para cargar el catalogo de lapsos academicos
 
@@ -81,7 +88,6 @@ public class CLapso extends CGeneral {
 				.getCurrent().getAttribute("itemsCatalogo");
 
 		
-		System.out.println("por aqui");
 		
 		if (map != null) {
 			if (map.get("id") != null) {
@@ -92,6 +98,7 @@ public class CLapso extends CGeneral {
 				dtbInicioLapso.setValue(lapso.getFechaInicial());		
 				dtbFinLapso.setValue(lapso.getFechaFinal());
 				id = lapso.getId();
+				btnEliminarLapso.setDisabled(false);
 				map.clear();
 				map = null;
 			}
@@ -136,6 +143,7 @@ public class CLapso extends CGeneral {
 	//Coloca todos los campos en blanco
 	@Listen("onClick = #btnCancelarLapso")
 	public void cancelarLapso() {
+		btnEliminarLapso.setDisabled(true);
 		txtNombreLapso.setValue("");
 		dtbInicioLapso.setValue(null);
 		dtbFinLapso.setValue(null);

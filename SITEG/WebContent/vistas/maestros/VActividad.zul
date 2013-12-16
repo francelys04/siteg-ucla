@@ -90,7 +90,7 @@
 
 						<button id="btnCatalogoActividad"
 							image="/public/imagenes/iconos/catalogo.png" style="margin-left:40px"
-							tooltip="pupCatalogoActividad" constraint = "no empty">
+							tooltip="pupCatalogoActividad" >
 						</button>
 
 					</hbox>
@@ -106,7 +106,7 @@
 
 					<textbox id="txtDescripcionActividad" rows="5"
 						cols="100" width="52%" tabindex="8"
-						tooltip="pupDescripcionActividad" />
+						tooltip="pupDescripcionActividad" constraint = "no empty" />
 				</row>
 
 			</rows>
