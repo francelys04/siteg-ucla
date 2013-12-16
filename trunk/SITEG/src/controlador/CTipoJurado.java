@@ -115,7 +115,7 @@ public class CTipoJurado extends CGeneral {
 
 		} else {
 			Messagebox.show("¿Desea guardar los datos del tipo de jurado?",
-					"Dialogo de confirmacion", Messagebox.OK
+					"Dialogo de confirmación", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -157,6 +157,10 @@ public class CTipoJurado extends CGeneral {
 							tipoJurado.setEstatus(false);
 							servicioTipoJurado.guardar(tipoJurado);
 							cancelarTipoJurado();
+							Messagebox.show(
+									"Tipo de jurado eliminado exitosamente",
+									"Información", Messagebox.OK,
+									Messagebox.INFORMATION);
 						}
 					}
 				});
