@@ -124,8 +124,8 @@ public class CAreaInvestigacion extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);			
 		}else{
-			Messagebox.show("Desea guardar el area de investigacion?",
-					"Dialogo de confirmacion", Messagebox.OK
+			Messagebox.show("¿Desea guardar el area de investigacion?",
+					"Dialogo de confirmación", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -136,7 +136,7 @@ public class CAreaInvestigacion extends CGeneral {
 								Boolean estado = true;
 								AreaInvestigacion area = new AreaInvestigacion(id, nombre,descripcion, estado);
 								servicioArea.guardar(area);
-								 Messagebox.show("Area de investigacion registrada exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+								 Messagebox.show("Area de investigación registrada exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
 								cancelarArea();
 								id = 0;
 								
@@ -153,7 +153,7 @@ public class CAreaInvestigacion extends CGeneral {
 //elimina un area
 	@Listen("onClick = #btnEliminarArea")
 	public void eliminarArea() {
-		Messagebox.show("Desea eliminar el area de investigacion?",
+		Messagebox.show("¿Desea eliminar los datos del de area de investigacion?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
@@ -163,7 +163,7 @@ public class CAreaInvestigacion extends CGeneral {
 							AreaInvestigacion area = servicioArea.buscarArea(id);
 							area.setEstatus(false);
 							servicioArea.guardar(area);
-							 Messagebox.show("Area de investigacion eliminada exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+							 Messagebox.show("Area de investigación eliminada exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
 							cancelarArea();
 							
 							

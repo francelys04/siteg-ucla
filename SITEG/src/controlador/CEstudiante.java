@@ -43,9 +43,9 @@ import configuracion.GeneradorBeans;
 
 @Controller
 public class CEstudiante extends CGeneral {
-	
+
 	CCatalogoEstudiante catalogo = new CCatalogoEstudiante();
-	
+
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
@@ -120,13 +120,14 @@ public class CEstudiante extends CGeneral {
 				txtNombreEstudiante.setValue(estudiante.getNombre());
 				txtApellidoEstudiante.setValue(estudiante.getApellido());
 
-				if (estudiante.getSexo() == "Masculino") {
+				if (estudiante.getSexo().equals("Masculino")) {
 					rdoSexoMEstudiante.setChecked(true);
-				} else{
+				} else {
 					rdoSexoFEstudiante.setChecked(true);
-					}
-				int TelefonoMovil= Integer.parseInt (estudiante.getTelefono());
-				int TelefonoFijo = Integer.parseInt (estudiante.getTelefono_fijo());
+				}
+				int TelefonoMovil = Integer.parseInt(estudiante.getTelefono());
+				int TelefonoFijo = Integer.parseInt(estudiante
+						.getTelefono_fijo());
 				txtDireccionEstudiante.setValue(estudiante.getDireccion());
 				itbTelefonoMovilEstudiante.setValue(TelefonoMovil);
 				itbTelefonoFijoEstudiante.setValue(TelefonoFijo);
@@ -144,13 +145,15 @@ public class CEstudiante extends CGeneral {
 	// Metodo que permite visualizar el catalogo, activado por el boton de
 	// buscar
 	@Listen("onClick = #btnCatalogoEstudiante")
-	public void buscarEstudiante() {	
-		
-		Window window = (Window) Executions.createComponents("/vistas/catalogos/VCatalogoEstudiante.zul", null, null);
+	public void buscarEstudiante() {
+
+		Window window = (Window) Executions.createComponents(
+				"/vistas/catalogos/VCatalogoEstudiante.zul", null, null);
 		window.doModal();
 		catalogo.recibir("maestros/VEstudiante");
-		
+
 	}
+
 	// Metodo que permite tomar los datos de la vista y luego de llamar un
 	// servicio almacenarlos en la base de datos
 	@Listen("onClick = #btnGuardarEstudiante")
@@ -159,13 +162,12 @@ public class CEstudiante extends CGeneral {
 				|| txtNombreEstudiante.getText().compareTo("") == 0
 				|| txtApellidoEstudiante.getText().compareTo("") == 0
 				|| txtCorreoEstudiante.getText().compareTo("") == 0
-				|| txtDireccionEstudiante.getText().compareTo("") == 0	
-				|| itbTelefonoMovilEstudiante.getText().compareTo("")==0
-				|| itbTelefonoFijoEstudiante.getText().compareTo("")==0
-				|| cmbProgramaEstudiante.getText().compareTo("")==0
-				|| rdoSexoFEstudiante.isChecked() == false
-				&& rdoSexoMEstudiante.isChecked() == false
-				) {
+				|| txtDireccionEstudiante.getText().compareTo("") == 0
+				|| itbTelefonoMovilEstudiante.getText().compareTo("") == 0
+				|| itbTelefonoFijoEstudiante.getText().compareTo("") == 0
+				|| cmbProgramaEstudiante.getText().compareTo("") == 0
+				|| (rdoSexoFEstudiante.isChecked() == false && rdoSexoMEstudiante
+						.isChecked() == false)) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 
@@ -177,70 +179,86 @@ public class CEstudiante extends CGeneral {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
-								 String cedula = txtCedulaEstudiante.getValue();
-								 String nombre = txtNombreEstudiante.getValue();
-								 String apellido = txtApellidoEstudiante.getValue(); 
-								 String correo = txtCorreoEstudiante.getValue();
-								 String direccion = txtDireccionEstudiante.getValue();							 						 
-								 String telefonoFijo = Integer.toString(itbTelefonoMovilEstudiante.getValue());
-								 String telefonoMovil = Integer.toString(itbTelefonoFijoEstudiante.getValue());
-								 String programas = cmbProgramaEstudiante.getValue();
-								 String sexo;
-								 if (rdoSexoFEstudiante.isChecked())
-								 	sexo = "Femenino";
-								 		else
-								 			sexo = "Masculino";
-								 Boolean estatus = true; 
-								  
-								 Programa programa = servicioPrograma.buscarPorNombrePrograma(programas);
-								 
-								 Estudiante estudiante = new Estudiante(cedula, nombre, apellido, correo, sexo, direccion, telefonoMovil, telefonoFijo, estatus, programa);
-								 servicioEstudiante.guardar(estudiante);						
-								 Messagebox.show("Estudiante registrado exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
-								 cancelarEstudiante();
-								 //id = 0;
-								}
+								String cedula = txtCedulaEstudiante.getValue();
+								String nombre = txtNombreEstudiante.getValue();
+								String apellido = txtApellidoEstudiante
+										.getValue();
+								String correo = txtCorreoEstudiante.getValue();
+								String direccion = txtDireccionEstudiante
+										.getValue();
+								String telefonoFijo = Integer
+										.toString(itbTelefonoMovilEstudiante
+												.getValue());
+								String telefonoMovil = Integer
+										.toString(itbTelefonoFijoEstudiante
+												.getValue());
+								String programas = cmbProgramaEstudiante
+										.getValue();
+								String sexo = rdgSexoEstudiante.getSelectedItem()
+										.getLabel();
+								Boolean estatus = true;
+
+								Programa programa = servicioPrograma
+										.buscarPorNombrePrograma(programas);
+
+								Estudiante estudiante = new Estudiante(cedula,
+										nombre, apellido, correo, sexo,
+										direccion, telefonoMovil, telefonoFijo,
+										estatus, programa);
+								servicioEstudiante.guardar(estudiante);
+								Messagebox.show(
+										"Estudiante registrado exitosamente",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+								cancelarEstudiante();
+								// id = 0;
+							}
 						}
 					});
 
 		}
 	}
+
 	// Metodo que buscar un objeto dado un codigo y lo elimina logicamente de la
 	// base de datos
 	@Listen("onClick = #btnEliminarEstudiante")
 	public void eliminarEstudiante() {
-	Messagebox.show("Desea eliminar el estudiante?",
-			"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-			Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
-				public void onEvent(Event evt) throws InterruptedException {
-					if (evt.getName().equals("onOK")) {
-						String cedula = txtCedulaEstudiante.getValue();
-						Estudiante estudiante = servicioEstudiante.buscarEstudiante(cedula);
-						estudiante.setEstatus(false);
-						servicioEstudiante.guardar(estudiante);
-						cancelarEstudiante();						
-						 Messagebox.show("Estudiante eliminado exitosamente", "Informacion", Messagebox.OK,Messagebox.INFORMATION);
-						 btnEliminarEstudiante.setDisabled(false);
+		Messagebox.show("Desea eliminar el estudiante?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+							String cedula = txtCedulaEstudiante.getValue();
+							Estudiante estudiante = servicioEstudiante
+									.buscarEstudiante(cedula);
+							estudiante.setEstatus(false);
+							servicioEstudiante.guardar(estudiante);
+							cancelarEstudiante();
+							Messagebox.show(
+									"Estudiante eliminado exitosamente",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
+							btnEliminarEstudiante.setDisabled(false);
+						}
 					}
-				}
-			});
-	
+				});
+
 	}
 
 	// Metodo que limpia los campos de la vista
 	@Listen("onClick = #btnCancelarEstudiante")
 	public void cancelarEstudiante() {
-		
-		txtCedulaEstudiante.setValue("");		
-		txtNombreEstudiante.setValue("");		
-		txtApellidoEstudiante.setValue("");				
-		rdgSexoEstudiante.setSelectedItem(null);	
+
+		txtCedulaEstudiante.setValue("");
+		txtNombreEstudiante.setValue("");
+		txtApellidoEstudiante.setValue("");
+		rdgSexoEstudiante.setSelectedItem(null);
 		txtDireccionEstudiante.setValue("");
-		itbTelefonoMovilEstudiante.setValue(null);		
+		itbTelefonoMovilEstudiante.setValue(null);
 		itbTelefonoFijoEstudiante.setValue(null);
-		txtCorreoEstudiante.setValue("");	    
+		txtCorreoEstudiante.setValue("");
 		cmbProgramaEstudiante.setValue("");
-		
+
 		btnEliminarEstudiante.setDisabled(true);
 
 	}

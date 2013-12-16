@@ -1,5 +1,5 @@
-<window id="wdwProfesor" title="Profesor" border="normal" width="100%" height="95%"
-	closable="true" apply="controlador.CProfesor">
+<window id="wdwProfesor" title="Profesor" border="normal" width="100%"
+	height="95%" closable="true" apply="controlador.CProfesor">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -33,6 +33,57 @@
 
 	</style>
 
+
+
+	<!-- Lista de popus -->
+	<popup id="pupCedulaProfesor">
+		<toolbarbutton label="Ingrese aqui la cedula del profesor" />
+	</popup>
+	<popup id="pupCategoriaProfesor">
+		<toolbarbutton label="Seleccione la categoria del profesor" />
+	</popup>
+	<popup id="pupNombreProfesor">
+		<toolbarbutton label="Ingrese aqui el nombre del profesor" />
+	</popup>
+	<popup id="pupApellidoProfesor">
+		<toolbarbutton label="Ingrese aqui el apellido del profesor" />
+	</popup>
+	<popup id="pupDireccionProfesor">
+		<toolbarbutton label="Ingrese aqui la direccion del profesor" />
+	</popup>
+	<popup id="pupSexoProfesor">
+		<toolbarbutton label="Seleccione aqui el sexo del profesor" />
+	</popup>
+	<popup id="pupTelefonoMovilProfesor">
+		<toolbarbutton
+			label="Ingrese aqui el telefono movil del profesor" />
+	</popup>
+	<popup id="pupTelefonoFijoProfesor">
+		<toolbarbutton
+			label="Ingrese aqui el telefono fijo del profesor" />
+	</popup>
+	<popup id="pupCorreoProfesor">
+		<toolbarbutton label="Ingrese aqui el correo del profesor" />
+	</popup>
+	<popup id="pupGuardarProfesor">
+		<toolbarbutton
+			label="Presione aqui para guardar los datos del profesor" />
+	</popup>
+	<popup id="pupCancelarProfesor">
+		<toolbarbutton label="Presione aqui para limpiar los campos" />
+	</popup>
+	<popup id="pupEliminarProfesor">
+		<toolbarbutton
+			label="Presione aqui para eliminar los datos del profesor" />
+	</popup>
+	<popup id="pupCatalogoProfesor">
+		<toolbarbutton
+			label="Presione aqui para ver la lista de profesores" />
+	</popup>
+	<!-- Fin de popus -->
+
+
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -57,12 +108,11 @@
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red" />
-						<label value="Categoría:"
-							style="color:black" />
+						<label value="Categoría:" style="color:black" />
 					</hlayout>
 
 					<combobox id="cmbCategoriaProfesor" autodrop="true"
-						width="25%" tabindex="1">
+						tooltip="pupCategoriaProfesor" width="25%" tabindex="1">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
@@ -81,10 +131,11 @@
 					<hbox>
 
 						<textbox id="txtCedulaProfesor" width="90%"
-							tabindex="2" />
+							tabindex="2" tooltip="pupCedulaProfesor" />
 
 						<button id="btnCatalogoProfesor"
-							image="/public/imagenes/iconos/catalogo.png" tabindex="13"/>
+							tooltip="pupCatalogoProfesor"
+							image="/public/imagenes/iconos/catalogo.png" tabindex="13" />
 
 					</hbox>
 				</row>
@@ -97,7 +148,7 @@
 
 					<hbox>
 						<textbox id="txtNombreProfesor" width="90%"
-							tabindex="3" />
+							tooltip="pupNombreProfesor" tabindex="3" />
 
 						<hlayout>
 							<label value="*"
@@ -107,7 +158,8 @@
 						</hlayout>
 
 						<textbox id="txtApellidoProfesor" width="90%"
-							style="margin-left:10px" tabindex="4" />
+							style="margin-left:10px" tabindex="4"
+							tooltip="pupApellidoProfesor" />
 					</hbox>
 				</row>
 
@@ -117,17 +169,19 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Sexo: "
-							style="color:black">
+						<label value="Sexo: " style="color:black">
 						</label>
 					</hlayout>
 
 					<hlayout>
 
-						<radiogroup id="rdgSexoProfesor">
-							<radio id="rdoSexoFProfesor" label="Femenino" tabindex="5" style="color:black"/>
-							<radio id="rdoSexoMProfesor" label="Masculino"
-								style="margin-left:15px;color:black" tabindex="6" />
+						<radiogroup id="rdgSexoProfesor"
+							tooltip="pupSexoProfesor">
+							<radio id="rdoSexoFProfesor"
+								label="Femenino" tabindex="5" style="color:black" />
+							<radio id="rdoSexoMProfesor"
+								label="Masculino" style="margin-left:15px;color:black"
+								tabindex="6" />
 						</radiogroup>
 					</hlayout>
 				</row>
@@ -136,12 +190,11 @@
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red" />
-						<label value="Dirección:"
-							style="color:black" />
+						<label value="Dirección:" style="color:black" />
 					</hlayout>
 
 					<textbox id="txtDireccionProfesor" width="52%"
-						rows="2" cols="100" tabindex="7" />
+						rows="2" cols="100" tabindex="7" tooltip="pupDireccionProfesor" />
 
 				</row>
 
@@ -156,7 +209,7 @@
 
 					<hbox>
 						<textbox id="txtTelefonoMovilProfesor"
-							width="90%" tabindex="8" />
+							width="90%" tabindex="8" tooltip="pupTelefonoMovilProfesor" />
 
 						<hlayout>
 							<label value="Teléfono Fijo:"
@@ -164,7 +217,8 @@
 						</hlayout>
 
 						<textbox id="txtTelefonoFijoProfesor"
-							width="90%" style="margin-left:15px" tabindex="9" />
+							tooltip="pupTelefonoFijoProfesor" width="90%"
+							style="margin-left:15px" tabindex="9" />
 					</hbox>
 
 				</row>
@@ -178,7 +232,7 @@
 					</hlayout>
 
 					<textbox id="txtCorreoProfesor" width="25%"
-						tabindex="10" />
+						tooltip="pupCorreoProfesor" tabindex="10" />
 
 
 				</row>
@@ -207,7 +261,8 @@
 					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 				</button>
 				<button id="btnEliminarProfesor" label="Eliminar"
-					image="/public/imagenes/iconos/eliminar.png" tabindex="15">
+					disabled="true" image="/public/imagenes/iconos/eliminar.png"
+					tabindex="15">
 				</button>
 				<separator />
 

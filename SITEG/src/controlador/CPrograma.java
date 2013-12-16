@@ -174,7 +174,7 @@ public class CPrograma extends CGeneral {
 									Programa programa = new Programa( id,nombre, descripcion, estatus);
 									servicioPrograma.guardar(programa);
 									cancelarPrograma(); 
-									Messagebox.show("Programa registrado exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+									Messagebox.show("Programa registrado exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
 									id = 0;
 									}
 							}
@@ -195,7 +195,7 @@ public class CPrograma extends CGeneral {
 								programa.setEstatus(false);
 								servicioPrograma.guardar(programa);
 								cancelarPrograma();
-								Messagebox.show("Programa eliminado exitosamente", "Informacion", Messagebox.OK,Messagebox.INFORMATION);
+								Messagebox.show("Programa eliminado exitosamente", "Información", Messagebox.OK,Messagebox.INFORMATION);
 								btnEliminarPrograma.setDisabled(true);
 							}
 						}
