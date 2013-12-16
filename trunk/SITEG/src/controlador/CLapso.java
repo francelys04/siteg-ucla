@@ -40,7 +40,8 @@ import servicio.SLapso;
 
 @Controller
 public class CLapso extends CGeneral {
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();			
+	SLapso servicioLapso = GeneradorBeans.getServicioLapso();	
+	CCatalogoLapso catalogo = new CCatalogoLapso();
 
 	
 	@Wire
@@ -105,6 +106,7 @@ public class CLapso extends CGeneral {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoLapso.zul", null, null);
 		window.doModal();
+		catalogo.recibir("maestros/VLapsoAcademico");
 
 	}
 	//Guarda un lapso
@@ -140,37 +142,6 @@ public class CLapso extends CGeneral {
 		id = 0;
 	
 	}
-	//Filtra por nombre
-	@Listen("onChange = #txtNombreMostrarLapso")
-	public void filtrarDatosCatalogo() {
-		List<Lapso> lapsos1 = servicioLapso.buscarActivos();
-		List<Lapso> lapsos2 = new ArrayList<Lapso>();
 
-		for (Lapso lapso : lapsos1) {
-			if (lapso.getNombre().toLowerCase().contains(txtNombreMostrarLapso.getValue().toLowerCase()))
-					 {
-				lapsos2.add(lapso);
-			}
-
-		}
-
-		ltbLapso.setModel(new ListModelList<Lapso>(lapsos2));
-
-	}
-	//Carga los lapsos desde el catalogo hacia el formulario lapso academico
-	@Listen("onDoubleClick = #ltbLapso")
-	public void mostrarDatosCatalogo() {
-
-		Listitem listItem = ltbLapso.getSelectedItem();
-		Lapso lapsoDatosCatalogo = (Lapso) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", lapsoDatosCatalogo.getId());
-		String vista = "maestros/VLapsoAcademico";
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoLapso.onClose();
-
-	}
 }
 
