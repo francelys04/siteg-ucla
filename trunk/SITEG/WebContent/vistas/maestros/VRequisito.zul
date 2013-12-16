@@ -1,5 +1,5 @@
 <window title="Requisito" border="normal" width="100%" height="380px"
-	closable="true" apply="controlador.CRequisito" >
+	closable="true" apply="controlador.CRequisito">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -33,6 +33,33 @@
 
 	</style>
 
+	<!-- Lista de popus -->
+	<popup id="pupNombreRequisito">
+		<toolbarbutton label="Ingrese aquí el nombre del requisito" />
+	</popup>
+	<popup id="pupDescripcionRequisito">
+		<toolbarbutton
+			label="Ingrese aquí la descripción del requisito" />
+	</popup>
+	<popup id="pupGuardarRequisito">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos de un requisito" />
+	</popup>
+	<popup id="pupCancelarRequisito">
+		<toolbarbutton label="Presione aquí para limpar los campos" />
+	</popup>
+	<popup id="pupEliminarRequisito">
+		<toolbarbutton
+			label="Presione aqui para eliminar los datos de un requisito" />
+	</popup>
+	<popup id="pupCatalogoRequisito">
+		<toolbarbutton
+			label="Presione aqui para ver la lista de requisitos" />
+	</popup>
+	<!-- Fin de popus -->
+
+
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -64,10 +91,12 @@
 
 					<hbox>
 
-						<textbox id="txtNombreRequisito" width="120%" />
+						<textbox id="txtNombreRequisito" width="120%"
+							tooltip="pupNombreRequisito"/>
 
 						<button id="btnBuscarRequisito"
-							image="/public/imagenes/iconos/catalogo.png" style="margin-left:40px">
+							image="/public/imagenes/iconos/catalogo.png"
+							style="margin-left:40px" tooltip="pupCatalogoRequisito">
 						</button>
 
 					</hbox>
@@ -79,12 +108,12 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Descripción:"
-							style="color:black" />
+						<label value="Descripción:" style="color:black" />
 					</hlayout>
 
 					<textbox id="txtDescripcionRequisito" rows="5"
-						cols="100" width="52%" tabindex="8" />
+					 tooltip="pupDescripcionRequisito" cols="100"
+						width="52%" tabindex="8" />
 
 				</row>
 
@@ -102,15 +131,18 @@
 		<panelchildren>
 			<div align="center">
 				<separator />
-
 				<button id="btnGuardarRequisito" label="Guardar"
+					tooltip="pupGuardarRequisito"
 					image="/public/imagenes/iconos/guardar.png" tabindex="13">
 				</button>
 				<button id="btnCancelarRequisito" label="Cancelar"
+					tooltip="pupCancelarRequisito"
 					image="/public/imagenes/iconos//limpiar.png" tabindex="14">
 				</button>
 				<button id="btnEliminarRequisito" label="Eliminar"
-					image="/public/imagenes/iconos/eliminar.png" tabindex="15">
+					tooltip="pupEliminarRequisito"
+					image="/public/imagenes/iconos/eliminar.png" disabled="true"
+					tabindex="15">
 				</button>
 				<separator />
 

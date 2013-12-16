@@ -2,7 +2,7 @@
 <zk>
 	<window title="Catalogo Requisito" border="normal" width="800px"
 		id="wdwCatalogoRequisito"
-		apply="controlador.CRequisito"
+		apply="controlador.CCatalogoRequisito"
 		closable="true">
 		
 		<listbox id="ltbRequisito" width="100%"  mold="paging" pageSize="10">

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.Actividad;
+import modelo.Estudiante;
 import modelo.Requisito;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -28,7 +31,6 @@ import configuracion.GeneradorBeans;
 public class CCatalogoRequisito extends CGeneral {
 
 	SRequisito servicioRequisito = GeneradorBeans.getServicioRequisito();
-			
 
 	@Wire
 	private Listbox ltbRequisito;
@@ -37,16 +39,16 @@ public class CCatalogoRequisito extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionMostrarRequisito;
 	@Wire
-	private Window wdwCatalogoActividad;
-	@Wire
 	private Textbox txtNombreRequisito;
 	@Wire
 	private Textbox txtDescripcionRequisito;
+	@Wire
+	private Button btnEliminarRequisito;
 	private long id = 0;
 	@Wire
-	private Window wdwRequisito;
-	
-	private String vistaRecibida;
+	private Window wdwCatalogoRequisito;
+
+	private static String vistaRecibida;
 
 	/**
 	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
@@ -81,7 +83,7 @@ public class CCatalogoRequisito extends CGeneral {
 		 */
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("actividadRequisito");
+				.getCurrent().getAttribute("requisitoCatalogo");
 		/*
 		 * Validacion para vaciar la informacion del VActividad a la vista
 		 * VActividad.zul si la varible map tiene algun dato contenido
@@ -90,13 +92,15 @@ public class CCatalogoRequisito extends CGeneral {
 			if (map.get("id") != null) {
 
 				long codigo = (Long) map.get("id");
-				Requisito actividad2 = servicioRequisito
+				Requisito requisito2 = servicioRequisito
 						.buscarRequisito(codigo);
-				txtNombreRequisito.setValue(actividad2.getNombre());
-				txtDescripcionRequisito.setValue(actividad2.getDescripcion());
-				id = actividad2.getId();
+				txtNombreRequisito.setValue(requisito2.getNombre());
+				txtDescripcionRequisito.setValue(requisito2.getDescripcion());
+				id = requisito2.getId();
 				map.clear();
 				map = null;
+				
+				
 			}
 		}
 	}
@@ -107,23 +111,19 @@ public class CCatalogoRequisito extends CGeneral {
 	 * 
 	 * @date 09-12-2013
 	 */
-	
 
 	/**
 	 * Aca se selecciona una actividad del catalogo
 	 * 
 	 * @date 09-12-2013
 	 */
-	public void recibir (String vista)
-	{
+	public void recibir(String vista) {
 		vistaRecibida = vista;
-		System.out.println("imprimo");
-		System.out.println(vistaRecibida);
 	}
-	
+
 	// Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
 	// descripcion
-	@Listen("onChange = #txtNombreMostrarActividad,#txtDescripcionMostrarActividad")
+	@Listen("onChange = #txtNombreMostrarRequisito,#txtDescripcionMostrarRequisito")
 	public void filtrarDatosCatalogo() {
 		List<Requisito> requisito1 = servicioRequisito.buscarActivos();
 		List<Requisito> requisito2 = new ArrayList<Requisito>();
@@ -148,25 +148,24 @@ public class CCatalogoRequisito extends CGeneral {
 
 	}
 
-	
 	// Aca se selecciona una actividad del catalogo
-	@Listen("onDoubleClick = #ltbActividad")
+	@Listen("onDoubleClick = #ltbRequisito")
 	public void mostrarDatosCatalogo() {
-
 
 		Listitem listItem = ltbRequisito.getSelectedItem();
 		Requisito requisitoDatosCatalogo = (Requisito) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", requisitoDatosCatalogo.getId());
-		
-		map.put("vistaRecibida", vistaRecibida);
+		String vista = vistaRecibida;
+		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		 Executions.sendRedirect("/vistas/arbol.zul");
-		
-		wdwCatalogoActividad.onClose();
-
+		Executions.sendRedirect("/vistas/arbol.zul");
+		wdwCatalogoRequisito.onClose();
 	}
+	
+	
 
 	
-	
+
+
 }
