@@ -45,13 +45,13 @@ public class Tematica {
 	}
 
 	public Tematica(long id, String nombre, String descripcion, Boolean estatus,
-			AreaInvestigacion lineaInvestigacion) {
+			AreaInvestigacion areaInvestigacion) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.areaInvestigacion = lineaInvestigacion;
+		this.areaInvestigacion = areaInvestigacion;
 	}
 
 	public long getId() {
@@ -94,12 +94,12 @@ public class Tematica {
 		this.teg = teg;
 	}
 
-	public AreaInvestigacion getLineaInvestigacion() {
+	public AreaInvestigacion getareaInvestigacion() {
 		return areaInvestigacion;
 	}
 
-	public void setLineaInvestigacion(AreaInvestigacion lineaInvestigacion) {
-		this.areaInvestigacion = lineaInvestigacion;
+	public void setareaInvestigacion(AreaInvestigacion areaInvestigacion) {
+		this.areaInvestigacion = areaInvestigacion;
 	}
 
 	public Set<SolicitudTutoria> getSolicitudesTutoria() {

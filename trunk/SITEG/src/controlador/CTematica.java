@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import modelo.Requisito;
 import modelo.Tematica;
 import modelo.AreaInvestigacion;
 
@@ -17,10 +19,12 @@ import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Grid;
@@ -34,6 +38,7 @@ import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+import servicio.SPrograma;
 import servicio.STematica;
 import servicio.SAreaInvestigacion;
 import configuracion.GeneradorBeans;
@@ -41,15 +46,13 @@ import configuracion.GeneradorBeans;
 //es un controlador de tematica y su catalogo
 @Controller
 public class CTematica extends CGeneral {
-	
-	//servicios para los dos modelos implicados
-	STematica servicioTematica = GeneradorBeans
-			.getSTematica();
-	
 
+	// servicios para los dos modelos implicados
+	STematica servicioTematica = GeneradorBeans.getSTematica();
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	
-	//atributos de la vista tematica
+	CCatalogoTematica catalogo = new CCatalogoTematica();
+
+	// atributos de la vista tematica
 	@Wire
 	private Combobox cmbAreaTematica;
 	@Wire
@@ -57,8 +60,7 @@ public class CTematica extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionTematica;
 
-	
-	//atributos de la pantalla del catalogo
+	// atributos de la pantalla del catalogo
 	@Wire
 	private Listbox ltbTematica;
 	@Wire
@@ -71,37 +73,38 @@ public class CTematica extends CGeneral {
 	private Textbox txtAreaMostrarTematica;
 	@Wire
 	private Textbox txtDescripcionMostrarTematica;
-	private long id=0;
-	
+	@Wire
+	private Button btnEliminarTematica;
+	private long id = 0;
 
-	//metodo para llenar combo y mapear
+	// metodo para llenar combo y mapear
 	void inicializar(Component comp) {
 
 		List<AreaInvestigacion> areas = servicioArea.buscarActivos();
 		List<Tematica> tematicas = servicioTematica.buscarActivos();
-		
+
 		if (cmbAreaTematica == null) {
 			ltbTematica.setModel(new ListModelList<Tematica>(tematicas));
 		} else {
-			cmbAreaTematica.setModel(new ListModelList<AreaInvestigacion>(
-					areas));
-			
+			cmbAreaTematica
+					.setModel(new ListModelList<AreaInvestigacion>(areas));
+
 		}
-		
+
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 
 		if (map != null) {
-			if ( map.get("id") != null) {
+			if (map.get("id") != null) {
 				long codigo = (Long) map.get("id");
-				Tematica tematica = servicioTematica
-						.buscarTematica(codigo);
+				Tematica tematica = servicioTematica.buscarTematica(codigo);
 				txtNombreTematica.setValue(tematica.getNombre());
 				txtDescripcionTematica.setValue(tematica.getDescripcion());
-				cmbAreaTematica.setValue(tematica.getLineaInvestigacion()
+				cmbAreaTematica.setValue(tematica.getareaInvestigacion()
 						.getNombre());
+				btnEliminarTematica.setDisabled(false);
 				id = tematica.getId();
 				map.clear();
 				map = null;
@@ -109,105 +112,93 @@ public class CTematica extends CGeneral {
 		}
 
 	}
-//al darle al boton me muestra el catalogo
+
+	// al darle al boton me muestra el catalogo
 	@Listen("onClick = #btnBuscarTematica")
 	public void buscarTematica() {
 
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoTematica.zul", null, null);
 		window.doModal();
+		catalogo.recibir("maestros/VTematica");
 
 	}
-//guarda al darle clic
+
+	// guarda al darle clic
 	@Listen("onClick = #btnGuardarTematica")
 	public void guardarTematica() {
-		String nombre = txtNombreTematica.getValue();
-		String descripcion = txtDescripcionTematica.getValue();
-		String areas = cmbAreaTematica.getValue();
-		
-		Boolean estatus = true;
-		AreaInvestigacion areainvestigacion = servicioArea
-				.buscarAreaPorNombre(areas);
 
-		Tematica tematica = new Tematica(id,nombre,descripcion,estatus,areainvestigacion);
-		
-		servicioTematica.guardar(tematica);
-		cancelarTematica();
-		id = 0;
-		Messagebox.show("Tematica Registrada");
+		if ((cmbAreaTematica.getText().compareTo("") == 0)
+				|| (txtNombreTematica.getText().compareTo("") == 0)
+				|| (txtDescripcionTematica.getText().compareTo("") == 0)) {
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
+
+		} else {
+			Messagebox.show("Desea guardar los datos de la tematica?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+								String nombre = txtNombreTematica.getValue();
+								String descripcion = txtDescripcionTematica
+										.getValue();
+								String areas = cmbAreaTematica.getValue();
+
+								Boolean estatus = true;
+								AreaInvestigacion areainvestigacion = servicioArea
+										.buscarAreaPorNombre(areas);
+
+								Tematica tematica = new Tematica(id, nombre,
+										descripcion, estatus, areainvestigacion);
+
+								servicioTematica.guardar(tematica);
+								cancelarTematica();
+								Messagebox.show(
+										"Tematica registrada exitosamente",
+										"Información", Messagebox.OK,
+										Messagebox.INFORMATION);
+								id = 0;
+								
+							}
+						}
+					});
+
+		}
 	}
-//elimina al darle clic
+
+	// elimina al darle clic
 	@Listen("onClick = #btnEliminarTematica")
 	public void eliminarTematica() {
-		System.out.println("Tematica Eliminada");
-		Tematica tematica = servicioTematica.buscarTematica(id);
-		tematica.setEstatus(false);
-		servicioTematica.guardar(tematica);
-		cancelarTematica();
-		Messagebox.show("Tematica Eliminada");
+		Messagebox.show("Desea eliminar los datos del requisito?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+
+							Tematica tematica = servicioTematica.buscarTematica(id);
+							tematica.setEstatus(false);
+							servicioTematica.guardar(tematica);
+							cancelarTematica();
+							
+						}
+					}
+				});
+		
+		
 	}
-//coloca los campos de la vista en blanco
+
+	// coloca los campos de la vista en blanco
 	@Listen("onClick = #btnCancelarTematica")
 	public void cancelarTematica() {
 		id = 0;
 		txtNombreTematica.setValue("");
 		txtDescripcionTematica.setValue("");
 		cmbAreaTematica.setValue("");
-
-	}
-	
-	// filtra en el catalogo 
-	
-	@Listen("onChange = #txtNombreMostrarTematica,#txtAreaMostrarTematica,#txtDescripcionMostrarTematica")
-	public void filtrarDatosCatalogo() {
-		List<Tematica> tematicas1 = servicioTematica.buscarActivos();
-		List<Tematica> tematicas2 = new ArrayList<Tematica>();
-
-		for (Tematica tematica : tematicas1) {
-			if (tematica
-					.getNombre()
-					.toLowerCase()
-					.contains(
-							txtNombreMostrarTematica.getValue().toLowerCase())
-					&& tematica
-							.getLineaInvestigacion()
-							.getNombre()
-							.toLowerCase()
-							.contains(
-									txtAreaMostrarTematica.getValue()
-											.toLowerCase())
-					&& tematica
-							.getDescripcion()
-							.toLowerCase()
-							.contains(
-									txtDescripcionMostrarTematica.getValue()
-											.toLowerCase())) {
-				tematicas2.add(tematica);
-			}
-
-		}
-
-		ltbTematica.setModel(new ListModelList<Tematica>(tematicas2));
+		btnEliminarTematica.setDisabled(true);
 
 	}
 
-	//al darle clic a un item se va a pantalla y se cierra el catalogo
-	@Listen("onDoubleClick = #ltbTematica")
-	public void mostrarDatosCatalogo() {
-
-		Listitem listItem = ltbTematica.getSelectedItem();
-		Tematica tematicaDatosCatalogo = (Tematica) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", tematicaDatosCatalogo.getId());
-		String vista = "maestros/VTematica";
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoTematica.onClose();
-		
-		//txtNombreTematica.setValue(nombre);
-		
-
-	}
 }
-

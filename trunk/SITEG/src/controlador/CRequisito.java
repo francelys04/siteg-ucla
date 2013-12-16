@@ -136,7 +136,7 @@ public class CRequisito extends CGeneral {
 	}
 
 	@Listen("onClick = #btnEliminarRequisito")
-	public void eliminarEstudiante() {
+	public void eliminarRequisito() {
 
 		Messagebox.show("Desea eliminar los datos del requisito?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
