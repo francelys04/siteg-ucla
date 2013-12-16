@@ -2,7 +2,7 @@
 <zk>
 	<window title="Catálogo Lapso Académico" border="normal" width="800px"
 		id="wdwCatalogoLapso"
-		apply="controlador.CLapso"
+		apply="controlador.CCatalogoLapso"
 		closable="true">
 		<listbox id="ltbLapso" width="100%" mold="paging" pageSize="10">
 				<auxhead sclass="category-center">
