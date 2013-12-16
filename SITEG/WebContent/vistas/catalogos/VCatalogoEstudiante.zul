@@ -1,57 +1,52 @@
 <?page id="wdwCatalogoEstudiante"  title="Catalogo Estudiante" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="Catalogo Estudiante" border="normal" width="800px"
-		id="wdwCatalogoEstudiante"
-		apply="controlador.CCatalogoEstudiante"
+		id="wdwCatalogoEstudiante" apply="controlador.CCatalogoEstudiante"
 		closable="true">
-		<listbox id="ltbEstudiante" width="100%" mold="paging" pageSize="10" >
-				<auxhead sclass="category-center">
-					<auxheader colspan="1">
-						<image
-						src="/public/imagenes/iconos/filtro.png" />
+		<listbox id="ltbEstudiante" width="100%" mold="paging"
+			pageSize="10" emptyMessage="No hay estudiantes registrados">
+			<auxhead sclass="category-center">
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
 
-						<textbox instant="true" width="80%" id="txtCedulaMostrarEstudiante"
-/>
-					</auxheader>
-					<auxheader colspan="1">
-						<image
-						src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						id="txtCedulaMostrarEstudiante" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
 
-						<textbox instant="true" width="80%" id="txtNombreMostrarEstudiante"
-							 />
-					</auxheader>
-					<auxheader colspan="1">
-						<image
-						src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						id="txtNombreMostrarEstudiante" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
 
-						<textbox instant="true" width="80%" id="txtApellidoMostrarEstudiante"
-							 />
-					</auxheader>
-					<auxheader colspan="1">
-						<image
-						src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						id="txtApellidoMostrarEstudiante" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
 
-						<textbox instant="true" width="80%" id="txtProgramaMostrarEstudiante" 
-							 />
-					</auxheader>
-					<auxheader colspan="1">
-						<image
-						src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						id="txtProgramaMostrarEstudiante" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
 
-						<textbox instant="true" width="80%" id="txtCorreoMostrarEstudiante"
-							 />
-					</auxheader>
-				</auxhead>
+					<textbox instant="true" width="80%"
+						id="txtCorreoMostrarEstudiante" />
+				</auxheader>
+			</auxhead>
 			<listhead>
-				<listheader label="Cédula" align="center"/>
-				<listheader label="Nombre" align="center"/>
-				<listheader label="Apellido" align="center"/>
-				<listheader label="Programa" align="center"/>
-				<listheader label="Correo" align="center"/>
-				
-			
+				<listheader label="Cédula" align="center" />
+				<listheader label="Nombre" align="center" />
+				<listheader label="Apellido" align="center" />
+				<listheader label="Programa" align="center" />
+				<listheader label="Correo" align="center" />
+
+
 			</listhead>
-		
+
 
 			<template name="model">
 				<listitem>
@@ -60,8 +55,8 @@
 					<listcell label="${each.apellido}" />
 					<listcell label="${each.programa.nombre}" />
 					<listcell label="${each.correoElectronico}" />
-					
-			</listitem>
+
+				</listitem>
 			</template>
 		</listbox>
 	</window>

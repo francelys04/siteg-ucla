@@ -1,39 +1,37 @@
 <?page id="wdwCatalogoItem"  title="Catalogo Item" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="Catalogo Item" border="normal" width="800px"
-		id="wdwCatalogoItem"
-		apply="controlador.CCatalogoItem"
+		id="wdwCatalogoItem" apply="controlador.CCatalogoItem"
 		closable="true">
-		
-		<listbox id="ltbItem" width="100%"  mold="paging" pageSize="10">
-				<auxhead sclass="category-center">
-					<auxheader colspan="1">
-						<image
-						src="/public/imagenes/iconos/filtro.png" />
-						<textbox instant="true" width="90%" id="txtNombreMostrarItem"
-							/>
-					</auxheader>
-					<auxheader colspan="1">
-						<image
-						src="/public/imagenes/iconos/filtro.png" />
-						<textbox instant="true" width="90%" id="txtDescripcionMostrarItem"
-							 />
-					</auxheader>				
-					
-				</auxhead>
+
+		<listbox id="ltbItem" width="100%" mold="paging" pageSize="10"
+			emptyMessage="No hay items de evaluación registrados">
+			<auxhead sclass="category-center">
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="90%"
+						id="txtNombreMostrarItem" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="90%"
+						id="txtDescripcionMostrarItem" />
+				</auxheader>
+
+			</auxhead>
 			<listhead>
-				<listheader label="Nombre" align="center"/>
-				<listheader label="Descripción" align="center"/>
-				
+				<listheader label="Nombre" align="center" />
+				<listheader label="Descripción" align="center" />
+
 			</listhead>
-		
+
 
 			<template name="model">
 				<listitem>
 					<listcell label="${each.nombre}" />
 					<listcell label="${each.descripcion}" />
-					
-			</listitem>
+
+				</listitem>
 			</template>
 		</listbox>
 	</window>
