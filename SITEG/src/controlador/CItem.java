@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
+
+import modelo.AreaInvestigacion;
 import modelo.ItemEvaluacion;
 
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
@@ -12,13 +14,16 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -45,6 +50,8 @@ public class CItem extends CGeneral {
 	private Textbox txtNombreMostrarItem;
 	@Wire
 	private Textbox txtDescripcionMostrarItem;
+	@Wire
+	private Button btnEliminarItem;
 	private long id = 0;
 
 	
@@ -71,6 +78,7 @@ public class CItem extends CGeneral {
 				txtNombreItem.setValue(item.getNombre());
 				txtDescripcionItem.setValue(item.getDescripcion());
 				id=item.getId();
+				btnEliminarItem.setDisabled(false);
 				map.clear();
 				map = null;
 			}
@@ -80,15 +88,38 @@ public class CItem extends CGeneral {
 
 	@Listen("onClick = #btnGuardarItem")
 	public void guardarEstudiante() {
-		//ACOMODAR LA VISTA METIENDOLE EL VALOR
-		String nombre = txtNombreItem.getValue();
-		String descripcion = txtDescripcionItem.getValue();
-		Boolean estatus = true;
-		String tipo = "valor";
-		ItemEvaluacion item= new ItemEvaluacion(id,nombre, descripcion, estatus, tipo);
-		servicioItem.guardar(item);
-		cancelarItem();
-		id = 0;
+		if (txtNombreItem.getText().compareTo("")==0
+			|| txtDescripcionItem.getText().compareTo("")==0){
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);			
+		}else{
+			
+			Messagebox.show("Desea guardar Item?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+								String nombre = txtNombreItem.getValue();
+								String descripcion = txtDescripcionItem.getValue();
+								Boolean estatus = true;
+								String tipo = "valor";
+								ItemEvaluacion item= new ItemEvaluacion(id,nombre, descripcion, estatus, tipo);
+								servicioItem.guardar(item);
+								cancelarItem();
+								id = 0;
+								Messagebox.show("Item registrado exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+								
+								
+							}
+						}
+					});
+			
+			
+		
+		
+		}
 	}
 	
 	
@@ -96,18 +127,32 @@ public class CItem extends CGeneral {
 	public void cancelarItem() {
 		txtNombreItem.setValue("");
 		txtDescripcionItem.setValue("");
+		btnEliminarItem.setDisabled(true);
 		id=0;
 	}
 	
 	@Listen("onClick = #btnEliminarItem")
-	public void eliminarLapso() {
+	public void eliminarItem() {
+		Messagebox.show("Desea eliminar Item?",
+				"Dialogo de confirmacion", Messagebox.OK
+						| Messagebox.CANCEL, Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt)
+							throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+							ItemEvaluacion item = servicioItem.buscarItem(id);
+							item.setEstatus(false);
+							servicioItem.guardar(item);
+							cancelarItem();
+							Messagebox.show("Item eliminado exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+							id=0;
+							
+							
+						}
+					}
+				});
 		
-		ItemEvaluacion item = servicioItem.buscarItem(id);
-		item.setEstatus(false);
-		servicioItem.guardar(item);
-		cancelarItem();
-		System.out.println("Item Eliminado");
-		id=0;
+		
 	}
 
 	@Listen("onClick = #btnCatalogoItem")
@@ -116,48 +161,8 @@ public class CItem extends CGeneral {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoItem.zul", null, null);
 		window.doModal();
-
-	}
-	
-	@Listen("onDoubleClick = #ltbItem")
-	public void mostrarDatosCatalogo() {
-		Listitem listItem = ltbItem.getSelectedItem();
-		ItemEvaluacion itemDatosCatalogo = (ItemEvaluacion) listItem.getValue();
-		String vista = "maestros/VItem";
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", itemDatosCatalogo.getId());
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoItem.onClose();
-
-	}
-	
-	@Listen("onChange = #txtNombreMostrarItem,#txtDescripcionMostrarItem")
-	public void filtrarDatosCatalogo() {
-		List<ItemEvaluacion> item = servicioItem.buscarItemsActivos();
-		List<ItemEvaluacion> item2 = new ArrayList<ItemEvaluacion>();
-
-		for (ItemEvaluacion item1 : item) {
-			if (item1
-					.getNombre()
-					.toLowerCase()
-					.contains(
-							txtNombreMostrarItem.getValue().toLowerCase())
-					&& item1
-							.getDescripcion()
-							.toLowerCase()
-							.contains(
-									txtDescripcionMostrarItem.getValue()
-											.toLowerCase()))
-			{
-				item2.add(item1);
-			}
-
-		}
-
-		ltbItem.setModel(new ListModelList<ItemEvaluacion>(item2));
-
-	}
+		CCatalogoItem catalogo = new CCatalogoItem();
+		catalogo.recibir("maestros/VItem");
+	}	
 	
 }

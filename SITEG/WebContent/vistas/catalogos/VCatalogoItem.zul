@@ -2,7 +2,7 @@
 <zk>
 	<window title="Catalogo Item" border="normal" width="800px"
 		id="wdwCatalogoItem"
-		apply="controlador.CItem"
+		apply="controlador.CCatalogoItem"
 		closable="true">
 		
 		<listbox id="ltbItem" width="100%"  mold="paging" pageSize="10">
