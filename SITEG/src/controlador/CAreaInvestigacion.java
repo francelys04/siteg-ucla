@@ -12,7 +12,9 @@ import javax.persistence.GeneratedValue;
 
 
 import modelo.AreaInvestigacion;
+import modelo.Estudiante;
 import modelo.Lapso;
+import modelo.Programa;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +25,12 @@ import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Grid;
@@ -64,6 +68,8 @@ public class CAreaInvestigacion extends CGeneral {
 	private Textbox txtNombreMostrarArea;
 	@Wire
 	private Textbox txtDescripcionMostrarArea;
+	@Wire
+	private Button btnEliminarArea;
 	private long id = 0;
 	
 
@@ -91,8 +97,10 @@ public class CAreaInvestigacion extends CGeneral {
 				txtNombreArea.setValue(a.getNombre());
 				txtDescripcionArea.setValue(a.getDescripcion());
 				id = a.getId();
+				btnEliminarArea.setDisabled(false);
 				map.clear();
 				map = null;
+				
 			}
 		}
 
@@ -104,32 +112,70 @@ public class CAreaInvestigacion extends CGeneral {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoArea.zul", null, null);
 		window.doModal();
+		CCatalogoAreaInvestigacion catalogo = new CCatalogoAreaInvestigacion();
+		catalogo.recibir("maestros/VAreaInvestigacion");
 
 	}
 //guarda un area
 	@Listen("onClick = #btnGuardarArea")
 	public void guardarArea() {
-
+		if(txtNombreArea.getText().compareTo("")==0 
+			|| txtDescripcionArea.getText().compareTo("")==0){
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);			
+		}else{
+			Messagebox.show("Desea guardar el area de investigacion?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+								String nombre = txtNombreArea.getValue();
+								String descripcion = txtDescripcionArea.getValue();
+								Boolean estado = true;
+								AreaInvestigacion area = new AreaInvestigacion(id, nombre,descripcion, estado);
+								servicioArea.guardar(area);
+								 Messagebox.show("Area de investigacion registrada exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+								cancelarArea();
+								id = 0;
+								
+							}
+						}
+					});
+			
+			
+			
 		
 		
-		String nombre = txtNombreArea.getValue();
-		String descripcion = txtDescripcionArea.getValue();
-		Boolean estado = true;
-		AreaInvestigacion area = new AreaInvestigacion(id, nombre,descripcion, estado);
-		servicioArea.guardar(area);
-		cancelarArea();
-		id = 0;
-		Messagebox.show("Area de Investigacion Registrada");
+		}
 	}
 //elimina un area
 	@Listen("onClick = #btnEliminarArea")
 	public void eliminarArea() {
+		Messagebox.show("Desea eliminar el area de investigacion?",
+				"Dialogo de confirmacion", Messagebox.OK
+						| Messagebox.CANCEL, Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt)
+							throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+							AreaInvestigacion area = servicioArea.buscarArea(id);
+							area.setEstatus(false);
+							servicioArea.guardar(area);
+							 Messagebox.show("Area de investigacion eliminada exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+							cancelarArea();
+							
+							
+						}
+					}
+				});
 		
-		AreaInvestigacion area = servicioArea.buscarArea(id);
-		area.setEstatus(false);
-		servicioArea.guardar(area);
-		cancelarArea();
-		Messagebox.show("Area de Investigacion Eliminada");
+		
+		
+		
+		
+		
 	}
 //limpia los campos de la ventana
 	@Listen("onClick = #btnCancelarArea")
@@ -137,52 +183,10 @@ public class CAreaInvestigacion extends CGeneral {
 
 		txtNombreArea.setValue("");
 		txtDescripcionArea.setValue("");
+		btnEliminarArea.setDisabled(true);
 		id = 0;
 
 	}
-//filtra el catalogo en este caso solo por nombre y descripcion
-	@Listen("onChange = #txtNombreMostrarArea")
-	public void filtrarDatosCatalogo() {
-		List<AreaInvestigacion> area1 = servicioArea.buscarActivos();
-		List<AreaInvestigacion> area2 = new ArrayList<AreaInvestigacion>();
 
-		for (AreaInvestigacion area : area1) {
-			if (area
-					.getNombre()
-					.toLowerCase()
-					.contains(
-							txtNombreMostrarArea.getValue().toLowerCase())
-					
-					
-					
-					&& area
-							.getDescripcion()
-							.toLowerCase()
-							.contains(
-									txtDescripcionMostrarArea.getValue()
-											.toLowerCase())) {
-				area2.add(area);
-			}
-
-		}
-
-		ltbArea.setModel(new ListModelList<AreaInvestigacion>(area2));
-
-	}
-//lleva el item que selecciono en el catalogo a la ventana y cierra el catalogo
-	@Listen("onDoubleClick = #ltbArea")
-	public void mostrarDatosCatalogo() {
-
-		Listitem listItem = ltbArea.getSelectedItem();
-		AreaInvestigacion areaDatosCatalogo = (AreaInvestigacion) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", areaDatosCatalogo.getId());
-		String vista = "maestros/VAreaInvestigacion";
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoArea.onClose();
-
-	}
 }
 
