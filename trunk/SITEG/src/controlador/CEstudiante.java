@@ -66,9 +66,9 @@ public class CEstudiante extends CGeneral {
 	@Wire
 	private Textbox txtDireccionEstudiante;
 	@Wire
-	private Intbox itbTelefonoMovilEstudiante;
+	private Textbox txtTelefonoMovilEstudiante;
 	@Wire
-	private Intbox itbTelefonoFijoEstudiante;
+	private Textbox txtTelefonoFijoEstudiante;
 	@Wire
 	private Textbox txtCorreoEstudiante;
 
@@ -125,12 +125,9 @@ public class CEstudiante extends CGeneral {
 				} else {
 					rdoSexoFEstudiante.setChecked(true);
 				}
-				int TelefonoMovil = Integer.parseInt(estudiante.getTelefono());
-				int TelefonoFijo = Integer.parseInt(estudiante
-						.getTelefono_fijo());
 				txtDireccionEstudiante.setValue(estudiante.getDireccion());
-				itbTelefonoMovilEstudiante.setValue(TelefonoMovil);
-				itbTelefonoFijoEstudiante.setValue(TelefonoFijo);
+				txtTelefonoMovilEstudiante.setValue(estudiante.getTelefono());
+				txtTelefonoFijoEstudiante.setValue(estudiante.getTelefono_fijo());
 				txtCorreoEstudiante.setValue(estudiante.getCorreoElectronico());
 				cmbProgramaEstudiante.setValue(estudiante.getPrograma()
 						.getNombre());
@@ -158,13 +155,14 @@ public class CEstudiante extends CGeneral {
 	// servicio almacenarlos en la base de datos
 	@Listen("onClick = #btnGuardarEstudiante")
 	public void guardarEstudiante() {
+		
 		if (txtCedulaEstudiante.getText().compareTo("") == 0
 				|| txtNombreEstudiante.getText().compareTo("") == 0
 				|| txtApellidoEstudiante.getText().compareTo("") == 0
 				|| txtCorreoEstudiante.getText().compareTo("") == 0
 				|| txtDireccionEstudiante.getText().compareTo("") == 0
-				|| itbTelefonoMovilEstudiante.getText().compareTo("") == 0
-				|| itbTelefonoFijoEstudiante.getText().compareTo("") == 0
+				|| txtTelefonoMovilEstudiante.getText().compareTo("") == 0
+				|| txtTelefonoFijoEstudiante.getText().compareTo("") == 0
 				|| cmbProgramaEstudiante.getText().compareTo("") == 0
 				|| (rdoSexoFEstudiante.isChecked() == false && rdoSexoMEstudiante
 						.isChecked() == false)) {
@@ -186,12 +184,10 @@ public class CEstudiante extends CGeneral {
 								String correo = txtCorreoEstudiante.getValue();
 								String direccion = txtDireccionEstudiante
 										.getValue();
-								String telefonoFijo = Integer
-										.toString(itbTelefonoMovilEstudiante
-												.getValue());
-								String telefonoMovil = Integer
-										.toString(itbTelefonoFijoEstudiante
-												.getValue());
+								String telefonoFijo =txtTelefonoMovilEstudiante
+												.getValue();
+								String telefonoMovil = txtTelefonoFijoEstudiante
+												.getValue();
 								String programas = cmbProgramaEstudiante
 										.getValue();
 								String sexo = rdgSexoEstudiante.getSelectedItem()
@@ -254,8 +250,8 @@ public class CEstudiante extends CGeneral {
 		txtApellidoEstudiante.setValue("");
 		rdgSexoEstudiante.setSelectedItem(null);
 		txtDireccionEstudiante.setValue("");
-		itbTelefonoMovilEstudiante.setValue(null);
-		itbTelefonoFijoEstudiante.setValue(null);
+		txtTelefonoMovilEstudiante.setValue("");
+		txtTelefonoFijoEstudiante.setValue("");
 		txtCorreoEstudiante.setValue("");
 		cmbProgramaEstudiante.setValue("");
 

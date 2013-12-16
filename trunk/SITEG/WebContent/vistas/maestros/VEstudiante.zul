@@ -207,18 +207,18 @@
 					</hlayout>
 
 					<hbox>
-						<intbox id="itbTelefonoMovilEstudiante"
+						<textbox id="txtTelefonoMovilEstudiante"
 							width="100%" tabindex="8" tooltip="pupTelefonoMovilEstudiante"
-							constraint="no negative" />
+							 />
 
 						<hlayout>
 							<label value="Teléfono Fijo:"
 								style="color:black;margin-left:15px" />
 						</hlayout>
 
-						<intbox id="itbTelefonoFijoEstudiante"
+						<textbox id="txtTelefonoFijoEstudiante"
 							width="90%" style="margin-left:15px" tabindex="9"
-							tooltip="pupTelefonoFijoEstudiante" constraint="no negative" />
+							tooltip="pupTelefonoFijoEstudiante" />
 					</hbox>
 				</row>
 
