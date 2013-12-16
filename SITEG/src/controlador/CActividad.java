@@ -21,6 +21,7 @@ import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -33,6 +34,7 @@ import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
@@ -140,28 +142,61 @@ public class CActividad extends CGeneral {
 	// Aca se guardan las actividades
 	@Listen("onClick = #btnGuardarActividad")
 	public void guardarActividad() {
-		String nombre = txtNombreActividad.getValue();
-		String descripcion = txtDescripcionActividad.getValue();
-		Boolean estatus = true;
-		Actividad actividad = new Actividad(id, nombre, descripcion, estatus);
-		servicioActividad.guardar(actividad);
-		cancelarActividad();
-		alert("Actividades Guardadas");
 		
-		id = 0;
+		if ((txtNombreActividad.getText().compareTo("") == 0)
+				|| (txtDescripcionActividad.getText().compareTo("") == 0)) {
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
+		}else {
+			Messagebox.show("¿Desea guardar los datos de la actividad?",
+					"Dialogo de confirmación", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+
+								String nombre = txtNombreActividad.getValue();
+								String descripcion = txtDescripcionActividad.getValue();
+								Boolean estatus = true;
+								Actividad actividad = new Actividad(id, nombre, descripcion, estatus);
+								servicioActividad.guardar(actividad);
+								cancelarActividad();
+								id = 0;
+								Messagebox.show(
+										"Actividad registrada exitosamente",
+										"Información", Messagebox.OK,
+										Messagebox.INFORMATION);
+							}
+						}
+					});
+
+		}
 	}
+		
 
 	// Aca se eliminan logicamente las actividades
 	@Listen("onClick = #btnEliminarActividad")
 	public void eliminarActividad() {
-		btnEliminarActividad.setDisabled(false);
-		System.out.println("Tipo de Jurado Eliminado");
-		Actividad actividad = servicioActividad.buscarActividad(id);
-		actividad.setEstatus(false);
-		servicioActividad.guardar(actividad);
-		cancelarActividad();
-		alert("Actividad Eliminada");
 		
+		Messagebox.show("¿Desea eliminar los datos de la actividad?",
+				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+							Actividad actividad = servicioActividad.buscarActividad(id);
+							actividad.setEstatus(false);
+							servicioActividad.guardar(actividad);
+							cancelarActividad();
+							Messagebox.show(
+									"Actividad eliminada exitosamente",
+									"Información", Messagebox.OK,
+									Messagebox.INFORMATION);
+							
+						}
+					}
+				});
+			
 	}
 
 	// Aca se mandan a limpiar los campos de textos de la vista
@@ -171,6 +206,7 @@ public class CActividad extends CGeneral {
 		id = 0;
 		txtNombreActividad.setValue("");
 		txtDescripcionActividad.setValue("");
+		btnEliminarActividad.setDisabled(true);
 		
 	}
 

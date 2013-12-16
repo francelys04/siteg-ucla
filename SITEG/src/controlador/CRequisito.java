@@ -109,7 +109,7 @@ public class CRequisito extends CGeneral {
 
 		} else {
 			Messagebox.show("¿Desea guardar los datos de la actividad?",
-					"Dialogo de confirmacion", Messagebox.OK
+					"Dialogo de confirmación", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -139,7 +139,7 @@ public class CRequisito extends CGeneral {
 	public void eliminarRequisito() {
 
 		Messagebox.show("¿Desea eliminar los datos del requisito?",
-				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
@@ -149,6 +149,10 @@ public class CRequisito extends CGeneral {
 							requisito.setEstatus(false);
 							servicioRequisito.guardar(requisito);
 							cancelarRequisito();
+							Messagebox.show(
+									"Requisito eliminado exitosamente",
+									"Información", Messagebox.OK,
+									Messagebox.INFORMATION);
 						}
 					}
 				});
