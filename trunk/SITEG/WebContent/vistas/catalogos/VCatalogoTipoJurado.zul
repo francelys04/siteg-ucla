@@ -1,33 +1,31 @@
 <window title="Catalogo Tipo de Jurado" border="normal" width="800px"
-		id="wdwCatalogoTipoJurado"
-		apply="controlador.CCatalogoTipoJurado"
-		closable="true">
-		<listbox id="ltbTipoJurado" width="100%" mold="paging" pageSize="10">
-			<auxhead sclass="category-center">
-				<auxheader colspan="1">
-						<image
-						src="/public/imagenes/iconos/filtro.png" />
-						<textbox instant="true" width="90%" id="txtNombreMostrarTipoJurado"
-							/>
-				</auxheader>
-				<auxheader colspan="1">
-						<image
-						src="/public/imagenes/iconos/filtro.png" />
-						<textbox instant="true" width="90%" id="txtDescripcionMostrarTipoJurado"
-							 />
-			  	</auxheader>
-			</auxhead>
-			<listhead>
-				<listheader label="Nombre" align="center" width="90%" />
-				<listheader label="Descripción" align="center" width="90%" />
-			</listhead>
-		
+	id="wdwCatalogoTipoJurado" apply="controlador.CCatalogoTipoJurado"
+	closable="true">
+	<listbox id="ltbTipoJurado" width="100%" mold="paging" pageSize="10"
+		emptyMessage="No hay tipos de jurado registrados">
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="90%"
+					id="txtNombreMostrarTipoJurado" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="90%"
+					id="txtDescripcionMostrarTipoJurado" />
+			</auxheader>
+		</auxhead>
+		<listhead>
+			<listheader label="Nombre" align="center" width="90%" />
+			<listheader label="Descripción" align="center" width="90%" />
+		</listhead>
 
-			<template name="model">
-				<listitem>
-					<listcell label="${each.nombre}" />
-					<listcell label="${each.descripcion}" />
-				</listitem>
-			</template>
-		</listbox>
+
+		<template name="model">
+			<listitem>
+				<listcell label="${each.nombre}" />
+				<listcell label="${each.descripcion}" />
+			</listitem>
+		</template>
+	</listbox>
 </window>
