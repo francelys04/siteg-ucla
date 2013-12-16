@@ -34,6 +34,27 @@
 		background: white; border-top: none; }
 
 	</style>
+		<!-- Lista de popus -->
+	<popup id="pupNombreArea">
+        <toolbarbutton label="Ingrese aquí el nombre del area de investigacion" />
+    </popup>
+    <popup id="pupDescripcionArea">
+     	<toolbarbutton label="Ingrese aquí la descripción del area de investigacion" />
+    </popup>
+      <popup id="pupGuardarArea">
+     	<toolbarbutton label="Presione aquí para guardar los datos de un area de investigacion" />
+    </popup>
+     <popup id="pupCancelarArea">
+     	<toolbarbutton label="Presione aquí para limpiar los campos" />
+    </popup>
+     <popup id="pupEliminarArea">
+     	<toolbarbutton label="Presione aqui para eliminar los datos de un area de investigacion" />
+    </popup>
+    <popup id="pupCatalogoArea">
+     	<toolbarbutton label="Presione aqui para ver la lista de las areas de investigacion" />
+    </popup>
+    
+    <!-- Fin de popus -->
 
 	<separator />
 	<separator />
@@ -67,10 +88,10 @@
 
 					<hbox>
 						
-						<textbox id="txtNombreArea" width="120%" />
+						<textbox id="txtNombreArea" width="120%" tooltip="pupNombreArea"/>
 
 							<button id="btnBuscarArea"
-								image="/public/imagenes/iconos/catalogo.png" style="margin-left:40px">
+								image="/public/imagenes/iconos/catalogo.png" style="margin-left:40px" tooltip="pupCatalogoArea">
 							</button>
 
 					</hbox>
@@ -87,7 +108,7 @@
 					</hlayout>
 
 					<textbox id="txtDescripcionArea" rows="5"
-						cols="100" width="52%" tabindex="8" />
+						cols="100" width="52%" tabindex="8" tooltip="pupDescripcionArea"/>
 
 				</row>
 
@@ -106,13 +127,13 @@
 				<separator />
 
 				<button id="btnGuardarArea" label="Guardar"
-					image="/public/imagenes/iconos/guardar.png" tabindex="13">
+					image="/public/imagenes/iconos/guardar.png" tabindex="13" tooltip="pupGuardarArea">
 				</button>
 				<button id="btnCancelarArea" label="Cancelar"
-					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					image="/public/imagenes/iconos/limpiar.png" tabindex="14" tooltip="pupCancelarArea">
 				</button>
 				<button id="btnEliminarArea" label="Eliminar"
-					image="/public/imagenes/iconos/eliminar.png" tabindex="15" disabled="true">
+					image="/public/imagenes/iconos/eliminar.png" tabindex="15" disabled="true" tooltip="pupEliminarArea">
 				</button>
 				<separator />
 

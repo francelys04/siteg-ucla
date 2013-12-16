@@ -32,6 +32,28 @@
 		background: white; border-top: none; }
 
 	</style>
+	
+	<!-- Lista de popus -->
+	<popup id="pupNombreItem">
+        <toolbarbutton label="Ingrese aquí el nombre del item" />
+    </popup>
+    <popup id="pupDescripcionItem">
+     	<toolbarbutton label="Ingrese aquí la descripción del item" />
+    </popup>
+     <popup id="pupGuardarItem">
+     	<toolbarbutton label="Presione aquí para guardar los datos de un item" />
+    </popup>
+     <popup id="pupCancelarItem">
+     	<toolbarbutton label="Presione aquí para limpiar los campos" />
+    </popup>
+     <popup id="pupEliminarItem">
+     	<toolbarbutton label="Presione aqui para eliminar los datos de un item" />
+    </popup>
+    <popup id="pupCatalogoItem">
+     	<toolbarbutton label="Presione aqui para ver la lista de items" />
+    </popup>
+    
+    <!-- Fin de popus -->    
 
 	<separator />
 	<separator />
@@ -63,12 +85,12 @@
 					</hlayout>
 
 					<hbox>
-					<textbox id="txtNombreItem" width="120%" />
-					<textbox id="txtIdItem" width="120%" visible="false"/>
+					<textbox id="txtNombreItem" width="120%" tooltip="pupNombreItem"/>
+					
 						
 
 						<button id="btnCatalogoItem"  tabindex="13"
-							image="/public/imagenes/iconos/catalogo.png" style="margin-left:40px">
+							image="/public/imagenes/iconos/catalogo.png" style="margin-left:40px" tooltip="pupCatalogoItem">
 						</button>
 
 					</hbox>
@@ -85,7 +107,7 @@
 					</hlayout>
 
 					<textbox id="txtDescripcionItem" rows="5"
-						cols="100" width="52%" tabindex="8" />
+						cols="100" width="52%" tabindex="8" tooltip="pupDescripcionItem" />
 
 				</row>
 
@@ -105,13 +127,13 @@
 				<separator />
 
 				<button id="btnGuardarItem" label="Guardar"
-					image="/public/imagenes/iconos/guardar.png" tabindex="13">
+					image="/public/imagenes/iconos/guardar.png" tabindex="13" tooltip="pupGuardarItem">
 				</button>
 				<button id="btnCancelarItem" label="Cancelar"
-					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					image="/public/imagenes/iconos/limpiar.png" tabindex="14" tooltip="pupCancelarItem">
 				</button>
 				<button id="btnEliminarItem" label="Eliminar"
-					image="/public/imagenes/iconos/eliminar.png" tabindex="15">
+					image="/public/imagenes/iconos/eliminar.png" tabindex="15" disabled="true" tooltip="pupEliminarItem">
 				</button>
 				<separator />
 
