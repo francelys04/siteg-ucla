@@ -2,7 +2,7 @@
 <zk>
 	<window title="Catalogo Area" border="normal" width="800px"
 		id="wdwCatalogoArea"
-		apply="controlador.CAreaInvestigacion"
+		apply="controlador.CCatalogoAreaInvestigacion"
 		closable="true">
 		<listbox id="ltbArea" width="100%"  mold="paging" pageSize="10">
 		

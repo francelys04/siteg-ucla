@@ -171,7 +171,7 @@ public class CEstudiante extends CGeneral {
 
 		} else {
 			Messagebox.show("Desea guardar el estudiante?",
-					"Dialogo de confirmaci�n", Messagebox.OK
+					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
