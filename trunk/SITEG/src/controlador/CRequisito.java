@@ -108,7 +108,7 @@ public class CRequisito extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("Desea guardar los datos de la actividad?",
+			Messagebox.show("¿Desea guardar los datos de la actividad?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -138,7 +138,7 @@ public class CRequisito extends CGeneral {
 	@Listen("onClick = #btnEliminarRequisito")
 	public void eliminarRequisito() {
 
-		Messagebox.show("Desea eliminar los datos del requisito?",
+		Messagebox.show("¿Desea eliminar los datos del requisito?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
