@@ -1,8 +1,6 @@
-<?page id="wdwCatalogoTematica"  title="Catalogo Tematica" contentType="text/html;charset=UTF-8"?>
-<zk>
 	<window title="Catalogo Tematica" border="normal" width="800px"
 		id="wdwCatalogoTematica"
-		apply="controlador.CTematica"
+		apply="controlador.CCatalogoTematica"
 		closable="true">
 		<listbox id="ltbTematica" width="100%"  mold="paging" pageSize="10">
 				
@@ -46,4 +44,3 @@
 			</template>
 		</listbox>
 	</window>
-</zk>

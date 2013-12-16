@@ -1,6 +1,5 @@
-<?page id="wdwTematica" title="Tematica" contentType="text/html;charset=UTF-8"?>
-<window id="wdwArea" title="Tematica" border="normal" width="100%" height="430px"
-	closable="true" apply="controlador.CTematica">
+<window id=" wdwTematica" title="Tematica" border="normal" width="100%"
+	height="430px" closable="true" apply="controlador.CTematica">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -34,6 +33,35 @@
 
 	</style>
 
+
+	<!-- Lista de popus -->
+	<popup id="pupAreaTematica">
+		<toolbarbutton label="Seleccione el area de la tematica" />
+	</popup>
+	<popup id="pupNombreTematica">
+		<toolbarbutton label="Ingrese aquí el nombre de la tematica" />
+	</popup>
+	<popup id="pupDescripcionTematica">
+		<toolbarbutton
+			label="Ingrese aquí la descripción de la tematica" />
+	</popup>
+	<popup id="pupGuardarTematica">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos de la tematica" />
+	</popup>
+	<popup id="pupCancelarTematica">
+		<toolbarbutton label="Presione aquí para limpar los campos" />
+	</popup>
+	<popup id="pupEliminarTematica">
+		<toolbarbutton
+			label="Presione aqui para eliminar los datos de la tematica" />
+	</popup>
+	<popup id="pupCatalogoTematica">
+		<toolbarbutton
+			label="Presione aqui para ver la lista de tematicas" />
+	</popup>
+	<!-- Fin de popus -->
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -63,7 +91,7 @@
 					</hlayout>
 
 					<combobox id="cmbAreaTematica" autodrop="true"
-						width="23%" tabindex="12">
+						width="23%" tabindex="12" tooltip="pupAreaTematica">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
@@ -81,10 +109,12 @@
 
 					<hbox>
 
-						<textbox id="txtNombreTematica" width="120%" />
+						<textbox id="txtNombreTematica" width="120%"
+							tooltip="pupNombreTematica" />
 
-						<button id="btnBuscarTematica"
-							image="/public/imagenes/iconos/catalogo.png" style="margin-left:40px">
+						<button id="btnBuscarTematica" tooltip="pupCatalogoTematica"
+							image="/public/imagenes/iconos/catalogo.png"
+							style="margin-left:40px">
 						</button>
 					</hbox>
 				</row>
@@ -95,11 +125,10 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Descripción:"
-							style="color:black" />
+						<label value="Descripción:" style="color:black" />
 					</hlayout>
 
-					<textbox id="txtDescripcionTematica" rows="5"
+					<textbox id="txtDescripcionTematica" rows="5" tooltip="pupDescripcionTematica"
 						cols="100" width="52%" tabindex="8" />
 
 				</row>
@@ -120,14 +149,14 @@
 			<div align="center">
 				<separator />
 
-				<button id="btnGuardarTematica" label="Guardar"
+				<button id="btnGuardarTematica" label="Guardar" tooltip="pupGuardarTematica"
 					image="/public/imagenes/iconos/guardar.png" tabindex="13">
 				</button>
-				<button id="btnCancelarTematica" label="Cancelar"
+				<button id="btnCancelarTematica" label="Cancelar" tooltip="pupCancelarTematica"
 					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 				</button>
-				<button id="btnEliminarTematica" label="Eliminar"
-					image="/public/imagenes/iconos/eliminar.png" tabindex="15">
+				<button id="btnEliminarTematica" label="Eliminar" tooltip="pupEliminarTematica"
+					image="/public/imagenes/iconos/eliminar.png" tabindex="15" disabled="true">
 				</button>
 				<separator />
 

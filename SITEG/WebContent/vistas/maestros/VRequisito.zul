@@ -43,14 +43,14 @@
 	</popup>
 	<popup id="pupGuardarRequisito">
 		<toolbarbutton
-			label="Presione aquí para guardar los datos de un requisito" />
+			label="Presione aquí para guardar los datos del requisito" />
 	</popup>
 	<popup id="pupCancelarRequisito">
 		<toolbarbutton label="Presione aquí para limpar los campos" />
 	</popup>
 	<popup id="pupEliminarRequisito">
 		<toolbarbutton
-			label="Presione aqui para eliminar los datos de un requisito" />
+			label="Presione aqui para eliminar los datos del requisito" />
 	</popup>
 	<popup id="pupCatalogoRequisito">
 		<toolbarbutton
