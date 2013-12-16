@@ -48,6 +48,9 @@
     <popup id="pupApellidoEstudiante">
         <toolbarbutton label="Ingrese aqui el apellido del estudiante" />
     </popup>
+    <popup id="pupSexoEstudiante">
+		<toolbarbutton label="Seleccione aqui el sexo del estudiante" />
+	</popup>
     <popup id="pupDireccionEstudiante">
      	<toolbarbutton label="Ingrese aqui la direccion del estudiante" />
     </popup> 	
@@ -168,7 +171,7 @@
 
 					<hlayout>
 
-						<radiogroup id="rdgSexoEstudiante">
+						<radiogroup id="rdgSexoEstudiante" tooltip="pupSexoEstudiante">
 							<radio id="rdoSexoFEstudiante"
 								label="Femenino" tabindex="5" style="color:black"/>
 							<radio id="rdoSexoMEstudiante"
@@ -203,7 +206,7 @@
 
 					<hbox>
 						<intbox id="itbTelefonoMovilEstudiante"
-							width="90%" tabindex="8" 
+							width="100%" tabindex="8" 
 							tooltip="pupTelefonoMovilEstudiante" constraint="no negative" />
 
 						<hlayout>

@@ -94,8 +94,8 @@ public class CItem extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);			
 		}else{
 			
-			Messagebox.show("Desea guardar Item?",
-					"Dialogo de confirmacion", Messagebox.OK
+			Messagebox.show("¿Desea guardar los datos del Item?",
+					"Dialogo de confirmación", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -109,7 +109,7 @@ public class CItem extends CGeneral {
 								servicioItem.guardar(item);
 								cancelarItem();
 								id = 0;
-								Messagebox.show("Item registrado exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+								Messagebox.show("Item registrado exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
 								
 								
 							}
@@ -133,8 +133,8 @@ public class CItem extends CGeneral {
 	
 	@Listen("onClick = #btnEliminarItem")
 	public void eliminarItem() {
-		Messagebox.show("Desea eliminar Item?",
-				"Dialogo de confirmacion", Messagebox.OK
+		Messagebox.show("Desea eliminar el Item?",
+				"Dialogo de confirmación", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt)
@@ -144,7 +144,7 @@ public class CItem extends CGeneral {
 							item.setEstatus(false);
 							servicioItem.guardar(item);
 							cancelarItem();
-							Messagebox.show("Item eliminado exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+							Messagebox.show("Item eliminado exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
 							id=0;
 							
 							
