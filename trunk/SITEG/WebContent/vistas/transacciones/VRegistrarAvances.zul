@@ -169,26 +169,9 @@
 								width="600px" rows="6" cols="100" />
 						</row>
 					</rows>
-				</grid>
+				</grid>				
 				
-				
-	<panel border="none" width="95%"
-		style="margin-left:2%;margin-right:2%">
-		<panelchildren>
-			<div align="center">
-				<separator />
-				<button id="btnAgregarObservacion" label="Agregar"
-					image="/imagenes/agregar.png" tabindex="12">
-				</button>
-				<button id="btnQuitarObservacion" label="Eliminar"
-					image="/imagenes/quitar.png" tabindex="13">
-				</button>
-
-				<separator />
-
-			</div>
-		</panelchildren>
-	</panel>
+	
 				
 
 
