@@ -1,5 +1,5 @@
-<window title="Profesor por Área" border="normal" width="100%"
-	height="480px" closable="true">
+<window title="Areas de investigación de un profesor" border="normal"
+	width="100%" height="570px" closable="true">
 	<separator />
 
 	<style dynamic="true">
@@ -44,150 +44,177 @@
 	<separator />
 
 
-	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
-		<columns>
-			<column width="98%" height="30px" />
-		</columns>
-		<rows>
+	<groupbox width="95%" height="400px" style="margin-left:2%">
+		<separator />
+		<separator />
+		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+			<columns>
+				<column width="98%" height="30px" />
+			</columns>
+			<rows>
 
-			<row>
-			<hbox>
-				<hlayout>
-					<label value="*"
-						style="font-weight:bold;color:red">
-					</label>
-					<label value="Profesor:" style="font-weight:bold" />
-				</hlayout>
+				<row>
+					<hbox>
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red">
+							</label>
+							<label value="Cédula:" style="color:black" />
+						</hlayout>
 
-				<hbox>
-					<textbox id="txtProfesorArea" width="150px"
-						style="margin-left:20px" />
+						<hbox>
+							<textbox id="txtCedulaProfesorArea"
+								width="150px" style="margin-left:20px" />
 
-					<button id="btnCatalogoProfesorArea"
-						style="margin-left:10%" image="/imagenes/catalogo.png">
-					</button>
-				</hbox>
-			</hbox>
-				
-				
-			</row>
-		</rows>
-	</grid>
+							<button id="btnCatalogoProfesorArea"
+								style="margin-left:10%"
+								image="/public/imagenes/iconos/catalogo.png">
+							</button>
+						</hbox>
+					</hbox>
+				</row>
+
+				<row>
+					<hbox>
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red">
+							</label>
+							<label value="Nombre:" style="color:black" />
+						</hlayout>
+
+						<hbox>
+							<textbox id="txtNombreProfesorArea"
+								width="150px" style="margin-left:20px" />
+
+							<hlayout>
+								<label value="*"
+									style="font-weight:bold;color:red;margin-left:15px">
+								</label>
+								<label value="Apellido:"
+									style="color:black" />
+							</hlayout>
+
+							<textbox id="txtApellidoProfesorArea"
+								width="150px" style="margin-left:20px" />
+						</hbox>
+
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+
+		<separator />
+		<separator />
+		<separator />
+		<separator />
+
+		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+			<columns>
+				<column width="95%" height="30%" />
+			</columns>
+			<rows>
+
+				<row>
+					<hbox>
+						<panel title="Areas Disponibles"
+							width="260px">
+							<panelchildren>
+								<listbox
+									emptyMessage="No hay areas registradas"
+									id="lsbAreasProfesorDisponibles" height="200px" mold="paging"
+									pageSize="4" oddRowSclass="non-odd" checkmark="true">
+									<auxhead sclass="category-center">
+										<auxheader colspan="1">
+											<image
+												src="/public/imagenes/iconos/filtro.png" />
+											<textbox instant="true"
+												width="90%" id="txtNombreMostrarArea2" />
+										</auxheader>
+									</auxhead>
+									<listhead>
+										<listheader label="Nombre" />
+									</listhead>
+
+									<template name="model">
+										<listitem>
+											<listcell
+												label="${each.nombre}">
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+							</panelchildren>
+						</panel>
+
+
+						<panel width="60px"
+							style="margin-left:20px;margin-top:80px">
+							<panelchildren>
+								<div>
+
+									<button id="btnAgergarAreas"
+										sclass="pointer" image="/public/imagenes/iconos/right.png"
+										tooltiptext="Agregar Areas" width="35px" />
+									<separator />
+									<button sclass="pointer"
+										id="btnRemoverAreas" image="/public/imagenes/iconos/left.png"
+										tooltiptext="Remover Areas" width="35px" />
+
+								</div>
+							</panelchildren>
+						</panel>
+
+						<panel title="Areas Seleccionadas"
+							width="260px">
+							<panelchildren>
+								<listbox
+									emptyMessage="No hay areas seleccionadas"
+									id="lsbAreasProfesorSeleccionadas" height="200px" mold="paging"
+									pageSize="4" oddRowSclass="non-odd" checkmark="true">
+									<auxhead sclass="category-center">
+										<auxheader colspan="1">
+											<image
+												src="/public/imagenes/iconos/filtro.png" />
+											<textbox instant="true"
+												width="90%" id="txtNombreMostrarArea" />
+										</auxheader>
+									</auxhead>
+									<listhead>
+										<listheader label="Nombre" />
+									</listhead>
+
+									<template name="model">
+										<listitem>
+											<listcell
+												label="${each.nombre}">
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+							</panelchildren>
+						</panel>
+
+
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
 
 	<separator />
 	<separator />
-	<separator />
-	<separator />
 
-	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
-		<columns>
-			<column width="95%" height="30%" />
-		</columns>
-		<rows>
-
-			<row>
-				<hbox>
-					<panel title="Áreas Disponibles" width="260px">
-						<panelchildren>
-							<listbox id="lsbAreasProgramaDisponibles"
-								mold="paging" pageSize="5" multiple="true" checkmark="true">
-								<listitem>
-									<listcell label="Matemática Pura" />
-								</listitem>
-								<listitem>
-									<listcell
-										label="Matemática Aplicada" />
-								</listitem>
-								<listitem>
-									<listcell
-										label="Ciencias Matemáticas" />
-								</listitem>
-								<listitem>
-									<listcell label="Lógica" />
-								</listitem>
-								<listitem>
-									<listcell
-										label="Ciencias de la Computación" />
-								</listitem>
-								<listitem>
-									<listcell
-										label="Ciencias Económicas" />
-								</listitem>
-								<listitem>
-									<listcell label="Desarrollo Social" />
-								</listitem>
-							</listbox>
-						</panelchildren>
-					</panel>
-
-
-					<panel width="30px"
-						style="margin:0 auto;padding:35px;">
-						<panelchildren>
-							<div>
-
-								<image src="/imagenes/right.png"></image>
-								<separator height="15px" />
-								<image src="/imagenes/left.png">
-
-								</image>
-
-							</div>
-						</panelchildren>
-					</panel>
-
-
-					<panel title="Áreas Seleccionadas" width="260px">
-						<panelchildren>
-							<listbox id="lsbAreasProgramasSeleccionadas"
-								mold="paging" pageSize="5" multiple="true" checkmark="true">
-								<listitem>
-									<listcell label="Matemática Pura" />
-								</listitem>
-								<listitem>
-									<listcell
-										label="Matemática Aplicada" />
-								</listitem>
-								<listitem>
-									<listcell
-										label="Ciencias Matemáticas" />
-								</listitem>
-								<listitem>
-									<listcell label="Lógica" />
-								</listitem>
-								<listitem>
-									<listcell
-										label="Ciencias de la Computación" />
-								</listitem>
-								<listitem>
-									<listcell
-										label="Ciencias Económicas" />
-								</listitem>
-
-							</listbox>
-						</panelchildren>
-					</panel>
-				</hbox>
-			</row>
-		</rows>
-	</grid>
-
-
-	<separator />
-	<separator />
-	<separator />
-	<separator />
-
-	<panel border="normal" width="90%"
+	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:2%">
 		<panelchildren>
 			<div align="center">
 				<separator />
 				<button id="btnGuardarProfesorAreas" label="Guardar"
-					image="/imagenes/guardar.png" tabindex="12">
+					image="/public/imagenes/iconos/guardar.png" tabindex="12">
 				</button>
 				<button id="btnCancelarProfesorAreas" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="13">
+					image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 				</button>
 
 				<separator />

@@ -1,6 +1,5 @@
 package controlador;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,14 +26,12 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-
 import servicio.SItem;
 import configuracion.GeneradorBeans;
 
 @Controller
 public class CItem extends CGeneral {
 	SItem servicioItem = GeneradorBeans.getServicioItem();
-
 
 	@Wire
 	private Textbox txtNombreItem;
@@ -51,33 +48,34 @@ public class CItem extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionMostrarItem;
 	@Wire
+	private Textbox txtTipoItem;
+	@Wire
 	private Button btnEliminarItem;
 	private long id = 0;
 
-	
 	void inicializar(Component comp) {
 
-		List<ItemEvaluacion> items = servicioItem.buscarItemsActivos();	
-//		System.out.println(items.get(0).getNombre());
-//		System.out.println(items.get(1).getNombre());
-		
-		if(txtNombreItem==null){
-		ltbItem.setModel(new ListModelList<ItemEvaluacion>(items));
+		List<ItemEvaluacion> items = servicioItem.buscarItemsActivos();
+		// System.out.println(items.get(0).getNombre());
+		// System.out.println(items.get(1).getNombre());
+
+		if (txtNombreItem == null) {
+			ltbItem.setModel(new ListModelList<ItemEvaluacion>(items));
 		}
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 
-	
 		if (map != null) {
-			if ( map.get("id") != null) {
+			if (map.get("id") != null) {
 
 				long codigo = (Long) map.get("id");
 				ItemEvaluacion item = servicioItem.buscarItem(codigo);
 				txtNombreItem.setValue(item.getNombre());
 				txtDescripcionItem.setValue(item.getDescripcion());
-				id=item.getId();
+				txtTipoItem.setValue(item.getTipo());
+				id = item.getId();
 				btnEliminarItem.setDisabled(false);
 				map.clear();
 				map = null;
@@ -88,12 +86,13 @@ public class CItem extends CGeneral {
 
 	@Listen("onClick = #btnGuardarItem")
 	public void guardarEstudiante() {
-		if (txtNombreItem.getText().compareTo("")==0
-			|| txtDescripcionItem.getText().compareTo("")==0){
+		if (txtNombreItem.getText().compareTo("") == 0
+				|| txtTipoItem.getText().compareTo("") == 0
+				|| txtDescripcionItem.getText().compareTo("") == 0) {
 			Messagebox.show("Debe completar todos los campos", "Error",
-					Messagebox.OK, Messagebox.ERROR);			
-		}else{
-			
+					Messagebox.OK, Messagebox.ERROR);
+		} else {
+
 			Messagebox.show("¿Desea guardar los datos del Item?",
 					"Dialogo de confirmación", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
@@ -102,57 +101,55 @@ public class CItem extends CGeneral {
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
 								String nombre = txtNombreItem.getValue();
-								String descripcion = txtDescripcionItem.getValue();
+								String descripcion = txtDescripcionItem
+										.getValue();
 								Boolean estatus = true;
-								String tipo = "valor";
-								ItemEvaluacion item= new ItemEvaluacion(id,nombre, descripcion, estatus, tipo);
+								String tipo = txtTipoItem.getValue();
+								ItemEvaluacion item = new ItemEvaluacion(id,
+										nombre, descripcion, estatus, tipo);
 								servicioItem.guardar(item);
 								cancelarItem();
 								id = 0;
-								Messagebox.show("Item registrado exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
-								
-								
+								Messagebox.show("Item registrado exitosamente",
+										"Información", Messagebox.OK,
+										Messagebox.INFORMATION);
+
 							}
 						}
 					});
-			
-			
-		
-		
+
 		}
 	}
-	
-	
+
 	@Listen("onClick = #btnCancelarItem")
 	public void cancelarItem() {
 		txtNombreItem.setValue("");
+		txtTipoItem.setValue("");
 		txtDescripcionItem.setValue("");
 		btnEliminarItem.setDisabled(true);
-		id=0;
+		id = 0;
 	}
-	
+
 	@Listen("onClick = #btnEliminarItem")
 	public void eliminarItem() {
-		Messagebox.show("Desea eliminar el Item?",
-				"Dialogo de confirmación", Messagebox.OK
-						| Messagebox.CANCEL, Messagebox.QUESTION,
+		Messagebox.show("Desea eliminar el Item?", "Dialogo de confirmación",
+				Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
-					public void onEvent(Event evt)
-							throws InterruptedException {
+					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							ItemEvaluacion item = servicioItem.buscarItem(id);
 							item.setEstatus(false);
 							servicioItem.guardar(item);
 							cancelarItem();
-							Messagebox.show("Item eliminado exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
-							id=0;
-							
-							
+							Messagebox.show("Item eliminado exitosamente",
+									"Información", Messagebox.OK,
+									Messagebox.INFORMATION);
+							id = 0;
+
 						}
 					}
 				});
-		
-		
+
 	}
 
 	@Listen("onClick = #btnCatalogoItem")
@@ -163,6 +160,6 @@ public class CItem extends CGeneral {
 		window.doModal();
 		CCatalogoItem catalogo = new CCatalogoItem();
 		catalogo.recibir("maestros/VItem");
-	}	
-	
+	}
+
 }
