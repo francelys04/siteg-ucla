@@ -3,10 +3,8 @@ package controlador;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import modelo.Actividad;
 import modelo.ActividadRequisito;
@@ -20,16 +18,12 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-import com.sun.org.apache.xml.internal.utils.ListingErrorHandler;
 
 import servicio.SActividad;
 import servicio.SRequisito;
