@@ -244,14 +244,20 @@ public class CEstudiante extends CGeneral {
 	// Metodo que limpia los campos de la vista
 	@Listen("onClick = #btnCancelarEstudiante")
 	public void cancelarEstudiante() {
-
+		txtCedulaEstudiante.setConstraint("");
 		txtCedulaEstudiante.setValue("");
+		txtCedulaEstudiante.setConstraint("/.+[0-9]+/: Debe ingresar una cedula valida");
 		txtNombreEstudiante.setValue("");
 		txtApellidoEstudiante.setValue("");
 		rdgSexoEstudiante.setSelectedItem(null);
 		txtDireccionEstudiante.setValue("");
+		txtTelefonoMovilEstudiante.setConstraint("");
 		txtTelefonoMovilEstudiante.setValue("");
+		txtTelefonoMovilEstudiante.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+		txtTelefonoFijoEstudiante.setConstraint("");
 		txtTelefonoFijoEstudiante.setValue("");
+		txtTelefonoFijoEstudiante.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+		
 		txtCorreoEstudiante.setValue("");
 		cmbProgramaEstudiante.setValue("");
 
