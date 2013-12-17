@@ -23,11 +23,13 @@ import configuracion.GeneradorBeans;
 
 public class CCatalogoItem extends CGeneral {
 	SItem servicioItem = GeneradorBeans.getServicioItem();
-	
+
 	@Wire
 	private Textbox txtNombreItem;
 	@Wire
 	private Textbox txtDescripcionItem;
+	@Wire
+	private Textbox txtTipoItem;
 	@Wire
 	private Textbox txtIdItem;
 	@Wire
@@ -37,26 +39,29 @@ public class CCatalogoItem extends CGeneral {
 	@Wire
 	private Textbox txtNombreMostrarItem;
 	@Wire
+	private Textbox txtTipoMostrarItem;
+	@Wire
 	private Textbox txtDescripcionMostrarItem;
 	private long id = 0;
 	private static String vistaRecibida;
-	
-	@Override		
-		void inicializar(Component comp) {
 
-			List<ItemEvaluacion> items = servicioItem.buscarItemsActivos();	
-//			System.out.println(items.get(0).getNombre());
-//			System.out.println(items.get(1).getNombre());
-			
-			if(txtNombreItem==null){
+	@Override
+	void inicializar(Component comp) {
+
+		List<ItemEvaluacion> items = servicioItem.buscarItemsActivos();
+		// System.out.println(items.get(0).getNombre());
+		// System.out.println(items.get(1).getNombre());
+
+		if (txtNombreItem == null) {
 			ltbItem.setModel(new ListModelList<ItemEvaluacion>(items));
-			}
-			Selectors.wireComponents(comp, this, false);
+		}
+		Selectors.wireComponents(comp, this, false);
 
-			HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-					.getCurrent().getAttribute("itemsCatalogo");		
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
 	}
-	@Listen("onChange = #txtNombreMostrarItem,#txtDescripcionMostrarItem")
+
+	@Listen("onChange = #txtNombreMostrarItem, #txtTipoMostrarItem, #txtDescripcionMostrarItem")
 	public void filtrarDatosCatalogo() {
 		List<ItemEvaluacion> item = servicioItem.buscarItemsActivos();
 		List<ItemEvaluacion> item2 = new ArrayList<ItemEvaluacion>();
@@ -72,7 +77,13 @@ public class CCatalogoItem extends CGeneral {
 							.toLowerCase()
 							.contains(
 									txtDescripcionMostrarItem.getValue()
-											.toLowerCase()))
+											.toLowerCase())
+				&& item1
+				.getTipo()
+				.toLowerCase()
+				.contains(
+						txtTipoMostrarItem.getValue()
+								.toLowerCase()))
 			{
 				item2.add(item1);
 			}
@@ -82,13 +93,12 @@ public class CCatalogoItem extends CGeneral {
 		ltbItem.setModel(new ListModelList<ItemEvaluacion>(item2));
 
 	}
-	public void recibir (String vista)
-	{
+
+	public void recibir(String vista) {
 		vistaRecibida = vista;
-		
+
 	}
-	
-	
+
 	@Listen("onDoubleClick = #ltbItem")
 	public void mostrarDatosCatalogo() {
 		Listitem listItem = ltbItem.getSelectedItem();
@@ -102,8 +112,5 @@ public class CCatalogoItem extends CGeneral {
 		wdwCatalogoItem.onClose();
 
 	}
-	
-	
-	
 
 }

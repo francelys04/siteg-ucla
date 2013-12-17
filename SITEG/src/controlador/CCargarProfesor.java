@@ -93,7 +93,7 @@ public class CCargarProfesor extends CGeneral {
 					Set<AreaInvestigacion> areasProfesor = new HashSet<AreaInvestigacion>();
 					profesor = new Profesor(cedula, nombre, apellido, correo, sexo,
 							direccion, telefonomovil, telefonofijo,
-							estatus, categoria, areasProfesor);
+							estatus, categoria);
 
 					servicioProfesor.guardarProfesor(profesor);
 				}

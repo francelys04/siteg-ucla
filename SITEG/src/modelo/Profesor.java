@@ -79,7 +79,7 @@ public class Profesor {
 	public Profesor(String cedula, String nombre, String apellido,
 			String correoElectronico, String sexo, String direccion,
 			String telefono_movil, String telefono_fijo, Boolean estatus,
-			Categoria categoria, Set<AreaInvestigacion> areas) {
+			Categoria categoria) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -91,7 +91,6 @@ public class Profesor {
 		this.telefono_movil = telefono_movil;
 		this.estatus = estatus;
 		this.categoria = categoria;
-		this.areas = areas;
 
 	}
 
@@ -173,14 +172,6 @@ public class Profesor {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
-	}
-
-	public Set<AreaInvestigacion> getAreas() {
-		return areas;
-	}
-
-	public void setAreas(Set<AreaInvestigacion> areas) {
-		this.areas = areas;
 	}
 
 	public Set<SolicitudTutoria> getSolicitudesTutoria() {

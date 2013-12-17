@@ -15,12 +15,18 @@
 				<auxheader colspan="1">
 					<image src="/public/imagenes/iconos/filtro.png" />
 					<textbox instant="true" width="90%"
+						id="txtTipoMostrarItem" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="90%"
 						id="txtDescripcionMostrarItem" />
 				</auxheader>
 
 			</auxhead>
 			<listhead>
 				<listheader label="Nombre" align="center" />
+				<listheader label="Tipo" align="center" />
 				<listheader label="Descripción" align="center" />
 
 			</listhead>
@@ -29,6 +35,7 @@
 			<template name="model">
 				<listitem>
 					<listcell label="${each.nombre}" />
+					<listcell label="${each.tipo}" />
 					<listcell label="${each.descripcion}" />
 
 				</listitem>

@@ -171,11 +171,10 @@ public class CProfesor extends CGeneral {
 							Boolean estatus = true;
 							Categoria categoria = servicioCategoria
 									.buscarCategoriaPorNombre(categorias);
-							Set<AreaInvestigacion> areasProfesor = new HashSet<AreaInvestigacion>();
 							Profesor profesor = new Profesor(cedula, nombre,
 									apellido, correo, sexo, direccion,
 									telefonoMovil, telefonoFijo, estatus,
-									categoria, areasProfesor);
+									categoria);
 							servicioProfesor.guardarProfesor(profesor);
 							Messagebox.show(
 									"Profesor registrado exitosamente",
