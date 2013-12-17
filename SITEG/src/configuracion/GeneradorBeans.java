@@ -9,6 +9,9 @@ import servicio.SActividad;
 import servicio.SArbol;
 import servicio.SAreaInvestigacion;
 import servicio.SCategoria;
+import servicio.SCondicion;
+import servicio.SCondicionPrograma;
+import servicio.SCronograma;
 import servicio.SEstudiante;
 import servicio.SGrupo;
 import servicio.SItem;
@@ -103,5 +106,16 @@ public class GeneradorBeans implements ApplicationContextAware {
 	
 	public static SProgramaItem getServicioProgramaItem(){
 		return applicationContext.getBean(SProgramaItem.class);
+	}
+	public static SCondicionPrograma getServicioCondicionPrograma(){
+		return applicationContext.getBean(SCondicionPrograma.class);
+	}
+	
+	public static SCondicion getServicioCondicion(){
+		return applicationContext.getBean(SCondicion.class);
+	}
+	
+	public static SCronograma getServicioCronograma(){
+		return applicationContext.getBean(SCronograma.class);
 	}
 }

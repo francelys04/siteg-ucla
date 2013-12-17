@@ -1,12 +1,8 @@
 package modelo;
 
-import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -36,8 +32,8 @@ public class Actividad {
 	@OneToMany(mappedBy="actividad")
 	private Set<Cronograma> cronogramas;
 	
-	@OneToMany(fetch = FetchType.EAGER,mappedBy="actividad",cascade = CascadeType.ALL)
-	private Set<ActividadRequisito> actividadesRequisitos = new HashSet<ActividadRequisito>();
+	@OneToMany(mappedBy="actividad")
+	private Set<ActividadRequisito> actividadesRequisitos;
 
 	public Actividad(long id, String nombre, String descripcion, Boolean estatus) {
 		super();

@@ -22,12 +22,12 @@ public class Cronograma {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "lapso_id", referencedColumnName = "id")
-	private Lapso lapso;
-	
-	@ManyToOne
 	@JoinColumn(name = "actividad_id", referencedColumnName = "id")
 	private Actividad actividad;
+	
+	@ManyToOne
+	@JoinColumn(name = "lapso_id", referencedColumnName = "id")
+	private Lapso lapso;
 	
 	@Column(name = "fecha_inicio")
 	private Date fechaInicio;

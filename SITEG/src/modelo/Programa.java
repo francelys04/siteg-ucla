@@ -41,8 +41,6 @@ public class Programa {
 	@OneToMany(mappedBy="programa")
 	private Set<Cronograma> cronogramas;
 	
-	@OneToMany(mappedBy="programa")
-	private Set<ProgramaRequisito> programasRequisitos;
 	
 	@OneToMany(mappedBy="programa")
 	private Set<ProgramaArea> programasAreas;
@@ -121,13 +119,7 @@ public class Programa {
 		this.cronogramas = cronogramas;
 	}
 
-	public Set<ProgramaRequisito> getProgramasRequisitos() {
-		return programasRequisitos;
-	}
-
-	public void setProgramasRequisitos(Set<ProgramaRequisito> programasRequisitos) {
-		this.programasRequisitos = programasRequisitos;
-	}
+	
 
 	public Set<ProgramaArea> getProgramasAreas() {
 		return programasAreas;
