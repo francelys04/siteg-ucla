@@ -257,10 +257,8 @@ public class CEstudiante extends CGeneral {
 		txtTelefonoFijoEstudiante.setConstraint("");
 		txtTelefonoFijoEstudiante.setValue("");
 		txtTelefonoFijoEstudiante.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
-		
 		txtCorreoEstudiante.setValue("");
 		cmbProgramaEstudiante.setValue("");
-
 		btnEliminarEstudiante.setDisabled(true);
 
 	}

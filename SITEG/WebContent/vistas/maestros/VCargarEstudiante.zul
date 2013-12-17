@@ -34,6 +34,15 @@
 
 	</style>
 
+
+	<!-- Lista de popus -->
+	<popup id="pupExaminarEstudiantes">
+		<toolbarbutton
+			label="Presione aquí para buscar la lista de los estudiantes" />
+	</popup>
+	<!-- fin de popus -->
+
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -44,34 +53,35 @@
 	<separator />
 	<separator />
 
-	<groupbox width="96%" style="margin-left:2%"> 
-	<grid sclass="fgrid" style="margin-left:2%">
-		<columns>
-			<column width="150px" height="30px" />
-		</columns>
-		<rows>
+	<groupbox width="96%" style="margin-left:2%">
+		<grid sclass="fgrid" style="margin-left:2%">
+			<columns>
+				<column width="150px" height="30px" />
+			</columns>
+			<rows>
 
-			<row>
+				<row>
 
-				<hlayout>
-					<label value="*"
-						style="font-weight:bold;color:red">
-					</label>
-					<label value="Lista de Estudiantes:"
-						style="color:black" />
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label value="Lista de Estudiantes:"
+							style="color:black" />
 
-				</hlayout>
-
-
-				<button id="btnCargarListaEstudiantes" label="Examinar">
-
-				</button>
-				<separator />
+					</hlayout>
 
 
-			</row>
-		</rows>
-	</grid>
+					<button id="btnCargarListaEstudiantes"
+						tooltip="pupExaminarEstudiantes" label="Examinar">
+
+					</button>
+					<separator />
+
+
+				</row>
+			</rows>
+		</grid>
 	</groupbox>
 
 

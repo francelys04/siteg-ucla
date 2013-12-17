@@ -195,17 +195,23 @@ public class CProfesor extends CGeneral {
 	@Listen("onClick = #btnCancelarProfesor")
 	public void cancelarProfesor() {
 
+		txtCedulaProfesor.setConstraint("");
 		txtCedulaProfesor.setValue("");
+		txtCedulaProfesor.setConstraint("/.+[0-9]+/: Debe ingresar una cedula valida");
 		txtNombreProfesor.setValue("");
 		txtApellidoProfesor.setValue("");
 		rdgSexoProfesor.setSelectedItem(null);
 		txtDireccionProfesor.setValue("");
+		txtTelefonoMovilProfesor.setConstraint("");
 		txtTelefonoMovilProfesor.setValue("");
+		txtTelefonoMovilProfesor.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+		txtTelefonoFijoProfesor.setConstraint("");
 		txtTelefonoFijoProfesor.setValue("");
+		txtTelefonoFijoProfesor.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
 		txtCorreoProfesor.setValue("");
 		cmbCategoriaProfesor.setValue("");
 		btnEliminarProfesor.setDisabled(true);
-
+			
 	}
 	
 
