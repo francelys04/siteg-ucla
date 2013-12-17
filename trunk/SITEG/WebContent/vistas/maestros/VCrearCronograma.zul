@@ -1,5 +1,5 @@
 <window title="Crear Cronograma" border="normal" width="100%"
-	height="500px" closable="true">
+	height="500px" closable="true" apply="controlador.CCrearCronograma">
 
 	<separator />
 
@@ -56,11 +56,15 @@
 					<label value="*"
 						style="font-weight:bold;color:red">
 					</label>
-					<label value="Programa:" style="font-weight:bold" />
+					<label value="Lapso:" style="font-weight:bold" />
 				</hlayout>
 
-				<textbox id="txtProgramaCronograma" width="150px"
-					style="margin-left:20px" />
+				<combobox id="cmbLapsoCrearCronograma" autodrop="true"
+						width="120px" tabindex="12" style="margin-left:55px">
+						<template name="model">
+							<comboitem label="${each.nombre}" />
+						</template>
+					</combobox>
 			</row>
 
 			<row>
@@ -68,17 +72,15 @@
 					<label value="*"
 						style="font-weight:bold;color:red">
 					</label>
-					<label value="Lapso:" style="font-weight:bold" />
+					<label value="Programa:" style="font-weight:bold" />
 				</hlayout>
 
-				<combobox id="cmbLapsoCronograma"
-					style="margin-left:20px" autodrop="true" width="10%"
-					tabindex="12">
-					<comboitem label="2013-1" />
-					<comboitem label="2013-2" />
-					<comboitem label="2014-1" />
-					<comboitem label="2014-2" />
-				</combobox>
+				<combobox id="cmbProgramaCrearCronograma" autodrop="true"
+						width="120px" tabindex="12" style="margin-left:55px">
+						<template name="model">
+							<comboitem label="${each.nombre}" />
+						</template>
+					</combobox>
 			</row>
 		</rows>
 
@@ -98,27 +100,32 @@
 			<row>
 				<hbox>
 					<panel title="Actividades Disponibles"
-						width="240px">
+						width="250px">
 						<panelchildren>
-							<listbox id="left" mold="paging"
-								pageSize="5" multiple="true" checkmark="true">
-								<listitem>
-									<listcell
-										label="solicitud de tutorías" />
-								</listitem>
-								<listitem>
-									<listcell
-										label="Recepción de Proyectos" />
-								</listitem>
-								<listitem>
-									<listcell label="Recepción de TEG" />
-								</listitem>
-								<listitem>
-									<listcell
-										label="solicitudes de Defensa" />
-								</listitem>
-
-							</listbox>
+							<listbox id="ltbActividadesDisponibles" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true">
+											<listhead>
+												<listheader label="Nombre" width="100%"/>
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre} " >
+													</listcell>
+													<listcell>
+													<datebox inplace="true"
+                           							width="98%" />
+													</listcell>
+													<listcell>
+													<datebox inplace="true" 
+                           							width="98%" />
+													</listcell>
+													<listcell>
+													<spinner inplace="true" value="${each.id}"
+                           							width="98%" visible="false" disabled="true"/>
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
 						</panelchildren>
 					</panel>
 
@@ -127,123 +134,50 @@
 						<panelchildren>
 							<div>
 
-								<image src="/imagenes/right.png"></image>
-								<separator height="15px" />
-								<image src="/imagenes/left.png">
+											<button id="btnAgregarActividades" sclass="pointer"
+												image="/public/imagenes/iconos/right.png" tooltiptext="Agregar Items"
+												width="35px" />
+											<separator />
+											<button sclass="pointer" id="btnRemoverActividades" image="/public/imagenes/iconos/left.png"
+												tooltiptext="Quitar Items" width="35px" />
 
-								</image>
-
-							</div>
+										</div>
 						</panelchildren>
 					</panel>
 
 
 					<panel title="Actividades Seleccionadas"
-						width="320px">
+						width="370px">
 						<panelchildren>
 
-							<listbox mold="paging" pageSize="2">
-								<listhead>
-									<listheader label="" align="center"
-										width="10%" />
-									<listheader label="Actividad"
-										width="40%" align="center" />
-									<listheader label="Fecha Inicio"
-										align="center" />
-									<listheader label="Fecha Fin"
-										align="center" />
-								</listhead>
+							<listbox id="ltbActividadesSeleccionadas" mold="paging"
+											pageSize="2">
+											<listhead>
+												<listheader label="Nombre" width="60%" align="center" />
+												<listheader label="Fecha Inicio" align="center" />
+												<listheader label="Fecha Fin" align="center" />
+											</listhead>
 
+												<template name="model">
+												<listitem>
+													<listcell label="${each.actividad.nombre}">
+													</listcell>
+													<listcell>
+													<datebox inplace="true" value="${each.fechaInicio}"
+                           							width="98%"/>
+													</listcell>
+													<listcell>
+													<datebox inplace="true" value="${each.fechaFin}"
+                           							width="98%"/>
+													</listcell>
+													<listcell>
+													<spinner inplace="true" value="${each.actividad.id}"
+                           							width="98%" visible="false" disabled="true"/>
+													</listcell>
+												</listitem>
+											</template>
 
-								<listitem>
-									<listcell>
-										<checkbox />
-									</listcell>
-									<listcell
-										label="Recepción Cartas de compromiso">
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-
-								</listitem>
-
-								<listitem>
-									<listcell>
-										<checkbox />
-									</listcell>
-									<listcell
-										label="Recepción Cartas de compromiso">
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-
-								</listitem>
-
-								<listitem id="evaluarSolicitudes">
-									<listcell>
-										<checkbox />
-									</listcell>
-									<listcell
-										label="Recepción Cartas de compromiso">
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-								</listitem>
-								<listitem id="evaluarSolicitudes3">
-									<listcell>
-										<checkbox />
-									</listcell>
-									<listcell
-										label="Recepción Cartas de compromiso">
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-								</listitem>
-								<listitem id="evaluarSolicitudes1">
-									<listcell>
-										<checkbox />
-									</listcell>
-									<listcell
-										label="Recepción Cartas de compromiso">
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-								</listitem>
-								<listitem id="evaluarSolicitudes2">
-									<listcell>
-										<checkbox />
-									</listcell>
-									<listcell
-										label="Recepción Cartas de compromiso">
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-									<listcell>
-										<datebox width="100%" />
-									</listcell>
-								</listitem>
-							</listbox>
+										</listbox>
 						</panelchildren>
 					</panel>
 				</hbox>
@@ -267,10 +201,10 @@
 			<div align="center">
 				<separator />
 				<button id="btnCrearCronograma" label="Crear Cronograma"
-					image="/imagenes/cronograma.png" tabindex="12">
+					image="/public/imagenes/iconos/cronograma.png" tabindex="12">
 				</button>
 				<button id="btnCancelarCronograma" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="13">
+					image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 				</button>
 				<separator />
 

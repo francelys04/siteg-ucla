@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Set;
 
 import modelo.AreaInvestigacion;
+import modelo.Condicion;
+import modelo.CondicionPrograma;
 import modelo.Grupo;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
@@ -44,6 +46,8 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import servicio.SAreaInvestigacion;
+import servicio.SCondicion;
+import servicio.SCondicionPrograma;
 import servicio.SPrograma;
 import configuracion.GeneradorBeans;
 
@@ -57,6 +61,10 @@ public class CPrograma extends CGeneral {
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	
 	CCatalogoPrograma catalogo = new CCatalogoPrograma();
+	
+	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
+	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
+	SCondicion servicioCondicion = GeneradorBeans.getServicioCondicion();
 	/*
 	 * Declaracion de componentes dado a sus id, implementados en las vistas
 	 * VPrograma y VCatalago
@@ -173,6 +181,20 @@ public class CPrograma extends CGeneral {
 									Boolean estatus = true; 
 									Programa programa = new Programa( id,nombre, descripcion, estatus);
 									servicioPrograma.guardar(programa);
+									Programa p = servicioPrograma.buscarPorNombrePrograma(nombre);
+									System.out.println("Programa Guardado");
+									List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
+									List<Condicion> condiciones = servicioCondicion.buscarActivos();
+									for(int i=0; i<condiciones.size(); i++){
+										Condicion condicion = condiciones.get(i);
+										CondicionPrograma condicionPrograma = new CondicionPrograma();
+										condicionPrograma.setPrograma(p);
+										condicionPrograma.setCondicion(condicion);
+										condicionPrograma.setValor(0);
+										condicionesPrograma.add(condicionPrograma);
+									}
+									
+									servicioCondicionPrograma.guardar(condicionesPrograma);
 									cancelarPrograma(); 
 									Messagebox.show("Programa registrado exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
 									id = 0;

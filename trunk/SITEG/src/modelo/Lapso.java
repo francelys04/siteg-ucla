@@ -38,8 +38,7 @@ public class Lapso {
 	@OneToMany(mappedBy="lapso")
 	private Set<ActividadRequisito> actividadesRequisitos;
 	
-	@OneToMany(mappedBy="lapso")
-	private Set<ProgramaRequisito> programasRequisitos;
+	
 	
 	@OneToMany(mappedBy="lapso")
 	private Set<ProgramaArea> programasAreas;
@@ -122,13 +121,7 @@ public class Lapso {
 		this.actividadesRequisitos = actividadesRequisitos;
 	}
 
-	public Set<ProgramaRequisito> getProgramasRequisitos() {
-		return programasRequisitos;
-	}
-
-	public void setProgramasRequisitos(Set<ProgramaRequisito> programasRequisitos) {
-		this.programasRequisitos = programasRequisitos;
-	}
+	
 
 	public Set<ProgramaArea> getProgramasAreas() {
 		return programasAreas;
