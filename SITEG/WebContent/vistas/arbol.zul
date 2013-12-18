@@ -10,7 +10,7 @@
 					height="100px" />
 			</div>
 		</north>
-		<!-- Inicio del menu (ÃƒÂ�rbol)-->
+		<!-- Inicio del menu (Arbol)-->
 		<west size="25%" flex="true" maxsize="250" splittable="true"
 			collapsible="true">
 			<tree id="treeMenu" width="99%">			
@@ -24,7 +24,7 @@
 			</tree>	
 		</west>
 		<!-- Fin del banner de contenido-->
-		<center border="none" autoscroll="true">
+		<center border="none" >
 			<borderlayout sclass="complex-layout" style="overflow-y:scroll;" height="99%">
 				<north size="30px" border="none">
 					<div align="right"
@@ -33,7 +33,7 @@
 						<a href="../j_spring_security_logout" style="color: blue"> Cerrar Sesion</a>
 					</div>
 				</north>
-				<center>
+				<center autoscroll="true">
 					<div>
 						<include id="formularios"></include>
 					</div>
@@ -42,7 +42,7 @@
 		</center>
 		<south height="3%" border="normal"
 			class="nav nav-pills alert-info">
-			<div align="center" style="margin:0 auto;padding:5px">
+			<div align="center" style="margin:0 auto">
 				<label
 					value=" SITEG © 2013 Elaborado por Singleton - Todos los Derechos Reservados">
 				</label>
