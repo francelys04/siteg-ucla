@@ -125,7 +125,15 @@ public class CActividad extends CGeneral {
 			}
 		}
 	}
+	
+	
+	public void Integrar(){
+		
+		//probando
+		
+	}
 
+	
 	// Aca se muestra el catalogo de las actividades Registradas
 	@Listen("onClick = #btnCatalogoActividad")
 	public void buscarActividad() {
@@ -198,7 +206,7 @@ public class CActividad extends CGeneral {
 				});
 			
 	}
-	//Hola mundoooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+	
 	// Aca se mandan a limpiar los campos de textos de la vista
 	@Listen("onClick = #btnCancelarActividad")
 	public void cancelarActividad() {
