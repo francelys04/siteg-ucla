@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "profesor_area")
-@IdClass(ProgramaAreaId.class)
+@IdClass(ProfesorAreaId.class)
 public class ProfesorArea {
 
 	@Id
