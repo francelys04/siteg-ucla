@@ -42,6 +42,9 @@ public class Programa {
 	
 	@OneToMany(mappedBy="programa")
 	private Set<ProgramaArea> programasAreas;
+	
+	@OneToMany(mappedBy="programa")
+	private Set<ProgramaRequisito> programaRequisitos;
 
 	@OneToMany(mappedBy="programa")
 	private Set<ProgramaItem> programasItems;
@@ -118,7 +121,15 @@ public class Programa {
 	}
 
 	
+	public Set<ProgramaRequisito> getProgramaRequisitos() {
+		return programaRequisitos;
+	}
 
+	public void setProgramaRequisitos(Set<ProgramaRequisito> programaRequisitos) {
+		this.programaRequisitos = programaRequisitos;
+	}
+	
+	
 	public Set<ProgramaArea> getProgramasAreas() {
 		return programasAreas;
 	}

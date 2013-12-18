@@ -37,6 +37,11 @@ public class Requisito {
 	@OneToMany(mappedBy="requisito")
 	private Set<ActividadRequisito> actividadesRequisitos;
 	
+	@OneToMany(mappedBy="requisito")
+	private Set<ProgramaRequisito> programaRequisitos;
+	
+	
+	
 	public Requisito(long id, String nombre, String descripcion,
 			Boolean estatus) {
 		super();
@@ -90,6 +95,17 @@ public class Requisito {
 	public void setRequisitosTeg(Set<TegRequisito> requisitosTeg) {
 		this.requisitosTeg = requisitosTeg;
 	}
+	
+	
+	public Set<ProgramaRequisito> getProgramaRequisitos() {
+		return programaRequisitos;
+	}
+
+	public void setProgramaRequisitos(
+			Set<ProgramaRequisito> programaRequisitos) {
+		this.programaRequisitos = programaRequisitos;
+	}
+	
 
 	public Set<ActividadRequisito> getActividadesRequisitos() {
 		return actividadesRequisitos;
