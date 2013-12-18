@@ -10,6 +10,7 @@ import java.util.List;
 
 import modelo.AreaInvestigacion;
 import modelo.Lapso;
+import modelo.Profesor;
 import modelo.Programa;
 import modelo.Tematica;
 
@@ -50,6 +51,13 @@ private IAreaInvestigacionDAO interfaceArea;
 		areas = interfaceArea.buscarDisponibles(programa, lapso);
 		return areas;
 	}
+	
+	public List<AreaInvestigacion> buscarAreasSinProfesor(Profesor profesor){
+		List<AreaInvestigacion> areas;
+		areas = interfaceArea.buscarDisponiblesProfesor(profesor);
+		return areas;
+	}
+
 
 }
 
