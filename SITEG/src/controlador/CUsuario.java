@@ -60,6 +60,8 @@ public class CUsuario extends CGeneral {
 	private Button pasar1;
 	@Wire
 	private Button pasar2;
+	@Wire
+	private Button btnEliminarUsuario;
 	
 	void inicializar(Component comp) {
 
@@ -84,6 +86,7 @@ public class CUsuario extends CGeneral {
 				Usuario usuario = servicioUsuario.buscarUsuarioPorId(codigo);
 				txtNombreUsuario.setValue(usuario.getNombre());
 				txtPasswordUsuario.setValue(usuario.getPassword());
+				btnEliminarUsuario.setDisabled(false);
 				id = usuario.getId();
 				map.clear();
 				map = null;
@@ -131,7 +134,7 @@ public class CUsuario extends CGeneral {
 	public void buscarItem() {
 
 		Window window = (Window) Executions.createComponents(
-				"/vistas/VCatalogoUsuario.zul", null, null);
+				"/vistas/catalogos/VCatalogoUsuario.zul", null, null);
 		window.doModal();
 
 	}
@@ -142,7 +145,7 @@ public class CUsuario extends CGeneral {
 		Usuario itemDatosCatalogo = (Usuario) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", itemDatosCatalogo.getId());
-		String vista = "VCrearUsuario";
+		String vista = "maestros/VCrearUsuario";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
