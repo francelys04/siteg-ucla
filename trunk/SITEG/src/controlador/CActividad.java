@@ -127,11 +127,7 @@ public class CActividad extends CGeneral {
 	}
 	
 	
-	public void Integrar(){
-		
-		//probando
-		
-	}
+	
 
 	
 	// Aca se muestra el catalogo de las actividades Registradas
@@ -217,7 +213,6 @@ public class CActividad extends CGeneral {
 		btnEliminarActividad.setDisabled(true);
 		
 	}
-
 
 
 }
