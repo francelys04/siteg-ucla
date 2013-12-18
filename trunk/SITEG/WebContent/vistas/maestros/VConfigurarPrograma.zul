@@ -1,14 +1,13 @@
 <window title="Configurar Programa" border="normal" width="100%"
-	height="585px" closable="true" apply="controlador.CConfigurarPrograma">
+	height="585px" closable="true"
+	apply="controlador.CConfigurarPrograma">
 	<separator />
 
 	<style dynamic="true">
-		.GridLayoutNoBorder tr.z-row td.z-row-inner,
-		tr.z-row
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
 		background: white; border-top: none; border-left: none;
-		border-right:
-		none; border-bottom: none; }
+		border-right: none; border-bottom: none; }
 
 	</style>
 
@@ -17,40 +16,31 @@
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
 		background: white; border-top: none; border-left: none;
-		border-right:
-		none; border-bottom: none; }
+		border-right: none; border-bottom: none; }
 
-		.fgrid .z-grid-odd .fgrid
-		.z-row-inner,.fgrid .z-grid-odd
-		.z-cell { background-color: #F7F7F7;
-		border-bottom: 1px solid
-		transparent; border-left: 1px solid
-		transparent; border-top: 1px
+		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
+		transparent; border-left: 1px solid transparent; border-top: 1px
 		solid transparent; }
 
-		.fgrid .z-grid-odd
-		.fgrid.z-row-inner,.fgrid.z-grid-odd
-		.z-cell,.fgrid.z-grid-odd {
-		background: none repeat scroll 0 0
+		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
 		transparent; }
 
-		.fgrid tr.z-grid-odd
-		td.z-row-inner,.fgrid tr.z-grid-odd
-		.z-cell,.fgrid tr.z-grid-odd {
-		background: white }
+		.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd { background: white }
 
-		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row
-		.z-cell {
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
-		.pointer { cursor:
-		pointer; } .actionColumn { margin: 70px 34px;
+		.pointer { cursor: pointer; } .actionColumn { margin: 70px 34px;
 
 
 	</style>
 	<separator />
 
-	<label value="(*) " style="font-weight:bold;color:red;margin-left:2%">
+	<label value="(*) "
+		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
 	<label value="Campos Obligatorios"></label>
 	<separator />
@@ -67,12 +57,14 @@
 			<row>
 				<hbox>
 					<hlayout>
-						<label value="*" style="font-weight:bold;color:red" />
+						<label value="*"
+							style="font-weight:bold;color:red" />
 						<label value="Lapso:" style="color:black" />
 					</hlayout>
 
-					<combobox id="cmbLapsoConfigurarPrograma" autodrop="true"
-						width="120px" tabindex="12" style="margin-left:55px">
+					<combobox id="cmbLapsoConfigurarPrograma"
+						autodrop="true" width="120px" tabindex="12"
+						style="margin-left:55px">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
@@ -84,12 +76,14 @@
 			<row>
 				<hbox>
 					<hlayout>
-						<label value="*" style="font-weight:bold;color:red" />
+						<label value="*"
+							style="font-weight:bold;color:red" />
 						<label value="Programa:" style="color:black" />
 					</hlayout>
 
-					<combobox id="cmbProgramaConfigurarPrograma" autodrop="true"
-						width="170px" tabindex="12" style="margin-left:35px">
+					<combobox id="cmbProgramaConfigurarPrograma"
+						autodrop="true" width="170px" tabindex="12"
+						style="margin-left:35px">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
@@ -111,7 +105,8 @@
 		height="320px">
 		<tabs>
 			<tab label="Areas de Investigación" />
-			<tab label="Items" />
+			<tab label="Requisitos" />
+			<tab label="Items de evaluación" />
 			<tab label="Condiciones" />
 		</tabs>
 		<tabpanels>
@@ -123,7 +118,8 @@
 				<separator />
 
 
-				<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+				<grid sclass="fgrid"
+					style="margin-left:2%;margin-right:1%">
 					<columns>
 						<column width="98%" height="30%" />
 					</columns>
@@ -131,16 +127,21 @@
 
 						<row>
 							<hbox>
-								<panel title="Áreas Disponibles" width="260px">
+								<panel title="Áreas Disponibles"
+									width="260px">
 									<panelchildren>
-										<listbox id="ltbAreasDisponibles" height="200px" mold="paging"
-											pageSize="4" oddRowSclass="non-odd" checkmark="true">
+										<listbox
+											id="ltbAreasDisponibles" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No hay areas registradas">
 											<listhead>
-												<listheader label="Nombre" />
+												<listheader
+													label="Nombre" />
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell label="${each.nombre}">
+													<listcell
+														label="${each.nombre}">
 													</listcell>
 												</listitem>
 											</template>
@@ -149,31 +150,39 @@
 								</panel>
 
 
-								<panel width="60px" style="margin-left:20px;margin-top:80px">
+								<panel width="60px"
+									style="margin-left:20px;margin-top:80px">
 									<panelchildren>
 										<div>
 
-											<button id="btnAgregarAreas" sclass="pointer"
-												image="/public/imagenes/iconos/right.png" tooltiptext="Agregar Items"
-												width="35px" />
+											<button id="btnAgregarAreas"
+												sclass="pointer" image="/public/imagenes/iconos/right.png"
+												tooltiptext="Agregar Items" width="35px" />
 											<separator />
-											<button sclass="pointer" id="btnRemoverAreas" image="/public/imagenes/iconos/left.png"
+											<button sclass="pointer"
+												id="btnRemoverAreas"
+												image="/public/imagenes/iconos/left.png"
 												tooltiptext="Quitar Items" width="35px" />
 
 										</div>
 									</panelchildren>
 								</panel>
 
-								<panel title="Áreas Seleccionadas" width="260px">
+								<panel title="Áreas Seleccionadas"
+									width="260px">
 									<panelchildren>
-										<listbox id="ltbAreasSeleccionadas" height="200px"
-											mold="paging" pageSize="4" oddRowSclass="non-odd" checkmark="true">
+										<listbox
+											id="ltbAreasSeleccionadas" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No se han seleccionado areas">
 											<listhead>
-												<listheader label="Nombre" />
+												<listheader
+													label="Nombre" />
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell label="${each.nombre}">
+													<listcell
+														label="${each.nombre}">
 													</listcell>
 												</listitem>
 											</template>
@@ -190,6 +199,7 @@
 
 			</tabpanel>
 
+
 			<tabpanel height="350px">
 				<separator />
 				<separator />
@@ -197,7 +207,8 @@
 				<separator />
 
 
-				<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+				<grid sclass="fgrid"
+					style="margin-left:2%;margin-right:1%">
 					<columns>
 						<column width="98%" height="30%" />
 					</columns>
@@ -205,19 +216,21 @@
 
 						<row>
 							<hbox>
-								<panel title="Items Disponibles" width="260px">
+								<panel title="Requisitos Disponibles"
+									width="260px">
 									<panelchildren>
-										<listbox id="ltbItemsDisponibles" height="200px" mold="paging"
-											pageSize="4" oddRowSclass="non-odd" checkmark="true">
+										<listbox
+											id="ltbRequisitosDisponibles" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No hay requisitos registrados">
 											<listhead>
-												<listheader label="Nombre" />
-												<listheader label="Tipo" />
+												<listheader
+													label="Nombre" />
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell label="${each.nombre}">
-													</listcell>
-													<listcell label="${each.tipo}">
+													<listcell
+														label="${each.nombre}">
 													</listcell>
 												</listitem>
 											</template>
@@ -226,35 +239,139 @@
 								</panel>
 
 
-								<panel width="60px" style="margin-left:20px;margin-top:80px">
+								<panel width="60px"
+									style="margin-left:20px;margin-top:80px">
 									<panelchildren>
 										<div>
 
-											<button id="btnAgregarItems" sclass="pointer"
-												image="/public/imagenes/iconos/right.png" tooltiptext="Agregar Items"
-												width="35px" />
+											<button id="btnAgregarRequisitos"
+												sclass="pointer" image="/public/imagenes/iconos/right.png"
+												tooltiptext="Agregar Requisitos" width="35px" />
 											<separator />
-											<button sclass="pointer" id="btnRemoverItems" image="/public/imagenes/iconos/left.png"
+											<button sclass="pointer"
+												id="btnRemoverRequisitos"
+												image="/public/imagenes/iconos/left.png"
+												tooltiptext="Quitar Requisitos" width="35px" />
+
+										</div>
+									</panelchildren>
+								</panel>
+
+								<panel title="Áreas Seleccionadas"
+									width="260px">
+									<panelchildren>
+										<listbox
+											id="ltbRequisitosSeleccionadas" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No se han seleccionado requisitos">
+											<listhead>
+												<listheader
+													label="Nombre" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell
+														label="${each.nombre}">
+													</listcell>
+												</listitem>
+											</template>
+
+
+										</listbox>
+									</panelchildren>
+								</panel>
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+
+
+			</tabpanel>
+
+
+			<tabpanel height="350px">
+				<separator />
+				<separator />
+				<separator />
+				<separator />
+
+
+				<grid sclass="fgrid"
+					style="margin-left:2%;margin-right:1%">
+					<columns>
+						<column width="98%" height="30%" />
+					</columns>
+					<rows>
+
+						<row>
+							<hbox>
+								<panel title="Items Disponibles"
+									width="260px">
+									<panelchildren>
+										<listbox
+											id="ltbItemsDisponibles" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No hay items registrados">
+											<listhead>
+												<listheader
+													label="Nombre" />
+												<listheader
+													label="Tipo" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell
+														label="${each.nombre}">
+													</listcell>
+													<listcell
+														label="${each.tipo}">
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+									</panelchildren>
+								</panel>
+
+
+								<panel width="60px"
+									style="margin-left:20px;margin-top:80px">
+									<panelchildren>
+										<div>
+
+											<button id="btnAgregarItems"
+												sclass="pointer" image="/public/imagenes/iconos/right.png"
+												tooltiptext="Agregar Items" width="35px" />
+											<separator />
+											<button sclass="pointer"
+												id="btnRemoverItems"
+												image="/public/imagenes/iconos/left.png"
 												tooltiptext="Quitar Items" width="35px" />
 
 										</div>
 									</panelchildren>
 								</panel>
 
-								<panel title="Items Seleccionados" width="260px">
+								<panel title="Items Seleccionados"
+									width="260px">
 									<panelchildren>
-										<listbox id="ltbItemsSeleccionados" height="200px"
-											mold="paging" pageSize="4" oddRowSclass="non-odd" checkmark="true">
+										<listbox
+											id="ltbItemsSeleccionados" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No se han seleccionado items">
 											<listhead>
-												<listheader label="Nombre" />
-												<listheader label="Tipo" />
+												<listheader
+													label="Nombre" />
+												<listheader
+													label="Tipo" />
 											</listhead>
 
 											<template name="model">
 												<listitem>
-													<listcell label="${each.nombre}">
+													<listcell
+														label="${each.nombre}">
 													</listcell>
-													<listcell label="${each.tipo}">
+													<listcell
+														label="${each.tipo}">
 													</listcell>
 												</listitem>
 											</template>
@@ -275,7 +392,8 @@
 				<separator />
 
 
-				<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+				<grid sclass="fgrid"
+					style="margin-left:2%;margin-right:1%">
 					<columns>
 						<column width="98%" height="30%" />
 					</columns>
@@ -283,32 +401,30 @@
 
 						<row>
 							<hbox>
-								<panel title="Condiciones Seleccionadas" width="270px">
-									<panelchildren>
+								<listbox id="ltbCondiciones"
+									mold="paging" pageSize="2" height="240px">
+									<listhead>
+										<listheader label="Condicion"
+											width="60%" align="center" />
+										<listheader label="Valor"
+											align="center" />
 
-										<listbox id="ltbCondiciones" mold="paging"
-											pageSize="2">
-											<listhead>
-												<listheader label="Condicion" width="60%" align="center" />
-												<listheader label="Valor" align="center" />
+									</listhead>
 
-											</listhead>
+									<template name="model">
+										<listitem>
+											<listcell
+												label="${each.condicion.nombre}">
+											</listcell>
+											<listcell>
+												<spinner inplace="true"
+													value="${each.valor}" constraint="min 0 max 100"
+													width="98%" />
+											</listcell>
+										</listitem>
+									</template>
 
-												<template name="model">
-												<listitem>
-													<listcell label="${each.condicion.nombre}">
-													</listcell>
-													<listcell>
-													<spinner inplace="true" value="${each.valor}"
-													 constraint="min 0 max 100"
-                           							width="98%"/>
-													</listcell>
-												</listitem>
-											</template>
-
-										</listbox>
-									</panelchildren>
-								</panel>
+								</listbox>
 							</hbox>
 						</row>
 					</rows>
@@ -324,15 +440,18 @@
 	<separator />
 
 
-	<panel border="normal" width="95%" style="margin-left:2%;margin-right:2%">
+	<panel border="normal" width="95%"
+		style="margin-left:2%;margin-right:2%">
 		<panelchildren>
 			<div align="center">
 				<separator />
-				<button id="btnGuardarConfiguracionPrograma" label="Guardar"
-					image="/public/imagenes/iconos/guardar.png" tabindex="12">
+				<button id="btnGuardarConfiguracionPrograma"
+					label="Guardar" image="/public/imagenes/iconos/guardar.png"
+					tabindex="12">
 				</button>
-				<button id="btnCancelarConfigurarPrograma" label="Cancelar"
-					image="/public/imagenes/iconos/limpiar.png" tabindex="13">
+				<button id="btnCancelarConfigurarPrograma"
+					label="Cancelar" image="/public/imagenes/iconos/limpiar.png"
+					tabindex="13">
 				</button>
 
 				<separator />
