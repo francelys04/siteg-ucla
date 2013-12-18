@@ -54,6 +54,9 @@ public class CCrearCronograma extends CGeneral {
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		List<Programa> programas = servicioPrograma.buscarActivas();
 
+		
+		llenarActividades();
+	
 		if (cmbLapsoCrearCronograma != null) {
 
 			cmbLapsoCrearCronograma
@@ -63,6 +66,7 @@ public class CCrearCronograma extends CGeneral {
 					programas));
 
 		}
+		
 	}
 	
 	@Listen("onClick = #btnAgregarActividades")

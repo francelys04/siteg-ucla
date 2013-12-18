@@ -72,6 +72,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		List<Programa> programas = servicioPrograma.buscarActivas();
+		llenarListas();
 
 		if (cmbLapsoConfigurarPrograma != null) {
 
