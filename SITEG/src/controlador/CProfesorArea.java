@@ -89,7 +89,7 @@ public class CProfesorArea extends CGeneral{
 				
 				txtNombreProfesorArea.setValue(profesor.getNombre());
 				txtApellidoProfesorArea.setValue(profesor.getApellido());
-				
+				llenaListas();
 				map.clear();
 				map = null;
 			}
@@ -156,7 +156,7 @@ public class CProfesorArea extends CGeneral{
 		txtCedulaProfesorArea.setValue("");
 		txtApellidoProfesorArea.setValue("");
 		txtNombreProfesorArea.setValue("");
-		//llenarListas();
+		llenaListas();
 	}
 	
 
