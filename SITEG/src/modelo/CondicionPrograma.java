@@ -28,6 +28,8 @@ public class CondicionPrograma {
 	@JoinColumn(name = "lapso_id", referencedColumnName = "id")
 	private Lapso lapso;
 	
+	
+	
 	@Column(name = "valor")
 	private int valor;
 

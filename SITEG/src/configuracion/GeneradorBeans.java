@@ -122,4 +122,6 @@ public class GeneradorBeans implements ApplicationContextAware {
 	public static SProfesorArea getProfesorArea(){
 		return applicationContext.getBean(SProfesorArea.class);
 	}
+	
+	
 }
