@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfazdao.IProfesorDAO;
 
+import modelo.AreaInvestigacion;
 import modelo.Profesor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,6 @@ public class SProfesor {
 		profesores = interfazProfesor.findByEstatusTrue();
 		return profesores;
 	}
+	
+	
 }
