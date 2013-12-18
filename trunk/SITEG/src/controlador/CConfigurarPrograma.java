@@ -11,6 +11,7 @@ import modelo.Lapso;
 import modelo.Programa;
 import modelo.ProgramaArea;
 import modelo.ProgramaItem;
+import modelo.ProgramaRequisito;
 import modelo.Requisito;
 
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ import servicio.SLapso;
 import servicio.SPrograma;
 import servicio.SProgramaArea;
 import servicio.SProgramaItem;
+import servicio.SProgramaRequisito;
 import servicio.SRequisito;
 
 import configuracion.GeneradorBeans;
@@ -51,6 +53,8 @@ public class CConfigurarPrograma extends CGeneral {
 			.getServicioProgramaItem();
 	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
 			.getServicioCondicionPrograma();
+	SProgramaRequisito servicioProgramRequisito = GeneradorBeans.getServicioProgramaRequisito();
+	
 	@Wire
 	private Combobox cmbLapsoConfigurarPrograma;
 	@Wire
@@ -65,6 +69,11 @@ public class CConfigurarPrograma extends CGeneral {
 	private Listbox ltbItemsSeleccionados;
 	@Wire
 	private Listbox ltbCondiciones;
+	@Wire
+	private Listbox  ltbRequisitosDisponibles;
+	
+	@Wire
+	private Listbox ltbRequisitosSeleccionadas;
 
 	@Override
 	void inicializar(Component comp) {
@@ -73,6 +82,9 @@ public class CConfigurarPrograma extends CGeneral {
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		List<Programa> programas = servicioPrograma.buscarActivas();
 		llenarListas();
+		List<Requisito> requisito = servicioRequisito.buscarActivos();
+		ltbRequisitosDisponibles.setModel(new ListModelList<Requisito>(
+				requisito));
 
 		if (cmbLapsoConfigurarPrograma != null) {
 
@@ -85,6 +97,29 @@ public class CConfigurarPrograma extends CGeneral {
 		}
 	}
 
+	
+	@Listen("onClick = #btnAgregarRequisitos")
+	public void moverDerechaRequisitos() {
+
+		Listitem list1 = ltbRequisitosDisponibles.getSelectedItem();
+		if (list1 == null)
+			Messagebox.show("Seleccione un Item");
+		else
+			list1.setParent(ltbRequisitosSeleccionadas);
+	}
+	
+	
+	
+	@Listen("onClick = #btnRemoverRequisitos")
+	public void moverIzquierdaRequisitos() {
+		Listitem list2 = ltbRequisitosSeleccionadas.getSelectedItem();
+		System.out.println(list2.getValue().toString());
+		if (list2 == null)
+			Messagebox.show("Seleccione un Item");
+		else
+			list2.setParent(ltbRequisitosDisponibles);
+	}
+	
 	@Listen("onClick = #btnAgregarAreas")
 	public void moverDerechaArea() {
 
@@ -140,6 +175,18 @@ public class CConfigurarPrograma extends CGeneral {
 			programasAreas.add(programaArea);
 		}
 		servicioProgramaArea.guardar(programasAreas);
+		
+		List<ProgramaRequisito> programasRequisito = new ArrayList<ProgramaRequisito>();
+		for (int i = 0; i < ltbRequisitosSeleccionadas.getItemCount(); i++) {
+			Requisito requisito = ltbRequisitosSeleccionadas.getItems().get(i)
+					.getValue();
+			ProgramaRequisito programaRequisito = new ProgramaRequisito(programa, requisito, lapso);
+			programasRequisito.add(programaRequisito);
+		}
+		servicioProgramRequisito.guardar(programasRequisito);
+		
+		
+		
 		List<ProgramaItem> programasItems = new ArrayList<ProgramaItem>();
 		for (int i = 0; i < ltbItemsSeleccionados.getItemCount(); i++) {
 			ItemEvaluacion item = ltbItemsSeleccionados.getItems().get(i)
