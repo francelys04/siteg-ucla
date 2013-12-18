@@ -1,22 +1,18 @@
 <?page id="wdwCatalogoUsuario"  title="Catalogo Usuario" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Catalogo Usuario" border="normal" width="800px"
-		id="wdwCatalogoUsuario" apply="controlador.CUsuario" closable="true">
+	<window title="Catalogo Usuario" border="normal" width="870px"
+		id="wdwCatalogoUsuario" apply="controlador.CUsuario"
+		closable="true">
 		<listbox id="ltbUsuario" width="100%">
-			<auxhead>
-				<auxheader label="Usuarios" colspan="2" />
-			</auxhead>
 			<auxhead sclass="category-center">
 				<auxheader colspan="1">
-					<image
-						src="/widgets/listbox/data_filter/img/funnel.png" />
-					<textbox instant="true" width="80%"
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="90%"
 						id="txtNombreMostrarUsuario" />
 				</auxheader>
 				<auxheader colspan="1">
-					<image
-						src="/widgets/listbox/data_filter/img/funnel.png" />
-					<textbox instant="true" width="80%"
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="90%"
 						id="txtPasswordMostrarUsuario" />
 				</auxheader>
 
