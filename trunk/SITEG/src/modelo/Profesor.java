@@ -55,9 +55,8 @@ public class Profesor {
 	@OneToMany(mappedBy = "profesor")
 	private Set<Defensa> defensas;
 
-	@ManyToMany
-	@JoinTable(name = "profesor_area", joinColumns = { @JoinColumn(name = "profesor_cedula") }, inverseJoinColumns = { @JoinColumn(name = "area_id") })
-	private Set<AreaInvestigacion> areas;
+	@OneToMany(mappedBy = "profesor")
+	private Set<ProfesorArea> profesorAreas;
 
 	@OneToMany(mappedBy = "profesor")
 	private Set<SolicitudTutoria> solicitudesTutoria;
@@ -172,6 +171,14 @@ public class Profesor {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public Set<ProfesorArea> getProfesorAreas() {
+		return profesorAreas;
+	}
+
+	public void setProfesorAreas(Set<ProfesorArea> profesorAreas) {
+		this.profesorAreas = profesorAreas;
 	}
 
 	public Set<SolicitudTutoria> getSolicitudesTutoria() {
