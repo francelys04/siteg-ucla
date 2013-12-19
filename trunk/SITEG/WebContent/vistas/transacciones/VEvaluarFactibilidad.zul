@@ -195,7 +195,7 @@
 							align="center" />
 						<column width="450px" label="Descripción"
 							align="center" />
-						<column width="100px" label="Ponderación"
+						<column width="100px" label="Apreciación"
 							align="center" />
 					</columns>
 
@@ -206,14 +206,7 @@
 							<label
 								value="descripción del tópico a estudiar, resaltando los resultados más relevantes a ser desarrollados en la lectura. Identificación de las fuentes o referencias centrales a estudiar. " />
 
-							<combobox id="cmbPonderacion"
-								autodrop="true" width="80%" tabindex="10">
-								<comboitem label="1" />
-								<comboitem label="2" />
-								<comboitem label="3" />
-								<comboitem label="4" />
-								<comboitem label="5" />
-							</combobox>
+							<textbox width="90%"></textbox>
 
 						</row>
 
@@ -222,14 +215,7 @@
 							<label
 								value="descripción del tópico a estudiar, resaltando los resultados más relevantes a ser desarrollados en la lectura. Identificación de las fuentes o referencias centrales a estudiar. " />
 
-							<combobox autodrop="true" width="80%"
-								tabindex="10">
-								<comboitem label="1" />
-								<comboitem label="2" />
-								<comboitem label="3" />
-								<comboitem label="4" />
-								<comboitem label="5" />
-							</combobox>
+						<textbox></textbox>
 
 						</row>
 
@@ -238,15 +224,7 @@
 							<label
 								value="descripción del tópico a estudiar, resaltando los resultados más relevantes a ser desarrollados en la lectura. Identificación de las fuentes o referencias centrales a estudiar. " />
 
-							<combobox autodrop="true" width="80%"
-								tabindex="10">
-								<comboitem label="1" />
-								<comboitem label="2" />
-								<comboitem label="3" />
-								<comboitem label="4" />
-								<comboitem label="5" />
-							</combobox>
-
+							<textbox width="90%"></textbox>
 						</row>
 
 						<row>
@@ -255,30 +233,11 @@
 							<label
 								value="descripción del tópico a estudiar, resaltando los resultados más relevantes a ser desarrollados en la lectura. Identificación de las fuentes o referencias centrales a estudiar. " />
 
-							<combobox autodrop="true" width="80%"
-								tabindex="10">
-								<comboitem label="1" />
-								<comboitem label="2" />
-								<comboitem label="3" />
-								<comboitem label="4" />
-								<comboitem label="5" />
-							</combobox>
-
+						<textbox width="90%"></textbox>
 						</row>
 
 					</rows>
 				</grid>
-
-				<separator />
-				<separator />
-				<hlayout>
-					<label value="Nota:"
-						style="font-weight:bold;color:red">
-					</label>
-					<label value="5 es la mayor ponderación" />
-				</hlayout>
-
-
 			</tabpanel>
 		</tabpanels>
 	</tabbox>

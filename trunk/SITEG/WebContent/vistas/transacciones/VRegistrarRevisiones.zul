@@ -1,5 +1,5 @@
 <window title="Registrar Revision" border="normal" width="700px"
-	height="600px" closable="true">
+	height="450px" closable="true">
 	<separator />
 
 	<style dynamic="true">
@@ -155,7 +155,7 @@
 
 				<grid sclass="fgrid" style="margin-left:2%">
 					<columns>
-						<column width="620px" height="20px" />
+						<column width="610px" height="20px" />
 					</columns>
 					<rows>
 						<row>
@@ -166,7 +166,7 @@
 
 						<row>
 							<textbox id="txtObservacionTutorias"
-								width="600px" rows="6" cols="100" />
+								width="590px" rows="6" cols="100" />
 						</row>
 					</rows>
 				</grid>

@@ -115,7 +115,7 @@
 				<separator />
 				<separator />
 
-				<listbox mold="paging" pageSize="2">
+				<listbox mold="paging" pageSize="1">
 
 					<listhead>
 						<listheader label="Cédula" align="center" />
@@ -185,44 +185,13 @@
 			<tabpanel>
 				<separator />
 				<separator />
-				<listbox mold="paging" pageSize="3">
+				<listbox mold="paging" pageSize="2">
 					<listhead>
 						<listheader label="Nombre" align="center" />
 						<listheader label="Apellido" align="center" />
 						<listheader label="Evaluación" align="center"
 							width="30%" />
 					</listhead>
-
-					<listitem>
-						<listcell label="Luis"></listcell>
-						<listcell label="Garcia"></listcell>
-						<listcell>
-
-							<button id="btnVisualizarEvaluacion"
-								label="Visualizar" />
-
-						</listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label="Carlos"></listcell>
-						<listcell label="Primera"></listcell>
-						<listcell>
-
-							<button label="Visualizar" />
-
-						</listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label="Alfredo"></listcell>
-						<listcell label="Infante"></listcell>
-						<listcell>
-
-							<button label="Visualizar" />
-
-						</listcell>
-					</listitem>
 
 					<listitem>
 						<listcell label="Alfredo"></listcell>
