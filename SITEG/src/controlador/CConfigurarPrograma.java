@@ -53,7 +53,7 @@ public class CConfigurarPrograma extends CGeneral {
 			.getServicioProgramaItem();
 	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
 			.getServicioCondicionPrograma();
-	SProgramaRequisito servicioProgramRequisito = GeneradorBeans.getServicioProgramaRequisito();
+	SProgramaRequisito servicioProgramaRequisito = GeneradorBeans.getServicioProgramaRequisito();
 	
 	@Wire
 	private Combobox cmbLapsoConfigurarPrograma;
@@ -183,7 +183,7 @@ public class CConfigurarPrograma extends CGeneral {
 			ProgramaRequisito programaRequisito = new ProgramaRequisito(programa, requisito, lapso);
 			programasRequisito.add(programaRequisito);
 		}
-		servicioProgramRequisito.guardar(programasRequisito);
+		servicioProgramaRequisito.guardar(programasRequisito);
 		
 		
 		
@@ -248,6 +248,9 @@ public class CConfigurarPrograma extends CGeneral {
 				.buscarItemsEnPrograma(programa, lapso);
 		List<CondicionPrograma> condicionesDePrograma = servicioCondicionPrograma
 				.buscarCondicionesPrograma(programa, lapso);
+		List<Requisito> requisitosIzquierda = servicioRequisito.buscarRequisitosDisponibles(programa, lapso);
+		List<Requisito> requisitosDerecha = servicioProgramaRequisito.buscarRequisitosEnPrograma(programa, lapso);
+		
 		if(condicionesDePrograma.toString() == "[]"){
 			condicionesDePrograma = servicioCondicionPrograma
 					.buscarCondicionesPrograma(programa, null);
@@ -262,6 +265,15 @@ public class CConfigurarPrograma extends CGeneral {
 				itemsDerecha));
 		ltbCondiciones.setModel(new ListModelList<CondicionPrograma>(
 				condicionesDePrograma));
+
+		  ltbRequisitosDisponibles.setModel(new ListModelList<Requisito>(
+				requisitosIzquierda));
+		
+		 ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(
+					requisitosDerecha));
+		
+		
+		
 	}
 
 }
