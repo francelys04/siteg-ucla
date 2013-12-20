@@ -36,7 +36,7 @@ public class Factibilidad {
 	private String observacion;
 	
 	@Column(name="estatus")
-	private Boolean estatus;
+	private String estatus;
 
 	@OneToMany(mappedBy = "factibilidad")
 	private Set<ItemFactibilidad> itemsFactibilidad;
@@ -47,7 +47,7 @@ public class Factibilidad {
 	}
 
 	public Factibilidad(long id, Teg teg, Profesor profesor, Date fecha,
-			String observacion, Boolean estatus) {
+			String observacion, String estatus) {
 		super();
 		this.id = id;
 		this.teg = teg;
@@ -97,11 +97,11 @@ public class Factibilidad {
 		this.observacion = observacion;
 	}
 
-	public Boolean getEstatus() {
+	public String getEstatus() {
 		return estatus;
 	}
 
-	public void setEstatus(Boolean estatus) {
+	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
 
