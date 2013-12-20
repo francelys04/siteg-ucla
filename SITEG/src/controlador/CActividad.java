@@ -51,6 +51,8 @@ public class CActividad extends CGeneral {
   CCatalogoActividad catalogo = new CCatalogoActividad();
 	@Wire
 	private Textbox txtNombreActividad;
+	
+	
 	@Wire
 	private Textbox txtDescripcionActividad;
 	@Wire
