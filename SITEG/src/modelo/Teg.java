@@ -43,7 +43,7 @@ public class Teg {
 	private Date duracion;
 
 	@ManyToOne
-	@JoinColumn(name = "tutor_cedula", referencedColumnName = "cedula")
+	@JoinColumn(name = "profesor_cedula", referencedColumnName = "cedula")
 	private Profesor tutor;
 
 	@OneToOne(mappedBy="teg")
