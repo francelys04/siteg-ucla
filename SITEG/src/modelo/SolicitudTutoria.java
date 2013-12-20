@@ -28,8 +28,8 @@ public class SolicitudTutoria {
 	@Column(name="descripcion")
 	private String descripcion;
 	
-	@Column(name="estado")
-	private Boolean estado;
+	@Column(name="estatus")
+	private String estatus;
 	
 	@ManyToOne
 	@JoinColumn(name="profesor_cedula", referencedColumnName="cedula")
@@ -54,7 +54,7 @@ public class SolicitudTutoria {
 		this.id = id;
 		this.fecha = fecha;
 		this.descripcion = descripcion;
-		this.estado = estado;
+		this.estatus = estatus;
 		this.profesor = profesor;
 		this.tematica = tematica;
 		this.estudiantes = estudiantes;
@@ -84,12 +84,12 @@ public class SolicitudTutoria {
 		this.descripcion = descripcion;
 	}
 
-	public Boolean getEstado() {
-		return estado;
+	public String getEstatus() {
+		return estatus;
 	}
 
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
+	public void setEstatus (String estatus) {
+		this.estatus = estatus;
 	}
 
 	public Profesor getProfesor() {

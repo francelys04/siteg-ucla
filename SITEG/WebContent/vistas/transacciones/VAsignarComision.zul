@@ -1,5 +1,5 @@
-<window title="Asignar Comisión Evaluadora" border="normal"
-	width="750px" height="500px" closable="true">
+<window title="Asignar Comisión Evaluadora" border="normal" width="100%"
+	height="500px" closable="true">
 	<separator />
 
 	<style dynamic="true">
@@ -74,7 +74,7 @@
 						<row>
 							<hbox>
 								<label value="Area:"
-									style="font-weight:bold" />
+									style="color:black" />
 
 								<textbox id="txtAreaRegistrarAvances"
 									width="60%" style="margin-left:42%" />
@@ -86,7 +86,7 @@
 							<hbox>
 								<label value="
 										Temática: "
-									style="font-weight:bold" />
+									style="color:black" />
 
 								<textbox
 									id="txtTematicaRegistrarAvances" width="80%"
@@ -97,7 +97,7 @@
 
 						<row>
 							<label value="Título del Proyecto:"
-								style="font-weight:bold" />
+								style="color:black" />
 
 						</row>
 						<row>
@@ -163,21 +163,19 @@
 					</columns>
 					<rows>
 						<row>
-							<label value="Cedula:"
-								style="font-weight:bold" />
+							<label value="Cédula:" style="color:black" />
 
 							<textbox id="txtCedulaTutor" width="20%" />
 						</row>
 						<row>
-							<label value="Nombre:"
-								style="font-weight:bold" />
+							<label value="Nombre:" style="color:black" />
 
 
 							<textbox id="txtNombreTutor" width="30%" />
 						</row>
 						<row>
 							<label value="Apellido:"
-								style="font-weight:bold" />
+								style="color:black" />
 
 							<textbox id="txtApellidoTutor" width="30%" />
 						</row>
@@ -191,137 +189,102 @@
 				<grid sclass="fgrid"
 					style="margin-left:2%;margin-right:1%">
 					<columns>
-						<column width="98%" height="30%" />
+						<column width="100%" height="30%" />
 					</columns>
 					<rows>
 
 						<row>
 							<hbox>
 								<panel title="Profesores Disponibles"
-									width="260px">
+									width="250px">
 									<panelchildren>
 										<listbox
-											id="lsbAreasProgramaDisponibles" mold="paging"
-											pageSize="3">
-
+											id="ltbProfesoresDisponibles" height="160px" mold="paging"
+											pageSize="4" emptyMessage="No hay Profesores registrados"
+											oddRowSclass="non-odd" checkmark="true">
 											<listhead>
-												<listheader label=""
-													width="15%" align="center" />
 												<listheader
-													label="Nombre" align="center" />
+													label="Cédula" />
 												<listheader
-													label="Apellido" align="center" />
-
+													label="Nombre" />
+												<listheader
+													label="Apellido" />
 											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell
+														label="${each.cedula} ">
+													</listcell>
+													<listcell
+														label="${each.nombre} ">
+													</listcell>
+													<listcell
+														label="${each.apellido} ">
+													</listcell>
 
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell label="Luis" />
-												<listcell
-													label="Garcia" />
-
-											</listitem>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell label="Jorge" />
-												<listcell
-													label="Guerrero" />
-											</listitem>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell
-													label="Alvaro" />
-												<listcell label="Muñoz" />
-
-											</listitem>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell
-													label="Luzneida" />
-												<listcell
-													label="Matute" />
-											</listitem>
+												</listitem>
+											</template>
 										</listbox>
 									</panelchildren>
 								</panel>
 
-
-								<panel width="30px"
+								<panel width="40px"
 									style="margin:0 auto;padding:35px;">
 									<panelchildren>
 										<div>
 
-											<image
-												src="/imagenes/right.png">
-											</image>
-											<separator height="15px" />
-											<image
-												src="/imagenes/left.png">
-
-											</image>
+											<button
+												id="btnAgregarProfesores" sclass="pointer"
+												image="/public/imagenes/iconos/right.png"
+												tooltiptext="Agregar Profesores" width="35px" />
+											<separator />
+											<button sclass="pointer"
+												id="btnRemoverProfesores"
+												image="/public/imagenes/iconos/left.png"
+												tooltiptext="Quitar Profesores" width="35px" />
 
 										</div>
 									</panelchildren>
 								</panel>
 
 
-								<panel title="Comisión Evaluadora"
-									width="260px">
+								<panel title="Profesores Seleccionados"
+									width="480px">
 									<panelchildren>
-										<listbox
-											id="lsbAreasProgramasSeleccionadas" mold="paging"
-											pageSize="3">
 
+										<listbox
+											id="ltbProfesoresSeleccionados" mold="paging" pageSize="2"
+											height="160px"
+											emptyMessage="No hay profesores seleccionados">
 											<listhead>
-												<listheader label=""
-													width="15%" align="center" />
+												<listheader
+													label="Cédula" align="center" />
 												<listheader
 													label="Nombre" align="center" />
 												<listheader
 													label="Apellido" align="center" />
-
 											</listhead>
 
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell label="Luis" />
-												<listcell
-													label="Garcia" />
-
-											</listitem>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell label="Jorge" />
-												<listcell
-													label="Guerrero" />
-											</listitem>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell
-													label="Alvaro" />
-												<listcell label="Muñoz" />
-
-											</listitem>
-
+											<template name="model">
+												<listitem>
+													<listcell
+														label="${each.actividad.nombre}">
+													</listcell>
+													<listcell>
+														<datebox
+															inplace="true" value="${each.fechaInicio}" width="98%" />
+													</listcell>
+													<listcell>
+														<datebox
+															inplace="true" value="${each.fechaFin}" width="98%" />
+													</listcell>
+													<listcell>
+														<spinner
+															inplace="true" value="${each.actividad.id}" width="98%"
+															visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
 
 										</listbox>
 									</panelchildren>

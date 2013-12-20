@@ -39,7 +39,7 @@ public class Defensa {
 	private int nota;
 
 	@Column(name = "estatus")
-	private Boolean estatus;
+	private String estatus;
 
 	@OneToMany(mappedBy = "defensa")
 	private Set<ItemDefensa> itemsDefensas;
@@ -54,7 +54,7 @@ public class Defensa {
 	}
 
 	public Defensa(long id, Teg teg, Date fecha, Date hora, String lugar,
-			int nota, Boolean estatus, Profesor profesor) {
+			int nota, String estatus, Profesor profesor) {
 		super();
 		this.id = id;
 		this.teg = teg;
@@ -114,11 +114,11 @@ public class Defensa {
 		this.nota = nota;
 	}
 
-	public Boolean getEstatus() {
+	public String getEstatus() {
 		return estatus;
 	}
 
-	public void setEstatus(Boolean estatus) {
+	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
 

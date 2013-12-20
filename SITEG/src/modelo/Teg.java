@@ -26,7 +26,10 @@ public class Teg {
 
 	@Column(name = "titulo")
 	private String titulo;
-	// new
+	
+	@Column(name = "fecha")
+	private Date fecha;
+
 	@Column(name = "fecha_inicio")
 	private Date fechaInicio;
 
@@ -45,10 +48,9 @@ public class Teg {
 
 	@OneToOne(mappedBy="teg")
 	private Defensa defensa;
-	// Finnew
 
 	@Column(name = "estatus")
-	private Boolean estado;
+	private String estatus;
 
 	@ManyToOne
 	@JoinColumn(name = "tematica_id", referencedColumnName = "id")
@@ -82,18 +84,19 @@ public class Teg {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Teg(long id, String titulo, Date fechaInicio, Date fechaEntrega,
-			String descripcion, Date duracion, Profesor tutor, Boolean estado,
+	public Teg(long id, String titulo, Date fecha, Date fechaInicio, Date fechaEntrega,
+			String descripcion, Date duracion, Profesor tutor, String estatus,
 			Tematica tematica, Set<Profesor> profesores, Set<Estudiante> estudiantes) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
+		this.fecha = fecha;
 		this.fechaInicio = fechaInicio;
 		this.fechaEntrega = fechaEntrega;
 		this.descripcion = descripcion;
 		this.duracion = duracion;
 		this.tutor = tutor;
-		this.estado = estado;
+		this.estatus = estatus;
 		this.tematica = tematica;
 		this.profesores = profesores;
 		this.estudiantes = estudiantes;
@@ -115,12 +118,21 @@ public class Teg {
 		this.titulo = titulo;
 	}
 
-	public Boolean getEstado() {
-		return estado;
+	public String getEstatus() {
+		return estatus;
 	}
 
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
+	}
+	
+	
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public Tematica getTematica() {
