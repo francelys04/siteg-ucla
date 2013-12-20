@@ -1,8 +1,6 @@
 <zk><?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <window id="uploadVideo" border="none" height="100%" apply="fiddle.TestVM" >
-	<style>
-		IMG.displayed { display: block; margin:0 auto; padding : 150px;
-	</style>
+
 	<borderlayout sclass="complex-layout" height="99%">
 		<north size="100px" border="normal">
 		<div>
@@ -29,7 +27,7 @@
 				<north size="70px" border="none">
 					<div align="right"
 						style="margin-right:20px;padding:5px">
-						<image id="imagenes"  width="80px" height="50px"/>
+					<image id="imagenes"  width="80px" height="50px"/>  
 						<label style="color: red" value="Usuario: ${desktop.execution.userPrincipal.name}" />
 						<a href="../j_spring_security_logout" style="color: blue"> Cerrar Sesion</a>
 					</div>

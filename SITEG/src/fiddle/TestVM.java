@@ -70,7 +70,7 @@ public class TestVM extends SelectorComposer<Component> {
 					.getImagen()));
 			imagenes.setContent(imag);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			 //TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(auth.getAuthorities());
