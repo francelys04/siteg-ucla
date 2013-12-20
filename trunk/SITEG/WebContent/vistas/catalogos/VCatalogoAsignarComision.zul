@@ -1,0 +1,34 @@
+<?page id="wdwCatalogoAsignarComision"  title="Catalogo " contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Catalogo Actividad" border="normal" width="800px"
+		id="wdwCatalogoActividad" apply="controlador.CCatalogoActividad"
+		closable="true">
+		<listbox id="ltbActividad" width="100%" mold="paging"
+			pageSize="10" emptyMessage="No hay actividades registradas">
+			<auxhead sclass="category-center">
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="90%"
+						id="txtNombreMostrarActividad" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="90%"
+						id="txtDescripcionMostrarActividad" />
+				</auxheader>
+			</auxhead>
+			<listhead>
+				<listheader label="Nombre" align="center" />
+				<listheader label="Descripción" align="center" />
+			</listhead>
+
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.descripcion}" />
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>
