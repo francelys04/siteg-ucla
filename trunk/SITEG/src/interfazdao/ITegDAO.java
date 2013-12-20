@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	
-	@Query("select t from Teg t where t.estado='SolicitandoRegistro'")
+	@Query("select t from Teg t where t.estatus='SolicitandoRegistro'")
 	public List<Teg> buscarSolicitudRegistroTeg();
 
 }
