@@ -17,7 +17,6 @@ import servicio.SGrupo;
 import servicio.SItem;
 import servicio.SLapso;
 import servicio.SProfesor;
-import servicio.SProfesorArea;
 import servicio.SPrograma;
 import servicio.SProgramaArea;
 import servicio.SProgramaItem;
@@ -119,9 +118,6 @@ public class GeneradorBeans implements ApplicationContextAware {
 	
 	public static SCronograma getServicioCronograma(){
 		return applicationContext.getBean(SCronograma.class);
-	}
-	public static SProfesorArea getProfesorArea(){
-		return applicationContext.getBean(SProfesorArea.class);
 	}
 	
 	public static STeg getServicioTeg(){

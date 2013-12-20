@@ -32,4 +32,11 @@ public class SUsuario {
 		// TODO Auto-generated method stub
 		interfazUsuario.save(usuario);
 	}
+	
+	public Usuario buscarUsuarioPorNombre(String name) {
+		// TODO Auto-generated method stub
+		Usuario usuario;
+		usuario = interfazUsuario.findByNombre(name);
+		return usuario;
+	}
 }

@@ -3,16 +3,10 @@ package servicio;
 import interfazdao.IAreaInvestigacionDAO;
 
 import java.util.List;
-
-
-
-
-
 import modelo.AreaInvestigacion;
 import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
-import modelo.Tematica;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,12 +46,17 @@ private IAreaInvestigacionDAO interfaceArea;
 		return areas;
 	}
 	
-	public List<AreaInvestigacion> buscarAreasSinProfesor(Profesor profesor){
+	public List<AreaInvestigacion> buscarAreasDelProfesor(Profesor profesor){
 		List<AreaInvestigacion> areas;
-		areas = interfaceArea.buscarDisponiblesProfesor(profesor);
+		areas = interfaceArea.findByProfesores(profesor);
 		return areas;
 	}
-
+	
+	public List<AreaInvestigacion> buscarAreasSinProfesor(List<Long> ids){
+		List<AreaInvestigacion> areas;
+		areas = interfaceArea.findByIdNotIn(ids);
+		return areas;
+	}
 
 }
 

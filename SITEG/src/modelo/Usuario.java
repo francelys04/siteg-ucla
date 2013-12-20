@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,19 +30,29 @@ public class Usuario {
 	@Column(name = "estatus")
 	private Boolean estatus;
 	
+	@Column(name = "imagen")
+	private byte[] imagen;
+	
 	@ManyToMany
 	@JoinTable(name="grupo_usuario",
 	     joinColumns={@JoinColumn(name="usuario_id")},
 	     inverseJoinColumns={@JoinColumn(name="grupo_id")})
 	     private Set<Grupo> grupos;
 
-	public Usuario(long codigo, String nombre, String password, Boolean estatus, Set<Grupo> grupos) {
+	@OneToOne(mappedBy="usuario")
+	private Profesor profesor;
+	
+	@OneToOne(mappedBy="usuario")
+	private Estudiante estudiante;
+	
+	public Usuario(long codigo, String nombre, String password, Boolean estatus, Set<Grupo> grupos, byte[] imagen) {
 		super();
 		this.id = codigo;
 		this.nombre = nombre;
 		this.password = password;
 		this.setEstatus(estatus);
 		this.grupos=grupos;
+		this.imagen = imagen;
 	}
 
 	public Usuario() {
@@ -90,6 +101,30 @@ public class Usuario {
 
 	public void setGrupos(Set<Grupo> grupos) {
 		this.grupos = grupos;
+	}
+
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+
+	public Estudiante getEstudiante() {
+		return estudiante;
+	}
+
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
 	}
 
 }

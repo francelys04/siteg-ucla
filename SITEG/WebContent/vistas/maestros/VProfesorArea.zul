@@ -64,7 +64,7 @@
 
 						<hbox>
 							<textbox id="txtCedulaProfesorArea"
-								width="150px" style="margin-left:20px" />
+								width="150px" style="margin-left:20px" disabled="True"/>
 
 							<button id="btnCatalogoProfesorArea"
 								style="margin-left:10%"
@@ -85,7 +85,7 @@
 
 						<hbox>
 							<textbox id="txtNombreProfesorArea"
-								width="150px" style="margin-left:20px" />
+								width="150px" style="margin-left:20px" disabled="True" />
 
 							<hlayout>
 								<label value="*"
@@ -96,7 +96,7 @@
 							</hlayout>
 
 							<textbox id="txtApellidoProfesorArea"
-								width="150px" style="margin-left:20px" />
+								width="150px" style="margin-left:20px" disabled="True" />
 						</hbox>
 
 					</hbox>

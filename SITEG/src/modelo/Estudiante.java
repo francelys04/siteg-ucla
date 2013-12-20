@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -54,6 +55,10 @@ public class Estudiante {
 	@ManyToMany(mappedBy="estudiantes")
 	private Set<Teg> tegs;
 	
+	@OneToOne
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+	private Usuario usuario;
+	
 	public Estudiante() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -61,7 +66,7 @@ public class Estudiante {
 	
 	public Estudiante(String cedula, String nombre, String apellido,
 			String correoElectronico, String sexo,
-			String direccion, String telefono,String telefono_fijo, Boolean estatus, Programa programa) {
+			String direccion, String telefono,String telefono_fijo, Boolean estatus, Programa programa, Usuario usuario) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -73,7 +78,7 @@ public class Estudiante {
 		this.telefono_fijo = telefono_fijo;
 		this.estatus = estatus;
 		this.programa = programa;
-		
+		this.usuario=usuario;
 	}
 
 	public String getCedula() {
@@ -170,6 +175,14 @@ public class Estudiante {
 
 	public void setTegs(Set<Teg> tegs) {
 		this.tegs = tegs;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 

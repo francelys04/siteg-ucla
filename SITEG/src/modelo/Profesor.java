@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -56,9 +58,6 @@ public class Profesor {
 	private Set<Defensa> defensas;
 
 	@OneToMany(mappedBy = "profesor")
-	private Set<ProfesorArea> profesorAreas;
-
-	@OneToMany(mappedBy = "profesor")
 	private Set<SolicitudTutoria> solicitudesTutoria;
 
 	@ManyToMany(mappedBy = "profesores")
@@ -70,6 +69,14 @@ public class Profesor {
 	@OneToMany(mappedBy = "profesor")
 	private Set<Jurado> juradosTeg;
 
+	@ManyToMany
+	@JoinTable(name = "profesor_area", joinColumns = { @JoinColumn(name = "profesor_cedula") }, inverseJoinColumns = { @JoinColumn(name = "area_id") })
+	private Set<AreaInvestigacion> areas;
+	
+	@OneToOne
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+	private Usuario usuario;
+	
 	public Profesor() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -78,7 +85,7 @@ public class Profesor {
 	public Profesor(String cedula, String nombre, String apellido,
 			String correoElectronico, String sexo, String direccion,
 			String telefono_movil, String telefono_fijo, Boolean estatus,
-			Categoria categoria) {
+			Categoria categoria, Set<AreaInvestigacion> areas, Usuario usuario) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -90,7 +97,8 @@ public class Profesor {
 		this.telefono_movil = telefono_movil;
 		this.estatus = estatus;
 		this.categoria = categoria;
-
+		this.areas=areas;
+		this.usuario=usuario;
 	}
 
 	public String getCedula() {
@@ -173,14 +181,6 @@ public class Profesor {
 		this.categoria = categoria;
 	}
 
-	public Set<ProfesorArea> getProfesorAreas() {
-		return profesorAreas;
-	}
-
-	public void setProfesorAreas(Set<ProfesorArea> profesorAreas) {
-		this.profesorAreas = profesorAreas;
-	}
-
 	public Set<SolicitudTutoria> getSolicitudesTutoria() {
 		return solicitudesTutoria;
 	}
@@ -227,6 +227,22 @@ public class Profesor {
 
 	public void setDefensas(Set<Defensa> defensas) {
 		this.defensas = defensas;
+	}
+
+	public Set<AreaInvestigacion> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(Set<AreaInvestigacion> areas) {
+		this.areas = areas;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

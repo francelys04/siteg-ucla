@@ -1,24 +1,36 @@
 package controlador;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
+
+import modelo.AreaInvestigacion;
 import modelo.Grupo;
 import modelo.Usuario;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.zkoss.image.AImage;
+import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Fileupload;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -62,13 +74,17 @@ public class CUsuario extends CGeneral {
 	private Button pasar2;
 	@Wire
 	private Button btnEliminarUsuario;
+	@Wire
+	private Image imagen;
+	@Wire
+	private Fileupload fudImagenUsuario;
+	@Wire
+	private Media media;
 	
 	void inicializar(Component comp) {
 
 		List<Usuario> usuarios = servicioUsuario.buscarActivos();
 		List<Grupo> grupos = servicioGrupo.buscarActivos();
-		// System.out.println(items.get(0).getNombre());
-		// System.out.println(items.get(1).getNombre());
 
 		if (txtNombreUsuario == null) 
 			ltbUsuario.setModel(new ListModelList<Usuario>(usuarios));
@@ -84,8 +100,18 @@ public class CUsuario extends CGeneral {
 
 				long codigo = (Long) map.get("id");
 				Usuario usuario = servicioUsuario.buscarUsuarioPorId(codigo);
+				llenarGrupos(usuario);
 				txtNombreUsuario.setValue(usuario.getNombre());
 				txtPasswordUsuario.setValue(usuario.getPassword());
+				BufferedImage imag;
+				try {
+					imag = ImageIO.read(new ByteArrayInputStream(usuario
+							.getImagen()));
+					imagen.setContent(imag);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				btnEliminarUsuario.setDisabled(false);
 				id = usuario.getId();
 				map.clear();
@@ -96,18 +122,29 @@ public class CUsuario extends CGeneral {
 	}
 
 	@Listen("onClick = #btnGuardarUsuario")
-	public void guardarEstudiante() {
+	public void guardarEstudiante() throws IOException {
 
 		String nombre = txtNombreUsuario.getValue();
 		String password = txtPasswordUsuario.getValue();
 		Boolean estatus = true;
 		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+		byte[] imagenUsuario = null;
+		if (media instanceof org.zkoss.image.Image){
+			imagenUsuario = imagen.getContent().getByteData();
+			
+		}
+		else
+		{
+			URL url = getClass().getResource("/configuracion/usuario.png");
+			imagen.setContent(new AImage(url));
+			imagenUsuario = imagen.getContent().getByteData();	
+		}
 		for (int i = 0; i < listaGruposAgregados.getItemCount(); i++) {
 			Grupo grupo = listaGruposAgregados.getItems().get(i).getValue();
 			gruposUsuario.add(grupo);
 		}
 		Usuario usu = new Usuario(id, nombre, passwordEncoder.encode(password),
-				estatus, gruposUsuario);
+				estatus, gruposUsuario, imagenUsuario);
 		servicioUsuario.guardar(usu);
 		cancelarItem();
 		id = 0;
@@ -188,5 +225,27 @@ public class CUsuario extends CGeneral {
 		else
 			list2.setParent(listaGrupos);
 	}
+	
+	@Listen("onUpload = #fudImagenUsuario")
+	public void processMedia(UploadEvent event) {
+		media = event.getMedia();
+		imagen.setContent((org.zkoss.image.Image) media);
 
+	}
+
+	public void llenarGrupos(Usuario usuario){
+		List<Grupo> gruposActuales = servicioGrupo.buscarGruposDelUsuario(usuario);
+		listaGruposAgregados.setModel(new ListModelList<Grupo>(
+				gruposActuales));
+		List<Long> ids = new ArrayList<Long>();
+		for(int i=0; i<gruposActuales.size();i++){
+			long id = gruposActuales.get(i).getId();
+			ids.add(id);
+		}
+		if(ids.toString()!="[]"){
+			List<Grupo> gruposDisponibles = servicioGrupo.buscarGruposDisponibles(ids);
+			listaGrupos.setModel(new ListModelList<Grupo>(
+					gruposDisponibles));
+		}
+	}
 }

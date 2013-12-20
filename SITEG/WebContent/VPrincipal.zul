@@ -190,11 +190,18 @@
 			</vbox>
 			</div>
 		</center>
-
+<zscript>
+String variable = execution.getParameter("respuesta");
+String a = "";
+if(variable==null)
+ a = "Iniciar Sesión";
+else 
+	a = execution.getParameter("respuesta");
+</zscript>
 		<east title="" sclass="body_left" size="30%" flex="true"
 			style="margin-top:10px;">
 			<vlayout style="overflow:auto;">
-				<window title="Iniciar Sesion" border="normal" width="100%">
+				<window title="${a}" border="normal" width="100%">
 					<vlayout>
 						<hlayout width="100%">
 <!--Inicio sesion  -->

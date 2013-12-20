@@ -34,11 +34,6 @@ public class Lapso {
 	
 	@OneToMany(mappedBy="lapso")
 	private Set<Cronograma> cronogramas;
-
-	@OneToMany(mappedBy="lapso")
-	private Set<ActividadRequisito> actividadesRequisitos;
-	
-	
 	
 	@OneToMany(mappedBy="lapso")
 	private Set<ProgramaArea> programasAreas;
@@ -111,17 +106,6 @@ public class Lapso {
 	public void setCronogramas(Set<Cronograma> cronogramas) {
 		this.cronogramas = cronogramas;
 	}
-
-	public Set<ActividadRequisito> getActividadesRequisitos() {
-		return actividadesRequisitos;
-	}
-
-	public void setActividadesRequisitos(
-			Set<ActividadRequisito> actividadesRequisitos) {
-		this.actividadesRequisitos = actividadesRequisitos;
-	}
-
-	
 
 	public Set<ProgramaArea> getProgramasAreas() {
 		return programasAreas;

@@ -1,17 +1,25 @@
 package fiddle;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.security.Principal;
 import java.util.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import modelo.Arbol;
 import modelo.Estudiante;
+import modelo.Usuario;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
@@ -24,25 +32,47 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.*;
+
 import servicio.SArbol;
+import servicio.SUsuario;
 import configuracion.GeneradorBeans;
 
 public class TestVM extends SelectorComposer<Component> {
 	TreeModel _model;
 	SArbol servicioArbol = GeneradorBeans.getServicioArbol();
-
+	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	@Wire
 	private Tree treeMenu;
 	@Wire
 	private Include formularios;
+	@Wire
+	private Label etiqueta;
+	@Wire
+	private Image imagenes;
 
 	List<String> listmenu1 = new ArrayList();
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-
+		
+		
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
+		System.out.println(auth.getName());
+		
+		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
+		System.out.println(u.getImagen().toString());
+		if(u.getImagen().toString() == "[]")
+			imagenes.setSrc("/imagenes/buscar.png");
+		try {
+			BufferedImage imag;
+			imag = ImageIO.read(new ByteArrayInputStream(u
+					.getImagen()));
+			imagenes.setContent(imag);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(auth.getAuthorities());
 		// List<GrantedAuthority> authorities = new
 		// ArrayList<GrantedAuthority>(auth.getAuthorities());

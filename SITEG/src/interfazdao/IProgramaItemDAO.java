@@ -1,8 +1,6 @@
 package interfazdao;
 
 import java.util.List;
-
-import modelo.AreaInvestigacion;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
 import modelo.Programa;

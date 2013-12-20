@@ -9,12 +9,15 @@ import javax.swing.JFileChooser;
 import modelo.AreaInvestigacion;
 import modelo.Profesor;
 import modelo.Categoria;
+import modelo.Usuario;
+
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zul.Messagebox;
 import servicio.SCategoria;
 import servicio.SProfesor;
+import servicio.SUsuario;
 import configuracion.GeneradorBeans;
 
 @Controller
@@ -23,14 +26,14 @@ public class CCargarProfesor extends CGeneral {
 			.getServicioProfesor();
 	SCategoria servicioCategoria = GeneradorBeans
 			.getServicioCategoria();
-
+	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	private File f;
 
 	@Listen("onClick = #btnCargarListaProfesores")
 	public void cargarProfesores() {
 
 		// variables locales
-		String cedula, nombre, apellido, sexo, direccion, telefonomovil, telefonofijo, correo;
+		String cedula, nombre, apellido, sexo, direccion, telefonomovil, telefonofijo, correo, usuario;
 		boolean estatus;
 		long idcategoria;
 
@@ -83,6 +86,9 @@ public class CCargarProfesor extends CGeneral {
 
 					linea = br.readLine();
 					idcategoria = Long.parseLong(linea);
+					
+					linea = br.readLine();
+					usuario = linea;
 
 					// busco el programa con el id que tengo en el txt para
 					// registrar
@@ -90,10 +96,11 @@ public class CCargarProfesor extends CGeneral {
 					categoria = servicioCategoria.buscarPorId(idcategoria);
 					// creo el estudiante y lo guardo
 					Profesor profesor;
+					Usuario user = servicioUsuario.buscarUsuarioPorNombre(usuario);
 					Set<AreaInvestigacion> areasProfesor = new HashSet<AreaInvestigacion>();
 					profesor = new Profesor(cedula, nombre, apellido, correo, sexo,
 							direccion, telefonomovil, telefonofijo,
-							estatus, categoria);
+							estatus, categoria, areasProfesor, user);
 
 					servicioProfesor.guardarProfesor(profesor);
 				}

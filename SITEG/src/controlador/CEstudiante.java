@@ -8,6 +8,7 @@ import java.util.List;
 
 import modelo.Estudiante;
 import modelo.Programa;
+import modelo.Usuario;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,7 @@ import org.zkoss.zul.Window;
 
 import servicio.SEstudiante;
 import servicio.SPrograma;
+import servicio.SUsuario;
 import configuracion.GeneradorBeans;
 
 @Controller
@@ -48,7 +50,8 @@ public class CEstudiante extends CGeneral {
 
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-
+	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
+	
 	@Wire
 	private Combobox cmbProgramaEstudiante;
 	@Wire
@@ -197,10 +200,12 @@ public class CEstudiante extends CGeneral {
 								Programa programa = servicioPrograma
 										.buscarPorNombrePrograma(programas);
 
+
+								Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
 								Estudiante estudiante = new Estudiante(cedula,
 										nombre, apellido, correo, sexo,
 										direccion, telefonoMovil, telefonoFijo,
-										estatus, programa);
+										estatus, programa, usuario);
 								servicioEstudiante.guardar(estudiante);
 								Messagebox.show(
 										"Estudiante registrado exitosamente",
