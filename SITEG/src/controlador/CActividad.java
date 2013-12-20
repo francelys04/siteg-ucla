@@ -50,9 +50,7 @@ public class CActividad extends CGeneral {
 	SActividad servicioActividad = GeneradorBeans.getServicioActividad();
   CCatalogoActividad catalogo = new CCatalogoActividad();
 	@Wire
-	private Textbox txtNombreActividad;
-	
-	
+	private Textbox txtNombreActividad;	
 	@Wire
 	private Textbox txtDescripcionActividad;
 	@Wire
