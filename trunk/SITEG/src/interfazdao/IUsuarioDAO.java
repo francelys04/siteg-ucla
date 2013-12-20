@@ -10,6 +10,6 @@ public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 
 	List<Usuario> findByEstatusTrue();
 
-	
+	Usuario findByNombre(String name);
 	
 }

@@ -26,9 +26,10 @@
 		<!-- Fin del banner de contenido-->
 		<center border="none" >
 			<borderlayout sclass="complex-layout" style="overflow-y:scroll;" height="99%">
-				<north size="30px" border="none">
+				<north size="70px" border="none">
 					<div align="right"
 						style="margin-right:20px;padding:5px">
+						<image id="imagenes"  width="80px" height="50px"/>
 						<label style="color: red" value="Usuario: ${desktop.execution.userPrincipal.name}" />
 						<a href="../j_spring_security_logout" style="color: blue"> Cerrar Sesion</a>
 					</div>

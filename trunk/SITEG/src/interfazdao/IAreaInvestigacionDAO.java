@@ -24,14 +24,9 @@ public interface IAreaInvestigacionDAO extends JpaRepository<AreaInvestigacion, 
 	@Query("select a from AreaInvestigacion a where a.id not in (select aa.area from ProgramaArea aa where aa.programa = ?1 and aa.lapso = ?2)")
 	public List<AreaInvestigacion> buscarDisponibles(Programa programa, Lapso lapso);
 	
+	public List<AreaInvestigacion> findByProfesores(Profesor profesor);
 	
-	
-	//Grid de la izquierda	
-		
-		@Query("select a from AreaInvestigacion a where a.id not in (select aa.area from ProfesorArea aa where aa.profesor = ?1)")
-		public List<AreaInvestigacion> buscarDisponiblesProfesor(Profesor profesor);
-		
-
+	public List<AreaInvestigacion> findByIdNotIn(List<Long> ids);
 }
 
 

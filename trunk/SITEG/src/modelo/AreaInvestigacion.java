@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -28,8 +29,8 @@ public class AreaInvestigacion {
 	@Column(name="estatus")
 	private Boolean estatus;
 	
-	@OneToMany(mappedBy="area")
-	private Set<ProfesorArea> profesorAreas;
+	@ManyToMany(mappedBy="areas")
+	private Set<Profesor> profesores;
 	
 	@OneToMany(mappedBy="areaInvestigacion")
 	private Set<Tematica> tematicas;
@@ -99,14 +100,15 @@ public class AreaInvestigacion {
 	public void setProgramasAreas(Set<ProgramaArea> programasAreas) {
 		this.programasAreas = programasAreas;
 	}
-	
-	public Set<ProfesorArea> getProfesorAreas() {
-		return profesorAreas;
+
+	public Set<Profesor> getProfesores() {
+		return profesores;
 	}
 
-	public void setProfesorAreas(Set<ProfesorArea> profesorAreas) {
-		this.profesorAreas = profesorAreas;
+	public void setProfesores(Set<Profesor> profesores) {
+		this.profesores = profesores;
 	}
+
 	
 
 }

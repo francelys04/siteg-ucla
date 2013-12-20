@@ -2,7 +2,9 @@ package controlador;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import modelo.AreaInvestigacion;
 
@@ -12,7 +14,6 @@ import modelo.Cronograma;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
 import modelo.Profesor;
-import modelo.ProfesorArea;
 import modelo.Programa;
 
 
@@ -33,7 +34,6 @@ import org.zkoss.zul.Window;
 
 import servicio.SAreaInvestigacion;
 import servicio.SProfesor;
-import servicio.SProfesorArea;
 import configuracion.GeneradorBeans;
 
 @Controller
@@ -42,13 +42,11 @@ public class CProfesorArea extends CGeneral{
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
 	CCatalogoProfesor catalogo = new CCatalogoProfesor();
-	SProfesorArea servicioProfesorArea = GeneradorBeans.getProfesorArea();
 	
 	@Wire
 	private Textbox txtCedulaProfesorArea;
 	@Wire
 	private Listbox ltbProfesor;
-
 
 	@Wire
 	private Textbox txtApellidoProfesorArea;
@@ -135,19 +133,18 @@ public class CProfesorArea extends CGeneral{
 	public void guardar() {
 		Profesor profesor = servicioProfesor.buscarProfesorPorCedula(txtCedulaProfesorArea.getValue());
 		
-		
-		List<ProfesorArea> profesorArea = new ArrayList<ProfesorArea>();
+
+		Set<AreaInvestigacion> areasProfesor = new HashSet<AreaInvestigacion>();
 		for (int i = 0; i < lsbAreasProfesorSeleccionadas.getItemCount(); i++) {
 			System.out.println("imprimo cronograma");
 			System.out.println(lsbAreasProfesorSeleccionadas.getItemCount());
 			AreaInvestigacion area = lsbAreasProfesorSeleccionadas.getItems().get(i)
 					.getValue();
-			ProfesorArea profesorarea = new ProfesorArea(profesor,area);
-			profesorArea.add(profesorarea);
+			areasProfesor.add(area);
 		}
 		
-		
-		servicioProfesorArea.guardar(profesorArea);
+		profesor.setAreas(areasProfesor);
+		servicioProfesor.guardarProfesor(profesor);
 		alert("Configuraciones Guardadas");
 		limpiarCampos();
 	}
@@ -165,15 +162,26 @@ public class CProfesorArea extends CGeneral{
 		
 		Profesor profesor = servicioProfesor.buscarProfesorPorCedula(ProfesorCedula);
 		
-		List<AreaInvestigacion> areasIzquierda = servicioArea.buscarAreasSinProfesor(profesor);
-		List<AreaInvestigacion> areasDerecha = servicioProfesorArea
-				.buscarAreasDeProfesor(profesor);
 		
-		lsbAreasProfesorDisponibles.setModel(new ListModelList<AreaInvestigacion>(
-				areasIzquierda));
+		List<AreaInvestigacion> areasDerecha = servicioArea.buscarAreasDelProfesor(profesor);
+		
+		
 		lsbAreasProfesorSeleccionadas.setModel(new ListModelList<AreaInvestigacion>(
 				areasDerecha));
 		
+		
+		List<Long> ids = new ArrayList<Long>();
+		for(int i=0; i<areasDerecha.size();i++){
+			long id = areasDerecha.get(i).getId();
+			ids.add(id);
+		}
+		System.out.println(ids.toString());
+		if(ids.toString()!="[]"){
+			System.out.println("entro");
+		List<AreaInvestigacion> areasIzquierda = servicioArea.buscarAreasSinProfesor(ids);
+		lsbAreasProfesorDisponibles.setModel(new ListModelList<AreaInvestigacion>(
+						areasIzquierda));
+		}
 	}
 	
 	

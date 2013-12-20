@@ -35,9 +35,6 @@ public class Requisito {
 	private Set<TegRequisito> requisitosTeg;
 	
 	@OneToMany(mappedBy="requisito")
-	private Set<ActividadRequisito> actividadesRequisitos;
-	
-	@OneToMany(mappedBy="requisito")
 	private Set<ProgramaRequisito> programaRequisitos;
 	
 	
@@ -104,16 +101,6 @@ public class Requisito {
 	public void setProgramaRequisitos(
 			Set<ProgramaRequisito> programaRequisitos) {
 		this.programaRequisitos = programaRequisitos;
-	}
-	
-
-	public Set<ActividadRequisito> getActividadesRequisitos() {
-		return actividadesRequisitos;
-	}
-
-	public void setActividadesRequisitos(
-			Set<ActividadRequisito> actividadesRequisitos) {
-		this.actividadesRequisitos = actividadesRequisitos;
 	}
 	
 }

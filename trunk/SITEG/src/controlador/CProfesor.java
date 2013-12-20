@@ -11,6 +11,7 @@ import modelo.Categoria;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
+import modelo.Usuario;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -31,12 +32,14 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import servicio.SCategoria;
 import servicio.SProfesor;
+import servicio.SUsuario;
 import configuracion.GeneradorBeans;
 
 public class CProfesor extends CGeneral {
 
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SCategoria servicioCategoria = GeneradorBeans.getServicioCategoria();
+	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	CCatalogoProfesor catalogo = new CCatalogoProfesor();
 	@Wire
 	private Combobox cmbCategoriaProfesor;
@@ -171,10 +174,12 @@ public class CProfesor extends CGeneral {
 							Boolean estatus = true;
 							Categoria categoria = servicioCategoria
 									.buscarCategoriaPorNombre(categorias);
+							Set<AreaInvestigacion> areasProfesor = new HashSet<AreaInvestigacion>();
+							Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
 							Profesor profesor = new Profesor(cedula, nombre,
 									apellido, correo, sexo, direccion,
 									telefonoMovil, telefonoFijo, estatus,
-									categoria);
+									categoria, areasProfesor, usuario);
 							servicioProfesor.guardarProfesor(profesor);
 							Messagebox.show(
 									"Profesor registrado exitosamente",

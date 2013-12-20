@@ -31,9 +31,6 @@ public class Actividad {
 	
 	@OneToMany(mappedBy="actividad")
 	private Set<Cronograma> cronogramas;
-	
-	@OneToMany(mappedBy="actividad")
-	private Set<ActividadRequisito> actividadesRequisitos;
 
 	public Actividad(long id, String nombre, String descripcion, Boolean estatus) {
 		super();
@@ -86,14 +83,5 @@ public class Actividad {
 
 	public void setActividades(Set<Cronograma> actividades) {
 		this.cronogramas = actividades;
-	}
-
-	public Set<ActividadRequisito> getActividadesRequisitos() {
-		return actividadesRequisitos;
-	}
-
-	public void setActividadesRequisitos(
-			Set<ActividadRequisito> actividadesRequisitos) {
-		this.actividadesRequisitos = actividadesRequisitos;
 	}
 }
