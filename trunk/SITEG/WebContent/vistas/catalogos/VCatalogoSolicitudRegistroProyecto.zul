@@ -1,0 +1,77 @@
+<window title="Solicitudes de registro de proyectos" border="normal" width="100%"
+	height="500px" closable="true" apply="controlador.CCatalogoSolicitudRegistroProyecto">
+	<separator />
+	<separator />
+	<separator />
+
+	<listbox id="ltbSolcitudRegistroProyecto" mold="paging" pageSize="6"
+		style="margin-left:10px;margin-right:10px">
+
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox id="txtMostrarFecha" placeholder="" instant="true" width="70%"
+					value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox id="txtMostrarTematica" placeholder="" instant="true" width="70%"
+				
+					value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox id="txtMostrarArea" placeholder="" instant="true" width="70%"
+					value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox id="txtMostrarTitulo"  placeholder="" instant="true" width="80%"
+					value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox id="txtMostrarNombreTutor" placeholder="" instant="true" width="70%"
+					value="" onChange="" />
+			</auxheader>
+
+			<auxheader colspan="1">
+				<image src="/imagenes/filtro.png" />
+				<textbox id="txtMostrarApellidoTutor"  placeholder="" instant="true" width="70%"
+					value="" onChange="" />
+			</auxheader>
+
+
+		</auxhead>
+
+		<listhead>
+			<listheader label="Fecha" align="center" />
+			<listheader label="Temática" align="center" />
+			<listheader label="Área" align="center" />			
+			<listheader label="Título" align="center" width="25%" />
+			<listheader label="Nombre Tutor" align="center" />
+			<listheader label="Apellido Tutor" align="center" />
+		</listhead>
+
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.fechaInicio}" />
+					<listcell label="${each.tematica.nombre}" />
+					<listcell label="${each.tematica.areaInvestigacion.nombre}" />		
+					<listcell label="${each.titulo}" />					
+					<listcell label="${each.tutor.nombre}" />
+					<listcell label="${each.tutor.apellido}" />					
+
+				</listitem>
+			</template>
+
+	</listbox>
+
+	<separator />
+	<separator />
+	<separator />
+
+
+
+</window>
