@@ -50,6 +50,10 @@ public class Profesor {
 	@ManyToOne
 	@JoinColumn(name = "categoria_id", referencedColumnName = "id")
 	private Categoria categoria;
+	
+	@ManyToOne
+	@JoinColumn(name="programa_id", referencedColumnName = "id")
+	private Programa programa;
 
 	@OneToMany(mappedBy = "profesor")
 	private Set<Factibilidad> factibilidad;
@@ -179,6 +183,15 @@ public class Profesor {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+	
+	
+	public Programa getPrograma() {
+		return programa;
+	}
+
+	public void setPrograma(Programa programa) {
+		this.programa = programa;
 	}
 
 	public Set<SolicitudTutoria> getSolicitudesTutoria() {

@@ -32,6 +32,9 @@ public class Programa {
 
 	@OneToMany(mappedBy = "programa")
 	private Set<Estudiante> estudiantes;
+	
+	@OneToMany(mappedBy="programa")
+	private Set<Profesor> profesores;
 
 	@OneToMany(mappedBy = "programa")
 	private Set<CondicionPrograma> condicionesProgramas;
@@ -101,6 +104,14 @@ public class Programa {
 
 	public void setEstudiantes(Set<Estudiante> estudiantes) {
 		this.estudiantes = estudiantes;
+	}
+
+	public Set<Profesor> getProfesores() {
+		return profesores;
+	}
+
+	public void setProfesores(Set<Profesor> profesores) {
+		this.profesores = profesores;
 	}
 
 	public Set<CondicionPrograma> getCondicionesProgramas() {
