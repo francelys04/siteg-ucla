@@ -94,8 +94,7 @@ public class CCatalogoActividad extends CGeneral {
 	public void recibir (String vista)
 	{
 		vistaRecibida = vista;
-		System.out.println("imprimo");
-		System.out.println(vistaRecibida);
+
 	}
 	
 	// Aca se filtran las busqueda en el catalogo, ya sea por nombre o por

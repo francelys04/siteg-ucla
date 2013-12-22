@@ -9,6 +9,7 @@ import javax.swing.JFileChooser;
 import modelo.AreaInvestigacion;
 import modelo.Profesor;
 import modelo.Categoria;
+import modelo.Programa;
 import modelo.Usuario;
 
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.zkoss.zul.Messagebox;
 import servicio.SCategoria;
 import servicio.SProfesor;
 import servicio.SUsuario;
+import servicio.SPrograma;
 import configuracion.GeneradorBeans;
 
 @Controller
@@ -27,6 +29,8 @@ public class CCargarProfesor extends CGeneral {
 	SCategoria servicioCategoria = GeneradorBeans
 			.getServicioCategoria();
 	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
+	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+	
 	private File f;
 
 	@Listen("onClick = #btnCargarListaProfesores")
@@ -35,7 +39,7 @@ public class CCargarProfesor extends CGeneral {
 		// variables locales
 		String cedula, nombre, apellido, sexo, direccion, telefonomovil, telefonofijo, correo, usuario;
 		boolean estatus;
-		long idcategoria;
+		long idcategoria, idprograma;
 
 		// abre el examinar para elegir el archivo
 		javax.swing.JFileChooser j = new javax.swing.JFileChooser();
@@ -88,19 +92,29 @@ public class CCargarProfesor extends CGeneral {
 					idcategoria = Long.parseLong(linea);
 					
 					linea = br.readLine();
+					idprograma = Long.parseLong(linea);
+					
+					linea = br.readLine();
 					usuario = linea;
 
 					// busco el programa con el id que tengo en el txt para
 					// registrar
 					Categoria categoria = new Categoria();
 					categoria = servicioCategoria.buscarPorId(idcategoria);
+					
+					// busco el programa con el id que tengo en el txt para
+					// registrar
+					
+					Programa programa = new Programa();
+					programa = servicioPrograma.buscarPorId(idprograma);
+					
 					// creo el estudiante y lo guardo
 					Profesor profesor;
 					Usuario user = servicioUsuario.buscarUsuarioPorNombre(usuario);
 					Set<AreaInvestigacion> areasProfesor = new HashSet<AreaInvestigacion>();
 					profesor = new Profesor(cedula, nombre, apellido, correo, sexo,
 							direccion, telefonomovil, telefonofijo,
-							estatus, categoria, areasProfesor, user);
+							estatus, categoria, programa, areasProfesor, user);
 
 					servicioProfesor.guardarProfesor(profesor);
 				}
