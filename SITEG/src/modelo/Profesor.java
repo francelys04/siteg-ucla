@@ -89,7 +89,7 @@ public class Profesor {
 	public Profesor(String cedula, String nombre, String apellido,
 			String correoElectronico, String sexo, String direccion,
 			String telefono_movil, String telefono_fijo, Boolean estatus,
-			Categoria categoria, Set<AreaInvestigacion> areas, Usuario usuario) {
+			Categoria categoria, Programa programa, Set<AreaInvestigacion> areas, Usuario usuario) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -101,6 +101,7 @@ public class Profesor {
 		this.telefono_movil = telefono_movil;
 		this.estatus = estatus;
 		this.categoria = categoria;
+		this.programa = programa;
 		this.areas=areas;
 		this.usuario=usuario;
 	}

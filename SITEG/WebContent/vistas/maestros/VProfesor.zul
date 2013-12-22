@@ -65,6 +65,9 @@
 	<popup id="pupCorreoProfesor">
 		<toolbarbutton label="Ingrese aqui el correo del profesor" />
 	</popup>
+		<popup id="pupProgramaProfesor">
+		<toolbarbutton label="Seleccione el programa del profesor" />
+	</popup>
 	<popup id="pupGuardarProfesor">
 		<toolbarbutton
 			label="Presione aqui para guardar los datos del profesor" />
@@ -103,6 +106,22 @@
 				<column width="15%" height="40px" />
 			</columns>
 			<rows>
+
+				<row>
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Programa:" style="color:black" />
+					</hlayout>
+
+					<combobox id="cmbProgramaProfesor" autodrop="true"
+						tooltip="pupProgramaProfesor" width="25%" tabindex="1">
+						<template name="model">
+							<comboitem label="${each.nombre}" />
+						</template>
+					</combobox>
+				</row>
+
 
 				<row>
 					<hlayout>
