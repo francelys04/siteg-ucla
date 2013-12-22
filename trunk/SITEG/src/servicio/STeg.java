@@ -8,6 +8,7 @@ import interfazdao.ITegDAO;
 import modelo.Actividad;
 import modelo.Requisito;
 import modelo.Teg;
+import modelo.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,16 @@ public class STeg {
 			return interfaceTeg.findOne(id);
 		
 	}
-
+		public List<Teg> buscarProyectoFactible() {
+			List<Teg> tegs;
+			tegs = interfaceTeg.findAll();
+			return tegs;	
+		
+	}
+		
+		public List<Teg> buscarActivos() {
+			List<Teg> tegs;
+			tegs = interfaceTeg.findAll();
+			return tegs;
+		}
 }
