@@ -31,7 +31,7 @@ public class STeg {
 	}
 		public List<Teg> buscarProyectoFactible() {
 			List<Teg> tegs;
-			tegs = interfaceTeg.findAll();
+			tegs = interfaceTeg.buscarProyectoFactible();
 			return tegs;	
 		
 	}
