@@ -31,7 +31,8 @@ public class Categoria {
 	
 	@OneToMany(mappedBy="categoria")
 	private Set<Profesor> profesores;
-
+	
+	
 	public Categoria() {
 		super();
 		// TODO Auto-generated constructor stub

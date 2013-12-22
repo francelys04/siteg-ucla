@@ -1,5 +1,6 @@
-<window title="Asignar Comisión Evaluadora" border="normal" width="100%"
-	height="500px" closable="true">
+<window title="Asignar Comisión Evaluadora" border="normal"
+	width="800px" height="505px" closable="true"
+	apply="controlador.CAsignarComision">
 	<separator />
 
 	<style dynamic="true">
@@ -32,17 +33,20 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+
+
+
 	</style>
 	<separator />
 	<separator />
 
 	<label value="Programa:" style="margin-left:2%" />
-	<textbox id="txtProgramaRegistrarAvances" style="margin-left:5%"
-		width="25%" />
+	<textbox id="txtProgramaComision" style="margin-left:5%;color:black !important;" disabled="true" width="25%" />
 
 	<div align="right">
 		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="db1" cols="12" style="margin-right:30px"
+		<datebox id="dbfecha" cols="12"
+			style="margin-right:30px;color:black !important;" disabled="true"
 			format="short" onCreate="self.value = new Date()" mold="rounded">
 		</datebox>
 	</div>
@@ -76,8 +80,9 @@
 								<label value="Area:"
 									style="color:black" />
 
-								<textbox id="txtAreaRegistrarAvances"
-									width="60%" style="margin-left:42%" />
+								<textbox id="txtAreaComision"
+									width="90%" style="margin-left:42%;color:black !important;"
+									disabled="true" />
 
 							</hbox>
 						</row>
@@ -88,9 +93,9 @@
 										Temática: "
 									style="color:black" />
 
-								<textbox
-									id="txtTematicaRegistrarAvances" width="80%"
-									style="margin-left:35%" />
+								<textbox id="txtTematicaComision"
+									width="100%" style="margin-left:35%;color:black !important;"
+									disabled="true" />
 							</hbox>
 
 						</row>
@@ -101,13 +106,12 @@
 
 						</row>
 						<row>
-							<textbox id="txtTituloSolicitud"
-								width="520px" rows="2" cols="100" />
+							<textbox id="txtTituloComision"
+								style="margin-left:35%margin-left:42%;color:black !important;"
+								disabled="true" width="600px" rows="4" cols="100" />
 						</row>
 					</rows>
 				</grid>
-
-
 			</tabpanel>
 
 			<tabpanel height="150px">
@@ -116,47 +120,33 @@
 				<separator />
 				<separator />
 
-
-				<listbox mold="paging" pageSize="2">
+				<listbox id="ltbEstudiantesTeg" mold="paging"
+					pageSize="2"
+					emptyMessage="No hay Estudiantes registrados actualmente">
 
 					<listhead>
 						<listheader label="Cédula" align="center" />
 						<listheader label="Nombre" align="center" />
 						<listheader label="Apellido" align="center" />
-						<listheader label="Correo" align="center"
-							width="30%" />
+						<listheader label="Correo" align="center" />
 					</listhead>
 
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
+					<template name="model">
+						<listitem>
+							<listcell label="${each.cedula}" />
+							<listcell label="${each.nombre}" />
+							<listcell label="${each.apellido}" />
+							<listcell label="${each.correoElectronico}" />
+						</listitem>
+					</template>
 				</listbox>
 
 
 			</tabpanel>
-
 			<tabpanel height="300px">
+				<separator />
+				<separator />
 
-				<separator />
-				<separator />
 				<grid sclass="fgrid" style="margin-left:1%">
 					<columns>
 						<column width="15%" height="30px" />
@@ -165,20 +155,32 @@
 						<row>
 							<label value="Cédula:" style="color:black" />
 
-							<textbox id="txtCedulaTutor" width="20%" />
+							<textbox id="txtCedulaTutorComision"
+								style="color:black !important;" width="20%" disabled="True" />
 						</row>
 						<row>
 							<label value="Nombre:" style="color:black" />
 
 
-							<textbox id="txtNombreTutor" width="30%" />
+							<textbox id="txtNombreTutorComision"
+								style="color:black !important;" width="30%" disabled="True" />
 						</row>
 						<row>
 							<label value="Apellido:"
 								style="color:black" />
 
-							<textbox id="txtApellidoTutor" width="30%" />
+							<textbox id="txtApellidoTutorComision"
+								style="color:black !important;" width="30%" disabled="True" />
 						</row>
+
+						<row>
+							<label value="Correo:"
+								style="color:black" />
+
+							<textbox id="txtCorreoTutorComision"
+								style="color:black !important;" width="40%" disabled="True" />
+						</row>
+
 					</rows>
 				</grid>
 			</tabpanel>
@@ -196,7 +198,7 @@
 						<row>
 							<hbox>
 								<panel title="Profesores Disponibles"
-									width="300px">
+									width="270px">
 									<panelchildren>
 										<listbox
 											id="ltbProfesoresDisponibles" height="160px" mold="paging"
@@ -228,8 +230,8 @@
 									</panelchildren>
 								</panel>
 
-								<panel width="40px"
-									style="margin:0 auto;padding:35px;">
+								<panel width="60px"
+									style="margin-top:70px;margin-left:25px">
 									<panelchildren>
 										<div>
 
@@ -249,7 +251,7 @@
 
 
 								<panel title="Profesores Seleccionados"
-									width="300px">
+									width="270px">
 									<panelchildren>
 
 										<listbox
@@ -264,28 +266,25 @@
 												<listheader
 													label="Apellido" align="center" />
 											</listhead>
-
 											<template name="model">
 												<listitem>
 													<listcell
-														label="${each.actividad.nombre}">
+														label="${each.cedula}">
 													</listcell>
-													<listcell>
-														<datebox
-															inplace="true" value="${each.fechaInicio}" width="98%" />
+												</listitem>
+
+												<listitem>
+													<listcell
+														label="${each.nombre}">
 													</listcell>
-													<listcell>
-														<datebox
-															inplace="true" value="${each.fechaFin}" width="98%" />
-													</listcell>
-													<listcell>
-														<spinner
-															inplace="true" value="${each.actividad.id}" width="98%"
-															visible="false" disabled="true" />
+												</listitem>
+
+												<listitem>
+													<listcell
+														label="${each.apellido}">
 													</listcell>
 												</listitem>
 											</template>
-
 										</listbox>
 									</panelchildren>
 								</panel>
@@ -293,11 +292,7 @@
 						</row>
 					</rows>
 				</grid>
-
-
-
 			</tabpanel>
-
 		</tabpanels>
 
 	</tabbox>
@@ -310,10 +305,10 @@
 		<panelchildren>
 			<div align="center">
 				<separator />
-				<button id="btnGuardar" label="Guardar"
+				<button id="btnGuardarComision" label="Guardar"
 					image="/public/imagenes/iconos/guardar.png" tabindex="12">
 				</button>
-				<button id="btnCancelar" label="Cancelar"
+				<button id="btnCancelarComision" label="Cancelar"
 					image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 				</button>
 
