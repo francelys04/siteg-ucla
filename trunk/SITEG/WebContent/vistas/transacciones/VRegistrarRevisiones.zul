@@ -207,14 +207,13 @@
 				<button id="btnGuardar" label="Guardar"
 					image="/imagenes/guardar.png" tabindex="12">
 				</button>
-				<button id="btnCancelar" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="13">
-				</button>
 				<button id="btnCerrarEvaluacionAvances"
 					label="Finalizar Evaluación" image="/imagenes/finalizar.png"
 					tabindex="12">
 				</button>
-
+				<button id="btnCancelar" label="Cancelar"
+					image="/imagenes/limpiar.png" tabindex="13">
+				</button>
 
 				<separator />
 
