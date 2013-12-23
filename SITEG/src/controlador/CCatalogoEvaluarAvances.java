@@ -92,24 +92,17 @@ public class CCatalogoEvaluarAvances extends CGeneral {
 				long codigo = (Long) map.get("id");
 				Teg tegs = servicioTeg.buscarTeg(id);
 			
-				
 				txtMostrarArea.setValue(tegs.getTematica().getareaInvestigacion().getNombre());
 				txtMostrarTematica.setValue(tegs.getTematica().getNombre());
 				txtMostrarTitulo.setValue(tegs.getTitulo());
 				
-			
 				//btnEliminarUsuario.setDisabled(false);
 				id = tegs.getId();
 				map.clear();
 				map = null;
 			}
 		}
-
-	
 	}
-	
-
-
 	
 	@Listen("onChange = #txtMostrarArea,#txtMostrarTematica,txtMostrarTitulo")
 	public void filtrarDatosCatalogo() {
@@ -143,7 +136,21 @@ public class CCatalogoEvaluarAvances extends CGeneral {
 
 	}
 		
-	
-	
+	@Listen("onDoubleClick = #ltbAvanceProyecto")
+	public void mostrarDatosCatalogo() {
+		Window window = (Window) Executions.createComponents(
+				"/vistas/transacciones/VEvaluarAvances.zul", null, null);	 				
+		window.doModal();
+
+		Listitem listItem = ltbAvanceProyecto.getSelectedItem();
+		Teg tegDatosCatalogo = (Teg) listItem.getValue();
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", tegDatosCatalogo.getId());
+		String vista = "transacciones/VEvaluarAvances.zul";
+		map.put("vista", vista);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+		List<Teg> teg = servicioTeg.buscarProyectoFactible();
+
+	}
 	
 }
