@@ -24,6 +24,9 @@ public class ItemEvaluacion {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
+	@Column(name = "tipo")
+	private String tipo;
+	
 	@Column(name = "estatus")
 	private Boolean estatus;
 	
@@ -35,9 +38,7 @@ public class ItemEvaluacion {
 	
 	@OneToMany(mappedBy="item")
 	private Set<ProgramaItem> programasItems;
-	
-	@Column(name = "tipo")
-	private String tipo;
+
 	
 	public ItemEvaluacion(long id, String nombre, String descripcion, Boolean estatus, String tipo) {
 		super();
