@@ -1,0 +1,47 @@
+<?page id="wdwCatalogoTegRegistrado"  title="Lista de Trabajos Especiales de Grado" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Lista Trabajo Especial de Grado" border="normal" width="800px"
+		id="wdwCatalogoTegRegistrado" apply="controlador.CCatalogoTegRegistrado"
+		closable="true">
+		<listbox id="ltbCatalogoTegRegistrado" width="100%" mold="paging"
+			pageSize="10" emptyMessage="No hay Trabajo Especial de Grado Registrados">
+			<auxhead sclass="category-center">
+				
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+
+					<textbox instant="true" width="80%"
+						id="txtTituloCatalogoTegRegistrado" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+
+					<textbox instant="true" width="80%"
+						id="textTematicaCatalogoTegRegistrado" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+
+					<textbox instant="true" width="80%"
+						id="txtDescripcionCatalogoTegRegistrado" />
+				</auxheader>
+				
+				
+			</auxhead>
+			<listhead>
+				<listheader label="Titulo" align="center" />
+				<listheader label="Tematica" align="center" />
+				<listheader label="Descripcion" align="center" />
+			</listhead>
+
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.teg.titulo}" />
+					<listcell label="${each.teg.tematica}" />
+					<listcell label="${each.teg.descripcion}" />
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>
