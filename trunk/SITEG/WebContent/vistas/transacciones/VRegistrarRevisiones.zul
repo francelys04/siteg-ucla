@@ -1,5 +1,5 @@
-<window title="Registrar Revision" border="normal" width="700px"
-	height="450px" closable="true">
+<window title="Revisiones" border="normal" width="700px"
+	height="600px" closable="true">
 	<separator />
 
 	<style dynamic="true">
@@ -55,7 +55,7 @@
 	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
 		height="250px">
 		<tabs>
-			<tab label="Datos del Proyecto" />
+			<tab label="Datos del Trabajo" />
 			<tab label="Datos del Estudiante" />
 			<tab label="Observaciones" />
 
@@ -95,7 +95,7 @@
 						</row>
 
 						<row>
-							<label value="Título del Proyecto:"
+							<label value="Título del Trabajo:"
 								style="font-weight:bold" />
 
 						</row>
@@ -148,38 +148,53 @@
 
 				</listbox>
 			</tabpanel>
-
-			<tabpanel>
-				<separator />
-				<separator />
-
-				<grid sclass="fgrid" style="margin-left:2%">
-					<columns>
-						<column width="610px" height="20px" />
-					</columns>
-					<rows>
-						<row>
-							<label value="Observaciones:"
-								style="font-weight:bold" />
-
-						</row>
-
-						<row>
-							<textbox id="txtObservacionTutorias"
-								width="590px" rows="6" cols="100" />
-						</row>
-					</rows>
-				</grid>
-
-			</tabpanel>
-
-
 		</tabpanels>
 
 	</tabbox>
 
 	<separator />
 	<separator />
+
+	<listbox mold="paging" pageSize="2" style="margin-left:2%;margin-right:2%">
+
+		<listhead>
+			<listheader label="Fecha" align="center" />
+			<listheader label="Observación" width="80%" align="center" />
+		</listhead>
+
+		<listitem>
+			<listcell label=""></listcell>
+			<listcell label=""></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label=""></listcell>
+			<listcell label=""></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label=""></listcell>
+			<listcell label=""></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label=""></listcell>
+			<listcell label=""></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label=""></listcell>
+			<listcell label=""></listcell>
+		</listitem>
+
+		<listitem>
+			<listcell label=""></listcell>
+			<listcell label=""></listcell>
+		</listitem>
+
+	</listbox>
+
+
 	<separator />
 	<separator />
 
@@ -195,6 +210,11 @@
 				<button id="btnCancelar" label="Cancelar"
 					image="/imagenes/limpiar.png" tabindex="13">
 				</button>
+				<button id="btnCerrarEvaluacionAvances"
+					label="Finalizar Evaluación" image="/imagenes/finalizar.png"
+					tabindex="12">
+				</button>
+
 
 				<separator />
 
