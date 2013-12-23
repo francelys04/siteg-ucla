@@ -17,4 +17,7 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	@Query("select t from Teg t where t.estatus='ProyectoFactible'")
 	public List<Teg> buscarProyectoFactible();
 
+	//Evaluar Revisiones
+	@Query("select t from Teg t where t.estatus='TEGRegistrado'")
+	public List<Teg> buscarProyectoRegistrado();
 }
