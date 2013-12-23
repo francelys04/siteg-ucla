@@ -35,7 +35,13 @@ public class STeg {
 			return tegs;	
 		
 	}
+		//Evaluar Revisiones
+		public List<Teg> buscarProyectoRegistrado() {
+			List<Teg> tegs;
+			tegs = interfaceTeg.buscarProyectoRegistrado();
+			return tegs;	
 		
+	}
 		public List<Teg> buscarActivos() {
 			List<Teg> tegs;
 			tegs = interfaceTeg.findAll();
