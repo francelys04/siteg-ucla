@@ -134,7 +134,7 @@ public class CCatalogoTegRegistrado extends CGeneral {
 		ltbCatalogoTegRegistrado.setModel(new ListModelList<Teg>(tegs2));
 
 	}
-		
+		//Le falta
 	@Listen("onDoubleClick = #ltbCatalogoTegRegistrado")
 	public void mostrarDatosCatalogo() {
 		Window window = (Window) Executions.createComponents(
