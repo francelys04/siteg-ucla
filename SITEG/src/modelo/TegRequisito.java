@@ -28,21 +28,16 @@ public class TegRequisito {
 	@Column(name = "fecha_entrega")
 	private Date fechaEntrega;
 	
-	@Column(name = "estado")
-	private String estado;
-
 	public TegRequisito() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public TegRequisito(Requisito requisito, Teg teg, Date fechaEntrega,
-			String estado) {
+	public TegRequisito(Requisito requisito, Teg teg, Date fechaEntrega) {
 		super();
 		this.requisito = requisito;
 		this.teg = teg;
 		this.fechaEntrega = fechaEntrega;
-		this.estado = estado;
 	}
 
 	public Requisito getRequisito() {
@@ -69,11 +64,4 @@ public class TegRequisito {
 		this.fechaEntrega = fechaEntrega;
 	}
 
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
 }
