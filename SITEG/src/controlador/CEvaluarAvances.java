@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.imageio.ImageIO;
 
 import modelo.Actividad;
+import modelo.Estudiante;
 import modelo.Requisito;
 import modelo.Teg;
 import modelo.Profesor;
@@ -25,6 +26,7 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -75,13 +77,19 @@ public class CEvaluarAvances extends CGeneral {
 	private Datebox dbEvaluarAvances;
 	@Wire
 	private Listbox ltbEvaluarAvance;
+	@Wire
+	private Button btnCerrarEvaluacionAvances;
+	@Wire
+	private Listbox ltbEstudiantesProyecto;
 
 	@Override
 	void inicializar(Component comp) {
 
 		List<Teg> teg = servicioTeg.buscarProyectoFactible();
 		List<Avance> avance = servicioAvance.buscarActivos();
-
+        List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantes();
+		
+		ltbEstudiantesProyecto.setModel(new ListModelList<Estudiante>(estudiantes));
 		ltbEvaluarAvance.setModel(new ListModelList<Avance>(avance));
 
 		Selectors.wireComponents(comp, this, false);

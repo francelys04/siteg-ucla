@@ -117,9 +117,8 @@
 				<separator />
 				<separator />
 				<separator />
-
-				<listbox mold="paging" pageSize="2">
-
+         
+            <listbox id="ltbEstudiantesProyecto" mold="paging" pageSize="2" style="margin-left:2%;margin-right:2%">
 					<listhead>
 						<listheader label="Cédula" align="center" />
 						<listheader label="Nombre" align="center" />
@@ -127,28 +126,15 @@
 						<listheader label="Correo" align="center"
 							width="30%" />
 					</listhead>
-
+					
+					<template name="model">
 					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
+						<listcell label="${each.cedula}" />
+						<listcell label="${each.nombre}" />
+					    <listcell label="${each.apellido}" />
+						<listcell label="${each.correoElectronico}" />
 					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
+					</template>
 				</listbox>
 			</tabpanel>
 		</tabpanels>
