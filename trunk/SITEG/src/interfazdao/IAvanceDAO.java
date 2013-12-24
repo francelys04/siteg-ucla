@@ -12,7 +12,7 @@ import modelo.Programa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface IAvanceDAO extends JpaRepository<Actividad, Long> {
+public interface IAvanceDAO extends JpaRepository<Avance, Long> {
 
 
 	public List<Avance> findByEstatusTrue();
