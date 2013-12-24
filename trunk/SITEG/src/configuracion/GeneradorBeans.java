@@ -26,6 +26,7 @@ import servicio.STeg;
 import servicio.STematica;
 import servicio.STipoJurado;
 import servicio.SUsuario;
+import servicio.SAvance;
 
 public class GeneradorBeans implements ApplicationContextAware {
 
@@ -124,4 +125,7 @@ public class GeneradorBeans implements ApplicationContextAware {
 		return applicationContext.getBean(STeg.class);
 	}
 	
+	public static SAvance getServicioAvance(){
+		return applicationContext.getBean(SAvance.class);
+	}
 }
