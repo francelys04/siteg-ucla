@@ -1,5 +1,5 @@
-<window title="Evaluar Avances" border="normal" width="700px"
-	height="600px" closable="true">
+<window id="wdwEvaluarAvances" title="Evaluar Avances" border="normal" width="700px"
+	height="600px" closable="true" apply="controlador.CEvaluarAvances">
 	<separator />
 
 	<style dynamic="true">
@@ -36,14 +36,18 @@
 
 	<separator />
 	<separator />
-
+<label value="(*) "
+		style="font-weight:bold;color:red;margin-left:2%">
+	</label>
+	<label value="Campos Obligatorios"></label>
+	
 	<label value="Programa:" style="margin-left:2%" />
-	<textbox id="txtProgramaRegistrarAvances" style="margin-left:5%"
+	<textbox id="txtProgramaEvaluarAvances" style="margin-left:5%"
 		width="25%" />
 
 	<div align="right">
 		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="db1" cols="12" style="margin-right:30px"
+		<datebox id="dbEvaluarAvances" cols="12" style="margin-right:30px"
 			format="short" onCreate="self.value = new Date()" mold="rounded">
 		</datebox>
 	</div>
@@ -74,7 +78,7 @@
 								<label value="Area:"
 									style="font-weight:bold" />
 
-								<textbox id="txtAreaRegistrarAvances"
+								<textbox id="txtAreaEvaluarAvances"
 									width="60%" style="margin-left:42%" />
 
 							</hbox>
@@ -87,7 +91,7 @@
 									style="font-weight:bold" />
 
 								<textbox
-									id="txtTematicaRegistrarAvances" width="80%"
+									id="txtTematicaEvaluarAvances" width="80%"
 									style="margin-left:35%" />
 							</hbox>
 
@@ -99,7 +103,7 @@
 
 						</row>
 						<row>
-							<textbox id="txtTituloSolicitud"
+							<textbox id="txtTituloEvaluarAvances"
 								width="520px" rows="2" cols="100" />
 						</row>
 					</rows>
@@ -154,42 +158,19 @@
 	<separator />
 	<separator />
 
-	<listbox mold="paging" pageSize="2" style="margin-left:2%;margin-right:2%">
+	<listbox id="ltbEvaluarAvance" mold="paging" pageSize="2" style="margin-left:2%;margin-right:2%">
 
 		<listhead>
-			<listheader label="Fecha" align="center" />
-			<listheader label="Observación" width="80%" align="center" />
+			<listheader id="txtMostrarFecha" label="Fecha" align="center" />
+			<listheader id="txtMostrarObservacion" label="Observación" width="80%" align="center" />
 		</listhead>
 
-		<listitem>
-			<listcell label=""></listcell>
-			<listcell label=""></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label=""></listcell>
-			<listcell label=""></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label=""></listcell>
-			<listcell label=""></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label=""></listcell>
-			<listcell label=""></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label=""></listcell>
-			<listcell label=""></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label=""></listcell>
-			<listcell label=""></listcell>
-		</listitem>
+	<template name="model">
+				<listitem>
+					<listcell label="${each.fecha}" />
+					<listcell label="${each.observacion}" />
+				</listitem>
+			</template>
 
 	</listbox>
 
