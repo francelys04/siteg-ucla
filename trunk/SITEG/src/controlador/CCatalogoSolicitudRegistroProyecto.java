@@ -2,12 +2,22 @@ package controlador;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import modelo.Actividad;
+import modelo.AreaInvestigacion;
+import modelo.Cronograma;
+import modelo.Estudiante;
+import modelo.Profesor;
+import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
+import modelo.Usuario;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -21,7 +31,12 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+import servicio.SAreaInvestigacion;
+import servicio.SEstudiante;
+import servicio.SProfesor;
+import servicio.SPrograma;
 import servicio.STeg;
+import servicio.SUsuario;
 
 
 import configuracion.GeneradorBeans;
@@ -30,7 +45,10 @@ import configuracion.GeneradorBeans;
 @Controller
 public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	
+	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
+	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
+	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
+	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	@Wire
 	private Listbox ltbSolcitudRegistroProyecto;
 	@Wire
@@ -47,6 +65,8 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	private Textbox txtMostrarNombreTutor;
 	@Wire
 	private Textbox txtMostrarApellidoTutor;
+	
+	CVerificarSolicitudProyecto vistaVerificar = new CVerificarSolicitudProyecto();
 
 	@Override
 	void inicializar(Component comp) {
@@ -55,19 +75,10 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 		 * Listado de todos los teg cuyo
 		 * estatus=SolicitandoRegistro
 		 */
-
-		List<Teg> teg = servicioTeg.buscarSolicitudRegistroTeg();
-
-		/*
-		 * Validacion para mostrar el listado de actividades mediante el
-		 * componente ltbActividad dependiendo si se encuentra ejecutando la
-		 * vista VCatalogoActividad
-		 */
-		//if (txtNombreRequisito == null) {
-			ltbSolcitudRegistroProyecto.setModel(new ListModelList<Teg>(teg));
-		//}
-
-		Selectors.wireComponents(comp, this, false);
+	
+		List<Teg>  t = buscarDatos();
+		ltbSolcitudRegistroProyecto.setModel(new ListModelList<Teg> (t));
+		Selectors.wireComponents(comp, this, false) ;
 
 		/*
 		 * Permite retornar el valor asignado previamente guardado al
@@ -82,13 +93,19 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 		
 	}
 	
-	@Listen("onChange = #txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,# txtMostrarApellidoTutor")
+	@Listen("onChange = #txtMostrarFecha,#txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,# txtMostrarApellidoTutor")
 	public void filtrarDatosCatalogo() {
-		List<Teg> teg1 = servicioTeg.buscarSolicitudRegistroTeg();
+		List<Teg> teg1 = buscarDatos();
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
 			if (teg
+					.getFecha().toString()
+					.toLowerCase()
+					.contains(
+					txtMostrarFecha.getValue().toLowerCase())
+					
+				&&	teg
 					.getTematica().getNombre()
 					.toLowerCase()
 					.contains(
@@ -130,44 +147,46 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 
 	}
 	
-	
+		
 	@Listen("onDoubleClick = #ltbSolcitudRegistroProyecto")
 	public void mostrarDatosCatalogo() {		
-		
-		Window window = (Window) Executions.createComponents(
-				"/vistas/transacciones/VVerificarSolicitudProyecto.zul", null, null);	 				
-		window.doModal();
-
 			Listitem listItem = ltbSolcitudRegistroProyecto.getSelectedItem();
 			Teg tegDatosCatalogo = (Teg) listItem.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", tegDatosCatalogo.getId());
+			map.put("id", tegDatosCatalogo.getId());			
 			String vista = "transacciones/VVerificarSolicitudProyecto";
 			map.put("vista", vista);
-			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			List<Teg> teg = servicioTeg.buscarSolicitudRegistroTeg();
-/*
-			//if (txtNombreRequisito == null) {
-				ltbSolcitudRegistroProyecto.setModel(new ListModelList<Teg>(teg));
-			//}
-
-		//	Selectors.wireComponents(comp, this, false);
-
-			HashMap<String, Object> map1 = (HashMap<String, Object>) Sessions
-					.getCurrent().getAttribute("tegCatalogo");
-			if (map1 != null) {
-				if (map1.get("id") != null) {
-
-					long codigo =  (Long) map1.get("id");
-					Teg teg3 = servicioTeg.buscarTeg(codigo);
-					txtNombreActividad.setValue(actividad2.getNombre());
-					txtDescripcionActividad.setValue(actividad2.getDescripcion());
-					id = actividad2.getId();
-					btnEliminarActividad.setDisabled(false);
-					map1.clear();
-					map1 = null;
-				}
-			}*/
-
+			Sessions.getCurrent().setAttribute("tegCatalogo", map);
+			//List<Teg> teg = servicioTeg.buscarTegPrograma();	
+			Window window = (Window) Executions.createComponents(
+					"/vistas/transacciones/VVerificarSolicitudProyecto.zul", null, null);	 				
+			window.doModal();
+			vistaVerificar.recibir("catalogos/VCatalogoSolicitudRegistroProyecto");
+		
 	}
+	public List<Teg> buscarDatos()
+	{
+			Profesor profesor = ObtenerUsuarioProfesor();		
+			Programa programa = new Programa();			
+			programa= profesor.getPrograma();			
+			List<Profesor>  profesores = servicioProfesor.buscarProfesorDelPrograma(programa);			
+			List<Teg>  tegs = servicioTeg.BuscarTegSolicitandoRegistro();
+			Profesor profesor1 = new Profesor();		
+			List<Teg> t = new ArrayList<Teg>();			
+			for (int i = 0; i < tegs.size(); i++) {
+				profesor1 = tegs.get(i).getTutor();
+				boolean encontre = false;
+				for (int j = 0; j < profesores.size(); j++) {
+					if (profesores.get(j).getCedula().equals(profesor1.getCedula())) {
+						System.out.print(profesores.get(j).getCedula());
+						encontre = true;
+					}
+				}
+				if (encontre == true) {
+					t.add(tegs.get(i));
+
+				}
+			}
+			return t;
+	}	
 }

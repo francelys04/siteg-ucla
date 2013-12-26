@@ -19,11 +19,7 @@ public class STeg {
 	private ITegDAO interfaceTeg;
 
 	
-	public List<Teg> buscarSolicitudRegistroTeg(){
-		List<Teg> tegs;
-		tegs = interfaceTeg.buscarSolicitudRegistroTeg();
-		return tegs;
-	}
+
 		
 		public Teg buscarTeg(long id){
 			return interfaceTeg.findOne(id);
@@ -61,6 +57,16 @@ public class STeg {
 			return tegs;
 
 		}
+		
+		public List<Teg> BuscarTegSolicitandoRegistro() {
+
+			List<Teg> tegs;
+			tegs = interfaceTeg.TegSolicitandoRegistro();
+			return tegs;
+
+		}
+		
+
 
 		
 }

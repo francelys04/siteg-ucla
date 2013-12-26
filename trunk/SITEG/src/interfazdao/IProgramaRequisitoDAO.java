@@ -14,4 +14,8 @@ public interface IProgramaRequisitoDAO extends JpaRepository<ProgramaRequisito, 
 
 	@Query("select distinct r from Requisito r where r.id in (select pr.requisito from ProgramaRequisito pr where pr.programa = ?1 and pr.lapso = ?2)")
 	public List<Requisito> buscarRequisitosPrograma(Programa programa, Lapso lapso);
+	
+	@Query ("select pr.requisito from ProgramaRequisito pr where pr.programa = ?1 and pr.lapso = ?2")
+	public List<Requisito> buscarRequistos(Programa programa, Lapso lapso);
+	
 }

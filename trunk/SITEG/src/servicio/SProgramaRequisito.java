@@ -26,4 +26,11 @@ public class SProgramaRequisito {
 		requisitos = interfaceProgramaRequisito.buscarRequisitosPrograma(programa, lapso);
 		return requisitos;
 	}
+	
+	public List<Requisito> buscarRequisitos(Programa programa, Lapso lapso){
+		List<Requisito> requisitos;
+		requisitos = interfaceProgramaRequisito.buscarRequistos(programa, lapso);
+		return requisitos;
+	}
+	
 }

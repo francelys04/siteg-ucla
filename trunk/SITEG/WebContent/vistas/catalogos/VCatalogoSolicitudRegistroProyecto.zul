@@ -5,7 +5,7 @@
 	<separator />
 
 	<listbox id="ltbSolcitudRegistroProyecto" mold="paging" pageSize="6"
-		style="margin-left:10px;margin-right:10px">
+		style="margin-left:10px;margin-right:10px" emptyMessage="No hay tegs para mostrar">
 
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">

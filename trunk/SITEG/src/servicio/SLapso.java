@@ -34,5 +34,9 @@ public Lapso buscarPorNombre(String value) {
 	lapso = interfaceLapso.findByNombre(value);
 	return lapso;
 }
-
+public Lapso buscarLapsoVigente(){
+Lapso lapso;
+lapso = interfaceLapso.findByEstatusTrue();
+return lapso;
+}
 }
