@@ -6,6 +6,7 @@ import interfazdao.IProfesorDAO;
 
 import modelo.AreaInvestigacion;
 import modelo.Profesor;
+import modelo.Programa;
 import modelo.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,15 @@ public class SProfesor {
 		profesor = interfazProfesor.findByUsuario(u);
 		return profesor;
 	}
+	
+	public List<Profesor> buscarProfesorDelPrograma(Programa programa){
+		List<Profesor> profesores;
+		profesores= interfazProfesor.buscarProfesorporPrograma(programa);
+		return profesores;
+	}
+
+	
+	
 	
 	
 }

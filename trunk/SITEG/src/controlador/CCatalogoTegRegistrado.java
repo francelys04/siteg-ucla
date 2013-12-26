@@ -60,7 +60,7 @@ public class CCatalogoTegRegistrado extends CGeneral {
 		 * estatus=ProyectoFactible
 		 */
  
-		List<Teg> teg = servicioTeg.buscarProyectoRegistrado();
+		List<Teg> teg = servicioTeg.buscarTegRegistrado();
 
 		/*
 		 * Validacion para mostrar el listado de actividades mediante el
@@ -89,7 +89,7 @@ public class CCatalogoTegRegistrado extends CGeneral {
 			if (map.get("estatus") != null) {
 
 				String estatus = (String) map.get("estatus");
-				Teg tegs = (Teg) servicioTeg.buscarProyectoRegistrado();
+				Teg tegs = (Teg) servicioTeg.buscarTegRegistrado();
 			
 				txtTituloCatalogoTegRegistrado.setValue(tegs.getTitulo());
 				txtTematicaCatalogoTegRegistrado.setValue(tegs.getTematica().getNombre());
@@ -148,7 +148,7 @@ public class CCatalogoTegRegistrado extends CGeneral {
 		String vista = "transacciones/VRegistrarRevisiones.zul";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		List<Teg> teg = servicioTeg.buscarProyectoRegistrado();
+		List<Teg> teg = servicioTeg.buscarTegRegistrado();
 
 	}
 	

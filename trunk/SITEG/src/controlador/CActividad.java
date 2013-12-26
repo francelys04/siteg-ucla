@@ -152,8 +152,8 @@ public class CActividad extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		}else {
-			Messagebox.show("ï¿½Desea guardar los datos de la actividad?",
-					"Dialogo de confirmaciï¿½n", Messagebox.OK
+			Messagebox.show("¿Desea guardar los datos de la actividad?",
+					"Dialogo de confirmación", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -169,7 +169,7 @@ public class CActividad extends CGeneral {
 								id = 0;
 								Messagebox.show(
 										"Actividad registrada exitosamente",
-										"Informaciï¿½n", Messagebox.OK,
+										"Información", Messagebox.OK,
 										Messagebox.INFORMATION);
 							}
 						}
