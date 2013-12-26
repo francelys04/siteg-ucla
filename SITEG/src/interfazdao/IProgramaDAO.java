@@ -21,5 +21,7 @@ public interface IProgramaDAO extends JpaRepository<Programa, Long> {
 	
 //	@Query("select p from Programa p where p.id in p.areas =?")
 //	public List<Programa> buscar();
+	
+	
 }
 

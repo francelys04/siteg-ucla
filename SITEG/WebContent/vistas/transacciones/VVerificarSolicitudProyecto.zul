@@ -1,5 +1,5 @@
-<window title="Verificar Solicitudes de Proyecto" border="normal"
-	width="700px" height="560px" closable="true">
+<window id="wdwVerificarSolicitudProyecto" title="Verificar Solicitudes de Proyecto" border="normal"
+	width="700px" height="700px" closable="true" apply="controlador.CVerificarSolicitudProyecto">
 	<separator />
 
 	<style dynamic="true">
@@ -39,12 +39,12 @@
 
 	<label value="Programa:" style="margin-left:2%" />
 	<textbox id="txtProgramaRegistrarAvances" style="margin-left:5%"
-		width="25%" />
+		width="25%" disabled="true" />
 
 	<div align="right">
 		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="db1" cols="12" style="margin-right:30px"
-			format="short" onCreate="self.value = new Date()" mold="rounded">
+		<datebox id="db1" cols="12" style="margin-right:30px;color:black !important;"
+			format="short" onCreate="self.value = new Date()" mold="rounded" disabled="true">
 		</datebox>
 	</div>
 
@@ -52,7 +52,7 @@
 	<separator />
 
 	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
-		height="250px">
+		height="350px">
 		<tabs>
 			<tab label="Datos del Proyecto" />
 			<tab label="Datos del Estudiante" />
@@ -75,8 +75,8 @@
 								<label value="Area:"
 									style="font-weight:bold" />
 
-								<textbox id="txtAreaRegistrarAvances"
-									width="60%" style="margin-left:42%" />
+								<textbox id="txtAreaVerificar"
+									width="60%" style="margin-left:42%;color:black !important;" disabled="true" />
 
 							</hbox>
 						</row>
@@ -88,8 +88,8 @@
 									style="font-weight:bold" />
 
 								<textbox
-									id="txtTematicaRegistrarAvances" width="80%"
-									style="margin-left:35%" />
+									id="txtTematicaVerificar" width="80%"
+									style="margin-left:35%;color:black !important;" disabled="true" />
 							</hbox>
 
 						</row>
@@ -100,8 +100,8 @@
 
 						</row>
 						<row>
-							<textbox id="txtTituloSolicitud"
-								width="520px" rows="2" cols="100" />
+							<textbox id="txtTituloVerificar"
+								width="520px" rows="2" cols="100" style="color:black !important;" disabled="true" />
 						</row>
 					</rows>
 				</grid>
@@ -115,7 +115,7 @@
 				<separator />
 				<separator />
 
-				<listbox mold="paging" pageSize="2">
+				<listbox id="ltbEstudiantesTeg" mold="paging" pageSize="2">
 
 					<listhead>
 						<listheader label="Cédula" align="center" />
@@ -124,28 +124,19 @@
 						<listheader label="Correo" align="center"
 							width="30%" />
 					</listhead>
+					
+			<template name="model">
+				<listitem>
+					<listcell label="${each.cedula}" />
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.apellido}" />
+					<listcell label="${each.correoElectronico}" />	
 
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
+				</listitem>
+			</template>
 
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
 
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
+				
 				</listbox>
 
 
@@ -164,20 +155,20 @@
 							<label value="Cedula:"
 								style="font-weight:bold" />
 
-							<textbox id="txtCedulaTutor" width="20%" />
+							<textbox id="txtCedulaTutorVerificar" width="20%" style="color:black !important;" disabled="true"/>
 						</row>
 						<row>
 							<label value="Nombre:"
 								style="font-weight:bold" />
 
 
-							<textbox id="txtNombreTutor" width="30%" />
+							<textbox id="txtNombreTutorVerificar" width="30%" style="color:black !important;" disabled="true" />
 						</row>
 						<row>
 							<label value="Apellido:"
 								style="font-weight:bold" />
 
-							<textbox id="txtApellidoTutor" width="30%" />
+							<textbox id="txtApellidoTutorVerificar" width="30%" style="color:black !important;" disabled="true"/>
 						</row>
 					</rows>
 				</grid>
@@ -188,61 +179,102 @@
 				<separator />
 				<separator />
 
-				<grid mold="paging" pageSize="1" width="640px">
-
-
+		<grid sclass="fgrid"
+					style="margin-left:2%;margin-right:1%">
 					<columns>
-						<column width="40px" label="" align="center" />
-						<column width="200px" label="Nombre"
-							align="center" />
-						<column width="400px" label="Descripción"
-							align="center" />
+						<column width="98%" height="30%" />
 					</columns>
-
 					<rows>
 
 						<row>
-							<checkbox />
-							<label value="Historial de Notas" />
-							<label
-								value="Record académico del estudiante donde se indica el semestre que cursa y las notas obtenidas" />
+							<hbox>
+								<panel title="Requisitos Disponibles"
+									width="260px">
+									<panelchildren>
+										<listbox
+											id="ltbRequisitosDisponibles" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No hay requisitos registrados">
+											<listhead>
+												<listheader
+													label="Nombre" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell
+														label="${each.nombre}">
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+									</panelchildren>
+								</panel>
 
+
+								<panel width="60px"
+									style="margin-left:20px;margin-top:80px">
+									<panelchildren>
+										<div>
+
+											<button
+												id="btnAgregarRequisitos" sclass="pointer"
+												image="/public/imagenes/iconos/right.png"
+												tooltiptext="Agregar Requisitos" width="35px" />
+											<separator />
+											<button sclass="pointer"
+												id="btnRemoverRequisitos"
+												image="/public/imagenes/iconos/left.png"
+												tooltiptext="Quitar Requisitos" width="35px" />
+
+										</div>
+									</panelchildren>
+								</panel>
+
+								<panel title="Requisitos Seleccionados"
+									width="260px">
+									<panelchildren>
+										<listbox 
+											id="ltbRequisitosSeleccionadas" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No se han seleccionado requisitos">
+											<listhead>
+												<listheader
+													label="Nombre" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell
+														label="${each.nombre}">
+													</listcell>
+												</listitem>
+											</template>
+
+
+										</listbox>
+									</panelchildren>
+								</panel>
+							</hbox>
 						</row>
-
-						<row>
-							<checkbox />
-							<label value="Proyecto Resumen" />
-							<label
-								value="Resumen del proyecto que contendrá la información más relevante" />
-						</row>
-
-						<row>
-							<checkbox />
-							<label value="Proyecto Resumen" />
-							<label
-								value="Resumen del proyecto que contendrá la información más relevante" />
-						</row>
-
 					</rows>
 				</grid>
+						
+				
+				<separator />
+				<separator />
+				
 
-				<separator />
-				<separator />
-				<separator />
-				<separator />
-
-				<radiogroup id="radSexoEstudiante">
-					<radio label="Requisitos completos y correctos"
+				<radiogroup id="rdgRequisitos">
+					<radio id="rdoCompleto" label="Requisitos completos y correctos"
 						style="margin-left:100px" tabindex="5" />
-					<radio label="Requisitos incompletos o incorrectos"
+					<radio  id="rdoIncompleto" label="Requisitos incompletos o incorrectos"
 						style="margin-left:15px" tabindex="6" />
 				</radiogroup>
-
-			</tabpanel>
+				
+</tabpanel>
 
 		</tabpanels>
-
-	</tabbox>
+		</tabbox>
+	
 
 	<separator />
 	<separator />
@@ -258,7 +290,7 @@
 			</row>
 
 			<row>
-				<textbox id="txtObservacionTutorias" width="600px"
+				<textbox id="txtObservacion" width="600px"
 					rows="2" cols="100" />
 			</row>
 		</rows>
