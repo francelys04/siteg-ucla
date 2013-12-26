@@ -18,6 +18,10 @@ public class SSolicitudTutoria {
 	private ISolicitudTutoriaDAO interfaceSolicitud;
 	private String[] Estatus = {"Por Revisar", "Aprobada", "Rechazada"};
 	
+	public void guardar(SolicitudTutoria solicitud){
+		interfaceSolicitud.save(solicitud);
+	}
+	
 	public List<SolicitudTutoria> buscarSolicitudPorRevisar(Profesor profesor){
 		List<SolicitudTutoria> solicitudes;
 		solicitudes = interfaceSolicitud.findByEstatusLikeAndProfesor(Estatus[0], profesor);
