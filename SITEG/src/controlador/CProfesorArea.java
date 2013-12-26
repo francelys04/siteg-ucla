@@ -136,8 +136,6 @@ public class CProfesorArea extends CGeneral{
 
 		Set<AreaInvestigacion> areasProfesor = new HashSet<AreaInvestigacion>();
 		for (int i = 0; i < lsbAreasProfesorSeleccionadas.getItemCount(); i++) {
-			System.out.println("imprimo cronograma");
-			System.out.println(lsbAreasProfesorSeleccionadas.getItemCount());
 			AreaInvestigacion area = lsbAreasProfesorSeleccionadas.getItems().get(i)
 					.getValue();
 			areasProfesor.add(area);

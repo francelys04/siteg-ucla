@@ -9,19 +9,19 @@
 
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
-				<image src="/imagenes/filtro.png" />
+				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox instant="true" width="70%" id="txtFechaSolicitud"/>
 			</auxheader>
 			<auxheader colspan="1">
-				<image src="/imagenes/filtro.png" />
+				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox instant="true" width="80%" id="txtAreaSolicitud" />
 			</auxheader>
 			<auxheader colspan="1">
-				<image src="/imagenes/filtro.png" />
+				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox instant="true" width="80%" id="txtTematicaSolicitud" />
 			</auxheader>
 			<auxheader colspan="1">
-				<image src="/imagenes/filtro.png" />
+				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox instant="true" width="80%" id="txtDescripcionSolicitud" />
 			</auxheader>
 

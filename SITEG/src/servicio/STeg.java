@@ -36,9 +36,9 @@ public class STeg {
 		
 	}
 		//Evaluar Revisiones
-		public List<Teg> buscarProyectoRegistrado() {
+		public List<Teg> buscarTegRegistrado() {
 			List<Teg> tegs;
-			tegs = interfaceTeg.buscarProyectoRegistrado();
+			tegs = interfaceTeg.buscarTegRegistrado();
 			return tegs;	
 		
 	}
@@ -52,4 +52,15 @@ public class STeg {
 			// TODO Auto-generated method stub
 			interfaceTeg.save(objetoTeg1);
 		}
+		
+		
+		public List<Teg> BuscarProyectoRegistrado() {
+
+			List<Teg> tegs;
+			tegs = interfaceTeg.ProyectoRegistrado();
+			return tegs;
+
+		}
+
+		
 }

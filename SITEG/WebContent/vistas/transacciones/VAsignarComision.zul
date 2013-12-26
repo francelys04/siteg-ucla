@@ -1,4 +1,4 @@
-<window title="Asignar Comisión Evaluadora" border="normal"
+<window id="wdwAsignarComision" title="Asignar Comisión Evaluadora" border="normal"
 	width="800px" height="505px" closable="true"
 	apply="controlador.CAsignarComision">
 	<separator />
@@ -41,7 +41,9 @@
 	<separator />
 
 	<label value="Programa:" style="margin-left:2%" />
-	<textbox id="txtProgramaComision" style="margin-left:5%;color:black !important;" disabled="true" width="25%" />
+	<textbox id="txtProgramaComision"
+		style="margin-left:5%;color:black !important;" disabled="true"
+		width="25%" />
 
 	<div align="right">
 		<label value="Fecha:" style="margin-right:10px"></label>
@@ -120,7 +122,7 @@
 				<separator />
 				<separator />
 
-				<listbox id="ltbEstudiantesTeg" mold="paging"
+				<listbox id="lsbEstudiantesTeg" mold="paging"
 					pageSize="2"
 					emptyMessage="No hay Estudiantes registrados actualmente">
 
@@ -174,8 +176,7 @@
 						</row>
 
 						<row>
-							<label value="Correo:"
-								style="color:black" />
+							<label value="Correo:" style="color:black" />
 
 							<textbox id="txtCorreoTutorComision"
 								style="color:black !important;" width="40%" disabled="True" />
@@ -201,8 +202,8 @@
 									width="270px">
 									<panelchildren>
 										<listbox
-											id="ltbProfesoresDisponibles" height="160px" mold="paging"
-											pageSize="4" emptyMessage="No hay Profesores registrados"
+											id="lsbProfesoresDisponibles" height="180px" mold="paging"
+											pageSize="3" emptyMessage="No hay Profesores Disponibles"
 											oddRowSclass="non-odd" checkmark="true">
 											<listhead>
 												<listheader
@@ -236,12 +237,12 @@
 										<div>
 
 											<button
-												id="btnAgregarProfesores" sclass="pointer"
+												id="btnAgregarProfesoresComision" sclass="pointer"
 												image="/public/imagenes/iconos/right.png"
 												tooltiptext="Agregar Profesores" width="35px" />
 											<separator />
 											<button sclass="pointer"
-												id="btnRemoverProfesores"
+												id="btnRemoverProfesoresComision"
 												image="/public/imagenes/iconos/left.png"
 												tooltiptext="Quitar Profesores" width="35px" />
 
@@ -255,9 +256,9 @@
 									<panelchildren>
 
 										<listbox
-											id="ltbProfesoresSeleccionados" mold="paging" pageSize="2"
-											height="160px"
-											emptyMessage="No hay profesores seleccionados">
+											id="lsbProfesoresSeleccionados" mold="paging" pageSize="3"
+											height="180px" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No hay profesores Seleccionados">
 											<listhead>
 												<listheader
 													label="Cédula" align="center" />

@@ -81,7 +81,7 @@ public class CSolicitudTutoria extends CGeneral {
 
 		if (map != null) {
 			if (map.get("id") != null) {
-				id = (long) map.get("id");
+				id = (Long) map.get("id");
 				solicitud = servicioTutoria.buscarSolicitud(id);
 				List<Estudiante> estudiantes = servicioEstudiante.buscarSolicitudesEstudiante(solicitud);
 				ltbSolicitudesEstudiantes.setModel(new ListModelList<Estudiante>(estudiantes));
