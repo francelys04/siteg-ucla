@@ -13,8 +13,10 @@ import servicio.SCondicion;
 import servicio.SCondicionPrograma;
 import servicio.SCronograma;
 import servicio.SEstudiante;
+import servicio.SFactibilidad;
 import servicio.SGrupo;
 import servicio.SItem;
+import servicio.SItemFactibilidad;
 import servicio.SLapso;
 import servicio.SProfesor;
 import servicio.SPrograma;
@@ -22,6 +24,7 @@ import servicio.SProgramaArea;
 import servicio.SProgramaItem;
 import servicio.SProgramaRequisito;
 import servicio.SRequisito;
+import servicio.SSolicitudTutoria;
 import servicio.STeg;
 import servicio.STematica;
 import servicio.STipoJurado;
@@ -127,5 +130,17 @@ public class GeneradorBeans implements ApplicationContextAware {
 	
 	public static SAvance getServicioAvance(){
 		return applicationContext.getBean(SAvance.class);
+	}
+	
+	public static SSolicitudTutoria getServicioTutoria(){
+		return applicationContext.getBean(SSolicitudTutoria.class);
+	}
+	
+	public static SFactibilidad getServicioFactibilidad(){
+		return applicationContext.getBean(SFactibilidad.class);
+	}
+	
+	public static SItemFactibilidad getServicioItemFactibilidad(){
+		return applicationContext.getBean(SItemFactibilidad.class);
 	}
 }

@@ -14,4 +14,6 @@ public interface IGrupoDAO extends JpaRepository<Grupo, Long> {
 	public List<Grupo> findByUsuarios(Usuario usuario);
 	
 	public List<Grupo> findByIdNotIn(List<Long> ids);
+
+	public Grupo findByNombre(String string);
 }

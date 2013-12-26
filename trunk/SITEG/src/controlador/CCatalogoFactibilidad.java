@@ -32,7 +32,7 @@ public class CCatalogoFactibilidad extends CGeneral{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	SFactibilidad serviciofactibilidad = GeneradorBeans.getFactibilidad();
+	SFactibilidad serviciofactibilidad = GeneradorBeans.getServicioFactibilidad();
 	@Wire
 	private Textbox txtIdListaFactibilidad;
 	@Wire

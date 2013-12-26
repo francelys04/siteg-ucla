@@ -61,8 +61,8 @@ public class TestVM extends SelectorComposer<Component> {
 		System.out.println(auth.getName());
 		
 		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
-		System.out.println(u.getImagen().toString());
-		if(u.getImagen().toString() == "[]")
+		//System.out.println(u.getImagen().toString());
+		if(u.getImagen().toString() == "[]"  )
 			imagenes.setSrc("/imagenes/buscar.png");
 		try {
 			BufferedImage imag;

@@ -33,7 +33,7 @@ import controlador.CCatalogoFactibilidad;
 import controlador.CGeneral;
 	public class CRegistrarFactibilidad extends CGeneral{
 		CCatalogoFactibilidad catalogo = new CCatalogoFactibilidad();
-		SFactibilidad ServicioRegistrarFactibilidad = GeneradorBeans.getFactibilidad();
+		SFactibilidad ServicioRegistrarFactibilidad = GeneradorBeans.getServicioFactibilidad();
 		STeg ServicioTeg = GeneradorBeans.getServicioTeg();
 		SEstudiante ServicioEstudiante = GeneradorBeans.getServicioEstudiante();
 		SItemFactibilidad ServicioItemFactibilidad = GeneradorBeans.getServicioItemFactibilidad();
