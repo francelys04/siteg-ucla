@@ -187,7 +187,7 @@ public class CProfesor extends CGeneral {
 							Categoria categoria = servicioCategoria
 									.buscarCategoriaPorNombre(categorias);
 							Programa programa = servicioPrograma
-							.buscarProgramaPorNombre(programas);
+							.buscarPorNombrePrograma(programas);
 							Set<AreaInvestigacion> areasProfesor = new HashSet<AreaInvestigacion>();
 							Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
 							Profesor profesor = new Profesor(cedula, nombre,

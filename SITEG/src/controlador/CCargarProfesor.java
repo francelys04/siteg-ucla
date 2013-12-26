@@ -106,7 +106,7 @@ public class CCargarProfesor extends CGeneral {
 					// registrar
 					
 					Programa programa = new Programa();
-					programa = servicioPrograma.buscarPorId(idprograma);
+					programa = servicioPrograma.buscar(idprograma);
 					
 					// creo el estudiante y lo guardo
 					Profesor profesor;

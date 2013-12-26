@@ -47,4 +47,9 @@ public class STeg {
 			tegs = interfaceTeg.findAll();
 			return tegs;
 		}
+
+		public void guardar(Teg objetoTeg1) {
+			// TODO Auto-generated method stub
+			interfaceTeg.save(objetoTeg1);
+		}
 }

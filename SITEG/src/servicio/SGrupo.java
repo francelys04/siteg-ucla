@@ -33,4 +33,11 @@ public class SGrupo {
 		grupos = interfazGrupo.findByIdNotIn(ids);
 		return grupos;
 	}
+
+	public Grupo BuscarPorNombre(String string) {
+		// TODO Auto-generated method stub
+		Grupo grupito;
+		grupito = interfazGrupo.findByNombre(string);
+		return grupito;
+	}
 }

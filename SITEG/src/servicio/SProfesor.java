@@ -6,6 +6,7 @@ import interfazdao.IProfesorDAO;
 
 import modelo.AreaInvestigacion;
 import modelo.Profesor;
+import modelo.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,13 @@ public class SProfesor {
 		List<Profesor> profesores;
 		profesores = interfazProfesor.findByEstatusTrue();
 		return profesores;
+	}
+
+	public Profesor buscarProfesorLoggeado(Usuario u) {
+		// TODO Auto-generated method stub
+		Profesor profesor;
+		profesor = interfazProfesor.findByUsuario(u);
+		return profesor;
 	}
 	
 	
