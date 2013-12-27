@@ -199,10 +199,10 @@ public class CSolicitarTutor extends CGeneral {
 						 else{
 							 List<SolicitudTutoria> solicitud = servicioSolicitarTutor.buscarSolicitudEstudiante(estudiante);
 							 if(solicitud.size() > 0){
-								 alert("paso");
+								 Messagebox.show("Ya tienes una Solicitud Pendiente", "Información", Messagebox.OK, Messagebox.INFORMATION);
 							 }
 							 else{
-								 alert(" no paso");
+								 
 							 }
 							 
 						 }
