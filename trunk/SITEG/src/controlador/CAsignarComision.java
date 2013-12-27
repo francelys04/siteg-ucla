@@ -127,14 +127,13 @@ public class CAsignarComision extends CGeneral {
 		}
 
 	}
-	
-	public void recibir (String vista)
-	{
+
+	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
-	
-	private void salir(){
+
+	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
 		map.put("vista", vista);
@@ -142,7 +141,6 @@ public class CAsignarComision extends CGeneral {
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwAsignarComision.onClose();
 	}
-	
 
 	// Metodo que permite agregar los profesores a la lista de integrantes de la
 	// comision evaluadora
@@ -151,7 +149,8 @@ public class CAsignarComision extends CGeneral {
 
 		Listitem list1 = lsbProfesoresDisponibles.getSelectedItem();
 		if (list1 == null)
-			Messagebox.show("Seleccione un Item");
+			Messagebox.show("Seleccione un profesor", "Advertencia",
+					Messagebox.OK, Messagebox.EXCLAMATION);
 		else
 			list1.setParent(lsbProfesoresSeleccionados);
 	}
@@ -162,7 +161,8 @@ public class CAsignarComision extends CGeneral {
 	public void removerProfesor() {
 		Listitem list2 = lsbProfesoresSeleccionados.getSelectedItem();
 		if (list2 == null)
-			Messagebox.show("Seleccione un Item");
+			Messagebox.show("Seleccione un profesor", "Advertencia",
+					Messagebox.OK, Messagebox.EXCLAMATION);
 		else
 			list2.setParent(lsbProfesoresDisponibles);
 	}
@@ -192,21 +192,19 @@ public class CAsignarComision extends CGeneral {
 
 			Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
 			for (int i = 0; i < lsbProfesoresSeleccionados.getItemCount(); i++) {
-				Profesor profesor = lsbProfesoresSeleccionados
-						.getItems().get(i).getValue();
+				Profesor profesor = lsbProfesoresSeleccionados.getItems()
+						.get(i).getValue();
 				profesoresSeleccionados.add(profesor);
 			}
-			
+
 			Teg tegSeleccionado = servicioTeg.buscarTeg(auxiliarId);
 			tegSeleccionado.setProfesores(profesoresSeleccionados);
 			tegSeleccionado.setEstatus("Comision Asignada");
 			servicioTeg.guardar(tegSeleccionado);
-			Messagebox.show(
-					"Comisión asignada exitosamente",
-					"Información", Messagebox.OK,
-					Messagebox.INFORMATION);
+			Messagebox.show("Comisión asignada exitosamente", "Información",
+					Messagebox.OK, Messagebox.INFORMATION);
 			salir();
-		
+
 		}
 
 	}

@@ -2,6 +2,7 @@ package interfazdao;
 
 import java.util.List;
 
+import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.SolicitudTutoria;
 import modelo.Usuario;
