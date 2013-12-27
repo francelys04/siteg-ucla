@@ -66,7 +66,7 @@ public class CSolicitarTutor extends CGeneral {
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	STematica servicioTematica = GeneradorBeans.getSTematica();
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SSolicitudTutoria servicioSolicitarTutor = GeneradorBeans.getServicioSolicitarTutoria();
+	SSolicitudTutoria servicioSolicitarTutor = GeneradorBeans.getServicioTutoria();
 
 	@Wire
 	private Datebox db1;
