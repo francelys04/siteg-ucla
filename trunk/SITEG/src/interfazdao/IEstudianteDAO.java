@@ -18,12 +18,14 @@ public interface IEstudianteDAO extends JpaRepository<Estudiante, String> {
 
 	public List<Estudiante> findBySolicitudesTutorias(SolicitudTutoria solicitud);
 
-	public Estudiante findByUsuario(Usuario u);
-
-	// Metodo para buscar los estudiantes asociados a un teg
+// Metodo para buscar los estudiantes asociados a un teg
 	public List<Estudiante> findByTegs(Teg Teg);
 	
-	@Query("select e from Estudiante e where e.programa = ?1")
-	public List<Estudiante> buscarEstudiantesporPrograma(Programa programa);
+	public Estudiante findByUsuario(Usuario u);
 
+	@Query("select e from Estudiante e where e.usuario=null")
+	public List<Estudiante> buscarSinUsuario();
+
+			
+	
 }
