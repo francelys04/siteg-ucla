@@ -150,4 +150,11 @@ public class GeneradorBeans implements ApplicationContextAware {
 	public static SItemFactibilidad getServicioItemFactibilidad(){
 		return applicationContext.getBean(SItemFactibilidad.class);
 	}
+	
+	public static SSolicitudTutoria getServicioSolicitarTutoria(){
+		return applicationContext.getBean(SSolicitudTutoria.class);
+	}
+	
+	
+	
 }

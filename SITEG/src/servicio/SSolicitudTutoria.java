@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfazdao.ISolicitudTutoriaDAO;
 
+import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.SolicitudTutoria;
 import modelo.Usuario;

@@ -18,6 +18,7 @@ public interface ILapsoDAO extends JpaRepository<Lapso, String> {
 	public Lapso findByNombre(String value);
 	public Lapso findByEstatusTrue();
 	
+	
 }
 
 

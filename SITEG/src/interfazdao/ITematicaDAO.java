@@ -2,6 +2,8 @@ package interfazdao;
 
 
 import java.util.List;
+
+import modelo.AreaInvestigacion;
 import modelo.Tematica;
 
 
