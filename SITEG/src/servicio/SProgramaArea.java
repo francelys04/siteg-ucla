@@ -27,4 +27,12 @@ public class SProgramaArea {
 		areas = interfaceProgramaArea.buscarAreasPrograma(programa, lapso);
 		return areas;
 	}
+	
+	/*
+	 * Para listar las areas por Programa*/
+	public List<AreaInvestigacion> buscarAreasDePrograma(Programa programa){
+		List<AreaInvestigacion> areas;
+		areas = interfaceProgramaArea.buscarAreasPrograma(programa);
+		return areas;
+	}
 }
