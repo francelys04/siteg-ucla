@@ -17,6 +17,10 @@ public interface ITematicaDAO extends JpaRepository<Tematica, Long> {
 	
 	public Tematica findById(long codigo);
 	
+	/*
+	 * Busca las tematicas por Areas*/
+	public List<Tematica> findByAreaInvestigacion(AreaInvestigacion area2);
+	
 }
 
 
