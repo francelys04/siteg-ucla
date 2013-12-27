@@ -56,7 +56,7 @@
 
 			<template name="model">
 				<listitem>
-					<listcell label="${each.fechaInicio}" />
+					<listcell label="${each.fecha}" />
 					<listcell label="${each.tematica.nombre}" />
 					<listcell label="${each.tematica.areaInvestigacion.nombre}" />		
 					<listcell label="${each.titulo}" />					
