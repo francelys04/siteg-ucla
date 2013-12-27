@@ -33,5 +33,13 @@ public List<Tematica> buscarActivos(){
 	return tematicas;
 }
 
+/*
+ * Busca las tematicas por Areas*/
+public List<Tematica> buscarTematicasDeArea(AreaInvestigacion area2) {
+	List<Tematica> tematicas;
+	tematicas= interfaceTematica.findByAreaInvestigacion(area2);
+	return tematicas;
+}
+
 }
 
