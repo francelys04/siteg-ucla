@@ -5,6 +5,7 @@ import java.util.List;
 import interfazdao.IProfesorDAO;
 
 import modelo.AreaInvestigacion;
+import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Usuario;
@@ -42,6 +43,12 @@ public class SProfesor {
 		Profesor profesor;
 		profesor = interfazProfesor.findByUsuario(u);
 		return profesor;
+	}
+	public List<Profesor> buscarProfesorSinUsuario() {
+		// TODO Auto-generated method stub
+		List<Profesor> profesores;
+		profesores = interfazProfesor.buscarSinUsuario();
+		return profesores;
 	}
 	
 	public List<Profesor> buscarProfesorDelPrograma(Programa programa){
