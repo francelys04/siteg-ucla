@@ -1,0 +1,56 @@
+<?page id="wdwCatalogoProfesorArea"  title="Catalogo Profesor" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Catalogo Profesor" border="normal" width="800px"
+		id="wdwCatalogoProfesorArea" apply="controlador.CCatalogoProfesorArea"
+		closable="true">
+		<listbox id="ltbProfesor" width="100%" mold="paging"
+			pageSize="10" emptyMessage="No hay profesores registrados">
+			<auxhead sclass="category-center">
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						id="txtCedulaMostrarProfesor" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						id="txtNombreMostrarProfesor" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						id="txtApellidoMostrarProfesor" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						id="txtCategoriaMostrarProfesor" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						id="txtCorreoMostrarProfesor" />
+				</auxheader>
+			</auxhead>
+			<listhead>
+				<listheader label="Cédula" align="center" />
+				<listheader label="Nombre" align="center" />
+				<listheader label="Apellido" align="center" />
+				<listheader label="Correo" align="center" />
+				<listheader label="Area" align="center" />
+			</listhead>
+
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.cedula}" />
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.apellido}" />
+					<listcell label="${each.correoElectronico}" />
+					<listcell label="${each.categoria.nombre}" />
+
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>
