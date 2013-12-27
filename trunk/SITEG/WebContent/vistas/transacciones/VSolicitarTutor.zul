@@ -1,5 +1,5 @@
-<window title="Solicitar Tutor" border="normal" width="700px"
-	height="730px" closable="true">
+<window id="wdwSolicitarTutoria" title="Solicitar Tutor" border="normal" width="700px"
+	height="730px" closable="true" apply="controlador.CSolicitarTutor">
 	<separator />
 
 	<style dynamic="true">
@@ -75,13 +75,12 @@
 								style="font-weight:bold" />
 						</hlayout>
 
-						<combobox id="cmbProgramaSolicitud"
+						<combobox id="cmbProgramaSolicitud" value="Seleccione una Opción..."
 							autodrop="true" width="150px" style="margin-left:60px"
 							tabindex="10">
-							<comboitem label="Infórmatica" />
-							<comboitem label="Producción" />
-							<comboitem label="Analisis de sistemas" />
-							<comboitem label="Matemáticas" />
+						<template name="model">
+							<comboitem label="${each.nombre}" value ="${each.id}" />
+						</template>
 						</combobox>
 					</hbox>
 				</row>
@@ -96,10 +95,11 @@
 								style="font-weight:bold" />
 						</hlayout>
 
-						<combobox id="cmbAreaSolicitud" autodrop="true"
+						<combobox id="cmbAreaSolicitud" autodrop="true" value="Seleccione una Opción..."
 							width="150px" style="margin-left:90px" tabindex="10">
-							<comboitem label="Matematica Pura" />
-							<comboitem label="Matemaatica Aplicada" />
+						<template name="model">
+							<comboitem label="${each.nombre}" />
+						</template>
 						</combobox>
 
 						<hlayout>
@@ -111,11 +111,11 @@
 						</hlayout>
 
 						<combobox id="cmbTematicaSolicitud"
-							autodrop="true" width="150px" tabindex="10"
+							autodrop="true" width="150px" tabindex="10" value="Seleccione una Opción..."
 							style="margin-left:25px">
-							<comboitem label="Algebra" />
-							<comboitem label="Grafos" />
-							<comboitem label="Ecuaciones Diferenciales" />
+						<template name="model">
+							<comboitem label="${each.nombre}" />
+						</template>
 						</combobox>
 					</hbox>
 				</row>
@@ -294,8 +294,9 @@
 												style="margin:0 auto;padding:20px;">
 
 												<image
-													src="/public/imagenes/iconos/agregar.png">
+													src="/imagenes/agregar.png">
 												</image>
+
 											</div>
 										</panelchildren>
 									</panel>
@@ -330,7 +331,7 @@
 										width="100px" />
 
 									<button id="btnCatalogoProfesorArea"
-										style="margin-left:10px" image="/public/imagenes/iconos/catalogo.png">
+										style="margin-left:10px" image="/imagenes/catalogo.png">
 									</button>
 
 								</hbox>
@@ -394,10 +395,10 @@
 				<separator />
 
 				<button id="btnEnviarSolicitudtutoria" label="Enviar"
-					image="/public/imagenes/iconos/enviar.png" tabindex="13">
+					image="/imagenes/enviar.png" tabindex="13">
 				</button>
 				<button id="btnCancelarSolicitudTutoria"
-					label="Cancelar" image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					label="Cancelar" image="/imagenes/limpiar.png" tabindex="14">
 				</button>
 				<separator />
 
