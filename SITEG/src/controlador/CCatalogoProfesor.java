@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Categoria;
+import modelo.Estudiante;
 import modelo.Profesor;
 
 import org.zkoss.zk.ui.Component;
@@ -54,16 +55,32 @@ public class CCatalogoProfesor extends CGeneral {
 		
 		// TODO Auto-generated method stub
 				
-				List<Profesor> profesores = servicioProfesor.buscarActivos();
+			
 				if (cmbCategoriaProfesor == null) {
+					List<Profesor> profesores = servicioProfesor.buscarActivos();
 					ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
 				}
-
-				Selectors.wireComponents(comp, this, false);
 
 				HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 						.getCurrent().getAttribute("itemsCatalogo");
 
+				if (map != null) {
+					if (map.get("usuario") != null) {
+						List<Profesor> profesores = servicioProfesor
+								.buscarProfesorSinUsuario();
+						ltbProfesor.setModel(new ListModelList<Profesor>(
+								profesores));
+
+					} else {
+						List<Profesor> profesores = servicioProfesor
+								.buscarActivos();
+						ltbProfesor.setModel(new ListModelList<Profesor>(
+								profesores));
+
+					}
+
+					Selectors.wireComponents(comp, this, false);
+				}
 				
 	}
 	
@@ -130,7 +147,12 @@ public class CCatalogoProfesor extends CGeneral {
 		}
 		else{
 		
-		final HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+	
+		if(map2!=null)
+			map=map2;
 		map.put("cedula", profesorDatosCatalogo.getCedula());
 		String vista = vistaRecibida;
 		map.put("vista", vista);

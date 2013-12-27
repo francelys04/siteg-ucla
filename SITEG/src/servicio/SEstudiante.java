@@ -44,6 +44,12 @@ public Estudiante buscarEstudianteLoggeado(Usuario u) {
 	estudiante = interfaceEstudiante.findByUsuario(u);
 	return estudiante;
 }
+public List<Estudiante> buscarEstudianteSinUsuario() {
+	// TODO Auto-generated method stub
+	List<Estudiante> estudiantes;
+	estudiantes = interfaceEstudiante.buscarSinUsuario();
+	return estudiantes;
+}
 
 //metodo para buscar estudiantes asociados a un treg
 public List<Estudiante> buscarEstudiantePorTeg(Teg teg) {

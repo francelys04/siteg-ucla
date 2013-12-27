@@ -2,6 +2,7 @@ package interfazdao;
 
 import java.util.List;
 
+
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Usuario;
@@ -16,6 +17,10 @@ public interface IProfesorDAO extends JpaRepository<Profesor, String> {
 	public List<Profesor> findByEstatusTrue();
 
 	public Profesor findByUsuario(Usuario u);
+	
+	@Query("select p from Profesor p where p.usuario=null")
+	public List<Profesor> buscarSinUsuario();
+
 
 	@Query("select p from Profesor p where p.programa = ?1")
 	public List<Profesor> buscarProfesorporPrograma(Programa programa);
