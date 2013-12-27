@@ -5,6 +5,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import servicio.STegRequisito;
+
 import servicio.SActividad;
 import servicio.SArbol;
 import servicio.SAreaInvestigacion;
@@ -126,6 +128,11 @@ public class GeneradorBeans implements ApplicationContextAware {
 	
 	public static STeg getServicioTeg(){
 		return applicationContext.getBean(STeg.class);
+	}
+
+	public static STegRequisito getServicioTegRequisito() {
+		// TODO Auto-generated method stub
+		return applicationContext.getBean(STegRequisito.class);
 	}
 	
 	public static SAvance getServicioAvance(){
