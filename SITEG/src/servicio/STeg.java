@@ -6,6 +6,8 @@ import interfazdao.IActividadDAO;
 import interfazdao.ITegDAO;
 
 import modelo.Actividad;
+import modelo.Estudiante;
+import modelo.Profesor;
 import modelo.Requisito;
 import modelo.Teg;
 import modelo.Usuario;
@@ -66,6 +68,20 @@ public class STeg {
 
 		}
 		
+		/*Busca los teg asociados al Profesor*/
+		public List<Teg> buscarTutoriaProfesor(Profesor profesor) {
+			List<Teg> teg;
+			teg = interfaceTeg.findByTutor(profesor);
+			return teg;
+		}
+		
+		/*Busca los teg asociados al Estudiante*/
+		public List<Teg> buscarTeg(Estudiante estudiante) {
+			// TODO Auto-generated method stub
+			List<Teg> teg;
+			teg = interfaceTeg.findByEstudiantes(estudiante);
+			return teg;
+		}
 
 
 		
