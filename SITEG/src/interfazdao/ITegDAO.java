@@ -39,7 +39,8 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	@Query("select t from Teg t where t.estatus='Solicitando Registro'")
 	public List<Teg> TegSolicitandoRegistro();	
 
-	
+	/*Busca los teg asociados al Estudiante*/
+	public List<Teg> findByEstudiantes(Estudiante estudiante);
 		
 
 }
