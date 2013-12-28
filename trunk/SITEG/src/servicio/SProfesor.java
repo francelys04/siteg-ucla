@@ -6,8 +6,10 @@ import interfazdao.IProfesorDAO;
 
 import modelo.AreaInvestigacion;
 import modelo.Estudiante;
+import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
+import modelo.Teg;
 import modelo.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +58,21 @@ public class SProfesor {
 		profesores= interfazProfesor.buscarProfesorporPrograma(programa);
 		return profesores;
 	}
-
+	
+	//Busca la comision asociado a un teg
+	public List<Profesor> buscarComisionDelTeg(Teg teg){
+		List<Profesor> profesores;
+		profesores = interfazProfesor.findByTegs(teg);
+		return profesores;
+	}
+	
+	
+	public List<Profesor> buscarProfesoresSinComision(List<String> cedulas){
+		List<Profesor> profesores;
+		profesores = interfazProfesor.findByCedulaNotIn(cedulas);
+		return profesores;
+	}
+	
 	
 	
 	

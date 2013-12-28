@@ -1,5 +1,6 @@
 package controlador;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,6 +26,7 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
@@ -85,6 +87,9 @@ public class CAsignarComision extends CGeneral {
 	private Window wdwAsignarComision;
 	@Wire
 	private Window wdwCatalogoAsignarComision;
+	@Wire
+	private Button btnGuardarComision;
+	
 	private static String vistaRecibida;
 
 	private List<Profesor> profesores;
@@ -100,14 +105,6 @@ public class CAsignarComision extends CGeneral {
 		Profesor profesor = ObtenerUsuarioProfesor();
 		Programa programa = new Programa();
 		programa = profesor.getPrograma();
-
-		List<Profesor> profesores = servicioProfesor
-				.buscarProfesorDelPrograma(programa);
-		lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
-				profesores));
-		
-		
-		
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -132,11 +129,65 @@ public class CAsignarComision extends CGeneral {
 						.buscarEstudiantesDelTeg(tegPorCodigo);
 				lsbEstudiantesTeg.setModel(new ListModelList<Estudiante>(
 						estudiantes));
+				llenarListas();
 				id = teg2.getId();
 
 				map.clear();
 				map = null;
 			}
+		}
+
+	}
+
+	public void llenarListas() {
+
+		Profesor profesor = ObtenerUsuarioProfesor();
+		Programa programa = new Programa();
+		programa = profesor.getPrograma();
+
+		Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
+
+		List<Profesor> profesoresComision = servicioProfesor
+				.buscarComisionDelTeg(teg2);
+
+		if (profesoresComision.size() == 0) {
+
+			List<Profesor> profesores = servicioProfesor
+					.buscarProfesorDelPrograma(programa);
+			lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
+					profesores));
+
+		} else {
+			
+			btnGuardarComision.setDisabled(true);
+			lsbProfesoresSeleccionados.setModel(new ListModelList<Profesor>(
+					profesoresComision));
+
+			List<String> cedulas = new ArrayList<String>();
+			for (int i = 0; i < profesoresComision.size(); i++) {
+				String cedulasComision = profesoresComision.get(i).getCedula();
+				cedulas.add(cedulasComision);
+			}
+
+			List<Profesor> profesoresDisponibles = servicioProfesor
+					.buscarProfesoresSinComision(cedulas);
+
+			List<Profesor> profesoresDisponiblesporPrograma = new ArrayList<Profesor>();
+
+			for (int j = 0; j < profesoresDisponibles.size(); j++) {
+
+				if (profesoresDisponibles.get(j).getPrograma().getNombre()
+						.equals(programa.getNombre()))
+					profesoresDisponiblesporPrograma.add(profesoresDisponibles
+							.get(j));
+
+			}
+
+			lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
+					profesoresDisponiblesporPrograma));
+			
+			
+
 		}
 
 	}
@@ -197,16 +248,16 @@ public class CAsignarComision extends CGeneral {
 		else
 
 			list1.setParent(lsbProfesoresSeleccionados);
-			valorItem = lsbProfesoresSeleccionados.getItemCount();
-	
-			if (valorItem > valorcondicion) {
-	
-				Messagebox
-						.show("El número de profesores seleccionados excede al número de integrantes de la comisión evaluadora para este programa,",
-								"Advertencia", Messagebox.OK,
-								Messagebox.EXCLAMATION);
-	
-			}
+		valorItem = lsbProfesoresSeleccionados.getItemCount();
+
+		if (valorItem > valorcondicion) {
+
+			Messagebox
+					.show("El número de profesores seleccionados excede al número de integrantes de la comisión evaluadora para este programa,",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+
+		}
 	}
 
 	// Metodo que permite quitar los profesores de la lista de integrantes de la
@@ -225,7 +276,13 @@ public class CAsignarComision extends CGeneral {
 	// como el de los seleccionados para formar parte de la comision evaluador
 	@Listen("onClick = #btnCancelarComision")
 	public void limpiarCampos() {
-		List<Profesor> profesores = servicioProfesor.buscarActivos();
+
+		Profesor profesor = ObtenerUsuarioProfesor();
+		Programa programa = new Programa();
+		programa = profesor.getPrograma();
+
+		List<Profesor> profesores = servicioProfesor
+				.buscarProfesorDelPrograma(programa);
 		lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
 				profesores));
 		lsbProfesoresSeleccionados.getItems().clear();
@@ -251,25 +308,87 @@ public class CAsignarComision extends CGeneral {
 			if (valorItem > valorcondicion) {
 
 				Messagebox
-						.show("El número de profesores seleccionados excede al número de integrantes de la comisión evaluadora para este programa,",
+						.show("El número de profesores seleccionados excede al número de integrantes de la comisión evaluadora para este programa",
 								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			} else {
 
-				Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
-				for (int i = 0; i < lsbProfesoresSeleccionados.getItemCount(); i++) {
-					Profesor profesor = lsbProfesoresSeleccionados.getItems()
-							.get(i).getValue();
-					profesoresSeleccionados.add(profesor);
+				if (valorItem == valorcondicion) {
+
+					Messagebox
+							.show("El número de profesores que conformán la comisión evaluadora está completo, por favor seleccione el botón de finalizar",
+									"Advertencia", Messagebox.OK,
+									Messagebox.EXCLAMATION);
+
+				} else {
+
+					Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
+					for (int i = 0; i < lsbProfesoresSeleccionados
+							.getItemCount(); i++) {
+						Profesor profesor = lsbProfesoresSeleccionados
+								.getItems().get(i).getValue();
+						profesoresSeleccionados.add(profesor);
+					}
+
+					Teg tegSeleccionado = servicioTeg.buscarTeg(auxiliarId);
+					tegSeleccionado.setProfesores(profesoresSeleccionados);
+					servicioTeg.guardar(tegSeleccionado);
+					Messagebox.show("Los datos de la comisión fueron guardados exitosamente, pero todvía faltan miembros",
+							"Información", Messagebox.OK,
+							Messagebox.INFORMATION);
+					salir();
 				}
 
-				Teg tegSeleccionado = servicioTeg.buscarTeg(auxiliarId);
-				tegSeleccionado.setProfesores(profesoresSeleccionados);
-				tegSeleccionado.setEstatus("Comision Asignada");
-				servicioTeg.guardar(tegSeleccionado);
-				Messagebox.show("Comisión asignada exitosamente",
-						"Información", Messagebox.OK, Messagebox.INFORMATION);
-				salir();
+			}
+
+		}
+
+	}
+
+	// Metodo que permite guardar los integrantes de la comision evaluadora
+	@Listen("onClick = #btnFinalizarComision")
+	public void finalizarComision() {
+
+		int valorcondicion = valorCondicion();
+
+		Listitem listProfesoresSeleccionados = lsbProfesoresSeleccionados
+				.getSelectedItem();
+		if (listProfesoresSeleccionados == null)
+			Messagebox
+					.show("Debe Seleccionar los profesores que conformarán la comisión evaluadora",
+							"Error", Messagebox.OK, Messagebox.ERROR);
+		else {
+
+			int valorItem = lsbProfesoresSeleccionados.getItemCount();
+
+			if (valorItem > valorcondicion) {
+
+				Messagebox
+						.show("El número de profesores seleccionados excede al número de integrantes de la comisión evaluadora para este programa",
+								"Error", Messagebox.OK, Messagebox.ERROR);
+
+			} else {
+
+				if (valorItem == valorcondicion) {
+
+					
+					Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
+					for (int i = 0; i < lsbProfesoresSeleccionados
+							.getItemCount(); i++) {
+						Profesor profesor = lsbProfesoresSeleccionados
+								.getItems().get(i).getValue();
+						profesoresSeleccionados.add(profesor);
+					}
+
+					Teg tegSeleccionado = servicioTeg.buscarTeg(auxiliarId);
+					tegSeleccionado.setProfesores(profesoresSeleccionados);
+					tegSeleccionado.setEstatus("Comision Asignada");
+					servicioTeg.guardar(tegSeleccionado);
+					Messagebox.show("Comisión asignada exitosamente",
+							"Información", Messagebox.OK,
+							Messagebox.INFORMATION);
+					salir();
+				}
 
 			}
 
