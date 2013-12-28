@@ -199,17 +199,12 @@
 											checkmark="true">
 											<listhead>
 												<listheader
-													label="Cédula" />
-												<listheader
 													label="Nombre" />
 												<listheader
 													label="Apellido" />
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell
-														label="${each.cedula} ">
-													</listcell>
 													<listcell
 														label="${each.nombre} ">
 													</listcell>
@@ -250,34 +245,24 @@
 									<panelchildren>
 
 										<listbox
-											id="lsbProfesoresSeleccionados" mold="paging" pageSize="3"
-											height="180px" oddRowSclass="non-odd" checkmark="true"
-											emptyMessage="No hay profesores Seleccionados">
+											id="lsbProfesoresSeleccionados" height="180px" mold="paging"
+											pageSize="3" emptyMessage="No hay Profesores Seleccionados"
+											checkmark="true">
 											<listhead>
 												<listheader
-													label="Cédula" align="center" />
+													label="Nombre" />
 												<listheader
-													label="Nombre" align="center" />
-												<listheader
-													label="Apellido" align="center" />
+													label="Apellido" />
 											</listhead>
 											<template name="model">
 												<listitem>
 													<listcell
-														label="${each.cedula}">
+														label="${each.nombre} ">
 													</listcell>
-												</listitem>
-
-												<listitem>
 													<listcell
-														label="${each.nombre}">
+														label="${each.apellido} ">
 													</listcell>
-												</listitem>
 
-												<listitem>
-													<listcell
-														label="${each.apellido}">
-													</listcell>
 												</listitem>
 											</template>
 										</listbox>
@@ -302,6 +287,10 @@
 				<separator />
 				<button id="btnGuardarComision" label="Guardar"
 					tooltiptext="Presione aquí para guardar los datos de la comisión evaluadora"
+					image="/public/imagenes/iconos/guardar.png" tabindex="12">
+				</button>
+				<button id="btnFinalizarComision" label="Finalizar"
+					tooltiptext="Presione aquí para finalizar la asignación de la comisión evaluadora"
 					image="/public/imagenes/iconos/guardar.png" tabindex="12">
 				</button>
 				<button id="btnCancelarComision" label="Cancelar"

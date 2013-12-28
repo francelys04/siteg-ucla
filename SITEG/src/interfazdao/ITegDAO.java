@@ -44,7 +44,10 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 		
 	/*Busca los teg asociados al Profesor*/
 	public List<Teg> findByTutor(Profesor profesor);
+	
 
+	
+	
 }
 
 

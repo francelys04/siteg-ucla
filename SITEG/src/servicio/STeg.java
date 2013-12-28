@@ -82,6 +82,8 @@ public class STeg {
 			teg = interfaceTeg.findByEstudiantes(estudiante);
 			return teg;
 		}
+		
+	
 
 
 		

@@ -173,9 +173,7 @@ public class CProfesorArea extends CGeneral{
 			long id = areasDerecha.get(i).getId();
 			ids.add(id);
 		}
-		System.out.println(ids.toString());
 		if(ids.toString()!="[]"){
-			System.out.println("entro");
 		List<AreaInvestigacion> areasIzquierda = servicioArea.buscarAreasSinProfesor(ids);
 		lsbAreasProfesorDisponibles.setModel(new ListModelList<AreaInvestigacion>(
 						areasIzquierda));
