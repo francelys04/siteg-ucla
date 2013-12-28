@@ -13,7 +13,7 @@
 		</script>
 	</html>
 
-	<borderlayout style="overflow-y:scroll; overflow-x:scroll;"  >
+	<borderlayout style="overflow-y:scroll; overflow-x:scroll;"  height="150%">
 		<!-- norte y Encabezado -->
 		<north size="18%">
 
