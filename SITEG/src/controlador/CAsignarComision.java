@@ -1,5 +1,6 @@
 package controlador;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -7,7 +8,9 @@ import java.util.Set;
 
 import modelo.Actividad;
 import modelo.AreaInvestigacion;
+import modelo.CondicionPrograma;
 import modelo.Estudiante;
+import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
@@ -22,6 +25,7 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -35,10 +39,13 @@ import org.zkoss.zul.Window;
 import servicio.SActividad;
 import servicio.SEstudiante;
 import servicio.SProfesor;
+import servicio.SPrograma;
 import servicio.SProgramaRequisito;
 import servicio.SRequisito;
 import servicio.STeg;
 import servicio.SUsuario;
+import servicio.SLapso;
+import servicio.SCondicionPrograma;
 import configuracion.GeneradorBeans;
 
 public class CAsignarComision extends CGeneral {
@@ -47,7 +54,13 @@ public class CAsignarComision extends CGeneral {
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
+	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
+	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
+			.getServicioCondicionPrograma();
 
+	@Wire
+	private Datebox dbfecha;
 	@Wire
 	private Textbox txtAreaComision;
 	@Wire
@@ -62,8 +75,6 @@ public class CAsignarComision extends CGeneral {
 	private Textbox txtApellidoTutorComision;
 	@Wire
 	private Textbox txtProgramaComision;
-	@Wire
-	private Textbox txtCorreoTutorComision;
 	@Wire
 	private Listbox lsbProfesoresDisponibles;
 	@Wire
@@ -80,6 +91,7 @@ public class CAsignarComision extends CGeneral {
 
 	private long id = 0;
 	private static long auxiliarId = 0;
+	private static long auxIdPrograma = 0;
 
 	@Override
 	void inicializar(Component comp) {
@@ -93,6 +105,9 @@ public class CAsignarComision extends CGeneral {
 				.buscarProfesorDelPrograma(programa);
 		lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
 				profesores));
+		
+		
+		
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -107,8 +122,6 @@ public class CAsignarComision extends CGeneral {
 				txtNombreTutorComision.setValue(teg2.getTutor().getNombre());
 				txtApellidoTutorComision
 						.setValue(teg2.getTutor().getApellido());
-				txtCorreoTutorComision.setValue(teg2.getTutor()
-						.getCorreoElectronico());
 				txtTituloComision.setValue(teg2.getTitulo());
 				txtCedulaTutorComision.setValue(teg2.getTutor().getCedula());
 				txtAreaComision.setValue(teg2.getTematica()
@@ -133,6 +146,30 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
+	public int valorCondicion() {
+
+		Teg tegComision = new Teg();
+		int valor = 0;
+		tegComision = servicioTeg.buscarTeg(auxiliarId);
+		auxIdPrograma = tegComision.getTutor().getPrograma().getId();
+		Lapso lapso = servicioLapso.buscarLapsoVigente();
+		Programa programa = servicioPrograma.buscar(auxIdPrograma);
+		List<CondicionPrograma> condicion = servicioCondicionPrograma
+				.buscarCondicionesPrograma(programa, lapso);
+
+		for (int i = 0; i < condicion.size(); i++) {
+
+			if (condicion.get(i).getCondicion().getNombre()
+					.equals("Numero de integrantes de la comision")) {
+				valor = condicion.get(i).getValor();
+
+			}
+		}
+
+		return valor;
+
+	}
+
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -142,17 +179,34 @@ public class CAsignarComision extends CGeneral {
 		wdwAsignarComision.onClose();
 	}
 
+	Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
+
 	// Metodo que permite agregar los profesores a la lista de integrantes de la
 	// comision evaluadora
 	@Listen("onClick = #btnAgregarProfesoresComision")
 	public void agregarProfesor() {
 
+		int valorcondicion = valorCondicion();
+		int valorItem = 0;
+
 		Listitem list1 = lsbProfesoresDisponibles.getSelectedItem();
+
 		if (list1 == null)
-			Messagebox.show("Seleccione un profesor", "Advertencia",
+			Messagebox.show("Debe Seleccionar un profesor", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 		else
+
 			list1.setParent(lsbProfesoresSeleccionados);
+			valorItem = lsbProfesoresSeleccionados.getItemCount();
+	
+			if (valorItem > valorcondicion) {
+	
+				Messagebox
+						.show("El número de profesores seleccionados excede al número de integrantes de la comisión evaluadora para este programa,",
+								"Advertencia", Messagebox.OK,
+								Messagebox.EXCLAMATION);
+	
+			}
 	}
 
 	// Metodo que permite quitar los profesores de la lista de integrantes de la
@@ -161,7 +215,7 @@ public class CAsignarComision extends CGeneral {
 	public void removerProfesor() {
 		Listitem list2 = lsbProfesoresSeleccionados.getSelectedItem();
 		if (list2 == null)
-			Messagebox.show("Seleccione un profesor", "Advertencia",
+			Messagebox.show("Debe Seleccionar un profesor", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 		else
 			list2.setParent(lsbProfesoresDisponibles);
@@ -182,6 +236,8 @@ public class CAsignarComision extends CGeneral {
 	@Listen("onClick = #btnGuardarComision")
 	public void GuardarComision() {
 
+		int valorcondicion = valorCondicion();
+
 		Listitem listProfesoresSeleccionados = lsbProfesoresSeleccionados
 				.getSelectedItem();
 		if (listProfesoresSeleccionados == null)
@@ -190,20 +246,32 @@ public class CAsignarComision extends CGeneral {
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		else {
 
-			Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
-			for (int i = 0; i < lsbProfesoresSeleccionados.getItemCount(); i++) {
-				Profesor profesor = lsbProfesoresSeleccionados.getItems()
-						.get(i).getValue();
-				profesoresSeleccionados.add(profesor);
-			}
+			int valorItem = lsbProfesoresSeleccionados.getItemCount();
 
-			Teg tegSeleccionado = servicioTeg.buscarTeg(auxiliarId);
-			tegSeleccionado.setProfesores(profesoresSeleccionados);
-			tegSeleccionado.setEstatus("Comision Asignada");
-			servicioTeg.guardar(tegSeleccionado);
-			Messagebox.show("Comisión asignada exitosamente", "Información",
-					Messagebox.OK, Messagebox.INFORMATION);
-			salir();
+			if (valorItem > valorcondicion) {
+
+				Messagebox
+						.show("El número de profesores seleccionados excede al número de integrantes de la comisión evaluadora para este programa,",
+								"Error", Messagebox.OK, Messagebox.ERROR);
+
+			} else {
+
+				Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
+				for (int i = 0; i < lsbProfesoresSeleccionados.getItemCount(); i++) {
+					Profesor profesor = lsbProfesoresSeleccionados.getItems()
+							.get(i).getValue();
+					profesoresSeleccionados.add(profesor);
+				}
+
+				Teg tegSeleccionado = servicioTeg.buscarTeg(auxiliarId);
+				tegSeleccionado.setProfesores(profesoresSeleccionados);
+				tegSeleccionado.setEstatus("Comision Asignada");
+				servicioTeg.guardar(tegSeleccionado);
+				Messagebox.show("Comisión asignada exitosamente",
+						"Información", Messagebox.OK, Messagebox.INFORMATION);
+				salir();
+
+			}
 
 		}
 

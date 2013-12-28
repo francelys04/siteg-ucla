@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfazdao.ICondicionProgramaDAO;
 
+import modelo.Actividad;
 import modelo.CondicionPrograma;
 import modelo.Lapso;
 import modelo.Programa;
@@ -26,4 +27,6 @@ public class SCondicionPrograma {
 		condicionesProgramas = interfaceCondicionPrograma.findByProgramaAndLapso(programa, lapso);
 		return condicionesProgramas;
 	}
+	
+	
 }

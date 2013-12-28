@@ -49,8 +49,8 @@
 			<listheader label="Temática" align="center" />
 			<listheader label="Área" align="center" />
 			<listheader label="Título" align="center" width="25%" />
-			<listheader label="Nombre Tutor" align="center" />
-			<listheader label="Apellido Tutor" align="center" />
+			<listheader label="Nombre del Tutor" align="center" />
+			<listheader label="Apellido del Tutor" align="center" />
 		</listhead>
 
 

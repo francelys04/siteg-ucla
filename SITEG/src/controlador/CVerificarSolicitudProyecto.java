@@ -286,7 +286,7 @@ private boolean enviarEmailNotificacion(){
     
 }
 	public void llenarRequisitos(Teg teg){
-		auxIdP= teg.getTutor().getPrograma().getId();
+		auxIdP = teg.getTutor().getPrograma().getId();
 		Lapso lapso = servicioLapso.buscarLapsoVigente();
 		Programa programa = servicioPrograma.buscar(auxIdP);
 		

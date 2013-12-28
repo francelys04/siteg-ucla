@@ -1,5 +1,5 @@
-<window id="wdwAsignarComision" title="Asignar Comisión Evaluadora" border="normal"
-	width="800px" height="505px" closable="true"
+<window id="wdwAsignarComision" title="Asignar Comisión Evaluadora"
+	border="normal" width="800px" height="505px" closable="true"
 	apply="controlador.CAsignarComision">
 	<separator />
 
@@ -32,8 +32,6 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
-
-
 
 
 	</style>
@@ -175,12 +173,6 @@
 								style="color:black !important;" width="30%" disabled="True" />
 						</row>
 
-						<row>
-							<label value="Correo:" style="color:black" />
-
-							<textbox id="txtCorreoTutorComision"
-								style="color:black !important;" width="40%" disabled="True" />
-						</row>
 
 					</rows>
 				</grid>
@@ -204,7 +196,7 @@
 										<listbox
 											id="lsbProfesoresDisponibles" height="180px" mold="paging"
 											pageSize="3" emptyMessage="No hay Profesores Disponibles"
-											oddRowSclass="non-odd" checkmark="true">
+											checkmark="true">
 											<listhead>
 												<listheader
 													label="Cédula" />
@@ -237,14 +229,16 @@
 										<div>
 
 											<button
-												id="btnAgregarProfesoresComision" sclass="pointer"
+												id="btnAgregarProfesoresComision"
 												image="/public/imagenes/iconos/right.png"
-												tooltiptext="Agregar Profesores" width="35px" />
+												tooltiptext="Presione aquí para agregar un profesor"
+												width="35px" />
 											<separator />
-											<button sclass="pointer"
+											<button
 												id="btnRemoverProfesoresComision"
 												image="/public/imagenes/iconos/left.png"
-												tooltiptext="Quitar Profesores" width="35px" />
+												tooltiptext="Presione aquí para remover un profesor"
+												width="35px" />
 
 										</div>
 									</panelchildren>
@@ -307,9 +301,11 @@
 			<div align="center">
 				<separator />
 				<button id="btnGuardarComision" label="Guardar"
+					tooltiptext="Presione aquí para guardar los datos de la comisión evaluadora"
 					image="/public/imagenes/iconos/guardar.png" tabindex="12">
 				</button>
 				<button id="btnCancelarComision" label="Cancelar"
+					tooltiptext="Presione aquí para limpar los campos"
 					image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 				</button>
 
