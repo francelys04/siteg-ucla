@@ -32,7 +32,7 @@ import configuracion.GeneradorBeans;
 import controlador.CCatalogoFactibilidad;
 import controlador.CGeneral;
 	public class CRegistrarFactibilidad extends CGeneral{
-		CCatalogoFactibilidad catalogo = new CCatalogoFactibilidad();
+		//CCatalogoFactibilidad catalogo = new CCatalogoFactibilidad();
 		SFactibilidad ServicioRegistrarFactibilidad = GeneradorBeans.getServicioFactibilidad();
 		STeg ServicioTeg = GeneradorBeans.getServicioTeg();
 		SEstudiante ServicioEstudiante = GeneradorBeans.getServicioEstudiante();
@@ -65,6 +65,11 @@ import controlador.CGeneral;
 		private Listbox ltbEstudianteRegistrarFactibilidad;
 		@Wire 
 		private Listbox ltbComisiónRegistrarFactibilidad;
+		@Wire
+		private Window wdwRegistrarFactibilidad;
+		@Wire
+		private Window wdwCatalogoFactibilidad;
+		private static String vistaRecibida;
 		private long id;
 		@Override
 		void inicializar(Component comp) {
@@ -73,8 +78,11 @@ import controlador.CGeneral;
 		//	cmbRegistrarFactibilidad.setModel(new ListModelList<Factibilidad>(factibilidad1));
 			Selectors.wireComponents(comp, this, false);
 
+			/**HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+					.getCurrent().getAttribute("itemsCatalogo"); **/
+			Selectors.wireComponents(comp, this, false);
 			HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-					.getCurrent().getAttribute("itemsCatalogo");
+					.getCurrent().getAttribute("FactibilidadCatalogo");
 
 					/*
 					 * Validacion para vaciar la informacion del Catalogo a la vista
@@ -118,6 +126,18 @@ import controlador.CGeneral;
 						}
 					}
 		}
+		public void recibir(String vista) {
+			vistaRecibida = vista;
+
+		}
+		private void salir() {
+			final HashMap<String, Object> map = new HashMap<String, Object>();
+			String vista = vistaRecibida;
+			map.put("vista", vista);
+			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+			Executions.sendRedirect("/vistas/arbol.zul");
+			wdwRegistrarFactibilidad.onClose();
+		}
 //Metodo que limpia los campos
 	public void limpiar(){
          txtAreaRegistrarFactibilidad.setDisabled(false);
@@ -141,7 +161,7 @@ import controlador.CGeneral;
 	}
 
 		// Metodo que permite visualizar el catalogo de factibilidad.
-		@Listen("onClick = #btnRegistrarFactibilidad")
+	/**	@Listen("onClick = #btnRegistrarFactibilidad")
 		public void buscarEstudiante() {
 
 			Window window = (Window) Executions.createComponents(
@@ -149,7 +169,7 @@ import controlador.CGeneral;
 			window.doModal();
 			catalogo.recibir("transacciones/VRegistrarFactibilidad");
 
-		}
+		} **/
 	//Metodo para actualizar el estado del proyecto a ProyectoFactible
 	//cuando se acepta un proyecto
 		@Listen("onClick = #btnAceptarFactibilidad")
@@ -175,10 +195,12 @@ import controlador.CGeneral;
 								factibilidad2.setEstatus("Aceptado");
 								ServicioRegistrarFactibilidad.guardar(factibilidad2);
 								limpiar();
+								
 								Messagebox.show(
 										"Proyecto Aceptado exitosamente",
 										"Información", Messagebox.OK,
 										Messagebox.INFORMATION);
+								salir();
 							}
 						}
 					});
@@ -214,6 +236,7 @@ import controlador.CGeneral;
 											"Proyecto rechazado exitosamente",
 											"Información", Messagebox.OK,
 											Messagebox.INFORMATION);
+									salir();
 								}
 							}
 						});

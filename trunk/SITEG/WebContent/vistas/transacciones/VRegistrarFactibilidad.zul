@@ -1,5 +1,5 @@
-<?page id="wdwRegistrarFactibilidad"  title="Lista de Proyectos" contentType="text/html;charset=UTF-8"?>
-<window title="Registrar Factibilidad" border="normal" width="750px"
+<?page  title="Lista de Proyectos" contentType="text/html;charset=UTF-8"?>
+<window id="wdwRegistrarFactibilidad"  title="Registrar Factibilidad" border="normal" width="750px"
 	height="460px" closable="true" apply="controlador.CRegistrarFactibilidad">
 	<separator />
 
@@ -71,26 +71,7 @@
 					<columns>
 						<column width="600px" height="30px" />
 					</columns>
-					<rows>
-					
-				  	  <row>
-                     <!--     <hbox>
-                             <combobox id="cmbRegistrarFactibilidad"
-						      tooltip="">
-						    <template name="model">
-							<comboitem label="${each.id}" />
-						    </template>
-					        </combobox>
-					        -->
-					        <hbox>
-			     <label value="Buscar:"
-				 style="font-weight:bold" />
-			     <button id="btnRegistrarFactibilidad"
-				  image="/public/imagenes/iconos/catalogo.png" tabindex="13"
-				  tooltip="" />
-			</hbox>
-                        </row>  
-					
+					<rows>			
 					
 						<row>
 							<hbox>
