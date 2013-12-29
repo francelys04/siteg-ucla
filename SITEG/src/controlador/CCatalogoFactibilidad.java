@@ -5,10 +5,15 @@ import java.util.List;
 
 import servicio.SEstudiante;
 import servicio.SFactibilidad;
+import servicio.SProfesor;
+import servicio.SUsuario;
 
 
 import modelo.Estudiante;
 import modelo.Factibilidad;
+import modelo.Profesor;
+import modelo.Programa;
+import modelo.Teg;
 import modelo.Tematica;
 
 import org.springframework.stereotype.Controller;
@@ -28,11 +33,16 @@ import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 @Controller
 public class CCatalogoFactibilidad extends CGeneral{
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	SFactibilidad serviciofactibilidad = GeneradorBeans.getServicioFactibilidad();
+	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
+	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
+	
+	CRegistrarFactibilidad vistaFactibilidad = new CRegistrarFactibilidad();
 	@Wire
 	private Textbox txtIdListaFactibilidad;
 	@Wire
@@ -49,10 +59,12 @@ public class CCatalogoFactibilidad extends CGeneral{
 	private Window  wdwListaFactibilidad;
 	@Wire
 	private Window wdwCatalogoFactibilidad;
+	
 	private  static String vistaRecibida;
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+		
 		//se busca los proyectos con estatus FactibilidadEvaluada
 		List<Factibilidad> factibilidad = serviciofactibilidad.buscarActivos();
 		//Se llena el listbox con los proyectos con estatus FactibilidadEvaluada
@@ -107,16 +119,16 @@ public class CCatalogoFactibilidad extends CGeneral{
 
 			}
 
-			public void recibir (String vista)
+		/**	public void recibir (String vista)
 			{
   			  vistaRecibida = vista;
 			
-			}
+			} **/
 			// Metodo que luego de presionar doble click sobre una fila de la lista
 			// almacena los datos en un mapa, para luego colocarlos en la vista
 			// correspondiente
 			
-			 @Listen("onDoubleClick = #ltbListaFactibilidad")
+		/**	 @Listen("onDoubleClick = #ltbListaFactibilidad")
              public void mostrarDatosLista() {                         
                      Listitem listItem = ltbListaFactibilidad.getSelectedItem();
                      Factibilidad ListaFactibilidad = (Factibilidad) listItem.getValue();
@@ -129,5 +141,24 @@ public class CCatalogoFactibilidad extends CGeneral{
                      Executions.sendRedirect("/vistas/arbol.zul");        
                      wdwListaFactibilidad.onClose();
 
-             }
+             } */
+			//Metodo que permite mostrar los datos del catalogo
+			@Listen("onDoubleClick = #ltbListaFactibilidad")
+			public void mostrarDatosCatalogo() {
+
+				Listitem listItem = ltbListaFactibilidad.getSelectedItem();
+				Factibilidad FactibilidadDatosCatalogo = (Factibilidad) listItem.getValue();
+				final HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("id", FactibilidadDatosCatalogo.getId());
+				String vista = "transacciones/VRegistrarFactibilidad";
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("FactibilidadCatalogo", map);
+				Window window = (Window) Executions.createComponents(
+						"/vistas/transacciones/VRegistrarFactibilidad.zul", null, null);
+				window.doModal();
+				vistaFactibilidad.recibir("catalogos/VCatalogoFactibilidad");
+				
+
+			}
+			
 }
