@@ -9,6 +9,7 @@ import modelo.Actividad;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Requisito;
+import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Usuario;
 
@@ -19,72 +20,82 @@ import org.springframework.stereotype.Service;
 public class STeg {
 	@Autowired
 	private ITegDAO interfaceTeg;
+	private String[] Estatus = { "Solicitando Proyecto", "Proyecto Registrado",
+			"Comision Asignada", "Factibilidad Evaluada", "Proyecto Factible",
+			"Proyecto No Factible", "Avances Finalizados", "Teg Registrado",
+			"Revisiones Finalizadas", "Solicitando Defensa",
+			"Defensa Asignada", "Teg Aprobado", "Teg Reprobado" };
 
-	
+	public Teg buscarTeg(long id) {
+		return interfaceTeg.findOne(id);
 
-		
-		public Teg buscarTeg(long id){
-			return interfaceTeg.findOne(id);
-		
 	}
-		public List<Teg> buscarProyectoFactible() {
-			List<Teg> tegs;
-			tegs = interfaceTeg.buscarProyectoFactible();
-			return tegs;	
-		
+
+	public List<Teg> buscarProyectoFactible() {
+		List<Teg> tegs;
+		tegs = interfaceTeg.buscarProyectoFactible();
+		return tegs;
+
 	}
-		//Evaluar Revisiones
-		public List<Teg> buscarTegRegistrado() {
-			List<Teg> tegs;
-			tegs = interfaceTeg.buscarTegRegistrado();
-			return tegs;	
-		
+
+	// Evaluar Revisiones
+	public List<Teg> buscarTegRegistrado() {
+		List<Teg> tegs;
+		tegs = interfaceTeg.buscarTegRegistrado();
+		return tegs;
+
 	}
-		public List<Teg> buscarActivos() {
-			List<Teg> tegs;
-			tegs = interfaceTeg.findAll();
-			return tegs;
-		}
 
-		public void guardar(Teg objetoTeg1) {
-			// TODO Auto-generated method stub
-			interfaceTeg.save(objetoTeg1);
-		}
-		
-		
-		public List<Teg> BuscarProyectoRegistrado() {
+	public List<Teg> buscarActivos() {
+		List<Teg> tegs;
+		tegs = interfaceTeg.findAll();
+		return tegs;
+	}
 
-			List<Teg> tegs;
-			tegs = interfaceTeg.ProyectoRegistrado();
-			return tegs;
+	public void guardar(Teg objetoTeg1) {
+		// TODO Auto-generated method stub
+		interfaceTeg.save(objetoTeg1);
+	}
 
-		}
-		
-		public List<Teg> BuscarTegSolicitandoRegistro() {
+	public List<Teg> BuscarProyectoRegistrado() {
 
-			List<Teg> tegs;
-			tegs = interfaceTeg.TegSolicitandoRegistro();
-			return tegs;
+		List<Teg> tegs;
+		tegs = interfaceTeg.ProyectoRegistrado();
+		return tegs;
 
-		}
-		
-		/*Busca los teg asociados al Profesor*/
-		public List<Teg> buscarTutoriaProfesor(Profesor profesor) {
-			List<Teg> teg;
-			teg = interfaceTeg.findByTutor(profesor);
-			return teg;
-		}
-		
-		/*Busca los teg asociados al Estudiante*/
-		public List<Teg> buscarTeg(Estudiante estudiante) {
-			// TODO Auto-generated method stub
-			List<Teg> teg;
-			teg = interfaceTeg.findByEstudiantes(estudiante);
-			return teg;
-		}
-		
-	
+	}
+
+	public List<Teg> BuscarTegSolicitandoRegistro() {
+
+		List<Teg> tegs;
+		tegs = interfaceTeg.TegSolicitandoRegistro();
+		return tegs;
+
+	}
+
+	/* Busca los teg asociados al Profesor */
+	public List<Teg> buscarTutoriaProfesor(Profesor profesor) {
+		List<Teg> teg;
+		teg = interfaceTeg.findByTutor(profesor);
+		return teg;
+	}
+
+	/* Busca los teg asociados al Estudiante */
+	public List<Teg> buscarTeg(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		List<Teg> teg;
+		teg = interfaceTeg.findByEstudiantes(estudiante);
+		return teg;
+	}
+
+	/*Busca un teg asociado a un estudiante que tengan estatus avances finalizados*/
+	public Teg buscarTegEstudiantePorEstatus(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		Teg teg;
+		teg = interfaceTeg.findByEstatusLikeAndEstudiantes(
+				Estatus[6], estudiante);
+		return teg;
+	}
 
 
-		
 }

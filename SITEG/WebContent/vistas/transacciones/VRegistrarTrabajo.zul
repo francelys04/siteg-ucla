@@ -1,5 +1,6 @@
-<window title="Registrar Trabajo Especial de Grado" border="normal"
-	width="100%" height="95%" closable="true">
+<window id="wdwRegistrarTeg" title="Registrar Trabajo Especial de Grado"
+	border="normal" width="100%" height="100%" closable="true"
+	apply="controlador.CRegistrarTeg">
 	<separator />
 
 	<style dynamic="true">
@@ -47,7 +48,7 @@
 
 	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 		<columns>
-			<column width="12%" height="40px" />
+			<column width="10%" height="40px" />
 		</columns>
 		<rows>
 
@@ -56,11 +57,11 @@
 					<label value="*"
 						style="font-weight:bold;color:red">
 					</label>
-					<label value="Programa:" style="font-weight:bold" />
+					<label value="Programa:" style="color:black" />
 				</hlayout>
 
-				<textbox id="txtProgramaRegistrarAvances" width="20%"
-					style="margin-left:5%" />
+				<textbox id="txtProgramaRegistraTeg" width="20%"
+					style="color:black !important;" disabled="True" />
 
 			</row>
 		</rows>
@@ -68,7 +69,8 @@
 
 	<div align="right">
 		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="db1" cols="12" style="margin-right:30px"
+		<datebox id="dtbFechaTeg" cols="12"
+			style="margin-right:30px;color:black !important;" disabled="true"
 			format="short" onCreate="self.value = new Date()" mold="rounded">
 		</datebox>
 	</div>
@@ -102,27 +104,29 @@
 										style="font-weight:bold;color:red">
 									</label>
 									<label value="Area:"
-										style="font-weight:bold" />
+										style="color:black" />
 								</hlayout>
 
 								<hbox>
 
-									<textbox
-										id="txtAreaRegistrarAvances" width="80%"
-										style="margin-left:15px" />
+									<textbox id="txtAreaRegistrarTeg"
+										width="160px"
+										style="margin-left:15px;margin-right:20px;color:black !important;"
+										disabled="true" />
 
 
 									<hlayout>
 										<label value="*"
-											style="font-weight:bold;color:red">
+											style="margin-legt:80px;font-weight:bold;color:red">
 										</label>
 										<label
 											value="
-										Temática: " style="font-weight:bold" />
+										Temática: " style="color:black" />
 									</hlayout>
 									<textbox
-										id="txtTematicaRegistrarAvances" width="70%"
-										style="margin-left:15px" />
+										id="txtTematicaRegistrarTeg" width="200px"
+										style="margin-left:15px;color:black !important;"
+										disabled="true" />
 
 								</hbox>
 
@@ -136,12 +140,12 @@
 									style="font-weight:bold;color:red">
 								</label>
 								<label value="Título del Proyecto:"
-									style="font-weight:bold" />
+									style="color:black" />
 							</hlayout>
 
 						</row>
 						<row>
-							<textbox id="txtTituloSolicitud"
+							<textbox id="txtTituloRegistrarTeg"
 								width="520px" rows="2" cols="100" />
 						</row>
 
@@ -153,12 +157,12 @@
 								</label>
 								<label
 									value="Breve descripción de la proposición de la investigación:"
-									style="font-weight:bold" />
+									style="color:black" />
 							</hlayout>
 
 						</row>
 						<row>
-							<textbox id="txtDescripciónTrabajo"
+							<textbox id="txtDescripciónRegistrarTeg"
 								width="520px" rows="2" cols="100" />
 						</row>
 
@@ -170,11 +174,12 @@
 										style="font-weight:bold;color:red">
 									</label>
 									<label value="Fecha inicio:"
-										style="font-weight:bold" />
+										style="color:black" />
 								</hlayout>
 
 								<hbox>
-									<datebox id="dtbFechaInicioTrabajo"
+									<datebox
+										id="dtbFechaInicioRegistrarTeg" format="short"
 										style="margin-left:20%" />
 
 									<hlayout>
@@ -182,11 +187,12 @@
 											style="font-weight:bold;color:red;margin-left:20px">
 										</label>
 										<label
-											value="Fecha aprox. de entrega:" style="font-weight:bold" />
+											value="Fecha aprox. de entrega:" style="color:black" />
 									</hlayout>
 
 
-									<datebox id="dtbFechaEntregaTrabajo"
+									<datebox
+										id="dtbFechaEntregaRegistrarTeg" format="short"
 										style="margin-left:20%" />
 								</hbox>
 
@@ -202,10 +208,10 @@
 										style="font-weight:bold;color:red">
 									</label>
 									<label value="Duración:"
-										style="font-weight:bold" />
+										style="color:black" />
 								</hlayout>
 
-								<spinner id="spnDuracionTrabajo"
+								<spinner id="spnDuracionRegistrarTeg"
 									style="margin-left:28%" />
 
 							</hbox>
@@ -226,40 +232,25 @@
 				<separator />
 
 
-				<listbox mold="paging" pageSize="2"
-					style="margin-left:2%;margin-right:4%">
+				<listbox id="lsbEstudiantesRegistrarTeg"
+					emptyMessage="No hay Estudiantes registrados actualmente">
 
 					<listhead>
 						<listheader label="Cédula" align="center" />
 						<listheader label="Nombre" align="center" />
 						<listheader label="Apellido" align="center" />
-						<listheader label="Correo" align="center"
-							width="30%" />
+						<listheader label="Correo" align="center" />
 					</listhead>
 
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
+					<template name="model">
+						<listitem>
+							<listcell label="${each.cedula}" />
+							<listcell label="${each.nombre}" />
+							<listcell label="${each.apellido}" />
+							<listcell label="${each.correoElectronico}" />
+						</listitem>
+					</template>
 				</listbox>
-
 
 			</tabpanel>
 
@@ -277,21 +268,23 @@
 								<label value="* "
 									style="font-weight:bold;color:red;margin-left:1%" />
 								<label value="Cedula:"
-									style="font-weight:bold" />
+									style="color:black" />
 							</hlayout>
 
-							<textbox id="txtCedulaTutor" width="20%" />
+							<textbox id="txtCedulaTutorRegistrarTeg"
+								width="20%" style="color:black !important;" disabled="true" />
 						</row>
 						<row>
 							<hlayout>
 								<label value="* "
 									style="font-weight:bold;color:red;margin-left:1%" />
 								<label value="Nombre:"
-									style="font-weight:bold" />
+									style="color:black" />
 							</hlayout>
 
 
-							<textbox id="txtNombreTutor" width="30%" />
+							<textbox id="txtNombreTutorRegistrarTeg"
+								width="30%" style="color:black !important;" disabled="true" />
 						</row>
 						<row>
 							<hlayout>
@@ -300,10 +293,11 @@
 									style="font-weight:bold;color:red;margin-left:1%" />
 
 								<label value="Apellido:"
-									style="font-weight:bold" />
+									style="color:black" />
 							</hlayout>
 
-							<textbox id="txtApellidoTutor" width="30%" />
+							<textbox id="txtApellidoTutorRegistrarTeg"
+								width="30%" style="color:black !important;" disabled="true" />
 						</row>
 					</rows>
 				</grid>
@@ -322,11 +316,11 @@
 		<panelchildren>
 			<div align="center">
 				<separator />
-				<button id="btnGuardar" label="Guardar"
-					image="/imagenes/guardar.png" tabindex="12">
+				<button id="btnGuardarRegistrarTeg" label="Guardar"
+					image="/public/imagenes/iconos/guardar.png" tabindex="12">
 				</button>
-				<button id="btnCancelar" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="13">
+				<button id="btnCancelarRegistrarTeg" label="Cancelar"
+					image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 				</button>
 				<separator />
 

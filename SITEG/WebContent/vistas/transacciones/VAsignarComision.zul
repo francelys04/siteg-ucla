@@ -120,8 +120,7 @@
 				<separator />
 				<separator />
 
-				<listbox id="lsbEstudiantesTeg" mold="paging"
-					pageSize="2"
+				<listbox id="lsbEstudiantesTeg"
 					emptyMessage="No hay Estudiantes registrados actualmente">
 
 					<listhead>
