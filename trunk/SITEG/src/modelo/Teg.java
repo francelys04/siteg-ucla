@@ -40,7 +40,7 @@ public class Teg {
 	private String descripcion;
 
 	@Column(name = "duracion")
-	private Date duracion;
+	private long duracion;
 
 	@ManyToOne
 	@JoinColumn(name = "profesor_cedula", referencedColumnName = "cedula")
@@ -85,7 +85,7 @@ public class Teg {
 	}
 
 	public Teg(long id, String titulo, Date fecha, Date fechaInicio, Date fechaEntrega,
-			String descripcion, Date duracion, Profesor tutor, String estatus,
+			String descripcion, long duracion, Profesor tutor, String estatus,
 			Tematica tematica, Set<Profesor> profesores, Set<Estudiante> estudiantes) {
 		super();
 		this.id = id;
@@ -199,11 +199,11 @@ public class Teg {
 		this.descripcion = descripcion;
 	}
 
-	public Date getDuracion() {
+	public long getDuracion() {
 		return duracion;
 	}
 
-	public void setDuracion(Date duracion) {
+	public void setDuracion(long duracion) {
 		this.duracion = duracion;
 	}
 

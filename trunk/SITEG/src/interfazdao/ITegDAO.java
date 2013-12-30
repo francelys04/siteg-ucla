@@ -8,6 +8,7 @@ import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
+import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Usuario;
 
@@ -16,9 +17,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	
+	
 	public Teg findById(long id);
-	
-	
 
     //Busca los tegs con estatus = ProyectoFactible
 
@@ -45,6 +45,10 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	/*Busca los teg asociados al Profesor*/
 	public List<Teg> findByTutor(Profesor profesor);
 	
+	/*Busca un teg asociado a un estudiante que tengan estatus avances finalizados*/
+	public Teg findByEstatusLikeAndEstudiantes(
+			String estatusAvancesFinalizados, Estudiante estudiante);
+
 
 	
 	
