@@ -29,7 +29,7 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 
 	SSolicitudTutoria servicioTutoria = GeneradorBeans.getServicioTutoria();
 	CSolicitudTutoria vista = new CSolicitudTutoria();
-	
+
 	@Wire
 	private Listbox ltbSolicitud;
 	@Wire
@@ -46,23 +46,30 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-		if(map != null || map==null){
-		List<SolicitudTutoria> solicitudes = servicioTutoria
-				.buscarSolicitudPorRevisar(ObtenerUsuarioProfesor());
-		ltbSolicitud.setModel(new ListModelList<SolicitudTutoria>(solicitudes));
+		if (map != null || map == null) {
+			List<SolicitudTutoria> solicitudes = servicioTutoria
+					.buscarSolicitudPorRevisar(ObtenerUsuarioProfesor());
+			ltbSolicitud.setModel(new ListModelList<SolicitudTutoria>(
+					solicitudes));
 		}
 	}
 
-	@Listen("onChange = #txtAreaSolicitud,#txtTematicaSolicitud,#txtDescripcionSolicitud")
+	@Listen("onChange = #txtFechaSolicitud,#txtAreaSolicitud,#txtTematicaSolicitud,#txtDescripcionSolicitud")
 	public void filtrarDatosCatalogo() {
 		List<SolicitudTutoria> solicitudes = servicioTutoria
 				.buscarSolicitudPorRevisar(ObtenerUsuarioProfesor());
 		List<SolicitudTutoria> solicitud2 = new ArrayList<SolicitudTutoria>();
 
 		for (SolicitudTutoria solicitud : solicitudes) {
-			if (solicitud.getTematica().getareaInvestigacion().getNombre()
-					.toLowerCase()
-					.contains(txtAreaSolicitud.getValue().toLowerCase())
+			if (solicitud.getFecha().toString().toLowerCase()
+					.contains(txtFechaSolicitud.getValue().toLowerCase())
+
+					&& solicitud
+							.getTematica()
+							.getareaInvestigacion()
+							.getNombre()
+							.toLowerCase()
+							.contains(txtAreaSolicitud.getValue().toLowerCase())
 					&& solicitud
 							.getTematica()
 							.getNombre()
@@ -70,9 +77,7 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 							.contains(
 									txtTematicaSolicitud.getValue()
 											.toLowerCase())
-					&& solicitud
-							.getDescripcion()
-							.toLowerCase()
+					&& solicitud.getDescripcion().toLowerCase()
 							.contains(txtDescripcionSolicitud.getValue())) {
 				solicitud2.add(solicitud);
 			}
@@ -81,17 +86,18 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 		ltbSolicitud.setModel(new ListModelList<SolicitudTutoria>(solicitud2));
 
 	}
-	
+
 	@Listen("onDoubleClick = #ltbSolicitud")
-	public void seleccionarSolicitud(){
+	public void seleccionarSolicitud() {
 		Listitem listItem = ltbSolicitud.getSelectedItem();
-		SolicitudTutoria solicitudSeleccionada = (SolicitudTutoria)listItem.getValue();
+		SolicitudTutoria solicitudSeleccionada = (SolicitudTutoria) listItem
+				.getValue();
 		long id = solicitudSeleccionada.getId();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id",id);
+		map.put("id", id);
 		Sessions.getCurrent().setAttribute("catalogoSolicitud", map);
 		Window window = (Window) Executions.createComponents(
-				"/vistas/transacciones/VEvaluarTutorias.zul", null, null);	 				
+				"/vistas/transacciones/VEvaluarTutorias.zul", null, null);
 		window.doModal();
 		vista.recibir("catalogos/VCatalogoSolicitudTutorias");
 	}

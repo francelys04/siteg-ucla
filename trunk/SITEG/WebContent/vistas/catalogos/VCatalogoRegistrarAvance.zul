@@ -1,48 +1,47 @@
-<window title="Solicitudes de registro de proyectos" border="normal"
-	width="100%" height="500px" closable="true"
-	apply="controlador.CCatalogoSolicitudRegistroProyecto">
+<window id="wdwCatalogoRegistrarAvances" title="Proyectos Factibles"
+	border="normal" width="100%" height="500px" closable="true"
+	apply="controlador.CCatalogoRegistrarAvance">
 	<separator />
 	<separator />
 	<separator />
 
-	<listbox id="ltbSolcitudRegistroProyecto" mold="paging" pageSize="6"
+	<listbox id="ltbProyectosFactibles" mold="paging" pageSize="10"
 		style="margin-left:10px;margin-right:10px"
-		emptyMessage="No hay solicitudes de registro de proyectos actualmente">
+		emptyMessage="No hay proyectos factibles actualmente">
+
 
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarFecha" placeholder=""
+				<textbox id="txtFechaRegistrarAvance" placeholder=""
 					instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarArea" placeholder=""
+				<textbox id="txtAreaRegistrarAvance" placeholder=""
 					instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarTematica" placeholder=""
+				<textbox id="txtTematicaRegistrarAvance" placeholder=""
 					instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarTitulo" placeholder=""
-					instant="true" width="80%" value="" onChange="" />
+				<textbox id="txtTituloRegistrarAvance" placeholder=""
+					instant="true" width="85%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarNombreTutor" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
-			</auxheader>
-
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarApellidoTutor" placeholder=""
+				<textbox id="txtNombreTutorRegistrarAvance" placeholder=""
 					instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 
-
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtApellidoTutorRegistrarAvance" placeholder=""
+					instant="true" width="70%" value="" onChange="" />
+			</auxheader>
 		</auxhead>
 
 		<listhead>
@@ -64,16 +63,12 @@
 				<listcell label="${each.titulo}" />
 				<listcell label="${each.tutor.nombre}" />
 				<listcell label="${each.tutor.apellido}" />
-
 			</listitem>
 		</template>
-
 	</listbox>
 
 	<separator />
 	<separator />
 	<separator />
-
-
 
 </window>

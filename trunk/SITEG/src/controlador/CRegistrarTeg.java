@@ -161,7 +161,7 @@ public class CRegistrarTeg extends CGeneral {
 								tegRegistrado.setFechaInicio(dtbFechaInicioRegistrarTeg.getValue());
 								tegRegistrado.setFechaEntrega(dtbFechaEntregaRegistrarTeg.getValue());
 								tegRegistrado.setDuracion(spnDuracionRegistrarTeg.getValue());
-								tegRegistrado.setEstatus("Teg Registrado");
+								tegRegistrado.setEstatus("TEG Registrado");
 								servicioTeg.guardar(tegRegistrado);
 								cancelarRegistroTeg();
 								Messagebox.show(
