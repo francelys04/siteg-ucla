@@ -1,5 +1,6 @@
-<window title="Registrar Avance" border="normal" width="700px"
-	height="450px" closable="true">
+<window id="wdwRegistrarAvance" title="Registrar Avances"
+	border="normal" width="700px" height="630px" closable="true"
+	apply="controlador.CRegistrarAvance">
 	<separator />
 
 	<style dynamic="true">
@@ -9,6 +10,8 @@
 		border-right: none; border-bottom: none; }
 
 	</style>
+
+	<style src="public/css/style.css" />
 
 	<style id="estilo">
 
@@ -32,18 +35,24 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+		.fgrid td.z-listcell tr.z-listbox-odd{background: white;
+		border-color: rgb(207, 207, 207)}
+
+
 	</style>
 
 	<separator />
 	<separator />
 
 	<label value="Programa:" style="margin-left:2%" />
-	<textbox id="txtProgramaRegistrarAvances" style="margin-left:5%"
+	<textbox id="txtProgramaRegistrarAvance"
+		style="margin-left:5%;color:black !important;" disabled="true"
 		width="25%" />
 
 	<div align="right">
 		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="db1" cols="12" style="margin-right:30px"
+		<datebox id="dtbRegistrarAvance" cols="12"
+			style="margin-right:30px;color:black !important;" disabled="true"
 			format="short" onCreate="self.value = new Date()" mold="rounded">
 		</datebox>
 	</div>
@@ -73,10 +82,11 @@
 						<row>
 							<hbox>
 								<label value="Area:"
-									style="font-weight:bold" />
+									style="color:black" />
 
-								<textbox id="txtAreaRegistrarAvances"
-									width="60%" style="margin-left:42%" />
+								<textbox id="txtAreaRegistrarAvance"
+									width="60%" style="margin-left:42%;color:black !important;"
+									disabled="true" />
 
 							</hbox>
 						</row>
@@ -85,23 +95,24 @@
 							<hbox>
 								<label value="
 										Temática: "
-									style="font-weight:bold" />
+									style="color:black" />
 
-								<textbox
-									id="txtTematicaRegistrarAvances" width="80%"
-									style="margin-left:35%" />
+								<textbox id="txtTematicaRegistrarAvance"
+									width="80%" style="margin-left:35%;color:black !important;"
+									disabled="true" />
 							</hbox>
 
 						</row>
 
 						<row>
 							<label value="Título del Proyecto:"
-								style="font-weight:bold" />
+								style="color:black" />
 
 						</row>
 						<row>
-							<textbox id="txtTituloSolicitud"
-								width="520px" rows="2" cols="100" />
+							<textbox id="txtTituloRegistrarAvance"
+								style="color:black !important;" disabled="true" width="520px"
+								rows="3" cols="100" />
 						</row>
 					</rows>
 				</grid>
@@ -115,37 +126,24 @@
 				<separator />
 				<separator />
 
-				<listbox mold="paging" pageSize="2">
+				<listbox id="lsbEstudiantesTeg" sclass="fgrid"
+					emptyMessage="No hay Estudiantes registrados actualmente">
 
 					<listhead>
 						<listheader label="Cédula" align="center" />
 						<listheader label="Nombre" align="center" />
 						<listheader label="Apellido" align="center" />
-						<listheader label="Correo" align="center"
-							width="30%" />
+						<listheader label="Correo" align="center" />
 					</listhead>
 
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
+					<template name="model">
+						<listitem>
+							<listcell label="${each.cedula}" />
+							<listcell label="${each.nombre}" />
+							<listcell label="${each.apellido}" />
+							<listcell label="${each.correoElectronico}" />
+						</listitem>
+					</template>
 				</listbox>
 			</tabpanel>
 
@@ -153,7 +151,8 @@
 				<separator />
 				<separator />
 
-				<grid sclass="fgrid" style="margin-left:2%">
+				<grid sclass="fgrid"
+					style="margin-left:2%;margin-right:2%">
 					<columns>
 						<column width="610px" height="20px" />
 					</columns>
@@ -165,14 +164,14 @@
 						</row>
 
 						<row>
-							<textbox id="txtObservacionTutorias"
-								width="590px" rows="6" cols="100" />
+							<textbox id="txtObservacionRegistrarAvance"
+								tabindex="1" width="590px" rows="9" cols="100" />
 						</row>
 					</rows>
-				</grid>				
-				
-	
-				
+				</grid>
+
+
+
 
 
 			</tabpanel>
@@ -185,6 +184,24 @@
 	<separator />
 	<separator />
 
+
+	<listbox id="ltbAvancesRegistrados" mold="paging" sclass="fgrid" height="170px"
+		pageSize="2" style="margin-left:2%;margin-right:2%"
+		emptyMessage="No hay avances registrados actualmente">
+		<listhead>
+			<listheader label="Fecha" width="20%" align="center" />
+			<listheader label="Observación" align="center" />
+		</listhead>
+		<template name="model">
+			<listitem>
+				<listcell label="${each.fecha} "></listcell>
+				<listcell label="${each.observacion} "></listcell>
+
+			</listitem>
+		</template>
+	</listbox>
+
+
 	<separator />
 	<separator />
 
@@ -194,11 +211,15 @@
 		<panelchildren>
 			<div align="center">
 				<separator />
-				<button id="btnGuardar" label="Guardar"
-					image="/imagenes/guardar.png" tabindex="12">
+				<button id="btnGuardarRegistrarAvance" label="Guardar"
+					image="/public/imagenes/iconos/guardar.png" tabindex="12">
 				</button>
-				<button id="btnCancelar" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="13">
+				<button id="btnFinalizarRegistrarAvance"
+					label="Finalizar" image="/public/imagenes/iconos/guardar.png"
+					tabindex="13">
+				</button>
+				<button id="btnCancelarRegistrarAvance" label="Cancelar"
+					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 				</button>
 
 				<separator />

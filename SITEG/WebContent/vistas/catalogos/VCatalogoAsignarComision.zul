@@ -5,9 +5,9 @@
 	<separator />
 	<separator />
 
-	<listbox id="ltbProyectosRegistrados"  mold="paging"
-		pageSize="10" style="margin-left:10px;margin-right:10px"
-		emptyMessage="No hay Proyectos registrados actualmente">
+	<listbox id="ltbProyectosRegistrados" mold="paging" pageSize="10"
+		style="margin-left:10px;margin-right:10px"
+		emptyMessage="No hay proyectos registrados actualmente">
 
 
 		<auxhead sclass="category-center">
@@ -18,12 +18,12 @@
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarTematica" placeholder=""
+				<textbox id="txtMostrarArea" placeholder=""
 					instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarArea" placeholder=""
+				<textbox id="txtMostrarTematica" placeholder=""
 					instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
@@ -46,8 +46,8 @@
 
 		<listhead>
 			<listheader label="Fecha" align="center" />
-			<listheader label="Temática" align="center" />
 			<listheader label="Área" align="center" />
+			<listheader label="Temática" align="center" />
 			<listheader label="Título" align="center" width="25%" />
 			<listheader label="Nombre del Tutor" align="center" />
 			<listheader label="Apellido del Tutor" align="center" />
@@ -57,9 +57,9 @@
 		<template name="model">
 			<listitem>
 				<listcell label="${each.fecha}" />
-				<listcell label="${each.tematica.nombre}" />
 				<listcell
 					label="${each.tematica.areaInvestigacion.nombre}" />
+				<listcell label="${each.tematica.nombre}" />
 				<listcell label="${each.titulo}" />
 				<listcell label="${each.tutor.nombre}" />
 				<listcell label="${each.tutor.apellido}" />

@@ -4,7 +4,7 @@
 		id="wdwCatalogoTegRegistrado" apply="controlador.CCatalogoTegRegistrado"
 		closable="true">
 		<listbox id="ltbCatalogoTegRegistrado" width="100%" mold="paging"
-			pageSize="10" emptyMessage="No hay Trabajo Especial de Grado Registrados">
+			pageSize="6" emptyMessage="No hay Trabajo Especial de Grado Registrados">
 			<auxhead sclass="category-center">
 				
 				<auxheader colspan="1">

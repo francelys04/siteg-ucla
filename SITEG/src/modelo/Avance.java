@@ -28,13 +28,13 @@ public class Avance {
 	private String observacion;
 	
 	@Column(name="estatus")
-	private Boolean estatus;
+	private String estatus;
 	
 	@ManyToOne
 	@JoinColumn(name="teg_id", referencedColumnName="id")
 	private Teg teg;
 
-	public Avance(long id, Date fecha, String observacion, Boolean estatus,
+	public Avance(long id, Date fecha, String observacion, String estatus,
 			Teg teg) {
 		super();
 		this.id = id;
@@ -73,11 +73,11 @@ public class Avance {
 		this.observacion = observacion;
 	}
 
-	public Boolean getEstatus() {
+	public String getEstatus() {
 		return estatus;
 	}
 
-	public void setEstatus(Boolean estatus) {
+	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
 

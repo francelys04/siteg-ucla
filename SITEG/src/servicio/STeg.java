@@ -22,19 +22,12 @@ public class STeg {
 	private ITegDAO interfaceTeg;
 	private String[] Estatus = { "Solicitando Proyecto", "Proyecto Registrado",
 			"Comision Asignada", "Factibilidad Evaluada", "Proyecto Factible",
-			"Proyecto No Factible", "Avances Finalizados", "Teg Registrado",
+			"Proyecto No Factible", "Avances Finalizados", "TEG Registrado",
 			"Revisiones Finalizadas", "Solicitando Defensa",
-			"Defensa Asignada", "Teg Aprobado", "Teg Reprobado" };
+			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado" };
 
 	public Teg buscarTeg(long id) {
 		return interfaceTeg.findOne(id);
-
-	}
-
-	public List<Teg> buscarProyectoFactible() {
-		List<Teg> tegs;
-		tegs = interfaceTeg.buscarProyectoFactible();
-		return tegs;
 
 	}
 
@@ -57,6 +50,7 @@ public class STeg {
 		interfaceTeg.save(objetoTeg1);
 	}
 
+	/*Buscar los teg que tengan estatus Proyecto Registrado*/
 	public List<Teg> BuscarProyectoRegistrado() {
 
 		List<Teg> tegs;
@@ -96,6 +90,17 @@ public class STeg {
 				Estatus[6], estudiante);
 		return teg;
 	}
+	
+	
+	/*Buscar los teg que tengan estatus Proyecto Registrado*/
+	public List<Teg> buscarProyectoFactible() {
+
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatus(Estatus[4]);
+		return tegs;
+
+	}
+	
 
 
 }

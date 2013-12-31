@@ -20,10 +20,7 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	
 	public Teg findById(long id);
 
-    //Busca los tegs con estatus = ProyectoFactible
 
-	@Query("select t from Teg t where t.estatus='ProyectoFactible'")
-	public List<Teg> buscarProyectoFactible();
 
 	//Evaluar Revisiones
 	@Query("select t from Teg t where t.estatus='TEGRegistrado'")
@@ -48,6 +45,10 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	/*Busca un teg asociado a un estudiante que tengan estatus avances finalizados*/
 	public Teg findByEstatusLikeAndEstudiantes(
 			String estatusAvancesFinalizados, Estudiante estudiante);
+	
+	/*Busca un teg asociado a un estudiante que tengan estatus avances finalizados*/
+	public List<Teg> findByEstatus(
+			String estatusProyectoFactible);
 
 
 	
