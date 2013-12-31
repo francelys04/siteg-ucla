@@ -71,8 +71,8 @@
 												
 						<vbox>			
 						<hbox>
-						<div style="margin-top:10px; text-align:center;"><textbox placeholder="Ingrese aqui su cedula" id="cedulaEstatus"/></div>						
-						<div style="margin-top:10px; text-align:center"><button sclass="btn btn-primary" href="new_file4.zul">Consultar</button></div>
+						<div style="margin-top:10px; text-align:center;"><intbox placeholder="Ingrese aqui su cedula" id="cedulaEstatus"/></div>						
+						<div style="margin-top:10px; text-align:center"><button sclass="btn btn-primary" apply="controlador.CInicio" id="btnConsultarEstatus" >Consultar</button></div>
 						<div style="margin-left:20px;margin-top:10px; text-align:center"><label value="Consulta el estado de tu TEG" style="font-size:12px;" /></div>
 							
 							</hbox>
