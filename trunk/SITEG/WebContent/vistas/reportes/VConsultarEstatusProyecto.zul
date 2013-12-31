@@ -1,0 +1,148 @@
+<?page id="wdwConsultarEstatusProyecto" title="Consultar Estado del Proyecto" contentType="text/html;charset=UTF-8"?>
+<window id="wdwConsultarEstatusProyecto" title="Consultar Estado del Proyecto" border="normal"
+	width="40%" height="95%" closable="true"
+	apply="controlador.CConsultarEstatus">
+
+	<style dynamic="true">
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+	</style>
+
+	<style id="estilo">
+
+		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
+		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
+		transparent; border-left: 1px solid transparent; border-top: 1px
+		solid transparent; }
+
+		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
+		transparent; }
+
+		.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd { background: white }
+
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
+		background: white; border-top: none; }
+
+	</style>
+	
+	<separator />
+	<separator />
+	
+	<groupbox width="95%" height="160px"
+		style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
+		
+		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+			<columns>
+				<column width="15%" height="30px" />
+			</columns>
+			<rows>
+				<row>
+				
+					<hlayout>
+						
+						<label value="Cedula:" style="color:black" />
+					</hlayout>
+				
+					<textbox id="txtCedulaEstudiante" width="60%" />
+				</row>
+				
+				<row>
+				
+					<hlayout>
+						
+						<label value="Nombre:"  style="color:black" />
+					</hlayout>
+				
+					<textbox id="txtNombreEstudiante" width="60%" />
+				</row>
+				
+				<row>
+				
+					<hlayout>
+						
+						<label value="Apellido:" style="color:black" />
+					</hlayout>
+				
+					<textbox id="txtApellidoEstudiante" width="60%" />
+				</row>
+
+				
+
+
+			</rows>
+		</grid>
+		
+	</groupbox>
+
+	<separator />
+	<separator />
+
+
+
+	<panel border="normal" width="95%"
+		style="margin-left:2%;margin-right:3%">
+		<panelchildren>
+			<div align="center">
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgSolicitandoTutoria"/>
+					<label value="Solicitando Tutoria" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgTutoriaAceptada"/>
+					<label value="Tutoria Aceptada" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgSolicitandoRegistro"/>
+					<label value="Solicitando Registro Proyecto" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgProyectoRegistrado"/>
+					<label value="Proyecto Registrado" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgProyectoFactible"/>
+					<label value="Proyecto Factible" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgRevisandoAvances"/>
+					<label value="Revisando Avances del Proyecto" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgRevisionesFinalizadasProyecto"/>
+					<label value="Revisiones Finalizadas del Proyecto" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgRegistrarTrabajo"/>
+					<label value="Trabajo Especial de Grado Registrado" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgRevisionesAvances"/>
+					<label value="Revisiones de Avance de Trabajo Especial de Grado" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgRevisionesFinalizadasTrabajo"/>
+					<label value="Revisiones Finalizadas del Trabajo Especial de Grado" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgSolicitandoDefensa"/>
+					<label value="Solicitando Defensa" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgDefensaAsignada"/>
+					<label value="Defensa Asignada" style="color:black" />
+				<separator />
+					<image src="/public/imagenes/iconos/aceptar.png" id="imgTrabajoEspecial"/>
+					<label value="Trabajo Especial de Grado Aprobado" style="color:black" />
+				<separator />
+
+			</div>
+		</panelchildren>
+	</panel>
+
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+	
+</window>
