@@ -7,6 +7,7 @@ import interfazdao.ISolicitudTutoriaDAO;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.SolicitudTutoria;
+import modelo.Teg;
 import modelo.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +49,13 @@ public class SSolicitudTutoria {
         solicitudes = interfaceSolicitud.findByEstatusLikeAndEstudiantes(Estatus[0], estudiante);
         return solicitudes;
 	}
+	
+	/* Busca las solicitudes asociadas al Estudiante */
+	public List<SolicitudTutoria> buscarSolicitud(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		List<SolicitudTutoria> solicitudTutoria;
+		solicitudTutoria = interfaceSolicitud.findByEstudiantes(estudiante);
+		return solicitudTutoria;
+	}
+	
 }
