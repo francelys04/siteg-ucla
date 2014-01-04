@@ -57,20 +57,23 @@ import configuracion.GeneradorBeans;
 //es un controlador de tematica y su catalogo
 @Controller
 public class CSolicitarTutor extends CGeneral {
-	
-	//servicios para los dos modelos implicados
+
+	// servicios para los dos modelos implicados
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SProgramaArea servicioProgramaArea = GeneradorBeans.getServicioProgramaArea();
-	SAreaInvestigacion servicioAreaInvestigacion = GeneradorBeans.getServicioArea();
+	SProgramaArea servicioProgramaArea = GeneradorBeans
+			.getServicioProgramaArea();
+	SAreaInvestigacion servicioAreaInvestigacion = GeneradorBeans
+			.getServicioArea();
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	STematica servicioTematica = GeneradorBeans.getSTematica();
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SSolicitudTutoria servicioSolicitarTutor = GeneradorBeans.getServicioTutoria();
+	SSolicitudTutoria servicioSolicitarTutor = GeneradorBeans
+			.getServicioTutoria();
 
 	@Wire
 	private Datebox db1;
-	//atributos del Proyecto
+	// atributos del Proyecto
 	@Wire
 	private Combobox cmbProgramaSolicitud;
 	@Wire
@@ -80,8 +83,7 @@ public class CSolicitarTutor extends CGeneral {
 	@Wire
 	private Textbox txtTituloSolicitud;
 
-
-	//atributos del Estudiante
+	// atributos del Estudiante
 	@Wire
 	private Textbox txtCedulaEstudiante;
 	@Wire
@@ -90,8 +92,8 @@ public class CSolicitarTutor extends CGeneral {
 	private Textbox txtApellidoEstudiante;
 	@Wire
 	private Textbox txtCorreoEstudiante;
-	
-	//atributos del Tutor
+
+	// atributos del Tutor
 	@Wire
 	private Textbox txtCedulaProfesor;
 	@Wire
@@ -101,8 +103,7 @@ public class CSolicitarTutor extends CGeneral {
 	@Wire
 	private Textbox txtCorreoProfesor;
 
-	
-	//atributos de la pantalla del catalogo
+	// atributos de la pantalla del catalogo
 	@Wire
 	private Textbox txtCedulaMostrarProfesor;
 	@Wire
@@ -113,19 +114,18 @@ public class CSolicitarTutor extends CGeneral {
 	private Textbox txtCorreoMostrarProfesor;
 	@Wire
 	private Textbox txtCategoriaMostrarProfesor;
-	
+
 	private long id;
 
-	//metodo para mapear los datos del Tutor
+	// metodo para mapear los datos del Tutor
 	void inicializar(Component comp) {
-		
+
 		List<Programa> programas = servicioPrograma.buscarActivas();
-		cmbProgramaSolicitud.setModel(new ListModelList<Programa>(
-				programas));
-		
+		cmbProgramaSolicitud.setModel(new ListModelList<Programa>(programas));
+
 		cmbAreaSolicitud.setDisabled(true);
 		cmbTematicaSolicitud.setDisabled(true);
-		
+
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 
@@ -133,7 +133,8 @@ public class CSolicitarTutor extends CGeneral {
 			if ((String) map.get("cedula") != null) {
 
 				txtCedulaProfesor.setValue((String) map.get("cedula"));
-				Profesor profesor = servicioProfesor.buscarProfesorPorCedula(txtCedulaProfesor.getValue());
+				Profesor profesor = servicioProfesor
+						.buscarProfesorPorCedula(txtCedulaProfesor.getValue());
 				txtNombreProfesor.setValue(profesor.getNombre());
 				txtApellidoProfesor.setValue(profesor.getApellido());
 				txtCorreoProfesor.setValue(profesor.getCorreoElectronico());
@@ -142,7 +143,7 @@ public class CSolicitarTutor extends CGeneral {
 			}
 		}
 	}
-		
+
 	@Listen("onClick = #btnCatalogoProfesorArea")
 	public void buscarProfesor() {
 
@@ -151,116 +152,128 @@ public class CSolicitarTutor extends CGeneral {
 		window.doModal();
 
 	}
-	
+
 	@Listen("onClick = #btnEnviarSolicitudtutoria")
-	public void enviarSolicitud(){
-		
+	public void enviarSolicitud() {
+
 		Date fecha = db1.getValue();
 		String estado = "Por Revisar";
 		String programa = cmbProgramaSolicitud.getValue();
 		String area = cmbAreaSolicitud.getValue();
 		String tematica = cmbTematicaSolicitud.getValue();
 		String titulo = txtTituloSolicitud.getValue();
-		
+
 		String cedulaEstudiante = txtCedulaEstudiante.getValue();
 		String nombreEstudiante = txtNombreEstudiante.getValue();
 		String apellidoEstudiante = txtApellidoEstudiante.getValue();
 		String correoEstudiante = txtCorreoEstudiante.getValue();
-		
+
 		String cedulaProfesor = txtCedulaProfesor.getValue();
 		String nombreProfesor = txtNombreProfesor.getValue();
 		String apellidoProfesor = txtApellidoProfesor.getValue();
 		String correoProfesor = txtCorreoProfesor.getValue();
-		
-		if(programa=="" || area=="" || tematica=="" || titulo==""
-		   || cedulaEstudiante=="" || nombreEstudiante=="" || apellidoEstudiante==""
-		   || correoEstudiante=="" || cedulaProfesor=="" || nombreProfesor=="" || apellidoProfesor==""
-		   || correoProfesor=="" ){
-			
-			Messagebox.show("Debe llenar todos los campos", "Campos Vacíos", Messagebox.OK, Messagebox.INFORMATION);
-		}
-		else{
-			Estudiante estudiante = servicioEstudiante.buscarEstudiante(cedulaEstudiante);
-			
-			if(estudiante == null){
-				Messagebox.show("Debes estar Previamente Registrado", "Información", Messagebox.OK, Messagebox.INFORMATION);	
-			}
-			else{
-					List<Teg> teg = servicioTeg.buscarTeg(estudiante);
-					if(teg.size() > 0){
-						Messagebox.show("Ya Tienes Un TEG en Proceso", "Información", Messagebox.OK, Messagebox.INFORMATION);
-					}
-					else{
-						Profesor profesor = servicioProfesor.buscarProfesorPorCedula(cedulaProfesor);
-						List<Teg> teg2 = servicioTeg.buscarTutoriaProfesor(profesor);
-						if(teg2.size() >= 3){
-							 Messagebox.show("El Profesor ya tiene más de 3 Proyectos", "Información", Messagebox.OK, Messagebox.INFORMATION);	
-						 }
-						 else{
-							 List<SolicitudTutoria> solicitud = servicioSolicitarTutor.buscarSolicitudEstudiante(estudiante);
-							 if(solicitud.size() > 0){
-								 Messagebox.show("Ya tienes una Solicitud Pendiente", "Información", Messagebox.OK, Messagebox.INFORMATION);
-							 }
-							 else{
-								 
-							 }
-							 
-						 }
-					}
-			   }
-		     }
-		}
-	
 
-	
+		if (programa == "" || area == "" || tematica == "" || titulo == ""
+				|| cedulaEstudiante == "" || nombreEstudiante == ""
+				|| apellidoEstudiante == "" || correoEstudiante == ""
+				|| cedulaProfesor == "" || nombreProfesor == ""
+				|| apellidoProfesor == "" || correoProfesor == "") {
+
+			Messagebox.show("Debe llenar todos los campos", "Campos Vacíos",
+					Messagebox.OK, Messagebox.INFORMATION);
+		} else {
+			Estudiante estudiante = servicioEstudiante
+					.buscarEstudiante(cedulaEstudiante);
+
+			if (estudiante == null) {
+				Messagebox.show("Debes estar Previamente Registrado",
+						"Información", Messagebox.OK, Messagebox.INFORMATION);
+			} else {
+				List<Teg> teg = servicioTeg.buscarTeg(estudiante);
+				if (teg.size() > 0) {
+					Messagebox.show("Ya Tienes Un TEG en Proceso",
+							"Información", Messagebox.OK,
+							Messagebox.INFORMATION);
+				} else {
+					Profesor profesor = servicioProfesor
+							.buscarProfesorPorCedula(cedulaProfesor);
+					List<Teg> teg2 = servicioTeg
+							.buscarTutoriaProfesor(profesor);
+					if (teg2.size() >= 3) {
+						Messagebox.show(
+								"El Profesor ya tiene más de 3 Proyectos",
+								"Información", Messagebox.OK,
+								Messagebox.INFORMATION);
+					} else {
+						SolicitudTutoria solicitud = servicioSolicitarTutor
+								.buscarSolicitudEstudiante(estudiante);
+						try {
+							if (solicitud == null) {
+								Messagebox.show(
+										"Ya tienes una Solicitud Pendiente",
+										"Información", Messagebox.OK,
+										Messagebox.INFORMATION);
+							} else {
+
+							}
+						} catch (NullPointerException e) {
+
+							System.out.println("NullPointerException");
+						}
+
+					}
+				}
+			}
+		}
+	}
+
 	@Listen("onClick = #btnCancelarSolicitudTutoria")
-	public void cancelarSolicitud(){
+	public void cancelarSolicitud() {
 		id = 0;
-		
+
 		cmbProgramaSolicitud.setValue("");
 		cmbAreaSolicitud.setValue("");
 		cmbTematicaSolicitud.setValue("");
 		txtTituloSolicitud.setValue("");
-		
+
 		txtCedulaEstudiante.setValue("");
 		txtNombreEstudiante.setValue("");
 		txtApellidoEstudiante.setValue("");
 		txtCorreoEstudiante.setValue("");
-		
+
 		txtCedulaProfesor.setValue("");
 		txtNombreProfesor.setValue("");
 		txtApellidoProfesor.setValue("");
 		txtCorreoProfesor.setValue("");
-		
+
 	}
-	
+
 	@Listen("onSelect = #cmbProgramaSolicitud")
-	public void areaSolicitud(){
-		
+	public void areaSolicitud() {
+
 		cmbAreaSolicitud.setDisabled(false);
-		
+
 		String programa = cmbProgramaSolicitud.getValue();
 		Programa programa2 = servicioPrograma.buscarPorNombrePrograma(programa);
-		
-		List<AreaInvestigacion> a = servicioProgramaArea.buscarAreasDePrograma(programa2);
-		cmbAreaSolicitud.setModel(new ListModelList<AreaInvestigacion>(
-				a));
-		
+
+		List<AreaInvestigacion> a = servicioProgramaArea
+				.buscarAreasDePrograma(programa2);
+		cmbAreaSolicitud.setModel(new ListModelList<AreaInvestigacion>(a));
+
 	}
-	
+
 	@Listen("onSelect = #cmbAreaSolicitud")
-	public void tematicaSolicitud(){
-		
+	public void tematicaSolicitud() {
+
 		cmbTematicaSolicitud.setDisabled(false);
-		
+
 		String area = cmbAreaSolicitud.getValue();
-		AreaInvestigacion area2 = servicioAreaInvestigacion.buscarAreaPorNombre(area);
-		
-		
-		List<Tematica> tematicas = servicioTematica.buscarTematicasDeArea(area2);
-		cmbTematicaSolicitud.setModel(new ListModelList<Tematica>(
-				tematicas));
+		AreaInvestigacion area2 = servicioAreaInvestigacion
+				.buscarAreaPorNombre(area);
+
+		List<Tematica> tematicas = servicioTematica
+				.buscarTematicasDeArea(area2);
+		cmbTematicaSolicitud.setModel(new ListModelList<Tematica>(tematicas));
 	}
-	
 
 }
