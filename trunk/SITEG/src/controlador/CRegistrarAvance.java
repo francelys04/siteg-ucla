@@ -85,7 +85,7 @@ public class CRegistrarAvance extends CGeneral {
 	@Wire
 	private Button btnGuardarRegistrarAvance;
 	@Wire
-	private Button btnfinalizarRegistrarAvance;
+	private Button btnFinalizarRegistrarAvance;
 
 	private static String vistaRecibida;
 
@@ -190,6 +190,19 @@ public class CRegistrarAvance extends CGeneral {
 
 	}
 
+	@Listen("onClick = #btnFinalizarRegistrarAvance")
+	public void finalizarRegistrarAvance() {
+
+		Teg tegAvance = servicioTeg.buscarTeg(auxiliarId);
+		tegAvance.setEstatus("Avances Finalizados");
+		servicioTeg.guardar(tegAvance);
+		Messagebox
+				.show("Avances del Trabajo Especial de Grado finalizados exitosamente",
+						"Información", Messagebox.OK, Messagebox.INFORMATION);
+		salir();
+
+	}
+
 	@Listen("onClick = #btnCancelarRegistrarAvance")
 	public void cancelarRegistrarAvance() {
 
@@ -201,15 +214,21 @@ public class CRegistrarAvance extends CGeneral {
 
 		Teg tegAvance = servicioTeg.buscarTeg(auxiliarId);
 		List<Avance> avancesTeg = servicioAvance.buscarAvancePorTeg(tegAvance);
-		
-		if (avancesTeg.size() == 0){
-			
-			btnfinalizarRegistrarAvance.setDisabled(true);		
-		}else{
-		
-		ltbAvancesRegistrados.setModel(new ListModelList<Avance>(
-				avancesTeg));
-		
+
+		try {
+			if (avancesTeg.size() == 0) {
+
+				btnFinalizarRegistrarAvance.setDisabled(true);
+
+			} else {
+
+				ltbAvancesRegistrados.setModel(new ListModelList<Avance>(
+						avancesTeg));
+
+			}
+		} catch (NullPointerException e) {
+
+			System.out.println("NullPointerException");
 		}
 
 	}
