@@ -9,7 +9,7 @@
 			</div>
 		</north>
 		<!-- Inicio del menu (Arbol)-->
-		<west size="25%" flex="true" maxsize="250" splittable="true"
+		<west size="25%" flex="true" maxsize="250" splittable="false"
 			collapsible="true">
 			<tree id="treeMenu" width="99%">			
 				<template name="model">
