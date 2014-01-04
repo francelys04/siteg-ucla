@@ -42,19 +42,19 @@ public class SSolicitudTutoria {
 		interfaceSolicitud.save(solicitud);
 	}
 	
-	public List<SolicitudTutoria> buscarSolicitudEstudiante(
+	public SolicitudTutoria buscarSolicitudEstudiante(
 			Estudiante estudiante) {
 		// TODO Auto-generated method stub
-        List<SolicitudTutoria> solicitudes;
+        SolicitudTutoria solicitudes;
         solicitudes = interfaceSolicitud.findByEstatusLikeAndEstudiantes(Estatus[0], estudiante);
         return solicitudes;
 	}
 	
 	
-	public List<SolicitudTutoria> buscarSolicitudAceptadaEstudiante(
+	public SolicitudTutoria buscarSolicitudAceptadaEstudiante(
 			Estudiante estudiante) {
 		// TODO Auto-generated method stub
-        List<SolicitudTutoria> solicitudes;
+        SolicitudTutoria solicitudes;
         solicitudes = interfaceSolicitud.findByEstatusLikeAndEstudiantes(Estatus[1], estudiante);
         return solicitudes;
 	}

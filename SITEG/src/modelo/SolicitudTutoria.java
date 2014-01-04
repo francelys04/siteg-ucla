@@ -49,7 +49,7 @@ public class SolicitudTutoria {
 	}
 
 	public SolicitudTutoria(long id, Date fecha, String descripcion,
-			Boolean estado, Profesor profesor, Tematica tematica, Set<Estudiante> estudiantes) {
+			String estatus, Profesor profesor, Tematica tematica, Set<Estudiante> estudiantes) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
