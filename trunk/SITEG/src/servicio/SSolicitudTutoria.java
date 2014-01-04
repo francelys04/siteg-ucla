@@ -18,7 +18,7 @@ public class SSolicitudTutoria {
 
 	@Autowired
 	private ISolicitudTutoriaDAO interfaceSolicitud;
-	private String[] Estatus = {"Por Revisar", "Aprobada", "Rechazada"};
+	private String[] Estatus = {"Por Revisar", "Aceptada", "Rechazada", "No Factible", "Finalizada"};
 	
 	public void guardar(SolicitudTutoria solicitud){
 		interfaceSolicitud.save(solicitud);
@@ -49,6 +49,16 @@ public class SSolicitudTutoria {
         solicitudes = interfaceSolicitud.findByEstatusLikeAndEstudiantes(Estatus[0], estudiante);
         return solicitudes;
 	}
+	
+	
+	public List<SolicitudTutoria> buscarSolicitudAceptadaEstudiante(
+			Estudiante estudiante) {
+		// TODO Auto-generated method stub
+        List<SolicitudTutoria> solicitudes;
+        solicitudes = interfaceSolicitud.findByEstatusLikeAndEstudiantes(Estatus[1], estudiante);
+        return solicitudes;
+	}
+	
 	
 	/* Busca las solicitudes asociadas al Estudiante */
 	public List<SolicitudTutoria> buscarSolicitud(Estudiante estudiante) {
