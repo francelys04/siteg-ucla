@@ -89,6 +89,8 @@ public class CConsultarEstatus extends CGeneral {
 		txtNombreEstudiante.setText(estudiante.getNombre());
 		txtApellidoEstudiante.setText(estudiante.getApellido());
 		
+		int indiceSolicitud = -1;
+		int indiceTeg = -1;
 		List<SolicitudTutoria> solicitudTutoria = null;
 		List<Teg> teg = null;
 		
@@ -99,10 +101,23 @@ public class CConsultarEstatus extends CGeneral {
 			teg = servicioTeg.buscarTeg(estudiante);		
 		}
 		
+		for(int x = 0; x < solicitudTutoria.size(); x = x+1){
+			if (solicitudTutoria.get(x).getEstatus().equals("Por Revisar")==true||
+					solicitudTutoria.get(x).getEstatus().equals("Aceptada")==true){
+				indiceSolicitud = x;
+			}
+		}
 		
-		if(solicitudTutoria.isEmpty()==false){
+		for(int x = 0; x < teg.size(); x = x+1){
+			if (teg.get(x).getEstatus().equals("Proyecto No Factible")!=true||
+					teg.get(x).getEstatus().equals("TEG Reprobado")!=true){
+				indiceTeg = x;
+			}
+		}
+		
+		if(solicitudTutoria.isEmpty()==false && indiceSolicitud!=-1){
 			
-			if (solicitudTutoria.get(0).getEstatus().equals("Por Revisar")==true){
+			if (solicitudTutoria.get(indiceSolicitud).getEstatus().equals("Por Revisar")==true){
 				
 				imgTutoriaAceptada.detach();
 				imgSolicitandoRegistro.detach();
@@ -118,22 +133,17 @@ public class CConsultarEstatus extends CGeneral {
 				imgTrabajoEspecial.detach();
 			}
 			else{
-				if (solicitudTutoria.get(0).getEstatus().equals("Aceptada")==true){
+				if (solicitudTutoria.get(indiceSolicitud).getEstatus().equals("Aceptada")==true){
 					
-					if(teg.isEmpty()==false){
+					if(teg.isEmpty()==false && indiceTeg!=-1){
 									
-						if (teg.get(0).getEstatus().equals("Solicitando Proyecto")!=true){
+						if (teg.get(indiceTeg).getEstatus().equals("Solicitando Proyecto")!=true){
 							
-							if (teg.get(0).getEstatus().equals("Proyecto Registrado")!=true){
+							if (teg.get(indiceTeg).getEstatus().equals("Proyecto Registrado")!=true){
 								
-								if (teg.get(0).getEstatus().equals("Proyecto Factible")!=true){
+								if (teg.get(indiceTeg).getEstatus().equals("Comision Asignada")==true || 
+										teg.get(indiceTeg).getEstatus().equals("Factibilidad Evaluada")==true){
 									
-									if (teg.get(0).getEstatus().equals("Proyecto No Factible")==true){
-										
-										imgSolicitandoTutoria.detach();
-										imgTutoriaAceptada.detach();
-										imgSolicitandoRegistro.detach();
-										imgProyectoRegistrado.detach();
 										imgProyectoFactible.detach();
 										imgRevisandoAvances.detach();
 										imgRevisionesFinalizadasProyecto.detach();
@@ -143,54 +153,47 @@ public class CConsultarEstatus extends CGeneral {
 										imgSolicitandoDefensa.detach();
 										imgDefensaAsignada.detach();
 										imgTrabajoEspecial.detach();
-										Messagebox.show("El Proyecto de Trabajo Especial de Grado NO es" +
-												" factible");
-										
-									}
-									else{
-										
-										if (teg.get(0).getEstatus().equals("Avances En Proceso")!=true){
+								}	
+								else{
+									if (teg.get(indiceTeg).getEstatus().equals("Proyecto Factible")!=true){
 											
-											if (teg.get(0).getEstatus().equals("Avances Finalizados")!=true){
+											if (teg.get(indiceTeg).getEstatus().equals("Avances En Proceso")!=true){
 												
-												if (teg.get(0).getEstatus().equals("TEG Registrado")!=true){
+												if (teg.get(indiceTeg).getEstatus().equals("Avances Finalizados")!=true){
 													
-													if (teg.get(0).getEstatus().equals("Revisiones En Proceso")!=true){
+													if (teg.get(indiceTeg).getEstatus().equals("TEG Registrado")!=true){
 														
-														if (teg.get(0).getEstatus().equals("Revisiones Finalizadas")!=true){
+														if (teg.get(indiceTeg).getEstatus().equals("Revisiones En Proceso")!=true){
 															
-															if (teg.get(0).getEstatus().equals("Solicitando Defensa")!=true){
+															if (teg.get(indiceTeg).getEstatus().equals("Revisiones Finalizadas")!=true){
 																
-																if (teg.get(0).getEstatus().equals("Defensa Asignada")!=true){
-																
-																	if (teg.get(0).getEstatus().equals("TEG Aprobado")==true){
-																		
-																		Messagebox.show("Felicitaciones! Aprobaste el Trabajo" +
-																				" Especial de Grado");
-																	}
-																	else{
-																		imgSolicitandoDefensa.detach();
-																		imgDefensaAsignada.detach();
+																if (teg.get(indiceTeg).getEstatus().equals("Solicitando Defensa")!=true){
+																	
+																	if (teg.get(indiceTeg).getEstatus().equals("Defensa Asignada")==true){
+																	
 																		imgTrabajoEspecial.detach();
-																		Messagebox.show("Trabajo Especial de Grado Reprobado");
 																	}
 																}
 																else{
+																	imgDefensaAsignada.detach();
 																	imgTrabajoEspecial.detach();
 																}
 															}
 															else{
+																imgSolicitandoDefensa.detach();
 																imgDefensaAsignada.detach();
 																imgTrabajoEspecial.detach();
 															}
 														}
 														else{
+															imgRevisionesFinalizadasTrabajo.detach();
 															imgSolicitandoDefensa.detach();
 															imgDefensaAsignada.detach();
 															imgTrabajoEspecial.detach();
 														}
 													}
 													else{
+														imgRevisionesAvances.detach();
 														imgRevisionesFinalizadasTrabajo.detach();
 														imgSolicitandoDefensa.detach();
 														imgDefensaAsignada.detach();
@@ -198,6 +201,7 @@ public class CConsultarEstatus extends CGeneral {
 													}
 												}
 												else{
+													imgRegistrarTrabajo.detach();
 													imgRevisionesAvances.detach();
 													imgRevisionesFinalizadasTrabajo.detach();
 													imgSolicitandoDefensa.detach();
@@ -206,6 +210,7 @@ public class CConsultarEstatus extends CGeneral {
 												}
 											}
 											else{
+												imgRevisionesFinalizadasProyecto.detach();
 												imgRegistrarTrabajo.detach();
 												imgRevisionesAvances.detach();
 												imgRevisionesFinalizadasTrabajo.detach();
@@ -213,29 +218,19 @@ public class CConsultarEstatus extends CGeneral {
 												imgDefensaAsignada.detach();
 												imgTrabajoEspecial.detach();
 											}
-										}
-										else{
-											imgRevisionesFinalizadasProyecto.detach();
-											imgRegistrarTrabajo.detach();
-											imgRevisionesAvances.detach();
-											imgRevisionesFinalizadasTrabajo.detach();
-											imgSolicitandoDefensa.detach();
-											imgDefensaAsignada.detach();
-											imgTrabajoEspecial.detach();
-										}
 									}
-								}
-								else{
-									imgRevisandoAvances.detach();
-									imgRevisionesFinalizadasProyecto.detach();
-									imgRegistrarTrabajo.detach();
-									imgRevisionesAvances.detach();
-									imgRevisionesFinalizadasTrabajo.detach();
-									imgSolicitandoDefensa.detach();
-									imgDefensaAsignada.detach();
-									imgTrabajoEspecial.detach();
-								}
+									else{
+										imgRevisandoAvances.detach();
+										imgRevisionesFinalizadasProyecto.detach();
+										imgRegistrarTrabajo.detach();
+										imgRevisionesAvances.detach();
+										imgRevisionesFinalizadasTrabajo.detach();
+										imgSolicitandoDefensa.detach();
+										imgDefensaAsignada.detach();
+										imgTrabajoEspecial.detach();
+									}
 								
+								}
 							}
 							else{
 								imgProyectoFactible.detach();
@@ -264,17 +259,35 @@ public class CConsultarEstatus extends CGeneral {
 					
 					}
 					else{
-						imgSolicitandoRegistro.detach();
-						imgProyectoRegistrado.detach();
-						imgProyectoFactible.detach();
-						imgRevisandoAvances.detach();
-						imgRevisionesFinalizadasProyecto.detach();
-						imgRegistrarTrabajo.detach();
-						imgRevisionesAvances.detach();
-						imgRevisionesFinalizadasTrabajo.detach();
-						imgSolicitandoDefensa.detach();
-						imgDefensaAsignada.detach();
-						imgTrabajoEspecial.detach();
+						if(teg.isEmpty()==false && indiceTeg!=-1){
+							imgSolicitandoRegistro.detach();
+							imgProyectoRegistrado.detach();
+							imgProyectoFactible.detach();
+							imgRevisandoAvances.detach();
+							imgRevisionesFinalizadasProyecto.detach();
+							imgRegistrarTrabajo.detach();
+							imgRevisionesAvances.detach();
+							imgRevisionesFinalizadasTrabajo.detach();
+							imgSolicitandoDefensa.detach();
+							imgDefensaAsignada.detach();
+							imgTrabajoEspecial.detach();
+							Messagebox.show("Trabajo Especial de Grado No Factible o Reprobado");
+							
+						}
+						else{
+							imgSolicitandoRegistro.detach();
+							imgProyectoRegistrado.detach();
+							imgProyectoFactible.detach();
+							imgRevisandoAvances.detach();
+							imgRevisionesFinalizadasProyecto.detach();
+							imgRegistrarTrabajo.detach();
+							imgRevisionesAvances.detach();
+							imgRevisionesFinalizadasTrabajo.detach();
+							imgSolicitandoDefensa.detach();
+							imgDefensaAsignada.detach();
+							imgTrabajoEspecial.detach();
+						}
+						
 					}
 					
 				}
@@ -299,19 +312,26 @@ public class CConsultarEstatus extends CGeneral {
 		
 		}
 		else{
-			imgSolicitandoTutoria.detach();
-			imgTutoriaAceptada.detach();
-			imgSolicitandoRegistro.detach();
-			imgProyectoRegistrado.detach();
-			imgProyectoFactible.detach();
-			imgRevisandoAvances.detach();
-			imgRevisionesFinalizadasProyecto.detach();
-			imgRegistrarTrabajo.detach();
-			imgRevisionesAvances.detach();
-			imgRevisionesFinalizadasTrabajo.detach();
-			imgSolicitandoDefensa.detach();
-			imgDefensaAsignada.detach();
-			imgTrabajoEspecial.detach();
+			if(teg.isEmpty()==false && indiceSolicitud==-1){
+				if (teg.get(indiceTeg).getEstatus().equals("TEG Aprobado")==true){
+					Messagebox.show("Felicidades!! Proyecto de Trabajo Especial de Grado Aprobado!");
+				}
+			}
+			else{
+				imgSolicitandoTutoria.detach();
+				imgTutoriaAceptada.detach();
+				imgSolicitandoRegistro.detach();
+				imgProyectoRegistrado.detach();
+				imgProyectoFactible.detach();
+				imgRevisandoAvances.detach();
+				imgRevisionesFinalizadasProyecto.detach();
+				imgRegistrarTrabajo.detach();
+				imgRevisionesAvances.detach();
+				imgRevisionesFinalizadasTrabajo.detach();
+				imgSolicitandoDefensa.detach();
+				imgDefensaAsignada.detach();
+				imgTrabajoEspecial.detach();
+			}
 		}
 		
 	}
