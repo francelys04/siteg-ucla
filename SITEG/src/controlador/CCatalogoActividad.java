@@ -27,8 +27,7 @@ import configuracion.GeneradorBeans;
 @Controller
 public class CCatalogoActividad extends CGeneral {
 
-	SActividad servicioActividad = GeneradorBeans
-			.getServicioActividad();
+	SActividad servicioActividad = GeneradorBeans.getServicioActividad();
 
 	@Wire
 	private Listbox ltbActividad;
@@ -45,7 +44,7 @@ public class CCatalogoActividad extends CGeneral {
 	private long id = 0;
 	@Wire
 	private Window wdwActividad;
-	
+
 	private static String vistaRecibida;
 
 	/**
@@ -86,17 +85,14 @@ public class CCatalogoActividad extends CGeneral {
 		 * Validacion para vaciar la informacion del VActividad a la vista
 		 * VActividad.zul si la varible map tiene algun dato contenido
 		 */
-		
-		
+
 	}
 
-	
-	public void recibir (String vista)
-	{
+	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
-	
+
 	// Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
 	// descripcion
 	@Listen("onChange = #txtNombreMostrarActividad,#txtDescripcionMostrarActividad")
@@ -124,25 +120,28 @@ public class CCatalogoActividad extends CGeneral {
 
 	}
 
-	
 	// Aca se selecciona una actividad del catalogo
 	@Listen("onDoubleClick = #ltbActividad")
 	public void mostrarDatosCatalogo() {
 
+		if (vistaRecibida == null) {
 
-		Listitem listItem = ltbActividad.getSelectedItem();
-		Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", actividadDatosCatalogo.getId());
-		String vista = vistaRecibida;
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		 Executions.sendRedirect("/vistas/arbol.zul");
-		
-		wdwCatalogoActividad.onClose();
+			vistaRecibida = "maestros/VActividad";
+
+		} else {
+
+			Listitem listItem = ltbActividad.getSelectedItem();
+			Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
+			final HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("id", actividadDatosCatalogo.getId());
+			String vista = vistaRecibida;
+			map.put("vista", vista);
+			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+			Executions.sendRedirect("/vistas/arbol.zul");
+
+			wdwCatalogoActividad.onClose();
+		}
 
 	}
 
-	
-	
 }

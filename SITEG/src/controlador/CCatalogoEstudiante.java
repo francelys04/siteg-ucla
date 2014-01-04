@@ -168,6 +168,13 @@ public class CCatalogoEstudiante extends CGeneral {
 	// correspondiente
 	@Listen("onDoubleClick = #ltbEstudiante")
 	public void mostrarDatosCatalogo() {
+		
+		if (vistaRecibida == null) {
+
+			vistaRecibida = "maestros/VEstudiante";
+
+		} else {
+		
 		Listitem listItem = ltbEstudiante.getSelectedItem();
 		Estudiante estudianteDatosCatalogo = (Estudiante) listItem.getValue();
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -183,6 +190,7 @@ public class CCatalogoEstudiante extends CGeneral {
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwCatalogoEstudiante.onClose();
+		}
 
 	}
 

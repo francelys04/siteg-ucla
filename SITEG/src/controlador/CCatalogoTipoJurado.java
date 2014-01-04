@@ -49,8 +49,6 @@ public class CCatalogoTipoJurado extends CGeneral {
 
 	STipoJurado servicioTipoJurado = GeneradorBeans.getServicioTipoJurado();
 
-
-
 	@Wire
 	private Textbox txtNombreTipoJurado;
 	@Wire
@@ -115,20 +113,27 @@ public class CCatalogoTipoJurado extends CGeneral {
 		ltbTipoJurado.setModel(new ListModelList<TipoJurado>(tipoJurado2));
 
 	}
-	
-	
+
 	@Listen("onDoubleClick = #ltbTipoJurado")
-	public void mostrarDatosCatalogo() { 			
-		Listitem listItem = ltbTipoJurado.getSelectedItem();
-		TipoJurado tipoJuradoDatosCatalogo = (TipoJurado) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", tipoJuradoDatosCatalogo.getId());
-		String vista = vistaRecibida;
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		 Executions.sendRedirect("/vistas/arbol.zul");
-		 wdwCatalogoTipoJurado.onClose();
+	public void mostrarDatosCatalogo() {
+
+		if (vistaRecibida == null) {
+
+			vistaRecibida = "maestros/VTipoJurado";
+
+		} else {
+
+			Listitem listItem = ltbTipoJurado.getSelectedItem();
+			TipoJurado tipoJuradoDatosCatalogo = (TipoJurado) listItem
+					.getValue();
+			final HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("id", tipoJuradoDatosCatalogo.getId());
+			String vista = vistaRecibida;
+			map.put("vista", vista);
+			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+			Executions.sendRedirect("/vistas/arbol.zul");
+			wdwCatalogoTipoJurado.onClose();
+		}
 	}
-	
 
 }

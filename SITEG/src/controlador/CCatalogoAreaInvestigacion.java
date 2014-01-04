@@ -101,7 +101,13 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		//lleva el item que selecciono en el catalogo a la ventana y cierra el catalogo
 			@Listen("onDoubleClick = #ltbArea")
 			public void mostrarDatosCatalogo() {
+				
+				if (vistaRecibida == null) {
+					
+					vistaRecibida = "maestros/VAreaInvestigacion";
 
+				} else {
+				
 				Listitem listItem = ltbArea.getSelectedItem();
 				AreaInvestigacion areaDatosCatalogo = (AreaInvestigacion) listItem.getValue();
 				final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -111,6 +117,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 				Executions.sendRedirect("/vistas/arbol.zul");
 				wdwCatalogoArea.onClose();
+				}
 
 			}
 		

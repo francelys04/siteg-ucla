@@ -22,8 +22,8 @@ import servicio.SLapso;
 import configuracion.GeneradorBeans;
 
 public class CCatalogoLapso extends CGeneral {
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();		
-	
+	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
+
 	@Wire
 	private Listbox ltbLapso;
 	@Wire
@@ -38,43 +38,38 @@ public class CCatalogoLapso extends CGeneral {
 	private Textbox txtFechaFinalMostrarLapso;
 	@Wire
 	private Textbox txtNombreLapso;
-	
+
 	private static String vistaRecibida;
-	
-void inicializar(Component comp) {
-		
-		List<Lapso> lapsos =servicioLapso.buscarActivos();
-		//System.out.println(lapsos.get(0).getNombre());
-		if(txtNombreLapso==null){
-		ltbLapso.setModel(new ListModelList<Lapso>(lapsos));
+
+	void inicializar(Component comp) {
+
+		List<Lapso> lapsos = servicioLapso.buscarActivos();
+		// System.out.println(lapsos.get(0).getNombre());
+		if (txtNombreLapso == null) {
+			ltbLapso.setModel(new ListModelList<Lapso>(lapsos));
 		}
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 
-		
-	
-		
-		
-
 	}
 
-public void recibir (String vista)
-{
-	vistaRecibida = vista;
-	System.out.println("imprimo");
-	System.out.println(vistaRecibida);
-}
-//Filtra por nombre
+	public void recibir(String vista) {
+		vistaRecibida = vista;
+		System.out.println("imprimo");
+		System.out.println(vistaRecibida);
+	}
+
+	// Filtra por nombre
 	@Listen("onChange = #txtNombreMostrarLapso")
 	public void filtrarDatosCatalogo() {
 		List<Lapso> lapsos1 = servicioLapso.buscarActivos();
 		List<Lapso> lapsos2 = new ArrayList<Lapso>();
 
 		for (Lapso lapso : lapsos1) {
-			if (lapso.getNombre().toLowerCase().contains(txtNombreMostrarLapso.getValue().toLowerCase()))
-					 {
+			if (lapso.getNombre().toLowerCase()
+					.contains(txtNombreMostrarLapso.getValue().toLowerCase())) {
 				lapsos2.add(lapso);
 			}
 
@@ -83,22 +78,28 @@ public void recibir (String vista)
 		ltbLapso.setModel(new ListModelList<Lapso>(lapsos2));
 
 	}
-	//Carga los lapsos desde el catalogo hacia el formulario lapso academico
+
+	// Carga los lapsos desde el catalogo hacia el formulario lapso academico
 	@Listen("onDoubleClick = #ltbLapso")
 	public void mostrarDatosCatalogo() {
 
-		Listitem listItem = ltbLapso.getSelectedItem();
-		Lapso lapsoDatosCatalogo = (Lapso) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", lapsoDatosCatalogo.getId());
-		String vista = vistaRecibida;
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoLapso.onClose();
+		if (vistaRecibida == null) {
+
+			vistaRecibida = "maestros/VLapsoAcademico";
+
+		} else {
+
+			Listitem listItem = ltbLapso.getSelectedItem();
+			Lapso lapsoDatosCatalogo = (Lapso) listItem.getValue();
+			final HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("id", lapsoDatosCatalogo.getId());
+			String vista = vistaRecibida;
+			map.put("vista", vista);
+			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+			Executions.sendRedirect("/vistas/arbol.zul");
+			wdwCatalogoLapso.onClose();
+		}
 
 	}
-
-	
 
 }
