@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.Actividad;
 import modelo.Categoria;
 import modelo.Estudiante;
 import modelo.Profesor;
@@ -139,13 +140,14 @@ public class CCatalogoProfesor extends CGeneral {
 	@Listen("onDoubleClick = #ltbProfesor")
 	public void mostrarDatosCatalogo() {
 
+		if (vistaRecibida == null) {
+
+			vistaRecibida = "maestros/VProfesor";
+
+		} else {
+		
 		Listitem listItem = ltbProfesor.getSelectedItem();
 		Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
-		if(profesorDatosCatalogo==null)
-		{
-			alert("no hay gente");
-		}
-		else{
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
@@ -160,6 +162,12 @@ public class CCatalogoProfesor extends CGeneral {
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwCatalogoProfesor.onClose();
 		}
+		
 	}
+	
+	
+	
+	
+	
 
 }

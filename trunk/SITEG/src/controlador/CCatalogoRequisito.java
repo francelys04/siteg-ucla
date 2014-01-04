@@ -151,6 +151,12 @@ public class CCatalogoRequisito extends CGeneral {
 	// Aca se selecciona una actividad del catalogo
 	@Listen("onDoubleClick = #ltbRequisito")
 	public void mostrarDatosCatalogo() {
+		
+		if (vistaRecibida == null) {
+
+			vistaRecibida = "maestros/VRequisito";
+
+		} else {
 
 		Listitem listItem = ltbRequisito.getSelectedItem();
 		Requisito requisitoDatosCatalogo = (Requisito) listItem.getValue();
@@ -161,6 +167,7 @@ public class CCatalogoRequisito extends CGeneral {
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwCatalogoRequisito.onClose();
+		}
 	}
 	
 	

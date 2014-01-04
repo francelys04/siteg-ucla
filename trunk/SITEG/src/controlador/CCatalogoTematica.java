@@ -33,7 +33,7 @@ public class CCatalogoTematica extends CGeneral {
 
 	STematica servicioTematica = GeneradorBeans.getSTematica();
 
-	//atributos de la vista tematica
+	// atributos de la vista tematica
 	@Wire
 	private Combobox cmbAreaTematica;
 	@Wire
@@ -41,8 +41,7 @@ public class CCatalogoTematica extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionTematica;
 
-	
-	//atributos de la pantalla del catalogo
+	// atributos de la pantalla del catalogo
 	@Wire
 	private Listbox ltbTematica;
 	@Wire
@@ -51,13 +50,12 @@ public class CCatalogoTematica extends CGeneral {
 	private Textbox txtAreaMostrarTematica;
 	@Wire
 	private Textbox txtDescripcionMostrarTematica;
-	private long id=0;
-	
+	private long id = 0;
+
 	@Wire
 	private Window wdwCatalogoTematica;
-	
-	private static String vistaRecibida;
 
+	private static String vistaRecibida;
 
 	/**
 	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
@@ -97,7 +95,7 @@ public class CCatalogoTematica extends CGeneral {
 		 * Validacion para vaciar la informacion del VActividad a la vista
 		 * VActividad.zul si la varible map tiene algun dato contenido
 		 */
-		
+
 	}
 
 	/**
@@ -116,8 +114,8 @@ public class CCatalogoTematica extends CGeneral {
 		vistaRecibida = vista;
 	}
 
-// filtra en el catalogo 
-	
+	// filtra en el catalogo
+
 	@Listen("onChange = #txtNombreMostrarTematica,#txtAreaMostrarTematica,#txtDescripcionMostrarTematica")
 	public void filtrarDatosCatalogo() {
 		List<Tematica> tematicas1 = servicioTematica.buscarActivos();
@@ -127,8 +125,7 @@ public class CCatalogoTematica extends CGeneral {
 			if (tematica
 					.getNombre()
 					.toLowerCase()
-					.contains(
-							txtNombreMostrarTematica.getValue().toLowerCase())
+					.contains(txtNombreMostrarTematica.getValue().toLowerCase())
 					&& tematica
 							.getareaInvestigacion()
 							.getNombre()
@@ -155,20 +152,22 @@ public class CCatalogoTematica extends CGeneral {
 	@Listen("onDoubleClick = #ltbTematica")
 	public void mostrarDatosCatalogo() {
 
-		Listitem listItem = ltbTematica.getSelectedItem();
-		Tematica tematicaDatosCatalogo = (Tematica) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", tematicaDatosCatalogo.getId());
-		String vista = vistaRecibida;
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoTematica.onClose();
+		if (vistaRecibida == null) {
+
+			vistaRecibida = "maestros/VTematica";
+
+		} else {
+
+			Listitem listItem = ltbTematica.getSelectedItem();
+			Tematica tematicaDatosCatalogo = (Tematica) listItem.getValue();
+			final HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("id", tematicaDatosCatalogo.getId());
+			String vista = vistaRecibida;
+			map.put("vista", vista);
+			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+			Executions.sendRedirect("/vistas/arbol.zul");
+			wdwCatalogoTematica.onClose();
+		}
 	}
-	
-	
-
-	
-
 
 }

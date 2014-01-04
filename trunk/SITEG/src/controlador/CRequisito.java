@@ -108,7 +108,7 @@ public class CRequisito extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("¿Desea guardar los datos de la actividad?",
+			Messagebox.show("¿Desea guardar los datos del requisito?",
 					"Dialogo de confirmación", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {

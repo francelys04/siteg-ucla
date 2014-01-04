@@ -101,6 +101,13 @@ public class CCatalogoItem extends CGeneral {
 
 	@Listen("onDoubleClick = #ltbItem")
 	public void mostrarDatosCatalogo() {
+		
+		if (vistaRecibida == null) {
+
+			vistaRecibida = "maestros/VItem";
+
+		} else {
+		
 		Listitem listItem = ltbItem.getSelectedItem();
 		ItemEvaluacion itemDatosCatalogo = (ItemEvaluacion) listItem.getValue();
 		String vista = vistaRecibida;
@@ -110,6 +117,7 @@ public class CCatalogoItem extends CGeneral {
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwCatalogoItem.onClose();
+		}
 
 	}
 
