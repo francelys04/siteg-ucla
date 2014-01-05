@@ -137,7 +137,7 @@ public class CConsultarEstatus extends CGeneral {
 					
 					if(teg.isEmpty()==false && indiceTeg!=-1){
 									
-						if (teg.get(indiceTeg).getEstatus().equals("Solicitando Proyecto")!=true){
+						if (teg.get(indiceTeg).getEstatus().equals("Solicitando Registro")!=true){
 							
 							if (teg.get(indiceTeg).getEstatus().equals("Proyecto Registrado")!=true){
 								
