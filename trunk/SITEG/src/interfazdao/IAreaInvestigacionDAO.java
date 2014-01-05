@@ -30,7 +30,6 @@ public interface IAreaInvestigacionDAO extends JpaRepository<AreaInvestigacion, 
 	
 	
 	
-	
 }
 
 

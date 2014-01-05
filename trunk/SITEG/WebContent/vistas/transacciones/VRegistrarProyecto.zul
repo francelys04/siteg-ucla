@@ -1,5 +1,6 @@
 <window title="Registrar Proyecto de Trabajo Especial de Grado"
-	border="normal" width="100%" height="95%" closable="true">
+	id="wdwRegistrarProyecto" border="normal" width="100%" height="95%"
+	closable="true" apply="controlador.CRegistrarProyecto">
 	<separator />
 
 	<style dynamic="true">
@@ -59,8 +60,8 @@
 					<label value="Programa:" style="font-weight:bold" />
 				</hlayout>
 
-				<textbox id="txtProgramaRegistrarAvances"
-									width="20%" style="margin-left:5%" />
+				<textbox id="txtProgramaRegistrarProyecto" width="20%"
+					style="margin-left:5%" />
 
 			</row>
 		</rows>
@@ -68,8 +69,9 @@
 
 	<div align="right">
 		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="db1" cols="12" style="margin-right:30px"
-			format="short" onCreate="self.value = new Date()" mold="rounded">
+		<datebox id="dbfechaRegistrarProyecto" cols="12"
+			style="margin-right:30px" format="short"
+			onCreate="self.value = new Date()" mold="rounded">
 		</datebox>
 	</div>
 
@@ -105,7 +107,7 @@
 										style="font-weight:bold" />
 								</hlayout>
 
-								<textbox id="txtAreaRegistrarAvances"
+								<textbox id="txtAreaRegistrarProyecto"
 									width="60%" style="margin-left:42%" />
 
 							</hbox>
@@ -123,7 +125,7 @@
 										Temática: " style="font-weight:bold" />
 								</hlayout>
 								<textbox
-									id="txtTematicaRegistrarAvances" width="80%"
+									id="txtTematicaRegistrarProyecto" width="80%"
 									style="margin-left:35%" />
 							</hbox>
 
@@ -141,7 +143,7 @@
 
 						</row>
 						<row>
-							<textbox id="txtTituloSolicitud"
+							<textbox id="txtTituloRegistrarProyecto"
 								width="520px" rows="2" cols="100" />
 						</row>
 					</rows>
@@ -156,42 +158,28 @@
 				<separator />
 				<separator />
 
-				
-						<listbox mold="paging" pageSize="2">
 
-							<listhead>
-								<listheader label="Cédula"
-									align="center" />
-								<listheader label="Nombre"
-									align="center" />
-								<listheader label="Apellido"
-									align="center" />
-								<listheader label="Correo"
-									align="center" width="30%" />
-							</listhead>
+				<listbox mold="paging" pageSize="2"
+					id="lsbEstudiantesRegistrarProyecto">
 
-							<listitem>
-								<listcell label=""></listcell>
-								<listcell label=""></listcell>
-								<listcell label=""></listcell>
-								<listcell label=""></listcell>
-							</listitem>
+					<listhead>
+						<listheader label="Cédula" align="center" />
+						<listheader label="Nombre" align="center" />
+						<listheader label="Apellido" align="center" />
+						<listheader label="Correo" align="center"
+							width="center" />
+					</listhead>
 
-							<listitem>
-								<listcell label=""></listcell>
-								<listcell label=""></listcell>
-								<listcell label=""></listcell>
-								<listcell label=""></listcell>
-							</listitem>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.cedula}" />
+							<listcell label="${each.nombre}" />
+							<listcell label="${each.apellido}" />
+							<listcell label="${each.correoElectronico}" />
+						</listitem>
+					</template>
 
-							<listitem>
-								<listcell label=""></listcell>
-								<listcell label=""></listcell>
-								<listcell label=""></listcell>
-								<listcell label=""></listcell>
-							</listitem>
-
-						</listbox>
+				</listbox>
 
 			</tabpanel>
 
@@ -212,7 +200,8 @@
 									style="font-weight:bold" />
 							</hlayout>
 
-							<textbox id="txtCedulaTutor" width="20%" />
+							<textbox
+								id="txtCedulaTutorRegistrarProyecto" width="20%" />
 						</row>
 						<row>
 							<hlayout>
@@ -223,7 +212,8 @@
 							</hlayout>
 
 
-							<textbox id="txtNombreTutor" width="30%" />
+							<textbox
+								id="txtNombreTutorRegistrarProyecto" width="30%" />
 						</row>
 						<row>
 							<hlayout>
@@ -235,7 +225,8 @@
 									style="font-weight:bold" />
 							</hlayout>
 
-							<textbox id="txtApellidoTutor" width="30%" />
+							<textbox
+								id="txtApellidoTutorRegistrarProyecto" width="30%" />
 						</row>
 					</rows>
 				</grid>
@@ -254,11 +245,11 @@
 		<panelchildren>
 			<div align="center">
 				<separator />
-				<button id="btnGuardar" label="Guardar"
-					image="/imagenes/guardar.png" tabindex="12">
+				<button id="btnGuardarRegistrarProyecto" label="Guardar"
+					image="/public/imagenes/iconos/guardar.png" tabindex="12">
 				</button>
-				<button id="btnCancelar" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="13">
+				<button id="btnCancelarRegistrarProyecto"
+					label="Cancelar" image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 				</button>
 				<separator />
 

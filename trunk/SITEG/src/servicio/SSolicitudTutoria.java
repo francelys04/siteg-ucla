@@ -18,7 +18,7 @@ public class SSolicitudTutoria {
 
 	@Autowired
 	private ISolicitudTutoriaDAO interfaceSolicitud;
-	private String[] Estatus = {"Por Revisar", "Aceptada", "Rechazada", "No Factible", "Finalizada"};
+	private String[] Estatus = {"Por Revisar", "Aceptada", "Rechazada", "Finalizada"};
 	
 	public void guardar(SolicitudTutoria solicitud){
 		interfaceSolicitud.save(solicitud);

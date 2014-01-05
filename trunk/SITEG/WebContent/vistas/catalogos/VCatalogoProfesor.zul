@@ -48,7 +48,6 @@
 					<listcell label="${each.apellido}" />
 					<listcell label="${each.categoria.nombre}" />
 					<listcell label="${each.correoElectronico}" />
-
 				</listitem>
 			</template>
 		</listbox>
