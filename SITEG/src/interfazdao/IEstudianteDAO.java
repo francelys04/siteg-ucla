@@ -26,6 +26,8 @@ public interface IEstudianteDAO extends JpaRepository<Estudiante, String> {
 	@Query("select e from Estudiante e where e.usuario=null")
 	public List<Estudiante> buscarSinUsuario();
 
+	public List<Estudiante> findByPrograma(Programa programa);
+
 			
 	
 }

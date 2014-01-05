@@ -97,8 +97,8 @@ public class CConsultarEstatus extends CGeneral {
 		if (servicioTutoria.buscarSolicitud(estudiante)!=null){
 			solicitudTutoria = servicioTutoria.buscarSolicitud(estudiante);		
 		}
-		if (servicioTeg.buscarTeg(estudiante)!=null){
-			teg = servicioTeg.buscarTeg(estudiante);		
+		if (servicioTeg.buscarTegPorEstudiante(estudiante)!=null){
+			teg = servicioTeg.buscarTegPorEstudiante(estudiante);		
 		}
 		
 		for(int x = 0; x < solicitudTutoria.size(); x = x+1){

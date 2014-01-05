@@ -1,5 +1,6 @@
 package controlador;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -9,7 +10,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import modelo.Condicion;
+import modelo.CondicionPrograma;
 import modelo.Estudiante;
+import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Usuario;
 
@@ -19,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 
+import servicio.SCondicionPrograma;
 import servicio.SEstudiante;
 import servicio.SProfesor;
 import servicio.SUsuario;
@@ -30,6 +35,7 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
+	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		// TODO Auto-generated method stub
@@ -48,6 +54,17 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
 		Profesor profesor = servicioProfesor.buscarProfesorLoggeado(u);
 		return profesor;
+	}
+	
+	public CondicionPrograma buscarCondicionVigenteEspecifica(String nombre){
+		List<CondicionPrograma> condicionesActuales = servicioCondicionPrograma.buscarUltimasCondiciones(ObtenerUsuarioProfesor().getPrograma());
+		CondicionPrograma condicionBuscada = new CondicionPrograma();
+		for(int i=0; i<condicionesActuales.size(); i++){
+			if(condicionesActuales.get(i).getCondicion().getNombre().equals(nombre)){
+				condicionBuscada = condicionesActuales.get(i);
+			}
+		}
+		return condicionBuscada;
 	}
 	
 	public Estudiante ObtenerUsuarioEstudiante() {

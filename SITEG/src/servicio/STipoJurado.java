@@ -27,6 +27,12 @@ public List<TipoJurado> buscarActivos(){
 	tipoJurados= interfaceTipoJurado.buscarTipoJuradoActivos();
 	return tipoJurados;
 }
+public TipoJurado buscarPorNombre(String tipojurado) {
+	// TODO Auto-generated method stub
+	TipoJurado tipo;
+	tipo = interfaceTipoJurado.findByNombre(tipojurado);
+	return tipo;
+}
 
 }
 

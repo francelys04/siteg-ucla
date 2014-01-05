@@ -62,7 +62,7 @@
 					</hlayout>
 
 					<combobox id="cmbLapsoCrearCronograma"
-						autodrop="true" width="120px" tabindex="12"
+						readonly="true" autodrop="true" width="120px" tabindex="12"
 						style="margin-left:55px">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
@@ -79,7 +79,7 @@
 					</hlayout>
 
 					<combobox id="cmbProgramaCrearCronograma"
-						autodrop="true" width="160px" tabindex="12"
+						readonly="true" autodrop="true" width="160px" tabindex="12"
 						style="margin-left:55px">
 						<template name="model">
 							<comboitem label="${each.nombre}" />

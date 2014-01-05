@@ -23,18 +23,18 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 
 
 	//Evaluar Revisiones
-	@Query("select t from Teg t where t.estatus='TEGRegistrado'")
-	public List<Teg> buscarTegRegistrado();
+//	@Query("select t from Teg t where t.estatus='TEGRegistrado'")
+//	public List<Teg> buscarTegRegistrado();
 	
 	//Buscar tegs por profesores
 	public List<Teg> findByTutor(List<Profesor> profesores);
 	
 	
-	@Query("select t from Teg t where t.estatus='Proyecto Registrado'")
-	public List<Teg> ProyectoRegistrado();	
+//	@Query("select t from Teg t where t.estatus='Proyecto Registrado'")
+//	public List<Teg> ProyectoRegistrado();	
 	
-	@Query("select t from Teg t where t.estatus='Solicitando Registro'")
-	public List<Teg> TegSolicitandoRegistro();	
+//	@Query("select t from Teg t where t.estatus='Solicitando Registro'")
+//	public List<Teg> TegSolicitandoRegistro();	
 
 	/*Busca los teg asociados al Estudiante*/
 	public List<Teg> findByEstudiantes(Estudiante estudiante);
@@ -50,7 +50,13 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	public List<Teg> findByEstatus(
 			String estatusProyectoFactible);
 
+	public Teg findByEstatusAndEstudiantes(String string, Estudiante estudiante);
 
+	//Busca los tegs de los estudiantes del programa dado y con estatus dado
+	@Query("select t from Teg t where t.estatus=?2 and t.estudiantes in (select e from Estudiante e where e.programa=?1)")
+	public List<Teg> buscarTegsPorPrograma(Programa programa, String string);
+
+	public List<Teg> findByEstatusAndEstudiantesInOrderByIdAsc(String estatus, List<Estudiante> list);
 	
 	
 }

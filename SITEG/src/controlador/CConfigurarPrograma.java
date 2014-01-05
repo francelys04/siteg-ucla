@@ -81,7 +81,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		List<Programa> programas = servicioPrograma.buscarActivas();
-		llenarListas();
+		//llenarListas();
 		List<Requisito> requisito = servicioRequisito.buscarActivos();
 		ltbRequisitosDisponibles.setModel(new ListModelList<Requisito>(
 				requisito));
@@ -250,11 +250,12 @@ public class CConfigurarPrograma extends CGeneral {
 				.buscarCondicionesPrograma(programa, lapso);
 		List<Requisito> requisitosIzquierda = servicioRequisito.buscarRequisitosDisponibles(programa, lapso);
 		List<Requisito> requisitosDerecha = servicioProgramaRequisito.buscarRequisitosEnPrograma(programa, lapso);
-		
+		System.out.println("Condiciones1"+condicionesDePrograma.toString());
 		if(condicionesDePrograma.toString() == "[]"){
 			condicionesDePrograma = servicioCondicionPrograma
 					.buscarCondicionesPrograma(programa, null);
-		}			
+		}
+		System.out.println("Condiciones2"+condicionesDePrograma.toString());
 		ltbAreasDisponibles.setModel(new ListModelList<AreaInvestigacion>(
 				areasIzquierda));
 		ltbAreasSeleccionadas.setModel(new ListModelList<AreaInvestigacion>(

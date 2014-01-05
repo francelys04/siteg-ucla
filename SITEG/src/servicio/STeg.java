@@ -3,11 +3,13 @@ package servicio;
 import java.util.List;
 
 import interfazdao.IActividadDAO;
+import interfazdao.IEstudianteDAO;
 import interfazdao.ITegDAO;
 
 import modelo.Actividad;
 import modelo.Estudiante;
 import modelo.Profesor;
+import modelo.Programa;
 import modelo.Requisito;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
@@ -20,7 +22,10 @@ import org.springframework.stereotype.Service;
 public class STeg {
 	@Autowired
 	private ITegDAO interfaceTeg;
-	private String[] Estatus = { "Solicitando Proyecto", "Proyecto Registrado",
+	@Autowired
+	private IEstudianteDAO interfaceEstudiante;
+	
+	private String[] estatus = { "Solicitando Proyecto", "Proyecto Registrado",
 			"Comision Asignada", "Factibilidad Evaluada", "Proyecto Factible",
 			"Proyecto No Factible", "Avances Finalizados", "TEG Registrado",
 			"Revisiones Finalizadas", "Solicitando Defensa",
@@ -34,7 +39,7 @@ public class STeg {
 	// Evaluar Revisiones
 	public List<Teg> buscarTegRegistrado() {
 		List<Teg> tegs;
-		tegs = interfaceTeg.buscarTegRegistrado();
+		tegs = interfaceTeg.findByEstatus(estatus[7]);
 		return tegs;
 
 	}
@@ -54,7 +59,7 @@ public class STeg {
 	public List<Teg> BuscarProyectoRegistrado() {
 
 		List<Teg> tegs;
-		tegs = interfaceTeg.ProyectoRegistrado();
+		tegs = interfaceTeg.findByEstatus(estatus[1]);
 		return tegs;
 
 	}
@@ -62,7 +67,7 @@ public class STeg {
 	public List<Teg> BuscarTegSolicitandoRegistro() {
 
 		List<Teg> tegs;
-		tegs = interfaceTeg.TegSolicitandoRegistro();
+		tegs = interfaceTeg.findByEstatus(estatus[0]);
 		return tegs;
 
 	}
@@ -75,7 +80,7 @@ public class STeg {
 	}
 
 	/* Busca los teg asociados al Estudiante */
-	public List<Teg> buscarTeg(Estudiante estudiante) {
+	public List<Teg> buscarTegPorEstudiante(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		List<Teg> teg;
 		teg = interfaceTeg.findByEstudiantes(estudiante);
@@ -87,7 +92,7 @@ public class STeg {
 		// TODO Auto-generated method stub
 		Teg teg;
 		teg = interfaceTeg.findByEstatusLikeAndEstudiantes(
-				Estatus[6], estudiante);
+				estatus[6], estudiante);
 		return teg;
 	}
 	
@@ -96,11 +101,39 @@ public class STeg {
 	public List<Teg> buscarProyectoFactible() {
 
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatus(Estatus[4]);
+		tegs = interfaceTeg.findByEstatus(estatus[4]);
 		return tegs;
 
 	}
 	
+	public Teg buscarTegConRevisionFinal(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		Teg teg;
+		teg = interfaceTeg.findByEstatusAndEstudiantes(estatus[8], estudiante);
+		return teg;
+	}
+	
+	public Teg buscarTegSolicitandoDefensa(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		Teg teg;
+		teg = interfaceTeg.findByEstatusAndEstudiantes(estatus[9], estudiante);
+		return teg;
+	}
+	
+	public List<Teg> buscarTegPorProgramaParaDefensa(Programa programa) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs =interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(estatus[9], interfaceEstudiante.findByPrograma(programa));
+		return tegs;
+	}
+
+	//Acomodar
+//	public Teg buscarTegUnicoPorEstudiante(Estudiante obtenerUsuarioEstudiante) {
+//		// TODO Auto-generated method stub
+//		Teg teg;
+//		teg = interfaceTeg.findByEstudiantes(obtenerUsuarioEstudiante);
+//		return teg;
+//	}
 
 
 }

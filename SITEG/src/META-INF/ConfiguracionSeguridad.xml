@@ -6,11 +6,8 @@
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd
 	http://www.zkoss.org/2008/zkspring http://www.zkoss.org/2008/zkspring/zkspring.xsd">
 
-	<http auto-config="true">
-		<!-- <intercept-url pattern="/interface" access="ROLE_ANONYMOUS" /> <intercept-url 
-			pattern="/error" access="ROLE_ANONYMOUS" /> <intercept-url pattern="/**" 
-			access="ROLE_USER" /> -->
-		<intercept-url pattern="/vistas/**" access="ROLE_USER, ROLE_ADMIN" />
+	<http use-expressions="true">
+		<intercept-url pattern="/vistas/**" access="isAuthenticated()" />
 		<form-login login-page="/VPrincipal.zul"
 			login-processing-url="/j_spring_security_check" default-target-url="/vistas/arbol.zul"
 			authentication-failure-url="/VPrincipal.zul?respuesta=Usuario o Contraseña Incorrectos" />
@@ -21,11 +18,9 @@
 		</session-management>
 	</http>
 
-	<!-- notaciones de seguridad -->
 	<global-method-security secured-annotations="enabled" />
 
 	<beans:bean id='bCryptPasswordEncoder' class='org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder'/>
-
 
 	<authentication-manager>
 		<authentication-provider>

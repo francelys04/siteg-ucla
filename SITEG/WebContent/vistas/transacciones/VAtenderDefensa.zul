@@ -1,12 +1,14 @@
-<window title="Atender Solicitudes de Defensa" border="normal"
-	width="750px" height="610px" closable="true">
+<window id="wdwAtenderDefensa" title="Atender Solicitudes de Defensa" border="normal"
+	width="750px" height="610px" closable="true" apply="controlador.CAtenderDefensa">
 	<separator />
 
 	<style dynamic="true">
-		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.GridLayoutNoBorder tr.z-row td.z-row-inner,
+		tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
 		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		border-right:
+		none; border-bottom: none; }
 
 	</style>
 
@@ -15,21 +17,30 @@
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
 		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		border-right:
+		none; border-bottom: none; }
 
-		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
-		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
-		transparent; border-left: 1px solid transparent; border-top: 1px
+		.fgrid .z-grid-odd .fgrid
+		.z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7;
+		border-bottom: 1px solid
+		transparent; border-left: 1px solid
+		transparent; border-top: 1px
 		solid transparent; }
 
-		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
-		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
+		.fgrid .z-grid-odd
+		.fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd {
+		background: none repeat scroll 0 0
 		transparent; }
 
-		.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
-		.z-cell,.fgrid tr.z-grid-odd { background: white }
+		.fgrid tr.z-grid-odd
+		td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd {
+		background: white }
 
-		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row
+		.z-cell {
 		background: white; border-top: none; }
 
 	</style>
@@ -38,13 +49,14 @@
 	<separator />
 
 	<label value="Programa:" style="margin-left:2%" />
-	<textbox id="txtProgramaRegistrarAvances" style="margin-left:5%"
+	<label id="txtProgramaAtenderDefensa" style="margin-left:5%"
 		width="25%" />
 
 	<div align="right">
 		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="db1" cols="12" style="margin-right:30px"
-			format="short" onCreate="self.value = new Date()" mold="rounded">
+		<datebox id="dtbFechaAtenderDefensa" cols="12" style="margin-right:30px"
+			format="short" onCreate="self.value = new Date()" mold="rounded"
+			disabled="true">
 		</datebox>
 	</div>
 
@@ -72,11 +84,9 @@
 					<rows>
 						<row>
 							<hbox>
-								<label value="Area:"
-									style="font-weight:bold" />
+								<label value="Area:" style="font-weight:bold" />
 
-								<textbox id="txtAreaRegistrarAvances"
-									width="60%" style="margin-left:42%" />
+								<label id="txtAreaAtenderDefensa" width="60%" style="margin-left:42%" />
 
 							</hbox>
 						</row>
@@ -84,24 +94,20 @@
 						<row>
 							<hbox>
 								<label value="
-										Temática: "
-									style="font-weight:bold" />
+										Temática: " style="font-weight:bold" />
 
-								<textbox
-									id="txtTematicaRegistrarAvances" width="80%"
+								<label id="txtTematicaAtenderDefensa" width="80%"
 									style="margin-left:35%" />
 							</hbox>
 
 						</row>
 
 						<row>
-							<label value="Título del Trabajo:"
-								style="font-weight:bold" />
+							<label value="Título del Trabajo:" style="font-weight:bold" />
 
 						</row>
 						<row>
-							<textbox id="txtTituloSolicitud"
-								width="520px" rows="2" cols="100" />
+							<label id="txtTituloAtenderDefensa" width="520px" />
 						</row>
 					</rows>
 				</grid>
@@ -115,36 +121,28 @@
 				<separator />
 				<separator />
 
-				<listbox mold="paging" pageSize="2">
+				<listbox mold="paging" pageSize="2"
+					id="ltbEstudiantesAtenderDefensa">
 
 					<listhead>
 						<listheader label="Cédula" align="center" />
 						<listheader label="Nombre" align="center" />
 						<listheader label="Apellido" align="center" />
-						<listheader label="Correo" align="center"
-							width="30%" />
+						<listheader label="Correo" align="center" width="30%" />
 					</listhead>
 
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.cedula}">
+							</listcell>
+							<listcell label="${each.nombre}">
+							</listcell>
+							<listcell label="${each.apellido}">
+							</listcell>
+							<listcell label="${each.correoElectronico}">
+							</listcell>
+						</listitem>
+					</template>
 
 				</listbox>
 
@@ -160,23 +158,20 @@
 					</columns>
 					<rows>
 						<row>
-							<label value="Cedula:"
-								style="font-weight:bold" />
+							<label value="Cedula:" style="font-weight:bold" />
 
-							<textbox id="txtCedulaTutor" width="20%" />
+							<label id="txtCedulaTutorAtenderDefensa" width="20%" />
 						</row>
 						<row>
-							<label value="Nombre:"
-								style="font-weight:bold" />
+							<label value="Nombre:" style="font-weight:bold" />
 
 
-							<textbox id="txtNombreTutor" width="30%" />
+							<label id="txtNombreTutorAtenderDefensa" width="30%" />
 						</row>
 						<row>
-							<label value="Apellido:"
-								style="font-weight:bold" />
+							<label value="Apellido:" style="font-weight:bold" />
 
-							<textbox id="txtApellidoTutor" width="30%" />
+							<label id="txtApellidoTutorAtenderDefensa" width="30%" />
 						</row>
 					</rows>
 				</grid>
@@ -186,8 +181,7 @@
 				<separator />
 				<separator />
 
-				<grid sclass="fgrid"
-					style="margin-left:2%;margin-right:1%">
+				<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 					<columns>
 						<column width="98%" height="30px" />
 					</columns>
@@ -195,146 +189,94 @@
 
 						<row>
 							<hbox>
-								<label value="Tipo de Jurado:"
-									style="font-weight:bold" />
-
-
-								<combobox id="cmbTipoJuradoEstudiante"
-									style="margin-left:15px" autodrop="true" width="75%"
-									tabindex="1">
-									<comboitem label="Principal" />
-									<comboitem label="Suplente" />
-								</combobox>
+								<label id="lblCondicionAtenderDefensa" style="font-weight:bold" />
 							</hbox>
 
 						</row>
 
 						<row>
 							<hbox>
-								<panel title="Profesores Disponibles"
-									width="260px">
+								<panel title="Profesores Disponibles" width="260px">
 									<panelchildren>
-										<listbox
-											id="lsbAreasProgramaDisponibles" mold="paging"
-											pageSize="3">
-
+										<listbox id="ltbJuradoDisponible" height="200px" mold="paging"
+											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No hay items registrados">
 											<listhead>
-												<listheader label=""
-													width="15%" align="center" />
-												<listheader
-													label="Nombre" align="center" />
-												<listheader
-													label="Apellido" align="center" />
-
+												<listheader label="Cedula" />
+												<listheader label="Nombre" />
+												<listheader label="Apellido" />
 											</listhead>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell label="Luis" />
-												<listcell
-													label="Garcia" />
-
-											</listitem>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell label="Jorge" />
-												<listcell
-													label="Guerrero" />
-											</listitem>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell
-													label="Alvaro" />
-												<listcell label="Muñoz" />
-
-											</listitem>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell
-													label="Luzneida" />
-												<listcell
-													label="Matute" />
-											</listitem>
+											<template name="model">
+												<listitem>
+													<listcell>
+													<spinner inplace="true"
+														value="${each.cedula}" width="98%"
+														readonly="true" />
+													</listcell>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell label="${each.apellido}">
+													</listcell>
+													<listcell>
+														<combobox readonly="true" inplace="true" width="70px">
+																<comboitem label="Principal" />
+																<comboitem label="Asistente" />
+														</combobox>
+													</listcell>
+												</listitem>
+											</template>
 										</listbox>
 									</panelchildren>
 								</panel>
 
 
-								<panel width="30px"
-									style="margin:0 auto;padding:35px;">
+								<panel width="60px" style="margin-left:20px;margin-top:80px">
 									<panelchildren>
 										<div>
 
-											<image
-												src="/imagenes/right.png">
-											</image>
-											<separator height="15px" />
-											<image
-												src="/imagenes/left.png">
-
-											</image>
+											<button id="btnAgregarJurado" sclass="pointer"
+												image="/public/imagenes/iconos/right.png" tooltiptext="Agregar Items"
+												width="35px" />
+											<separator />
+											<button sclass="pointer" id="btnRemoverJurado"
+												image="/public/imagenes/iconos/left.png" tooltiptext="Quitar Items"
+												width="35px" />
 
 										</div>
 									</panelchildren>
 								</panel>
 
-
-								<panel title="Jurado" width="260px">
+								<panel title="Jurado" width="290px">
 									<panelchildren>
-										<listbox
-											id="lsbAreasProgramasSeleccionadas" mold="paging"
-											pageSize="3">
-
+										<listbox id="ltbJuradoSeleccionado" height="200px"
+											mold="paging" pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											emptyMessage="No se han seleccionado items">
 											<listhead>
-												<listheader label=""
-													width="15%" align="center" />
-												<listheader
-													label="Nombre" align="center" />
-												<listheader
-													label="Apellido" align="center" />
-
+												<listheader label="Cedula" width="20%"/>
+												<listheader label="Nombre" width="22%"/>
+												<listheader label="Apellido" width="23%"/>
+												<listheader label="Tipo de Jurado" width="35%"/>
 											</listhead>
 
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell label="Luis" />
-												<listcell
-													label="Garcia" />
-
-											</listitem>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell label="Jorge" />
-												<listcell
-													label="Guerrero" />
-											</listitem>
-
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell
-													label="Alvaro" />
-												<listcell label="Muñoz" />
-
-											</listitem>
-
+											<template name="model">
+												<listitem>
+													<listcell>
+													<spinner inplace="true"
+														value="${each.profesor.cedula}" width="98%"
+														readonly="true" />
+													</listcell>
+													<listcell label="${each.profesor.nombre}">
+													</listcell>
+													<listcell label="${each.profesor.apellido}">
+													</listcell>
+													<listcell>
+														<combobox readonly="true" value="${each.tipoJurado.nombre}" inplace="true">
+																<comboitem label="Principal" />
+																<comboitem label="Asistente" />
+														</combobox>
+													</listcell>
+												</listitem>
+											</template>
 
 										</listbox>
 									</panelchildren>
@@ -360,12 +302,12 @@
 
 				<hbox>
 					<datebox id="dtbFechaDefensa" />
-					
+
 					<label value="Hora:" style="font-weight:bold;margin-left:30px" />
 
 
-					<timebox id="tb3" cols="12" format="hh:mm:ss a" style="margin-left:10px"
-						onCreate="self.value = new Date()" />
+					<timebox id="tmbHoraDefensa" cols="12" format="hh:mm:ss a"
+						style="margin-left:10px" onCreate="self.value = new Date()" />
 
 				</hbox>
 
@@ -387,16 +329,18 @@
 	<separator />
 	<separator />
 
-	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:2%">
+	<panel border="normal" width="95%" style="margin-left:2%;margin-right:2%">
 		<panelchildren>
 			<div align="center">
 				<separator />
-				<button id="btnGuardar" label="Guardar"
+				<button id="btnAceptarDefensa" label="Finalizar" image="/imagenes/guardar.png"
+					tabindex="12">
+				</button>
+				<button id="btnAceptarDefensaMientrasTanto" label="Guardar"
 					image="/imagenes/guardar.png" tabindex="12">
 				</button>
-				<button id="btnCancelar" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="13">
+				<button id="btnCancelarDefensa" label="Rechazar" image="/imagenes/limpiar.png"
+					tabindex="13">
 				</button>
 
 				<separator />

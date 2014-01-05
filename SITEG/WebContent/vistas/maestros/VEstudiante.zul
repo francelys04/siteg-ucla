@@ -108,7 +108,7 @@
 							style="font-weight:bold;color:red" />
 						<label value="Programa:" style="color:black" />
 					</hlayout>
-					<combobox id="cmbProgramaEstudiante"
+					<combobox readonly="true" id="cmbProgramaEstudiante"
 						tooltip="pupProgramaEstudiante">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
