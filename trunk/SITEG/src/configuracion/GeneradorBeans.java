@@ -14,11 +14,13 @@ import servicio.SCategoria;
 import servicio.SCondicion;
 import servicio.SCondicionPrograma;
 import servicio.SCronograma;
+import servicio.SDefensa;
 import servicio.SEstudiante;
 import servicio.SFactibilidad;
 import servicio.SGrupo;
 import servicio.SItem;
 import servicio.SItemFactibilidad;
+import servicio.SJurado;
 import servicio.SLapso;
 import servicio.SProfesor;
 import servicio.SPrograma;
@@ -151,4 +153,11 @@ public class GeneradorBeans implements ApplicationContextAware {
 		return applicationContext.getBean(SItemFactibilidad.class);
 	}
 	
+	public static SDefensa getServicioDefensa(){
+		return applicationContext.getBean(SDefensa.class);
+	}
+	
+	public static SJurado getServicioJurado(){
+		return applicationContext.getBean(SJurado.class);
+	}
 }

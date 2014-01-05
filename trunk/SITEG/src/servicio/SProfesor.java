@@ -58,6 +58,13 @@ public class SProfesor {
 		profesores= interfazProfesor.buscarProfesorporPrograma(programa);
 		return profesores;
 	}
+	public List<Profesor> buscarProfesorJuradoDadoTeg(Teg teg) {
+		// TODO Auto-generated method stub
+		List<Profesor> profesores;
+		profesores = interfazProfesor.buscarProfesorEnJurado(teg);
+		return profesores;
+	}
+
 	
 	//Busca la comision asociado a un teg
 	public List<Profesor> buscarComisionDelTeg(Teg teg){

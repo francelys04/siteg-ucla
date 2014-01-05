@@ -36,4 +36,7 @@ public interface IProfesorDAO extends JpaRepository<Profesor, String> {
 	
 	
 
+	@Query("select p from Profesor p where p.cedula not in (select j.profesor from Jurado j where j.teg = ?1)")
+	public List<Profesor> buscarProfesorEnJurado(Teg teg);
+
 }

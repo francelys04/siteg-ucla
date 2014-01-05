@@ -63,7 +63,7 @@
 					</hlayout>
 
 					<combobox id="cmbLapsoConfigurarPrograma"
-						autodrop="true" width="120px" tabindex="12"
+						readonly="true" autodrop="true" width="120px" tabindex="12"
 						style="margin-left:55px">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
@@ -82,7 +82,7 @@
 					</hlayout>
 
 					<combobox id="cmbProgramaConfigurarPrograma"
-						autodrop="true" width="170px" tabindex="12"
+						readonly="true" autodrop="true" width="170px" tabindex="12"
 						style="margin-left:35px">
 						<template name="model">
 							<comboitem label="${each.nombre}" />

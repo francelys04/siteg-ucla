@@ -189,7 +189,7 @@ public class CSolicitarTutor extends CGeneral {
 				Messagebox.show("Debes estar Previamente Registrado",
 						"Información", Messagebox.OK, Messagebox.INFORMATION);
 			} else {
-				List<Teg> teg = servicioTeg.buscarTeg(estudiante);
+				List<Teg> teg = servicioTeg.buscarTegPorEstudiante(estudiante);
 				if (teg.size() > 0) {
 					Messagebox.show("Ya Tienes Un TEG en Proceso",
 							"Información", Messagebox.OK,
@@ -199,7 +199,7 @@ public class CSolicitarTutor extends CGeneral {
 							.buscarProfesorPorCedula(cedulaProfesor);
 					List<Teg> teg2 = servicioTeg
 							.buscarTutoriaProfesor(profesor);
-					if (teg2.size() >= 3) {
+					if (teg2.size() >= 3) { //No creo que deban ser 3 especificamente, debe ser lo que diga esa condicion del programa....
 						Messagebox.show(
 								"El Profesor ya tiene más de 3 Proyectos",
 								"Información", Messagebox.OK,

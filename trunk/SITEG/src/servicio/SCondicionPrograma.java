@@ -3,6 +3,7 @@ package servicio;
 import java.util.List;
 
 import interfazdao.ICondicionProgramaDAO;
+import interfazdao.ILapsoDAO;
 
 import modelo.Actividad;
 import modelo.CondicionPrograma;
@@ -26,6 +27,13 @@ public class SCondicionPrograma {
 		List<CondicionPrograma> condicionesProgramas;
 		condicionesProgramas = interfaceCondicionPrograma.findByProgramaAndLapso(programa, lapso);
 		return condicionesProgramas;
+	}
+
+	public List<CondicionPrograma> buscarUltimasCondiciones(Programa programa) {
+		// TODO Auto-generated method stub
+		List<CondicionPrograma> condiciones;
+		condiciones = interfaceCondicionPrograma.buscarCondicionesActuales(programa);
+		return condiciones;
 	}
 	
 	

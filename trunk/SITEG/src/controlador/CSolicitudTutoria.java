@@ -70,7 +70,7 @@ public class CSolicitudTutoria extends CGeneral {
 	private static String vistaRecibida;
 	private String[] mensaje = {
 			"Su Tutoria ha sido aprobada, le enviamos su usuario y contraseña",
-			"Su tutoria ha sido rechazada, por favor intente con otro tutor" };
+			"Su Tutoria ha sido rechazada, por favor intente con otro tutor" };
 	
 	@Override
 	void inicializar(Component comp) {
@@ -111,11 +111,16 @@ public class CSolicitudTutoria extends CGeneral {
 		for (int i = 0; i < ltbSolicitudesEstudiantes.getItemCount(); i++){
 			Estudiante estudiante = ltbSolicitudesEstudiantes.getItems().get(i)
 					.getValue();
+			Usuario user = servicioUsuario.buscarUsuarioPorNombre(estudiante.getCedula());
+			if(user==null){
+			System.out.println("Aqui");
 			Usuario usuario = new Usuario(0, estudiante.getCedula(), passwordEncoder.encode(estudiante.getCedula()), true, gruposUsuario, imagenUsuario);
 			servicioUsuario.guardar(usuario);
-			Usuario user = servicioUsuario.buscarUsuarioPorNombre(estudiante.getCedula());
+			user = servicioUsuario.buscarUsuarioPorNombre(estudiante.getCedula());
+			System.out.println(user.getNombre());
 			estudiante.setUsuario(user);
 			servicioEstudiante.guardar(estudiante);
+			}			
 			valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), mensaje[0]+" Usuario: "+user.getNombre()+"  "+"Contraseña: "+user.getNombre()));
 		}
 		servicioTutoria.guardarSolicitud(solicitud);
