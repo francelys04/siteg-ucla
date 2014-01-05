@@ -3,9 +3,9 @@
 	<window title="Catalogo Actividad" border="normal" width="800px"
 		id="wdwCatalogoActividad" apply="controlador.CCatalogoActividad"
 		closable="true">
-		
+
 		<style src="public/css/style.css" />
-		
+
 		<listbox id="ltbActividad" width="100%" mold="paging"
 			pageSize="10" emptyMessage="No hay actividades registradas">
 			<auxhead sclass="category-center">
@@ -26,7 +26,7 @@
 			</listhead>
 
 
-			<template name="model">
+			<template name="modelo">
 				<listitem>
 					<listcell label="${each.nombre}" />
 					<listcell label="${each.descripcion}" />

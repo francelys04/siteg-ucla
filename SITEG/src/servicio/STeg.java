@@ -25,7 +25,7 @@ public class STeg {
 	@Autowired
 	private IEstudianteDAO interfaceEstudiante;
 	
-	private String[] estatus = { "Solicitando Proyecto", "Proyecto Registrado",
+	private String[] estatus = { "Solicitando Registro", "Proyecto Registrado",
 			"Comision Asignada", "Factibilidad Evaluada", "Proyecto Factible",
 			"Proyecto No Factible", "Avances Finalizados", "TEG Registrado",
 			"Revisiones Finalizadas", "Solicitando Defensa",
