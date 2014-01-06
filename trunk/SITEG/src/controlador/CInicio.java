@@ -47,10 +47,16 @@ public class CInicio extends CGeneral {
 	private Intbox cedulaEstatus;
 	@Wire
 	private Window wdwConsultarEstatusProyecto;
+	@Wire
+	private Button btnSolicitarTutor;
 	
 	
-	
-	
+	@Listen("onClick = #btnSolicitarTutor")
+	public void SolicitarTutor() {
+		Window window = (Window) Executions.createComponents(
+				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
+		window.doModal();
+	}
 	
 
 	@Listen("onClick = #btnDatos")
