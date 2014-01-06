@@ -102,6 +102,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 	private static long auxId =0; 
 	private static long auxIdP=0;
 	private static String vistaRecibida;
+	ArrayList<Boolean> valor = new ArrayList<Boolean>();
 	SProgramaRequisito servicioRequisitoPrograma = GeneradorBeans.getServicioProgramaRequisito();
 	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
@@ -197,7 +198,11 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 			Messagebox.show("Debe indicar la observacion", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 					}
 			else {
-				enviarEmailNotificacion();	        	
+				for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
+		            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
+		            valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), txtObservacion.getValue()));
+		           
+			 } 	        	
 				
 			}
 		}
@@ -211,8 +216,12 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		txtObservacion.setVisible(false);
 		txtObservacion.setValue("");
 		txtObservacion.setValue("Sus requisitos estan correctos y completos");
-		enviarEmailNotificacion();
-           
+		//enviarEmailNotificacion();
+		 for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
+	            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
+	            valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), txtObservacion.getValue()));
+	           
+		 } 
 		}
 		}	
 		Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
@@ -220,71 +229,6 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		}
 
 
-//Metodo para el envio de correo
-private boolean enviarEmailNotificacion(){
-    try
-    {
-        
-        for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
-            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
-                        
-                       
-         // Propiedades de la conexion
-        Properties props = new Properties();
-        props.setProperty("mail.smtp.host",  "smtp.gmail.com");
-        props.setProperty("mail.smtp.starttls.enable", "true");
-        props.setProperty("mail.smtp.port", "587");
-        props.setProperty("mail.smtp.auth", "true");
-       
-        Session session = Session.getDefaultInstance(props);
-        //Recoger los datos
-        String asunto = "Notificacion de SITEG";
-        String remitente = "siteg.ucla@gmail.com"; 
-        String contrasena = "Equipo.2";
-        String destino = estudiante.getCorreoElectronico();
-        String mensaje = txtObservacion.getValue();
-        
-       
-        //Obtenemos los destinatarios
-        String destinos[] = destino.split(",");
-                
-        // Construimos el mensaje
-        MimeMessage message = new MimeMessage(session);
-         
-        message.setFrom(new InternetAddress( remitente ));
- 
-        //Forma 3
-        Address [] receptores = new Address [ destinos.length ];
-        int j = 0;
-        while(j<destinos.length){                   
-        receptores[j] = new InternetAddress ( destinos[j] ) ;                  
-        j++;               
-        }
- 
-        
-        //receptores.
-        message.addRecipients(Message.RecipientType.TO, receptores);       
-        message.setSubject(asunto);       
-        message.setText(mensaje);
-             
-        // Lo enviamos.
-        Transport t = session.getTransport("smtp");
-        t.connect(remitente,contrasena);
-        t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
-                 
-        // Cierre de la conexion.
-        t.close();
-        }
-        return true;
-    }
-   
-    catch (Exception e)
-    {
-        e.printStackTrace();
-        return false;
-    } 
-    
-}
 	public void llenarRequisitos(Teg teg){
 		auxIdP = teg.getTutor().getPrograma().getId();
 		Lapso lapso = servicioLapso.buscarLapsoVigente();
@@ -295,11 +239,9 @@ private boolean enviarEmailNotificacion(){
 		requisitoIzquierda = servicioTegRequisito.buscarTegRequisitoDisponible(programa, lapso, teg);			
 		ltbRequisitosDisponibles.setModel(new ListModelList<Requisito>(
 				requisitoIzquierda));
-		ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(
-				requisitosDerecha));
-		
-		 
-	}
+	
+		ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(requisitosDerecha));
+			}
 	
 	private void salir(){
 		final HashMap<String, Object> map = new HashMap<String, Object>();
