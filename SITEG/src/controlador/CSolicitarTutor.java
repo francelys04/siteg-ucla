@@ -301,9 +301,8 @@ public class CSolicitarTutor extends CGeneral {
 					 List<Teg> teg2 = servicioTeg.buscarTutoriaProfesor(profesor);
 					 String nombre2 = "Numero de tutorias por profesor";
 					 buscarCondicionVigenteEspecifica(nombre2);
-					 int tam = teg2.size();
-
-					 if(tam >= valor){
+					 
+					 if(teg2.size() >= valor){
 							 Messagebox.show("El Profesor ya tiene un maximo de proyectos asignados", "Información", Messagebox.OK, Messagebox.INFORMATION);	
 						 }
 					 else{
