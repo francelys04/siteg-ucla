@@ -120,9 +120,8 @@ public class CCatalogoProfesorArea extends CGeneral {
 		String vista = "transacciones/VSolicitarTutor";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Window window = (Window) Executions.createComponents(
-				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
-		window.doModal();
+		
+		Executions.sendRedirect("/vistas/transacciones/VSolicitarTutor.zul");
 		
 		
 		
