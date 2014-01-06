@@ -24,11 +24,6 @@
 				<auxheader colspan="1">
 					<image src="/public/imagenes/iconos/filtro.png" />
 					<textbox instant="true" width="80%"
-						id="txtCategoriaMostrarProfesor" />
-				</auxheader>
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="80%"
 						id="txtCorreoMostrarProfesor" />
 				</auxheader>
 			</auxhead>
@@ -37,9 +32,7 @@
 				<listheader label="Nombre" align="center" />
 				<listheader label="Apellido" align="center" />
 				<listheader label="Correo" align="center" />
-				<listheader label="Area" align="center" />
 			</listhead>
-
 
 			<template name="model">
 				<listitem>
@@ -47,8 +40,6 @@
 					<listcell label="${each.nombre}" />
 					<listcell label="${each.apellido}" />
 					<listcell label="${each.correoElectronico}" />
-					<listcell label="${each.categoria.nombre}" />
-
 				</listitem>
 			</template>
 		</listbox>
