@@ -29,7 +29,7 @@ import servicio.STeg;
 import servicio.SItemFactibilidad;
 
 import configuracion.GeneradorBeans;
-import controlador.CCatalogoFactibilidad;
+import controlador.CCatalogoRegistrarFactibilidad;
 import controlador.CGeneral;
 	public class CRegistrarFactibilidad extends CGeneral{
 		//CCatalogoFactibilidad catalogo = new CCatalogoFactibilidad();
@@ -68,7 +68,7 @@ import controlador.CGeneral;
 		@Wire
 		private Window wdwRegistrarFactibilidad;
 		@Wire
-		private Window wdwCatalogoFactibilidad;
+		private Window wdwCatalogoRegistrarFactibilidad;
 		private static String vistaRecibida;
 		private long id;
 		@Override

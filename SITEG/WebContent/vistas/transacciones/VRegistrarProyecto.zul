@@ -48,7 +48,7 @@
 
 	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 		<columns>
-			<column width="12%" height="40px" />
+			<column width="8%" height="40px" />
 		</columns>
 		<rows>
 
@@ -57,11 +57,11 @@
 					<label value="*"
 						style="font-weight:bold;color:red">
 					</label>
-					<label value="Programa:" style="font-weight:bold" />
+					<label value="Programa:" style="color:black" />
 				</hlayout>
 
-				<textbox id="txtProgramaRegistrarProyecto" width="20%"
-					style="margin-left:5%" />
+				<textbox id="txtProgramaRegistrarProyecto" width="25%"
+					style="margin-left:20px;color:black !important;" disabled="true" />
 
 			</row>
 		</rows>
@@ -70,7 +70,7 @@
 	<div align="right">
 		<label value="Fecha:" style="margin-right:10px"></label>
 		<datebox id="dbfechaRegistrarProyecto" cols="12"
-			style="margin-right:30px" format="short"
+			style="margin-right:30px;color:black !important;" disabled="true" format="short"
 			onCreate="self.value = new Date()" mold="rounded">
 		</datebox>
 	</div>
@@ -104,11 +104,11 @@
 										style="font-weight:bold;color:red">
 									</label>
 									<label value="Area:"
-										style="font-weight:bold" />
+										style="color:black" />
 								</hlayout>
 
 								<textbox id="txtAreaRegistrarProyecto"
-									width="60%" style="margin-left:42%" />
+									width="80%" style="margin-left:42%;color:black !important;" disabled="true" />
 
 							</hbox>
 						</row>
@@ -122,11 +122,11 @@
 									</label>
 									<label
 										value="
-										Temática: " style="font-weight:bold" />
+										Temática: " style="color:black" />
 								</hlayout>
 								<textbox
-									id="txtTematicaRegistrarProyecto" width="80%"
-									style="margin-left:35%" />
+									id="txtTematicaRegistrarProyecto" width="120%"
+									style="margin-left:35%;color:black !important;" disabled="true" />
 							</hbox>
 
 						</row>
@@ -138,13 +138,13 @@
 									style="font-weight:bold;color:red">
 								</label>
 								<label value="Título del Proyecto:"
-									style="font-weight:bold" />
+									style="color:black" />
 							</hlayout>
 
 						</row>
 						<row>
 							<textbox id="txtTituloRegistrarProyecto"
-								width="520px" rows="2" cols="100" />
+								width="620px" rows="2" cols="100" style="color:black !important;" disabled="true"/>
 						</row>
 					</rows>
 				</grid>
@@ -196,24 +196,24 @@
 							<hlayout>
 								<label value="* "
 									style="font-weight:bold;color:red;margin-left:1%" />
-								<label value="Cedula:"
-									style="font-weight:bold" />
+								<label value="Cédula:"
+									style="color:black" />
 							</hlayout>
 
 							<textbox
-								id="txtCedulaTutorRegistrarProyecto" width="20%" />
+								id="txtCedulaTutorRegistrarProyecto" style="color:black !important;" disabled="true" width="20%" />
 						</row>
 						<row>
 							<hlayout>
 								<label value="* "
 									style="font-weight:bold;color:red;margin-left:1%" />
 								<label value="Nombre:"
-									style="font-weight:bold" />
+									style="color:black" />
 							</hlayout>
 
 
 							<textbox
-								id="txtNombreTutorRegistrarProyecto" width="30%" />
+								id="txtNombreTutorRegistrarProyecto" style="color:black !important;" disabled="true" width="30%" />
 						</row>
 						<row>
 							<hlayout>
@@ -222,11 +222,11 @@
 									style="font-weight:bold;color:red;margin-left:1%" />
 
 								<label value="Apellido:"
-									style="font-weight:bold" />
+									style="color:black" />
 							</hlayout>
 
 							<textbox
-								id="txtApellidoTutorRegistrarProyecto" width="30%" />
+								id="txtApellidoTutorRegistrarProyecto" style="color:black !important;" disabled="true" width="30%" />
 						</row>
 					</rows>
 				</grid>

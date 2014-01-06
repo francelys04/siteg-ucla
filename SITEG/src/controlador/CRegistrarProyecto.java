@@ -130,30 +130,24 @@ public class CRegistrarProyecto extends CGeneral {
 
 							txtProgramaRegistrarProyecto.setValue(programa
 									.getNombre());
-							txtProgramaRegistrarProyecto.setDisabled(true);
 							txtAreaRegistrarProyecto.setValue(solicitudAceptada
 									.getTematica().getareaInvestigacion()
 									.getNombre());
-							txtAreaRegistrarProyecto.setDisabled(true);
 							txtTematicaRegistrarProyecto
 									.setValue(solicitudAceptada.getTematica()
 											.getNombre());
-							txtTematicaRegistrarProyecto.setDisabled(true);
 							txtTituloRegistrarProyecto
 									.setValue(solicitudAceptada
 											.getDescripcion());
 							txtCedulaTutorRegistrarProyecto
 									.setValue(solicitudAceptada.getProfesor()
 											.getCedula());
-							txtCedulaTutorRegistrarProyecto.setDisabled(true);
 							txtNombreTutorRegistrarProyecto
 									.setValue(solicitudAceptada.getProfesor()
 											.getNombre());
-							txtNombreTutorRegistrarProyecto.setDisabled(true);
 							txtApellidoTutorRegistrarProyecto
 									.setValue(solicitudAceptada.getProfesor()
 											.getApellido());
-							txtApellidoTutorRegistrarProyecto.setDisabled(true);
 							List<Estudiante> estudiantes = servicioEstudiante
 									.buscarSolicitudesEstudiante(solicitudAceptada);
 							lsbEstudiantesRegistrarProyecto
@@ -165,25 +159,19 @@ public class CRegistrarProyecto extends CGeneral {
 				} else {
 
 					txtProgramaRegistrarProyecto.setValue(programa.getNombre());
-					txtProgramaRegistrarProyecto.setDisabled(true);
 					txtAreaRegistrarProyecto.setValue(solicitudAceptada
 							.getTematica().getareaInvestigacion().getNombre());
-					txtAreaRegistrarProyecto.setDisabled(true);
 					txtTematicaRegistrarProyecto.setValue(solicitudAceptada
 							.getTematica().getNombre());
-					txtTematicaRegistrarProyecto.setDisabled(true);
 					txtTituloRegistrarProyecto.setValue(solicitudAceptada
 							.getDescripcion());
 					txtCedulaTutorRegistrarProyecto.setValue(solicitudAceptada
 							.getProfesor().getCedula());
-					txtCedulaTutorRegistrarProyecto.setDisabled(true);
 					txtNombreTutorRegistrarProyecto.setValue(solicitudAceptada
 							.getProfesor().getNombre());
-					txtNombreTutorRegistrarProyecto.setDisabled(true);
 					txtApellidoTutorRegistrarProyecto
 							.setValue(solicitudAceptada.getProfesor()
 									.getApellido());
-					txtApellidoTutorRegistrarProyecto.setDisabled(true);
 					List<Estudiante> estudiantes = servicioEstudiante
 							.buscarSolicitudesEstudiante(solicitudAceptada);
 					lsbEstudiantesRegistrarProyecto
