@@ -47,6 +47,16 @@ public class SAvance {
 	}
 	
 	
+	/*Busca un teg asociado a un estudiante que tengan estatus avances finalizados*/
+	public List<Avance> buscarRevisionPorTeg(Teg teg) {
+		// TODO Auto-generated method stub
+		List<Avance> revisiones;
+		revisiones = interfazAvance.findByEstatusLikeAndTeg(
+				Estatus[1], teg);
+		return revisiones;
+	}
+	
+	
 	
 	
 }

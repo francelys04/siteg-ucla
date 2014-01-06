@@ -90,7 +90,7 @@
 						<label value="Area:" style="color:black" />
 					</hlayout>
 
-					<combobox id="cmbAreaTematica" autodrop="true"
+					<combobox id="cmbAreaTematica" readonly="true"
 						width="23%" tabindex="12" tooltip="pupAreaTematica">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
