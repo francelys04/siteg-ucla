@@ -156,14 +156,10 @@ public class CConsultarEstatus extends CGeneral {
 								}	
 								else{
 									if (teg.get(indiceTeg).getEstatus().equals("Proyecto Factible")!=true){
-											
-											if (teg.get(indiceTeg).getEstatus().equals("Avances En Proceso")!=true){
 												
 												if (teg.get(indiceTeg).getEstatus().equals("Avances Finalizados")!=true){
 													
 													if (teg.get(indiceTeg).getEstatus().equals("TEG Registrado")!=true){
-														
-														if (teg.get(indiceTeg).getEstatus().equals("Revisiones En Proceso")!=true){
 															
 															if (teg.get(indiceTeg).getEstatus().equals("Revisiones Finalizadas")!=true){
 																
@@ -184,16 +180,9 @@ public class CConsultarEstatus extends CGeneral {
 																imgDefensaAsignada.detach();
 																imgTrabajoEspecial.detach();
 															}
-														}
-														else{
-															imgRevisionesFinalizadasTrabajo.detach();
-															imgSolicitandoDefensa.detach();
-															imgDefensaAsignada.detach();
-															imgTrabajoEspecial.detach();
-														}
+
 													}
 													else{
-														imgRevisionesAvances.detach();
 														imgRevisionesFinalizadasTrabajo.detach();
 														imgSolicitandoDefensa.detach();
 														imgDefensaAsignada.detach();
@@ -208,19 +197,9 @@ public class CConsultarEstatus extends CGeneral {
 													imgDefensaAsignada.detach();
 													imgTrabajoEspecial.detach();
 												}
-											}
-											else{
-												imgRevisionesFinalizadasProyecto.detach();
-												imgRegistrarTrabajo.detach();
-												imgRevisionesAvances.detach();
-												imgRevisionesFinalizadasTrabajo.detach();
-												imgSolicitandoDefensa.detach();
-												imgDefensaAsignada.detach();
-												imgTrabajoEspecial.detach();
-											}
+											
 									}
 									else{
-										imgRevisandoAvances.detach();
 										imgRevisionesFinalizadasProyecto.detach();
 										imgRegistrarTrabajo.detach();
 										imgRevisionesAvances.detach();
