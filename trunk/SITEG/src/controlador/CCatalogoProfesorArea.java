@@ -32,11 +32,11 @@ public class CCatalogoProfesorArea extends CGeneral {
 	private Listbox ltbProfesor;
 	
 	@Wire
-	private Combobox cmbCategoriaProfesor;
+	private Combobox cmbProgramaSolicitud;
 	@Wire
 	private Window wdwCatalogoProfesorArea;
 	@Wire
-	private Window wdwProfesor;
+	private Window wdwSolicitarTutoria;
 	@Wire
 	private Textbox txtCedulaMostrarProfesor;
 	@Wire
@@ -45,17 +45,15 @@ public class CCatalogoProfesorArea extends CGeneral {
 	private Textbox txtApellidoMostrarProfesor;
 	@Wire
 	private Textbox txtCorreoMostrarProfesor;
-	@Wire
-	private Textbox txtCategoriaMostrarProfesor;
+	
 	 private static String vistaRecibida;
 	
 	void inicializar(Component comp) {
 		
-		
+	
 		// TODO Auto-generated method stub
-				
 				List<Profesor> profesores = servicioProfesor.buscarActivos();
-				if (cmbCategoriaProfesor == null) {
+				if (cmbProgramaSolicitud.getValue() == null) {
 					ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
 				}
 
@@ -70,11 +68,9 @@ public class CCatalogoProfesorArea extends CGeneral {
 	public void recibir (String vista)
 	{
 		vistaRecibida = vista;
-		//System.out.println("imprimo");
-		//System.out.println(vistaRecibida);
 	}
 	
-	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor,#txtProgramaMostrarProfesor")
+	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor")
 	public void filtrarDatosCatalogo() {
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		List<Profesor> profesores2 = new ArrayList<Profesor>();
@@ -102,13 +98,6 @@ public class CCatalogoProfesorArea extends CGeneral {
 							.toLowerCase()
 							.contains(
 									txtCorreoMostrarProfesor.getValue()
-											.toLowerCase())
-					&& profesor
-							.getCategoria()
-							.getNombre()
-							.toLowerCase()
-							.contains(
-									txtCategoriaMostrarProfesor.getValue()
 											.toLowerCase())) {
 				profesores2.add(profesor);
 			}
