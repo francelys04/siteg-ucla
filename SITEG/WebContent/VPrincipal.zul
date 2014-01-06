@@ -93,7 +93,7 @@
 <div style=" text-align:center;" sclass="btn-primary"><label style="font-size: 10px; font: oblique bold 90% cursive;">Solicita tu tutor </label></div>
 <div  style=" text-align:center;"><image src="public/imagenes/portal/tutor.jpg" width="60%" height="80%" /></div>
 <div style=" text-align:center;"><label style="background-color:#fff; font-size: 12px;">Realiza una peticion de tutoria para comenzar tu proyecto de TEG</label></div>
-<div style="text-align:center;"><button sclass="btn btn-primary" id="botonSolicitarTutor"  label="Haz click aqui"  width="125px" dir="reverse"/></div>
+<div style="text-align:center;"><button apply="controlador.CInicio" sclass="btn btn-primary" id="btnSolicitarTutor"  label="Haz click aqui"  width="125px" dir="reverse"/></div>
 							
 							</vbox>
 						</panelchildren>
