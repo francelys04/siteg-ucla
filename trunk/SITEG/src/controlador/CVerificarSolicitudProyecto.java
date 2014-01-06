@@ -211,7 +211,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		else if (rdoCompleto.isChecked()==true) {
 			
 		Teg teg = servicioTeg.buscarTeg(auxId2);
-		String estatus= "Registrado";
+		String estatus= "Proyecto Registrado";
 		teg.setEstatus(estatus);
 		servicioTeg.guardar(teg);
 		txtObservacion.setVisible(false);
