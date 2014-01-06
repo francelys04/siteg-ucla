@@ -1,6 +1,10 @@
 package controlador;
 
+import java.util.List;
+
+import modelo.Cronograma;
 import modelo.Estudiante;
+import modelo.Lapso;
 import modelo.Programa;
 import configuracion.GeneradorBeans;
 import controlador.CConsultarEstatus;
@@ -15,19 +19,28 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Treecell;
 import org.zkoss.zul.Treeitem;
 import org.zkoss.zul.Window;
 
+import servicio.SCronograma;
 import servicio.SEstudiante;
+import servicio.SLapso;
+import servicio.SPrograma;
 
 
 @Controller
 public class CInicio extends CGeneral {
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
+	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
+	SCronograma servicioCronograma = GeneradorBeans.getServicioCronograma();
 	@Wire
 	private Treeitem fila3;
 	@Wire
@@ -50,6 +63,40 @@ public class CInicio extends CGeneral {
 	private Window wdwConsultarEstatusProyecto;
 	@Wire
 	private Button btnSolicitarTutor;
+	@Wire
+	private Combobox cmbPrograma;
+	@Wire
+	private Listbox ltbCronograma;
+	public static long idPrograma;
+	
+	
+
+	@Override
+	void inicializar(Component com) {
+		// TODO Auto-generated method stub
+		List<Programa> programa = servicioPrograma.buscarActivas();
+	if (cmbPrograma != null) {
+            cmbPrograma.setModel(new ListModelList<Programa>(programa));
+		
+		}
+	Lapso lapso = servicioLapso.buscarLapsoVigente();
+	Programa programa1 = servicioPrograma.buscar(idPrograma);
+	
+	}	
+	
+	@Listen("onSelect = #cmbPrograma")	
+	public void llenarCronograma (){
+		idPrograma =Long.parseLong(cmbPrograma.getSelectedItem().getDescription());
+		System.out.println(idPrograma);
+		Lapso lapso = servicioLapso.buscarLapsoVigente();
+		Programa programa = servicioPrograma.buscar(idPrograma);
+		List<Cronograma> cronograma = servicioCronograma.buscarCronogramaPorLapsoYPrograma(programa, lapso);
+		ltbCronograma.setModel(new ListModelList<Cronograma>(cronograma));
+	
+	}
+	
+	
+	
 	
 	
 	@Listen("onClick = #btnSolicitarTutor")
@@ -68,15 +115,7 @@ public class CInicio extends CGeneral {
 		System.out.println(userDetails.toString());
 	}
 	
-	
 
-	@Override
-	void inicializar(Component com) {
-		// TODO Auto-generated method stub
-		
-		
-		
-	}
 	
 
 	

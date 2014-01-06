@@ -2,8 +2,8 @@
 <zk>
 	<?meta name="viewport" content="width=device-width, initial-scale=1.0" ?>
 	<style src="public/css/style.css" />
-	<style src="public/css/bootstrap.css" />
-	<style src="public/css/bootstrap-responsive.css" />
+ <style src="public/css/bootstrap.css" />
+ <style src="public/css/bootstrap-responsive.css" />
 	<style src="public/css/slider.css" />
 	<html>
 		<script type="text/javascript" src="js/DP.js"></script>
@@ -201,7 +201,7 @@ else
 		<east title="" sclass="body_left" size="30%" flex="true"
 			style="margin-top:10px;">
 			<vlayout style="overflow:auto;">
-				<window title="${a}" border="normal" width="100%">
+				<window title="${a}" border="normal" width="100%" >
 					<vlayout>
 						<hlayout width="100%">
 <!--Inicio sesion  -->
@@ -216,71 +216,37 @@ else
 					</vlayout>
 				</window>
 				<!-- Inicio del cronograma de actividades -->
-				<window title="Cronograma de actividades" border="normal">
-					<tabbox id="tb" width="100%" height="200px" mold="accordion">
-						<tabs>
-							<tab label="Matematica" />
-							<tab label="Produccion" />
-						</tabs>
-						<tabpanels>
-							<tabpanel>
-								<grid width="100%" vflex="1" style="overflow-y:auto;">
+				<window title="Cronograma de actividades" border="normal"  width="100%" vflex="1"
+					contentStyle="overflow:auto;" apply="controlador.CInicio">
+				<hlayout>
+			<label value="Programa:" />
+					
+			<combobox id="cmbPrograma"
+						autodrop="true" width="120px" tabindex="12" readonly="true">
+						<template name="model">
+							<comboitem label="${each.nombre}" description="${each.id}"/>
+						</template>
+			</combobox>
+			
+				</hlayout>
+		<listbox id="ltbCronograma" width="100%" mold="paging"
+			pageSize="10" emptyMessage="No hay actividades registradas">
+			
+			<listhead>
+				<listheader label="Actividad" align="center" />
+				<listheader label="Fecha Inicio" align="center" />
+				<listheader label="Fecha Fin" align="center" />
+			</listhead>
 
-									<columns>
-										<column width="25%">
-											Fecha
-										</column>
-										<column width="50%">
-											Actividades
-										</column>
-										<column width="25%">
-											Requisitos
-										</column>
-									</columns>
-									<rows sclass="narrow">
-										<row>
-											<label value="02/11/2013" />
-											<!-- Cargar las fechas -->
-											<label value="Inscripcion Proyectos" />
-											<!--Cargar las actividades -->
-											<label value="ver requisitos" />
-										</row>
-										<row>
-											<label value="02/02/2014" />
-											<label value="Inscripcion del TEG" />
-											<label value="ver requisitos" />
-										</row>
-									
-									</rows>
-								</grid>
-							</tabpanel>
-							<tabpanel>
-								<grid width="100%" vflex="1" style="overflow-y:auto;">
 
-									<columns>
-										<column width="40%">
-											Fecha
-										</column>
-										<column width="60%">
-											Actividades
-										</column>
-									</columns>
-									<rows sclass="narrow">
-										<row>
-											<label value="02/11/2013" />
-											<!-- Cargar las fechas -->
-											<label value="Inscripcion Proyectos" />
-											<!--Cargar las actividades -->
-										</row>
-										<row>
-											<label value="02/02/2014" />
-											<label value="Inscripcion del TEG" />
-										</row>
-									</rows>
-								</grid>
-							</tabpanel>
-						</tabpanels>
-					</tabbox>
+			 <template name="model">
+				<listitem>
+					<listcell label="${each.actividad.nombre}" />
+					<listcell label="${each.fechaInicio}" />
+					<listcell label="${each.fechaFin}" />
+				</listitem>
+			</template>
+		</listbox>
 				</window>
 				<!-- Fin del cronograma de actividades -->
 
