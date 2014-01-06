@@ -6,6 +6,7 @@ import java.util.List;
 
 import modelo.Categoria;
 import modelo.Profesor;
+import modelo.Teg;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -35,8 +36,7 @@ public class CCatalogoProfesorArea extends CGeneral {
 	private Combobox cmbProgramaSolicitud;
 	@Wire
 	private Window wdwCatalogoProfesorArea;
-	@Wire
-	private Window wdwSolicitarTutoria;
+	
 	@Wire
 	private Textbox txtCedulaMostrarProfesor;
 	@Wire
@@ -53,9 +53,9 @@ public class CCatalogoProfesorArea extends CGeneral {
 	
 		// TODO Auto-generated method stub
 				List<Profesor> profesores = servicioProfesor.buscarActivos();
-				if (cmbProgramaSolicitud.getValue() == null) {
+			
 					ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
-				}
+				
 
 				Selectors.wireComponents(comp, this, false);
 
@@ -113,20 +113,21 @@ public class CCatalogoProfesorArea extends CGeneral {
 
 		Listitem listItem = ltbProfesor.getSelectedItem();
 		Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
-		if(profesorDatosCatalogo==null)
-		{
-			alert("no hay gente");
-		}
-		else{
+		
 		
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("cedula", profesorDatosCatalogo.getCedula());
-		String vista = vistaRecibida;
+		String vista = "transacciones/VSolicitarTutor";
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/transacciones/VSolicitarTutor.zul");
-		wdwCatalogoProfesorArea.onClose();
-		}
+		Window window = (Window) Executions.createComponents(
+				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
+		window.doModal();
+		
+		
+		
+		
+		
 	}
 
 }
