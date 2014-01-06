@@ -176,8 +176,8 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 	
 	@Listen("onClick = #btnGuardar")
 	public void GuardarVerificacion() {
-		if ((rdoCompleto.isChecked()==false) && (rdoIncompleto.isChecked()==false)){
-			Messagebox.show("Debe indicar si los requisitos estan completos o incompletos", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+		if ((rdoCompleto.isChecked()==false) && (rdoIncompleto.isChecked()==false) || txtObservacion.getValue().compareTo("")==0 ){
+			Messagebox.show("Debe indicar si los requisitos estan completos o incompletos o ingresar una observacion", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 		}
 		else{
 		long auxId2;
@@ -194,15 +194,16 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		
 		
 		if (rdoCompleto.isChecked()==false){
-			if (txtObservacion.getValue().compareTo("")==0) {
-			Messagebox.show("Debe indicar la observacion", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
-					}
-			else {
+		//	if (txtObservacion.getValue().compareTo("")==0) {
+			//Messagebox.show("Debe indicar la observacion", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+				//	}
+			//else {
 				for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
 		            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
 		            valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), txtObservacion.getValue()));
-		           
-			 } 	        	
+		            Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+		   		 salir();  
+			 //} 	        	
 				
 			}
 		}
@@ -220,12 +221,12 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		 for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
 	            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
 	            valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), txtObservacion.getValue()));
-	           
+	            Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+	   		 salir();  
 		 } 
 		}
 		}	
-		Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
-		 salir();  
+		
 		}
 
 
