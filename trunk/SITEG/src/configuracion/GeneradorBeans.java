@@ -160,9 +160,4 @@ public class GeneradorBeans implements ApplicationContextAware {
 	public static SJurado getServicioJurado(){
 		return applicationContext.getBean(SJurado.class);
 	}
-
-	public static SSolicitudTutoria getServicioSolicitarTutoria() {
-		
-		return applicationContext.getBean(SSolicitudTutoria.class);
-	}
 }
