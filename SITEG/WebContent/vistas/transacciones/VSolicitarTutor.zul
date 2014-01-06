@@ -224,7 +224,7 @@
 								<hbox>
 									<panel>
 										<panelchildren>
-											<listbox mold="paging"
+											<listbox id="ltbEstudiantes" mold="paging"
 												pageSize="2" width="100%">
 
 												<listhead>
@@ -238,50 +238,14 @@
 														label="Correo" align="center" width="30%" />
 												</listhead>
 
-												<listitem>
-													<listcell
-														label="">
-													</listcell>
-													<listcell
-														label="">
-													</listcell>
-													<listcell
-														label="">
-													</listcell>
-													<listcell
-														label="">
-													</listcell>
-												</listitem>
-
-												<listitem>
-													<listcell
-														label="">
-													</listcell>
-													<listcell
-														label="">
-													</listcell>
-													<listcell
-														label="">
-													</listcell>
-													<listcell
-														label="">
-													</listcell>
-												</listitem>
-
-												<listitem>
-													<listcell
-														label="">
-													</listcell>
-													<listcell
-														label="">
-													</listcell>
-													<listcell
-														label="">
-													</listcell>
-													<listcell
-														label="">
-													</listcell>
-												</listitem>
+												<template name="model">
+													<listitem>
+														<listcell label="${each.cedula}" />
+														<listcell label="${each.nombre}" />
+														<listcell label="${each.apellido}" />
+														<listcell label="${each.correoElectronico}" />
+													</listitem>
+												</template>
 
 											</listbox>
 										</panelchildren>
@@ -293,9 +257,9 @@
 											<div
 												style="margin:0 auto;padding:20px;">
 
-												<image
-													src="/imagenes/agregar.png">
-												</image>
+												<button id="btnAgregarEstudiante"
+													image="/imagenes/agregar.png">
+												</button>
 
 											</div>
 										</panelchildren>
