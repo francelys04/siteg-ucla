@@ -1,0 +1,74 @@
+<window id="wdwCatalogoRegistrarRevisiones" title="Trabajos Especiales de Grado Registrados"
+	border="normal" width="100%" height="600px" closable="true"
+	apply="controlador.CCatalogoRegistrarRevision">
+	<separator />
+	<separator />
+	<separator />
+
+	<listbox id="ltbTrabajosRegistrados" mold="paging" pageSize="10"
+		style="margin-left:10px;margin-right:10px"
+		emptyMessage="No hay trabajos registrados actualmente">
+
+
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtFechaRegistrarRevision" placeholder=""
+					instant="true" width="70%" value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtAreaRegistrarRevision" placeholder=""
+					instant="true" width="70%" value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtTematicaRegistrarRevision" placeholder=""
+					instant="true" width="70%" value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtTituloRegistrarRevision" placeholder=""
+					instant="true" width="85%" value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtNombreTutorRegistrarRevision" placeholder=""
+					instant="true" width="70%" value="" onChange="" />
+			</auxheader>
+
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtApellidoTutorRegistrarRevision" placeholder=""
+					instant="true" width="70%" value="" onChange="" />
+			</auxheader>
+		</auxhead>
+
+		<listhead>
+			<listheader label="Fecha" align="center" />
+			<listheader label="Área" align="center" />
+			<listheader label="Temática" align="center" />
+			<listheader label="Título" align="center" width="25%" />
+			<listheader label="Nombre del Tutor" align="center" />
+			<listheader label="Apellido del Tutor" align="center" />
+		</listhead>
+
+
+		<template name="model">
+			<listitem>
+				<listcell label="${each.fecha}" />
+				<listcell
+					label="${each.tematica.areaInvestigacion.nombre}" />
+				<listcell label="${each.tematica.nombre}" />
+				<listcell label="${each.titulo}" />
+				<listcell label="${each.tutor.nombre}" />
+				<listcell label="${each.tutor.apellido}" />
+			</listitem>
+		</template>
+	</listbox>
+
+	<separator />
+	<separator />
+	<separator />
+
+</window>

@@ -73,7 +73,6 @@ public class CRegistrarProyecto extends CGeneral {
 	SSolicitudTutoria ServicioSolicitudTutoria = GeneradorBeans
 			.getServicioTutoria();
 
-	// STutor ServicioTutor = GeneradorBeans.get
 	@Wire
 	private Textbox txtProgramaRegistrarProyecto;
 	@Wire

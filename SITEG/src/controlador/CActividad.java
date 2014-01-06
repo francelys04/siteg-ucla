@@ -183,8 +183,8 @@ public class CActividad extends CGeneral {
 	@Listen("onClick = #btnEliminarActividad")
 	public void eliminarActividad() {
 		
-		Messagebox.show("ï¿½Desea eliminar los datos de la actividad?",
-				"Dialogo de confirmaciï¿½n", Messagebox.OK | Messagebox.CANCEL,
+		Messagebox.show("¿Desea eliminar los datos de la actividad?",
+				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {

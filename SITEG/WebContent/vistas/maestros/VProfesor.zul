@@ -114,7 +114,7 @@
 						<label value="Programa:" style="color:black" />
 					</hlayout>
 
-					<combobox id="cmbProgramaProfesor" autodrop="true"
+					<combobox id="cmbProgramaProfesor" readonly="true"
 						tooltip="pupProgramaProfesor" width="25%" tabindex="1">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
@@ -130,7 +130,7 @@
 						<label value="Categoría:" style="color:black" />
 					</hlayout>
 
-					<combobox id="cmbCategoriaProfesor" autodrop="true"
+					<combobox id="cmbCategoriaProfesor" readonly="true"
 						tooltip="pupCategoriaProfesor" width="25%" tabindex="1">
 						<template name="model">
 							<comboitem label="${each.nombre}" />

@@ -53,7 +53,7 @@ import servicio.SCondicionPrograma;
 import configuracion.GeneradorBeans;
 import servicio.SAvance;
 
-public class CRegistrarAvance extends CGeneral {
+public class CRegistrarRevision extends CGeneral {
 
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
@@ -63,29 +63,29 @@ public class CRegistrarAvance extends CGeneral {
 	SAvance servicioAvance = GeneradorBeans.getServicioAvance();
 
 	@Wire
-	private Datebox dtbRegistrarAvance;
+	private Datebox dtbRegistrarRevision;
 	@Wire
-	private Textbox txtProgramaRegistrarAvance;
+	private Textbox txtProgramaRegistrarRevision;
 	@Wire
-	private Textbox txtAreaRegistrarAvance;
+	private Textbox txtAreaRegistrarRevision;
 	@Wire
-	private Textbox txtTematicaRegistrarAvance;
+	private Textbox txtTematicaRegistrarRevision;
 	@Wire
-	private Textbox txtTituloRegistrarAvance;
+	private Textbox txtTituloRegistrarRevision;
 	@Wire
-	private Textbox txtObservacionRegistrarAvance;
+	private Textbox txtObservacionRegistrarRevision;
 	@Wire
 	private Listbox lsbEstudiantesTeg;
 	@Wire
-	private Listbox ltbAvancesRegistrados;
+	private Listbox ltbRevisionesRegistradas;
 	@Wire
-	private Window wdwRegistrarAvance;
+	private Window wdwRegistrarRevision;
 	@Wire
-	private Window wdwCatalogoRegistrarAvance;
+	private Window wdwCatalogoRegistrarRevision;
 	@Wire
-	private Button btnGuardarRegistrarAvance;
+	private Button btnGuardarRegistrarRevision;
 	@Wire
-	private Button btnFinalizarRegistrarAvance;
+	private Button btnFinalizarRegistrarRevision;
 
 	private static String vistaRecibida;
 
@@ -112,12 +112,12 @@ public class CRegistrarAvance extends CGeneral {
 				long codigo = (Long) map.get("id");
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-				txtProgramaRegistrarAvance.setValue(programa.getNombre());
-				txtAreaRegistrarAvance.setValue(teg2.getTematica()
+				txtProgramaRegistrarRevision.setValue(programa.getNombre());
+				txtAreaRegistrarRevision.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
-				txtTematicaRegistrarAvance.setValue(teg2.getTematica()
+				txtTematicaRegistrarRevision.setValue(teg2.getTematica()
 						.getNombre());
-				txtTituloRegistrarAvance.setValue(teg2.getTitulo());
+				txtTituloRegistrarRevision.setValue(teg2.getTitulo());
 				Teg tegPorCodigo = servicioTeg.buscarTeg(auxiliarId);
 				List<Estudiante> estudiantes = servicioEstudiante
 						.buscarEstudiantesDelTeg(tegPorCodigo);
@@ -144,19 +144,19 @@ public class CRegistrarAvance extends CGeneral {
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwRegistrarAvance.onClose();
+		wdwRegistrarRevision.onClose();
 	}
 
-	@Listen("onClick = #btnGuardarRegistrarAvance")
-	public void guardarAvance() {
+	@Listen("onClick = #btnGuardarRegistrarRevision")
+	public void guardarRevision() {
 
-		if ((txtObservacionRegistrarAvance.getText().compareTo("") == 0)) {
+		if ((txtObservacionRegistrarRevision.getText().compareTo("") == 0)) {
 			Messagebox
-					.show("Debe agregar las observaciones respectivas sobre el avance del Trabajo Especial de Grado",
+					.show("Debe agregar las observaciones respectivas a la revision del Trabajo Especial de Grado",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Messagebox.show(
-					"¿Desea guardar el avance del trabajo Especial de Grado?",
+					"¿Desea guardar la revision del trabajo Especial de Grado?",
 					"Dialogo de confirmación", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -164,21 +164,21 @@ public class CRegistrarAvance extends CGeneral {
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
 
-								Teg tegAvance = servicioTeg
+								Teg tegRevision = servicioTeg
 										.buscarTeg(auxiliarId);
-								Date fecha = dtbRegistrarAvance.getValue();
-								String observacion = txtObservacionRegistrarAvance
+								Date fecha = dtbRegistrarRevision.getValue();
+								String observacion = txtObservacionRegistrarRevision
 										.getValue();
-								String estatus = "Avance Proyecto";
-								Avance avance = new Avance(id, fecha,
-										observacion, estatus, tegAvance);
-								servicioAvance.guardar(avance);
-								cancelarRegistrarAvance();
+								String estatus = "Revision TEG";
+								Avance revision = new Avance(id, fecha,
+										observacion, estatus, tegRevision);
+								servicioAvance.guardar(revision);
+								cancelarRegistrarRevision();
 								id = 0;
 								llenarListas();
 
 								Messagebox
-										.show("Avance del Trabajo Especial de Grado registrado exitosamente",
+										.show("Revision del Trabajo Especial de Grado registrada exitosamente",
 												"Información", Messagebox.OK,
 												Messagebox.INFORMATION);
 
@@ -190,47 +190,48 @@ public class CRegistrarAvance extends CGeneral {
 
 	}
 
-	@Listen("onClick = #btnFinalizarRegistrarAvance")
-	public void finalizarRegistrarAvance() {
+	@Listen("onClick = #btnFinalizarRegistrarRevision")
+	public void finalizarRegistrarRevision() {
 
-		Messagebox.show("¿Desea finalizar los avances del proyecto?",
+		Messagebox.show("¿Desea finalizar las revisiones del Trabajo Especial de Grado?",
 				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							
 							Teg tegAvance = servicioTeg.buscarTeg(auxiliarId);
-							tegAvance.setEstatus("Avances Finalizados");
+							tegAvance.setEstatus("Revisiones Finalizadas");
 							servicioTeg.guardar(tegAvance);
 							Messagebox
-									.show("Avances del Trabajo Especial de Grado finalizados exitosamente",
+									.show("Revisiones del Trabajo Especial de Grado finalizadas exitosamente",
 											"Información", Messagebox.OK, Messagebox.INFORMATION);
 							salir();
 						}
 					}
 				});
+
 	}
 
-	@Listen("onClick = #btnCancelarRegistrarAvance")
-	public void cancelarRegistrarAvance() {
+	@Listen("onClick = #btnCancelarRegistrarRevision")
+	public void cancelarRegistrarRevision() {
 
-		txtObservacionRegistrarAvance.setValue("");
+		txtObservacionRegistrarRevision.setValue("");
 
 	}
 
 	public void llenarListas() {
 
 		Teg tegAvance = servicioTeg.buscarTeg(auxiliarId);
-		List<Avance> avancesTeg = servicioAvance.buscarAvancePorTeg(tegAvance);
+		List<Avance> avancesTeg = servicioAvance. buscarRevisionPorTeg(tegAvance);
 
 		try {
 			if (avancesTeg.size() == 0) {
 
-				btnFinalizarRegistrarAvance.setDisabled(true);
+				btnFinalizarRegistrarRevision.setDisabled(true);
 
 			} else {
 
-				ltbAvancesRegistrados.setModel(new ListModelList<Avance>(
+				ltbRevisionesRegistradas.setModel(new ListModelList<Avance>(
 						avancesTeg));
 
 			}
