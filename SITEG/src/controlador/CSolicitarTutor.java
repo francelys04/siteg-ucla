@@ -78,6 +78,7 @@ public class CSolicitarTutor extends CGeneral {
 	STematica servicioTematica = GeneradorBeans.getSTematica();
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SSolicitudTutoria servicioSolicitarTutor = GeneradorBeans.getServicioTutoria();
+	CCatalogoProfesorArea catalogo = new CCatalogoProfesorArea();
 
 	@Wire
 	private Datebox db1;
@@ -127,6 +128,10 @@ public class CSolicitarTutor extends CGeneral {
 	private Textbox txtCorreoMostrarProfesor;
 	@Wire
 	private Textbox txtCategoriaMostrarProfesor;
+	@Wire
+	private Window wdwSolicitarTutoria;
+	@Wire
+	private Window wdwCatalogoProfesorArea;
 	
 	private long id;
 	private int valor;
@@ -204,6 +209,8 @@ public class CSolicitarTutor extends CGeneral {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoProfesorArea.zul", null, null);
 		window.doModal();
+		catalogo.recibir("transacciones/VSolicitarTutor");
+		
 
 	}
 	
@@ -453,7 +460,8 @@ public class CSolicitarTutor extends CGeneral {
 	        String remitente = "siteg.ucla@gmail.com"; 
 	        String contrasena = "Equipo.2";
 	        String destino = profesor.getCorreoElectronico();
-	        String mensaje = "Estudiante: "+estudiante+" Titulo de Proyecto: "+txtTituloSolicitud.getValue();
+	        String mensaje = " Solicitud de tutoria  " +
+	        		"Estudiante: "+estudiante.getNombre()+" , "+estudiante.getApellido()+" con Titulo de Proyecto: "+txtTituloSolicitud.getValue();
 	        
 	       
 	        //Obtenemos los destinatarios
