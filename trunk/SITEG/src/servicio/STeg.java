@@ -106,6 +106,17 @@ public class STeg {
 
 	}
 	
+	/*Buscar los teg que tengan estatus Factibilidad Evaluada*/
+	public List<Teg> buscarProyectoFactibilidadEvaluada() {
+
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatus(estatus[3]);
+		return tegs;
+
+	}
+	
+	
+	
 	public Teg buscarTegConRevisionFinal(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		Teg teg;

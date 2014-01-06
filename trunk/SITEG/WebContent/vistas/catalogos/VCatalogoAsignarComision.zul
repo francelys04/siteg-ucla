@@ -1,5 +1,5 @@
 <window id="wdwCatalogoAsignarComision" title="Proyectos Registrados"
-	border="normal" width="100%" height="500px" closable="true"
+	border="normal" width="100%" height="600px" closable="true"
 	apply="controlador.CCatalogoAsignarComision">
 	<separator />
 	<separator />
