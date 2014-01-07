@@ -1,4 +1,4 @@
-<window title="Contáctanos" width="600px" height="540px" border="normal"
+<window  id="wdwContactanos" title="Contáctanos" width="600px" height="540px" border="normal"
 	closable="true" apply="controlador.CContactanos">
 
 	<style dynamic="true">

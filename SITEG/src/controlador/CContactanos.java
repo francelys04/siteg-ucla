@@ -16,6 +16,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -29,6 +30,8 @@ import org.zkoss.zul.Window;
 	private Textbox txtAsunto;
 	@Wire
 	private Textbox txtMensaje;
+	@Wire
+	private Window wdwContactanos;
 	
 	
 
@@ -55,17 +58,27 @@ import org.zkoss.zul.Window;
 		String asunto = txtAsunto.getText(); 
 		String correo = txtCorreo.getText();
 	    String mensaje = txtMensaje.getText();
-		String remitente = "Contacto.tegucla@gmail.com";
-		String contraseña = "trabajosespecialesdegrado";
+		String remitente = "siteg.ucla@gmail.com";
+		String contraseña = "Equipo.2";
+		 String destino = "siteg.ucla@gmail.com";
 	    String cuerpo = "Nombre: " + nombre + " \n\n Correo: " + correo + " \n\n Mensaje: " + mensaje + ".";
 	
-	                 
+	    //Obtenemos los destinatarios
+        String destinos[] = destino.split(",");     
+	    
+	    
 	        // Construimos el mensaje
 	        MimeMessage message = new MimeMessage(session);
 	         
 	        message.setFrom(new InternetAddress(remitente));
 	 
-		
+	        //Forma 3
+            Address [] receptores = new Address [ destinos.length ];
+            int j = 0;
+            while(j<destinos.length){                  
+            receptores[j] = new InternetAddress ( destinos[j] ) ;                 
+            j++;              
+            }
 	         
 	        //receptores.
 	        message.addRecipients(Message.RecipientType.TO, remitente);       
@@ -92,13 +105,28 @@ import org.zkoss.zul.Window;
 	    @Listen("onClick = #btnEnviarCorreo")
 		public void enviarCorreo() {
 	    	     if(enviarEmail() ) {
-                     JOptionPane.showMessageDialog(null,"Mensaje enviado!");                 
+	    	    	 Messagebox.show("Mensaje enviado","Informacion", Messagebox.OK,Messagebox.INFORMATION);  
+	    	    	 cancelarCorreo();
+	    	    	 wdwContactanos.onClose();
                  } else {
-                     JOptionPane.showMessageDialog(null,"Por el momentono se pudo enviar el mensaje.");
+                	 Messagebox.show("Disculpe en estos momentos no se envio el Mensaje","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+                	 cancelarCorreo();
+                	 wdwContactanos.onClose();
                  }
                   
                       
-         }   
+         }
+	    
+	    @Listen("onClick = #btnCancelarCorreo")
+	    public void cancelarCorreo() {
+
+	    	 txtNombre.setValue("");
+	    	
+	    	 txtCorreo.setValue("");
+	    	 txtAsunto.setValue("");
+	    	 txtMensaje.setValue("");
+	    	
+	    }
 	  
 	    	
 	    }
