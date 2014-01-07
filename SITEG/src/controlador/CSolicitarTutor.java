@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.mail.Address;
 import javax.mail.Message;
@@ -281,8 +283,17 @@ public class CSolicitarTutor extends CGeneral {
 								 Messagebox.show("El Profesor ya tiene un maximo de proyectos asignados", "Información", Messagebox.OK, Messagebox.INFORMATION);
 								 }
 							 else{
-								 enviarEmailNotificacion();
-								 Messagebox.show("Su Solicitud ha sido enviada", "Información", Messagebox.OK, Messagebox.INFORMATION);
+								   Tematica tematica2 = servicioTematica.buscarTematicaPorNombre(tematica);
+									
+								   Set<Estudiante> estudiante2 = new HashSet<Estudiante>();
+								   Estudiante estudiante3 = servicioEstudiante.buscarEstudiante(cedulaEstudiante);
+								   estudiante2.add(estudiante3);
+
+								   SolicitudTutoria solicitud2 = new SolicitudTutoria(id, fecha, titulo, estado, profesor, tematica2, estudiante2);
+								   
+								   servicioSolicitarTutor.guardarSolicitud(solicitud2);
+								   enviarEmailNotificacion();
+								   Messagebox.show("Su Solicitud ha sido enviada", "Información", Messagebox.OK, Messagebox.INFORMATION);
 							 }
 						 }
 							}
@@ -313,8 +324,20 @@ public class CSolicitarTutor extends CGeneral {
 							 Messagebox.show("El Profesor ya tiene un maximo de proyectos asignados", "Información", Messagebox.OK, Messagebox.INFORMATION);	
 						 }
 					 else{
-						 enviarEmailNotificacion();
-						 Messagebox.show("Su Solicitud ha sido enviada", "Información", Messagebox.OK, Messagebox.INFORMATION);
+						   Tematica tematica2 = servicioTematica.buscarTematicaPorNombre(tematica);
+							
+						   Set<Estudiante> estudiante2 = new HashSet<Estudiante>();
+							for (int i = 0; i < ltbEstudiantes.getItemCount(); i++) {
+								Estudiante estudiante3 = ltbEstudiantes.getItems().get(i)
+										.getValue();
+								estudiante2.add(estudiante3);
+							}
+							
+						   SolicitudTutoria solicitud2 = new SolicitudTutoria(id, fecha, titulo, estado, profesor, tematica2, estudiante2);
+						   
+						   servicioSolicitarTutor.guardarSolicitud(solicitud2);
+						   enviarEmailNotificacion();
+						   Messagebox.show("Su Solicitud ha sido enviada", "Información", Messagebox.OK, Messagebox.INFORMATION);
 					 }
 				 }
 			}
