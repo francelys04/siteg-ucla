@@ -164,8 +164,7 @@
 							width="100%">
 							<panel height="300px" width="100%"
 								border="rounded" framable="true">
-								<panelchildren
-									style="overflow-y:scroll;">
+								<panelchildren>
 
 									<vbox>
 										<div style=" text-align:center;"
@@ -190,68 +189,13 @@
 												height="30%" />
 										</div>
 										<!--  INICIO MENU INFO -->
-										<div>
-											<menubar id="menubar_ver"
-												orient="vertical" autodrop="true">
-												<menu
-													label="Tutores disponibles">
-													<menupopup>
-														<menuseparator></menuseparator>
-														<menuitem
-															label="Licenciatura en Matematica"
-															onClick="alert(self.label)" />
-														<menuitem
-															label="Ingenieria de Produccion"
-															onClick="alert(self.label)" />
-
-													</menupopup>
-												</menu>
-
-												<menu
-													label="Areas de Investigacion">
-													<menupopup>
-														<menuseparator></menuseparator>
-														<menuitem
-															label="Licenciatura en Matematica"
-															onClick="alert(self.label)" />
-														<menuitem
-															label="Ingenieria de Produccion"
-															onClick="alert(self.label)" />
-
-													</menupopup>
-												</menu>
-												<menu
-													label="Requisitos">
-													<menupopup>
-														<menuseparator></menuseparator>
-														<menuitem
-															label="Licenciatura en Matematica"
-															onClick="alert(self.label)" />
-														<menuitem
-															label="Ingenieria de Produccion"
-															onClick="alert(self.label)" />
-
-													</menupopup>
-												</menu>
-												<menu
-													label="Descargas">
-													<menupopup>
-														<menuseparator></menuseparator>
-														<menuitem
-															label="Licenciatura en Matematica"
-															onClick="alert(self.label)" />
-														<menuitem
-															label="Ingenieria de Produccion"
-															onClick="alert(self.label)" />
-
-													</menupopup>
-												</menu>
-
-											</menubar>
-
-
-
-
+									<separator></separator>
+										<div
+											style="text-align:center;">
+											<button
+												apply="controlador.CInicio" sclass="btn btn-primary"
+												id="btnInformacionInteres" label="Haz click aqui" width="125px"
+												dir="reverse" />
 										</div>
 									</vbox>
 									<!-- FIN MENU INFO -->
@@ -290,6 +234,7 @@
 												realizados anteriormente
 											</label>
 										</div>
+										<separator></separator>
 										<div
 											style="text-align:center;">
 											<button
@@ -365,7 +310,7 @@
 
 					<listbox id="ltbCronograma" width="100%"
 						mold="paging" pageSize="10"
-						emptyMessage="No hay actividades registradas">
+						emptyMessage="Selecciona un programa">
 
 						<listhead>
 							<listheader label="Actividad"
@@ -386,6 +331,9 @@
 							</listitem>
 						</template>
 					</listbox>
+					<window id="wdwCrono" style=" text-align:center;">
+					<image src="public/imagenes/portal/Imagen4.png" width="50%" height="50%" />
+					</window>
 				</window>
 				<!-- Fin del cronograma de actividades -->
 
