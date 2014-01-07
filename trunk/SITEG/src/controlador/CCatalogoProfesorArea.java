@@ -123,7 +123,11 @@ public class CCatalogoProfesorArea extends CGeneral {
 			String vista = vistaRecibida;
 			map.put("vista", vista);
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			Executions.sendRedirect("/vistas/transacciones/VSolicitarTutor.zul");
+			//Executions.sendRedirect("/vistas/transacciones/VSolicitarTutor.zul");			
+			
+			Window window = (Window) Executions.createComponents(
+					"/vistas/transacciones/VSolicitarTutor.zul", null, null);
+			window.doModal();
 			wdwCatalogoProfesorArea.onClose();
 		}
 	}
