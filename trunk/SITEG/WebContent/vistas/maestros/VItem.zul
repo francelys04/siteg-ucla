@@ -1,5 +1,5 @@
 <window title="Item de Evaluación" border="normal" width="100%"
-	height="420px" closable="true" apply="controlador.CItem">
+	height="460px" closable="true" apply="controlador.CItem">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -34,13 +34,15 @@
 
 	</style>
 
+	<style src="/public/css/bootstrap.css" />
+
 	<!-- Lista de popus -->
 	<popup id="pupNombreItem">
 		<toolbarbutton label="Ingrese aquí el nombre del item" />
 	</popup>
-		<popup id="pupTipoItem">
+	<popup id="pupTipoItem">
 		<toolbarbutton label="Ingrese aquí el tipo del item" />
-	</popup>	
+	</popup>
 	<popup id="pupDescripcionItem">
 		<toolbarbutton label="Ingrese aquí la descripción del item" />
 	</popup>
@@ -73,7 +75,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="240px"
+	<groupbox width="95%" height="270px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -97,8 +99,8 @@
 
 
 						<button id="btnCatalogoItem" tabindex="13"
-							image="/public/imagenes/iconos/catalogo.png"
-							style="margin-left:40px" tooltip="pupCatalogoItem">
+							sclass="btn" image="/public/imagenes/iconos/catalogo.png"
+							style="margin-left:50px" tooltip="pupCatalogoItem">
 						</button>
 
 					</hbox>
@@ -142,22 +144,24 @@
 	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:3%">
 		<panelchildren>
-			<div align="center">
+			<div sclass="alert-info" align="center">
 				<separator />
+				<div sclass="btn-group">
 
-				<button id="btnGuardarItem" label="Guardar"
-					image="/public/imagenes/iconos/guardar.png" tabindex="13"
-					tooltip="pupGuardarItem">
-				</button>
-				<button id="btnCancelarItem" label="Cancelar"
-					image="/public/imagenes/iconos/limpiar.png" tabindex="14"
-					tooltip="pupCancelarItem">
-				</button>
-				<button id="btnEliminarItem" label="Eliminar"
-					image="/public/imagenes/iconos/eliminar.png" tabindex="15"
-					disabled="true" tooltip="pupEliminarItem">
-				</button>
-				<separator />
+					<button id="btnGuardarItem" label="Guardar"
+						sclass="btn" image="/public/imagenes/iconos/guardar.png"
+						tabindex="13" tooltip="pupGuardarItem">
+					</button>
+					<button id="btnCancelarItem" label="Cancelar"
+						sclass="btn" image="/public/imagenes/iconos/limpiar.png"
+						tabindex="14" tooltip="pupCancelarItem">
+					</button>
+					<button id="btnEliminarItem" label="Eliminar"
+						sclass="btn" image="/public/imagenes/iconos/eliminar.png"
+						tabindex="15" disabled="true" tooltip="pupEliminarItem">
+					</button>
+					<separator />
+				</div>
 
 			</div>
 		</panelchildren>

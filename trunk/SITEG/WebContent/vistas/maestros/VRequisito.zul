@@ -1,4 +1,4 @@
-<window title="Requisito" border="normal" width="100%" height="380px"
+<window title="Requisito" border="normal" width="100%" height="400px"
 	closable="true" apply="controlador.CRequisito">
 
 	<style dynamic="true">
@@ -32,6 +32,8 @@
 		background: white; border-top: none; }
 
 	</style>
+
+	<style src="/public/css/bootstrap.css" />
 
 	<!-- Lista de popus -->
 	<popup id="pupNombreRequisito">
@@ -72,7 +74,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="200px"
+	<groupbox width="95%" height="220px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -92,11 +94,11 @@
 					<hbox>
 
 						<textbox id="txtNombreRequisito" width="120%"
-							tooltip="pupNombreRequisito"/>
+							tooltip="pupNombreRequisito" />
 
-						<button id="btnBuscarRequisito"
+						<button id="btnBuscarRequisito" sclass="btn"
 							image="/public/imagenes/iconos/catalogo.png"
-							style="margin-left:40px" tooltip="pupCatalogoRequisito">
+							style="margin-left:50px" tooltip="pupCatalogoRequisito">
 						</button>
 
 					</hbox>
@@ -112,8 +114,8 @@
 					</hlayout>
 
 					<textbox id="txtDescripcionRequisito" rows="5"
-					 tooltip="pupDescripcionRequisito" cols="100"
-						width="52%" tabindex="8" />
+						tooltip="pupDescripcionRequisito" cols="100" width="52%"
+						tabindex="8" />
 
 				</row>
 
@@ -129,22 +131,25 @@
 	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:3%">
 		<panelchildren>
-			<div align="center">
+			<div sclass="alert-info" align="center">
 				<separator />
-				<button id="btnGuardarRequisito" label="Guardar"
-					tooltip="pupGuardarRequisito"
-					image="/public/imagenes/iconos/guardar.png" tabindex="13">
-				</button>
-				<button id="btnCancelarRequisito" label="Cancelar"
-					tooltip="pupCancelarRequisito"
-					image="/public/imagenes/iconos//limpiar.png" tabindex="14">
-				</button>
-				<button id="btnEliminarRequisito" label="Eliminar"
-					tooltip="pupEliminarRequisito"
-					image="/public/imagenes/iconos/eliminar.png" disabled="true"
-					tabindex="15">
-				</button>
-				<separator />
+				<div sclass="btn-group">
+
+					<button id="btnGuardarRequisito" label="Guardar" sclass="btn"
+						tooltip="pupGuardarRequisito"
+						image="/public/imagenes/iconos/guardar.png" tabindex="13">
+					</button>
+					<button id="btnCancelarRequisito" label="Cancelar" sclass="btn"
+						tooltip="pupCancelarRequisito"
+						image="/public/imagenes/iconos//limpiar.png" tabindex="14">
+					</button>
+					<button id="btnEliminarRequisito" label="Eliminar" sclass="btn"
+						tooltip="pupEliminarRequisito"
+						image="/public/imagenes/iconos/eliminar.png" disabled="true"
+						tabindex="15">
+					</button>
+					<separator />
+				</div>
 
 			</div>
 		</panelchildren>

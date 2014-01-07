@@ -33,6 +33,8 @@
 
 
 	</style>
+	
+	<style src="/public/css/bootstrap.css" />
 
 
 	<!-- Lista de popus -->
@@ -71,7 +73,7 @@
 					</hlayout>
 
 
-					<button id="btnCargarListaProfesores"
+					<button id="btnCargarListaProfesores" sclass="btn"
 						label="Examinar" tooltip="pupExaminarProfesores">
 
 					</button>

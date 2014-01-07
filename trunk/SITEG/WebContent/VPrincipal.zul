@@ -145,7 +145,7 @@
 										<div
 											style="text-align:center;">
 											<button
-												apply="controlador.CInicio" sclass="btn btn-primary"
+												apply="controlador.CInicio" sclass="btn btn-primary" style="margin-top:30px"
 												id="btnSolicitarTutor" label="Haz click aqui" width="125px"
 												dir="reverse" />
 										</div>
@@ -170,7 +170,7 @@
 											sclass="btn-primary">
 											<label
 												style="font-size: 10px; font: oblique bold 90% cursive; "
-												value="Infomacion de interes" />
+												value="Infomación de interes" />
 										</div>
 										<div
 											style=" text-align:center;">
@@ -194,7 +194,7 @@
 											<button
 												apply="controlador.CInicio" sclass="btn btn-primary"
 												id="btnInformacionInteres" label="Haz click aqui"
-												width="125px" dir="reverse" />
+												width="125px" style="margin-top:30px" dir="reverse" />
 										</div>
 									</vbox>
 									<!-- FIN MENU INFO -->
@@ -237,7 +237,7 @@
 										<div
 											style="text-align:center;">
 											<button
-												apply="controlador.CInicio" sclass="btn btn-primary"
+												apply="controlador.CInicio" sclass="btn btn-primary" style="margin-top:45px"
 												label="Haz click aqui" width="125px" dir="reverse" />
 										</div>
 
@@ -250,6 +250,11 @@
 						<!--FIN Biblioteca -->
 
 					</hbox>
+			
+					
+			
+					
+					
 
 				</vbox>
 			</div>

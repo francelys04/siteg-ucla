@@ -1,5 +1,5 @@
 <window id="wdwProfesor" title="Profesor" border="normal" width="100%"
-	height="95%" closable="true" apply="controlador.CProfesor">
+	height="650px" closable="true" apply="controlador.CProfesor">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -33,6 +33,7 @@
 
 	</style>
 
+	<style src="/public/css/bootstrap.css" />
 
 
 	<!-- Lista de popus -->
@@ -65,7 +66,7 @@
 	<popup id="pupCorreoProfesor">
 		<toolbarbutton label="Ingrese aqui el correo del profesor" />
 	</popup>
-		<popup id="pupProgramaProfesor">
+	<popup id="pupProgramaProfesor">
 		<toolbarbutton label="Seleccione el programa del profesor" />
 	</popup>
 	<popup id="pupGuardarProfesor">
@@ -115,7 +116,7 @@
 					</hlayout>
 
 					<combobox id="cmbProgramaProfesor" readonly="true"
-						tooltip="pupProgramaProfesor" width="25%" tabindex="1">
+						tooltip="pupProgramaProfesor" tabindex="1">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
@@ -131,7 +132,7 @@
 					</hlayout>
 
 					<combobox id="cmbCategoriaProfesor" readonly="true"
-						tooltip="pupCategoriaProfesor" width="25%" tabindex="1">
+						tooltip="pupCategoriaProfesor" tabindex="1">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
@@ -153,7 +154,7 @@
 							constraint="/.+[0-9]+/: Debe ingresar una cédula válida"
 							tabindex="2" tooltip="pupCedulaProfesor" />
 
-						<button id="btnCatalogoProfesor"
+						<button id="btnCatalogoProfesor" sclass="btn"
 							tooltip="pupCatalogoProfesor"
 							image="/public/imagenes/iconos/catalogo.png" tabindex="13" />
 
@@ -194,16 +195,16 @@
 					</hlayout>
 
 					<hlayout>
-
 						<radiogroup id="rdgSexoProfesor"
 							tooltip="pupSexoProfesor">
 							<radio id="rdoSexoFProfesor"
 								label="Femenino" tabindex="5" style="color:black" />
 							<radio id="rdoSexoMProfesor"
-								label="Masculino" style="margin-left:15px;color:black"
+								label="Masculino" style="margin-left:25px;color:black"
 								tabindex="6" />
 						</radiogroup>
 					</hlayout>
+					
 				</row>
 
 				<row>
@@ -267,26 +268,25 @@
 
 	<separator />
 	<separator />
-	<separator />
-	<separator />
-
 	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:2%">
 		<panelchildren>
-			<div align="center">
+			<div sclass="alert-info" align="center">
 				<separator />
+				<div sclass="btn-group">
 
-				<button id="btnGuardarProfesor" label="Guardar"
-					image="/public/imagenes/iconos/guardar.png" tabindex="13">
-				</button>
-				<button id="btnCancelarProfesor" label="Cancelar"
-					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
-				</button>
-				<button id="btnEliminarProfesor" label="Eliminar"
-					disabled="true" image="/public/imagenes/iconos/eliminar.png"
-					tabindex="15">
-				</button>
-				<separator />
+					<button id="btnGuardarProfesor" label="Guardar" sclass="btn" 
+						image="/public/imagenes/iconos/guardar.png" tabindex="13">
+					</button>
+					<button id="btnCancelarProfesor" label="Cancelar" sclass="btn" 
+						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					</button>
+					<button id="btnEliminarProfesor" label="Eliminar" sclass="btn" 
+						disabled="true" image="/public/imagenes/iconos/eliminar.png"
+						tabindex="15">
+					</button>
+					<separator />
+				</div>
 
 			</div>
 		</panelchildren>
