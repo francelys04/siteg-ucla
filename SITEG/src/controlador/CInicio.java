@@ -111,6 +111,14 @@ public class CInicio extends CGeneral {
 		window.doModal();
 	}
 	
+	
+	@Listen("onClick = #btnContactanos")
+	public void contactanos() {
+		Window window = (Window) Executions.createComponents(
+				"/vistas/maestros/VContactanos.zul", null, null);
+		window.doModal();
+	}
+	
 
 	@Listen("onClick = #btnDatos")
 	public void datos() {

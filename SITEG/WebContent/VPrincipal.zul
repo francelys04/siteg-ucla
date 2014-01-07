@@ -13,7 +13,7 @@
 		</script>
 	</html>
 
-	<borderlayout height="150%">
+	<borderlayout height="110%">
 		<!-- norte y Encabezado -->
 		<north size="130px">
 
@@ -30,12 +30,11 @@
 
 				<div>
 					<menubar id="menubar" autodrop="true">
-						<menuitem label="Inicio"
-							onClick="alert(self.label)" />
+						<menuitem label="Inicio" />
 						<menuitem label="Quienes somos"
 							onClick="alert(self.label)" />
 						<menuitem label="Contactanos"
-							onClick="alert(self.label)" />
+							apply="controlador.CInicio" id="btnContactanos" />
 					</menubar>
 				</div>
 				<!--Fin del Menu -->
@@ -88,13 +87,13 @@
 												value="Consulta el estado de tu TEG:"
 												style="font-weight:bold" />
 										</div>
-										
+
 										<div
 											style="margin-top:15px;margin-left:15px;text-align:center;">
 											<intbox
 												placeholder="Ingrese aquí su cédula" id="cedulaEstatus" />
 										</div>
-										
+
 										<div
 											style="margin-top:15px;margin-left:15px;text-align:center">
 											<button
@@ -189,13 +188,13 @@
 												height="30%" />
 										</div>
 										<!--  INICIO MENU INFO -->
-									<separator></separator>
+										<separator></separator>
 										<div
 											style="text-align:center;">
 											<button
 												apply="controlador.CInicio" sclass="btn btn-primary"
-												id="btnInformacionInteres" label="Haz click aqui" width="125px"
-												dir="reverse" />
+												id="btnInformacionInteres" label="Haz click aqui"
+												width="125px" dir="reverse" />
 										</div>
 									</vbox>
 									<!-- FIN MENU INFO -->
@@ -263,10 +262,11 @@
 	else
 		a = execution.getParameter("respuesta");
 </zscript>
-		<east title="" sclass="body_left" size="30%" flex="true"
+		<east title="" sclass="body_left" size="32%" flex="true"
 			style="margin-top:10px;">
 			<vlayout>
-				<window title="${a}" border="normal" width="100%">
+				<window title="${a}" border="normal" width="100%"
+					height="90px">
 					<vlayout>
 						<hlayout width="100%">
 							<!--Inicio sesion  -->
@@ -274,13 +274,13 @@
 								action="j_spring_security_check" method="POST"
 								xmlns:h="native">
 								<textbox placeholder="Usuario"
-									id="log_usuario" name="j_username" hflex="1" />
+									style="margin-top:4px" id="log_usuario" name="j_username"
+									hflex="1" />
 								<textbox placeholder="Clave"
-									id="log_clave" hflex="1" type="password" name="j_password" />
-								<h:input sclass="btn btn-primary"
-									type="submit" value="Entrar" />
-								<h:input sclass="btn btn-primary"
-									type="reset" value="Limpiar" />
+									style="margin-top:4px" id="log_clave" hflex="1" type="password"
+									name="j_password" />
+								<button sclass="btn btn-primary"
+									type="submit" label="Entrar" />
 							</h:form>
 						</hlayout>
 					</vlayout>
@@ -332,13 +332,14 @@
 						</template>
 					</listbox>
 					<window id="wdwCrono" style=" text-align:center;">
-					<image src="public/imagenes/portal/Imagen4.png" width="50%" height="50%" />
+						<image src="public/imagenes/portal/Imagen4.png"
+							width="50%" height="50%" />
 					</window>
 				</window>
 				<!-- Fin del cronograma de actividades -->
 
 
-				<window title="Timeline" border="normal" width="100%"
+				<window title="Twitter" border="normal" width="100%"
 					vflex="1" contentStyle="overflow:auto;">
 					<include src="public/widgets/twitter.html" />
 				</window>
