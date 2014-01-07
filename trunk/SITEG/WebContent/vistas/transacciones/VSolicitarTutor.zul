@@ -258,7 +258,7 @@
 												style="margin:0 auto;padding:20px;">
 
 												<button id="btnAgregarEstudiante"
-													image="/imagenes/agregar.png">
+													image="public/imagenes/iconos/agregar.png">
 												</button>
 
 											</div>
@@ -295,7 +295,7 @@
 										width="100px" />
 
 									<button id="btnCatalogoProfesorArea"
-										style="margin-left:10px" image="/imagenes/catalogo.png">
+										style="margin-left:10px" image="public/imagenes/iconos/catalogo.png">
 									</button>
 
 								</hbox>
@@ -359,10 +359,10 @@
 				<separator />
 
 				<button id="btnEnviarSolicitudtutoria" label="Enviar"
-					image="/imagenes/enviar.png" tabindex="13">
+					image="public/imagenes/iconos/enviar.png" tabindex="13">
 				</button>
 				<button id="btnCancelarSolicitudTutoria"
-					label="Cancelar" image="/imagenes/limpiar.png" tabindex="14">
+					label="Cancelar" image="public/imagenes/iconos/limpiar.png" tabindex="14">
 				</button>
 				<separator />
 
