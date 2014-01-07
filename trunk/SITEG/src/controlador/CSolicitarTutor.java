@@ -102,12 +102,7 @@ public class CSolicitarTutor extends CGeneral {
 	//atributos del Estudiante
 	@Wire
 	private Textbox txtCedulaEstudiante;
-	@Wire
-	private Textbox txtNombreEstudiante;
-	@Wire
-	private Textbox txtApellidoEstudiante;
-	@Wire
-	private Textbox txtCorreoEstudiante;
+	
 	
 	//atributos del Tutor
 	@Wire
@@ -171,9 +166,6 @@ public class CSolicitarTutor extends CGeneral {
 	public void limpiarDatosEstudiante(){
 		
 		txtCedulaEstudiante.setValue("");
-		txtNombreEstudiante.setValue("");
-		txtApellidoEstudiante.setValue("");
-		txtCorreoEstudiante.setValue("");
 		
 	}
 	@Listen("onSelect = #cmbProgramaSolicitud")
@@ -228,9 +220,7 @@ public class CSolicitarTutor extends CGeneral {
 		String titulo = txtTituloSolicitud.getValue();
 		
 		String cedulaEstudiante = txtCedulaEstudiante.getValue();
-		String nombreEstudiante = txtNombreEstudiante.getValue();
-		String apellidoEstudiante = txtApellidoEstudiante.getValue();
-		String correoEstudiante = txtCorreoEstudiante.getValue();
+		
 		
 		String cedulaProfesor = txtCedulaProfesor.getValue();
 		String nombreProfesor = txtNombreProfesor.getValue();
@@ -241,8 +231,8 @@ public class CSolicitarTutor extends CGeneral {
 		if(gridEstudiante.size() == 0){
 			
 			if(programa=="Seleccione una Opci�n" || area=="Seleccione una Opci�n" || tematica=="Seleccione una Opci�n" || titulo==""
-					   || cedulaEstudiante=="" || nombreEstudiante=="" || apellidoEstudiante==""
-					   || correoEstudiante=="" || cedulaProfesor=="" || nombreProfesor=="" || apellidoProfesor==""
+					   || cedulaEstudiante=="" 
+					    || cedulaProfesor=="" || nombreProfesor=="" || apellidoProfesor==""
 					   || correoProfesor=="" ){
 						
 						Messagebox.show("Debe llenar todos los campos", "Campos Vac�os", Messagebox.OK, Messagebox.INFORMATION);
@@ -360,9 +350,7 @@ public class CSolicitarTutor extends CGeneral {
 		txtTituloSolicitud.setValue("");
 		
 		txtCedulaEstudiante.setValue("");
-		txtNombreEstudiante.setValue("");
-		txtApellidoEstudiante.setValue("");
-		txtCorreoEstudiante.setValue("");
+		
 		
 		txtCedulaProfesor.setValue("");
 		txtNombreProfesor.setValue("");
