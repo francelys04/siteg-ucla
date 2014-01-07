@@ -328,7 +328,9 @@ public class CSolicitarTutor extends CGeneral {
 						   
 						   servicioSolicitarTutor.guardarSolicitud(solicitud2);
 						   enviarEmailNotificacion();
-						   Messagebox.show("Su Solicitud ha sido enviada", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
+						  
+						  Messagebox.show("Su Solicitud ha sido enviada", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
+						  cancelarSolicitud();
 					 }
 				 }
 			}
@@ -342,15 +344,15 @@ public class CSolicitarTutor extends CGeneral {
 	public void cancelarSolicitud(){
 		id = 0;
 		
-		cmbProgramaSolicitud.setValue("Seleccione una Opci�n");
-		cmbAreaSolicitud.setValue("Seleccione una Opci�n");
-		cmbTematicaSolicitud.setValue("Seleccione una Opci�n");
+		cmbProgramaSolicitud.setValue("");
+		cmbAreaSolicitud.setValue("");
+		cmbTematicaSolicitud.setValue("");
 		cmbAreaSolicitud.setDisabled(true);
 		cmbTematicaSolicitud.setDisabled(true);
 		txtTituloSolicitud.setValue("");
 		
 		txtCedulaEstudiante.setValue("");
-		
+		ltbEstudiantes.getItems().clear();
 		
 		txtCedulaProfesor.setValue("");
 		txtNombreProfesor.setValue("");
