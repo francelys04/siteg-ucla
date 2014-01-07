@@ -39,14 +39,14 @@
 				</center>
 			</borderlayout>
 		</center>
-		<south height="3%" border="normal"
-			class="nav nav-pills alert-info">
+		<south height="20px" border="normal" style="background-color:rgb(241, 249, 255)">
 			<div align="center" style="margin:0 auto">
 				<label
 					value=" SITEG © 2013 Elaborado por Singleton - Todos los Derechos Reservados">
 				</label>
 			</div>
 		</south>
+
 	</borderlayout>
 </window>
 </zk>

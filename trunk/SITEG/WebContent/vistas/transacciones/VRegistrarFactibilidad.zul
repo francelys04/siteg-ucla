@@ -1,6 +1,6 @@
-<?page  title="Lista de Proyectos" contentType="text/html;charset=UTF-8"?>
-<window id="wdwRegistrarFactibilidad"  title="Registrar Factibilidad" border="normal" width="750px"
-	height="460px" closable="true" apply="controlador.CRegistrarFactibilidad">
+<window id="wdwRegistrarFactibilidad" title="Registrar Factibilidad"
+	border="normal" width="750px" height="600px" closable="true"
+	apply="controlador.CRegistrarFactibilidad">
 	<separator />
 
 	<style dynamic="true">
@@ -39,14 +39,15 @@
 	<separator />
 
 	<label value="Programa:" style="margin-left:2%" />
-	<textbox id="txtProgramaRegistrarAvances" style="margin-left:5%"
-		width="25%" />
-	         
+	<textbox id="txtProgramaRegistrarFactibilidad"
+		style="margin-left:5%"  width="25%" />
+
 
 	<div align="right">
 		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="db1" cols="12" style="margin-right:30px"
-			format="short" onCreate="self.value = new Date()" mold="rounded">
+		<datebox id="dbRegistrarFactibilidad" cols="12"
+			style="margin-right:30px" format="short"
+			onCreate="self.value = new Date()" mold="rounded">
 		</datebox>
 	</div>
 
@@ -54,7 +55,7 @@
 	<separator />
 
 	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
-		height="300px">
+		height="405px">
 		<tabs>
 			<tab label="Datos del Proyecto" />
 			<tab label="Datos del Estudiante" />
@@ -69,21 +70,22 @@
 				<separator />
 				<grid sclass="fgrid" style="margin-left:1%">
 					<columns>
-						<column width="600px" height="30px" />
+						<column width="650px" height="30px" />
 					</columns>
-					<rows>			
-					
+					<rows>
+
 						<row>
 							<hbox>
 								<label value="Area:"
 									style="font-weight:bold" />
 
-								<textbox id="txtAreaRegistrarFactibilidad"
-									width="60%" style="margin-left:42%" />
+								<textbox
+									id="txtAreaRegistrarFactibilidad" width="80%"
+									style="margin-left:42%" />
 
 							</hbox>
 						</row>
-                      
+
 						<row>
 							<hbox>
 								<label value="
@@ -91,7 +93,7 @@
 									style="font-weight:bold" />
 
 								<textbox
-									id="txtTematicaRegistrarFactibilidad" width="80%"
+									id="txtTematicaRegistrarFactibilidad" width="120%"
 									style="margin-left:35%" />
 							</hbox>
 
@@ -104,7 +106,7 @@
 						</row>
 						<row>
 							<textbox id="txtTituloRegistrarFactibilidad"
-								width="520px" rows="2" cols="100" />
+								width="620px" rows="3"  cols="100" />
 						</row>
 					</rows>
 				</grid>
@@ -118,9 +120,10 @@
 				<separator />
 				<separator />
 
-                 <listbox id="ltbEstudianteRegistrarFactibilidad" width="100%" mold="paging"
-			pageSize="10" emptyMessage="No hay estudiantes registrados">
-				
+				<listbox id="ltbEstudianteRegistrarFactibilidad"
+					width="100%" mold="paging" pageSize="10"
+					emptyMessage="No hay estudiantes registrados">
+
 
 					<listhead>
 						<listheader label="Cédula" align="center" />
@@ -130,38 +133,16 @@
 							width="30%" />
 					</listhead>
 
-			<!--  		<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem> -->
 					<template name="model">
-				<listitem>
-					<listcell label="${each.cedula}" />
-					<listcell label="${each.nombre}" />
-					<listcell label="${each.apellido}" />
-					<listcell label="${each.correoElectronico}" />
+						<listitem>
+							<listcell label="${each.cedula}" />
+							<listcell label="${each.nombre}" />
+							<listcell label="${each.apellido}" />
+							<listcell label="${each.correoElectronico}" />
 
-				</listitem>
-			</template>
-
+						</listitem>
+					</template>
 				</listbox>
-
 			</tabpanel>
 
 			<tabpanel height="200px">
@@ -177,20 +158,23 @@
 							<label value="Cedula:"
 								style="font-weight:bold" />
 
-							<textbox id="txtCedulaTutorRegistrarFactibilidad" width="20%" />
+							<textbox
+								id="txtCedulaTutorRegistrarFactibilidad" width="30%" />
 						</row>
 						<row>
 							<label value="Nombre:"
 								style="font-weight:bold" />
 
 
-							<textbox id="txtNombreTutorRegistrarFactibilidad" width="30%" />
+							<textbox
+								id="txtNombreTutorRegistrarFactibilidad" width="35%" />
 						</row>
 						<row>
 							<label value="Apellido:"
 								style="font-weight:bold" />
 
-							<textbox id="txtApellidoTutorRegistrarFactiblidad" width="30%" />
+							<textbox
+								id="txtApellidoTutorRegistrarFactiblidad" width="35%" />
 						</row>
 					</rows>
 				</grid>
@@ -199,80 +183,81 @@
 			<tabpanel>
 				<separator />
 				<separator />
-			
-           <grid sclass="fgrid" style="margin-left:1%">
+
+				<grid sclass="fgrid" style="margin-left:1%">
 					<columns>
-						<column width="15%" height="30px" />
+						<column width="80px" height="30px" />
 					</columns>
-            <rows>
-               <row>
-	             <label value="Nombre:" style="margin-left:2%" />
-	             <textbox id="txtNombreTutorFactibilidad" style="margin-left:5%"
-		          width="25%" />
-		        </row>
-		        <row>
-		         <label value="Apellido:" style="margin-left:2%" />
-	             <textbox id="txtApellidoTutorFactibilidad" style="margin-left:5%"
-		         width="25%" />
-		        </row>
-		        <row>
-		         <label value="Observación:" style="margin-left:2%"/>  
-		         <textbox id="txtObservacionRegistrarFactibilidad" style="margin-left:5%" width="200px" rows="3"/>
-		        </row>
-		        </rows>
-	         </grid>
-			  <separator />
-	          <separator />
-			<!--  	<listbox id="ltbComisiónRegistrarFactibilidad" mold="paging" pageSize="2"  
-				emptyMessage="No profesores registraddos">
+					<rows>
+
+						<row>
+							<label value="Cédula:"
+								style="margin-left:2%" />
+							<textbox
+								id="txtCedulaComisionRegistrarFactibilidad"
+								style="margin-left:15px" width="120px" />
+						</row>
+
+						<row>
+							<label value="Nombre:"
+								style="margin-left:2%" />
+
+							<hbox>
+
+								<textbox
+									id="txtNombreComisionRegistrarFactibilidad"
+									style="margin-left:15px" width="160px" />
+
+								<label value="Apellido:"
+									style="margin-left:15px" />
+								<textbox
+									id="txtApellidoComisionRegistrarFactibilidad"
+									style="margin-left:5%" width="160px" />
+
+							</hbox>
+						</row>
+
+
+						<row>
+							<label value="Observación:"
+								style="margin-left:2%" />
+							<textbox
+								id="txtObservacionRegistrarFactibilidad" style="margin-left:2%"
+								width="500px" rows="5" />
+						</row>
+
+
+					</rows>
+				</grid>
+				<separator />
+				<separator />
+
+				<listbox id="ltbItemsFactibilidad" height="150px"
+					style="margin-left:3%;margin-right:3%" mold="paging" pageSize="10"
+					emptyMessage="No hay items evaluados">
+
 					<listhead>
-						<listheader label="Nombre" align="center" />
-						<listheader label="Apellido" align="center" />
-						<listheader label="Evaluación" align="center"/>  
-							width="30%" />
+						<listheader label="Item" align="center" />
+						<listheader label="Apreciación" align="center" />
+
 					</listhead>
 
-					
-					   	<template name="model">
-				<listitem>
-					
-					<listcell label="${each.profesor.nombre}" />
-					<listcell label="${each.profesor.apellido}" />	
-					 <listcell> <button id="btnEvaluacionRegistrarFactibilidad" label="Visualizar" /> </listcell>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.item.nombre}" />
+							<listcell label="${each.ponderacion}" />
+						</listitem>
+					</template>
+				</listbox>
 
-				</listitem>
-			</template>
-
-				</listbox> -->
-
-
-
-            <listbox id="ltbItemsFactibilidad" width="100%"  mold="paging" pageSize="10"  
-				     emptyMessage="No hay items evaluados">
-				
-					<listhead>
-						<listheader label="Nombre" align="center" />
-						<listheader label="Ponderación" align="center" />
-						
-					</listhead>
-
-					
-				  	<template name="model">
-				        <listitem>
-					        <listcell label="${each.item.nombre}" />
-					        <listcell label="${each.ponderacion}" />	
-                         </listitem>
-			       </template>
-            </listbox> 
-
+				<separator />
+				<separator />
 
 			</tabpanel>
-
-
 		</tabpanels>
-
 	</tabbox>
 
+	<separator />
 	<separator />
 
 	<panel border="normal" width="95%"
@@ -280,11 +265,13 @@
 		<panelchildren>
 			<div align="center">
 				<separator />
-				<button id="btnAceptarFactibilidad" label="Aceptar"
-					image="/imagenes/aceptar.png" tabindex="12">
+				<button id="btnAceptarRegistrarFactibilidad"
+					label="Aceptar" image="/public/imagenes/iconos/aceptar.png"
+					tabindex="12">
 				</button>
-				<button id="btnRechazarFactibilidad" label="Rechazar"
-					image="/imagenes/rechazar.png" tabindex="13">
+				<button id="btnRechazarRegistrarFactibilidad"
+					label="Rechazar" image="/public/imagenes/iconos/rechazar.png"
+					tabindex="13">
 				</button>
 
 				<separator />

@@ -34,4 +34,15 @@ public class SFactibilidad {
 		factibilidad1= interfacefactibilidad.BuscarProfesor(id);
 		return factibilidad1;
 	}
+	
+	/*Buscar los teg que tengan estatus Proyecto Registrado*/
+	public Factibilidad buscarFactibilidadPorTeg(Teg teg) {
+
+		Factibilidad factibilidad;
+		factibilidad = interfacefactibilidad.findByTeg(teg);
+		return factibilidad;
+
+	}
+	
+	
 }
