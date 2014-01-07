@@ -90,7 +90,7 @@ public class CInicio extends CGeneral {
 	
 	@Listen("onSelect = #cmbPrograma")	
 	public void llenarCronograma (){
-		idPrograma =Long.parseLong(cmbPrograma.getSelectedItem().getDescription());
+		idPrograma =Long.parseLong(cmbPrograma.getSelectedItem().getId());
 		System.out.println(idPrograma);
 		Lapso lapso = servicioLapso.buscarLapsoVigente();
 		Programa programa = servicioPrograma.buscar(idPrograma);
