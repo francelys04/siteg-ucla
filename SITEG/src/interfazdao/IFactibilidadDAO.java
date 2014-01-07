@@ -17,6 +17,6 @@ public interface IFactibilidadDAO extends JpaRepository<Factibilidad, Long> {
 	@Query("select f from Factibilidad f where f.id=?1")
 	public List<Factibilidad> BuscarProfesor(long id);
 		
-	
+	public Factibilidad findByTeg(Teg teg);
 
 }
