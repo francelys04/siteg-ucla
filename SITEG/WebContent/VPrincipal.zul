@@ -13,7 +13,7 @@
 		</script>
 	</html>
 
-	<borderlayout height="110%">
+	<borderlayout height="160%">
 		<!-- norte y Encabezado -->
 		<north size="130px">
 
@@ -144,7 +144,7 @@
 										</div>
 										<div
 											style="text-align:center;">
-											<button
+											<button style="margin-top:32px"
 												apply="controlador.CInicio" sclass="btn btn-primary" style="margin-top:30px"
 												id="btnSolicitarTutor" label="Haz click aqui" width="125px"
 												dir="reverse" />
@@ -191,7 +191,7 @@
 										<separator></separator>
 										<div
 											style="text-align:center;">
-											<button
+											<button style="margin-top:30px"
 												apply="controlador.CInicio" sclass="btn btn-primary"
 												id="btnInformacionInteres" label="Haz click aqui"
 												width="125px" style="margin-top:30px" dir="reverse" />
@@ -236,7 +236,7 @@
 										<separator></separator>
 										<div
 											style="text-align:center;">
-											<button
+											<button style="margin-top:45px"
 												apply="controlador.CInicio" sclass="btn btn-primary" style="margin-top:45px"
 												label="Haz click aqui" width="125px" dir="reverse" />
 										</div>
@@ -267,7 +267,7 @@
 	else
 		a = execution.getParameter("respuesta");
 </zscript>
-		<east title="" sclass="body_left" size="32%" flex="true"
+		<east title="" sclass="body_left" size="35%" flex="true"
 			style="margin-top:10px;">
 			<vlayout>
 				<window title="${a}" border="normal" width="100%"
@@ -278,13 +278,13 @@
 							<h:form id="f" name="f"
 								action="j_spring_security_check" method="POST"
 								xmlns:h="native">
-								<textbox placeholder="Usuario"
+								<textbox placeholder="Usuario" width="25%"
 									style="margin-top:4px" id="log_usuario" name="j_username"
 									hflex="1" />
-								<textbox placeholder="Clave"
+								<textbox placeholder="Clave" width="25%"
 									style="margin-top:4px" id="log_clave" hflex="1" type="password"
 									name="j_password" />
-								<button sclass="btn btn-primary"
+								<button sclass="btn btn-primary" style="margin-left:10px"
 									type="submit" label="Entrar" />
 							</h:form>
 						</hlayout>
@@ -344,7 +344,7 @@
 				<!-- Fin del cronograma de actividades -->
 
 
-				<window title="Twitter" border="normal" width="100%"
+				<window title="Twitter" border="normal" width="100%" height="98%"
 					vflex="1" contentStyle="overflow:auto;">
 					<include src="public/widgets/twitter.html" />
 				</window>
