@@ -41,5 +41,12 @@ public List<Tematica> buscarTematicasDeArea(AreaInvestigacion area2) {
 	return tematicas;
 }
 
+public Tematica buscarTematicaPorNombre(String tematica) {
+	// TODO Auto-generated method stub
+	Tematica tema;
+	tema= interfaceTematica.findByNombre(tematica);
+	return tema;
+}
+
 }
 
