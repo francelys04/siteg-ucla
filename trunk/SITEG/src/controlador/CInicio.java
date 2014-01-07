@@ -29,6 +29,8 @@ import org.zkoss.zul.Treecell;
 import org.zkoss.zul.Treeitem;
 import org.zkoss.zul.Window;
 
+import com.lowagie.text.Image;
+
 import servicio.SCronograma;
 import servicio.SEstudiante;
 import servicio.SLapso;
@@ -67,6 +69,8 @@ public class CInicio extends CGeneral {
 	private Combobox cmbPrograma;
 	@Wire
 	private Listbox ltbCronograma;
+	@Wire
+	private Window wdwCrono;
 	public static long idPrograma;
 	
 	
@@ -92,6 +96,7 @@ public class CInicio extends CGeneral {
 		Programa programa = servicioPrograma.buscar(idPrograma);
 		List<Cronograma> cronograma = servicioCronograma.buscarCronogramaPorLapsoYPrograma(programa, lapso);
 		ltbCronograma.setModel(new ListModelList<Cronograma>(cronograma));
+		wdwCrono.setVisible(false);
 	
 	}
 	
