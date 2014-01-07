@@ -1,5 +1,5 @@
 <window id="wdwLapsoAcademico" title="Lapso Académico" border="normal"
-	width="100%" height="380px" closable="true"
+	width="100%" height="390px" closable="true"
 	apply="controlador.CLapso">
 
 	<style dynamic="true">
@@ -33,6 +33,8 @@
 		background: white; border-top: none; }
 
 	</style>
+
+	<style src="/public/css/bootstrap.css" />
 
 	<!-- Lista de popus -->
 	<popup id="pupNombreLapso">
@@ -95,7 +97,7 @@
 					<hbox>
 						<textbox id="txtNombreLapso" width="90%"
 							tooltip="pupNombreLapso" tabindex="2" />
-						<button id="btnCatalogoLapsos"
+						<button id="btnCatalogoLapsos" sclass="btn"
 							tooltip="pupCatalogoLapso"
 							image="/public/imagenes/iconos/catalogo.png" tabindex="13" />
 					</hbox>
@@ -143,25 +145,27 @@
 	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:3%">
 		<panelchildren>
-			<div align="center">
+			<div sclass="alert-info" align="center">
 				<separator />
+				<div sclass="btn-group">
 
-				<button id="btnGuardarLapso" label="Guardar"
-					tooltip="pupGuardarLapso"
-					image="/public/imagenes/iconos/guardar.png" tabindex="13">
-				</button>
-				<button id="btnCancelarLapso" label="Cancelar"
-					tooltip="pupCancelarLapso"
-					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
-				</button>
-				<button id="btnEliminarLapso" label="Eliminar"
-					tooltip="pupEliminarLapso"
-					image="/public/imagenes/iconos/eliminar.png" disabled="true"
-					tabindex="15">
-				</button>
-				<separator />
+					<button id="btnGuardarLapso" label="Guardar"
+						sclass="btn" tooltip="pupGuardarLapso"
+						image="/public/imagenes/iconos/guardar.png" tabindex="13">
+					</button>
+					<button id="btnCancelarLapso" label="Cancelar"
+						sclass="btn" tooltip="pupCancelarLapso"
+						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					</button>
+					<button id="btnEliminarLapso" label="Eliminar"
+						sclass="btn" tooltip="pupEliminarLapso"
+						image="/public/imagenes/iconos/eliminar.png" disabled="true"
+						tabindex="15">
+					</button>
+					<separator />
+				</div>
 
-			</div>
+				</div>
 		</panelchildren>
 	</panel>
 

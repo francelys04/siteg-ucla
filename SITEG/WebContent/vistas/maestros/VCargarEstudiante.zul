@@ -34,6 +34,8 @@
 
 	</style>
 
+	<style src="/public/css/bootstrap.css" />
+
 
 	<!-- Lista de popus -->
 	<popup id="pupExaminarEstudiantes">
@@ -72,7 +74,7 @@
 					</hlayout>
 
 
-					<button id="btnCargarListaEstudiantes"
+					<button id="btnCargarListaEstudiantes" sclass="btn"
 						tooltip="pupExaminarEstudiantes" label="Examinar">
 
 					</button>
