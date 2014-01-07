@@ -111,22 +111,21 @@ public class CCatalogoProfesorArea extends CGeneral {
 	@Listen("onDoubleClick = #ltbProfesor")
 	public void mostrarDatosCatalogo() {
 
-		Listitem listItem = ltbProfesor.getSelectedItem();
-		Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
-		
-		
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("cedula", profesorDatosCatalogo.getCedula());
-		String vista = "transacciones/VSolicitarTutor";
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		
-		Executions.sendRedirect("/vistas/transacciones/VSolicitarTutor.zul");
-		
-		
-		
-		
-		
+		if (vistaRecibida == null) {
+			
+			vistaRecibida = "/vistas/transacciones/VSolicitarTutor";
+
+		} else {
+			Listitem listItem = ltbProfesor.getSelectedItem();
+			Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
+			final HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("cedula", profesorDatosCatalogo.getCedula());
+			String vista = vistaRecibida;
+			map.put("vista", vista);
+			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+			Executions.sendRedirect("/vistas/transacciones/VSolicitarTutor.zul");
+			wdwCatalogoProfesorArea.onClose();
+		}
 	}
 
 }
