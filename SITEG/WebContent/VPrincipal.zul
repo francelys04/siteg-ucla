@@ -299,7 +299,7 @@
 							width="120px" tabindex="12" readonly="true">
 							<template name="model">
 								<comboitem label="${each.nombre}"
-									description="${each.id}" />
+									id="${each.id}" />
 							</template>
 						</combobox>
 
