@@ -6,7 +6,7 @@
  <style src="public/css/bootstrap-responsive.css" />
 	<style src="public/css/slider.css" />
 	<html>
-		<script type="text/javascript" src="js/DP.js"></script>
+		<script type="text/javascript" src="public/js/DP.js"></script>
 
 		<script type="text/javascript" defer="true">
 			window.onload = DP.inicio;
