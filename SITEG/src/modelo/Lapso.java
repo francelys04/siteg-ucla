@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "lapso")
@@ -23,9 +25,11 @@ public class Lapso {
 	@Column(name = "nombre")
 	private String nombre;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_inicial")
 	private Date fechaInicial;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_final")
 	private Date fechaFinal;
 	

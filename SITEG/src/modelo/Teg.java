@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "teg")
@@ -27,12 +29,15 @@ public class Teg {
 	@Column(name = "titulo")
 	private String titulo;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha")
 	private Date fecha;
-
+	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_inicio")
 	private Date fechaInicio;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_entrega")
 	private Date fechaEntrega;
 
