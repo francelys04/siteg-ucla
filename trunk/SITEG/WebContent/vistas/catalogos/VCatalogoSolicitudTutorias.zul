@@ -4,6 +4,8 @@
 	<separator />
 	<separator />
 	<separator />
+	
+	<style src="/public/css/bootstrap.css" />
 
 	<listbox id="ltbSolicitud" mold="paging" pageSize="6"
 		style="margin-left:10px;margin-right:10px"

@@ -1,5 +1,5 @@
 <window title="Evaluar Factibilidad" border="normal" width="750px"
-	height="570px" closable="true">
+	height="630px" closable="true">
 	<separator />
 
 	<style dynamic="true">
@@ -34,16 +34,20 @@
 
 	</style>
 
+	<style src="/public/css/bootstrap.css" />
+
 	<separator />
 	<separator />
 
-	<label value="Programa:" style="margin-left:2%" />
-	<textbox id="txtProgramaRegistrarAvances" style="margin-left:5%"
+	<label value="Programa:" style="margin-left:2%;color:black" />
+	<textbox id="txtProgramaRegistrarAvances"
+		style="margin-left:5%;color:black !important;" disabled="true"
 		width="25%" />
 
 	<div align="right">
-		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="db1" cols="12" style="margin-right:30px"
+		<label value="Fecha:" style="margin-right:10px;color:black"></label>
+		<datebox id="db1" cols="12" width="130px"
+			style="margin-right:30px;color:black !important;" disabled="true"
 			format="short" onCreate="self.value = new Date()" mold="rounded">
 		</datebox>
 	</div>
@@ -73,10 +77,11 @@
 						<row>
 							<hbox>
 								<label value="Area:"
-									style="font-weight:bold" />
+									style="color:black" />
 
 								<textbox id="txtAreaRegistrarAvances"
-									width="60%" style="margin-left:42%" />
+									width="60%" style="margin-left:42%;color:black !important;"
+									disabled="true" />
 
 							</hbox>
 						</row>
@@ -85,23 +90,25 @@
 							<hbox>
 								<label value="
 										Temática: "
-									style="font-weight:bold" />
+									style="color:black" />
 
 								<textbox
 									id="txtTematicaRegistrarAvances" width="80%"
-									style="margin-left:35%" />
+									style="margin-left:35%;color:black !important;"
+									disabled="true" />
 							</hbox>
 
 						</row>
 
 						<row>
 							<label value="Título del Proyecto:"
-								style="font-weight:bold" />
+								style="color:black" />
 
 						</row>
 						<row>
 							<textbox id="txtTituloSolicitud"
-								width="520px" rows="2" cols="100" />
+								style="color:black !important;" disabled="true" width="520px"
+								rows="2" cols="100" />
 						</row>
 					</rows>
 				</grid>
@@ -160,23 +167,24 @@
 					</columns>
 					<rows>
 						<row>
-							<label value="Cedula:"
-								style="font-weight:bold" />
+							<label value="Cedula:" style="color:black" />
 
-							<textbox id="txtCedulaTutor" width="20%" />
+							<textbox id="txtCedulaTutor"
+								style="color:black !important;" disabled="true" width="20%" />
 						</row>
 						<row>
-							<label value="Nombre:"
-								style="font-weight:bold" />
+							<label value="Nombre:" style="color:black" />
 
 
-							<textbox id="txtNombreTutor" width="30%" />
+							<textbox id="txtNombreTutor"
+								style="color:black !important;" disabled="true" width="30%" />
 						</row>
 						<row>
 							<label value="Apellido:"
-								style="font-weight:bold" />
+								style="color:black" />
 
-							<textbox id="txtApellidoTutor" width="30%" />
+							<textbox id="txtApellidoTutor"
+								style="color:black !important;" disabled="true" width="30%" />
 						</row>
 					</rows>
 				</grid>
@@ -215,7 +223,7 @@
 							<label
 								value="descripción del tópico a estudiar, resaltando los resultados más relevantes a ser desarrollados en la lectura. Identificación de las fuentes o referencias centrales a estudiar. " />
 
-						<textbox></textbox>
+							<textbox></textbox>
 
 						</row>
 
@@ -233,7 +241,7 @@
 							<label
 								value="descripción del tópico a estudiar, resaltando los resultados más relevantes a ser desarrollados en la lectura. Identificación de las fuentes o referencias centrales a estudiar. " />
 
-						<textbox width="90%"></textbox>
+							<textbox width="90%"></textbox>
 						</row>
 
 					</rows>
@@ -252,7 +260,7 @@
 		</columns>
 		<rows>
 			<row>
-				<label value="Observaciones:" style="font-weight:bold" />
+				<label value="Observaciones:" style="color:black" />
 
 			</row>
 
@@ -269,16 +277,19 @@
 	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:2%">
 		<panelchildren>
-			<div align="center">
+			<div sclass="alert-info" align="center">
 				<separator />
-				<button id="btnGuardar" label="Guardar"
-					image="/imagenes/guardar.png" tabindex="12">
-				</button>
-				<button id="btnCancelar" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="13">
-				</button>
+				<div sclass="btn-group">
+					<button id="btnGuardar" label="Guardar" sclass="btn"
+						image="/public/imagenes/iconos/guardar.png" tabindex="12">
+					</button>
+					<button id="btnCancelar" label="Cancelar"
+						sclass="btn" image="/public/imagenes/iconos/limpiar.png"
+						tabindex="13">
+					</button>
 
-				<separator />
+					<separator />
+				</div>
 
 			</div>
 		</panelchildren>

@@ -51,19 +51,19 @@ public class CAtenderDefensa extends CGeneral {
 	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
 			.getServicioCondicionPrograma();
 	@Wire
-	private Label txtProgramaAtenderDefensa;
+	private Textbox txtProgramaAtenderDefensa;
 	@Wire
-	private Label txtAreaAtenderDefensa;
+	private Textbox txtAreaAtenderDefensa;
 	@Wire
-	private Label txtTematicaAtenderDefensa;
+	private Textbox txtTematicaAtenderDefensa;
 	@Wire
-	private Label txtTituloAtenderDefensa;
+	private Textbox txtTituloAtenderDefensa;
 	@Wire
-	private Label txtCedulaTutorAtenderDefensa;
+	private Textbox txtCedulaTutorAtenderDefensa;
 	@Wire
-	private Label txtNombreTutorAtenderDefensa;
+	private Textbox txtNombreTutorAtenderDefensa;
 	@Wire
-	private Label txtApellidoTutorAtenderDefensa;
+	private Textbox txtApellidoTutorAtenderDefensa;
 	@Wire
 	private Label lblCondicionAtenderDefensa;
 	@Wire
@@ -115,7 +115,7 @@ public class CAtenderDefensa extends CGeneral {
 				lblCondicionAtenderDefensa
 						.setValue("Recuerde que la cantidad de jurados es de:"
 								+ buscarCondicionVigenteEspecifica(
-										"Numero de Integrantes del Jurado")
+										"Numero de integrantes del jurado")
 										.getValor());
 				Defensa defensa = servicioDefensa.buscarDefensaDadoTeg(teg);
 				if (defensa != null) {

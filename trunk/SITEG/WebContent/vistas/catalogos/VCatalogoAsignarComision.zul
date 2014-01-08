@@ -5,6 +5,8 @@
 	<separator />
 	<separator />
 
+	<style src="/public/css/bootstrap.css" />
+	
 	<listbox id="ltbProyectosRegistrados" mold="paging" pageSize="10"
 		style="margin-left:10px;margin-right:10px"
 		emptyMessage="No hay proyectos registrados actualmente">

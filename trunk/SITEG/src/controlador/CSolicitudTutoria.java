@@ -50,13 +50,13 @@ public class CSolicitudTutoria extends CGeneral {
 	@Wire
 	private Datebox dtbFechaEvaluarTutoria;
 	@Wire
-	private Label txtProgramaEvaluarTutorias;
+	private Textbox txtProgramaEvaluarTutorias;
 	@Wire
-	private Label txtAreaEvaluarTutorias;
+	private Textbox  txtAreaEvaluarTutorias;
 	@Wire
-	private Label txtTematicaEvaluarTutorias;
+	private Textbox  txtTematicaEvaluarTutorias;
 	@Wire
-	private Label txtTituloSolicitud;
+	private Textbox  txtTituloSolicitud;
 	@Wire
 	private Listbox ltbSolicitudesEstudiantes;
 	@Wire

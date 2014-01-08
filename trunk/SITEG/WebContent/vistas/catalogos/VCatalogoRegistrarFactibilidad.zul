@@ -1,6 +1,8 @@
-<window id="wdwCatalogoRegistrarFactibilidad" title="Proyectos Evaluados"
-	border="normal" width="100%" height="600px" apply="controlador.CCatalogoRegistrarFactibilidad"
-	closable="true">
+<window id="wdwCatalogoRegistrarFactibilidad"
+	title="Proyectos Evaluados" border="normal" width="100%" height="600px"
+	apply="controlador.CCatalogoRegistrarFactibilidad" closable="true">
+
+	<style src="/public/css/bootstrap.css" />
 
 	<listbox id="ltbListaFactibilidad" mold="paging" pageSize="10"
 		style="margin-left:10px;margin-right:10px"
@@ -20,24 +22,24 @@
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarTematicaFactibilidad" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtMostrarTematicaFactibilidad"
+					placeholder="" instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarTituloFactibilidad" placeholder=""
-					instant="true" width="85%" value="" onChange="" />
+				<textbox id="txtMostrarTituloFactibilidad"
+					placeholder="" instant="true" width="85%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarNombreTutorFactibilidad" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtMostrarNombreTutorFactibilidad"
+					placeholder="" instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarApellidoTutorFactibilidad" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtMostrarApellidoTutorFactibilidad"
+					placeholder="" instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 		</auxhead>
 

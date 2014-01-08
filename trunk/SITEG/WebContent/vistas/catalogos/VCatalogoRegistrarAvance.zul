@@ -5,6 +5,8 @@
 	<separator />
 	<separator />
 
+	<style src="/public/css/bootstrap.css" />
+
 	<listbox id="ltbProyectosFactibles" mold="paging" pageSize="10"
 		style="margin-left:10px;margin-right:10px"
 		emptyMessage="No hay proyectos factibles actualmente">
@@ -33,14 +35,14 @@
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtNombreTutorRegistrarAvance" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtNombreTutorRegistrarAvance"
+					placeholder="" instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtApellidoTutorRegistrarAvance" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtApellidoTutorRegistrarAvance"
+					placeholder="" instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 		</auxhead>
 

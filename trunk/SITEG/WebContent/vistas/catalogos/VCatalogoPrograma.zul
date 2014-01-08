@@ -1,37 +1,36 @@
-<?page id="wdwCatalogoPrograma"  title="Catalogo Programa" contentType="text/html;charset=UTF-8"?>
-<zk>
-	<window title="Catalogo Programa" border="normal" width="800px"
-		id="wdwCatalogoPrograma" apply="controlador.CCatalogoPrograma"
-		closable="true">
+<window title="Catalogo Programa" border="normal" width="800px"
+	id="wdwCatalogoPrograma" apply="controlador.CCatalogoPrograma"
+	closable="true">
 
-		<listbox id="ltbPrograma" width="100%" mold="paging"
-			pageSize="10" emptyMessage="No hay programas registrados">
-			<auxhead sclass="category-center">
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="90%"
-						id="txtNombreMostrarPrograma" />
-				</auxheader>
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="90%"
-						id="txtDescripcionMostrarPrograma" />
-				</auxheader>
+	<style src="/public/css/bootstrap.css" />
 
-			</auxhead>
-			<listhead>
-				<listheader label="Nombre" align="center" />
-				<listheader label="Descripción" align="center" />
+	<listbox id="ltbPrograma" width="100%" mold="paging" pageSize="10"
+		emptyMessage="No hay programas registrados">
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="90%"
+					id="txtNombreMostrarPrograma" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="90%"
+					id="txtDescripcionMostrarPrograma" />
+			</auxheader>
 
-			</listhead>
+		</auxhead>
+		<listhead>
+			<listheader label="Nombre" align="center" />
+			<listheader label="Descripción" align="center" />
+
+		</listhead>
 
 
-			<template name="model">
-				<listitem>
-					<listcell label="${each.nombre}" />
-					<listcell label="${each.descripcion}" />
-				</listitem>
-			</template>
-		</listbox>
-	</window>
-</zk>
+		<template name="model">
+			<listitem>
+				<listcell label="${each.nombre}" />
+				<listcell label="${each.descripcion}" />
+			</listitem>
+		</template>
+	</listbox>
+</window>
