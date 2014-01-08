@@ -1,42 +1,48 @@
-<window title="Trabajos" border="normal" width="100%"
-	height="500px" closable="true">
+<window title="Calificar Defensa de los Trabajos" border="normal" width="100%"
+	height="500px" closable="true"
+	apply="controlador.CCatalogoCalificarDefensa">
 	<separator />
 	<separator />
 	<separator />
 
-	<listbox mold="paging" pageSize="6"
-		style="margin-left:10px;margin-right:10px">
+	<style src="/public/css/bootstrap.css" />
+
+	<listbox   id="ltbCalificarDefensa" mold="paging" pageSize="6"
+		style="margin-left:10px;margin-right:10px"
+		emptyMessage="No hay TEG para Calificar Defensa">
+		
+
 
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
-				<image src="/imagenes/filtro.png" />
-				<textbox placeholder="" instant="true" width="70%"
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtMostrarFechaCalificar" placeholder="" instant="true" width="70%"
 					value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
-				<image src="/imagenes/filtro.png" />
-				<textbox placeholder="" instant="true" width="70%"
+				<image src="/public/imagenes/iconos/filtro.png"/>
+				<textbox id="txtMostrarAreaCalificar" placeholder="" instant="true" width="70%"
 					value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
-				<image src="/imagenes/filtro.png" />
-				<textbox placeholder="" instant="true" width="70%"
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtMostrarTematicaCalificar" placeholder="" instant="true" width="70%"
 					value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
-				<image src="/imagenes/filtro.png" />
-				<textbox placeholder="" instant="true" width="80%"
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtMostrarTituloCalificar" placeholder="" instant="true" width="80%"
 					value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
-				<image src="/imagenes/filtro.png" />
-				<textbox placeholder="" instant="true" width="70%"
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtMostrarNombreTutorCalificar" placeholder="" instant="true" width="70%"
 					value="" onChange="" />
 			</auxheader>
 
 			<auxheader colspan="1">
-				<image src="/imagenes/filtro.png" />
-				<textbox placeholder="" instant="true" width="70%"
+				<image src="/public/imagenes/iconos/filtro.png"/>
+				<textbox id="txtMostrarApellidoTutorCalificar" placeholder="" instant="true" width="70%"
 					value="" onChange="" />
 			</auxheader>
 
@@ -51,140 +57,21 @@
 			<listheader label="Nombre Tutor"  align="center" />
 			<listheader label="Apellido Tutor" align="center" />
 		</listhead>
+		
+		<template name="model">
+			<listitem>
+				<listcell label="${each.fecha}" />
+				<listcell
+					label="${each.tematica.areaInvestigacion.nombre}" />
+				<listcell label="${each.tematica.nombre}" />
+				<listcell label="${each.titulo}" />
+				<listcell label="${each.tutor.nombre}" />
+				<listcell label="${each.tutor.apellido}" />
+
+			</listitem>
+		</template>
 
 
-		<listitem id="calificarDefensas"
-			apply="controlador.CInicio">
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
-
-		<listitem>
-			<listcell label="20/11/2013"></listcell>
-			<listcell label="Matematica aplicada"></listcell>
-			<listcell label="Grafos"></listcell>
-			<listcell
-				label="Implementacion de los grafos en la fisica">
-			</listcell>
-			<listcell label="Luis"></listcell>
-			<listcell label="Garcia"></listcell>
-		</listitem>
 
 	</listbox>
 
