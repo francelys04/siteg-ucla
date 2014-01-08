@@ -132,6 +132,13 @@ public class CSolicitarTutor extends CGeneral {
 	
 	private long id;
 	private int valor;
+	public static String combo;
+	public static String combo1;
+	public static String combo2;
+	public static String descripcion;
+	private static List<Estudiante> EstudiantesColocados= new ArrayList<Estudiante>();
+	
+	
 	
 	List<Estudiante> gridEstudiante = new ArrayList<Estudiante>();
 	
@@ -140,11 +147,60 @@ public class CSolicitarTutor extends CGeneral {
 		
 		
 		List<Programa> programas = servicioPrograma.buscarActivas();
-		cmbProgramaSolicitud.setModel(new ListModelList<Programa>(
-				programas));
 		
-		cmbAreaSolicitud.setDisabled(true);
-		cmbTematicaSolicitud.setDisabled(true);
+		if (combo == null)
+			{
+			cmbProgramaSolicitud.setModel(new ListModelList<Programa>(
+					programas));
+			}
+		else
+		{
+			cmbProgramaSolicitud.setValue(combo);
+			combo = null;
+		}
+		
+		
+		if (combo1 == null)
+		{
+			cmbAreaSolicitud.setDisabled(true);
+		}
+	else
+	{
+		cmbAreaSolicitud.setValue(combo1);
+		combo1 = null;
+	}
+		
+		
+		
+		if (combo2 == null)
+		{
+			cmbTematicaSolicitud.setDisabled(true);
+		}
+	else
+	{
+		cmbTematicaSolicitud.setValue(combo2);
+		combo2 = null;
+	}
+		
+		
+		if (descripcion != null){
+			
+			txtTituloSolicitud.setValue(descripcion);
+			descripcion= null;
+		}
+			
+		if (EstudiantesColocados.size() != 0)
+		{
+			for (int i = 0; i < EstudiantesColocados.size(); i++) {
+				
+				ltbEstudiantes.setModel(new ListModelList<Estudiante>(EstudiantesColocados));
+			}
+			EstudiantesColocados.clear();
+
+			
+		}
+		
+		
 		
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
@@ -203,8 +259,22 @@ public class CSolicitarTutor extends CGeneral {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoProfesorArea.zul", null, null);
 		window.doModal();
+		combo = cmbProgramaSolicitud.getValue();
+		combo1 = cmbAreaSolicitud.getValue();
+		combo2 = cmbTematicaSolicitud.getValue();
+		descripcion = txtTituloSolicitud.getValue();
+		for (int i = 0; i < ltbEstudiantes.getItemCount(); i++) {
+			Estudiante e = ltbEstudiantes.getItems().get(i)
+					.getValue();
+			
+			EstudiantesColocados.add(e);
+			
+		}
+		
+		
 		catalogo.recibir("transacciones/VSolicitarTutor");
 		 wdwSolicitarTutoria.onClose();
+		 
 		
 
 	}
