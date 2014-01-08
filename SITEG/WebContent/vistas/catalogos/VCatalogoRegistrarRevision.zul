@@ -1,9 +1,12 @@
-<window id="wdwCatalogoRegistrarRevisiones" title="Trabajos Especiales de Grado Registrados"
-	border="normal" width="100%" height="700px" closable="true"
+<window id="wdwCatalogoRegistrarRevisiones"
+	title="Trabajos Especiales de Grado Registrados" border="normal"
+	width="100%" height="700px" closable="true"
 	apply="controlador.CCatalogoRegistrarRevision">
 	<separator />
 	<separator />
 	<separator />
+
+	<style src="/public/css/bootstrap.css" />
 
 	<listbox id="ltbTrabajosRegistrados" mold="paging" pageSize="10"
 		style="margin-left:10px;margin-right:10px"
@@ -23,8 +26,8 @@
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtTematicaRegistrarRevision" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtTematicaRegistrarRevision"
+					placeholder="" instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
@@ -33,14 +36,14 @@
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtNombreTutorRegistrarRevision" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtNombreTutorRegistrarRevision"
+					placeholder="" instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtApellidoTutorRegistrarRevision" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtApellidoTutorRegistrarRevision"
+					placeholder="" instant="true" width="70%" value="" onChange="" />
 			</auxheader>
 		</auxhead>
 

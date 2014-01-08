@@ -1,39 +1,40 @@
-<?page id="wdwCatalogoArea"  title="Catalogo Area" contentType="text/html;charset=UTF-8"?>
-<zk>
-	<window title="Catalogo Area" border="normal" width="800px"
-		id="wdwCatalogoArea" apply="controlador.CCatalogoAreaInvestigacion"
-		closable="true">
-		<listbox id="ltbArea" width="100%" mold="paging" pageSize="10"
-			emptyMessage="No hay areas de investigación registradas">
+<window title="Catalogo Area" border="normal" width="800px"
+	id="wdwCatalogoArea" apply="controlador.CCatalogoAreaInvestigacion"
+	closable="true">
+	<style src="/public/css/bootstrap.css" />
 
-			<auxhead sclass="category-center">
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="90%"
-						id="txtNombreMostrarArea" />
-				</auxheader>
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="90%"
-						id="txtDescripcionMostrarArea" />
-				</auxheader>
+	<listbox id="ltbArea" width="100%" mold="paging" pageSize="10"
+		emptyMessage="No hay areas de investigación registradas">
 
 
-			</auxhead>
-			<listhead>
-				<listheader label="Nombre" align="center" />
-				<listheader label="Descripción" align="center" />
 
-			</listhead>
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="90%"
+					id="txtNombreMostrarArea" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="90%"
+					id="txtDescripcionMostrarArea" />
+			</auxheader>
 
 
-			<template name="model">
-				<listitem>
-					<listcell label="${each.nombre}" />
-					<listcell label="${each.descripcion}" />
+		</auxhead>
+		<listhead>
+			<listheader label="Nombre" align="center" />
+			<listheader label="Descripción" align="center" />
 
-				</listitem>
-			</template>
-		</listbox>
-	</window>
-</zk>
+		</listhead>
+
+
+		<template name="model">
+			<listitem>
+				<listcell label="${each.nombre}" />
+				<listcell label="${each.descripcion}" />
+
+			</listitem>
+		</template>
+	</listbox>
+</window>

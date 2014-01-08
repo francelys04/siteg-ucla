@@ -1,35 +1,35 @@
-<?page id="wdwCatalogoUsuario"  title="Catalogo Usuario" contentType="text/html;charset=UTF-8"?>
-<zk>
-	<window title="Catalogo Usuario" border="normal" width="870px"
-		id="wdwCatalogoUsuario" apply="controlador.CCatalogoUsuario"
-		closable="true">
-		<listbox id="ltbUsuario" width="100%">
-			<auxhead sclass="category-center">
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="90%"
-						id="txtNombreMostrarUsuario" />
-				</auxheader>
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="90%"
-						id="txtPasswordMostrarUsuario" />
-				</auxheader>
+<window title="Catalogo Usuario" border="normal" width="870px"
+	id="wdwCatalogoUsuario" apply="controlador.CCatalogoUsuario"
+	closable="true">
 
-			</auxhead>
-			<listhead>
-				<listheader label="Nombre" align="center" />
-				<listheader label="Password" align="center" />
+	<style src="/public/css/bootstrap.css" />
 
-			</listhead>
+	<listbox id="ltbUsuario" width="100%">
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="90%"
+					id="txtNombreMostrarUsuario" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="90%"
+					id="txtPasswordMostrarUsuario" />
+			</auxheader>
+
+		</auxhead>
+		<listhead>
+			<listheader label="Nombre" align="center" />
+			<listheader label="Password" align="center" />
+
+		</listhead>
 
 
-			<template name="model">
-				<listitem>
-					<listcell label="${each.nombre}" />
-					<listcell label="${each.password}" />
-				</listitem>
-			</template>
-		</listbox>
-	</window>
-</zk>
+		<template name="model">
+			<listitem>
+				<listcell label="${each.nombre}" />
+				<listcell label="${each.password}" />
+			</listitem>
+		</template>
+	</listbox>
+</window>
