@@ -9,6 +9,8 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "cronograma")
@@ -29,9 +31,11 @@ public class Cronograma {
 	@JoinColumn(name = "lapso_id", referencedColumnName = "id")
 	private Lapso lapso;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_inicio")
 	private Date fechaInicio;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_fin")
 	private Date fechaFin;
 	
