@@ -1,5 +1,5 @@
 <window id="wdwCatalogoRegistrarRevisiones" title="Trabajos Especiales de Grado Registrados"
-	border="normal" width="100%" height="600px" closable="true"
+	border="normal" width="100%" height="700px" closable="true"
 	apply="controlador.CCatalogoRegistrarRevision">
 	<separator />
 	<separator />

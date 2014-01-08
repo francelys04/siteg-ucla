@@ -233,6 +233,7 @@ public class CRegistrarRevision extends CGeneral {
 
 				ltbRevisionesRegistradas.setModel(new ListModelList<Avance>(
 						avancesTeg));
+				btnFinalizarRegistrarRevision.setDisabled(false);
 
 			}
 		} catch (NullPointerException e) {

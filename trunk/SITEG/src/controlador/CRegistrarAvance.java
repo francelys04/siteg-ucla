@@ -232,6 +232,7 @@ public class CRegistrarAvance extends CGeneral {
 
 				ltbAvancesRegistrados.setModel(new ListModelList<Avance>(
 						avancesTeg));
+				btnFinalizarRegistrarAvance.setDisabled(false);
 
 			}
 		} catch (NullPointerException e) {

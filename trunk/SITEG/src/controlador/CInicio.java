@@ -36,7 +36,6 @@ import servicio.SEstudiante;
 import servicio.SLapso;
 import servicio.SPrograma;
 
-
 @Controller
 public class CInicio extends CGeneral {
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
@@ -72,53 +71,46 @@ public class CInicio extends CGeneral {
 	@Wire
 	private Window wdwCrono;
 	public static long idPrograma;
-	
-	
 
 	@Override
 	void inicializar(Component com) {
 		// TODO Auto-generated method stub
 		List<Programa> programa = servicioPrograma.buscarActivas();
-	if (cmbPrograma != null) {
-            cmbPrograma.setModel(new ListModelList<Programa>(programa));
-		
+		if (cmbPrograma != null) {
+			cmbPrograma.setModel(new ListModelList<Programa>(programa));
+
 		}
-	Lapso lapso = servicioLapso.buscarLapsoVigente();
-	Programa programa1 = servicioPrograma.buscar(idPrograma);
-	
-	}	
-	
-	@Listen("onSelect = #cmbPrograma")	
-	public void llenarCronograma (){
-		idPrograma =Long.parseLong(cmbPrograma.getSelectedItem().getId());
+		Lapso lapso = servicioLapso.buscarLapsoVigente();
+		Programa programa1 = servicioPrograma.buscar(idPrograma);
+
+	}
+
+	@Listen("onSelect = #cmbPrograma")
+	public void llenarCronograma() {
+		idPrograma = Long.parseLong(cmbPrograma.getSelectedItem().getId());
 		System.out.println(idPrograma);
 		Lapso lapso = servicioLapso.buscarLapsoVigente();
 		Programa programa = servicioPrograma.buscar(idPrograma);
-		List<Cronograma> cronograma = servicioCronograma.buscarCronogramaPorLapsoYPrograma(programa, lapso);
+		List<Cronograma> cronograma = servicioCronograma
+				.buscarCronogramaPorLapsoYPrograma(programa, lapso);
 		ltbCronograma.setModel(new ListModelList<Cronograma>(cronograma));
 		wdwCrono.setVisible(false);
-	
+
 	}
-	
-	
-	
-	
-	
+
 	@Listen("onClick = #btnSolicitarTutor")
 	public void SolicitarTutor() {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 		window.doModal();
 	}
-	
-	
+
 	@Listen("onClick = #btnContactanos")
 	public void contactanos() {
 		Window window = (Window) Executions.createComponents(
-				"/vistas/maestros/VContactanos.zul", null, null);
+				"/vistas/portal-web/VContactanos.zul", null, null);
 		window.doModal();
 	}
-	
 
 	@Listen("onClick = #btnDatos")
 	public void datos() {
@@ -127,35 +119,31 @@ public class CInicio extends CGeneral {
 				.getContext().getAuthentication().getPrincipal();
 		System.out.println(userDetails.toString());
 	}
-	
 
-	
+	@Listen("onClick = #btnInformacionInteres")
+	public void InformacionInteres(Event e) {
+		Window wdwInformacionInteres = (Window) Executions.createComponents(
+				"/vistas/portal-web/VInformacionInteres.zul", null, null);
+		wdwInformacionInteres.doModal();
+	}
 
-	
 	@Listen("onClick = #btnConsultarEstatus")
 	public void ventanaEmergente(Event e) {
 		String cedula = Integer.toString(cedulaEstatus.getValue());
-		
-		if (cedula!= "") {
-			if (servicioEstudiante.buscarEstudiante(cedula)!=null){
-				
+
+		if (cedula != "") {
+			if (servicioEstudiante.buscarEstudiante(cedula) != null) {
+
 				cedulaEstatus.setValue(null);
 				CConsultarEstatus consultarestatus = new CConsultarEstatus();
 				consultarestatus.recibirCedula(cedula);
-			}
-			else{
+			} else {
 				Messagebox.show("El estudiante no se encuentra registrado");
 				cedulaEstatus.setValue(null);
 			}
-			
-			
-		}
-		
-		
-	}
-	
-	
-	
 
+		}
+
+	}
 
 }
