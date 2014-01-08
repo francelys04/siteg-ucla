@@ -35,7 +35,14 @@ public class STeg {
 		return interfaceTeg.findOne(id);
 
 	}
+	
+	public List<Teg> BuscarTegCalificandoDefensa() {
 
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatus(estatus[11]);
+		return tegs;
+
+	}
 	// Evaluar Revisiones
 	public List<Teg> buscarTegRegistrado() {
 		List<Teg> tegs;

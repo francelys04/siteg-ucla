@@ -1,5 +1,5 @@
 <window title="Calificar Defensa" border="normal" width="750px"
-	height="570px" closable="true">
+	height="600px" closable="true">
 	<separator />
 
 	<style dynamic="true">
@@ -34,16 +34,18 @@
 
 	</style>
 
+	<style src="/public/css/bootstrap.css" />
+
 	<separator />
 	<separator />
 
-	<label value="Programa:" style="margin-left:2%" />
+	<label value="Programa:" style="margin-left:2%;color:black" />
 	<textbox id="txtProgramaRegistrarAvances" style="margin-left:5%"
 		width="25%" />
 
 	<div align="right">
-		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="db1" cols="12" style="margin-right:30px"
+		<label value="Fecha:" style="margin-right:10px;color:black"></label>
+		<datebox id="dtbfecha" cols="12" style="margin-right:30px" width="130px"
 			format="short" onCreate="self.value = new Date()" mold="rounded">
 		</datebox>
 	</div>
@@ -73,10 +75,10 @@
 						<row>
 							<hbox>
 								<label value="Area:"
-									style="font-weight:bold" />
+									style="color:black" />
 
 								<textbox id="txtAreaRegistrarAvances"
-									width="60%" style="margin-left:42%" />
+									width="80%" style="margin-left:90px" />
 
 							</hbox>
 						</row>
@@ -85,18 +87,18 @@
 							<hbox>
 								<label value="
 										Temática: "
-									style="font-weight:bold" />
+									style="color:black" />
 
 								<textbox
-									id="txtTematicaRegistrarAvances" width="80%"
-									style="margin-left:35%" />
+									id="txtTematicaRegistrarAvances" width="100%"
+									style="margin-left:70px" />
 							</hbox>
 
 						</row>
 
 						<row>
 							<label value="Título del Proyecto:"
-								style="font-weight:bold" />
+								style="color:black" />
 
 						</row>
 						<row>
@@ -161,20 +163,20 @@
 					<rows>
 						<row>
 							<label value="Cedula:"
-								style="font-weight:bold" />
+								style="color:black" />
 
 							<textbox id="txtCedulaTutor" width="20%" />
 						</row>
 						<row>
 							<label value="Nombre:"
-								style="font-weight:bold" />
+								style="color:black" />
 
 
 							<textbox id="txtNombreTutor" width="30%" />
 						</row>
 						<row>
 							<label value="Apellido:"
-								style="font-weight:bold" />
+								style="color:black" />
 
 							<textbox id="txtApellidoTutor" width="30%" />
 						</row>
@@ -271,21 +273,7 @@
 
 				<separator />
 				<separator />
-				<hlayout>
-					<label value="Nota:"
-						style="font-weight:bold;color:red">
-					</label>
-					<label value="5 es la mayor ponderación" />
-				</hlayout>
-
-				<div align="right">
-					<label value="Ponderacion Total:" />
-
-
-					<textbox id="txtPonderacion" width="10%"/>
-				</div>
-
-
+			
 			</tabpanel>
 		</tabpanels>
 	</tabbox>
@@ -317,16 +305,17 @@
 	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:2%">
 		<panelchildren>
-			<div align="center">
+			<div sclass="alert-info" align="center">
 				<separator />
-				<button id="btnGuardar" label="Guardar"
-					image="/imagenes/guardar.png" tabindex="12">
-				</button>
-				<button id="btnCancelar" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="13">
-				</button>
-
-				<separator />
+				<div sclass="btn-group">
+					<button id="btnGuardar" label="Guardar" sclass="btn"
+						image="/public/imagenes/iconos/guardar.png" tabindex="12">
+					</button>
+					<button id="btnCancelar" label="Cancelar"
+						sclass="btn" image="/public/imagenes/iconos/limpiar.png" tabindex="13">
+					</button>
+					<separator />
+				</div>
 
 			</div>
 		</panelchildren>
