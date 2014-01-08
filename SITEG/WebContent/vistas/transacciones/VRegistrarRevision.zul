@@ -1,5 +1,5 @@
 <window id="wdwRegistrarRevision" title="Registrar Revisiones"
-	border="normal" width="700px" height="630px" closable="true"
+	border="normal" width="700px" height="700px" closable="true"
 	apply="controlador.CRegistrarRevision">
 	<separator />
 
@@ -41,16 +41,18 @@
 
 	</style>
 
+	<style src="/public/css/bootstrap.css" />
+
 	<separator />
 	<separator />
 
-	<label value="Programa:" style="margin-left:2%" />
+	<label value="Programa:" style="margin-left:2%;color:black" />
 	<textbox id="txtProgramaRegistrarRevision"
 		style="margin-left:5%;color:black !important;" disabled="true"
 		width="25%" />
 
 	<div align="right">
-		<label value="Fecha:" style="margin-right:10px"></label>
+		<label value="Fecha:" style="margin-right:10px;color:black"></label>
 		<datebox id="dtbRegistrarRevision" cols="12"
 			style="margin-right:30px;color:black !important;" disabled="true"
 			format="short" onCreate="self.value = new Date()" mold="rounded">
@@ -62,7 +64,7 @@
 
 
 	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
-		height="250px">
+		height="280px">
 		<tabs>
 			<tab label="Datos del Proyecto" />
 			<tab label="Datos del Estudiante" />
@@ -97,8 +99,9 @@
 										Temática: "
 									style="color:black" />
 
-								<textbox id="txtTematicaRegistrarRevision"
-									width="80%" style="margin-left:35%;color:black !important;"
+								<textbox
+									id="txtTematicaRegistrarRevision" width="80%"
+									style="margin-left:35%;color:black !important;"
 									disabled="true" />
 							</hbox>
 
@@ -112,7 +115,7 @@
 						<row>
 							<textbox id="txtTituloRegistrarRevision"
 								style="color:black !important;" disabled="true" width="520px"
-								rows="3" cols="100" />
+								rows="2" cols="100" />
 						</row>
 					</rows>
 				</grid>
@@ -126,7 +129,8 @@
 				<separator />
 				<separator />
 
-				<listbox id="lsbEstudiantesTeg" sclass="fgrid"
+				<listbox id="lsbEstudiantesTeg"
+					style="margin-left:30px;margin-right:30px"
 					emptyMessage="No hay Estudiantes registrados actualmente">
 
 					<listhead>
@@ -164,8 +168,9 @@
 						</row>
 
 						<row>
-							<textbox id="txtObservacionRegistrarRevision"
-								tabindex="1" width="590px" rows="9" cols="100" />
+							<textbox
+								id="txtObservacionRegistrarRevision" tabindex="1" width="590px"
+								rows="8" cols="100" />
 						</row>
 					</rows>
 				</grid>
@@ -185,8 +190,8 @@
 	<separator />
 
 
-	<listbox id="ltbRevisionesRegistradas" mold="paging" sclass="fgrid" height="170px"
-		pageSize="2" style="margin-left:2%;margin-right:2%"
+	<listbox id="ltbRevisionesRegistradas" mold="paging" sclass="fgrid"
+		height="170px" pageSize="2" style="margin-left:2%;margin-right:2%"
 		emptyMessage="No hay revisiones registradas actualmente">
 		<listhead>
 			<listheader label="Fecha" width="20%" align="center" />
@@ -209,20 +214,24 @@
 	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:2%">
 		<panelchildren>
-			<div align="center">
+			<div sclass="alert-info" align="center">
 				<separator />
-				<button id="btnGuardarRegistrarRevision" label="Guardar"
-					image="/public/imagenes/iconos/guardar.png" tabindex="12">
-				</button>
-				<button id="btnFinalizarRegistrarRevision"
-					label="Finalizar" image="/public/imagenes/iconos/guardar.png"
-					tabindex="13">
-				</button>
-				<button id="btnCancelarRegistrarRevision" label="Cancelar"
-					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
-				</button>
+				<div sclass="btn-group">
+					<button id="btnGuardarRegistrarRevision"
+						sclass="btn" label="Guardar"
+						image="/public/imagenes/iconos/guardar.png" tabindex="12">
+					</button>
+					<button id="btnFinalizarRegistrarRevision"
+						sclass="btn" label="Finalizar"
+						image="/public/imagenes/iconos/guardar.png" tabindex="13">
+					</button>
+					<button id="btnCancelarRegistrarRevision"
+						sclass="btn" label="Cancelar"
+						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					</button>
 
-				<separator />
+					<separator />
+				</div>
 
 			</div>
 		</panelchildren>

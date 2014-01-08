@@ -1,6 +1,5 @@
 <window id="wdwRegistrarFactibilidad" title="Registrar Factibilidad"
-	border="normal" width="750px" height="600px" closable="true"
-	apply="controlador.CRegistrarFactibilidad">
+	border="normal" width="750px" height="680px" closable="true">
 	<separator />
 
 	<style dynamic="true">
@@ -35,19 +34,22 @@
 
 	</style>
 
+	<style src="/public/css/bootstrap.css" />
+
 	<separator />
 	<separator />
 
-	<label value="Programa:" style="margin-left:2%" />
+	<label value="Programa:" style="margin-left:2%;color:black" />
 	<textbox id="txtProgramaRegistrarFactibilidad"
-		style="margin-left:5%"  width="25%" />
+		style="margin-left:5%;color:black !important;" disabled="true"
+		width="25%" />
 
 
 	<div align="right">
-		<label value="Fecha:" style="margin-right:10px"></label>
-		<datebox id="dbRegistrarFactibilidad" cols="12"
-			style="margin-right:30px" format="short"
-			onCreate="self.value = new Date()" mold="rounded">
+		<label value="Fecha:" style="margin-right:10px;color:black"></label>
+		<datebox id="dbRegistrarFactibilidad" cols="12" width="130px"
+			style="margin-right:30px;color:black !important;" disabled="true"
+			format="short" onCreate="self.value = new Date()" mold="rounded">
 		</datebox>
 	</div>
 
@@ -55,7 +57,7 @@
 	<separator />
 
 	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
-		height="405px">
+		height="450px">
 		<tabs>
 			<tab label="Datos del Proyecto" />
 			<tab label="Datos del Estudiante" />
@@ -77,11 +79,12 @@
 						<row>
 							<hbox>
 								<label value="Area:"
-									style="font-weight:bold" />
+									style="color:black" />
 
 								<textbox
 									id="txtAreaRegistrarFactibilidad" width="80%"
-									style="margin-left:42%" />
+									style="margin-left:42%;color:black !important;"
+									disabled="true" />
 
 							</hbox>
 						</row>
@@ -90,23 +93,25 @@
 							<hbox>
 								<label value="
 										Temática: "
-									style="font-weight:bold" />
+									style="color:black" />
 
 								<textbox
 									id="txtTematicaRegistrarFactibilidad" width="120%"
-									style="margin-left:35%" />
+									style="margin-left:35%;color:black !important;"
+									disabled="true" />
 							</hbox>
 
 						</row>
 
 						<row>
 							<label value="Título del Proyecto:"
-								style="font-weight:bold" />
+								style="color:black" />
 
 						</row>
 						<row>
 							<textbox id="txtTituloRegistrarFactibilidad"
-								width="620px" rows="3"  cols="100" />
+								style="color:black !important;" disabled="true" width="620px"
+								rows="3" cols="100" />
 						</row>
 					</rows>
 				</grid>
@@ -121,7 +126,7 @@
 				<separator />
 
 				<listbox id="ltbEstudianteRegistrarFactibilidad"
-					width="100%" mold="paging" pageSize="10"
+					style="margin-left:30px;margin-right:30px"
 					emptyMessage="No hay estudiantes registrados">
 
 
@@ -155,26 +160,29 @@
 					</columns>
 					<rows>
 						<row>
-							<label value="Cedula:"
-								style="font-weight:bold" />
+							<label value="Cédula:"
+								style="color:black" />
 
-							<textbox
-								id="txtCedulaTutorRegistrarFactibilidad" width="30%" />
+							<textbox style="color:black !important;"
+								disabled="true" id="txtCedulaTutorRegistrarFactibilidad"
+								width="30%" />
 						</row>
 						<row>
 							<label value="Nombre:"
-								style="font-weight:bold" />
+								style="color:black" />
 
 
-							<textbox
-								id="txtNombreTutorRegistrarFactibilidad" width="35%" />
+							<textbox style="color:black !important;"
+								disabled="true" id="txtNombreTutorRegistrarFactibilidad"
+								width="35%" />
 						</row>
 						<row>
 							<label value="Apellido:"
-								style="font-weight:bold" />
+								style="color:black" />
 
-							<textbox
-								id="txtApellidoTutorRegistrarFactiblidad" width="35%" />
+							<textbox style="color:black !important;"
+								disabled="true" id="txtApellidoTutorRegistrarFactiblidad"
+								width="35%" />
 						</row>
 					</rows>
 				</grid>
@@ -192,27 +200,30 @@
 
 						<row>
 							<label value="Cédula:"
-								style="margin-left:2%" />
+								style="margin-left:2%;color:black" />
 							<textbox
 								id="txtCedulaComisionRegistrarFactibilidad"
-								style="margin-left:15px" width="120px" />
+								style="margin-left:15px;color:black !important;" disabled="true"
+								width="120px" />
 						</row>
 
 						<row>
 							<label value="Nombre:"
-								style="margin-left:2%" />
+								style="margin-left:2%;color:black" />
 
 							<hbox>
 
 								<textbox
 									id="txtNombreComisionRegistrarFactibilidad"
-									style="margin-left:15px" width="160px" />
+									style="margin-left:15px;color:black !important;"
+									disabled="true" width="160px" />
 
 								<label value="Apellido:"
-									style="margin-left:15px" />
+									style="margin-left:15px;color:black" />
 								<textbox
 									id="txtApellidoComisionRegistrarFactibilidad"
-									style="margin-left:5%" width="160px" />
+									style="margin-left:5%;color:black !important;" disabled="true"
+									width="160px" />
 
 							</hbox>
 						</row>
@@ -220,9 +231,10 @@
 
 						<row>
 							<label value="Observación:"
-								style="margin-left:2%" />
+								style="margin-left:2%;color:black" />
 							<textbox
-								id="txtObservacionRegistrarFactibilidad" style="margin-left:2%"
+								id="txtObservacionRegistrarFactibilidad"
+								style="margin-left:2%;color:black !important;" disabled="true"
 								width="500px" rows="5" />
 						</row>
 
@@ -232,7 +244,7 @@
 				<separator />
 				<separator />
 
-				<listbox id="ltbItemsFactibilidad" height="150px"
+				<listbox id="ltbItemsFactibilidad" height="120px"
 					style="margin-left:3%;margin-right:3%" mold="paging" pageSize="10"
 					emptyMessage="No hay items evaluados">
 
@@ -263,16 +275,18 @@
 	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:2%">
 		<panelchildren>
-			<div align="center">
+			<div sclass="alert-info" align="center">
 				<separator />
-				<button id="btnAceptarRegistrarFactibilidad"
-					label="Aceptar" image="/public/imagenes/iconos/aceptar.png"
-					tabindex="12">
-				</button>
-				<button id="btnRechazarRegistrarFactibilidad"
-					label="Rechazar" image="/public/imagenes/iconos/rechazar.png"
-					tabindex="13">
-				</button>
+				<div sclass="btn-group">
+					<button id="btnAceptarRegistrarFactibilidad"
+						sclass="btn" label="Aceptar"
+						image="/public/imagenes/iconos/aceptar.png" tabindex="12">
+					</button>
+					<button id="btnRechazarRegistrarFactibilidad"
+						sclass="btn" label="Rechazar"
+						image="/public/imagenes/iconos/rechazar.png" tabindex="13">
+					</button>
+				</div>
 
 				<separator />
 

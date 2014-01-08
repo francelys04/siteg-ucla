@@ -1,0 +1,34 @@
+<window id="wdwInfomacionInteres" title="Información de Interes"
+	border="normal" height="80%" width="80%" closable="true">
+
+
+	<borderlayout sclass="complex-layout" height="100%">
+
+		<!-- Inicio del menu -->
+
+		<west size="20%" flex="true" maxsize="250" splittable="false"
+			collapsible="true">
+
+
+			<menubar id="menubar" orient="vertical" autodrop="true">
+				<menuitem label="Tutores disponibles"
+					onClick='vistas.src = "VCatalogoProfesor.zul"' />
+				<menuitem  label="Areas de Investigación" />
+				<menuitem  label="Temáticas" />
+				<menuitem label="Descargas" />
+			</menubar>
+
+		</west>
+
+		<center border="none">
+
+			<div>
+				<include id="vistas"></include>
+			</div>
+
+
+		</center>
+
+	</borderlayout>
+
+</window>
