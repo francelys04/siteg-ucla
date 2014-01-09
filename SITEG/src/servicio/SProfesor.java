@@ -80,7 +80,11 @@ public class SProfesor {
 		return profesores;
 	}
 	
-	
+	public List<Profesor> buscarProfesoresPorArea(AreaInvestigacion area) {
+		List<Profesor> profesores;
+		profesores = interfazProfesor.findByAreas(area);
+		return profesores;
+	}
 	
 	
 	
