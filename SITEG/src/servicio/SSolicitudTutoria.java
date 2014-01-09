@@ -42,7 +42,7 @@ public class SSolicitudTutoria {
 		interfaceSolicitud.save(solicitud);
 	}
 	
-	public SolicitudTutoria buscarSolicitudEstudiante(
+	public SolicitudTutoria buscarSolicitudEstudiantePorRevisar(
 			Estudiante estudiante) {
 		// TODO Auto-generated method stub
         SolicitudTutoria solicitudes;
