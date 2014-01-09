@@ -32,7 +32,7 @@
 					<menubar id="menubar" autodrop="true">
 						<menuitem label="Inicio" />
 						<menuitem label="Quienes somos"
-							onClick="alert(self.label)" />
+							id="mitQuienesSomos" />
 						<menuitem label="Contactanos"
 							apply="controlador.CInicio" id="btnContactanos" />
 					</menubar>
@@ -237,7 +237,7 @@
 										<div
 											style="text-align:center;">
 											<button
-												style="margin-top:45px" apply="controlador.CInicio"
+												id="btnBiblioteca" style="margin-top:45px" apply="controlador.CInicio"
 												sclass="btn btn-primary" label="Haz click aqui"
 												width="125px" dir="reverse" />
 										</div>

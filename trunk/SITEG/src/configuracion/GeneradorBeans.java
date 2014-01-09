@@ -9,6 +9,7 @@ import servicio.STegRequisito;
 
 import servicio.SActividad;
 import servicio.SArbol;
+import servicio.SArchivo;
 import servicio.SAreaInvestigacion;
 import servicio.SCategoria;
 import servicio.SCondicion;
@@ -159,5 +160,8 @@ public class GeneradorBeans implements ApplicationContextAware {
 	
 	public static SJurado getServicioJurado(){
 		return applicationContext.getBean(SJurado.class);
+	}
+	public static SArchivo getServicioArchivo(){
+		return applicationContext.getBean(SArchivo.class);
 	}
 }

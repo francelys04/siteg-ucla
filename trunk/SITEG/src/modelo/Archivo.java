@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,31 +20,70 @@ public class Archivo {
 	@Column(name = "nombre")
 	private String nombre;
 	
+	@Column(name = "descripcion")
+	private String descripcion;
+	
 	@Column(name = "tipo_archivo")
 	private String tipoArchivo;
 	
 	@Column(name = "documento")
 	private byte[] contenidoDocumento = new byte[] {};
 	
-		@Column(name = "tamano_documento")
+	@Column(name = "tamano_documento")
 	private Long tamanoDocumento = 0l;
-		
-		
+	
+	@Column(name="estatus")
+	private Boolean estatus;
+	
+	@ManyToOne
+	@JoinColumn(name="programa_id", referencedColumnName = "id")
+	private Programa programa;
+	
+			
 		public Archivo() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
 
-
-		public Archivo(long id, String nombre, byte[] contenidoDocumento,
-				Long tamanoDocumento) {
+		public Archivo(long id, String nombre, String descripcion,
+				String tipoArchivo, byte[] contenidoDocumento,
+				Long tamanoDocumento, Boolean estatus, Programa programa) {
 			super();
 			this.id = id;
 			this.nombre = nombre;
+			this.descripcion = descripcion;
+			this.tipoArchivo = tipoArchivo;
 			this.contenidoDocumento = contenidoDocumento;
 			this.tamanoDocumento = tamanoDocumento;
+			this.estatus = estatus;
+			this.programa = programa;
 		}
 
+		public Programa getPrograma() {
+			return programa;
+		}
+
+		public void setPrograma(Programa programa) {
+			this.programa = programa;
+		}
+
+		public String getDescripcion() {
+			return descripcion;
+		}
+
+
+		public void setDescripcion(String descripcion) {
+			this.descripcion = descripcion;
+		}
+
+
+		public Boolean getEstatus() {
+			return estatus;
+		}
+
+		public void setEstatus(Boolean estatus) {
+			this.estatus = estatus;
+		}
 
 		public long getId() {
 			return id;
