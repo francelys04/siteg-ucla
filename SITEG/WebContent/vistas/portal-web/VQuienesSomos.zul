@@ -1,0 +1,13 @@
+<window id="wdwQuienesSomos" title="Quienes Somos" border="normal"
+	width="90%" height="85%" closable="true"
+    apply="controlador.CInicio">
+<vbox>
+<label style="font-size: 10px; font: oblique bold 90% cursive; text-align:center;">
+		Vision
+</label>
+	<label  style="font: monospace 150%;" >
+	Ser una coordinacion con eleveda calidad, que permita contribuir en el proceso formativo del estudiante, ayudando a que este cumpla con un conjunto.</label>
+	<label  style="font: monospace 150%;" >	de actividades que conforman un proceso de aprendizaje y de aplicación de métodos y técnicas de investigación, así como de comunicación y divulgación</label>
+	<label  style="font: monospace 150%;" >con fines didácticos y formativos.</label>
+</vbox>
+</window>
