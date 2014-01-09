@@ -105,7 +105,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Nombre:" style="color:black" />
+						<label value="Temática:" style="color:black" />
 					</hlayout>
 
 					<hbox>

@@ -113,9 +113,13 @@
 						</label>
 						<label value="Tipo:" style="color:black" />
 					</hlayout>
-
-					<textbox id="txtTipoItem" width="160px"
-						tooltip="pupTipoItem" />
+					
+					<combobox id="cmbTipoItem" readonly="true" tooltip="pupTipoItem" 
+						width="170px" tabindex="12" style="margin-left:2px">
+							<comboitem label="Factibilidad" />
+							<comboitem label="Defensa" />
+					</combobox>
+					
 				</row>
 
 				<row>
