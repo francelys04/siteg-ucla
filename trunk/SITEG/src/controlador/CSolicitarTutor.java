@@ -252,10 +252,14 @@ public class CSolicitarTutor extends CGeneral {
 				tematicas));
 	}
 	
+	public String prueba(){
+		String a = cmbAreaSolicitud.getValue();
+		return a;
+	}
 	
 	@Listen("onClick = #btnCatalogoProfesorArea")
 	public void buscarProfesor() {
-
+		
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoProfesorArea.zul", null, null);
 		window.doModal();
@@ -288,101 +292,34 @@ public class CSolicitarTutor extends CGeneral {
 		String area = cmbAreaSolicitud.getValue();
 		String tematica = cmbTematicaSolicitud.getValue();
 		String titulo = txtTituloSolicitud.getValue();
-		
-		String cedulaEstudiante = txtCedulaEstudiante.getValue();
-		
-		
 		String cedulaProfesor = txtCedulaProfesor.getValue();
 		String nombreProfesor = txtNombreProfesor.getValue();
 		String apellidoProfesor = txtApellidoProfesor.getValue();
 		String correoProfesor = txtCorreoProfesor.getValue();
 		
-		
-		if(gridEstudiante.size() == 0){
-			
-			if(programa=="Seleccione una Opci�n" || area=="Seleccione una Opci�n" || tematica=="Seleccione una Opci�n" || titulo==""
-					   || cedulaEstudiante=="" 
-					    || cedulaProfesor=="" || nombreProfesor=="" || apellidoProfesor==""
-					   || correoProfesor=="" ){
-						
-						Messagebox.show("Debe llenar todos los campos", "Campos Vac�os", Messagebox.OK, Messagebox.INFORMATION);
-					}
+			if(gridEstudiante.size() == 0){
+				Messagebox.show("No hay estudiantes agregados", "Campos Vac�os", Messagebox.OK, Messagebox.INFORMATION);
+			}
 			else{
-				
-				Estudiante estudiante = servicioEstudiante.buscarEstudiante(cedulaEstudiante);
-				
-				if(estudiante == null){
-					Messagebox.show("Debes estar Previamente Registrado", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);	
+				if(programa=="Seleccione una Opci�n" || area=="Seleccione una Opci�n" || tematica=="Seleccione una Opci�n" || titulo==""
+						   || cedulaProfesor=="" || nombreProfesor=="" || apellidoProfesor==""
+						   || correoProfesor=="" ){
+					Messagebox.show("Debes completar los Datos", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
 				}
 				else{
-					 
-					SolicitudTutoria solicitud = servicioSolicitarTutor.buscarSolicitudEstudiante(estudiante);
-					 
-					 if(solicitud != null){
-						 Messagebox.show("Ya tienes una Solicitud Pendiente", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
-					 }
-					 else{
-						 
-						 List<Teg> teg = servicioTeg.buscarTegPorEstudiante(estudiante);
-							if (teg.size() > 0) {
-								Messagebox.show("Ya Tienes Un TEG en Proceso",
-										"Informaci�n", Messagebox.OK,
-										Messagebox.INFORMATION);
-							} else {
-						 Profesor profesor = servicioProfesor.buscarProfesorPorCedula(cedulaProfesor);
-
-						 if(profesor == null){
-							 Messagebox.show("El Profesor no Existe", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION); 
-						 }
-						 else{
-							 
-							 List<Teg> teg2 = servicioTeg.buscarTutoriaProfesor(profesor);
-							 String nombre2 = "Numero de tutorias por profesor";
-							 buscarCondicionVigenteEspecifica(nombre2);
-							 
-							 if(teg2.size() >= valor){
-								 Messagebox.show("El Profesor ya tiene un maximo de proyectos asignados", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
-								 }
-							 else{
-								   Tematica tematica2 = servicioTematica.buscarTematicaPorNombre(tematica);
-									
-								   Set<Estudiante> estudiante2 = new HashSet<Estudiante>();
-								   Estudiante estudiante3 = servicioEstudiante.buscarEstudiante(cedulaEstudiante);
-								   estudiante2.add(estudiante3);
-
-								   SolicitudTutoria solicitud2 = new SolicitudTutoria(id, fecha, titulo, estado, profesor, tematica2, estudiante2);
-								   
-								   servicioSolicitarTutor.guardarSolicitud(solicitud2);
-								   enviarEmailNotificacion();
-								   Messagebox.show("Su Solicitud ha sido enviada", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
-							 }
-						 }
-							}
-					 }
-				}
-			}
-		}
-		else{
-			if(programa=="Seleccione una Opci�n" || area=="Seleccione una Opci�n" || tematica=="Seleccione una Opci�n" || titulo==""
-					   || cedulaProfesor=="" || nombreProfesor=="" || apellidoProfesor==""
-					   || correoProfesor=="" ){
-						
-						Messagebox.show("Debe llenar todos los campos", "Campos Vac�os", Messagebox.OK, Messagebox.INFORMATION);
-					}
-			else{
-				
 				 Profesor profesor = servicioProfesor.buscarProfesorPorCedula(cedulaProfesor);
 				 
 				 if(profesor == null){
 					 Messagebox.show("El Profesor no Existe", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION); 
 				 }
 				 else{
+					 
 					 List<Teg> teg2 = servicioTeg.buscarTutoriaProfesor(profesor);
 					 String nombre2 = "Numero de tutorias por profesor";
 					 buscarCondicionVigenteEspecifica(nombre2);
 					 
 					 if(teg2.size() >= valor){
-							 Messagebox.show("El Profesor ya tiene un maximo de proyectos asignados", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);	
+						 Messagebox.show("El Profesor ya tiene un maximo de proyectos asignados", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
 						 }
 					 else{
 						   Tematica tematica2 = servicioTematica.buscarTematicaPorNombre(tematica);
@@ -393,19 +330,16 @@ public class CSolicitarTutor extends CGeneral {
 										.getValue();
 								estudiante2.add(estudiante3);
 							}
-							
+
 						   SolicitudTutoria solicitud2 = new SolicitudTutoria(id, fecha, titulo, estado, profesor, tematica2, estudiante2);
 						   
 						   servicioSolicitarTutor.guardarSolicitud(solicitud2);
 						   enviarEmailNotificacion();
-						  
-						  Messagebox.show("Su Solicitud ha sido enviada", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
-						  cancelarSolicitud();
+						   Messagebox.show("Su Solicitud ha sido enviada", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
 					 }
 				 }
+			   }
 			}
-		}
-
 		}
 	
 
@@ -451,12 +385,16 @@ public class CSolicitarTutor extends CGeneral {
 				}
 				else{
 					
-					SolicitudTutoria solicitud = servicioSolicitarTutor.buscarSolicitudEstudiante(estudiante);
-					 
+					SolicitudTutoria solicitud = servicioSolicitarTutor.buscarSolicitudEstudiantePorRevisar(estudiante);
+					SolicitudTutoria solicitudAceptada = servicioSolicitarTutor.buscarSolicitudAceptadaEstudiante(estudiante);
 					 if(solicitud != null){
-						 Messagebox.show("Ya tienes una Solicitud Pendiente", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
+						 Messagebox.show("Ya tienes una Solicitud Por Revisar", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
 					 }
 					 else{
+						 if(solicitudAceptada != null){
+							 Messagebox.show("Ya tienes una Solicitud Aceptada", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
+						 }
+						 else{
 						 List<Teg> teg = servicioTeg.buscarTegPorEstudiante(estudiante);
 							if (teg.size() > 0) {
 								Messagebox.show("Ya Tienes Un TEG en Proceso",
@@ -467,6 +405,7 @@ public class CSolicitarTutor extends CGeneral {
 								ltbEstudiantes.setModel(new ListModelList<Estudiante>(gridEstudiante));
 								limpiarDatosEstudiante();
 							}
+						 }
 					 }
 
 				}
@@ -477,12 +416,16 @@ public class CSolicitarTutor extends CGeneral {
 					Messagebox.show("Debes estar Previamente Registrado", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
 				}
 				else{
-					SolicitudTutoria solicitud = servicioSolicitarTutor.buscarSolicitudEstudiante(estudiante2);
-					 
+					SolicitudTutoria solicitud = servicioSolicitarTutor.buscarSolicitudEstudiantePorRevisar(estudiante2);
+					SolicitudTutoria solicitudAceptada = servicioSolicitarTutor.buscarSolicitudAceptadaEstudiante(estudiante2); 
 					 if(solicitud != null){
 						 Messagebox.show("Ya tienes una Solicitud Pendiente", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
 					 }
 					 else{
+						 if(solicitudAceptada != null){
+							 Messagebox.show("Ya tienes una Solicitud Aceptada", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
+						 }
+						 else{
 						 List<Teg> teg = servicioTeg.buscarTegPorEstudiante(estudiante2);
 							if (teg.size() > 0) {
 								Messagebox.show("Ya Tienes Un TEG en Proceso",
@@ -501,6 +444,7 @@ public class CSolicitarTutor extends CGeneral {
 							 Messagebox.show("Solo se permiten "+valor+" Estudiantes por proyecto", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
 						 }
 							}
+					   }
 					 }
 				}
 			}
