@@ -96,8 +96,6 @@
 						<textbox id="txtNombreItem" width="120%"
 							tooltip="pupNombreItem" />
 
-
-
 						<button id="btnCatalogoItem" tabindex="13"
 							sclass="btn" image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:50px" tooltip="pupCatalogoItem">

@@ -74,6 +74,8 @@ public class CPrograma extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionPrograma;
 	@Wire
+	private Textbox txtCorreoPrograma;
+	@Wire
 	private Listbox ltbPrograma;
 	@Wire
 	private Window wdwCatalogoPrograma;
@@ -83,7 +85,6 @@ public class CPrograma extends CGeneral {
 	private Textbox txtDescripcionMostrarPrograma;
 	@Wire
 	private Button btnEliminarPrograma;
-	
 	@Wire
 	private Button btnGuardarPrograma;
 
@@ -137,6 +138,7 @@ public class CPrograma extends CGeneral {
 				Programa programa = servicioPrograma.buscar(id);
 				txtNombrePrograma.setValue(programa.getNombre());
 				txtDescripcionPrograma.setValue(programa.getDescripcion());
+				txtCorreoPrograma.setValue(programa.getCorreo());
 				btnEliminarPrograma.setDisabled(false);
 				map.clear();
 				map = null;
@@ -164,7 +166,8 @@ public class CPrograma extends CGeneral {
 		@Listen("onClick = #btnGuardarPrograma")
 		public void guardarPrograma() {
 			if ((txtNombrePrograma.getText().compareTo("") == 0)
-					|| (txtDescripcionPrograma.getText().compareTo("") == 0)) {
+					|| (txtDescripcionPrograma.getText().compareTo("") == 0)
+					|| (txtCorreoPrograma.getText().compareTo("") == 0)) {
 				Messagebox.show("Debe completar todos los campos", "Error",
 						Messagebox.OK, Messagebox.ERROR);
 
@@ -178,8 +181,9 @@ public class CPrograma extends CGeneral {
 								if (evt.getName().equals("onOK")) {
 									String nombre = txtNombrePrograma.getValue(); 
 									String descripcion = txtDescripcionPrograma.getValue(); 
+									String correo = txtCorreoPrograma.getValue();
 									Boolean estatus = true; 
-									Programa programa = new Programa( id,nombre, descripcion, estatus);
+									Programa programa = new Programa( id,nombre, descripcion,correo,estatus);
 									servicioPrograma.guardar(programa);
 									Programa p = servicioPrograma.buscarPorNombrePrograma(nombre);
 									System.out.println("Programa Guardado");
@@ -229,6 +233,7 @@ public class CPrograma extends CGeneral {
 			id = 0;
 			txtNombrePrograma.setValue("");
 			txtDescripcionPrograma.setValue("");
+			txtCorreoPrograma.setValue("");
 			btnEliminarPrograma.setDisabled(true);
 
 		}

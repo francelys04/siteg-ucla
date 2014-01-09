@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.Set;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -27,37 +26,40 @@ public class Programa {
 	@Column(name = "descripcion")
 	private String descripcion;
 
+	@Column(name = "correo")
+	private String correo;
+
 	@Column(name = "estatus")
 	private Boolean estatus;
 
 	@OneToMany(mappedBy = "programa")
 	private Set<Estudiante> estudiantes;
-	
-	@OneToMany(mappedBy="programa")
+
+	@OneToMany(mappedBy = "programa")
 	private Set<Profesor> profesores;
 
 	@OneToMany(mappedBy = "programa")
 	private Set<CondicionPrograma> condicionesProgramas;
-	
-	@OneToMany(mappedBy="programa")
+
+	@OneToMany(mappedBy = "programa")
 	private Set<Cronograma> cronogramas;
-	
-	
-	@OneToMany(mappedBy="programa")
+
+	@OneToMany(mappedBy = "programa")
 	private Set<ProgramaArea> programasAreas;
-	
-	@OneToMany(mappedBy="programa")
+
+	@OneToMany(mappedBy = "programa")
 	private Set<ProgramaRequisito> programaRequisitos;
 
-	@OneToMany(mappedBy="programa")
+	@OneToMany(mappedBy = "programa")
 	private Set<ProgramaItem> programasItems;
-	
-	public Programa(long id, String nombre, String descripcion,
+
+	public Programa(long id, String nombre, String descripcion, String correo,
 			Boolean estatus) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.correo = correo;
 		this.estatus = estatus;
 	}
 
@@ -88,6 +90,15 @@ public class Programa {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 	public Boolean getEstatus() {
@@ -131,7 +142,6 @@ public class Programa {
 		this.cronogramas = cronogramas;
 	}
 
-	
 	public Set<ProgramaRequisito> getProgramaRequisitos() {
 		return programaRequisitos;
 	}
@@ -139,8 +149,7 @@ public class Programa {
 	public void setProgramaRequisitos(Set<ProgramaRequisito> programaRequisitos) {
 		this.programaRequisitos = programaRequisitos;
 	}
-	
-	
+
 	public Set<ProgramaArea> getProgramasAreas() {
 		return programasAreas;
 	}
