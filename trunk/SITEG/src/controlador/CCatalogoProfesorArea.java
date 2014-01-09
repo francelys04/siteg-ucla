@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.AreaInvestigacion;
 import modelo.Categoria;
 import modelo.Profesor;
 import modelo.Teg;
@@ -52,9 +53,10 @@ public class CCatalogoProfesorArea extends CGeneral {
 		
 	
 		// TODO Auto-generated method stub
-				List<Profesor> profesores = servicioProfesor.buscarActivos();
-			
-					ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
+		String a = "";
+		AreaInvestigacion area = servicioAreaInvestigacion.buscarAreaPorNombre(a);
+		List<Profesor> profesores = servicioProfesor.buscarProfesoresPorArea(area);
+		ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
 				
 
 				Selectors.wireComponents(comp, this, false);
