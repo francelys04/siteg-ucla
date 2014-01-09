@@ -63,7 +63,11 @@ public class CInicio extends CGeneral {
 	@Wire
 	private Window wdwConsultarEstatusProyecto;
 	@Wire
+	private Window wdwCatalogoArchivo;
+	@Wire
 	private Button btnSolicitarTutor;
+	@Wire
+	private Button btnBiblioteca;
 	@Wire
 	private Combobox cmbPrograma;
 	@Wire
@@ -104,6 +108,12 @@ public class CInicio extends CGeneral {
 				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 		window.doModal();
 	}
+	@Listen("onClick = #mitQuienesSomos")
+	public void QuienesSomos() {
+		Window window = (Window) Executions.createComponents(
+				"/vistas/portal-web/VQuienesSomos.zul", null, null);
+		window.doModal();
+	}
 
 	@Listen("onClick = #btnContactanos")
 	public void contactanos() {
@@ -111,6 +121,13 @@ public class CInicio extends CGeneral {
 				"/vistas/portal-web/VContactanos.zul", null, null);
 		window.doModal();
 	}
+	@Listen("onClick = #btnBiblioteca")
+	public void BibliotecaVirtual() {
+		Window window = (Window) Executions.createComponents(
+				"/vistas/catalogos/VCatalogoArchivo.zul", null, null);
+		window.doModal();
+	}
+
 
 	@Listen("onClick = #btnDatos")
 	public void datos() {
