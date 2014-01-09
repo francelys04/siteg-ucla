@@ -19,6 +19,7 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -48,7 +49,7 @@ public class CItem extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionMostrarItem;
 	@Wire
-	private Textbox txtTipoItem;
+	private Combobox  cmbTipoItem;
 	@Wire
 	private Button btnEliminarItem;
 	private long id = 0;
@@ -74,7 +75,7 @@ public class CItem extends CGeneral {
 				ItemEvaluacion item = servicioItem.buscarItem(codigo);
 				txtNombreItem.setValue(item.getNombre());
 				txtDescripcionItem.setValue(item.getDescripcion());
-				txtTipoItem.setValue(item.getTipo());
+				cmbTipoItem.setValue(item.getTipo());
 				id = item.getId();
 				btnEliminarItem.setDisabled(false);
 				map.clear();
@@ -87,7 +88,7 @@ public class CItem extends CGeneral {
 	@Listen("onClick = #btnGuardarItem")
 	public void guardarEstudiante() {
 		if (txtNombreItem.getText().compareTo("") == 0
-				|| txtTipoItem.getText().compareTo("") == 0
+				|| cmbTipoItem.getText().compareTo("") == 0
 				|| txtDescripcionItem.getText().compareTo("") == 0) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
@@ -104,7 +105,7 @@ public class CItem extends CGeneral {
 								String descripcion = txtDescripcionItem
 										.getValue();
 								Boolean estatus = true;
-								String tipo = txtTipoItem.getValue();
+								String tipo = cmbTipoItem.getValue();
 								ItemEvaluacion item = new ItemEvaluacion(id,
 										nombre, descripcion, estatus, tipo);
 								servicioItem.guardar(item);
@@ -124,7 +125,7 @@ public class CItem extends CGeneral {
 	@Listen("onClick = #btnCancelarItem")
 	public void cancelarItem() {
 		txtNombreItem.setValue("");
-		txtTipoItem.setValue("");
+		cmbTipoItem.setValue("");
 		txtDescripcionItem.setValue("");
 		btnEliminarItem.setDisabled(true);
 		id = 0;

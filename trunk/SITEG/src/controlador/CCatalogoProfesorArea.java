@@ -24,11 +24,14 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import servicio.SProfesor;
+import servicio.SAreaInvestigacion;
 import configuracion.GeneradorBeans;
 
 public class CCatalogoProfesorArea extends CGeneral {
 	
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
+	SAreaInvestigacion servicioAreaInvestigacion = GeneradorBeans.getServicioArea();
+	
 	
 	@Wire
 	private Listbox ltbProfesor;
