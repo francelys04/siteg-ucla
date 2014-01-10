@@ -39,7 +39,7 @@ public class STeg {
 	public List<Teg> BuscarTegCalificandoDefensa() {
 
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatus(estatus[11]);
+		tegs = interfaceTeg.findByEstatus(estatus[10]);
 		return tegs;
 
 	}
@@ -152,6 +152,7 @@ public class STeg {
 //		teg = interfaceTeg.findByEstudiantes(obtenerUsuarioEstudiante);
 //		return teg;
 //	}
+	
 
 
 }

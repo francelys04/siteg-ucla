@@ -5,6 +5,7 @@ import java.util.List;
 import interfazdao.IJuradoDAO;
 
 import modelo.Jurado;
+import modelo.Profesor;
 import modelo.Teg;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class SJurado {
 
 	@Autowired
 	IJuradoDAO interfaceJurado;
-
+	
 	public List<Jurado> buscarJuradoDeTeg(Teg teg) {
 		// TODO Auto-generated method stub
 		List<Jurado> jurado;
@@ -26,5 +27,13 @@ public class SJurado {
 	public void guardar(List<Jurado> jurados) {
 		// TODO Auto-generated method stub
 		interfaceJurado.save(jurados);
+	}
+	
+	public List<Jurado> buscarTegDeProfesor(Profesor profesor)
+	{
+		List<Jurado> j;
+		j = interfaceJurado.findByProfesor( profesor);
+		return j;
+		
 	}
 }

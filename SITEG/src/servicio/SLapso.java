@@ -41,7 +41,7 @@ public class SLapso {
 
 	public Lapso buscarLapsoVigente() {
 		Lapso lapso;
-		lapso = interfaceLapso.findByEstatusTrue();
+		lapso = interfaceLapso.buscarLapsoVigente();
 		return lapso;
 	}
 }

@@ -35,8 +35,7 @@ public class Defensa {
 	@Column(name = "lugar")
 	private String lugar;
 
-	@Column(name = "nota")
-	private int nota;
+	
 
 	@Column(name = "estatus")
 	private String estatus;
@@ -54,14 +53,14 @@ public class Defensa {
 	}
 
 	public Defensa(long id, Teg teg, Date fecha, Date hora, String lugar,
-			int nota, String estatus, Profesor profesor) {
+			String estatus, Profesor profesor) {
 		super();
 		this.id = id;
 		this.teg = teg;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.lugar = lugar;
-		this.nota = nota;
+		
 		this.estatus = estatus;
 		this.profesor = profesor;
 	}
@@ -106,13 +105,7 @@ public class Defensa {
 		this.lugar = lugar;
 	}
 
-	public int getNota() {
-		return nota;
-	}
-
-	public void setNota(int nota) {
-		this.nota = nota;
-	}
+	
 
 	public String getEstatus() {
 		return estatus;
