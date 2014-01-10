@@ -21,6 +21,7 @@ import servicio.SEstudiante;
 import servicio.SFactibilidad;
 import servicio.SGrupo;
 import servicio.SItem;
+import servicio.SItemDefensa;
 import servicio.SItemFactibilidad;
 import servicio.SJurado;
 import servicio.SLapso;
@@ -167,5 +168,9 @@ public class GeneradorBeans implements ApplicationContextAware {
 	}
 	public static SDescarga getServicioDescarga(){
 		return applicationContext.getBean(SDescarga.class);
+	}
+	
+	public static SItemDefensa getServicioItemDefensa(){
+		return applicationContext.getBean(SItemDefensa.class);
 	}
 }
