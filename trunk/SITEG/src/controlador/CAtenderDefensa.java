@@ -249,13 +249,13 @@ public class CAtenderDefensa extends CGeneral {
 			Date fecha = dtbFechaDefensa.getValue();
 			Date hora = tmbHoraDefensa.getValue();
 			String lugar = txtLugarDefensa.getValue();
-			int nota = 0;
+			
 			String estatus = "Por Defender";
 			Profesor profesor = servicioProfesor
 					.buscarProfesorPorCedula(txtCedulaTutorAtenderDefensa
 							.getValue());
 			Defensa defensa = new Defensa(idDefensa, teg, fecha, hora, lugar,
-					nota, estatus, profesor);
+					 estatus, profesor);
 			servicioDefensa.guardarDefensa(defensa);
 			return true;
 		} else {

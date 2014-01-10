@@ -16,7 +16,7 @@ public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Lo
 			String estatusPorRevisar, Profesor profesor);
 	
 	public SolicitudTutoria findByEstatusLikeAndEstudiantes(
-			String estatusPorRevisar, Estudiante estudiante);
+			String estatusDefensaAsignada, Estudiante estudiante);
 	
 	
 	/*Busca las solicitudes asociadas al Estudiante*/

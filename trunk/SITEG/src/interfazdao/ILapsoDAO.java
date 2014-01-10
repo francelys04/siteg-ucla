@@ -16,7 +16,9 @@ public interface ILapsoDAO extends JpaRepository<Lapso, String> {
 	public Lapso findById(long codigo);
 
 	public Lapso findByNombre(String value);
-	public Lapso findByEstatusTrue();
+	
+	@Query("select max(cpp.lapso) from CondicionPrograma cpp")
+	public Lapso buscarLapsoVigente();
 	
 	
 }

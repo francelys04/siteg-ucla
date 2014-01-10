@@ -23,6 +23,7 @@ import modelo.Requisito;
 import modelo.Teg;
 import modelo.TegRequisito;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -53,7 +54,7 @@ import servicio.SRequisito;
 import servicio.STeg;
 import servicio.STegRequisito;
 import configuracion.GeneradorBeans;
-
+@Controller
 public class CVerificarSolicitudProyecto   extends CGeneral {
 
 	
@@ -113,7 +114,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		
 
 
-		//List<Teg> teg = servicioTeg.buscarTegPrograma();		
+		
 		Selectors.wireComponents(comp, this, false);	
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("tegCatalogo");
@@ -194,16 +195,13 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		
 		
 		if (rdoCompleto.isChecked()==false){
-		//	if (txtObservacion.getValue().compareTo("")==0) {
-			//Messagebox.show("Debe indicar la observacion", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
-				//	}
-			//else {
+		
 				for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
 		            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
 		            valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), txtObservacion.getValue()));
 		            Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		   		 salir();  
-			 //} 	        	
+			 	        	
 				
 			}
 		}
