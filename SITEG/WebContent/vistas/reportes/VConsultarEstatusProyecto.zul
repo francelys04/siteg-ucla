@@ -1,6 +1,6 @@
 <window id="wdwConsultarEstatusProyecto"
 	title="Consultar Estado del Trabajo Especial de Grado" border="normal"
-	width="700px" height="810px" closable="true"
+	width="700px" height="860px" closable="true"
 	apply="controlador.CConsultarEstatus">
 
 	<style dynamic="true">
@@ -38,7 +38,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="150px"
+	<groupbox width="95%" height="200px"
 		style="margin-left:2%;margin-right:1%">
 		<caption label="Datos del Estudiante"></caption>
 		<separator />
@@ -50,6 +50,18 @@
 
 			</columns>
 			<rows>
+
+				<row>
+					<hlayout>
+
+						<label value="Programa:" style="color:black" />
+					</hlayout>
+
+					<textbox id="txtProgramaEstudiante" width="180px"
+						style="color:black !important;" disabled="true" />
+				</row>
+
+
 				<row>
 					<hlayout>
 
@@ -93,141 +105,148 @@
 	<separator />
 	<separator />
 
-	<grid sclass="fgrid" style="margin-left:3%;margin-right:1%"
-		height="580px">
-		<columns>
-			<column width="60%" height="30px" />
+	<groupbox width="95%" height="555px"
+		style="margin-left:2%;margin-right:1%">
 
-		</columns>
-		<rows>
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgSolicitandoTutoria" />
-					<label value="Solicitando Tutoria"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
+		<grid sclass="fgrid">
+			<columns>
+				<column width="60%" height="30px" />
 
-			<row>
+			</columns>
+			<rows>
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgSolicitandoTutoria" />
+						<label value="Solicitando Tutoria"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
 
-				<hbox>
+				<row>
 
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgTutoriaAceptada" />
-					<label value="Tutoria Aceptada"
-						style="color:black;margin-left:20px" />
+					<hbox>
 
-				</hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgTutoriaAceptada" />
+						<label value="Tutoria Aceptada"
+							style="color:black;margin-left:20px" />
 
-			</row>
+					</hbox>
 
-			<row>
+				</row>
 
-				<hbox>
+				<row>
 
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgSolicitandoRegistro" />
-					<label value="Solicitando Registro del Proyecto"
-						style="color:black;margin-left:20px" />
+					<hbox>
 
-				</hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgSolicitandoRegistro" />
+						<label value="Solicitando Registro del Proyecto"
+							style="color:black;margin-left:20px" />
 
-			</row>
+					</hbox>
 
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgProyectoRegistrado" />
-					<label value="Proyecto Registrado"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
+				</row>
 
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgProyectoFactible" />
-					<label value="Proyecto Factible"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgProyectoRegistrado" />
+						<label value="Proyecto Registrado"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
 
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgRevisandoAvances" />
-					<label value="Revisando Avances del Proyecto"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgProyectoFactible" />
+						<label value="Proyecto Factible"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
 
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgRevisionesFinalizadasProyecto" />
-					<label value="Revisiones Finalizadas del Proyecto"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgRevisandoAvances" />
+						<label value="Revisando Avances del Proyecto"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
 
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgRegistrarTrabajo" />
-					<label value="Trabajo Especial de Grado Registrado"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgRevisionesFinalizadasProyecto" />
+						<label
+							value="Revisiones Finalizadas del Proyecto"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
 
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgRevisionesAvances" />
-					<label
-						value="Revisando Avances del Trabajo Especial de Grado"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgRegistrarTrabajo" />
+						<label
+							value="Trabajo Especial de Grado Registrado"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
 
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgRevisionesFinalizadasTrabajo" />
-					<label
-						value="Revisiones Finalizadas del Trabajo Especial de Grado"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgRevisionesAvances" />
+						<label
+							value="Revisando Avances del Trabajo Especial de Grado"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
 
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgSolicitandoDefensa" />
-					<label value="Solicitando Defensa"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgRevisionesFinalizadasTrabajo" />
+						<label
+							value="Revisiones Finalizadas del Trabajo Especial de Grado"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
 
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgDefensaAsignada" />
-					<label value="Defensa Asignada"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgSolicitandoDefensa" />
+						<label value="Solicitando Defensa"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
 
-			<row>
-				<hbox>
-					<image src="/public/imagenes/iconos/estatus.png"
-						id="imgTrabajoEspecial" />
-					<label value="Trabajo Especial de Grado Aprobado"
-						style="color:black;margin-left:20px" />
-				</hbox>
-			</row>
-		</rows>
-	</grid>
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgDefensaAsignada" />
+						<label value="Defensa Asignada"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
+
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgTrabajoEspecial" />
+						<label
+							value="Trabajo Especial de Grado Aprobado"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+	
 	<separator />
 	<separator />
 

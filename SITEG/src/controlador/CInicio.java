@@ -108,6 +108,7 @@ public class CInicio extends CGeneral {
 				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 		window.doModal();
 	}
+
 	@Listen("onClick = #mitQuienesSomos")
 	public void QuienesSomos() {
 		Window window = (Window) Executions.createComponents(
@@ -121,13 +122,13 @@ public class CInicio extends CGeneral {
 				"/vistas/portal-web/VContactanos.zul", null, null);
 		window.doModal();
 	}
+
 	@Listen("onClick = #btnBiblioteca")
 	public void BibliotecaVirtual() {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoArchivo.zul", null, null);
 		window.doModal();
 	}
-
 
 	@Listen("onClick = #btnDatos")
 	public void datos() {
@@ -157,8 +158,12 @@ public class CInicio extends CGeneral {
 				CConsultarEstatus consultarestatus = new CConsultarEstatus();
 				consultarestatus.recibirCedula(cedula);
 			} else {
-				Messagebox.show("El estudiante no se encuentra registrado");
-				cedulaEstatus.setValue(null);
+
+				Messagebox
+						.show("Estudiante no autorizado para realizar un Trabajo Especial de Grado",
+								"Información", Messagebox.OK,
+								Messagebox.INFORMATION);
+			
 			}
 
 		}
