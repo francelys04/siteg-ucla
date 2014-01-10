@@ -142,6 +142,8 @@ public class CInicio extends CGeneral {
 		Window wdwInformacionInteres = (Window) Executions.createComponents(
 				"/vistas/portal-web/VInformacionInteres.zul", null, null);
 		wdwInformacionInteres.doModal();
+		CCatalogoArchivoDescarga cata = new controlador.CCatalogoArchivoDescarga();
+		cata.metodoPrender();
 	}
 
 	@Listen("onClick = #btnConsultarEstatus")
