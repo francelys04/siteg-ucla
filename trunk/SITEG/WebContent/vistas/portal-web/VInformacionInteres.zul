@@ -12,10 +12,10 @@
 
 			<menubar id="menubar" orient="vertical" autodrop="true">
 				<menuitem label="Tutores disponibles"
-					onClick='vistas.src = "VCatalogoProfesor.zul"' />
+					onClick='vistas.src = "vistas/catalogos/VCatalogoProfesor.zul"' />
 				<menuitem  label="Areas de Investigación" />
 				<menuitem  label="Temáticas" />
-				<menuitem label="Descargas" />
+				<menuitem label="Descargas"  onClick='vistas.src = "vistas/catalogos/VCatalogoArchivoDescarga.zul"' />
 			</menubar>
 
 		</west>
