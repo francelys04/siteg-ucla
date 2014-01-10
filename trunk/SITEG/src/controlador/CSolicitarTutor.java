@@ -252,7 +252,7 @@ public class CSolicitarTutor extends CGeneral {
 				tematicas));
 	}
 	
-	public String prueba(){
+	public String capturarArea(){
 		String a = cmbAreaSolicitud.getValue();
 		return a;
 	}
