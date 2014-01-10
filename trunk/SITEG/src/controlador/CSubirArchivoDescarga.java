@@ -8,9 +8,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+
 import javax.swing.JFileChooser;
 
+import modelo.Actividad;
 import modelo.Archivo;
+import modelo.Descarga;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
@@ -19,9 +24,13 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.util.media.Media;
 import org.zkoss.zhtml.Filedownload;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
@@ -31,30 +40,36 @@ import org.zkoss.zk.ui.event.UploadEvent;
 
 import servicio.SActividad;
 import servicio.SArchivo;
+import servicio.SDescarga;
 import configuracion.GeneradorBeans;
 
 
 
 @Controller
-public class CArchivo extends CGeneral {
+public class CSubirArchivoDescarga extends CGeneral {
 	
 	
-	SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
+	SDescarga servicioDescarga = GeneradorBeans.getServicioDescarga();
 
 
 	@Wire
-	private Textbox txtNombreArchivo;
+	private Textbox txtNombreArchivoDescarga;
 	@Wire
-	private Textbox txtDescripcionArchivo;	
+	private Textbox txtDescripcionArchivoDescarga;	
 	@Wire
-	private Button btnArchivo;
+	private Button btnArchivoDescarga;
+	@Wire
+	private Button btnEliminarArchivoDescarga;
 	@Wire
 	private Media media;
+	@Wire
+	private Listbox ltbArchivoDescarga;
 	private long id = 0;
 	private FileInputStream archivo;
 	private int longitudByte;
-	private Archivo archi = new Archivo();
+	private Descarga descarga = new Descarga();
 	private String nombreDoc;
+	private static long idAux;
 	
 	/* Metodo para inicializar componentes al momento que se ejecuta las vistas
 	  tanto VDescarga como VCatalogoDescarga*/
@@ -63,9 +78,29 @@ public class CArchivo extends CGeneral {
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		
+		
+		Selectors.wireComponents(comp, this, false);
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+
+		if (map != null) {
+			if (map.get("id") != null) {
+
+				long codigo = (Long) map.get("id");
+				Descarga descarga  = servicioDescarga.buscarArchivo(codigo);
+				txtNombreArchivoDescarga.setValue(descarga.getNombre());
+				txtDescripcionArchivoDescarga.setValue(descarga.getDescripcion());
+				id = descarga.getId();
+				idAux=id;
+				btnEliminarArchivoDescarga.setDisabled(false);
+				map.clear();
+				map = null;
+			}
+		}
+		
 	}
-	//Metodo para subir archivo
-	@Listen("onUpload = #btnArchivo")
+	
+	@Listen("onUpload = #btnArchivoDescarga")
 	public void subirArchivo(UploadEvent event){
 	
 		media = event.getMedia();
@@ -80,11 +115,12 @@ public class CArchivo extends CGeneral {
 				
 			{
 			
-				archi.setNombre(media.getName());
-				archi.setContenidoDocumento(media.getByteData());
-				archi.setTipoArchivo(media.getContentType());
-				nombreDoc= archi.getNombre();
-				txtNombreArchivo.setValue(archi.getNombre());
+				descarga.setNombre(media.getName());
+				descarga.setContenidoDocumento(media.getByteData());
+				descarga.setTipoArchivo(media.getContentType());
+				nombreDoc= descarga.getNombre();
+							
+				txtNombreArchivoDescarga.setValue(descarga.getNombre());
 				
 				
 				
@@ -97,19 +133,19 @@ public class CArchivo extends CGeneral {
 
 
 	//Aca se mandan a limpiar los campos de textos de la vista
-	@Listen("onClick = #btnCancelarArchivo")
+	@Listen("onClick = #btnCancelarArchivoDescarga")
 	public void cancelar() {
 	
-		txtNombreArchivo.setValue("");
-		txtDescripcionArchivo.setValue("");
-		archi.equals(null);
+		txtNombreArchivoDescarga.setValue("");
+		txtDescripcionArchivoDescarga.setValue("");
+		descarga.equals(null);
 	
 	
 	}
-	///Metodo para guardar los archivos
-	@Listen("onClick = #btnGuardarArchivo")
+	
+	@Listen("onClick = #btnGuardarArchivoDescarga")
 	public void guardarDescarga() {
-		if (archi == null || txtNombreArchivo.getText().compareTo("")==0 || txtDescripcionArchivo.getText().compareTo("")==0) {
+		if (descarga == null || txtNombreArchivoDescarga.getText().compareTo("")==0 || txtDescripcionArchivoDescarga.getText().compareTo("")==0) {
 			Messagebox.show("Debe completar los campos", "Error", Messagebox.OK, Messagebox.ERROR);
 		} 
 		else {
@@ -121,23 +157,60 @@ public class CArchivo extends CGeneral {
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
 								
-								Estudiante estudiante = ObtenerUsuarioEstudiante();		
+								Profesor profesor = ObtenerUsuarioProfesor();		
 								Programa programa = new Programa();			
-								programa = estudiante.getPrograma();		
-								archi.setId(id);
-								archi.setPrograma(programa);
-								archi.setDescripcion(txtDescripcionArchivo.getValue());
-								archi.setEstatus(true);
-								servicioArchivo.guardar(archi);
+								programa = profesor.getPrograma();		
+								descarga.setId(id);
+								descarga.setPrograma(programa);
+								descarga.setDescripcion(txtDescripcionArchivoDescarga.getValue());
+								descarga.setEstatus(true);
+								servicioDescarga.guardar(descarga);
 								cancelar();
 								Messagebox.show("Archivo guardado exitosamente", "Informacion", Messagebox.OK, Messagebox.INFORMATION);
 								
 							}
 						}
-					});
-
+					});	
+	
 		}
 }
+	
+	@Listen("onClick = #btnEliminarArchivoDescarga") 
+	public void eliminarArchivo (){
+		Messagebox.show("Desea eliminar archivo?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+							Descarga descarga = servicioDescarga.buscarArchivo(idAux);
+							descarga.setEstatus(false);
+							servicioDescarga.guardar(descarga);
+							cancelar();
+							btnEliminarArchivoDescarga.setDisabled(true);
+							Messagebox.show(
+									"Archivo eliminado exitosamente",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
+							
+						}
+					}
+				});
+			}
+	
+	
+	@Listen("onClick = #btnCatalogoDescarga") 
+		public void verCatalogo(){
+		CCatalogoArchivoDescarga cata = new controlador.CCatalogoArchivoDescarga();
+		cata.metodoApagar();
+		Window window = (Window) Executions.createComponents(
+				"/vistas/catalogos/VCatalogoArchivoDescarga.zul", null, null);
+		window.doModal();
+		CCatalogoItem catalogo = new CCatalogoItem();
+		//catalogo.recibir("maestros/VItem");
+	}
+	
+	
+	
 	
 
 public static byte[] toByteArray(InputStream is) throws SQLException,
