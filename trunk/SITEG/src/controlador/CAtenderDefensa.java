@@ -11,6 +11,7 @@ import modelo.Defensa;
 import modelo.Estudiante;
 import modelo.Jurado;
 import modelo.Profesor;
+import modelo.Programa;
 import modelo.Teg;
 import modelo.TipoJurado;
 
@@ -87,7 +88,7 @@ public class CAtenderDefensa extends CGeneral {
 	private static String vistaRecibida;
 	long idTeg = 0;
 	long idDefensa = 0;
-
+    private static Programa programa;
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -99,8 +100,7 @@ public class CAtenderDefensa extends CGeneral {
 				idTeg = (Long) map.get("id");
 				Teg teg = servicioTeg.buscarTeg(idTeg);
 				llenarListas(teg);
-				txtProgramaAtenderDefensa.setValue(ObtenerUsuarioProfesor()
-						.getPrograma().getNombre());
+				
 				txtCedulaTutorAtenderDefensa.setValue(teg.getTutor()
 						.getCedula());
 				txtNombreTutorAtenderDefensa.setValue(teg.getTutor()
@@ -111,11 +111,15 @@ public class CAtenderDefensa extends CGeneral {
 						.getareaInvestigacion().getNombre());
 				txtTematicaAtenderDefensa.setValue(teg.getTematica()
 						.getNombre());
+				//para que se guie por el programa del estudiante
+				List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
+				programa = est.get(0).getPrograma();
+				txtProgramaAtenderDefensa.setValue(est.get(0).getPrograma().getNombre());
 				txtTituloAtenderDefensa.setValue(teg.getTitulo());
 				lblCondicionAtenderDefensa
 						.setValue("Recuerde que la cantidad de jurados es de:"
 								+ buscarCondicionVigenteEspecifica(
-										"Numero de integrantes del jurado")
+										"Numero de integrantes del jurado", programa)
 										.getValor());
 				Defensa defensa = servicioDefensa.buscarDefensaDadoTeg(teg);
 				if (defensa != null) {
@@ -172,7 +176,7 @@ public class CAtenderDefensa extends CGeneral {
 
 	public boolean validarJurado() {
 		if (ltbJuradoSeleccionado.getItemCount() == buscarCondicionVigenteEspecifica(
-				"Numero de Integrantes del Jurado").getValor()) {
+				"Numero de Integrantes del Jurado", programa).getValor()) {
 			System.out.println("aqui");
 			return true;
 		} else
@@ -204,7 +208,7 @@ public class CAtenderDefensa extends CGeneral {
 			Messagebox.show(
 					"El numero de profesores en el jurado no es el correcto, debe ser: "
 							+ buscarCondicionVigenteEspecifica(
-									"Numero de Integrantes del Jurado")
+									"Numero de Integrantes del Jurado", programa)
 									.getValor(), "Error", Messagebox.OK,
 					Messagebox.ERROR);
 		}

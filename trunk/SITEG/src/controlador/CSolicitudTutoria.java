@@ -88,7 +88,8 @@ public class CSolicitudTutoria extends CGeneral {
 				txtAreaEvaluarTutorias.setValue(solicitud.getTematica().getareaInvestigacion().getNombre());
 				txtTematicaEvaluarTutorias.setValue(solicitud.getTematica().getNombre());
 				txtTituloSolicitud.setValue(solicitud.getDescripcion());
-				txtProgramaEvaluarTutorias.setValue(solicitud.getProfesor().getPrograma().getNombre());
+				//debe guiarse con el programa del estudiante que esta pidiendo la tutoria.
+				txtProgramaEvaluarTutorias.setValue(estudiantes.get(0).getPrograma().getNombre());
 				map.clear();
 				map = null;
 			}

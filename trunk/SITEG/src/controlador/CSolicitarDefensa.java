@@ -51,8 +51,8 @@ public class CSolicitarDefensa extends CGeneral {
 		List<Estudiante> estudiantes = servicioEstudiante
 				.buscarEstudiantePorTeg(teg);
 		if (teg.getEstatus().equals(estatus[0])) {
-			txtProgramaSolicitarDefensa.setValue(teg.getTutor().getPrograma()
-					.getNombre());
+			//se guia es por el programa del estudiante
+			txtProgramaSolicitarDefensa.setValue(estudiantes.get(0).getPrograma().getNombre());
 			txtAreaSolicitarDefensa.setValue(teg.getTematica()
 					.getareaInvestigacion().getNombre());
 			txtTematicaSolicitarDefensa.setValue(teg.getTematica().getNombre());
