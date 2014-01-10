@@ -40,7 +40,7 @@ public class CSolicitarDefensa extends CGeneral {
 	@Wire
 	private Window wdwSolicitarDefensa;
 	private Teg teg;
-	private String[] estatus = { "Revisiones Finales", "Solicitando Defensa" };
+	private String[] estatus = { "Revisiones Finalizadas", "Solicitando Defensa" };
 
 	@Override
 	void inicializar(Component comp) {
