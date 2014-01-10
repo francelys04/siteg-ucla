@@ -1,5 +1,6 @@
-<window  id="wdwContactanos" title="Contáctanos" width="600px" height="540px" border="normal"
-	closable="true" apply="controlador.CContactanos">
+<window id="wdwContactanos" title="Contáctanos" width="600px"
+	height="620px" border="normal" closable="true"
+	apply="controlador.CContactanos">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -43,31 +44,43 @@
 		</columns>
 		<rows>
 			<row>
-				<label value="Nombre y Apellido:"
-					style="font-weight:bold" />
-			</row>
-			<row>
-				<textbox id="txtNombre" width="160px" />
+				<label value="Programa:" style="color:black" />
 			</row>
 
 			<row>
-				<label value="Correo electrónico:" style="font-weight:bold" />
-			</row>
-			<row>
-				<textbox id="txtCorreo" width="170px" />
-			</row>
-
-			<row>
-				<label value="Asunto:" style="font-weight:bold" />
-
+				<combobox readonly="true"
+					id="cmbProgramaContactanos">
+					<template name="model">
+						<comboitem label="${each.nombre}" />
+					</template>
+				</combobox>
 			</row>
 
 			<row>
-				<textbox id="txtAsunto" width="250px" />
+				<label value="Nombre y Apellido:" style="color:black" />
+			</row>
+			<row>
+				<textbox id="txtNombre" width="190px" />
 			</row>
 
 			<row>
-				<label value="Mensaje:" style="font-weight:bold" />
+				<label value="Correo electrónico:" style="color:black" />
+			</row>
+			<row>
+				<textbox id="txtCorreo" width="190px" />
+			</row>
+
+			<row>
+				<label value="Asunto:" style="color:black" />
+
+			</row>
+
+			<row>
+				<textbox id="txtAsunto" width="270px" />
+			</row>
+
+			<row>
+				<label value="Mensaje:" style="color:black" />
 			</row>
 
 			<row>
@@ -90,11 +103,13 @@
 				<separator />
 				<div sclass="btn-group">
 
-					<button id="btnEnviarCorreo" sclass="btn" label="Enviar"
-						image="/public/imagenes/iconos/guardar.png" tabindex="13">
+					<button id="btnEnviarCorreo" sclass="btn"
+						label="Enviar" image="/public/imagenes/iconos/guardar.png"
+						tabindex="13">
 					</button>
-					<button id="btnCancelarCorreo" sclass="btn" label="Cancelar"
-						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					<button id="btnCancelarCorreo" sclass="btn"
+						label="Cancelar" image="/public/imagenes/iconos/limpiar.png"
+						tabindex="14">
 					</button>
 				</div>
 				<separator />

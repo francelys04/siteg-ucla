@@ -98,7 +98,7 @@ public class CSolicitudTutoria extends CGeneral {
 	@Listen("onClick = #btnAceptarTutoria")
 	public void aceptarTutoria() throws IOException{
 		System.out.println(solicitud.getDescripcion());
-		solicitud.setEstatus("Aprobada");
+		solicitud.setEstatus("Aceptada");
 		
 		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
 		Grupo grupo = servicioGrupo.BuscarPorNombre("ROLE_USER");
