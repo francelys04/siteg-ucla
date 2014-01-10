@@ -102,9 +102,8 @@ public class CAsignarComision extends CGeneral {
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		Profesor profesor = ObtenerUsuarioProfesor();
 		Programa programa = new Programa();
-		programa = profesor.getPrograma();
+	
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -115,7 +114,7 @@ public class CAsignarComision extends CGeneral {
 				long codigo = (Long) map.get("id");
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-				txtProgramaComision.setValue(programa.getNombre());
+				
 				txtNombreTutorComision.setValue(teg2.getTutor().getNombre());
 				txtApellidoTutorComision
 						.setValue(teg2.getTutor().getApellido());
@@ -125,8 +124,11 @@ public class CAsignarComision extends CGeneral {
 						.getareaInvestigacion().getNombre());
 				txtTematicaComision.setValue(teg2.getTematica().getNombre());
 				Teg tegPorCodigo = servicioTeg.buscarTeg(auxiliarId);
+				//se toma es el programa del estudiante asociado a el teg.
 				List<Estudiante> estudiantes = servicioEstudiante
 						.buscarEstudiantesDelTeg(tegPorCodigo);
+				programa = estudiantes.get(0).getPrograma();
+				txtProgramaComision.setValue(programa.getNombre());
 				lsbEstudiantesTeg.setModel(new ListModelList<Estudiante>(
 						estudiantes));
 				llenarListas();
@@ -141,19 +143,20 @@ public class CAsignarComision extends CGeneral {
 
 	public void llenarListas() {
 
-		Profesor profesor = ObtenerUsuarioProfesor();
+	
 		Programa programa = new Programa();
-		programa = profesor.getPrograma();
+	
 
 		Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-
+		//para guiarse por el programa del estudiante
+				List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg2);
+				programa = est.get(0).getPrograma();
 		List<Profesor> profesoresComision = servicioProfesor
 				.buscarComisionDelTeg(teg2);
 
 		if (profesoresComision.size() == 0) {
 
-			List<Profesor> profesores = servicioProfesor
-					.buscarProfesorDelPrograma(programa);
+			List<Profesor> profesores = servicioProfesor.buscarActivos();
 			lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
 					profesores));
 
@@ -202,7 +205,10 @@ public class CAsignarComision extends CGeneral {
 		Teg tegComision = new Teg();
 		int valor = 0;
 		tegComision = servicioTeg.buscarTeg(auxiliarId);
-		auxIdPrograma = tegComision.getTutor().getPrograma().getId();
+		//se debe guiar con el programa del estudiante
+		List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(tegComision);
+		auxIdPrograma = est.get(0).getPrograma().getId();
+		
 		Lapso lapso = servicioLapso.buscarLapsoVigente();
 		Programa programa = servicioPrograma.buscar(auxIdPrograma);
 		List<CondicionPrograma> condicion = servicioCondicionPrograma
@@ -277,12 +283,8 @@ public class CAsignarComision extends CGeneral {
 	@Listen("onClick = #btnCancelarComision")
 	public void limpiarCampos() {
 
-		Profesor profesor = ObtenerUsuarioProfesor();
-		Programa programa = new Programa();
-		programa = profesor.getPrograma();
-
-		List<Profesor> profesores = servicioProfesor
-				.buscarProfesorDelPrograma(programa);
+		
+		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
 				profesores));
 		lsbProfesoresSeleccionados.getItems().clear();

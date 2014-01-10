@@ -126,17 +126,20 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 				System.out.print("pase por el mapeo");
 				System.out.print(codigo);
 				Teg teg2 = servicioTeg.buscarTeg(codigo);
-				txtProgramaRegistrarAvances.setValue(teg2.getTutor().getPrograma().getNombre());
+				List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg2);
+				//programa por el estudiante del primer estudiante del teg2
+				txtProgramaRegistrarAvances.setValue(est.get(0).getPrograma().getNombre());
 				txtNombreTutorVerificar.setValue(teg2.getTutor().getNombre());
 				txtApellidoTutorVerificar.setValue(teg2.getTutor().getApellido());
 				txtTituloVerificar.setValue(teg2.getTitulo());
 				txtCedulaTutorVerificar.setValue(teg2.getTutor().getCedula());
 				txtAreaVerificar.setValue(teg2.getTematica().getareaInvestigacion().getNombre());
 				txtTematicaVerificar.setValue(teg2.getTematica().getNombre());				
-				List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg2);				
+							
 				ltbEstudiantesTeg.setModel(new ListModelList<Estudiante>(est));
-				id = teg2.getId();
-				llenarRequisitos(teg2);
+				
+				id = est.get(0).getPrograma().getId();
+				llenarRequisitos(id, teg2);
 				map.clear();
 				map = null;
 			}
@@ -168,7 +171,11 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 	public void cancelarVerificacion() {
 		long auxId3 = auxId;
 		Teg teg1 = servicioTeg.buscarTeg(auxId3);
-		llenarRequisitos(teg1);
+		
+		//para guiarse por el programa del estudiante
+		List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg1);
+		long id = est.get(0).getPrograma().getId();
+		llenarRequisitos(id,teg1);
 		rdoCompleto.setChecked(false);
 		rdoIncompleto.setChecked(false);
 		txtObservacion.setValue("");
@@ -228,10 +235,10 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		}
 
 
-	public void llenarRequisitos(Teg teg){
-		auxIdP = teg.getTutor().getPrograma().getId();
+	public void llenarRequisitos(long id, Teg teg){
+	
 		Lapso lapso = servicioLapso.buscarLapsoVigente();
-		Programa programa = servicioPrograma.buscar(auxIdP);
+		Programa programa = servicioPrograma.buscar(id);
 		
 		List<Requisito>  requisitosDerecha= servicioTegRequisito.buscarTegRequisitoSeleccionados(teg);
 		List<Requisito> requisitoIzquierda = new ArrayList<Requisito>();

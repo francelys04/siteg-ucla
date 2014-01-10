@@ -15,6 +15,7 @@ import modelo.CondicionPrograma;
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Profesor;
+import modelo.Programa;
 import modelo.Usuario;
 
 import org.springframework.security.core.Authentication;
@@ -56,8 +57,8 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		return profesor;
 	}
 	
-	public CondicionPrograma buscarCondicionVigenteEspecifica(String nombre){
-		List<CondicionPrograma> condicionesActuales = servicioCondicionPrograma.buscarUltimasCondiciones(ObtenerUsuarioProfesor().getPrograma());
+	public CondicionPrograma buscarCondicionVigenteEspecifica(String nombre, Programa programa){
+		List<CondicionPrograma> condicionesActuales = servicioCondicionPrograma.buscarUltimasCondiciones(programa);
 		CondicionPrograma condicionBuscada = new CondicionPrograma();
 		for(int i=0; i<condicionesActuales.size(); i++){
 			if(condicionesActuales.get(i).getCondicion().getNombre().equals(nombre)){

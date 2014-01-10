@@ -362,6 +362,11 @@ public class CSolicitarTutor extends CGeneral {
 		txtNombreProfesor.setValue("");
 		txtApellidoProfesor.setValue("");
 		txtCorreoProfesor.setValue("");
+List<Programa> programas = servicioPrograma.buscarActivas();
+		
+	
+			cmbProgramaSolicitud.setModel(new ListModelList<Programa>(
+					programas));
 		
 	}
 	
