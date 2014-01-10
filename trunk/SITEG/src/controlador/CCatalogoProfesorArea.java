@@ -51,12 +51,13 @@ public class CCatalogoProfesorArea extends CGeneral {
 	private Textbox txtCorreoMostrarProfesor;
 	
 	 private static String vistaRecibida;
-	
+	 private static String a;
+	 
 	void inicializar(Component comp) {
 		
 	
 		// TODO Auto-generated method stub
-		String a = "";
+
 		AreaInvestigacion area = servicioAreaInvestigacion.buscarAreaPorNombre(a);
 		List<Profesor> profesores = servicioProfesor.buscarProfesoresPorArea(area);
 		ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
@@ -135,6 +136,11 @@ public class CCatalogoProfesorArea extends CGeneral {
 			window.doModal();
 			wdwCatalogoProfesorArea.onClose();
 		}
+	}
+	
+	public String AreaSolicitada(String area) {
+		a = area; 
+		return a;
 	}
 
 }
