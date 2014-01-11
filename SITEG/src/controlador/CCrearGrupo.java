@@ -106,16 +106,17 @@ public class CCrearGrupo extends SelectorComposer<Component> {
 		FooNode twoLevelNode = new FooNode(null, 0, "");
 		FooNode threeLevelNode = new FooNode(null, 0, "");
 		FooNode fourLevelNode = new FooNode(null, 0, "");
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(
-				auth.getAuthorities());
+//		Authentication auth = SecurityContextHolder.getContext()
+//				.getAuthentication();
+//		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(
+//				auth.getAuthorities());
+		List<Arbol> listaArbol=servicioArbol.listarArbol();
 		ArrayList<Arbol> arbole = new ArrayList<Arbol>();
 		List<Arbol> arboles = new ArrayList<Arbol>();
 		ArrayList<Long> ids = new ArrayList<Long>();
-		for (int k = 0; k < authorities.size(); k++) {
+		for (int k = 0; k < listaArbol.size(); k++) {
 			Arbol arbol;
-			String nombre = authorities.get(k).toString();
+			String nombre = listaArbol.get(k).getNombre();
 			arbol = servicioArbol.buscarPorNombreArbol(nombre);
 			if (arbol != null)
 				ids.add(arbol.getId());
