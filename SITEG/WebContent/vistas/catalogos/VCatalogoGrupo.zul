@@ -1,0 +1,25 @@
+<?page id="wdwCatalogoUsuario"  title="Catalogo Usuario" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Catalogo Grupo" border="normal" width="870px"
+		id="wdwCatalogoGrupo" apply="controlador.CCatalogoGrupo"
+		closable="true">
+		<listbox id="ltbGrupo" width="100%">
+			<auxhead sclass="category-center">
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="90%"
+						id="txtNombreMostrarGrupo" />
+				</auxheader>
+			</auxhead>
+			<listhead>
+				<listheader label="Nombre" align="center" />
+
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="${each.nombre}" />
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>

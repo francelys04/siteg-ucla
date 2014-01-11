@@ -4,6 +4,9 @@ package interfazdao;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Arbol;
+import modelo.Grupo;
+import modelo.Usuario;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -19,6 +22,7 @@ public interface IArbolDAO extends JpaRepository<Arbol, Long> {
 	 @Query("select a from Arbol a where a.id = ?1 order by a.id")
 	public List<Arbol> buscar(ArrayList<Long> ids);
 
-
+	public List<Arbol> findByGrupos(Grupo grupo);
+		
 	
 }

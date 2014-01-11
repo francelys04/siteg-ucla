@@ -16,10 +16,16 @@ public class SGrupo {
 	@Autowired
 	private IGrupoDAO interfazGrupo;
 	
+	public void guardarGrupo(Grupo grupo){
+		interfazGrupo.save(grupo);
+	}
 	public List<Grupo> buscarActivos(){
 		List<Grupo> grupos;
 		grupos = interfazGrupo.findByEstatusTrue();
 		return grupos;
+	}
+	public Grupo buscarGrupo(long id){
+		return interfazGrupo.findOne(id);
 	}
 	
 	public List<Grupo> buscarGruposDelUsuario(Usuario usuario){
@@ -40,4 +46,6 @@ public class SGrupo {
 		grupito = interfazGrupo.findByNombre(string);
 		return grupito;
 	}
+	
+
 }

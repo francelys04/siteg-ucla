@@ -7,6 +7,7 @@ import java.util.List;
 
 
 import modelo.Arbol;
+import modelo.Grupo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,14 @@ public Arbol buscarPorId(Long id) {
 	arbol = interfaceArbol.findOne(id);
 	return arbol;
 }
-
-
+/*public List<Arbol> buscarGrupo(long id){
+	List<Arbol> arboles;
+	arboles=interfaceArbol.buscarPorGrupo(id);
+	return arboles;
+}*/
+public List<Arbol> buscarporGrupo(Grupo grupo){
+	List<Arbol> arboles;
+	arboles=interfaceArbol.findByGrupos(grupo);
+	return arboles;
+}
 }
