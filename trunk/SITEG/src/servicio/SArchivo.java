@@ -25,9 +25,9 @@ public class SArchivo {
 		return interfaceArchivo.findOne(id);
 	}
 	// busca todos los archivos sin eliminar en la base de dato
-		public List<Archivo> buscarActivos() {
+		public List<Archivo> buscarActivos(String h) {
 			List<Archivo> archivo;
-			archivo = interfaceArchivo.findByEstatusTrue();
+			archivo = interfaceArchivo.findByEstatusAndTipoArchivo(true, h);
 			return archivo;
 		}
 	

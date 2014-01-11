@@ -3,42 +3,29 @@ package controlador;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import modelo.Actividad;
 import modelo.Archivo;
-import modelo.Descarga;
-import modelo.Lapso;
-
 import org.springframework.stereotype.Controller;
-import org.zkoss.bind.annotation.BindingParam;
-import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zhtml.Filedownload;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-
-import servicio.SActividad;
 import servicio.SArchivo;
-import servicio.SDescarga;
+
 
 import configuracion.GeneradorBeans;
 
 @Controller
 public class CCatalogoArchivoDescarga extends CGeneral {
 
-	SDescarga servicioDescarga = GeneradorBeans.getServicioDescarga();
+	SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
 
 	@Wire
 	private Listbox ltbArchivoDescarga;
@@ -75,8 +62,8 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 		 * estatus=true con el servicioActividad mediante el metodo
 		 * buscarActivos
 		 */
-		List<Descarga> descarga = servicioDescarga.buscarActivos();
-		ltbArchivoDescarga.setModel(new ListModelList<Descarga>(descarga));
+		List<Archivo> archivo = servicioArchivo.buscarActivos("Descarga");
+		ltbArchivoDescarga.setModel(new ListModelList<Archivo>(archivo));
 			
 		
 
@@ -108,33 +95,33 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 	// descripcion
 	@Listen("onChange = #txtNombreMostrarArchivoDescarga,#txtDescripcionMostrarArchivoDescarga,#txtProgramaMostrarArchivoDescarga")
 	public void filtrarDatosCatalogo() {
-		List<Descarga> descarga1 = servicioDescarga.buscarActivos();
-		List<Descarga> descarga2 = new ArrayList<Descarga>();
+		List<Archivo> archivo1 = servicioArchivo.buscarActivos("Descarga");
+		List<Archivo> archivo2 = new ArrayList<Archivo>();
 
-		for (Descarga descarga : descarga1) {
-			if (descarga
+		for (Archivo archivo : archivo1) {
+			if (archivo
 					.getNombre()
 					.toLowerCase()
 					.contains(
 							txtNombreMostrarArchivoDescarga.getValue().toLowerCase())
-					&& descarga
+					&& archivo
 							.getDescripcion()
 							.toLowerCase()
 							.contains(
 									txtDescripcionMostrarArchivoDescarga.getValue()
 											.toLowerCase())
-						&& descarga
+						&& archivo
 							.getPrograma().getNombre()
 							.toLowerCase()
 							.contains(
 									txtProgramaMostrarArchivoDescarga.getValue()
 											.toLowerCase()))
 			{
-				descarga2.add(descarga);
+				archivo2.add(archivo);
 			}
 		}
 
-		ltbArchivoDescarga.setModel(new ListModelList<Descarga>(descarga2));
+		ltbArchivoDescarga.setModel(new ListModelList<Archivo>(archivo2));
 
 	}
 
@@ -144,15 +131,15 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 	public void descargarArchivo(){
 		if (h==true) {
 			Listitem listItem = ltbArchivoDescarga.getSelectedItem();
-			Descarga descarga3= (Descarga) listItem.getValue();		
-			Descarga descarga4 = servicioDescarga.buscarArchivo(descarga3.getId());
-			Filedownload.save(descarga4.getContenidoDocumento(), descarga4.getTipoArchivo(), descarga4.getNombre());
+			Archivo archivo3= (Archivo) listItem.getValue();		
+			Archivo archivo4 = servicioArchivo.buscarArchivo(archivo3.getId());
+			Filedownload.save(archivo4.getContenidoDocumento(), archivo4.getTipoDocumento(), archivo4.getNombre());
 			
 		}else{
 			Listitem listItem = ltbArchivoDescarga.getSelectedItem();
-			Descarga descarga = (Descarga) listItem.getValue();
+			Archivo archivo = (Archivo) listItem.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", descarga.getId());
+			map.put("id", archivo.getId());
 			String vista = "portal-web/VSubirArchivoDescarga";
 			map.put("vista", vista);
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map);

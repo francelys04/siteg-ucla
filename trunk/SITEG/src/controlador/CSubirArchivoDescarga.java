@@ -10,16 +10,12 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.swing.JFileChooser;
-
 import modelo.Actividad;
 import modelo.Archivo;
-import modelo.Descarga;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
-
 import org.springframework.stereotype.Controller;
 import org.zkoss.util.media.Media;
 import org.zkoss.zhtml.Filedownload;
@@ -37,10 +33,8 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
-
 import servicio.SActividad;
 import servicio.SArchivo;
-import servicio.SDescarga;
 import configuracion.GeneradorBeans;
 
 
@@ -49,7 +43,7 @@ import configuracion.GeneradorBeans;
 public class CSubirArchivoDescarga extends CGeneral {
 	
 	
-	SDescarga servicioDescarga = GeneradorBeans.getServicioDescarga();
+	SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
 
 
 	@Wire
@@ -65,9 +59,8 @@ public class CSubirArchivoDescarga extends CGeneral {
 	@Wire
 	private Listbox ltbArchivoDescarga;
 	private long id = 0;
-	private FileInputStream archivo;
 	private int longitudByte;
-	private Descarga descarga = new Descarga();
+	private Archivo archivo = new Archivo();
 	private String nombreDoc;
 	private static long idAux;
 	
@@ -87,10 +80,10 @@ public class CSubirArchivoDescarga extends CGeneral {
 			if (map.get("id") != null) {
 
 				long codigo = (Long) map.get("id");
-				Descarga descarga  = servicioDescarga.buscarArchivo(codigo);
-				txtNombreArchivoDescarga.setValue(descarga.getNombre());
-				txtDescripcionArchivoDescarga.setValue(descarga.getDescripcion());
-				id = descarga.getId();
+				Archivo archivo  = servicioArchivo.buscarArchivo(codigo);
+				txtNombreArchivoDescarga.setValue(archivo.getNombre());
+				txtDescripcionArchivoDescarga.setValue(archivo.getDescripcion());
+				id = archivo.getId();
 				idAux=id;
 				btnEliminarArchivoDescarga.setDisabled(false);
 				map.clear();
@@ -115,12 +108,13 @@ public class CSubirArchivoDescarga extends CGeneral {
 				
 			{
 			
-				descarga.setNombre(media.getName());
-				descarga.setContenidoDocumento(media.getByteData());
-				descarga.setTipoArchivo(media.getContentType());
-				nombreDoc= descarga.getNombre();
+				archivo.setNombre(media.getName());
+				archivo.setContenidoDocumento(media.getByteData());
+				archivo.setTipoDocumento(media.getContentType());
+				
+				nombreDoc= archivo.getNombre();
 							
-				txtNombreArchivoDescarga.setValue(descarga.getNombre());
+				txtNombreArchivoDescarga.setValue(archivo.getNombre());
 				
 				
 				
@@ -138,14 +132,14 @@ public class CSubirArchivoDescarga extends CGeneral {
 	
 		txtNombreArchivoDescarga.setValue("");
 		txtDescripcionArchivoDescarga.setValue("");
-		descarga.equals(null);
+		archivo.equals(null);
 	
 	
 	}
 	
 	@Listen("onClick = #btnGuardarArchivoDescarga")
 	public void guardarDescarga() {
-		if (descarga == null || txtNombreArchivoDescarga.getText().compareTo("")==0 || txtDescripcionArchivoDescarga.getText().compareTo("")==0) {
+		if (archivo == null || txtNombreArchivoDescarga.getText().compareTo("")==0 || txtDescripcionArchivoDescarga.getText().compareTo("")==0) {
 			Messagebox.show("Debe completar los campos", "Error", Messagebox.OK, Messagebox.ERROR);
 		} 
 		else {
@@ -160,11 +154,12 @@ public class CSubirArchivoDescarga extends CGeneral {
 								Profesor profesor = ObtenerUsuarioProfesor();		
 								Programa programa = new Programa();			
 								programa = profesor.getPrograma();		
-								descarga.setId(id);
-								descarga.setPrograma(programa);
-								descarga.setDescripcion(txtDescripcionArchivoDescarga.getValue());
-								descarga.setEstatus(true);
-								servicioDescarga.guardar(descarga);
+								archivo.setId(id);
+								archivo.setPrograma(programa);
+								archivo.setDescripcion(txtDescripcionArchivoDescarga.getValue());
+								archivo.setEstatus(true);
+								archivo.setTipoArchivo("Descarga");
+								servicioArchivo.guardar(archivo);
 								cancelar();
 								Messagebox.show("Archivo guardado exitosamente", "Informacion", Messagebox.OK, Messagebox.INFORMATION);
 								
@@ -182,9 +177,9 @@ public class CSubirArchivoDescarga extends CGeneral {
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-							Descarga descarga = servicioDescarga.buscarArchivo(idAux);
-							descarga.setEstatus(false);
-							servicioDescarga.guardar(descarga);
+							Archivo archivo = servicioArchivo.buscarArchivo(idAux);
+							archivo.setEstatus(false);
+							servicioArchivo.guardar(archivo);
 							cancelar();
 							btnEliminarArchivoDescarga.setDisabled(true);
 							Messagebox.show(

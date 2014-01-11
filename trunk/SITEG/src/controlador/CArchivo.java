@@ -82,7 +82,7 @@ public class CArchivo extends CGeneral {
 			
 				archi.setNombre(media.getName());
 				archi.setContenidoDocumento(media.getByteData());
-				archi.setTipoArchivo(media.getContentType());
+				archi.setTipoDocumento(media.getContentType());
 				nombreDoc= archi.getNombre();
 				txtNombreArchivo.setValue(archi.getNombre());
 				
@@ -128,6 +128,7 @@ public class CArchivo extends CGeneral {
 								archi.setPrograma(programa);
 								archi.setDescripcion(txtDescripcionArchivo.getValue());
 								archi.setEstatus(true);
+								archi.setTipoArchivo("Teg");
 								servicioArchivo.guardar(archi);
 								cancelar();
 								Messagebox.show("Archivo guardado exitosamente", "Informacion", Messagebox.OK, Messagebox.INFORMATION);
