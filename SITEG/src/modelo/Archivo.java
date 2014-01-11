@@ -23,6 +23,9 @@ public class Archivo {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
+	@Column(name = "tipo_documento")
+	private String tipoDocumento;
+	
 	@Column(name = "tipo_archivo")
 	private String tipoArchivo;
 	
@@ -44,20 +47,25 @@ public class Archivo {
 			super();
 			// TODO Auto-generated constructor stub
 		}
-
+				
 		public Archivo(long id, String nombre, String descripcion,
-				String tipoArchivo, byte[] contenidoDocumento,
-				Long tamanoDocumento, Boolean estatus, Programa programa) {
+				String tipoDocumento, String tipoArchivo,
+				byte[] contenidoDocumento, Long tamanoDocumento,
+				Boolean estatus, Programa programa) {
 			super();
 			this.id = id;
 			this.nombre = nombre;
 			this.descripcion = descripcion;
+			this.tipoDocumento = tipoDocumento;
 			this.tipoArchivo = tipoArchivo;
 			this.contenidoDocumento = contenidoDocumento;
 			this.tamanoDocumento = tamanoDocumento;
 			this.estatus = estatus;
 			this.programa = programa;
 		}
+
+
+
 
 		public Programa getPrograma() {
 			return programa;
@@ -129,16 +137,24 @@ public class Archivo {
 			this.tamanoDocumento = tamanoDocumento;
 		}
 
+		public String getTipoDocumento() {
+			return tipoDocumento;
+		}
+
+		public void setTipoDocumento(String tipoDocumento) {
+			this.tipoDocumento = tipoDocumento;
+		}
 
 		public String getTipoArchivo() {
 			return tipoArchivo;
 		}
 
-
 		public void setTipoArchivo(String tipoArchivo) {
 			this.tipoArchivo = tipoArchivo;
 		}
-		
+
+
+	
 		
 
 }

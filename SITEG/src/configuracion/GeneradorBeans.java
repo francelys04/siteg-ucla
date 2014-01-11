@@ -16,7 +16,6 @@ import servicio.SCondicion;
 import servicio.SCondicionPrograma;
 import servicio.SCronograma;
 import servicio.SDefensa;
-import servicio.SDescarga;
 import servicio.SEstudiante;
 import servicio.SFactibilidad;
 import servicio.SGrupo;
@@ -166,9 +165,7 @@ public class GeneradorBeans implements ApplicationContextAware {
 	public static SArchivo getServicioArchivo(){
 		return applicationContext.getBean(SArchivo.class);
 	}
-	public static SDescarga getServicioDescarga(){
-		return applicationContext.getBean(SDescarga.class);
-	}
+	
 	
 	public static SItemDefensa getServicioItemDefensa(){
 		return applicationContext.getBean(SItemDefensa.class);

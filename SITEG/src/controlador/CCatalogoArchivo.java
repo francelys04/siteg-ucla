@@ -72,7 +72,7 @@ public class CCatalogoArchivo extends CGeneral {
 		 * estatus=true con el servicioActividad mediante el metodo
 		 * buscarActivos
 		 */
-		List<Archivo> archivo = servicioArchivo.buscarActivos();
+		List<Archivo> archivo = servicioArchivo.buscarActivos("Teg");
 		ltbArchivo.setModel(new ListModelList<Archivo>(archivo));
 			
 		
@@ -99,7 +99,7 @@ public class CCatalogoArchivo extends CGeneral {
 	// descripcion
 	@Listen("onChange = #txtNombreMostrarArchivo,#txtDescripcionMostrarArchivo,#txtProgramaMostrarArchivo")
 	public void filtrarDatosCatalogo() {
-		List<Archivo> archivo1 = servicioArchivo.buscarActivos();
+		List<Archivo> archivo1 = servicioArchivo.buscarActivos("teg");
 		List<Archivo> archivo2 = new ArrayList<Archivo>();
 
 		for (Archivo archivo : archivo1) {
@@ -134,7 +134,7 @@ public class CCatalogoArchivo extends CGeneral {
 		Listitem listItem = ltbArchivo.getSelectedItem();
 		Archivo archivo3= (Archivo) listItem.getValue();		
 		Archivo archivo4 = servicioArchivo.buscarArchivo(archivo3.getId());
-		Filedownload.save(archivo4.getContenidoDocumento(), archivo4.getTipoArchivo(), archivo4.getNombre());
+		Filedownload.save(archivo4.getContenidoDocumento(), archivo4.getTipoDocumento(), archivo4.getNombre());
 		
 	}
 	

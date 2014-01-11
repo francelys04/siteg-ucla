@@ -109,7 +109,7 @@
 					image="/public/imagenes/iconos/guardar.png" tabindex="14">
 				</button>
 				<button id="btnCancelarArchivo" label="Cancelar"
-					image="/public/imagenes/iconos/cancelar.png" tabindex="14">
+					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 				</button>
 				
 				<separator />
