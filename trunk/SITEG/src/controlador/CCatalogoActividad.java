@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.AreaInvestigacion;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -53,38 +54,20 @@ public class CCatalogoActividad extends CGeneral {
 	 * 
 	 * @date 09-12-2013
 	 */
+
 	void inicializar(Component comp) {
 
-		/*
-		 * Listado de todos las actividades que se encuentran activos, cuyo
-		 * estatus=true con el servicioActividad mediante el metodo
-		 * buscarActivos
-		 */
-
+		// busca todas las areas y llena un listado
 		List<Actividad> actividad = servicioActividad.buscarActivos();
 
-		/*
-		 * Validacion para mostrar el listado de actividades mediante el
-		 * componente ltbActividad dependiendo si se encuentra ejecutando la
-		 * vista VCatalogoActividad
-		 */
 		if (txtNombreActividad == null) {
 			ltbActividad.setModel(new ListModelList<Actividad>(actividad));
 		}
 
 		Selectors.wireComponents(comp, this, false);
 
-		/*
-		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item de la vista VActividad
-		 */
-
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("actividadCatalogo");
-		/*
-		 * Validacion para vaciar la informacion del VActividad a la vista
-		 * VActividad.zul si la varible map tiene algun dato contenido
-		 */
+				.getCurrent().getAttribute("itemsCatalogo");
 
 	}
 
@@ -124,23 +107,16 @@ public class CCatalogoActividad extends CGeneral {
 	@Listen("onDoubleClick = #ltbActividad")
 	public void mostrarDatosCatalogo() {
 
-		if (vistaRecibida == null) {
+		Listitem listItem = ltbActividad.getSelectedItem();
+		Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", actividadDatosCatalogo.getId());
+		String vista = vistaRecibida;
+		map.put("vista", vista);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+		Executions.sendRedirect("/vistas/arbol.zul");
 
-			vistaRecibida = "maestros/VActividad";
-
-		} else {
-
-			Listitem listItem = ltbActividad.getSelectedItem();
-			Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
-			final HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", actividadDatosCatalogo.getId());
-			String vista = vistaRecibida;
-			map.put("vista", vista);
-			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			Executions.sendRedirect("/vistas/arbol.zul");
-
-			wdwCatalogoActividad.onClose();
-		}
+		wdwCatalogoActividad.onClose();
 
 	}
 

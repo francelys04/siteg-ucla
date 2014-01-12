@@ -9,17 +9,19 @@
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Nombre"
 					id="txtNombreMostrarItem" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
-					id="txtTipoMostrarItem" />
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Tipo" id="txtTipoMostrarItem" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Descripción"
 					id="txtDescripcionMostrarItem" />
 			</auxheader>
 

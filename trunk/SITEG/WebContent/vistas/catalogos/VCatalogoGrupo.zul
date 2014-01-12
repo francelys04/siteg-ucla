@@ -1,13 +1,16 @@
 <?page id="wdwCatalogoUsuario"  title="Catalogo Usuario" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Catalogo Grupo" border="normal" width="870px"
+	<window title="Catalogo Grupo" border="normal" width="800px"
 		id="wdwCatalogoGrupo" apply="controlador.CCatalogoGrupo"
 		closable="true">
+		
+		<style src="/public/css/bootstrap.css" />
+		
 		<listbox id="ltbGrupo" width="100%">
 			<auxhead sclass="category-center">
 				<auxheader colspan="1">
 					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="90%"
+					<textbox instant="true" width="80%" sclass="search-query" placeholder="Nombre"
 						id="txtNombreMostrarGrupo" />
 				</auxheader>
 			</auxhead>

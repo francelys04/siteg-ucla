@@ -82,10 +82,11 @@
 									<hbox>
 
 										<div
-											style="margin-left:20px;margin-top:20px; text-align:center">
+											style="margin-left:20px;margin-top:20px;
+											text-align:center">
 											<label
 												value="Consulta el estado de tu TEG:"
-												style="font-weight:bold" />
+												style="font-weight:bold;font-size:15px;" />
 										</div>
 
 										<div
@@ -236,8 +237,8 @@
 										<separator></separator>
 										<div
 											style="text-align:center;">
-											<button
-												id="btnBiblioteca" style="margin-top:45px" apply="controlador.CInicio"
+											<button id="btnBiblioteca"
+												style="margin-top:45px" apply="controlador.CInicio"
 												sclass="btn btn-primary" label="Haz click aqui"
 												width="125px" dir="reverse" />
 										</div>
@@ -251,13 +252,16 @@
 						<!--FIN Biblioteca -->
 
 					</hbox>
-
-
-
-
-
-
 				</vbox>
+
+				<separator />
+				<separator />
+				<separator />
+				<separator />
+
+
+				<include src="public/widgets/enlaces.html" />
+
 			</div>
 		</center>
 		<zscript>

@@ -3,41 +3,46 @@
 	<window title="Descargas" border="normal" width="95%"
 		id="wdwCatalogoArchivoDescarga"
 		apply="controlador.CCatalogoArchivoDescarga" closable="true">
-	<listbox id="ltbArchivoDescarga" width="100%" mold="paging" pageSize="10"
-		emptyMessage="No hay archivos registrados">
-		<auxhead sclass="category-center">
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="90%"
-					id="txtNombreMostrarArchivoDescarga" />
-			</auxheader>
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="90%"
-					id="txtDescripcionMostrarArchivoDescarga" />
-			</auxheader>
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="90%"
-					id="txtProgramaMostrarArchivoDescarga" />
-			</auxheader>
-		</auxhead>
-		<listhead>
-			<listheader label="Nombre" align="center" />
-			<listheader label="Descripción" align="center" />
-			<listheader label="Programa" align="center" />
-			<listheader label="Descarga" align="center" />
-		</listhead>
+		<listbox id="ltbArchivoDescarga" width="100%" mold="paging"
+			pageSize="10" emptyMessage="No hay archivos registrados">
+			<auxhead sclass="category-center">
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						sclass="search-query" placeholder="Nombre"
+						id="txtNombreMostrarArchivoDescarga" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						sclass="search-query" placeholder="Descripción"
+						id="txtDescripcionMostrarArchivoDescarga" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						sclass="search-query" placeholder="Programa"
+						id="txtProgramaMostrarArchivoDescarga" />
+				</auxheader>
+				<auxheader colspan="1"></auxheader>
+			</auxhead>
+			<listhead>
+				<listheader label="Nombre" align="center" />
+				<listheader label="Descripción" align="center" />
+				<listheader label="Programa" align="center" />
+				<listheader label="Descarga" align="center" />
+			</listhead>
 
 
-		<template name="model">
-			<listitem>
-				<listcell label="${each.nombre}" />
-				<listcell label="${each.descripcion}" />
-				<listcell label="${each.programa.nombre}" />
-				<listcell  image="/public/imagenes/iconos/descargar.jpg" />
-			</listitem>
-		</template>
-	</listbox>
+			<template name="model">
+				<listitem>
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.descripcion}" />
+					<listcell label="${each.programa.nombre}" />
+					<listcell
+						image="/public/imagenes/iconos/descargar.jpg" />
+				</listitem>
+			</template>
+		</listbox>
 	</window>
 </zk>

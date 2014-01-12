@@ -3,38 +3,43 @@
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />
-	
+
 	<listbox id="ltbEstudiante" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay estudiantes registrados">
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Cédula"
 					id="txtCedulaMostrarEstudiante" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Nombre"
 					id="txtNombreMostrarEstudiante" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Apellido"
 					id="txtApellidoMostrarEstudiante" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Programa"
 					id="txtProgramaMostrarEstudiante" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Correo"
 					id="txtCorreoMostrarEstudiante" />
 			</auxheader>
 		</auxhead>

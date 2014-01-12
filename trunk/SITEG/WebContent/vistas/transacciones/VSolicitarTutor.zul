@@ -33,6 +33,17 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+		.z-window-modal-cnt, .z-window-highlighted-cnt,
+		.z-window-modal-cnt-noborder,
+		.z-window-highlighted-cnt-noborder,
+		.z-window-overlapped-cnt-noborder { background: #f5f5f5; }
+
+		.z-groupbox-cnt{ background: #fff; border-radius: 10px; border:
+		none; }
+
+
+
+
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
@@ -76,7 +87,7 @@
 							<label value="*"
 								style="font-weight:bold;color:red" />
 							<label value="Programa:"
-								style="font-weight:bold" />
+								sclass="label label-info" style="font-weight:bold" />
 						</hlayout>
 
 						<combobox id="cmbProgramaSolicitud"
@@ -96,12 +107,12 @@
 							<label value="*"
 								style="font-weight:bold;color:red">
 							</label>
-							<label value="Area:"
-								style="font-weight:bold" />
+							<label value="Área:"
+								sclass="label label-info" style="font-weight:bold" />
 						</hlayout>
 
 						<combobox id="cmbAreaSolicitud" readonly="true"
-							width="180px" style="margin-left:90px" tabindex="10">
+							width="170px" style="margin-left:90px" tabindex="10">
 							<template name="model">
 								<comboitem label="${each.nombre}" />
 							</template>
@@ -109,14 +120,14 @@
 
 						<hlayout>
 							<label value="*"
-								style="font-weight:bold;color:red;margin-left:25px">
+								style="font-weight:bold;color:red;margin-left:20px">
 							</label>
 							<label value="Temática:"
-								style="font-weight:bold" />
+								sclass="label label-info" style="font-weight:bold" />
 						</hlayout>
 
 						<combobox id="cmbTematicaSolicitud"
-							readonly="true" width="180px" tabindex="10"
+							readonly="true" width="175px" tabindex="10"
 							style="margin-left:25px">
 							<template name="model">
 								<comboitem label="${each.nombre}" />
@@ -130,12 +141,12 @@
 						<label value="*"
 							style="font-weight:bold;color:red" />
 						<label value="Descripción (Título Tentativo):"
-							style="font-weight:bold" />
+							sclass="label label-info" style="font-weight:bold" />
 					</hlayout>
 				</row>
 
 				<row>
-					<textbox id="txtTituloSolicitud" width="500px"
+					<textbox id="txtTituloSolicitud" width="590px"
 						rows="3" cols="100" />
 				</row>
 
@@ -167,7 +178,7 @@
 										style="font-weight:bold;color:red">
 									</label>
 									<label value="Cédula:"
-										style="font-weight:bold" />
+										sclass="label label-info" style="font-weight:bold" />
 								</hlayout>
 
 								<hbox>
@@ -261,8 +272,8 @@
 									<label value="*"
 										style="font-weight:bold;color:red">
 									</label>
-									<label value="Cedula:"
-										style="font-weight:bold" />
+									<label value="Cédula:"
+										sclass="label label-info" style="font-weight:bold" />
 								</hlayout>
 
 								<hbox>
@@ -283,22 +294,22 @@
 									<label value="*"
 										style="font-weight:bold;color:red" />
 									<label value="Nombre:"
-										style="font-weight:bold" />
+										sclass="label label-info" style="font-weight:bold" />
 								</hlayout>
 
 								<hbox>
 									<textbox id="txtNombreProfesor"
-										width="90%" tabindex="2" />
+										width="160px" tabindex="2" />
 
 									<hlayout>
 										<label value="*"
 											style="font-weight:bold;color:red;margin-left:5px" />
 										<label value="Apellido:"
-											style="font-weight:bold" />
+											sclass="label label-info" style="font-weight:bold" />
 									</hlayout>
 
 									<textbox id="txtApellidoProfesor"
-										width="90%" style="margin-left:10px" tabindex="3" />
+										width="160px" style="margin-left:10px" tabindex="3" />
 								</hbox>
 							</row>
 
@@ -308,11 +319,11 @@
 									<label value="*"
 										style="font-weight:bold;color:red" />
 									<label value="Correo:"
-										style="font-weight:bold" />
+										sclass="label label-info" style="font-weight:bold" />
 								</hlayout>
 
 								<textbox id="txtCorreoProfesor"
-									width="35%" tabindex="11" />
+									width="180px" tabindex="11" />
 
 
 							</row>
