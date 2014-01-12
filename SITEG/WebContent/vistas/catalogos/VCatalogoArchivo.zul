@@ -1,43 +1,49 @@
 <?page  title="Biblioteca Virtual" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="Biblioteca Virtual" border="normal" width="85%"
-		id="wdwCatalogoArchivo"
-		apply="controlador.CCatalogoArchivo" closable="true">
-	<listbox id="ltbArchivo" width="100%" mold="paging" pageSize="10"
-		emptyMessage="No hay archivos registrados">
-		<auxhead sclass="category-center">
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="90%"
-					id="txtNombreMostrarArchivo" />
-			</auxheader>
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="90%"
-					id="txtDescripcionMostrarArchivo" />
-			</auxheader>
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="90%"
-					id="txtProgramaMostrarArchivo" />
-			</auxheader>
-		</auxhead>
-		<listhead>
-			<listheader label="Nombre" align="center" />
-			<listheader label="Descripción" align="center" />
-			<listheader label="Programa" align="center" />
-			<listheader label="Descarga" align="center" />
-		</listhead>
+		id="wdwCatalogoArchivo" apply="controlador.CCatalogoArchivo"
+		closable="true">
+		<listbox id="ltbArchivo" width="100%" mold="paging"
+			pageSize="10" emptyMessage="No hay archivos registrados">
+			<auxhead sclass="category-center">
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						sclass="search-query" placeholder="Nombre"
+						id="txtNombreMostrarArchivo" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						sclass="search-query" placeholder="Descripción"
+						id="txtDescripcionMostrarArchivo" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						sclass="search-query" placeholder="Programa"
+						id="txtProgramaMostrarArchivo" />
+				</auxheader>
+				<auxheader colspan="1">
+				</auxheader>
+			</auxhead>
+			<listhead>
+				<listheader label="Nombre" align="center" />
+				<listheader label="Descripción" align="center" />
+				<listheader label="Programa" align="center" />
+				<listheader label="Descarga" align="center" />
+			</listhead>
 
 
-		<template name="model">
-			<listitem>
-				<listcell label="${each.nombre}" />
-				<listcell label="${each.descripcion}" />
-				<listcell label="${each.programa.nombre}" />
-				<listcell  image="/public/imagenes/iconos/descargar.jpg" />
-			</listitem>
-		</template>
-	</listbox>
+			<template name="model">
+				<listitem>
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.descripcion}" />
+					<listcell label="${each.programa.nombre}" />
+					<listcell
+						image="/public/imagenes/iconos/descargar.jpg" />
+				</listitem>
+			</template>
+		</listbox>
 	</window>
 </zk>

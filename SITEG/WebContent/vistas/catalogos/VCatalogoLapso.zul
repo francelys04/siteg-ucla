@@ -10,17 +10,20 @@
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Nombre"
 					id="txtNombreMostrarLapso" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Fecha de inicio"
 					id="txtNombreMostrarInicioLapso" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Fecha final"
 					id="txtNombreMostrarFinLapso" />
 			</auxheader>
 		</auxhead>

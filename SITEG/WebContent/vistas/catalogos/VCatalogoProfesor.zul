@@ -9,27 +9,32 @@
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Cédula"
 					id="txtCedulaMostrarProfesor" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Nombre"
 					id="txtNombreMostrarProfesor" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Apellido"
 					id="txtApellidoMostrarProfesor" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Categoría"
 					id="txtCategoriaMostrarProfesor" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Correo"
 					id="txtCorreoMostrarProfesor" />
 			</auxheader>
 		</auxhead>
