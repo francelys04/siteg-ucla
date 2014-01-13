@@ -25,7 +25,7 @@ import servicio.SProfesor;
 import configuracion.GeneradorBeans;
 
 @Controller
-public class CCatalogoProfesorTematica {
+public class CCatalogoProfesorTematica extends CGeneral {
 
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SAreaInvestigacion servicioAreaInvestigacion = GeneradorBeans.getServicioArea();
@@ -50,6 +50,7 @@ public class CCatalogoProfesorTematica {
 	
 	 private static String vistaRecibida;
 	 private static String t;
+	 private static String p;
 	 
 	void inicializar(Component comp) {
 		
@@ -72,9 +73,13 @@ public class CCatalogoProfesorTematica {
 				
 	}
 	
-	public void recibir (String vista)
+	public void recibir (String vista,String programa, String tematica)
 	{
 		vistaRecibida = vista;
+		p = programa;
+		t = tematica;
+		System.out.println(p);
+		System.out.println(t);
 	}
 	
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor")
