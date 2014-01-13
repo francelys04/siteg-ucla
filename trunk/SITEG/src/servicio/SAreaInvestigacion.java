@@ -52,16 +52,6 @@ public class SAreaInvestigacion {
 		return areas;
 	}
 
-	public List<AreaInvestigacion> buscarAreasDelProfesor(Profesor profesor) {
-		List<AreaInvestigacion> areas;
-		areas = interfaceArea.findByProfesores(profesor);
-		return areas;
-	}
-
-	public List<AreaInvestigacion> buscarAreasSinProfesor(List<Long> ids) {
-		List<AreaInvestigacion> areas;
-		areas = interfaceArea.findByIdNotIn(ids);
-		return areas;
-	}
+	
 
 }

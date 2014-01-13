@@ -1,16 +1,16 @@
 package controlador;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import modelo.AreaInvestigacion;
 import modelo.Categoria;
-import modelo.Estudiante;
+
 import modelo.Profesor;
 import modelo.Programa;
+import modelo.Tematica;
 import modelo.Usuario;
 
 import org.zkoss.zk.ui.Component;
@@ -188,12 +188,12 @@ public class CProfesor extends CGeneral {
 									.buscarCategoriaPorNombre(categorias);
 							Programa programa = servicioPrograma
 							.buscarPorNombrePrograma(programas);
-							Set<AreaInvestigacion> areasProfesor = new HashSet<AreaInvestigacion>();
+							Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
 							Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
 							Profesor profesor = new Profesor(cedula, nombre,
 									apellido, correo, sexo, direccion,
 									telefonoMovil, telefonoFijo, estatus,
-									categoria, programa, areasProfesor, usuario);
+									categoria, programa, tematicasProfesor, usuario);
 							servicioProfesor.guardarProfesor(profesor);
 							Messagebox.show(
 									"Profesor registrado exitosamente",

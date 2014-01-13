@@ -4,12 +4,11 @@ import java.util.List;
 
 import interfazdao.IProfesorDAO;
 
-import modelo.AreaInvestigacion;
-import modelo.Estudiante;
-import modelo.Lapso;
+
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
+import modelo.Tematica;
 import modelo.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,9 +79,9 @@ public class SProfesor {
 		return profesores;
 	}
 	
-	public List<Profesor> buscarProfesoresPorArea(AreaInvestigacion area) {
+	public List<Profesor> buscarProfesoresPorTematica(Tematica tematica) {
 		List<Profesor> profesores;
-		profesores = interfazProfesor.findByAreas(area);
+		profesores = interfazProfesor.findByTematicas(tematica);
 		return profesores;
 	}
 	

@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.AreaInvestigacion;
-import modelo.Categoria;
 import modelo.Profesor;
-import modelo.Teg;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -23,12 +20,13 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SProfesor;
 import servicio.SAreaInvestigacion;
+import servicio.SProfesor;
 import configuracion.GeneradorBeans;
 
-public class CCatalogoProfesorArea extends CGeneral {
-	
+@Controller
+public class CCatalogoProfesorTematica {
+
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SAreaInvestigacion servicioAreaInvestigacion = GeneradorBeans.getServicioArea();
 	
@@ -51,16 +49,19 @@ public class CCatalogoProfesorArea extends CGeneral {
 	private Textbox txtCorreoMostrarProfesor;
 	
 	 private static String vistaRecibida;
-	 private static String a;
+	 private static String t;
 	 
 	void inicializar(Component comp) {
 		
 	
 		// TODO Auto-generated method stub
 
-		AreaInvestigacion area = servicioAreaInvestigacion.buscarAreaPorNombre(a);
-		List<Profesor> profesores = servicioProfesor.buscarProfesoresPorArea(area);
-		ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
+		
+		
+		
+		
+		//List<Profesor> profesores = servicioProfesor.buscarProfesoresPorTematica(tema);
+		//ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
 				
 
 				Selectors.wireComponents(comp, this, false);
@@ -138,9 +139,6 @@ public class CCatalogoProfesorArea extends CGeneral {
 		}
 	}
 	
-	public String AreaSolicitada(String area) {
-		a = area; 
-		return a;
-	}
+
 
 }

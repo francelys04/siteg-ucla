@@ -29,8 +29,7 @@ public class AreaInvestigacion {
 	@Column(name="estatus")
 	private Boolean estatus;
 	
-	@ManyToMany(mappedBy="areas")
-	private Set<Profesor> profesores;
+	
 	
 	@OneToMany(mappedBy="areaInvestigacion")
 	private Set<Tematica> tematicas;
@@ -101,14 +100,7 @@ public class AreaInvestigacion {
 		this.programasAreas = programasAreas;
 	}
 
-	public Set<Profesor> getProfesores() {
-		return profesores;
-	}
-
-	public void setProfesores(Set<Profesor> profesores) {
-		this.profesores = profesores;
-	}
-
+	
 	
 
 }

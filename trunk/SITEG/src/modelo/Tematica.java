@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -28,6 +29,9 @@ public class Tematica {
 	
 	@Column(name="estatus")
 	private Boolean estatus;
+	
+	@ManyToMany(mappedBy="tematicas")
+	private Set<Profesor> profesores;
 	
 	@OneToMany(mappedBy="tematica")
 	private Set<Teg> teg;
@@ -108,6 +112,15 @@ public class Tematica {
 
 	public void setSolicitudesTutoria(Set<SolicitudTutoria> solicitudesTutoria) {
 		this.solicitudesTutoria = solicitudesTutoria;
+	}
+
+	
+	public Set<Profesor> getProfesores() {
+		return profesores;
+	}
+
+	public void setProfesores(Set<Profesor> profesores) {
+		this.profesores = profesores;
 	}
 
 	

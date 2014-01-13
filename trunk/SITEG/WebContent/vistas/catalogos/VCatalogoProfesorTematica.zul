@@ -1,5 +1,5 @@
 <window title="Catalogo Profesor" border="normal" width="800px"
-	id="wdwCatalogoProfesorArea" apply="controlador.CCatalogoProfesorArea"
+	id="wdwCatalogoProfesorArea" apply="controlador.CCatalogoProfesorTematica"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />
