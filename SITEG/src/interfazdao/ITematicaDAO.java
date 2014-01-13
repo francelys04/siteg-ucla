@@ -4,6 +4,7 @@ package interfazdao;
 import java.util.List;
 
 import modelo.AreaInvestigacion;
+import modelo.Profesor;
 import modelo.Tematica;
 
 
@@ -22,6 +23,11 @@ public interface ITematicaDAO extends JpaRepository<Tematica, Long> {
 	/*
 	 * Busca las tematicas por Areas*/
 	public List<Tematica> findByAreaInvestigacion(AreaInvestigacion area2);
+	
+    public List<Tematica> findByProfesores(Profesor profesor);
+	
+	public List<Tematica> findByIdNotIn(List<Long> ids);
+	
 	
 }
 

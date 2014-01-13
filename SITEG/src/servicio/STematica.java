@@ -2,6 +2,7 @@ package servicio;
 
 import java.util.List;
 
+import modelo.Profesor;
 import modelo.Tematica;
 import modelo.AreaInvestigacion;
 
@@ -46,6 +47,17 @@ public Tematica buscarTematicaPorNombre(String tematica) {
 	Tematica tema;
 	tema= interfaceTematica.findByNombre(tematica);
 	return tema;
+}
+public List<Tematica> buscarTematicasDelProfesor(Profesor profesor) {
+	List<Tematica> tematicas;
+	tematicas = interfaceTematica.findByProfesores(profesor);
+	return tematicas;
+}
+
+public List<Tematica> buscarTematicasSinProfesor(List<Long> ids) {
+	List<Tematica> tematicas;
+	tematicas = interfaceTematica.findByIdNotIn(ids);
+	return tematicas;
 }
 
 }

@@ -74,8 +74,8 @@ public class Profesor {
 	private Set<Jurado> juradosTeg;
 
 	@ManyToMany
-	@JoinTable(name = "profesor_area", joinColumns = { @JoinColumn(name = "profesor_cedula") }, inverseJoinColumns = { @JoinColumn(name = "area_id") })
-	private Set<AreaInvestigacion> areas;
+	@JoinTable(name = "profesor_tematica", joinColumns = { @JoinColumn(name = "profesor_cedula") }, inverseJoinColumns = { @JoinColumn(name = "tematica_id") })
+	private Set<Tematica> tematicas;
 	
 	@OneToOne
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
@@ -89,7 +89,7 @@ public class Profesor {
 	public Profesor(String cedula, String nombre, String apellido,
 			String correoElectronico, String sexo, String direccion,
 			String telefono_movil, String telefono_fijo, Boolean estatus,
-			Categoria categoria, Programa programa, Set<AreaInvestigacion> areas, Usuario usuario) {
+			Categoria categoria, Programa programa, Set<Tematica> tematicas, Usuario usuario) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -102,7 +102,7 @@ public class Profesor {
 		this.estatus = estatus;
 		this.categoria = categoria;
 		this.programa = programa;
-		this.areas=areas;
+		this.tematicas=tematicas;
 		this.usuario=usuario;
 	}
 
@@ -243,12 +243,14 @@ public class Profesor {
 		this.defensas = defensas;
 	}
 
-	public Set<AreaInvestigacion> getAreas() {
-		return areas;
+	
+
+	public Set<Tematica> getTematicas() {
+		return tematicas;
 	}
 
-	public void setAreas(Set<AreaInvestigacion> areas) {
-		this.areas = areas;
+	public void setTematicas(Set<Tematica> tematicas) {
+		this.tematicas = tematicas;
 	}
 
 	public Usuario getUsuario() {

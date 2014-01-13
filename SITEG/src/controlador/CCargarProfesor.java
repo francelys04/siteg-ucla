@@ -6,10 +6,11 @@ import java.io.FileReader;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JFileChooser;
-import modelo.AreaInvestigacion;
+
 import modelo.Profesor;
 import modelo.Categoria;
 import modelo.Programa;
+import modelo.Tematica;
 import modelo.Usuario;
 
 import org.springframework.stereotype.Controller;
@@ -111,10 +112,10 @@ public class CCargarProfesor extends CGeneral {
 					// creo el estudiante y lo guardo
 					Profesor profesor;
 					Usuario user = servicioUsuario.buscarUsuarioPorNombre(usuario);
-					Set<AreaInvestigacion> areasProfesor = new HashSet<AreaInvestigacion>();
+					Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
 					profesor = new Profesor(cedula, nombre, apellido, correo, sexo,
 							direccion, telefonomovil, telefonofijo,
-							estatus, categoria, programa, areasProfesor, user);
+							estatus, categoria, programa, tematicasProfesor, user);
 
 					servicioProfesor.guardarProfesor(profesor);
 				}

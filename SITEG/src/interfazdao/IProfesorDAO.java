@@ -3,10 +3,11 @@ package interfazdao;
 import java.util.List;
 
 
-import modelo.AreaInvestigacion;
+
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
+import modelo.Tematica;
 import modelo.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,7 +31,7 @@ public interface IProfesorDAO extends JpaRepository<Profesor, String> {
 	
 	public List<Profesor> findByCedulaNotIn(List<String> cedulas);
 	
-	public List<Profesor> findByAreas(AreaInvestigacion area);
+	public List<Profesor> findByTematicas(Tematica tematica);
 	
 	@Query("select p from Profesor p where p.cedula not in (select j.profesor from Jurado j where j.teg = ?1)")
 	public List<Profesor> buscarProfesorEnJurado(Teg teg);

@@ -80,7 +80,7 @@ public class CSolicitarTutor extends CGeneral {
 	STematica servicioTematica = GeneradorBeans.getSTematica();
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SSolicitudTutoria servicioSolicitarTutor = GeneradorBeans.getServicioTutoria();
-	CCatalogoProfesorArea catalogo = new CCatalogoProfesorArea();
+	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
 
 	@Wire
 	private Datebox db1;
@@ -261,7 +261,7 @@ public class CSolicitarTutor extends CGeneral {
 	public void buscarProfesor() {
 		
 		Window window = (Window) Executions.createComponents(
-				"/vistas/catalogos/VCatalogoProfesorArea.zul", null, null);
+				"/vistas/catalogos/VCatalogoProfesorTematica.zul", null, null);
 		window.doModal();
 		combo = cmbProgramaSolicitud.getValue();
 		combo1 = cmbAreaSolicitud.getValue();

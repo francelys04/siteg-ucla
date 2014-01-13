@@ -1,6 +1,6 @@
 <window title="Areas de investigación de un profesor" border="normal"
 	width="100%" height="580px" closable="true"
-	apply="controlador.CProfesorArea">
+	apply="controlador.CProfesorTematicas">
 	<separator />
 
 	<style dynamic="true">
@@ -67,10 +67,10 @@
 						</hlayout>
 
 						<hbox>
-							<textbox id="txtCedulaProfesorArea"
+							<textbox id="txtCedulaProfesorTematica"
 								width="150px" style="margin-left:20px" disabled="True" />
 
-							<button id="btnCatalogoProfesorArea"
+							<button id="btnCatalogoProfesorTematica"
 								sclass="btn" style="margin-left:10%"
 								image="/public/imagenes/iconos/catalogo.png">
 							</button>
@@ -88,7 +88,7 @@
 						</hlayout>
 
 						<hbox>
-							<textbox id="txtNombreProfesorArea"
+							<textbox id="txtNombreProfesorTematica"
 								width="150px" style="margin-left:18px" disabled="True" />
 
 							<hlayout>
@@ -99,7 +99,7 @@
 									style="color:black" />
 							</hlayout>
 
-							<textbox id="txtApellidoProfesorArea"
+							<textbox id="txtApellidoProfesorTematica"
 								width="150px" style="margin-left:20px" disabled="True" />
 						</hbox>
 
@@ -121,12 +121,12 @@
 
 				<row>
 					<hbox>
-						<panel title="Areas Disponibles"
+						<panel title="Tematicas Disponibles"
 							width="260px">
 							<panelchildren>
 								<listbox
-									emptyMessage="No hay areas registradas"
-									id="lsbAreasProfesorDisponibles" height="200px" mold="paging"
+									emptyMessage="No hay tema registradas"
+									id="lsbTematicasProfesorDisponibles" height="200px" mold="paging"
 									pageSize="4" oddRowSclass="non-odd" checkmark="true">
 
 									<listhead>
@@ -149,25 +149,25 @@
 							<panelchildren>
 								<div>
 
-									<button id="btnAgergarProfesorAreas"
+									<button id="btnAgergarProfesorTematicas"
 										sclass="btn" image="/public/imagenes/iconos/right.png"
-										tooltiptext="Agregar Areas" width="35px" />
+										tooltiptext="Agregar Tematicas" width="35px" />
 									<separator />
 									<button sclass="btn"
-										id="btnRemoverProfesorAreas"
+										id="btnRemoverProfesorTematicas"
 										image="/public/imagenes/iconos/left.png"
-										tooltiptext="Remover Areas" width="35px" />
+										tooltiptext="Remover Tematicas" width="35px" />
 
 								</div>
 							</panelchildren>
 						</panel>
 
-						<panel title="Areas Seleccionadas"
+						<panel title="Tematicas Seleccionadas"
 							width="260px">
 							<panelchildren>
 								<listbox
-									emptyMessage="No hay areas seleccionadas"
-									id="lsbAreasProfesorSeleccionadas" height="200px" mold="paging"
+									emptyMessage="No hay tematicas seleccionadas"
+									id="lsbTematicasProfesorSeleccionadas" height="200px" mold="paging"
 									pageSize="4" oddRowSclass="non-odd" checkmark="true">
 									<listhead>
 										<listheader label="Nombre" />
@@ -199,11 +199,11 @@
 			<div sclass="alert-info" align="center">
 				<separator />
 				<div sclass="btn-group">
-					<button id="btnGuardarProfesorAreas" label="Guardar"
+					<button id="btnGuardarProfesorTematicas" label="Guardar"
 						sclass="btn" image="/public/imagenes/iconos/guardar.png"
 						tabindex="12">
 					</button>
-					<button id="btnCancelarProfesorAreas"
+					<button id="btnCancelarProfesorTematicas"
 						label="Cancelar" sclass="btn"
 						image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 					</button>

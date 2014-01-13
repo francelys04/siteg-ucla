@@ -23,8 +23,8 @@ public interface IProgramaAreaDAO extends JpaRepository<ProgramaArea, String>{
 	public List<AreaInvestigacion> buscarAreasPrograma(Programa programa);
 	
 	
-	@Query("select a  from ProgramaArea a where a.area in (select areas from Profesor p where p.cedula  in (select p from Profesor p where p.usuario = ?1))")
-	public Programa BuscarPrograma (Usuario usuario);
+	//@Query("select a  from ProgramaArea a where a.area in (select areas from Profesor p where p.cedula  in (select p from Profesor p where p.usuario = ?1))")
+	//public Programa BuscarPrograma (Usuario usuario);
 	
 	
 }
