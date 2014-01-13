@@ -13,32 +13,38 @@
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="60%"
+					sclass="search-query" placeholder="Fecha"
 					id="txtFechaSolicitudDefensa" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="60%"
+					sclass="search-query" placeholder="Área"
 					id="txtAreaSolicitudDefensa" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="60%"
+					sclass="search-query" placeholder="Temática"
 					id="txtTematicaSolicitudDefensa" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="75%"
+					sclass="search-query" placeholder="Título"
 					id="txtTituloSolicitudDefensa" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="60%"
+					sclass="search-query" placeholder="Nombre"
 					id="txtNombreTutorSolicitudDefensa" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="60%"
+					sclass="search-query" placeholder="Apellido"
 					id="txtApellidoTutorSolicitudDefensa" />
 			</auxheader>
 

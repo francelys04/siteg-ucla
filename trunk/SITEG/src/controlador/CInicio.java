@@ -116,7 +116,7 @@ public class CInicio extends CGeneral {
 		window.doModal();
 	}
 
-	@Listen("onClick = #btnContactanos")
+	@Listen("onClick = #mitContactanos")
 	public void contactanos() {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/portal-web/VContactanos.zul", null, null);

@@ -2,14 +2,6 @@
 	height="620px" border="normal" closable="true"
 	apply="controlador.CContactanos">
 
-	<style dynamic="true">
-		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
-		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
-
-	</style>
-
 	<style id="estilo">
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
@@ -19,9 +11,8 @@
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
-		transparent; border-left: 1px solid transparent;
-		border-"WebContent/vistas/VItem.zul"top: 1px solid transparent;
-		}
+		transparent; border-left: 1px solid transparent; border-top: 1px
+		solid transparent; }
 
 		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
 		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
@@ -33,7 +24,20 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+		.z-window-modal-cnt, .z-window-highlighted-cnt,
+		.z-window-modal-cnt-noborder,
+		.z-window-highlighted-cnt-noborder,
+		.z-window-overlapped-cnt-noborder { background: #f5f5f5; }
+
+		.z-groupbox-cnt{ background: #fff; border-radius: 10px; border:
+		none; }
+
+
+
+
 	</style>
+
+	<style src="/public/css/bootstrap.css" />
 
 	<separator />
 	<separator />
@@ -44,12 +48,11 @@
 		</columns>
 		<rows>
 			<row>
-				<label value="Programa:" style="color:black" />
+				<label value="Programa:" style="font-weight:bold" />
 			</row>
 
 			<row>
-				<combobox readonly="true"
-					id="cmbProgramaContactanos">
+				<combobox readonly="true" id="cmbProgramaContactanos">
 					<template name="model">
 						<comboitem label="${each.nombre}" />
 					</template>
@@ -57,21 +60,23 @@
 			</row>
 
 			<row>
-				<label value="Nombre y Apellido:" style="color:black" />
+				<label value="Nombre y Apellido:"
+					style="font-weight:bold" />
 			</row>
 			<row>
 				<textbox id="txtNombre" width="190px" />
 			</row>
 
 			<row>
-				<label value="Correo electrónico:" style="color:black" />
+				<label value="Correo electrónico:"
+					style="font-weight:bold" />
 			</row>
 			<row>
 				<textbox id="txtCorreo" width="190px" />
 			</row>
 
 			<row>
-				<label value="Asunto:" style="color:black" />
+				<label value="Asunto:" style="font-weight:bold" />
 
 			</row>
 
@@ -80,7 +85,7 @@
 			</row>
 
 			<row>
-				<label value="Mensaje:" style="color:black" />
+				<label value="Mensaje:" style="font-weight:bold" />
 			</row>
 
 			<row>

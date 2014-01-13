@@ -1,6 +1,9 @@
 <window id="wdwCatalogoRegistrarFactibilidad"
 	title="Proyectos Evaluados" border="normal" width="100%" height="600px"
 	apply="controlador.CCatalogoRegistrarFactibilidad" closable="true">
+	<separator />
+	<separator />
+	<separator />
 
 	<style src="/public/css/bootstrap.css" />
 
@@ -12,34 +15,40 @@
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarFechaFactibilidad" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtMostrarFechaFactibilidad"
+					sclass="search-query" placeholder="Fecha" instant="true"
+					width="60%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtMostrarAreaFactibilidad" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtMostrarAreaFactibilidad"
+					sclass="search-query" placeholder="Área" instant="true" width="60%"
+					value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtMostrarTematicaFactibilidad"
-					placeholder="" instant="true" width="70%" value="" onChange="" />
+					sclass="search-query" placeholder="Temática" instant="true"
+					width="60%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtMostrarTituloFactibilidad"
-					placeholder="" instant="true" width="85%" value="" onChange="" />
+					sclass="search-query" placeholder="Título" instant="true"
+					width="75%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtMostrarNombreTutorFactibilidad"
-					placeholder="" instant="true" width="70%" value="" onChange="" />
+					sclass="search-query" placeholder="Nombre" instant="true"
+					width="60%" value="" onChange="" />
 			</auxheader>
 
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtMostrarApellidoTutorFactibilidad"
-					placeholder="" instant="true" width="70%" value="" onChange="" />
+					sclass="search-query" placeholder="Apellido" instant="true"
+					width="60%" value="" onChange="" />
 			</auxheader>
 		</auxhead>
 

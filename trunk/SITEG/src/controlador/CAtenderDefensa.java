@@ -176,7 +176,7 @@ public class CAtenderDefensa extends CGeneral {
 
 	public boolean validarJurado() {
 		if (ltbJuradoSeleccionado.getItemCount() == buscarCondicionVigenteEspecifica(
-				"Numero de Integrantes del Jurado", programa).getValor()) {
+				"Numero de integrantes del jurado", programa).getValor()) {
 			System.out.println("aqui");
 			return true;
 		} else
@@ -208,7 +208,7 @@ public class CAtenderDefensa extends CGeneral {
 			Messagebox.show(
 					"El numero de profesores en el jurado no es el correcto, debe ser: "
 							+ buscarCondicionVigenteEspecifica(
-									"Numero de Integrantes del Jurado", programa)
+									"Numero de integrantes del jurado", programa)
 									.getValor(), "Error", Messagebox.OK,
 					Messagebox.ERROR);
 		}

@@ -16,34 +16,40 @@
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtFechaRegistrarRevision" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtFechaRegistrarRevision"
+					sclass="search-query" placeholder="Fecha" instant="true"
+					width="60%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtAreaRegistrarRevision" placeholder=""
-					instant="true" width="70%" value="" onChange="" />
+				<textbox id="txtAreaRegistrarRevision"
+					sclass="search-query" placeholder="Área" instant="true" width="60%"
+					value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtTematicaRegistrarRevision"
-					placeholder="" instant="true" width="70%" value="" onChange="" />
+					sclass="search-query" placeholder="Temática" instant="true"
+					width="60%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtTituloRegistrarRevision" placeholder=""
-					instant="true" width="85%" value="" onChange="" />
+				<textbox id="txtTituloRegistrarRevision"
+					sclass="search-query" placeholder="Título" instant="true"
+					width="75%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtNombreTutorRegistrarRevision"
-					placeholder="" instant="true" width="70%" value="" onChange="" />
+					sclass="search-query" placeholder="Nombre" instant="true"
+					width="60%" value="" onChange="" />
 			</auxheader>
 
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtApellidoTutorRegistrarRevision"
-					placeholder="" instant="true" width="70%" value="" onChange="" />
+					sclass="search-query" placeholder="Apellido" instant="true"
+					width="60%" value="" onChange="" />
 			</auxheader>
 		</auxhead>
 
