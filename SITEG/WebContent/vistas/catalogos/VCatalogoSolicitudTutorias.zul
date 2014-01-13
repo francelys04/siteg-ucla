@@ -4,7 +4,7 @@
 	<separator />
 	<separator />
 	<separator />
-	
+
 	<style src="/public/css/bootstrap.css" />
 
 	<listbox id="ltbSolicitud" mold="paging" pageSize="6"
@@ -14,23 +14,24 @@
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
-					id="txtFechaSolicitud" />
+				<textbox instant="true" width="60%"
+					sclass="search-query" placeholder="Fecha" id="txtFechaSolicitud" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox instant="true" width="80%"
-					id="txtAreaSolicitud" />
+					sclass="search-query" placeholder="Área" id="txtAreaSolicitud" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox instant="true" width="80%"
+					sclass="search-query" placeholder="Temática"
 					id="txtTematicaSolicitud" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
-					id="txtDescripcionSolicitud" />
+				<textbox instant="true" width="80%" sclass=" search-query "
+					placeholder="Descripción" id="txtDescripcionSolicitud" />
 			</auxheader>
 
 

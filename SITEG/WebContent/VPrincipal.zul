@@ -31,10 +31,10 @@
 				<div>
 					<menubar id="menubar" autodrop="true">
 						<menuitem label="Inicio" />
-						<menuitem label="Quienes somos"
+						<menuitem label="¿Quiénes somos?"
 							id="mitQuienesSomos" />
 						<menuitem label="Contactanos"
-							apply="controlador.CInicio" id="btnContactanos" />
+							apply="controlador.CInicio" id="mitContactanos" />
 					</menubar>
 				</div>
 				<!--Fin del Menu -->

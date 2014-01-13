@@ -87,7 +87,7 @@
 							<label value="*"
 								style="font-weight:bold;color:red" />
 							<label value="Programa:"
-								sclass="label label-info" style="font-weight:bold" />
+								 style="font-weight:bold" />
 						</hlayout>
 
 						<combobox id="cmbProgramaSolicitud"
@@ -108,7 +108,7 @@
 								style="font-weight:bold;color:red">
 							</label>
 							<label value="Área:"
-								sclass="label label-info" style="font-weight:bold" />
+								 style="font-weight:bold" />
 						</hlayout>
 
 						<combobox id="cmbAreaSolicitud" readonly="true"
@@ -123,7 +123,7 @@
 								style="font-weight:bold;color:red;margin-left:20px">
 							</label>
 							<label value="Temática:"
-								sclass="label label-info" style="font-weight:bold" />
+								 style="font-weight:bold" />
 						</hlayout>
 
 						<combobox id="cmbTematicaSolicitud"
@@ -141,7 +141,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red" />
 						<label value="Descripción (Título Tentativo):"
-							sclass="label label-info" style="font-weight:bold" />
+							 style="font-weight:bold" />
 					</hlayout>
 				</row>
 
@@ -178,7 +178,7 @@
 										style="font-weight:bold;color:red">
 									</label>
 									<label value="Cédula:"
-										sclass="label label-info" style="font-weight:bold" />
+										 style="font-weight:bold" />
 								</hlayout>
 
 								<hbox>
@@ -273,7 +273,7 @@
 										style="font-weight:bold;color:red">
 									</label>
 									<label value="Cédula:"
-										sclass="label label-info" style="font-weight:bold" />
+										 style="font-weight:bold" />
 								</hlayout>
 
 								<hbox>
@@ -294,7 +294,7 @@
 									<label value="*"
 										style="font-weight:bold;color:red" />
 									<label value="Nombre:"
-										sclass="label label-info" style="font-weight:bold" />
+										 style="font-weight:bold" />
 								</hlayout>
 
 								<hbox>
@@ -305,7 +305,7 @@
 										<label value="*"
 											style="font-weight:bold;color:red;margin-left:5px" />
 										<label value="Apellido:"
-											sclass="label label-info" style="font-weight:bold" />
+											 style="font-weight:bold" />
 									</hlayout>
 
 									<textbox id="txtApellidoProfesor"
@@ -319,7 +319,7 @@
 									<label value="*"
 										style="font-weight:bold;color:red" />
 									<label value="Correo:"
-										sclass="label label-info" style="font-weight:bold" />
+										 style="font-weight:bold" />
 								</hlayout>
 
 								<textbox id="txtCorreoProfesor"
