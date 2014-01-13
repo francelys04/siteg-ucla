@@ -260,9 +260,7 @@ public class CSolicitarTutor extends CGeneral {
 	@Listen("onClick = #btnCatalogoProfesorArea")
 	public void buscarProfesor() {
 		
-		Window window = (Window) Executions.createComponents(
-				"/vistas/catalogos/VCatalogoProfesorTematica.zul", null, null);
-		window.doModal();
+		
 		combo = cmbProgramaSolicitud.getValue();
 		combo1 = cmbAreaSolicitud.getValue();
 		combo2 = cmbTematicaSolicitud.getValue();
@@ -275,9 +273,30 @@ public class CSolicitarTutor extends CGeneral {
 			
 		}
 		
+		System.out.println(combo);
+		System.out.println(combo2);
 		
-		catalogo.recibir("transacciones/VSolicitarTutor");
+		if (combo.compareTo("")== 0){
+			System.out.println("pase por el primer");
+			Messagebox.show("Debe Elegir el Programa", "oo ", Messagebox.OK, Messagebox.INFORMATION);
+		}
+		
+		else if (combo2.compareTo("")== 0){
+			System.out.println("pase por el segundo");
+			Messagebox.show("Debe Elegir la Tematica", "oo ", Messagebox.OK, Messagebox.INFORMATION);
+		}
+		
+		if ((combo.compareTo("")!= 0) && (combo2.compareTo("")!= 0))
+		{
+			System.out.println("pAW POR EL Y");
+		catalogo.recibir("transacciones/VSolicitarTutor",combo, combo2);
+		
+		Window window = (Window) Executions.createComponents(
+				"/vistas/catalogos/VCatalogoProfesorTematica.zul", null, null);
+		window.doModal();
+		
 		 wdwSolicitarTutoria.onClose();
+		}
 		 
 		
 
