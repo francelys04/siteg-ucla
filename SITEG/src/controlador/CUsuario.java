@@ -54,7 +54,6 @@ import configuracion.GeneradorBeans;
 @Controller
 public class CUsuario extends CGeneral {
 
-
 	CCatalogoUsuario catalogoUsuario = new CCatalogoUsuario();
 	CCatalogoEstudiante catalogoEstudiante = new CCatalogoEstudiante();
 	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
@@ -75,6 +74,12 @@ public class CUsuario extends CGeneral {
 	List<Usuario> usuarios = servicioUsuario.buscarActivos();
 	List<Grupo> grupos = servicioGrupo.buscarActivos();
 
+	ArrayList<Boolean> valorCorreo = new ArrayList<Boolean>();
+	
+	private String mensaje = "Su solicitud ha sido exitosamente procesada, le enviamos su usuario y contraseña,";
+	
+	
+	
 	@Wire
 	private Textbox txtNombreUsuario;
 	@Wire
@@ -96,104 +101,133 @@ public class CUsuario extends CGeneral {
 	@Wire
 	private Media media;
 	@Wire
-	private Button btnCatalgoProfesorEstudiante;
+	private Button btnCatalogoProfesorEstudiante;
 	@Wire
-	private Radiogroup rdgProfesorEstudiante;
+	private Button btnCatalogoUsuario;
+	
 	@Wire
-	private Label lblCedulaProfesorEstudiante;
+	private Radiogroup rdgProfesorEstudianteOtro;
 	@Wire
 	private Radio rdoProfesor;
 	@Wire
 	private Radio rdoEstudiante;
+	@Wire
+	private Radio rdoOtro;
+	@Wire
+	private Textbox txtCorreo;
+	@Wire
+	private Label lblCorreo;
 
 	void inicializar(Component comp) {
 
 		if (txtNombreUsuario != null)
 			ltbGruposDisponibles.setModel(new ListModelList<Grupo>(grupos));
 
+		txtNombreUsuario.setDisabled(true);
+		txtPasswordUsuario.setDisabled(true);
+
+		try {
+			imagen.setContent(new AImage(url));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 
-		if (map != null) {
-			if (map.get("id") != null) {
+		
+		 if (map != null) {
+			 
+			 if (map.get("id") != null) {
+		 
+		 
+		 long codigo = (Long) map.get("id");
+		 Usuario usuario = servicioUsuario.buscarUsuarioPorId(codigo);
+		 txtNombreUsuario.setValue(usuario.getNombre());
+		 txtPasswordUsuario.setValue(usuario.getPassword());
+		 txtNombreUsuario.setDisabled(true);
+		 txtPasswordUsuario.setDisabled(true);
+		  
+		 llenarGrupos(usuario); 
+		 btnEliminarUsuario.setDisabled(false);
+		  btnCatalogoProfesorEstudiante.setVisible(false);
+		  rdoProfesor.setDisabled(true);
+		  rdoEstudiante.setDisabled(true);
+		  BufferedImage imag; try { imag = ImageIO.read(new
+		  ByteArrayInputStream(usuario .getImagen())); imagen.setContent(imag);
+		  } catch (IOException e) { // TODO Auto-generated catch block
+		  e.printStackTrace(); }
+		  
+		  id = usuario.getId();
+		  
+		  } 
+		  
+		  if (map.get("profesorEstudiante") != null) {
+		  profesorEstudiante = (String) map.get("profesorEstudiante"); 
+		  if (profesorEstudiante.equals("Estudiante")) {
+		  rdoEstudiante.setSelected(true);
+		  } 
+		  if (profesorEstudiante.equals("Profesor")) {
+		  rdoProfesor.setSelected(true); }
+		  
+		  if (profesorEstudiante.equals("Otro")) {
+			  rdoOtro.setSelected(true); }
+		  
+		  } 
+		  if (map.get("nombreUsuario") != null) { 
+			  String nombreUsuario =(String) map.get("nombreUsuario");
+			  txtNombreUsuario.setValue(nombreUsuario); }
+		  if (map.get("passwordUsuario") != null) {
+		  	  String passwordUsuario =(String) map.get("passwordUsuario");
+		  	  txtPasswordUsuario.setValue(passwordUsuario); } 
+		  if (map.get("cedula") != null) {
+			  String cedulaProfesorEstudiante=(String) map.get("cedula");
+			
+			  Estudiante estudiante=servicioEstudiante.buscarEstudiante(cedulaProfesorEstudiante);
+			  Profesor profesor=servicioProfesor.buscarProfesorPorCedula(cedulaProfesorEstudiante);
+			  
+			  if(estudiante!=null){
+				  txtCorreo.setValue(estudiante.getCorreoElectronico());
+				  rdoProfesor.setDisabled(true);
+				  rdoOtro.setDisabled(true);
+	    	  }
+			  if(profesor!=null){
+				  txtCorreo.setValue(profesor.getCorreoElectronico());
+				  rdoEstudiante.setDisabled(true);
+				  rdoOtro.setDisabled(true);
+		      }
+			  txtCorreo.setDisabled(true);
+    	      
+			  
+			  txtNombreUsuario.setValue(cedulaProfesorEstudiante);
+			  txtNombreUsuario.setDisabled(true);
+			  txtPasswordUsuario.setValue(cedulaProfesorEstudiante);
+    		  txtPasswordUsuario.setDisabled(true);
+    		  btnCatalogoUsuario.setVisible(false);
+    		} 
+		 
+		 } 
+	}
 
-				long codigo = (Long) map.get("id");
+	@Listen("onClick = #rdoOtro,#rdoEstudiante,#rdoProfesor")
+	public void seleccionarOtro() {
 
-				Usuario usuario = servicioUsuario.buscarUsuarioPorId(codigo);
-				System.out.println("Id:" + codigo);
-				System.out.println("nombre:" + usuario.getNombre());
+		if (rdoOtro.isSelected()) {
+			txtNombreUsuario.setDisabled(false);
+			txtPasswordUsuario.setDisabled(false);
+			btnCatalogoUsuario.setVisible(true);
+			btnCatalogoProfesorEstudiante.setVisible(false);
+		} else {
+			txtNombreUsuario.setValue("");
+			txtPasswordUsuario.setValue("");
+			txtCorreo.setValue("");
+			txtNombreUsuario.setDisabled(true);
+			txtPasswordUsuario.setDisabled(true);
+			btnCatalogoUsuario.setVisible(false);
+			btnCatalogoProfesorEstudiante.setVisible(true);
 
-				txtNombreUsuario.setValue(usuario.getNombre());
-				txtPasswordUsuario.setValue(usuario.getPassword());
-				txtPasswordUsuario.setDisabled(true);
-
-				llenarGrupos(usuario);
-				Estudiante estudiante = servicioEstudiante
-						.buscarEstudianteLoggeado(usuario);
-				Profesor profesor = servicioProfesor
-						.buscarProfesorLoggeado(usuario);
-				if (estudiante != null) {
-					lblCedulaProfesorEstudiante
-							.setValue(estudiante.getCedula());
-					rdoEstudiante.setSelected(true);
-					rdoEstudiante.setDisabled(true);
-					rdoProfesor.setDisabled(true);
-				}
-				if (profesor != null) {
-					lblCedulaProfesorEstudiante.setValue(profesor.getCedula());
-					rdoProfesor.setSelected(true);
-					rdoEstudiante.setDisabled(true);
-					rdoProfesor.setDisabled(true);
-
-				}
-
-				btnEliminarUsuario.setDisabled(false);
-
-				BufferedImage imag;
-				try {
-					imag = ImageIO.read(new ByteArrayInputStream(usuario
-							.getImagen()));
-					imagen.setContent(imag);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				id = usuario.getId();
-
-			}
-			if (map.get("cedula") != null) {
-
-				cedulaProfesorEstudiante = (String) map.get("cedula");
-				lblCedulaProfesorEstudiante.setValue(cedulaProfesorEstudiante);
-
-			}
-			if (map.get("profesorEstudiante") != null) {
-
-				profesorEstudiante = (String) map.get("profesorEstudiante");
-				if (profesorEstudiante.equals("Estudiante")) {
-					rdoEstudiante.setSelected(true);
-				} else {
-					rdoProfesor.setSelected(true);
-				}
-
-			}
-			if (map.get("nombreUsuario") != null) {
-				String nombreUsuario = (String) map.get("nombreUsuario");
-				txtNombreUsuario.setValue(nombreUsuario);
-			}
-			if (map.get("passwordUsuario") != null) {
-				String passwordUsuario = (String) map.get("passwordUsuario");
-				txtPasswordUsuario.setValue(passwordUsuario);
-			}
-			/*
-			 * if (map.get("imagen") != null) {
-			 * 
-			 * org.zkoss.image.Image image = (org.zkoss.image.Image) map
-			 * .get("imagen"); imagen.setContent(image); }
-			 */
 		}
 
 	}
@@ -201,139 +235,108 @@ public class CUsuario extends CGeneral {
 	@Listen("onClick = #btnGuardarUsuario")
 	public void guardarUsuario() throws IOException {
 
-		if (txtNombreUsuario.getText().compareTo("") == 0
-				|| txtPasswordUsuario.getText().compareTo("") == 0
-				|| lblCedulaProfesorEstudiante.getValue().compareTo("") == 0
-				|| (rdoEstudiante.isChecked() == false && rdoProfesor
-						.isChecked() == false)) {
-			Messagebox.show("Debe completar todos los campos", "Error",
-					Messagebox.OK, Messagebox.ERROR);
+		String nombre = txtNombreUsuario.getValue();
+		String password = txtPasswordUsuario.getValue();
+		String correoUsuario = txtCorreo.getValue();
+		
+		Boolean estatus = true;
+		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+		byte[] imagenUsuario = null;
+		if (media instanceof org.zkoss.image.Image) {
+			imagenUsuario = imagen.getContent().getByteData();
 
 		} else {
 
-			String nombre = txtNombreUsuario.getValue();
-			String password = txtPasswordUsuario.getValue();
-			Boolean estatus = true;
-			Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-			byte[] imagenUsuario = null;
-			if (media instanceof org.zkoss.image.Image) {
-				imagenUsuario = imagen.getContent().getByteData();
+			imagen.setContent(new AImage(url));
+			imagenUsuario = imagen.getContent().getByteData();
+		}
+		for (int i = 0; i < ltbGruposAgregados.getItemCount(); i++) {
+			Grupo grupo = ltbGruposAgregados.getItems().get(i).getValue();
+			gruposUsuario.add(grupo);
+		}
+		Usuario usuario = servicioUsuario.buscarUsuarioPorNombre(nombre);
 
-			} else {
+		if (id == 0 && usuario == null) {
 
-				imagen.setContent(new AImage(url));
-				imagenUsuario = imagen.getContent().getByteData();
-			}
-			for (int i = 0; i < ltbGruposAgregados.getItemCount(); i++) {
-				Grupo grupo = ltbGruposAgregados.getItems().get(i).getValue();
-				gruposUsuario.add(grupo);
-			}
-			Usuario usuario = servicioUsuario.buscarUsuarioPorNombre(nombre);
-			if (id != 0 && usuario != null) {
+			Usuario usuario1 = new Usuario(id, nombre,
+					passwordEncoder.encode(password), estatus, gruposUsuario,
+					imagenUsuario);
+			servicioUsuario.guardar(usuario1);
 
-				usuario.setGrupos(gruposUsuario);
-				usuario.setImagen(imagenUsuario);
+			Usuario usuario2= servicioUsuario.buscarUsuarioPorNombre(nombre);
 			
-				
+			cedulaProfesorEstudiante = nombre;
+
+			if (rdgProfesorEstudianteOtro.getSelectedItem().getLabel()
+					.equals("Estudiante")) {
+
 				Estudiante estudiante = servicioEstudiante
-						.buscarEstudianteLoggeado(usuario);
-				
+						.buscarEstudiante(cedulaProfesorEstudiante);
+				estudiante.setUsuario(usuario2);
+				servicioEstudiante.guardar(estudiante);
+
+			}
+			if (rdgProfesorEstudianteOtro.getSelectedItem().getLabel()
+					.equals("Profesor")) {
 				Profesor profesor = servicioProfesor
-						.buscarProfesorLoggeado(usuario);
-				
-				if(estudiante==null && profesor==null){
-					if (rdgProfesorEstudiante.getSelectedItem().getLabel()
-							.equals("Estudiante")) {
-
-						
-						Estudiante estudiante2 = servicioEstudiante
-								.buscarEstudiante(cedulaProfesorEstudiante);
-						estudiante2.setUsuario(usuario);
-						servicioEstudiante.guardar(estudiante2);
-						
-					} else {
-						Profesor profesor2= servicioProfesor
-							.buscarProfesorPorCedula(cedulaProfesorEstudiante);
-						profesor2.setUsuario(usuario);
-						servicioProfesor.guardarProfesor(profesor2);
-					}
-				}
-				servicioUsuario.guardar(usuario);
-				
-				
-				
-
-				Messagebox.show("Usuario registrado exitosamente",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
-				cancelarItem();
-
-				id = 0;
-
+						.buscarProfesorPorCedula(cedulaProfesorEstudiante);
+				profesor.setUsuario(usuario2);
+				servicioProfesor.guardarProfesor(profesor);
 			}
-			else				
-			if (id == 0 && usuario != null) {
-
-				
-				Messagebox.show(
-						"El nombre de usuario no se encuentra disponible",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
-
-				txtPasswordUsuario.setValue("");
-				txtNombreUsuario.setValue("");
-
-			}
-			else
-			if (id == 0 && usuario == null) {
+			valorCorreo.add(enviarEmailNotificacion(correoUsuario, mensaje+" Usuario: "+nombre+"  "+"Contraseña: "+nombre));
+			confirmacion(valorCorreo);
 			
-								
-				Usuario usuario2 = new Usuario(id, nombre,
-						passwordEncoder.encode(password), estatus,
-						gruposUsuario, imagenUsuario);
-				System.out.println("Imagen:"+imagenUsuario);
-				servicioUsuario.guardar(usuario2);
+			Messagebox.show("Usuario registrado exitosamente", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
+			cancelarUsuario();
+		}
+		if (id != 0) {
 
-				Usuario usuario1 = servicioUsuario
-						.buscarUsuarioPorNombre(nombre);
+			usuario.setNombre(nombre);
+			usuario.setGrupos(gruposUsuario);
+			usuario.setImagen(imagenUsuario);
 
-				if (rdgProfesorEstudiante.getSelectedItem().getLabel()
-						.equals("Estudiante")) {
+			servicioUsuario.guardar(usuario);
+			Messagebox.show("Usuario registrado exitosamente",
+					"Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+			cancelarUsuario();
+			
+		}
+		if (id == 0 && usuario != null) {
 
-					Estudiante estudiante = servicioEstudiante
-							.buscarEstudiante(cedulaProfesorEstudiante);
-					estudiante.setUsuario(usuario1);
-					servicioEstudiante.guardar(estudiante);
+			Messagebox.show("El nombre de usuario no se encuentra disponible",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 
-				} else {
-					Profesor profesor = servicioProfesor
-							.buscarProfesorPorCedula(cedulaProfesorEstudiante);
-					profesor.setUsuario(usuario1);
-					servicioProfesor.guardarProfesor(profesor);
-				}
-				Messagebox.show("Usuario registrado exitosamente",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
-				cancelarItem();
-				id = 0;
-			}
-						
-
-			}}
+			txtPasswordUsuario.setValue("");
+			txtNombreUsuario.setValue("");
+			txtCorreo.setValue("");
+		}
+	}
 
 	@Listen("onClick = #btnCancelarUsuario")
-	public void cancelarItem() throws IOException {
+	public void cancelarUsuario() throws IOException {
+		id = 0;
 		txtNombreUsuario.setValue("");
 		txtPasswordUsuario.setValue("");
-		rdgProfesorEstudiante.setSelectedItem(null);
-		lblCedulaProfesorEstudiante
-				.setValue("No ha seleccionado al Profesor o Estudiante");
-		id = 0;
+		rdgProfesorEstudianteOtro.setSelectedItem(null);
 		ltbGruposDisponibles.setModel(new ListModelList<Grupo>(grupos));
 		ltbGruposAgregados.getItems().clear();
 		imagen.setContent(new AImage(url));
 		rdoEstudiante.setDisabled(false);
 		rdoProfesor.setDisabled(false);
+		txtNombreUsuario.setDisabled(false);
 		txtPasswordUsuario.setDisabled(false);
 		btnEliminarUsuario.setDisabled(true);
-
+		btnCatalogoUsuario.setVisible(true);
+		txtCorreo.setValue("");
+		txtCorreo.setDisabled(false);
+		
+	    btnCatalogoProfesorEstudiante.setVisible(true);
+		rdoProfesor.setDisabled(false);
+		rdoEstudiante.setDisabled(false);
+		rdoOtro.setDisabled(false);
+		
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 
@@ -364,7 +367,7 @@ public class CUsuario extends CGeneral {
 									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 							try {
-								cancelarItem();
+								cancelarUsuario();
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -375,21 +378,46 @@ public class CUsuario extends CGeneral {
 
 	}
 
+	private int confirmacion(ArrayList<Boolean> valor2) {
+		// TODO Auto-generated method stub
+		for(int w=0; w<valor2.size();w++){
+			if(valor2.get(w).equals(false)){
+				return Messagebox.show("Correo electronico no enviado", "Error", Messagebox.OK, Messagebox.ERROR);
+			}
+		}
+		return Messagebox.show("Correo electronico enviado","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+	}
+	
 	@Listen("onClick = #btnCatalogoUsuario")
-	public void buscarItem() {
+	public void buscarUsuario() {
 
+		if(rdoOtro.isChecked()){
+		
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoUsuario.zul", null, null);
 		window.doModal();
-		catalogoUsuario.recibir("maestros/VCrearUsuario");
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
 
+		if (map2 != null) {
+			map = map2;
+		}
+		map.put("profesorEstudiante", rdgProfesorEstudianteOtro
+				.getSelectedItem().getLabel());
+
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+
+		catalogoUsuario.recibir("maestros/VCrearUsuario");
+		}
 	}
 
 	@Listen("onClick = #btnCatalogoProfesorEstudiante")
-	public void buscarItemProfesorEstudiante() {
+	public void buscarProfesorEstudiante() {
 
-		if (rdgProfesorEstudiante.getSelectedItem() != null) {
-			String profesorEstudiante = rdgProfesorEstudiante.getSelectedItem()
+		if (rdgProfesorEstudianteOtro.getSelectedItem() != null) {
+			String profesorEstudiante = rdgProfesorEstudianteOtro.getSelectedItem()
 					.getLabel();
 
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -405,9 +433,8 @@ public class CUsuario extends CGeneral {
 			if (txtPasswordUsuario.getText().compareTo("") != 0)
 				map.put("passwordUsuario", txtPasswordUsuario.getValue());
 
-			map.put("profesorEstudiante", rdgProfesorEstudiante
+			map.put("profesorEstudiante", rdgProfesorEstudianteOtro
 					.getSelectedItem().getLabel());
-			// map.put("imagen", imagen.getContent().getByteData());
 
 			map.put("usuario", true);
 
@@ -418,7 +445,7 @@ public class CUsuario extends CGeneral {
 							+ profesorEstudiante + ".zul", null, null);
 			window.doModal();
 
-			if (rdgProfesorEstudiante.getSelectedItem().getLabel()
+			if (rdgProfesorEstudianteOtro.getSelectedItem().getLabel()
 					.equals("Estudiante")) {
 
 				catalogoEstudiante.recibir("maestros/VCrearUsuario");
@@ -473,34 +500,5 @@ public class CUsuario extends CGeneral {
 		}
 	}
 
-	/*
-	 * @Listen("onChange = #txtNombreUsuario,#txtPasswordUsuario") public void
-	 * guardarDatosTemporal() {
-	 * 
-	 * HashMap<String, Object> map = new HashMap<String, Object>();
-	 * HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
-	 * .getCurrent().getAttribute("itemsCatalogo");
-	 * 
-	 * if (map2 != null) { map = map2; } if (txtNombreUsuario.getValue() != "")
-	 * { map.put("nombreUsuario", txtNombreUsuario.getValue());
-	 * 
-	 * /* Usuario usuario=
-	 * servicioUsuario.buscarUsuarioPorNombre(txtNombreUsuario .getValue());
-	 * if(usuario!=null){ Messagebox.show(
-	 * "El Nombre de Usuario no se encuentra disponible", "Informacion",
-	 * Messagebox.OK, Messagebox.ERROR);
-	 * 
-	 * txtPasswordUsuario.setValue(""); txtNombreUsuario.setValue(""); }
-	 */
-
-	/*
-	 * System.out.println("Entro1"); } if
-	 * (txtPasswordUsuario.getValue().compareTo("") != 0) {
-	 * map.put("passwordUsuario", txtPasswordUsuario.getValue());
-	 * System.out.println("Entro2"); }
-	 * 
-	 * Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-	 * 
-	 * }
-	 */
+	
 }

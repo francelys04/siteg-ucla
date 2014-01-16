@@ -54,7 +54,7 @@ public class CCatalogoUsuario extends CGeneral {
 		System.out.println("Map"+map);
 	}
 
-	@Listen("onChange = #txtNombreMostarUsuario, #txtPasswordMostrarUsuario")
+	@Listen("onChange = #txtNombreMostarUsuario")
 	public void filtrarDatosCatalogo() {
 		List<Usuario> usuarios = servicioUsuario.buscarActivos();
 		List<Usuario> usuarios1 = servicioUsuario.buscarActivos();
@@ -64,13 +64,7 @@ public class CCatalogoUsuario extends CGeneral {
 					.getNombre()
 					.toLowerCase()
 					.contains(
-							txtNombreMostrarUsuario.getValue().toLowerCase())
-					&& usuario
-							.getPassword()
-							.toLowerCase()
-							.contains(
-									txtPasswordMostrarUsuario.getValue()
-											.toLowerCase()))
+							txtNombreMostrarUsuario.getValue().toLowerCase()))
 			{
 				usuarios1.add(usuario);
 			}

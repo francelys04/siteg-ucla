@@ -21,6 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
@@ -43,7 +44,8 @@ import configuracion.GeneradorBeans;
 import fiddle.FooModel;
 import fiddle.FooNode;
 
-public class CCrearGrupo extends SelectorComposer<Component> {
+@Controller
+public class CCrearGrupo extends CGeneral {
 
 	long id = 0;
 	TreeModel _model;
@@ -64,6 +66,7 @@ public class CCrearGrupo extends SelectorComposer<Component> {
 	@Wire
 	private Button btnCancelarGrupo;
 
+	
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 
@@ -406,5 +409,11 @@ public class CCrearGrupo extends SelectorComposer<Component> {
 				"/vistas/catalogos/VCatalogoGrupo.zul", null, null);
 		window.doModal();
 		catalogoGrupo.recibir("maestros/VCrearGrupo");
+	}
+
+	@Override
+	void inicializar(Component comp) {
+		// TODO Auto-generated method stub
+		
 	}
 }
