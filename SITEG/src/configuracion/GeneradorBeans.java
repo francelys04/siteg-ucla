@@ -24,6 +24,7 @@ import servicio.SItemDefensa;
 import servicio.SItemFactibilidad;
 import servicio.SJurado;
 import servicio.SLapso;
+import servicio.SNoticia;
 import servicio.SProfesor;
 import servicio.SPrograma;
 import servicio.SProgramaArea;
@@ -169,5 +170,9 @@ public class GeneradorBeans implements ApplicationContextAware {
 	
 	public static SItemDefensa getServicioItemDefensa(){
 		return applicationContext.getBean(SItemDefensa.class);
+	}
+	public static SNoticia getServicioNoticia() {
+		return applicationContext.getBean(SNoticia.class);
+		
 	}
 }
