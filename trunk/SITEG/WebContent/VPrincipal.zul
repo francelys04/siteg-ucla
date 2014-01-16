@@ -1,11 +1,35 @@
 <?page title="Bienvenido" contentType="text/html;charset=UTF-8"  ?>
 <zk>
 	<?meta name="viewport" content="width=device-width, initial-scale=1.0" ?>
+	
+	<style>
+		.z-loading {
+            background-color:#808080;
+            border:1px outset #A0A0A0;
+            font-weight: bold;
+             font-size: 45;
+            padding:2px;
+            
+        }
+        .z-loading-indicator {
+            color: blue;
+           
+        }
+        .z-loading-icon {    
+            background-image: url('public/imagenes/portal/gif.gif'); 
+            height: 80px;
+			width: 80px; 
+        }
+    </style>	
 	<style src="/public/css/style.css" />
 	<style src="/public/css/bootstrap.css" />
-	<style src="/public/css/bootstrap-responsive.css" />
-	<style src="/public/css/slider.css" />
+	  <style src="/public/css/bootstrap-responsive.css" />
+	<style src="/public/css/slider.css" /> 
+	
+	
+	
 	<html>
+
 		<script type="text/javascript" src="public/js/DP.js"></script>
 
 		<script type="text/javascript" defer="true">
@@ -48,30 +72,73 @@
 						<hbox>
 
 							<!-- inicio Slide -->
-							<div
-								style="text-align:center;margin-left:20px">
-								<html>
-									<ul id="diapos"
-										style="margin-top:7px;">
-										<li>
-											<img class="img"
-												src="public/imagenes/portal/noticias.png" alt="" />
-										</li>
-										<li>
-											<img class="img"
-												src="public/imagenes/portal/12.jpg" alt="" />
-										</li>
-										<li>
-											<img class="img"
-												src="public/imagenes/portal/Noticia2.png" alt="" />
-										</li>
-									</ul>
-								</html>
-							</div>
+<style>
+		.the-slider {
+			width: 820px;
+			height: 310px;
+			overflow: hidden;
+			background-color: #01A9DB;
+		}
+		.the-slider div {
+			width: 1500px;
+		}
+		.the-slider div img {
+			margin: 5px 10px;
+			width: 800px;
+			height: 300px;
+		}
+</style>
+	<script type="text/javascript"><![CDATA[
+		var listaImagenes = [],
+			longitud,
+			index = 3,
+			frameWidth = 420,
+			animateTime = 4500,
+			slideShow;
+		function setContent (content) {
+			listaImagenes = content.split(',');
+			longitud = listaImagenes.length
+		}
+		function iniciarSlideShow (delay) {
+			var $slider = jq('$slider'),
+				$container = jq('$container');
+			slideShow = setInterval (function () {
+				var imagenUno = $container.find('img')[0];
+				$slider.animate({'scrollLeft': '+='+frameWidth+'px'}, animateTime, null, function (){
+					var imagenUno = $container.find('img')[0];
+					// change the src of first image after slide
+					//firstImage.src = contentList[index];
+					// update index
+					index = (index+1) % longitud;
+
+					// move the first image to the last
+					$container[0].appendChild(imagenUno);
+					// reset the scrollLeft of slider
+					$slider[0].scrollLeft = 0;
+					
+				});
+			}, delay);
+		}
+		
+	]]></script>
+                 
+
+	<div apply="controlador.CInicio">
+		<div id="slider" class="the-slider">
+			<div id="container">
+				<image id="imgNoticiaUno" />
+				<image id="imgNoticiaDos" />
+				<image id="imgNoticiaTres" />
+			</div>
+		</div>
+		
+	</div> 
+	
 							<!-- fin slide-->
 						</hbox>
 					</div>
 					<!-- inicio consulta status-->
+					
 					<div sclass="label-info"
 						style="float:center;width:100%; position:absolute; margin-top:10px;margin-left:2%,margin-right:2%">
 						<panel height="80px" width="100%"
@@ -114,7 +181,9 @@
 
 					<hbox>
 						<!-- inicio Solicita tu tutor -->
+						
 						<div style="float:left;margin-top:100px;">
+						
 
 							<panel height="300px" width="100%"
 								border="rounded" framable="true">
@@ -222,7 +291,7 @@
 										</div>
 										<div
 											style=" text-align:center;">
-											<image
+											<image id="biblio"
 												src="public/imagenes/portal/biblioteca.jpeg" width="60%"
 												height="80%" />
 										</div>
@@ -284,9 +353,9 @@
 								action="j_spring_security_check" method="POST"
 								xmlns:h="native">
 								<textbox placeholder="Usuario"
-									width="25%" style="margin-top:4px" id="log_usuario"
+									width="15%" style="margin-top:4px" id="log_usuario"
 									name="j_username" hflex="1" />
-								<textbox placeholder="Clave" width="25%"
+								<textbox placeholder="Clave" width="15%"
 									style="margin-top:4px" id="log_clave" hflex="1" type="password"
 									name="j_password" />
 								<button sclass="btn btn-primary"
