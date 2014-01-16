@@ -21,6 +21,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
@@ -74,6 +75,8 @@ public class CInicio extends CGeneral {
 	private Listbox ltbCronograma;
 	@Wire
 	private Window wdwCrono;
+	@Wire
+	private Label lblOlvidoClave;
 	public static long idPrograma;
 
 	@Override
@@ -106,6 +109,12 @@ public class CInicio extends CGeneral {
 	public void SolicitarTutor() {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
+		window.doModal();
+	}
+	@Listen("onClick = #lblOlvidoClave")
+	public void reiniciarClave() {
+		Window window = (Window) Executions.createComponents(
+				"/vistas/portal-web/VReinicioClave.zul", null, null);
 		window.doModal();
 	}
 

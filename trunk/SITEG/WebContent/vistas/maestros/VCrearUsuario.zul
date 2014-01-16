@@ -52,6 +52,29 @@
 			</columns>
 			<rows>
 				<row>
+					<hbox>
+						
+						<label value="Asignar a:" style="color:black" />
+					</hbox>
+
+					<radiogroup id="rdgProfesorEstudianteOtro"
+						width="50px">
+						<radio id="rdoProfesor" label="Profesor"
+							width="20px" />
+						<radio id="rdoEstudiante" label="Estudiante"
+							width="20px" />
+						<radio id="rdoOtro" label="Otro"
+							width="20px" />
+					</radiogroup>
+					<button id="btnCatalogoProfesorEstudiante"
+						image="/public/imagenes/iconos/catalogo.png"
+						style="margin-left:40px">
+					</button>
+
+
+
+				</row>
+				<row>
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red">
@@ -73,7 +96,6 @@
 				</row>
 
 				<row>
-
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red">
@@ -81,9 +103,23 @@
 						<label value="Password:" style="color:black" />
 					</hlayout>
 
-					<textbox id="txtPasswordUsuario" type="password" width="90%" />
+					<textbox id="txtPasswordUsuario" type="password"
+						width="90%" />
 
 				</row>
+					<row>
+					<hlayout>
+					<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label id="lblCorreo" value="Correo:"
+							style="color:black" />
+					</hlayout>
+					<hbox>
+						<textbox id="txtCorreo" width="120%" />
+					</hbox>
+				</row>
+				
 				<row>
 					<label value="Foto:" style="font-weight:bold" />
 					<panel>
@@ -99,40 +135,6 @@
 					</vbox>
 				</row>
 
-				<row>
-					<hbox>
-						<label value="*"
-							style="font-weight:bold;color:red">
-						</label>
-						<label value="Asignar a:" style="color:black" />
-					</hbox>
-
-					<radiogroup id="rdgProfesorEstudiante"
-						width="50px">
-						<radio id="rdoProfesor" label="Profesor"
-							width="20px" />
-						<radio id="rdoEstudiante" label="Estudiante"
-							width="20px" />
-					</radiogroup>
-					<button id="btnCatalogoProfesorEstudiante"
-						image="/public/imagenes/iconos/catalogo.png"
-						style="margin-left:40px">
-					</button>
-
-
-
-				</row>
-				<row>
-					<hbox>
-						<label value="*"
-							style="font-weight:bold;color:red">
-						</label>
-						<label value="Cedula:" style="color:black" />
-					</hbox>
-						<label id="lblCedulaProfesorEstudiante"
-							value="No ha seleccionado al Profesor o Estudiante" />
-					
-				</row>
 
 			</rows>
 		</grid>

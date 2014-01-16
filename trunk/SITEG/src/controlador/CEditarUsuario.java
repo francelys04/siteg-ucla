@@ -15,11 +15,15 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Image;
+import org.zkoss.zul.Label;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 import servicio.SUsuario;
@@ -32,10 +36,14 @@ public class CEditarUsuario extends CGeneral {
 	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	URL url = getClass().getResource("/configuracion/usuario.png");
+	
 	@Wire
-	private Textbox txtNombreUsuarioEditar;
+	private Label lblNombreUsuarioEditar;
 	@Wire
-	private Textbox txtContraseniaUsuarioEditar;
+	private Textbox txtClaveUsuarioNueva;
+	@Wire
+	private Textbox txtClaveUsuarioConfirmar;
 	@Wire
 	private Image imagenUsuarioEditar;
 	@Wire
@@ -43,55 +51,77 @@ public class CEditarUsuario extends CGeneral {
 	@Wire
 	private Media mediaUsuarioEditar;
 	private long id = 0;
-	
-	
+
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		System.out.println(auth.getName());
-		Usuario usuario = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
+		Usuario usuario = servicioUsuario
+				.buscarUsuarioPorNombre(auth.getName());
 		id = usuario.getId();
-		txtContraseniaUsuarioEditar.setValue(usuario.getPassword());
-		txtNombreUsuarioEditar.setValue(usuario.getNombre());
+		lblNombreUsuarioEditar.setValue(usuario.getNombre());
 		try {
 			BufferedImage imag;
-			imag = ImageIO.read(new ByteArrayInputStream(usuario
-					.getImagen()));
+			imag = ImageIO.read(new ByteArrayInputStream(usuario.getImagen()));
 			imagenUsuarioEditar.setContent(imag);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
 	@Listen("onUpload = #fudImagenUsuarioEditar")
 	public void processMedia(UploadEvent event) {
 		mediaUsuarioEditar = event.getMedia();
-		imagenUsuarioEditar.setContent((org.zkoss.image.Image) mediaUsuarioEditar);
+		imagenUsuarioEditar
+				.setContent((org.zkoss.image.Image) mediaUsuarioEditar);
 
 	}
-	
+
 	@Listen("onClick = #btnGuardarUsuarioEditar")
-	public void editarUsuario() throws IOException{
-		Usuario usuarioAuxiliar = servicioUsuario.buscarUsuarioPorId(id);
-		String nombre = txtNombreUsuarioEditar.getValue();
-		String password = txtContraseniaUsuarioEditar.getValue();
-		Boolean estatus = true;
-		byte[] imagenUsuario = null;
-		if (mediaUsuarioEditar instanceof org.zkoss.image.Image){
-			imagenUsuario = imagenUsuarioEditar.getContent().getByteData();
+	public void editarUsuario(Event event) throws IOException {
+
+		if(txtClaveUsuarioNueva.getValue().equals(txtClaveUsuarioConfirmar.getValue())){
 			
-		}
-		else
-		{
-			URL url = getClass().getResource("/configuracion/usuario.png");
+		Usuario usuarioAuxiliar = servicioUsuario.buscarUsuarioPorId(id);
+		String nombre = lblNombreUsuarioEditar.getValue();
+		Boolean estatus = true;
+		String password = "";
+		byte[] imagenUsuario = null;
+		if (mediaUsuarioEditar instanceof org.zkoss.image.Image) {
+			imagenUsuario = imagenUsuarioEditar.getContent().getByteData();
+
+		} else {
 			imagenUsuarioEditar.setContent(new AImage(url));
-			imagenUsuario = imagenUsuarioEditar.getContent().getByteData();	
+			imagenUsuario = imagenUsuarioEditar.getContent().getByteData();
 		}
-		Usuario usuarioEditado = new Usuario(id, nombre, passwordEncoder.encode(password),
-				estatus, usuarioAuxiliar.getGrupos(), imagenUsuario);
-		servicioUsuario.guardar(usuarioEditado);
+
+		if (txtClaveUsuarioConfirmar.getText().compareTo("") != 0) {
+			password = txtClaveUsuarioConfirmar.getValue();
+			usuarioAuxiliar.setPassword(passwordEncoder.encode(password));
+
+		}
+		usuarioAuxiliar.setImagen(imagenUsuario);
+		usuarioAuxiliar.setEstatus(true);
+
+		servicioUsuario.guardar(usuarioAuxiliar);
+		Messagebox.show("Usuarios exitosamente editado", "Informado",
+				Messagebox.OK, Messagebox.INFORMATION);
+		
+		txtClaveUsuarioConfirmar.setValue("");
+		txtClaveUsuarioNueva.setValue("");
+		imagenUsuarioEditar.setContent(new AImage(url));
+		
+	}
+	
+	else {
+		Messagebox.show("No coincide las claves", "Error",
+				Messagebox.OK, Messagebox.ERROR);
+		
+		
 	}
 }
 
+}
