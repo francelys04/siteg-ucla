@@ -1,0 +1,49 @@
+<window title="Catalogo Tematica" border="normal" width="800px"
+	id="wdwCatalogoTematica" apply="controlador.CCatalogoTematicaArea"
+	closable="true">
+
+	<style src="/public/css/bootstrap.css" />
+
+	<listbox id="ltbTematica" width="100%" mold="paging" pageSize="10"
+		emptyMessage="No hay tematicas registradas">
+
+		<auxhead sclass="category-center">
+
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Nombre"
+					id="txtNombreMostrarTematica" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Área"
+					id="txtAreaMostrarTematica" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Descripción"
+					id="txtDescripcionMostrarTematica" />
+			</auxheader>
+
+		</auxhead>
+		<listhead>
+			<listheader label="Nombre" align="center" />
+			<listheader label="Area" align="center" />
+			<listheader label="Descripción" align="center" />
+
+
+		</listhead>
+
+
+		<template name="model">
+			<listitem>
+				<listcell label="${each.nombre}" />
+				<listcell label="${each.areaInvestigacion.nombre}" />
+				<listcell label="${each.descripcion}" />
+			</listitem>
+		</template>
+	</listbox>
+</window>

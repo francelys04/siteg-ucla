@@ -31,6 +31,7 @@ import org.zkoss.zk.ui.event.UploadEvent;
 
 import servicio.SActividad;
 import servicio.SArchivo;
+import servicio.SUsuario;
 import configuracion.GeneradorBeans;
 
 
@@ -40,6 +41,7 @@ public class CArchivo extends CGeneral {
 	
 	
 	SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
+	
 
 
 	@Wire
@@ -140,7 +142,7 @@ public class CArchivo extends CGeneral {
 		}
 }
 	
-
+//Metodo para subir un archivo
 public static byte[] toByteArray(InputStream is) throws SQLException,
 	IOException {
 

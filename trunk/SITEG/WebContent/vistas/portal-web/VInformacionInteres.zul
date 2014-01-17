@@ -1,5 +1,5 @@
 <window id="wdwInfomacionInteres" title="Información de Interes"
-	border="normal" height="80%" width="80%" closable="true">
+	border="normal" height="80%" width="80%" closable="true" apply="controlador.CInicio">
 
 
 	<borderlayout sclass="complex-layout" height="100%">
@@ -11,11 +11,10 @@
 
 
 			<menubar id="menubar" orient="vertical" autodrop="true">
-				<menuitem label="Tutores disponibles"
-					onClick='vistas.src = "vistas/catalogos/VCatalogoProfesor.zul"' />
-				<menuitem  label="Areas de Investigación" />
-				<menuitem  label="Temáticas" />
-				<menuitem label="Descargas"  onClick='vistas.src = "vistas/catalogos/VCatalogoArchivoDescarga.zul"' />
+				<menuitem label="Tutores disponibles" onClick='vistas.src = "vistas/catalogos/VCatalogoProfesor.zul"' />
+				<menuitem  label="Areas de Investigación" onClick='vistas.src = "vistas/catalogos/VCatalogoArea.zul"' />
+				<menuitem label="Descargas" onClick='vistas.src = "vistas/catalogos/VCatalogoArchivoDescarga.zul"'  />
+				<!--   -->
 			</menubar>
 
 		</west>

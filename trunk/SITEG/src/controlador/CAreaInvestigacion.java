@@ -5,42 +5,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.persistence.GeneratedValue;
-
-
-
-
 import modelo.AreaInvestigacion;
-import modelo.Estudiante;
-import modelo.Lapso;
-import modelo.Programa;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -108,7 +86,8 @@ public class CAreaInvestigacion extends CGeneral {
 //abre la ventana del catalogo
 	@Listen("onClick = #btnBuscarArea")
 	public void buscarArea() {
-
+		CCatalogoAreaInvestigacion areas = new CCatalogoAreaInvestigacion();
+		areas.metodoPrender();
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoArea.zul", null, null);
 		window.doModal();
@@ -124,8 +103,8 @@ public class CAreaInvestigacion extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);			
 		}else{
-			Messagebox.show("¿Desea guardar el area de investigacion?",
-					"Dialogo de confirmación", Messagebox.OK
+			Messagebox.show("ï¿½Desea guardar el area de investigacion?",
+					"Dialogo de confirmaciï¿½n", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -136,7 +115,7 @@ public class CAreaInvestigacion extends CGeneral {
 								Boolean estado = true;
 								AreaInvestigacion area = new AreaInvestigacion(id, nombre,descripcion, estado);
 								servicioArea.guardar(area);
-								 Messagebox.show("Area de investigación registrada exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
+								 Messagebox.show("Area de investigaciï¿½n registrada exitosamente","Informaciï¿½n", Messagebox.OK,Messagebox.INFORMATION); 
 								cancelarArea();
 								id = 0;
 								
@@ -153,7 +132,7 @@ public class CAreaInvestigacion extends CGeneral {
 //elimina un area
 	@Listen("onClick = #btnEliminarArea")
 	public void eliminarArea() {
-		Messagebox.show("¿Desea eliminar los datos del de area de investigacion?",
+		Messagebox.show("ï¿½Desea eliminar los datos del de area de investigacion?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
@@ -163,7 +142,7 @@ public class CAreaInvestigacion extends CGeneral {
 							AreaInvestigacion area = servicioArea.buscarArea(id);
 							area.setEstatus(false);
 							servicioArea.guardar(area);
-							 Messagebox.show("Area de investigación eliminada exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
+							 Messagebox.show("Area de investigaciï¿½n eliminada exitosamente","Informaciï¿½n", Messagebox.OK,Messagebox.INFORMATION); 
 							cancelarArea();
 							
 							

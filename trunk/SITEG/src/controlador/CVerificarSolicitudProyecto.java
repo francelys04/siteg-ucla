@@ -184,10 +184,16 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 	
 	@Listen("onClick = #btnGuardar")
 	public void GuardarVerificacion() {
-		if ((rdoCompleto.isChecked()==false) && (rdoIncompleto.isChecked()==false) || txtObservacion.getValue().compareTo("")==0 ){
-			Messagebox.show("Debe indicar si los requisitos estan completos o incompletos o ingresar una observacion", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+		if (ltbRequisitosSeleccionadas.getItems().size() ==0)
+		{
+			Messagebox.show("Debe seleccionar al menos un requisito", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 		}
 		else{
+		if ((rdoCompleto.isChecked()==false) && (rdoIncompleto.isChecked()==false) ){
+			Messagebox.show("Debe indicar si los requisitos estan completos o incompletos", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+		}
+		else{
+			
 		long auxId2;
 		auxId2=auxId;
 		Teg teg1 = servicioTeg.buscarTeg(auxId2);
@@ -202,26 +208,29 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		
 		
 		if (rdoCompleto.isChecked()==false){
-		
+			if ( txtObservacion.getValue().compareTo("")==0){
+				 Messagebox.show("Debe indicar una observacion","Error", Messagebox.OK,Messagebox.ERROR);
+			}else{
 				for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
 		            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
 		            valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), txtObservacion.getValue()));
 		            Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		   		 salir();  
-			 	        	
+				}     	
 				
 			}
 		}
 			
 		else if (rdoCompleto.isChecked()==true) {
-			
+		
 		Teg teg = servicioTeg.buscarTeg(auxId2);
 		String estatus= "Proyecto Registrado";
 		teg.setEstatus(estatus);
-		servicioTeg.guardar(teg);
-		txtObservacion.setVisible(false);
-		txtObservacion.setValue("");
-		txtObservacion.setValue("Sus requisitos estan correctos y completos");
+		servicioTeg.guardar(teg);		
+		if (txtObservacion.getValue().compareTo("")==0){
+			txtObservacion.setValue("Sus requisitos estan correctos y completos");			
+		}
+		
 		//enviarEmailNotificacion();
 		 for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
 	            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
@@ -231,7 +240,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		 } 
 		}
 		}	
-		
+		}
 		}
 
 

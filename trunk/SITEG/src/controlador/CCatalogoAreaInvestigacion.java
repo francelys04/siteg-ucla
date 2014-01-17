@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.AreaInvestigacion;
+import modelo.Cronograma;
+import modelo.Lapso;
+import modelo.Programa;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -12,13 +15,17 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Popup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import servicio.SAreaInvestigacion;
+import servicio.SLapso;
+import servicio.SPrograma;
 import configuracion.GeneradorBeans;
 
 public class CCatalogoAreaInvestigacion extends CGeneral {
@@ -26,7 +33,8 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 	
 		//servicio 
 		SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-		
+		SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+		SLapso servicioLapso = GeneradorBeans.getServicioLapso();
 
 		//atributos de la vista de registrar area
 		@Wire
@@ -43,18 +51,38 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		private Textbox txtNombreMostrarArea;
 		@Wire
 		private Textbox txtDescripcionMostrarArea;
+		@Wire
+		private Combobox cmbPrograma;
 		private long id = 0;
 		private static String vistaRecibida;
+		private static boolean h;
 
 		
 		void inicializar(Component comp) {
+			List<Programa> programa = servicioPrograma.buscarActivas();
+			if (cmbPrograma != null) {
+				cmbPrograma.setModel(new ListModelList<Programa>(programa));
 
+			}
+			
 			//busca todas las areas y llena un listado
 			List<AreaInvestigacion> area = servicioArea.buscarActivos();
-
-			if(txtNombreArea==null){
+			
+			
+			if(h==true){
+				ltbArea.setEmptyMessage("No hay areas de investigacion registradas");
+				ltbArea.setTooltiptext("Doble clic para seleccionar el area");
 				ltbArea.setModel(new ListModelList<AreaInvestigacion>(area));
+				cmbPrograma.setVisible(false);
+				System.out.println("paso if");
 				}
+			else {
+				ltbArea.setTooltiptext("Doble clic para ver las tematicas del area");
+				ltbArea.setEmptyMessage("Seleccione un programa para ver las areas");
+				cmbPrograma.setVisible(true);
+				
+			}
+			
 
 			Selectors.wireComponents(comp, this, false);
 
@@ -62,6 +90,27 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 					.getCurrent().getAttribute("itemsCatalogo");
 
 		}
+		public void metodoPrender(){
+			h=true;			
+		
+		}
+		public void metodoApagar(){
+				h=false;		
+			
+		}
+		
+		@Listen("onSelect = #cmbPrograma")			
+		public void llenarLista() {
+			long idPrograma;
+			idPrograma = Long.parseLong(cmbPrograma.getSelectedItem().getId());
+			Lapso lapso = servicioLapso.buscarLapsoVigente();
+			Programa programa = servicioPrograma.buscar(idPrograma);
+			List<AreaInvestigacion> areas = servicioArea.areasPrograma(programa, lapso);
+			ltbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+			
+
+		}
+		
 		//filtra el catalogo en este caso solo por nombre y descripcion
 		@Listen("onChange = #txtNombreMostrarArea, #txtDescripcionMostrarArea")
 		public void filtrarDatosCatalogo() {
@@ -102,9 +151,14 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 			@Listen("onDoubleClick = #ltbArea")
 			public void mostrarDatosCatalogo() {
 				
-				if (vistaRecibida == null) {
-					
-					vistaRecibida = "maestros/VAreaInvestigacion";
+				if (h == false) {
+				Listitem listItem = ltbArea.getSelectedItem();
+				AreaInvestigacion areaDatosCatalogo = (AreaInvestigacion) listItem.getValue();
+				CCatalogoTematicaArea area = new CCatalogoTematicaArea();
+				area.recibirId(areaDatosCatalogo);		
+				Window window = (Window) Executions.createComponents(
+						"/vistas/catalogos/VCatalogoTematicaArea.zul", null, null);
+				window.doModal();
 
 				} else {
 				
