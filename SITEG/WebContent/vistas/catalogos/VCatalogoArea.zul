@@ -2,7 +2,19 @@
 	id="wdwCatalogoArea" apply="controlador.CCatalogoAreaInvestigacion"
 	closable="true">
 	<style src="/public/css/bootstrap.css" />
-
+	
+	<hbox>
+						<label value="Programa:" />
+	<combobox id="cmbPrograma"
+							width="180px" readonly="true" style="margin-left:60px"
+							tabindex="10">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
+	
+	</hbox>
 	<listbox id="ltbArea" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay areas de investigación registradas">
 
