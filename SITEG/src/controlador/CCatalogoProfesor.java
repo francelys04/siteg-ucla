@@ -89,7 +89,7 @@ public class CCatalogoProfesor extends CGeneral {
 	{
 		vistaRecibida = vista;
 		//System.out.println("imprimo");
-		//System.out.println(vistaRecibida);
+		System.out.println(vistaRecibida);
 	}
 	
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor,#txtProgramaMostrarProfesor")

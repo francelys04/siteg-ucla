@@ -61,7 +61,6 @@ public class CRegistrarRevision extends CGeneral {
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	SAvance servicioAvance = GeneradorBeans.getServicioAvance();
-
 	@Wire
 	private Datebox dtbRegistrarRevision;
 	@Wire
@@ -99,9 +98,8 @@ public class CRegistrarRevision extends CGeneral {
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		Profesor profesor = ObtenerUsuarioProfesor();
-		Programa programa = new Programa();
-		programa = profesor.getPrograma();
+		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions

@@ -113,14 +113,16 @@ public class CInicio extends CGeneral {
 			cmbPrograma.setModel(new ListModelList<Programa>(programa));
 
 		}
-	
+		List<Noticia> noticias= servicioNoticia.buscarActivos();
 		
-		if(imgNoticiaUno != null){
+		if(!noticias.isEmpty()){
 		imgNoticiaUno.setContent(getImagen());
 		imgNoticiaDos.setContent(getImagen());
 		imgNoticiaTres.setContent(getImagen());		
 		Clients.evalJavaScript("setContent('"+getContentString()+"')");
 		iniciarSlide ();
+		}else{
+			System.out.println("nula");
 		}
 	}
 	//inician metodos para mostrar imagenes en el slide

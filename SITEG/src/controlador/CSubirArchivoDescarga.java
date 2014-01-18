@@ -35,6 +35,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import servicio.SActividad;
 import servicio.SArchivo;
+import servicio.SPrograma;
 import configuracion.GeneradorBeans;
 
 
@@ -44,7 +45,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 	
 	
 	SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
-
+	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
 	@Wire
 	private Textbox txtNombreArchivoDescarga;
@@ -152,8 +153,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 							if (evt.getName().equals("onOK")) {
 								
 								Profesor profesor = ObtenerUsuarioProfesor();		
-								Programa programa = new Programa();			
-								programa = profesor.getPrograma();		
+								Programa programa = servicioPrograma.buscarProgramaDeDirector(profesor);		
 								archivo.setId(id);
 								archivo.setPrograma(programa);
 								archivo.setDescripcion(txtDescripcionArchivoDescarga.getValue());

@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,16 +19,16 @@ public class Programa {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private long id;
 
-	@Column(name = "nombre")
+	@Column(name = "nombre", length = 100)
 	private String nombre;
 
-	@Column(name = "descripcion")
+	@Column(name = "descripcion", length = 500)
 	private String descripcion;
 
-	@Column(name = "correo")
+	@Column(name = "correo", length = 100)
 	private String correo;
 
 	@Column(name = "estatus")
@@ -35,8 +37,9 @@ public class Programa {
 	@OneToMany(mappedBy = "programa")
 	private Set<Estudiante> estudiantes;
 
-	@OneToMany(mappedBy = "programa")
-	private Set<Profesor> profesores;
+	@OneToOne(optional=false)
+	@JoinColumn(name = "profesor_cedula", referencedColumnName = "cedula")
+	private Profesor directorPrograma;
 
 	@OneToMany(mappedBy = "programa")
 	private Set<CondicionPrograma> condicionesProgramas;
@@ -52,15 +55,19 @@ public class Programa {
 
 	@OneToMany(mappedBy = "programa")
 	private Set<ProgramaItem> programasItems;
+	
+	@OneToMany(mappedBy = "programa")
+	private Set<Archivo> archivos;
 
 	public Programa(long id, String nombre, String descripcion, String correo,
-			Boolean estatus) {
+			Boolean estatus, Profesor directorPrograma) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.correo = correo;
 		this.estatus = estatus;
+		this.directorPrograma = directorPrograma;
 	}
 
 	public Programa() {
@@ -117,14 +124,6 @@ public class Programa {
 		this.estudiantes = estudiantes;
 	}
 
-	public Set<Profesor> getProfesores() {
-		return profesores;
-	}
-
-	public void setProfesores(Set<Profesor> profesores) {
-		this.profesores = profesores;
-	}
-
 	public Set<CondicionPrograma> getCondicionesProgramas() {
 		return condicionesProgramas;
 	}
@@ -164,6 +163,22 @@ public class Programa {
 
 	public void setProgramasItems(Set<ProgramaItem> programasItems) {
 		this.programasItems = programasItems;
+	}
+
+	public Set<Archivo> getArchivos() {
+		return archivos;
+	}
+
+	public void setArchivos(Set<Archivo> archivos) {
+		this.archivos = archivos;
+	}
+
+	public Profesor getDirectorPrograma() {
+		return directorPrograma;
+	}
+
+	public void setDirectorPrograma(Profesor directorPrograma) {
+		this.directorPrograma = directorPrograma;
 	}
 
 }

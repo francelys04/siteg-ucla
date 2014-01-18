@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "solicitud_tutoria")
@@ -19,23 +21,24 @@ public class SolicitudTutoria {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name="id", nullable = false)
 	private long id;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="fecha")
 	private Date fecha;
 	
-	@Column(name="descripcion")
+	@Column(name="descripcion", length = 500)
 	private String descripcion;
 	
-	@Column(name="estatus")
+	@Column(name="estatus", length = 100)
 	private String estatus;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name="profesor_cedula", referencedColumnName="cedula")
 	private Profesor profesor;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name="tematica_id", referencedColumnName="id")
 	private Tematica tematica;
 	
@@ -114,5 +117,5 @@ public class SolicitudTutoria {
 
 	public void setEstudiantes(Set<Estudiante> estudiantes) {
 		this.estudiantes = estudiantes;
-	}	
+	}
 }

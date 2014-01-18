@@ -14,16 +14,16 @@ import javax.persistence.Table;
 public class ItemDefensa {
 
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_id", referencedColumnName = "id")
 	private ItemEvaluacion item;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "defensa_id", referencedColumnName = "id")
 	private Defensa defensa;
 	
-	@Column(name = "ponderacion")
+	@Column(name = "ponderacion", length = 100)
 	private String ponderacion;
 
 	public ItemDefensa() {

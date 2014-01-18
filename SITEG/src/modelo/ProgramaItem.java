@@ -1,6 +1,5 @@
 package modelo;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -15,16 +14,17 @@ public class ProgramaItem {
 
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "programa_id", referencedColumnName = "id")
 	private Programa programa;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_evaluacion_id", referencedColumnName = "id")
 	private ItemEvaluacion item;
 	
-	@ManyToOne
+	@Id
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "lapso_id", referencedColumnName = "id")
 	private Lapso lapso;
 

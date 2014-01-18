@@ -1,13 +1,11 @@
 package modelo;
 
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,13 +15,13 @@ public class Actividad {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private long id;
 
-	@Column(name = "nombre")
+	@Column(name = "nombre", length = 500)
 	private String nombre;
 
-	@Column(name = "descripcion")
+	@Column(name = "descripcion", length = 500)
 	private String descripcion;
 
 	@Column(name = "estatus")

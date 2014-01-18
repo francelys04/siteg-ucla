@@ -4,12 +4,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,13 +15,13 @@ public class Requisito {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@Column(name = "nombre")
+	@Column(name = "nombre", length = 100)
 	private String nombre;
 	
-	@Column(name = "descripcion")
+	@Column(name = "descripcion", length = 500)
 	private String descripcion;
 	
 	@Column(name = "estatus")
@@ -36,8 +32,6 @@ public class Requisito {
 	
 	@OneToMany(mappedBy="requisito")
 	private Set<ProgramaRequisito> programaRequisitos;
-	
-	
 	
 	public Requisito(long id, String nombre, String descripcion,
 			Boolean estatus) {

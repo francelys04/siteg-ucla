@@ -18,12 +18,12 @@ import javax.persistence.TemporalType;
 public class TegRequisito {
 
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "requisito_id", referencedColumnName = "id")
 	private Requisito requisito;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "teg_id", referencedColumnName = "id")
 	private Teg teg;
 	

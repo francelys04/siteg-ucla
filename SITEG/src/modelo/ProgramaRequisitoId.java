@@ -6,4 +6,5 @@ public class ProgramaRequisitoId implements Serializable {
 
 	private Programa programa;
 	private Requisito requisito;
+	private Lapso lapso;
 }

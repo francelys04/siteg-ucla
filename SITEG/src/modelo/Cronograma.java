@@ -18,16 +18,17 @@ import javax.persistence.TemporalType;
 public class Cronograma {
 
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "programa_id", referencedColumnName = "id")
 	private Programa programa;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "actividad_id", referencedColumnName = "id")
 	private Actividad actividad;
 	
-	@ManyToOne
+	@Id
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "lapso_id", referencedColumnName = "id")
 	private Lapso lapso;
 	

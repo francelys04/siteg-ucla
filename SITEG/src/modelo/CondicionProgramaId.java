@@ -6,4 +6,5 @@ public class CondicionProgramaId implements Serializable {
 
 	private Condicion condicion;
 	private Programa programa;
+	private Lapso lapso;
 }

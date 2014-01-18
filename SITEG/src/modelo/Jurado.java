@@ -13,16 +13,16 @@ import javax.persistence.Table;
 public class Jurado {
 
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "teg_id", referencedColumnName = "id")
 	private Teg teg;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "profesor_cedula", referencedColumnName = "cedula")
 	private Profesor profesor;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "tipo_jurado_id", referencedColumnName = "id")
 	private TipoJurado tipoJurado;
 

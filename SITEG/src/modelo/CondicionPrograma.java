@@ -2,7 +2,6 @@ package modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -15,16 +14,17 @@ import javax.persistence.Table;
 public class CondicionPrograma {
 
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "condicion_id", referencedColumnName = "id")
 	private Condicion condicion;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "programa_id", referencedColumnName = "id")
 	private Programa programa;
 	
-	@ManyToOne
+	@Id
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "lapso_id", referencedColumnName = "id")
 	private Lapso lapso;
 	

@@ -50,8 +50,6 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		// Agarrar datos del usuario
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
-		System.out.println(auth.getName());
-		
 		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
 		Profesor profesor = servicioProfesor.buscarProfesorLoggeado(u);
 		return profesor;
@@ -72,8 +70,6 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		// Agarrar datos del usuario
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
-		System.out.println(auth.getName());
-		
 		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
 		Estudiante estudiante = servicioEstudiante.buscarEstudianteLoggeado(u);
 		return estudiante;

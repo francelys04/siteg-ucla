@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "defensa")
@@ -19,31 +21,31 @@ public class Defensa {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private long id;
 
 	@OneToOne
 	@JoinColumn(name = "teg_id", referencedColumnName = "id")
 	private Teg teg;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha")
 	private Date fecha;
 
+	@Temporal(TemporalType.TIME)
 	@Column(name = "hora")
 	private Date hora;
 
-	@Column(name = "lugar")
+	@Column(name = "lugar", length = 100)
 	private String lugar;
 
-	
-
-	@Column(name = "estatus")
+	@Column(name = "estatus", length = 100)
 	private String estatus;
 
 	@OneToMany(mappedBy = "defensa")
 	private Set<ItemDefensa> itemsDefensas;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "profesor_cedula", referencedColumnName = "cedula")
 	private Profesor profesor;
 	

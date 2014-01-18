@@ -1,15 +1,12 @@
 package modelo;
 
-import java.util.Date;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,34 +15,34 @@ import javax.persistence.Table;
 public class Estudiante {
 
 	@Id
-	@Column(name = "cedula")
+	@Column(name = "cedula", nullable = false)
 	private String cedula;
 
-	@Column(name = "nombre")
+	@Column(name = "nombre", length = 100)
 	private String nombre;
 
-	@Column(name = "apellido")
+	@Column(name = "apellido", length = 100)
 	private String apellido;
 
-	@Column(name = "correo_electronico")
+	@Column(name = "correo_electronico", length = 100)
 	private String correoElectronico;
 
-	@Column(name = "sexo")
+	@Column(name = "sexo", length = 100)
 	private String sexo;
 
-	@Column(name = "direcion")
+	@Column(name = "direcion", length = 500)
 	private String direccion;
 
-	@Column(name = "telefono_movil")
+	@Column(name = "telefono_movil", length = 100)
 	private String telefono_movil;
 	
-	@Column(name = "telefono_fijo")
+	@Column(name = "telefono_fijo", length = 100)
 	private String telefono_fijo;
 
 	@Column(name = "estatus")
 	private Boolean estatus;
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name="programa_id", referencedColumnName = "id")
 	private Programa programa;
 	

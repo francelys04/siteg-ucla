@@ -166,10 +166,11 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	}
 	public List<Teg> buscarDatos()
 	{
-			Profesor profesor = ObtenerUsuarioProfesor();		
-			Programa programa = new Programa();			
-			programa= profesor.getPrograma();			
-			List<Profesor>  profesores = servicioProfesor.buscarProfesorDelPrograma(programa);			
+//			Profesor profesor = ObtenerUsuarioProfesor();		
+//			Programa programa = new Programa();			
+//			programa= profesor.getPrograma();			
+//			List<Profesor>  profesores = servicioProfesor.buscarProfesorDelPrograma(programa);
+			List<Profesor>  profesores = servicioProfesor.buscarActivos();
 			List<Teg>  tegs = servicioTeg.BuscarTegSolicitandoRegistro();
 			Profesor profesor1 = new Profesor();		
 			List<Teg> t = new ArrayList<Teg>();			

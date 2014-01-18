@@ -6,24 +6,22 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="categoria")
 public class Categoria {
-
 	
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name="id", nullable = false)
 	private long id;
 	
-	@Column(name="nombre")
+	@Column(name="nombre", length = 100)
 	private String nombre;
 	
-	@Column(name="descripcion")
+	@Column(name="descripcion", length = 500)
 	private String descripcion;
 	
 	@Column(name="estatus")
@@ -31,8 +29,7 @@ public class Categoria {
 	
 	@OneToMany(mappedBy="categoria")
 	private Set<Profesor> profesores;
-	
-	
+		
 	public Categoria() {
 		super();
 		// TODO Auto-generated constructor stub

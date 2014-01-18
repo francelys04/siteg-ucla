@@ -47,8 +47,6 @@ public class CProfesor extends CGeneral {
 	@Wire
 	private Combobox cmbCategoriaProfesor;
 	@Wire
-	private Combobox cmbProgramaProfesor;
-	@Wire
 	private Textbox txtCedulaProfesor;
 	@Wire
 	private Textbox txtNombreProfesor;
@@ -84,13 +82,13 @@ public class CProfesor extends CGeneral {
 	private Textbox txtCorreoMostrarProfesor;
 	@Wire
 	private Textbox txtCategoriaMostrarProfesor;
-	@Wire Button btnEliminarProfesor;
+	@Wire 
+	private Button btnEliminarProfesor;
 
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		List<Categoria> categorias = servicioCategoria.buscarCategoria();
-		List<Programa> programas = servicioPrograma.buscarActivas();
 		
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		if (cmbCategoriaProfesor == null) {
@@ -99,9 +97,6 @@ public class CProfesor extends CGeneral {
 			cmbCategoriaProfesor.setModel(new ListModelList<Categoria>(
 					categorias));
 		}
-		
-		cmbProgramaProfesor.setModel(new ListModelList<Programa>(programas));
-
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -127,7 +122,6 @@ public class CProfesor extends CGeneral {
 				txtCorreoProfesor.setValue(profesor.getCorreoElectronico());
 				cmbCategoriaProfesor.setValue(profesor.getCategoria()
 						.getNombre());
-				cmbProgramaProfesor.setValue(profesor.getPrograma().getNombre());
 				btnEliminarProfesor.setDisabled(false);
 				map.clear();
 				map = null;
@@ -157,7 +151,6 @@ public class CProfesor extends CGeneral {
 				|| txtTelefonoMovilProfesor.getText().compareTo("") == 0
 				|| txtTelefonoFijoProfesor.getText().compareTo("") == 0
 				|| cmbCategoriaProfesor.getText().compareTo("") == 0
-				|| cmbProgramaProfesor.getText().compareTo("") == 0
 				|| (rdoSexoFProfesor.isChecked() == false && rdoSexoMProfesor
 						.isChecked() == false)) {
 			Messagebox.show("Debe completar todos los campos", "Error",
@@ -182,18 +175,15 @@ public class CProfesor extends CGeneral {
 									.getValue();
 							String correo = txtCorreoProfesor.getValue();
 							String categorias = cmbCategoriaProfesor.getValue();
-							String programas = cmbProgramaProfesor.getValue();
 							Boolean estatus = true;
 							Categoria categoria = servicioCategoria
 									.buscarCategoriaPorNombre(categorias);
-							Programa programa = servicioPrograma
-							.buscarPorNombrePrograma(programas);
 							Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
 							Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
 							Profesor profesor = new Profesor(cedula, nombre,
 									apellido, correo, sexo, direccion,
 									telefonoMovil, telefonoFijo, estatus,
-									categoria, programa, tematicasProfesor, usuario);
+									categoria, tematicasProfesor, usuario);
 							servicioProfesor.guardarProfesor(profesor);
 							Messagebox.show(
 									"Profesor registrado exitosamente",
@@ -228,7 +218,6 @@ public class CProfesor extends CGeneral {
 		txtTelefonoFijoProfesor.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
 		txtCorreoProfesor.setValue("");
 		cmbCategoriaProfesor.setValue("");
-		cmbProgramaProfesor.setValue("");
 		btnEliminarProfesor.setDisabled(true);
 			
 	}

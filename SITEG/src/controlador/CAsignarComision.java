@@ -172,22 +172,24 @@ public class CAsignarComision extends CGeneral {
 				cedulas.add(cedulasComision);
 			}
 
+			
+			//REVISAR
 			List<Profesor> profesoresDisponibles = servicioProfesor
 					.buscarProfesoresSinComision(cedulas);
 
-			List<Profesor> profesoresDisponiblesporPrograma = new ArrayList<Profesor>();
-
-			for (int j = 0; j < profesoresDisponibles.size(); j++) {
-
-				if (profesoresDisponibles.get(j).getPrograma().getNombre()
-						.equals(programa.getNombre()))
-					profesoresDisponiblesporPrograma.add(profesoresDisponibles
-							.get(j));
-
-			}
+//			List<Profesor> profesoresDisponiblesporPrograma = new ArrayList<Profesor>();
+//
+//			for (int j = 0; j < profesoresDisponibles.size(); j++) {
+//
+//				if (profesoresDisponibles.get(j).getPrograma().getNombre()
+//						.equals(programa.getNombre()))
+//					profesoresDisponiblesporPrograma.add(profesoresDisponibles
+//							.get(j));
+//
+//			}
 
 			lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
-					profesoresDisponiblesporPrograma));
+					profesoresDisponibles));
 			
 			
 

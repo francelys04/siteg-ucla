@@ -1,8 +1,6 @@
 package modelo;
 
-import java.util.Date;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,17 +14,17 @@ public class Etapa {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name="id", nullable = false)
 	private long id;
 	
-	@Column(name="nombre")
+	@Column(name="nombre", length = 100)
 	private String nombre;
 	
-	@Column(name="descripcion")
+	@Column(name="descripcion", length = 500)
 	private String descripcion;
 	
 	@Column(name="duracion")
-	private Date duracion;
+	private long duracion;
 	
 	@Column(name="estatus")
 	private Boolean estatus;
@@ -34,7 +32,7 @@ public class Etapa {
 	@OneToMany(mappedBy="etapa")
 	private Set<TegEtapa> etapasTeg;
 
-	public Etapa(long id, String nombre, String descripcion, Date duracion,
+	public Etapa(long id, String nombre, String descripcion, long duracion,
 			Boolean estatus) {
 		super();
 		this.id = id;
@@ -73,14 +71,6 @@ public class Etapa {
 		this.descripcion = descripcion;
 	}
 
-	public Date getDuracion() {
-		return duracion;
-	}
-
-	public void setDuracion(Date duracion) {
-		this.duracion = duracion;
-	}
-
 	public Boolean getEstatus() {
 		return estatus;
 	}
@@ -95,5 +85,13 @@ public class Etapa {
 
 	public void setEtapasTeg(Set<TegEtapa> etapasTeg) {
 		this.etapasTeg = etapasTeg;
+	}
+
+	public long getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(long duracion) {
+		this.duracion = duracion;
 	}	
 }

@@ -14,19 +14,19 @@ public class Archivo {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@Column(name = "nombre")
+	@Column(name = "nombre", length = 100)
 	private String nombre;
 	
-	@Column(name = "descripcion")
+	@Column(name = "descripcion", length = 500)
 	private String descripcion;
 	
-	@Column(name = "tipo_documento")
+	@Column(name = "tipo_documento", length = 100)
 	private String tipoDocumento;
 	
-	@Column(name = "tipo_archivo")
+	@Column(name = "tipo_archivo", length = 100)
 	private String tipoArchivo;
 	
 	@Column(name = "documento")

@@ -18,13 +18,13 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@Column(name = "nombre")
+	@Column(name = "nombre", length = 100, unique = true)
 	private String nombre;
 	
-	@Column(name = "password")
+	@Column(name = "password", length = 100)
 	private String password;
 	
 	@Column(name = "estatus")
@@ -44,6 +44,9 @@ public class Usuario {
 	
 	@OneToOne(mappedBy="usuario")
 	private Estudiante estudiante;
+	
+	@OneToMany(mappedBy = "usuario")
+	private Set<Noticia> noticias;
 	
 	public Usuario(long codigo, String nombre, String password, Boolean estatus, Set<Grupo> grupos, byte[] imagen) {
 		super();
@@ -125,6 +128,14 @@ public class Usuario {
 
 	public void setEstudiante(Estudiante estudiante) {
 		this.estudiante = estudiante;
+	}
+
+	public Set<Noticia> getNoticias() {
+		return noticias;
+	}
+
+	public void setNoticias(Set<Noticia> noticias) {
+		this.noticias = noticias;
 	}
 
 }
