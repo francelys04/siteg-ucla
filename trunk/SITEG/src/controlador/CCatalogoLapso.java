@@ -57,8 +57,6 @@ public class CCatalogoLapso extends CGeneral {
 
 	public void recibir(String vista) {
 		vistaRecibida = vista;
-		System.out.println("imprimo");
-		System.out.println(vistaRecibida);
 	}
 
 	// Filtra por nombre

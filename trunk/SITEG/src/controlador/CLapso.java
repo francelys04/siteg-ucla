@@ -125,7 +125,10 @@ public class CLapso extends CGeneral {
 				|| (dtbFinLapso.getText().compareTo("") == 0)) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
-		} else {
+		} else if(dtbInicioLapso.getValue().after(dtbFinLapso.getValue())){
+			Messagebox.show("La fecha de fin de lapso debe ser posterior a la fecha de inicio", "Error",
+					Messagebox.OK, Messagebox.ERROR);
+		} else{
 			Messagebox.show("¿Desea guardar los datos del lapso académico?",
 					"Dialogo de confirmación", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
@@ -184,8 +187,6 @@ public class CLapso extends CGeneral {
 		dtbInicioLapso.setValue(null);
 		dtbFinLapso.setValue(null);
 		btnEliminarLapso.setDisabled(true);
-
-
 	}
 
 }

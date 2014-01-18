@@ -122,7 +122,7 @@
 				<row>
 					<hbox>
 						<panel title="Tematicas Disponibles"
-							width="260px">
+							width="425px">
 							<panelchildren>
 								<listbox
 									emptyMessage="No hay tema registradas"
@@ -163,7 +163,7 @@
 						</panel>
 
 						<panel title="Tematicas Seleccionadas"
-							width="260px">
+							width="425px">
 							<panelchildren>
 								<listbox
 									emptyMessage="No hay tematicas seleccionadas"
