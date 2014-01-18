@@ -20,40 +20,36 @@ import javax.persistence.Table;
 public class Profesor {
 
 	@Id
-	@Column(name = "cedula")
+	@Column(name = "cedula", nullable = false)
 	private String cedula;
 
-	@Column(name = "nombre")
+	@Column(name = "nombre", length = 100)
 	private String nombre;
 
-	@Column(name = "apellido")
+	@Column(name = "apellido", length = 100)
 	private String apellido;
 
-	@Column(name = "correo_electronico")
+	@Column(name = "correo_electronico", length = 100)
 	private String correoElectronico;
 
-	@Column(name = "sexo")
+	@Column(name = "sexo", length = 100)
 	private String sexo;
 
-	@Column(name = "direccion")
+	@Column(name = "direccion", length = 500)
 	private String direccion;
 
-	@Column(name = "telefono_movil")
+	@Column(name = "telefono_movil", length = 100)
 	private String telefono_movil;
 
-	@Column(name = "telefono_fijo")
+	@Column(name = "telefono_fijo", length = 100)
 	private String telefono_fijo;
 
 	@Column(name = "estatus")
 	private Boolean estatus;
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "categoria_id", referencedColumnName = "id")
 	private Categoria categoria;
-	
-	@ManyToOne
-	@JoinColumn(name="programa_id", referencedColumnName = "id")
-	private Programa programa;
 
 	@OneToMany(mappedBy = "profesor")
 	private Set<Factibilidad> factibilidad;
@@ -81,6 +77,9 @@ public class Profesor {
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private Usuario usuario;
 	
+	@OneToOne(mappedBy="directorPrograma")
+	private Programa programa;
+	
 	public Profesor() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -89,7 +88,7 @@ public class Profesor {
 	public Profesor(String cedula, String nombre, String apellido,
 			String correoElectronico, String sexo, String direccion,
 			String telefono_movil, String telefono_fijo, Boolean estatus,
-			Categoria categoria, Programa programa, Set<Tematica> tematicas, Usuario usuario) {
+			Categoria categoria, Set<Tematica> tematicas, Usuario usuario) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -101,7 +100,6 @@ public class Profesor {
 		this.telefono_movil = telefono_movil;
 		this.estatus = estatus;
 		this.categoria = categoria;
-		this.programa = programa;
 		this.tematicas=tematicas;
 		this.usuario=usuario;
 	}
@@ -185,15 +183,6 @@ public class Profesor {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
-	
-	public Programa getPrograma() {
-		return programa;
-	}
-
-	public void setPrograma(Programa programa) {
-		this.programa = programa;
-	}
 
 	public Set<SolicitudTutoria> getSolicitudesTutoria() {
 		return solicitudesTutoria;
@@ -242,8 +231,6 @@ public class Profesor {
 	public void setDefensas(Set<Defensa> defensas) {
 		this.defensas = defensas;
 	}
-
-	
 
 	public Set<Tematica> getTematicas() {
 		return tematicas;

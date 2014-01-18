@@ -76,13 +76,13 @@ public class CCatalogoAsignarComision extends CGeneral {
 	// programa del profesor que se encuentra loggeado
 	public List<Teg> buscarDatos() {
 
-		Profesor profesor = ObtenerUsuarioProfesor();
-		Programa programa = new Programa();
-		programa = profesor.getPrograma();
-
-		List<Profesor> profesores = servicioProfesor
-				.buscarProfesorDelPrograma(programa);
-
+//		Profesor profesor = ObtenerUsuarioProfesor();
+//		Programa programa = new Programa();
+//		programa = profesor.getPrograma();
+//
+//		List<Profesor> profesores = servicioProfesor
+//				.buscarProfesorDelPrograma(programa);
+		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		List<Teg> tegs = servicioTeg.BuscarProyectoRegistrado();
 
 		Profesor profesor1 = new Profesor();

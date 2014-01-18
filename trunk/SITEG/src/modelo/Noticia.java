@@ -1,14 +1,11 @@
 package modelo;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,13 +14,13 @@ public class Noticia {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name="id", nullable = false)
 	private long id;
 	
-	@Column(name="nombre")
+	@Column(name="nombre", length = 100)
 	private String nombre;
 
-	@Column(name="descripcion")
+	@Column(name="descripcion", length = 500)
 	private String descripcion;
 	
 	@Column(name="estatus")
@@ -32,9 +29,10 @@ public class Noticia {
 	@Column(name="imagen")
 	private byte[] imagen;
 	
-
-
-
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+	private Usuario usuario;
+	
 	public Noticia() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -42,13 +40,14 @@ public class Noticia {
 
 
 	public Noticia(long id, String nombre, String descripcion, Boolean estatus,
-			byte[] imagen) {
+			byte[] imagen, Usuario usuario) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.imagen = imagen;
+		this.usuario = usuario;
 	}
 
 
@@ -88,6 +87,14 @@ public class Noticia {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

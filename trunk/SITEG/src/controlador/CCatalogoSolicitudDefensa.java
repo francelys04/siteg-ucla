@@ -21,12 +21,14 @@ import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
 
+import servicio.SPrograma;
 import servicio.STeg;
 
 @Controller
 public class CCatalogoSolicitudDefensa extends CGeneral {
 
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
+	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	CAtenderDefensa vista = new CAtenderDefensa();
 	
 	@Wire
@@ -51,7 +53,7 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		if(map != null || map==null){
-			tegsDefensa1 = servicioTeg.buscarTegPorProgramaParaDefensa(ObtenerUsuarioProfesor().getPrograma());
+			tegsDefensa1 = servicioTeg.buscarTegPorProgramaParaDefensa(servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
 			tegsDefensa.add(tegsDefensa1.get(0));
 			for(int i =1; i<tegsDefensa1.size();i++){
 				System.out.println("id"+tegsDefensa1.get(i).getId());

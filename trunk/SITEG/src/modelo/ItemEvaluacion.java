@@ -5,7 +5,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,16 +14,16 @@ public class ItemEvaluacion {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@Column(name = "nombre")
+	@Column(name = "nombre", length = 100)
 	private String nombre;
 	
-	@Column(name = "descripcion")
+	@Column(name = "descripcion", length = 500)
 	private String descripcion;
 	
-	@Column(name = "tipo")
+	@Column(name = "tipo", length = 100)
 	private String tipo;
 	
 	@Column(name = "estatus")

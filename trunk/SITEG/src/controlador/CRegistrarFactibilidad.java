@@ -27,6 +27,8 @@ import org.zkoss.zul.Window;
 
 import servicio.SEstudiante;
 import servicio.SFactibilidad;
+import servicio.SProfesor;
+import servicio.SPrograma;
 import servicio.STeg;
 import servicio.SItemFactibilidad;
 
@@ -42,7 +44,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	SItemFactibilidad servicioItemFactibilidad = GeneradorBeans
 			.getServicioItemFactibilidad();
-	
+	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
 	@Wire
 	private Listbox ltbListaFactibilidad;
@@ -87,9 +89,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		Profesor profesor = ObtenerUsuarioProfesor();
-		Programa programa = new Programa();
-		programa = profesor.getPrograma();
+		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions

@@ -58,10 +58,7 @@ public class TestVM extends SelectorComposer<Component> {
 		
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
-		System.out.println(auth.getName());
-		
 		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
-		//System.out.println(u.getImagen().toString());
 		if(u.getImagen().toString() == "[]"  )
 			imagenes.setSrc("/imagenes/buscar.png");
 		try {
@@ -73,14 +70,6 @@ public class TestVM extends SelectorComposer<Component> {
 			 //TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(auth.getAuthorities());
-		// List<GrantedAuthority> authorities = new
-		// ArrayList<GrantedAuthority>(auth.getAuthorities());
-		// System.out.println(authorities.toString());
-		// authorities.add(new GrantedAuthorityImpl('ROLE_NEWROLE'));
-		// Authentication newAuth = new
-		// UsernamePasswordToken(auth.getPrincipal(),auth.getCredentials(),authorities)
-		// SecurityContextHolder.getContext().setAuthentication(newAuth);
 		
 		treeMenu.setModel(getModel());
 
@@ -134,20 +123,12 @@ public class TestVM extends SelectorComposer<Component> {
 				arbole.add(arbol);
 				
 		}
-		//System.out.println(arboles.toString());
-		//arbolito = servicioArbol.ordenarPorID(ids);
-		System.out.println(ids.toString());
 		Collections.sort(ids);
-		System.out.println(ids.toString());
 		for(int t = 0; t<ids.size(); t++){
 			Arbol a;
 			a = servicioArbol.buscarPorId(ids.get(t));
 			arboles.add(a);
 		}
-		System.out.println(arbole.toString());
-		System.out.println(arboles.toString());
-		//List<Arbol> arboles = servicioArbol.listarArbol(); 
-
 		
 		long temp1,temp2,temp3=0;
 		
@@ -202,9 +183,6 @@ public class TestVM extends SelectorComposer<Component> {
 			i=i-1;	
 			}
 			}
-		
-		
-		System.out.println(arboles.toString());
 		return root;
 		
 	}
@@ -214,7 +192,6 @@ public class TestVM extends SelectorComposer<Component> {
 		String item = String.valueOf(treeMenu.getSelectedItem().getValue());
 		if (treeMenu.getSelectedItem().getLevel() > 0) {
 			Arbol arbolItem = servicioArbol.buscarPorNombreArbol(item);
-			System.out.println(arbolItem.getUrl());
 			String ruta = "/vistas/" + arbolItem.getUrl() + ".zul";
 			formularios.setSrc(null);
 			formularios.setSrc(ruta);

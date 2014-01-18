@@ -3,6 +3,7 @@ package servicio;
 import java.util.List;
 
 import modelo.Categoria;
+import modelo.Profesor;
 import modelo.Programa;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ public class SPrograma {
 	}
 
 	public Programa buscar(long id) {
-
 		return interfacePrograma.findOne(id);
 	}
 	
@@ -30,8 +30,6 @@ public class SPrograma {
 		programa = interfacePrograma.findOne(idprograma);
 		return programa;
 	}
-	
-
 	public List<Programa> listarPrograma() {
 		return interfacePrograma.findAll();
 	}
@@ -52,6 +50,12 @@ public class SPrograma {
 		// TODO Auto-generated method stub
 		Programa programa;
 		programa = interfacePrograma.findByNombreAndEstatusTrue(programas);
+		return programa;
+	}
+	
+	public Programa buscarProgramaDeDirector(Profesor profesor){
+		Programa programa;
+		programa = interfacePrograma.findByDirectorPrograma(profesor);
 		return programa;
 	}
 

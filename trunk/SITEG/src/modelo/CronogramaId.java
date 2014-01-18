@@ -6,4 +6,5 @@ public class CronogramaId implements Serializable {
 
 	private Programa programa;
 	private Actividad actividad;
+	private Lapso lapso;
 }

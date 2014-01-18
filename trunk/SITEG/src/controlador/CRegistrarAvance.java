@@ -99,9 +99,7 @@ public class CRegistrarAvance extends CGeneral {
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		Profesor profesor = ObtenerUsuarioProfesor();
-		Programa programa = new Programa();
-		programa = profesor.getPrograma();
+		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions

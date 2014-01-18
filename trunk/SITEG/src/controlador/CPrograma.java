@@ -14,6 +14,7 @@ import modelo.CondicionPrograma;
 import modelo.Grupo;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
+import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
 
@@ -48,6 +49,7 @@ import org.zkoss.zul.Window;
 import servicio.SAreaInvestigacion;
 import servicio.SCondicion;
 import servicio.SCondicionPrograma;
+import servicio.SProfesor;
 import servicio.SPrograma;
 import configuracion.GeneradorBeans;
 
@@ -58,12 +60,13 @@ public class CPrograma extends CGeneral {
 	 * Inicializacion del servicioPrograma que permitira realizar las
 	 * operaciones con las entidades relacionadas con base de datos
 	 */
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	
+
 	CCatalogoPrograma catalogo = new CCatalogoPrograma();
-	
+	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
+	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
+	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
+			.getServicioCondicionPrograma();
 	SCondicion servicioCondicion = GeneradorBeans.getServicioCondicion();
 	/*
 	 * Declaracion de componentes dado a sus id, implementados en las vistas
@@ -87,7 +90,8 @@ public class CPrograma extends CGeneral {
 	private Button btnEliminarPrograma;
 	@Wire
 	private Button btnGuardarPrograma;
-
+	@Wire
+	private Textbox txtDirectorPrograma;
 	/*
 	 * Inicializacion de la varible global id que sera asociado con el id del
 	 * programa
@@ -105,7 +109,7 @@ public class CPrograma extends CGeneral {
 		 * estatus=true con el servicioPrograma mediante el metodo buscarActivas
 		 */
 		List<Programa> programas = servicioPrograma.buscarActivas();
-		
+
 		/*
 		 * Validacion para mostrar el listado de programas mediante el
 		 * componente ltbPrograma dependiendo si se encuentra ejecutando la
@@ -129,16 +133,20 @@ public class CPrograma extends CGeneral {
 		if (map != null) {
 			if ((Long) map.get("id") != null) {
 				id = ((Long) map.get("id"));
-				System.out.println(id);
 				/*
 				 * Creacion de objeto cargado con el servicioPrograma mediante
 				 * el metodo buscar dado a su id y asi llenar los textbox de la
 				 * vista VPrograma
 				 */
+				System.out.println(map.get("id"));
+				System.out.println(map.get("cedula"));
 				Programa programa = servicioPrograma.buscar(id);
 				txtNombrePrograma.setValue(programa.getNombre());
 				txtDescripcionPrograma.setValue(programa.getDescripcion());
 				txtCorreoPrograma.setValue(programa.getCorreo());
+				if (map.get("cedula") != null){
+				txtDirectorPrograma.setValue((String) map.get("cedula"));
+				}
 				btnEliminarPrograma.setDisabled(false);
 				map.clear();
 				map = null;
@@ -158,87 +166,102 @@ public class CPrograma extends CGeneral {
 
 	}
 
-	
-
-	
+	@Listen("onClick = #btnCatalogoDirectorPrograma")
+	public void buscarDirector() {
+		Window window = (Window) Executions.createComponents(
+				"/vistas/catalogos/VCatalogoProfesor.zul", null, null);
+		window.doModal();
+		catalogoProfesor.recibir("maestros/VPrograma");
+	}
 
 	// Metodo para guardar un programa
-		@Listen("onClick = #btnGuardarPrograma")
-		public void guardarPrograma() {
-			if ((txtNombrePrograma.getText().compareTo("") == 0)
-					|| (txtDescripcionPrograma.getText().compareTo("") == 0)
-					|| (txtCorreoPrograma.getText().compareTo("") == 0)) {
-				Messagebox.show("Debe completar todos los campos", "Error",
-						Messagebox.OK, Messagebox.ERROR);
+	@Listen("onClick = #btnGuardarPrograma")
+	public void guardarPrograma() {
+		if ((txtNombrePrograma.getText().compareTo("") == 0)
+				|| (txtDescripcionPrograma.getText().compareTo("") == 0)
+				|| (txtCorreoPrograma.getText().compareTo("") == 0)
+				|| (txtDirectorPrograma.getText().compareTo("") == 0)) {
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
 
-			} else {
-				Messagebox.show("¿Desea guardar los datos del programa?",
-						"Dialogo de confirmación", Messagebox.OK
-								| Messagebox.CANCEL, Messagebox.QUESTION,
-						new org.zkoss.zk.ui.event.EventListener() {
-							public void onEvent(Event evt)
-									throws InterruptedException {
-								if (evt.getName().equals("onOK")) {
-									String nombre = txtNombrePrograma.getValue(); 
-									String descripcion = txtDescripcionPrograma.getValue(); 
-									String correo = txtCorreoPrograma.getValue();
-									Boolean estatus = true; 
-									Programa programa = new Programa( id,nombre, descripcion,correo,estatus);
-									servicioPrograma.guardar(programa);
-									Programa p = servicioPrograma.buscarPorNombrePrograma(nombre);
-									System.out.println("Programa Guardado");
-									List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
-									List<Condicion> condiciones = servicioCondicion.buscarActivos();
-									for(int i=0; i<condiciones.size(); i++){
-										Condicion condicion = condiciones.get(i);
-										CondicionPrograma condicionPrograma = new CondicionPrograma();
-										condicionPrograma.setPrograma(p);
-										condicionPrograma.setCondicion(condicion);
-										condicionPrograma.setValor(0);
-										condicionesPrograma.add(condicionPrograma);
-									}
-									
-									servicioCondicionPrograma.guardar(condicionesPrograma);
-									cancelarPrograma(); 
-									Messagebox.show("Programa registrado exitosamente","Información", Messagebox.OK,Messagebox.INFORMATION); 
-									id = 0;
-									}
-							}
-						});
-
-			}
-		}
-		
-		// Metodo para eliminar un programa dado su id
-		@Listen("onClick = #btnEliminarPrograma")
-		public void eliminarPrograma() {
-			Messagebox.show("¿Desea eliminar los datos del programa?",
-					"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
-					Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
-						public void onEvent(Event evt) throws InterruptedException {
+		} else {
+			Messagebox.show("¿Desea guardar los datos del programa?",
+					"Dialogo de confirmación", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
-								Programa programa = servicioPrograma.buscar(id);
-								programa.setEstatus(false);
+								String nombre = txtNombrePrograma.getValue();
+								String descripcion = txtDescripcionPrograma
+										.getValue();
+								String correo = txtCorreoPrograma.getValue();
+								Boolean estatus = true;
+								Profesor directorPrograma = servicioProfesor.buscarProfesorPorCedula(txtDirectorPrograma.getValue());
+								Programa programa = new Programa(id, nombre,
+										descripcion, correo, estatus,
+										directorPrograma);
 								servicioPrograma.guardar(programa);
+								Programa p = servicioPrograma
+										.buscarPorNombrePrograma(nombre);
+								System.out.println("Programa Guardado");
+								List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
+								List<Condicion> condiciones = servicioCondicion
+										.buscarActivos();
+								for (int i = 0; i < condiciones.size(); i++) {
+									Condicion condicion = condiciones.get(i);
+									CondicionPrograma condicionPrograma = new CondicionPrograma();
+									condicionPrograma.setPrograma(p);
+									condicionPrograma.setCondicion(condicion);
+									condicionPrograma.setValor(0);
+									condicionesPrograma.add(condicionPrograma);
+								}
+
+								servicioCondicionPrograma
+										.guardar(condicionesPrograma);
 								cancelarPrograma();
-								Messagebox.show("Programa eliminado exitosamente", "Información", Messagebox.OK,Messagebox.INFORMATION);
-								btnEliminarPrograma.setDisabled(true);
+								Messagebox.show(
+										"Programa registrado exitosamente",
+										"Información", Messagebox.OK,
+										Messagebox.INFORMATION);
+								id = 0;
 							}
 						}
 					});
-		}
-			// Metodo para limpiar los componentes textbox y variable id
-		@Listen("onClick = #btnCancelarPrograma")
-		public void cancelarPrograma() {
-			id = 0;
-			txtNombrePrograma.setValue("");
-			txtDescripcionPrograma.setValue("");
-			txtCorreoPrograma.setValue("");
-			btnEliminarPrograma.setDisabled(true);
 
 		}
+	}
 
-		
+	// Metodo para eliminar un programa dado su id
+	@Listen("onClick = #btnEliminarPrograma")
+	public void eliminarPrograma() {
+		Messagebox.show("¿Desea eliminar los datos del programa?",
+				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+							Programa programa = servicioPrograma.buscar(id);
+							programa.setEstatus(false);
+							servicioPrograma.guardar(programa);
+							cancelarPrograma();
+							Messagebox.show("Programa eliminado exitosamente",
+									"Información", Messagebox.OK,
+									Messagebox.INFORMATION);
+							btnEliminarPrograma.setDisabled(true);
+						}
+					}
+				});
+	}
 
+	// Metodo para limpiar los componentes textbox y variable id
+	@Listen("onClick = #btnCancelarPrograma")
+	public void cancelarPrograma() {
+		id = 0;
+		txtNombrePrograma.setValue("");
+		txtDescripcionPrograma.setValue("");
+		txtCorreoPrograma.setValue("");
+		btnEliminarPrograma.setDisabled(true);
+
+	}
 
 }

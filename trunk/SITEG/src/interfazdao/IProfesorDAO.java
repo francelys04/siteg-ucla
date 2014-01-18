@@ -23,9 +23,6 @@ public interface IProfesorDAO extends JpaRepository<Profesor, String> {
 	
 	@Query("select p from Profesor p where p.usuario=null")
 	public List<Profesor> buscarSinUsuario();
-
-	@Query("select p from Profesor p where p.programa = ?1")
-	public List<Profesor> buscarProfesorporPrograma(Programa programa);
 	
 	public List<Profesor> findByTegs(Teg teg);
 	

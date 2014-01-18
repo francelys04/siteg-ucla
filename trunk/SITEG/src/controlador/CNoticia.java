@@ -137,7 +137,7 @@ public class CNoticia extends CGeneral {
 		byte[] image = imagen.getContent().getByteData();
 		Profesor profesor = ObtenerUsuarioProfesor();
 		Usuario usuario = servicioUsuario.buscarUsuarioPorId(profesor.getUsuario().getId());
-		Noticia noticia1 = new Noticia(id,nombre,descripcion, estatus,image);
+		Noticia noticia1 = new Noticia(id,nombre,descripcion, estatus,image,usuario);
 		servicioNoticia.guardar(noticia1);
 		cancelarNoticia();
 		Messagebox.show("Noticia resgistrada satisfactoriamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);

@@ -14,12 +14,12 @@ import javax.persistence.Table;
 public class ItemFactibilidad {
 
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_evaluacion_id", referencedColumnName = "id")
 	private ItemEvaluacion item;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "factibilidad_id", referencedColumnName = "id")
 	private Factibilidad factibilidad;
 	

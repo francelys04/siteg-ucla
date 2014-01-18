@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,16 +15,16 @@ public class Arbol {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name="id", nullable = false)
 	private long id;
 	
 	@Column(name="hijo")
 	private long hijo;
 	
-	@Column(name="nombre")
+	@Column(name="nombre", length = 100, unique = true)
 	private String nombre;
 	
-	@Column(name="url")
+	@Column(name="url", length = 250, nullable = false)
 	private String url;
 
 	@ManyToMany(mappedBy="arboles")

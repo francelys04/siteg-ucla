@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "factibilidad")
@@ -18,24 +20,25 @@ public class Factibilidad {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "teg_id", referencedColumnName = "id")
 	private Teg teg;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "profesor_cedula", referencedColumnName = "cedula")
 	private Profesor profesor;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="fecha")
 	private Date fecha;
 	
-	@Column(name="observacion")
+	@Column(name="observacion", length = 500)
 	private String observacion;
 	
-	@Column(name="estatus")
+	@Column(name="estatus", length = 100)
 	private String estatus;
 
 	@OneToMany(mappedBy = "factibilidad")

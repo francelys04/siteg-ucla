@@ -13,16 +13,17 @@ import javax.persistence.Table;
 public class ProgramaRequisito {
 
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "programa_id", referencedColumnName = "id")
 	private Programa programa;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "requisito_id", referencedColumnName = "id")
 	private Requisito requisito;
 	
-	@ManyToOne
+	@Id
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "lapso_id", referencedColumnName = "id")
 	private Lapso lapso;
 

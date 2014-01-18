@@ -51,12 +51,7 @@ public class SProfesor {
 		profesores = interfazProfesor.buscarSinUsuario();
 		return profesores;
 	}
-	
-	public List<Profesor> buscarProfesorDelPrograma(Programa programa){
-		List<Profesor> profesores;
-		profesores= interfazProfesor.buscarProfesorporPrograma(programa);
-		return profesores;
-	}
+
 	public List<Profesor> buscarProfesorJuradoDadoTeg(Teg teg) {
 		// TODO Auto-generated method stub
 		List<Profesor> profesores;

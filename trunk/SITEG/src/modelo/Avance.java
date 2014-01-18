@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="avance")
@@ -18,19 +18,20 @@ public class Avance {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name="id", nullable = false)
 	private long id;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="fecha")
 	private Date fecha;
 	
-	@Column(name="observacion")
+	@Column(name="observacion", length = 500)
 	private String observacion;
 	
-	@Column(name="estatus")
+	@Column(name="estatus", length = 100)
 	private String estatus;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name="teg_id", referencedColumnName="id")
 	private Teg teg;
 

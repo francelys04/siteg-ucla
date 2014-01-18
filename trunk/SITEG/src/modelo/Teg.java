@@ -23,10 +23,10 @@ public class Teg {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private long id;
 
-	@Column(name = "titulo")
+	@Column(name = "titulo", length = 500)
 	private String titulo;
 	
 	@Temporal(TemporalType.DATE)
@@ -41,23 +41,23 @@ public class Teg {
 	@Column(name = "fecha_entrega")
 	private Date fechaEntrega;
 
-	@Column(name = "descripcion")
+	@Column(name = "descripcion", length = 500)
 	private String descripcion;
 
 	@Column(name = "duracion")
 	private long duracion;
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "profesor_cedula", referencedColumnName = "cedula")
 	private Profesor tutor;
 
 	@OneToOne(mappedBy="teg")
 	private Defensa defensa;
 
-	@Column(name = "estatus")
+	@Column(name = "estatus", length = 100)
 	private String estatus;
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "tematica_id", referencedColumnName = "id")
 	private Tematica tematica;
 
