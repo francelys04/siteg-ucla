@@ -98,27 +98,9 @@ public class CPrograma extends CGeneral {
 	 */
 	long id = 0;
 
-	/*
-	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
-	 * tanto VPrograma como VCatalogoPrograma
-	 */
 	void inicializar(Component comp) {
 
-		/*
-		 * Listado de todos los programas que se encuentran activos, cuyo
-		 * estatus=true con el servicioPrograma mediante el metodo buscarActivas
-		 */
-		List<Programa> programas = servicioPrograma.buscarActivas();
-
-		/*
-		 * Validacion para mostrar el listado de programas mediante el
-		 * componente ltbPrograma dependiendo si se encuentra ejecutando la
-		 * vista VCatalogoPrograma
-		 */
-		if (ltbPrograma != null) {
-			ltbPrograma.setModel(new ListModelList<Programa>(programas));
-		}
-
+		txtDirectorPrograma.setDisabled(true);
 		Selectors.wireComponents(comp, this, false);
 		/*
 		 * Permite retornar el valor asignado previamente guardado al
@@ -131,6 +113,9 @@ public class CPrograma extends CGeneral {
 		 * VPrograma.zul si la varible map tiene algun dato contenido
 		 */
 		if (map != null) {
+			if (map.get("cedula") != null){
+				txtDirectorPrograma.setValue((String) map.get("cedula"));
+				}
 			if ((Long) map.get("id") != null) {
 				id = ((Long) map.get("id"));
 				/*
@@ -138,15 +123,11 @@ public class CPrograma extends CGeneral {
 				 * el metodo buscar dado a su id y asi llenar los textbox de la
 				 * vista VPrograma
 				 */
-				System.out.println(map.get("id"));
-				System.out.println(map.get("cedula"));
 				Programa programa = servicioPrograma.buscar(id);
 				txtNombrePrograma.setValue(programa.getNombre());
 				txtDescripcionPrograma.setValue(programa.getDescripcion());
 				txtCorreoPrograma.setValue(programa.getCorreo());
-				if (map.get("cedula") != null){
-				txtDirectorPrograma.setValue((String) map.get("cedula"));
-				}
+				txtDirectorPrograma.setValue(programa.getDirectorPrograma().getCedula());
 				btnEliminarPrograma.setDisabled(false);
 				map.clear();
 				map = null;
@@ -158,7 +139,6 @@ public class CPrograma extends CGeneral {
 	// Metodo que permite abrir la vista VCatalago en forma modal //
 	@Listen("onClick = #btnBuscarPrograma")
 	public void buscarPrograma() {
-
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoPrograma.zul", null, null);
 		window.doModal();
@@ -261,7 +241,7 @@ public class CPrograma extends CGeneral {
 		txtDescripcionPrograma.setValue("");
 		txtCorreoPrograma.setValue("");
 		btnEliminarPrograma.setDisabled(true);
-
+		txtDirectorPrograma.setValue("");
 	}
 
 }

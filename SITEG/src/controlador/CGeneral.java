@@ -37,6 +37,10 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
+	
+	/*
+	 * Metodo para inicializar componentes implementado en todos los controladores
+	 */
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		// TODO Auto-generated method stub
