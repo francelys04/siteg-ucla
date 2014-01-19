@@ -150,7 +150,7 @@
 							tabindex="10">
 							<template name="model">
 								<comboitem label="${each.nombre}"
-									value="${each.id}" />
+									value="${each.id}" id="${each.id}" />
 							</template>
 						</combobox>
 					</hbox>
@@ -169,7 +169,7 @@
 						<combobox id="cmbAreaSolicitud" readonly="true"
 							width="170px" style="margin-left:90px" tabindex="10">
 							<template name="model">
-								<comboitem label="${each.nombre}" />
+								<comboitem label="${each.nombre}" id="${each.id}"/>
 							</template>
 						</combobox>
 
@@ -185,7 +185,7 @@
 							readonly="true" width="175px" tabindex="10"
 							style="margin-left:25px">
 							<template name="model">
-								<comboitem label="${each.nombre}" />
+								<comboitem label="${each.nombre}" id="${each.id}" />
 							</template>
 						</combobox>
 					</hbox>

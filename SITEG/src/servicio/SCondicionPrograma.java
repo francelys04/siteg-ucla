@@ -18,7 +18,9 @@ public class SCondicionPrograma {
 
 	@Autowired
 	private ICondicionProgramaDAO interfaceCondicionPrograma;
-
+	@Autowired
+	private ILapsoDAO interfaceLapso;
+	
 	public void guardar(List<CondicionPrograma> condicionesProgramas) {
 		interfaceCondicionPrograma.save(condicionesProgramas);
 	}
@@ -32,7 +34,7 @@ public class SCondicionPrograma {
 	public List<CondicionPrograma> buscarUltimasCondiciones(Programa programa) {
 		// TODO Auto-generated method stub
 		List<CondicionPrograma> condiciones;
-		condiciones = interfaceCondicionPrograma.buscarCondicionesActuales(programa);
+		condiciones = interfaceCondicionPrograma.buscarCondicionesActuales(programa, interfaceLapso.buscarLapsoVigente());
 		return condiciones;
 	}
 	
