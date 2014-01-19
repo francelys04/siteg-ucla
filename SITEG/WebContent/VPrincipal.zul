@@ -20,6 +20,86 @@
             height: 80px;
 			width: 80px; 
         }
+        
+        /*inicio del estilo borde de la ventana*/
+		
+		.z-window-embedded-hm, .z-window-embedded-hm, .z-window-highlighted-hm, .z-window-overlapped-hm, .z-window-popup-hm {
+		background: #3276b1;
+		}
+		
+		.z-window-embedded-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
+		background: #3276b1;
+		}
+		
+		.z-window-embedded-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
+		background-image: none;
+		}
+		
+		.z-window-embedded-hl, .z-window-embedded-hl, .z-window-highlighted-hl, .z-window-overlapped-hl, .z-window-popup-hl {
+		background: #3276b1;
+		background-image: none;
+		}
+
+		.z-window-embedded-hr, .z-window-embedded-hr, .z-window-highlighted-hr, .z-window-overlapped-hr, .z-window-popup-hr {
+		background-image: none;
+		}
+		
+		.z-window-embedded-tr, .z-window-embedded-tr, .z-window-highlighted-tr, .z-window-overlapped-tr, .z-window-popup-tr {
+		background: #3276b1;
+		background-image: none;
+		}
+		
+		.z-window-embedded-br, .z-window-highlighted-br, .z-window-overlapped-br {
+		background: #3276b1;
+		background-image: none;
+		}
+		
+		.z-window-embedded-header, .z-window-embedded-header, .z-window-popup-header, .z-window-highlighted-header, .z-window-overlapped-header {
+		color: #fff;
+		}
+		
+		.z-window-modal-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
+		background: #3276b1;
+		}
+		
+		.z-window-modal-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
+		background-image: none;
+		}
+		
+		.z-window-modal-br, .z-window-highlighted-br, .z-window-overlapped-br {
+		background: #3276b1;
+		background-image: none;
+		}
+		
+		.z-window-embedded-tl, .z-window-modal-tl, .z-window-highlighted-tl, .z-window-overlapped-tl, .z-window-popup-tl {
+		background: #3276b1;
+		background-image: none;
+		}
+		
+		.z-window-embedded-hl, .z-window-modal-hl, .z-window-highlighted-hl, .z-window-overlapped-hl, .z-window-popup-hl {
+		background: #3276b1;
+		background-image: none;
+		}
+		
+		.z-window-embedded-hr, .z-window-modal-hr, .z-window-highlighted-hr, .z-window-overlapped-hr, .z-window-popup-hr {
+		background: #3276b1;
+		background-image: none;
+		}
+		
+		.z-window-embedded-hm, .z-window-modal-hm, .z-window-highlighted-hm, .z-window-overlapped-hm, .z-window-popup-hm {
+		background-image: none;
+		}
+		
+		.z-window-embedded-tr, .z-window-modal-tr, .z-window-highlighted-tr, .z-window-overlapped-tr, .z-window-popup-tr {
+		background: #3276b1;
+		background-image: none;
+		}
+		
+		.z-window-embedded-header, .z-window-modal-header, .z-window-popup-header, .z-window-highlighted-header, .z-window-overlapped-header {
+		color: #fff;
+		}
+		
+		/*fin del estilo*/
     </style>	
 	<style src="/public/css/style.css" />
 	<style src="/public/css/bootstrap.css" />
@@ -37,7 +117,7 @@
 		</script>
 	</html>
 
-	<borderlayout height="150%">
+	<borderlayout height="165%">
 		<!-- norte y Encabezado -->
 		<north size="130px">
 
