@@ -32,10 +32,99 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
+		
+		/*inicio del estilo interno de la ventana fondo gris con recuadro blando con bordes redondeados
+		fUNCIONA ADECUADAMENTE CON UN <groupbox></groupbox>
+		*/
+		
+		.z-window-embedded-cnt, .z-window-highlighted-cnt,
+		.z-window-embedded-cnt-noborder,
+		.z-window-highlighted-cnt-noborder,
+		.z-window-overlapped-cnt-noborder { background: #f5f5f5; }
+
+		.z-groupbox-cnt{ background: #fff; border-radius: 10px; border:
+		none; }
+		
+		/*fin del estilo*/
+		
+		/*inicio del estilo borde de la ventana*/
+		
+		.z-window-embedded-hm, .z-window-embedded-hm, .z-window-highlighted-hm, .z-window-overlapped-hm, .z-window-popup-hm {
+		background: #3276b1;
+		}
+		
+		.z-window-embedded-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
+		background: #3276b1;
+		}
+		
+		.z-window-embedded-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
+		background-image: none;
+		}
+		
+		.z-window-embedded-hl, .z-window-embedded-hl, .z-window-highlighted-hl, .z-window-overlapped-hl, .z-window-popup-hl {
+		background: #3276b1;
+		background-image: none;
+		}
+
+		.z-window-embedded-hr, .z-window-embedded-hr, .z-window-highlighted-hr, .z-window-overlapped-hr, .z-window-popup-hr {
+		background-image: none;
+		}
+		
+		.z-window-embedded-tr, .z-window-embedded-tr, .z-window-highlighted-tr, .z-window-overlapped-tr, .z-window-popup-tr {
+		background: #3276b1;
+		background-image: none;
+		}
+		
+		.z-window-embedded-br, .z-window-highlighted-br, .z-window-overlapped-br {
+		background: #3276b1;
+		background-image: none;
+		}
+		
+		.z-window-embedded-header, .z-window-embedded-header, .z-window-popup-header, .z-window-highlighted-header, .z-window-overlapped-header {
+		color: #fff;
+		}
+		
+		.z-window-modal-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
+		background: #3276b1;
+		}
+		
+		.z-window-modal-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
+		background-image: none;
+		}
+		
+		.z-window-modal-br, .z-window-highlighted-br, .z-window-overlapped-br {
+		background: #3276b1;
+		background-image: none;
+		}
+		
+		/*fin del estilo*/
 
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	
+	<!-- Lista de popus -->
+	<popup id="pupDatosProyecto">
+		<toolbarbutton
+			label="Presione aquí para visualizar los datos del proyecto" />
+	</popup>
+	<popup id="pupDatosEstudiante">
+		<toolbarbutton
+			label="Presione aquí para visualizar los datos del estudiante" />
+	</popup>
+	<popup id="pupDatosTutor">
+		<toolbarbutton
+			label="Presione aquí para visualizar los datos del tutor" />
+	</popup>
+	<popup id="pupBtnGuardar">
+		<toolbarbutton
+			label="Presione aquí para guardar el trabajo" />
+	</popup>
+	<popup id="pupBtnCancelar">
+		<toolbarbutton
+			label="Presione aquí para cancelar la seleccion" />
+	</popup>
+	<!-- fin de popus -->
 
 	<separator />
 	<separator />
@@ -47,6 +136,9 @@
 	<label value="Campos Obligatorios"></label>
 	<separator />
 	<separator />
+
+	<groupbox width="95%" height="620px"
+		style="margin-left:2%;margin-right:1%">
 
 	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 		<columns>
@@ -83,9 +175,9 @@
 	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
 		height="450px">
 		<tabs>
-			<tab label="Datos del Proyecto" />
-			<tab label="Datos del Estudiante" />
-			<tab label="Datos del Tutor" />
+			<tab label="Datos del Proyecto" tooltip="pupDatosProyecto"/>
+			<tab label="Datos del Estudiante" tooltip="pupDatosEstudiante"/>
+			<tab label="Datos del Tutor" tooltip="pupDatosTutor"/>
 
 		</tabs>
 		<tabpanels>
@@ -326,12 +418,13 @@
 				<separator />
 				<div sclass="btn-group">
 					<button id="btnGuardarRegistrarTeg" label="Guardar"
-						sclass="btn" image="/public/imagenes/iconos/guardar.png"
-						tabindex="12">
+						sclass="btn" image="/public/imagenes/iconos/guardar.png" tabindex="12"
+						tooltip="pupBtnGuardar">
 					</button>
 					<button id="btnCancelarRegistrarTeg"
 						label="Cancelar" sclass="btn"
-						image="/public/imagenes/iconos/limpiar.png" tabindex="13">
+						image="/public/imagenes/iconos/limpiar.png" tabindex="13"
+						tooltip="pupBtnCancelar">
 					</button>
 					<separator />
 				</div>
@@ -339,7 +432,9 @@
 			</div>
 		</panelchildren>
 	</panel>
-
+	
+	</groupbox>
+	
 	<separator />
 	<separator />
 	<separator />
