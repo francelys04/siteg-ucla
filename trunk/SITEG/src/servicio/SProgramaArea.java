@@ -35,4 +35,9 @@ public class SProgramaArea {
 		areas = interfaceProgramaArea.buscarAreasPrograma(programa);
 		return areas;
 	}
+
+	public void limpiar(List<ProgramaArea> programasAreas) {
+		// TODO Auto-generated method stub
+		interfaceProgramaArea.delete(programasAreas);
+	}
 }

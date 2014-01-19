@@ -52,22 +52,6 @@ public class CInicio extends CGeneral {
 	SCronograma servicioCronograma = GeneradorBeans.getServicioCronograma();
 	SNoticia servicioNoticia = GeneradorBeans.getServicioNoticia();
 	@Wire
-	private Treeitem fila3;
-	@Wire
-	private Treecell fila211;
-	@Wire
-	private Treecell fila2;
-	@Wire
-	private Treecell fila11;
-	@Wire
-	private Treecell fila1;
-	@Wire
-	private Treecell fila12;
-	@Wire
-	private Treecell fila112;
-	@Wire
-	private Treecell fila111;
-	@Wire
 	private Intbox cedulaEstatus;
 	@Wire
 	private Window wdwConsultarEstatusProyecto;
@@ -172,7 +156,6 @@ public class CInicio extends CGeneral {
 	@Listen("onSelect = #cmbPrograma")
 	public void llenarCronograma() {
 		idPrograma = Long.parseLong(cmbPrograma.getSelectedItem().getId());
-		System.out.println(idPrograma);
 		Lapso lapso = servicioLapso.buscarLapsoVigente();
 		Programa programa = servicioPrograma.buscar(idPrograma);
 		List<Cronograma> cronograma = servicioCronograma

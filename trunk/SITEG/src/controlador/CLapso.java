@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.Condicion;
+import modelo.CondicionPrograma;
 import modelo.Lapso;
 
 import org.springframework.stereotype.Controller;
@@ -39,13 +41,16 @@ import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
 
+import servicio.SCondicion;
 import servicio.SLapso;
+import servicio.SPrograma;
 
 @Controller
 public class CLapso extends CGeneral {
 	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
 	CCatalogoLapso catalogo = new CCatalogoLapso();
-
+	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+	SCondicion servicioCondicion = GeneradorBeans.getServicioCondicion();
 	@Wire
 	private Textbox txtNombreLapso;
 	@Wire
@@ -144,6 +149,29 @@ public class CLapso extends CGeneral {
 								Lapso lapso = new Lapso(id, nombre,
 										fechaInicio, fechaFin, estatus);
 								servicioLapso.guardar(lapso);
+								
+								
+								if(servicioPrograma.buscarActivas().size()!=0){
+									for(int i = 0; i<servicioPrograma.buscarActivas().size();i++){
+										if(servicioCondicionPrograma.buscarUltimasCondiciones(servicioPrograma.buscarActivas().get(i)).isEmpty()){
+											List<Condicion> condiciones = servicioCondicion
+													.buscarActivos();
+											List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
+											for (int j = 0; j < condiciones.size(); j++) {
+												Condicion condicion = condiciones.get(j);
+												CondicionPrograma condicionPrograma = new CondicionPrograma();
+												condicionPrograma.setPrograma(servicioPrograma.buscarActivas().get(i));
+												condicionPrograma.setLapso(servicioLapso.buscarLapso(id));
+												condicionPrograma.setCondicion(condicion);
+												condicionPrograma.setValor(0);
+												condicionesPrograma.add(condicionPrograma);
+											}
+
+											servicioCondicionPrograma
+													.guardar(condicionesPrograma);
+										}
+									}
+								}
 								cancelarLapso();
 								id = 0;
 								Messagebox
@@ -169,7 +197,8 @@ public class CLapso extends CGeneral {
 							lapso.setEstatus(false);
 							servicioLapso.guardar(lapso);
 							cancelarLapso();
-							Messagebox.show("Lapso académico eliminado exitosamente",
+							Messagebox.show(
+									"Lapso académico eliminado exitosamente",
 									"Información", Messagebox.OK,
 									Messagebox.INFORMATION);
 

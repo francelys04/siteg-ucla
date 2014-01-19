@@ -26,4 +26,9 @@ public class SCronograma {
 		cronogramas = interfaceCronograma.findByProgramaAndLapso(programa, lapso);
 		return cronogramas;
 	}
+
+	public void limpiar(List<Cronograma> cronogramas) {
+		// TODO Auto-generated method stub
+		interfaceCronograma.delete(cronogramas);
+	}
 }

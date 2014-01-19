@@ -49,6 +49,7 @@ import org.zkoss.zul.Window;
 import servicio.SAreaInvestigacion;
 import servicio.SCondicion;
 import servicio.SCondicionPrograma;
+import servicio.SLapso;
 import servicio.SProfesor;
 import servicio.SPrograma;
 import configuracion.GeneradorBeans;
@@ -68,6 +69,7 @@ public class CPrograma extends CGeneral {
 	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
 			.getServicioCondicionPrograma();
 	SCondicion servicioCondicion = GeneradorBeans.getServicioCondicion();
+	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
 	/*
 	 * Declaracion de componentes dado a sus id, implementados en las vistas
 	 * VPrograma y VCatalago
@@ -185,6 +187,7 @@ public class CPrograma extends CGeneral {
 								Programa p = servicioPrograma
 										.buscarPorNombrePrograma(nombre);
 								System.out.println("Programa Guardado");
+								if(servicioLapso.buscarActivos().size()!=0){
 								List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
 								List<Condicion> condiciones = servicioCondicion
 										.buscarActivos();
@@ -192,6 +195,7 @@ public class CPrograma extends CGeneral {
 									Condicion condicion = condiciones.get(i);
 									CondicionPrograma condicionPrograma = new CondicionPrograma();
 									condicionPrograma.setPrograma(p);
+									condicionPrograma.setLapso(servicioLapso.BuscarLapsoActual());
 									condicionPrograma.setCondicion(condicion);
 									condicionPrograma.setValor(0);
 									condicionesPrograma.add(condicionPrograma);
@@ -199,6 +203,7 @@ public class CPrograma extends CGeneral {
 
 								servicioCondicionPrograma
 										.guardar(condicionesPrograma);
+								}
 								cancelarPrograma();
 								Messagebox.show(
 										"Programa registrado exitosamente",

@@ -44,4 +44,10 @@ public class SLapso {
 		lapso = interfaceLapso.buscarLapsoVigente();
 		return lapso;
 	}
+	
+	public Lapso BuscarLapsoActual(){
+		Lapso lapso;
+		lapso = interfaceLapso.findById(interfaceLapso.lapsoActual());
+		return lapso;
+	}
 }

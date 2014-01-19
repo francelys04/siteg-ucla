@@ -29,4 +29,9 @@ public class SProgramaItem {
 		items = interfaceProgramaItem.buscarItemsPrograma(programa, lapso);
 		return items;
 	}
+
+	public void limpiar(List<ProgramaItem> programasItems) {
+		// TODO Auto-generated method stub
+		interfaceProgramaItem.delete(programasItems);
+	}
 }
