@@ -68,7 +68,7 @@
 						readonly="true" autodrop="true" width="140px" tabindex="12"
 						style="margin-left:20px">
 						<template name="model">
-							<comboitem label="${each.nombre}" />
+							<comboitem label="${each.nombre}" id="${each.id}" />
 						</template>
 					</combobox>
 				</row>
@@ -85,7 +85,7 @@
 						readonly="true" autodrop="true" width="190px" tabindex="12"
 						style="margin-left:20px">
 						<template name="model">
-							<comboitem label="${each.nombre}" />
+							<comboitem label="${each.nombre}" id="${each.id}" />
 						</template>
 					</combobox>
 				</row>
@@ -107,10 +107,10 @@
 				<row>
 					<hbox>
 						<panel title="Actividades Disponibles"
-							width="250px">
+							width="400px">
 							<panelchildren>
 								<listbox id="ltbActividadesDisponibles"
-									height="160px" mold="paging" pageSize="4"
+									height="160px" mold="paging" pageSize="3"
 									emptyMessage="No hay actividades registradas"
 									oddRowSclass="non-odd" checkmark="true">
 									<listhead>
@@ -161,7 +161,7 @@
 
 
 						<panel title="Actividades Seleccionadas"
-							width="480px">
+							width="550px">
 							<panelchildren>
 
 								<listbox

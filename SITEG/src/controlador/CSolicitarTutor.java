@@ -273,9 +273,6 @@ public class CSolicitarTutor extends CGeneral {
 			
 		}
 		
-		System.out.println(combo);
-		System.out.println(combo2);
-		
 		if (combo.compareTo("")== 0){
 			System.out.println("pase por el primer");
 			Messagebox.show("Debe Elegir el Programa", "oo ", Messagebox.OK, Messagebox.INFORMATION);
@@ -315,6 +312,8 @@ public class CSolicitarTutor extends CGeneral {
 		String nombreProfesor = txtNombreProfesor.getValue();
 		String apellidoProfesor = txtApellidoProfesor.getValue();
 		String correoProfesor = txtCorreoProfesor.getValue();
+		String cedula = ltbEstudiantes.getItems().get(0)
+				.getValue();
 		
 			if(gridEstudiante.size() == 0){
 				Messagebox.show("No hay estudiantes agregados", "Campos Vac�os", Messagebox.OK, Messagebox.INFORMATION);
@@ -335,9 +334,8 @@ public class CSolicitarTutor extends CGeneral {
 					 
 					 List<Teg> teg2 = servicioTeg.buscarTutoriaProfesor(profesor);
 					 String nombre2 = "Numero de tutorias por profesor";
-					 buscarCondicionVigenteEspecifica(nombre2);
 					 
-					 if(teg2.size() >= valor){
+					 if(teg2.size() >= buscarCondicionVigenteEspecifica(nombre2, servicioEstudiante.buscarEstudiante(cedula).getPrograma()).getValor()){
 						 Messagebox.show("El Profesor ya tiene un maximo de proyectos asignados", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
 						 }
 					 else{
@@ -457,15 +455,14 @@ List<Programa> programas = servicioPrograma.buscarActivas();
 										Messagebox.INFORMATION);
 							} else {
 						 String nombre = "Numero de estudiantes por trabajo";
-						 buscarCondicionVigenteEspecifica(nombre);
-						 if(tamano < valor){
+						 if(tamano < buscarCondicionVigenteEspecifica(nombre, estudiante2.getPrograma()).getValor()){
 						 	gridEstudiante.add(estudiante2);
 							ltbEstudiantes.setModel(new ListModelList<Estudiante>(gridEstudiante));
 							limpiarDatosEstudiante();
 						 }
 						 else
 						 {
-							 Messagebox.show("Solo se permiten "+valor+" Estudiantes por proyecto", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
+							 Messagebox.show("Solo se permiten "+buscarCondicionVigenteEspecifica(nombre, estudiante2.getPrograma()).getValor()+" Estudiantes por proyecto", "Informaci�n", Messagebox.OK, Messagebox.INFORMATION);
 						 }
 							}
 					   }
@@ -474,21 +471,6 @@ List<Programa> programas = servicioPrograma.buscarActivas();
 			}
 		}
 
-	}
-	
-	public CondicionPrograma buscarCondicionVigenteEspecifica(String nombre){
-		String programa = cmbProgramaSolicitud.getValue();
-		Programa programa2 = servicioPrograma.buscarPorNombrePrograma(programa);
-		List<CondicionPrograma> condicionesActuales = servicioCondicionPrograma.buscarUltimasCondiciones(programa2);
-		CondicionPrograma condicionBuscada = new CondicionPrograma();
-		
-		for(int i=0; i<condicionesActuales.size(); i++){
-			if(condicionesActuales.get(i).getCondicion().getNombre().equals(nombre)){
-				condicionBuscada = condicionesActuales.get(i);
-				valor = condicionBuscada.getValor();
-			}
-		}
-		return condicionBuscada;
 	}
 	
 	private boolean enviarEmailNotificacion(){

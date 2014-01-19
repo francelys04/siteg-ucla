@@ -32,5 +32,10 @@ public class SProgramaRequisito {
 		requisitos = interfaceProgramaRequisito.buscarRequistos(programa, lapso);
 		return requisitos;
 	}
+
+	public void limpiar(List<ProgramaRequisito> programasRequisito) {
+		// TODO Auto-generated method stub
+		interfaceProgramaRequisito.delete(programasRequisito);
+	}
 	
 }

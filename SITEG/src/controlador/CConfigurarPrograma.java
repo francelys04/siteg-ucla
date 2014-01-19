@@ -53,8 +53,9 @@ public class CConfigurarPrograma extends CGeneral {
 			.getServicioProgramaItem();
 	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
 			.getServicioCondicionPrograma();
-	SProgramaRequisito servicioProgramaRequisito = GeneradorBeans.getServicioProgramaRequisito();
-	
+	SProgramaRequisito servicioProgramaRequisito = GeneradorBeans
+			.getServicioProgramaRequisito();
+
 	@Wire
 	private Combobox cmbLapsoConfigurarPrograma;
 	@Wire
@@ -70,8 +71,8 @@ public class CConfigurarPrograma extends CGeneral {
 	@Wire
 	private Listbox ltbCondiciones;
 	@Wire
-	private Listbox  ltbRequisitosDisponibles;
-	
+	private Listbox ltbRequisitosDisponibles;
+
 	@Wire
 	private Listbox ltbRequisitosSeleccionadas;
 
@@ -81,7 +82,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		List<Programa> programas = servicioPrograma.buscarActivas();
-		//llenarListas();
+		// llenarListas();
 		List<Requisito> requisito = servicioRequisito.buscarActivos();
 		ltbRequisitosDisponibles.setModel(new ListModelList<Requisito>(
 				requisito));
@@ -97,7 +98,6 @@ public class CConfigurarPrograma extends CGeneral {
 		}
 	}
 
-	
 	@Listen("onClick = #btnAgregarRequisitos")
 	public void moverDerechaRequisitos() {
 
@@ -107,9 +107,7 @@ public class CConfigurarPrograma extends CGeneral {
 		else
 			list1.setParent(ltbRequisitosSeleccionadas);
 	}
-	
-	
-	
+
 	@Listen("onClick = #btnRemoverRequisitos")
 	public void moverIzquierdaRequisitos() {
 		Listitem list2 = ltbRequisitosSeleccionadas.getSelectedItem();
@@ -119,7 +117,7 @@ public class CConfigurarPrograma extends CGeneral {
 		else
 			list2.setParent(ltbRequisitosDisponibles);
 	}
-	
+
 	@Listen("onClick = #btnAgregarAreas")
 	public void moverDerechaArea() {
 
@@ -162,12 +160,24 @@ public class CConfigurarPrograma extends CGeneral {
 
 	@Listen("onClick = #btnGuardarConfiguracionPrograma")
 	public void guardar() {
-		Lapso lapso = servicioLapso.buscarPorNombre(cmbLapsoConfigurarPrograma
-				.getValue());
-		Programa programa = servicioPrograma
-				.buscarPorNombrePrograma(cmbProgramaConfigurarPrograma
-						.getValue());
+		Lapso lapso = servicioLapso
+				.buscarLapso(Long.parseLong(cmbLapsoConfigurarPrograma
+						.getSelectedItem().getId()));
+		Programa programa = servicioPrograma.buscar((Long
+				.parseLong(cmbProgramaConfigurarPrograma.getSelectedItem()
+						.getId())));
 		List<ProgramaArea> programasAreas = new ArrayList<ProgramaArea>();
+		List<AreaInvestigacion> areas = servicioProgramaArea
+				.buscarAreasDePrograma(programa, lapso);
+		if (!areas.isEmpty()) {
+			for (int i = 0; i < areas.size(); i++) {
+				ProgramaArea programaArea = new ProgramaArea(programa,
+						areas.get(i), lapso);
+				programasAreas.add(programaArea);
+			}
+			servicioProgramaArea.limpiar(programasAreas);
+		}
+		programasAreas = new ArrayList<ProgramaArea>();
 		for (int i = 0; i < ltbAreasSeleccionadas.getItemCount(); i++) {
 			AreaInvestigacion area = ltbAreasSeleccionadas.getItems().get(i)
 					.getValue();
@@ -175,19 +185,40 @@ public class CConfigurarPrograma extends CGeneral {
 			programasAreas.add(programaArea);
 		}
 		servicioProgramaArea.guardar(programasAreas);
-		
+
 		List<ProgramaRequisito> programasRequisito = new ArrayList<ProgramaRequisito>();
+		List<Requisito> requisit = servicioProgramaRequisito.buscarRequisitos(
+				programa, lapso);
+		if (!requisit.isEmpty()) {
+			for (int i = 0; i < requisit.size(); i++) {
+				ProgramaRequisito programaRequisito = new ProgramaRequisito(
+						programa, requisit.get(i), lapso);
+				programasRequisito.add(programaRequisito);
+			}
+			servicioProgramaRequisito.limpiar(programasRequisito);
+		}
+		programasRequisito = new ArrayList<ProgramaRequisito>();
 		for (int i = 0; i < ltbRequisitosSeleccionadas.getItemCount(); i++) {
 			Requisito requisito = ltbRequisitosSeleccionadas.getItems().get(i)
 					.getValue();
-			ProgramaRequisito programaRequisito = new ProgramaRequisito(programa, requisito, lapso);
+			ProgramaRequisito programaRequisito = new ProgramaRequisito(
+					programa, requisito, lapso);
 			programasRequisito.add(programaRequisito);
 		}
 		servicioProgramaRequisito.guardar(programasRequisito);
-		
-		
-		
+
 		List<ProgramaItem> programasItems = new ArrayList<ProgramaItem>();
+		List<ItemEvaluacion> itemsE = servicioProgramaItem
+				.buscarItemsEnPrograma(programa, lapso);
+		if (!itemsE.isEmpty()) {
+			for (int i = 0; i < itemsE.size(); i++) {
+				ProgramaItem programaItem = new ProgramaItem(programa,
+						itemsE.get(i), lapso);
+				programasItems.add(programaItem);
+			}
+			servicioProgramaItem.limpiar(programasItems);
+		}
+		programasItems = new ArrayList<ProgramaItem>();
 		for (int i = 0; i < ltbItemsSeleccionados.getItemCount(); i++) {
 			ItemEvaluacion item = ltbItemsSeleccionados.getItems().get(i)
 					.getValue();
@@ -195,14 +226,19 @@ public class CConfigurarPrograma extends CGeneral {
 			programasItems.add(programaItem);
 		}
 		servicioProgramaItem.guardar(programasItems);
+
 		List<CondicionPrograma> condicionesProgramas = new ArrayList<CondicionPrograma>();
+		System.out.println("numero" + ltbCondiciones.getItemCount());
 		for (int i = 0; i < ltbCondiciones.getItemCount(); i++) {
 			Listitem listItem = ltbCondiciones.getItemAtIndex(i);
-			int valor = ((Spinner)((listItem.getChildren().get(1))).getFirstChild()).getValue();
+			int valor = ((Spinner) ((listItem.getChildren().get(1)))
+					.getFirstChild()).getValue();
 			System.out.println(valor);
-			CondicionPrograma condicionPrograma = ltbCondiciones.getItems().get(i)
-					.getValue();
-			CondicionPrograma condicionProgramaReal = new CondicionPrograma(condicionPrograma.getCondicion(), condicionPrograma.getPrograma(), lapso, valor);
+			CondicionPrograma condicionPrograma = ltbCondiciones.getItems()
+					.get(i).getValue();
+			CondicionPrograma condicionProgramaReal = new CondicionPrograma(
+					condicionPrograma.getCondicion(),
+					condicionPrograma.getPrograma(), lapso, valor);
 			condicionesProgramas.add(condicionProgramaReal);
 		}
 		servicioCondicionPrograma.guardar(condicionesProgramas);
@@ -219,25 +255,28 @@ public class CConfigurarPrograma extends CGeneral {
 
 	@Listen("onChange = #cmbProgramaConfigurarPrograma")
 	public void buscarPrograma() {
-		if (cmbProgramaConfigurarPrograma.getValue() != null
-				&& cmbLapsoConfigurarPrograma.getValue() != null)
+		if (!cmbLapsoConfigurarPrograma.getValue().equals("")
+				&& !cmbProgramaConfigurarPrograma.getValue().equals("")) {
 			llenarListas();
+		}
 	}
 
 	@Listen("onChange = #cmbLapsoConfigurarPrograma")
 	public void buscarLapso() {
-		if (cmbProgramaConfigurarPrograma.getValue() != null
-				&& cmbLapsoConfigurarPrograma.getValue() != null)
+		if (!cmbLapsoConfigurarPrograma.getValue().equals("")
+				&& !cmbProgramaConfigurarPrograma.getValue().equals("")) {
 			llenarListas();
+		}
 
 	}
 
 	public void llenarListas() {
-		String programaNombre = cmbProgramaConfigurarPrograma.getValue();
-		String lapsoNombre = cmbLapsoConfigurarPrograma.getValue();
-		Programa programa = servicioPrograma
-				.buscarPorNombrePrograma(programaNombre);
-		Lapso lapso = servicioLapso.buscarPorNombre(lapsoNombre);
+		Lapso lapso = servicioLapso
+				.buscarLapso(Long.parseLong(cmbLapsoConfigurarPrograma
+						.getSelectedItem().getId()));
+		Programa programa = servicioPrograma.buscar((Long
+				.parseLong(cmbProgramaConfigurarPrograma.getSelectedItem()
+						.getId())));
 		List<AreaInvestigacion> areasIzquierda = servicioArea
 				.buscarAreasSinPrograma(programa, lapso);
 		List<AreaInvestigacion> areasDerecha = servicioProgramaArea
@@ -248,14 +287,10 @@ public class CConfigurarPrograma extends CGeneral {
 				.buscarItemsEnPrograma(programa, lapso);
 		List<CondicionPrograma> condicionesDePrograma = servicioCondicionPrograma
 				.buscarCondicionesPrograma(programa, lapso);
-		List<Requisito> requisitosIzquierda = servicioRequisito.buscarRequisitosDisponibles(programa, lapso);
-		List<Requisito> requisitosDerecha = servicioProgramaRequisito.buscarRequisitosEnPrograma(programa, lapso);
-		System.out.println("Condiciones1"+condicionesDePrograma.toString());
-		if(condicionesDePrograma.toString() == "[]"){
-			condicionesDePrograma = servicioCondicionPrograma
-					.buscarCondicionesPrograma(programa, null);
-		}
-		System.out.println("Condiciones2"+condicionesDePrograma.toString());
+		List<Requisito> requisitosIzquierda = servicioRequisito
+				.buscarRequisitosDisponibles(programa, lapso);
+		List<Requisito> requisitosDerecha = servicioProgramaRequisito
+				.buscarRequisitosEnPrograma(programa, lapso);
 		ltbAreasDisponibles.setModel(new ListModelList<AreaInvestigacion>(
 				areasIzquierda));
 		ltbAreasSeleccionadas.setModel(new ListModelList<AreaInvestigacion>(
@@ -266,15 +301,10 @@ public class CConfigurarPrograma extends CGeneral {
 				itemsDerecha));
 		ltbCondiciones.setModel(new ListModelList<CondicionPrograma>(
 				condicionesDePrograma));
-
-		  ltbRequisitosDisponibles.setModel(new ListModelList<Requisito>(
+		ltbRequisitosDisponibles.setModel(new ListModelList<Requisito>(
 				requisitosIzquierda));
-		
-		 ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(
-					requisitosDerecha));
-		
-		
-		
+		ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(
+				requisitosDerecha));
 	}
 
 }

@@ -69,7 +69,7 @@
 						readonly="true" autodrop="true" width="140px" tabindex="12"
 						style="margin-left:55px">
 						<template name="model">
-							<comboitem label="${each.nombre}" />
+							<comboitem label="${each.nombre}" id="${each.id}" />
 						</template>
 					</combobox>
 				</hbox>
@@ -88,7 +88,7 @@
 						readonly="true" autodrop="true" width="190px" tabindex="12"
 						style="margin-left:35px">
 						<template name="model">
-							<comboitem label="${each.nombre}" />
+							<comboitem label="${each.nombre}" id="${each.id}" />
 						</template>
 					</combobox>
 
@@ -131,11 +131,11 @@
 						<row>
 							<hbox>
 								<panel title="Áreas Disponibles"
-									width="260px">
+									width="350px">
 									<panelchildren>
 										<listbox
 											id="ltbAreasDisponibles" height="200px" mold="paging"
-											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											pageSize="5" oddRowSclass="non-odd" checkmark="true"
 											emptyMessage="No hay areas registradas">
 											<listhead>
 												<listheader
@@ -172,11 +172,11 @@
 								</panel>
 
 								<panel title="Áreas Seleccionadas"
-									width="260px">
+									width="350px">
 									<panelchildren>
 										<listbox
 											id="ltbAreasSeleccionadas" height="200px" mold="paging"
-											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											pageSize="5" oddRowSclass="non-odd" checkmark="true"
 											emptyMessage="No se han seleccionado areas">
 											<listhead>
 												<listheader
@@ -220,11 +220,11 @@
 						<row>
 							<hbox>
 								<panel title="Requisitos Disponibles"
-									width="260px">
+									width="350px">
 									<panelchildren>
 										<listbox
 											id="ltbRequisitosDisponibles" height="200px" mold="paging"
-											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											pageSize="5" oddRowSclass="non-odd" checkmark="true"
 											emptyMessage="No hay requisitos registrados">
 											<listhead>
 												<listheader
@@ -262,11 +262,11 @@
 								</panel>
 
 								<panel title="Áreas Seleccionadas"
-									width="260px">
+									width="350px">
 									<panelchildren>
 										<listbox
 											id="ltbRequisitosSeleccionadas" height="200px" mold="paging"
-											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											pageSize="5" oddRowSclass="non-odd" checkmark="true"
 											emptyMessage="No se han seleccionado requisitos">
 											<listhead>
 												<listheader
@@ -310,7 +310,7 @@
 						<row>
 							<hbox>
 								<panel title="Items Disponibles"
-									width="260px">
+									width="350px">
 									<panelchildren>
 										<listbox
 											id="ltbItemsDisponibles" height="200px" mold="paging"
@@ -356,11 +356,11 @@
 								</panel>
 
 								<panel title="Items Seleccionados"
-									width="260px">
+									width="350px">
 									<panelchildren>
 										<listbox
 											id="ltbItemsSeleccionados" height="200px" mold="paging"
-											pageSize="4" oddRowSclass="non-odd" checkmark="true"
+											pageSize="5" oddRowSclass="non-odd" checkmark="true"
 											emptyMessage="No se han seleccionado items">
 											<listhead>
 												<listheader
@@ -407,7 +407,7 @@
 							<hbox>
 								<listbox id="ltbCondiciones"
 									emptyMessage="No hay condiciones registradas" mold="paging"
-									pageSize="2" height="200px">
+									pageSize="5" height="200px">
 									<listhead>
 										<listheader label="Condicion"
 											width="60%" align="center" />
