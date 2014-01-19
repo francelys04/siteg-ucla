@@ -11,5 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ICronogramaDAO extends JpaRepository<Cronograma, CronogramaId> {
 
-	public List<Cronograma> findByProgramaAndLapso(Programa programa, Lapso lapso);
+	public List<Cronograma> findByProgramaAndLapsoOrderByFechaInicioAsc(Programa programa, Lapso lapso);
 }
