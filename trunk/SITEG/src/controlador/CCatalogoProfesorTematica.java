@@ -22,23 +22,25 @@ import org.zkoss.zul.Window;
 
 import servicio.SAreaInvestigacion;
 import servicio.SProfesor;
+import servicio.STematica;
 import configuracion.GeneradorBeans;
 
 @Controller
 public class CCatalogoProfesorTematica extends CGeneral {
 
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SAreaInvestigacion servicioAreaInvestigacion = GeneradorBeans.getServicioArea();
-	
-	
+	SAreaInvestigacion servicioAreaInvestigacion = GeneradorBeans
+			.getServicioArea();
+	STematica servicioTematica = GeneradorBeans.getSTematica();
+
 	@Wire
 	private Listbox ltbProfesor;
-	
+
 	@Wire
 	private Combobox cmbProgramaSolicitud;
 	@Wire
 	private Window wdwCatalogoProfesorArea;
-	
+
 	@Wire
 	private Textbox txtCedulaMostrarProfesor;
 	@Wire
@@ -47,41 +49,30 @@ public class CCatalogoProfesorTematica extends CGeneral {
 	private Textbox txtApellidoMostrarProfesor;
 	@Wire
 	private Textbox txtCorreoMostrarProfesor;
-	
-	 private static String vistaRecibida;
-	 private static String t;
-	 private static String p;
-	 
+
+	private static String vistaRecibida;
+	private static String tematicaRecibida;
+
 	void inicializar(Component comp) {
-		
-	
+
 		// TODO Auto-generated method stub
+		List<Profesor> profesores = servicioProfesor
+				.buscarProfesoresPorTematica(servicioTematica
+						.buscarTematica(Long.parseLong(tematicaRecibida)));
+		ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
 
-		
-		
-		
-		
-		//List<Profesor> profesores = servicioProfesor.buscarProfesoresPorTematica(tema);
-		//ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
-				
+		Selectors.wireComponents(comp, this, false);
 
-				Selectors.wireComponents(comp, this, false);
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
 
-				HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-						.getCurrent().getAttribute("itemsCatalogo");
-
-				
 	}
-	
-	public void recibir (String vista,String programa, String tematica)
-	{
+
+	public void recibir(String vista, String tematica) {
 		vistaRecibida = vista;
-		p = programa;
-		t = tematica;
-		System.out.println(p);
-		System.out.println(t);
+		tematicaRecibida = tematica;
 	}
-	
+
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor")
 	public void filtrarDatosCatalogo() {
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
@@ -91,8 +82,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 			if (profesor
 					.getCedula()
 					.toLowerCase()
-					.contains(
-							txtCedulaMostrarProfesor.getValue().toLowerCase())
+					.contains(txtCedulaMostrarProfesor.getValue().toLowerCase())
 					&& profesor
 							.getNombre()
 							.toLowerCase()
@@ -124,7 +114,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 	public void mostrarDatosCatalogo() {
 
 		if (vistaRecibida == null) {
-			
+
 			vistaRecibida = "/vistas/transacciones/VSolicitarTutor";
 
 		} else {
@@ -135,15 +125,13 @@ public class CCatalogoProfesorTematica extends CGeneral {
 			String vista = vistaRecibida;
 			map.put("vista", vista);
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			//Executions.sendRedirect("/vistas/transacciones/VSolicitarTutor.zul");			
-			
+			// Executions.sendRedirect("/vistas/transacciones/VSolicitarTutor.zul");
+
 			Window window = (Window) Executions.createComponents(
 					"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 			window.doModal();
 			wdwCatalogoProfesorArea.onClose();
 		}
 	}
-	
-
 
 }
