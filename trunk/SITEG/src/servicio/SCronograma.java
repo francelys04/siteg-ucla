@@ -23,7 +23,7 @@ public class SCronograma {
 	
 	public List<Cronograma> buscarCronogramaPorLapsoYPrograma(Programa programa, Lapso lapso){
 		List<Cronograma> cronogramas;
-		cronogramas = interfaceCronograma.findByProgramaAndLapso(programa, lapso);
+		cronogramas = interfaceCronograma.findByProgramaAndLapsoOrderByFechaInicioAsc(programa, lapso);
 		return cronogramas;
 	}
 
