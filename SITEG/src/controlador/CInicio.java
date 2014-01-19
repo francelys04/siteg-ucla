@@ -97,17 +97,19 @@ public class CInicio extends CGeneral {
 			cmbPrograma.setModel(new ListModelList<Programa>(programa));
 
 		}
-		List<Noticia> noticias= servicioNoticia.buscarActivos();
+	//	List<Noticia> noticias= servicioNoticia.buscarActivos();
 		
-		if(!noticias.isEmpty()){
-		imgNoticiaUno.setContent(getImagen());
-		imgNoticiaDos.setContent(getImagen());
-		imgNoticiaTres.setContent(getImagen());		
-		Clients.evalJavaScript("setContent('"+getContentString()+"')");
-		iniciarSlide ();
-		}else{
+	//	if(){
+		if(imgNoticiaUno != null){
+			imgNoticiaUno.setContent(getImagen());
+			imgNoticiaDos.setContent(getImagen());
+			imgNoticiaTres.setContent(getImagen());		
+			Clients.evalJavaScript("setContent('"+getContentString()+"')");
+			iniciarSlide ();
+			}
+	//	}else{
 			System.out.println("nula");
-		}
+		//}
 	}
 	//inician metodos para mostrar imagenes en el slide
 	
@@ -147,7 +149,6 @@ public class CInicio extends CGeneral {
 	}
 	private BufferedImage getImagen () {
 		BufferedImage imagen = getListaImagenes().get(index);
-		
 		index = (index+1) % longitud;
 		return imagen;
 	}

@@ -157,7 +157,7 @@
 			width: 820px;
 			height: 310px;
 			overflow: hidden;
-			background-color: #01A9DB;
+			background-color: #FFFFFF;
 		}
 		.the-slider div {
 			width: 1500px;
