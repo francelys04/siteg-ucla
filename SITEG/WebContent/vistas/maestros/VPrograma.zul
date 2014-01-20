@@ -78,7 +78,7 @@
 		<separator />
 		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 			<columns>
-				<column width="15%" height="40px" />
+				<column width="200px" height="40px" />
 			</columns>
 			<rows>
 				<row>
