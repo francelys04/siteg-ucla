@@ -1,4 +1,4 @@
-<window title="Cargar Estudiantes" border="normal" width="100%"
+<window title="Cargar Profesores" border="normal" width="100%"
 	height="200px" closable="true" apply="controlador.CCargarProfesor">
 
 	<style dynamic="true">
@@ -35,7 +35,7 @@
 	</style>
 	
 	<style src="/public/css/bootstrap.css" />
-
+	<style src="/public/css/style.css" />
 
 	<!-- Lista de popus -->
 	<popup id="pupExaminarProfesores">
@@ -68,7 +68,7 @@
 							style="font-weight:bold;color:red">
 						</label>
 						<label value="Lista de Profesores:"
-							style="color:black" />
+							style="font-weight:bold" />
 
 					</hlayout>
 

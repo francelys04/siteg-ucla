@@ -35,6 +35,7 @@
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+		<style src="/public/css/style.css" />
 
 	<!-- Lista de popus -->
 	<popup id="pupNombreArea">
@@ -90,7 +91,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Nombre:" style="color:black" />
+						<label value="Nombre:" style="font-weight:bold" />
 					</hlayout>
 
 					<hbox>
@@ -112,7 +113,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Descripción:" style="color:black" />
+						<label value="Descripción:" style="font-weight:bold" />
 					</hlayout>
 
 					<textbox id="txtDescripcionArea" rows="5" cols="100"

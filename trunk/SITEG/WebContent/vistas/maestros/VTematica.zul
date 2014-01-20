@@ -34,6 +34,7 @@
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<!-- Lista de popus -->
 	<popup id="pupAreaTematica">
@@ -88,7 +89,7 @@
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red" />
-						<label value="Área:" style="color:black" />
+						<label value="Área:" style="font-weight:bold" />
 					</hlayout>
 
 					<combobox id="cmbAreaTematica" readonly="true"
@@ -105,7 +106,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Temática:" style="color:black" />
+						<label value="Temática:" style="font-weight:bold" />
 					</hlayout>
 
 					<hbox>
@@ -127,7 +128,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Descripción:" style="color:black" />
+						<label value="Descripción:" style="font-weight:bold" />
 					</hlayout>
 
 					<textbox id="txtDescripcionTematica" rows="5"
