@@ -269,7 +269,7 @@ public class CSolicitarTutor extends CGeneral {
 
 		if ((combo.compareTo("") != 0) && (combo2.compareTo("") != 0)) {
 			System.out.println("pAW POR EL Y");
-			catalogo.recibir("transacciones/VSolicitarTutor",
+			catalogo.recibir("transacciones/VSolicitarTutor",cmbProgramaSolicitud.getSelectedItem().getId(),
 					cmbTematicaSolicitud.getSelectedItem().getId());
 
 			Window window = (Window) Executions.createComponents(
