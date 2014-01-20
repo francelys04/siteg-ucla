@@ -90,7 +90,10 @@ public class CCrearCronograma extends CGeneral {
 	public void limpiarCampos() {
 		cmbLapsoCrearCronograma.setValue("");
 		cmbProgramaCrearCronograma.setValue("");
-		//llenarActividades();
+		ltbActividadesSeleccionadas.getItems().clear();
+		ltbActividadesDisponibles.getItems().clear();
+		
+		
 	}
 
 	@Listen("onClick = #btnCrearCronograma")
@@ -129,6 +132,9 @@ public class CCrearCronograma extends CGeneral {
 		}
 		if (!error) {
 			servicioCronograma.guardar(cronogramas);
+			Messagebox
+			.show("Cronograma Registrado",
+					"Informativo", Messagebox.OK, Messagebox.ERROR);
 			limpiarCampos();
 		} else {
 			Messagebox
