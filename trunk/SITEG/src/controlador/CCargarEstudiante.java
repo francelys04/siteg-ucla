@@ -52,6 +52,7 @@ public class CCargarEstudiante extends CGeneral {
 			.getServicioEstudiante();
 	SPrograma servicioPrograma = GeneradorBeans
 			.getServicioPrograma();
+	
 	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	private File f;
 
@@ -59,7 +60,7 @@ public class CCargarEstudiante extends CGeneral {
 	public void cargarEstudiante() {
 
 		// variables locales
-		String cedula, nombre, apellido, sexo, direccion, telefonomovil, telefonofijo, correo, usuario;
+		String cedula, nombre, apellido, sexo, direccion, telefonomovil, telefonofijo, correo;
 		boolean estatus;
 		long idprograma;
 
@@ -113,18 +114,18 @@ public class CCargarEstudiante extends CGeneral {
 					linea = br.readLine();
 					idprograma = Long.parseLong(linea);
 
-					linea = br.readLine();
-					usuario = linea;
+					
+					Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
 					// busco el programa con el id que tengo en el txt para
 					// registrar
 					Programa p = new Programa();
 					p = servicioPrograma.buscar(idprograma);
 					// creo el estudiante y lo guardo
 					Estudiante estudiante;
-					Usuario user = servicioUsuario.buscarUsuarioPorNombre(usuario);
+					
 					estudiante = new Estudiante(cedula, nombre, apellido, sexo,
 							direccion, telefonomovil, telefonofijo, correo,
-							estatus, p, user);
+							estatus, p, usuario);
 
 					servicioEstudiante.guardar(estudiante);
 				}

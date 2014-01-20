@@ -38,7 +38,7 @@ public class CCargarProfesor extends CGeneral {
 	public void cargarProfesores() {
 
 		// variables locales
-		String cedula, nombre, apellido, sexo, direccion, telefonomovil, telefonofijo, correo, usuario;
+		String cedula, nombre, apellido, sexo, direccion, telefonomovil, telefonofijo, correo;
 		boolean estatus;
 		long idcategoria, idprograma;
 
@@ -92,8 +92,7 @@ public class CCargarProfesor extends CGeneral {
 					linea = br.readLine();
 					idcategoria = Long.parseLong(linea);
 					
-					linea = br.readLine();
-					usuario = linea;
+					Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
 
 					// busco el programa con el id que tengo en el txt para
 					// registrar
@@ -102,11 +101,11 @@ public class CCargarProfesor extends CGeneral {
 					
 					// creo el profesor y lo guardo
 					Profesor profesor;
-					Usuario user = servicioUsuario.buscarUsuarioPorNombre(usuario);
+					
 					Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
 					profesor = new Profesor(cedula, nombre, apellido, correo, sexo,
 							direccion, telefonomovil, telefonofijo,
-							estatus, categoria, tematicasProfesor, user);
+							estatus, categoria, tematicasProfesor, usuario);
 
 					servicioProfesor.guardarProfesor(profesor);
 				}
