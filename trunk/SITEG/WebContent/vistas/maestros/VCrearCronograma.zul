@@ -1,5 +1,5 @@
 <window title="Crear Cronograma" border="normal" width="130%"
-	height="535px" closable="true" apply="controlador.CCrearCronograma">
+	height="645px" closable="true" apply="controlador.CCrearCronograma">
 
 	<separator />
 
@@ -48,7 +48,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="97%" height="370px" style="margin-left:2%">
+	<groupbox width="97%" height="470px" style="margin-left:2%">
 		<separator />
 		<separator />
 		<grid sclass="fgrid" style="margin-left:1%;margin-right:1%">
@@ -111,7 +111,7 @@
 							width="400px">
 							<panelchildren>
 								<listbox id="ltbActividadesDisponibles"
-									height="160px" mold="paging" pageSize="3"
+									height="250px" 
 									emptyMessage="No hay actividades registradas"
 									oddRowSclass="non-odd" checkmark="true">
 									<listhead>
@@ -166,8 +166,8 @@
 							<panelchildren>
 
 								<listbox
-									id="ltbActividadesSeleccionadas" mold="paging" pageSize="2"
-									height="160px"
+									id="ltbActividadesSeleccionadas"
+									height="250px" checkmark="true"
 									emptyMessage="No hay actividades seleccionadas">
 									<listhead>
 										<listheader label="Nombre"
