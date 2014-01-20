@@ -34,6 +34,7 @@
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<!-- Lista de popus -->
 	<popup id="pupNombreTipoJurado">
@@ -87,7 +88,7 @@
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red" />
-						<label value="Nombre:" style="color:black" />
+						<label value="Nombre:" style="font-weight:bold" />
 					</hlayout>
 
 					<hbox>
@@ -104,7 +105,7 @@
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red" />
-						<label value="Descripción:" style="color:black" />
+						<label value="Descripción:" style="font-weight:bold" />
 					</hlayout>
 					<textbox id="txtDescripcionTipoJurado" rows="5"
 						tooltip="pupDescripcionTipoJurado" cols="100" width="52%"

@@ -36,6 +36,7 @@
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 
 	<!-- Lista de popus -->
@@ -109,7 +110,7 @@
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red" />
-						<label value="Programa:" style="color:black" />
+						<label value="Programa:" style="font-weight:bold" />
 					</hlayout>
 					<combobox readonly="true" id="cmbProgramaEstudiante"
 						tooltip="pupProgramaEstudiante">
@@ -124,7 +125,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Cédula:" style="color:black" />
+						<label value="Cédula:" style="font-weight:bold" />
 					</hlayout>
 					<hbox>
 
@@ -145,7 +146,7 @@
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red" />
-						<label value="Nombre:" style="color:black" />
+						<label value="Nombre:" style="font-weight:bold" />
 					</hlayout>
 
 					<hbox>
@@ -156,7 +157,7 @@
 							<label value="*"
 								style="font-weight:bold;color:red;margin-left:5px" />
 							<label value="Apellido:"
-								style="color:black" />
+								style="font-weight:bold" />
 						</hlayout>
 
 						<textbox id="txtApellidoEstudiante" width="90%"
@@ -171,7 +172,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Sexo: " style="color:black">
+						<label value="Sexo: " style="font-weight:bold">
 						</label>
 					</hlayout>
 
@@ -193,7 +194,7 @@
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red" />
-						<label value="Dirección:" style="color:black" />
+						<label value="Dirección:" style="font-weight:bold" />
 					</hlayout>
 
 					<textbox id="txtDireccionEstudiante" width="52%"
@@ -207,7 +208,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red" />
 						<label value="Teléfono Móvil:"
-							style="color:black" />
+							style="font-weight:bold" />
 					</hlayout>
 
 					<hbox>
@@ -217,7 +218,7 @@
 
 						<hlayout>
 							<label value="Teléfono Fijo:"
-								style="color:black;margin-left:15px" />
+								style="font-weight:bold;margin-left:15px" />
 						</hlayout>
 
 						<textbox id="txtTelefonoFijoEstudiante"
@@ -231,7 +232,7 @@
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red" />
-						<label value="Correo:" style="color:black" />
+						<label value="Correo:" style="font-weight:bold" />
 					</hlayout>
 
 					<textbox id="txtCorreoEstudiante" width="25%"

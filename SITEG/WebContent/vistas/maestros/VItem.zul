@@ -35,6 +35,7 @@
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<!-- Lista de popus -->
 	<popup id="pupNombreItem">
@@ -89,7 +90,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Nombre:" style="color:black" />
+						<label value="Nombre:" style="font-weight:bold" />
 					</hlayout>
 
 					<hbox>
@@ -109,7 +110,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Tipo:" style="color:black" />
+						<label value="Tipo:" style="font-weight:bold" />
 					</hlayout>
 					
 					<combobox id="cmbTipoItem" readonly="true" tooltip="pupTipoItem" 
@@ -126,7 +127,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Descripción:" style="color:black" />
+						<label value="Descripción:" style="font-weight:bold" />
 					</hlayout>
 
 					<textbox id="txtDescripcionItem" rows="5" cols="100"
