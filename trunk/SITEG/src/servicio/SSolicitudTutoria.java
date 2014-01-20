@@ -24,6 +24,13 @@ public class SSolicitudTutoria {
 		interfaceSolicitud.save(solicitud);
 	}
 	
+	public List<SolicitudTutoria> buscarAceptadas()
+	{
+		List<SolicitudTutoria> solicitudes;
+		solicitudes = interfaceSolicitud.findByEstatusLike(Estatus[1]);
+		return solicitudes;
+	}
+	
 	public List<SolicitudTutoria> buscarSolicitudPorRevisar(Profesor profesor){
 		List<SolicitudTutoria> solicitudes;
 		solicitudes = interfaceSolicitud.findByEstatusLikeAndProfesor(Estatus[0], profesor);

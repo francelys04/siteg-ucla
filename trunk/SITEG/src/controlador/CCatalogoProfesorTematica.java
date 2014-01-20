@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.CondicionPrograma;
 import modelo.Profesor;
+import modelo.Programa;
+import modelo.SolicitudTutoria;
+import modelo.Tematica;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -22,6 +26,8 @@ import org.zkoss.zul.Window;
 
 import servicio.SAreaInvestigacion;
 import servicio.SProfesor;
+import servicio.SPrograma;
+import servicio.SSolicitudTutoria;
 import servicio.STematica;
 import configuracion.GeneradorBeans;
 
@@ -32,6 +38,8 @@ public class CCatalogoProfesorTematica extends CGeneral {
 	SAreaInvestigacion servicioAreaInvestigacion = GeneradorBeans
 			.getServicioArea();
 	STematica servicioTematica = GeneradorBeans.getSTematica();
+	SPrograma serviciop =GeneradorBeans.getServicioPrograma();
+	SSolicitudTutoria serviciost = GeneradorBeans.getServicioTutoria();
 
 	@Wire
 	private Listbox ltbProfesor;
@@ -51,15 +59,23 @@ public class CCatalogoProfesorTematica extends CGeneral {
 	private Textbox txtCorreoMostrarProfesor;
 
 	private static String vistaRecibida;
-	private static String tematicaRecibida;
+	
+	private static String p;
+	private static String t;
 
 	void inicializar(Component comp) {
+
+
+		List<Profesor> profe = llenarprofesores();
+		ltbProfesor.setModel(new ListModelList<Profesor>(profe));
+				
 
 		// TODO Auto-generated method stub
 		List<Profesor> profesores = servicioProfesor
 				.buscarProfesoresPorTematica(servicioTematica
-						.buscarTematica(Long.parseLong(tematicaRecibida)));
+						.buscarTematica(Long.parseLong(t)));
 		ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
+
 
 		Selectors.wireComponents(comp, this, false);
 
@@ -68,11 +84,18 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	}
 
-	public void recibir(String vista, String tematica) {
-		vistaRecibida = vista;
-		tematicaRecibida = tematica;
-	}
 
+
+public void recibir(String vista,String programa, String tematica) {
+	vistaRecibida = vista;
+
+	p = programa;
+	t = tematica;
+	
+
+	
+
+}
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor")
 	public void filtrarDatosCatalogo() {
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
@@ -133,5 +156,43 @@ public class CCatalogoProfesorTematica extends CGeneral {
 			wdwCatalogoProfesorArea.onClose();
 		}
 	}
+	
+	public List<Profesor> llenarprofesores()
+	{
+	Tematica tema = servicioTematica.buscarTematicaPorNombre(t);
+			
+			
+			
+			List<Profesor> profesores = servicioProfesor.buscarProfesoresPorTematica(tema);
+			String variable = "Numero de tutorias por profesor";
+			Programa progra = serviciop.buscarPorNombrePrograma(p);
+			CondicionPrograma cm = buscarCondicionVigenteEspecifica(variable, progra);
+			List<SolicitudTutoria> st = serviciost.buscarAceptadas();
+			int valor = cm.getValor();
+			
+			
+			
+			
+			List<Profesor> profe = new  ArrayList <Profesor> ();
+			for (int i = 0; i <profesores.size(); i++) {
+				Profesor pf = profesores.get(i);
+				int contar = 0;
+				for (int j = 0 ; i< st.size(); j++)
+				{
+					if (pf == st.get(j).getProfesor())
+					{
+						++contar;
+					}
+				}
+				if (contar <valor)
+				{
+					profe.add(pf);
+				}
+				
+			}
+			return profe;
+			
+		}
+		
 
 }
