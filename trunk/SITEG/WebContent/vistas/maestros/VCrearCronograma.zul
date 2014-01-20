@@ -1,5 +1,5 @@
 <window title="Crear Cronograma" border="normal" width="130%"
-	height="530px" closable="true" apply="controlador.CCrearCronograma">
+	height="535px" closable="true" apply="controlador.CCrearCronograma">
 
 	<separator />
 
@@ -36,6 +36,7 @@
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<separator />
 
@@ -61,7 +62,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Lapso:" style="color:black" />
+						<label value="Lapso:" style="font-weight:bold" />
 					</hlayout>
 
 					<combobox id="cmbLapsoCrearCronograma"
@@ -78,7 +79,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Programa:" style="color:black" />
+						<label value="Programa:" style="font-weight:bold" />
 					</hlayout>
 
 					<combobox id="cmbProgramaCrearCronograma"
@@ -206,6 +207,7 @@
 			</rows>
 		</grid>
 	</groupbox>
+	<separator />
 	<separator />
 
 	<panel border="normal" width="97%"

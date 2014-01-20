@@ -1,4 +1,4 @@
-<window title="Areas de investigación de un profesor" border="normal"
+<window title="Temáticas de un profesor" border="normal"
 	width="100%" height="580px" closable="true"
 	apply="controlador.CProfesorTematicas">
 	<separator />
@@ -36,6 +36,7 @@
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<separator />
 
@@ -63,7 +64,7 @@
 							<label value="*"
 								style="font-weight:bold;color:red">
 							</label>
-							<label value="Cédula:" style="color:black" />
+							<label value="Cédula:" style="font-weight:bold" />
 						</hlayout>
 
 						<hbox>
@@ -84,7 +85,7 @@
 							<label value="*"
 								style="font-weight:bold;color:red">
 							</label>
-							<label value="Nombre:" style="color:black" />
+							<label value="Nombre:" style="font-weight:bold" />
 						</hlayout>
 
 						<hbox>
@@ -96,7 +97,7 @@
 									style="font-weight:bold;color:red;margin-left:15px">
 								</label>
 								<label value="Apellido:"
-									style="color:black" />
+									style="font-weight:bold" />
 							</hlayout>
 
 							<textbox id="txtApellidoProfesorTematica"
@@ -121,8 +122,8 @@
 
 				<row>
 					<hbox>
-						<panel title="Tematicas Disponibles"
-							width="425px">
+						<panel title="Temáticas Disponibles"
+							width="350px">
 							<panelchildren>
 								<listbox
 									emptyMessage="No hay tema registradas"
@@ -162,8 +163,8 @@
 							</panelchildren>
 						</panel>
 
-						<panel title="Tematicas Seleccionadas"
-							width="425px">
+						<panel title="Temáticas Seleccionadas"
+							width="350px">
 							<panelchildren>
 								<listbox
 									emptyMessage="No hay tematicas seleccionadas"
