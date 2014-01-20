@@ -219,7 +219,10 @@ public class CConfigurarPrograma extends CGeneral {
 			servicioProgramaItem.limpiar(programasItems);
 		}
 		programasItems = new ArrayList<ProgramaItem>();
+		System.out.print(ltbItemsSeleccionados.getItemCount());
 		for (int i = 0; i < ltbItemsSeleccionados.getItemCount(); i++) {
+			System.out.print(ltbItemsSeleccionados.getItems().get(i)
+					.getValue());
 			ItemEvaluacion item = ltbItemsSeleccionados.getItems().get(i)
 					.getValue();
 			ProgramaItem programaItem = new ProgramaItem(programa, item, lapso);
@@ -250,7 +253,21 @@ public class CConfigurarPrograma extends CGeneral {
 	public void limpiarCampos() {
 		cmbLapsoConfigurarPrograma.setValue("");
 		cmbProgramaConfigurarPrograma.setValue("");
-		llenarListas();
+		ltbAreasDisponibles.getItems().clear();
+		
+		 ltbAreasSeleccionadas.getItems().clear();
+	
+		 ltbItemsDisponibles.getItems().clear();
+		
+		 ltbItemsSeleccionados.getItems().clear();
+		
+		 ltbCondiciones.getItems().clear();
+		
+		 ltbRequisitosDisponibles.getItems().clear();
+
+		
+		 ltbRequisitosSeleccionadas.getItems().clear();
+	     
 	}
 
 	@Listen("onChange = #cmbProgramaConfigurarPrograma")
@@ -271,9 +288,13 @@ public class CConfigurarPrograma extends CGeneral {
 	}
 
 	public void llenarListas() {
+		
+		long idLapso = Long
+				.parseLong( cmbLapsoConfigurarPrograma.getSelectedItem().getId());
+		System.out.println("idlapso");
+		System.out.println(idLapso);
 		Lapso lapso = servicioLapso
-				.buscarLapso(Long.parseLong(cmbLapsoConfigurarPrograma
-						.getSelectedItem().getId()));
+				.buscarLapso(idLapso);
 		Programa programa = servicioPrograma.buscar((Long
 				.parseLong(cmbProgramaConfigurarPrograma.getSelectedItem()
 						.getId())));
@@ -305,6 +326,7 @@ public class CConfigurarPrograma extends CGeneral {
 				requisitosIzquierda));
 		ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(
 				requisitosDerecha));
-	}
+		}
+	
 
 }
