@@ -390,7 +390,7 @@ public class CSolicitarTutor extends CGeneral {
 		int tamano = gridEstudiante.size();
 
 		if (cedulaEstudiante == "") {
-			Messagebox.show("Debes colocar Tus Datos", "Informaci�n",
+			Messagebox.show("Debes colocar Tus Datos", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
 		} else {
 			if (tamano == 0) {
@@ -422,7 +422,16 @@ public class CSolicitarTutor extends CGeneral {
 								Messagebox.show("Ya Tienes Un TEG en Proceso",
 										"Informaci�n", Messagebox.OK,
 										Messagebox.INFORMATION);
-							} else {
+							} else
+								System.out.print(cmbProgramaSolicitud.getValue());
+							System.out.print(estudiante.getPrograma().getNombre());
+								
+								if (cmbProgramaSolicitud.getValue().compareTo( estudiante.getPrograma().getNombre())!=0) {
+								Messagebox.show("Debe Elejir el programa al que pertenece",
+										"Informaci�n", Messagebox.OK,
+										Messagebox.INFORMATION);
+							}
+							else{
 								gridEstudiante.add(estudiante);
 								ltbEstudiantes
 										.setModel(new ListModelList<Estudiante>(

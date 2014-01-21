@@ -171,11 +171,11 @@
 									emptyMessage="No hay actividades seleccionadas">
 									<listhead>
 										<listheader label="Nombre"
-											width="60%" align="center" />
+											width="60%"  />
 										<listheader label="Fecha Inicio"
-											align="center" />
+											 />
 										<listheader label="Fecha Fin"
-											align="center" />
+											/>
 									</listhead>
 
 									<template name="model">
