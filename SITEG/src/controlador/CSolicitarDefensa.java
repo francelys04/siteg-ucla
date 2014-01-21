@@ -50,6 +50,7 @@ public class CSolicitarDefensa extends CGeneral {
 				.get(0);
 		List<Estudiante> estudiantes = servicioEstudiante
 				.buscarEstudiantePorTeg(teg);
+		
 		if (teg.getEstatus().equals(estatus[0])) {
 			//se guia es por el programa del estudiante
 			txtProgramaSolicitarDefensa.setValue(estudiantes.get(0).getPrograma().getNombre());
@@ -62,13 +63,15 @@ public class CSolicitarDefensa extends CGeneral {
 		} else {
 			if (teg.getEstatus().equals(estatus[1])) {
 				Messagebox.show(
-						"Su Solicitud de Defensa ya fue enviada",
-						"Información", Messagebox.OK,
-						Messagebox.INFORMATION);
+						"Ya ud Posee una solicitud de Defensa",
+						"Advertencia", Messagebox.OK,
+						Messagebox.EXCLAMATION);
 				cancelar();
 			} else {
-				Messagebox.show("Aun no puede solicitar defensa", "Error",
-						Messagebox.OK, Messagebox.ERROR);
+				Messagebox.show(
+						"No puede solicitar defensa",
+						"Advertencia", Messagebox.OK,
+						Messagebox.EXCLAMATION);
 				cancelar();
 			}
 		}
