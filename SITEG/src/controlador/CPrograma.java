@@ -151,7 +151,7 @@ public class CPrograma extends CGeneral {
 	@Listen("onClick = #btnCatalogoDirectorPrograma")
 	public void buscarDirector() {
 		Window window = (Window) Executions.createComponents(
-				"/vistas/catalogos/VCatalogoProfesor.zul", null, null);
+				"/vistas/catalogos/VCatalogoDirectorPrograma.zul", null, null);
 		window.doModal();
 		catalogoProfesor.recibir("maestros/VPrograma");
 	}
@@ -167,8 +167,8 @@ public class CPrograma extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("¿Desea guardar los datos del programa?",
-					"Dialogo de confirmación", Messagebox.OK
+			Messagebox.show("Desea guardar los datos del programa?",
+					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -186,7 +186,6 @@ public class CPrograma extends CGeneral {
 								servicioPrograma.guardar(programa);
 								Programa p = servicioPrograma
 										.buscarPorNombrePrograma(nombre);
-								System.out.println("Programa Guardado");
 								if(servicioLapso.buscarActivos().size()!=0){
 								List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
 								List<Condicion> condiciones = servicioCondicion
@@ -207,7 +206,7 @@ public class CPrograma extends CGeneral {
 								cancelarPrograma();
 								Messagebox.show(
 										"Programa registrado exitosamente",
-										"Información", Messagebox.OK,
+										"Informacion", Messagebox.OK,
 										Messagebox.INFORMATION);
 								id = 0;
 							}
@@ -220,8 +219,8 @@ public class CPrograma extends CGeneral {
 	// Metodo para eliminar un programa dado su id
 	@Listen("onClick = #btnEliminarPrograma")
 	public void eliminarPrograma() {
-		Messagebox.show("¿Desea eliminar los datos del programa?",
-				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
+		Messagebox.show("Desea eliminar los datos del programa?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
@@ -230,7 +229,7 @@ public class CPrograma extends CGeneral {
 							servicioPrograma.guardar(programa);
 							cancelarPrograma();
 							Messagebox.show("Programa eliminado exitosamente",
-									"Información", Messagebox.OK,
+									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 							btnEliminarPrograma.setDisabled(true);
 						}
