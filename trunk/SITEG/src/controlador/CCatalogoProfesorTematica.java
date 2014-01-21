@@ -60,8 +60,8 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	private static String vistaRecibida;
 	
-	private static long p;
-	private static long t;
+	private static long programaRecibido;
+	private static long tematicaRecibida;
 
 	void inicializar(Component comp) {
 
@@ -73,7 +73,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 		// TODO Auto-generated method stub
 		List<Profesor> profesores = servicioProfesor
 				.buscarProfesoresPorTematica(servicioTematica
-						.buscarTematica(t));
+						.buscarTematica(tematicaRecibida));
 		ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
 
 
@@ -89,8 +89,8 @@ public class CCatalogoProfesorTematica extends CGeneral {
 public void recibir(String vista,long programa, long tematica) {
 	vistaRecibida = vista;
 
-	p = programa;
-	t = tematica;
+	programaRecibido = programa;
+	tematicaRecibida = tematica;
 	
 
 	
@@ -98,7 +98,7 @@ public void recibir(String vista,long programa, long tematica) {
 }
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor")
 	public void filtrarDatosCatalogo() {
-		List<Profesor> profesores = servicioProfesor.buscarActivos();
+		List<Profesor> profesores = llenarprofesores();
 		List<Profesor> profesores2 = new ArrayList<Profesor>();
 
 		for (Profesor profesor : profesores) {
@@ -159,13 +159,13 @@ public void recibir(String vista,long programa, long tematica) {
 	
 	public List<Profesor> llenarprofesores()
 	{
-	Tematica tema = servicioTematica.buscarTematica(t);
+	Tematica tema = servicioTematica.buscarTematica(tematicaRecibida);
 			
 			
 			
 			List<Profesor> profesores = servicioProfesor.buscarProfesoresPorTematica(tema);
 			String variable = "Numero de tutorias por profesor";
-			Programa progra = serviciop.buscarPorId(p);
+			Programa progra = serviciop.buscarPorId(programaRecibido);
 			CondicionPrograma cm = buscarCondicionVigenteEspecifica(variable, progra);
 			List<SolicitudTutoria> st = serviciost.buscarAceptadas();
 			int valor = cm.getValor();
