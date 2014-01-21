@@ -54,7 +54,7 @@ public class SAreaInvestigacion {
 	public List<AreaInvestigacion> areasPrograma(Programa programa,
 			Lapso lapso) {
 		List<AreaInvestigacion> areas;
-		areas = interfaceArea.buscarDisponibles(programa, lapso);
+		areas = interfaceArea.buscarAreasPrograma(programa, lapso);
 		return areas;
 	}
 	
