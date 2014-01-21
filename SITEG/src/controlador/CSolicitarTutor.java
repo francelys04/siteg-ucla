@@ -269,8 +269,9 @@ public class CSolicitarTutor extends CGeneral {
 
 		if ((combo.compareTo("") != 0) && (combo2.compareTo("") != 0)) {
 			System.out.println("pAW POR EL Y");
-			catalogo.recibir("transacciones/VSolicitarTutor",cmbProgramaSolicitud.getSelectedItem().getId(),
-					cmbTematicaSolicitud.getSelectedItem().getId());
+			
+			catalogo.recibir("transacciones/VSolicitarTutor",Long.parseLong( cmbProgramaSolicitud.getSelectedItem().getId()),
+					Long.parseLong(cmbTematicaSolicitud.getSelectedItem().getId()));
 
 			Window window = (Window) Executions.createComponents(
 					"/vistas/catalogos/VCatalogoProfesorTematica.zul", null,
@@ -296,6 +297,12 @@ public class CSolicitarTutor extends CGeneral {
 		String apellidoProfesor = txtApellidoProfesor.getValue();
 		String correoProfesor = txtCorreoProfesor.getValue();
 		Estudiante pruebaCondicion = ltbEstudiantes.getItems().get(0).getValue();
+		for (int i = 0; i < ltbEstudiantes.getItemCount(); i++) {
+			Estudiante e = ltbEstudiantes.getItems().get(i).getValue();
+
+			gridEstudiante.add(e);
+
+		}
 
 		if (gridEstudiante.size() == 0) {
 			Messagebox.show("No hay estudiantes agregados", "Campos Vac�os",

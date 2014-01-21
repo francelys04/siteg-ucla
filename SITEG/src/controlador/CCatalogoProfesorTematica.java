@@ -60,8 +60,8 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	private static String vistaRecibida;
 	
-	private static String p;
-	private static String t;
+	private static long p;
+	private static long t;
 
 	void inicializar(Component comp) {
 
@@ -73,7 +73,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 		// TODO Auto-generated method stub
 		List<Profesor> profesores = servicioProfesor
 				.buscarProfesoresPorTematica(servicioTematica
-						.buscarTematica(Long.parseLong(t)));
+						.buscarTematica(t));
 		ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
 
 
@@ -86,7 +86,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 
 
-public void recibir(String vista,String programa, String tematica) {
+public void recibir(String vista,long programa, long tematica) {
 	vistaRecibida = vista;
 
 	p = programa;
@@ -159,13 +159,13 @@ public void recibir(String vista,String programa, String tematica) {
 	
 	public List<Profesor> llenarprofesores()
 	{
-	Tematica tema = servicioTematica.buscarTematicaPorNombre(t);
+	Tematica tema = servicioTematica.buscarTematica(t);
 			
 			
 			
 			List<Profesor> profesores = servicioProfesor.buscarProfesoresPorTematica(tema);
 			String variable = "Numero de tutorias por profesor";
-			Programa progra = serviciop.buscarPorNombrePrograma(p);
+			Programa progra = serviciop.buscarPorId(p);
 			CondicionPrograma cm = buscarCondicionVigenteEspecifica(variable, progra);
 			List<SolicitudTutoria> st = serviciost.buscarAceptadas();
 			int valor = cm.getValor();
