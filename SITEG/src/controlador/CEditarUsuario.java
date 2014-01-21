@@ -107,7 +107,7 @@ public class CEditarUsuario extends CGeneral {
 		usuarioAuxiliar.setEstatus(true);
 
 		servicioUsuario.guardar(usuarioAuxiliar);
-		Messagebox.show("Usuarios exitosamente editado", "Informado",
+		Messagebox.show("Datos del usuario modificados con èxito", "Informado",
 				Messagebox.OK, Messagebox.INFORMATION);
 		
 		txtClaveUsuarioConfirmar.setValue("");

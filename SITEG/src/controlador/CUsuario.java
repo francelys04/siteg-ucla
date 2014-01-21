@@ -284,7 +284,7 @@ public class CUsuario extends CGeneral {
 				servicioProfesor.guardarProfesor(profesor);
 			}
 			valorCorreo.add(enviarEmailNotificacion(correoUsuario, mensaje+" Usuario: "+nombre+"  "+"Contraseña: "+nombre));
-			confirmacion(valorCorreo);
+			//confirmacion(valorCorreo);
 			
 			Messagebox.show("Usuario registrado exitosamente", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
@@ -297,9 +297,7 @@ public class CUsuario extends CGeneral {
 			usuario.setImagen(imagenUsuario);
 
 			servicioUsuario.guardar(usuario);
-			Messagebox.show("Usuario registrado exitosamente",
-					"Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			
 			cancelarUsuario();
 			
 		}
@@ -311,6 +309,9 @@ public class CUsuario extends CGeneral {
 			txtPasswordUsuario.setValue("");
 			txtNombreUsuario.setValue("");
 			txtCorreo.setValue("");
+			ltbGruposAgregados.getItems().clear();
+			imagen.setContent(new AImage(url));
+			ltbGruposDisponibles.setModel(new ListModelList<Grupo>(grupos));
 		}
 	}
 
@@ -378,15 +379,15 @@ public class CUsuario extends CGeneral {
 
 	}
 
-	private int confirmacion(ArrayList<Boolean> valor2) {
+	/*private int confirmacion(ArrayList<Boolean> valor2) {
 		// TODO Auto-generated method stub
 		for(int w=0; w<valor2.size();w++){
 			if(valor2.get(w).equals(false)){
-				return Messagebox.show("Correo electronico no enviado", "Error", Messagebox.OK, Messagebox.ERROR);
+				//return Messagebox.show("Correo electronico no enviado", "Error", Messagebox.OK, Messagebox.ERROR);
 			}
 		}
-		return Messagebox.show("Correo electronico enviado","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
-	}
+		//return Messagebox.show("Correo electronico enviado","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+	}*/
 	
 	@Listen("onClick = #btnCatalogoUsuario")
 	public void buscarUsuario() {
