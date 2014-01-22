@@ -73,7 +73,7 @@ public class CContactanos extends CGeneral {
 		Programa programa = servicioPrograma.buscarPorNombrePrograma(n);
 		correoProgramas = programa.getCorreo();
 		
-		System.out.println(correoProgramas);
+	
 		boolean valor = enviarEmailNotificacion(correoProgramas, cuerpo);
 		
 		
