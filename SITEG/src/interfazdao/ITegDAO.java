@@ -31,7 +31,7 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	//Buscar tegs por profesores
 	public List<Teg> findByTutor(List<Profesor> profesores);
 	
-	
+	public List<Teg> findByProfesores(Profesor p);
 //	@Query("select t from Teg t where t.estatus='Proyecto Registrado'")
 //	public List<Teg> ProyectoRegistrado();	
 	
