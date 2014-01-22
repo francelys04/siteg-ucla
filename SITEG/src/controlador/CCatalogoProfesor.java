@@ -50,6 +50,8 @@ public class CCatalogoProfesor extends CGeneral {
 	@Wire
 	private Textbox txtCategoriaMostrarProfesor;
 	 private static String vistaRecibida;
+	 public static List<Profesor> profesores;
+	 public static boolean variable2 = false;
 	
 	void inicializar(Component comp) {
 		
@@ -71,6 +73,7 @@ public class CCatalogoProfesor extends CGeneral {
 								.buscarProfesorSinUsuario();
 						ltbProfesor.setModel(new ListModelList<Profesor>(
 								profesores));
+						variable2= true;
 
 					} else {
 						List<Profesor> profesores = servicioProfesor
@@ -92,7 +95,15 @@ public class CCatalogoProfesor extends CGeneral {
 	
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor,#txtProgramaMostrarProfesor")
 	public void filtrarDatosCatalogo() {
-		List<Profesor> profesores = servicioProfesor.buscarActivos();
+		if (variable2 == true)
+		{
+			 profesores = servicioProfesor
+			.buscarProfesorSinUsuario();
+		}
+		else
+			{
+			profesores = servicioProfesor.buscarActivos();
+			}
 		List<Profesor> profesores2 = new ArrayList<Profesor>();
 
 		for (Profesor profesor : profesores) {

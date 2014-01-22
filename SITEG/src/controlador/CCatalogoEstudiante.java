@@ -72,6 +72,8 @@ public class CCatalogoEstudiante extends CGeneral {
 	@Wire
 	private Textbox txtProgramaMostrarEstudiante;
 	private static String vistaRecibida;
+	private static boolean variable = false;
+	public static  List<Estudiante> estudiantes1;
 
 	@Override
 	void inicializar(Component comp) {
@@ -93,6 +95,7 @@ public class CCatalogoEstudiante extends CGeneral {
 
 		if (map != null) {
 			if (map.get("usuario") != null) {
+				variable= true;
 				List<Estudiante> estudiantes = servicioEstudiante
 						.buscarEstudianteSinUsuario();
 				ltbEstudiante.setModel(new ListModelList<Estudiante>(
@@ -115,7 +118,17 @@ public class CCatalogoEstudiante extends CGeneral {
 	// diferentes campos que este posee
 	@Listen("onChange = #txtCedulaMostrarEstudiante,#txtNombreMostrarEstudiante,#txtApellidoMostrarEstudiante,#txtCorreoMostrarEstudiante,#txtProgramaMostrarEstudiante")
 	public void filtrarDatosCatalogo() {
-		List<Estudiante> estudiantes1 = servicioEstudiante.buscarActivos();
+		
+		if (variable == true)
+		{
+			 estudiantes1 = servicioEstudiante
+			.buscarEstudianteSinUsuario();
+			
+		}
+		else
+		{
+		 estudiantes1 = servicioEstudiante.buscarActivos();
+		}
 		List<Estudiante> estudiantes2 = new ArrayList<Estudiante>();
 
 		for (Estudiante estudiante : estudiantes1) {

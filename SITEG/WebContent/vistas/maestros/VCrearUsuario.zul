@@ -176,11 +176,11 @@
 				<row>
 					<hbox>
 						<panel title="Grupos Disponibles"
-							width="260px">
+							width="320px">
 							<panelchildren>
 
 								<listbox id="ltbGruposDisponibles"
-									height="160px" mold="paging" pageSize="4"
+									height="160px" 
 									emptyMessage="No hay Grupos registrados" checkmark="true">
 									<listhead>
 										<listheader label="Nombre" />
@@ -215,11 +215,11 @@
 						</panel>
 
 						<panel title="Grupos Seleccionados"
-							width="260px">
+							width="320px">
 							<panelchildren>
 
 								<listbox id="ltbGruposAgregados"
-									mold="paging" pageSize="4" height="160px"
+									 height="160px"
 									emptyMessage="No ha Seleccionado ningun Grupo"
 									checkmark="true">
 									<listhead>
