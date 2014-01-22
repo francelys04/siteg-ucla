@@ -1,6 +1,6 @@
 <?page id="wdwConsultaListadoTeg" title="Gestion Estudiante" contentType="text/html;charset=UTF-8"?>
 <window id="wdwConsultaListadoTeg" title="Consulta de Trabajo Especial de Grado" border="normal"
-	width="700px" height="700px" closable="true"> 	<!-- apply="controlador.CTEG" -->
+	width="700px" height="400px" closable="true"> 	<!-- apply="controlador.CTEG" -->
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -50,9 +50,15 @@
 		<separator />
 		<grid sclass="fgrid">
 			<columns>
-				<column width="12%" height="30%" />
+				<column width="20%" height="30%" />
 			</columns>
 			<rows>
+				<row>
+					<hlayout>
+						<label value="Fecha de Registro"
+							style="font-weight:bold" width="100% " />
+					</hlayout>
+				</row>
 				<row>
 					<hlayout>
 						<label value="*"
@@ -136,7 +142,7 @@
 				<button id="btnBuscar" label="Buscar"
 					image="/imagenes/guardar.png" tabindex="13">
 				</button>
-				<button id="btnLimpiar" label="Limpiar"
+				<button id="btnExportar" label="Generar"
 					image="/imagenes/limpiar.png" tabindex="13">
 				</button>
 				<button id="btnCancelar" label="Cancelar"
@@ -149,29 +155,5 @@
 		</panelchildren>
 	</panel>
 
-	<separator />
-	<separator />
-	<separator />
-	<listbox id="ltbteg" mold="paging" pageSize="10"
-		style="margin-left:14px;margin-right:20px"
-		emptyMessage="No hay Informacion para mostrar">
-
-	<listhead>
-			<listheader label="Proyecto TEG" align="center" width="15%"/>
-			<listheader label="Fecha Registro" align="center" width="25%"/>
-			<listheader label="Fecha 1er Avance" align="center" width="20%"/>
-			<listheader label="Tiempo" align="center" width="20%"/>
-			
-		</listhead>
-
-		<template name="model">
-			<listitem>
-				<listcell label="${each.titulo}" />
-				<listcell label="${each.registroteg}" />
-				<listcell label="${each.avanceteg}" />
-				<listcell label="${each.tiempo}" />
-			</listitem>
-		</template>
-	</listbox>
 	<separator />
 </window>
