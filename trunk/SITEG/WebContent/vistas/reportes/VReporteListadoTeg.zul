@@ -1,0 +1,195 @@
+<?page id="wdwConsultaListadoTeg" title="Gestion Estudiante" contentType="text/html;charset=UTF-8"?>
+<window id="wdwConsultaListadoTeg" title="Consulta de Trabajo Especial de Grado" border="normal"
+	width="700px" height="700px" closable="true"> 	<!-- apply="controlador.CTEG" -->
+
+	<style dynamic="true">
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+	</style>
+
+	<style id="estilo">
+
+		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
+		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
+		transparent; border-left: 1px solid transparent; border-top: 1px
+		solid transparent; }
+
+		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
+		transparent; }
+
+		.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd { background: white }
+
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
+		background: white; border-top: none; }
+
+	</style>
+
+	<separator />
+	<separator />
+	<!-- <label value="(*) "
+		style="font-weight:bold;color:red;margin-center:2%">
+	</label> -->
+	<label value="Listado de Trabajo Especial de Grado" 	style="font-weight:bold;margin-left:35%;margin-right:20%"></label>
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+
+	<groupbox width="95%" style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
+		<grid sclass="fgrid">
+			<columns>
+				<column width="12%" height="30%" />
+			</columns>
+			<rows>
+				<row>
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red"  />
+						<label value="Fecha Desde"
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbFechaDesde" width="100%">
+						<template name="model" >
+							<comboitem label="${each.fechadesde}"/>
+						</template>
+					</combobox>
+					
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red"  />
+						<label value="Fecha Hasta"
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbFechaHasta" width="100%">
+						<template name="model" >
+							<comboitem label="${each.fechahasta}"/>
+						</template>
+					</combobox>
+				
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Programa:"
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbPrograma" width="100%">
+						<template name="model">
+							<comboitem label="${each.programa}" />
+						</template>
+					</combobox>
+				</row>
+					
+				<row>		
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label value="Area:" style="font-weight:bold" width="12%" />
+					</hlayout>
+					<combobox id="cmbArea" width="100%">
+						<template name="model">
+							<comboitem label="${each.area}" />
+						</template>
+					</combobox>
+				
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Temática" style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbTematica" width="100%">
+						<template name="model">
+							<comboitem label="${each.tematica}" />
+						</template>
+					</combobox>
+			
+			
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red;margin-left:5px" />
+						<label value="Status"
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbStatus" width="100%">
+						<template name="model">
+							<comboitem label="${each.status}" />
+						</template>
+					</combobox>
+				
+				</row>
+
+			</rows>
+		</grid>
+		<separator />
+		<separator />
+	</groupbox>
+
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+
+	<panel border="normal" width="95%"
+		style="margin-left:2%;margin-right:2%">
+		<panelchildren>
+			<div align="center">
+				<separator />
+
+				<button id="btnBuscarTEG" label="Buscar"
+					image="/imagenes/guardar.png" tabindex="13">
+				</button>
+				<button id="btnLimpiarTEG" label="Limpiar"
+					image="/imagenes/limpiar.png" tabindex="13">
+				</button>
+				<button id="btnCancelarTEG" label="Cancelar"
+					image="/imagenes/limpiar.png" tabindex="14">
+				</button>
+				
+				<separator />
+
+			</div>
+		</panelchildren>
+	</panel>
+	
+	<separator />
+	<separator />
+	<separator />
+	<listbox id="ltbteg" mold="paging" pageSize="10"
+		style="margin-left:14px;margin-right:20px"
+		emptyMessage="No hay Trabajos Especiales de Grado">
+
+	<listhead>
+			<listheader label="Fecha" align="center" width="15%"/>
+			<listheader label="Programa" align="center" width="20%"/>
+			<listheader label="Área" align="center" width="15%"/>
+			<listheader label="Temática" align="center" width="15%"/>
+			<listheader label="Status" align="center" width="15%" />
+			<listheader label="TEG" align="center" width="15%"/>
+		</listhead>
+
+		<template name="model">
+			<listitem>
+				<listcell label="${each.fecha}" />
+				<listcell label="${each.programa}" />
+				<listcell label="${each.tematica.areaInvestigacion.nombre}" />
+				<listcell label="${each.tematica.nombre}" />
+				<listcell label="${each.status}" />
+				<listcell label="${each.titulo}" />
+			</listitem>
+		</template>
+	</listbox>
+
+	<separator />
+</window>
