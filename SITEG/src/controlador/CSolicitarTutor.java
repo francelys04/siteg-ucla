@@ -305,22 +305,22 @@ public class CSolicitarTutor extends CGeneral {
 		}
 
 		if (gridEstudiante.size() == 0) {
-			Messagebox.show("No hay estudiantes agregados", "Campos Vacï¿½os",
+			Messagebox.show("No hay estudiantes agregados", "Campos Vacóos",
 					Messagebox.OK, Messagebox.INFORMATION);
 		} else {
-			if (programa == "Seleccione una Opciï¿½n"
-					|| area == "Seleccione una Opciï¿½n"
-					|| tematica == "Seleccione una Opciï¿½n" || titulo == ""
+			if (programa == "Seleccione una Opción"
+					|| area == "Seleccione una Opción"
+					|| tematica == "Seleccione una Opción" || titulo == ""
 					|| cedulaProfesor == "" || nombreProfesor == ""
 					|| apellidoProfesor == "" || correoProfesor == "") {
-				Messagebox.show("Debes completar los Datos", "Informaciï¿½n",
+				Messagebox.show("Debes completar los Datos", "Información",
 						Messagebox.OK, Messagebox.INFORMATION);
 			} else {
 				Profesor profesor = servicioProfesor
 						.buscarProfesorPorCedula(cedulaProfesor);
 
 				if (profesor == null) {
-					Messagebox.show("El Profesor no Existe", "Informaciï¿½n",
+					Messagebox.show("El Profesor no Existe", "Información",
 							Messagebox.OK, Messagebox.INFORMATION);
 				} else {
 
@@ -331,7 +331,7 @@ public class CSolicitarTutor extends CGeneral {
 					if (teg2.size() >= buscarCondicionVigenteEspecifica(nombre2, pruebaCondicion.getPrograma()).getValor()) {
 						Messagebox
 								.show("El Profesor ya tiene un maximo de proyectos asignados",
-										"Informaciï¿½n", Messagebox.OK,
+										"Información", Messagebox.OK,
 										Messagebox.INFORMATION);
 					} else {
 						Tematica tematica2 = servicioTematica
@@ -351,7 +351,7 @@ public class CSolicitarTutor extends CGeneral {
 						servicioSolicitarTutor.guardarSolicitud(solicitud2);
 						enviarEmailNotificacion();
 						Messagebox.show("Su Solicitud ha sido enviada",
-								"Informaciï¿½n", Messagebox.OK,
+								"Información", Messagebox.OK,
 								Messagebox.INFORMATION);
 					}
 				}
@@ -398,7 +398,7 @@ public class CSolicitarTutor extends CGeneral {
 						.buscarEstudiante(cedulaEstudiante);
 				if (estudiante == null) {
 					Messagebox.show("Debes estar Previamente Registrado",
-							"Informaciï¿½n", Messagebox.OK,
+							"Información", Messagebox.OK,
 							Messagebox.INFORMATION);
 				} else {
 
@@ -408,19 +408,19 @@ public class CSolicitarTutor extends CGeneral {
 							.buscarSolicitudAceptadaEstudiante(estudiante);
 					if (solicitud != null) {
 						Messagebox.show("Ya tienes una Solicitud Por Revisar",
-								"Informaciï¿½n", Messagebox.OK,
+								"Información", Messagebox.OK,
 								Messagebox.INFORMATION);
 					} else {
 						if (solicitudAceptada != null) {
 							Messagebox.show("Ya tienes una Solicitud Aceptada",
-									"Informaciï¿½n", Messagebox.OK,
+									"Información", Messagebox.OK,
 									Messagebox.INFORMATION);
 						} else {
 							List<Teg> teg = servicioTeg
 									.buscarTegPorEstudiante(estudiante);
 							if (teg.size() > 0) {
 								Messagebox.show("Ya Tienes Un TEG en Proceso",
-										"Informaciï¿½n", Messagebox.OK,
+										"Información", Messagebox.OK,
 										Messagebox.INFORMATION);
 							} else
 								System.out.print(cmbProgramaSolicitud.getValue());
@@ -428,7 +428,7 @@ public class CSolicitarTutor extends CGeneral {
 								
 								if (cmbProgramaSolicitud.getValue().compareTo( estudiante.getPrograma().getNombre())!=0) {
 								Messagebox.show("Debe Elejir el programa al que pertenece",
-										"Informaciï¿½n", Messagebox.OK,
+										"Informacón", Messagebox.OK,
 										Messagebox.INFORMATION);
 							}
 							else{
@@ -447,7 +447,7 @@ public class CSolicitarTutor extends CGeneral {
 						.buscarEstudiante(cedulaEstudiante);
 				if (estudiante2 == null) {
 					Messagebox.show("Debes estar Previamente Registrado",
-							"Informaciï¿½n", Messagebox.OK,
+							"Información", Messagebox.OK,
 							Messagebox.INFORMATION);
 				} else {
 					SolicitudTutoria solicitud = servicioSolicitarTutor
@@ -456,19 +456,19 @@ public class CSolicitarTutor extends CGeneral {
 							.buscarSolicitudAceptadaEstudiante(estudiante2);
 					if (solicitud != null) {
 						Messagebox.show("Ya tienes una Solicitud Pendiente",
-								"Informaciï¿½n", Messagebox.OK,
+								"Información", Messagebox.OK,
 								Messagebox.INFORMATION);
 					} else {
 						if (solicitudAceptada != null) {
 							Messagebox.show("Ya tienes una Solicitud Aceptada",
-									"Informaciï¿½n", Messagebox.OK,
+									"Información", Messagebox.OK,
 									Messagebox.INFORMATION);
 						} else {
 							List<Teg> teg = servicioTeg
 									.buscarTegPorEstudiante(estudiante2);
 							if (teg.size() > 0) {
 								Messagebox.show("Ya Tienes Un TEG en Proceso",
-										"Informaciï¿½n", Messagebox.OK,
+										"Información", Messagebox.OK,
 										Messagebox.INFORMATION);
 							} else {
 								
@@ -492,7 +492,7 @@ public class CSolicitarTutor extends CGeneral {
 																	.getPrograma())
 															.getValor()
 													+ " Estudiantes por proyecto",
-													"Informaciï¿½n",
+													"Información",
 													Messagebox.OK,
 													Messagebox.INFORMATION);
 								}
@@ -557,8 +557,7 @@ public class CSolicitarTutor extends CGeneral {
 				// Lo enviamos.
 				Transport t = session.getTransport("smtp");
 				t.connect(remitente, contrasena);
-				t.sendMessage(message,
-						message.getRecipients(Message.RecipientType.TO));
+				 t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
 
 				// Cierre de la conexion.
 				t.close();

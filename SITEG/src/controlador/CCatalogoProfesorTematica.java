@@ -189,11 +189,15 @@ public void recibir(String vista,long programa, long tematica) {
 			for (int i = 0; i <profesores.size(); i++) {
 				Profesor pf = profesores.get(i);
 				int contar = 0;
-				for (int j = 0 ; i< st.size(); j++)
+			
+				for (int j = 0 ; j< st.size(); j++)
 				{
-					if (pf == st.get(j).getProfesor())
+				
+					if (pf.getCedula().compareTo(st.get(j).getProfesor().getCedula())==0)
 					{
+						
 						++contar;
+					
 					}
 				}
 				if (contar <valor)

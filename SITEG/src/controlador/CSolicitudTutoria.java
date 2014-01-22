@@ -98,15 +98,15 @@ public class CSolicitudTutoria extends CGeneral {
 	
 	@Listen("onClick = #btnAceptarTutoria")
 	public void aceptarTutoria() throws IOException{
-		System.out.println(solicitud.getDescripcion());
+		
 		solicitud.setEstatus("Aceptada");
 		
 		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-		Grupo grupo = servicioGrupo.BuscarPorNombre("ROLE_USER");
+		Grupo grupo = servicioGrupo.BuscarPorNombre("ROLE_ESTUDIANTE");
 		gruposUsuario.add(grupo);
 		byte[] imagenUsuario = null;
 		URL url = getClass().getResource("/configuracion/usuario.png");
-		System.out.println(url);
+		
 		imagenx.setContent(new AImage(url));
 		imagenUsuario = imagenx.getContent().getByteData();
 		for (int i = 0; i < ltbSolicitudesEstudiantes.getItemCount(); i++){
@@ -114,7 +114,7 @@ public class CSolicitudTutoria extends CGeneral {
 					.getValue();
 			Usuario user = servicioUsuario.buscarUsuarioPorNombre(estudiante.getCedula());
 			if(user==null){
-			System.out.println("Aqui");
+			
 			Usuario usuario = new Usuario(0, estudiante.getCedula(), passwordEncoder.encode(estudiante.getCedula()), true, gruposUsuario, imagenUsuario);
 			servicioUsuario.guardar(usuario);
 			user = servicioUsuario.buscarUsuarioPorNombre(estudiante.getCedula());
@@ -146,10 +146,10 @@ public class CSolicitudTutoria extends CGeneral {
 		// TODO Auto-generated method stub
 		for(int w=0; w<valor2.size();w++){
 			if(valor2.get(w).equals(false)){
-				return Messagebox.show("Correo electronico no enviado", "Error", Messagebox.OK, Messagebox.ERROR);
+				return Messagebox.show("No se envio el correo al Estudiante", "Error", Messagebox.OK, Messagebox.ERROR);
 			}
 		}
-		return Messagebox.show("Correo electronico enviado","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+		return Messagebox.show("Correo electronico enviado al Estudiante","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
 	}
 	
 	public void recibir (String vista)

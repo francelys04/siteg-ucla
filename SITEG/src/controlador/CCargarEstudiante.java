@@ -123,8 +123,9 @@ public class CCargarEstudiante extends CGeneral {
 					// creo el estudiante y lo guardo
 					Estudiante estudiante;
 					
-					estudiante = new Estudiante(cedula, nombre, apellido, sexo,
-							direccion, telefonomovil, telefonofijo, correo,
+					
+					estudiante = new Estudiante(cedula, nombre, apellido, correo,
+							sexo,direccion, telefonomovil, telefonofijo,
 							estatus, p, usuario);
 
 					servicioEstudiante.guardar(estudiante);
