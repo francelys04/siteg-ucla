@@ -1,5 +1,5 @@
-<window id="wdwReinicioClave" title="Reinicio Clave" width="600px"
-	height="auto" border="normal" closable="true"
+<window id="wdwReinicioClave" title="Reinicio de Contraseña"
+	width="600px" height="320px" border="normal" closable="true"
 	apply="controlador.CReinicioClave">
 
 	<style dynamic="true">
@@ -35,59 +35,86 @@
 
 	</style>
 
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+
+	<separator />
+	<separator />
+	<label value="(*) "
+		style="font-weight:bold;color:red;margin-left:2%">
+	</label>
+	<label value="Campos Obligatorios"
+		style="font-weight:bold;color:rgb(99, 99, 99)">
+	</label>
+	<separator />
+	<separator />
+	<separator />
 	<separator />
 	<separator />
 
-	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
-		<columns>
-			<column height="10px" />
-		</columns>
-		<rows>
-			<row>
-					<label value="Ingrese su usuario y correo para restablecer su clave."
-						width="170px" />
-			</row>
-			<row>
-				<hbox>
+	<groupbox width="95%" height="200px"
+		style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
+		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+			<columns>
+				<column width="15%" height="40px" />
+			</columns>
+			<rows>
+				<row>
 
-					<label id="lblNombreUsuario" value="Usuario:"
-						width="170px" />
-					<textbox id="txtNombreUsuario" width="170px" />
-				</hbox>
-			</row>
-			<row>
-				<hbox>
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label id="lblNombreUsuario" value="Usuario:"
+							style="font-weight:bold"  />
+					</hlayout>
 
-					<label id="lblCorreoUsuario" value="Correo:"
-						width="170px" />
-					<textbox id="txtCorreoUsuario" width="170px" />
-				</hbox>
-			</row>
-		</rows>
-	</grid>
-	<separator />
-	<separator />
-	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:3%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
+					<textbox id="txtNombreUsuario" width="180px" style="margin-left:15px"/>
 
-					<button id="btnEnviarCorreo" sclass="btn"
-						label="Enviar" image="/public/imagenes/iconos/guardar.png"
-						tabindex="13">
-					</button>
-					<button id="btnCancelarCorreo" sclass="btn"
-						label="Cancelar" image="/public/imagenes/iconos/limpiar.png"
-						tabindex="14">
-					</button>
+				</row>
+
+
+				<row>
+
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label id="lblCorreoUsuario" value="Correo:"
+							style="font-weight:bold"  />
+					</hlayout>
+
+					<textbox id="txtCorreoUsuario" width="180px"  style="margin-left:15px"/>
+				</row>
+				
+			</rows>
+		</grid>
+		<separator />
+		<separator />
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:3%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
+					<separator />
+					<div sclass="btn-group">
+
+						<button id="btnEnviarCorreo" sclass="btn"
+							label="Enviar" image="/public/imagenes/iconos/guardar.png"
+							tabindex="13">
+						</button>
+						<button id="btnCancelarCorreo" sclass="btn"
+							label="Cancelar" image="/public/imagenes/iconos/limpiar.png"
+							tabindex="14">
+						</button>
+					</div>
+					<separator />
+
 				</div>
-				<separator />
-
-			</div>
-		</panelchildren>
-	</panel>
+			</panelchildren>
+		</panel>
+	</groupbox>
 
 	<separator />
 	<separator />

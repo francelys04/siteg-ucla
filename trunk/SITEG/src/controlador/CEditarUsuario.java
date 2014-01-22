@@ -39,7 +39,7 @@ public class CEditarUsuario extends CGeneral {
 	URL url = getClass().getResource("/configuracion/usuario.png");
 	
 	@Wire
-	private Label lblNombreUsuarioEditar;
+	private Textbox txtNombreUsuarioEditar;
 	@Wire
 	private Textbox txtClaveUsuarioNueva;
 	@Wire
@@ -61,7 +61,7 @@ public class CEditarUsuario extends CGeneral {
 		Usuario usuario = servicioUsuario
 				.buscarUsuarioPorNombre(auth.getName());
 		id = usuario.getId();
-		lblNombreUsuarioEditar.setValue(usuario.getNombre());
+		txtNombreUsuarioEditar.setValue(usuario.getNombre());
 		try {
 			BufferedImage imag;
 			imag = ImageIO.read(new ByteArrayInputStream(usuario.getImagen()));
@@ -86,7 +86,7 @@ public class CEditarUsuario extends CGeneral {
 		if(txtClaveUsuarioNueva.getValue().equals(txtClaveUsuarioConfirmar.getValue())){
 			
 		Usuario usuarioAuxiliar = servicioUsuario.buscarUsuarioPorId(id);
-		String nombre = lblNombreUsuarioEditar.getValue();
+		String nombre = txtNombreUsuarioEditar.getValue();
 		Boolean estatus = true;
 		String password = "";
 		byte[] imagenUsuario = null;

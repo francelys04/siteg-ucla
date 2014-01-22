@@ -3,6 +3,7 @@
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<listbox id="ltbTipoJurado" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay tipos de jurado registrados">
