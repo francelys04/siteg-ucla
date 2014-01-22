@@ -14,6 +14,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
@@ -28,13 +29,13 @@ public class CSolicitarDefensa extends CGeneral {
 	@Wire
 	private Datebox dtbFechaSolicitarDefensa;
 	@Wire
-	private Label txtProgramaSolicitarDefensa;
+	private Textbox txtProgramaSolicitarDefensa;
 	@Wire
-	private Label txtAreaSolicitarDefensa;
+	private Textbox txtAreaSolicitarDefensa;
 	@Wire
-	private Label txtTematicaSolicitarDefensa;
+	private Textbox txtTematicaSolicitarDefensa;
 	@Wire
-	private Label txtTituloSolicitarDefensa;
+	private Textbox txtTituloSolicitarDefensa;
 	@Wire
 	private Listbox ltbEstudiantesSolicitarDefensa;
 	@Wire
@@ -57,7 +58,7 @@ public class CSolicitarDefensa extends CGeneral {
 			txtAreaSolicitarDefensa.setValue(teg.getTematica()
 					.getareaInvestigacion().getNombre());
 			txtTematicaSolicitarDefensa.setValue(teg.getTematica().getNombre());
-			txtTituloSolicitarDefensa.setValue(teg.getDescripcion());
+			txtTituloSolicitarDefensa.setValue(teg.getTitulo());
 			ltbEstudiantesSolicitarDefensa
 					.setModel(new ListModelList<Estudiante>(estudiantes));
 		} else {

@@ -1,6 +1,6 @@
-<window id="wdwSubirArchivo" title="Subir Documento" border="normal"
-	width="90%" height="85%" closable="true"
-    apply="controlador.CArchivo">
+<window id="wdwSubirArchivo" title="Subir TEG" border="normal"
+	width="100%" height="420px" closable="true"
+	apply="controlador.CArchivo">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -33,6 +33,11 @@
 
 	</style>
 
+
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -45,7 +50,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="80%" height="200px"
+	<groupbox width="95%" height="300px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -55,7 +60,7 @@
 			</columns>
 			<rows>
 				<row>
-				
+
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red">
@@ -63,60 +68,62 @@
 						<label value="Nombre:" style="font-weight:bold" />
 					</hlayout>
 
-					<hlayout>
-					
-						<textbox id="txtNombreArchivo" width="150%" disabled="true" />
-						</hlayout>
-						<button id="btnArchivo" label="Examinar"  upload="true">  </button> 
-					
-					
+					<hbox>
+
+						<textbox id="txtNombreArchivo" width="280px"
+							style="color:black !important;" disabled="true" />
+							
+						<button id="btnArchivo" label="Examinar" style="margin-left:10px"
+							upload="true">
+						</button>
+
+					</hbox>
+
+
+
+
 				</row>
 				<row>
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Descripción:" style="color:black" />
+						<label value="Descripción:"
+							style="font-weight:bold" />
 					</hlayout>
 
 					<textbox id="txtDescripcionArchivo" rows="5"
-						tabindex="2" cols="100" width="95%"/>
+						tabindex="2" cols="100" width="450px" />
 				</row>
-				
-				
-				
-				
-
 
 			</rows>
 		</grid>
-	
-            
-        <image id="imagen" width="80px" height="50px"/>
+
+		<separator />
+		<separator />
+
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:3%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
+					<separator />
+					<div sclass="btn-group">
+						<button id="btnGuardarArchivo" label="Guardar"
+							sclass="btn" image="/public/imagenes/iconos/guardar.png"
+							tabindex="14">
+						</button>
+						<button id="btnCancelarArchivo" label="Cancelar"
+							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
+							tabindex="14">
+						</button>
+						<separator />
+					</div>
+
+				</div>
+			</panelchildren>
+		</panel>
+
 	</groupbox>
-
-
-	<separator />
-	<separator />
-
-	<panel border="normal" width="80%"
-		style="margin-left:2%;margin-right:3%">
-		<panelchildren>
-			<div align="center">
-				<separator />
-				
-				<button id="btnGuardarArchivo" label="Guardar"
-					image="/public/imagenes/iconos/guardar.png" tabindex="14">
-				</button>
-				<button id="btnCancelarArchivo" label="Cancelar"
-					image="/public/imagenes/iconos/limpiar.png" tabindex="14">
-				</button>
-				
-				<separator />
-
-			</div>
-		</panelchildren>
-	</panel>
 
 	<separator />
 	<separator />

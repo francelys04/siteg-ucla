@@ -6,6 +6,7 @@
 	<separator />
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<listbox id="ltbProyectosFactibles" mold="paging" pageSize="10"
 		style="margin-left:10px;margin-right:10px"

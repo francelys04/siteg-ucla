@@ -1,6 +1,6 @@
 <window id="wdwVerificarSolicitudProyecto"
-	title="Verificar Solicitudes de Proyecto" border="normal" width="700px"
-	height="720px" closable="true"
+	title="Verificar Solicitudes de Proyecto" border="normal" width="760px"
+	height="780px" closable="true"
 	apply="controlador.CVerificarSolicitudProyecto">
 	<separator />
 
@@ -33,77 +33,12 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
-		
-		/*inicio del estilo interno de la ventana fondo gris con recuadro blando con bordes redondeados
-		fUNCIONA ADECUADAMENTE CON UN <groupbox></groupbox>
-		*/
-		
-		.z-window-embedded-cnt, .z-window-highlighted-cnt,
-		.z-window-embedded-cnt-noborder,
-		.z-window-highlighted-cnt-noborder,
-		.z-window-overlapped-cnt-noborder { background: #f5f5f5; }
-
-		.z-groupbox-cnt{ background: #fff; border-radius: 10px; border:
-		none; }
-		
-		/*fin del estilo*/
-		
-		/*inicio del estilo borde de la ventana*/
-		
-		.z-window-embedded-hm, .z-window-embedded-hm, .z-window-highlighted-hm, .z-window-overlapped-hm, .z-window-popup-hm {
-		background: #3276b1;
-		}
-		
-		.z-window-embedded-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
-		background: #3276b1;
-		}
-		
-		.z-window-embedded-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
-		background-image: none;
-		}
-		
-		.z-window-embedded-hl, .z-window-embedded-hl, .z-window-highlighted-hl, .z-window-overlapped-hl, .z-window-popup-hl {
-		background: #3276b1;
-		background-image: none;
-		}
-
-		.z-window-embedded-hr, .z-window-embedded-hr, .z-window-highlighted-hr, .z-window-overlapped-hr, .z-window-popup-hr {
-		background-image: none;
-		}
-		
-		.z-window-embedded-tr, .z-window-embedded-tr, .z-window-highlighted-tr, .z-window-overlapped-tr, .z-window-popup-tr {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		.z-window-embedded-br, .z-window-highlighted-br, .z-window-overlapped-br {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		.z-window-embedded-header, .z-window-embedded-header, .z-window-popup-header, .z-window-highlighted-header, .z-window-overlapped-header {
-		color: #fff;
-		}
-		
-		.z-window-modal-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
-		background: #3276b1;
-		}
-		
-		.z-window-modal-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
-		background-image: none;
-		}
-		
-		.z-window-modal-br, .z-window-highlighted-br, .z-window-overlapped-br {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		/*fin del estilo*/
 
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
-	
+	<style src="/public/css/style.css" />
+
 	<!-- Lista de popus -->
 	<popup id="pupDatosProyecto">
 		<toolbarbutton
@@ -126,318 +61,334 @@
 			label="Presione aquí para guardar la verificacion" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton
-			label="Presione aquí para cancelar la seleccion" />
+		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
 	</popup>
 	<!-- fin de popus -->
-	
+
 	<separator />
 
-	<label value="(*) " style="font-weight:bold;color:red;margin-left:2%">
+	<label value="(*) "
+		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
-	<label value="Campos Obligatorios"></label>
+	<label value="Campos Obligatorios"
+		style="font-weight:bold;color:rgb(99, 99, 99)">
+	</label>
+	<separator />
+	<separator />
 	<separator />
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="620px"
+	<groupbox width="95%" height="660px"
 		style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
 
-	<label value="Programa:" style="margin-left:2%;color:black" />
-	<textbox id="txtProgramaRegistrarAvances"
-		style="margin-left:5%;color:black !important;" width="25%"
-		disabled="true" />
+		<label value="Programa:"
+			style="margin-left:2%;font-weight:bold;color:rgb(99, 99, 99)" />
+		<textbox id="txtProgramaRegistrarAvances"
+			style="margin-left:5%;color:black !important;" width="25%"
+			disabled="true" />
 
-	<div align="right">
-		<label value="Fecha:" style="margin-right:10px;color:black"></label>
-		<datebox id="db1" cols="12"
-			style="margin-right:30px;color:black !important;"  width="130px" format="short"
-			onCreate="self.value = new Date()" mold="rounded" disabled="true">
-		</datebox>
-	</div>
+		<div align="right">
+			<label value="Fecha:"
+				style="margin-right:10px;font-weight:bold;color:rgb(99, 99, 99)">
+			</label>
+			<datebox id="db1" cols="12"
+				style="margin-right:30px;color:black !important;" width="130px"
+				format="short" onCreate="self.value = new Date()" mold="rounded"
+				disabled="true">
+			</datebox>
+		</div>
 
-	<separator />
-	<separator />
+		<separator />
+		<separator />
 
-	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
-		height="350px">
-		<tabs>
-			<tab label="Datos del Proyecto" tooltip="pupDatosProyecto"/>
-			<tab label="Datos del Estudiante" tooltip="pupDatosEstudiante"/>
-			<tab label="Datos del Tutor" tooltip="pupDatosTutor"/>
-			<tab label="Requisitos" tooltip="pupRequisitos"/>
+		<tabbox style="margin-left:2%;margin-right:1%" width="660px"
+			height="350px">
+			<tabs>
+				<tab label="Datos del Proyecto"
+					tooltip="pupDatosProyecto" />
+				<tab label="Datos del Estudiante"
+					tooltip="pupDatosEstudiante" />
+				<tab label="Datos del Tutor" tooltip="pupDatosTutor" />
+				<tab label="Requisitos" tooltip="pupRequisitos" />
 
-		</tabs>
-		<tabpanels>
+			</tabs>
+			<tabpanels>
 
-			<tabpanel height="200px">
-				<separator />
-				<separator />
-				<grid sclass="fgrid" style="margin-left:1%">
-					<columns>
-						<column width="600px" height="30px" />
-					</columns>
-					<rows>
-						<row>
-							<hbox>
-								<label value="Area:"
-									style="color:black" />
+				<tabpanel height="200px">
+					<separator />
+					<separator />
+					<grid sclass="fgrid" style="margin-left:1%">
+						<columns>
+							<column width="600px" height="30px" />
+						</columns>
+						<rows>
+							<row>
+								<hbox>
+									<label value="Area:"
+										style="font-weight:bold" />
 
-								<textbox id="txtAreaVerificar"
-									width="60%" style="margin-left:42%;color:black !important;"
-									disabled="true" />
+									<textbox id="txtAreaVerificar"
+										width="60%" style="margin-left:42%;color:black !important;"
+										disabled="true" />
 
-							</hbox>
-						</row>
+								</hbox>
+							</row>
 
-						<row>
-							<hbox>
-								<label value="
-										Temática: "
-									style="color:black" />
+							<row>
+								<hbox>
+									<label
+										value="
+										Temática: " style="font-weight:bold" />
 
-								<textbox id="txtTematicaVerificar"
-									width="80%" style="margin-left:35%;color:black !important;"
-									disabled="true" />
-							</hbox>
+									<textbox id="txtTematicaVerificar"
+										width="80%" style="margin-left:35%;color:black !important;"
+										disabled="true" />
+								</hbox>
 
-						</row>
+							</row>
 
-						<row>
-							<label value="Título del Proyecto:"
-								style="color:black" />
+							<row>
+								<label value="Título del Proyecto:"
+									style="font-weight:bold" />
 
-						</row>
-						<row>
-							<textbox id="txtTituloVerificar"
-								width="520px" rows="2" cols="100"
-								style="color:black !important;" disabled="true" />
-						</row>
-					</rows>
-				</grid>
-
-
-			</tabpanel>
-
-			<tabpanel height="150px">
-				<separator />
-				<separator />
-				<separator />
-				<separator />
-
-				<listbox id="ltbEstudiantesTeg" mold="paging"
-					style="margin-left:30px;margin-right:30px" pageSize="2">
-
-					<listhead>
-						<listheader label="Cédula" align="center" />
-						<listheader label="Nombre" align="center" />
-						<listheader label="Apellido" align="center" />
-						<listheader label="Correo" align="center"
-							width="30%" />
-					</listhead>
-
-					<template name="model">
-						<listitem>
-							<listcell label="${each.cedula}" />
-							<listcell label="${each.nombre}" />
-							<listcell label="${each.apellido}" />
-							<listcell label="${each.correoElectronico}" />
-
-						</listitem>
-					</template>
+							</row>
+							<row>
+								<textbox id="txtTituloVerificar"
+									width="520px" rows="2" cols="100"
+									style="color:black !important;" disabled="true" />
+							</row>
+						</rows>
+					</grid>
 
 
+				</tabpanel>
 
-				</listbox>
+				<tabpanel height="150px">
+					<separator />
+					<separator />
+					<separator />
+					<separator />
 
+					<listbox id="ltbEstudiantesTeg" mold="paging"
+						style="margin-left:30px;margin-right:30px" pageSize="2">
 
-			</tabpanel>
+						<listhead>
+							<listheader label="Cédula" align="center" />
+							<listheader label="Nombre" align="center" />
+							<listheader label="Apellido" align="center" />
+							<listheader label="Correo" align="center"
+								width="30%" />
+						</listhead>
 
-			<tabpanel height="200px">
+						<template name="model">
+							<listitem>
+								<listcell label="${each.cedula}" />
+								<listcell label="${each.nombre}" />
+								<listcell label="${each.apellido}" />
+								<listcell
+									label="${each.correoElectronico}" />
 
-				<separator />
-				<separator />
-				<grid sclass="fgrid" style="margin-left:1%">
-					<columns>
-						<column width="15%" height="30px" />
-					</columns>
-					<rows>
-						<row>
-							<label value="Cédula:"
-								style="color:black" />
-
-							<textbox id="txtCedulaTutorVerificar"
-								width="30%" style="color:black !important;" disabled="true" />
-						</row>
-						<row>
-							<label value="Nombre:"
-								style="color:black" />
-
-
-							<textbox id="txtNombreTutorVerificar"
-								width="40%" style="color:black !important;" disabled="true" />
-						</row>
-						<row>
-							<label value="Apellido:"
-								style="color:black" />
-
-							<textbox id="txtApellidoTutorVerificar"
-								width="40%" style="color:black !important;" disabled="true" />
-						</row>
-					</rows>
-				</grid>
-			</tabpanel>
-
-			<tabpanel height="200px">
-
-				<separator />
-				<separator />
-
-				<grid sclass="fgrid"
-					style="margin-left:2%;margin-right:1%">
-					<columns>
-						<column width="99%" height="30%" />
-					</columns>
-					<rows>
-
-						<row>
-							<hbox>
-								<panel title="Requisitos"
-									width="260px">
-									<panelchildren>
-										<listbox
-											id="ltbRequisitosDisponibles" height="200px" mold="paging"
-											pageSize="4" oddRowSclass="non-odd" checkmark="true"
-											emptyMessage="No hay requisitos registrados">
-											<listhead>
-												<listheader
-													label="Nombre" />
-											</listhead>
-											<template name="model">
-												<listitem>
-													<listcell
-														label="${each.nombre}">
-													</listcell>
-												</listitem>
-											</template>
-										</listbox>
-									</panelchildren>
-								</panel>
+							</listitem>
+						</template>
 
 
-								<panel width="60px"
-									style="margin-left:20px;margin-top:80px">
-									<panelchildren>
-										<div>
 
-											<button
-												id="btnAgregarRequisitos" sclass="btn"
-												image="/public/imagenes/iconos/right.png"
-												tooltiptext="Agregar Requisitos" width="35px" />
-											<separator />
-											<button sclass="btn"
-												id="btnRemoverRequisitos"
-												image="/public/imagenes/iconos/left.png"
-												tooltiptext="Quitar Requisitos" width="35px" />
-
-										</div>
-									</panelchildren>
-								</panel>
-
-								<panel title="Requisitos Verificados"
-									width="260px">
-									<panelchildren>
-										<listbox
-											id="ltbRequisitosSeleccionadas" height="200px" mold="paging"
-											pageSize="4" oddRowSclass="non-odd" checkmark="true"
-											emptyMessage="No se han seleccionado requisitos">
-											<listhead>
-												<listheader
-													label="Nombre" />
-											</listhead>
-											<template name="model">
-												<listitem>
-													<listcell
-														label="${each.nombre}">
-													</listcell>
-												</listitem>
-											</template>
+					</listbox>
 
 
-										</listbox>
-									</panelchildren>
-								</panel>
-							</hbox>
-						</row>
-					</rows>
-				</grid>
+				</tabpanel>
+
+				<tabpanel height="200px">
+
+					<separator />
+					<separator />
+					<grid sclass="fgrid" style="margin-left:1%">
+						<columns>
+							<column width="15%" height="30px" />
+						</columns>
+						<rows>
+							<row>
+								<label value="Cédula:"
+									style="font-weight:bold" />
+
+								<textbox id="txtCedulaTutorVerificar"
+									width="30%" style="color:black !important;" disabled="true" />
+							</row>
+							<row>
+								<label value="Nombre:"
+									style="font-weight:bold" />
 
 
-				<separator />
-				<separator />
+								<textbox id="txtNombreTutorVerificar"
+									width="40%" style="color:black !important;" disabled="true" />
+							</row>
+							<row>
+								<label value="Apellido:"
+									style="font-weight:bold" />
+
+								<textbox id="txtApellidoTutorVerificar"
+									width="40%" style="color:black !important;" disabled="true" />
+							</row>
+						</rows>
+					</grid>
+				</tabpanel>
+
+				<tabpanel height="200px">
+
+					<separator />
+					<separator />
+
+					<grid sclass="fgrid"
+						style="margin-left:2%;margin-right:1%">
+						<columns>
+							<column width="99%" height="30%" />
+						</columns>
+						<rows>
+
+							<row>
+								<hbox>
+									<panel title="Requisitos"
+										width="260px">
+										<panelchildren>
+											<listbox
+												id="ltbRequisitosDisponibles" height="200px" mold="paging"
+												pageSize="4" oddRowSclass="non-odd" checkmark="true"
+												emptyMessage="No hay requisitos registrados">
+												<listhead>
+													<listheader
+														label="Nombre" />
+												</listhead>
+												<template
+													name="model">
+													<listitem>
+														<listcell
+															label="${each.nombre}">
+														</listcell>
+													</listitem>
+												</template>
+											</listbox>
+										</panelchildren>
+									</panel>
 
 
-				<radiogroup id="rdgRequisitos">
-					<radio id="rdoCompleto"
-						label="Requisitos completos y correctos" style="margin-left:100px"
-						tabindex="5" />
-					<radio id="rdoIncompleto"
-						label="Requisitos incompletos o incorrectos"
-						style="margin-left:15px" tabindex="6" />
-				</radiogroup>
+									<panel width="60px"
+										style="margin-left:20px;margin-top:80px">
+										<panelchildren>
+											<div>
 
-			</tabpanel>
+												<button
+													id="btnAgregarRequisitos" sclass="btn"
+													image="/public/imagenes/iconos/right.png"
+													tooltiptext="Agregar Requisitos" width="35px" />
+												<separator />
+												<button sclass="btn"
+													id="btnRemoverRequisitos"
+													image="/public/imagenes/iconos/left.png"
+													tooltiptext="Quitar Requisitos" width="35px" />
 
-		</tabpanels>
-	</tabbox>
+											</div>
+										</panelchildren>
+									</panel>
+
+									<panel
+										title="Requisitos Verificados" width="260px">
+										<panelchildren>
+											<listbox
+												id="ltbRequisitosSeleccionadas" height="200px" mold="paging"
+												pageSize="4" oddRowSclass="non-odd" checkmark="true"
+												emptyMessage="No se han seleccionado requisitos">
+												<listhead>
+													<listheader
+														label="Nombre" />
+												</listhead>
+												<template
+													name="model">
+													<listitem>
+														<listcell
+															label="${each.nombre}">
+														</listcell>
+													</listitem>
+												</template>
 
 
-	<separator />
-	<separator />
+											</listbox>
+										</panelchildren>
+									</panel>
+								</hbox>
+							</row>
+						</rows>
+					</grid>
 
-	<grid sclass="fgrid" style="margin-left:2%">
-		<columns>
-			<column width="620px" height="20px" />
-		</columns>
-		<rows>
-			<row>
-				<label value="Observaciones:" style="color:black" />
 
-			</row>
+					<separator />
+					<separator />
 
-			<row>
-				<textbox id="txtObservacion" width="600px" rows="2"
-					cols="100" />
-			</row>
-		</rows>
-	</grid>
 
-	<separator />
-	<separator />
+					<radiogroup id="rdgRequisitos">
+						<radio id="rdoCompleto"
+							label="Requisitos completos y correctos"
+							style="margin-left:100px" tabindex="5" />
+						<radio id="rdoIncompleto"
+							label="Requisitos incompletos o incorrectos"
+							style="margin-left:15px" tabindex="6" />
+					</radiogroup>
 
-	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:2%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
-					<button id="btnGuardar" label="Guardar" sclass="btn"
-						image="/public/imagenes/iconos/guardar.png" tabindex="12"
-						tooltip="pupBtnGuardar">
-					</button>
-					<button id="btnCancelar" label="Cancelar" sclass="btn" 
-						image="/public/imagenes/iconos/limpiar.png" tabindex="13" 
-						tooltip="pupBtnCancelar">
-					</button>
+				</tabpanel>
+
+			</tabpanels>
+		</tabbox>
+
+
+		<separator />
+		<separator />
+
+		<grid sclass="fgrid" style="margin-left:2%">
+			<columns>
+				<column width="620px" height="20px" />
+			</columns>
+			<rows>
+				<row>
+					<label value="Observaciones:"
+						style="font-weight:bold;color:rgb(99, 99, 99)" />
+
+				</row>
+
+				<row>
+					<textbox id="txtObservacion" width="600px" rows="2"
+						cols="100" />
+				</row>
+			</rows>
+		</grid>
+
+		<separator />
+		<separator />
+
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:2%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
+					<separator />
+					<div sclass="btn-group">
+						<button id="btnGuardar" label="Guardar"
+							sclass="btn" image="/public/imagenes/iconos/guardar.png"
+							tabindex="12" tooltip="pupBtnGuardar">
+						</button>
+						<button id="btnCancelar" label="Cancelar"
+							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
+							tabindex="13" tooltip="pupBtnCancelar">
+						</button>
+					</div>
+
+					<separator />
+
 				</div>
+			</panelchildren>
+		</panel>
 
-				<separator />
+		<separator />
 
-			</div>
-		</panelchildren>
-	</panel>
-
-	<separator />
-	
 	</groupbox>
 </window>

@@ -16,6 +16,7 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -41,6 +42,8 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		private Textbox txtNombreArea;
 		@Wire
 		private Textbox txtDescripcionArea;
+		@Wire
+		private Label lblPrograma;
 		
 	   //atributos del catalogo de area
 		@Wire
@@ -74,6 +77,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 				ltbArea.setTooltiptext("Doble clic para seleccionar el area");
 				ltbArea.setModel(new ListModelList<AreaInvestigacion>(area));
 				cmbPrograma.setVisible(false);
+				lblPrograma.setVisible(false);
 				System.out.println("paso if");
 				}
 			else {
