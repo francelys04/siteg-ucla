@@ -79,6 +79,11 @@ public class SProfesor {
 		profesores = interfazProfesor.findByTematicas(tematica);
 		return profesores;
 	}
+	public List<Profesor> buscarProfesoresSinPrograma(){
+		List<Profesor> profesores;
+		profesores = interfazProfesor.buscarProfesorEnPrograma();
+		return profesores;
+	}
 	
 	
 	
