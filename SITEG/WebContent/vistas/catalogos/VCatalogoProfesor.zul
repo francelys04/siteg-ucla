@@ -1,8 +1,9 @@
-<window title="Catalogo Profesor" border="normal" width="800px"
+<window title="Catalogo Profesor" border="normal" width="795px"
 	id="wdwCatalogoProfesor" apply="controlador.CCatalogoProfesor"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<listbox id="ltbProfesor" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay profesores registrados">

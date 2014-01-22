@@ -3,6 +3,7 @@
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<listbox id="ltbUsuario" width="100%">
 		<auxhead sclass="category-center">

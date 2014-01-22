@@ -29,6 +29,7 @@
 		</style>
 
 		<style src="/public/css/bootstrap.css" />
+		<style src="/public/css/style.css" />
 
 		<separator />
 		<separator />
