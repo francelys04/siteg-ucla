@@ -8,6 +8,7 @@ import interfazdao.IEstudianteDAO;
 import interfazdao.ITegDAO;
 
 import modelo.Actividad;
+import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
@@ -160,6 +161,12 @@ public class STeg {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
 		tegs=interfaceTeg.findByTutorAndTematicaAndEstatusAndFechaBetween(profesor,tematica,estatus2, fechaInicio,fechaFin);
+		return tegs;
+	}
+	public List<Teg> buscarUltimasTematicas(String estatus, AreaInvestigacion area,Date fechaInicio,Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs =interfaceTeg.buscarUltimasTematicas(estatus, area,fechaInicio,fechaFin);
 		return tegs;
 	}
 
