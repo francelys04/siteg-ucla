@@ -1,5 +1,5 @@
 <window title="Evaluar Factibilidad" border="normal" width="750px"
-	height="630px" closable="true">
+	height="630px" closable="true" apply="controlador.CEvaluarFactibilidad" id="wdwEvaluarFactibilidad">
 	<separator />
 
 	<style dynamic="true">
@@ -140,7 +140,7 @@
 		style="margin-left:2%;margin-right:1%">
 
 	<label value="Programa:" style="margin-left:2%;color:black" />
-	<textbox id="txtProgramaRegistrarAvances"
+	<textbox id="txtProgramaEvaluarFactibilidad"
 		style="margin-left:5%;color:black !important;" disabled="true"
 		width="25%" />
 
@@ -179,7 +179,7 @@
 								<label value="Area:"
 									style="color:black" />
 
-								<textbox id="txtAreaRegistrarAvances"
+								<textbox id="txtAreaEvaluarFactibilidad"
 									width="60%" style="margin-left:42%;color:black !important;"
 									disabled="true" />
 
@@ -193,7 +193,7 @@
 									style="color:black" />
 
 								<textbox
-									id="txtTematicaRegistrarAvances" width="80%"
+									id="txtTematicaEvaluarFactibilidad" width="80%"
 									style="margin-left:35%;color:black !important;"
 									disabled="true" />
 							</hbox>
@@ -206,7 +206,7 @@
 
 						</row>
 						<row>
-							<textbox id="txtTituloSolicitud"
+							<textbox id="txtTituloEvaluarFactibilidad"
 								style="color:black !important;" disabled="true" width="520px"
 								rows="2" cols="100" />
 						</row>
@@ -222,7 +222,8 @@
 				<separator />
 				<separator />
 
-				<listbox mold="paging" pageSize="2">
+				<listbox mold="paging" pageSize="3" id="ltbListaEstudiantes"
+				emptyMessage="No hay estudiantes registrados actualmente">
 
 					<listhead>
 						<listheader label="Cédula" align="center" />
@@ -231,28 +232,15 @@
 						<listheader label="Correo" align="center"
 							width="30%" />
 					</listhead>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
-					<listitem>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-						<listcell label=""></listcell>
-					</listitem>
-
+					
+					<template name="model">
+						<listitem>
+							<listcell label="${each.cedula}" />
+							<listcell label="${each.nombre}" />
+							<listcell label="${each.apellido}" />
+							<listcell label="${each.correo_electronico}" />
+						</listitem>
+					</template>
 				</listbox>
 
 			</tabpanel>
@@ -269,21 +257,21 @@
 						<row>
 							<label value="Cedula:" style="color:black" />
 
-							<textbox id="txtCedulaTutor"
+							<textbox id="txtCedulaTutorEvaluarFactibilidad"
 								style="color:black !important;" disabled="true" width="20%" />
 						</row>
 						<row>
 							<label value="Nombre:" style="color:black" />
 
 
-							<textbox id="txtNombreTutor"
+							<textbox id="txtNombreTutorEvaluarFactibilidad"
 								style="color:black !important;" disabled="true" width="30%" />
 						</row>
 						<row>
 							<label value="Apellido:"
 								style="color:black" />
 
-							<textbox id="txtApellidoTutor"
+							<textbox id="txtApellidoTutorEvaluarFactiblidad"
 								style="color:black !important;" disabled="true" width="30%" />
 						</row>
 					</rows>
