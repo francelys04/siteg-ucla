@@ -39,7 +39,7 @@
 	<!-- <label value="(*) "
 		style="font-weight:bold;color:red;margin-center:2%">
 	</label> -->
-	<label value="Listado de Trabajo Especial de Grado" 	style="font-weight:bold;margin-left:35%;margin-right:20%"></label>
+	<label value="Lista de Trabajo Especial de Grado" 	style="font-weight:bold;margin-left:35%;margin-right:20%"></label>
 	<separator />
 	<separator />
 	<separator />
@@ -50,10 +50,30 @@
 		<separator />
 		<grid sclass="fgrid">
 			<columns>
-				<column width="12%" height="30%" />
+				<column width="20%" height="30%" />
 			</columns>
 			<rows>
 				<row>
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red"  />
+						<label value="Tipo de Lista "
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbTipoLista" width="100%">
+						<template name="model" >
+							<comboitem label="${each.tipolista}"/>
+						</template>
+					</combobox>
+				</row>
+				
+				<row>
+				<hlayout>
+					<label value="Fecha de Registro"
+						style="font-weight:bold" width="100% " />
+				</hlayout>
+				</row>
+				<row>				
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red"  />
@@ -91,7 +111,7 @@
 					</combobox>
 				</row>
 					
-				<row>		
+				<row>					
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red">
@@ -115,21 +135,19 @@
 						</template>
 					</combobox>
 			
-			
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red;margin-left:5px" />
-						<label value="Status"
+						<label value="Estatus"
 							style="font-weight:bold" />
 					</hlayout>
-					<combobox id="cmbStatus" width="100%">
+					<combobox id="cmbEstatus" width="100%">
 						<template name="model">
-							<comboitem label="${each.status}" />
+							<comboitem label="${each.estatus}" />
 						</template>
 					</combobox>
 				
 				</row>
-
 			</rows>
 		</grid>
 		<separator />
@@ -150,7 +168,7 @@
 				<button id="btnBuscarTEG" label="Buscar"
 					image="/imagenes/guardar.png" tabindex="13">
 				</button>
-				<button id="btnLimpiarTEG" label="Limpiar"
+				<button id="btnExportarTEG" label="Generar"
 					image="/imagenes/limpiar.png" tabindex="13">
 				</button>
 				<button id="btnCancelarTEG" label="Cancelar"
