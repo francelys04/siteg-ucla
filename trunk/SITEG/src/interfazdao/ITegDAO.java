@@ -1,5 +1,6 @@
 package interfazdao;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -10,6 +11,7 @@ import modelo.Profesor;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
+import modelo.Tematica;
 import modelo.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -57,6 +59,14 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	public List<Teg> buscarTegsPorPrograma(Programa programa, String string);
 
 	public List<Teg> findByEstatusAndEstudiantesInOrderByIdAsc(String estatus, List<Estudiante> list);
+
+	public List<Teg> findByTutorAndTematicaAndFechaBetween(
+			Profesor buscarProfesorPorCedula, Tematica tematica,
+			Date fechaInicio, Date fechaFin);
+
+	public List<Teg> findByTutorAndTematicaAndEstatusAndFechaBetween(
+			Profesor profesor, Tematica tematica, String estatus2,
+			Date fechaInicio, Date fechaFin);
 	
 	
 }

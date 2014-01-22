@@ -136,6 +136,9 @@ public void recibir(String vista,long programa, long tematica) {
 	@Listen("onDoubleClick = #ltbProfesor")
 	public void mostrarDatosCatalogo() {
 
+		HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+		
 		if (vistaRecibida == null) {
 
 			vistaRecibida = "/vistas/transacciones/VSolicitarTutor";
@@ -147,6 +150,14 @@ public void recibir(String vista,long programa, long tematica) {
 			map.put("cedula", profesorDatosCatalogo.getCedula());
 			String vista = vistaRecibida;
 			map.put("vista", vista);
+			if(map2!=null){
+				map.put("area", (String)map2.get("area"));
+				map.put("tematica", tematicaRecibida);
+				map.put("programa", programaRecibido);
+				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+				Executions.sendRedirect("/vistas/arbol.zul");
+				wdwCatalogoProfesorArea.onClose();
+				}else{
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 			// Executions.sendRedirect("/vistas/transacciones/VSolicitarTutor.zul");
 
@@ -154,6 +165,7 @@ public void recibir(String vista,long programa, long tematica) {
 					"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 			window.doModal();
 			wdwCatalogoProfesorArea.onClose();
+				}
 		}
 	}
 	
