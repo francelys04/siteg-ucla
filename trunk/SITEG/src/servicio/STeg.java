@@ -73,6 +73,14 @@ public class STeg {
 		return tegs;
 
 	}
+	
+	public List<Teg> buscarProyectoAsignado() {
+
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatus(estatus[2]);
+		return tegs;
+
+	}
 
 	public List<Teg> BuscarTegSolicitandoRegistro() {
 
@@ -148,6 +156,13 @@ public class STeg {
 		return tegs;
 	}
 
+	public List<Teg> buscarTegDeComision(Profesor obtenerUsuarioProfesor) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByProfesores(obtenerUsuarioProfesor);
+		return tegs;
+	}
+
 	public List<Teg> buscarTegsDeTutorPorDosFechas(
 			Profesor buscarProfesorPorCedula, Tematica tematica, Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
@@ -169,7 +184,6 @@ public class STeg {
 		tegs =interfaceTeg.buscarUltimasTematicas(estatus, area,fechaInicio,fechaFin);
 		return tegs;
 	}
-
 	//Acomodar
 //	public Teg buscarTegUnicoPorEstudiante(Estudiante obtenerUsuarioEstudiante) {
 //		// TODO Auto-generated method stub
