@@ -1,5 +1,6 @@
 package servicio;
 
+import java.util.Date;
 import java.util.List;
 
 import interfazdao.IActividadDAO;
@@ -13,6 +14,7 @@ import modelo.Programa;
 import modelo.Requisito;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
+import modelo.Tematica;
 import modelo.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,6 +144,22 @@ public class STeg {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
 		tegs =interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(estatus[9], interfaceEstudiante.findByPrograma(programa));
+		return tegs;
+	}
+
+	public List<Teg> buscarTegsDeTutorPorDosFechas(
+			Profesor buscarProfesorPorCedula, Tematica tematica, Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs=interfaceTeg.findByTutorAndTematicaAndFechaBetween(buscarProfesorPorCedula, tematica, fechaInicio,fechaFin);
+		return tegs;
+	}
+
+	public List<Teg> buscarTegsDeTutorPorDosFechasYEstatus(Profesor profesor,
+			Tematica tematica, String estatus2, Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs=interfaceTeg.findByTutorAndTematicaAndEstatusAndFechaBetween(profesor,tematica,estatus2, fechaInicio,fechaFin);
 		return tegs;
 	}
 
