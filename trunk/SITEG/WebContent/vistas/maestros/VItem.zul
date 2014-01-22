@@ -76,7 +76,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="270px"
+	<groupbox width="95%" height="340px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -112,13 +112,14 @@
 						</label>
 						<label value="Tipo:" style="font-weight:bold" />
 					</hlayout>
-					
-					<combobox id="cmbTipoItem" readonly="true" tooltip="pupTipoItem" 
-						width="170px" tabindex="12" style="margin-left:2px">
-							<comboitem label="Factibilidad" />
-							<comboitem label="Defensa" />
+
+					<combobox id="cmbTipoItem" readonly="true"
+						tooltip="pupTipoItem" width="170px" tabindex="12"
+						style="margin-left:2px">
+						<comboitem label="Factibilidad" />
+						<comboitem label="Defensa" />
 					</combobox>
-					
+
 				</row>
 
 				<row>
@@ -127,7 +128,8 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Descripción:" style="font-weight:bold" />
+						<label value="Descripción:"
+							style="font-weight:bold" />
 					</hlayout>
 
 					<textbox id="txtDescripcionItem" rows="5" cols="100"
@@ -138,37 +140,38 @@
 
 			</rows>
 		</grid>
-	</groupbox>
 
 
-	<separator />
-	<separator />
+		<separator />
+		<separator />
 
-	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:3%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
-
-					<button id="btnGuardarItem" label="Guardar"
-						sclass="btn" image="/public/imagenes/iconos/guardar.png"
-						tabindex="13" tooltip="pupGuardarItem">
-					</button>
-					<button id="btnCancelarItem" label="Cancelar"
-						sclass="btn" image="/public/imagenes/iconos/limpiar.png"
-						tabindex="14" tooltip="pupCancelarItem">
-					</button>
-					<button id="btnEliminarItem" label="Eliminar"
-						sclass="btn" image="/public/imagenes/iconos/eliminar.png"
-						tabindex="15" disabled="true" tooltip="pupEliminarItem">
-					</button>
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:3%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
 					<separator />
-				</div>
+					<div sclass="btn-group">
 
-			</div>
-		</panelchildren>
-	</panel>
+						<button id="btnGuardarItem" label="Guardar"
+							sclass="btn" image="/public/imagenes/iconos/guardar.png"
+							tabindex="13" tooltip="pupGuardarItem">
+						</button>
+						<button id="btnCancelarItem" label="Cancelar"
+							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
+							tabindex="14" tooltip="pupCancelarItem">
+						</button>
+						<button id="btnEliminarItem" label="Eliminar"
+							sclass="btn" image="/public/imagenes/iconos/eliminar.png"
+							tabindex="15" disabled="true" tooltip="pupEliminarItem">
+						</button>
+						<separator />
+					</div>
+
+				</div>
+			</panelchildren>
+		</panel>
+
+	</groupbox>
 
 	<separator />
 	<separator />

@@ -1,5 +1,5 @@
 <window id="wdwActividad" title="Actividad" border="normal" width="100%"
-	height="400px" closable="true" apply="controlador.CActividad">
+	height="410px" closable="true" apply="controlador.CActividad">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -38,9 +38,11 @@
 	<separator />
 	<separator />
 	<label value="(*) "
-		style="font-weight:bold;color:red;margin-left:1%">
+		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
-	<label value="Campos Obligatorios"></label>
+	<label value="Campos Obligatorios"
+		style="font-weight:bold;color:rgb(99, 99, 99)">
+	</label>
 	<separator />
 	<separator />
 	<separator />
@@ -72,7 +74,7 @@
 	</popup>
 	<!-- Fin de popus -->
 
-	<groupbox width="95%" height="220px"
+	<groupbox width="95%" height="290px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -108,7 +110,8 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Descripción:" style="font-weight:bold" />
+						<label value="Descripción:"
+							style="font-weight:bold" />
 					</hlayout>
 
 					<textbox id="txtDescripcionActividad" rows="5"
@@ -118,37 +121,39 @@
 
 			</rows>
 		</grid>
-	</groupbox>
 
+		<separator />
+		<separator />
 
-	<separator />
-	<separator />
-
-	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:3%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
-
-					<button id="btnGuardarActividad" tabindex="3"
-						sclass="btn" tooltip="pupGuardarActividad" label="Guardar"
-						image="/public/imagenes/iconos/guardar.png">
-					</button>
-					<button id="btnCancelarActividad" label="Cancelar"
-						sclass="btn" tabindex="4" tooltip="pupCancelarActividad"
-						image="/public/imagenes/iconos/limpiar.png">
-					</button>
-					<button id="btnEliminarActividad" label="Eliminar"
-						sclass="btn" tooltip="pupEliminarActividad" disabled="true"
-						image="/public/imagenes/iconos/eliminar.png" tabindex="5">
-					</button>
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:3%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
 					<separator />
-				</div>
+					<div sclass="btn-group">
 
-			</div>
-		</panelchildren>
-	</panel>
+						<button id="btnGuardarActividad" tabindex="3"
+							sclass="btn" tooltip="pupGuardarActividad" label="Guardar"
+							image="/public/imagenes/iconos/guardar.png">
+						</button>
+						<button id="btnCancelarActividad"
+							label="Cancelar" sclass="btn" tabindex="4"
+							tooltip="pupCancelarActividad"
+							image="/public/imagenes/iconos/limpiar.png">
+						</button>
+						<button id="btnEliminarActividad"
+							label="Eliminar" sclass="btn" tooltip="pupEliminarActividad"
+							disabled="true" image="/public/imagenes/iconos/eliminar.png"
+							tabindex="5">
+						</button>
+						<separator />
+					</div>
+
+				</div>
+			</panelchildren>
+		</panel>
+
+	</groupbox>
 
 	<separator />
 	<separator />
