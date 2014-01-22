@@ -1,5 +1,5 @@
 <window id="wdwContactanos" title="Contáctanos" width="600px"
-	height="620px" border="normal" closable="true"
+	height="650px" border="normal" closable="true"
 	apply="controlador.CContactanos">
 
 	<style id="estilo">
@@ -24,104 +24,100 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
-		.z-window-modal-cnt, .z-window-highlighted-cnt,
-		.z-window-modal-cnt-noborder,
-		.z-window-highlighted-cnt-noborder,
-		.z-window-overlapped-cnt-noborder { background: #f5f5f5; }
-
-		.z-groupbox-cnt{ background: #fff; border-radius: 10px; border:
-		none; }
-
-
-
-
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<separator />
 	<separator />
 
-	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
-		<columns>
-			<column height="10px" />
-		</columns>
-		<rows>
-			<row>
-				<label value="Programa:" style="font-weight:bold" />
-			</row>
+	<groupbox style="margin-left:2%;margin-right:2%" height="570px">
+		<grid sclass="fgrid">
+			<columns>
+				<column height="10px" />
+			</columns>
+			<rows>
+				<row>
+					<label value="Programa:" style="font-weight:bold" />
+				</row>
 
-			<row>
-				<combobox readonly="true" id="cmbProgramaContactanos">
-					<template name="model">
-						<comboitem label="${each.nombre}" />
-					</template>
-				</combobox>
-			</row>
+				<row>
+					<combobox readonly="true"
+						id="cmbProgramaContactanos">
+						<template name="model">
+							<comboitem label="${each.nombre}" />
+						</template>
+					</combobox>
+				</row>
 
-			<row>
-				<label value="Nombre y Apellido:"
-					style="font-weight:bold" />
-			</row>
-			<row>
-				<textbox id="txtNombre" width="190px" />
-			</row>
+				<row>
+					<label value="Nombre y Apellido:"
+						style="font-weight:bold" />
+				</row>
+				<row>
+					<textbox id="txtNombre" width="190px" />
+				</row>
 
-			<row>
-				<label value="Correo electrónico:"
-					style="font-weight:bold" />
-			</row>
-			<row>
-				<textbox id="txtCorreo" width="190px" />
-			</row>
+				<row>
+					<label value="Correo electrónico:"
+						style="font-weight:bold" />
+				</row>
+				<row>
+					<textbox id="txtCorreo" width="190px" />
+				</row>
 
-			<row>
-				<label value="Asunto:" style="font-weight:bold" />
+				<row>
+					<label value="Asunto:" style="font-weight:bold" />
 
-			</row>
+				</row>
 
-			<row>
-				<textbox id="txtAsunto" width="270px" />
-			</row>
+				<row>
+					<textbox id="txtAsunto" width="270px" />
+				</row>
 
-			<row>
-				<label value="Mensaje:" style="font-weight:bold" />
-			</row>
+				<row>
+					<label value="Mensaje:" style="font-weight:bold" />
+				</row>
 
-			<row>
+				<row>
 
-				<textbox id="txtMensaje" rows="5" cols="100"
-					width="530px" tabindex="8" />
+					<textbox id="txtMensaje" rows="5" cols="100"
+						width="530px" tabindex="8" />
 
-			</row>
+				</row>
 
 
-		</rows>
-	</grid>
-	<separator />
-	<separator />
+			</rows>
+		</grid>
 
-	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:3%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
 
-					<button id="btnEnviarCorreo" sclass="btn"
-						label="Enviar" image="/public/imagenes/iconos/guardar.png"
-						tabindex="13">
-					</button>
-					<button id="btnCancelarCorreo" sclass="btn"
-						label="Cancelar" image="/public/imagenes/iconos/limpiar.png"
-						tabindex="14">
-					</button>
+		<separator />
+		<separator />
+
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:3%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
+					<separator />
+					<div sclass="btn-group">
+
+						<button id="btnEnviarCorreo" sclass="btn"
+							label="Enviar" image="/public/imagenes/iconos/guardar.png"
+							tabindex="13">
+						</button>
+						<button id="btnCancelarCorreo" sclass="btn"
+							label="Cancelar" image="/public/imagenes/iconos/limpiar.png"
+							tabindex="14">
+						</button>
+					</div>
+					<separator />
+
 				</div>
-				<separator />
+			</panelchildren>
+		</panel>
 
-			</div>
-		</panelchildren>
-	</panel>
+	</groupbox>
 
 	<separator />
 	<separator />

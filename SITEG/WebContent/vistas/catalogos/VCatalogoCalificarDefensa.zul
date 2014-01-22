@@ -5,7 +5,9 @@
 	<separator />
 	<separator />
 
+	
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<listbox id="ltbCalificarDefensa" mold="paging" pageSize="6"
 		style="margin-left:10px;margin-right:10px"

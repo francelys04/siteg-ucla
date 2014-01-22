@@ -33,87 +33,27 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
-		/*inicio del estilo interno de la ventana fondo gris con recuadro blando con bordes redondeados
-		fUNCIONA ADECUADAMENTE CON UN <groupbox></groupbox>
-		*/
-		
-		.z-window-embedded-cnt, .z-window-highlighted-cnt,
-		.z-window-embedded-cnt-noborder,
-		.z-window-highlighted-cnt-noborder,
-		.z-window-overlapped-cnt-noborder { background: #f5f5f5; }
-
-		.z-groupbox-cnt{ background: #fff; border-radius: 10px; border:
-		none; }
-		
-		/*fin del estilo*/
-
-		/*inicio del estilo borde de la ventana*/
-		
-		.z-window-embedded-hm, .z-window-embedded-hm, .z-window-highlighted-hm, .z-window-overlapped-hm, .z-window-popup-hm {
-		background: #3276b1;
-		}
-		
-		.z-window-embedded-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
-		background: #3276b1;
-		}
-		
-		.z-window-embedded-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
-		background-image: none;
-		}
-		
-		.z-window-embedded-hl, .z-window-embedded-hl, .z-window-highlighted-hl, .z-window-overlapped-hl, .z-window-popup-hl {
-		background: #3276b1;
-		background-image: none;
-		}
-
-		.z-window-embedded-hr, .z-window-embedded-hr, .z-window-highlighted-hr, .z-window-overlapped-hr, .z-window-popup-hr {
-		background-image: none;
-		}
-		
-		.z-window-embedded-tr, .z-window-embedded-tr, .z-window-highlighted-tr, .z-window-overlapped-tr, .z-window-popup-tr {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		.z-window-embedded-br, .z-window-highlighted-br, .z-window-overlapped-br {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		.z-window-embedded-header, .z-window-embedded-header, .z-window-popup-header, .z-window-highlighted-header, .z-window-overlapped-header {
-		color: #fff;
-		}
-		
-		.z-window-modal-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
-		background: #3276b1;
-		}
-		
-		.z-window-modal-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
-		background-image: none;
-		}
-		
-		.z-window-modal-br, .z-window-highlighted-br, .z-window-overlapped-br {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		/*fin del estilo*/
 
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 
 
 	<label value="(*) "
 		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
-	<label value="Campos Obligatorios"></label>
+	<label value="Campos Obligatorios"
+		style="font-weight:bold;color:rgb(99, 99, 99)">
+	</label>
 	<separator />
 	<separator />
 
 	<div align="right">
-		<label value="Fecha:" style="margin-right:10px"></label>
+		<label value="Fecha:"
+			style="margin-right:10px;font-weight:bold;color:rgb(99, 99, 99)">
+		</label>
 		<datebox id="db1" cols="12" style="margin-right:40px"
 			width="120px" disabled="true" format="short"
 			onCreate="self.value = new Date()" mold="rounded">
@@ -125,7 +65,7 @@
 	<separator />
 
 
-	<groupbox width="95%" height="620px"
+	<groupbox width="95%" height="660px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -142,7 +82,7 @@
 							<label value="*"
 								style="font-weight:bold;color:red" />
 							<label value="Programa:"
-								 style="font-weight:bold" />
+								style="font-weight:bold" />
 						</hlayout>
 
 						<combobox id="cmbProgramaSolicitud"
@@ -163,13 +103,14 @@
 								style="font-weight:bold;color:red">
 							</label>
 							<label value="Área:"
-								 style="font-weight:bold" />
+								style="font-weight:bold" />
 						</hlayout>
 
 						<combobox id="cmbAreaSolicitud" readonly="true"
 							width="170px" style="margin-left:90px" tabindex="10">
 							<template name="model">
-								<comboitem label="${each.nombre}" id="${each.id}"/>
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
 							</template>
 						</combobox>
 
@@ -178,14 +119,15 @@
 								style="font-weight:bold;color:red;margin-left:20px">
 							</label>
 							<label value="Temática:"
-								 style="font-weight:bold" />
+								style="font-weight:bold" />
 						</hlayout>
 
 						<combobox id="cmbTematicaSolicitud"
 							readonly="true" width="175px" tabindex="10"
 							style="margin-left:25px">
 							<template name="model">
-								<comboitem label="${each.nombre}" id="${each.id}" />
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
 							</template>
 						</combobox>
 					</hbox>
@@ -196,7 +138,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red" />
 						<label value="Descripción (Título Tentativo):"
-							 style="font-weight:bold" />
+							style="font-weight:bold" />
 					</hlayout>
 				</row>
 
@@ -233,7 +175,7 @@
 										style="font-weight:bold;color:red">
 									</label>
 									<label value="Cédula:"
-										 style="font-weight:bold" />
+										style="font-weight:bold" />
 								</hlayout>
 
 								<hbox>
@@ -328,7 +270,7 @@
 										style="font-weight:bold;color:red">
 									</label>
 									<label value="Cédula:"
-										 style="font-weight:bold" />
+										style="font-weight:bold" />
 								</hlayout>
 
 								<hbox>
@@ -349,7 +291,7 @@
 									<label value="*"
 										style="font-weight:bold;color:red" />
 									<label value="Nombre:"
-										 style="font-weight:bold" />
+										style="font-weight:bold" />
 								</hlayout>
 
 								<hbox>
@@ -360,7 +302,7 @@
 										<label value="*"
 											style="font-weight:bold;color:red;margin-left:5px" />
 										<label value="Apellido:"
-											 style="font-weight:bold" />
+											style="font-weight:bold" />
 									</hlayout>
 
 									<textbox id="txtApellidoProfesor"
@@ -374,7 +316,7 @@
 									<label value="*"
 										style="font-weight:bold;color:red" />
 									<label value="Correo:"
-										 style="font-weight:bold" />
+										style="font-weight:bold" />
 								</hlayout>
 
 								<textbox id="txtCorreoProfesor"
@@ -390,32 +332,34 @@
 			</tabpanels>
 		</tabbox>
 
-	</groupbox>
 
-	<separator />
-	<separator />
 
-	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:3%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
+		<separator />
+		<separator />
 
-					<button id="btnEnviarSolicitudtutoria"
-						label="Enviar" sclass="btn"
-						image="public/imagenes/iconos/enviar.png" tabindex="13">
-					</button>
-					<button id="btnCancelarSolicitudTutoria"
-						sclass="btn" label="Cancelar"
-						image="public/imagenes/iconos/limpiar.png" tabindex="14">
-					</button>
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:3%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
 					<separator />
+					<div sclass="btn-group">
 
+						<button id="btnEnviarSolicitudtutoria"
+							label="Enviar" sclass="btn"
+							image="public/imagenes/iconos/enviar.png" tabindex="13">
+						</button>
+						<button id="btnCancelarSolicitudTutoria"
+							sclass="btn" label="Cancelar"
+							image="public/imagenes/iconos/limpiar.png" tabindex="14">
+						</button>
+						<separator />
+
+					</div>
 				</div>
-			</div>
-		</panelchildren>
-	</panel>
+			</panelchildren>
+		</panel>
+
+	</groupbox>
 
 	<separator />
 	<separator />

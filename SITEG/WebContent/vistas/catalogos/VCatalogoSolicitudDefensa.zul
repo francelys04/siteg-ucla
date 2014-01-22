@@ -1,11 +1,13 @@
 <window title="Solicitudes de Defensa" border="normal" width="100%"
-	height="500px" closable="true"
+	height="600px" closable="true"
 	apply="controlador.CCatalogoSolicitudDefensa">
 	<separator />
 	<separator />
 	<separator />
 
+	
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<listbox mold="paging" pageSize="6" id="ltbSolicitudesDefensa"
 		style="margin-left:10px;margin-right:10px">

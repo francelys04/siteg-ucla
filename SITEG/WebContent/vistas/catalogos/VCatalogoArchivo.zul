@@ -1,8 +1,12 @@
 <?page  title="Biblioteca Virtual" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Biblioteca Virtual" border="normal" width="85%"
+	<window title="Biblioteca Virtual" border="normal" width="90%"
 		id="wdwCatalogoArchivo" apply="controlador.CCatalogoArchivo"
 		closable="true">
+
+		<style src="/public/css/bootstrap.css" />
+		<style src="/public/css/style.css" />
+
 		<listbox id="ltbArchivo" width="100%" mold="paging"
 			pageSize="10" emptyMessage="No hay archivos registrados">
 			<auxhead sclass="category-center">
@@ -24,8 +28,7 @@
 						sclass="search-query" placeholder="Programa"
 						id="txtProgramaMostrarArchivo" />
 				</auxheader>
-				<auxheader colspan="1">
-				</auxheader>
+				<auxheader colspan="1"></auxheader>
 			</auxhead>
 			<listhead>
 				<listheader label="Nombre" align="center" />

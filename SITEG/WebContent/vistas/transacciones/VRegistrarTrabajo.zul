@@ -32,77 +32,12 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
-		
-		/*inicio del estilo interno de la ventana fondo gris con recuadro blando con bordes redondeados
-		fUNCIONA ADECUADAMENTE CON UN <groupbox></groupbox>
-		*/
-		
-		.z-window-embedded-cnt, .z-window-highlighted-cnt,
-		.z-window-embedded-cnt-noborder,
-		.z-window-highlighted-cnt-noborder,
-		.z-window-overlapped-cnt-noborder { background: #f5f5f5; }
-
-		.z-groupbox-cnt{ background: #fff; border-radius: 10px; border:
-		none; }
-		
-		/*fin del estilo*/
-		
-		/*inicio del estilo borde de la ventana*/
-		
-		.z-window-embedded-hm, .z-window-embedded-hm, .z-window-highlighted-hm, .z-window-overlapped-hm, .z-window-popup-hm {
-		background: #3276b1;
-		}
-		
-		.z-window-embedded-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
-		background: #3276b1;
-		}
-		
-		.z-window-embedded-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
-		background-image: none;
-		}
-		
-		.z-window-embedded-hl, .z-window-embedded-hl, .z-window-highlighted-hl, .z-window-overlapped-hl, .z-window-popup-hl {
-		background: #3276b1;
-		background-image: none;
-		}
-
-		.z-window-embedded-hr, .z-window-embedded-hr, .z-window-highlighted-hr, .z-window-overlapped-hr, .z-window-popup-hr {
-		background-image: none;
-		}
-		
-		.z-window-embedded-tr, .z-window-embedded-tr, .z-window-highlighted-tr, .z-window-overlapped-tr, .z-window-popup-tr {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		.z-window-embedded-br, .z-window-highlighted-br, .z-window-overlapped-br {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		.z-window-embedded-header, .z-window-embedded-header, .z-window-popup-header, .z-window-highlighted-header, .z-window-overlapped-header {
-		color: #fff;
-		}
-		
-		.z-window-modal-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
-		background: #3276b1;
-		}
-		
-		.z-window-modal-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
-		background-image: none;
-		}
-		
-		.z-window-modal-br, .z-window-highlighted-br, .z-window-overlapped-br {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		/*fin del estilo*/
 
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
-	
+	<style src="/public/css/style.css" />
+
 	<!-- Lista de popus -->
 	<popup id="pupDatosProyecto">
 		<toolbarbutton
@@ -117,12 +52,10 @@
 			label="Presione aquí para visualizar los datos del tutor" />
 	</popup>
 	<popup id="pupBtnGuardar">
-		<toolbarbutton
-			label="Presione aquí para guardar el trabajo" />
+		<toolbarbutton label="Presione aquí para guardar el trabajo" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton
-			label="Presione aquí para cancelar la seleccion" />
+		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
 	</popup>
 	<!-- fin de popus -->
 
@@ -133,308 +66,323 @@
 	<label value="(*) "
 		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
-	<label value="Campos Obligatorios"></label>
+	<label value="Campos Obligatorios"
+		style="font-weight:bold;color:rgb(99, 99, 99)">
+	</label>
+	<separator />
+	<separator />
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="620px"
+	<groupbox width="95%" height="660px"
 		style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
 
-	<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
-		<columns>
-			<column width="10%" height="40px" />
-		</columns>
-		<rows>
+		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+			<columns>
+				<column width="10%" height="40px" />
+			</columns>
+			<rows>
 
-			<row>
-				<hlayout>
-					<label value="*"
-						style="font-weight:bold;color:red">
-					</label>
-					<label value="Programa:" style="color:black" />
-				</hlayout>
+				<row>
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label value="Programa:"
+							style="font-weight:bold;color:rgb(99, 99, 99)" />
+					</hlayout>
 
-				<textbox id="txtProgramaRegistraTeg" width="20%"
-					style="color:black !important;" disabled="True" />
+					<textbox id="txtProgramaRegistraTeg" width="190px"
+						style="color:black !important;margin-left:15px" disabled="True" />
 
-			</row>
-		</rows>
-	</grid>
+				</row>
+			</rows>
+		</grid>
 
-	<div align="right">
-		<label value="Fecha:" style="margin-right:10px;color:black"></label>
-		<datebox id="dtbFechaTeg" cols="12" width="130px"
-			style="margin-right:30px;color:black !important;" disabled="true"
-			format="short" onCreate="self.value = new Date()" mold="rounded">
-		</datebox>
-	</div>
+		<div align="right">
+			<label value="Fecha:"
+				style="margin-right:10px;font-weight:bold;color:rgb(99, 99, 99)">
+			</label>
+			<datebox id="dtbFechaTeg" cols="12" width="130px"
+				style="margin-right:30px;color:black !important;" disabled="true"
+				format="short" onCreate="self.value = new Date()" mold="rounded">
+			</datebox>
+		</div>
 
-	<separator />
-	<separator />
+		<separator />
+		<separator />
 
-	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
-		height="450px">
-		<tabs>
-			<tab label="Datos del Proyecto" tooltip="pupDatosProyecto"/>
-			<tab label="Datos del Estudiante" tooltip="pupDatosEstudiante"/>
-			<tab label="Datos del Tutor" tooltip="pupDatosTutor"/>
+		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
+			height="450px">
+			<tabs>
+				<tab label="Datos del Proyecto"
+					tooltip="pupDatosProyecto" />
+				<tab label="Datos del Estudiante"
+					tooltip="pupDatosEstudiante" />
+				<tab label="Datos del Tutor" tooltip="pupDatosTutor" />
 
-		</tabs>
-		<tabpanels>
+			</tabs>
+			<tabpanels>
 
-			<tabpanel height="400px">
-				<separator />
-				<separator />
-				<grid sclass="fgrid" style="margin-left:1%">
-					<columns>
-						<column width="650px" height="30px" />
-					</columns>
-					<rows>
-						<row>
-							<hbox>
-
-								<hlayout>
-									<label value="*"
-										style="font-weight:bold;color:red">
-									</label>
-									<label value="Area:"
-										style="color:black" />
-								</hlayout>
-
+				<tabpanel height="400px">
+					<separator />
+					<separator />
+					<grid sclass="fgrid" style="margin-left:1%">
+						<columns>
+							<column width="650px" height="30px" />
+						</columns>
+						<rows>
+							<row>
 								<hbox>
-
-									<textbox id="txtAreaRegistrarTeg"
-										width="160px"
-										style="margin-left:15px;margin-right:20px;color:black !important;"
-										disabled="true" />
-
 
 									<hlayout>
 										<label value="*"
-											style="margin-legt:80px;font-weight:bold;color:red">
+											style="font-weight:bold;color:red">
 										</label>
-										<label
-											value="
-										Temática: " style="color:black" />
-									</hlayout>
-									<textbox
-										id="txtTematicaRegistrarTeg" width="200px"
-										style="margin-left:15px;color:black !important;"
-										disabled="true" />
-
-								</hbox>
-
-							</hbox>
-						</row>
-
-						<row>
-
-							<hlayout>
-								<label value="*"
-									style="font-weight:bold;color:red">
-								</label>
-								<label value="Título del Proyecto:"
-									style="color:black" />
-							</hlayout>
-
-						</row>
-						<row>
-							<textbox id="txtTituloRegistrarTeg"
-								width="520px" rows="2" cols="100" />
-						</row>
-
-						<row>
-
-							<hlayout>
-								<label value="*"
-									style="font-weight:bold;color:red">
-								</label>
-								<label
-									value="Breve descripción de la proposición de la investigación:"
-									style="color:black" />
-							</hlayout>
-
-						</row>
-						<row>
-							<textbox id="txtDescripciónRegistrarTeg"
-								width="520px" rows="2" cols="100" />
-						</row>
-
-						<row>
-
-
-							<hbox>
-
-								<hlayout width="100px">
-									<label value="*"
-										style="font-weight:bold;color:red">
-									</label>
-									<label value="Fecha inicio:"
-										style="color:black" />
-								</hlayout>
-
-								<hbox>
-
-									<datebox
-										id="dtbFechaInicioRegistrarTeg" width="130px" format="short"
-										style="margin-left:5px" />
-
-
-									<hlayout width="180px"
-										style="margin-left:20px">
-										<label value="*"
-											style="font-weight:bold;color:red;margin-left:20px">
-										</label>
-										<label
-											value="Fecha aprox. de entrega:" style="color:black" />
+										<label value="Área:"
+											style="font-weight:bold" />
 									</hlayout>
 
-									<datebox
-										id="dtbFechaEntregaRegistrarTeg" width="130px" format="short"
-										style="margin-left:5px" />
+									<hbox>
+
+										<textbox
+											id="txtAreaRegistrarTeg" width="160px"
+											style="margin-left:15px;margin-right:20px;color:black !important;"
+											disabled="true" />
+
+
+										<hlayout>
+											<label value="*"
+												style="margin-legt:80px;font-weight:bold;color:red">
+											</label>
+											<label
+												value="
+										Temática: " style="font-weight:bold" />
+										</hlayout>
+										<textbox
+											id="txtTematicaRegistrarTeg" width="200px"
+											style="margin-left:15px;color:black !important;"
+											disabled="true" />
+
+									</hbox>
 
 								</hbox>
+							</row>
 
-							</hbox>
+							<row>
 
-						</row>
-
-						<row>
-
-							<hbox>
 								<hlayout>
 									<label value="*"
 										style="font-weight:bold;color:red">
 									</label>
-									<label value="Duración:"
-										style="color:black" />
+									<label value="Título del Trabajo:"
+										style="font-weight:bold" />
 								</hlayout>
 
-								<spinner id="spnDuracionRegistrarTeg"
-									width="100px" style="margin-left:43px" />
+							</row>
+							<row>
+								<textbox id="txtTituloRegistrarTeg"
+									width="520px" rows="2" cols="100" />
+							</row>
 
-							</hbox>
+							<row>
 
-						</row>
+								<hlayout>
+									<label value="*"
+										style="font-weight:bold;color:red">
+									</label>
+									<label
+										value="Breve descripción de la proposición de la investigación:"
+										style="font-weight:bold" />
+								</hlayout>
 
+							</row>
+							<row>
+								<textbox id="txtDescripciónRegistrarTeg"
+									width="520px" rows="2" cols="100" />
+							</row>
 
-					</rows>
-				</grid>
-
-
-			</tabpanel>
-
-			<tabpanel height="150px">
-				<separator />
-				<separator />
-				<separator />
-				<separator />
-
-
-				<listbox id="lsbEstudiantesRegistrarTeg"
-					style="margin-left:30px;margin-right:30px"
-					emptyMessage="No hay Estudiantes registrados actualmente">
-
-					<listhead>
-						<listheader label="Cédula" align="center" />
-						<listheader label="Nombre" align="center" />
-						<listheader label="Apellido" align="center" />
-						<listheader label="Correo" align="center" />
-					</listhead>
-
-					<template name="model">
-						<listitem>
-							<listcell label="${each.cedula}" />
-							<listcell label="${each.nombre}" />
-							<listcell label="${each.apellido}" />
-							<listcell label="${each.correoElectronico}" />
-						</listitem>
-					</template>
-				</listbox>
-
-			</tabpanel>
-
-			<tabpanel height="200px">
-
-				<separator />
-				<separator />
-				<grid sclass="fgrid" style="margin-left:1%">
-					<columns>
-						<column width="15%" height="30px" />
-					</columns>
-					<rows>
-						<row>
-							<hlayout>
-								<label value="* "
-									style="font-weight:bold;color:red;margin-left:1%" />
-								<label value="Cedula:"
-									style="color:black" />
-							</hlayout>
-
-							<textbox id="txtCedulaTutorRegistrarTeg"
-								width="20%" style="color:black !important;" disabled="true" />
-						</row>
-						<row>
-							<hlayout>
-								<label value="* "
-									style="font-weight:bold;color:red;margin-left:1%" />
-								<label value="Nombre:"
-									style="color:black" />
-							</hlayout>
+							<row>
 
 
-							<textbox id="txtNombreTutorRegistrarTeg"
-								width="30%" style="color:black !important;" disabled="true" />
-						</row>
-						<row>
-							<hlayout>
+								<hbox>
 
-								<label value="* "
-									style="font-weight:bold;color:red;margin-left:1%" />
+									<hlayout width="100px">
+										<label value="*"
+											style="font-weight:bold;color:red">
+										</label>
+										<label value="Fecha inicio:"
+											style="font-weight:bold" />
+									</hlayout>
 
-								<label value="Apellido:"
-									style="color:black" />
-							</hlayout>
+									<hbox>
 
-							<textbox id="txtApellidoTutorRegistrarTeg"
-								width="30%" style="color:black !important;" disabled="true" />
-						</row>
-					</rows>
-				</grid>
-			</tabpanel>
+										<datebox
+											id="dtbFechaInicioRegistrarTeg" width="130px" format="short"
+											style="margin-left:5px" />
 
-		</tabpanels>
-	</tabbox>
 
-	<separator />
+										<hlayout width="180px"
+											style="margin-left:20px">
+											<label value="*"
+												style="font-weight:bold;color:red;margin-left:20px">
+											</label>
+											<label
+												value="Fecha aprox. de entrega:" style="font-weight:bold" />
+										</hlayout>
 
-	<separator />
-	<separator />
+										<datebox
+											id="dtbFechaEntregaRegistrarTeg" width="130px" format="short"
+											style="margin-left:5px" />
 
-	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:2%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
-					<button id="btnGuardarRegistrarTeg" label="Guardar"
-						sclass="btn" image="/public/imagenes/iconos/guardar.png" tabindex="12"
-						tooltip="pupBtnGuardar">
-					</button>
-					<button id="btnCancelarRegistrarTeg"
-						label="Cancelar" sclass="btn"
-						image="/public/imagenes/iconos/limpiar.png" tabindex="13"
-						tooltip="pupBtnCancelar">
-					</button>
+									</hbox>
+
+								</hbox>
+
+							</row>
+
+							<row>
+
+								<hbox>
+									<hlayout>
+										<label value="*"
+											style="font-weight:bold;color:red">
+										</label>
+										<label value="Duración:"
+											style="font-weight:bold" />
+									</hlayout>
+
+									<spinner
+										id="spnDuracionRegistrarTeg" width="100px"
+										style="margin-left:43px" />
+
+								</hbox>
+
+							</row>
+
+
+						</rows>
+					</grid>
+
+
+				</tabpanel>
+
+				<tabpanel height="150px">
 					<separator />
-				</div>
+					<separator />
+					<separator />
+					<separator />
 
-			</div>
-		</panelchildren>
-	</panel>
-	
+
+					<listbox id="lsbEstudiantesRegistrarTeg"
+						style="margin-left:30px;margin-right:30px"
+						emptyMessage="No hay Estudiantes registrados actualmente">
+
+						<listhead>
+							<listheader label="Cédula" align="center" />
+							<listheader label="Nombre" align="center" />
+							<listheader label="Apellido" align="center" />
+							<listheader label="Correo" align="center" />
+						</listhead>
+
+						<template name="model">
+							<listitem>
+								<listcell label="${each.cedula}" />
+								<listcell label="${each.nombre}" />
+								<listcell label="${each.apellido}" />
+								<listcell
+									label="${each.correoElectronico}" />
+							</listitem>
+						</template>
+					</listbox>
+
+				</tabpanel>
+
+				<tabpanel height="200px">
+
+					<separator />
+					<separator />
+					<grid sclass="fgrid" style="margin-left:1%">
+						<columns>
+							<column width="15%" height="30px" />
+						</columns>
+						<rows>
+							<row>
+								<hlayout>
+									<label value="* "
+										style="font-weight:bold;color:red;margin-left:1%" />
+									<label value="Cédula:"
+										style="font-weight:bold" />
+								</hlayout>
+
+								<textbox id="txtCedulaTutorRegistrarTeg"
+									width="20%" style="color:black !important;" disabled="true" />
+							</row>
+							<row>
+								<hlayout>
+									<label value="* "
+										style="font-weight:bold;color:red;margin-left:1%" />
+									<label value="Nombre:"
+										style="font-weight:bold" />
+								</hlayout>
+
+
+								<textbox id="txtNombreTutorRegistrarTeg"
+									width="30%" style="color:black !important;" disabled="true" />
+							</row>
+							<row>
+								<hlayout>
+
+									<label value="* "
+										style="font-weight:bold;color:red;margin-left:1%" />
+
+									<label value="Apellido:"
+										style="font-weight:bold" />
+								</hlayout>
+
+								<textbox
+									id="txtApellidoTutorRegistrarTeg" width="30%"
+									style="color:black !important;" disabled="true" />
+							</row>
+						</rows>
+					</grid>
+				</tabpanel>
+
+			</tabpanels>
+		</tabbox>
+
+		<separator />
+
+		<separator />
+		<separator />
+
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:2%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
+					<separator />
+					<div sclass="btn-group">
+						<button id="btnGuardarRegistrarTeg"
+							label="Guardar" sclass="btn"
+							image="/public/imagenes/iconos/guardar.png" tabindex="12"
+							tooltip="pupBtnGuardar">
+						</button>
+						<button id="btnCancelarRegistrarTeg"
+							label="Cancelar" sclass="btn"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="13"
+							tooltip="pupBtnCancelar">
+						</button>
+						<separator />
+					</div>
+
+				</div>
+			</panelchildren>
+		</panel>
+
 	</groupbox>
-	
+
 	<separator />
 	<separator />
 	<separator />

@@ -1,5 +1,5 @@
 <window id="wdwCalificarDefensa" title="Calificar Defensa"
-	border="normal" width="750px" height="640px" closable="true"
+	border="normal" width="750px" height="680px" closable="true"
 	apply="controlador.CCalificarDefensa">
 	<separator />
 
@@ -32,76 +32,12 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
-		
-		/*inicio del estilo interno de la ventana fondo gris con recuadro blando con bordes redondeados
-		fUNCIONA ADECUADAMENTE CON UN <groupbox></groupbox>
-		*/
-		
-		.z-window-embedded-cnt, .z-window-highlighted-cnt,
-		.z-window-embedded-cnt-noborder,
-		.z-window-highlighted-cnt-noborder,
-		.z-window-overlapped-cnt-noborder { background: #f5f5f5; }
 
-		.z-groupbox-cnt{ background: #fff; border-radius: 10px; border:
-		none; }
-		
-		/*fin del estilo*/
-		
-		/*inicio del estilo borde de la ventana*/
-		
-		.z-window-embedded-hm, .z-window-embedded-hm, .z-window-highlighted-hm, .z-window-overlapped-hm, .z-window-popup-hm {
-		background: #3276b1;
-		}
-		
-		.z-window-embedded-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
-		background: #3276b1;
-		}
-		
-		.z-window-embedded-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
-		background-image: none;
-		}
-		
-		.z-window-embedded-hl, .z-window-embedded-hl, .z-window-highlighted-hl, .z-window-overlapped-hl, .z-window-popup-hl {
-		background: #3276b1;
-		background-image: none;
-		}
 
-		.z-window-embedded-hr, .z-window-embedded-hr, .z-window-highlighted-hr, .z-window-overlapped-hr, .z-window-popup-hr {
-		background-image: none;
-		}
-		
-		.z-window-embedded-tr, .z-window-embedded-tr, .z-window-highlighted-tr, .z-window-overlapped-tr, .z-window-popup-tr {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		.z-window-embedded-br, .z-window-highlighted-br, .z-window-overlapped-br {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		.z-window-embedded-header, .z-window-embedded-header, .z-window-popup-header, .z-window-highlighted-header, .z-window-overlapped-header {
-		color: #fff;
-		}
-		
-		.z-window-modal-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
-		background: #3276b1;
-		}
-		
-		.z-window-modal-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
-		background-image: none;
-		}
-		
-		.z-window-modal-br, .z-window-highlighted-br, .z-window-overlapped-br {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		/*fin del estilo*/
-		
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<!-- Lista de popus -->
 	<popup id="pupDatosTrabajo">
@@ -121,267 +57,275 @@
 			label="Presione aquí para visualizar los datos de la evaluacion" />
 	</popup>
 	<popup id="pupBtnGuardar">
-		<toolbarbutton
-			label="Presione aquí para guardar la comision" />
+		<toolbarbutton label="Presione aquí para guardar la comision" />
 	</popup>
 	<popup id="pupBtnFinalizar">
 		<toolbarbutton
 			label="Presione aquí para finalizar la seleccion de las defensas" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton
-			label="Presione aquí para cancelar la seleccion" />
+		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
 	</popup>
 	<!-- fin de popus -->
 
 	<separator />
 	<separator />
-	
-	<groupbox width="95%" height="620px"
+
+	<groupbox width="95%" height="600px"
 		style="margin-left:2%;margin-right:1%">
 
-	<label value="Programa:" style="margin-left:2%;color:black" />
-	<textbox id="txtProgramaCalificar"
-		style="margin-left:5%;color:black !important;" width="25%"
-		disabled="true" />
+		<separator />
+		<separator />
 
-	<div align="right">
-		<label value="Fecha:" style="margin-right:10px;color:black"></label>
-		<datebox id="dtbfecha" cols="12"
-			style="margin-right:30px;color:black !important;" width="130px"
-			format="short" onCreate="self.value = new Date()" mold="rounded"
-			disabled="true">
-		</datebox>
-	</div>
+		<label value="Programa:"
+			style="margin-left:2%;font-weight:bold;color:rgb(99, 99, 99)" />
+		<textbox id="txtProgramaCalificar"
+			style="margin-left:5%;color:black !important;" width="25%"
+			disabled="true" />
 
-	<separator />
-	<separator />
+		<div align="right">
+			<label value="Fecha:"
+				style="margin-right:10px;font-weight:bold;color:rgb(99, 99, 99)">
+			</label>
+			<datebox id="dtbfecha" cols="12"
+				style="margin-right:30px;color:black !important;" width="130px"
+				format="short" onCreate="self.value = new Date()" mold="rounded"
+				disabled="true">
+			</datebox>
+		</div>
 
-	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
-		height="400px">
-		<tabs>
-			<tab label="Datos del Trabajo" tooltip="pupDatosTrabajo"/>
-			<tab label="Datos del Estudiante" tooltip="pupDatosEstudiante"/>
-			<tab label="Datos del Tutor" tooltip="pupDatosTutor"/>
-			<tab label="Evaluación" tooltip="pupDatosEvaluacion"/>
+		<separator />
+		<separator />
 
-		</tabs>
-		<tabpanels>
+		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
+			height="400px">
+			<tabs>
+				<tab label="Datos del Trabajo"
+					tooltip="pupDatosTrabajo" />
+				<tab label="Datos del Estudiante"
+					tooltip="pupDatosEstudiante" />
+				<tab label="Datos del Tutor" tooltip="pupDatosTutor" />
+				<tab label="Evaluación" tooltip="pupDatosEvaluacion" />
 
-			<tabpanel height="200px">
-				<separator />
-				<separator />
-				<grid sclass="fgrid" style="margin-left:1%">
-					<columns>
-						<column width="600px" height="30px" />
-					</columns>
-					<rows>
-						<row>
-							<hbox>
-								<label value="Área:"
-									style="color:black" />
+			</tabs>
+			<tabpanels>
 
-								<textbox id="txtAreaCalificar"
-									width="80%" style="margin-left:90px;color:black !important;"
-									disabled="true" />
-
-							</hbox>
-						</row>
-
-						<row>
-							<hbox>
-								<label value="
-										Temática: "
-									style="color:black" />
-
-								<textbox id="txtTematicaCalificar"
-									width="100%" style="margin-left:65px;color:black !important;"
-									disabled="true" />
-							</hbox>
-
-						</row>
-
-						<row>
-							<label value="Título del Proyecto:"
-								style="color:black" />
-
-						</row>
-						<row>
-							<textbox id="txtTituloCalificar"
-								width="620px" rows="3" cols="100"
-								style="color:black !important;" disabled="true" />
-						</row>
-					</rows>
-				</grid>
-
-
-			</tabpanel>
-
-			<tabpanel height="150px">
-				<separator />
-				<separator />
-				<separator />
-				<separator />
-
-				<listbox id="ltbEstudiantesCalificar" mold="paging"
-					style="margin-left:30px;margin-right:30px" pageSize="2">
-
-
-
-					<listhead>
-						<listheader label="Cédula" align="center" />
-						<listheader label="Nombre" align="center" />
-						<listheader label="Apellido" align="center" />
-						<listheader label="Correo" align="center"
-							width="30%" />
-					</listhead>
-					<template name="model">
-						<listitem>
-							<listcell label="${each.cedula}" />
-							<listcell label="${each.nombre}" />
-							<listcell label="${each.apellido}" />
-							<listcell label="${each.correoElectronico}" />
-
-						</listitem>
-					</template>
-
-
-				</listbox>
-
-			</tabpanel>
-
-			<tabpanel height="200px">
-
-				<separator />
-				<separator />
-
-				<grid sclass="fgrid" style="margin-left:1%">
-					<columns>
-						<column width="15%" height="30px" />
-					</columns>
-					<rows>
-						<row>
-							<label value="Cedula:" style="color:black" />
-
-							<textbox id="txtCedulaTutor" width="20%"
-								style="color:black !important;" disabled="true" />
-						</row>
-						<row>
-							<label value="Nombre:" style="color:black" />
-
-
-							<textbox id="txtNombreTutor" width="30%"
-								style="color:black !important;" disabled="true" />
-						</row>
-						<row>
-							<label value="Apellido:"
-								style="color:black" />
-
-							<textbox id="txtApellidoTutor" width="30%"
-								style="color:black !important;" disabled="true" />
-						</row>
-					</rows>
-				</grid>
-			</tabpanel>
-
-			<tabpanel height="300px">
-
-				<separator />
-				<separator />
-
-				<grid sclass="fgrid"
-					style="margin-left:2%;margin-right:1%">
-					<columns>
-						<column width="98%" height="30%" />
-					</columns>
-					<rows>
-
-						<row>
-							<hbox>
-								<listbox id="ltbitem"
-									emptyMessage="No hay item registradas" mold="paging"
-									pageSize="3" height="245px">
-									<listhead>
-										<listheader label="Item"
-											align="center" />
-										<listheader label="Apreciación"
-											align="center" />
-
-
-									</listhead>
-
-									<template name="model">
-										<listitem>
-											<listcell
-												label="${each.nombre}">
-											</listcell>
-											<listcell>
-												<textbox width="90%" />
-
-											</listcell>
-										</listitem>
-									</template>
-
-								</listbox>
-
-								<separator />
-								<separator />
-
-							</hbox>
-						</row>
-						
-						<row>
-						</row>
-						
-						<row>
-						</row>
-						
-						<row>
-							<radiogroup id="rdgCalificacion">
-								<radio id="rdoAprobado"
-									label="TEG Aprobado" style="margin-left:210px" tabindex="5" />
-								<radio id="rdoReprobado"
-									label="TEG Reprobado" style="margin-left:50px" tabindex="6" />
-							</radiogroup>
-
-						</row>
-					</rows>
-				</grid>
-
-				<separator />
-				<separator />
-
-			</tabpanel>
-		</tabpanels>
-	</tabbox>
-
-
-	<separator />
-	<separator />
-
-
-	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:2%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
-					<button id="btnGuardar" label="Guardar" sclass="btn"
-						image="/public/imagenes/iconos/guardar.png" tabindex="12"
-						tooltip="pupBtnGuardar">
-					</button>
-					<button id="btnCancelar" label="Cancelar"
-						sclass="btn" image="/public/imagenes/iconos/limpiar.png" tabindex="13"
-						tooltip="pupBtnCancelar">
-					</button>
+				<tabpanel height="200px">
 					<separator />
+					<separator />
+					<grid sclass="fgrid" style="margin-left:1%">
+						<columns>
+							<column width="600px" height="30px" />
+						</columns>
+						<rows>
+							<row>
+								<hbox>
+									<label value="Área:"
+										style="font-weight:bold" />
+
+									<textbox id="txtAreaCalificar"
+										width="80%" style="margin-left:90px;color:black !important;"
+										disabled="true" />
+
+								</hbox>
+							</row>
+
+							<row>
+								<hbox>
+									<label
+										value="
+										Temática: " style="font-weight:bold" />
+
+									<textbox id="txtTematicaCalificar"
+										width="100%" style="margin-left:65px;color:black !important;"
+										disabled="true" />
+								</hbox>
+
+							</row>
+
+							<row>
+								<label value="Título del Proyecto:"
+									style="font-weight:bold" />
+
+							</row>
+							<row>
+								<textbox id="txtTituloCalificar"
+									width="620px" rows="3" cols="100"
+									style="color:black !important;" disabled="true" />
+							</row>
+						</rows>
+					</grid>
+
+
+				</tabpanel>
+
+				<tabpanel height="150px">
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+
+					<listbox id="ltbEstudiantesCalificar" mold="paging"
+						style="margin-left:30px;margin-right:30px" pageSize="2">
+
+
+
+						<listhead>
+							<listheader label="Cédula" align="center" />
+							<listheader label="Nombre" align="center" />
+							<listheader label="Apellido" align="center" />
+							<listheader label="Correo" align="center"
+								width="30%" />
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell label="${each.cedula}" />
+								<listcell label="${each.nombre}" />
+								<listcell label="${each.apellido}" />
+								<listcell
+									label="${each.correoElectronico}" />
+
+							</listitem>
+						</template>
+
+
+					</listbox>
+
+				</tabpanel>
+
+				<tabpanel height="200px">
+
+					<separator />
+					<separator />
+
+					<grid sclass="fgrid" style="margin-left:1%">
+						<columns>
+							<column width="15%" height="30px" />
+						</columns>
+						<rows>
+							<row>
+								<label value="Cédula:"
+									style="font-weight:bold" />
+
+								<textbox id="txtCedulaTutor" width="20%"
+									style="color:black !important;" disabled="true" />
+							</row>
+							<row>
+								<label value="Nombre:"
+									style="font-weight:bold" />
+
+
+								<textbox id="txtNombreTutor" width="30%"
+									style="color:black !important;" disabled="true" />
+							</row>
+							<row>
+								<label value="Apellido:"
+									style="font-weight:bold" />
+
+								<textbox id="txtApellidoTutor"
+									width="30%" style="color:black !important;" disabled="true" />
+							</row>
+						</rows>
+					</grid>
+				</tabpanel>
+
+				<tabpanel height="300px">
+
+					<separator />
+					<separator />
+
+					<grid sclass="fgrid"
+						style="margin-left:2%;margin-right:1%">
+						<columns>
+							<column width="98%" height="30%" />
+						</columns>
+						<rows>
+
+							<row>
+								<hbox>
+									<listbox id="ltbitem"
+										emptyMessage="No hay item registradas" mold="paging"
+										pageSize="3" height="245px">
+										<listhead>
+											<listheader label="Item"
+												align="center" />
+											<listheader
+												label="Apreciación" align="center" />
+
+
+										</listhead>
+
+										<template name="model">
+											<listitem>
+												<listcell
+													label="${each.nombre}">
+												</listcell>
+												<listcell>
+													<textbox
+														width="90%" />
+
+												</listcell>
+											</listitem>
+										</template>
+
+									</listbox>
+
+									<separator />
+									<separator />
+
+								</hbox>
+							</row>
+
+							<row></row>
+
+							<row></row>
+
+							<row>
+								<radiogroup id="rdgCalificacion">
+									<radio id="rdoAprobado"
+										label="TEG Aprobado" style="margin-left:210px" tabindex="5" />
+									<radio id="rdoReprobado"
+										label="TEG Reprobado" style="margin-left:50px" tabindex="6" />
+								</radiogroup>
+
+							</row>
+						</rows>
+					</grid>
+
+					<separator />
+					<separator />
+
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+
+
+		<separator />
+		<separator />
+
+
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:2%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
+					<separator />
+					<div sclass="btn-group">
+						<button id="btnGuardar" label="Guardar"
+							sclass="btn" image="/public/imagenes/iconos/guardar.png"
+							tabindex="12" tooltip="pupBtnGuardar">
+						</button>
+						<button id="btnCancelar" label="Cancelar"
+							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
+							tabindex="13" tooltip="pupBtnCancelar">
+						</button>
+						<separator />
+					</div>
+
 				</div>
+			</panelchildren>
+		</panel>
 
-			</div>
-		</panelchildren>
-	</panel>
-
-	<separator />
+		<separator />
 	</groupbox>
-	
+
 </window>

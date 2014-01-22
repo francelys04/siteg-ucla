@@ -84,7 +84,7 @@
 }
 
 .z-loading-icon {
-	background-image: url('public/imagenes/portal/gif.gif');
+	background-image: url('..public/imagenes/portal/gif.gif');
 	height: 80px;
 	width: 80px;
 }

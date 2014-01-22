@@ -1,26 +1,30 @@
 <?page  title="Descargas" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Descargas" border="normal" width="95%"
+	<window title="Descargas" border="normal" width="795px"
 		id="wdwCatalogoArchivoDescarga"
 		apply="controlador.CCatalogoArchivoDescarga" closable="true">
+
+		<style src="/public/css/bootstrap.css" />
+		<style src="/public/css/style.css" />
+
 		<listbox id="ltbArchivoDescarga" width="100%" mold="paging"
 			pageSize="10" emptyMessage="No hay archivos registrados">
 			<auxhead sclass="category-center">
 				<auxheader colspan="1">
 					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="80%"
+					<textbox instant="true" width="70%"
 						sclass="search-query" placeholder="Nombre"
 						id="txtNombreMostrarArchivoDescarga" />
 				</auxheader>
 				<auxheader colspan="1">
 					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="80%"
+					<textbox instant="true" width="70%"
 						sclass="search-query" placeholder="Descripción"
 						id="txtDescripcionMostrarArchivoDescarga" />
 				</auxheader>
 				<auxheader colspan="1">
 					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="80%"
+					<textbox instant="true" width="70%"
 						sclass="search-query" placeholder="Programa"
 						id="txtProgramaMostrarArchivoDescarga" />
 				</auxheader>

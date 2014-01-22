@@ -38,9 +38,8 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="200px"
+	<groupbox width="95%" height="750px"
 		style="margin-left:2%;margin-right:1%">
-		<caption label="Datos del Estudiante"></caption>
 		<separator />
 		<separator />
 
@@ -98,16 +97,12 @@
 			</rows>
 		</grid>
 
-	</groupbox>
 
 	<separator />
 	<separator />
 	<separator />
 	<separator />
-
-	<groupbox width="95%" height="555px"
-		style="margin-left:2%;margin-right:1%">
-
+	
 		<grid sclass="fgrid">
 			<columns>
 				<column width="60%" height="30px" />
