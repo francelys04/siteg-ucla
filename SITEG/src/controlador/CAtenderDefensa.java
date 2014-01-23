@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -68,10 +69,6 @@ public class CAtenderDefensa extends CGeneral {
 	@Wire
 	private Label lblCondicionAtenderDefensa;
 	@Wire
-	private Listbox ltbJuradoDisponible;
-	@Wire
-	private Listbox ltbJuradoSeleccionado;
-	@Wire
 	private Listbox ltbEstudiantesAtenderDefensa;
 	@Wire
 	private Datebox dtbFechaAtenderDefensa;
@@ -116,109 +113,69 @@ public class CAtenderDefensa extends CGeneral {
 				programa = est.get(0).getPrograma();
 				txtProgramaAtenderDefensa.setValue(est.get(0).getPrograma().getNombre());
 				txtTituloAtenderDefensa.setValue(teg.getTitulo());
-				lblCondicionAtenderDefensa
-						.setValue("Recuerde que la cantidad de jurados es de:"
-								+ buscarCondicionVigenteEspecifica(
-										"Numero de integrantes del jurado", programa)
-										.getValor());
-				Defensa defensa = servicioDefensa.buscarDefensaDadoTeg(teg);
-				if (defensa != null) {
-					idDefensa = defensa.getId();
-					dtbFechaDefensa.setValue(defensa.getFecha());
-					tmbHoraDefensa.setValue(defensa.getHora());
-					txtLugarDefensa.setValue(defensa.getLugar());
-				}
+				
+				
 			}
 		}
-	}
-
-	@Listen("onClick = #btnAgregarJurado")
-	public void moverDerechaJurado() {
-
-		Listitem list1 = ltbJuradoDisponible.getSelectedItem();
-		if (list1 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list1.setParent(ltbJuradoSeleccionado);
-	}
-
-	@Listen("onClick = #btnRemoverJurado")
-	public void moverIzquierdaJurado() {
-		Listitem list2 = ltbJuradoSeleccionado.getSelectedItem();
-		if (list2 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list2.setParent(ltbJuradoDisponible);
 	}
 
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
-
+//Metodo que permite llenar la lista de los estudiantes
 	public void llenarListas(Teg teg) {
 		List<Estudiante> estudiantesTeg = servicioEstudiante
 				.buscarEstudiantePorTeg(teg);
 		ltbEstudiantesAtenderDefensa.setModel(new ListModelList<Estudiante>(
 				estudiantesTeg));
-		List<Profesor> juradoDisponible = servicioProfesor
-				.buscarProfesorJuradoDadoTeg(teg);
-		ltbJuradoDisponible.setModel(new ListModelList<Profesor>(
-				juradoDisponible));
-		List<Jurado> juradoOcupado = servicioJurado.buscarJuradoDeTeg(teg);
-		ltbJuradoSeleccionado
-				.setModel(new ListModelList<Jurado>(juradoOcupado));
-		// List<TipoJurado> tipoJurado = servicioTipoJurado.buscarActivos();
-		// System.out.println(tipoJurado.toString());
-		// cmbDefensaTipoJurado.setModel(new
-		// ListModelList<TipoJurado>(tipoJurado));
 	}
-
-	public boolean validarJurado() {
-		if (ltbJuradoSeleccionado.getItemCount() == buscarCondicionVigenteEspecifica(
-				"Numero de integrantes del jurado", programa).getValor()) {
-			System.out.println("aqui");
-			return true;
-		} else
-			System.out.println("alla");
-		return false;
-	}
-
-	@Listen("onClick = #btnAceptarDefensaMientrasTanto")
+//Metodo que permite guardar los datos de la defensa
+	@Listen("onClick = #btnAceptarDefensa")
 	public void aceptarDefensa() {
-		if (guardardatosDefensa()) {
-			Messagebox
-					.show("Solicitud de Defensa guardada para futuras modificaciones",
-							"Información", Messagebox.OK,
+		if (tmbHoraDefensa.getValue()== null || txtLugarDefensa.getText().compareTo("")== 0 || dtbFechaDefensa.getValue() == null ){
+
+			Messagebox.show("Debe completar todos los campos","Error", Messagebox.OK,
+							Messagebox.ERROR);
+			
+		}else{
+			Messagebox.show("Desea guardar los datos d ela defensa?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+			
+			
+			Teg teg = servicioTeg.buscarTeg(idTeg);
+			Date fecha = dtbFechaDefensa.getValue();
+			Date hora = tmbHoraDefensa.getValue();
+			String lugar = txtLugarDefensa.getValue();
+			
+			String estatus = "Por Defender";
+			Defensa defensa = new Defensa(idDefensa, teg, fecha, hora, lugar,
+					 estatus,null);
+			servicioDefensa.guardarDefensa(defensa);			
+			
+			Messagebox.show("Datos de la defensa guardados con exito","Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
 			salir();
+			
+							}
+						}
+					});
 		}
-	}
 
-	@Listen("onClick = #btnAceptarDefensa")
-	public void aceptarDefensaDefinitiva() {
-		if (validarJurado() && guardardatosDefensa()) {
-			Teg teg = servicioTeg.buscarTeg(idTeg);
-			teg.setEstatus("Defensa Asignada");
-			servicioTeg.guardar(teg);
-			Messagebox.show("Solicitud de Defensa finalizada exitosamente",
-					"Información", Messagebox.OK, Messagebox.INFORMATION);
-			salir();
-		} else {
-			Messagebox.show(
-					"El numero de profesores en el jurado no es el correcto, debe ser: "
-							+ buscarCondicionVigenteEspecifica(
-									"Numero de integrantes del jurado", programa)
-									.getValor(), "Error", Messagebox.OK,
-					Messagebox.ERROR);
-		}
 	}
-
+	
+//metodo para limpiar los campos
 	@Listen("onClick = #btnCancelarDefensa")
 	public void cancelarDefensa() {
-		salir();
+		txtLugarDefensa.setValue("");
+		
 	}
-
+//metodo para cerrar y refrescar las vistas
 	public void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -228,44 +185,5 @@ public class CAtenderDefensa extends CGeneral {
 		wdwAtenderDefensa.onClose();
 	}
 
-	public boolean guardardatosDefensa() {
-		Teg teg = servicioTeg.buscarTeg(idTeg);
-
-		List<Jurado> jurados = new ArrayList<Jurado>();
-		boolean error = false;
-		for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
-			Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
-			String tipojurado = ((Combobox) ((listItem.getChildren().get(3)))
-					.getFirstChild()).getValue();
-			if (tipojurado == "") {
-				error = true;
-			}
-			long cedula = ((Spinner) ((listItem.getChildren().get(0)))
-					.getFirstChild()).getValue();
-			Profesor profesorJurado = servicioProfesor
-					.buscarProfesorPorCedula(String.valueOf(cedula));
-			TipoJurado tipo = servicioTipoJurado.buscarPorNombre(tipojurado);
-			Jurado jurado = new Jurado(teg, profesorJurado, tipo);
-			jurados.add(jurado);
-		}
-		if (!error) {
-			servicioJurado.guardar(jurados);
-			Date fecha = dtbFechaDefensa.getValue();
-			Date hora = tmbHoraDefensa.getValue();
-			String lugar = txtLugarDefensa.getValue();
-			
-			String estatus = "Por Defender";
-			Profesor profesor = servicioProfesor
-					.buscarProfesorPorCedula(txtCedulaTutorAtenderDefensa
-							.getValue());
-			Defensa defensa = new Defensa(idDefensa, teg, fecha, hora, lugar,
-					 estatus, profesor);
-			servicioDefensa.guardarDefensa(defensa);
-			return true;
-		} else {
-			Messagebox.show("Debe seleccionar un tipo para cada jurado",
-					"Error", Messagebox.OK, Messagebox.ERROR);
-			return false;
-		}
-	}
+	
 }
