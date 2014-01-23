@@ -163,7 +163,7 @@ public class STeg {
 		return tegs;
 	}
 
-	public List<Teg> buscarTegsDeTutorPorDosFechas(
+	public List<Teg> buscarTegsDeTutorPorDosFechasYTematica(
 			Profesor buscarProfesorPorCedula, Tematica tematica, Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
@@ -171,11 +171,27 @@ public class STeg {
 		return tegs;
 	}
 
-	public List<Teg> buscarTegsDeTutorPorDosFechasYEstatus(Profesor profesor,
+	public List<Teg> buscarTegsDeTutorPorTematicaPorDosFechasYEstatus(Profesor profesor,
 			Tematica tematica, String estatus2, Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
 		tegs=interfaceTeg.findByTutorAndTematicaAndEstatusAndFechaBetween(profesor,tematica,estatus2, fechaInicio,fechaFin);
+		return tegs;
+	}
+
+	public List<Teg> buscarTodosTegsDeTutorPorDosFechas(Profesor profesor,
+			Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByTutorAndFechaBetween(profesor,fechaInicio,fechaFin);
+		return tegs;
+	}
+
+	public List<Teg> buscarTegsDeTutorPorDosFechasYEstatus(Profesor profesor,
+			String estatus2, Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByTutorAndEstatusAndFechaBetween(profesor,estatus2,fechaInicio,fechaFin);
 		return tegs;
 	}
 	public List<Teg> buscarUltimasTematicas(String estatus, AreaInvestigacion area,Date fechaInicio,Date fechaFin) {
