@@ -1,6 +1,6 @@
-<?page id="wdwConsultaListadoTeg" title="Gestion Estudiante" contentType="text/html;charset=UTF-8"?>
-<window id="wdwConsultaListadoTeg" title="Consulta de Trabajo Especial de Grado" border="normal"
-	width="700px" height="700px" closable="true"> 	<!-- apply="controlador.CTEG" -->
+
+<window id="wdwConsultaListadoTeg" title="Consulta de Tramites registrados" border="normal"
+	width="100%" height="450px" closable="true"> 	<!-- apply="controlador.CTEG" -->
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -33,13 +33,13 @@
 		background: white; border-top: none; }
 
 	</style>
-
+ <style src="/public/css/bootstrap.css" />
 	<separator />
 	<separator />
 	<!-- <label value="(*) "
 		style="font-weight:bold;color:red;margin-center:2%">
 	</label> -->
-	<label value="Lista de Trabajo Especial de Grado" 	style="font-weight:bold;margin-left:35%;margin-right:20%"></label>
+<!--  	<label value="Lista de Proyectos-Trabajo Especial de Grado" 	style="font-weight:bold;margin-left:35%;margin-right:20%"></label>-->
 	<separator />
 	<separator />
 	<separator />
@@ -55,97 +55,86 @@
 			<rows>
 				<row>
 					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red"  />
-						<label value="Tipo de Lista "
-							style="font-weight:bold" />
+						
+						<label value="Tipo de Lista: "
+							style="color:black" />
 					</hlayout>
-					<combobox id="cmbTipoLista" width="100%">
+					<combobox id="cmbTipoLista" width="100%" readonly="true">
 						<template name="model" >
 							<comboitem label="${each.tipolista}"/>
 						</template>
 					</combobox>
 				</row>
-				
+
 				<row>
-				<hlayout>
-					<label value="Fecha de Registro"
-						style="font-weight:bold" width="100% " />
-				</hlayout>
-				</row>
-				<row>				
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red"  />
-						<label value="Fecha Desde"
-							style="font-weight:bold" />
-					</hlayout>
-					<combobox id="cmbFechaDesde" width="100%">
-						<template name="model" >
-							<comboitem label="${each.fechadesde}"/>
-						</template>
-					</combobox>
-					
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red"  />
-						<label value="Fecha Hasta"
-							style="font-weight:bold" />
-					</hlayout>
-					<combobox id="cmbFechaHasta" width="100%">
-						<template name="model" >
-							<comboitem label="${each.fechahasta}"/>
-						</template>
-					</combobox>
-				
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red" />
+				    <hlayout>
+						
 						<label value="Programa:"
-							style="font-weight:bold" />
+							style="color:black" />
 					</hlayout>
-					<combobox id="cmbPrograma" width="100%">
+					<combobox id="cmbPrograma" width="100%" readonly="true">
 						<template name="model">
 							<comboitem label="${each.programa}" />
 						</template>
 					</combobox>
-				</row>
 					
-				<row>					
 					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red">
-						</label>
-						<label value="Area:" style="font-weight:bold" width="12%" />
+						<label value="Area:" style="color:black" width="12%" />
 					</hlayout>
-					<combobox id="cmbArea" width="100%">
+					<combobox id="cmbArea" width="100%" readonly="true">
 						<template name="model">
 							<comboitem label="${each.area}" />
 						</template>
 					</combobox>
-				
+								
+					
 					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red" />
-						<label value="Temática" style="font-weight:bold" />
+						
+						<label value="Temática:" style="color:black" />
 					</hlayout>
-					<combobox id="cmbTematica" width="100%">
+					<combobox id="cmbTematica" width="100%" readonly="true">
 						<template name="model">
 							<comboitem label="${each.tematica}" />
 						</template>
 					</combobox>
-			
+					
+					
+					
+					
+				</row>
+					
+				<row>	
+				
 					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red;margin-left:5px" />
-						<label value="Estatus"
-							style="font-weight:bold" />
+						
+						<label value="Estatus:"
+							style="color:black" />
 					</hlayout>
-					<combobox id="cmbEstatus" width="100%">
+					<combobox id="cmbEstatus" width="100%" readonly="true">
 						<template name="model">
 							<comboitem label="${each.estatus}" />
 						</template>
-					</combobox>
+					</combobox>				
+					<hlayout>
+						<label value="Fecha Inicio de Registro:"
+							style="color:black" />
+					</hlayout>
+					<datebox id="dtbCronogramaFechaInicio" cols="12"
+				     style="margin-right:30px;color:black !important;" width="130px"
+				      format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
+			</datebox>
+				
+				 <hlayout>
+						<label value="Fecha Fin de Registro:"
+							style="color:black" />
+					</hlayout>
+					<datebox id="dtbCronogramaFechaHasta" cols="12"
+				     style="margin-right:30px;color:black !important;" width="130px"
+				      format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
+			</datebox>
+					
+			
+				
 				
 				</row>
 			</rows>
@@ -160,22 +149,22 @@
 	<separator />
 
 	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:2%">
+		style="margin-left:2%;margin-right:3%">
 		<panelchildren>
-			<div align="center">
+			<div sclass="alert-info" align="center">
 				<separator />
+				<div sclass="btn-group">
 
-				<button id="btnBuscarTEG" label="Buscar"
-					image="/imagenes/guardar.png" tabindex="13">
-				</button>
-				<button id="btnExportarTEG" label="Generar"
-					image="/imagenes/limpiar.png" tabindex="13">
-				</button>
-				<button id="btnCancelarTEG" label="Cancelar"
-					image="/imagenes/limpiar.png" tabindex="14">
-				</button>
-				
-				<separator />
+					<button id="btnGenerarLista"
+						label="Generar" sclass="btn" tooltip=""
+						image="/public/imagenes/iconos/guardar.png" tabindex="13">
+					</button>
+					<button id="btnSalirListas"
+						label="Salir" sclass="btn" tooltip="p"
+						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					</button>
+					<separator />
+				</div>
 
 			</div>
 		</panelchildren>
