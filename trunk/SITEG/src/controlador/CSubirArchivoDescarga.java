@@ -26,6 +26,7 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
@@ -59,6 +60,8 @@ public class CSubirArchivoDescarga extends CGeneral {
 	private Media media;
 	@Wire
 	private Listbox ltbArchivoDescarga;
+	@Wire
+	private Combobox cmbPrograma;
 	private long id = 0;
 	private int longitudByte;
 	private Archivo archivo = new Archivo();
@@ -71,7 +74,11 @@ public class CSubirArchivoDescarga extends CGeneral {
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		
+		List<Programa> programa = servicioPrograma.buscarActivas();
+		if (cmbPrograma != null) {
+			cmbPrograma.setModel(new ListModelList<Programa>(programa));
+
+		}
 		
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -82,6 +89,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 
 				long codigo = (Long) map.get("id");
 				Archivo archivo  = servicioArchivo.buscarArchivo(codigo);
+				cmbPrograma.setValue(archivo.getPrograma().getNombre());
 				txtNombreArchivoDescarga.setValue(archivo.getNombre());
 				txtDescripcionArchivoDescarga.setValue(archivo.getDescripcion());
 				id = archivo.getId();
@@ -134,13 +142,15 @@ public class CSubirArchivoDescarga extends CGeneral {
 		txtNombreArchivoDescarga.setValue("");
 		txtDescripcionArchivoDescarga.setValue("");
 		archivo.equals(null);
+		cmbPrograma.setValue("");
+		btnEliminarArchivoDescarga.setDisabled(true);
 	
 	
 	}
 	
 	@Listen("onClick = #btnGuardarArchivoDescarga")
 	public void guardarDescarga() {
-		if (archivo == null || txtNombreArchivoDescarga.getText().compareTo("")==0 || txtDescripcionArchivoDescarga.getText().compareTo("")==0) {
+		if (archivo == null || txtNombreArchivoDescarga.getText().compareTo("")==0 || txtDescripcionArchivoDescarga.getText().compareTo("")==0 || cmbPrograma.getValue() == "") {
 			Messagebox.show("Debe completar los campos", "Error", Messagebox.OK, Messagebox.ERROR);
 		} 
 		else {
@@ -152,8 +162,9 @@ public class CSubirArchivoDescarga extends CGeneral {
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
 								
-								Profesor profesor = ObtenerUsuarioProfesor();		
-								Programa programa = servicioPrograma.buscarProgramaDeDirector(profesor);		
+								String idPrograma = cmbPrograma.getSelectedItem().getId();
+								long idPrograma1 = Long.parseLong(idPrograma);
+								Programa programa = servicioPrograma.buscarPorId(idPrograma1);		
 								archivo.setId(id);
 								archivo.setPrograma(programa);
 								archivo.setDescripcion(txtDescripcionArchivoDescarga.getValue());
