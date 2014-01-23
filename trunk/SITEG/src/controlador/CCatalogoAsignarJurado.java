@@ -25,11 +25,11 @@ import servicio.SPrograma;
 import servicio.STeg;
 
 @Controller
-public class CCatalogoSolicitudDefensa extends CGeneral {
+public class CCatalogoAsignarJurado extends CGeneral {
 
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	CAtenderDefensa vista = new CAtenderDefensa();
+	CAsignarJurado vista = new CAsignarJurado();
 	
 	@Wire
 	private Textbox txtFechaSolicitudDefensa;
@@ -53,11 +53,11 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		if(map != null || map==null){
-			tegsDefensa1 = servicioTeg.buscarTegPorProgramaParaDefensa2(servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
-			if(tegsDefensa1.isEmpty()){
-				ltbSolicitudesDefensa.setEmptyMessage("No hay solicitudes registradas");
-			}else{
-			tegsDefensa.add(tegsDefensa1.get(0));
+			//Metodo que permite cargar los tegs en el listbox median utilizacion de servicios
+			tegsDefensa1 = servicioTeg.buscarTegPorProgramaParaDefensa(servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
+			if(!tegsDefensa1.isEmpty()) {
+	
+				tegsDefensa.add(tegsDefensa1.get(0));
 			for(int i =1; i<tegsDefensa1.size();i++){
 				System.out.println("id"+tegsDefensa1.get(i).getId());
 				long temp = tegsDefensa1.get(i-1).getId();
@@ -69,10 +69,10 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 			}
 			System.out.println(tegsDefensa.toString());
 			ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegsDefensa));
-		}
+			}
 		}
 	}
-	
+	//Metodo que permite el fitrado de datos
 	@Listen("onChange = #txtAreaSolicitudDefensa,#txtTematicaSolicitudDefensa,#txtTituloSolicitudDefensa,#txtNombreTutorSolicitudDefensa,#txtApellidoTutorSolicitudDefensa")
 	public void filtrarCatalogo(){
 		
@@ -109,7 +109,7 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 
 		ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegs));
 	}
-	
+	//Metodo para seleccionar un Teg haciendo doble clic a las lista
 	@Listen("onDoubleClick = #ltbSolicitudesDefensa")
 	public void seleccionarLista(){
 		if(ltbSolicitudesDefensa.getItemCount()!= 0){
@@ -120,9 +120,9 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 		map.put("id",id);
 		Sessions.getCurrent().setAttribute("catalogoSolicitudDefensa", map);
 		Window window = (Window) Executions.createComponents(
-				"/vistas/transacciones/VAtenderDefensa.zul", null, null);	 				
+				"/vistas/transacciones/VAsignarJurado.zul", null, null);	 				
 		window.doModal();
-		vista.recibir("catalogos/VCatalogoSolicitudDefensa");
-	}
+		vista.recibir("catalogos/VCatalogoAsignarJurado");
+		}
 	}
 }

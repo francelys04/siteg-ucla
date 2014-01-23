@@ -32,7 +32,7 @@ public class STeg {
 			"Comision Asignada", "Factibilidad Evaluada", "Proyecto Factible",
 			"Proyecto No Factible", "Avances Finalizados", "TEG Registrado",
 			"Revisiones Finalizadas", "Solicitando Defensa",
-			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado" };
+			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado", "Jurado Asignado"};
 
 	public Teg buscarTeg(long id) {
 		return interfaceTeg.findOne(id);
@@ -149,10 +149,18 @@ public class STeg {
 		return teg;
 	}
 	
+	
 	public List<Teg> buscarTegPorProgramaParaDefensa(Programa programa) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
 		tegs =interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(estatus[9], interfaceEstudiante.findByPrograma(programa));
+		return tegs;
+	}
+	
+	public List<Teg> buscarTegPorProgramaParaDefensa2(Programa programa) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs =interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(estatus[13], interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
 
