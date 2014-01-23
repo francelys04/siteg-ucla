@@ -1,4 +1,4 @@
-<window id="wdwReporteProfesorTeg" title="Generar Reporte de Teg dado un profesor"
+<window id="wdwReporteProfesorTeg" title="Lista de Tegs asociados a un profesor segun su estatus"
 	border="normal" width="700px" height="580px" closable="true"
 	apply="controlador.CReporte">
 	<separator />
