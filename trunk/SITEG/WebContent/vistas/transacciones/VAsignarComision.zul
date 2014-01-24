@@ -71,7 +71,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="560px"
+	<groupbox width="95%" height="565px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -98,7 +98,7 @@
 
 
 		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
-			height="350px">
+			height="370px">
 			<tabs>
 				<tab label="Datos del Proyecto"
 					tooltip="pupDatosProyecto" />
@@ -225,7 +225,7 @@
 						</rows>
 					</grid>
 				</tabpanel>
-				<tabpanel height="300px">
+				<tabpanel height="310px">
 					<separator />
 					<separator />
 
@@ -235,6 +235,16 @@
 							<column width="98%" height="30px" />
 						</columns>
 						<rows>
+
+							<row>
+								<hbox>
+									<label
+										id="lblCondicionAsignarComision" style="font-weight:bold" />
+								</hbox>
+
+							</row>
+
+
 
 							<row>
 								<hbox>
@@ -339,7 +349,7 @@
 
 						<button id="btnFinalizarComision"
 							label="Finalizar" sclass="btn"
-							image="/public/imagenes/iconos/finalizar1.png" tabindex="12"
+							image="/public/imagenes/iconos/finalizar.png" tabindex="12"
 							tooltip="pupBtnFinalizar">
 						</button>
 						<button id="btnGuardarComision" label="Guardar"

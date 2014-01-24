@@ -59,12 +59,6 @@ public class CRegistrarFactibilidad extends CGeneral {
 	@Wire
 	private Textbox txtTituloRegistrarFactibilidad;
 	@Wire
-	private Textbox txtCedulaTutorRegistrarFactibilidad;
-	@Wire
-	private Textbox txtNombreTutorRegistrarFactibilidad;
-	@Wire
-	private Textbox txtApellidoTutorRegistrarFactiblidad;
-	@Wire
 	private Textbox txtCedulaComisionRegistrarFactibilidad;
 	@Wire
 	private Textbox txtNombreComisionRegistrarFactibilidad;
@@ -84,12 +78,13 @@ public class CRegistrarFactibilidad extends CGeneral {
 	private long id = 0;
 	private static long auxiliarId = 0;
 	private static long auxIdPrograma = 0;
+	private static Programa programa;
 
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -104,18 +99,22 @@ public class CRegistrarFactibilidad extends CGeneral {
 				txtAreaRegistrarFactibilidad.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
 				txtTematicaRegistrarFactibilidad.setValue(teg2.getTematica().getNombre());
-				txtCedulaTutorRegistrarFactibilidad.setValue(teg2.getTutor().getCedula());
-				txtNombreTutorRegistrarFactibilidad.setValue(teg2.getTutor().getNombre());
-				txtApellidoTutorRegistrarFactiblidad
-						.setValue(teg2.getTutor().getApellido());
 				txtTituloRegistrarFactibilidad.setValue(teg2.getTitulo());
 				
 				Teg tegPorCodigo = servicioTeg.buscarTeg(auxiliarId);
 				Factibilidad factibilidadPorTeg = servicioFactibilidad.buscarFactibilidadPorTeg(tegPorCodigo);
 				
-				txtCedulaComisionRegistrarFactibilidad.setValue(factibilidadPorTeg.getProfesor().getCedula());
-				txtNombreComisionRegistrarFactibilidad.setValue(factibilidadPorTeg.getProfesor().getNombre());
-				txtApellidoComisionRegistrarFactibilidad.setValue(factibilidadPorTeg.getProfesor().getApellido());
+				
+				List<ItemFactibilidad> itemsFactibilidad = servicioItemFactibilidad.buscarItemFactibilidad(factibilidadPorTeg);
+				ltbItemsFactibilidad.setModel(new ListModelList<ItemFactibilidad>(
+						itemsFactibilidad));
+				
+				 txtCedulaComisionRegistrarFactibilidad.setValue(teg2.getTutor().getCedula());
+				 txtNombreComisionRegistrarFactibilidad.setValue(teg2.getTutor().getNombre());
+				 txtApellidoComisionRegistrarFactibilidad.setValue(teg2.getTutor().getApellido());
+				 
+				 
+				
 				txtObservacionRegistrarFactibilidad.setValue(factibilidadPorTeg.getObservacion());
 				
 				List<Estudiante> estudiantes = servicioEstudiante
@@ -143,6 +142,17 @@ public class CRegistrarFactibilidad extends CGeneral {
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwRegistrarFactibilidad.onClose();
+	}
+	
+	@Listen("onClick = #btnAceptarRegistrarFactibilidad")
+	public void guardar(){
+		
+		Messagebox.show(
+				"Proyecto Factible",
+				"Información", Messagebox.OK,
+				Messagebox.INFORMATION);
+		salir();
+		
 	}
 
 

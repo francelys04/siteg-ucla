@@ -132,8 +132,7 @@
 								<listbox
 									emptyMessage="No hay tema registradas"
 									id="lsbTematicasProfesorDisponibles" height="200px"
-									mold="paging" pageSize="4" oddRowSclass="non-odd"
-									checkmark="true">
+									oddRowSclass="non-odd" checkmark="true">
 
 									<listhead>
 										<listheader label="Nombre" />

@@ -6,6 +6,7 @@ import java.util.List;
 
 import modelo.Actividad;
 import modelo.Factibilidad;
+import modelo.Jurado;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
@@ -70,46 +71,32 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
+		
+		
 
 	}
+	
+	
 
 	// Metodo que permite obtener una lista de los teg de acuerdo al
 	// programa del profesor que se encuentra loggeado
 	public List<Teg> buscarDatos() {
 
-		Profesor profesor = ObtenerUsuarioProfesor();
-		Programa programa = new Programa();
-		programa = profesor.getPrograma();
-
-		List<Profesor> profesores = servicioProfesor
-				.buscarProfesorDelPrograma(programa);
-
+		
 		List<Teg> tegs = servicioTeg.buscarTegDeComision(ObtenerUsuarioProfesor());
-
-		Profesor profesor1 = new Profesor();
-		List<Teg> t = new ArrayList<Teg>();
-
+		
+		
+		List<Teg> tegComisionAsignada = new ArrayList<Teg>();
 		for (int i = 0; i < tegs.size(); i++) {
 
-			profesor1 = tegs.get(i).getTutor();
+			if (tegs.get(i).getEstatus().equals("Comision Asignada")) {
 
-			boolean encontre = false;
-
-			for (int j = 0; j < profesores.size(); j++) {
-
-				if (profesores.get(j).getCedula().equals(profesor1.getCedula())) {
-					encontre = true;
-				}
+				tegComisionAsignada.add(tegs.get(i));
 			}
-			if (encontre == true) {
-				t.add(tegs.get(i));
-
-			}
-
 		}
+		return tegComisionAsignada;
 
-		ltbListaFactibilidad.setModel(new ListModelList<Teg>(t));
-		return t;
+		
 	}
 
 	// Metodo que permite filtrar un teg de acuerdo a la fecha, tematica, area,
@@ -186,5 +173,9 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 		vistaFactibilidad.recibir("catalogos/VCatalogoEvaluarFactibilidad");
         
 	}
+	
+	
+
+	
 
 }

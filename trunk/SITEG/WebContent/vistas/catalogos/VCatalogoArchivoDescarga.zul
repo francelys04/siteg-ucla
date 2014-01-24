@@ -44,7 +44,7 @@
 					<listcell label="${each.descripcion}" />
 					<listcell label="${each.programa.nombre}" />
 					<listcell
-						image="/public/imagenes/iconos/descargar.jpg" />
+						image="/public/imagenes/iconos/descarga.png" />
 				</listitem>
 			</template>
 		</listbox>

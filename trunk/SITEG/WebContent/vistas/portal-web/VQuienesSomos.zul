@@ -1,13 +1,27 @@
 <window id="wdwQuienesSomos" title="Quienes Somos" border="normal"
-	width="90%" height="85%" closable="true"
+	width="auto" height="auto" closable="true"
     apply="controlador.CInicio">
-<vbox>
-<label style="font-size: 10px; font: oblique bold 90% cursive; text-align:center;">
-		Vision
-</label>
-	<label  style="font: monospace 150%;" >
-	Ser una coordinacion con eleveda calidad, que permita contribuir en el proceso formativo del estudiante, ayudando a que este cumpla con un conjunto.</label>
-	<label  style="font: monospace 150%;" >	de actividades que conforman un proceso de aprendizaje y de aplicación de métodos y técnicas de investigación, así como de comunicación y divulgación</label>
-	<label  style="font: monospace 150%;" >con fines didácticos y formativos.</label>
-</vbox>
+
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+	
+	<separator />
+	<separator />
+	
+	<groupbox width="auto" height="auto"
+		style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
+
+
+ 	<image src="/public/imagenes/portal/quienessomos.png" id="imagen" width="755px" height="478px" />
+
+
+	</groupbox>
+	
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+
 </window>

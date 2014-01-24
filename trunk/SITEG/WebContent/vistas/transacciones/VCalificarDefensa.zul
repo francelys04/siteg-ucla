@@ -165,8 +165,8 @@
 					<separator />
 					<separator />
 
-					<listbox id="ltbEstudiantesCalificar" mold="paging"
-						style="margin-left:30px;margin-right:30px" pageSize="2">
+					<listbox id="ltbEstudiantesCalificar"
+						style="margin-left:30px;margin-right:30px" >
 
 
 

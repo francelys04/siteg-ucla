@@ -231,7 +231,7 @@ public class CInicio extends CGeneral {
 
 				Messagebox
 						.show("Estudiante no autorizado para realizar un Trabajo Especial de Grado",
-								"Informaciï¿½n", Messagebox.OK,
+								"Información", Messagebox.OK,
 								Messagebox.INFORMATION);
 			
 			}

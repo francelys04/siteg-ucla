@@ -254,8 +254,8 @@
 										width="260px">
 										<panelchildren>
 											<listbox
-												id="ltbRequisitosDisponibles" height="200px" mold="paging"
-												pageSize="4" oddRowSclass="non-odd" checkmark="true"
+												id="ltbRequisitosDisponibles" height="200px"
+												oddRowSclass="non-odd" checkmark="true"
 												emptyMessage="No hay requisitos registrados">
 												<listhead>
 													<listheader
@@ -297,8 +297,8 @@
 										title="Requisitos Verificados" width="260px">
 										<panelchildren>
 											<listbox
-												id="ltbRequisitosSeleccionadas" height="200px" mold="paging"
-												pageSize="4" oddRowSclass="non-odd" checkmark="true"
+												id="ltbRequisitosSeleccionadas" height="200px"
+												oddRowSclass="non-odd" checkmark="true"
 												emptyMessage="No se han seleccionado requisitos">
 												<listhead>
 													<listheader
