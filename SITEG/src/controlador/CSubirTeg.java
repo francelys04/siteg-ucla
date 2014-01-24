@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.JFileChooser;
 
 import modelo.Archivo;
@@ -22,6 +24,8 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
@@ -31,18 +35,18 @@ import org.zkoss.zk.ui.event.UploadEvent;
 
 import servicio.SActividad;
 import servicio.SArchivo;
+import servicio.SPrograma;
 import servicio.SUsuario;
 import configuracion.GeneradorBeans;
 
 
 
 @Controller
-public class CArchivo extends CGeneral {
+public class CSubirTeg extends CGeneral {
 	
 	
 	SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
-	
-
+	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
 	@Wire
 	private Textbox txtNombreArchivo;
@@ -52,18 +56,24 @@ public class CArchivo extends CGeneral {
 	private Button btnArchivo;
 	@Wire
 	private Media media;
+	@Wire
+	private Combobox cmbPrograma;
 	private long id = 0;
 	private FileInputStream archivo;
 	private int longitudByte;
 	private Archivo archi = new Archivo();
 	private String nombreDoc;
-	
 	/* Metodo para inicializar componentes al momento que se ejecuta las vistas
 	  tanto VDescarga como VCatalogoDescarga*/
 
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+		List<Programa> programa = servicioPrograma.buscarActivas();
+		if (cmbPrograma != null) {
+			cmbPrograma.setModel(new ListModelList<Programa>(programa));
+
+		}
 		
 	}
 	//Metodo para subir archivo
@@ -104,7 +114,9 @@ public class CArchivo extends CGeneral {
 	
 		txtNombreArchivo.setValue("");
 		txtDescripcionArchivo.setValue("");
+		cmbPrograma.setValue("");
 		archi.equals(null);
+		
 	
 	
 	}
@@ -123,9 +135,9 @@ public class CArchivo extends CGeneral {
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
 								
-								Estudiante estudiante = ObtenerUsuarioEstudiante();		
-								Programa programa = new Programa();			
-								programa = estudiante.getPrograma();		
+								String idPrograma = cmbPrograma.getSelectedItem().getId();
+								long idPrograma1 = Long.parseLong(idPrograma);
+								Programa programa = servicioPrograma.buscarPorId(idPrograma1);	
 								archi.setId(id);
 								archi.setPrograma(programa);
 								archi.setDescripcion(txtDescripcionArchivo.getValue());
