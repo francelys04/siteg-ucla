@@ -1,15 +1,13 @@
-<window id="wdwReporteProfesorTeg" title="Lista de Tegs asociados a un profesor segun su estatus"
-	border="normal" width="700px" height="580px" closable="true"
-	apply="controlador.CReporte">
-	<separator />
+<window id="wdwReporteProfesorTeg"
+	title="Lista de Tegs asociados a un profesor segun su estatus"
+	border="normal" width="70%" height="700px" closable="true" apply="controlador.CReporte"
+>
 
 	<style dynamic="true">
-		.GridLayoutNoBorder tr.z-row td.z-row-inner,
-		tr.z-row
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
 		background: white; border-top: none; border-left: none;
-		border-right:
-		none; border-bottom: none; }
+		border-right: none; border-bottom: none; }
 
 	</style>
 
@@ -18,175 +16,301 @@
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
 		background: white; border-top: none; border-left: none;
-		border-right:
-		none; border-bottom: none; }
+		border-right: none; border-bottom: none; }
 
-		.fgrid .z-grid-odd .fgrid
-		.z-row-inner,.fgrid .z-grid-odd
-		.z-cell { background-color: #F7F7F7;
-		border-bottom: 1px solid
-		transparent; border-left: 1px solid
-		transparent; border-top: 1px
+		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
+		transparent; border-left: 1px solid transparent; border-top: 1px
 		solid transparent; }
 
-		.fgrid .z-grid-odd
-		.fgrid.z-row-inner,.fgrid.z-grid-odd
-		.z-cell,.fgrid.z-grid-odd {
-		background: none repeat scroll 0 0
+		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
 		transparent; }
 
-		.fgrid tr.z-grid-odd
-		td.z-row-inner,.fgrid tr.z-grid-odd
-		.z-cell,.fgrid tr.z-grid-odd {
-		background: white }
+		.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd { background: white }
 
-		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row
-		.z-cell {
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
 	</style>
 
-	<style src="/public/css/bootstrap.css" />
-
 	<separator />
 	<separator />
-
-	<div align="right">
-		<label value="Fecha:" style="margin-right:10px;color:black"></label>
-		<datebox id="dtbFechaReporteProfesorTeg" cols="12" width="130px"
-			style="margin-right:40px" format="short" onCreate="self.value = new Date()"
-			mold="rounded" disabled="true">
-		</datebox>
-	</div>
-
+	<!-- <label value="(*) "
+		style="font-weight:bold;color:red;margin-center:2%">
+		</label> -->
+	<label value="Lista de Trabajo Especial de Grado"
+		style="font-weight:bold;margin-left:35%;margin-right:20%">
+	</label>
+	<separator />
 	<separator />
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="400px" style="margin-left:2%;margin-right:1%">
+	<groupbox width="auto%" style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
-
-
-		<grid sclass="fgrid" style="margin-left:2%">
+		<grid sclass="fgrid">
 			<columns>
-				<column width="600px" height="30px" />
+				<column width="17%" height="17%" />
 			</columns>
 			<rows>
-			<row>
-					<hbox>
-						<hlayout>
-							<label value="Programa:" style="font-weight:bold" />
-						</hlayout>
-						<combobox id="cmbProgramaReporteProfesorTeg" readonly="true"
-							autodrop="true" width="140px" tabindex="12" style="margin-left:55px">
-							<template name="model">
-								<comboitem label="${each.nombre}" id="${each.id}" />
-							</template>
-						</combobox>
-					</hbox>
+				<row>
+
+					<hlayout width="100px">
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Programa "
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbProgramaReporteProfesorTeg"
+						width="100%">
+						<template name="model">
+							<comboitem label="${each.nombre}" id="${each.id}" />
+						</template>
+					</combobox>
+
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Area" style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbAreaReporteProfesorTeg"
+						width="100%">
+						<template name="model">
+							<comboitem label="${each.nombre}" id="${each.id}" />
+						</template>
+					</combobox>
+					
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Temática"
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbTematicaReporteProfesorTeg" width="100%">
+						<template name="model">
+						<comboitem label="${each.nombre}" id="${each.id}" />
+						</template>
+					</combobox>
 				</row>
 				<row>
-					<hbox>
-						<hlayout>
-							<label value="Area:" style="font-weight:bold" />
-						</hlayout>
-						<combobox id="cmbAreaReporteProfesorTeg" readonly="true"
-							autodrop="true" width="140px" tabindex="12" style="margin-left:55px">
-							<template name="model">
-								<comboitem label="${each.nombre}" id="${each.id}" />
-							</template>
-						</combobox>
-					</hbox>
-				</row><row>
-					<hbox>
-						<hlayout>
-							<label value="Tematica:" style="font-weight:bold" />
-						</hlayout>
-						<combobox id="cmbTematicaReporteProfesorTeg" readonly="true"
-							autodrop="true" width="140px" tabindex="12" style="margin-left:55px">
-							<template name="model">
-								<comboitem label="${each.nombre}" id="${each.id}" />
-							</template>
-						</combobox>
-					</hbox>
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Profesor:"
+							style="font-weight:bold" />
+						
+					</hlayout>
+					<textbox id="txtCedulaReporteProfesorTeg"
+							 disabled="true" tabindex="1" />
+					<button id="btnProfesorReporteProfesorTeg"
+						 sclass="btn"
+						image="/public/imagenes/iconos/catalogo.png" >
+					</button>
+
+					
+
 				</row>
+
+				
+				
+				
+				
 				<row>
-					<hbox>
+				
+				<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Estatus"
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbEstatusReporteProfesorTeg" width="100%">
+						<template name="model">
+							<comboitem label="${each}" />
+						</template>
+					</combobox>
+				<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red"  />
+						<label value="Fecha Inicio Registro"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbInicioReporteProfesorTeg"
+						 readonly="true" format="yyyy/MM/dd"
+						>
+					</datebox>
+					
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red"  />
+						<label value="Fecha Fin Registro"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbFinReporteProfesorTeg"
+						 readonly="true" format="yyyy/MM/dd"
+						>
+					</datebox>
+					
+<!--  
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Fecha Inicio Registro"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbInicioReporteProfesorTeg" cols="12"
+						 readonly="true" format="yyyy/MM/dd"
+						>
+					</datebox>
 
-						<hlayout>
-						<label value="Profesor:" style="font-weight:bold" />
-						<textbox id="txtCedulaReporteProfesorTeg" width="120%" disabled="true"
-								tabindex="1" />
-						</hlayout>
 
-						<button id="btnProfesorReporteProfesorTeg" tabindex="6"
-							sclass="btn" image="/public/imagenes/iconos/catalogo.png" style="margin-left:50px">
-						</button>
-
-					</hbox>
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red;margin-left:5px" />
+						<label value="Fecha Fin Registro" style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbFinReporteProfesorTeg" cols="12"
+						 readonly="true" format="yyyy/MM/dd"
+						>
+					</datebox>
+-->
 				</row>
-
-				<row>
-					<hbox>
-						<hlayout>
-							<label value="Estatus:" style="font-weight:bold" />
-						</hlayout>
-						<combobox id="cmbEstatusReporteProfesorTeg" readonly="true"
-							autodrop="true" width="140px" tabindex="12" style="margin-left:55px">
-							<template name="model">
-								<comboitem label="${each}" />
-							</template>
-						</combobox>
-					</hbox>
-				</row>
-
-				<row>
-					<hbox>
-						<hlayout>
-
-							<label value="Desde:" style="font-weight:bold" />
-
-						</hlayout>
-						<datebox id="dtbInicioReporteProfesorTeg" cols="12" width="40%"
-							readonly="true" format="yyyy/MM/dd" style="margin-right:15px">
-						</datebox>
-					</hbox>
-				</row>
-
-				<row>
-					<hbox>
-						<hlayout>
-
-							<label value="Hasta:" style="font-weight:bold" />
-
-						</hlayout>
-						<datebox id="dtbFinReporteProfesorTeg" cols="12" width="40%"
-							readonly="true" format="yyyy/MM/dd" style="margin-right:15px">
-						</datebox>
-					</hbox>
-				</row>
-
-
 			</rows>
 		</grid>
+		<separator />
+		<separator />
 	</groupbox>
 
+	<!-- <groupbox width="95%" style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
+		<grid sclass="fgrid">
+		<columns>
+		<column width="30%" height="30%" />
+		</columns>
+		<rows>
+		<row>
+		<hbox>
+		<hlayout>
+		<label value="*"
+		style="font-weight:bold;color:red"  />
+		<label value="Programa"
+		style="font-weight:bold" />
+		</hlayout>
+		<combobox id="cmbProgramaReporteProfesorTeg" readonly="true"
+		autodrop="true" width="140px" tabindex="12" style="margin-left:55px">
+		<template name="model">
+		<comboitem label="${each.nombre}" id="${each.id}" />
+		</template>
+		</combobox>
+		</hbox>
+		</row>
+		
+		<row>
+		<hlayout>
+		<label value="Fecha de Registro"
+		style="font-weight:bold" width="100% " />
+		</hlayout>
+		</row>
+		<row>		
+		<hlayout>
+		<label value="*"
+		style="font-weight:bold;color:red"  />
+		<label value="Fecha Desde"
+		style="font-weight:bold" />
+		</hlayout>
+		<combobox id="cmbAreaReporteProfesorTeg" readonly="true"
+		autodrop="true" width="140px" tabindex="12" style="margin-left:55px">
+		<template name="model">
+		<comboitem label="${each.nombre}" id="${each.id}" />
+		</template>
+		</combobox>
+		<hlayout>
+		<label value="*"
+		style="font-weight:bold;color:red"  />
+		<label value="Fecha Hasta"
+		style="font-weight:bold" />
+		</hlayout>
+		<combobox id="cmbTematicaReporteProfesorTeg" readonly="true"
+		autodrop="true" width="140px" tabindex="12" style="margin-left:55px">
+		<template name="model">
+		<comboitem label="${each.nombre}" id="${each.id}" />
+		</template>
+		</combobox>
+		<hlayout>
+		<label value="*"
+		style="font-weight:bold;color:red" />
+		<label value="Programa:"
+		style="font-weight:bold" />
+		<textbox id="txtCedulaReporteProfesorTeg" width="120%" disabled="true"
+		tabindex="1" />
+		</hlayout>
+		<button id="btnProfesorReporteProfesorTeg" tabindex="6"
+		sclass="btn" image="/public/imagenes/iconos/catalogo.png" style="margin-left:50px">
+		</button>
+		</row>
+		
+		<row>					
+		<hlayout>
+		<label value="*"
+		style="font-weight:bold;color:red">
+		</label>
+		<label value="Area:" style="font-weight:bold" width="12%" />
+		</hlayout>
+		<combobox id="cmbEstatusReporteProfesorTeg" readonly="true"
+		autodrop="true" width="140px" tabindex="12" style="margin-left:55px">
+		<template name="model">
+		<comboitem label="${each}" />
+		</template>
+		</combobox>
+		
+		<hlayout>
+		<label value="*"
+		style="font-weight:bold;color:red" />
+		<label value="Temática" style="font-weight:bold" />
+		</hlayout>
+		<datebox id="dtbInicioReporteProfesorTeg" cols="12" width="40%"
+		readonly="true" format="yyyy/MM/dd" style="margin-right:15px">
+		</datebox>
+		
+		
+		<hlayout>
+		<label value="*"
+		style="font-weight:bold;color:red;margin-left:5px" />
+		<label value="Estatus"
+		style="font-weight:bold" />
+		</hlayout>
+		<datebox id="dtbFinReporteProfesorTeg" cols="12" width="40%"
+		readonly="true" format="yyyy/MM/dd" style="margin-right:15px">
+		</datebox>
+		
+		</row>
+		</rows>
+		</grid>
+		<separator />
+		<separator />
+		</groupbox>
+	-->
 	<separator />
 	<separator />
-
-	<panel border="normal" width="95%" style="margin-left:2%;margin-right:3%">
+	<separator />
+	<separator />
+	<panel border="normal" width="100%"
+		style="margin-left:2%;margin-right:3%">
 		<panelchildren>
 			<div sclass="alert-info" align="center">
 				<separator />
 				<div sclass="btn-group">
 
-					<button id="btnGenerarReporteProfesorTeg" label="Generar Reporte"
-						sclass="btn" image="/public/imagenes/iconos/aceptar.png" tabindex="13">
+					<button id="btnGenerarReporteProfesorTeg"
+						label="Generar Reporte" sclass="btn"
+						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
 					</button>
-					<button id="btnSalirReporteProfesorTeg" label="Cancelar"
-						sclass="btn" image="/public/imagenes/iconos/rechazar.png"
-						tabindex="14">
+					<button id="btnSalirReporteProfesorTeg"
+						label="Cancelar" sclass="btn"
+						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
 					</button>
 					<separator />
 				</div>
@@ -194,11 +318,7 @@
 			</div>
 		</panelchildren>
 	</panel>
-
 	<separator />
 	<separator />
 	<separator />
-	<separator />
-	<separator />
-
 </window>

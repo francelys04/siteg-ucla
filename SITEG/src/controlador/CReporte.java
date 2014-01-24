@@ -171,11 +171,11 @@ public class CReporte extends CGeneral {
 					"/vistas/catalogos/VCatalogoProfesor.zul", null, null);
 			window.doModal();
 
-			catalogoProfesor.recibir("reportes/VReporteProfesorTeg");
+			catalogoProfesor.recibir("reportes/no estructurados/VReporteProfesorTeg");
 		} else {
 			map2.put("area", cmbAreaReporteProfesorTeg.getValue());
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map2);
-			catalogo.recibir("reportes/VReporteProfesorTeg", Long
+			catalogo.recibir("reportes/no estructurados/VReporteProfesorTeg", Long
 					.parseLong(cmbProgramaReporteProfesorTeg.getSelectedItem()
 							.getId()), Long
 					.parseLong(cmbTematicaReporteProfesorTeg.getSelectedItem()
