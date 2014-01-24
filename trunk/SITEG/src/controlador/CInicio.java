@@ -236,6 +236,10 @@ public class CInicio extends CGeneral {
 			
 			}
 
+		}else{
+			Messagebox
+					.show("Ingrese el numero de cedula del estudiante","Informaci�n",
+					Messagebox.OK,Messagebox.INFORMATION);
 		}
 
 	}
