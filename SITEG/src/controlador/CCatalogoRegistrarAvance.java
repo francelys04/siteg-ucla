@@ -173,7 +173,7 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/transacciones/VRegistrarAvance.zul", null, null);
 		window.doModal();
-		vistaRegistrarAvance.recibir("catalogos/VCRegistrarAvance");
+		vistaRegistrarAvance.recibir("catalogos/VCatalogoRegistrarAvance");
 		//vistaRegistrarAvance.recibir("catalogos/VCatalogoAsignarComision");
 		
 

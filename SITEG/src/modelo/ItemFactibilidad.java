@@ -24,7 +24,7 @@ public class ItemFactibilidad {
 	private Factibilidad factibilidad;
 	
 	@Column(name ="ponderacion")
-	private int ponderacion;
+	private String ponderacion;
 
 	public ItemFactibilidad() {
 		super();
@@ -32,7 +32,7 @@ public class ItemFactibilidad {
 	}
 
 	public ItemFactibilidad(ItemEvaluacion item, Factibilidad factibilidad,
-			int ponderacion) {
+			String ponderacion) {
 		super();
 		this.item = item;
 		this.factibilidad = factibilidad;
@@ -55,11 +55,11 @@ public class ItemFactibilidad {
 		this.factibilidad = factibilidad;
 	}
 
-	public int getPonderacion() {
+	public String getPonderacion() {
 		return ponderacion;
 	}
 
-	public void setPonderacion(int ponderacion) {
+	public void setPonderacion(String ponderacion) {
 		this.ponderacion = ponderacion;
 	}	
 }

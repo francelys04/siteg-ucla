@@ -183,7 +183,8 @@ public class CProfesor extends CGeneral {
 							Profesor profesor = new Profesor(cedula, nombre,
 									apellido, correo, sexo, direccion,
 									telefonoMovil, telefonoFijo, estatus,
-									categoria, tematicasProfesor, usuario);
+									categoria, tematicasProfesor, usuario);	
+							
 							servicioProfesor.guardarProfesor(profesor);
 							Messagebox.show(
 									"Profesor registrado exitosamente",

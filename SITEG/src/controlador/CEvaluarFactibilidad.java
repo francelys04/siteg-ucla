@@ -7,6 +7,8 @@ import java.util.List;
 import modelo.Actividad;
 import modelo.Estudiante;
 import modelo.Factibilidad;
+import modelo.ItemEvaluacion;
+import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
@@ -28,8 +30,11 @@ import org.zkoss.zul.Window;
 
 import servicio.SEstudiante;
 import servicio.SFactibilidad;
+import servicio.SProgramaItem;
 import servicio.STeg;
 import servicio.SItemFactibilidad;
+import servicio.SLapso;
+import servicio.SProgramaItem;
 
 import configuracion.GeneradorBeans;
 import controlador.CCatalogoRegistrarFactibilidad;
@@ -43,6 +48,8 @@ public class CEvaluarFactibilidad extends CGeneral {
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	SItemFactibilidad servicioItemFactibilidad = GeneradorBeans
 			.getServicioItemFactibilidad();
+	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
+	SProgramaItem servicioProgramaItem = GeneradorBeans.getServicioProgramaItem();
 	
 
 	@Wire
@@ -85,14 +92,13 @@ public class CEvaluarFactibilidad extends CGeneral {
 	private long id = 0;
 	private static long auxiliarId = 0;
 	private static long auxIdPrograma = 0;
+	private static Programa programa;
 
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		Profesor profesor = ObtenerUsuarioProfesor();
-		Programa programa = new Programa();
-		programa = profesor.getPrograma();
+		
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -103,6 +109,20 @@ public class CEvaluarFactibilidad extends CGeneral {
 				long codigo = (Long) map.get("id");
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
+				
+				// se toma es el programa del estudiante asociado a el teg.
+				List<Estudiante> estudiantes = servicioEstudiante
+						.buscarEstudiantesDelTeg(teg2);
+				
+				if (estudiantes.size() != 0) {
+					programa = estudiantes.get(0).getPrograma();	
+				}
+				
+				
+				ltbListaEstudiantes.setModel(new ListModelList<Estudiante>(
+						estudiantes));
+				
+							
 				txtProgramaEvaluarFactibilidad.setValue(programa.getNombre());
 				txtAreaEvaluarFactibilidad.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
@@ -113,25 +133,36 @@ public class CEvaluarFactibilidad extends CGeneral {
 						.setValue(teg2.getTutor().getApellido());
 				txtTituloEvaluarFactibilidad.setValue(teg2.getTitulo());
 				
+				Lapso lapso = servicioLapso.buscarLapsoVigente();
+				List<ItemEvaluacion> item = servicioProgramaItem.buscarItemsEnPrograma(programa, lapso);
+				List<ItemEvaluacion> item2 = new  ArrayList <ItemEvaluacion>();
+				for(int i= 0; i<item.size(); i++){
+					if (item.get(i).getTipo().equals("Factibilidad"))
+					{
+						item2.add(item.get(i));
+					}
+					
+				}
+				ltbItemsFactibilidad.setModel(new ListModelList<ItemEvaluacion>(item2));
+				
+				
+				
 				
 			}
 		}
 
 	}
+	
+	
+	
+	
 
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 	
-	public List<Estudiante> buscarDatos(Teg teg2) {
-
-		List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(teg2);
-
-		ltbListaEstudiantes.setModel(new ListModelList<Estudiante>(estudiantes));
-		
-		return estudiantes;
-	}
+	
 
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -143,6 +174,16 @@ public class CEvaluarFactibilidad extends CGeneral {
 	}
 
 
-
+	@Listen("onClick = #btnGuardarEvaluacionFactibilidad")
+	public void guardar() {
+		
+		Messagebox.show(
+				"Evaluación registrada exitosamente",
+				"Información", Messagebox.OK,
+				Messagebox.INFORMATION);
+		salir();
+		
+		
+	}
 	
 }

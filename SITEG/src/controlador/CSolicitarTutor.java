@@ -269,9 +269,11 @@ public class CSolicitarTutor extends CGeneral {
 
 		if ((combo.compareTo("") != 0) && (combo2.compareTo("") != 0)) {
 			System.out.println("pAW POR EL Y");
-			
-			catalogo.recibir("transacciones/VSolicitarTutor",Long.parseLong( cmbProgramaSolicitud.getSelectedItem().getId()),
-					Long.parseLong(cmbTematicaSolicitud.getSelectedItem().getId()));
+
+			catalogo.recibir("transacciones/VSolicitarTutor", Long
+					.parseLong(cmbProgramaSolicitud.getSelectedItem().getId()),
+					Long.parseLong(cmbTematicaSolicitud.getSelectedItem()
+							.getId()));
 
 			Window window = (Window) Executions.createComponents(
 					"/vistas/catalogos/VCatalogoProfesorTematica.zul", null,
@@ -296,7 +298,8 @@ public class CSolicitarTutor extends CGeneral {
 		String nombreProfesor = txtNombreProfesor.getValue();
 		String apellidoProfesor = txtApellidoProfesor.getValue();
 		String correoProfesor = txtCorreoProfesor.getValue();
-		Estudiante pruebaCondicion = ltbEstudiantes.getItems().get(0).getValue();
+		Estudiante pruebaCondicion = ltbEstudiantes.getItems().get(0)
+				.getValue();
 		for (int i = 0; i < ltbEstudiantes.getItemCount(); i++) {
 			Estudiante e = ltbEstudiantes.getItems().get(i).getValue();
 
@@ -327,8 +330,11 @@ public class CSolicitarTutor extends CGeneral {
 					List<Teg> teg2 = servicioTeg
 							.buscarTutoriaProfesor(profesor);
 					String nombre2 = "Numero de tutorias por profesor";
-					System.out.println("profesor"+buscarCondicionVigenteEspecifica(nombre2, pruebaCondicion.getPrograma()).getValor());
-					if (teg2.size() >= buscarCondicionVigenteEspecifica(nombre2, pruebaCondicion.getPrograma()).getValor()) {
+					System.out.println("profesor"
+							+ buscarCondicionVigenteEspecifica(nombre2,
+									pruebaCondicion.getPrograma()).getValor());
+					if (teg2.size() >= buscarCondicionVigenteEspecifica(
+							nombre2, pruebaCondicion.getPrograma()).getValor()) {
 						Messagebox
 								.show("El Profesor ya tiene un maximo de proyectos asignados",
 										"Información", Messagebox.OK,
@@ -353,6 +359,7 @@ public class CSolicitarTutor extends CGeneral {
 						Messagebox.show("Su Solicitud ha sido enviada",
 								"Información", Messagebox.OK,
 								Messagebox.INFORMATION);
+						wdwSolicitarTutoria.onClose();
 					}
 				}
 			}
@@ -423,15 +430,18 @@ public class CSolicitarTutor extends CGeneral {
 										"Información", Messagebox.OK,
 										Messagebox.INFORMATION);
 							} else
-								System.out.print(cmbProgramaSolicitud.getValue());
-							System.out.print(estudiante.getPrograma().getNombre());
-								
-								if (cmbProgramaSolicitud.getValue().compareTo( estudiante.getPrograma().getNombre())!=0) {
-								Messagebox.show("Debe Elejir el programa al que pertenece",
-										"Informacón", Messagebox.OK,
-										Messagebox.INFORMATION);
-							}
-							else{
+								System.out.print(cmbProgramaSolicitud
+										.getValue());
+							System.out.print(estudiante.getPrograma()
+									.getNombre());
+
+							if (cmbProgramaSolicitud.getValue().compareTo(
+									estudiante.getPrograma().getNombre()) != 0) {
+								Messagebox
+										.show("Debe Elejir el programa al que pertenece",
+												"Informacón", Messagebox.OK,
+												Messagebox.INFORMATION);
+							} else {
 								gridEstudiante.add(estudiante);
 								ltbEstudiantes
 										.setModel(new ListModelList<Estudiante>(
@@ -471,10 +481,13 @@ public class CSolicitarTutor extends CGeneral {
 										"Información", Messagebox.OK,
 										Messagebox.INFORMATION);
 							} else {
-								
+
 								String nombre = "Numero de estudiantes por trabajo";
-								System.out.println("estudiantes"+buscarCondicionVigenteEspecifica(
-										nombre, estudiante2.getPrograma()).getValor());
+								System.out.println("estudiantes"
+										+ buscarCondicionVigenteEspecifica(
+												nombre,
+												estudiante2.getPrograma())
+												.getValor());
 								if (tamano < buscarCondicionVigenteEspecifica(
 										nombre, estudiante2.getPrograma())
 										.getValor()) {
@@ -557,7 +570,8 @@ public class CSolicitarTutor extends CGeneral {
 				// Lo enviamos.
 				Transport t = session.getTransport("smtp");
 				t.connect(remitente, contrasena);
-				 t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+				t.sendMessage(message,
+						message.getRecipients(Message.RecipientType.TO));
 
 				// Cierre de la conexion.
 				t.close();

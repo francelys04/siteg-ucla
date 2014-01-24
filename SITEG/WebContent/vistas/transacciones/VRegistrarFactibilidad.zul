@@ -1,5 +1,6 @@
 <window id="wdwRegistrarFactibilidad" title="Registrar Factibilidad"
-	border="normal" width="750px" height="680px" closable="true">
+	border="normal" width="765px" height="760px" closable="true"
+	apply="controlador.CRegistrarFactibilidad">
 	<separator />
 
 	<style dynamic="true">
@@ -31,76 +32,11 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
-		
-		/*inicio del estilo interno de la ventana fondo gris con recuadro blando con bordes redondeados
-		fUNCIONA ADECUADAMENTE CON UN <groupbox></groupbox>
-		*/
-		
-		.z-window-embedded-cnt, .z-window-highlighted-cnt,
-		.z-window-embedded-cnt-noborder,
-		.z-window-highlighted-cnt-noborder,
-		.z-window-overlapped-cnt-noborder { background: #f5f5f5; }
 
-		.z-groupbox-cnt{ background: #fff; border-radius: 10px; border:
-		none; }
-		
-		/*fin del estilo*/
-		
-		/*inicio del estilo borde de la ventana*/
-		
-		.z-window-embedded-hm, .z-window-embedded-hm, .z-window-highlighted-hm, .z-window-overlapped-hm, .z-window-popup-hm {
-		background: #3276b1;
-		}
-		
-		.z-window-embedded-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
-		background: #3276b1;
-		}
-		
-		.z-window-embedded-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
-		background-image: none;
-		}
-		
-		.z-window-embedded-hl, .z-window-embedded-hl, .z-window-highlighted-hl, .z-window-overlapped-hl, .z-window-popup-hl {
-		background: #3276b1;
-		background-image: none;
-		}
-
-		.z-window-embedded-hr, .z-window-embedded-hr, .z-window-highlighted-hr, .z-window-overlapped-hr, .z-window-popup-hr {
-		background-image: none;
-		}
-		
-		.z-window-embedded-tr, .z-window-embedded-tr, .z-window-highlighted-tr, .z-window-overlapped-tr, .z-window-popup-tr {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		.z-window-embedded-br, .z-window-highlighted-br, .z-window-overlapped-br {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		.z-window-embedded-header, .z-window-embedded-header, .z-window-popup-header, .z-window-highlighted-header, .z-window-overlapped-header {
-		color: #fff;
-		}
-		
-		.z-window-modal-cl, .z-window-highlighted-cl, .z-window-overlapped-cl {
-		background: #3276b1;
-		}
-		
-		.z-window-modal-cr, .z-window-highlighted-cr, .z-window-overlapped-cr {
-		background-image: none;
-		}
-		
-		.z-window-modal-br, .z-window-highlighted-br, .z-window-overlapped-br {
-		background: #3276b1;
-		background-image: none;
-		}
-		
-		/*fin del estilo*/
-		
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<!-- Lista de popus -->
 	<popup id="pupDatosProyecto">
@@ -131,268 +67,249 @@
 
 	<separator />
 	<separator />
-	
-	<groupbox width="95%" height="620px"
+
+	<groupbox width="95%" height="685px"
 		style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
 
-	<label value="Programa:" style="margin-left:2%;color:black" />
-	<textbox id="txtProgramaRegistrarFactibilidad"
-		style="margin-left:5%;color:black !important;" disabled="true"
-		width="25%" />
+		<label value="Programa:"
+			style="margin-left:2%;font-weight:bold;color:rgb(99, 99, 99)" />
+		<textbox id="txtProgramaRegistrarFactibilidad"
+			style="margin-left:5%;color:black !important;" disabled="true"
+			width="25%" />
 
 
-	<div align="right">
-		<label value="Fecha:" style="margin-right:10px;color:black"></label>
-		<datebox id="dbRegistrarFactibilidad" cols="12" width="130px"
-			style="margin-right:30px;color:black !important;" disabled="true"
-			format="short" onCreate="self.value = new Date()" mold="rounded">
-		</datebox>
-	</div>
+		<div align="right">
+			<label value="Fecha:"
+				style="margin-right:10px;font-weight:bold;color:rgb(99, 99, 99)">
+			</label>
+			<datebox id="dbRegistrarFactibilidad" cols="12"
+				width="130px" style="margin-right:30px;color:black !important;"
+				disabled="true" format="short" onCreate="self.value = new Date()"
+				mold="rounded">
+			</datebox>
+		</div>
 
-	<separator />
-	<separator />
+		<separator />
+		<separator />
 
-	<tabbox style="margin-left:2%;margin-right:1%" width="95%"
-		height="450px">
-		<tabs>
-			<tab label="Datos del Proyecto" tooltip="pupDatosProyecto"/>
-			<tab label="Datos del Estudiante" tooltip="pupDatosEstudiante"/>
-			<tab label="Datos del Tutor" tooltip="pupDatosTutor"/>
-			<tab label="Evaluación de la Comisión" tooltip="pupDatosComision"/>
+		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
+			height="350px">
+			<tabs>
+				<tab label="Datos del Proyecto"
+					tooltip="pupDatosProyecto" />
+				<tab label="Datos del Estudiante"
+					tooltip="pupDatosEstudiante" />
+				<tab label="Datos del Tutor" tooltip="pupDatosTutor" />
+				<tab label="Evaluación de la Comisión"
+					tooltip="pupDatosComision" />
 
-		</tabs>
-		<tabpanels>
+			</tabs>
+			<tabpanels>
 
-			<tabpanel height="200px">
-				<separator />
-				<separator />
-				<grid sclass="fgrid" style="margin-left:1%">
-					<columns>
-						<column width="650px" height="30px" />
-					</columns>
-					<rows>
+				<tabpanel height="200px">
+					<separator />
+					<separator />
+					<grid sclass="fgrid" style="margin-left:1%">
+						<columns>
+							<column width="640px" height="30px" />
+						</columns>
+						<rows>
 
-						<row>
-							<hbox>
-								<label value="Area:"
-									style="color:black" />
+							<row>
+								<hbox>
+									<label value="Área:"
+										style="font-weight:bold" />
 
+									<textbox
+										id="txtAreaRegistrarFactibilidad" width="80%"
+										style="margin-left:42%;color:black !important;"
+										disabled="true" />
+
+								</hbox>
+							</row>
+
+							<row>
+								<hbox>
+									<label
+										value="
+										Temática: " style="font-weight:bold" />
+
+									<textbox
+										id="txtTematicaRegistrarFactibilidad" width="120%"
+										style="margin-left:35%;color:black !important;"
+										disabled="true" />
+								</hbox>
+
+							</row>
+
+							<row>
+								<label value="Título del Proyecto:"
+									style="font-weight:bold" />
+
+							</row>
+							<row>
 								<textbox
-									id="txtAreaRegistrarFactibilidad" width="80%"
-									style="margin-left:42%;color:black !important;"
-									disabled="true" />
-
-							</hbox>
-						</row>
-
-						<row>
-							<hbox>
-								<label value="
-										Temática: "
-									style="color:black" />
-
-								<textbox
-									id="txtTematicaRegistrarFactibilidad" width="120%"
-									style="margin-left:35%;color:black !important;"
-									disabled="true" />
-							</hbox>
-
-						</row>
-
-						<row>
-							<label value="Título del Proyecto:"
-								style="color:black" />
-
-						</row>
-						<row>
-							<textbox id="txtTituloRegistrarFactibilidad"
-								style="color:black !important;" disabled="true" width="620px"
-								rows="3" cols="100" />
-						</row>
-					</rows>
-				</grid>
+									id="txtTituloRegistrarFactibilidad"
+									style="color:black !important;" disabled="true" width="580px"
+									rows="3" cols="100" />
+							</row>
+						</rows>
+					</grid>
 
 
-			</tabpanel>
+				</tabpanel>
 
-			<tabpanel height="150px">
-				<separator />
-				<separator />
-				<separator />
-				<separator />
+				<tabpanel height="150px">
+					<separator />
+					<separator />
+					<separator />
+					<separator />
 
-				<listbox id="ltbEstudianteRegistrarFactibilidad"
-					style="margin-left:30px;margin-right:30px"
-					emptyMessage="No hay estudiantes registrados">
+					<listbox id="ltbEstudianteRegistrarFactibilidad"
+						style="margin-left:30px;margin-right:30px"
+						emptyMessage="No hay estudiantes registrados">
 
 
-					<listhead>
-						<listheader label="Cédula" align="center" />
-						<listheader label="Nombre" align="center" />
-						<listheader label="Apellido" align="center" />
-						<listheader label="Correo" align="center"
-							width="30%" />
-					</listhead>
-
-					<template name="model">
-						<listitem>
-							<listcell label="${each.cedula}" />
-							<listcell label="${each.nombre}" />
-							<listcell label="${each.apellido}" />
-							<listcell label="${each.correoElectronico}" />
-
-						</listitem>
-					</template>
-				</listbox>
-			</tabpanel>
-
-			<tabpanel height="200px">
-
-				<separator />
-				<separator />
-				<grid sclass="fgrid" style="margin-left:1%">
-					<columns>
-						<column width="15%" height="30px" />
-					</columns>
-					<rows>
-						<row>
-							<label value="Cédula:"
-								style="color:black" />
-
-							<textbox style="color:black !important;"
-								disabled="true" id="txtCedulaTutorRegistrarFactibilidad"
+						<listhead>
+							<listheader label="Cédula" align="center" />
+							<listheader label="Nombre" align="center" />
+							<listheader label="Apellido" align="center" />
+							<listheader label="Correo" align="center"
 								width="30%" />
-						</row>
-						<row>
-							<label value="Nombre:"
-								style="color:black" />
+						</listhead>
+
+						<template name="model">
+							<listitem>
+								<listcell label="${each.cedula}" />
+								<listcell label="${each.nombre}" />
+								<listcell label="${each.apellido}" />
+								<listcell
+									label="${each.correoElectronico}" />
+
+							</listitem>
+						</template>
+					</listbox>
+				</tabpanel>
+
+				<tabpanel height="200px">
+
+					<separator />
+					<separator />
+					<grid sclass="fgrid" style="margin-left:1%">
+						<columns>
+							<column width="15%" height="30px" />
+						</columns>
+						<rows>
+							<row>
+								<label value="Cédula:"
+									style="font-weight:bold" />
+
+								<textbox style="color:black !important;"
+									disabled="true" id="txtCedulaComisionRegistrarFactibilidad"
+									width="30%" />
+							</row>
+							<row>
+								<label value="Nombre:"
+									style="font-weight:bold" />
 
 
-							<textbox style="color:black !important;"
-								disabled="true" id="txtNombreTutorRegistrarFactibilidad"
-								width="35%" />
-						</row>
-						<row>
-							<label value="Apellido:"
-								style="color:black" />
-
-							<textbox style="color:black !important;"
-								disabled="true" id="txtApellidoTutorRegistrarFactiblidad"
-								width="35%" />
-						</row>
-					</rows>
-				</grid>
-			</tabpanel>
-
-			<tabpanel>
-				<separator />
-				<separator />
-
-				<grid sclass="fgrid" style="margin-left:1%">
-					<columns>
-						<column width="80px" height="30px" />
-					</columns>
-					<rows>
-
-						<row>
-							<label value="Cédula:"
-								style="margin-left:2%;color:black" />
-							<textbox
-								id="txtCedulaComisionRegistrarFactibilidad"
-								style="margin-left:15px;color:black !important;" disabled="true"
-								width="120px" />
-						</row>
-
-						<row>
-							<label value="Nombre:"
-								style="margin-left:2%;color:black" />
-
-							<hbox>
-
-								<textbox
-									id="txtNombreComisionRegistrarFactibilidad"
-									style="margin-left:15px;color:black !important;"
-									disabled="true" width="160px" />
-
+								<textbox style="color:black !important;"
+									disabled="true" id="txtNombreComisionRegistrarFactibilidad"
+									width="35%" />
+							</row>
+							<row>
 								<label value="Apellido:"
-									style="margin-left:15px;color:black" />
-								<textbox
-									id="txtApellidoComisionRegistrarFactibilidad"
-									style="margin-left:5%;color:black !important;" disabled="true"
-									width="160px" />
+									style="font-weight:bold" />
 
-							</hbox>
-						</row>
+								<textbox style="color:black !important;"
+									disabled="true" id="txtApellidoComisionRegistrarFactibilidad"
+									width="35%" />
+							</row>
+						</rows>
+					</grid>
+				</tabpanel>
+
+				<tabpanel>
+					<separator />
+					<separator />
+
+					<listbox id="ltbItemsFactibilidad" height="245px"
+						style="margin-left:3%;margin-right:3%" mold="paging" pageSize="6"
+						emptyMessage="No hay items evaluados">
+
+						<listhead>
+							<listheader label="Item" align="center" />
+							<listheader label="Apreciación"
+								align="center" />
+
+						</listhead>
+
+						<template name="model">
+							<listitem>
+								<listcell label="${each.item.nombre}" />
+								<listcell label="${each.ponderacion}" />
+							</listitem>
+						</template>
+					</listbox>
+
+					<separator />
+					<separator />
+
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+
+		<separator />
+		<separator />
+
+		<grid sclass="fgrid" style="margin-left:2%">
+			<columns>
+				<column width="620px" height="20px" />
+			</columns>
+			<rows>
+				<row>
+					<label value="Observaciones:"
+						style="font-weight:bold;color:rgb(99, 99, 99)" />
+
+				</row>
+
+				<row>
+					<textbox id="txtObservacionRegistrarFactibilidad" width="600px"
+						rows="3" cols="200" />
+				</row>
+			</rows>
+		</grid>
+		<separator />
+		<separator />
 
 
-						<row>
-							<label value="Observación:"
-								style="margin-left:2%;color:black" />
-							<textbox
-								id="txtObservacionRegistrarFactibilidad"
-								style="margin-left:2%;color:black !important;" disabled="true"
-								width="500px" rows="5" />
-						</row>
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:2%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
+					<separator />
+					<div sclass="btn-group">
+						<button id="btnAceptarRegistrarFactibilidad"
+							sclass="btn" label="Aceptar"
+							image="/public/imagenes/iconos/aceptar.png" tabindex="12"
+							tooltip="pupBtnAceptar">
+						</button>
+						<button id="btnRechazarRegistrarFactibilidad"
+							sclass="btn" label="Rechazar"
+							image="/public/imagenes/iconos/rechazar.png" tabindex="13"
+							tooltip="pupBtnRechazar">
+						</button>
+					</div>
 
+					<separator />
 
-					</rows>
-				</grid>
-				<separator />
-				<separator />
-
-				<listbox id="ltbItemsFactibilidad" height="120px"
-					style="margin-left:3%;margin-right:3%" mold="paging" pageSize="10"
-					emptyMessage="No hay items evaluados">
-
-					<listhead>
-						<listheader label="Item" align="center" />
-						<listheader label="Apreciación" align="center" />
-
-					</listhead>
-
-					<template name="model">
-						<listitem>
-							<listcell label="${each.item.nombre}" />
-							<listcell label="${each.ponderacion}" />
-						</listitem>
-					</template>
-				</listbox>
-
-				<separator />
-				<separator />
-
-			</tabpanel>
-		</tabpanels>
-	</tabbox>
-
-	<separator />
-	<separator />
-
-	<panel border="normal" width="95%"
-		style="margin-left:2%;margin-right:2%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
-					<button id="btnAceptarRegistrarFactibilidad"
-						sclass="btn" label="Aceptar"
-						image="/public/imagenes/iconos/aceptar.png" tabindex="12"
-						tooltip="pupBtnAceptar">
-					</button>
-					<button id="btnRechazarRegistrarFactibilidad"
-						sclass="btn" label="Rechazar"
-						image="/public/imagenes/iconos/rechazar.png" tabindex="13"
-						tooltip="pupBtnRechazar">
-					</button>
 				</div>
+			</panelchildren>
+		</panel>
 
-				<separator />
-
-			</div>
-		</panelchildren>
-	</panel>
-
-	<separator />
+		<separator />
 	</groupbox>
 
 </window>

@@ -191,29 +191,24 @@
 					<separator />
 					<separator />
 
-					<grid sclass="fgrid"
-						style="margin-left:2%;margin-right:2%">
+					<grid sclass="fgrid" style="margin-left:2%">
 						<columns>
-							<column width="610px" height="20px" />
+							<column width="620px" height="20px" />
 						</columns>
 						<rows>
 							<row>
 								<label value="Observaciones:"
-									style="font-weight:bold" />
+									style="font-weight:bold;color:rgb(99, 99, 99)" />
 
 							</row>
 
 							<row>
 								<textbox
-									id="txtObservacionRegistrarAvance" tabindex="1" width="590px"
-									rows="8" cols="100" />
+									id="txtObservacionRegistrarAvance" width="600px" rows="3"
+									cols="200" />
 							</row>
 						</rows>
 					</grid>
-
-
-
-
 
 				</tabpanel>
 
@@ -263,7 +258,7 @@
 							image="/public/imagenes/iconos/guardar.png" tabindex="12"
 							tooltip="pupBtnGuardar">
 						</button>
-						
+
 						<button id="btnCancelarRegistrarAvance"
 							sclass="btn" label="Cancelar"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="14"
