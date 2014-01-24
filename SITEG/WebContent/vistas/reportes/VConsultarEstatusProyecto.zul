@@ -223,6 +223,15 @@
 				<row>
 					<hbox>
 						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgJuradoAsignado" />
+						<label value="Jurado Asignado"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
+				
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
 							id="imgDefensaAsignada" />
 						<label value="Defensa Asignada"
 							style="color:black;margin-left:20px" />

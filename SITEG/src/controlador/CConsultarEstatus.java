@@ -77,6 +77,8 @@ public class CConsultarEstatus extends CGeneral {
 	private Image imgDefensaAsignada;
 	@Wire
 	private Image imgTrabajoEspecial;
+	@Wire
+	private Image imgJuradoAsignado;
 
 	private static String cedulaRecibida;
 
@@ -134,6 +136,7 @@ public class CConsultarEstatus extends CGeneral {
 				imgSolicitandoDefensa.detach();
 				imgDefensaAsignada.detach();
 				imgTrabajoEspecial.detach();
+				imgJuradoAsignado.detach();
 			} else {
 				if (solicitudTutoria.get(indiceSolicitud).getEstatus()
 						.equals("Aceptada") == true) {
@@ -161,6 +164,7 @@ public class CConsultarEstatus extends CGeneral {
 									imgSolicitandoDefensa.detach();
 									imgDefensaAsignada.detach();
 									imgTrabajoEspecial.detach();
+									imgJuradoAsignado.detach();
 								} else {
 									if (teg.get(indiceTeg).getEstatus()
 											.equals("Proyecto Factible") != true) {
@@ -178,16 +182,30 @@ public class CConsultarEstatus extends CGeneral {
 													if (teg.get(indiceTeg)
 															.getEstatus()
 															.equals("Solicitando Defensa") != true) {
-
+														
 														if (teg.get(indiceTeg)
 																.getEstatus()
-																.equals("Defensa Asignada") == true) {
+																.equals("Jurado Asignado") != true) {
 
+															if (teg.get(indiceTeg)
+																	.getEstatus()
+																	.equals("Defensa Asignada") == true) {
+	
+																imgTrabajoEspecial
+																		.detach();
+															}
+														
+														}else{
+															imgDefensaAsignada
+																	.detach();
 															imgTrabajoEspecial
 																	.detach();
 														}
+														
 													} else {
 														imgDefensaAsignada
+																.detach();
+														imgJuradoAsignado
 																.detach();
 														imgTrabajoEspecial
 																.detach();
@@ -197,6 +215,7 @@ public class CConsultarEstatus extends CGeneral {
 															.detach();
 													imgDefensaAsignada.detach();
 													imgTrabajoEspecial.detach();
+													imgJuradoAsignado.detach();
 												}
 
 											} else {
@@ -205,6 +224,7 @@ public class CConsultarEstatus extends CGeneral {
 												imgSolicitandoDefensa.detach();
 												imgDefensaAsignada.detach();
 												imgTrabajoEspecial.detach();
+												imgJuradoAsignado.detach();
 											}
 										} else {
 											imgRegistrarTrabajo.detach();
@@ -213,7 +233,8 @@ public class CConsultarEstatus extends CGeneral {
 													.detach();
 											imgSolicitandoDefensa.detach();
 											imgDefensaAsignada.detach();
-											imgTrabajoEspecial.detach();
+											imgTrabajoEspecial.detach()
+											;imgJuradoAsignado.detach();
 										}
 
 									} else {
@@ -226,6 +247,7 @@ public class CConsultarEstatus extends CGeneral {
 										imgSolicitandoDefensa.detach();
 										imgDefensaAsignada.detach();
 										imgTrabajoEspecial.detach();
+										imgJuradoAsignado.detach();
 									}
 
 								}
@@ -239,6 +261,7 @@ public class CConsultarEstatus extends CGeneral {
 								imgSolicitandoDefensa.detach();
 								imgDefensaAsignada.detach();
 								imgTrabajoEspecial.detach();
+								imgJuradoAsignado.detach();
 							}
 						} else {
 							imgProyectoRegistrado.detach();
@@ -251,6 +274,7 @@ public class CConsultarEstatus extends CGeneral {
 							imgSolicitandoDefensa.detach();
 							imgDefensaAsignada.detach();
 							imgTrabajoEspecial.detach();
+							imgJuradoAsignado.detach();
 						}
 
 					} else {
@@ -266,6 +290,7 @@ public class CConsultarEstatus extends CGeneral {
 							imgSolicitandoDefensa.detach();
 							imgDefensaAsignada.detach();
 							imgTrabajoEspecial.detach();
+							imgJuradoAsignado.detach();
 							Messagebox
 									.show("Trabajo Especial de Grado No Factible o Reprobado",
 											"Información", Messagebox.OK,
@@ -283,6 +308,7 @@ public class CConsultarEstatus extends CGeneral {
 							imgSolicitandoDefensa.detach();
 							imgDefensaAsignada.detach();
 							imgTrabajoEspecial.detach();
+							imgJuradoAsignado.detach();
 						}
 
 					}
@@ -301,6 +327,7 @@ public class CConsultarEstatus extends CGeneral {
 					imgSolicitandoDefensa.detach();
 					imgDefensaAsignada.detach();
 					imgTrabajoEspecial.detach();
+					imgJuradoAsignado.detach();
 					Messagebox
 					.show("Tutoria del Proyecto Rechazada",
 							"Información", Messagebox.OK,
@@ -334,6 +361,7 @@ public class CConsultarEstatus extends CGeneral {
 				imgSolicitandoDefensa.detach();
 				imgDefensaAsignada.detach();
 				imgTrabajoEspecial.detach();
+				imgJuradoAsignado.detach();
 			}
 		}
 
