@@ -197,11 +197,11 @@
 					<separator />
 					<div sclass="btn-group">
 						<button id="btnSolicitarDefensa" sclass="btn"
-							label="Aceptar" image="/public/imagenes/iconos/aceptar.png"
+							label="Solicitar Defensa" image="/public/imagenes/iconos/aceptar.png"
 							tabindex="12" tooltip="pupBtnGuardar">
 						</button>
 						<button id="btnCancelarSolicitarDefensa"
-							sclass="btn" label="Rechazar"
+							sclass="btn" label="Cancelar"
 							image="/public/imagenes/iconos/rechazar.png" tabindex="13"
 							tooltip="pupBtnCancelar">
 						</button>
