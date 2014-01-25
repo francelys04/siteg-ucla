@@ -155,17 +155,16 @@ public void recibir(String vista,long programa, long tematica) {
 				map.put("tematica", tematicaRecibida);
 				map.put("programa", programaRecibido);
 				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-				Executions.sendRedirect("/vistas/arbol.zul");
+			
 				wdwCatalogoProfesorArea.onClose();
-				}else{
+				}
+			
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			// Executions.sendRedirect("/vistas/transacciones/VSolicitarTutor.zul");
-
+			
 			Window window = (Window) Executions.createComponents(
 					"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 			window.doModal();
 			wdwCatalogoProfesorArea.onClose();
-				}
 		}
 	}
 	
