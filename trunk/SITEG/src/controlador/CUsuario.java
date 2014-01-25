@@ -207,7 +207,8 @@ public class CUsuario extends CGeneral {
     		  txtPasswordUsuario.setDisabled(true);
     		  btnCatalogoUsuario.setVisible(false);
     		} 
-		 
+		  map.clear();
+		  map = null;
 		 } 
 	}
 

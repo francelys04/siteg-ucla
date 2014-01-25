@@ -13,6 +13,7 @@ import modelo.Estudiante;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
+import modelo.TegEstatus;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -162,6 +163,9 @@ public class CRegistrarTeg extends CGeneral {
 								tegRegistrado.setFechaEntrega(dtbFechaEntregaRegistrarTeg.getValue());
 								tegRegistrado.setDuracion(spnDuracionRegistrarTeg.getValue());
 								tegRegistrado.setEstatus("TEG Registrado");
+								java.util.Date fechaEstatus = new Date();
+								TegEstatus tegEstatus = new TegEstatus(0, tegRegistrado, "TEG Registrado", fechaEstatus);
+								servicioTegEstatus.guardar(tegEstatus);
 								servicioTeg.guardar(tegRegistrado);
 								cancelarRegistroTeg();
 								Messagebox.show(

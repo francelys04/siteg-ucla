@@ -65,10 +65,10 @@ public class Teg {
 	private Set<Avance> avances;
 	
 	@OneToMany(mappedBy = "teg")
-	private Set<Factibilidad> factibilidades;
-
+	private Set<TegEstatus> estatusTeg;
+	
 	@OneToMany(mappedBy = "teg")
-	private Set<TegEtapa> etapasTeg;
+	private Set<Factibilidad> factibilidades;
 
 	@OneToMany(mappedBy = "teg")
 	private Set<TegRequisito> requisitosTegs;
@@ -154,14 +154,6 @@ public class Teg {
 
 	public void setAvances(Set<Avance> avances) {
 		this.avances = avances;
-	}
-
-	public Set<TegEtapa> getEtapasTeg() {
-		return etapasTeg;
-	}
-
-	public void setEtapasTeg(Set<TegEtapa> etapasTeg) {
-		this.etapasTeg = etapasTeg;
 	}
 
 	public Set<TegRequisito> getRequisitosTegs() {
@@ -250,6 +242,14 @@ public class Teg {
 
 	public void setDefensa(Defensa defensa) {
 		this.defensa = defensa;
+	}
+
+	public Set<TegEstatus> getEstatusTeg() {
+		return estatusTeg;
+	}
+
+	public void setEstatusTeg(Set<TegEstatus> estatusTeg) {
+		this.estatusTeg = estatusTeg;
 	}
 
 }

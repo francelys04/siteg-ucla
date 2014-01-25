@@ -27,6 +27,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import servicio.SCondicionPrograma;
 import servicio.SEstudiante;
 import servicio.SProfesor;
+import servicio.STegEstatus;
 import servicio.SUsuario;
 import configuracion.GeneradorBeans;
 
@@ -37,7 +38,7 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
-	
+	STegEstatus servicioTegEstatus = GeneradorBeans.getServicioTegEstatus();
 	/*
 	 * Metodo para inicializar componentes implementado en todos los controladores
 	 */

@@ -33,6 +33,7 @@ import servicio.SProgramaRequisito;
 import servicio.SRequisito;
 import servicio.SSolicitudTutoria;
 import servicio.STeg;
+import servicio.STegEstatus;
 import servicio.STematica;
 import servicio.STipoJurado;
 import servicio.SUsuario;
@@ -174,5 +175,9 @@ public class GeneradorBeans implements ApplicationContextAware {
 	public static SNoticia getServicioNoticia() {
 		return applicationContext.getBean(SNoticia.class);
 		
+	}
+	
+	public static STegEstatus getServicioTegEstatus() {
+		return applicationContext.getBean(STegEstatus.class);	
 	}
 }

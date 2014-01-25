@@ -123,6 +123,8 @@ public class CReporte extends CGeneral {
 							.setValue(tematica.getNombre());
 				}
 			}
+			map.clear();
+			map = null;
 		}
 	}
 
