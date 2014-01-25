@@ -99,7 +99,7 @@ public class CRegistrarAvance extends CGeneral {
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -110,7 +110,8 @@ public class CRegistrarAvance extends CGeneral {
 				long codigo = (Long) map.get("id");
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-				txtProgramaRegistrarAvance.setValue(programa.getNombre());
+				List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg2);
+				txtProgramaRegistrarAvance.setValue(est.get(0).getPrograma().getNombre());
 				txtAreaRegistrarAvance.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
 				txtTematicaRegistrarAvance.setValue(teg2.getTematica()

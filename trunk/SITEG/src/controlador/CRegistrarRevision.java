@@ -98,7 +98,7 @@ public class CRegistrarRevision extends CGeneral {
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		;
 		
 
 		Selectors.wireComponents(comp, this, false);
@@ -110,7 +110,8 @@ public class CRegistrarRevision extends CGeneral {
 				long codigo = (Long) map.get("id");
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-				txtProgramaRegistrarRevision.setValue(programa.getNombre());
+				List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg2);
+				txtProgramaRegistrarRevision.setValue(est.get(0).getPrograma().getNombre());
 				txtAreaRegistrarRevision.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
 				txtTematicaRegistrarRevision.setValue(teg2.getTematica()
