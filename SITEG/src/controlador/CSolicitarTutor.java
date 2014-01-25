@@ -199,9 +199,9 @@ public class CSolicitarTutor extends CGeneral {
 				txtNombreProfesor.setValue(profesor.getNombre());
 				txtApellidoProfesor.setValue(profesor.getApellido());
 				txtCorreoProfesor.setValue(profesor.getCorreoElectronico());
-				map.clear();
-				map = null;
 			}
+			map.clear();
+			map = null;
 		}
 	}
 
