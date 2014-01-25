@@ -43,6 +43,8 @@ import servicio.SEstudiante;
 import servicio.SLapso;
 import servicio.SNoticia;
 import servicio.SPrograma;
+import servicio.SSolicitudTutoria;
+import servicio.STeg;
 
 @Controller
 public class CInicio extends CGeneral {
@@ -50,6 +52,8 @@ public class CInicio extends CGeneral {
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
 	SCronograma servicioCronograma = GeneradorBeans.getServicioCronograma();
+	SSolicitudTutoria servicioTutoria = GeneradorBeans.getServicioTutoria();
+	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SNoticia servicioNoticia = GeneradorBeans.getServicioNoticia();
 	@Wire
 	private Intbox cedulaEstatus;
@@ -228,10 +232,21 @@ public class CInicio extends CGeneral {
 	
 			if (cedula != "") {
 				if (servicioEstudiante.buscarEstudiante(cedula) != null) {
-	
-					cedulaEstatus.setValue(null);
-					CConsultarEstatus consultarestatus = new CConsultarEstatus();
-					consultarestatus.recibirCedula(cedula);
+					
+					Estudiante estudiante = servicioEstudiante.buscarEstudiante(cedula);
+					
+					if (servicioTutoria.buscarSolicitud(estudiante) != null  ||
+							servicioTeg.buscarTegPorEstudiante(estudiante) != null ) {
+						
+						cedulaEstatus.setValue(null);
+						CConsultarEstatus consultarestatus = new CConsultarEstatus();
+						consultarestatus.recibirCedula(cedula);
+					}else{
+						Messagebox
+						.show("Estudiante apto para realizar la solicitud de tutor de Trabajo Especial de Grado",
+								"Información", Messagebox.OK,
+								Messagebox.INFORMATION);
+					}
 				} else {
 	
 					Messagebox
