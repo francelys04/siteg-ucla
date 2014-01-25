@@ -22,6 +22,7 @@ import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -68,8 +69,9 @@ public class CSolicitudTutoria extends CGeneral {
 	ArrayList<Boolean> valor = new ArrayList<Boolean>();
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	private static String vistaRecibida;
+	private static String estatusSolicitud;
 	private String[] mensaje = {
-			"Su Tutoria ha sido aprobada, le enviamos su usuario y contraseña",
+			"Su Tutoria ha sido aprobada, le enviamos su usuario y contraseï¿½a",
 			"Su Tutoria ha sido rechazada, por favor intente con otro tutor" };
 	
 	@Override
@@ -78,7 +80,8 @@ public class CSolicitudTutoria extends CGeneral {
 		Selectors.wireComponents(comp, this, false);	
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("catalogoSolicitud");
-
+			//Permite mapear los datos del catalogo de solicitudes de tutoria
+			//para atender una en especifico		
 		if (map != null) {
 			if (map.get("id") != null) {
 				id = (Long) map.get("id");
@@ -95,19 +98,30 @@ public class CSolicitudTutoria extends CGeneral {
 			}
 		}
 	}
-	
+	//Metodo para aceptar la tutoria
 	@Listen("onClick = #btnAceptarTutoria")
 	public void aceptarTutoria() throws IOException{
-		
+		Messagebox.show("Â¿Desea aceptar tutoria?",
+				"Dialogo de confirmacion", Messagebox.OK
+						| Messagebox.CANCEL, Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt)
+							throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
 		solicitud.setEstatus("Aceptada");
-		
+		estatusSolicitud = "Aceptada";
 		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
 		Grupo grupo = servicioGrupo.BuscarPorNombre("ROLE_ESTUDIANTE");
 		gruposUsuario.add(grupo);
 		byte[] imagenUsuario = null;
 		URL url = getClass().getResource("/configuracion/usuario.png");
 		
-		imagenx.setContent(new AImage(url));
+		try {
+			imagenx.setContent(new AImage(url));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		imagenUsuario = imagenx.getContent().getByteData();
 		for (int i = 0; i < ltbSolicitudesEstudiantes.getItemCount(); i++){
 			Estudiante estudiante = ltbSolicitudesEstudiantes.getItems().get(i)
@@ -118,20 +132,30 @@ public class CSolicitudTutoria extends CGeneral {
 			Usuario usuario = new Usuario(0, estudiante.getCedula(), passwordEncoder.encode(estudiante.getCedula()), true, gruposUsuario, imagenUsuario);
 			servicioUsuario.guardar(usuario);
 			user = servicioUsuario.buscarUsuarioPorNombre(estudiante.getCedula());
-			System.out.println(user.getNombre());
 			estudiante.setUsuario(user);
 			servicioEstudiante.guardar(estudiante);
 			}			
-			valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), mensaje[0]+" Usuario: "+user.getNombre()+"  "+"Contraseña: "+user.getNombre()));
+			valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), mensaje[0]+" Usuario: "+user.getNombre()+"  "+"Contraseï¿½a: "+user.getNombre()));
 		}
 		servicioTutoria.guardarSolicitud(solicitud);
 		confirmacion(valor);
 		salir();
+						}
+					}
+				});
 	}
-
+	//Metodo para rechazar la tutoria
 	@Listen("onClick = #btnRechazarTutoria")
 	public void rechazarTutoria(){
+		Messagebox.show("Â¿Desea rechazar tutoria?",
+				"Dialogo de confirmacion", Messagebox.OK
+						| Messagebox.CANCEL, Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt)
+							throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
 		solicitud.setEstatus("Rechazada");
+		estatusSolicitud = "Rechazada";
 		servicioTutoria.guardarSolicitud(solicitud);
 		for (int i = 0; i < ltbSolicitudesEstudiantes.getItemCount(); i++){
 			Estudiante estudiante = ltbSolicitudesEstudiantes.getItems().get(i)
@@ -140,16 +164,19 @@ public class CSolicitudTutoria extends CGeneral {
 		}
 		confirmacion(valor);
 		salir();
+						}
+					}
+				});
 	}
-
+	//Metodo para confirmar que le hay llegado el correo al estudiante
 	private int confirmacion(ArrayList<Boolean> valor2) {
 		// TODO Auto-generated method stub
 		for(int w=0; w<valor2.size();w++){
 			if(valor2.get(w).equals(false)){
-				return Messagebox.show("No se envio el correo al Estudiante", "Error", Messagebox.OK, Messagebox.ERROR);
+				return Messagebox.show("Solicitud "+estatusSolicitud+", no se envio el correo al Estudiante", "Informacion", Messagebox.OK, Messagebox.INFORMATION);
 			}
 		}
-		return Messagebox.show("Correo electronico enviado al Estudiante","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+		return Messagebox.show("Solicitud "+estatusSolicitud+", el correo electronico ha sido enviado al Estudiante","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
 	}
 	
 	public void recibir (String vista)
@@ -157,7 +184,7 @@ public class CSolicitudTutoria extends CGeneral {
 		vistaRecibida = vista;
 
 	}
-	
+	//metodo que permite salir y refrescar el catalogo de solicitudes de tutorias
 	private void salir(){
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
