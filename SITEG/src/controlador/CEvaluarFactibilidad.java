@@ -1,12 +1,16 @@
 package controlador;
 
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.Defensa;
 import modelo.Estudiante;
 import modelo.Factibilidad;
+import modelo.ItemDefensa;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
 import modelo.Profesor;
@@ -22,8 +26,10 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -51,11 +57,11 @@ public class CEvaluarFactibilidad extends CGeneral {
 	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
 	SProgramaItem servicioProgramaItem = GeneradorBeans.getServicioProgramaItem();
 	
-
+	@Wire
+	private Datebox db1;
 	@Wire
 	private Listbox ltbListaFactibilidad;
-	@Wire
-	private Listbox ltbListaEstudiantes;
+	
 	@Wire
 	private Listbox ltbItemsFactibilidad;
 	@Wire
@@ -119,7 +125,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 				}
 				
 				
-				ltbListaEstudiantes.setModel(new ListModelList<Estudiante>(
+				ltbEstudianteEvaluarFactibilidad.setModel(new ListModelList<Estudiante>(
 						estudiantes));
 				
 							
@@ -177,13 +183,106 @@ public class CEvaluarFactibilidad extends CGeneral {
 	@Listen("onClick = #btnGuardarEvaluacionFactibilidad")
 	public void guardar() {
 		
-		Messagebox.show(
-				"Evaluación registrada exitosamente",
-				"Información", Messagebox.OK,
-				Messagebox.INFORMATION);
-		salir();
+	long id = 0;
+	Teg teg = servicioTeg.buscarTeg(auxiliarId);
+	Profesor profesor = ObtenerUsuarioProfesor();
+	Date fecha = db1.getValue();
+	String Observacion = txtObservacionEvaluarFactibilidad.getValue();
+	String estatus = "Evaluando Factibilidad";
+	Factibilidad factibilidad3 = servicioFactibilidad.buscarFactibilidadPorTeg(teg);
+	
+boolean registrefactibilidad = false;
+	Factibilidad factibilidad = new Factibilidad(id,teg,profesor,fecha,Observacion,estatus);
+	if ( txtObservacionEvaluarFactibilidad.getValue().compareTo("")==0){
+		Messagebox.show("Debe Colocar una Observacion","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		
 		
 	}
+	else
+	{
+		if (factibilidad3 == null){
+			
+		
+			
+		servicioFactibilidad.guardar(factibilidad);
+		registrefactibilidad = true;
+		}
+		else
+		{
+			registrefactibilidad = true;
+		}
+	}
+		
 	
+if (registrefactibilidad == true)
+{
+	
+	boolean dejeenblanco = false;
+
+	Factibilidad factibilidad2 = servicioFactibilidad.buscarFactibilidadPorTeg(teg);
+	
+	for (int i = 0; i < ltbItemsFactibilidad.getItemCount(); i++) {
+
+	
+		Listitem listItem = ltbItemsFactibilidad.getItemAtIndex(i);
+		String valor = ((Textbox)((listItem.getChildren().get(1))).getFirstChild()).getValue();
+		System.out.print(valor);
+		if (valor.equals("")){
+			System.out.print("entre al if");
+			System.out.print(valor);
+			 Messagebox.show("Debe Colocar su Apreciacion en todos los item","Informacion", Messagebox.OK,Messagebox.INFORMATION);	
+			 i = ltbItemsFactibilidad.getItemCount();
+			 dejeenblanco = true;
+			
+			
+		}
+		else
+		{
+		ItemEvaluacion item = ltbItemsFactibilidad.getItems().get(i).getValue();
+		ItemFactibilidad itemfactibilidad= new ItemFactibilidad(item,factibilidad2, valor);
+		servicioItemFactibilidad.guardar(itemfactibilidad);
+		}
+	}
+	
+	if (dejeenblanco == false)
+	{
+	for (int i = 0; i < ltbEstudianteEvaluarFactibilidad.getItemCount(); i++) {
+        Estudiante estudiante = ltbEstudianteEvaluarFactibilidad.getItems().get(i).getValue();
+        enviarEmailNotificacion(estudiante.getCorreoElectronico(), "Observacion de la Evalucioon de Factibilidad:"+ txtObservacionEvaluarFactibilidad.getValue());
+        
+	}
+	String estatus1 = "Factibilidad Evaluada";
+	teg.setEstatus(estatus1);
+	servicioTeg.guardar(teg); 
+	Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+    salir();
+     
+     } 
+
+  }
 }
+
+	@Listen("onClick = #btnCancelarEvaluacionFactibilidad")
+	public void cancelar() {
+		txtObservacionEvaluarFactibilidad.setValue("");
+		for (int i = 0; i < ltbItemsFactibilidad.getItemCount(); i++) {
+
+			
+			Listitem listItem = ltbItemsFactibilidad.getItemAtIndex(i);
+			 ((Textbox)((listItem.getChildren().get(1))).getFirstChild()).setValue("");
+		}
+		
+	}
+
+}
+
+
+	
+	
+	
+	
+	
+		
+	
+	
+
