@@ -216,9 +216,10 @@ public class CCalificarDefensa extends CGeneral {
 		for (int i = 0; i < ltbEstudiantesCalificar.getItemCount(); i++) {
             Estudiante estudiante = ltbEstudiantesCalificar.getItems().get(i).getValue();
             valor2.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), estatus2));
-            Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
-            salir();
-	 } 	
+           
+	 }
+		 Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+         salir();
 		}
 		}	
 		}
