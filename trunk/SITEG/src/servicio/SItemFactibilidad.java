@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfazdao.IItemFactibilidadDAO;
 import modelo.Factibilidad;
+import modelo.ItemDefensa;
 import modelo.ItemFactibilidad;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public List<ItemFactibilidad> buscarItemFactibilidad(Factibilidad factibilidad) 
 	// ItemFactibilidad = interfaceItemFactibilidad.BuscarFactibilidad(factibilidad);
     ItemFactibilidad = interfaceItemFactibilidad.findByfactibilidad(factibilidad);
 	return ItemFactibilidad;
+}
+public void guardar(ItemFactibilidad itemfactibilidad){
+	interfaceItemFactibilidad.save(itemfactibilidad);
 }
 
 
