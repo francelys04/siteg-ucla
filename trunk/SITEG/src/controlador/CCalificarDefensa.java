@@ -240,6 +240,12 @@ public class CCalificarDefensa extends CGeneral {
 		
 		rdoAprobado.setChecked(false);
 		rdoReprobado.setChecked(false);
+for (int i = 0; i < ltbitem.getItemCount(); i++) {
+
+			
+			Listitem listItem = ltbitem.getItemAtIndex(i);
+			 ((Textbox)((listItem.getChildren().get(1))).getFirstChild()).setValue("");
+		}
 		
 	}
 	

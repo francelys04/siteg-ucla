@@ -83,7 +83,7 @@ public class CAtenderDefensa extends CGeneral {
 	// @Wire
 	// private Combobox cmbDefensaTipoJurado;
 	private static String vistaRecibida;
-	long idTeg = 0;
+	private static long idTeg = 0;
 	long idDefensa = 0;
     private static Programa programa;
 	@Override
@@ -152,12 +152,17 @@ public class CAtenderDefensa extends CGeneral {
 			Date fecha = dtbFechaDefensa.getValue();
 			Date hora = tmbHoraDefensa.getValue();
 			String lugar = txtLugarDefensa.getValue();
+			Profesor profesor = ObtenerUsuarioProfesor();
 			
 			String estatus = "Por Defender";
 			Defensa defensa = new Defensa(idDefensa, teg, fecha, hora, lugar,
-					 estatus,null);
+					 estatus,profesor);
 			servicioDefensa.guardarDefensa(defensa);			
-			
+			String estatus1 ="Defensa Asignada";
+			System.out.println(idTeg);
+			Teg teg1 = servicioTeg.buscarTeg(idTeg);
+			teg1.setEstatus(estatus1);
+			servicioTeg.guardar(teg1);
 			Messagebox.show("Datos de la defensa guardados con exito","Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
 			salir();
