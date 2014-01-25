@@ -71,6 +71,10 @@
 		<toolbarbutton
 			label="Presione aqui para ver la lista de programas" />
 	</popup>
+	<popup id="pupCatalogoDirectorPrograma">
+		<toolbarbutton
+			label="Presione aqui para ver la lista de profesores" />
+	</popup>
 	<!-- Fin de popus -->
 
 
@@ -97,7 +101,8 @@
 							tabindex="2" />
 
 						<button id="btnCatalogoDirectorPrograma"
-							sclass="btn" style="margin-left:15px"
+							tooltip="pupCatalogoDirectorPrograma" sclass="btn"
+							style="margin-left:15px"
 							image="/public/imagenes/iconos/catalogo.png" tabindex="13" />
 
 					</hbox>

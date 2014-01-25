@@ -93,7 +93,7 @@ public class CCatalogoProfesor extends CGeneral {
 		vistaRecibida = vista;
 	}
 	
-	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor,#txtProgramaMostrarProfesor")
+	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCategoriaMostrarProfesor,#txtCorreoMostrarProfesor")
 	public void filtrarDatosCatalogo() {
 		if (variable2 == true)
 		{
@@ -149,6 +149,7 @@ public class CCatalogoProfesor extends CGeneral {
 	@Listen("onDoubleClick = #ltbProfesor")
 	public void mostrarDatosCatalogo() {
 
+		try {
 		if (vistaRecibida == null) {
 
 			vistaRecibida = "maestros/VProfesor";
@@ -170,6 +171,10 @@ public class CCatalogoProfesor extends CGeneral {
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwCatalogoProfesor.onClose();
+		}
+		} catch (NullPointerException e) {
+
+			System.out.println("NullPointerException");
 		}
 		
 	}
