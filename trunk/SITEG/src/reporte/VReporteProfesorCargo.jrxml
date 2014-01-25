@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VReporteProfesorCargo" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86643447-ad29-4b3c-8409-5f8e59397c3f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="118"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="fecha2" class="java.util.Date"/>
 	<parameter name="fecha1" class="java.util.Date"/>
@@ -110,7 +110,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{teg.titulo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="433" y="29" width="100" height="20" uuid="6b17d4cd-0c9b-4596-b649-3710bc1491ed"/>
@@ -120,7 +120,7 @@
 				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="236" y="29" width="100" height="20" uuid="e0f8a18e-441d-487c-9321-d5dc250b74ee"/>
+				<reportElement x="236" y="29" width="123" height="20" uuid="e0f8a18e-441d-487c-9321-d5dc250b74ee"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -129,22 +129,7 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch">
-			<textField>
-				<reportElement x="432" y="25" width="52" height="20" uuid="c3190849-7247-44d8-ab7c-61c6d63487b5"/>
-				<textElement>
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[Pagina]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="533" y="25" width="32" height="20" uuid="efd48f3e-0d21-4b2f-8fc7-60ede100ec72"/>
-				<textElement>
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
