@@ -219,27 +219,31 @@ public class CInicio extends CGeneral {
 
 	@Listen("onClick = #btnConsultarEstatus")
 	public void ventanaEmergente(Event e) {
-		String cedula = Integer.toString(cedulaEstatus.getValue());
+		
+		if(cedulaEstatus.getValue()!=null){
 
-		if (cedula != "") {
-			if (servicioEstudiante.buscarEstudiante(cedula) != null) {
-
-				cedulaEstatus.setValue(null);
-				CConsultarEstatus consultarestatus = new CConsultarEstatus();
-				consultarestatus.recibirCedula(cedula);
-			} else {
-
-				Messagebox
-						.show("Estudiante no autorizado para realizar un Trabajo Especial de Grado",
-								"Información", Messagebox.OK,
-								Messagebox.INFORMATION);
-			
+			String cedula = Integer.toString(cedulaEstatus.getValue());
+	
+			if (cedula != "") {
+				if (servicioEstudiante.buscarEstudiante(cedula) != null) {
+	
+					cedulaEstatus.setValue(null);
+					CConsultarEstatus consultarestatus = new CConsultarEstatus();
+					consultarestatus.recibirCedula(cedula);
+				} else {
+	
+					Messagebox
+							.show("Estudiante no autorizado para realizar un Trabajo Especial de Grado",
+									"Información", Messagebox.OK,
+									Messagebox.INFORMATION);
+				
+				}
+	
 			}
-
 		}else{
 			Messagebox
-					.show("Ingrese el numero de cedula del estudiante","Informaciï¿½n",
-					Messagebox.OK,Messagebox.INFORMATION);
+			.show("Introduzca una cedula para continuar","Información", Messagebox.OK,
+											Messagebox.INFORMATION);
 		}
 
 	}
