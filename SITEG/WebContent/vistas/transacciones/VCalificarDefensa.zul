@@ -244,8 +244,7 @@
 							<row>
 								<hbox>
 									<listbox id="ltbitem"
-										emptyMessage="No hay item registradas" mold="paging"
-										pageSize="3" height="245px">
+										emptyMessage="No hay item registradas" height="245px">
 										<listhead>
 											<listheader label="Item"
 												align="center" />
