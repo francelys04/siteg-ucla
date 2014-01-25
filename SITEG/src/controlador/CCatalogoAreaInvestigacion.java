@@ -58,8 +58,9 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		private Combobox cmbPrograma;
 		private long id = 0;
 		private static String vistaRecibida;
-		private static boolean h;
-
+		private static boolean encontrado;
+		private static long idPrograma1;
+		public static List<AreaInvestigacion> area1;
 		
 		void inicializar(Component comp) {
 			List<Programa> programa = servicioPrograma.buscarActivas();
@@ -72,7 +73,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 			List<AreaInvestigacion> area = servicioArea.buscarActivos();
 			
 			
-			if(h==true){
+			if(encontrado==true){
 				ltbArea.setEmptyMessage("No hay areas de investigacion registradas");
 				ltbArea.setTooltiptext("Doble clic para seleccionar el area");
 				ltbArea.setModel(new ListModelList<AreaInvestigacion>(area));
@@ -95,20 +96,21 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 
 		}
 		public void metodoPrender(){
-			h=true;			
+			encontrado=true;			
 		
 		}
 		public void metodoApagar(){
-				h=false;		
+			encontrado=false;		
 			
 		}
 		
 		@Listen("onSelect = #cmbPrograma")			
 		public void llenarLista() {
-			long idPrograma;
-			idPrograma = Long.parseLong(cmbPrograma.getSelectedItem().getId());
+			
+			
+			idPrograma1 = Long.parseLong(cmbPrograma.getSelectedItem().getId());
 			Lapso lapso = servicioLapso.buscarLapsoVigente();
-			Programa programa = servicioPrograma.buscar(idPrograma);
+			Programa programa = servicioPrograma.buscar(idPrograma1);
 			List<AreaInvestigacion> areas = servicioArea.areasPrograma(programa, lapso);
 			ltbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 			
@@ -118,7 +120,15 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		//filtra el catalogo en este caso solo por nombre y descripcion
 		@Listen("onChange = #txtNombreMostrarArea, #txtDescripcionMostrarArea")
 		public void filtrarDatosCatalogo() {
-			List<AreaInvestigacion> area1 = servicioArea.buscarActivos();
+			if (encontrado==true){
+			area1 = servicioArea.buscarActivos();
+			}else {
+				idPrograma1 = Long.parseLong(cmbPrograma.getSelectedItem().getId());
+				Lapso lapso = servicioLapso.buscarLapsoVigente();
+				Programa programa = servicioPrograma.buscar(idPrograma1);
+				area1 = servicioArea.areasPrograma(programa, lapso);
+			
+			}
 			List<AreaInvestigacion> area2 = new ArrayList<AreaInvestigacion>();
 
 			for (AreaInvestigacion area : area1) {
@@ -140,9 +150,9 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 				}
 
 			}
-
+			
 			ltbArea.setModel(new ListModelList<AreaInvestigacion>(area2));
-
+			
 		}
 		public void recibir (String vista)
 		{
@@ -154,8 +164,8 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		//lleva el item que selecciono en el catalogo a la ventana y cierra el catalogo
 			@Listen("onDoubleClick = #ltbArea")
 			public void mostrarDatosCatalogo() {
-				
-				if (h == false) {
+				if(ltbArea.getItemCount()!=0){
+				if (encontrado == false) {
 				Listitem listItem = ltbArea.getSelectedItem();
 				AreaInvestigacion areaDatosCatalogo = (AreaInvestigacion) listItem.getValue();
 				CCatalogoTematicaArea area = new CCatalogoTematicaArea();
@@ -176,7 +186,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 				Executions.sendRedirect("/vistas/arbol.zul");
 				wdwCatalogoArea.onClose();
 				}
-
+				}
 			}
 		
 	}

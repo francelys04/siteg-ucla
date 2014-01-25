@@ -215,6 +215,8 @@ public class CInicio extends CGeneral {
 		wdwInformacionInteres.doModal();
 		CCatalogoArchivoDescarga cata = new controlador.CCatalogoArchivoDescarga();
 		cata.metodoPrender();
+		CCatalogoAreaInvestigacion areas = new CCatalogoAreaInvestigacion();
+		areas.metodoApagar();
 	}
 
 	@Listen("onClick = #btnConsultarEstatus")
@@ -234,7 +236,7 @@ public class CInicio extends CGeneral {
 	
 					Messagebox
 							.show("Estudiante no autorizado para realizar un Trabajo Especial de Grado",
-									"Información", Messagebox.OK,
+									"Informaciï¿½n", Messagebox.OK,
 									Messagebox.INFORMATION);
 				
 				}
@@ -242,7 +244,7 @@ public class CInicio extends CGeneral {
 			}
 		}else{
 			Messagebox
-			.show("Introduzca una cedula para continuar","Información", Messagebox.OK,
+			.show("Introduzca una cedula para continuar","Informaciï¿½n", Messagebox.OK,
 											Messagebox.INFORMATION);
 		}
 
