@@ -118,6 +118,14 @@ public class CPrograma extends CGeneral {
 			if (map.get("cedula") != null){
 				txtDirectorPrograma.setValue((String) map.get("cedula"));
 				}
+			if(map.get("idPrograma")!=null)
+				id = ((Long) map.get("idPrograma"));
+			if(map.get("nombrePrograma")!=null)
+				txtNombrePrograma.setValue((String) map.get("nombrePrograma"));
+			if(map.get("descripcionPrograma")!=null)
+				txtDescripcionPrograma.setValue((String) map.get("descripcionPrograma"));
+			if(map.get("correoPrograma")!=null)
+				txtCorreoPrograma.setValue((String) map.get("correoPrograma"));
 			if ((Long) map.get("id") != null) {
 				id = ((Long) map.get("id"));
 				/*
@@ -150,9 +158,25 @@ public class CPrograma extends CGeneral {
 
 	@Listen("onClick = #btnCatalogoDirectorPrograma")
 	public void buscarDirector() {
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("director", "director");
+		if ((txtNombrePrograma.getText().compareTo("") != 0))
+		map.put("nombrePrograma", txtNombrePrograma.getValue());
+
+		if(id!=0)
+		map.put("idPrograma", id);
+		
+		if((txtDescripcionPrograma.getText().compareTo("") != 0))
+		map.put("descripcionPrograma", txtDescripcionPrograma
+				.getValue());
+		if((txtCorreoPrograma.getText().compareTo("") != 0))
+		map.put("correoPrograma", txtCorreoPrograma.getValue());
+		
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoDirectorPrograma.zul", null, null);
 		window.doModal();
+		
 		catalogoProfesor.recibir("maestros/VPrograma");
 	}
 
@@ -180,6 +204,8 @@ public class CPrograma extends CGeneral {
 								String correo = txtCorreoPrograma.getValue();
 								Boolean estatus = true;
 								Profesor directorPrograma = servicioProfesor.buscarProfesorPorCedula(txtDirectorPrograma.getValue());
+								System.out.println(directorPrograma.getCedula());
+								System.out.println(id);
 								Programa programa = new Programa(id, nombre,
 										descripcion, correo, estatus,
 										directorPrograma);

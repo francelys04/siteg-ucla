@@ -37,7 +37,7 @@ public class Programa {
 	@OneToMany(mappedBy = "programa")
 	private Set<Estudiante> estudiantes;
 
-	@OneToOne(optional=false)
+	@OneToOne
 	@JoinColumn(name = "profesor_cedula", referencedColumnName = "cedula")
 	private Profesor directorPrograma;
 

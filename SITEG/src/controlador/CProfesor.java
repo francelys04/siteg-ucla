@@ -123,10 +123,11 @@ public class CProfesor extends CGeneral {
 				cmbCategoriaProfesor.setValue(profesor.getCategoria()
 						.getNombre());
 				btnEliminarProfesor.setDisabled(false);
-				map.clear();
-				map = null;
 			}
+			map.clear();
+			map = null;
 		}
+
 	}
 
 	@Listen("onClick = #btnCatalogoProfesor")

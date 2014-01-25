@@ -81,7 +81,7 @@ public class SProfesor {
 	}
 	public List<Profesor> buscarProfesoresSinPrograma(){
 		List<Profesor> profesores;
-		profesores = interfazProfesor.buscarProfesorEnPrograma();
+		profesores = interfazProfesor.profesorSinPrograma();
 		return profesores;
 	}
 	
