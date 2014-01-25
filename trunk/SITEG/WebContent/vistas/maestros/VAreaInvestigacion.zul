@@ -96,12 +96,12 @@
 
 					<hbox>
 
-						<textbox id="txtNombreArea" width="120%"
+						<textbox id="txtNombreArea" width="280px"
 							tooltip="pupNombreArea" />
 
 						<button id="btnBuscarArea" sclass="btn"
 							image="/public/imagenes/iconos/catalogo.png"
-							style="margin-left:50px" tooltip="pupCatalogoArea">
+							style="margin-left:10px" tooltip="pupCatalogoArea">
 						</button>
 
 					</hbox>

@@ -94,12 +94,12 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtNombreItem" width="120%"
+						<textbox id="txtNombreItem" width="250px"
 							tooltip="pupNombreItem" />
 
 						<button id="btnCatalogoItem" tabindex="13"
 							sclass="btn" image="/public/imagenes/iconos/catalogo.png"
-							style="margin-left:50px" tooltip="pupCatalogoItem">
+							style="margin-left:10px" tooltip="pupCatalogoItem">
 						</button>
 
 					</hbox>
