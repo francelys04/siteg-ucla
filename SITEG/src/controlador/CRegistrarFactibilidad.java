@@ -145,14 +145,38 @@ public class CRegistrarFactibilidad extends CGeneral {
 	}
 	
 	@Listen("onClick = #btnAceptarRegistrarFactibilidad")
-	public void guardar(){
+	public void aceptarfactibilidad(){
+	
 		
-		Messagebox.show(
-				"Proyecto Factible",
-				"Información", Messagebox.OK,
-				Messagebox.INFORMATION);
+		String estatus = "Proyecto Factible";
+		Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
+		teg2.setEstatus(estatus);
+		servicioTeg.guardar(teg2);
+		for (int i = 0; i < ltbEstudianteRegistrarFactibilidad.getItemCount(); i++) {
+	        Estudiante estudiante = ltbEstudianteRegistrarFactibilidad.getItems().get(i).getValue();
+	        enviarEmailNotificacion(estudiante.getCorreoElectronico(), "Su Proyecto es Factible");
+	        
+		}
+		
+		
+		Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		salir();
 		
+	}
+	@Listen("onClick = #btnRechazarRegistrarFactibilidad")
+	public void rechazarfactibilidad()
+	{
+		String estatus = "Proyecto No Factible";
+		Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
+		teg2.setEstatus(estatus);
+		servicioTeg.guardar(teg2);
+		for (int i = 0; i < ltbEstudianteRegistrarFactibilidad.getItemCount(); i++) {
+	        Estudiante estudiante = ltbEstudianteRegistrarFactibilidad.getItems().get(i).getValue();
+	        enviarEmailNotificacion(estudiante.getCorreoElectronico(), "Su Proyecto es no Factible");
+	        
+		}
+		Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+		salir();
 	}
 
 
