@@ -103,8 +103,8 @@ public class CAreaInvestigacion extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);			
 		}else{
-			Messagebox.show("ï¿½Desea guardar el area de investigacion?",
-					"Dialogo de confirmaciï¿½n", Messagebox.OK
+			Messagebox.show("Desea guardar el area de investigacion?",
+					"Dialogo de confirmaciòn", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
