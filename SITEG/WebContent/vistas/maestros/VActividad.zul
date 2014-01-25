@@ -93,13 +93,13 @@
 
 					<hbox>
 
-						<textbox id="txtNombreActividad" width="120%"
+						<textbox id="txtNombreActividad" width="270px"
 							tooltip="pupNombreActividad" tabindex="1" />
 
 
 						<button id="btnCatalogoActividad" tabindex="6"
 							sclass="btn" image="/public/imagenes/iconos/catalogo.png"
-							style="margin-left:50px" tooltip="pupCatalogoActividad">
+							style="margin-left:10px" tooltip="pupCatalogoActividad">
 						</button>
 
 					</hbox>

@@ -95,7 +95,7 @@
 					</hlayout>
 
 					<combobox id="cmbAreaTematica" readonly="true"
-						width="23%" tabindex="12" tooltip="pupAreaTematica">
+						width="300px" tabindex="12" tooltip="pupAreaTematica">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
@@ -114,13 +114,13 @@
 
 					<hbox>
 
-						<textbox id="txtNombreTematica" width="120%"
+						<textbox id="txtNombreTematica" width="280px"
 							tooltip="pupNombreTematica" />
 
 						<button id="btnBuscarTematica" sclass="btn"
 							tooltip="pupCatalogoTematica"
 							image="/public/imagenes/iconos/catalogo.png"
-							style="margin-left:50px">
+							style="margin-left:10px">
 						</button>
 					</hbox>
 				</row>

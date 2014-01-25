@@ -1,11 +1,11 @@
-<window title="Catalogo Tematica" border="normal" width="800px"
+<window title="Catalogo Temática" border="normal" width="860px"
 	id="wdwCatalogoTematica" apply="controlador.CCatalogoTematica"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
-	<listbox id="ltbTematica" width="100%" mold="paging" pageSize="10"
+	<listbox id="ltbTematica" width="100%" mold="paging" pageSize="15"
 		emptyMessage="No hay tematicas registradas">
 
 		<auxhead sclass="category-center">
@@ -32,7 +32,7 @@
 		</auxhead>
 		<listhead>
 			<listheader label="Nombre" align="center" />
-			<listheader label="Area" align="center" />
+			<listheader label="Área" align="center" />
 			<listheader label="Descripción" align="center" />
 
 

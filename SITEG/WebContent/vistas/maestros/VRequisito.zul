@@ -94,12 +94,12 @@
 
 					<hbox>
 
-						<textbox id="txtNombreRequisito" width="120%"
+						<textbox id="txtNombreRequisito" width="270px"
 							tooltip="pupNombreRequisito" />
 
 						<button id="btnBuscarRequisito" sclass="btn"
 							image="/public/imagenes/iconos/catalogo.png"
-							style="margin-left:50px" tooltip="pupCatalogoRequisito">
+							style="margin-left:10px" tooltip="pupCatalogoRequisito">
 						</button>
 
 					</hbox>

@@ -262,14 +262,12 @@
 					<div sclass="btn-group">
 
 						<button id="btnGuardarEstudiante"
-							label="Guardar" sclass="btn"
-							image="/public/imagenes/iconos/guardar.png" tabindex="13"
-							tooltip="pupGuradaroEstudiante">
+							tooltip="pupGuardarEstudiante" label="Guardar" sclass="btn"
+							image="/public/imagenes/iconos/guardar.png" tabindex="13">
 						</button>
 						<button id="btnCancelarEstudiante"
-							label="Cancelar" sclass="btn"
-							image="/public/imagenes/iconos/limpiar.png" tabindex="14"
-							tooltip="pupCancelarEstudiante">
+							tooltip="pupCancelarEstudiante" label="Cancelar" sclass="btn"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 						</button>
 						<button id="btnEliminarEstudiante"
 							label="Eliminar" sclass="btn"

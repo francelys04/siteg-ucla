@@ -151,7 +151,9 @@ public class CCatalogoTematica extends CGeneral {
 	// Aca se selecciona una actividad del catalogo
 	@Listen("onDoubleClick = #ltbTematica")
 	public void mostrarDatosCatalogo() {
+		
 
+		try {
 		if (vistaRecibida == null) {
 
 			vistaRecibida = "maestros/VTematica";
@@ -168,6 +170,12 @@ public class CCatalogoTematica extends CGeneral {
 			Executions.sendRedirect("/vistas/arbol.zul");
 			wdwCatalogoTematica.onClose();
 		}
-	}
+		} catch (NullPointerException e) {
 
-}
+			System.out.println("NullPointerException");
+		}
+		
+		}
+
+	}
+		

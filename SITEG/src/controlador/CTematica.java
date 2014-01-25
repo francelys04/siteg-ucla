@@ -135,7 +135,7 @@ public class CTematica extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("¿Desea guardar los datos de la tematica?",
+			Messagebox.show("¿Desea guardar los datos de la temática?",
 					"Dialogo de confirmación", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -157,7 +157,7 @@ public class CTematica extends CGeneral {
 								servicioTematica.guardar(tematica);
 								cancelarTematica();
 								Messagebox.show(
-										"Tematica registrada exitosamente",
+										"Temática registrada exitosamente",
 										"Información", Messagebox.OK,
 										Messagebox.INFORMATION);
 								id = 0;
@@ -172,8 +172,8 @@ public class CTematica extends CGeneral {
 	// elimina al darle clic
 	@Listen("onClick = #btnEliminarTematica")
 	public void eliminarTematica() {
-		Messagebox.show("¿Desea eliminar los datos de la tematica?",
-				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+		Messagebox.show("¿Desea eliminar los datos de la temática?",
+				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
@@ -183,7 +183,7 @@ public class CTematica extends CGeneral {
 							servicioTematica.guardar(tematica);
 							cancelarTematica();
 							Messagebox.show(
-									"Tematica eliminada exitosamente",
+									"Temática eliminada exitosamente",
 									"Información", Messagebox.OK,
 									Messagebox.INFORMATION);
 							

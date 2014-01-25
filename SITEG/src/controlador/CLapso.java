@@ -78,6 +78,7 @@ public class CLapso extends CGeneral {
 	@Wire
 	private Button btnGuardarLapso;
 	private long id = 0;
+	public static long idLapso = 0;
 
 	// Metodo para cargar el catalogo de lapsos academicos
 
@@ -152,8 +153,14 @@ public class CLapso extends CGeneral {
 								
 								
 								if(servicioPrograma.buscarActivas().size()!=0){
+									
+																		
 									for(int i = 0; i<servicioPrograma.buscarActivas().size();i++){
-										if(servicioCondicionPrograma.buscarUltimasCondiciones(servicioPrograma.buscarActivas().get(i)).isEmpty()){
+										
+												
+										if(servicioCondicionPrograma.buscarCondicionesPrograma(servicioPrograma.buscarActivas().get(i),servicioLapso.BuscarLapsoActual()).isEmpty()){
+										
+											System.out.println("pase por if2");
 											List<Condicion> condiciones = servicioCondicion
 													.buscarActivos();
 											List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
@@ -161,7 +168,9 @@ public class CLapso extends CGeneral {
 												Condicion condicion = condiciones.get(j);
 												CondicionPrograma condicionPrograma = new CondicionPrograma();
 												condicionPrograma.setPrograma(servicioPrograma.buscarActivas().get(i));
-												condicionPrograma.setLapso(servicioLapso.buscarLapso(id));
+												Lapso ultimoLapso = servicioLapso.BuscarLapsoActual();
+											
+												condicionPrograma.setLapso(ultimoLapso);
 												condicionPrograma.setCondicion(condicion);
 												condicionPrograma.setValor(0);
 												condicionesPrograma.add(condicionPrograma);

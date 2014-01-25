@@ -21,7 +21,7 @@ public class Tematica {
 	@Column(name="id", nullable = false)
 	private long id;
 	
-	@Column(name="nombre", length = 100)
+	@Column(name="nombre", length = 300)
 	private String nombre;
 	
 	@Column(name="descripcion", length = 500)
