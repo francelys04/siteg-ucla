@@ -273,19 +273,19 @@ public class CSolicitarTutor extends CGeneral {
 		}
 
 		if (combo.compareTo("") == 0) {
-			System.out.println("pase por el primer");
+			
 			Messagebox.show("Debe Elegir el Programa", "Advertencia", Messagebox.OK,
 					Messagebox.EXCLAMATION);
 		}
 
 		else if (combo2.compareTo("") == 0) {
-			System.out.println("pase por el segundo");
+			
 			Messagebox.show("Debe Elegir la Tematica", "Advertencia", Messagebox.OK,
 					Messagebox.EXCLAMATION);
 		}
 
 		if ((combo.compareTo("") != 0) && (combo2.compareTo("") != 0)) {
-			System.out.println("pAW POR EL Y");
+			
 
 			catalogo.recibir("transacciones/VSolicitarTutor",idcombo,valor);
 
@@ -344,9 +344,7 @@ public class CSolicitarTutor extends CGeneral {
 					List<Teg> teg2 = servicioTeg
 							.buscarTutoriaProfesor(profesor);
 					String nombre2 = "Numero de tutorias por profesor";
-					System.out.println("profesor"
-							+ buscarCondicionVigenteEspecifica(nombre2,
-									pruebaCondicion.getPrograma()).getValor());
+				
 					if (teg2.size() >= buscarCondicionVigenteEspecifica(
 							nombre2, pruebaCondicion.getPrograma()).getValor()) {
 						Messagebox
@@ -444,10 +442,7 @@ public class CSolicitarTutor extends CGeneral {
 										"Advertencia", Messagebox.OK,
 										Messagebox.EXCLAMATION);
 							} else
-								System.out.print(cmbProgramaSolicitud
-										.getValue());
-							System.out.print(estudiante.getPrograma()
-									.getNombre());
+							
 
 							if (cmbProgramaSolicitud.getValue().compareTo(
 									estudiante.getPrograma().getNombre()) != 0) {
@@ -497,11 +492,7 @@ public class CSolicitarTutor extends CGeneral {
 							} else {
 
 								String nombre = "Numero de estudiantes por trabajo";
-								System.out.println("estudiantes"
-										+ buscarCondicionVigenteEspecifica(
-												nombre,
-												estudiante2.getPrograma())
-												.getValor());
+							
 								if (tamano < buscarCondicionVigenteEspecifica(
 										nombre, estudiante2.getPrograma())
 										.getValor()) {
