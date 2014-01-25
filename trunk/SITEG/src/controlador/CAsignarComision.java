@@ -1,5 +1,7 @@
 package controlador;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,6 +13,7 @@ import modelo.Actividad;
 import modelo.AreaInvestigacion;
 import modelo.CondicionPrograma;
 import modelo.Estudiante;
+import modelo.Grupo;
 import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
@@ -20,6 +23,9 @@ import modelo.Usuario;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -28,6 +34,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
@@ -41,6 +48,7 @@ import org.zkoss.zul.Window;
 
 import servicio.SActividad;
 import servicio.SEstudiante;
+import servicio.SGrupo;
 import servicio.SProfesor;
 import servicio.SPrograma;
 import servicio.SProgramaRequisito;
@@ -61,6 +69,7 @@ public class CAsignarComision extends CGeneral {
 	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
 	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
 			.getServicioCondicionPrograma();
+	SGrupo serviciogrupo = GeneradorBeans.getServicioGrupo();
 
 	@Wire
 	private Datebox dbfecha;
@@ -94,13 +103,17 @@ public class CAsignarComision extends CGeneral {
 	private Button btnGuardarComision;
 
 	private static String vistaRecibida;
-
+	
+	@Wire
+	private Image imagenx;
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	private List<Profesor> profesores;
-
+	SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
 	private long id = 0;
 	private static long auxiliarId = 0;
 	private static long auxIdPrograma = 0;
 	private static Programa programa;
+	public static int j;
 
 	@Override
 	void inicializar(Component comp) {
@@ -179,21 +192,10 @@ public class CAsignarComision extends CGeneral {
 				cedulas.add(cedulasComision);
 			}
 
-			// REVISAR
+		
 			List<Profesor> profesoresDisponibles = servicioProfesor
 					.buscarProfesoresSinComision(cedulas);
 
-			// List<Profesor> profesoresDisponiblesporPrograma = new
-			// ArrayList<Profesor>();
-			//
-			// for (int j = 0; j < profesoresDisponibles.size(); j++) {
-			//
-			// if (profesoresDisponibles.get(j).getPrograma().getNombre()
-			// .equals(programa.getNombre()))
-			// profesoresDisponiblesporPrograma.add(profesoresDisponibles
-			// .get(j));
-			//
-			// }
 
 			lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
 					profesoresDisponibles));
@@ -338,6 +340,18 @@ public class CAsignarComision extends CGeneral {
 									Messagebox.EXCLAMATION);
 
 				} else {
+					Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+					Grupo grupo = servicioGrupo.BuscarPorNombre("ROLE_COMISION");
+					gruposUsuario.add(grupo);
+					byte[] imagenUsuario = null;
+					URL url = getClass().getResource("/configuracion/usuario.png");
+					try {
+						imagenx.setContent(new AImage(url));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					imagenUsuario = imagenx.getContent().getByteData();
 
 					Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
 					for (int i = 0; i < lsbProfesoresSeleccionados
@@ -345,6 +359,42 @@ public class CAsignarComision extends CGeneral {
 						Profesor profesor = lsbProfesoresSeleccionados
 								.getItems().get(i).getValue();
 						profesoresSeleccionados.add(profesor);
+						Usuario user = servicioUsuario.buscarUsuarioPorNombre(profesor.getCedula());
+						if(user==null){
+						System.out.println(user);
+						Usuario usuario = new Usuario(0, profesor.getCedula(), passwordEncoder.encode(profesor.getCedula()), true, gruposUsuario, imagenUsuario);
+						servicioUsuario.guardar(usuario);
+						user = servicioUsuario.buscarUsuarioPorNombre(profesor.getCedula());
+						profesor.setUsuario(user);
+						servicioProfesor.guardarProfesor(profesor);
+						}	
+						else
+						{
+						
+						List<Grupo> grupino = new ArrayList<Grupo>();
+						grupino = serviciogrupo.buscarGruposDelUsuario(user);
+						
+						
+						
+							Grupo grupo2 = servicioGrupo.BuscarPorNombre("ROLE_COMISION");
+						
+						
+							
+							
+							
+							Set<Grupo> gruposU = new HashSet<Grupo>();
+							for (int f = 0; f<grupino.size(); ++f)
+							{
+								Grupo g = grupino.get(f);
+								System.out.println(grupino.get(f).getNombre());
+								gruposU.add(g);
+							}
+							gruposU.add(grupo2);
+							
+							user.setGrupos(gruposU);
+							
+							servicioUsuario.guardar(user);
+						}
 					}
 
 					Teg tegSeleccionado = servicioTeg.buscarTeg(auxiliarId);

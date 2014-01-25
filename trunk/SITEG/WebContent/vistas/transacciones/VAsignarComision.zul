@@ -95,7 +95,7 @@
 		<separator />
 		<separator />
 		<separator />
-
+     <image id="imagenx" width="80px" height="50px" visible="false" />
 
 		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
 			height="370px">
