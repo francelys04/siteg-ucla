@@ -1,6 +1,6 @@
 
-<window id="wdwReporteCronograma" title="Consulta de cronograma de actividades" border="normal"
-	width="100%" height="450px" closable="true"> 	<!-- apply="" -->
+<window id="wdwReporteCronograma" title="Consulta cronograma de actividades" border="normal"
+	width="100%" height="450px" closable="true" apply="controlador.CReporteCronograma"> 	
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -41,7 +41,7 @@
 		<toolbarbutton label="Generar Cronograma" />
 	</popup>
 	<popup id="pupCancelarReporteCronograma">
-		<toolbarbutton label="Generar Cronograma" />
+		<toolbarbutton label="Salir" />
 	</popup>
 
 
@@ -62,68 +62,37 @@
 		
 		 <hbox>
 			<label value="Programa:" style="color:black" />
-			<combobox id="cmbCronogramaPrograma" readonly="true" width="50%"
-				tabindex="12" tooltip="pupPrograma">
-				<template name="model">
-					<comboitem label="${each.programa.nombre}" />
-				</template>
-			</combobox>
+			
+			<combobox id="cmbCronogramaPrograma" autodrop="true"
+							style="margin-left:10px" width="50%" tabindex="12"
+							readonly="true">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
 			<separator />
 			<separator />
 
 			<hlayout>
 				<label value="Lapso:" style="color:black" />
 			</hlayout>
-			<combobox id="cmCronogramaLaso" readonly="true" width="50%"
-				tabindex="12" tooltip="pupEstatus">
-				<comboitem label="" />
-				<comboitem label="" />
-
-			</combobox>
+		
+			
+			 <combobox id="cmbCronogramaLapso"
+						readonly="true" autodrop="true" width="50%" tabindex="12"
+						style="margin-left:20px">
+						<template name="model">
+							<comboitem label="${each.nombre}"
+								id="${each.id}" />
+						</template>
+					</combobox>
 
 		</hbox>
 		
+			
 		
-		
-		
-		
-		
-		
-<!-- 		<grid sclass="fgrid">
-			<columns>
-				<column width="20%" height="30%" />
-			</columns>
-			<rows>
-				<row>
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red"  />
-						<label value="Programa"
-							style="font-weight:bold" />
-					</hlayout>
-					<combobox id="cmbReporteCronogramaPrograma" width="100%">
-						<template name="model" >
-							<comboitem label="${each.programa.nombre}"/>
-						</template>
-					</combobox>
-								
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red"  />
-						<label value="Lapso "
-							style="font-weight:bold" />
-					</hlayout>
-					<combobox id="cmbReporteCronogramaLapso" width="100%">
-						<template name="model" >
-							<comboitem label="${each.lapso.nombre}"/>
-						</template>
-					</combobox>
-				
-				</row>
-					
-				
-			</rows>
-		</grid>    -->
+
 		<separator />
 		<separator />
 	</groupbox>
@@ -160,7 +129,9 @@
 	<separator />
 	<separator />
 	<separator />
-	<listbox id="ltbReporteCronograma" mold="paging" pageSize="10"
+	<jasperreport id="report" height="500px" />
+    <iframe id ="frame"></iframe>
+<!--  	<listbox id="ltbReporteCronograma" mold="paging" pageSize="10"
 		style="margin-left:14px;margin-right:20px"
 		emptyMessage="No hay cronograma registrado" >
 
@@ -180,7 +151,7 @@
 				<listcell label="${each.fechaFin}" />
 			</listitem>
 		</template>
-	</listbox>
+	</listbox>   -->
 
 	<separator />
 </window>
