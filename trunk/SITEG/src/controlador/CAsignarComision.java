@@ -351,7 +351,7 @@ public class CAsignarComision extends CGeneral {
 					tegSeleccionado.setProfesores(profesoresSeleccionados);
 					servicioTeg.guardar(tegSeleccionado);
 					Messagebox
-							.show("Los datos de la comisión fueron guardados exitosamente, pero todvía faltan miembros",
+							.show("Los datos de la comisión fueron guardados exitosamente, pero todavía faltan miembros",
 									"Información", Messagebox.OK,
 									Messagebox.INFORMATION);
 					salir();
