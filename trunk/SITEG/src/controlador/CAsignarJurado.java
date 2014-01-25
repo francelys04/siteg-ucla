@@ -93,6 +93,7 @@ public class CAsignarJurado extends CGeneral {
 	long idTeg = 0;
 	long idDefensa = 0;
     private static Programa programa;
+    private static int numeroIntegrantes;
     
     Jurado jurado = new Jurado(); 
 	@Override
@@ -137,7 +138,7 @@ public class CAsignarJurado extends CGeneral {
 
 		Listitem list1 = ltbJuradoDisponible.getSelectedItem();
 		if (list1 == null)
-			Messagebox.show("Seleccione un Item");
+			 Messagebox.show("Seleccione un profesor", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 		else
 			list1.setParent(ltbJuradoSeleccionado);
 	}
@@ -146,8 +147,11 @@ public class CAsignarJurado extends CGeneral {
 	public void moverIzquierdaJurado() {
 		Listitem list2 = ltbJuradoSeleccionado.getSelectedItem();
 		if (list2 == null)
-			Messagebox.show("Seleccione un Item");
+			 Messagebox.show("Seleccione un profesor", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 		else{
+			if(list2.getIndex() < numeroIntegrantes){
+				Messagebox.show("Jurado no puede ser removido", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);	
+			}			
 			list2.setParent(ltbJuradoDisponible);
 			}
 		}	
@@ -171,6 +175,7 @@ public class CAsignarJurado extends CGeneral {
 		List<Jurado> juradoOcupado = servicioJurado.buscarJuradoDeTeg(teg);
 		ltbJuradoSeleccionado.setModel(new ListModelList<Jurado>(juradoOcupado));
 		ltbJuradoSeleccionado.setDisabled(true);
+		numeroIntegrantes = juradoOcupado.size();
 
 		
 	}
@@ -203,7 +208,7 @@ public class CAsignarJurado extends CGeneral {
 							"Error", Messagebox.OK, Messagebox.ERROR);
 				}
 				else{
-					Messagebox.show("Desea finalizar la asignacion de jurado?",
+					Messagebox.show("¿Desea finalizar la asignacion de jurado?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener() {
@@ -308,7 +313,7 @@ public class CAsignarJurado extends CGeneral {
 									"Error", Messagebox.OK, Messagebox.ERROR);
 						}
 						else{
-							Messagebox.show("Desea guardar los datos del jurado?",
+							Messagebox.show("¿Desea guardar los datos del jurado?",
 									"Dialogo de confirmacion", Messagebox.OK
 											| Messagebox.CANCEL, Messagebox.QUESTION,
 									new org.zkoss.zk.ui.event.EventListener() {

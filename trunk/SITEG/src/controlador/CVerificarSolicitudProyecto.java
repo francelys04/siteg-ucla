@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -103,6 +104,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 	private static long auxId =0; 
 	private static long auxIdP=0;
 	private static String vistaRecibida;
+	private static int numero;
 	ArrayList<Boolean> valor = new ArrayList<Boolean>();
 	SProgramaRequisito servicioRequisitoPrograma = GeneradorBeans.getServicioProgramaRequisito();
 	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
@@ -123,8 +125,6 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 			if (map.get("id") != null) {				
 				long codigo =  (Long) map.get("id");
 				auxId = codigo;
-				System.out.print("pase por el mapeo");
-				System.out.print(codigo);
 				Teg teg2 = servicioTeg.buscarTeg(codigo);
 				List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg2);
 				//programa por el estudiante del primer estudiante del teg2
@@ -138,8 +138,10 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 							
 				ltbEstudiantesTeg.setModel(new ListModelList<Estudiante>(est));
 				
+				
 				id = est.get(0).getPrograma().getId();
 				llenarRequisitos(id, teg2);
+				
 				map.clear();
 				map = null;
 			}
@@ -164,7 +166,11 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		if (list2 == null)
 			 Messagebox.show("Seleccione un requisito", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 		else
+			if (list2.getIndex() < numero) {
+				Messagebox.show("Requisito no puede ser removido", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+			}else{
 			list2.setParent(ltbRequisitosDisponibles);
+			}
 	}
 	
 	@Listen("onClick = #btnCancelar")
@@ -193,6 +199,14 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 			Messagebox.show("Debe indicar si los requisitos estan completos o incompletos", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 		}
 		else{
+			Messagebox.show("¿Desea guardar la verificacion de requisitos?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+			
 			
 		long auxId2;
 		auxId2=auxId;
@@ -208,15 +222,16 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		
 		
 		if (rdoCompleto.isChecked()==false){
-			if ( txtObservacion.getValue().compareTo("")==0){
-				 Messagebox.show("Debe indicar una observacion","Error", Messagebox.OK,Messagebox.ERROR);
-			}else{
-				for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
+			if (txtObservacion.getValue().compareTo("")==0){
+				txtObservacion.setValue("Sus requisitos estan incorrectos o incompletos");			
+			}			
+			for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
 		            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
 		            valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), txtObservacion.getValue()));
 		            Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		   		 salir();  
-				}     	
+		   		
+				    	
 				
 			}
 		}
@@ -239,6 +254,9 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 	   		 salir();  
 		 } 
 		}
+							}
+						}
+					});
 		}	
 		}
 		}
@@ -256,6 +274,8 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 				requisitoIzquierda));
 	
 		ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(requisitosDerecha));
+		numero = requisitosDerecha.size();
+		
 			}
 	
 	private void salir(){
