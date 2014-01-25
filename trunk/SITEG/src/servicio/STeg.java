@@ -215,6 +215,12 @@ public class STeg {
 //		teg = interfaceTeg.findByEstudiantes(obtenerUsuarioEstudiante);
 //		return teg;
 //	}
+
+	public List<Teg> buscarTegsDeTematicaPorDosFechas(Tematica tematica,
+			Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.findByTematicaAndFechaBetween(
+				tematica, fechaInicio, fechaFin);
+	}
 	
 
 
