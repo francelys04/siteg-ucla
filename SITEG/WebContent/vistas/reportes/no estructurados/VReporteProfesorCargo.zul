@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesorCargo" 
 	title="Lista profesores con los cargos que desempeñan en Trabajos especiales de grado " 
-	border="normal" width="60%" height="500px" closable="true" apply="controlador.CReporteProfesorCargo"
+	border="normal" width="60%" height="500px" closable="true"  apply="controlador.CReporteProfesorCargo"
 >
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -88,7 +88,7 @@
 					
 						<combobox id="cmbPrograma" width="100%" readonly="true">
 							<template name="model">
-							<comboitem label="${each.programa}" />
+							<comboitem label="${each.nombre}" />
 							</template>
 						</combobox>
 						<hlayout>
@@ -96,7 +96,7 @@
 						</hlayout>
 							<combobox id="cmbArea" width="100%" readonly="true">
 							<template name="model">
-								<comboitem label="${each.area}" />
+								<comboitem label="${each.nombre}" />
 							</template>
 							</combobox>
 						
@@ -110,7 +110,7 @@
 					</hlayout>				
 						<combobox id="cmbEstatus" width="100%" readonly="true">
 							<template name="model">
-							<comboitem label="${each.estatus}" />
+							<comboitem label="${each}" />
 							</template>
 						</combobox>		
 					<hlayout>
@@ -118,7 +118,7 @@
 					</hlayout>
 						<combobox id="cmbTematica" width="100%" readonly="true">
 						<template name="model">
-							<comboitem label="${each.tematica}" />
+							<comboitem label="${each.nombre}" />
 						</template>
 						</combobox>				
 				</row>
