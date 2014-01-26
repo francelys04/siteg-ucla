@@ -200,7 +200,7 @@
 
 							</row>
 							<row>
-								<textbox id="txtDescripciónRegistrarTeg"
+								<textbox id="txtDescripcionRegistrarTeg"
 									width="520px" rows="2" cols="100" />
 							</row>
 

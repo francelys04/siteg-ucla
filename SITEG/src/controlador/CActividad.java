@@ -152,8 +152,8 @@ public class CActividad extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		}else {
-			Messagebox.show("¿Desea guardar los datos de la actividad?",
-					"Dialogo de confirmación", Messagebox.OK
+			Messagebox.show(" Â¿Desea guardar los datos de la actividad?",
+					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -169,7 +169,7 @@ public class CActividad extends CGeneral {
 								id = 0;
 								Messagebox.show(
 										"Actividad registrada exitosamente",
-										"Información", Messagebox.OK,
+										"Informacion", Messagebox.OK,
 										Messagebox.INFORMATION);
 							}
 						}
@@ -183,8 +183,8 @@ public class CActividad extends CGeneral {
 	@Listen("onClick = #btnEliminarActividad")
 	public void eliminarActividad() {
 		
-		Messagebox.show("¿Desea eliminar los datos de la actividad?",
-				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
+		Messagebox.show(" Â¿Desea eliminar los datos de la actividad?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
