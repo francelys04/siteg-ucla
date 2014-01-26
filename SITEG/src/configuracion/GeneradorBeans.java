@@ -16,6 +16,7 @@ import servicio.SCondicion;
 import servicio.SCondicionPrograma;
 import servicio.SCronograma;
 import servicio.SDefensa;
+import servicio.SEnlaceInteres;
 import servicio.SEstudiante;
 import servicio.SFactibilidad;
 import servicio.SGrupo;
@@ -179,5 +180,9 @@ public class GeneradorBeans implements ApplicationContextAware {
 	
 	public static STegEstatus getServicioTegEstatus() {
 		return applicationContext.getBean(STegEstatus.class);	
+	}
+	
+	public static SEnlaceInteres getServicioEnlace() {
+		return applicationContext.getBean(SEnlaceInteres.class);	
 	}
 }

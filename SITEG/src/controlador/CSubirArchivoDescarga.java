@@ -62,6 +62,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 	private Listbox ltbArchivoDescarga;
 	@Wire
 	private Combobox cmbPrograma;
+
 	private long id = 0;
 	private int longitudByte;
 	private Archivo archivo = new Archivo();
@@ -93,6 +94,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 				txtNombreArchivoDescarga.setValue(archivo.getNombre());
 				txtDescripcionArchivoDescarga.setValue(archivo.getDescripcion());
 				id = archivo.getId();
+				btnArchivoDescarga.setDisabled(true);
 				idAux=id;
 				btnEliminarArchivoDescarga.setDisabled(false);
 				map.clear();
@@ -144,6 +146,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 		archivo.equals(null);
 		cmbPrograma.setValue("");
 		btnEliminarArchivoDescarga.setDisabled(true);
+		btnArchivoDescarga.setDisabled(false);
 	
 	
 	}
