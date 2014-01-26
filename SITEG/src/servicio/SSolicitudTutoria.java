@@ -1,5 +1,6 @@
 package servicio;
 
+import java.util.Date;
 import java.util.List;
 
 import interfazdao.ISolicitudTutoriaDAO;
@@ -8,6 +9,7 @@ import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
+import modelo.Tematica;
 import modelo.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +75,38 @@ public class SSolicitudTutoria {
 		List<SolicitudTutoria> solicitudTutoria;
 		solicitudTutoria = interfaceSolicitud.findByEstudiantes(estudiante);
 		return solicitudTutoria;
+	}
+
+	public List<SolicitudTutoria> buscarTodasSolicitudesEntreFechas(
+			Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<SolicitudTutoria> solicitudes;
+		solicitudes = interfaceSolicitud.findByFechaBetween(fechaInicio,fechaFin);
+		return solicitudes;
+	}
+
+	public List<SolicitudTutoria> buscarSolicitudesPorTematicaEntreFechas(
+			Tematica tematica, Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<SolicitudTutoria> solicitudes;
+		solicitudes = interfaceSolicitud.findByTematicaAndFechaBetween(tematica,fechaInicio,fechaFin);
+		return solicitudes;
+	}
+
+	public List<SolicitudTutoria> buscarSolicitudesPorEstatusEntreFechas(
+			String estatus2, Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<SolicitudTutoria> solicitudes;
+		solicitudes=interfaceSolicitud.findByEstatusAndFechaBetween(estatus2,fechaInicio,fechaFin);
+		return solicitudes;
+	}
+
+	public List<SolicitudTutoria> buscarSolicitudesPorTematicaEstatusEntreFechas(
+			Tematica tematica, String estatus2, Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<SolicitudTutoria> solicitudes;
+		solicitudes=interfaceSolicitud.findByTematicaAndEstatusAndFechaBetween(tematica,estatus2,fechaInicio,fechaFin);
+		return solicitudes;
 	}
 	
 }
