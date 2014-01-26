@@ -106,7 +106,7 @@ public class CCatalogoActividad extends CGeneral {
 	// Aca se selecciona una actividad del catalogo
 	@Listen("onDoubleClick = #ltbActividad")
 	public void mostrarDatosCatalogo() {
-
+		if(ltbActividad.getItemCount() !=0){
 		Listitem listItem = ltbActividad.getSelectedItem();
 		Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -117,7 +117,7 @@ public class CCatalogoActividad extends CGeneral {
 		Executions.sendRedirect("/vistas/arbol.zul");
 
 		wdwCatalogoActividad.onClose();
-
+		}
 	}
 
 }

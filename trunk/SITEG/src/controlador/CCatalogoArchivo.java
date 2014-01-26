@@ -131,11 +131,12 @@ public class CCatalogoArchivo extends CGeneral {
 	
 	@Listen("onClick = #ltbArchivo")
 	public void descargarArchivo(){
+		if(ltbArchivo.getItemCount()!=0){
 		Listitem listItem = ltbArchivo.getSelectedItem();
 		Archivo archivo3= (Archivo) listItem.getValue();		
 		Archivo archivo4 = servicioArchivo.buscarArchivo(archivo3.getId());
 		Filedownload.save(archivo4.getContenidoDocumento(), archivo4.getTipoDocumento(), archivo4.getNombre());
-		
+		}
 	}
 	
 

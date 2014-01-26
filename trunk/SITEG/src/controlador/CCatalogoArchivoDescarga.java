@@ -43,7 +43,7 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 	private Textbox txtDescripcionActividadDescarga;
 	
 	private long id = 0;
-	private static boolean h=true;
+	private static boolean encontrado=true;
 	
     
 
@@ -85,10 +85,10 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 
 	}
 	public void metodoApagar(){
-		h=false;
+		encontrado=false;
 	}
 	public void metodoPrender(){
-		h=true;
+		encontrado=true;
 	}
 
 	// Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
@@ -126,10 +126,12 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 	}
 
 	
-
+	//si encontrado = true permite descargar un archivo en infromacion de interes
+	//si no mapea los datos a lhacia las vista VArchivoDescarga
 	@Listen("onClick = #ltbArchivoDescarga")
 	public void descargarArchivo(){
-		if (h==true) {
+		if(ltbArchivoDescarga.getItemCount()!=0){
+		if (encontrado==true) {
 			Listitem listItem = ltbArchivoDescarga.getSelectedItem();
 			Archivo archivo3= (Archivo) listItem.getValue();		
 			Archivo archivo4 = servicioArchivo.buscarArchivo(archivo3.getId());
@@ -148,7 +150,7 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 			
 			
 		}
-		
+		}	
 	}
 	
 
