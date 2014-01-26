@@ -104,6 +104,14 @@
 				</row>
 				
 				<row>
+				<hlayout>
+				    	<label value="Temática:" style="font-weight:bold" />
+					</hlayout>
+						<combobox id="cmbTematica" width="100%" readonly="true">
+						<template name="model">
+							<comboitem label="${each.nombre}" />
+						</template>
+						</combobox>				
 					<hlayout>
 						<label value="Estatus del profesor:"
 						style="font-weight:bold" />
@@ -113,14 +121,6 @@
 							<comboitem label="${each}" />
 							</template>
 						</combobox>		
-					<hlayout>
-				    	<label value="Temática:" style="font-weight:bold" />
-					</hlayout>
-						<combobox id="cmbTematica" width="100%" readonly="true">
-						<template name="model">
-							<comboitem label="${each.nombre}" />
-						</template>
-						</combobox>				
 				</row>
 					
 		</rows>		
