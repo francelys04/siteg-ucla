@@ -221,7 +221,35 @@ public class STeg {
 		return interfaceTeg.findByTematicaAndFechaBetween(
 				tematica, fechaInicio, fechaFin);
 	}
+
 	
+	
+	public List<Long> buscarUltimasTematicasProgramaAreaEstatus(String estatus, AreaInvestigacion area,Date fechaInicio,Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<Long> tegs;
+		tegs =interfaceTeg.buscarUltimasTematicasProgramaAreaEstatus(estatus, area, fechaInicio, fechaFin);
+		return tegs;
+	}
+	public List<Long> buscarUltimasTematicasProgramaEstatus(String estatus, Programa programa,Date fechaInicio,Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<Long> tegs;
+		tegs =interfaceTeg.buscarUltimasTematicasProgramaEstatus(estatus,programa, fechaInicio, fechaFin);
+		return tegs;
+	}
+	public List<Long> buscarUltimasEstatus(String estatus,Date fechaInicio,Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<Long> tegs;
+		tegs =interfaceTeg.buscarUltimasEstatus(estatus, fechaInicio, fechaFin);
+		return tegs;
+	}
+	
+	public List<Teg> buscarUltimasOrdenadasEstatus(String estatus, List<Tematica> tematicas,Date fechaInicio,Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs =interfaceTeg.buscarUltimasOrdenadasEstatus(estatus, tematicas, fechaInicio, fechaFin);
+		return tegs;
+	}
+
 
 
 }
