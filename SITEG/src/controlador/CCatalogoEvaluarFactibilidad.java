@@ -159,7 +159,7 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 	//Metodo que permite mostrar los datos del catalogo
 	@Listen("onDoubleClick = #ltbListaFactibilidad")
 	public void mostrarDatosCatalogo() {
-
+		if(ltbListaFactibilidad.getItemCount()!=0){
 		Listitem listItem = ltbListaFactibilidad.getSelectedItem();
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -173,7 +173,7 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 		vistaFactibilidad.recibir("catalogos/VCatalogoEvaluarFactibilidad");
         
 	}
-	
+	}
 	
 
 	

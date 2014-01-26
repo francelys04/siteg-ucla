@@ -49,8 +49,7 @@ public class CCatalogoItem extends CGeneral {
 	void inicializar(Component comp) {
 
 		List<ItemEvaluacion> items = servicioItem.buscarItemsActivos();
-		// System.out.println(items.get(0).getNombre());
-		// System.out.println(items.get(1).getNombre());
+		//llena el catalogo con los items activos
 
 		if (txtNombreItem == null) {
 			ltbItem.setModel(new ListModelList<ItemEvaluacion>(items));
@@ -60,7 +59,7 @@ public class CCatalogoItem extends CGeneral {
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 	}
-
+//permite filtrar los datos del catalogo item
 	@Listen("onChange = #txtNombreMostrarItem, #txtTipoMostrarItem, #txtDescripcionMostrarItem")
 	public void filtrarDatosCatalogo() {
 		List<ItemEvaluacion> item = servicioItem.buscarItemsActivos();
@@ -98,7 +97,7 @@ public class CCatalogoItem extends CGeneral {
 		vistaRecibida = vista;
 
 	}
-
+//permite enviar los datos a la vista recibida
 	@Listen("onDoubleClick = #ltbItem")
 	public void mostrarDatosCatalogo() {
 		
@@ -107,7 +106,7 @@ public class CCatalogoItem extends CGeneral {
 			vistaRecibida = "maestros/VItem";
 
 		} else {
-		
+		if( ltbItem.getSelectedCount()!=0){
 		Listitem listItem = ltbItem.getSelectedItem();
 		ItemEvaluacion itemDatosCatalogo = (ItemEvaluacion) listItem.getValue();
 		String vista = vistaRecibida;
@@ -118,7 +117,7 @@ public class CCatalogoItem extends CGeneral {
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwCatalogoItem.onClose();
 		}
-
+		}
 	}
 
 }

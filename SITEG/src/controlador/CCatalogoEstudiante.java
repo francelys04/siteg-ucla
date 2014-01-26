@@ -78,6 +78,7 @@ public class CCatalogoEstudiante extends CGeneral {
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+		//llena el catalogo con los datos del estudiante
 		List<Programa> programas = servicioPrograma.buscarActivas();
 
 		
@@ -187,7 +188,7 @@ public class CCatalogoEstudiante extends CGeneral {
 			vistaRecibida = "maestros/VEstudiante";
 
 		} else {
-		
+		if(ltbEstudiante.getItemCount()!=0){
 		Listitem listItem = ltbEstudiante.getSelectedItem();
 		Estudiante estudianteDatosCatalogo = (Estudiante) listItem.getValue();
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -204,7 +205,7 @@ public class CCatalogoEstudiante extends CGeneral {
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwCatalogoEstudiante.onClose();
 		}
-
+		}
 	}
 
 	/**
