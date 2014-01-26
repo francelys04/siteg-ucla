@@ -13,6 +13,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import modelo.Arbol;
 import modelo.Grupo;
+import modelo.Programa;
 import modelo.Usuario;
 
 import org.hibernate.Hibernate;
@@ -54,6 +55,7 @@ public class CCrearGrupo extends CGeneral {
 	SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
 
 	CCatalogoGrupo catalogoGrupo = new CCatalogoGrupo();
+	public static List<String> funcionalidades = new ArrayList();
 
 	@Wire
 	private Tree treeGrupo;
@@ -65,14 +67,18 @@ public class CCrearGrupo extends CGeneral {
 	private Button btnVisualizarFuncionalidades;
 	@Wire
 	private Button btnCancelarGrupo;
+	@Wire
+	private Listbox ltbFuncionalidadesSeleccionados;
 
-	
-	public void doAfterCompose(Component comp) throws Exception {
-		super.doAfterCompose(comp);
+	@Override
+	void inicializar(Component comp) {
+		// TODO Auto-generated method stub
 
 		treeGrupo.setModel(getModel());
 		treeGrupo.setCheckmark(true);
 		treeGrupo.setMultiple(true);
+
+
 		btnVisualizarFuncionalidades.setVisible(false);
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -94,7 +100,6 @@ public class CCrearGrupo extends CGeneral {
 
 	public TreeModel getModel() {
 		if (_model == null) {
-			System.out.println("1");
 			_model = new FooModel(getFooRoot());
 		}
 		return _model;
@@ -109,11 +114,7 @@ public class CCrearGrupo extends CGeneral {
 		FooNode twoLevelNode = new FooNode(null, 0, "");
 		FooNode threeLevelNode = new FooNode(null, 0, "");
 		FooNode fourLevelNode = new FooNode(null, 0, "");
-//		Authentication auth = SecurityContextHolder.getContext()
-//				.getAuthentication();
-//		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(
-//				auth.getAuthorities());
-		List<Arbol> listaArbol=servicioArbol.listarArbol();
+		List<Arbol> listaArbol = servicioArbol.listarArbol();
 		ArrayList<Arbol> arbole = new ArrayList<Arbol>();
 		List<Arbol> arboles = new ArrayList<Arbol>();
 		ArrayList<Long> ids = new ArrayList<Long>();
@@ -203,9 +204,34 @@ public class CCrearGrupo extends CGeneral {
 					encontrado = true;
 				}
 				return encontrado;
-			}
+			} 
 		}
 		return encontrado;
+	}
+
+	public void llenarFuncionalidadesSeleccionadas() {
+		Grupo grupo = servicioGrupo.buscarGrupo(id);
+		List<Arbol> listaArbol = servicioArbol.buscarporGrupo(grupo);
+		int ItemEncontrado=0;
+		for(int i=0; i<listaArbol.size();i++){
+			
+			long padre=listaArbol.get(i).getId();
+			ItemEncontrado=0;
+			for(int j=0;j<listaArbol.size();j++){
+				System.out.println("entro2");
+				long hijo=listaArbol.get(j).getHijo();
+				
+				if(padre==hijo){
+					ItemEncontrado=1;
+					j=listaArbol.size();
+				}
+			}
+			if(ItemEncontrado==0){
+				funcionalidades.add(listaArbol.get(i).getNombre());
+			}
+		}
+		ltbFuncionalidadesSeleccionados
+		.setModel(new ListModelList<String>(funcionalidades));
 	}
 
 	@Listen("onSelect = #treeGrupo")
@@ -226,6 +252,29 @@ public class CCrearGrupo extends CGeneral {
 				listaArbol.add(servicioArbol.buscar(ids.get(y)));
 			}
 			String nombreItem = String.valueOf(itemSeleccionado.getLabel());
+
+			if (itemSeleccionado.isSelected()) {
+
+				funcionalidades.add(nombreItem);
+
+				ltbFuncionalidadesSeleccionados
+						.setModel(new ListModelList<String>(funcionalidades));
+			} else {
+
+				List<Listitem> listaFuncionalidadesSeleccionadas = ltbFuncionalidadesSeleccionados
+						.getItems();
+				for (int i = 0; i < listaFuncionalidadesSeleccionadas.size(); i++) {
+					if (listaFuncionalidadesSeleccionadas.get(i).getLabel()
+							.equals(nombreItem)) {
+						ltbFuncionalidadesSeleccionados
+								.removeItemAt(listaFuncionalidadesSeleccionadas
+										.get(i).getIndex());
+					}
+				}
+				funcionalidades.remove(nombreItem);
+				ltbFuncionalidadesSeleccionados
+						.setModel(new ListModelList<String>(funcionalidades));
+			}
 			Arbol arbolItem = servicioArbol.buscarPorNombreArbol(nombreItem);
 			listaArbol.remove((int) (long) arbolItem.getId() - 1);
 			long temp = arbolItem.getHijo();
@@ -293,6 +342,7 @@ public class CCrearGrupo extends CGeneral {
 				}
 			}
 		}
+
 	}
 
 	@Listen("onClick = #btnGuardarGrupo")
@@ -322,8 +372,8 @@ public class CCrearGrupo extends CGeneral {
 			String nombre = txtNombreGrupo.getValue();
 			Grupo grupo1 = new Grupo(id, nombre, estatus, arboles);
 			servicioGrupo.guardarGrupo(grupo1);
-			Messagebox.show("Grupo registrado exitosamente", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			Messagebox.show("Grupo registrado exitosamente", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
 			cancelarGrupo();
 		} else {
 			Messagebox.show("Grupo no disponible", "Error", Messagebox.OK,
@@ -331,6 +381,7 @@ public class CCrearGrupo extends CGeneral {
 			cancelarGrupo();
 		}
 	}
+
 	@Listen("onClick = #btnCancelarGrupo")
 	public void cancelarGrupo() {
 		txtNombreGrupo.setValue("");
@@ -362,10 +413,16 @@ public class CCrearGrupo extends CGeneral {
 		}
 		id = 0;
 		treeGrupo.setVisible(true);
+		
+		funcionalidades.clear();
+		ltbFuncionalidadesSeleccionados
+		.setModel(new ListModelList<String>(funcionalidades));
+		
 	}
+
 	@Listen("onClick = #btnVisualizarFuncionalidades")
 	public void visualizarFuncionalidades() {
-		
+		llenarFuncionalidadesSeleccionadas();
 		treeGrupo.setVisible(true);
 		Treechildren treeChildren = treeGrupo.getTreechildren();
 		Collection<Treeitem> lista = treeChildren.getItems();
@@ -396,6 +453,7 @@ public class CCrearGrupo extends CGeneral {
 			}
 		}
 	}
+
 	@Listen("onClick = #btnEliminarGrupo")
 	public void eliminarGrupo() {
 		Grupo grupo = servicioGrupo.buscarGrupo(id);
@@ -403,6 +461,7 @@ public class CCrearGrupo extends CGeneral {
 		servicioGrupo.guardarGrupo(grupo);
 		cancelarGrupo();
 	}
+
 	@Listen("onClick = #btnCatalogoGrupo")
 	public void buscarItem() {
 		Window window = (Window) Executions.createComponents(
@@ -411,9 +470,6 @@ public class CCrearGrupo extends CGeneral {
 		catalogoGrupo.recibir("maestros/VCrearGrupo");
 	}
 
-	@Override
-	void inicializar(Component comp) {
-		// TODO Auto-generated method stub
-		
-	}
+
+
 }
