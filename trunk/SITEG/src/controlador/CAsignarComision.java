@@ -29,6 +29,7 @@ import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -162,7 +163,8 @@ public class CAsignarComision extends CGeneral {
 		}
 
 	}
-
+//Llena la lista de los profesores disponibles y los que ya han sido
+//asignados si es el caso
 	public void llenarListas() {
 
 		Programa programa = new Programa();
@@ -208,17 +210,17 @@ public class CAsignarComision extends CGeneral {
 		vistaRecibida = vista;
 
 	}
-
+	//busca la condicion de cantidad de miembros de la comision
+	// se debe guiar con el programa del estudiante
 	public int valorCondicion() {
 
 		Teg tegComision = new Teg();
 		int valor = 0;
 		tegComision = servicioTeg.buscarTeg(auxiliarId);
-		// se debe guiar con el programa del estudiante
+		
 		List<Estudiante> est = servicioEstudiante
 				.buscarEstudiantesDelTeg(tegComision);
 		auxIdPrograma = est.get(0).getPrograma().getId();
-
 		Lapso lapso = servicioLapso.buscarLapsoVigente();
 		Programa programa = servicioPrograma.buscar(auxIdPrograma);
 		List<CondicionPrograma> condicion = servicioCondicionPrograma
@@ -270,7 +272,7 @@ public class CAsignarComision extends CGeneral {
 			
 			
 			Messagebox.show(
-					"El numero de profesores en la comisión no es el correcto, debe ser: "
+					"El numero de profesores en la comisiï¿½n no es el correcto, debe ser: "
 							+ buscarCondicionVigenteEspecifica(
 									"Numero de integrantes de la comision", programa)
 									.getValor(), "Error", Messagebox.OK,
@@ -314,7 +316,7 @@ public class CAsignarComision extends CGeneral {
 
 		if (listProfesoresSeleccionados == null)
 			Messagebox
-					.show("Debe Seleccionar los profesores que conformarán la comisión evaluadora",
+					.show("Debe Seleccionar los profesores que conformaran la comision evaluadora",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		else {
 
@@ -323,7 +325,7 @@ public class CAsignarComision extends CGeneral {
 			if (valorItem > valorcondicion) {
 
 				Messagebox
-						.show("El número de profesores seleccionados excede al número de integrantes de la comisión evaluadora, ya que debe ser: "+ buscarCondicionVigenteEspecifica(
+						.show("El numero de profesores seleccionados excede al numero de integrantes de la comisiï¿½n evaluadora, ya que debe ser: "+ buscarCondicionVigenteEspecifica(
 								"Numero de integrantes de la comision", programa)
 								.getValor(), "Error", Messagebox.OK,
 				Messagebox.ERROR);
@@ -335,11 +337,19 @@ public class CAsignarComision extends CGeneral {
 				if (valorItem == valorcondicion) {
 
 					Messagebox
-							.show("El número de profesores que conformán la comisión evaluadora está completo, por favor seleccione el botón de finalizar",
+							.show("El numero de profesores que conformon la comision evaluadora esta completo, por favor seleccione el boton de finalizar",
 									"Advertencia", Messagebox.OK,
 									Messagebox.EXCLAMATION);
 
 				} else {
+					Messagebox.show(" Â¿Desea guardar los miembros de la comision?",
+							"Dialogo de confirmacion", Messagebox.OK
+									| Messagebox.CANCEL, Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+					
 					Set<Grupo> gruposUsuario = new HashSet<Grupo>();
 					Grupo grupo = servicioGrupo.BuscarPorNombre("ROLE_COMISION");
 					gruposUsuario.add(grupo);
@@ -361,7 +371,6 @@ public class CAsignarComision extends CGeneral {
 						profesoresSeleccionados.add(profesor);
 						Usuario user = servicioUsuario.buscarUsuarioPorNombre(profesor.getCedula());
 						if(user==null){
-						System.out.println(user);
 						Usuario usuario = new Usuario(0, profesor.getCedula(), passwordEncoder.encode(profesor.getCedula()), true, gruposUsuario, imagenUsuario);
 						servicioUsuario.guardar(usuario);
 						user = servicioUsuario.buscarUsuarioPorNombre(profesor.getCedula());
@@ -373,15 +382,7 @@ public class CAsignarComision extends CGeneral {
 						
 						List<Grupo> grupino = new ArrayList<Grupo>();
 						grupino = serviciogrupo.buscarGruposDelUsuario(user);
-						
-						
-						
-							Grupo grupo2 = servicioGrupo.BuscarPorNombre("ROLE_COMISION");
-						
-						
-							
-							
-							
+						Grupo grupo2 = servicioGrupo.BuscarPorNombre("ROLE_COMISION");
 							Set<Grupo> gruposU = new HashSet<Grupo>();
 							for (int f = 0; f<grupino.size(); ++f)
 							{
@@ -400,11 +401,13 @@ public class CAsignarComision extends CGeneral {
 					Teg tegSeleccionado = servicioTeg.buscarTeg(auxiliarId);
 					tegSeleccionado.setProfesores(profesoresSeleccionados);
 					servicioTeg.guardar(tegSeleccionado);
-					Messagebox
-							.show("Los datos de la comisión fueron guardados exitosamente, pero todavía faltan miembros",
-									"Información", Messagebox.OK,
+					Messagebox.show("Los datos de la comision fueron guardados exitosamente, pero todavia faltan miembros",
+									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 					salir();
+									}
+								}
+							});
 				}
 
 			}
@@ -417,7 +420,6 @@ public class CAsignarComision extends CGeneral {
 	@Listen("onClick = #btnFinalizarComision")
 	public void finalizarComision() {
 
-		System.out.println("entro en el boton finalizar");
 
 		int valorcondicion = valorCondicion();
 
@@ -425,7 +427,7 @@ public class CAsignarComision extends CGeneral {
 				.getSelectedItem();
 		if (listProfesoresSeleccionados == null)
 			Messagebox
-					.show("Debe Seleccionar los profesores que conformarán la comisión evaluadora",
+					.show("Debe Seleccionar los profesores que conformaran la comision evaluadora",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		else {
 
@@ -434,14 +436,20 @@ public class CAsignarComision extends CGeneral {
 			if (valorItem > valorcondicion) {
 
 				Messagebox
-						.show("El número de profesores seleccionados excede al número de integrantes de la comisión evaluadora para este programa",
+						.show("El numero de profesores seleccionados excede al numero de integrantes de la comision evaluadora para este programa",
 								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			} else {
 
 				if (valorItem == valorcondicion) {
-
-					Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
+					Messagebox.show("Â¿Desea finalizar la asignacion de la comision evaluadora?",
+							"Dialogo de confirmacion", Messagebox.OK
+									| Messagebox.CANCEL, Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+							Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
 					for (int i = 0; i < lsbProfesoresSeleccionados
 							.getItemCount(); i++) {
 						Profesor profesor = lsbProfesoresSeleccionados
@@ -453,14 +461,17 @@ public class CAsignarComision extends CGeneral {
 					tegSeleccionado.setProfesores(profesoresSeleccionados);
 					tegSeleccionado.setEstatus("Comision Asignada");
 					servicioTeg.guardar(tegSeleccionado);
-					Messagebox.show("Comisión asignada exitosamente",
-							"Información", Messagebox.OK,
+					Messagebox.show("Comision asignada exitosamente",
+							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
 					salir();
+									}
+								}
+							});
 				} else {
 
 					Messagebox
-							.show("El número de profesores seleccionados excede al número de integrantes de la comisión evaluadora para este programa",
+							.show("El numero de profesores seleccionados excede al numero de integrantes de la comision evaluadora para este programa",
 									"Error", Messagebox.OK, Messagebox.ERROR);
 
 				}
