@@ -2,6 +2,14 @@
 	height="650px" border="normal" closable="true"
 	apply="controlador.CContactanos">
 
+	<style dynamic="true">
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: none; color:none; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+	</style>
+
 	<style id="estilo">
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
@@ -24,7 +32,11 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+
+
 	</style>
+
+
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
