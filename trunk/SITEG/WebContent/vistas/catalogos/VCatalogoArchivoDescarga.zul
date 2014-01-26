@@ -8,7 +8,7 @@
 		<style src="/public/css/style.css" />
 
 		<listbox id="ltbArchivoDescarga" width="100%" mold="paging"
-			pageSize="10" emptyMessage="No hay archivos registrados">
+			pageSize="8" emptyMessage="No hay archivos registrados">
 			<auxhead sclass="category-center">
 				<auxheader colspan="1">
 					<image src="/public/imagenes/iconos/filtro.png" />

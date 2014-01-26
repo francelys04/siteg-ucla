@@ -38,6 +38,36 @@
 
 	<separator />
 	<separator />
+
+	<!-- Lista de popus -->
+	<popup id="pupProgramaDescarga">
+		<toolbarbutton label="Seleccione el programa" />
+	</popup>
+	<popup id="pupCatalogoDescarga">
+		<toolbarbutton
+			label="Presione aqui para ver la lista de archivos" />
+	</popup>
+	<popup id="pupNombreDescarga">
+		<toolbarbutton label="Ingrese aquí el nombre del archivo" />
+	</popup>
+	<popup id="pupDescripcionDescarga">
+		<toolbarbutton label="Ingrese aquí la descripcion del archivo" />
+	</popup>
+	<popup id="pupEliminarDescarga">
+		<toolbarbutton
+			label="Presione aqui para eliminar los datos del archivo" />
+	</popup>
+	<popup id="pupCancelarDescarga">
+		<toolbarbutton label="Presione aqui para limpiar los campos" />
+	</popup>
+	<popup id="pupGuardarDescarga">
+		<toolbarbutton
+			label="Presione aqui guardar los datos del archivo" />
+	</popup>
+	<!-- Fin de popus -->
+
+
+
 	<label value="(*) "
 		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
@@ -50,7 +80,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="520px"
+	<groupbox width="95%" height="395px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -60,25 +90,35 @@
 			</columns>
 			<rows>
 				<row>
-				
-
-						<hlayout>
+					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
 						<label value="Programa:"
-							style="margin-left:5px" />
-						</hlayout>
+							style="font-weight:bold" />
+					</hlayout>
+
+					<hbox>
+
 						<combobox id="cmbPrograma" autodrop="true"
-							style="margin-left:10px" width="200px" tabindex="12"
+							tooltip="pupProgramaDescarga" width="250px" tabindex="12"
 							readonly="true">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
 							</template>
 						</combobox>
-					</row>
-					<row>
+
+
+						<button id="btnCatalogoDescarga" sclass="btn"
+							tooltip="pupCatalogoDescarga" style="margin-left:20px"
+							image="/public/imagenes/iconos/catalogo.png" tabindex="14">
+						</button>
+
+					</hbox>
+
+				</row>
+				<row>
 
 					<hlayout>
 						<label value="*"
@@ -87,14 +127,16 @@
 						<label value="Nombre:" style="font-weight:bold" />
 					</hlayout>
 
-					<hlayout>
+					<hbox>
 
 						<textbox id="txtNombreArchivoDescarga"
-							width="150%" disabled="true" />
-					</hlayout>
-					<button id="btnArchivoDescarga" label="Examinar"
-						upload="true">
-					</button>
+							tooltip="pupNombreDescarga" width="290px" disabled="true" />
+
+						<button id="btnArchivoDescarga" label="Examinar"
+							style="margin-left:10px" upload="true">
+						</button>
+
+					</hbox>
 
 
 				</row>
@@ -103,16 +145,14 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Descripción:" style="font-weight:bold" />
+						<label value="Descripción:"
+							style="font-weight:bold" />
 					</hlayout>
 					<hlayout>
 						<textbox id="txtDescripcionArchivoDescarga"
-							rows="5" tabindex="2" cols="100" width="95%" />
+							tooltip="pupDescripcionDescarga" rows="5" tabindex="2" cols="100"
+							width="95%" />
 					</hlayout>
-					<button id="btnCatalogoDescarga"
-						sclass="btn" image="/public/imagenes/iconos/catalogo.png"
-						tabindex="14">
-					</button>
 				</row>
 			</rows>
 		</grid>
@@ -133,15 +173,15 @@
 
 
 						<button id="btnGuardarArchivoDescarga"
-							sclass="btn" label="Guardar"
+							tooltip="pupGuardarDescarga" sclass="btn" label="Guardar"
 							image="/public/imagenes/iconos/guardar.png" tabindex="13">
 						</button>
 						<button id="btnCancelarArchivoDescarga"
-							sclass="btn" label="Cancelar"
+							tooltip="pupCancelarDescarga" sclass="btn" label="Cancelar"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 						</button>
 						<button id="btnEliminarArchivoDescarga"
-							sclass="btn" label="Eliminar"
+							tooltip="pupEliminarDescarga" sclass="btn" label="Eliminar"
 							image="/public/imagenes/iconos/eliminar.png" tabindex="14"
 							disabled="true">
 						</button>

@@ -1,0 +1,42 @@
+<?page id="wdwCatalogoEnlace"  title="Catalogo Descarga" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Catalogo Enlace de Interes" border="normal" width="800px"
+		id="wdwCatalogoEnlace" apply="controlador.CCatalogoEnlaceInteres"
+		closable="true">
+
+		<style src="/public/css/bootstrap.css" />
+		<style src="/public/css/style.css" />
+
+		<listbox id="ltbEnlace" width="100%">
+
+			<auxhead sclass="category-center">
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						sclass="search-query" placeholder="Nombre"
+						id="txtNombreMostrarEnlace" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/public/imagenes/iconos/filtro.png" />
+					<textbox instant="true" width="80%"
+						sclass="search-query" placeholder="Url"
+						id="txtUrlMostrarEnlace" />
+				</auxheader>
+
+			</auxhead>
+			<listhead>
+				<listheader label="Nombre" align="center" />
+				<listheader label="Url" align="center" />
+			</listhead>
+
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.url}" />
+
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>

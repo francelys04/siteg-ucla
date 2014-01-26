@@ -130,6 +130,7 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 	//si no mapea los datos a lhacia las vista VArchivoDescarga
 	@Listen("onClick = #ltbArchivoDescarga")
 	public void descargarArchivo(){
+		try {
 		if(ltbArchivoDescarga.getItemCount()!=0){
 		if (encontrado==true) {
 			Listitem listItem = ltbArchivoDescarga.getSelectedItem();
@@ -150,7 +151,11 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 			
 			
 		}
-		}	
+		}
+		} catch (NullPointerException e) {
+
+			System.out.println("NullPointerException");
+		}
 	}
 	
 
