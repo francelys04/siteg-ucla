@@ -278,6 +278,17 @@ public class CReporteProfesorCargo extends CGeneral {
 		String ruta = filesys.getHomeDirectory().toString() + "/reporte.pdf";
 		JasperExportManager.exportReportToPdfFile(jasperPrint, ruta);
 		
-		System.out.println(ruta);
+		Messagebox.show("Su reporte fue guardado en: " + ruta,
+				"Información", Messagebox.OK,
+				Messagebox.INFORMATION);
+
+	}
+	@Listen("onClick = #btnSalirReporteProfesorCargo")
+	public void cancelarItem() {
+		cmbEstatus.setValue("");
+		cmbPrograma.setValue("");
+		cmbArea.setValue("");
+		cmbTematica.setValue("");;
+		
 	}
 }
