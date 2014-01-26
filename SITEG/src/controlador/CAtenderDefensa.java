@@ -89,6 +89,7 @@ public class CAtenderDefensa extends CGeneral {
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+		//Permite mapear los datos del catalogo a la vista Atender Defensa
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("catalogoSolicitudDefensa");
@@ -139,7 +140,7 @@ public class CAtenderDefensa extends CGeneral {
 							Messagebox.ERROR);
 			
 		}else{
-			Messagebox.show("Desea guardar los datos d ela defensa?",
+			Messagebox.show("¿Desea guardar los datos d ela defensa?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {

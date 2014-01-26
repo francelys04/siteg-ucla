@@ -112,7 +112,7 @@ public class CCargarProfesor extends CGeneral {
 				br.close();
 				fr.close();
 				Messagebox.show("Profesores registrados exitosamente",
-						"Información", Messagebox.OK, Messagebox.INFORMATION);
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 
 			} catch (Exception ex) {
 
@@ -126,7 +126,7 @@ public class CCargarProfesor extends CGeneral {
 
 		else {
 
-			Messagebox.show("Búsqueda de la lista de profesores cancelada", "Warning",
+			Messagebox.show("Busqueda de la lista de profesores cancelada", "Warning",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 
 		}

@@ -133,7 +133,7 @@ public class CCargarEstudiante extends CGeneral {
 				br.close();
 				fr.close();
 				Messagebox.show("Estudiantes registrados exitosamente",
-						"Información", Messagebox.OK, Messagebox.INFORMATION);
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 
 			} catch (Exception ex) {
 
@@ -147,7 +147,7 @@ public class CCargarEstudiante extends CGeneral {
 
 		else {
 
-			Messagebox.show("Búsqueda de la lista de estudiantes cancelada", "Warning",
+			Messagebox.show("Busqueda de la lista de estudiantes cancelada", "Warning",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 
 		}
