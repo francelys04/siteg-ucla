@@ -79,6 +79,42 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 
 	public List<Teg> findByTematicaAndFechaBetween(Tematica tematica,
 			Date fechaInicio, Date fechaFin);	
+	
+	
+/******************************   Querys para ordenar segun id tematica segun programa segun area ***********************************************/
+	
+	//Lista para ordenar los ids de las tematicas segun un programa  segun un estatus y fecha inicio y fecha fin
+	@Query("select teg.tematica.id from Teg teg where teg.estatus=?1 and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?2 ) and fecha between ?3 and ?4 Order by teg.tematica.id")
+	public List<Long> buscarUltimasTematicasProgramaAreaEstatus(String estatus,AreaInvestigacion area,Date fechaInicio,Date fechaFin);
+	
+
+/******************************   Querys para ordenar segun id tematica segun programa para todas las areas ***********************************************/
+	
+	//Lista para ordenar los ids de las tematicas segun un programa  por estatus y fecha inicio y fecha fin
+	@Query("select teg.tematica.id from Teg teg where teg.estatus=?1 and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?2)) and fecha between ?3 and ?4 Order by teg.tematica.id")
+	public List<Long> buscarUltimasTematicasProgramaEstatus(String estatus,Programa programa,Date fechaInicio,Date fechaFin);
+	
+
+	/*******************************   Querys para ordenar las ids tematicas para todos los programas *******************************/
+	
+	
+	//Lista para ordenar los ids de las tematicas para todos los programas por estatus  y fecha inicio y fecha fin
+	@Query("select teg.tematica.id from Teg teg where teg.estatus=?1 and fecha between ?2 and ?3 Order by teg.tematica.id")
+	public List<Long> buscarUltimasEstatus(String estatus,Date fechaInicio,Date fechaFin);	
+
+	
+	
+/*******************************  Querys con las 5 tematicas mas solicitadas segun sus estatus *********************************/
+	
+	@Query("select teg from Teg teg where teg.estatus=?1 and teg.tematica in ?2 and fecha between ?3 and ?4")
+	public List<Teg> buscarUltimasOrdenadasEstatus(String estatus,List<Tematica> tematicas,Date fechaInicio,Date fechaFin);
+
+	
+	
+	
+	
+	
+
 }
 
 

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RProyectosSolicitados" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="36ffbc72-cbd9-445b-a96c-f98bc807a7c7">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTematicasMasSolicitadas" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="36ffbc72-cbd9-445b-a96c-f98bc807a7c7">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="125"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="programaNombre" class="java.lang.String"/>
+	<parameter name="areaNombre" class="java.lang.String"/>
 	<field name="tematica.nombre" class="java.lang.String"/>
 	<field name="fechaInicio" class="java.lang.String"/>
 	<field name="fechaEntrega" class="java.lang.String"/>
@@ -41,11 +42,11 @@
 				<imageExpression><![CDATA["/reporte/logo CE.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="222" y="68" width="142" height="20" uuid="ea1f2c8d-9037-48f0-a7cc-f7e55957b511"/>
+				<reportElement x="188" y="63" width="197" height="20" uuid="ea1f2c8d-9037-48f0-a7cc-f7e55957b511"/>
 				<textElement textAlignment="Center">
 					<font size="14" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[Proyectos Solicitados]]></text>
+				<text><![CDATA[Tematicas mas Solicitadas]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -87,8 +88,8 @@
 				<text><![CDATA[Area:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="212" y="206" width="152" height="20" uuid="819817ed-367d-421f-ae48-a6fec3caca6e"/>
-				<text><![CDATA[Tematicas mas solicitadas]]></text>
+				<reportElement x="188" y="212" width="152" height="20" uuid="819817ed-367d-421f-ae48-a6fec3caca6e"/>
+				<text><![CDATA[Las 5 tematicas mas solicitadas]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="122" y="38" width="100" height="20" uuid="a38369d3-58ff-4adb-b228-57349c4b77c5"/>
@@ -129,10 +130,6 @@
 				</barPlot>
 			</stackedBarChart>
 			<textField>
-				<reportElement x="122" y="65" width="218" height="20" uuid="e840ff41-6201-4e4f-add5-660b32ac5202"/>
-				<textFieldExpression><![CDATA[$F{tematica.areaInvestigacion.nombre}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="122" y="88" width="100" height="20" uuid="b0498e07-f0fd-49ce-9220-3c40aa3c7b87"/>
 				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
 			</textField>
@@ -140,6 +137,10 @@
 				<reportElement x="12" y="88" width="100" height="20" uuid="78b2de1d-5d7f-4e56-9e13-28fdd47bee17"/>
 				<text><![CDATA[Estatus:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="122" y="63" width="100" height="20" uuid="3aea677b-39b9-45c7-96bc-0124eb887c26"/>
+				<textFieldExpression><![CDATA[$P{areaNombre}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
