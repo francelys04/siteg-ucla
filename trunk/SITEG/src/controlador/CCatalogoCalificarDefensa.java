@@ -62,7 +62,7 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 				.getCurrent().getAttribute("tegCatalogo");
 
 	}
-
+//busca los tegs de un profesor el cual el estatus sea defensa asignada
 	public List<Teg> buscar() {
 		List<Jurado> j = servicioj
 				.buscarTegDeProfesor(ObtenerUsuarioProfesor());
@@ -78,7 +78,7 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 		}
 		return t;
 	}
-
+//Permite hacer el filtrado en el catalogo
 	@Listen("onChange = #txtMostrarFechaCalificar,#txtMostrarTematicaCalificar,#txtMostrarAreaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,# txtMostrarApellidoTutorCalificar")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscar();
@@ -131,9 +131,10 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 		ltbCalificarDefensa.setModel(new ListModelList<Teg>(teg2));
 
 	}
-
+//permite mapear los datos a la vista calificar defensa
 	@Listen("onDoubleClick = #ltbCalificarDefensa")
 	public void mostrarDatosCatalogo() {
+		if(ltbCalificarDefensa.getItemCount()!=0){
 		Listitem listItem = ltbCalificarDefensa.getSelectedItem();
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -148,5 +149,5 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 		ventanarecibida.recibir("catalogos/VCatalogoCalificarDefensa");
 
 	}
-
+	}
 }

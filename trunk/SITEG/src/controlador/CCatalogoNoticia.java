@@ -46,7 +46,7 @@ public class CCatalogoNoticia extends CGeneral {
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-	
+	//Se llena el catalogo con las noticias
 		List<Noticia> noticia = servicioNoticia.buscarActivos();	
 		ltbNoticia.setModel(new ListModelList<Noticia>(noticia));
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -87,6 +87,7 @@ public class CCatalogoNoticia extends CGeneral {
 				Messagebox.show("No puede eliminarse deben haber minimo dos imagenes, registre una y elimine", "Informacion", Messagebox.OK, Messagebox.INFORMATION);
 			}
 			else{
+			if( ltbNoticia.getSelectedCount()!=0){
 			Listitem listItem = ltbNoticia.getSelectedItem();
 			Noticia descargaDatosCatalogo = (Noticia) listItem.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -97,6 +98,7 @@ public class CCatalogoNoticia extends CGeneral {
 			Executions.sendRedirect("/vistas/arbol.zul");
 			wdwCatalogoNoticia.onClose();
 			}
+		}
 		}
 
 	

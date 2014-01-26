@@ -76,12 +76,6 @@ public class CCatalogoAsignarComision extends CGeneral {
 	// programa del profesor que se encuentra loggeado
 	public List<Teg> buscarDatos() {
 
-//		Profesor profesor = ObtenerUsuarioProfesor();
-//		Programa programa = new Programa();
-//		programa = profesor.getPrograma();
-//
-//		List<Profesor> profesores = servicioProfesor
-//				.buscarProfesorDelPrograma(programa);
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		List<Teg> tegs = servicioTeg.BuscarProyectoRegistrado();
 
@@ -161,7 +155,7 @@ public class CCatalogoAsignarComision extends CGeneral {
 	//Metodo que permite mostrar los datos del catalogo
 	@Listen("onDoubleClick = #ltbProyectosRegistrados")
 	public void mostrarDatosCatalogo() {
-
+		if(ltbProyectosRegistrados.getItemCount()!=0){
 		Listitem listItem = ltbProyectosRegistrados.getSelectedItem();
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -176,7 +170,7 @@ public class CCatalogoAsignarComision extends CGeneral {
 		
 
 	}
-	
+	}
 	
 
 

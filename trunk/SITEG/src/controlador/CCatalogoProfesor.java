@@ -57,7 +57,7 @@ public class CCatalogoProfesor extends CGeneral {
 	void inicializar(Component comp) {
 
 		// TODO Auto-generated method stub
-
+		//Se llena el catalogo profesro con la lista de profesores activos
 		if(cmbCategoriaProfesor==null){
 			List<Profesor> profesores = servicioProfesor
 					.buscarActivos();
@@ -77,7 +77,7 @@ public class CCatalogoProfesor extends CGeneral {
 				variable2 = true;
 
 			} 
-//			else {
+
 				if (map.get("director") != null) {
 					System.out.println("director" + map.toString());
 					esDirector = true;
@@ -86,7 +86,7 @@ public class CCatalogoProfesor extends CGeneral {
 					ltbProfesor
 							.setModel(new ListModelList<Profesor>(profesores));
 				} 
-//			}
+
 		}else {
 					List<Profesor> profesores = servicioProfesor
 							.buscarActivos();
@@ -100,7 +100,7 @@ public class CCatalogoProfesor extends CGeneral {
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
-
+//permite filtrar los datos del catalogo porfesor
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCategoriaMostrarProfesor,#txtCorreoMostrarProfesor")
 	public void filtrarDatosCatalogo() {
 		if (variable2 == true) {
@@ -151,7 +151,7 @@ public class CCatalogoProfesor extends CGeneral {
 		ltbProfesor.setModel(new ListModelList<Profesor>(profesores2));
 
 	}
-
+//permite enviar los datos del profesor seleccionado a la vista recibida
 	@Listen("onDoubleClick = #ltbProfesor")
 	public void mostrarDatosCatalogo() {
 
@@ -161,7 +161,7 @@ public class CCatalogoProfesor extends CGeneral {
 				vistaRecibida = "maestros/VProfesor";
 
 			} else {
-
+				if( ltbProfesor.getSelectedCount()!=0){
 				Listitem listItem = ltbProfesor.getSelectedItem();
 				Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
 
@@ -178,11 +178,10 @@ public class CCatalogoProfesor extends CGeneral {
 				Executions.sendRedirect("/vistas/arbol.zul");
 				wdwCatalogoProfesor.onClose();
 			}
+			}
 		} catch (NullPointerException e) {
-
-			System.out.println("NullPointerException");
 		}
-
+		
 	}
-
+	
 }

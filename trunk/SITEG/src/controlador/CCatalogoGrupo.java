@@ -43,7 +43,7 @@ public class CCatalogoGrupo extends CGeneral {
 
 	@Override
 	void inicializar(Component comp) {
-
+		//Llena el catalogo con los grupos activos
 		List<Grupo> grupos = servicioGrupo.buscarActivos();
 		ltbGrupo.setModel(new ListModelList<Grupo>(grupos));
 	
@@ -54,7 +54,7 @@ public class CCatalogoGrupo extends CGeneral {
 		
 		System.out.println("Map"+map);
 	}
-
+	//permite filtrar los datos del catalogo grupo
 	@Listen("onChange = #txtNombreMostarGrupo")
 	public void filtrarDatosCatalogo() {
 		List<Grupo> grupos = servicioGrupo.buscarActivos();
@@ -82,9 +82,10 @@ public class CCatalogoGrupo extends CGeneral {
 		System.out.println("Recibir vista"+vista);
 
 	}
-
+//permite mapear los datos a la vista recibida
 	@Listen("onDoubleClick = #ltbGrupo")
 	public void mostrarDatosCatalogo() {
+		if(ltbGrupo.getItemCount()!=0){
 		Listitem listItem = ltbGrupo.getSelectedItem();
 		Grupo grupo = (Grupo) listItem.getValue();
 		Grupo grupo1=servicioGrupo.BuscarPorNombre(grupo.getNombre());
@@ -104,5 +105,5 @@ public class CCatalogoGrupo extends CGeneral {
 		wdwCatalogoGrupo.onClose();
 
 	}
-
+	}
 }

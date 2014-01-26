@@ -44,7 +44,7 @@ public class CCatalogoLapso extends CGeneral {
 	void inicializar(Component comp) {
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
-		// System.out.println(lapsos.get(0).getNombre());
+		//llena el catalogo con la lista de lapsos 
 		if (txtNombreLapso == null) {
 			ltbLapso.setModel(new ListModelList<Lapso>(lapsos));
 		}
@@ -86,7 +86,7 @@ public class CCatalogoLapso extends CGeneral {
 			vistaRecibida = "maestros/VLapsoAcademico";
 
 		} else {
-
+			if( ltbLapso.getSelectedCount()!=0){
 			Listitem listItem = ltbLapso.getSelectedItem();
 			Lapso lapsoDatosCatalogo = (Lapso) listItem.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -97,7 +97,7 @@ public class CCatalogoLapso extends CGeneral {
 			Executions.sendRedirect("/vistas/arbol.zul");
 			wdwCatalogoLapso.onClose();
 		}
-
+		}
 	}
 
 }

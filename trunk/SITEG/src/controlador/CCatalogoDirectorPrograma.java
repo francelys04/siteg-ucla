@@ -55,7 +55,7 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 		
 		
 		// TODO Auto-generated method stub
-				
+				//Llena la lista con los profesroes que no son direstores de programa
 			
 				if (cmbCategoriaProfesor == null) {
 					List<Profesor> profesores = servicioProfesor.buscarProfesoresSinPrograma();
@@ -89,7 +89,7 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 	{
 		vistaRecibida = vista;
 	}
-	
+	//permite filtrar los datos del catalogo
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor,#txtProgramaMostrarProfesor")
 	public void filtrarDatosCatalogo() {
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
@@ -134,16 +134,16 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 		ltbProfesor.setModel(new ListModelList<Profesor>(profesores2));
 
 	}
-
+	//permite mapear los datos a la vista recibida
 	@Listen("onDoubleClick = #ltbProfesor")
 	public void mostrarDatosCatalogo() {
-
+		
 		if (vistaRecibida == null) {
 
 			vistaRecibida = "maestros/VProfesor";
 
 		} else {
-		
+		if(ltbProfesor.getItemCount()!=0){
 		Listitem listItem = ltbProfesor.getSelectedItem();
 		Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
 		
@@ -160,7 +160,7 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwCatalogoProfesor.onClose();
 		}
-		
+		}
 	}
 	
 	
