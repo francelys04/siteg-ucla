@@ -46,10 +46,6 @@ public class CReporte extends CGeneral {
 
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
 	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
 	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
 	@Wire
