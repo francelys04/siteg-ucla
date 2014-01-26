@@ -45,6 +45,9 @@ public class Lapso {
 	private Set<ProgramaItem> programasItems;
 	
 	@OneToMany(mappedBy="lapso")
+	private Set<ProgramaRequisito> programasRequisitos;
+	
+	@OneToMany(mappedBy="lapso")
 	private Set<CondicionPrograma> programasLapsos;
 	
 	public Lapso(long id, String nombre, Date fechaInicial, Date fechaFinal,
@@ -132,6 +135,14 @@ public class Lapso {
 
 	public void setProgramasLapsos(Set<CondicionPrograma> programasLapsos) {
 		this.programasLapsos = programasLapsos;
+	}
+
+	public Set<ProgramaRequisito> getProgramasRequisitos() {
+		return programasRequisitos;
+	}
+
+	public void setProgramasRequisitos(Set<ProgramaRequisito> programasRequisitos) {
+		this.programasRequisitos = programasRequisitos;
 	}
 
 	
