@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -57,7 +58,7 @@ public class CProfesorTematicas extends CGeneral {
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-
+		//permite llenar los datos del catlago a la vista si el map es disferente de null
 		if (map != null) {
 			if ((String) map.get("cedula") != null) {
 
@@ -74,7 +75,7 @@ public class CProfesorTematicas extends CGeneral {
 		}
 
 	}
-
+	//permite ver la lista de profesores activos
 	@Listen("onClick = #btnCatalogoProfesorTematica")
 	public void buscarProfesor() {
 
@@ -85,7 +86,7 @@ public class CProfesorTematicas extends CGeneral {
 		catalogo.recibir("maestros/VProfesorTematica");
 
 	}
-
+	//permite mover una tematica de disponible a seleccionada
 	@Listen("onClick = #btnAgergarProfesorTematicas")
 	public void moverDerechaTematica() {
 
@@ -95,7 +96,7 @@ public class CProfesorTematicas extends CGeneral {
 		else
 			list1.setParent(lsbTematicasProfesorSeleccionadas);
 	}
-
+	//permite mover una tematica de seleccionada a disponible
 	@Listen("onClick = #btnRemoverProfesorTematicas")
 	public void moverIzquierdaArea() {
 		Listitem list2 = lsbTematicasProfesorSeleccionadas.getSelectedItem();
@@ -105,9 +106,17 @@ public class CProfesorTematicas extends CGeneral {
 		else
 			list2.setParent(lsbTematicasProfesorDisponibles);
 	}
-
+	//permite guardar la asignacion de tematicas a un profesor
 	@Listen("onClick = #btnGuardarProfesorTematicas")
 	public void guardar() {
+		if(lsbTematicasProfesorSeleccionadas.getItemCount()!=0){
+		Messagebox.show("¿Desea guardar configuracion?",
+				"Dialogo de confirmacion", Messagebox.OK
+						| Messagebox.CANCEL, Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt)
+							throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
 		Profesor profesor = servicioProfesor
 				.buscarProfesorPorCedula(txtCedulaProfesorTematica.getValue());
 
@@ -120,10 +129,23 @@ public class CProfesorTematicas extends CGeneral {
 
 		profesor.setTematicas(tematicasProfesor);
 		servicioProfesor.guardarProfesor(profesor);
-		alert("Configuraciones Guardadas");
 		limpiarCampos();
+		Messagebox.show(
+				"Configuraciones guardadas con exito",
+				"Informacion", Messagebox.OK,
+				Messagebox.INFORMATION);
 	}
-
+}
+});
+		}else{
+			Messagebox.show(
+					"Debe seleccionar al menos una tematica",
+					"Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+			
+		}
+	}
+//Limpia los campos
 	@Listen("onClick = #btnCancelarProfesorTematicas")
 	public void limpiarCampos() {
 		txtCedulaProfesorTematica.setValue("");
@@ -133,6 +155,7 @@ public class CProfesorTematicas extends CGeneral {
 		lsbTematicasProfesorSeleccionadas.getItems().clear();
 	}
 
+	//llena la lista de tematicas disponibles y seleccionadas
 	private void llenaListas() {
 
 		

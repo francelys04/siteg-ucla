@@ -1,5 +1,7 @@
 package controlador;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,13 +13,18 @@ import modelo.Condicion;
 import modelo.CondicionPrograma;
 import modelo.Defensa;
 import modelo.Estudiante;
+import modelo.Grupo;
 import modelo.Jurado;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
 import modelo.TipoJurado;
+import modelo.Usuario;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -27,6 +34,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -41,6 +49,7 @@ import configuracion.GeneradorBeans;
 
 import servicio.SCondicionPrograma;
 import servicio.SDefensa;
+import servicio.SGrupo;
 import servicio.SJurado;
 import servicio.STeg;
 import servicio.STipoJurado;
@@ -53,6 +62,7 @@ public class CAsignarJurado extends CGeneral {
 	SJurado servicioJurado = GeneradorBeans.getServicioJurado();
 	STipoJurado servicioTipoJurado = GeneradorBeans.getServicioTipoJurado();
 	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
+	SGrupo serviciogrupo = GeneradorBeans.getServicioGrupo();
 	@Wire
 	private Textbox txtProgramaAtenderDefensa;
 	@Wire
@@ -94,6 +104,15 @@ public class CAsignarJurado extends CGeneral {
 	long idDefensa = 0;
     private static Programa programa;
     private static int numeroIntegrantes;
+    @Wire
+	private Image imagenx;
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	private List<Profesor> profesores;
+	SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
+	private long id = 0;
+	private static long auxiliarId = 0;
+	private static long auxIdPrograma = 0;
+	public static int j;
     
     Jurado jurado = new Jurado(); 
 	@Override
@@ -180,7 +199,9 @@ public class CAsignarJurado extends CGeneral {
 		
 	}
 
-
+	//Metodo que permite guardar los integrantes del jurado sin finalizar
+	//es decir xi no ha llegado al maximo de miembros de la condicion
+	//por ese programa
 	@Listen("onClick = #btnAceptarDefensaMientrasTanto")
 	public void aceptarDefensa() {
 		Guardar();
@@ -188,7 +209,7 @@ public class CAsignarJurado extends CGeneral {
 	
 	//Metodo que permite finalizar la asignacion del jurado
 	@Listen("onClick = #btnAceptarDefensa")
-	public void aceptarDefensaDefinit1iva() {
+	public void aceptarDefensaDefinitiva() {
 		int valorcondicion = buscarCondicionVigenteEspecifica("Numero de integrantes del jurado", programa).getValor();
 		int valorItem = ltbJuradoSeleccionado.getItemCount();
 		if (valorItem != valorcondicion) {
@@ -211,10 +232,60 @@ public class CAsignarJurado extends CGeneral {
 					Messagebox.show("¿Desea finalizar la asignacion de jurado?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
-							new org.zkoss.zk.ui.event.EventListener() {
+							  new org.zkoss.zk.ui.event.EventListener() {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
+										
+										Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+										Grupo grupo = servicioGrupo.BuscarPorNombre("ROLE_JURADO");
+										gruposUsuario.add(grupo);
+										byte[] imagenUsuario = null;
+										URL url = getClass().getResource("/configuracion/usuario.png");
+										try {
+											imagenx.setContent(new AImage(url));
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										imagenUsuario = imagenx.getContent().getByteData();
+
+										Set<Profesor> profesorSeleccionado = new HashSet<Profesor>();
+										for (int k = 0; k < ltbJuradoSeleccionado
+												.getItemCount(); k++) {
+											Profesor profesor = ltbJuradoSeleccionado
+													.getItems().get(k).getValue();											
+											profesorSeleccionado.add(profesor);
+											Usuario user = servicioUsuario.buscarUsuarioPorNombre(profesor.getCedula());
+											if(user==null){
+											Usuario usuario = new Usuario(0, profesor.getCedula(), passwordEncoder.encode(profesor.getCedula()), true, gruposUsuario, imagenUsuario);
+											servicioUsuario.guardar(usuario);
+											user = servicioUsuario.buscarUsuarioPorNombre(jurado.getProfesor().getCedula());
+											profesor.setUsuario(user);
+											servicioProfesor.guardarProfesor(profesor);
+											}	
+											else
+											{
+											
+											List<Grupo> grupino = new ArrayList<Grupo>();
+											grupino = serviciogrupo.buscarGruposDelUsuario(user);
+											Grupo grupo2 = servicioGrupo.BuscarPorNombre("ROLE_JURADO");
+												Set<Grupo> gruposU = new HashSet<Grupo>();
+												for (int f = 0; f<grupino.size(); ++f)
+												{
+													Grupo g = grupino.get(f);
+													System.out.println(grupino.get(f).getNombre());
+													gruposU.add(g);
+												}
+												gruposU.add(grupo2);
+												
+												user.setGrupos(gruposU);
+												
+												servicioUsuario.guardar(user);
+											}
+										}
+										
+										
 										List<Jurado> jurados = new ArrayList<Jurado>();
 										Teg teg1 = servicioTeg.buscarTeg(idTeg);
 										long cedula1 =  Long.parseLong (cedula);

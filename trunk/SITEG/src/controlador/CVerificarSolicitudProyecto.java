@@ -115,8 +115,9 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		
 		
 
-
 		
+		//permite obteber los datos del teg seleccionado en el catalogo
+		//si el map es diferente de null
 		Selectors.wireComponents(comp, this, false);	
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("tegCatalogo");
@@ -148,7 +149,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		}
 
 	}
-	
+	//permite mover un requisito disponible a seleccionado
 	@Listen("onClick = #btnAgregarRequisitos")
 	public void moverDerechaRequisitos() {
 
@@ -159,7 +160,8 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 			list1.setParent(ltbRequisitosSeleccionadas);
 	}
 	
-	
+	//permite mover un requisito seleccionado a disponible si este no 
+	//esta guarda en base de datos
 	@Listen("onClick = #btnRemoverRequisitos")
 	public void moverIzquierdaRequisitos() {
 		Listitem list2 = ltbRequisitosSeleccionadas.getSelectedItem();		
@@ -172,7 +174,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 			list2.setParent(ltbRequisitosDisponibles);
 			}
 	}
-	
+	//limpia los campos
 	@Listen("onClick = #btnCancelar")
 	public void cancelarVerificacion() {
 		long auxId3 = auxId;
@@ -187,7 +189,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		txtObservacion.setValue("");
 	}
 	
-	
+	//permite guardar la verificacion de requisitos
 	@Listen("onClick = #btnGuardar")
 	public void GuardarVerificacion() {
 		if (ltbRequisitosSeleccionadas.getItems().size() ==0)
@@ -228,7 +230,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 			for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
 		            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
 		            valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), txtObservacion.getValue()));
-		            Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+		            Messagebox.show("Datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		   		 salir();  
 		   		
 				    	
@@ -250,7 +252,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		 for (int i = 0; i < ltbEstudiantesTeg.getItemCount(); i++) {
 	            Estudiante estudiante = ltbEstudiantesTeg.getItems().get(i).getValue();
 	            valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), txtObservacion.getValue()));
-	            Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+	            Messagebox.show("Datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 	   		 salir();  
 		 } 
 		}
@@ -261,7 +263,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		}
 		}
 
-
+	//llena la lista de requisitps disponibles y seleccionados
 	public void llenarRequisitos(long id, Teg teg){
 	
 		Lapso lapso = servicioLapso.buscarLapsoVigente();
@@ -277,7 +279,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 		numero = requisitosDerecha.size();
 		
 			}
-	
+	//permite salir y refrescar las vistas
 	private void salir(){
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;

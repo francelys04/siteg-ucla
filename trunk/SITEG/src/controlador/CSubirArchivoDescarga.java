@@ -80,11 +80,11 @@ public class CSubirArchivoDescarga extends CGeneral {
 			cmbPrograma.setModel(new ListModelList<Programa>(programa));
 
 		}
-		
+		//permite obtener los datos desde el catalogo si el map es diferente de null
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-
+		
 		if (map != null) {
 			if (map.get("id") != null) {
 
@@ -103,7 +103,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 		}
 		
 	}
-	
+	//permite subir el archivo
 	@Listen("onUpload = #btnArchivoDescarga")
 	public void subirArchivo(UploadEvent event){
 	
@@ -150,14 +150,14 @@ public class CSubirArchivoDescarga extends CGeneral {
 	
 	
 	}
-	
+	//permite guardar un archivo en la base de datos
 	@Listen("onClick = #btnGuardarArchivoDescarga")
 	public void guardarDescarga() {
 		if (archivo == null || txtNombreArchivoDescarga.getText().compareTo("")==0 || txtDescripcionArchivoDescarga.getText().compareTo("")==0 || cmbPrograma.getValue() == "") {
 			Messagebox.show("Debe completar los campos", "Error", Messagebox.OK, Messagebox.ERROR);
 		} 
 		else {
-			Messagebox.show("Desea guardar el archivo?",
+			Messagebox.show("¿Desea guardar el archivo?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -183,10 +183,10 @@ public class CSubirArchivoDescarga extends CGeneral {
 	
 		}
 }
-	
+	//Permite eliminar un archivo
 	@Listen("onClick = #btnEliminarArchivoDescarga") 
 	public void eliminarArchivo (){
-		Messagebox.show("Desea eliminar archivo?",
+		Messagebox.show("¿Desea eliminar archivo?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
@@ -206,7 +206,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 				});
 			}
 	
-	
+	//permite ver los la lista de archivos registrados
 	@Listen("onClick = #btnCatalogoDescarga") 
 		public void verCatalogo(){
 		CCatalogoArchivoDescarga cata = new controlador.CCatalogoArchivoDescarga();
@@ -215,12 +215,11 @@ public class CSubirArchivoDescarga extends CGeneral {
 				"/vistas/catalogos/VCatalogoArchivoDescarga.zul", null, null);
 		window.doModal();
 		CCatalogoItem catalogo = new CCatalogoItem();
-		//catalogo.recibir("maestros/VItem");
 	}
 	
 	
 	
-	
+//metodos para obtener el archivo
 
 public static byte[] toByteArray(InputStream is) throws SQLException,
 	IOException {
