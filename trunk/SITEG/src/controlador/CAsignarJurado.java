@@ -143,7 +143,7 @@ public class CAsignarJurado extends CGeneral {
 				txtProgramaAtenderDefensa.setValue(est.get(0).getPrograma().getNombre());
 				txtTituloAtenderDefensa.setValue(teg.getTitulo());
 				lblCondicionAtenderDefensa
-						.setValue("Recuerde que la cantidad de jurados es de:"
+						.setValue("Recuerde que la cantidad de integrantes del juarado es de: "
 								+ buscarCondicionVigenteEspecifica(
 										"Numero de integrantes del jurado", programa)
 										.getValor());
@@ -229,7 +229,7 @@ public class CAsignarJurado extends CGeneral {
 							"Error", Messagebox.OK, Messagebox.ERROR);
 				}
 				else{
-					Messagebox.show("Â¿Desea finalizar la asignacion de jurado?",
+					Messagebox.show("¿Desea finalizar la asignacion de jurado?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							  new org.zkoss.zk.ui.event.EventListener() {

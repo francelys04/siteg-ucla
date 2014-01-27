@@ -182,7 +182,7 @@ public class CRegistrarProyecto extends CGeneral {
 			} else {
 
 				Messagebox
-						.show("Para registrar un proyecto su solicitud debe ser aceptada",
+						.show("Para registrar un proyecto su solicitud de tutoria debe ser aceptada",
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 				wdwRegistrarProyecto.onClose();
@@ -208,7 +208,7 @@ public class CRegistrarProyecto extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show("Â¿Desea registrar el proyecto?",
+			Messagebox.show("¿Desea registrar el proyecto de trabajo especial de grado?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -249,7 +249,7 @@ public class CRegistrarProyecto extends CGeneral {
 								id = 0;
 								cancelarRegistroProyecto();
 								Messagebox.show(
-										"Proyecto registrado exitosamente",
+										"Proyecto de trabajo especial de grado registrado exitosamente",
 										"Informacion", Messagebox.OK,
 										Messagebox.INFORMATION);
 								wdwRegistrarProyecto.onClose();

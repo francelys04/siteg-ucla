@@ -274,7 +274,7 @@
 
 						<button id="btnFinalizarRegistrarRevision"
 							sclass="btn" label="Finalizar"
-							image="/public/imagenes/iconos/guardar.png" tabindex="13"
+							image="/public/imagenes/iconos/finalizar.png" tabindex="13"
 							tooltip="pupBtnFinalizar">
 						</button>
 

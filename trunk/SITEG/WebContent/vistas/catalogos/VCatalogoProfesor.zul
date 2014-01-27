@@ -1,4 +1,4 @@
-<window title="Catalogo Profesor" border="normal" width="795px"
+<window title="Catalogo Profesor" border="normal" width="850px"
 	id="wdwCatalogoProfesor" apply="controlador.CCatalogoProfesor"
 	closable="true">
 

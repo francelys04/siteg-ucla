@@ -149,7 +149,7 @@ public class CRegistrarTeg extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		}else {
-			Messagebox.show("Â¿Desea guardar los datos del Trabajo Especial de Grado?",
+			Messagebox.show("¿Desea guardar los datos del Trabajo Especial de Grado?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {

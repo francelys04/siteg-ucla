@@ -246,7 +246,7 @@
 						<label value="Correo:" style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtCorreoEstudiante" width="25%" maxlength="100" 
+					<textbox id="txtCorreoEstudiante" width="260px" maxlength="100" 
 						tabindex="11" tooltip="pupCorreoEstudiante" />
 				</row>
 

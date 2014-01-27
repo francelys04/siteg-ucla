@@ -71,7 +71,7 @@ public class CSolicitudTutoria extends CGeneral {
 	private static String vistaRecibida;
 	private static String estatusSolicitud;
 	private String[] mensaje = {
-			"Su Tutoria ha sido aprobada, le enviamos su usuario y contraseï¿½a",
+			"Su Tutoria ha sido aprobada, le enviamos su usuario y contrasena",
 			"Su Tutoria ha sido rechazada, por favor intente con otro tutor" };
 	
 	@Override
@@ -101,7 +101,7 @@ public class CSolicitudTutoria extends CGeneral {
 	//Metodo para aceptar la tutoria
 	@Listen("onClick = #btnAceptarTutoria")
 	public void aceptarTutoria() throws IOException{
-		Messagebox.show("Â¿Desea aceptar tutoria?",
+		Messagebox.show("¿Desea aceptar brindar la tutoria de este proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
@@ -135,7 +135,7 @@ public class CSolicitudTutoria extends CGeneral {
 			estudiante.setUsuario(user);
 			servicioEstudiante.guardar(estudiante);
 			}			
-			valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), mensaje[0]+" Usuario: "+user.getNombre()+"  "+"Contraseï¿½a: "+user.getNombre()));
+			valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), mensaje[0]+" Usuario: "+user.getNombre()+"  "+"Contrasena: "+user.getNombre()));
 		}
 		servicioTutoria.guardarSolicitud(solicitud);
 		confirmacion(valor);
@@ -147,7 +147,7 @@ public class CSolicitudTutoria extends CGeneral {
 	//Metodo para rechazar la tutoria
 	@Listen("onClick = #btnRechazarTutoria")
 	public void rechazarTutoria(){
-		Messagebox.show("Â¿Desea rechazar tutoria?",
+		Messagebox.show("¿Desea rechazar la tutoria de este proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
