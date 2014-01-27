@@ -37,7 +37,6 @@ import controlador.CCatalogoRegistrarFactibilidad;
 import controlador.CGeneral;
 
 public class CRegistrarFactibilidad extends CGeneral {
-	// CCatalogoFactibilidad catalogo = new CCatalogoFactibilidad();
 	SFactibilidad servicioFactibilidad = GeneradorBeans
 			.getServicioFactibilidad();
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
@@ -69,7 +68,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	@Wire
 	private Listbox ltbEstudianteRegistrarFactibilidad;
 	@Wire
-	private Listbox ltbComisi�nRegistrarFactibilidad;
+	private Listbox ltbComisionRegistrarFactibilidad;
 	@Wire
 	private Window wdwRegistrarFactibilidad;
 	@Wire
@@ -83,7 +82,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-
+		//permite cargar los datos del item seleccionado en el catalogo		
 		programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 
 		Selectors.wireComponents(comp, this, false);
@@ -143,10 +142,14 @@ public class CRegistrarFactibilidad extends CGeneral {
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwRegistrarFactibilidad.onClose();
 	}
-	
+	//Permite aceptar la factibilidad de un proyecto
 	@Listen("onClick = #btnAceptarRegistrarFactibilidad")
 	public void aceptarfactibilidad(){
-	
+		Messagebox.show("¿Desea aceptar factibilidad?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
 		
 		String estatus = "Proyecto Factible";
 		Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
@@ -159,13 +162,22 @@ public class CRegistrarFactibilidad extends CGeneral {
 		}
 		
 		
-		Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+		Messagebox.show("Datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		salir();
-		
+						}
+					}
+				});
+	
 	}
+	//Permite rechazar la factibilidad de un proyecto
 	@Listen("onClick = #btnRechazarRegistrarFactibilidad")
 	public void rechazarfactibilidad()
 	{
+		Messagebox.show("¿Desea rechazar factibilidad?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
 		String estatus = "Proyecto No Factible";
 		Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
 		teg2.setEstatus(estatus);
@@ -175,11 +187,15 @@ public class CRegistrarFactibilidad extends CGeneral {
 	        enviarEmailNotificacion(estudiante.getCorreoElectronico(), "Su Proyecto es no Factible");
 	        
 		}
-		Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+		Messagebox.show("Datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		salir();
+						}
+					}
+				});
+	}
 	}
 
 
 
 	
-}
+

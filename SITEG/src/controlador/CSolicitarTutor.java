@@ -38,6 +38,7 @@ import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -138,6 +139,15 @@ public class CSolicitarTutor extends CGeneral {
 	public static String combo2;
 	public static String descripcion;
 	public static long idcombo;
+	public static String estado;
+	public static String programa; 
+	public static String area;
+	public static String tematica;
+	public static String titulo;
+	public static String cedulaProfesor;
+	public static Date fecha;
+	
+	
 	private static List<Estudiante> EstudiantesColocados = new ArrayList<Estudiante>();
 
 	List<Estudiante> gridEstudiante = new ArrayList<Estudiante>();
@@ -210,7 +220,8 @@ public class CSolicitarTutor extends CGeneral {
 		txtCedulaEstudiante.setValue("");
 
 	}
-
+	//se activa el combo areas si selecciona un programa
+	//obteniendo el programa seleccionado 
 	@Listen("onSelect = #cmbProgramaSolicitud")
 	public void areaSolicitud() {
 		cmbAreaSolicitud.setValue("");
@@ -228,7 +239,8 @@ public class CSolicitarTutor extends CGeneral {
 
 
 	}
-
+	//se activa el combo tematicas si selecciona un area
+	//obteniendo el area seleccionada 
 	@Listen("onSelect = #cmbAreaSolicitud")
 	public void tematicaSolicitud() {
 
@@ -258,6 +270,7 @@ public class CSolicitarTutor extends CGeneral {
 		return a;
 	}
 
+	//permite ver la lista de profesores disponibles
 	@Listen("onClick = #btnCatalogoProfesorArea")
 	public void buscarProfesor() {
 
@@ -274,13 +287,13 @@ public class CSolicitarTutor extends CGeneral {
 
 		if (combo.compareTo("") == 0) {
 			
-			Messagebox.show("Debe Elegir el Programa", "Advertencia", Messagebox.OK,
+			Messagebox.show("Debe elegir el programa", "Advertencia", Messagebox.OK,
 					Messagebox.EXCLAMATION);
 		}
 
 		else if (combo2.compareTo("") == 0) {
 			
-			Messagebox.show("Debe Elegir la Tematica", "Advertencia", Messagebox.OK,
+			Messagebox.show("Debe elegir la tematica", "Advertencia", Messagebox.OK,
 					Messagebox.EXCLAMATION);
 		}
 
@@ -298,17 +311,17 @@ public class CSolicitarTutor extends CGeneral {
 		}
 
 	}
-
+	//Permite realizar una peticion de tutoria
 	@Listen("onClick = #btnEnviarSolicitudtutoria")
 	public void enviarSolicitud() {
 
-		Date fecha = db1.getValue();
-		String estado = "Por Revisar";
-		String programa = cmbProgramaSolicitud.getValue();
-		String area = cmbAreaSolicitud.getValue();
-		String tematica = cmbTematicaSolicitud.getValue();
-		String titulo = txtTituloSolicitud.getValue();
-		String cedulaProfesor = txtCedulaProfesor.getValue();
+		fecha = db1.getValue();
+		estado = "Por Revisar";
+		programa = cmbProgramaSolicitud.getValue();
+		area = cmbAreaSolicitud.getValue();
+		tematica = cmbTematicaSolicitud.getValue();
+		titulo = txtTituloSolicitud.getValue();
+		cedulaProfesor = txtCedulaProfesor.getValue();
 		String nombreProfesor = txtNombreProfesor.getValue();
 		String apellidoProfesor = txtApellidoProfesor.getValue();
 		String correoProfesor = txtCorreoProfesor.getValue();
@@ -325,9 +338,9 @@ public class CSolicitarTutor extends CGeneral {
 			Messagebox.show("No hay estudiantes agregados", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 		} else {
-			if (programa == "Seleccione una Opción"
-					|| area == "Seleccione una Opción"
-					|| tematica == "Seleccione una Opción" || titulo == ""
+			if (programa == "Seleccione una Opcion"
+					|| area == "Seleccione una Opcion"
+					|| tematica == "Seleccione una Opcion" || titulo == ""
 					|| cedulaProfesor == "" || nombreProfesor == ""
 					|| apellidoProfesor == "" || correoProfesor == "") {
 				Messagebox.show("Debes completar todos los campos", "Error",
@@ -337,7 +350,7 @@ public class CSolicitarTutor extends CGeneral {
 						.buscarProfesorPorCedula(cedulaProfesor);
 
 				if (profesor == null) {
-					Messagebox.show("El Profesor no Existe", "Advertencia",
+					Messagebox.show("El profesor no existe", "Advertencia",
 							Messagebox.OK, Messagebox.EXCLAMATION);
 				} else {
 
@@ -348,12 +361,21 @@ public class CSolicitarTutor extends CGeneral {
 					if (teg2.size() >= buscarCondicionVigenteEspecifica(
 							nombre2, pruebaCondicion.getPrograma()).getValor()) {
 						Messagebox
-								.show("El Profesor ya tiene un maximo de proyectos asignados",
+								.show("El profesor ya tiene un maximo de proyectos asignados",
 										"Advertencia", Messagebox.OK,
 										Messagebox.EXCLAMATION);
 					} else {
+						Messagebox.show("Â¿Desea enviar solicitud de tutoria?",
+								"Dialogo de confirmacion", Messagebox.OK
+										| Messagebox.CANCEL, Messagebox.QUESTION,
+								new org.zkoss.zk.ui.event.EventListener() {
+									public void onEvent(Event evt)
+											throws InterruptedException {
+										if (evt.getName().equals("onOK")) {
 						Tematica tematica2 = servicioTematica
 								.buscarTematicaPorNombre(tematica);
+						Profesor profesor = servicioProfesor
+								.buscarProfesorPorCedula(cedulaProfesor);
 
 						Set<Estudiante> estudiante2 = new HashSet<Estudiante>();
 						for (int i = 0; i < ltbEstudiantes.getItemCount(); i++) {
@@ -368,16 +390,19 @@ public class CSolicitarTutor extends CGeneral {
 
 						servicioSolicitarTutor.guardarSolicitud(solicitud2);
 						enviarEmailNotificacion();
-						Messagebox.show("Su Solicitud ha sido enviada",
-								"Información", Messagebox.OK,
+						Messagebox.show("Su solicitud ha sido enviada exitosamente",
+								"Informacion", Messagebox.OK,
 								Messagebox.INFORMATION);
 						wdwSolicitarTutoria.onClose();
+										}
+									}
+								});
 					}
 				}
 			}
 		}
 	}
-
+	//limpia todos los campos de la vista
 	@Listen("onClick = #btnCancelarSolicitudTutoria")
 	public void cancelarSolicitud() {
 		id = 0;
@@ -401,7 +426,7 @@ public class CSolicitarTutor extends CGeneral {
 		cmbProgramaSolicitud.setModel(new ListModelList<Programa>(programas));
 
 	}
-
+	//permite agrgar un estudiante a la vista
 	@Listen("onClick = #btnAgregarEstudiante")
 	public void AgregarEstudiante() {
 		String cedulaEstudiante = txtCedulaEstudiante.getValue();
@@ -409,14 +434,14 @@ public class CSolicitarTutor extends CGeneral {
 		int tamano = gridEstudiante.size();
 
 		if (cedulaEstudiante == "") {
-			Messagebox.show("Debes colocar la cedula", "Advertencia",
+			Messagebox.show("Debe ingresar su cedula", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 		} else {
 			if (tamano == 0) {
 				Estudiante estudiante = servicioEstudiante
 						.buscarEstudiante(cedulaEstudiante);
 				if (estudiante == null) {
-					Messagebox.show("Debes estar Previamente Registrado",
+					Messagebox.show("Debe estar previamente Registrado",
 							"Advertencia", Messagebox.OK,
 							Messagebox.EXCLAMATION);
 				} else {
@@ -426,19 +451,19 @@ public class CSolicitarTutor extends CGeneral {
 					SolicitudTutoria solicitudAceptada = servicioSolicitarTutor
 							.buscarSolicitudAceptadaEstudiante(estudiante);
 					if (solicitud != null) {
-						Messagebox.show("Ya tienes una Solicitud Por Revisar",
+						Messagebox.show("Ya tiene una solicitud por revisar",
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 					} else {
 						if (solicitudAceptada != null) {
-							Messagebox.show("Ya tienes una Solicitud Aceptada",
+							Messagebox.show("Ya tiene una solicitud aceptada",
 									"Advertencia", Messagebox.OK,
 									Messagebox.EXCLAMATION);
 						} else {
 							List<Teg> teg = servicioTeg
 									.buscarTegPorEstudiante(estudiante);
 							if (teg.size() > 0) {
-								Messagebox.show("Ya Tienes Un TEG en Proceso",
+								Messagebox.show("Ya tiene un TEG en proceso",
 										"Advertencia", Messagebox.OK,
 										Messagebox.EXCLAMATION);
 							} else
@@ -447,7 +472,7 @@ public class CSolicitarTutor extends CGeneral {
 							if (cmbProgramaSolicitud.getValue().compareTo(
 									estudiante.getPrograma().getNombre()) != 0) {
 								Messagebox
-										.show("Debe Elejir el programa al que pertenece",
+										.show("Debe elegir el programa al que pertenece",
 												"Advertencia", Messagebox.OK,
 												Messagebox.EXCLAMATION);
 							} else {
@@ -465,7 +490,7 @@ public class CSolicitarTutor extends CGeneral {
 				Estudiante estudiante2 = servicioEstudiante
 						.buscarEstudiante(cedulaEstudiante);
 				if (estudiante2 == null) {
-					Messagebox.show("Debes estar Previamente Registrado",
+					Messagebox.show("Debe estar previamente registrado",
 							"Advertencia", Messagebox.OK,
 							Messagebox.EXCLAMATION);
 				} else {
@@ -474,19 +499,19 @@ public class CSolicitarTutor extends CGeneral {
 					SolicitudTutoria solicitudAceptada = servicioSolicitarTutor
 							.buscarSolicitudAceptadaEstudiante(estudiante2);
 					if (solicitud != null) {
-						Messagebox.show("Ya tienes una Solicitud Pendiente",
+						Messagebox.show("Ya tiene una solicitud pendiente",
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 					} else {
 						if (solicitudAceptada != null) {
-							Messagebox.show("Ya tienes una Solicitud Aceptada",
+							Messagebox.show("Ya tiene una solicitud aceptada",
 									"Advertencia", Messagebox.OK,
 									Messagebox.EXCLAMATION);
 						} else {
 							List<Teg> teg = servicioTeg
 									.buscarTegPorEstudiante(estudiante2);
 							if (teg.size() > 0) {
-								Messagebox.show("Ya tienes un TEG en proceso",
+								Messagebox.show("Ya tiene un TEG en proceso",
 										"Advertencia", Messagebox.OK,
 										Messagebox.EXCLAMATION);
 							} else {
@@ -509,7 +534,7 @@ public class CSolicitarTutor extends CGeneral {
 															estudiante2
 																	.getPrograma())
 															.getValor()
-													+ " Estudiantes por proyecto",
+													+ " estudiantes por proyecto",
 													"Advertencia",
 													Messagebox.OK,
 													Messagebox.EXCLAMATION);
@@ -522,73 +547,23 @@ public class CSolicitarTutor extends CGeneral {
 		}
 
 	}
-
-	private boolean enviarEmailNotificacion() {
-		try {
-
-			for (int i = 0; i < ltbEstudiantes.getItemCount(); i++) {
-				Estudiante estudiante = ltbEstudiantes.getItems().get(i)
-						.getValue();
-				Profesor profesor = servicioProfesor
-						.buscarProfesorPorCedula(txtCedulaProfesor.getValue());
-
-				// Propiedades de la conexion
-				Properties props = new Properties();
-				props.setProperty("mail.smtp.host", "smtp.gmail.com");
-				props.setProperty("mail.smtp.starttls.enable", "true");
-				props.setProperty("mail.smtp.port", "587");
-				props.setProperty("mail.smtp.auth", "true");
-
-				Session session = Session.getDefaultInstance(props);
-				// Recoger los datos
-				String asunto = "Notificacion de SITEG";
-				String remitente = "siteg.ucla@gmail.com";
-				String contrasena = "Equipo.2";
-				String destino = profesor.getCorreoElectronico();
-				String mensaje = " Solicitud de tutoria \n\n " + "Estudiante: "
-						+ estudiante.getNombre() + " , "
-						+ estudiante.getApellido()
-						+ "\n\n con Titulo de Proyecto: "
-						+ txtTituloSolicitud.getValue();
-
-				// Obtenemos los destinatarios
-				String destinos[] = destino.split(",");
-
-				// Construimos el mensaje
-				MimeMessage message = new MimeMessage(session);
-
-				message.setFrom(new InternetAddress(remitente));
-
-				// Forma 3
-				Address[] receptores = new Address[destinos.length];
-				int j = 0;
-				while (j < destinos.length) {
-					receptores[j] = new InternetAddress(destinos[j]);
-					j++;
-				}
-
-				// receptores.
-				message.addRecipients(Message.RecipientType.TO, receptores);
-				message.setSubject(asunto);
-				message.setText(mensaje);
-
-				// Lo enviamos.
-				Transport t = session.getTransport("smtp");
-				t.connect(remitente, contrasena);
-				t.sendMessage(message,
-						message.getRecipients(Message.RecipientType.TO));
-
-				// Cierre de la conexion.
-				t.close();
-			}
-			return true;
-		}
-
-		catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-
+	//enviar email al profesor
+	private void enviarEmailNotificacion() {
+	for (int i = 0; i < ltbEstudiantes.getItemCount(); i++) {
+			Estudiante estudiante = ltbEstudiantes.getItems().get(i)
+					.getValue();
+			Profesor profesor = servicioProfesor
+					.buscarProfesorPorCedula(txtCedulaProfesor.getValue());
+			String mensaje = " Solicitud de tutoria \n\n " + "Estudiante: "
+					+ estudiante.getNombre() + " , "
+					+ estudiante.getApellido()
+					+ "\n\n con Titulo de Proyecto: "
+					+ txtTituloSolicitud.getValue();
+	
+	enviarEmailNotificacion(estudiante.getCorreoElectronico(), mensaje);
+	
+	
 	}
 
+}
 }

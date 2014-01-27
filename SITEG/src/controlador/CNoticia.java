@@ -16,6 +16,7 @@ import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -67,13 +68,13 @@ public class CNoticia extends CGeneral {
 	 
 	
 	/* Metodo para inicializar componentes al momento que se ejecuta las vistas
-	  tanto VDescarga como VCatalogoDescarga*/
+	  tanto VDescarga como VCatalogoNoticia*/
 	
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		/*Listado de todos las Descargas que se encuentran activas, cuyo
-		 * estatus=true con el servicioDescarga mediante el metodo buscarActivos
+		/*Listado de todos las Noticias que se encuentran activas, cuyo
+		 * estatus=true con el servicioNoticia mediante el metodo buscarActivos
 		 */
 
 	
@@ -81,14 +82,14 @@ public class CNoticia extends CGeneral {
 
 		/*
 		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item de la vista VDescarga
+		 * seleccionar un item de la vista VNoticia
 		 */
 	
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("noticiaCatalogo");
 		/*
-		 * Validacion para vaciar la informacion del VDescarga a la vista
-		 * VDescarga.zul si la varible map tiene algun dato contenido
+		 * Validacion para vaciar la informacion del VNoticia a la vista
+		 * VNoticiaa.zul si la varible map tiene algun dato contenido
 		 */
 		if (map != null) {
 			if ( map.get("id") != null) {
@@ -115,7 +116,7 @@ public class CNoticia extends CGeneral {
 		
 	}
 
-	//Aca se muestra el catalogo de las Descarga Registradas
+	//Aca se muestra el catalogo de las Noticias Registradas
 	@Listen("onClick = #btnCatalogoNoticia")
 	public void buscarDescarga() {
 
@@ -124,13 +125,18 @@ public class CNoticia extends CGeneral {
 		window.doModal();
 	}
 	
-	//Aca se guardan las Descargas
+	//Aca se guardan las Noticias
 	@Listen("onClick = #btnGuardarNoticia")
 	public void guardarDescarga() {
 		List <Noticia> noticia = servicioNoticia.buscarActivos();
 		if(noticia.size() == 3){
 			Messagebox.show("Ya existen tres noticias debe eliminar una","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		}else{
+			Messagebox.show("¿Desea guardar la noticia?",
+					"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+					Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt) throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
 		String nombre = txtNombreNoticia.getValue();
 		String descripcion = txtDescripcionNoticia.getValue();
 		Boolean estatus = true;
@@ -141,18 +147,28 @@ public class CNoticia extends CGeneral {
 		servicioNoticia.guardar(noticia1);
 		cancelarNoticia();
 		Messagebox.show("Noticia resgistrada satisfactoriamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
-	
+							}
+						}
+					});
 		}
 	}
 
-	//Aca se eliminan logicamente las Descarga
+	//Aca se eliminan logicamente las Noticias
 	@Listen("onClick = #btnEliminarNoticia")
-	public void eliminarNoticia() {		
+	public void eliminarNoticia() {	
+		Messagebox.show("¿Desea eliminar la noticia?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
 		Noticia noticia = servicioNoticia.buscarNoticia(id);
 		noticia.setEstatus(false);
 		servicioNoticia.guardar(noticia);
 		cancelarNoticia();
-		alert("Descarga Eliminada");
+		Messagebox.show("Noticia eliminada satisfactoriamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+						}
+					}
+				});
 	}
 
 	//Aca se mandan a limpiar los campos de textos de la vista

@@ -98,7 +98,8 @@ public class CRegistrarTeg extends CGeneral {
 		Teg tegEstudiante = servicioTeg
 				.buscarTegEstudiantePorEstatus(estudiante);
 		
-		//verfica el estado actual del TEG
+		//verifica el estado actual del TEG
+		//y lleno los datos del teg del estudiante en la vista
 		try {
 			if (tegEstudiante == null) {
 
@@ -148,8 +149,8 @@ public class CRegistrarTeg extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		}else {
-			Messagebox.show("�Desea guardar los datos del Trabajo Especial de Grado?",
-					"Dialogo de confirmaci�n", Messagebox.OK
+			Messagebox.show("¿Desea guardar los datos del Trabajo Especial de Grado?",
+					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -170,7 +171,7 @@ public class CRegistrarTeg extends CGeneral {
 								cancelarRegistroTeg();
 								Messagebox.show(
 										"Trabajo Especial de Grado registrado exitosamente",
-										"Informaci�n", Messagebox.OK,
+										"Informacion", Messagebox.OK,
 										Messagebox.INFORMATION);
 								wdwRegistrarTeg.onClose();
 								
