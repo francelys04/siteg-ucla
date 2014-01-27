@@ -20,7 +20,7 @@ public class ItemEvaluacion {
 	@Column(name = "nombre", length = 100)
 	private String nombre;
 	
-	@Column(name = "descripcion", length = 500)
+	@Column(name = "descripcion", length = 600)
 	private String descripcion;
 	
 	@Column(name = "tipo", length = 100)

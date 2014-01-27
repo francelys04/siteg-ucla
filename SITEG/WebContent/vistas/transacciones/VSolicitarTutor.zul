@@ -6,8 +6,8 @@
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: none; color:none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 	</style>
 
@@ -15,8 +15,8 @@
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: white;color: none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
@@ -33,6 +33,9 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
+
 
 	</style>
 
@@ -45,14 +48,14 @@
 		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
 	<label value="Campos Obligatorios"
-		style="font-weight:bold;color:rgb(99, 99, 99)">
+		style="font-weight:bold;color: rgb(0, 84, 122)">
 	</label>
 	<separator />
 	<separator />
 
 	<div align="right">
 		<label value="Fecha:"
-			style="margin-right:10px;font-weight:bold;color:rgb(99, 99, 99)">
+			style="margin-right:10px;font-weight:bold;color: rgb(0, 84, 122)">
 		</label>
 		<datebox id="db1" cols="12" style="margin-right:40px"
 			width="120px" disabled="true" format="short"
@@ -86,8 +89,8 @@
 						</hlayout>
 
 						<combobox id="cmbProgramaSolicitud"
-							width="180px" readonly="true" style="margin-left:60px"
-							tabindex="10">
+							width="220px" readonly="true" style="margin-left:30px"
+							tabindex="1">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									value="${each.id}" id="${each.id}" />
@@ -107,7 +110,7 @@
 						</hlayout>
 
 						<combobox id="cmbAreaSolicitud" readonly="true"
-							width="170px" style="margin-left:90px" tabindex="10">
+							width="170px" style="margin-left:60px" tabindex="2">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -123,8 +126,8 @@
 						</hlayout>
 
 						<combobox id="cmbTematicaSolicitud"
-							readonly="true" width="175px" tabindex="10"
-							style="margin-left:25px">
+							readonly="true" width="230px" tabindex="3"
+							style="margin-left:15px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -144,7 +147,7 @@
 
 				<row>
 					<textbox id="txtTituloSolicitud" width="590px"
-						rows="3" cols="100" />
+						tabindex="4" rows="3" cols="100" />
 				</row>
 
 
@@ -180,10 +183,10 @@
 
 								<hbox>
 									<textbox id="txtCedulaEstudiante"
-										width="140px" />
+										tabindex="5" width="140px" />
 
 									<button id="btnAgregarEstudiante"
-										sclass="btn" style="margin-left:10px"
+										tabindex="6" sclass="btn" style="margin-left:10px"
 										image="public/imagenes/iconos/agregar.png">
 									</button>
 
@@ -276,10 +279,10 @@
 								<hbox>
 
 									<textbox id="txtCedulaProfesor"
-										width="100px" />
+										tabindex="7" width="100px" />
 
 									<button id="btnCatalogoProfesorArea"
-										sclass="btn" style="margin-left:10px"
+										tabindex="8" sclass="btn" style="margin-left:10px"
 										image="public/imagenes/iconos/catalogo.png">
 									</button>
 
@@ -296,7 +299,7 @@
 
 								<hbox>
 									<textbox id="txtNombreProfesor"
-										width="160px" tabindex="2" />
+										width="160px" tabindex="9" />
 
 									<hlayout>
 										<label value="*"
@@ -306,7 +309,7 @@
 									</hlayout>
 
 									<textbox id="txtApellidoProfesor"
-										width="160px" style="margin-left:10px" tabindex="3" />
+										width="160px" style="margin-left:10px" tabindex="10" />
 								</hbox>
 							</row>
 
@@ -346,11 +349,11 @@
 
 						<button id="btnEnviarSolicitudtutoria"
 							label="Enviar" sclass="btn"
-							image="public/imagenes/iconos/enviar.png" tabindex="13">
+							image="public/imagenes/iconos/enviar.png" tabindex="12">
 						</button>
 						<button id="btnCancelarSolicitudTutoria"
 							sclass="btn" label="Cancelar"
-							image="public/imagenes/iconos/limpiar.png" tabindex="14">
+							image="public/imagenes/iconos/limpiar.png" tabindex="13">
 						</button>
 						<separator />
 
