@@ -1,5 +1,6 @@
 package controlador;
 
+import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
@@ -34,6 +35,7 @@ import servicio.STegEstatus;
 import servicio.STematica;
 import servicio.SUsuario;
 import configuracion.GeneradorBeans;
+import java.net.URL;
 
 @Controller
 public abstract class CGeneral extends SelectorComposer<Component> {
@@ -149,5 +151,16 @@ catch (Exception e) {
 	return false;
    }
   }
+
+	/**
+	 * 
+	 * @return El directorio actual de trabajo
+	 */
+	public static String obtenerDirectorio() {
+		URL rutaURL = CGeneral.class.getProtectionDomain()
+				.getCodeSource().getLocation();
+		String ruta = rutaURL.getPath();
+		return "/"+ruta.substring(1, ruta.indexOf("SITEG"));
+	}
 }
 
