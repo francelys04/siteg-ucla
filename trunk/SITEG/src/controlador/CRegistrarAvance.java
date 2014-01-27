@@ -146,17 +146,17 @@ public class CRegistrarAvance extends CGeneral {
 		wdwRegistrarAvance.onClose();
 	}
 
-	@Listen("onClick = #btnGuardarRegistrarAvance")
+	@Listen("onClick = #btnAgregarObservacionrAvance")
 	public void guardarAvance() {
 
 		if ((txtObservacionRegistrarAvance.getText().compareTo("") == 0)) {
 			Messagebox
-					.show("Debe agregar las observaciones respectivas sobre el avance del Trabajo Especial de Grado",
+					.show("Debe agregar las observaciones respectivas del avance del Trabajo Especial de Grado",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Messagebox.show(
 					"¿Desea guardar el avance del trabajo Especial de Grado?",
-					"Dialogo de confirmación", Messagebox.OK
+					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -193,7 +193,7 @@ public class CRegistrarAvance extends CGeneral {
 	public void finalizarRegistrarAvance() {
 
 		Messagebox.show("¿Desea finalizar los avances del proyecto?",
-				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
@@ -203,7 +203,7 @@ public class CRegistrarAvance extends CGeneral {
 							servicioTeg.guardar(tegAvance);
 							Messagebox
 									.show("Avances del Trabajo Especial de Grado finalizados exitosamente",
-											"Información", Messagebox.OK, Messagebox.INFORMATION);
+											"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 							salir();
 						}
 					}

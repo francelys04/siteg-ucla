@@ -54,8 +54,9 @@
 		<toolbarbutton
 			label="Presione aquí para visualizar el campo de observacion" />
 	</popup>
-	<popup id="pupBtnGuardar">
-		<toolbarbutton label="Presione aquí para guardar los avances" />
+	<popup id="pupAgregarObservacion">
+		<toolbarbutton
+			label="Presione aquí para agregar observaciones del avance" />
 	</popup>
 	<popup id="pupBtnFinalizar">
 		<toolbarbutton
@@ -69,21 +70,21 @@
 	<separator />
 	<separator />
 
-	<groupbox height="660px" width="690px"
+	<groupbox height="665px" width="690px"
 		style="margin-left:2%;margin-right:1%">
 
 		<separator />
 		<separator />
 
 		<label value="Programa:"
-			style="margin-left:2%;font-weight:bold;color:rgb(99, 99, 99)" />
+			style="margin-left:2%;font-weight:bold;color: rgb(0, 84, 122)" />
 		<textbox id="txtProgramaRegistrarAvance"
-			style="margin-left:5%;color:black !important;" disabled="true"
-			width="25%" />
+			style="margin-left:20px;color:black !important;" disabled="true"
+			width="250px" />
 
 		<div align="right">
 			<label value="Fecha:"
-				style="margin-right:10px;font-weight:bold;color:rgb(99, 99, 99)">
+				style="margin-right:10px;font-weight:bold;color: rgb(0, 84, 122)">
 			</label>
 			<datebox id="dtbRegistrarAvance" cols="12" width="130px"
 				style="margin-right:30px;color:black !important;" disabled="true"
@@ -96,7 +97,7 @@
 
 
 		<tabbox style="margin-left:2%;margin-right:1%" width="650px"
-			height="280px">
+			height="480px">
 			<tabs>
 				<tab label="Datos del Proyecto"
 					tooltip="pupDatosProyecto" />
@@ -122,7 +123,7 @@
 										style="font-weight:bold" />
 
 									<textbox id="txtAreaRegistrarAvance"
-										width="60%" style="margin-left:42%;color:black !important;"
+										width="220px" style="margin-left:70px;color:black !important;"
 										disabled="true" />
 
 								</hbox>
@@ -135,8 +136,8 @@
 										Temática: " style="font-weight:bold" />
 
 									<textbox
-										id="txtTematicaRegistrarAvance" width="80%"
-										style="margin-left:35%;color:black !important;"
+										id="txtTematicaRegistrarAvance" width="260px"
+										style="margin-left:45px;color:black !important;"
 										disabled="true" />
 								</hbox>
 
@@ -149,8 +150,8 @@
 							</row>
 							<row>
 								<textbox id="txtTituloRegistrarAvance"
-									style="color:black !important;" disabled="true" width="520px"
-									rows="2" cols="100" />
+									style="color:black !important;" disabled="true" width="580px"
+									rows="4" cols="100" />
 							</row>
 						</rows>
 					</grid>
@@ -198,17 +199,57 @@
 						<rows>
 							<row>
 								<label value="Observaciones:"
-									style="font-weight:bold;color:rgb(99, 99, 99)" />
+									style="font-weight:bold;color: rgb(0, 84, 122)" />
 
 							</row>
 
 							<row>
-								<textbox
-									id="txtObservacionRegistrarAvance" width="600px" rows="3"
-									cols="200" />
+
+								<hbox>
+									<textbox
+										id="txtObservacionRegistrarAvance" width="530px" rows="5"
+										cols="200" />
+
+									<button style="margin-left:10px"
+										tooltip="pupAgregarObservacion"
+										id="btnAgregarObservacionrAvance" sclass="btn"
+										image="/public/imagenes/iconos/agregar.png" tabindex="13">
+									</button>
+
+
+
+								</hbox>
+
+
 							</row>
 						</rows>
 					</grid>
+
+
+					<separator />
+					<separator />
+
+
+					<listbox id="ltbAvancesRegistrados" sclass="fgrid"
+						height="170px" style="margin-left:2%;margin-right:2%"
+						emptyMessage="No hay avances registrados actualmente">
+						<listhead>
+							<listheader label="Fecha" width="20%"
+								align="center" />
+							<listheader label="Observación"
+								align="center" />
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell label="${each.fecha} "></listcell>
+								<listcell
+									label="${each.observacion} ">
+								</listcell>
+
+							</listitem>
+						</template>
+					</listbox>
+
 
 				</tabpanel>
 
@@ -216,27 +257,6 @@
 			</tabpanels>
 
 		</tabbox>
-
-		<separator />
-		<separator />
-
-
-		<listbox id="ltbAvancesRegistrados" mold="paging" sclass="fgrid"
-			height="170px" pageSize="2" style="margin-left:2%;margin-right:2%"
-			emptyMessage="No hay avances registrados actualmente">
-			<listhead>
-				<listheader label="Fecha" width="20%" align="center" />
-				<listheader label="Observación" align="center" />
-			</listhead>
-			<template name="model">
-				<listitem>
-					<listcell label="${each.fecha} "></listcell>
-					<listcell label="${each.observacion} "></listcell>
-
-				</listitem>
-			</template>
-		</listbox>
-
 
 		<separator />
 		<separator />
@@ -250,13 +270,8 @@
 					<div sclass="btn-group">
 						<button id="btnFinalizarRegistrarAvance"
 							sclass="btn" label="Finalizar"
-							image="/public/imagenes/iconos/finalizar.png" tabindex="13"
+							image="/public/imagenes/iconos/guardar.png" tabindex="13"
 							tooltip="pupBtnFinalizar">
-						</button>
-						<button id="btnGuardarRegistrarAvance"
-							sclass="btn" label="Guardar"
-							image="/public/imagenes/iconos/guardar.png" tabindex="12"
-							tooltip="pupBtnGuardar">
 						</button>
 
 						<button id="btnCancelarRegistrarAvance"
