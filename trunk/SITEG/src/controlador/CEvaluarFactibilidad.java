@@ -89,7 +89,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 	@Wire
 	private Listbox ltbEstudianteEvaluarFactibilidad;
 	@Wire
-	private Listbox ltbComisiónEvaluarFactibilidad;
+	private Listbox ltbComisionEvaluarFactibilidad;
 	@Wire
 	private Window wdwEvaluarFactibilidad;
 	@Wire
@@ -169,7 +169,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 	}
 	
 	
-
+//Permite salir y refrescar las vistas (Evaluar factibilidad y catalogo)
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -179,7 +179,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 		wdwEvaluarFactibilidad.onClose();
 	}
 
-
+//Permite guardar los datos de la factibilidad
 	@Listen("onClick = #btnGuardarEvaluacionFactibilidad")
 	public void guardar() {
 		
@@ -228,8 +228,6 @@ if (registrefactibilidad == true)
 		String valor = ((Textbox)((listItem.getChildren().get(1))).getFirstChild()).getValue();
 		System.out.print(valor);
 		if (valor.equals("")){
-			System.out.print("entre al if");
-			System.out.print(valor);
 			 Messagebox.show("Debe Colocar su Apreciacion en todos los item","Informacion", Messagebox.OK,Messagebox.INFORMATION);	
 			 i = ltbItemsFactibilidad.getItemCount();
 			 dejeenblanco = true;

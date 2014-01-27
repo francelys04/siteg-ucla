@@ -42,7 +42,7 @@ public class CCatalogoUsuario extends CGeneral {
 
 	@Override
 	void inicializar(Component comp) {
-
+		//llena la lista con los usuario activos
 		List<Usuario> usuarios = servicioUsuario.buscarActivos();
 		ltbUsuario.setModel(new ListModelList<Usuario>(usuarios));
 	
@@ -53,7 +53,7 @@ public class CCatalogoUsuario extends CGeneral {
 		
 		System.out.println("Map"+map);
 	}
-
+	//permite filtrar por el nombre de usuario
 	@Listen("onChange = #txtNombreMostarUsuario")
 	public void filtrarDatosCatalogo() {
 		List<Usuario> usuarios = servicioUsuario.buscarActivos();
@@ -83,6 +83,7 @@ public class CCatalogoUsuario extends CGeneral {
 
 	@Listen("onDoubleClick = #ltbUsuario")
 	public void mostrarDatosCatalogo() {
+		if(ltbUsuario.getItemCount()!=0){
 		Listitem listItem = ltbUsuario.getSelectedItem();
 		Usuario usuario = (Usuario) listItem.getValue();
 		Usuario usuario1=servicioUsuario.buscarUsuarioPorNombre(usuario.getNombre());
@@ -102,5 +103,5 @@ public class CCatalogoUsuario extends CGeneral {
 		wdwCatalogoUsuario.onClose();
 
 	}
-
+	}
 }

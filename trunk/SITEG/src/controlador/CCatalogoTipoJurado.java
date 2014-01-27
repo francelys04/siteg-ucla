@@ -68,7 +68,7 @@ public class CCatalogoTipoJurado extends CGeneral {
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-
+		//llena la lista con los tipos de jurados activos
 		List<TipoJurado> tipoJurado = servicioTipoJurado.buscarActivos();
 
 		if (txtNombreTipoJurado == null) {
@@ -113,9 +113,10 @@ public class CCatalogoTipoJurado extends CGeneral {
 		ltbTipoJurado.setModel(new ListModelList<TipoJurado>(tipoJurado2));
 
 	}
-
+	//lleva los datos del item seleccionado a la vista recibida
 	@Listen("onDoubleClick = #ltbTipoJurado")
 	public void mostrarDatosCatalogo() {
+		if(ltbTipoJurado.getItemCount()!=0){
 
 		if (vistaRecibida == null) {
 
@@ -135,5 +136,5 @@ public class CCatalogoTipoJurado extends CGeneral {
 			wdwCatalogoTipoJurado.onClose();
 		}
 	}
-
+	}
 }

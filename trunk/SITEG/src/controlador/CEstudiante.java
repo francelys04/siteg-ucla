@@ -173,7 +173,7 @@ public class CEstudiante extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("Desea guardar el estudiante?",
+			Messagebox.show("¿Desea guardar datos del estudiante?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -224,7 +224,7 @@ public class CEstudiante extends CGeneral {
 	// base de datos
 	@Listen("onClick = #btnEliminarEstudiante")
 	public void eliminarEstudiante() {
-		Messagebox.show("Desea eliminar el estudiante?",
+		Messagebox.show("¿Desea eliminar los datos del estudiante?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {

@@ -101,19 +101,14 @@ public class CInicio extends CGeneral {
 			cmbPrograma.setModel(new ListModelList<Programa>(programa));
 
 		}
-	//	List<Noticia> noticias= servicioNoticia.buscarActivos();
-		
-	//	if(){
+	
 		if(imgNoticiaUno != null){
 			imgNoticiaUno.setContent(getImagen());
 			imgNoticiaDos.setContent(getImagen());
 			imgNoticiaTres.setContent(getImagen());		
 			Clients.evalJavaScript("setContent('"+getContentString()+"')");
 			iniciarSlide ();
-			}
-	//	}else{
-			System.out.println("nula");
-		//}
+			}	
 	}
 	//inician metodos para mostrar imagenes en el slide
 	
@@ -244,14 +239,14 @@ public class CInicio extends CGeneral {
 					}else{
 						Messagebox
 						.show("Estudiante apto para realizar la solicitud de tutor de Trabajo Especial de Grado",
-								"Información", Messagebox.OK,
+								"Informacion", Messagebox.OK,
 								Messagebox.INFORMATION);
 					}
 				} else {
 	
 					Messagebox
 							.show("Estudiante no autorizado para realizar un Trabajo Especial de Grado",
-									"Informaciï¿½n", Messagebox.OK,
+									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 				
 				}
@@ -259,7 +254,7 @@ public class CInicio extends CGeneral {
 			}
 		}else{
 			Messagebox
-			.show("Introduzca una cedula para continuar","Informaciï¿½n", Messagebox.OK,
+			.show("Introduzca una cedula para continuar","Informacion", Messagebox.OK,
 											Messagebox.INFORMATION);
 		}
 
