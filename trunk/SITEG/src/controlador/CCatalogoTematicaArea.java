@@ -60,24 +60,21 @@ public class CCatalogoTematicaArea extends CGeneral {
 
 	/**
 	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
-	 * tanto VActividad como VCatalogoActividad
+	 * tanto VActividad como VCatalogoTematicaArea
 	 * 
 	 * @date 09-12-2013
 	 */
 	void inicializar(Component comp) {
 
 		/*
-		 * Listado de todos las actividades que se encuentran activos, cuyo
-		 * estatus=true con el servicioActividad mediante el metodo
-		 * buscarActivos
+		 * Listado de todos las tematicas que se encuentran activos, cuyo
+		 * estatus=true
 		 */
 		
 		List<Tematica> tematica = servicioTematica.buscarTematicasDeArea(area);
 
 		/*
-		 * Validacion para mostrar el listado de actividades mediante el
-		 * componente ltbActividad dependiendo si se encuentra ejecutando la
-		 * vista VCatalogoActividad
+		 * Validacion para mostrar el listado de tematicas
 		 */
 		
 			ltbTematica.setModel(new ListModelList<Tematica>(tematica));
@@ -87,15 +84,12 @@ public class CCatalogoTematicaArea extends CGeneral {
 
 		/*
 		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item de la vista VActividad
+		 * seleccionar un item
 		 */
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("tematicaCatalogo");
-		/*
-		 * Validacion para vaciar la informacion del VActividad a la vista
-		 * VActividad.zul si la varible map tiene algun dato contenido
-		 */
+		
 
 	}
 

@@ -76,12 +76,6 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	// programa del profesor que se encuentra loggeado
 	public List<Teg> buscarDatos() {
 
-//		Profesor profesor = ObtenerUsuarioProfesor();
-//		Programa programa = new Programa();
-//		programa = profesor.getPrograma();
-//
-//		List<Profesor> profesores = servicioProfesor
-//				.buscarProfesorDelPrograma(programa);
 		List<Profesor> profesores = servicioProfesor
 				.buscarActivos();
 		List<Teg> tegs = servicioTeg.buscarProyectoFactible();
@@ -162,7 +156,7 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	//Metodo que permite mostrar los datos del catalogo
 	@Listen("onDoubleClick = #ltbProyectosFactibles")
 	public void mostrarDatosCatalogo() {
-
+		if(ltbProyectosFactibles.getItemCount()!=0){
 		Listitem listItem = ltbProyectosFactibles.getSelectedItem();
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -175,7 +169,7 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 		window.doModal();
 		vistaRegistrarAvance.recibir("catalogos/VCatalogoRegistrarAvance");
 		//vistaRegistrarAvance.recibir("catalogos/VCatalogoAsignarComision");
-		
+		}
 
 	}
 	

@@ -147,9 +147,10 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 
 	}
 	
-		
+	//permite llevar los datos del teg a las vista verificar solicitud de proyecto
 	@Listen("onDoubleClick = #ltbSolcitudRegistroProyecto")
-	public void mostrarDatosCatalogo() {		
+	public void mostrarDatosCatalogo() {	
+		if(ltbSolcitudRegistroProyecto.getItemCount()!=0){
 			Listitem listItem = ltbSolcitudRegistroProyecto.getSelectedItem();
 			Teg tegDatosCatalogo = (Teg) listItem.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -157,19 +158,14 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 			String vista = "transacciones/VVerificarSolicitudProyecto";
 			map.put("vista", vista);
 			Sessions.getCurrent().setAttribute("tegCatalogo", map);
-			//List<Teg> teg = servicioTeg.buscarTegPrograma();	
 			Window window = (Window) Executions.createComponents(
 					"/vistas/transacciones/VVerificarSolicitudProyecto.zul", null, null);	 				
 			window.doModal();
 			vistaVerificar.recibir("catalogos/VCatalogoSolicitudRegistroProyecto");
-		
+		}
 	}
 	public List<Teg> buscarDatos()
 	{
-//			Profesor profesor = ObtenerUsuarioProfesor();		
-//			Programa programa = new Programa();			
-//			programa= profesor.getPrograma();			
-//			List<Profesor>  profesores = servicioProfesor.buscarProfesorDelPrograma(programa);
 			List<Profesor>  profesores = servicioProfesor.buscarActivos();
 			List<Teg>  tegs = servicioTeg.BuscarTegSolicitandoRegistro();
 			Profesor profesor1 = new Profesor();		

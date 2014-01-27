@@ -61,7 +61,7 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-
+		
 		List<Teg> tegs = buscarDatos();
 
 		ltbListaFactibilidad.setModel(new ListModelList<Teg>(tegs));
@@ -77,12 +77,6 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 	// programa del profesor que se encuentra loggeado
 	public List<Teg> buscarDatos() {
 
-//		Profesor profesor = ObtenerUsuarioProfesor();
-//		Programa programa = new Programa();
-//		programa = profesor.getPrograma();
-//
-//		List<Profesor> profesores = servicioProfesor
-//				.buscarProfesorDelPrograma(programa);
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		List<Teg> tegs = servicioTeg.buscarProyectoFactibilidadEvaluada();
 
@@ -172,7 +166,7 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 	//Metodo que permite mostrar los datos del catalogo
 	@Listen("onDoubleClick = #ltbListaFactibilidad")
 	public void mostrarDatosCatalogo() {
-
+		if(ltbListaFactibilidad.getItemCount()!=0){
 		Listitem listItem = ltbListaFactibilidad.getSelectedItem();
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -184,7 +178,7 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 				"/vistas/transacciones/VRegistrarFactibilidad.zul", null, null);
 		window.doModal();
 		vistaFactibilidad.recibir("catalogos/VCatalogoRegistrarFactibilidad");
-		
+		}
 
 	}
 

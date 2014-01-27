@@ -65,7 +65,6 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	void inicializar(Component comp) {
 
-
 		List<Profesor> profe = llenarprofesores();
 		ltbProfesor.setModel(new ListModelList<Profesor>(profe));
 				
@@ -96,6 +95,7 @@ public void recibir(String vista,long programa, long tematica) {
 	
 
 }
+	//Permite filtrar los datos del profesor en el catalogo
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor")
 	public void filtrarDatosCatalogo() {
 		List<Profesor> profesores = llenarprofesores();
@@ -132,7 +132,7 @@ public void recibir(String vista,long programa, long tematica) {
 		ltbProfesor.setModel(new ListModelList<Profesor>(profesores2));
 
 	}
-
+	//permite enviar los datos de un profesor a la vista recibida al hacer doble clic
 	@Listen("onDoubleClick = #ltbProfesor")
 	public void mostrarDatosCatalogo() {
 
@@ -144,6 +144,7 @@ public void recibir(String vista,long programa, long tematica) {
 			vistaRecibida = "/vistas/transacciones/VSolicitarTutor";
 
 		} else {
+			if(ltbProfesor.getSelectedCount()!=0){
 			Listitem listItem = ltbProfesor.getSelectedItem();
 			Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -168,8 +169,9 @@ public void recibir(String vista,long programa, long tematica) {
 			wdwCatalogoProfesorArea.onClose();
 		}
 		}
+		}
 	}
-	
+	//permite llenar el listado de profesores
 	public List<Profesor> llenarprofesores()
 	{
 	Tematica tema = servicioTematica.buscarTematica(tematicaRecibida);
