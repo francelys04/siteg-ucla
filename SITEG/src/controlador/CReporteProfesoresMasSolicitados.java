@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.swing.filechooser.FileSystemView;
 
 import modelo.AreaInvestigacion;
+import modelo.Profesor;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
@@ -138,6 +139,69 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 					solicitudes = servicioSolicitudTutoria.buscarSolicitudesPorTematicaEstatusEntreFechas(tematica, estatus, fechaInicio, fechaFin);
 					System.out.println("Una tematica un estatus"+solicitudes.size());
 				}
+			}
+			
+			List<String> profesores = new ArrayList<String>();
+			List<Integer> contadores = new ArrayList<Integer>();
+			String profesor = solicitudes.get(0).getProfesor().getCedula();
+			int contadorProfesores=0;
+			for (int i = 0; i < solicitudes.size(); i++) {
+				if (profesor == solicitudes.get(i).getProfesor().getCedula()) {
+					contadorProfesores = contadorProfesores + 1;
+				} else {
+					profesores.add(profesor);
+					contadores.add(contadorProfesores);
+					profesor = solicitudes.get(i).getProfesor().getCedula();
+					contadorProfesores = 1;
+				}
+			}
+			profesores.add(profesor);
+			contadores.add(contadorProfesores);
+			/*************************** Ordenado de Lista ************* ******************/
+			List<String> profesoresOrdenados = new ArrayList<String>();
+			List<Integer> contadoresOrdenados = new ArrayList();
+			List<Profesor> profesoresFinales = new ArrayList<Profesor>();
+			int valor = 0;
+			int valor2 = 0;
+			String valorProfesor = null;
+			for (int i = 0; i < contadores.size(); i++) {
+				valor = contadores.get(i);
+				for (int j = 0; j < contadores.size(); j++) {
+					valor2 = contadores.get(j);
+					valorProfesor = profesores.get(j);
+					if (valor2 > valor) {
+						contadores.remove(j);
+						profesores.remove(j);
+						contadoresOrdenados.add(valor2);
+						profesoresOrdenados.add(valorProfesor);
+						j = contadores.size();
+					}
+				}
+			}
+			if (contadoresOrdenados.size() < 5) {
+				int cantidadFaltante = 4 - contadoresOrdenados.size();
+				System.out.println("tamaño lista1:" + contadoresOrdenados.size());
+				int i;
+				for (i = 0; i < 4 - contadoresOrdenados.size(); i++) {
+					for (int z = 0; z < contadores.size(); z++) {
+						System.out.println("itemsz-:" + contadores.get(z));
+						contadoresOrdenados.add(contadores.get(z));
+						profesoresOrdenados.add(profesores.get(z));
+					}
+				}
+				System.out.println("tamaño lista2:" + contadoresOrdenados.size());
+			}
+			if (contadoresOrdenados.size() > 5) {
+				for (int i = 5; i < contadoresOrdenados.size(); i++) {
+					contadoresOrdenados.remove(i);
+					profesoresOrdenados.remove(i);
+				}
+			}
+			for (int i = 0; i < profesoresOrdenados.size(); i++) {
+				Profesor profesorFinal = servicioProfesor.buscarProfesorPorCedula(profesoresOrdenados.get(i));
+				profesoresFinales.add(profesorFinal);
+				System.out.println("items3tematicas-:"
+						+ profesoresFinales.get(i).getCedula());
 			}
 			
 			FileSystemView filesys = FileSystemView.getFileSystemView();
