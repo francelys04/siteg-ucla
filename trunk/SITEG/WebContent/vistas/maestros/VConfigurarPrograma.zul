@@ -419,7 +419,7 @@
 										emptyMessage="No hay condiciones registradas"  height="200px">
 										<listhead>
 											<listheader
-												label="Condicion" width="60%" align="center" />
+												label="Condicion" width="65%" align="center" />
 											<listheader label="Valor"
 												align="center" />
 
@@ -433,7 +433,7 @@
 												<listcell>
 													<spinner
 														inplace="true" value="${each.valor}"
-														constraint="min 0 max 100" width="90%" />
+														constraint="min 0 max 100"  />
 												</listcell>
 											</listitem>
 										</template>

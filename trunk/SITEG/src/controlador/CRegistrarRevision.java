@@ -146,7 +146,7 @@ public class CRegistrarRevision extends CGeneral {
 		wdwRegistrarRevision.onClose();
 	}
 
-	@Listen("onClick = #btnGuardarRegistrarRevision")
+	@Listen("onClick = #btnAgregarRevisiones")
 	public void guardarRevision() {
 
 		if ((txtObservacionRegistrarRevision.getText().compareTo("") == 0)) {
@@ -156,7 +156,7 @@ public class CRegistrarRevision extends CGeneral {
 		} else {
 			Messagebox.show(
 					"¿Desea guardar la revision del trabajo Especial de Grado?",
-					"Dialogo de confirmación", Messagebox.OK
+					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -178,7 +178,7 @@ public class CRegistrarRevision extends CGeneral {
 
 								Messagebox
 										.show("Revision del Trabajo Especial de Grado registrada exitosamente",
-												"Información", Messagebox.OK,
+												"Informacion", Messagebox.OK,
 												Messagebox.INFORMATION);
 
 							}
@@ -193,7 +193,7 @@ public class CRegistrarRevision extends CGeneral {
 	public void finalizarRegistrarRevision() {
 
 		Messagebox.show("¿Desea finalizar las revisiones del Trabajo Especial de Grado?",
-				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
@@ -203,7 +203,7 @@ public class CRegistrarRevision extends CGeneral {
 							servicioTeg.guardar(tegAvance);
 							Messagebox
 									.show("Revisiones del Trabajo Especial de Grado finalizadas exitosamente",
-											"Información", Messagebox.OK, Messagebox.INFORMATION);
+											"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 							salir();
 						}
 					}
