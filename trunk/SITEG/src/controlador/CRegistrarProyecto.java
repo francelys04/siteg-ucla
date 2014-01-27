@@ -107,7 +107,9 @@ public class CRegistrarProyecto extends CGeneral {
 
 		List<Teg> tegEstudiante = ServicioTeg
 				.buscarTegPorEstudiante(estudiante);
-
+		//Permite verificar los estatus del teg para asi
+		//validar si este puede registrarlo de ser asi
+		//llena los datos en la vista
 		try {
 			if (solicitudAceptada != null) {
 
@@ -121,7 +123,7 @@ public class CRegistrarProyecto extends CGeneral {
 						if (teg != "Proyecto No Factible") {
 
 							Messagebox.show(
-									"Ya ud Posee un Proyecto Registrado",
+									"Ya posee un proyecto registrado",
 									"Advertencia", Messagebox.OK,
 									Messagebox.EXCLAMATION);
 							wdwRegistrarProyecto.onClose();
@@ -189,7 +191,6 @@ public class CRegistrarProyecto extends CGeneral {
 
 		} catch (NullPointerException e) {
 
-			System.out.println("NullPointerException");
 		}
 
 	}
@@ -207,7 +208,7 @@ public class CRegistrarProyecto extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show("Desea registrar el Proyecto?",
+			Messagebox.show("Â¿Desea registrar el proyecto?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -249,7 +250,7 @@ public class CRegistrarProyecto extends CGeneral {
 								cancelarRegistroProyecto();
 								Messagebox.show(
 										"Proyecto registrado exitosamente",
-										"Información", Messagebox.OK,
+										"Informacion", Messagebox.OK,
 										Messagebox.INFORMATION);
 								wdwRegistrarProyecto.onClose();
 
@@ -260,7 +261,7 @@ public class CRegistrarProyecto extends CGeneral {
 		}
 
 	}
-
+	//limpia los datos que son modificables en la vista
 	@Listen("onClick = #btnCancelarRegistrarProyecto")
 	public void cancelarRegistroProyecto() {
 		

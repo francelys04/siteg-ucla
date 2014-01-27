@@ -85,7 +85,6 @@ public class CLapso extends CGeneral {
 	void inicializar(Component comp) {
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
-		// System.out.println(lapsos.get(0).getNombre());
 		if (txtNombreLapso == null) {
 			ltbLapso.setModel(new ListModelList<Lapso>(lapsos));
 		}
@@ -135,8 +134,8 @@ public class CLapso extends CGeneral {
 			Messagebox.show("La fecha de fin de lapso debe ser posterior a la fecha de inicio", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else{
-			Messagebox.show("¿Desea guardar los datos del lapso académico?",
-					"Dialogo de confirmación", Messagebox.OK
+			Messagebox.show("Â¿Desea guardar los datos del lapso academico?",
+					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -184,8 +183,8 @@ public class CLapso extends CGeneral {
 								cancelarLapso();
 								id = 0;
 								Messagebox
-										.show("Lapso académico registrado exitosamente",
-												"Información", Messagebox.OK,
+										.show("Lapso academico registrado exitosamente",
+												"Informacion", Messagebox.OK,
 												Messagebox.INFORMATION);
 							}
 						}
@@ -197,8 +196,8 @@ public class CLapso extends CGeneral {
 	// Elimina un lapso
 	@Listen("onClick = #btnEliminarLapso")
 	public void eliminarLapso() {
-		Messagebox.show("¿Desea eliminar los datos de la actividad?",
-				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
+		Messagebox.show("Â¿Desea eliminar los datos de la actividad?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
@@ -207,8 +206,8 @@ public class CLapso extends CGeneral {
 							servicioLapso.guardar(lapso);
 							cancelarLapso();
 							Messagebox.show(
-									"Lapso académico eliminado exitosamente",
-									"Información", Messagebox.OK,
+									"Lapso academico eliminado exitosamente",
+									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 
 						}

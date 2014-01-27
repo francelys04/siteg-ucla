@@ -7,6 +7,7 @@ import modelo.Teg;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Datebox;
@@ -64,7 +65,7 @@ public class CSolicitarDefensa extends CGeneral {
 		} else {
 			if (teg.getEstatus().equals(estatus[1])) {
 				Messagebox.show(
-						"Ya ud Posee una solicitud de Defensa",
+						"Ya posee una solicitud de defensa",
 						"Advertencia", Messagebox.OK,
 						Messagebox.EXCLAMATION);
 				cancelar();
@@ -85,12 +86,23 @@ public class CSolicitarDefensa extends CGeneral {
 
 	@Listen("onClick = #btnSolicitarDefensa")
 	public void solicitarDefensa() {
+		Messagebox.show("Â¿Desea solicitar defensa?",
+				"Dialogo de confirmacion", Messagebox.OK
+						| Messagebox.CANCEL, Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt)
+							throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
 		teg.setEstatus(estatus[1]);
 		servicioTeg.guardar(teg);
 		Messagebox.show(
-				"Su Solicitud de Defensa fue enviada con exito",
-				"Información", Messagebox.OK,
+				"Su Solicitud de defensa fue enviada con exito",
+				"Informacion", Messagebox.OK,
 				Messagebox.INFORMATION);
 		cancelar();
+						}
+					}
+				});
 	}
+						
 }

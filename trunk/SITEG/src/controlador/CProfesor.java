@@ -129,7 +129,7 @@ public class CProfesor extends CGeneral {
 		}
 
 	}
-
+	//Permite ver la lista de profesores
 	@Listen("onClick = #btnCatalogoProfesor")
 	public void buscarProfesor() {
 
@@ -140,7 +140,7 @@ public class CProfesor extends CGeneral {
 		catalogo.recibir("maestros/VProfesor");
 
 	}
-
+	//guarda los datos de un profesor
 	@Listen("onClick = #btnGuardarProfesor")
 	public void guardarProfesor() {
 
@@ -158,8 +158,8 @@ public class CProfesor extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		}else{
-		Messagebox.show("¿Desea guardar los datos del profesor?",
-				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
+		Messagebox.show("Â¿Desea guardar los datos del profesor?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
@@ -189,7 +189,7 @@ public class CProfesor extends CGeneral {
 							servicioProfesor.guardarProfesor(profesor);
 							Messagebox.show(
 									"Profesor registrado exitosamente",
-									"Información", Messagebox.OK,
+									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 							cancelarProfesor();
 
@@ -201,7 +201,7 @@ public class CProfesor extends CGeneral {
 	}
 		
 		
-
+//limpiar los campos
 	@Listen("onClick = #btnCancelarProfesor")
 	public void cancelarProfesor() {
 
@@ -225,12 +225,12 @@ public class CProfesor extends CGeneral {
 	}
 	
 
-
+	//elimina los datos de un profesor
 	@Listen("onClick = #btnEliminarProfesor")
 	public void eliminarProfesor() {
 		
-		Messagebox.show("¿Desea eliminar los datos del profesor?",
-				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
+		Messagebox.show("Â¿Desea eliminar los datos del profesor?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
@@ -241,7 +241,7 @@ public class CProfesor extends CGeneral {
 							cancelarProfesor();
 							Messagebox.show(
 									"Profesor eliminado exitosamente",
-									"Información", Messagebox.OK,
+									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 						}
 					}

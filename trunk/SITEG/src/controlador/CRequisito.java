@@ -63,8 +63,9 @@ public class CRequisito extends CGeneral {
 	private long id = 0;
 
 	void inicializar(Component comp) {
-
-		List<Requisito> requisitos = servicioRequisito.buscarActivos();
+		//Permite llenar los datos del requisito en la vista 
+		//si el map es diferente a null
+			List<Requisito> requisitos = servicioRequisito.buscarActivos();
 
 		if (txtNombreRequisito == null)
 			ltbRequisito.setModel(new ListModelList<Requisito>(requisitos));
@@ -88,7 +89,7 @@ public class CRequisito extends CGeneral {
 		}
 
 	}
-
+	//Permite ver la lis de requisitos activos
 	@Listen("onClick = #btnBuscarRequisito")
 	public void buscarRequisito() {
 
@@ -98,9 +99,9 @@ public class CRequisito extends CGeneral {
 		catalogo.recibir("maestros/VRequisito");
 
 	}
-
+	//Permite guardar un requisito
 	@Listen("onClick = #btnGuardarRequisito")
-	public void guardarEstudiante() {
+	public void guardarRequisito() {
 
 		if ((txtNombreRequisito.getText().compareTo("") == 0)
 				|| (txtDescripcionRequisito.getText().compareTo("") == 0)) {
@@ -108,8 +109,8 @@ public class CRequisito extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("¿Desea guardar los datos del requisito?",
-					"Dialogo de confirmación", Messagebox.OK
+			Messagebox.show("Â¿Desea guardar los datos del requisito?",
+					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -125,7 +126,7 @@ public class CRequisito extends CGeneral {
 								cancelarRequisito();
 								Messagebox.show(
 										"Requisito registrado exitosamente",
-										"Información", Messagebox.OK,
+										"Informaciï¿½n", Messagebox.OK,
 										Messagebox.INFORMATION);
 								id = 0;
 							}
@@ -138,8 +139,8 @@ public class CRequisito extends CGeneral {
 	@Listen("onClick = #btnEliminarRequisito")
 	public void eliminarRequisito() {
 
-		Messagebox.show("¿Desea eliminar los datos del requisito?",
-				"Dialogo de confirmación", Messagebox.OK | Messagebox.CANCEL,
+		Messagebox.show("Â¿Desea eliminar los datos del requisito?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
@@ -151,7 +152,7 @@ public class CRequisito extends CGeneral {
 							cancelarRequisito();
 							Messagebox.show(
 									"Requisito eliminado exitosamente",
-									"Información", Messagebox.OK,
+									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 						}
 					}
