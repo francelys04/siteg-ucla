@@ -127,7 +127,7 @@ public class CSubirTeg extends CGeneral {
 			Messagebox.show("Debe completar los campos", "Error", Messagebox.OK, Messagebox.ERROR);
 		} 
 		else {
-			Messagebox.show("Desea guardar el archivo?",
+			Messagebox.show("¿Desea guardar el archivo?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -154,7 +154,7 @@ public class CSubirTeg extends CGeneral {
 		}
 }
 	
-//Metodo para subir un archivo
+//Metodos que permiten obtener el archivo
 public static byte[] toByteArray(InputStream is) throws SQLException,
 	IOException {
 

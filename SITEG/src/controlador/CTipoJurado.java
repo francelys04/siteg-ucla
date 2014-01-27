@@ -114,8 +114,8 @@ public class CTipoJurado extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("¿Desea guardar los datos del tipo de jurado?",
-					"Dialogo de confirmación", Messagebox.OK
+			Messagebox.show("Â¿Desea guardar los datos del tipo de jurado?",
+					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt)
@@ -132,7 +132,7 @@ public class CTipoJurado extends CGeneral {
 								cancelarTipoJurado();
 								Messagebox.show(
 										"Tipo de jurado registrado exitosamente",
-										"Información", Messagebox.OK,
+										"Informacion", Messagebox.OK,
 										Messagebox.INFORMATION);
 								id = 0;
 
@@ -148,7 +148,7 @@ public class CTipoJurado extends CGeneral {
 	@Listen("onClick = #btnEliminarTipoJurado")
 	public void eliminarTipoJurado() {
 		
-		Messagebox.show("¿Desea eliminar los datos del tipo de jurado?",
+		Messagebox.show("Â¿Desea eliminar los datos del tipo de jurado?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
@@ -159,7 +159,7 @@ public class CTipoJurado extends CGeneral {
 							cancelarTipoJurado();
 							Messagebox.show(
 									"Tipo de jurado eliminado exitosamente",
-									"Información", Messagebox.OK,
+									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 						}
 					}

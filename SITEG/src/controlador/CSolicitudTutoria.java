@@ -101,7 +101,7 @@ public class CSolicitudTutoria extends CGeneral {
 	//Metodo para aceptar la tutoria
 	@Listen("onClick = #btnAceptarTutoria")
 	public void aceptarTutoria() throws IOException{
-		Messagebox.show("¿Desea aceptar tutoria?",
+		Messagebox.show("Â¿Desea aceptar tutoria?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
@@ -168,7 +168,7 @@ public class CSolicitudTutoria extends CGeneral {
 					}
 				});
 	}
-	//Metodo para confirmar que le hay llegado el correo al estudiante
+	//Metodo para confirmar que le ha llegado el correo al estudiante
 	private int confirmacion(ArrayList<Boolean> valor2) {
 		// TODO Auto-generated method stub
 		for(int w=0; w<valor2.size();w++){

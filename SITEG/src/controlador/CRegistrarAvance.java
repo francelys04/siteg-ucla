@@ -104,7 +104,7 @@ public class CRegistrarAvance extends CGeneral {
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("tegCatalogo");
-
+		//permite traer los datos del teg a la vista si el map es diferente de nulo
 		if (map != null) {
 			if (map.get("id") != null) {
 				long codigo = (Long) map.get("id");
@@ -136,7 +136,7 @@ public class CRegistrarAvance extends CGeneral {
 		vistaRecibida = vista;
 
 	}
-
+	//permite salir y refrescar las vistas
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -145,7 +145,7 @@ public class CRegistrarAvance extends CGeneral {
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwRegistrarAvance.onClose();
 	}
-
+	//guarda las observacion en la base de datos
 	@Listen("onClick = #btnAgregarObservacionrAvance")
 	public void guardarAvance() {
 
@@ -155,7 +155,7 @@ public class CRegistrarAvance extends CGeneral {
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Messagebox.show(
-					"¿Desea guardar el avance del trabajo Especial de Grado?",
+					"Â¿Desea guardar el avance del Trabajo Especial de Grado?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -178,7 +178,7 @@ public class CRegistrarAvance extends CGeneral {
 
 								Messagebox
 										.show("Avance del Trabajo Especial de Grado registrado exitosamente",
-												"Información", Messagebox.OK,
+												"Informacion", Messagebox.OK,
 												Messagebox.INFORMATION);
 
 							}
@@ -188,11 +188,11 @@ public class CRegistrarAvance extends CGeneral {
 		}
 
 	}
-
+//Permite finalizar los avance cambia el estatus del teg
 	@Listen("onClick = #btnFinalizarRegistrarAvance")
 	public void finalizarRegistrarAvance() {
 
-		Messagebox.show("¿Desea finalizar los avances del proyecto?",
+		Messagebox.show("Â¿Desea finalizar los avances del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
@@ -209,14 +209,15 @@ public class CRegistrarAvance extends CGeneral {
 					}
 				});
 	}
-
+	//limpia los campos modificables de la vista
 	@Listen("onClick = #btnCancelarRegistrarAvance")
 	public void cancelarRegistrarAvance() {
 
 		txtObservacionRegistrarAvance.setValue("");
 
 	}
-
+	//permite llenar la lista de avances para que estas se puedan observar
+	//para que se tome la desicion de finalizar
 	public void llenarListas() {
 
 		Teg tegAvance = servicioTeg.buscarTeg(auxiliarId);
