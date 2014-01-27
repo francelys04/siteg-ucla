@@ -155,7 +155,7 @@ public class CRegistrarAvance extends CGeneral {
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Messagebox.show(
-					"Â¿Desea guardar el avance del Trabajo Especial de Grado?",
+					"¿Desea guardar el avance del Trabajo Especial de Grado?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -192,7 +192,7 @@ public class CRegistrarAvance extends CGeneral {
 	@Listen("onClick = #btnFinalizarRegistrarAvance")
 	public void finalizarRegistrarAvance() {
 
-		Messagebox.show("Â¿Desea finalizar los avances del proyecto?",
+		Messagebox.show("¿Desea finalizar los avances del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {

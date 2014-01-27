@@ -249,7 +249,7 @@
 						<label value="Correo:" style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtCorreoProfesor" width="25%" maxlength="100"
+					<textbox id="txtCorreoProfesor" width="260px" maxlength="100"
 						tooltip="pupCorreoProfesor" tabindex="11" />
 
 

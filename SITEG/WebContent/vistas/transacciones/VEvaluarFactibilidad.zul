@@ -6,8 +6,8 @@
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: none; color:none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 	</style>
 
@@ -15,8 +15,8 @@
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: white;color: none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
@@ -32,6 +32,10 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
+
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
+
 
 	</style>
 
@@ -77,14 +81,14 @@
 		<separator />
 
 		<label value="Programa:"
-			style="margin-left:2%;font-weight:bold;color:rgb(99, 99, 99)" />
+			style="margin-left:2%;font-weight:bold;color: rgb(0, 84, 122)" />
 		<textbox id="txtProgramaEvaluarFactibilidad"
 			style="margin-left:5%;color:black !important;" disabled="true"
 			width="25%" />
 
 		<div align="right">
 			<label value="Fecha:"
-				style="margin-right:10px;font-weight:bold;color:rgb(99, 99, 99)">
+				style="margin-right:10px;font-weight:bold;color: rgb(0, 84, 122)">
 			</label>
 			<datebox id="db1" cols="12" width="130px"
 				style="margin-right:30px;color:black !important;" disabled="true"
@@ -122,8 +126,8 @@
 										style="font-weight:bold" />
 
 									<textbox
-										id="txtAreaEvaluarFactibilidad" width="80%"
-										style="margin-left:42%;color:black !important;"
+										id="txtAreaEvaluarFactibilidad" width="230px"
+										style="margin-left:70px;color:black !important;"
 										disabled="true" />
 
 								</hbox>
@@ -136,8 +140,8 @@
 										Temática: " style="font-weight:bold" />
 
 									<textbox
-										id="txtTematicaEvaluarFactibilidad" width="100%"
-										style="margin-left:35%;color:black !important;"
+										id="txtTematicaEvaluarFactibilidad" width="270px"
+										style="margin-left:50px;color:black !important;"
 										disabled="true" />
 								</hbox>
 
@@ -152,7 +156,7 @@
 								<textbox
 									id="txtTituloEvaluarFactibilidad"
 									style="color:black !important;" disabled="true" width="620px"
-									rows="2" cols="100" />
+									rows="4" cols="100" />
 							</row>
 						</rows>
 					</grid>
@@ -244,7 +248,7 @@
 						<rows>
 							<row>
 								<listbox id="ltbItemsFactibilidad"
-									emptyMessage="No hay item registrados"  height="245px">
+									emptyMessage="No hay item registrados" height="245px">
 									<listhead>
 										<listheader label="Item"
 											align="center" />
@@ -283,18 +287,18 @@
 
 		<grid sclass="fgrid" style="margin-left:2%">
 			<columns>
-				<column width="620px" height="20px" />
+				<column width="650px" height="20px" />
 			</columns>
 			<rows>
 				<row>
 					<label value="Observaciones:"
-						style="font-weight:bold;color:rgb(99, 99, 99)" />
+						style="font-weight:bold;color: rgb(0, 84, 122)" />
 
 				</row>
 
 				<row>
-					<textbox id="txtObservacionEvaluarFactibilidad" width="600px"
-						rows="3" cols="200" />
+					<textbox id="txtObservacionEvaluarFactibilidad"
+						width="610px" rows="3" cols="200" />
 				</row>
 			</rows>
 		</grid>
@@ -308,13 +312,15 @@
 				<div sclass="alert-info" align="center">
 					<separator />
 					<div sclass="btn-group">
-						<button id="btnGuardarEvaluacionFactibilidad" label="Guardar"
-							sclass="btn" image="/public/imagenes/iconos/guardar.png"
-							tabindex="12" tooltip="pupBtnGuardar">
+						<button id="btnGuardarEvaluacionFactibilidad"
+							label="Guardar" sclass="btn"
+							image="/public/imagenes/iconos/guardar.png" tabindex="12"
+							tooltip="pupBtnGuardar">
 						</button>
-						<button id="btnCancelarEvaluacionFactibilidad" label="Cancelar"
-							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
-							tabindex="13" tooltip="pupBtnCancelar">
+						<button id="btnCancelarEvaluacionFactibilidad"
+							label="Cancelar" sclass="btn"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="13"
+							tooltip="pupBtnCancelar">
 						</button>
 
 						<separator />

@@ -1,4 +1,4 @@
-<window title="Catalogo Estudiante" border="normal" width="800px"
+<window title="Catalogo Estudiante" border="normal" width="850px"
 	id="wdwCatalogoEstudiante" apply="controlador.CCatalogoEstudiante"
 	closable="true">
 

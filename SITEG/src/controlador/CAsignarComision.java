@@ -148,7 +148,7 @@ public class CAsignarComision extends CGeneral {
 						estudiantes));
 				
 				lblCondicionAsignarComision
-				.setValue("Recuerde que los integrantes de la comision es de: "
+				.setValue("Recuerde que los integrantes de la comision son:  "
 						+ buscarCondicionVigenteEspecifica(
 								"Numero de integrantes de la comision", programa)
 								.getValor());
@@ -325,7 +325,7 @@ public class CAsignarComision extends CGeneral {
 			if (valorItem > valorcondicion) {
 
 				Messagebox
-						.show("El numero de profesores seleccionados excede al numero de integrantes de la comisiï¿½n evaluadora, ya que debe ser: "+ buscarCondicionVigenteEspecifica(
+						.show("El numero de profesores seleccionados excede al numero de integrantes de la comision evaluadora, ya que debe ser: "+ buscarCondicionVigenteEspecifica(
 								"Numero de integrantes de la comision", programa)
 								.getValor(), "Error", Messagebox.OK,
 				Messagebox.ERROR);
@@ -337,7 +337,7 @@ public class CAsignarComision extends CGeneral {
 				if (valorItem == valorcondicion) {
 
 					Messagebox
-							.show("El numero de profesores que conformon la comision evaluadora esta completo, por favor seleccione el boton de finalizar",
+							.show("El numero de profesores que conforman la comision evaluadora esta completo, por favor seleccione el boton de finalizar",
 									"Advertencia", Messagebox.OK,
 									Messagebox.EXCLAMATION);
 
@@ -442,7 +442,7 @@ public class CAsignarComision extends CGeneral {
 			} else {
 
 				if (valorItem == valorcondicion) {
-					Messagebox.show("Â¿Desea finalizar la asignacion de la comision evaluadora?",
+					Messagebox.show("¿Desea finalizar la asignacion de la comision evaluadora?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener() {

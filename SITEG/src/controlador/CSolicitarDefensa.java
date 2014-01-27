@@ -79,14 +79,14 @@ public class CSolicitarDefensa extends CGeneral {
 		}
 	}
 
-	@Listen("onClick = #btnCancelarSolicitarDefensa")
+	
 	public void cancelar() {
 		wdwSolicitarDefensa.onClose();
 	}
 
 	@Listen("onClick = #btnSolicitarDefensa")
 	public void solicitarDefensa() {
-		Messagebox.show("Â¿Desea solicitar defensa?",
+		Messagebox.show("¿Desea solicitar defensa?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {

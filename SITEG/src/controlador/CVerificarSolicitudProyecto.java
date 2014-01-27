@@ -201,7 +201,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 			Messagebox.show("Debe indicar si los requisitos estan completos o incompletos", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 		}
 		else{
-			Messagebox.show("Â¿Desea guardar la verificacion de requisitos?",
+			Messagebox.show("¿Desea guardar la verificacion de los requisitos?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {

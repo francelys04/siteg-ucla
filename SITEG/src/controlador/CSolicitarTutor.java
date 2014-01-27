@@ -365,7 +365,7 @@ public class CSolicitarTutor extends CGeneral {
 										"Advertencia", Messagebox.OK,
 										Messagebox.EXCLAMATION);
 					} else {
-						Messagebox.show("Â¿Desea enviar solicitud de tutoria?",
+						Messagebox.show("¿Desea enviar la solicitud de tutoria?",
 								"Dialogo de confirmacion", Messagebox.OK
 										| Messagebox.CANCEL, Messagebox.QUESTION,
 								new org.zkoss.zk.ui.event.EventListener() {
@@ -390,7 +390,7 @@ public class CSolicitarTutor extends CGeneral {
 
 						servicioSolicitarTutor.guardarSolicitud(solicitud2);
 						enviarEmailNotificacion();
-						Messagebox.show("Su solicitud ha sido enviada exitosamente",
+						Messagebox.show("Su solicitud de tutoria ha sido enviada exitosamente",
 								"Informacion", Messagebox.OK,
 								Messagebox.INFORMATION);
 						wdwSolicitarTutoria.onClose();
@@ -451,12 +451,12 @@ public class CSolicitarTutor extends CGeneral {
 					SolicitudTutoria solicitudAceptada = servicioSolicitarTutor
 							.buscarSolicitudAceptadaEstudiante(estudiante);
 					if (solicitud != null) {
-						Messagebox.show("Ya tiene una solicitud por revisar",
+						Messagebox.show("Ya tiene una solicitud de tutoria que se encuentra por revisar",
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 					} else {
 						if (solicitudAceptada != null) {
-							Messagebox.show("Ya tiene una solicitud aceptada",
+							Messagebox.show("Ya tiene una solicitud de tutoria aceptada",
 									"Advertencia", Messagebox.OK,
 									Messagebox.EXCLAMATION);
 						} else {
@@ -499,12 +499,12 @@ public class CSolicitarTutor extends CGeneral {
 					SolicitudTutoria solicitudAceptada = servicioSolicitarTutor
 							.buscarSolicitudAceptadaEstudiante(estudiante2);
 					if (solicitud != null) {
-						Messagebox.show("Ya tiene una solicitud pendiente",
+						Messagebox.show("Ya tiene una solicitud de tutoria que se encuentra por revisar",
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 					} else {
 						if (solicitudAceptada != null) {
-							Messagebox.show("Ya tiene una solicitud aceptada",
+							Messagebox.show("Ya tiene una solicitud de tutoria aceptada",
 									"Advertencia", Messagebox.OK,
 									Messagebox.EXCLAMATION);
 						} else {
