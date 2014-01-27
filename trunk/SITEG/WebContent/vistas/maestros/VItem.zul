@@ -4,8 +4,8 @@
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: none; color:none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 	</style>
 
@@ -13,14 +13,13 @@
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: white;color: none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
-		transparent; border-left: 1px solid transparent;
-		border-"WebContent/vistas/VItem.zul"top: 1px solid transparent;
-		}
+		transparent; border-left: 1px solid transparent; border-top: 1px
+		solid transparent; }
 
 		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
 		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
@@ -31,6 +30,10 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
+
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
+
 
 	</style>
 
@@ -69,7 +72,7 @@
 	<label value="(*) "
 		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
-	<label value="Campos Obligatorios"></label>
+	<label value="Campos Obligatorios" style="font-weight:bold;color: rgb(0, 84, 122)"></label>
 	<separator />
 	<separator />
 	<separator />
@@ -94,10 +97,10 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtNombreItem" width="250px"
+						<textbox id="txtNombreItem" width="250px" maxlength="100" tabindex="1"
 							tooltip="pupNombreItem" />
 
-						<button id="btnCatalogoItem" tabindex="13"
+						<button id="btnCatalogoItem" tabindex="2"
 							sclass="btn" image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:10px" tooltip="pupCatalogoItem">
 						</button>
@@ -114,7 +117,7 @@
 					</hlayout>
 
 					<combobox id="cmbTipoItem" readonly="true"
-						tooltip="pupTipoItem" width="170px" tabindex="12"
+						tooltip="pupTipoItem" width="170px" tabindex="3"
 						style="margin-left:2px">
 						<comboitem label="Factibilidad" />
 						<comboitem label="Defensa" />
@@ -132,8 +135,8 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtDescripcionItem" rows="5" cols="100"
-						width="52%" tabindex="8" tooltip="pupDescripcionItem" />
+					<textbox id="txtDescripcionItem" rows="5" cols="100" maxlength="600"
+						width="52%" tabindex="4" tooltip="pupDescripcionItem" />
 
 				</row>
 
@@ -154,15 +157,15 @@
 
 						<button id="btnGuardarItem" label="Guardar"
 							sclass="btn" image="/public/imagenes/iconos/guardar.png"
-							tabindex="13" tooltip="pupGuardarItem">
+							tabindex="5" tooltip="pupGuardarItem">
 						</button>
 						<button id="btnCancelarItem" label="Cancelar"
 							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
-							tabindex="14" tooltip="pupCancelarItem">
+							tabindex="6" tooltip="pupCancelarItem">
 						</button>
 						<button id="btnEliminarItem" label="Eliminar"
 							sclass="btn" image="/public/imagenes/iconos/eliminar.png"
-							tabindex="15" disabled="true" tooltip="pupEliminarItem">
+							tabindex="7" disabled="true" tooltip="pupEliminarItem">
 						</button>
 						<separator />
 					</div>

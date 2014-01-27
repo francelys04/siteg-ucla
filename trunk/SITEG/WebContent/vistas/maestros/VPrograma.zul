@@ -4,8 +4,8 @@
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: none; color:none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 	</style>
 
@@ -13,8 +13,8 @@
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: white;color: none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
@@ -31,6 +31,10 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
+
+
 	</style>
 
 
@@ -43,7 +47,7 @@
 		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
 	<label value="Campos Obligatorios"
-		style="font-weight:bold;color:rgb(99, 99, 99)">
+		style="font-weight:bold;color: rgb(0, 84, 122)">
 	</label>
 	<separator />
 	<separator />
@@ -102,7 +106,7 @@
 
 						<button id="btnCatalogoDirectorPrograma"
 							tooltip="pupCatalogoDirectorPrograma" sclass="btn"
-							style="margin-left:15px"
+							style="margin-left:15px" tabindex="1"
 							image="/public/imagenes/iconos/catalogo.png" />
 
 					</hbox>
@@ -116,10 +120,10 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtNombrePrograma" width="250px"
-							tooltip="pupNombrePrograma" tabindex="1" />
+						<textbox id="txtNombrePrograma" width="250px" maxlength="100"
+							tooltip="pupNombrePrograma" tabindex="2" />
 						<button id="btnBuscarPrograma" sclass="btn"
-							tooltip="pupCatalogoPrograma"
+							tooltip="pupCatalogoPrograma" tabindex="3"
 							image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:10px">
 						</button>
@@ -135,9 +139,9 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtDescripcionPrograma" rows="5"
+					<textbox id="txtDescripcionPrograma" rows="5" maxlength="500"
 						tooltip="pupDescripcionPrograma" cols="100" width="52%"
-						tabindex="2" />
+						tabindex="4" />
 				</row>
 
 				<row>
@@ -149,8 +153,8 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtCorreoPrograma" width="230px"
-							tooltip="pupNombrePrograma" tabindex="3" />
+						<textbox id="txtCorreoPrograma" width="230px" maxlength="100"
+							tooltip="pupNombrePrograma" tabindex="5" />
 					</hbox>
 				</row>
 
@@ -169,14 +173,14 @@
 					<separator />
 					<div sclass="btn-group">
 						<button id="btnGuardarPrograma" label="Guardar"
-							tabindex="4" sclass="btn" tooltip="pupGuardarPrograma"
+							tabindex="6" sclass="btn" tooltip="pupGuardarPrograma"
 							image="/public/imagenes/iconos/guardar.png">
 						</button>
-						<button id="btnCancelarPrograma" tabindex="5"
+						<button id="btnCancelarPrograma" tabindex="7"
 							label="Cancelar" sclass="btn" tooltip="pupCancelarPrograma"
 							image="/public/imagenes/iconos/limpiar.png">
 						</button>
-						<button id="btnEliminarPrograma" tabindex="6"
+						<button id="btnEliminarPrograma" tabindex="8"
 							label="Eliminar" sclass="btn" tooltip="pupEliminarPrograma"
 							disabled="true" image="/public/imagenes/iconos/eliminar.png">
 						</button>

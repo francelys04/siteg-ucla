@@ -25,7 +25,7 @@
 
 
 
-	<borderlayout height="165%">
+	<borderlayout height="120%">
 		<!-- norte y Encabezado -->
 		<north size="130px">
 
@@ -335,7 +335,7 @@
 							style="margin-left:5px" />
 
 						<combobox id="cmbPrograma" autodrop="true"
-							style="margin-left:10px" width="120px" tabindex="12"
+							style="margin-left:10px" width="200px" tabindex="12"
 							readonly="true">
 							<template name="model">
 								<comboitem label="${each.nombre}"

@@ -6,8 +6,8 @@
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: none; color:none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 	</style>
 
@@ -15,8 +15,8 @@
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: white;color: none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
@@ -32,6 +32,10 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
+
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
+
 
 	</style>
 
@@ -92,7 +96,7 @@
 		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
 	<label value="Campos Obligatorios"
-		style="font-weight:bold;color:rgb(99, 99, 99)">
+		style="font-weight:bold;color: rgb(0, 84, 122)">
 	</label>
 	<separator />
 	<separator />
@@ -116,7 +120,7 @@
 						<label value="Programa:"
 							style="font-weight:bold" />
 					</hlayout>
-					<combobox readonly="true" id="cmbProgramaEstudiante"
+					<combobox readonly="true" id="cmbProgramaEstudiante" tabindex="1"
 						tooltip="pupProgramaEstudiante">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
@@ -133,14 +137,14 @@
 					</hlayout>
 					<hbox>
 
-						<textbox id="txtCedulaEstudiante" width="90%"
+						<textbox id="txtCedulaEstudiante" width="90%" 
 							tabindex="2" tooltip="pupCedulaEstudiante"
 							constraint="/.+[0-9]+/: Debe ingresar una cedula valida" />
 
 
-						<button id="btnCatalogoEstudiante" sclass="btn"
+						<button id="btnCatalogoEstudiante" sclass="btn" 
 							style="margin-left:15px"
-							image="/public/imagenes/iconos/catalogo.png" tabindex="13"
+							image="/public/imagenes/iconos/catalogo.png" tabindex="3"
 							tooltip="pupCatalogoEstudiante" />
 
 					</hbox>
@@ -155,8 +159,8 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtNombreEstudiante" width="100%"
-							tabindex="3" tooltip="pupNombreEstudiante" />
+						<textbox id="txtNombreEstudiante" width="100%" maxlength="100"
+							tabindex="4" tooltip="pupNombreEstudiante" />
 
 						<hlayout>
 							<label value="*"
@@ -165,8 +169,8 @@
 								style="font-weight:bold" />
 						</hlayout>
 
-						<textbox id="txtApellidoEstudiante" width="100%"
-							style="margin-left:10px" tabindex="4"
+						<textbox id="txtApellidoEstudiante" width="100%" maxlength="100"
+							style="margin-left:10px" tabindex="5"
 							tooltip="pupApellidoEstudiante" />
 					</hbox>
 				</row>
@@ -187,10 +191,10 @@
 						<radiogroup id="rdgSexoEstudiante"
 							tooltip="pupSexoEstudiante">
 							<radio id="rdoSexoFEstudiante"
-								label="Femenino" tabindex="5" style="color:black" />
+								label="Femenino" tabindex="6" style="color: rgb(0, 84, 122)" />
 							<radio id="rdoSexoMEstudiante"
-								label="Masculino" style="margin-left:15px;color:black"
-								tabindex="6" />
+								label="Masculino" style="margin-left:15px;color: rgb(0, 84, 122)"
+								tabindex="7" />
 						</radiogroup>
 					</hlayout>
 
@@ -204,8 +208,8 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtDireccionEstudiante" width="420px"
-						rows="2" cols="100" tabindex="7" tooltip="pupDireccionEstudiante" />
+					<textbox id="txtDireccionEstudiante" width="420px" maxlength="500"
+						rows="2" cols="100" tabindex="8" tooltip="pupDireccionEstudiante" />
 
 				</row>
 
@@ -219,8 +223,8 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtTelefonoMovilEstudiante"
-							width="100%" tabindex="8" tooltip="pupTelefonoMovilEstudiante"
+						<textbox id="txtTelefonoMovilEstudiante" maxlength="100"
+							width="100%" tabindex="9" tooltip="pupTelefonoMovilEstudiante"
 							constraint="/.+[0-9]+/: Debe ingresar un telefono valido" />
 
 						<hlayout>
@@ -229,7 +233,7 @@
 						</hlayout>
 
 						<textbox id="txtTelefonoFijoEstudiante"
-							width="90%" style="margin-left:15px" tabindex="9"
+							width="90%" style="margin-left:15px" tabindex="10" maxlength="100"
 							tooltip="pupTelefonoFijoEstudiante"
 							constraint="/.+[0-9]+/: Debe ingresar un telefono valido" />
 					</hbox>
@@ -242,8 +246,8 @@
 						<label value="Correo:" style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtCorreoEstudiante" width="25%"
-						tabindex="10" tooltip="pupCorreoEstudiante" />
+					<textbox id="txtCorreoEstudiante" width="25%" maxlength="100" 
+						tabindex="11" tooltip="pupCorreoEstudiante" />
 				</row>
 
 			</rows>
@@ -263,15 +267,15 @@
 
 						<button id="btnGuardarEstudiante"
 							tooltip="pupGuardarEstudiante" label="Guardar" sclass="btn"
-							image="/public/imagenes/iconos/guardar.png" tabindex="13">
+							image="/public/imagenes/iconos/guardar.png" tabindex="12">
 						</button>
 						<button id="btnCancelarEstudiante"
 							tooltip="pupCancelarEstudiante" label="Cancelar" sclass="btn"
-							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+							image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 						</button>
 						<button id="btnEliminarEstudiante"
 							label="Eliminar" sclass="btn"
-							image="/public/imagenes/iconos/eliminar.png" tabindex="15"
+							image="/public/imagenes/iconos/eliminar.png" tabindex="14"
 							disabled="true" tooltip="pupEliminarEstudiante">
 						</button>
 					</div>

@@ -5,16 +5,17 @@
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: none; color:none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
+
 	</style>
 
 	<style id="estilo">
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: white;color: none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
@@ -30,6 +31,10 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
+
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
+
 
 	</style>
 
@@ -69,7 +74,7 @@
 	<label value="(*) "
 		style="font-weight:bold;color:red;margin-left:2%" />
 	<label value="Campos Obligatorios"
-		style="font-weight:bold;color:rgb(99, 99, 99)" />
+		style="font-weight:bold;color: rgb(0, 84, 122)" />
 	<separator />
 	<separator />
 	<separator />
@@ -93,9 +98,9 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtNombreTipoJurado" width="120%"
+						<textbox id="txtNombreTipoJurado" width="120%" maxlength="100" tabindex="1"
 							tooltip="pupNombreTipoJurado" />
-						<button id="btnCatalogoTipoJurado" sclass="btn"
+						<button id="btnCatalogoTipoJurado" sclass="btn" tabindex="2"
 							tooltip="pupCatalogoTipoJurado"
 							image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:50px" />
@@ -109,9 +114,9 @@
 						<label value="Descripción:"
 							style="font-weight:bold" />
 					</hlayout>
-					<textbox id="txtDescripcionTipoJurado" rows="5"
+					<textbox id="txtDescripcionTipoJurado" rows="5" maxlength="500"
 						tooltip="pupDescripcionTipoJurado" cols="100" width="52%"
-						tabindex="8" />
+						tabindex="3" />
 				</row>
 			</rows>
 		</grid>
@@ -128,14 +133,14 @@
 
 						<button id="btnGuardarTipoJurado"
 							label="Guardar" sclass="btn" tooltip="pupGuardarTipoJurado"
-							image="/public/imagenes/iconos/guardar.png" tabindex="13" />
+							image="/public/imagenes/iconos/guardar.png" tabindex="4" />
 						<button id="btnCancelarTipoJurado"
 							label="Cancelar" sclass="btn" tooltip="pupCancelarTipoJurado"
-							image="/public/imagenes/iconos/limpiar.png" tabindex="14" />
+							image="/public/imagenes/iconos/limpiar.png" tabindex="5" />
 						<button id="btnEliminarTipoJurado"
 							label="Eliminar" sclass="btn" tooltip="pupEliminarTipoJurado"
 							disabled="true" image="/public/imagenes/iconos/eliminar.png"
-							tabindex="15" />
+							tabindex="6" />
 						<separator />
 					</div>
 				</div>

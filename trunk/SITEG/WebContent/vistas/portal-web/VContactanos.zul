@@ -5,8 +5,8 @@
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: none; color:none; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: none; color:none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 	</style>
 
@@ -14,8 +14,8 @@
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: white;color: none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
@@ -32,6 +32,8 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
 
 
 	</style>
@@ -55,7 +57,7 @@
 				</row>
 
 				<row>
-					<combobox readonly="true"
+					<combobox readonly="true" tabindex="1"
 						id="cmbProgramaContactanos">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
@@ -68,7 +70,7 @@
 						style="font-weight:bold" />
 				</row>
 				<row>
-					<textbox id="txtNombre" width="190px" />
+					<textbox id="txtNombre" width="190px" tabindex="2"/>
 				</row>
 
 				<row>
@@ -76,7 +78,7 @@
 						style="font-weight:bold" />
 				</row>
 				<row>
-					<textbox id="txtCorreo" width="190px" />
+					<textbox id="txtCorreo" width="190px" tabindex="3"/>
 				</row>
 
 				<row>
@@ -85,7 +87,7 @@
 				</row>
 
 				<row>
-					<textbox id="txtAsunto" width="270px" />
+					<textbox id="txtAsunto" width="270px" tabindex="4"/>
 				</row>
 
 				<row>
@@ -94,8 +96,8 @@
 
 				<row>
 
-					<textbox id="txtMensaje" rows="5" cols="100"
-						width="530px" tabindex="8" />
+					<textbox id="txtMensaje" rows="5" cols="100" 
+						width="530px" tabindex="5" />
 
 				</row>
 
@@ -116,11 +118,11 @@
 
 						<button id="btnEnviarCorreo" sclass="btn"
 							label="Enviar" image="/public/imagenes/iconos/guardar.png"
-							tabindex="13">
+							tabindex="6">
 						</button>
 						<button id="btnCancelarCorreo" sclass="btn"
 							label="Cancelar" image="/public/imagenes/iconos/limpiar.png"
-							tabindex="14">
+							tabindex="7">
 						</button>
 					</div>
 					<separator />
