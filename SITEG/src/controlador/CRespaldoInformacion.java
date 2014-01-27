@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -53,7 +54,8 @@ public class CRespaldoInformacion extends CGeneral {
 	    	   Executions.getCurrent().sendRedirect("/respaldos/"+nombre, "_blank");
 	       } catch (IOException e) {
 	     
-	       }  
+	       }
+	       Messagebox.show("El Respaldo se ha realizado con exito");
 	}
 	
 
