@@ -71,30 +71,22 @@ public class CEnlaceInteres extends CGeneral {
 	private long id = 0;
 
 	/*
-	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
-	 * tanto VDescarga como VCatalogoDescarga
+	 * Metodo para inicializar componentes al momento que se ejecuta la vista
+	 * 
 	 */
 
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		/*
-		 * Listado de todos las Descargas que se encuentran activas, cuyo
-		 * estatus=true con el servicioDescarga mediante el metodo buscarActivos
-		 */
+		
 
 		Selectors.wireComponents(comp, this, false);
-
-		/*
-		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item de la vista VDescarga
-		 */
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		/*
-		 * Validacion para vaciar la informacion del VDescarga a la vista
-		 * VDescarga.zul si la varible map tiene algun dato contenido
+		 * Validacion para vaciar la informacion del catalogo a la vista
+		 * VEnlacesInteres.zul si la varible map tiene algun dato contenido
 		 */
 
 		if (map != null) {
@@ -124,7 +116,7 @@ public class CEnlaceInteres extends CGeneral {
 
 	}
 
-	// Aca se muestra el catalogo de las Descarga Registradas
+	// Aca se muestra el catalogo de los enlaces Registrados
 	@Listen("onClick = #btnCatalogoEnlace")
 	public void buscarDescarga() {
 
@@ -134,7 +126,7 @@ public class CEnlaceInteres extends CGeneral {
 		window.doModal();
 	}
 
-	// Aca se guardan las Descargas
+	// Aca se guardan los enlaces
 	@Listen("onClick = #btnGuardarEnlace")
 	public void guardarEnlace() {
 
@@ -144,7 +136,7 @@ public class CEnlaceInteres extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show(" ¿Desea guardar los datos del enlace de interes?",
+			Messagebox.show(" Â¿Desea guardar los datos del enlace de interes?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -178,7 +170,7 @@ public class CEnlaceInteres extends CGeneral {
 
 	}
 
-	// Aca se eliminan logicamente las Descarga
+	// Aca se eliminan logicamente los enlaces
 	@Listen("onClick = #btnEliminarEnlace")
 	public void eliminarEnlace() {
 		EnlaceInteres enlace = servicioEnlace.buscarEnlace(id);

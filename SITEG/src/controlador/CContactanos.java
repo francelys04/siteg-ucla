@@ -16,6 +16,7 @@ import modelo.Programa;
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -63,6 +64,13 @@ public class CContactanos extends CGeneral {
 
 	@Listen("onClick = #btnEnviarCorreo")
 	public void enviarCorreo() {
+		Messagebox.show(" ¿Desea enviar correo?",
+				"Dialogo de confirmacion", Messagebox.OK
+						| Messagebox.CANCEL, Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt)
+							throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
 		String nombre = txtNombre.getText();
 		String asunto = txtAsunto.getText();
 		String correo = txtCorreo.getText();
@@ -89,9 +97,13 @@ public class CContactanos extends CGeneral {
 			cancelarCorreo();
 			wdwContactanos.onClose();
 		}
+						}
+					}
+				});
+
 
 	}
-
+//permite limpiar los campos
 	@Listen("onClick = #btnCancelarCorreo")
 	public void cancelarCorreo() {
 

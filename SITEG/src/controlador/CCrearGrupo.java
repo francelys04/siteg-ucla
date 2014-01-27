@@ -347,13 +347,21 @@ public class CCrearGrupo extends CGeneral {
 
 	@Listen("onClick = #btnGuardarGrupo")
 	public void guardarGrupo() {
+		Messagebox.show(" ¿Desea guardar grupo?",
+				"Dialogo de confirmacion", Messagebox.OK
+						| Messagebox.CANCEL, Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt)
+							throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+		
 		List<Arbol> listaArbol = servicioArbol.listarArbol();
 		Set<Arbol> arboles = new HashSet<Arbol>();
 		Treechildren treeChildren = treeGrupo.getTreechildren();
 		Collection<Treeitem> lista = treeChildren.getItems();
 		String nombreGrupo = txtNombreGrupo.getValue();
 		Grupo grupo = servicioGrupo.BuscarPorNombre(nombreGrupo);
-		if (id == 0 && grupo == null || id != 0) {
+		if (id == 0 && grupo == null || id != 0) {			
 			for (int i = 0; i < listaArbol.size(); i++) {
 				for (Iterator<?> iterator = lista.iterator(); iterator
 						.hasNext();) {
@@ -380,6 +388,9 @@ public class CCrearGrupo extends CGeneral {
 					Messagebox.ERROR);
 			cancelarGrupo();
 		}
+	}
+}
+});
 	}
 
 	@Listen("onClick = #btnCancelarGrupo")

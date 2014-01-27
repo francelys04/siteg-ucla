@@ -84,7 +84,13 @@ public class CEditarUsuario extends CGeneral {
 	public void editarUsuario(Event event) throws IOException {
 
 		if(txtClaveUsuarioNueva.getValue().equals(txtClaveUsuarioConfirmar.getValue())){
-			
+			Messagebox.show(" Â¿Desea guardar los cambios?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {	
 		Usuario usuarioAuxiliar = servicioUsuario.buscarUsuarioPorId(id);
 		String nombre = txtNombreUsuarioEditar.getValue();
 		Boolean estatus = true;
@@ -94,7 +100,12 @@ public class CEditarUsuario extends CGeneral {
 			imagenUsuario = imagenUsuarioEditar.getContent().getByteData();
 
 		} else {
-			imagenUsuarioEditar.setContent(new AImage(url));
+			try {
+				imagenUsuarioEditar.setContent(new AImage(url));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			imagenUsuario = imagenUsuarioEditar.getContent().getByteData();
 		}
 
@@ -107,17 +118,24 @@ public class CEditarUsuario extends CGeneral {
 		usuarioAuxiliar.setEstatus(true);
 
 		servicioUsuario.guardar(usuarioAuxiliar);
-		Messagebox.show("Datos del usuario modificados con èxito", "Informado",
+		Messagebox.show("Datos del usuario modificados con exito", "Informacion",
 				Messagebox.OK, Messagebox.INFORMATION);
 		
 		txtClaveUsuarioConfirmar.setValue("");
 		txtClaveUsuarioNueva.setValue("");
-		imagenUsuarioEditar.setContent(new AImage(url));
-		
+		try {
+			imagenUsuarioEditar.setContent(new AImage(url));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+							}
+						}
+					});
 	}
 	
 	else {
-		Messagebox.show("No coincide las claves", "Error",
+		Messagebox.show("No coinciden las claves", "Error",
 				Messagebox.OK, Messagebox.ERROR);
 		
 		
