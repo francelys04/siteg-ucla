@@ -53,6 +53,7 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		if(map != null || map==null){
+			//Permite llenar la lista del teg que tienen por estatus Solicitando Defensa
 			tegsDefensa1 = servicioTeg.buscarTegPorProgramaParaDefensa2(servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
 			if(tegsDefensa1.isEmpty()){
 				ltbSolicitudesDefensa.setEmptyMessage("No hay solicitudes registradas");
@@ -72,7 +73,7 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 		}
 		}
 	}
-	
+	//Permite filtrar los datos del catalogo
 	@Listen("onChange = #txtAreaSolicitudDefensa,#txtTematicaSolicitudDefensa,#txtTituloSolicitudDefensa,#txtNombreTutorSolicitudDefensa,#txtApellidoTutorSolicitudDefensa")
 	public void filtrarCatalogo(){
 		
@@ -110,8 +111,10 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 		ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegs));
 	}
 	
+	//permite enviar el dato seleccionado del catalogo a la vista recibida
 	@Listen("onDoubleClick = #ltbSolicitudesDefensa")
 	public void seleccionarLista(){
+		
 		if(ltbSolicitudesDefensa.getItemCount()!= 0){
 		Listitem listItem = ltbSolicitudesDefensa.getSelectedItem();
 		Teg tegSeleccionado = (Teg)listItem.getValue();

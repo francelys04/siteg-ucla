@@ -157,7 +157,7 @@ public class CCatalogoRequisito extends CGeneral {
 			vistaRecibida = "maestros/VRequisito";
 
 		} else {
-
+		if(ltbRequisito.getItemCount()!=0){
 		Listitem listItem = ltbRequisito.getSelectedItem();
 		Requisito requisitoDatosCatalogo = (Requisito) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -167,6 +167,7 @@ public class CCatalogoRequisito extends CGeneral {
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwCatalogoRequisito.onClose();
+		}
 		}
 	}
 	

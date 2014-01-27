@@ -53,7 +53,7 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 					solicitudes));
 		}
 	}
-
+	//permite filtar los datos del catalogo
 	@Listen("onChange = #txtFechaSolicitud,#txtAreaSolicitud,#txtTematicaSolicitud,#txtDescripcionSolicitud")
 	public void filtrarDatosCatalogo() {
 		List<SolicitudTutoria> solicitudes = servicioTutoria
@@ -86,9 +86,10 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 		ltbSolicitud.setModel(new ListModelList<SolicitudTutoria>(solicitud2));
 
 	}
-
+	//permite llebas los datos del teg a la vista Evaluar Tutorias
 	@Listen("onDoubleClick = #ltbSolicitud")
 	public void seleccionarSolicitud() {
+		if(ltbSolicitud.getItemCount()!=0){
 		Listitem listItem = ltbSolicitud.getSelectedItem();
 		SolicitudTutoria solicitudSeleccionada = (SolicitudTutoria) listItem
 				.getValue();
@@ -100,5 +101,6 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 				"/vistas/transacciones/VEvaluarTutorias.zul", null, null);
 		window.doModal();
 		vista.recibir("catalogos/VCatalogoSolicitudTutorias");
+		}
 	}
 }

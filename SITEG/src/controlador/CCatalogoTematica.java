@@ -59,25 +59,20 @@ public class CCatalogoTematica extends CGeneral {
 
 	/**
 	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
-	 * tanto VActividad como VCatalogoActividad
+	 *
 	 * 
 	 * @date 09-12-2013
 	 */
 	void inicializar(Component comp) {
 
 		/*
-		 * Listado de todos las actividades que se encuentran activos, cuyo
-		 * estatus=true con el servicioActividad mediante el metodo
-		 * buscarActivos
+		 * Listado de todos las tematicas que se encuentran activas
+		 * 
 		 */
 
 		List<Tematica> tematica = servicioTematica.buscarActivos();
 
-		/*
-		 * Validacion para mostrar el listado de actividades mediante el
-		 * componente ltbActividad dependiendo si se encuentra ejecutando la
-		 * vista VCatalogoActividad
-		 */
+		
 		if (txtNombreTematica == null) {
 			ltbTematica.setModel(new ListModelList<Tematica>(tematica));
 		}
@@ -91,10 +86,7 @@ public class CCatalogoTematica extends CGeneral {
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("tematicaCatalogo");
-		/*
-		 * Validacion para vaciar la informacion del VActividad a la vista
-		 * VActividad.zul si la varible map tiene algun dato contenido
-		 */
+		
 
 	}
 
@@ -105,11 +97,7 @@ public class CCatalogoTematica extends CGeneral {
 	 * @date 09-12-2013
 	 */
 
-	/**
-	 * Aca se selecciona una actividad del catalogo
-	 * 
-	 * @date 09-12-2013
-	 */
+	
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
@@ -148,10 +136,10 @@ public class CCatalogoTematica extends CGeneral {
 
 	}
 
-	// Aca se selecciona una actividad del catalogo
+	// Aca se selecciona una tematica del catalogo
 	@Listen("onDoubleClick = #ltbTematica")
 	public void mostrarDatosCatalogo() {
-		
+		if(ltbTematica.getItemCount()!=0){
 
 		try {
 		if (vistaRecibida == null) {
@@ -159,7 +147,7 @@ public class CCatalogoTematica extends CGeneral {
 			vistaRecibida = "maestros/VTematica";
 
 		} else {
-
+			
 			Listitem listItem = ltbTematica.getSelectedItem();
 			Tematica tematicaDatosCatalogo = (Tematica) listItem.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -169,6 +157,7 @@ public class CCatalogoTematica extends CGeneral {
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 			Executions.sendRedirect("/vistas/arbol.zul");
 			wdwCatalogoTematica.onClose();
+			
 		}
 		} catch (NullPointerException e) {
 
@@ -176,6 +165,6 @@ public class CCatalogoTematica extends CGeneral {
 		}
 		
 		}
-
+	}
 	}
 		

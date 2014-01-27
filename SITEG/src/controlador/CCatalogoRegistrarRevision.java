@@ -73,15 +73,9 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	}
 
 	// Metodo que permite obtener una lista de los teg de acuerdo al
-	// programa del profesor que se encuentra loggeado
+	//profesor que se encuentra loggeado
 	public List<Teg> buscarDatos() {
 
-//		Profesor profesor = ObtenerUsuarioProfesor();
-//		Programa programa = new Programa();
-//		programa = profesor.getPrograma();
-//
-//		List<Profesor> profesores = servicioProfesor
-//				.buscarProfesorDelPrograma(programa);
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		List<Teg> tegs = servicioTeg.buscarTegRegistrado();
 
@@ -161,7 +155,7 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	//Metodo que permite mostrar los datos del catalogo
 	@Listen("onDoubleClick = #ltbTrabajosRegistrados")
 	public void mostrarDatosCatalogo() {
-
+		if(ltbTrabajosRegistrados.getItemCount()!=0){
 		Listitem listItem = ltbTrabajosRegistrados.getSelectedItem();
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -173,7 +167,7 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 				"/vistas/transacciones/VRegistrarRevision.zul", null, null);
 		window.doModal();
 		vistaRegistrarRevision.recibir("catalogos/VCatalogoRegistrarRevision");
-		
+		}
 
 	}
 
