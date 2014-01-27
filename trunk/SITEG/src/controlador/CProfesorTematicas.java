@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 import modelo.Profesor;
 import modelo.Tematica;
 
@@ -24,7 +23,6 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-
 import servicio.SProfesor;
 import servicio.STematica;
 import configuracion.GeneradorBeans;
@@ -34,7 +32,7 @@ public class CProfesorTematicas extends CGeneral {
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	STematica serviciotematica = GeneradorBeans.getSTematica();
 	CCatalogoProfesor catalogo = new CCatalogoProfesor();
-	
+
 	@Wire
 	private Textbox txtCedulaProfesorTematica;
 	@Wire
@@ -42,28 +40,18 @@ public class CProfesorTematicas extends CGeneral {
 
 	@Wire
 	private Textbox txtApellidoProfesorTematica;
-	
+
 	@Wire
 	private Textbox txtNombreProfesorTematica;
-	
+
 	@Wire
 	private Listbox lsbTematicasProfesorDisponibles;
 	@Wire
 	private Listbox lsbTematicasProfesorSeleccionadas;
-	
-	
+
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		List<Tematica> tema = serviciotematica.buscarActivos();
-		List<Profesor> profesores = servicioProfesor.buscarActivos();
-		if (txtCedulaProfesorTematica == null) {
-			ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
-		} else
-		{
-			lsbTematicasProfesorDisponibles.setModel(new ListModelList<Tematica>(
-					tema));
-		}
 
 		Selectors.wireComponents(comp, this, false);
 
@@ -75,8 +63,8 @@ public class CProfesorTematicas extends CGeneral {
 
 				txtCedulaProfesorTematica.setValue((String) map.get("cedula"));
 				Profesor profesor = servicioProfesor
-						.buscarProfesorPorCedula(txtCedulaProfesorTematica.getValue());
-				
+						.buscarProfesorPorCedula(txtCedulaProfesorTematica
+								.getValue());
 				txtNombreProfesorTematica.setValue(profesor.getNombre());
 				txtApellidoProfesorTematica.setValue(profesor.getApellido());
 				llenaListas();
@@ -84,10 +72,9 @@ public class CProfesorTematicas extends CGeneral {
 				map = null;
 			}
 		}
-		
+
 	}
-	
-	
+
 	@Listen("onClick = #btnCatalogoProfesorTematica")
 	public void buscarProfesor() {
 
@@ -98,7 +85,7 @@ public class CProfesorTematicas extends CGeneral {
 		catalogo.recibir("maestros/VProfesorTematica");
 
 	}
-	
+
 	@Listen("onClick = #btnAgergarProfesorTematicas")
 	public void moverDerechaTematica() {
 
@@ -118,13 +105,11 @@ public class CProfesorTematicas extends CGeneral {
 		else
 			list2.setParent(lsbTematicasProfesorDisponibles);
 	}
-	
-	
-	
+
 	@Listen("onClick = #btnGuardarProfesorTematicas")
 	public void guardar() {
-		Profesor profesor = servicioProfesor.buscarProfesorPorCedula(txtCedulaProfesorTematica.getValue());
-		
+		Profesor profesor = servicioProfesor
+				.buscarProfesorPorCedula(txtCedulaProfesorTematica.getValue());
 
 		Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
 		for (int i = 0; i < lsbTematicasProfesorSeleccionadas.getItemCount(); i++) {
@@ -132,50 +117,58 @@ public class CProfesorTematicas extends CGeneral {
 					.getValue();
 			tematicasProfesor.add(tema);
 		}
-		
+
 		profesor.setTematicas(tematicasProfesor);
 		servicioProfesor.guardarProfesor(profesor);
 		alert("Configuraciones Guardadas");
 		limpiarCampos();
 	}
+
 	@Listen("onClick = #btnCancelarProfesorTematicas")
 	public void limpiarCampos() {
 		txtCedulaProfesorTematica.setValue("");
 		txtApellidoProfesorTematica.setValue("");
 		txtNombreProfesorTematica.setValue("");
-		llenaListas();
+		lsbTematicasProfesorDisponibles.getItems().clear();
+		lsbTematicasProfesorSeleccionadas.getItems().clear();
 	}
-	
 
 	private void llenaListas() {
+
+		
 		String ProfesorCedula = txtCedulaProfesorTematica.getValue();
-		
-		Profesor profesor = servicioProfesor.buscarProfesorPorCedula(ProfesorCedula);
-		
-		
-		List<Tematica> tematicasDerecha = serviciotematica.buscarTematicasDelProfesor(profesor);
-		
-		
-		lsbTematicasProfesorSeleccionadas.setModel(new ListModelList<Tematica>(
-				tematicasDerecha));
-		
-		
-		List<Long> ids = new ArrayList<Long>();
-		for(int i=0; i<tematicasDerecha.size();i++){
-			long id = tematicasDerecha.get(i).getId();
-			ids.add(id);
+		Profesor profesor = servicioProfesor
+				.buscarProfesorPorCedula(ProfesorCedula);
+		List<Tematica> tematicasDerecha = serviciotematica
+				.buscarTematicasDelProfesor(profesor);
+
+		if (tematicasDerecha.size() == 0) {
+
+			List<Tematica> tema = serviciotematica.buscarActivos();
+			lsbTematicasProfesorDisponibles
+					.setModel(new ListModelList<Tematica>(tema));
+
+		} else {
+
+			lsbTematicasProfesorSeleccionadas
+					.setModel(new ListModelList<Tematica>(tematicasDerecha));
+
+			List<Long> ids = new ArrayList<Long>();
+			for (int i = 0; i < tematicasDerecha.size(); i++) {
+				long id = tematicasDerecha.get(i).getId();
+				ids.add(id);
+			}
+			if (ids.toString() != "[]") {
+				List<Tematica> tematicasIzquierda = serviciotematica
+						.buscarTematicasSinProfesor(ids);
+				lsbTematicasProfesorDisponibles
+						.setModel(new ListModelList<Tematica>(
+								tematicasIzquierda));
+			}
+
 		}
-		if(ids.toString()!="[]"){
-		List<Tematica> tematicasIzquierda = serviciotematica.buscarTematicasSinProfesor(ids);
-		lsbTematicasProfesorDisponibles.setModel(new ListModelList<Tematica>(
-						tematicasIzquierda));
+		
 		}
-	}
-	
-	
 
 
 }
-
-
-

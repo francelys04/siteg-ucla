@@ -130,7 +130,7 @@
 							width="350px">
 							<panelchildren>
 								<listbox
-									emptyMessage="No hay tema registradas"
+									emptyMessage="No hay tematicas registradas"
 									id="lsbTematicasProfesorDisponibles" height="200px"
 									oddRowSclass="non-odd" checkmark="true">
 
@@ -174,7 +174,7 @@
 								<listbox
 									emptyMessage="No hay tematicas seleccionadas"
 									id="lsbTematicasProfesorSeleccionadas" height="200px"
-									mold="paging" pageSize="4" oddRowSclass="non-odd"
+									oddRowSclass="non-odd"
 									checkmark="true">
 									<listhead>
 										<listheader label="Nombre" />
