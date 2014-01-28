@@ -158,7 +158,7 @@ public class CProfesor extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		}else{
-		Messagebox.show("Â¿Desea guardar los datos del profesor?",
+		Messagebox.show("¿Desea guardar los datos del profesor?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
@@ -229,7 +229,7 @@ public class CProfesor extends CGeneral {
 	@Listen("onClick = #btnEliminarProfesor")
 	public void eliminarProfesor() {
 		
-		Messagebox.show("Â¿Desea eliminar los datos del profesor?",
+		Messagebox.show("¿Desea eliminar los datos del profesor?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {

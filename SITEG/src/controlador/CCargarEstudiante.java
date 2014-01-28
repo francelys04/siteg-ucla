@@ -147,7 +147,7 @@ public class CCargarEstudiante extends CGeneral {
 
 		else {
 
-			Messagebox.show("Busqueda de la lista de estudiantes cancelada", "Warning",
+			Messagebox.show("Busqueda de la lista de estudiantes cancelada", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 
 		}

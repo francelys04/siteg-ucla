@@ -347,7 +347,7 @@ public class CCrearGrupo extends CGeneral {
 
 	@Listen("onClick = #btnGuardarGrupo")
 	public void guardarGrupo() {
-		Messagebox.show(" Â¿Desea guardar grupo?",
+		Messagebox.show("¿Desea guardar los datos del grupo?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {

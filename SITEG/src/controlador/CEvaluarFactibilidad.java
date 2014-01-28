@@ -246,13 +246,13 @@ if (registrefactibilidad == true)
 	{
 	for (int i = 0; i < ltbEstudianteEvaluarFactibilidad.getItemCount(); i++) {
         Estudiante estudiante = ltbEstudianteEvaluarFactibilidad.getItems().get(i).getValue();
-        enviarEmailNotificacion(estudiante.getCorreoElectronico(), "Observacion de la Evalucioon de Factibilidad:"+ txtObservacionEvaluarFactibilidad.getValue());
+        enviarEmailNotificacion(estudiante.getCorreoElectronico(), "Observacion de la Evalucion de Factibilidad:"+ txtObservacionEvaluarFactibilidad.getValue());
         
 	}
 	String estatus1 = "Factibilidad Evaluada";
 	teg.setEstatus(estatus1);
 	servicioTeg.guardar(teg); 
-	Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+	Messagebox.show("Datos de la evaluacion registrados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
     salir();
      
      } 

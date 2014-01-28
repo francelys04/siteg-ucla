@@ -110,7 +110,7 @@ public class CProfesorTematicas extends CGeneral {
 	@Listen("onClick = #btnGuardarProfesorTematicas")
 	public void guardar() {
 		if(lsbTematicasProfesorSeleccionadas.getItemCount()!=0){
-		Messagebox.show("Â¿Desea guardar configuracion?",
+		Messagebox.show("¿Desea guardar la configuracion realizada?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
@@ -131,7 +131,7 @@ public class CProfesorTematicas extends CGeneral {
 		servicioProfesor.guardarProfesor(profesor);
 		limpiarCampos();
 		Messagebox.show(
-				"Configuraciones guardadas con exito",
+				"Configuracion guardada con exito",
 				"Informacion", Messagebox.OK,
 				Messagebox.INFORMATION);
 	}
