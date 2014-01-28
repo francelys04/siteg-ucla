@@ -125,6 +125,7 @@ public class CUsuario extends CGeneral {
 
 		txtNombreUsuario.setDisabled(true);
 		txtPasswordUsuario.setDisabled(true);
+		btnCatalogoUsuario.setVisible(false);
 
 		try {
 			imagen.setContent(new AImage(url));

@@ -140,7 +140,7 @@ public class CAtenderDefensa extends CGeneral {
 							Messagebox.ERROR);
 			
 		}else{
-			Messagebox.show("Â¿Desea guardar los datos d ela defensa?",
+			Messagebox.show("¿Desea guardar los datos dela defensa?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -179,6 +179,7 @@ public class CAtenderDefensa extends CGeneral {
 	@Listen("onClick = #btnCancelarDefensa")
 	public void cancelarDefensa() {
 		txtLugarDefensa.setValue("");
+		dtbFechaDefensa.setValue(null);
 		
 	}
 //metodo para cerrar y refrescar las vistas
