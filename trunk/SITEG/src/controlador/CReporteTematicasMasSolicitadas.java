@@ -228,7 +228,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 
 		String rutaUrl = obtenerDirectorio();
 		String reporteSrc = rutaUrl
-				+ "SITEG/vistas/reportes/estadisticos/jasper/RTematicasMasSolicitadas.jasper";
+				+ "SITEG/vistas/reportes/estadisticos/compilados/RTematicasMasSolicitadas.jasper";
 		String reporteImage=rutaUrl
 				+ "SITEG/public/imagenes/reportes/";
 		
