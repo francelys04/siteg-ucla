@@ -106,30 +106,10 @@ public class CInicio extends CGeneral {
 			imgNoticiaUno.setContent(getImagen());
 			imgNoticiaDos.setContent(getImagen());
 			imgNoticiaTres.setContent(getImagen());		
-			Clients.evalJavaScript("setContent('"+getContentString()+"')");
-			iniciarSlide ();
-			}	
+			}
 	}
 	//inician metodos para mostrar imagenes en el slide
-	
-	
-	public void iniciarSlide () {
-		int delay = 2;
-		String comando = "iniciarSlideShow(" + delay*1000 + ")";
-		Clients.evalJavaScript(comando);
-	}
-	
-	
-	private String getContentString() {
-		StringBuilder sb = new StringBuilder();
-		List lista = getListaImagenes();
-		for (int i = 0; i < lista.size(); i++) {
-			if (i > 0)
-				sb.append(",");
-			sb.append(lista.get(i));
-		}
-		return sb.toString();
-	}
+
 	private List<BufferedImage> getListaImagenes () {
 		List<Noticia> noticia= servicioNoticia.buscarActivos();
 		if (listaImagenes == null) {

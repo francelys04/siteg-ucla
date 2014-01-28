@@ -219,6 +219,7 @@ public class CAsignarJurado extends CGeneral {
 							Messagebox.EXCLAMATION);
 
 		} else {
+		
 			for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
 				Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
 				tipoJurado = ((Combobox) ((listItem.getChildren().get(3)))
@@ -229,13 +230,7 @@ public class CAsignarJurado extends CGeneral {
 							"Error", Messagebox.OK, Messagebox.ERROR);
 				}
 				else{
-					Messagebox.show("¿Desea finalizar la asignacion de jurado?",
-							"Dialogo de confirmacion", Messagebox.OK
-									| Messagebox.CANCEL, Messagebox.QUESTION,
-							  new org.zkoss.zk.ui.event.EventListener() {
-								public void onEvent(Event evt)
-										throws InterruptedException {
-									if (evt.getName().equals("onOK")) {
+					
 										
 										Set<Grupo> gruposUsuario = new HashSet<Grupo>();
 										Grupo grupo = servicioGrupo.BuscarPorNombre("ROLE_JURADO");
@@ -306,15 +301,13 @@ public class CAsignarJurado extends CGeneral {
 										salir();
 									
 										
-									}
-								}
-							});
-					
+									
 					
 			
 				}
 			}	
-		
+							
+			
 			
 		}
 
@@ -375,6 +368,7 @@ public class CAsignarJurado extends CGeneral {
 									Messagebox.EXCLAMATION);
 
 				} else {
+										
 					for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
 						Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
 					tipoJurado = ((Combobox) ((listItem.getChildren().get(3))).getFirstChild()).getValue();
@@ -384,13 +378,7 @@ public class CAsignarJurado extends CGeneral {
 									"Error", Messagebox.OK, Messagebox.ERROR);
 						}
 						else{
-							Messagebox.show("Â¿Desea guardar los datos del jurado?",
-									"Dialogo de confirmacion", Messagebox.OK
-											| Messagebox.CANCEL, Messagebox.QUESTION,
-									new org.zkoss.zk.ui.event.EventListener() {
-										public void onEvent(Event evt)
-												throws InterruptedException {
-											if (evt.getName().equals("onOK")) {
+							
 												List<Jurado> jurados = new ArrayList<Jurado>();
 												Teg teg1 = servicioTeg.buscarTeg(idTeg);
 												long cedula1 =  Long.parseLong (cedula);
@@ -408,13 +396,10 @@ public class CAsignarJurado extends CGeneral {
 												salir();
 											
 												
-											}
-										}
-									});
-
+									
 						}
 					}	
-				
+									
 					}	
 				
 					

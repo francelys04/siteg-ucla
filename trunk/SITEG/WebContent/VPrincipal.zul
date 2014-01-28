@@ -1,5 +1,5 @@
 <?page title="Bienvenido" contentType="text/html;charset=UTF-8"  ?>
-<zk>
+<zk xmlns:h="native">
 	<?meta name="viewport" content="width=device-width, initial-scale=1.0" ?>
 
 
@@ -62,23 +62,20 @@
 							<!-- inicio Slide -->
 							<div
 								style="text-align:center;margin-left:20px">
-								<html>
-									<ul id="diapos"
+								
+									<h:ul id="diapos"
 										style="margin-top:7px;">
-										<li>
-											<img class="img"
-												src="public/imagenes/portal/noticias.png" alt="" />
-										</li>
-										<li>
-											<img class="img"
-												src="public/imagenes/portal/12.jpg" alt="" />
-										</li>
-										<li>
-											<img class="img"
-												src="public/imagenes/portal/Noticia2.png" alt="" />
-										</li>
-									</ul>
-								</html>
+										<h:li>
+											<image id="imgNoticiaTres" class="img"/>
+										</h:li>
+										<h:li>
+											<image  id="imgNoticiaDos" class="img"/>
+										</h:li>
+										<h:li>
+											<image id="imgNoticiaUno" class="img"/>
+										</h:li>
+									</h:ul>
+								
 							</div>
 							<!-- fin slide-->
 						</hbox>
