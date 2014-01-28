@@ -331,7 +331,7 @@ public class CUsuario extends CGeneral {
 		txtNombreUsuario.setDisabled(false);
 		txtPasswordUsuario.setDisabled(false);
 		btnEliminarUsuario.setDisabled(true);
-		btnCatalogoUsuario.setVisible(true);
+		btnCatalogoUsuario.setVisible(false);
 		txtCorreo.setValue("");
 		txtCorreo.setDisabled(false);
 		
