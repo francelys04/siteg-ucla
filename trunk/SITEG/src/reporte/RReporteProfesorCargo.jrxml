@@ -51,7 +51,7 @@
 			</textField>
 			<image>
 				<reportElement x="0" y="0" width="133" height="79" uuid="81d32369-d5b7-41f7-b4a4-f53557b8cfc3"/>
-				<imageExpression><![CDATA["C:\\Users\\Irina\\workspace\\SITEG\\src\\reporte\\logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["/reporte/logo.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
