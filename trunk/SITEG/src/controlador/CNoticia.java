@@ -142,7 +142,7 @@ public class CNoticia extends CGeneral {
 		Boolean estatus = true;
 		byte[] image = imagen.getContent().getByteData();
 		Profesor profesor = ObtenerUsuarioProfesor();
-		Usuario usuario = servicioUsuario.buscarUsuarioPorId(profesor.getUsuario().getId());
+		Usuario usuario = profesor.getUsuario();
 		Noticia noticia1 = new Noticia(id,nombre,descripcion, estatus,image,usuario);
 		servicioNoticia.guardar(noticia1);
 		cancelarNoticia();
