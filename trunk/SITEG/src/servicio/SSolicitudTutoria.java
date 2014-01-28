@@ -81,7 +81,7 @@ public class SSolicitudTutoria {
 			Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<SolicitudTutoria> solicitudes;
-		solicitudes = interfaceSolicitud.findByFechaBetween(fechaInicio,fechaFin);
+		solicitudes = interfaceSolicitud.findByFechaBetweenOrderByProfesorDesc(fechaInicio,fechaFin);
 		return solicitudes;
 	}
 
@@ -89,7 +89,7 @@ public class SSolicitudTutoria {
 			Tematica tematica, Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<SolicitudTutoria> solicitudes;
-		solicitudes = interfaceSolicitud.findByTematicaAndFechaBetween(tematica,fechaInicio,fechaFin);
+		solicitudes = interfaceSolicitud.findByTematicaAndFechaBetweenOrderByProfesorDesc(tematica,fechaInicio,fechaFin);
 		return solicitudes;
 	}
 
@@ -97,7 +97,7 @@ public class SSolicitudTutoria {
 			String estatus2, Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<SolicitudTutoria> solicitudes;
-		solicitudes=interfaceSolicitud.findByEstatusAndFechaBetween(estatus2,fechaInicio,fechaFin);
+		solicitudes=interfaceSolicitud.findByEstatusAndFechaBetweenOrderByProfesorDesc(estatus2,fechaInicio,fechaFin);
 		return solicitudes;
 	}
 
@@ -105,8 +105,42 @@ public class SSolicitudTutoria {
 			Tematica tematica, String estatus2, Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<SolicitudTutoria> solicitudes;
-		solicitudes=interfaceSolicitud.findByTematicaAndEstatusAndFechaBetween(tematica,estatus2,fechaInicio,fechaFin);
+		solicitudes=interfaceSolicitud.findByTematicaAndEstatusAndFechaBetweenOrderByProfesorDesc(tematica,estatus2,fechaInicio,fechaFin);
+		return solicitudes;
+	}
+
+	public List<SolicitudTutoria> buscarPorProfesorPorTematicaEstatusEntreFechas(
+			Profesor profesor, Tematica tematica, String estatus2,
+			Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<SolicitudTutoria> solicitudes;
+		solicitudes=interfaceSolicitud.findByProfesorAndTematicaAndEstatusAndFechaBetween(profesor,tematica,estatus2,fechaInicio,fechaFin);
 		return solicitudes;
 	}
 	
+	public List<SolicitudTutoria> buscarPorProfesorEstatusEntreFechas(
+			Profesor profesor, String estatus2,
+			Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<SolicitudTutoria> solicitudes;
+		solicitudes=interfaceSolicitud.findByProfesorAndEstatusAndFechaBetween(profesor,estatus2,fechaInicio,fechaFin);
+		return solicitudes;
+	}
+
+	public List<SolicitudTutoria> buscarPorProfesorTematicaEntreFechas(
+			Profesor profesor, Tematica tematica, Date fechaInicio,
+			Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<SolicitudTutoria> solicitudes;
+		solicitudes=interfaceSolicitud.findByProfesorAndTematicaAndFechaBetween(profesor,tematica,fechaInicio,fechaFin);
+		return solicitudes;
+	}
+
+	public List<SolicitudTutoria> buscarPorProfesorEntreFechas(
+			Profesor profesor, Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		List<SolicitudTutoria> solicitudes;
+		solicitudes=interfaceSolicitud.findByProfesorAndFechaBetween(profesor,fechaInicio,fechaFin);
+		return solicitudes;
+	}
 }

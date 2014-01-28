@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RProfesoresMasSolicitados" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="89b2ba1e-47e3-46e8-a599-f058ab72e350">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="31"/>
+	<property name="ireport.y" value="1"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="estatus" class="java.lang.String"/>
 	<parameter name="tematica" class="java.lang.String"/>
@@ -22,7 +22,7 @@
 	<title>
 		<band height="127" splitType="Stretch">
 			<textField>
-				<reportElement x="243" y="48" width="100" height="20" uuid="8d81e9cb-4c3c-4e10-b468-38f869caadd4"/>
+				<reportElement x="165" y="24" width="256" height="81" uuid="8d81e9cb-4c3c-4e10-b468-38f869caadd4"/>
 				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
 			</textField>
 			<image>
@@ -39,18 +39,18 @@
 		<band height="518" splitType="Stretch">
 			<staticText>
 				<reportElement x="170" y="30" width="150" height="20" uuid="cd363f2c-7f61-44f7-af67-c13c15519bb6"/>
-				<text><![CDATA[Profesores con tematicas mas: ]]></text>
+				<text><![CDATA[Profesores con mas solicitudes:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="321" y="30" width="100" height="20" uuid="c0234410-c62a-4e01-be05-9fa24e320f3d"/>
 				<textFieldExpression><![CDATA[$P{estatus}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="40" y="75" width="58" height="21" uuid="f251195c-6b19-4dab-bd58-e4a87998d0a5"/>
-				<text><![CDATA[Tematica:]]></text>
+				<reportElement x="40" y="75" width="100" height="21" uuid="f251195c-6b19-4dab-bd58-e4a87998d0a5"/>
+				<text><![CDATA[Segun la temantica:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="98" y="75" width="100" height="20" uuid="b27e3c66-1864-47d6-bba7-9c8bff7dc358"/>
+				<reportElement x="143" y="75" width="100" height="20" uuid="b27e3c66-1864-47d6-bba7-9c8bff7dc358"/>
 				<textFieldExpression><![CDATA[$P{tematica}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -82,10 +82,10 @@
 				</chart>
 				<categoryDataset>
 					<categorySeries>
-						<seriesExpression><![CDATA[$F{profesor.cedula}]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{profesor.cedula}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{profes_COUNT}.intValue()]]></valueExpression>
-						<labelExpression><![CDATA[$F{profesor.cedula}]]></labelExpression>
+						<seriesExpression><![CDATA[$F{profesor.nombre}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{profesor.nombre}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{profes_COUNT}]]></valueExpression>
+						<labelExpression><![CDATA[$F{profesor.nombre}]]></labelExpression>
 					</categorySeries>
 				</categoryDataset>
 				<barPlot>
