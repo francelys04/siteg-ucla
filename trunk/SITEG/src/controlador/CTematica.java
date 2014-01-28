@@ -135,7 +135,7 @@ public class CTematica extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("Â¿Desea guardar los datos de la tematica?",
+			Messagebox.show("¿Desea guardar los datos de la tematica?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {

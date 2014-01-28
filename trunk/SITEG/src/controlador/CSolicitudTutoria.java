@@ -101,7 +101,7 @@ public class CSolicitudTutoria extends CGeneral {
 	//Metodo para aceptar la tutoria
 	@Listen("onClick = #btnAceptarTutoria")
 	public void aceptarTutoria() throws IOException{
-		Messagebox.show("¿Desea aceptar brindar la tutoria de este proyecto?",
+		Messagebox.show("¿Desea aceptar la tutoria de este proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
