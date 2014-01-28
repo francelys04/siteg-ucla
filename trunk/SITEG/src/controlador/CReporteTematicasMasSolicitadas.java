@@ -108,7 +108,6 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 
 	}
 
-	
 	@Listen("onClick = #btnGenerarTematicasSolicitadas")
 	public void generarProyectosSolicitados() throws JRException {
 
@@ -154,102 +153,95 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 			}
 
 		}
-		
-		
-		if(tematicasSeleccionadas.size()!=0){
-		
-		
-		/*************************** Contador de Lista ************* ******************/
-		List<Long> tematicas = new ArrayList();
-		List<Integer> contadores = new ArrayList();
-		long tematica = tematicasSeleccionadas.get(0);
-		int contadorTematicas = 0;
-		for (int i = 0; i < tematicasSeleccionadas.size(); i++) {
-			if (tematica == tematicasSeleccionadas.get(i)) {
-				contadorTematicas = contadorTematicas + 1;
-			} else {
-				tematicas.add(tematica);
-				contadores.add(contadorTematicas);
-				tematica = tematicasSeleccionadas.get(i);
-				contadorTematicas = 1;
-			}
-		}
-		tematicas.add(tematica);
-		contadores.add(contadorTematicas);
-		/*************************** Ordenado de Lista ************* ******************/
-		List<Long> tematicasOrdenados = new ArrayList();
-		List<Integer> contadoresOrdenados = new ArrayList();
-		List<Tematica> tematicasFinales = new ArrayList();
-		int valor = 0;
-		int valor2 = 0;
-		long valorTematica = 0;
-		for (int i = 0; i < contadores.size(); i++) {
-			valor = contadores.get(i);
-			for (int j = 0; j < contadores.size(); j++) {
-				valor2 = contadores.get(j);
-				valorTematica = tematicas.get(j);
-				if (valor2 > valor) {
-					contadores.remove(j);
-					tematicas.remove(j);
-					contadoresOrdenados.add(valor2);
-					tematicasOrdenados.add(valorTematica);
-					j = contadores.size();
+
+		if (tematicasSeleccionadas.size() != 0) {
+
+			/*************************** Contador de Lista ************* ******************/
+			List<Long> tematicas = new ArrayList();
+			List<Integer> contadores = new ArrayList();
+			long tematica = tematicasSeleccionadas.get(0);
+			int contadorTematicas = 0;
+			for (int i = 0; i < tematicasSeleccionadas.size(); i++) {
+				if (tematica == tematicasSeleccionadas.get(i)) {
+					contadorTematicas = contadorTematicas + 1;
+				} else {
+					tematicas.add(tematica);
+					contadores.add(contadorTematicas);
+					tematica = tematicasSeleccionadas.get(i);
+					contadorTematicas = 1;
 				}
 			}
-		}
-		if (contadoresOrdenados.size() < 5) {
-			int cantidadFaltante = 4 - contadoresOrdenados.size();
-			int i;
-			for (i = 0; i < 4 - contadoresOrdenados.size(); i++) {
-				for (int z = 0; z < contadores.size(); z++) {
-					contadoresOrdenados.add(contadores.get(z));
-					tematicasOrdenados.add(tematicas.get(z));
+			tematicas.add(tematica);
+			contadores.add(contadorTematicas);
+			/*************************** Ordenado de Lista ************* ******************/
+			List<Long> tematicasOrdenados = new ArrayList();
+			List<Integer> contadoresOrdenados = new ArrayList();
+			List<Tematica> tematicasFinales = new ArrayList();
+			int valor = 0;
+			int valor2 = 0;
+			long valorTematica = 0;
+			for (int i = 0; i < contadores.size(); i++) {
+				valor = contadores.get(i);
+				for (int j = 0; j < contadores.size(); j++) {
+					valor2 = contadores.get(j);
+					valorTematica = tematicas.get(j);
+					if (valor2 > valor) {
+						contadores.remove(j);
+						tematicas.remove(j);
+						contadoresOrdenados.add(valor2);
+						tematicasOrdenados.add(valorTematica);
+						j = contadores.size();
+					}
 				}
 			}
-		}
-		if (contadoresOrdenados.size() > 5) {
-			for (int i = 5; i < contadoresOrdenados.size(); i++) {
-				contadoresOrdenados.remove(i);
-				tematicasOrdenados.remove(i);
+			if (contadoresOrdenados.size() < 5 && contadores.size() != 0) {
+				int cantidadFaltante = 5 - contadoresOrdenados.size();
+				for (int i = 0; i < cantidadFaltante; i++) {
+					if (i < contadores.size()) {
+						contadoresOrdenados.add(contadores.get(i));
+						tematicasOrdenados.add(tematicas.get(i));
+					}
+				}
 			}
-		}
-		List<Long> tematicasFinales2 = new ArrayList();
-		for (int i = 0; i < tematicasOrdenados.size(); i++) {
-			Tematica tematicaFinal = servicioTematica
-					.buscarTematica(tematicasOrdenados.get(i));
-			tematicasFinales.add(tematicaFinal);
-		}
-		List<Teg> tegsSegunUltimasTematicas = servicioTeg
-				.buscarUltimasOrdenadasEstatus(estatus, tematicasFinales,
-						fechaInicio, fechaFin);
+			if (contadoresOrdenados.size() > 5) {
+				for (int i = 5; i < contadoresOrdenados.size(); i++) {
+					contadoresOrdenados.remove(i);
+					tematicasOrdenados.remove(i);
+				}
+			}
+			for (int i = 0; i < tematicasOrdenados.size(); i++) {
+				Tematica tematicaFinal = servicioTematica
+						.buscarTematica(tematicasOrdenados.get(i));
+				tematicasFinales.add(tematicaFinal);
+			}
+			List<Teg> tegsSegunUltimasTematicas = servicioTeg
+					.buscarUltimasOrdenadasEstatus(estatus, tematicasFinales,
+							fechaInicio, fechaFin);
 
-		FileSystemView filesys = FileSystemView.getFileSystemView();
-		Map parametro = new HashMap();
+			FileSystemView filesys = FileSystemView.getFileSystemView();
+			Map parametro = new HashMap();
 
-		String rutaUrl = obtenerDirectorio();
-		String reporteSrc = rutaUrl
-				+ "SITEG/vistas/reportes/estadisticos/compilados/RTematicasMasSolicitadas.jasper";
-		String reporteImage=rutaUrl
-				+ "SITEG/public/imagenes/reportes/";
-		
+			String rutaUrl = obtenerDirectorio();
+			String reporteSrc = rutaUrl
+					+ "SITEG/vistas/reportes/estadisticos/compilados/RTematicasMasSolicitadas.jasper";
+			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
 
-		parametro.put("titulo", "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
-				+ " DECANATO DE CIENCIAS Y TECNOLOGIA"
-				+ "DIRECCION DE PROGRAMA");
-		parametro.put("programaNombre", cmbPrograma.getValue());
-		parametro.put("areaNombre", cmbArea.getValue());
-		parametro.put("etapaTeg", etapaTeg);
-		parametro.put("logoUcla", reporteImage+"logo ucla.png");
-		parametro.put("logoCE", reporteImage+"logo CE.png");
-		
-		
-		jstVistaPrevia.setSrc(reporteSrc);
-		jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-				tegsSegunUltimasTematicas));
-		jstVistaPrevia.setType("pdf");
-		jstVistaPrevia.setParameters(parametro);
-		}
-		else{
+			parametro.put("titulo",
+					"UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
+							+ " DECANATO DE CIENCIAS Y TECNOLOGIA"
+							+ "DIRECCION DE PROGRAMA");
+			parametro.put("programaNombre", cmbPrograma.getValue());
+			parametro.put("areaNombre", cmbArea.getValue());
+			parametro.put("etapaTeg", etapaTeg);
+			parametro.put("logoUcla", reporteImage + "logo ucla.png");
+			parametro.put("logoCE", reporteImage + "logo CE.png");
+
+			jstVistaPrevia.setSrc(reporteSrc);
+			jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+					tegsSegunUltimasTematicas));
+			jstVistaPrevia.setType("pdf");
+			jstVistaPrevia.setParameters(parametro);
+		} else {
 			Messagebox.show("No ha informacion disponible para este intervalo");
 		}
 
@@ -282,7 +274,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		if (etapaNombre.equals("Proyecto")) {
 			listaComboEstatus.add("Factible");
 			listaComboEstatus.add("No Factible");
-			
+
 		}
 		if (etapaNombre.equals("Teg")) {
 			listaComboEstatus.add("Aprobado");
@@ -290,9 +282,10 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		}
 		cmbEstatus.setModel(new ListModelList<String>(listaComboEstatus));
 	}
+
 	@Listen("onClick = #btnCancelarTematicasSolicitadas")
 	public void cancelarTematicasSolicitadas() throws JRException {
-		
+
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbArea.setDisabled(true);
@@ -301,7 +294,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		cmbEstatus.setDisabled(true);
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
-		
+
 		jstVistaPrevia.setSrc("");
 		jstVistaPrevia.setDatasource(null);
 	}
