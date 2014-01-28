@@ -375,7 +375,7 @@ public class CConsultarEstatus extends CGeneral {
 		cedulaRecibida = cedula;
 		Window VConsultarEstatusProyecto = (Window) Executions
 				.createComponents(
-						"/vistas/reportes/VConsultarEstatusProyecto.zul", null,
+						"/vistas/transacciones/VConsultarEstatusProyecto.zul", null,
 						null);
 		VConsultarEstatusProyecto.doModal();
 
