@@ -1,7 +1,6 @@
-<window  title="Proyectos mas Solicitados por Area"
-	border="normal" width="100%" height="450px" closable="true"
-	apply="controlador.CReporteTematicasMasSolicitadas">
-
+<window id="wdwReporteProfesorCargo"
+	title="Tematicas mas solicitadas"
+	border="normal" width="60%" height="auto" closable="true" apply="controlador.CReporteTematicasMasSolicitadas">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -34,16 +33,15 @@
 
 	</style>
 
-	<style src="/public/css/bootstrap.css" />
+	<separator />
+	<separator />
+	<!-- <label value="(*) "
+		style="font-weight:bold;color:red;margin-center:2%">
+		</label> -->
 
-	<!-- Lista de popus -->
-	<popup id="pupAreaTematica">
-		<toolbarbutton label="Seleccione el area de la tematica" />
-	</popup>
-
-	<!-- Fin de popus -->
-
-	<separator />
+	<label value="Tematicas Mas Solicitadas por estatus"
+		style="font-weight:bold;margin-left:35%;margin-right:20%">
+	</label>
 	<separator />
 	<separator />
 	<separator />
@@ -51,113 +49,117 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="270px"
-		style="margin-left:2%;margin-right:1%">
+		<groupbox width="auto" style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
+		<grid sclass="fgrid">
+			<columns>
+				<column width="17%" height="17%" />
+			</columns>
+			<rows>
 
-		<hbox>
-			<label value="Programa:" style="color:black" />
-			<combobox id="cmbPrograma" readonly="true" width="50%"
-				tabindex="12" tooltip="pupPrograma">
-				<template name="model">
-					<comboitem label="${each.nombre}" id="${each.id}"/>
-				</template>
-			</combobox>
-			<separator />
-			<separator />
+				<row>
 
-			<hlayout>
-				<label value="Area:" style="color:black" />
-			</hlayout>
-			<combobox id="cmbArea" readonly="true" width="50%"
-				tabindex="12" tooltip="pupArea">
-				<template name="model">
-					<comboitem label="${each.nombre}" id="${each.id}"/>
-				</template>
-			</combobox>
-			<separator />
-			<separator />
-			<hlayout>
-				<label value="Tipo:" style="color:black" />
-			</hlayout>
-			<combobox id="cmbTipo" readonly="true" width="50%"
-				tabindex="12" tooltip="pupTipo">
-				<comboitem label="Proyecto" />
-				<comboitem label="Teg" />
+					<hlayout width="100%">
+						<label value="Fecha Inicio Registro:"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbFechaInicio" cols="12" 
+						style="margin-right:30px;color:black !important;" width="100%"
+						format="short" onCreate="self.value = new Date()" mold="rounded"
+						readonly="true">
+					</datebox>
+
+
+					<hlayout width="100%">
+						<label value="Fecha Fin Registro:"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbFechaFin" cols="12"
+						style="margin-right:30px;color:black !important;" width="100%"
+						format="short" onCreate="self.value = new Date()" mold="rounded"
+						readonly="true">
+					</datebox>
+
+				</row>
+
+
+				<row>
+					<hlayout>
+						<label value="Programa:"
+							style="font-weight:bold" />
+					</hlayout>
+
+					<combobox id="cmbPrograma" width="100%"
+						readonly="true">
+						<template name="model">
+							<comboitem label="${each.nombre}" id="${each.id}" />
+						</template>
+					</combobox>
+					<hlayout>
+						<label value="Area:" style="font-weight:bold"
+							width="100%" />
+					</hlayout>
+					<combobox id="cmbArea" width="100%"
+						readonly="true">
+						<template name="model">
+							<comboitem label="${each.nombre}"  id="${each.id}" />
+						</template>
+					</combobox>
+
+
+				</row>
+
+				<row>
+
+					<hlayout>
+						<label value="Etapa del Teg:" style="color:black" />
+					</hlayout>
+					<combobox id="cmbEtapaTeg" readonly="true" width="100%"
+						tabindex="12" tooltip="pupEtapa">
+						<comboitem label="Proyecto" />
+						<comboitem label="Teg" />
+
+					</combobox>
 				
-			</combobox>
-			<separator />
-			<separator />
-			
 
-			<hlayout>
-				<label value="Estatus:" style="color:black" />
-			</hlayout>
-			<combobox id="cmbEstatus" readonly="true" width="50%"
-				tabindex="12" tooltip="pupEstatus">
-				<template name="model">
-					<comboitem label="${each}"/>
-				</template>
+					<hlayout>
+						<label value="Estatus:" style="color:black" />
+					</hlayout>
+					<combobox id="cmbEstatus" readonly="true"
+						width="100%" tabindex="12" tooltip="pupEstatus">
+						<template name="model">
+							<comboitem label="${each}" />
+						</template>
 
-			</combobox>
+					</combobox>
+				</row>
 
-
-
-
-		</hbox>
+			</rows>
+		</grid>
 		<separator />
 		<separator />
-		<separator />
-		<separator />
-		<separator />
-		<separator />
-		<hbox>
-
-			<hlayout>
-				<label value="Fecha Inicio de Registro:" style="color:black" />
-			</hlayout>
-			<datebox id="dtbFechaInicio" cols="12"
-				style="margin-right:30px;color:black !important;" width="130px"
-				format="short" onCreate="self.value = new Date()" mold="rounded"
-				>
-			</datebox>
-
-
-			<hlayout>
-				<label value="Fecha Fin de Registro:" style="color:black" />
-			</hlayout>
-			<datebox id="dtbFechaFin" cols="12"
-				style="margin-right:30px;color:black !important;" width="130px"
-				format="short" onCreate="self.value = new Date()" mold="rounded"
-				>
-			</datebox>
-		</hbox>
 	</groupbox>
 	<separator />
 	<separator />
-
-
-
-
+	<separator />
+	<separator />
 	<separator />
 	<separator />
 
-
-
-	<panel border="normal" width="95%"
+	<panel border="normal" width="100%"
 		style="margin-left:2%;margin-right:3%">
 		<panelchildren>
 			<div sclass="alert-info" align="center">
 				<separator />
 				<div sclass="btn-group">
 
-					<button id="btnGenerarProyectosSolicitados"
-						label="Generar" sclass="btn" tooltip="pupGuardarTematica"
+					<button id="btnGenerarTematicasSolicitadas"
+						label="Generar Reporte" sclass="btn"
 						image="/public/imagenes/iconos/guardar.png" tabindex="13">
 					</button>
-					<button id="btnSalirProyectoSolicitados"
-						label="Salir" sclass="btn" tooltip="pupCancelarTematica"
+					<button id="btnCancelarTematicasSolicitadas"
+						label="Cancelar" sclass="btn"
 						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 					</button>
 					<separator />
@@ -166,10 +168,10 @@
 			</div>
 		</panelchildren>
 	</panel>
-
 	<separator />
 	<separator />
-	<separator />
+	
+	<jasperreport id="jstVistaPrevia" height="40%" width="100%"></jasperreport>
 	<separator />
 	<separator />
 </window>
