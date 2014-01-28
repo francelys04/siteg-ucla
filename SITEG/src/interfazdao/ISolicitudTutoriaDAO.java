@@ -25,15 +25,32 @@ public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Lo
 	
 	public List<SolicitudTutoria> findByEstudiantes(Estudiante estudiante);
 
-	public List<SolicitudTutoria> findByFechaBetween(Date fechaInicio,
+	public List<SolicitudTutoria> findByFechaBetweenOrderByProfesorDesc(Date fechaInicio,
 			Date fechaFin);
 
-	public List<SolicitudTutoria> findByTematicaAndFechaBetween(
+	public List<SolicitudTutoria> findByTematicaAndFechaBetweenOrderByProfesorDesc(
 			Tematica tematica, Date fechaInicio, Date fechaFin);
 
-	public List<SolicitudTutoria> findByEstatusAndFechaBetween(String estatus2,
+//	public List<SolicitudTutoria> findByEstatusAndFechaBetween(String estatus2,
+//			Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findByTematicaAndEstatusAndFechaBetweenOrderByProfesorDesc(
+			Tematica tematica, String estatus2, Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findByProfesorAndTematicaAndEstatusAndFechaBetween(
+			Profesor profesor, Tematica tematica, String estatus2,
 			Date fechaInicio, Date fechaFin);
 
-	public List<SolicitudTutoria> findByTematicaAndEstatusAndFechaBetween(
-			Tematica tematica, String estatus2, Date fechaInicio, Date fechaFin);
+	public List<SolicitudTutoria> findByEstatusAndFechaBetweenOrderByProfesorDesc(
+			String estatus2, Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findByProfesorAndEstatusAndFechaBetween(
+			Profesor profesor, String estatus2, Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findByProfesorAndTematicaAndFechaBetween(
+			Profesor profesor, Tematica tematica, Date fechaInicio,
+			Date fechaFin);
+
+	public List<SolicitudTutoria> findByProfesorAndFechaBetween(
+			Profesor profesor, Date fechaInicio, Date fechaFin);
 }

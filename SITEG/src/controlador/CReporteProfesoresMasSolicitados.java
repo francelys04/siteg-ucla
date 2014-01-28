@@ -56,7 +56,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	private Combobox cmbTematicaReporteProfesoresSolicitados;
 	@Wire
 	private Combobox cmbSolicitudesReporteProfesoresSolicitados;
-	private String[] estatusSolicitud = {"Aprobadas", "Rechazadas","Por Revisar","Todos"};
+	private String[] estatusSolicitud = {"Aceptada", "Rechazada","Por Revisar","Todos"};
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
@@ -113,6 +113,9 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		Tematica tematica = servicioTematica.buscarTematica(idTematica);
 		String estatus = cmbSolicitudesReporteProfesoresSolicitados.getValue();
 		List<SolicitudTutoria> solicitudes = new ArrayList<SolicitudTutoria>();
+		List<SolicitudTutoria> solicitudesFinales = new ArrayList<SolicitudTutoria>();
+		List<SolicitudTutoria> solicitudTutorias = new ArrayList<SolicitudTutoria>();
+		List<Profesor> profesores = new ArrayList<Profesor>();
 		if (fechaFin == null || fechaInicio == null
 				|| fechaInicio.after(fechaFin)) {
 			Messagebox.show(
@@ -124,102 +127,134 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 //					todos todos
 					solicitudes = servicioSolicitudTutoria.buscarTodasSolicitudesEntreFechas(fechaInicio, fechaFin);
 					System.out.println("Todos"+solicitudes.size());
+					profesores =ordenar(solicitudes);
+					for(int i=0; i<profesores.size();i++){
+						solicitudTutorias = servicioSolicitudTutoria.buscarPorProfesorEntreFechas(profesores.get(i),fechaInicio,fechaFin);
+						solicitudesFinales.addAll(solicitudTutorias);
+					}
 				} else {
 //					todos estatus una tematica
 					solicitudes = servicioSolicitudTutoria.buscarSolicitudesPorTematicaEntreFechas(tematica,fechaInicio, fechaFin);
 					System.out.println("Todos estatus una tematica"+solicitudes.size());
+					profesores =ordenar(solicitudes);
+					for(int i=0; i<profesores.size();i++){
+						solicitudTutorias = servicioSolicitudTutoria.buscarPorProfesorTematicaEntreFechas(profesores.get(i), tematica, fechaInicio,fechaFin);
+						solicitudesFinales.addAll(solicitudTutorias);
+					}
 				}
 			} else {
 				if (cmbTematicaReporteProfesoresSolicitados.getValue().equals(estatusSolicitud[3]))  {
 //					todos tematicas un estatus
 					solicitudes = servicioSolicitudTutoria.buscarSolicitudesPorEstatusEntreFechas(estatus, fechaInicio, fechaFin);
 					System.out.println("Todas tematicas un estatus"+solicitudes.size());
+					profesores =ordenar(solicitudes);
+					for(int i=0; i<profesores.size();i++){
+						solicitudTutorias = servicioSolicitudTutoria.buscarPorProfesorEstatusEntreFechas(profesores.get(i), estatus, fechaInicio, fechaFin);
+						solicitudesFinales.addAll(solicitudTutorias);
+					}
 				} else {
 //					un estatus una tematica
 					solicitudes = servicioSolicitudTutoria.buscarSolicitudesPorTematicaEstatusEntreFechas(tematica, estatus, fechaInicio, fechaFin);
 					System.out.println("Una tematica un estatus"+solicitudes.size());
-				}
-			}
-			
-			List<String> profesores = new ArrayList<String>();
-			List<Integer> contadores = new ArrayList<Integer>();
-			String profesor = solicitudes.get(0).getProfesor().getCedula();
-			int contadorProfesores=0;
-			for (int i = 0; i < solicitudes.size(); i++) {
-				if (profesor == solicitudes.get(i).getProfesor().getCedula()) {
-					contadorProfesores = contadorProfesores + 1;
-				} else {
-					profesores.add(profesor);
-					contadores.add(contadorProfesores);
-					profesor = solicitudes.get(i).getProfesor().getCedula();
-					contadorProfesores = 1;
-				}
-			}
-			profesores.add(profesor);
-			contadores.add(contadorProfesores);
-			/*************************** Ordenado de Lista ************* ******************/
-			List<String> profesoresOrdenados = new ArrayList<String>();
-			List<Integer> contadoresOrdenados = new ArrayList();
-			List<Profesor> profesoresFinales = new ArrayList<Profesor>();
-			int valor = 0;
-			int valor2 = 0;
-			String valorProfesor = null;
-			for (int i = 0; i < contadores.size(); i++) {
-				valor = contadores.get(i);
-				for (int j = 0; j < contadores.size(); j++) {
-					valor2 = contadores.get(j);
-					valorProfesor = profesores.get(j);
-					if (valor2 > valor) {
-						contadores.remove(j);
-						profesores.remove(j);
-						contadoresOrdenados.add(valor2);
-						profesoresOrdenados.add(valorProfesor);
-						j = contadores.size();
+					profesores =ordenar(solicitudes);
+					for(int i=0; i<profesores.size();i++){
+						solicitudTutorias = servicioSolicitudTutoria.buscarPorProfesorPorTematicaEstatusEntreFechas(profesores.get(i), tematica, estatus, fechaInicio, fechaFin);
+						solicitudesFinales.addAll(solicitudTutorias);
 					}
+					
 				}
 			}
-			if (contadoresOrdenados.size() < 5) {
-				int cantidadFaltante = 4 - contadoresOrdenados.size();
-				System.out.println("tamaño lista1:" + contadoresOrdenados.size());
-				int i;
-				for (i = 0; i < 4 - contadoresOrdenados.size(); i++) {
-					for (int z = 0; z < contadores.size(); z++) {
-						System.out.println("itemsz-:" + contadores.get(z));
-						contadoresOrdenados.add(contadores.get(z));
-						profesoresOrdenados.add(profesores.get(z));
-					}
-				}
-				System.out.println("tamaño lista2:" + contadoresOrdenados.size());
-			}
-			if (contadoresOrdenados.size() > 5) {
-				for (int i = 5; i < contadoresOrdenados.size(); i++) {
-					contadoresOrdenados.remove(i);
-					profesoresOrdenados.remove(i);
-				}
-			}
-			for (int i = 0; i < profesoresOrdenados.size(); i++) {
-				Profesor profesorFinal = servicioProfesor.buscarProfesorPorCedula(profesoresOrdenados.get(i));
-				profesoresFinales.add(profesorFinal);
-				System.out.println("items3tematicas-:"
-						+ profesoresFinales.get(i).getCedula());
-			}
-			
 			FileSystemView filesys = FileSystemView.getFileSystemView();
 			Map<String, Object> p = new HashMap<String, Object>();
 			p.put("titulo", "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
 					+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
 					+ "DIRECCION DE PROGRAMA");
-			p.put("fecha1", fechaInicio);
-			p.put("fecha2", fechaFin);
+			p.put("inicio", fechaInicio);
+			p.put("fin", fechaFin);
+			p.put("estatus", estatus);
+			if(cmbTematicaReporteProfesoresSolicitados.getValue().equals(estatusSolicitud[3]))
+				p.put("tematica", "Todas las tematicas");
+				else p.put("tematica", tematica.getNombre());
 			JasperReport jasperReport = (JasperReport) JRLoader
 					.loadObject(getClass().getResource(
 							"/reporte/RProfesoresMasSolicitados.jasper"));
 			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					jasperReport, p, new JRBeanCollectionDataSource(solicitudes));
+					jasperReport, p, new JRBeanCollectionDataSource(solicitudesFinales));
 			JasperExportManager.exportReportToPdfFile(jasperPrint, filesys
 					.getHomeDirectory().toString() + "/reporteGrafica.pdf");
 			
 		}
 	}
-
+	public List<Profesor> ordenar(List<SolicitudTutoria> solicitudes){
+		List<String> profesores = new ArrayList();
+		List<Integer> contadores = new ArrayList();
+		List<SolicitudTutoria> solicitudesTutoria = new ArrayList();
+		SolicitudTutoria solicitud = solicitudes.get(0);
+		String profesor = solicitudes.get(0).getProfesor().getCedula();
+		
+		int contadorProfesores = 0;
+		for (int i = 0; i < solicitudes.size(); i++) {
+			solicitud = solicitudes.get(i);
+			if (profesor == solicitudes.get(i).getProfesor().getCedula()) {
+				contadorProfesores = contadorProfesores + 1;
+			} else {
+				profesores.add(profesor);
+				contadores.add(contadorProfesores);
+				solicitudesTutoria.add(solicitud);
+				solicitud = solicitudes.get(i);
+				profesor = solicitudes.get(i).getProfesor().getCedula();
+				contadorProfesores = 1;
+			}
+		}
+		profesores.add(profesor);
+		contadores.add(contadorProfesores);
+		solicitudesTutoria.add(solicitud);
+		/*************************** Ordenado de Lista ************* ******************/
+		List<String> profesoresOrdenados = new ArrayList();
+		List<Integer> contadoresOrdenados = new ArrayList();
+		List<SolicitudTutoria> solicitudesFinales = new ArrayList();
+		int valor = 0;
+		int valor2 = 0;
+		SolicitudTutoria solicit = new SolicitudTutoria();
+		String valorTematica = "";
+		for (int i = 0; i < contadores.size(); i++) {
+			valor = contadores.get(i);
+			for (int j = 0; j < contadores.size(); j++) {
+				valor2 = contadores.get(j);
+				valorTematica = profesores.get(j);
+				solicit = solicitudesTutoria.get(j);
+				if (valor2 > valor) {
+					contadores.remove(j);
+					profesores.remove(j);
+					solicitudesTutoria.remove(j);
+					contadoresOrdenados.add(valor2);
+					profesoresOrdenados.add(valorTematica);
+					solicitudesFinales.add(solicit);
+					j = contadores.size();
+				}
+			}
+		}
+		if (contadoresOrdenados.size() < 5 && contadores.size() != 0) {
+			int cantidadFaltante = 5 - contadoresOrdenados.size();
+			for (int i = 0; i < cantidadFaltante; i++) {
+				if (i < contadores.size()) {
+					contadoresOrdenados.add(contadores.get(i));
+					profesoresOrdenados.add(profesores.get(i));
+					solicitudesFinales.add(solicitudesTutoria.get(i));
+				}
+			}
+		}
+		if (contadoresOrdenados.size() > 5) {
+			for (int i = 5; i < contadoresOrdenados.size(); i++) {
+				contadoresOrdenados.remove(i);
+				profesoresOrdenados.remove(i);
+				solicitudesFinales.remove(i);
+			}
+		}
+		List<Profesor> f = new ArrayList<Profesor>();
+		for (int i = 0; i < profesoresOrdenados.size(); i++) {
+			f.add(servicioProfesor.buscarProfesorPorCedula(profesoresOrdenados.get(i)));
+					}
+		return f;
+	}
 }
