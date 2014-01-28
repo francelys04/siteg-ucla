@@ -157,7 +157,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 			Messagebox.show("Debe completar los campos", "Error", Messagebox.OK, Messagebox.ERROR);
 		} 
 		else {
-			Messagebox.show("Â¿Desea guardar el archivo?",
+			Messagebox.show("¿Desea guardar los datos del archivo?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -186,7 +186,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 	//Permite eliminar un archivo
 	@Listen("onClick = #btnEliminarArchivoDescarga") 
 	public void eliminarArchivo (){
-		Messagebox.show("Â¿Desea eliminar archivo?",
+		Messagebox.show("¿Desea eliminar los datos del archivo?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {

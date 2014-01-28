@@ -114,7 +114,7 @@ public class CTipoJurado extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("Â¿Desea guardar los datos del tipo de jurado?",
+			Messagebox.show("¿Desea guardar los datos del tipo de jurado?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -148,7 +148,7 @@ public class CTipoJurado extends CGeneral {
 	@Listen("onClick = #btnEliminarTipoJurado")
 	public void eliminarTipoJurado() {
 		
-		Messagebox.show("Â¿Desea eliminar los datos del tipo de jurado?",
+		Messagebox.show("¿Desea eliminar los datos del tipo de jurado?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
