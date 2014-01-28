@@ -65,12 +65,15 @@ public class CReporteProfesorCargo extends CGeneral {
 		private String nombre;
 		private String titulo;
 		private String cargo;
-		
-		public ElementoReporte(String nombre, String titulo, String cargo) {
+		private String estatusTeg;
+
+
+		public ElementoReporte(String nombre, String titulo, String cargo, String estatusTeg) {
 			super();
 			this.nombre = nombre;
 			this.titulo = titulo;
 			this.cargo = cargo;
+			this.estatusTeg = estatusTeg;
 		}
 
 		public String getNombre() {
@@ -95,6 +98,14 @@ public class CReporteProfesorCargo extends CGeneral {
 		
 		public void setCargo(String cargo) {
 			this.cargo = cargo;
+		}
+		
+		public String getEstatusTeg() {
+			return estatusTeg;
+		}
+
+		public void setEstatusTeg(String estatusTeg) {
+			this.estatusTeg = estatusTeg;
 		}
 	}
 	
@@ -132,6 +143,7 @@ public class CReporteProfesorCargo extends CGeneral {
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
 	long idTematica = 0;
+	long idArea = 0;
 
 	@Override
 	void inicializar(Component comp) {
@@ -216,6 +228,10 @@ public class CReporteProfesorCargo extends CGeneral {
 	public void generarReporteProfesorTeg() throws JRException {
 		Date fechaInicio = dtbCronogramaFechaInicio.getValue();
 		Date fechaFin = dtbCronogramaFechaHasta.getValue();
+		String area1 = cmbArea.getValue();
+		String tematica1 = cmbTematica.getValue();
+		String programa1= cmbPrograma.getValue();
+		AreaInvestigacion area = servicioArea.buscarArea(idArea);
 		Tematica tematica = servicioTematica.buscarTematica(idTematica);
 		String tipoCargo = (String) cmbEstatus.getSelectedItem().getValue();
 		System.out.println(tipoCargo);
@@ -235,7 +251,7 @@ public class CReporteProfesorCargo extends CGeneral {
 					elementos.add(new ElementoReporte(
 							profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 							teg.getTitulo(),
-							"Tutor"));
+							"Tutor", teg.getEstatus()));
 				}
 				
 				if (tipoCargo.equals("Jurado") || tipoCargo.equals("Todos")) {
@@ -244,7 +260,7 @@ public class CReporteProfesorCargo extends CGeneral {
 						elementos.add(new ElementoReporte(
 								profesorJurado.getNombre() + " " + profesorJurado.getApellido(),
 								teg.getTitulo(),
-								"Jurado - " + jurado.getTipoJurado().getNombre()));
+								"Jurado - " + jurado.getTipoJurado().getNombre(), teg.getEstatus()));
 					}
 				}
 				
@@ -253,7 +269,7 @@ public class CReporteProfesorCargo extends CGeneral {
 						elementos.add(new ElementoReporte(
 								profesorComision.getNombre() + " " + profesorComision.getApellido(),
 								teg.getTitulo(),
-								"Comision"));
+								"Comision", teg.getEstatus()));
 					}
 				}
 			}
@@ -261,12 +277,14 @@ public class CReporteProfesorCargo extends CGeneral {
 
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		Map<String, Object> p = new HashMap<String, Object>();
-		p.put("titulo", "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
-				+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
-				+ "DIRECCION DE PROGRAMA");
+		p.put("titulo", "LISTA DE PROFESORES CON EL ROL QUE DESEMPEÑAN EN CADA TRABAJO ESPECIAL DE GRADO");
 		p.put("fecha", new Date());
 		p.put("fecha1", fechaInicio);
 		p.put("fecha2", fechaFin);
+		p.put("area", area1);
+		p.put("tematica", tematica1);
+		p.put("programa", programa1);
+		p.put("cargo", tipoCargo);
 
 		JasperReport jasperReport = (JasperReport) JRLoader
 				.loadObject(getClass().getResource(
