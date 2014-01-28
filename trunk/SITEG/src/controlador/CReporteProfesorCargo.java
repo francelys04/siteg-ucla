@@ -1,6 +1,8 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -273,6 +275,11 @@ public class CReporteProfesorCargo extends CGeneral {
 					}
 				}
 			}
+
+			Collections.sort(elementos, new Comparator<ElementoReporte>() {
+				public int compare(ElementoReporte a, ElementoReporte b) {
+				return a.nombre.compareTo(b.nombre);
+				}});
 		}
 
 		FileSystemView filesys = FileSystemView.getFileSystemView();
