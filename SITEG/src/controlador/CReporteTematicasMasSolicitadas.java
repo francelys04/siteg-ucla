@@ -58,7 +58,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
-import configuracion.UtilidadSiteg;
 
 import servicio.SAreaInvestigacion;
 import servicio.SPrograma;
