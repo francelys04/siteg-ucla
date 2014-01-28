@@ -14,7 +14,7 @@
 		<separator />
 
 
- 	<image src="/public/imagenes/portal/quienessomos.png" id="imagen" width="755px" height="478px" />
+ 	<image src="/public/imagenes/portal/quienessomos.png" id="imagen" width="753px" height="568px" />
 
 
 	</groupbox>

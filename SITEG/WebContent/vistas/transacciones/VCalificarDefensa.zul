@@ -6,8 +6,8 @@
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: none; color:none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 	</style>
 
@@ -15,8 +15,8 @@
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: white;color: none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
@@ -32,6 +32,9 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
+
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
 
 
 	</style>
@@ -78,14 +81,14 @@
 		<separator />
 
 		<label value="Programa:"
-			style="margin-left:2%;font-weight:bold;color:rgb(99, 99, 99)" />
+			style="margin-left:2%;font-weight:bold;color: rgb(0, 84, 122)" />
 		<textbox id="txtProgramaCalificar"
-			style="margin-left:5%;color:black !important;" width="25%"
+			style="margin-left:5%;color:black !important;" width="250px"
 			disabled="true" />
 
 		<div align="right">
 			<label value="Fecha:"
-				style="margin-right:10px;font-weight:bold;color:rgb(99, 99, 99)">
+				style="margin-right:10px;font-weight:bold;color: rgb(0, 84, 122)">
 			</label>
 			<datebox id="dtbfecha" cols="12"
 				style="margin-right:30px;color:black !important;" width="130px"
@@ -124,7 +127,7 @@
 										style="font-weight:bold" />
 
 									<textbox id="txtAreaCalificar"
-										width="80%" style="margin-left:90px;color:black !important;"
+										width="230px" style="margin-left:70px;color:black !important;"
 										disabled="true" />
 
 								</hbox>
@@ -137,7 +140,7 @@
 										Temática: " style="font-weight:bold" />
 
 									<textbox id="txtTematicaCalificar"
-										width="100%" style="margin-left:65px;color:black !important;"
+										width="270px" style="margin-left:50px;color:black !important;"
 										disabled="true" />
 								</hbox>
 
