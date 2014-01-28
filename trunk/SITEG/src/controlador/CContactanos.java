@@ -64,7 +64,7 @@ public class CContactanos extends CGeneral {
 
 	@Listen("onClick = #btnEnviarCorreo")
 	public void enviarCorreo() {
-		Messagebox.show(" Â¿Desea enviar correo?",
+		Messagebox.show("¿Desea enviar el correo?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
@@ -86,7 +86,7 @@ public class CContactanos extends CGeneral {
 		
 		
 		if (valor == true) {
-			Messagebox.show("Mensaje enviado", "Informacion", Messagebox.OK,
+			Messagebox.show("Correo enviado", "Informacion", Messagebox.OK,
 					Messagebox.INFORMATION);
 			cancelarCorreo();
 			wdwContactanos.onClose();

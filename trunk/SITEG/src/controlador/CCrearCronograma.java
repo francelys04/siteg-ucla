@@ -133,12 +133,12 @@ public class CCrearCronograma extends CGeneral {
 		if (!error) {
 			servicioCronograma.guardar(cronogramas);
 			Messagebox
-			.show("Cronograma Registrado",
-					"Informativo", Messagebox.OK, Messagebox.ERROR);
+			.show("Cronograma Registrado con exito",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 			limpiarCampos();
 		} else {
 			Messagebox
-					.show("La fecha de fin de actividades debe ser posterior a la fecha de inicio",
+					.show("La fecha de fin de las actividades debe ser posterior a la fecha de inicio",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		}
 	}

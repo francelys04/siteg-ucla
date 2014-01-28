@@ -136,7 +136,7 @@ public class CEnlaceInteres extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show(" Â¿Desea guardar los datos del enlace de interes?",
+			Messagebox.show("¿Desea guardar los datos del enlace de interes?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -173,11 +173,25 @@ public class CEnlaceInteres extends CGeneral {
 	// Aca se eliminan logicamente los enlaces
 	@Listen("onClick = #btnEliminarEnlace")
 	public void eliminarEnlace() {
-		EnlaceInteres enlace = servicioEnlace.buscarEnlace(id);
-		enlace.setEstatus(false);
-		servicioEnlace.guardar(enlace);
-		cancelarEnlace();
-		alert("Descarga Eliminada");
+		
+		
+		Messagebox.show("¿Desea eliminar los datos del enlace de interes?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+							EnlaceInteres enlace = servicioEnlace.buscarEnlace(id);
+							enlace.setEstatus(false);
+							servicioEnlace.guardar(enlace);
+							cancelarEnlace();
+							Messagebox.show(
+									"Enlace de interes eliminado exitosamente",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
+							
+						}
+					}
+				});
 	}
 
 	// Aca se mandan a limpiar los campos de textos de la vista

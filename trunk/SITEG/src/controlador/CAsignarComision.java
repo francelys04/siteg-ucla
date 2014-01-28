@@ -148,7 +148,7 @@ public class CAsignarComision extends CGeneral {
 						estudiantes));
 				
 				lblCondicionAsignarComision
-				.setValue("Recuerde que los integrantes de la comision son:  "
+				.setValue("Recuerde que el numero de integrantes de la comision es de:  "
 						+ buscarCondicionVigenteEspecifica(
 								"Numero de integrantes de la comision", programa)
 								.getValor());
@@ -342,7 +342,7 @@ public class CAsignarComision extends CGeneral {
 									Messagebox.EXCLAMATION);
 
 				} else {
-					Messagebox.show(" Â¿Desea guardar los miembros de la comision?",
+					Messagebox.show("¿Desea guardar los miembros de la comision?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener() {

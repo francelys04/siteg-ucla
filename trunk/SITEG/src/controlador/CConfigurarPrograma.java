@@ -242,7 +242,10 @@ public class CConfigurarPrograma extends CGeneral {
 			condicionesProgramas.add(condicionProgramaReal);
 		}
 		servicioCondicionPrograma.guardar(condicionesProgramas);
-		alert("Configuraciones Guardadas");
+		Messagebox.show(
+				"Configuraciones guardas exitosamente",
+				"Informacion", Messagebox.OK,
+				Messagebox.INFORMATION);
 		limpiarCampos();
 	}
 

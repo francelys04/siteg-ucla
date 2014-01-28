@@ -132,7 +132,7 @@ public class CNoticia extends CGeneral {
 		if(noticia.size() == 3){
 			Messagebox.show("Ya existen tres noticias debe eliminar una","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		}else{
-			Messagebox.show("Â¿Desea guardar la noticia?",
+			Messagebox.show("¿Desea guardar los datos de la noticia?",
 					"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 					Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 						public void onEvent(Event evt) throws InterruptedException {
@@ -156,7 +156,7 @@ public class CNoticia extends CGeneral {
 	//Aca se eliminan logicamente las Noticias
 	@Listen("onClick = #btnEliminarNoticia")
 	public void eliminarNoticia() {	
-		Messagebox.show("Â¿Desea eliminar la noticia?",
+		Messagebox.show("¿Desea eliminar los datos de la noticia?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {

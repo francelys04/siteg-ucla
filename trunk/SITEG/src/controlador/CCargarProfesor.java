@@ -126,7 +126,7 @@ public class CCargarProfesor extends CGeneral {
 
 		else {
 
-			Messagebox.show("Busqueda de la lista de profesores cancelada", "Warning",
+			Messagebox.show("Busqueda de la lista de profesores cancelada", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 
 		}
