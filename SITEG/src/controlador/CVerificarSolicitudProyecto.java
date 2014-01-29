@@ -152,27 +152,18 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 	//permite mover un requisito disponible a seleccionado
 	@Listen("onClick = #btnAgregarRequisitos")
 	public void moverDerechaRequisitos() {
-
-		Listitem list1 = ltbRequisitosDisponibles.getSelectedItem();
-		if (list1 == null)
-			 Messagebox.show("Seleccione un requisito", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
-		else
-			list1.setParent(ltbRequisitosSeleccionadas);
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable)ltbRequisitosDisponibles.getModel()).getSelection();
+		((ListModelList)ltbRequisitosSeleccionadas.getModel()).addAll(selectedItems);
+		((ListModelList)ltbRequisitosDisponibles.getModel()).removeAll(selectedItems);
 	}
 	
 	//permite mover un requisito seleccionado a disponible si este no 
 	//esta guarda en base de datos
 	@Listen("onClick = #btnRemoverRequisitos")
 	public void moverIzquierdaRequisitos() {
-		Listitem list2 = ltbRequisitosSeleccionadas.getSelectedItem();		
-		if (list2 == null)
-			 Messagebox.show("Seleccione un requisito", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
-		else
-			if (list2.getIndex() < numero) {
-				Messagebox.show("Requisito no puede ser removido", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
-			}else{
-			list2.setParent(ltbRequisitosDisponibles);
-			}
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable)ltbRequisitosSeleccionadas.getModel()).getSelection();
+		((ListModelList)ltbRequisitosDisponibles.getModel()).addAll(selectedItems);
+		((ListModelList)ltbRequisitosSeleccionadas.getModel()).removeAll(selectedItems);
 	}
 	//limpia los campos
 	@Listen("onClick = #btnCancelar")
@@ -201,7 +192,7 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 			Messagebox.show("Debe indicar si los requisitos estan completos o incompletos", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 		}
 		else{
-			Messagebox.show("¿Desea guardar la verificacion de los requisitos?",
+			Messagebox.show("ï¿½Desea guardar la verificacion de los requisitos?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -277,6 +268,8 @@ public class CVerificarSolicitudProyecto   extends CGeneral {
 	
 		ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(requisitosDerecha));
 		numero = requisitosDerecha.size();
+		ltbRequisitosDisponibles.setMultiple(true);
+		ltbRequisitosSeleccionadas.setMultiple(true);
 		
 			}
 	//permite salir y refrescar las vistas
