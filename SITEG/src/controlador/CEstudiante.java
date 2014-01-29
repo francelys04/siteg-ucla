@@ -91,6 +91,8 @@ public class CEstudiante extends CGeneral {
 	private Textbox txtProgramaMostrarEstudiante;
 	@Wire
 	private Button btnEliminarEstudiante;
+	@Wire
+	private Window wdwEstudiante;
 
 	// Metodo heredado del controlador CGeneral que permite inicializar los
 	// componentes de zk
@@ -267,4 +269,14 @@ public class CEstudiante extends CGeneral {
 		btnEliminarEstudiante.setDisabled(true);
 
 	}
+	
+	
+	
+	@Listen("onClick = #btnSalirEstudiante")
+	public void salirEstudiante() {
+		
+
+		wdwEstudiante.onClose();
+	}
+	
 }

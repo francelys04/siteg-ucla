@@ -193,4 +193,19 @@ public class CSolicitudTutoria extends CGeneral {
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwEvaluarTutorias.onClose();
 	}
+	
+	
+	@Listen("onClick = #	btnSalirTutoria")
+	public void salirActividad() {
+	
+		wdwEvaluarTutorias.onClose();
+		
+		
+	}
+	
+	
+	
+	
+
+	
 }

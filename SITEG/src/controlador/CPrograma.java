@@ -94,6 +94,8 @@ public class CPrograma extends CGeneral {
 	private Button btnGuardarPrograma;
 	@Wire
 	private Textbox txtDirectorPrograma;
+	@Wire
+	private Window wdwPrograma;
 	/*
 	 * Inicializacion de la varible global id que sera asociado con el id del
 	 * programa
@@ -272,6 +274,15 @@ public class CPrograma extends CGeneral {
 		txtCorreoPrograma.setValue("");
 		btnEliminarPrograma.setDisabled(true);
 		txtDirectorPrograma.setValue("");
+	}
+	
+	
+	@Listen("onClick = #btnSalirPrograma")
+	public void salirPrograma() {
+		
+		
+		wdwPrograma.onClose();
+		
 	}
 
 }

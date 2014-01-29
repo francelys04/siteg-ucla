@@ -60,6 +60,8 @@ public class CRequisito extends CGeneral {
 	private Textbox txtDescripcionMostrarRequisito;
 	@Wire
 	private Button btnEliminarRequisito;
+	@Wire
+	private Window wdwRequisito;
 	private long id = 0;
 
 	void inicializar(Component comp) {
@@ -168,6 +170,15 @@ public class CRequisito extends CGeneral {
 		btnEliminarRequisito.setDisabled(true);
 
 	}
+	
+	
+	@Listen("onClick = #btnSalirRequisito")
+	public void salirRequisito() {
+		
+		wdwRequisito.onClose();
+
+	}
+	
 
 	
 

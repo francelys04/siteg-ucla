@@ -48,12 +48,13 @@ import configuracion.GeneradorBeans;
 
 @Controller
 public class CCargarEstudiante extends CGeneral {
-	SEstudiante servicioEstudiante = GeneradorBeans
-			.getServicioEstudiante();
-	SPrograma servicioPrograma = GeneradorBeans
-			.getServicioPrograma();
-	
+	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
+	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+
 	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
+
+	@Wire
+	private Window wdwCargarEstudiante;
 	private File f;
 
 	@Listen("onClick = #btnCargarListaEstudiantes")
@@ -66,13 +67,12 @@ public class CCargarEstudiante extends CGeneral {
 
 		// abre el examinar para elegir el archivo
 		javax.swing.JFileChooser j = new javax.swing.JFileChooser();
-		
-		
+
 		// abre el txt
 		int opcion = j.showOpenDialog(j);
 		if (opcion == JFileChooser.APPROVE_OPTION) {
 			String path = j.getSelectedFile().getAbsolutePath();
-			
+
 			f = new File(path);
 
 			try {
@@ -114,19 +114,18 @@ public class CCargarEstudiante extends CGeneral {
 					linea = br.readLine();
 					idprograma = Long.parseLong(linea);
 
-					
-					Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
+					Usuario usuario = servicioUsuario
+							.buscarUsuarioPorNombre("");
 					// busco el programa con el id que tengo en el txt para
 					// registrar
 					Programa p = new Programa();
 					p = servicioPrograma.buscar(idprograma);
 					// creo el estudiante y lo guardo
 					Estudiante estudiante;
-					
-					
-					estudiante = new Estudiante(cedula, nombre, apellido, correo,
-							sexo,direccion, telefonomovil, telefonofijo,
-							estatus, p, usuario);
+
+					estudiante = new Estudiante(cedula, nombre, apellido,
+							correo, sexo, direccion, telefonomovil,
+							telefonofijo, estatus, p, usuario);
 
 					servicioEstudiante.guardar(estudiante);
 				}
@@ -147,15 +146,22 @@ public class CCargarEstudiante extends CGeneral {
 
 		else {
 
-			Messagebox.show("Busqueda de la lista de estudiantes cancelada", "Advertencia",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			Messagebox.show("Busqueda de la lista de estudiantes cancelada",
+					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 
 		}
+	}
+
+	@Listen("onClick = #btnSalirCargarEstudiante")
+	public void salirCargarEstudiante() {
+
+		wdwCargarEstudiante.onClose();
+
 	}
 
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

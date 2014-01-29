@@ -48,6 +48,8 @@ public class CAreaInvestigacion extends CGeneral {
 	private Textbox txtDescripcionMostrarArea;
 	@Wire
 	private Button btnEliminarArea;
+	@Wire
+	private Window wdwArea;
 	private long id = 0;
 	
 
@@ -160,6 +162,14 @@ public class CAreaInvestigacion extends CGeneral {
 		txtDescripcionArea.setValue("");
 		btnEliminarArea.setDisabled(true);
 		id = 0;
+
+	}
+	
+	
+	@Listen("onClick = #btnSalirArea")
+	public void salirArea() {
+
+		wdwArea.onClose();
 
 	}
 

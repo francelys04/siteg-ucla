@@ -36,6 +36,18 @@
 		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
 		122); }
 
+		.z-panel-tl, .z-panel-tr, .z-panel-tl-gray, .z-panel-tr-gray,
+		.z-panel-bl, .z-panel-br { background: #3276b1;
+		background-image: none; }
+
+		.z-panel-hl { background: #3276b1; background-image: none; }
+
+		.z-panel-hr { background: #3276b1; background-image: mome; }
+
+		.z-panel-hm { background: #3276b1; background-image: none; }
+
+		.z-panel-hm .z-panel-header, .z-panel-header { color: #fff; }
+
 
 	</style>
 
@@ -68,6 +80,9 @@
 	</popup>
 	<popup id="pupBtnCancelar">
 		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
+	</popup>
+	<popup id="pupBtnSalir">
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<!-- fin de popus -->
 
@@ -103,17 +118,132 @@
 		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
 			height="430px">
 			<tabs>
+				<tab label="Comisión Evaluadora"
+					tooltip="pupDatosComision" />
 				<tab label="Datos del Proyecto"
 					tooltip="pupDatosProyecto" />
 				<tab label="Datos del Estudiante"
 					tooltip="pupDatosEstudiante" />
 				<tab label="Datos del Tutor" tooltip="pupDatosTutor" />
-				<tab label="Comisión Evaluadora"
-					tooltip="pupDatosComision" />
+
 
 
 			</tabs>
 			<tabpanels>
+
+				<tabpanel height="310px">
+					<separator />
+					<separator />
+
+					<grid sclass="fgrid"
+						style="margin-left:2%;margin-right:1%">
+						<columns>
+							<column width="98%" height="30px" />
+						</columns>
+						<rows>
+
+							<row>
+								<hbox>
+									<label
+										id="lblCondicionAsignarComision" style="font-weight:bold" />
+								</hbox>
+
+							</row>
+
+							<row>
+								<separator />
+								<separator />
+							</row>
+
+
+							<row>
+								<hbox>
+									<panel
+										title="Profesores Disponibles" width="270px">
+										<panelchildren>
+											<listbox
+												id="lsbProfesoresDisponibles" height="230px"
+												emptyMessage="No hay Profesores Disponibles"
+												checkmark="true">
+												<listhead>
+													<listheader
+														label="Nombre" />
+													<listheader
+														label="Apellido" />
+												</listhead>
+												<template
+													name="model">
+													<listitem>
+														<listcell
+															label="${each.nombre} ">
+														</listcell>
+														<listcell
+															label="${each.apellido} ">
+														</listcell>
+
+													</listitem>
+												</template>
+											</listbox>
+										</panelchildren>
+									</panel>
+
+									<panel width="60px"
+										style="margin-top:70px;margin-left:25px">
+										<panelchildren>
+											<div>
+
+												<button
+													id="btnAgregarProfesoresComision" sclass="btn"
+													image="/public/imagenes/iconos/right.png"
+													tooltiptext="Presione aquí para agregar un profesor"
+													width="35px" />
+												<separator />
+												<button
+													id="btnRemoverProfesoresComision" sclass="btn"
+													image="/public/imagenes/iconos/left.png"
+													tooltiptext="Presione aquí para remover un profesor"
+													width="35px" />
+
+											</div>
+										</panelchildren>
+									</panel>
+
+
+									<panel
+										title="Profesores Seleccionados" width="270px">
+										<panelchildren>
+
+											<listbox
+												id="lsbProfesoresSeleccionados" height="230px"
+												emptyMessage="No hay Profesores Seleccionados"
+												checkmark="true">
+												<listhead>
+													<listheader
+														label="Nombre" />
+													<listheader
+														label="Apellido" />
+												</listhead>
+												<template
+													name="model">
+													<listitem>
+														<listcell
+															label="${each.nombre} ">
+														</listcell>
+														<listcell
+															label="${each.apellido} ">
+														</listcell>
+
+													</listitem>
+												</template>
+											</listbox>
+										</panelchildren>
+									</panel>
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</tabpanel>
+
 
 				<tabpanel height="310px">
 					<separator />
@@ -228,118 +358,7 @@
 						</rows>
 					</grid>
 				</tabpanel>
-				<tabpanel height="310px">
-					<separator />
-					<separator />
 
-					<grid sclass="fgrid"
-						style="margin-left:2%;margin-right:1%">
-						<columns>
-							<column width="98%" height="30px" />
-						</columns>
-						<rows>
-
-							<row>
-								<hbox>
-									<label
-										id="lblCondicionAsignarComision" style="font-weight:bold" />
-								</hbox>
-
-							</row>
-
-							<row>
-								<separator />
-								<separator />
-							</row>
-
-
-							<row>
-								<hbox>
-									<panel
-										title="Profesores Disponibles" width="270px">
-										<panelchildren>
-											<listbox
-												id="lsbProfesoresDisponibles" height="230px"
-												emptyMessage="No hay Profesores Disponibles"
-												checkmark="true">
-												<listhead>
-													<listheader
-														label="Nombre" />
-													<listheader
-														label="Apellido" />
-												</listhead>
-												<template
-													name="model">
-													<listitem>
-														<listcell
-															label="${each.nombre} ">
-														</listcell>
-														<listcell
-															label="${each.apellido} ">
-														</listcell>
-
-													</listitem>
-												</template>
-											</listbox>
-										</panelchildren>
-									</panel>
-
-									<panel width="60px"
-										style="margin-top:70px;margin-left:25px">
-										<panelchildren>
-											<div>
-
-												<button
-													id="btnAgregarProfesoresComision" sclass="btn"
-													image="/public/imagenes/iconos/right.png"
-													tooltiptext="Presione aquí para agregar un profesor"
-													width="35px" />
-												<separator />
-												<button
-													id="btnRemoverProfesoresComision" sclass="btn"
-													image="/public/imagenes/iconos/left.png"
-													tooltiptext="Presione aquí para remover un profesor"
-													width="35px" />
-
-											</div>
-										</panelchildren>
-									</panel>
-
-
-									<panel
-										title="Profesores Seleccionados" width="270px">
-										<panelchildren>
-
-											<listbox
-												id="lsbProfesoresSeleccionados" height="230px"
-												emptyMessage="No hay Profesores Seleccionados"
-												checkmark="true">
-												<listhead>
-													<listheader
-														label="Nombre" />
-													<listheader
-														label="Apellido" />
-												</listhead>
-												<template
-													name="model">
-													<listitem>
-														<listcell
-															label="${each.nombre} ">
-														</listcell>
-														<listcell
-															label="${each.apellido} ">
-														</listcell>
-
-													</listitem>
-												</template>
-											</listbox>
-										</panelchildren>
-									</panel>
-								</hbox>
-							</row>
-						</rows>
-					</grid>
-				</tabpanel>
 			</tabpanels>
 
 		</tabbox>
@@ -363,11 +382,15 @@
 							sclass="btn" image="/public/imagenes/iconos/guardar.png"
 							tabindex="12" tooltip="pupBtnGuardar">
 						</button>
-
 						<button id="btnCancelarComision"
 							label="Cancelar" sclass="btn"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="13"
 							tooltip="pupBtnCancelar">
+						</button>
+						<button id="btnSalirComision" width="110px"
+							label="Salir" sclass="btn"
+							image="/public/imagenes/iconos/salir.png" tabindex="14"
+							tooltip="pupBtnSalir">
 						</button>
 
 						<separator />

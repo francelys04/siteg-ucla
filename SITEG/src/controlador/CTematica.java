@@ -75,6 +75,8 @@ public class CTematica extends CGeneral {
 	private Textbox txtDescripcionMostrarTematica;
 	@Wire
 	private Button btnEliminarTematica;
+	@Wire
+	private Window wdwTematica;
 	private long id = 0;
 
 	// metodo para llenar combo y mapear
@@ -202,6 +204,14 @@ public class CTematica extends CGeneral {
 		txtDescripcionTematica.setValue("");
 		cmbAreaTematica.setValue("");
 		btnEliminarTematica.setDisabled(true);
+
+	}
+	
+	@Listen("onClick = #btnSalirTematica")
+	public void salirTematica() {
+		
+		wdwTematica.onClose();
+		
 
 	}
 

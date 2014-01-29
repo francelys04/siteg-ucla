@@ -81,6 +81,9 @@
 	<popup id="pupCancelarProfesor">
 		<toolbarbutton label="Presione aqui para limpiar los campos" />
 	</popup>
+		<popup id="pupSalirProfesor">
+		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
 	<popup id="pupEliminarProfesor">
 		<toolbarbutton
 			label="Presione aqui para eliminar los datos del profesor" />
@@ -161,8 +164,8 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtNombreProfesor" width="100%" maxlength="100"
-							tooltip="pupNombreProfesor" tabindex="4" />
+						<textbox id="txtNombreProfesor" width="100%"
+							maxlength="100" tooltip="pupNombreProfesor" tabindex="4" />
 
 						<hlayout>
 							<label value="*"
@@ -171,8 +174,8 @@
 								style="font-weight:bold" />
 						</hlayout>
 
-						<textbox id="txtApellidoProfesor" width="100%" maxlength="100"
-							style="margin-left:10px" tabindex="5"
+						<textbox id="txtApellidoProfesor" width="100%"
+							maxlength="100" style="margin-left:10px" tabindex="5"
 							tooltip="pupApellidoProfesor" />
 					</hbox>
 				</row>
@@ -194,8 +197,8 @@
 							<radio id="rdoSexoFProfesor"
 								label="Femenino" tabindex="6" style="color: rgb(0, 84, 122)" />
 							<radio id="rdoSexoMProfesor"
-								label="Masculino" style="margin-left:25px;color: rgb(0, 84, 122)"
-								tabindex="7" />
+								label="Masculino"
+								style="margin-left:25px;color: rgb(0, 84, 122)" tabindex="7" />
 						</radiogroup>
 					</hlayout>
 
@@ -209,8 +212,9 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtDireccionProfesor" width="420px" maxlength="500"
-						rows="2" cols="100" tabindex="8" tooltip="pupDireccionProfesor" />
+					<textbox id="txtDireccionProfesor" width="420px"
+						maxlength="500" rows="2" cols="100" tabindex="8"
+						tooltip="pupDireccionProfesor" />
 
 				</row>
 
@@ -224,7 +228,8 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtTelefonoMovilProfesor" maxlength="100"
+						<textbox id="txtTelefonoMovilProfesor"
+							maxlength="100"
 							constraint="/.+[0-9]+/: Debe ingresar un telefono valido"
 							width="90%" tabindex="9" tooltip="pupTelefonoMovilProfesor" />
 
@@ -233,7 +238,8 @@
 								style="font-weight:bold;margin-left:30px" />
 						</hlayout>
 
-						<textbox id="txtTelefonoFijoProfesor" maxlength="100"
+						<textbox id="txtTelefonoFijoProfesor"
+							maxlength="100"
 							constraint="/.+[0-9]+/: Debe ingresar un telefono valido"
 							tooltip="pupTelefonoFijoProfesor" width="90%"
 							style="margin-left:15px" tabindex="10" />
@@ -249,8 +255,8 @@
 						<label value="Correo:" style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtCorreoProfesor" width="260px" maxlength="100"
-						tooltip="pupCorreoProfesor" tabindex="11" />
+					<textbox id="txtCorreoProfesor" width="260px"
+						maxlength="100" tooltip="pupCorreoProfesor" tabindex="11" />
 
 
 				</row>
@@ -269,17 +275,23 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button id="btnGuardarProfesor" label="Guardar" tooltip="pupGuardarProfesor"
-							sclass="btn" image="/public/imagenes/iconos/guardar.png"
-							tabindex="12">
+						<button id="btnGuardarProfesor" label="Guardar"
+							tooltip="pupGuardarProfesor" sclass="btn"
+							image="/public/imagenes/iconos/guardar.png" tabindex="12">
 						</button>
-						<button id="btnCancelarProfesor" tooltip ="pupCancelarProfesor"
-							label="Cancelar" sclass="btn"
+						<button id="btnCancelarProfesor"
+							tooltip="pupCancelarProfesor" label="Cancelar" sclass="btn"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 						</button>
-						<button id="btnEliminarProfesor" tooltip="pupEliminarProfesor"
-							label="Eliminar" sclass="btn" disabled="true"
-							image="/public/imagenes/iconos/eliminar.png" tabindex="14">
+						<button id="btnEliminarProfesor"
+							tooltip="pupEliminarProfesor" label="Eliminar" sclass="btn"
+							disabled="true" image="/public/imagenes/iconos/eliminar.png"
+							tabindex="14">
+						</button>
+						<button id="btnSalirProfesor" width="110px"
+							tooltip="pupSalirProfesor" label="Salir" sclass="btn"
+							 image="/public/imagenes/iconos/salir.png"
+							tabindex="15">
 						</button>
 						<separator />
 					</div>

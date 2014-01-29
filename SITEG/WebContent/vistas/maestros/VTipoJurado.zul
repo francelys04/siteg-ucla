@@ -65,6 +65,10 @@
 		<toolbarbutton
 			label="Presione aqui para ver la lista de tipos de jurados" />
 	</popup>
+	<popup id="pupSalirTipoJurado">
+		<toolbarbutton
+			label="Presione aqui para salirs" />
+	</popup>
 	<!-- Fin de popus -->
 
 
@@ -98,10 +102,10 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtNombreTipoJurado" width="120%" maxlength="100" tabindex="1"
-							tooltip="pupNombreTipoJurado" />
-						<button id="btnCatalogoTipoJurado" sclass="btn" tabindex="2"
-							tooltip="pupCatalogoTipoJurado"
+						<textbox id="txtNombreTipoJurado" width="120%"
+							maxlength="100" tabindex="1" tooltip="pupNombreTipoJurado" />
+						<button id="btnCatalogoTipoJurado" sclass="btn"
+							tabindex="2" tooltip="pupCatalogoTipoJurado"
 							image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:50px" />
 					</hbox>
@@ -114,9 +118,9 @@
 						<label value="Descripción:"
 							style="font-weight:bold" />
 					</hlayout>
-					<textbox id="txtDescripcionTipoJurado" rows="5" maxlength="500"
-						tooltip="pupDescripcionTipoJurado" cols="100" width="52%"
-						tabindex="3" />
+					<textbox id="txtDescripcionTipoJurado" rows="5"
+						maxlength="500" tooltip="pupDescripcionTipoJurado" cols="100"
+						width="52%" tabindex="3" />
 				</row>
 			</rows>
 		</grid>
@@ -141,6 +145,9 @@
 							label="Eliminar" sclass="btn" tooltip="pupEliminarTipoJurado"
 							disabled="true" image="/public/imagenes/iconos/eliminar.png"
 							tabindex="6" />
+						<button id="btnSalirTipoJurado" label="Salir" width="110px"
+							sclass="btn" tooltip="pupSalirTipoJurado"
+							image="/public/imagenes/iconos/salir.png" tabindex="7" />
 						<separator />
 					</div>
 				</div>

@@ -1,4 +1,4 @@
-<window title="Requisito" border="normal" width="100%" height="410px"
+<window id="wdwRequisito" title="Requisito" border="normal" width="100%" height="410px"
 	closable="true" apply="controlador.CRequisito">
 
 	<style dynamic="true">
@@ -58,6 +58,10 @@
 	<popup id="pupEliminarRequisito">
 		<toolbarbutton
 			label="Presione aqui para eliminar los datos del requisito" />
+	</popup>
+	<popup id="pupSalirRequisito">
+		<toolbarbutton
+			label="Presione aqui para salir" />
 	</popup>
 	<popup id="pupCatalogoRequisito">
 		<toolbarbutton
@@ -153,6 +157,11 @@
 							label="Eliminar" sclass="btn" tooltip="pupEliminarRequisito"
 							image="/public/imagenes/iconos/eliminar.png" disabled="true"
 							tabindex="6">
+						</button>
+						<button id="btnSalirRequisito" width="110px"
+							label="Salir" sclass="btn" tooltip="pupSalirRequisito"
+							image="/public/imagenes/iconos/salir.png"
+							tabindex="7">
 						</button>
 						<separator />
 					</div>

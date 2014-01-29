@@ -63,9 +63,10 @@ public class CActividad extends CGeneral {
 	private Window wdwCatalogoActividad;
 	@Wire
 	private Button btnEliminarActividad;
-	
 	@Wire
 	private Button btnGuardarActividad;
+	@Wire
+	private Window wdwActividad;
 	
 	
 	private long id = 0;
@@ -213,6 +214,16 @@ public class CActividad extends CGeneral {
 		btnEliminarActividad.setDisabled(true);
 		
 	}
+	
+	
+	@Listen("onClick = #btnSalirActividad")
+	public void salirActividad() {
+	
+		wdwActividad.onClose();
+		
+		
+	}
+	
 
 
 }
