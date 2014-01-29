@@ -1,5 +1,5 @@
 <window id="wdwAsignarComision" title="Asignar Comisión Evaluadora"
-	border="normal" width="800px" height="710px" closable="true"
+	border="normal" width="800px" height="760px" closable="true"
 	apply="controlador.CAsignarComision">
 	<separator />
 
@@ -89,16 +89,10 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="630px"
+	<groupbox width="95%" height="680px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
-
-		<label value="Programa:"
-			style="margin-left:2%;font-weight:bold;color: rgb(0, 84, 122)" />
-		<textbox id="txtProgramaComision"
-			style="margin-left:5%;color:black !important;" disabled="true"
-			width="25%" />
 
 		<div align="right">
 			<label value="Fecha:"
@@ -110,9 +104,26 @@
 			</datebox>
 		</div>
 
+		<label value="Programa:"
+			style="margin-left:2%;font-weight:bold;color: rgb(0, 84, 122)" />
+		<textbox id="txtProgramaComision"
+			style="margin-left:5%;color:black !important;" disabled="true"
+			width="250px" />
+
+		<separator />
+
+		<label value="Tutor:"
+			style="margin-left:2%;font-weight:bold;font-weight:bold;color: rgb(0, 84, 122)" />
+		<textbox id="txtTutorAsignarComision"
+			style="margin-left:65px;color:black !important;" width="180px"
+			disabled="true" />
+
 		<separator />
 		<separator />
 		<separator />
+		<separator />
+
+
 		<image id="imagenx" width="80px" height="50px" visible="false" />
 
 		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
@@ -124,9 +135,6 @@
 					tooltip="pupDatosProyecto" />
 				<tab label="Datos del Estudiante"
 					tooltip="pupDatosEstudiante" />
-				<tab label="Datos del Tutor" tooltip="pupDatosTutor" />
-
-
 
 			</tabs>
 			<tabpanels>
@@ -321,42 +329,6 @@
 					</listbox>
 
 
-				</tabpanel>
-				<tabpanel height="300px">
-					<separator />
-					<separator />
-
-					<grid sclass="fgrid" style="margin-left:1%">
-						<columns>
-							<column width="15%" height="30px" />
-						</columns>
-						<rows>
-							<row>
-								<label value="Cédula:"
-									style="font-weight:bold" />
-
-								<textbox id="txtCedulaTutorComision"
-									style="color:black !important;" width="20%" disabled="True" />
-							</row>
-							<row>
-								<label value="Nombre:"
-									style="font-weight:bold" />
-
-
-								<textbox id="txtNombreTutorComision"
-									style="color:black !important;" width="30%" disabled="True" />
-							</row>
-							<row>
-								<label value="Apellido:"
-									style="font-weight:bold" />
-
-								<textbox id="txtApellidoTutorComision"
-									style="color:black !important;" width="30%" disabled="True" />
-							</row>
-
-
-						</rows>
-					</grid>
 				</tabpanel>
 
 			</tabpanels>

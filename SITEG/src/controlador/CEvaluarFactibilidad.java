@@ -73,19 +73,9 @@ public class CEvaluarFactibilidad extends CGeneral {
 	@Wire
 	private Textbox txtTituloEvaluarFactibilidad;
 	@Wire
-	private Textbox txtCedulaTutorEvaluarFactibilidad;
-	@Wire
-	private Textbox txtNombreTutorEvaluarFactibilidad;
-	@Wire
-	private Textbox txtApellidoTutorEvaluarFactiblidad;
-	@Wire
-	private Textbox txtCedulaComisionEvaluarFactibilidad;
-	@Wire
-	private Textbox txtNombreComisionEvaluarFactibilidad;
-	@Wire
-	private Textbox txtApellidoComisionEvaluarFactibilidad;
-	@Wire
 	private Textbox txtObservacionEvaluarFactibilidad;
+	@Wire
+	private Textbox txtTutorEvaluarFactibilidad;
 	@Wire
 	private Listbox ltbEstudianteEvaluarFactibilidad;
 	@Wire
@@ -130,12 +120,8 @@ public class CEvaluarFactibilidad extends CGeneral {
 						.getareaInvestigacion().getNombre());
 				txtTematicaEvaluarFactibilidad.setValue(teg2.getTematica()
 						.getNombre());
-				txtCedulaTutorEvaluarFactibilidad.setValue(teg2.getTutor()
-						.getCedula());
-				txtNombreTutorEvaluarFactibilidad.setValue(teg2.getTutor()
-						.getNombre());
-				txtApellidoTutorEvaluarFactiblidad.setValue(teg2.getTutor()
-						.getApellido());
+				
+				txtTutorEvaluarFactibilidad.setValue(teg2.getTutor().getNombre() + " " + teg2.getTutor().getApellido());
 				txtTituloEvaluarFactibilidad.setValue(teg2.getTitulo());
 
 				Lapso lapso = servicioLapso.buscarLapsoVigente();

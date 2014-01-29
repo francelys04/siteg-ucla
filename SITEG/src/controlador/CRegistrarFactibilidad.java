@@ -58,13 +58,9 @@ public class CRegistrarFactibilidad extends CGeneral {
 	@Wire
 	private Textbox txtTituloRegistrarFactibilidad;
 	@Wire
-	private Textbox txtCedulaComisionRegistrarFactibilidad;
-	@Wire
-	private Textbox txtNombreComisionRegistrarFactibilidad;
-	@Wire
-	private Textbox txtApellidoComisionRegistrarFactibilidad;
-	@Wire
 	private Textbox txtObservacionRegistrarFactibilidad;
+	@Wire
+	private Textbox txtTutorRegistrarFactibilidad;
 	@Wire
 	private Listbox ltbEstudianteRegistrarFactibilidad;
 	@Wire
@@ -108,9 +104,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 				ltbItemsFactibilidad.setModel(new ListModelList<ItemFactibilidad>(
 						itemsFactibilidad));
 				
-				 txtCedulaComisionRegistrarFactibilidad.setValue(teg2.getTutor().getCedula());
-				 txtNombreComisionRegistrarFactibilidad.setValue(teg2.getTutor().getNombre());
-				 txtApellidoComisionRegistrarFactibilidad.setValue(teg2.getTutor().getApellido());
+				txtTutorRegistrarFactibilidad.setValue(teg2.getTutor().getNombre() + " " + teg2.getTutor().getApellido());
 				 
 				 
 				
@@ -171,29 +165,45 @@ public class CRegistrarFactibilidad extends CGeneral {
 	}
 	//Permite rechazar la factibilidad de un proyecto
 	@Listen("onClick = #btnRechazarRegistrarFactibilidad")
-	public void rechazarfactibilidad()
-	{
+	public void rechazarfactibilidad() {
 		Messagebox.show("¿Desea rechazar factibilidad del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-		String estatus = "Proyecto No Factible";
-		Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-		teg2.setEstatus(estatus);
-		servicioTeg.guardar(teg2);
-		for (int i = 0; i < ltbEstudianteRegistrarFactibilidad.getItemCount(); i++) {
-	        Estudiante estudiante = ltbEstudianteRegistrarFactibilidad.getItems().get(i).getValue();
-	        enviarEmailNotificacion(estudiante.getCorreoElectronico(), "Su Proyecto es no Factible");
-	        
-		}
-		Messagebox.show("Datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
-		salir();
+							String estatus = "Proyecto No Factible";
+							Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
+							teg2.setEstatus(estatus);
+							servicioTeg.guardar(teg2);
+							for (int i = 0; i < ltbEstudianteRegistrarFactibilidad
+									.getItemCount(); i++) {
+								Estudiante estudiante = ltbEstudianteRegistrarFactibilidad
+										.getItems().get(i).getValue();
+								enviarEmailNotificacion(
+										estudiante.getCorreoElectronico(),
+										"Su Proyecto es no Factible");
+
+							}
+							Messagebox.show("Datos guardados exitosamente",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
+							salir();
 						}
 					}
 				});
 	}
+	
+	
+	@Listen("onClick = #btnSalirRegistrarFactibilidad")
+	public void salirRegistrarFactibilidad()
+	{
+		
+		wdwRegistrarFactibilidad.onClose();
+		
 	}
+	
+	
+}
 
 
 
