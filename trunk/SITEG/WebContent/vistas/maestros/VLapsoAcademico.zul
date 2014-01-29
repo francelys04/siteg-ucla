@@ -70,6 +70,10 @@
 		<toolbarbutton
 			label="Presione aqui para ver la lista de lapsos académicos" />
 	</popup>
+	<popup id="pupSalirLapso">
+		<toolbarbutton
+			label="Presione aqui para salir" />
+	</popup>
 	<!-- Fin de popus -->
 
 	<separator />
@@ -103,8 +107,8 @@
 						<label value="Nombre:" style="font-weight:bold" />
 					</hlayout>
 					<hbox>
-						<textbox id="txtNombreLapso" width="180px" maxlength="100"
-							tooltip="pupNombreLapso" tabindex="1" />
+						<textbox id="txtNombreLapso" width="180px"
+							maxlength="100" tooltip="pupNombreLapso" tabindex="1" />
 						<button id="btnCatalogoLapsos" sclass="btn"
 							style="margin-left:15px" tooltip="pupCatalogoLapso"
 							image="/public/imagenes/iconos/catalogo.png" tabindex="2" />
@@ -119,8 +123,8 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<datebox id="dtbInicioLapso" cols="12" width="150px" tabindex="3"
-						format="yyyy/MM/dd" tooltip="pupInicioLapso"
+					<datebox id="dtbInicioLapso" cols="12" width="150px"
+						tabindex="3" format="yyyy/MM/dd" tooltip="pupInicioLapso"
 						style="margin-right:15px">
 					</datebox>
 
@@ -134,8 +138,8 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<datebox id="dtbFinLapso" cols="12" width="150px" tabindex="4"
-						format="yyyy/MM/dd" tooltip="pupFinLapso"
+					<datebox id="dtbFinLapso" cols="12" width="150px"
+						tabindex="4" format="yyyy/MM/dd" tooltip="pupFinLapso"
 						style="margin-right:15px">
 					</datebox>
 
@@ -169,6 +173,10 @@
 							sclass="btn" tooltip="pupEliminarLapso"
 							image="/public/imagenes/iconos/eliminar.png" disabled="true"
 							tabindex="7">
+						</button>
+						<button id="btnSalirLapso" label="Salir" width="110px"
+							sclass="btn" tooltip="pupSalirLapso"
+							image="/public/imagenes/iconos/salir.png" tabindex="8">
 						</button>
 						<separator />
 					</div>

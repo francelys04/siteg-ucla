@@ -3,7 +3,7 @@
 	apply="controlador.CConfigurarPrograma">
 	<separator />
 
-		<style dynamic="true">
+	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
 		background: none; color:none; border-top: none; border-left:
@@ -35,6 +35,19 @@
 
 		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
 		122); }
+
+		.z-panel-tl, .z-panel-tr, .z-panel-tl-gray, .z-panel-tr-gray,
+		.z-panel-bl, .z-panel-br { background: #3276b1;
+		background-image: none; }
+
+		.z-panel-hl { background: #3276b1; background-image: none; }
+
+		.z-panel-hr { background: #3276b1; background-image: mome; }
+
+		.z-panel-hm { background: #3276b1; background-image: none; }
+
+		.z-panel-hm .z-panel-header, .z-panel-header { color: #fff; }
+
 
 
 	</style>
@@ -143,7 +156,8 @@
 										width="340px">
 										<panelchildren>
 											<listbox
-												id="ltbAreasDisponibles" height="200px" oddRowSclass="non-odd" checkmark="true"
+												id="ltbAreasDisponibles" height="200px"
+												oddRowSclass="non-odd" checkmark="true"
 												emptyMessage="No hay areas registradas">
 												<listhead>
 													<listheader
@@ -185,7 +199,8 @@
 										width="340px">
 										<panelchildren>
 											<listbox
-												id="ltbAreasSeleccionadas" height="200px"  oddRowSclass="non-odd" checkmark="true"
+												id="ltbAreasSeleccionadas" height="200px"
+												oddRowSclass="non-odd" checkmark="true"
 												emptyMessage="No se han seleccionado areas">
 												<listhead>
 													<listheader
@@ -233,7 +248,8 @@
 										title="Requisitos Disponibles" width="340px">
 										<panelchildren>
 											<listbox
-												id="ltbRequisitosDisponibles" height="200px" oddRowSclass="non-odd" checkmark="true"
+												id="ltbRequisitosDisponibles" height="200px"
+												oddRowSclass="non-odd" checkmark="true"
 												emptyMessage="No hay requisitos registrados">
 												<listhead>
 													<listheader
@@ -275,7 +291,8 @@
 										title="Requisitos Seleccionados" width="340px">
 										<panelchildren>
 											<listbox
-												id="ltbRequisitosSeleccionadas" height="200px"  oddRowSclass="non-odd" checkmark="true"
+												id="ltbRequisitosSeleccionadas" height="200px"
+												oddRowSclass="non-odd" checkmark="true"
 												emptyMessage="No se han seleccionado requisitos">
 												<listhead>
 													<listheader
@@ -323,7 +340,8 @@
 										width="340px">
 										<panelchildren>
 											<listbox
-												id="ltbItemsDisponibles" height="200px"  oddRowSclass="non-odd" checkmark="true"
+												id="ltbItemsDisponibles" height="200px"
+												oddRowSclass="non-odd" checkmark="true"
 												emptyMessage="No hay items registrados">
 												<listhead>
 													<listheader
@@ -370,7 +388,8 @@
 										width="340px">
 										<panelchildren>
 											<listbox
-												id="ltbItemsSeleccionados" height="200px"  oddRowSclass="non-odd" checkmark="true"
+												id="ltbItemsSeleccionados" height="200px"
+												oddRowSclass="non-odd" checkmark="true"
 												emptyMessage="No se han seleccionado items">
 												<listhead>
 													<listheader
@@ -417,7 +436,8 @@
 							<row>
 								<hbox>
 									<listbox id="ltbCondiciones"
-										emptyMessage="No hay condiciones registradas"  height="200px">
+										emptyMessage="No hay condiciones registradas"
+										height="200px">
 										<listhead>
 											<listheader
 												label="Condicion" width="65%" align="center" />
@@ -434,7 +454,7 @@
 												<listcell>
 													<spinner
 														inplace="true" value="${each.valor}"
-														constraint="min 0 max 100"  />
+														constraint="min 0 max 100" />
 												</listcell>
 											</listitem>
 										</template>

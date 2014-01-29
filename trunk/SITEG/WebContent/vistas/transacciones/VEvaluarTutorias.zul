@@ -50,6 +50,12 @@
 	<popup id="pupBtnRechazar">
 		<toolbarbutton label="Presione aquí para rechazar la solicitud" />
 	</popup>
+	<popup id="pupBtnSalir">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+
+
+
 	<!-- fin de popus -->
 
 	<separator />
@@ -203,6 +209,11 @@
 						<button id="btnRechazarTutoria" label="Rechazar"
 							sclass="btn" image="/public/imagenes/iconos/rechazar.png"
 							tabindex="14" tooltip="pupBtnRechazar">
+						</button>
+						<button id="btnSalirTutoria" label="Salir"
+							width="110px" sclass="btn"
+							image="/public/imagenes/iconos/salir.png" tabindex="14"
+							tooltip="pupBtnSalir">
 						</button>
 						<separator />
 					</div>

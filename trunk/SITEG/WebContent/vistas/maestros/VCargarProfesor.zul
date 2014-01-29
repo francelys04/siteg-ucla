@@ -1,5 +1,5 @@
-<window title="Cargar Profesores" border="normal" width="100%"
-	height="200px" closable="true" apply="controlador.CCargarProfesor">
+<window id="wdwCargarProfesor" title="Cargar Profesores" border="normal" width="100%"
+	height="300px" closable="true" apply="controlador.CCargarProfesor">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -36,7 +36,7 @@
 
 
 	</style>
-	
+
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
@@ -44,6 +44,10 @@
 	<popup id="pupExaminarProfesores">
 		<toolbarbutton
 			label="Presione aquí para buscar la lista de los profesores" />
+	</popup>
+	<popup id="pupSalirCargarProfesor">
+		<toolbarbutton
+			label="Presione aquí para salir" />
 	</popup>
 	<!-- fin de popus -->
 
@@ -53,7 +57,9 @@
 	<label value="(*) "
 		style="font-weight:bold;color:red;margin-left:2%">
 	</label>
-	<label value="Campos Obligatorios" style="font-weight:bold;color: rgb(0, 84, 122)"></label>
+	<label value="Campos Obligatorios"
+		style="font-weight:bold;color: rgb(0, 84, 122)">
+	</label>
 	<separator />
 	<separator />
 	<separator />
@@ -61,7 +67,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="96%" style="margin-left:2%">
+	<groupbox width="96%" style="margin-left:2%" height="150px">
 		<grid sclass="fgrid" style="margin-left:2%">
 			<columns>
 				<column width="150px" height="30px" />
@@ -89,10 +95,39 @@
 				</row>
 			</rows>
 		</grid>
+
+
+		<separator />
+		<separator />
+		<separator />
+		<separator />
+		<separator />
+		<separator />
+
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:3%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
+					<separator />
+					<div sclass="btn-group">
+
+						<button id="btnSalirCargarProfesor"
+							label="Salir" width="110px" sclass="btn"
+							tooltip="pupSalirCargarProfesor"
+							image="/public/imagenes/iconos/salir.png" tabindex="7" />
+
+						<separator />
+					</div>
+				</div>
+			</panelchildren>
+		</panel>
+
 	</groupbox>
 
 
 	<separator />
 	<separator />
-
+	<separator />
+	<separator />
+	<separator />
 </window>

@@ -71,6 +71,8 @@ public class CLapso extends CGeneral {
 	private Textbox txtFechaInicialMostrarLapso;
 	@Wire
 	private Textbox txtFechaFinalMostrarLapso;
+	@Wire
+	private Window wdwLapsoAcademico;
 
 	@Wire
 	private Button btnEliminarLapso;
@@ -224,6 +226,13 @@ public class CLapso extends CGeneral {
 		dtbInicioLapso.setValue(null);
 		dtbFinLapso.setValue(null);
 		btnEliminarLapso.setDisabled(true);
+	}
+	
+	@Listen("onClick = #btnSalirLapso")
+	public void salirLapso() {
+		
+		wdwLapsoAcademico.onClose();
+		
 	}
 
 }

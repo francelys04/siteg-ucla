@@ -16,7 +16,10 @@ import modelo.Usuario;
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.annotation.Listen;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
+
 import servicio.SCategoria;
 import servicio.SProfesor;
 import servicio.SUsuario;
@@ -31,6 +34,9 @@ public class CCargarProfesor extends CGeneral {
 			.getServicioCategoria();
 	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+	
+	@Wire
+	private Window wdwCargarProfesor;
 	
 	private File f;
 
@@ -131,6 +137,17 @@ public class CCargarProfesor extends CGeneral {
 
 		}
 	}
+	
+	
+	
+	@Listen("onClick = #btnSalirCargarProfesor")
+	public void salirCargarProfesor() {
+	
+		wdwCargarProfesor.onClose();
+		
+		
+	}
+	
 
 	@Override
 	void inicializar(Component comp) {

@@ -355,6 +355,10 @@
 							sclass="btn" label="Cancelar"
 							image="public/imagenes/iconos/limpiar.png" tabindex="13">
 						</button>
+						<button id="btnSalirSolicitudTutoria" width="110px"
+							sclass="btn" label="Salir"
+							image="public/imagenes/iconos/salir.png" tabindex="14">
+						</button>
 						<separator />
 
 					</div>

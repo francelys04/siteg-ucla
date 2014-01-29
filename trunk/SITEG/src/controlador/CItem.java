@@ -52,6 +52,8 @@ public class CItem extends CGeneral {
 	private Combobox  cmbTipoItem;
 	@Wire
 	private Button btnEliminarItem;
+	@Wire
+	private Window wdwItem;
 	private long id = 0;
 
 	void inicializar(Component comp) {
@@ -161,6 +163,15 @@ public class CItem extends CGeneral {
 		window.doModal();
 		CCatalogoItem catalogo = new CCatalogoItem();
 		catalogo.recibir("maestros/VItem");
+	}
+	
+	
+	@Listen("onClick = #btnSalirItem")
+	public void salirItem() {
+
+	
+		wdwItem.onClose();
+		
 	}
 
 }

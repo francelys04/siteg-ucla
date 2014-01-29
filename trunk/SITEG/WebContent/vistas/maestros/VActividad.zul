@@ -1,6 +1,6 @@
 <window id="wdwActividad" title="Actividad" border="normal" width="100%"
 	height="410px" closable="true" apply="controlador.CActividad">
-	
+
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -73,6 +73,10 @@
 		<toolbarbutton
 			label="Presione aqui para eliminar los datos de una actividad" />
 	</popup>
+	<popup id="pupSalirActividad">
+		<toolbarbutton
+			label="Presione aqui para salir" />
+	</popup>
 	<popup id="pupCatalogoActividad">
 		<toolbarbutton
 			label="Presione aqui para ver la lista de actividades" />
@@ -98,8 +102,8 @@
 
 					<hbox>
 
-						<textbox id="txtNombreActividad" width="270px" maxlength="500"
-							tooltip="pupNombreActividad" tabindex="1" />
+						<textbox id="txtNombreActividad" width="270px"
+							maxlength="500" tooltip="pupNombreActividad" tabindex="1" />
 
 
 						<button id="btnCatalogoActividad" tabindex="2"
@@ -119,8 +123,8 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtDescripcionActividad" rows="5" maxlength="500"
-						tabindex="3" cols="100" width="52%"
+					<textbox id="txtDescripcionActividad" rows="5"
+						maxlength="500" tabindex="3" cols="100" width="52%"
 						tooltip="pupDescripcionActividad" />
 				</row>
 
@@ -150,6 +154,10 @@
 							label="Eliminar" sclass="btn" tooltip="pupEliminarActividad"
 							disabled="true" image="/public/imagenes/iconos/eliminar.png"
 							tabindex="6">
+						</button>
+						<button id="btnSalirActividad" label="Salir" width="110px"
+							sclass="btn" tooltip="pupSalirActividad"
+							image="/public/imagenes/iconos/salir.png" tabindex="7">
 						</button>
 						<separator />
 					</div>

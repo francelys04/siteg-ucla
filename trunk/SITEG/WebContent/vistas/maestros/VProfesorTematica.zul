@@ -36,7 +36,19 @@
 		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
 		122); }
 
-	
+		.z-panel-tl, .z-panel-tr, .z-panel-tl-gray, .z-panel-tr-gray,
+		.z-panel-bl, .z-panel-br { background: #3276b1;
+		background-image: none; }
+
+		.z-panel-hl { background: #3276b1; background-image: none; }
+
+		.z-panel-hr { background: #3276b1; background-image: mome; }
+
+		.z-panel-hm { background: #3276b1; background-image: none; }
+
+		.z-panel-hm .z-panel-header, .z-panel-header { color: #fff; }
+
+
 
 	</style>
 

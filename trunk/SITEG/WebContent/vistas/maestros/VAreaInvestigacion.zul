@@ -61,6 +61,10 @@
 		<toolbarbutton
 			label="Presione aqui para eliminar los datos de un area de investigacion" />
 	</popup>
+	<popup id="pupSalirArea">
+		<toolbarbutton
+			label="Presione aqui para salir" />
+	</popup>
 	<popup id="pupCatalogoArea">
 		<toolbarbutton
 			label="Presione aqui para ver la lista de las areas de investigacion" />
@@ -152,6 +156,10 @@
 						<button id="btnEliminarArea" label="Eliminar"
 							sclass="btn" image="/public/imagenes/iconos/eliminar.png"
 							tabindex="6" disabled="true" tooltip="pupEliminarArea">
+						</button>
+						<button id="btnSalirArea" label="Salir" width="110px"
+							sclass="btn" image="/public/imagenes/iconos/salir.png"
+							tabindex="7" tooltip="pupSalirArea">
 						</button>
 						<separator />
 					</div>

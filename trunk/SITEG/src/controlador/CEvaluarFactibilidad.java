@@ -1,6 +1,5 @@
 package controlador;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -55,13 +54,14 @@ public class CEvaluarFactibilidad extends CGeneral {
 	SItemFactibilidad servicioItemFactibilidad = GeneradorBeans
 			.getServicioItemFactibilidad();
 	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	SProgramaItem servicioProgramaItem = GeneradorBeans.getServicioProgramaItem();
-	
+	SProgramaItem servicioProgramaItem = GeneradorBeans
+			.getServicioProgramaItem();
+
 	@Wire
 	private Datebox db1;
 	@Wire
 	private Listbox ltbListaFactibilidad;
-	
+
 	@Wire
 	private Listbox ltbItemsFactibilidad;
 	@Wire
@@ -104,8 +104,6 @@ public class CEvaluarFactibilidad extends CGeneral {
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		
-
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("tegCatalogo");
@@ -115,61 +113,55 @@ public class CEvaluarFactibilidad extends CGeneral {
 				long codigo = (Long) map.get("id");
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-				
+
 				// se toma es el programa del estudiante asociado a el teg.
 				List<Estudiante> estudiantes = servicioEstudiante
 						.buscarEstudiantesDelTeg(teg2);
-				
+
 				if (estudiantes.size() != 0) {
-					programa = estudiantes.get(0).getPrograma();	
+					programa = estudiantes.get(0).getPrograma();
 				}
-				
-				
-				ltbEstudianteEvaluarFactibilidad.setModel(new ListModelList<Estudiante>(
-						estudiantes));
-				
-							
+
+				ltbEstudianteEvaluarFactibilidad
+						.setModel(new ListModelList<Estudiante>(estudiantes));
+
 				txtProgramaEvaluarFactibilidad.setValue(programa.getNombre());
 				txtAreaEvaluarFactibilidad.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
-				txtTematicaEvaluarFactibilidad.setValue(teg2.getTematica().getNombre());
-				txtCedulaTutorEvaluarFactibilidad.setValue(teg2.getTutor().getCedula());
-				txtNombreTutorEvaluarFactibilidad.setValue(teg2.getTutor().getNombre());
-				txtApellidoTutorEvaluarFactiblidad
-						.setValue(teg2.getTutor().getApellido());
+				txtTematicaEvaluarFactibilidad.setValue(teg2.getTematica()
+						.getNombre());
+				txtCedulaTutorEvaluarFactibilidad.setValue(teg2.getTutor()
+						.getCedula());
+				txtNombreTutorEvaluarFactibilidad.setValue(teg2.getTutor()
+						.getNombre());
+				txtApellidoTutorEvaluarFactiblidad.setValue(teg2.getTutor()
+						.getApellido());
 				txtTituloEvaluarFactibilidad.setValue(teg2.getTitulo());
-				
+
 				Lapso lapso = servicioLapso.buscarLapsoVigente();
-				List<ItemEvaluacion> item = servicioProgramaItem.buscarItemsEnPrograma(programa, lapso);
-				List<ItemEvaluacion> item2 = new  ArrayList <ItemEvaluacion>();
-				for(int i= 0; i<item.size(); i++){
-					if (item.get(i).getTipo().equals("Factibilidad"))
-					{
+				List<ItemEvaluacion> item = servicioProgramaItem
+						.buscarItemsEnPrograma(programa, lapso);
+				List<ItemEvaluacion> item2 = new ArrayList<ItemEvaluacion>();
+				for (int i = 0; i < item.size(); i++) {
+					if (item.get(i).getTipo().equals("Factibilidad")) {
 						item2.add(item.get(i));
 					}
-					
+
 				}
-				ltbItemsFactibilidad.setModel(new ListModelList<ItemEvaluacion>(item2));
-				
-				
-				
-				
+				ltbItemsFactibilidad
+						.setModel(new ListModelList<ItemEvaluacion>(item2));
+
 			}
 		}
 
 	}
-	
-	
-	
-	
 
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
-	
-	
-//Permite salir y refrescar las vistas (Evaluar factibilidad y catalogo)
+
+	// Permite salir y refrescar las vistas (Evaluar factibilidad y catalogo)
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -179,108 +171,108 @@ public class CEvaluarFactibilidad extends CGeneral {
 		wdwEvaluarFactibilidad.onClose();
 	}
 
-//Permite guardar los datos de la factibilidad
+	// Permite guardar los datos de la factibilidad
 	@Listen("onClick = #btnGuardarEvaluacionFactibilidad")
 	public void guardar() {
-		
-	long id = 0;
-	Teg teg = servicioTeg.buscarTeg(auxiliarId);
-	Profesor profesor = ObtenerUsuarioProfesor();
-	Date fecha = db1.getValue();
-	String Observacion = txtObservacionEvaluarFactibilidad.getValue();
-	String estatus = "Evaluando Factibilidad";
-	Factibilidad factibilidad3 = servicioFactibilidad.buscarFactibilidadPorTeg(teg);
-	
-boolean registrefactibilidad = false;
-	Factibilidad factibilidad = new Factibilidad(id,teg,profesor,fecha,Observacion,estatus);
-	if ( txtObservacionEvaluarFactibilidad.getValue().compareTo("")==0){
-		Messagebox.show("Debe Colocar una Observacion","Informacion", Messagebox.OK,Messagebox.INFORMATION);
-		
-		
-	}
-	else
-	{
-		if (factibilidad3 == null){
-			
-		
-			
-		servicioFactibilidad.guardar(factibilidad);
-		registrefactibilidad = true;
-		}
-		else
-		{
-			registrefactibilidad = true;
-		}
-	}
-		
-	
-if (registrefactibilidad == true)
-{
-	
-	boolean dejeenblanco = false;
 
-	Factibilidad factibilidad2 = servicioFactibilidad.buscarFactibilidadPorTeg(teg);
-	
-	for (int i = 0; i < ltbItemsFactibilidad.getItemCount(); i++) {
+		long id = 0;
+		Teg teg = servicioTeg.buscarTeg(auxiliarId);
+		Profesor profesor = ObtenerUsuarioProfesor();
+		Date fecha = db1.getValue();
+		String Observacion = txtObservacionEvaluarFactibilidad.getValue();
+		String estatus = "Evaluando Factibilidad";
+		Factibilidad factibilidad3 = servicioFactibilidad
+				.buscarFactibilidadPorTeg(teg);
 
-	
-		Listitem listItem = ltbItemsFactibilidad.getItemAtIndex(i);
-		String valor = ((Textbox)((listItem.getChildren().get(1))).getFirstChild()).getValue();
-		System.out.print(valor);
-		if (valor.equals("")){
-			 Messagebox.show("Debe Colocar su Apreciacion en todos los item","Informacion", Messagebox.OK,Messagebox.INFORMATION);	
-			 i = ltbItemsFactibilidad.getItemCount();
-			 dejeenblanco = true;
-			
-			
+		boolean registrefactibilidad = false;
+		Factibilidad factibilidad = new Factibilidad(id, teg, profesor, fecha,
+				Observacion, estatus);
+		if (txtObservacionEvaluarFactibilidad.getValue().compareTo("") == 0) {
+			Messagebox.show("Debe Colocar una Observacion", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
+
+		} else {
+			if (factibilidad3 == null) {
+
+				servicioFactibilidad.guardar(factibilidad);
+				registrefactibilidad = true;
+			} else {
+				registrefactibilidad = true;
+			}
 		}
-		else
-		{
-		ItemEvaluacion item = ltbItemsFactibilidad.getItems().get(i).getValue();
-		ItemFactibilidad itemfactibilidad= new ItemFactibilidad(item,factibilidad2, valor);
-		servicioItemFactibilidad.guardar(itemfactibilidad);
+
+		if (registrefactibilidad == true) {
+
+			boolean dejeenblanco = false;
+
+			Factibilidad factibilidad2 = servicioFactibilidad
+					.buscarFactibilidadPorTeg(teg);
+
+			for (int i = 0; i < ltbItemsFactibilidad.getItemCount(); i++) {
+
+				Listitem listItem = ltbItemsFactibilidad.getItemAtIndex(i);
+				String valor = ((Textbox) ((listItem.getChildren().get(1)))
+						.getFirstChild()).getValue();
+				System.out.print(valor);
+				if (valor.equals("")) {
+					Messagebox.show(
+							"Debe Colocar su Apreciacion en todos los item",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
+					i = ltbItemsFactibilidad.getItemCount();
+					dejeenblanco = true;
+
+				} else {
+					ItemEvaluacion item = ltbItemsFactibilidad.getItems()
+							.get(i).getValue();
+					ItemFactibilidad itemfactibilidad = new ItemFactibilidad(
+							item, factibilidad2, valor);
+					servicioItemFactibilidad.guardar(itemfactibilidad);
+				}
+			}
+
+			if (dejeenblanco == false) {
+				for (int i = 0; i < ltbEstudianteEvaluarFactibilidad
+						.getItemCount(); i++) {
+					Estudiante estudiante = ltbEstudianteEvaluarFactibilidad
+							.getItems().get(i).getValue();
+					enviarEmailNotificacion(
+							estudiante.getCorreoElectronico(),
+							"Observacion de la Evalucion de Factibilidad:"
+									+ txtObservacionEvaluarFactibilidad
+											.getValue());
+
+				}
+				String estatus1 = "Factibilidad Evaluada";
+				teg.setEstatus(estatus1);
+				servicioTeg.guardar(teg);
+				Messagebox.show(
+						"Datos de la evaluacion registrados exitosamente",
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+				salir();
+
+			}
+
 		}
 	}
-	
-	if (dejeenblanco == false)
-	{
-	for (int i = 0; i < ltbEstudianteEvaluarFactibilidad.getItemCount(); i++) {
-        Estudiante estudiante = ltbEstudianteEvaluarFactibilidad.getItems().get(i).getValue();
-        enviarEmailNotificacion(estudiante.getCorreoElectronico(), "Observacion de la Evalucion de Factibilidad:"+ txtObservacionEvaluarFactibilidad.getValue());
-        
-	}
-	String estatus1 = "Factibilidad Evaluada";
-	teg.setEstatus(estatus1);
-	servicioTeg.guardar(teg); 
-	Messagebox.show("Datos de la evaluacion registrados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
-    salir();
-     
-     } 
-
-  }
-}
 
 	@Listen("onClick = #btnCancelarEvaluacionFactibilidad")
 	public void cancelar() {
 		txtObservacionEvaluarFactibilidad.setValue("");
 		for (int i = 0; i < ltbItemsFactibilidad.getItemCount(); i++) {
 
-			
 			Listitem listItem = ltbItemsFactibilidad.getItemAtIndex(i);
-			 ((Textbox)((listItem.getChildren().get(1))).getFirstChild()).setValue("");
+			((Textbox) ((listItem.getChildren().get(1))).getFirstChild())
+					.setValue("");
 		}
-		
+
+	}
+
+	@Listen("onClick = #btnSalirEvaluacionFactibilidad")
+	public void salirEvaluarFactibilidad() {
+
+		wdwEvaluarFactibilidad.onClose();
+
 	}
 
 }
-
-
-	
-	
-	
-	
-	
-		
-	
-	
-

@@ -100,16 +100,45 @@
 		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
 			height="350px">
 			<tabs>
+				<tab label="Evaluación de la Comisión"
+					tooltip="pupDatosComision" />
 				<tab label="Datos del Proyecto"
 					tooltip="pupDatosProyecto" />
 				<tab label="Datos del Estudiante"
 					tooltip="pupDatosEstudiante" />
 				<tab label="Datos del Tutor" tooltip="pupDatosTutor" />
-				<tab label="Evaluación de la Comisión"
-					tooltip="pupDatosComision" />
+
 
 			</tabs>
 			<tabpanels>
+
+				<tabpanel>
+					<separator />
+					<separator />
+
+					<listbox id="ltbItemsFactibilidad" height="245px"
+						style="margin-left:3%;margin-right:3%" mold="paging" pageSize="6"
+						emptyMessage="No hay items evaluados">
+
+						<listhead>
+							<listheader label="Item" align="center" />
+							<listheader label="Apreciación"
+								align="center" />
+
+						</listhead>
+
+						<template name="model">
+							<listitem>
+								<listcell label="${each.item.nombre}" />
+								<listcell label="${each.ponderacion}" />
+							</listitem>
+						</template>
+					</listbox>
+
+					<separator />
+					<separator />
+
+				</tabpanel>
 
 				<tabpanel height="200px">
 					<separator />
@@ -234,33 +263,7 @@
 					</grid>
 				</tabpanel>
 
-				<tabpanel>
-					<separator />
-					<separator />
 
-					<listbox id="ltbItemsFactibilidad" height="245px"
-						style="margin-left:3%;margin-right:3%" mold="paging" pageSize="6"
-						emptyMessage="No hay items evaluados">
-
-						<listhead>
-							<listheader label="Item" align="center" />
-							<listheader label="Apreciación"
-								align="center" />
-
-						</listhead>
-
-						<template name="model">
-							<listitem>
-								<listcell label="${each.item.nombre}" />
-								<listcell label="${each.ponderacion}" />
-							</listitem>
-						</template>
-					</listbox>
-
-					<separator />
-					<separator />
-
-				</tabpanel>
 			</tabpanels>
 		</tabbox>
 
@@ -279,8 +282,9 @@
 				</row>
 
 				<row>
-					<textbox id="txtObservacionRegistrarFactibilidad" width="600px"
-						rows="3" cols="200" style="color:black !important;" disabled="true"/>
+					<textbox id="txtObservacionRegistrarFactibilidad"
+						width="600px" rows="3" cols="200" style="color:black !important;"
+						disabled="true" />
 				</row>
 			</rows>
 		</grid>

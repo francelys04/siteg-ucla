@@ -83,11 +83,6 @@
 	color: blue;
 }
 
-.z-loading-icon {
-	background-image: url('..public/imagenes/portal/gif.gif');
-	height: 80px;
-	width: 80px;
-}
 
 /*inicio del estilo borde de la ventana*/
 .z-window-embedded-hm,.z-window-embedded-hm,.z-window-highlighted-hm,.z-window-overlapped-hm,.z-window-popup-hm

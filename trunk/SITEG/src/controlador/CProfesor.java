@@ -1,6 +1,5 @@
 package controlador;
 
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -42,7 +41,7 @@ public class CProfesor extends CGeneral {
 	SCategoria servicioCategoria = GeneradorBeans.getServicioCategoria();
 	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	
+
 	CCatalogoProfesor catalogo = new CCatalogoProfesor();
 	@Wire
 	private Combobox cmbCategoriaProfesor;
@@ -82,14 +81,14 @@ public class CProfesor extends CGeneral {
 	private Textbox txtCorreoMostrarProfesor;
 	@Wire
 	private Textbox txtCategoriaMostrarProfesor;
-	@Wire 
+	@Wire
 	private Button btnEliminarProfesor;
 
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		List<Categoria> categorias = servicioCategoria.buscarCategoria();
-		
+
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		if (cmbCategoriaProfesor == null) {
 			ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
@@ -115,7 +114,7 @@ public class CProfesor extends CGeneral {
 					rdoSexoMProfesor.setChecked(true);
 				} else
 					rdoSexoFProfesor.setChecked(true);
-			
+
 				txtDireccionProfesor.setValue(profesor.getDireccion());
 				txtTelefonoMovilProfesor.setValue(profesor.getTelefono_movil());
 				txtTelefonoFijoProfesor.setValue(profesor.getTelefono_fijo());
@@ -129,7 +128,8 @@ public class CProfesor extends CGeneral {
 		}
 
 	}
-	//Permite ver la lista de profesores
+
+	// Permite ver la lista de profesores
 	@Listen("onClick = #btnCatalogoProfesor")
 	public void buscarProfesor() {
 
@@ -140,7 +140,8 @@ public class CProfesor extends CGeneral {
 		catalogo.recibir("maestros/VProfesor");
 
 	}
-	//guarda los datos de un profesor
+
+	// guarda los datos de un profesor
 	@Listen("onClick = #btnGuardarProfesor")
 	public void guardarProfesor() {
 
@@ -157,96 +158,112 @@ public class CProfesor extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 
-		}else{
-		Messagebox.show("¿Desea guardar los datos del profesor?",
-				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
-					public void onEvent(Event evt) throws InterruptedException {
-						if (evt.getName().equals("onOK")) {
+		} else {
+			Messagebox.show("¿Desea guardar los datos del profesor?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
 
-							String cedula = txtCedulaProfesor.getValue();
-							String nombre = txtNombreProfesor.getValue();
-							String apellido = txtApellidoProfesor.getValue();
-							String sexo = rdgSexoProfesor.getSelectedItem()
-									.getLabel();
-							String direccion = txtDireccionProfesor.getValue();
-							String telefonoMovil = txtTelefonoMovilProfesor
-									.getValue();
-							String telefonoFijo = txtTelefonoFijoProfesor
-									.getValue();
-							String correo = txtCorreoProfesor.getValue();
-							String categorias = cmbCategoriaProfesor.getValue();
-							Boolean estatus = true;
-							Categoria categoria = servicioCategoria
-									.buscarCategoriaPorNombre(categorias);
-							Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
-							Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
-							Profesor profesor = new Profesor(cedula, nombre,
-									apellido, correo, sexo, direccion,
-									telefonoMovil, telefonoFijo, estatus,
-									categoria, tematicasProfesor, usuario);	
-							
-							servicioProfesor.guardarProfesor(profesor);
-							Messagebox.show(
-									"Profesor registrado exitosamente",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
-							cancelarProfesor();
+								String cedula = txtCedulaProfesor.getValue();
+								String nombre = txtNombreProfesor.getValue();
+								String apellido = txtApellidoProfesor
+										.getValue();
+								String sexo = rdgSexoProfesor.getSelectedItem()
+										.getLabel();
+								String direccion = txtDireccionProfesor
+										.getValue();
+								String telefonoMovil = txtTelefonoMovilProfesor
+										.getValue();
+								String telefonoFijo = txtTelefonoFijoProfesor
+										.getValue();
+								String correo = txtCorreoProfesor.getValue();
+								String categorias = cmbCategoriaProfesor
+										.getValue();
+								Boolean estatus = true;
+								Categoria categoria = servicioCategoria
+										.buscarCategoriaPorNombre(categorias);
+								Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
+								Usuario usuario = servicioUsuario
+										.buscarUsuarioPorNombre("");
+								Profesor profesor = new Profesor(cedula,
+										nombre, apellido, correo, sexo,
+										direccion, telefonoMovil, telefonoFijo,
+										estatus, categoria, tematicasProfesor,
+										usuario);
+
+								servicioProfesor.guardarProfesor(profesor);
+								Messagebox.show(
+										"Profesor registrado exitosamente",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+								cancelarProfesor();
+
+							}
 
 						}
-
-					}
-				});
+					});
 		}
 	}
-		
-		
-//limpiar los campos
+
+	// limpiar los campos
 	@Listen("onClick = #btnCancelarProfesor")
 	public void cancelarProfesor() {
 
 		txtCedulaProfesor.setConstraint("");
 		txtCedulaProfesor.setValue("");
-		txtCedulaProfesor.setConstraint("/.+[0-9]+/: Debe ingresar una cedula valida");
+		txtCedulaProfesor
+				.setConstraint("/.+[0-9]+/: Debe ingresar una cedula valida");
 		txtNombreProfesor.setValue("");
 		txtApellidoProfesor.setValue("");
 		rdgSexoProfesor.setSelectedItem(null);
 		txtDireccionProfesor.setValue("");
 		txtTelefonoMovilProfesor.setConstraint("");
 		txtTelefonoMovilProfesor.setValue("");
-		txtTelefonoMovilProfesor.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+		txtTelefonoMovilProfesor
+				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
 		txtTelefonoFijoProfesor.setConstraint("");
 		txtTelefonoFijoProfesor.setValue("");
-		txtTelefonoFijoProfesor.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+		txtTelefonoFijoProfesor
+				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
 		txtCorreoProfesor.setValue("");
 		cmbCategoriaProfesor.setValue("");
 		btnEliminarProfesor.setDisabled(true);
-			
-	}
-	
 
-	//elimina los datos de un profesor
+	}
+
+	// elimina los datos de un profesor
 	@Listen("onClick = #btnEliminarProfesor")
 	public void eliminarProfesor() {
-		
+
 		Messagebox.show("¿Desea eliminar los datos del profesor?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							String cedula = txtCedulaProfesor.getValue();
-							Profesor profesor = servicioProfesor.buscarProfesorPorCedula(cedula);
+							Profesor profesor = servicioProfesor
+									.buscarProfesorPorCedula(cedula);
 							profesor.setEstatus(false);
 							servicioProfesor.guardarProfesor(profesor);
 							cancelarProfesor();
-							Messagebox.show(
-									"Profesor eliminado exitosamente",
+							Messagebox.show("Profesor eliminado exitosamente",
 									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 						}
 					}
 				});
-		
+
+	}
+
+	// elimina los datos de un profesor
+	@Listen("onClick = #btnSalirProfesor")
+	public void salirProfesor() {
+
+		wdwProfesor.onClose();
+
 	}
 
 }

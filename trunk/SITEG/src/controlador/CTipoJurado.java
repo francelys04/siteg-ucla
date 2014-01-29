@@ -61,6 +61,8 @@ public class CTipoJurado extends CGeneral {
 	private Window wdwCatalogoTipoJurado;
 	@Wire
 	private Button btnEliminarTipoJurado;
+	@Wire
+	private Window wdwTipoJurado;
 	private long id = 0;
 
 	void inicializar(Component comp) {
@@ -130,10 +132,10 @@ public class CTipoJurado extends CGeneral {
 										nombre, descripcion, estatus);
 								servicioTipoJurado.guardar(tipoJurado);
 								cancelarTipoJurado();
-								Messagebox.show(
-										"Tipo de jurado registrado exitosamente",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
+								Messagebox
+										.show("Tipo de jurado registrado exitosamente",
+												"Informacion", Messagebox.OK,
+												Messagebox.INFORMATION);
 								id = 0;
 
 							}
@@ -147,13 +149,14 @@ public class CTipoJurado extends CGeneral {
 	// Aca se eliminan logicamente los Tipo de Jurado
 	@Listen("onClick = #btnEliminarTipoJurado")
 	public void eliminarTipoJurado() {
-		
+
 		Messagebox.show("¿Desea eliminar los datos del tipo de jurado?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-							TipoJurado tipoJurado = servicioTipoJurado.buscarTipoJurado(id);
+							TipoJurado tipoJurado = servicioTipoJurado
+									.buscarTipoJurado(id);
 							tipoJurado.setEstatus(false);
 							servicioTipoJurado.guardar(tipoJurado);
 							cancelarTipoJurado();
@@ -164,9 +167,7 @@ public class CTipoJurado extends CGeneral {
 						}
 					}
 				});
-		
-		
-		
+
 	}
 
 	// Aca se mandan a limpiar los campos de textos de la vista
@@ -177,4 +178,14 @@ public class CTipoJurado extends CGeneral {
 		txtDescripcionTipoJurado.setValue("");
 		btnEliminarTipoJurado.setDisabled(true);
 	}
+
+	@Listen("onClick = #btnSalirTipoJurado")
+	public void salirTipoJurado() {
+		
+		wdwTipoJurado.onClose();
+		
+		
+		
+	}
+
 }

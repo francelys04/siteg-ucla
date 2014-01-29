@@ -234,8 +234,8 @@ public class CInicio extends CGeneral {
 			}
 		}else{
 			Messagebox
-			.show("Introduzca una cedula para continuar","Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+			.show("Introduzca su numero de cedula para realizar la consulta","Error", Messagebox.OK,
+											Messagebox.ERROR);
 		}
 
 	}
