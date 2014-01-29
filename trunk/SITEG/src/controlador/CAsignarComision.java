@@ -87,6 +87,8 @@ public class CAsignarComision extends CGeneral {
 	@Wire
 	private Textbox txtApellidoTutorComision;
 	@Wire
+	private Textbox txtTutorAsignarComision;
+	@Wire
 	private Textbox txtProgramaComision;
 	@Wire
 	private Label lblCondicionAsignarComision;
@@ -129,11 +131,9 @@ public class CAsignarComision extends CGeneral {
 				long codigo = (Long) map.get("id");
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-				txtNombreTutorComision.setValue(teg2.getTutor().getNombre());
-				txtApellidoTutorComision
-						.setValue(teg2.getTutor().getApellido());
+				txtTutorAsignarComision.setValue(teg2.getTutor().getNombre() + " " + teg2.getTutor().getApellido());
 				txtTituloComision.setValue(teg2.getTitulo());
-				txtCedulaTutorComision.setValue(teg2.getTutor().getCedula());
+				
 				txtAreaComision.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
 				txtTematicaComision.setValue(teg2.getTematica().getNombre());

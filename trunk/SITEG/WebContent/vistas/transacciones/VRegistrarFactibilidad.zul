@@ -1,5 +1,5 @@
 <window id="wdwRegistrarFactibilidad" title="Registrar Factibilidad"
-	border="normal" width="765px" height="760px" closable="true"
+	border="normal" width="765px" height="820px" closable="true"
 	apply="controlador.CRegistrarFactibilidad">
 	<separator />
 
@@ -66,22 +66,19 @@
 		<toolbarbutton
 			label="Presione aquí para rechazar la factibilidad" />
 	</popup>
+	<popup id="pupBtnSalir">
+		<toolbarbutton
+			label="Presione aquí para salir" />
+	</popup>
 	<!-- fin de popus -->
 
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="685px"
+	<groupbox width="95%" height="745px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
-
-		<label value="Programa:"
-			style="margin-left:2%;font-weight:bold;color: rgb(0, 84, 122)" />
-		<textbox id="txtProgramaRegistrarFactibilidad"
-			style="margin-left:5%;color:black !important;" disabled="true"
-			width="230px" />
-
 
 		<div align="right">
 			<label value="Fecha:"
@@ -94,6 +91,22 @@
 			</datebox>
 		</div>
 
+		<label value="Programa:"
+			style="margin-left:2%;font-weight:bold;color: rgb(0, 84, 122)" />
+		<textbox id="txtProgramaRegistrarFactibilidad"
+			style="margin-left:5%;color:black !important;" disabled="true"
+			width="230px" />
+
+		<separator />
+
+		<label value="Tutor:"
+			style="margin-left:2%;font-weight:bold;font-weight:bold;color: rgb(0, 84, 122)" />
+		<textbox id="txtTutorRegistrarFactibilidad"
+			style="margin-left:60px;color:black !important;" width="180px"
+			disabled="true" />
+
+		<separator />
+		<separator />
 		<separator />
 		<separator />
 
@@ -106,7 +119,6 @@
 					tooltip="pupDatosProyecto" />
 				<tab label="Datos del Estudiante"
 					tooltip="pupDatosEstudiante" />
-				<tab label="Datos del Tutor" tooltip="pupDatosTutor" />
 
 
 			</tabs>
@@ -225,45 +237,6 @@
 					</listbox>
 				</tabpanel>
 
-				<tabpanel height="200px">
-
-					<separator />
-					<separator />
-					<grid sclass="fgrid" style="margin-left:1%">
-						<columns>
-							<column width="15%" height="30px" />
-						</columns>
-						<rows>
-							<row>
-								<label value="Cédula:"
-									style="font-weight:bold" />
-
-								<textbox style="color:black !important;"
-									disabled="true" id="txtCedulaComisionRegistrarFactibilidad"
-									width="30%" />
-							</row>
-							<row>
-								<label value="Nombre:"
-									style="font-weight:bold" />
-
-
-								<textbox style="color:black !important;"
-									disabled="true" id="txtNombreComisionRegistrarFactibilidad"
-									width="35%" />
-							</row>
-							<row>
-								<label value="Apellido:"
-									style="font-weight:bold" />
-
-								<textbox style="color:black !important;"
-									disabled="true" id="txtApellidoComisionRegistrarFactibilidad"
-									width="35%" />
-							</row>
-						</rows>
-					</grid>
-				</tabpanel>
-
-
 			</tabpanels>
 		</tabbox>
 
@@ -307,6 +280,11 @@
 							sclass="btn" label="Rechazar"
 							image="/public/imagenes/iconos/rechazar.png" tabindex="13"
 							tooltip="pupBtnRechazar">
+						</button>
+						<button id="btnSalirRegistrarFactibilidad"
+							width="110px" sclass="btn" label="Salir"
+							image="/public/imagenes/iconos/salir.png" tabindex="14"
+							tooltip="pupBtnSalir">
 						</button>
 					</div>
 
