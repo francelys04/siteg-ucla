@@ -200,6 +200,8 @@ public class CAsignarComision extends CGeneral {
 					profesoresDisponibles));
 
 		}
+		lsbProfesoresDisponibles.setMultiple(true);
+		lsbProfesoresSeleccionados.setMultiple(true);
 
 	}
 
@@ -252,42 +254,36 @@ public class CAsignarComision extends CGeneral {
 	// comision evaluadora
 	@Listen("onClick = #btnAgregarProfesoresComision")
 	public void agregarProfesor() {
-
-		int valorcondicion = valorCondicion();
-		int valorItem = 0;
-
-		Listitem list1 = lsbProfesoresDisponibles.getSelectedItem();
-
-		if (list1 == null)
-			Messagebox.show("Debe Seleccionar un profesor", "Advertencia",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable)lsbProfesoresDisponibles.getModel()).getSelection();
+		int valor= selectedItems.size()+lsbProfesoresSeleccionados.getItemCount();
+	    System.out.println(valor);
+		if (valor <= valorCondicion())
+		{
+		
+			((ListModelList)lsbProfesoresSeleccionados.getModel()).addAll(selectedItems);
+			((ListModelList)lsbProfesoresDisponibles.getModel()).removeAll(selectedItems);
+		}
 		else
 
-			list1.setParent(lsbProfesoresSeleccionados);
-		valorItem = lsbProfesoresSeleccionados.getItemCount();
+		{
+			Messagebox.show("El numero de profesores seleccionados excede al numero de integrantes de la comision evaluadora, ya que debe ser: "+ buscarCondicionVigenteEspecifica(
+					"Numero de integrantes de la comision", programa)
+					.getValor(), "Error", Messagebox.OK,Messagebox.ERROR);
 
-		if (valorItem > valorcondicion) {
-
-			Messagebox.show(
-					"El numero de profesores en la comisi�n no es el correcto, debe ser: "
-							+ buscarCondicionVigenteEspecifica(
-									"Numero de integrantes de la comision",
-									programa).getValor(), "Error",
-					Messagebox.OK, Messagebox.ERROR);
 
 		}
+
+		
 	}
 
 	// Metodo que permite quitar los profesores de la lista de integrantes de la
 	// comision evaluadora
 	@Listen("onClick = #btnRemoverProfesoresComision")
 	public void removerProfesor() {
-		Listitem list2 = lsbProfesoresSeleccionados.getSelectedItem();
-		if (list2 == null)
-			Messagebox.show("Debe Seleccionar un profesor", "Advertencia",
-					Messagebox.OK, Messagebox.EXCLAMATION);
-		else
-			list2.setParent(lsbProfesoresDisponibles);
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable)lsbProfesoresSeleccionados.getModel()).getSelection();
+		((ListModelList)lsbProfesoresDisponibles.getModel()).addAll(selectedItems);
+		((ListModelList)lsbProfesoresSeleccionados.getModel()).removeAll(selectedItems);
+		
 	}
 
 	// Metodo que permite limpiar las listas tanto de los profesores disponibles
@@ -446,21 +442,11 @@ public class CAsignarComision extends CGeneral {
 
 		Listitem listProfesoresSeleccionados = lsbProfesoresSeleccionados
 				.getSelectedItem();
-		if (listProfesoresSeleccionados == null)
-			Messagebox
-					.show("Debe Seleccionar los profesores que conformaran la comision evaluadora",
-							"Error", Messagebox.OK, Messagebox.ERROR);
-		else {
+		
 
 			int valorItem = lsbProfesoresSeleccionados.getItemCount();
 
-			if (valorItem > valorcondicion) {
-
-				Messagebox
-						.show("El numero de profesores seleccionados excede al numero de integrantes de la comision evaluadora para este programa",
-								"Error", Messagebox.OK, Messagebox.ERROR);
-
-			} else {
+	
 
 				if (valorItem == valorcondicion) {
 					Messagebox
@@ -499,19 +485,13 @@ public class CAsignarComision extends CGeneral {
 											}
 										}
 									});
-				} else {
-
-					Messagebox
-							.show("El numero de profesores seleccionados excede al numero de integrantes de la comision evaluadora para este programa",
-									"Error", Messagebox.OK, Messagebox.ERROR);
-
-				}
+				} 
 
 			}
 
-		}
+		
 
-	}
+	
 
 	@Listen("onClick = #btnSalirComision")
 	public void salirComision() {
