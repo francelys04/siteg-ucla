@@ -113,6 +113,15 @@ public class STeg {
 				estatus[6], estudiante);
 		return teg;
 	}
+	/*Busca un teg asociado a un estudiante que tengan estatus avances aprobado*/
+	public Teg buscarTegEstudiantePorEstatusAprobado(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		Teg teg;
+		teg = interfaceTeg.findByEstatusLikeAndEstudiantes(
+				estatus[11], estudiante);
+		return teg;
+	}
+	
 	
 	
 	/*Buscar los teg que tengan estatus Proyecto Registrado*/
