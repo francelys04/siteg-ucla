@@ -349,19 +349,17 @@
 													name="model">
 													<listitem>
 														<listcell>
-															<label
-																value="${each.profesor.cedula}">
-															</label>
+															<label value ="${each.cedula}"></label>
 														</listcell>
 														<listcell
-															label="${each.profesor.nombre}">
+															label="${each.nombre}">
 														</listcell>
 														<listcell
-															label="${each.profesor.apellido}">
+															label="${each.apellido}">
 														</listcell>
 														<listcell>
 															<combobox
-																readonly="true" value="${each.tipoJurado.nombre}"
+																readonly="true" 
 																inplace="true">
 																<comboitem
 																	label="Principal" />

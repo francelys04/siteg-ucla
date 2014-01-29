@@ -155,24 +155,35 @@ public class CAsignarJurado extends CGeneral {
 	@Listen("onClick = #btnAgregarJurado")
 	public void moverDerechaJurado() {
 
-		Listitem list1 = ltbJuradoDisponible.getSelectedItem();
-		if (list1 == null)
-			 Messagebox.show("Seleccione un profesor", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable)ltbJuradoDisponible.getModel()).getSelection();
+		System.out.println("imprimir");
+		System.out.println(selectedItems);
+		int valor= selectedItems.size()+ltbJuradoSeleccionado.getItemCount();
+	    System.out.println(valor);
+	    int valorcondicion = buscarCondicionVigenteEspecifica("Numero de integrantes del jurado", programa).getValor();
+		if (valor <= valorcondicion)
+		{
+		
+			((ListModelList)ltbJuradoSeleccionado.getModel()).addAll(selectedItems);
+			((ListModelList)ltbJuradoDisponible.getModel()).removeAll(selectedItems);
+		}
 		else
-			list1.setParent(ltbJuradoSeleccionado);
+
+		{
+			Messagebox.show("El numero de profesores seleccionados excede al numero de integrantes del jurado, ya que debe ser: "+ buscarCondicionVigenteEspecifica(
+					"Numero de integrantes de la comision", programa)
+					.getValor(), "Error", Messagebox.OK,Messagebox.ERROR);
+
+
+		}
+
 	}
 	//metodo que permite mover un profesor de seleccionado a disponible
 	@Listen("onClick = #btnRemoverJurado")
 	public void moverIzquierdaJurado() {
-		Listitem list2 = ltbJuradoSeleccionado.getSelectedItem();
-		if (list2 == null)
-			 Messagebox.show("Seleccione un profesor", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
-		else{
-			if(list2.getIndex() < numeroIntegrantes){
-				Messagebox.show("Jurado no puede ser removido", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);	
-			}			
-			list2.setParent(ltbJuradoDisponible);
-			}
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable)ltbJuradoSeleccionado.getModel()).getSelection();
+		((ListModelList)ltbJuradoDisponible.getModel()).addAll(selectedItems);
+		((ListModelList)ltbJuradoSeleccionado.getModel()).removeAll(selectedItems);
 		}	
 	
 
@@ -192,9 +203,11 @@ public class CAsignarJurado extends CGeneral {
 		ltbJuradoDisponible.setModel(new ListModelList<Profesor>(
 				juradoDisponible));
 		List<Jurado> juradoOcupado = servicioJurado.buscarJuradoDeTeg(teg);
-		ltbJuradoSeleccionado.setModel(new ListModelList<Jurado>(juradoOcupado));
+		ltbJuradoSeleccionado.setModel(new ListModelList<Profesor>());
 		ltbJuradoSeleccionado.setDisabled(true);
 		numeroIntegrantes = juradoOcupado.size();
+		ltbJuradoSeleccionado.setMultiple(true);
+		ltbJuradoDisponible.setMultiple(true);
 
 		
 	}
