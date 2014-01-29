@@ -268,7 +268,7 @@ public class CAsignarJurado extends CGeneral {
 											if(user==null){
 											Usuario usuario = new Usuario(0, profesor.getCedula(), passwordEncoder.encode(profesor.getCedula()), true, gruposUsuario, imagenUsuario);
 											servicioUsuario.guardar(usuario);
-											user = servicioUsuario.buscarUsuarioPorNombre(jurado.getProfesor().getCedula());
+											user = servicioUsuario.buscarUsuarioPorNombre(profesor.getCedula());
 											profesor.setUsuario(user);
 											servicioProfesor.guardarProfesor(profesor);
 											}	
