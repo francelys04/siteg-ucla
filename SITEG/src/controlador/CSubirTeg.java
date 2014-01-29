@@ -16,6 +16,7 @@ import modelo.Archivo;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
+import modelo.Teg;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.util.media.Media;
@@ -36,6 +37,7 @@ import org.zkoss.zk.ui.event.UploadEvent;
 import servicio.SActividad;
 import servicio.SArchivo;
 import servicio.SPrograma;
+import servicio.STeg;
 import servicio.SUsuario;
 import configuracion.GeneradorBeans;
 
@@ -47,6 +49,7 @@ public class CSubirTeg extends CGeneral {
 	
 	SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 
 	@Wire
 	private Textbox txtNombreArchivo;
@@ -58,6 +61,8 @@ public class CSubirTeg extends CGeneral {
 	private Media media;
 	@Wire
 	private Combobox cmbPrograma;
+	@Wire
+	private Window wdwSubirTeg;
 	private long id = 0;
 	private FileInputStream archivo;
 	private int longitudByte;
@@ -69,6 +74,15 @@ public class CSubirTeg extends CGeneral {
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+		
+		Estudiante estudiante = ObtenerUsuarioEstudiante();
+		if(estudiante!= null){
+		Teg tegEstudiante = servicioTeg.buscarTegEstudiantePorEstatusAprobado(estudiante);
+		if(tegEstudiante == null){
+			wdwSubirTeg.onClose();
+			alert("no puede");
+		}
+		}
 		List<Programa> programa = servicioPrograma.buscarActivas();
 		if (cmbPrograma != null) {
 			cmbPrograma.setModel(new ListModelList<Programa>(programa));
@@ -127,7 +141,7 @@ public class CSubirTeg extends CGeneral {
 			Messagebox.show("Debe completar los campos", "Error", Messagebox.OK, Messagebox.ERROR);
 		} 
 		else {
-			Messagebox.show("¿Desea guardar los datos del archivo?",
+			Messagebox.show("ï¿½Desea guardar los datos del archivo?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
