@@ -20,6 +20,7 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -62,9 +63,15 @@ public class CCatalogoAsignarComision extends CGeneral {
 		// TODO Auto-generated method stub
 
 		List<Teg> tegs = buscarDatos();
+		
+		
+		
+     
+		
 
 		ltbProyectosRegistrados.setModel(new ListModelList<Teg>(tegs));
-
+		
+       
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
