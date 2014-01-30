@@ -1,5 +1,5 @@
 <window id="wdwReporteProfesorCargo"
-	title="Tematicas mas solicitadas"
+	title="Tematicas"
 	border="normal" width="60%" height="auto" closable="true" apply="controlador.CReporteTematicasMasSolicitadas">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -39,7 +39,7 @@
 		style="font-weight:bold;color:red;margin-center:2%">
 		</label> -->
 
-	<label value="Tematicas Mas Solicitadas por estatus"
+	<label value="Tematicas Mas Solicitadas"
 		style="font-weight:bold;margin-left:35%;margin-right:20%">
 	</label>
 	<separator />
@@ -113,7 +113,7 @@
 				<row>
 
 					<hlayout>
-						<label value="Etapa del Teg:" style="color:black" />
+						<label value="Etapa del Teg:" style="font-weight:bold" />
 					</hlayout>
 					<combobox id="cmbEtapaTeg" readonly="true" width="100%"
 						tabindex="12" tooltip="pupEtapa">
@@ -124,7 +124,7 @@
 				
 
 					<hlayout>
-						<label value="Estatus:" style="color:black" />
+						<label value="Estatus:" style="font-weight:bold" />
 					</hlayout>
 					<combobox id="cmbEstatus" readonly="true"
 						width="100%" tabindex="12" tooltip="pupEstatus">
