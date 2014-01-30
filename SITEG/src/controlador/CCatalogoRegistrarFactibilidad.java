@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.Estudiante;
 import modelo.Factibilidad;
 import modelo.Profesor;
 import modelo.Programa;
@@ -40,7 +41,8 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 
 	CRegistrarFactibilidad vistaFactibilidad = new CRegistrarFactibilidad();
-
+	@Wire
+	private Textbox txtEstudianteRegistrarFactibilidad;
 	@Wire
 	private Listbox ltbListaFactibilidad;
 	@Wire
@@ -64,6 +66,12 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 		
 		List<Teg> tegs = buscarDatos();
 
+		for (int i = 0; i < tegs.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			tegs.get(i).setEstatus(nombre+" "+apellido);
+		}
 		ltbListaFactibilidad.setModel(new ListModelList<Teg>(tegs));
 
 		Selectors.wireComponents(comp, this, false);
@@ -111,10 +119,23 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 	@Listen("onChange = #txtMostrarFechaFactibilidad, #txtMostrarTematicaFactibilidad,#txtMostrarAreaFactibilidad,#txtMostrarTituloFactibilidad,#txtMostrarNombreTutorFactibilidad,# txtMostrarApellidoTutorFactibilidad")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
+		for (int i = 0; i < teg1.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			teg1.get(i).setEstatus(nombre+" "+apellido);
+		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
-			if (teg.getFecha()
+			if (servicioEstudiante.buscarEstudiantePorTeg(teg)
+					.get(0)
+					.getNombre()
+					.toLowerCase()
+					.contains(
+							txtEstudianteRegistrarFactibilidad.getValue()
+									.toLowerCase())&&
+									teg.getFecha()
 					.toString()
 					.toLowerCase()
 					.contains(
@@ -168,6 +189,7 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 	public void mostrarDatosCatalogo() {
 		if(ltbListaFactibilidad.getItemCount()!=0){
 		Listitem listItem = ltbListaFactibilidad.getSelectedItem();
+		if(listItem!=null){
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", tegDatosCatalogo.getId());
@@ -179,7 +201,7 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 		window.doModal();
 		vistaFactibilidad.recibir("catalogos/VCatalogoRegistrarFactibilidad");
 		}
-
+		}
 	}
 
 }

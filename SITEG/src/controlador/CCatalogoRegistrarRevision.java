@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
@@ -39,7 +40,8 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	
 	CRegistrarRevision vistaRegistrarRevision = new CRegistrarRevision();
-
+	@Wire
+	private Textbox txtEstudianteRevision;
 	@Wire
 	private Listbox ltbTrabajosRegistrados;
 	@Wire
@@ -62,7 +64,12 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 		// TODO Auto-generated method stub
 
 		List<Teg> tegs = buscarDatos();
-
+		for (int i = 0; i < tegs.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			tegs.get(i).setEstatus(nombre+" "+apellido);
+		}
 		ltbTrabajosRegistrados.setModel(new ListModelList<Teg>(tegs));
 
 		Selectors.wireComponents(comp, this, false);
@@ -110,10 +117,23 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	@Listen("onChange = #txtFechaRegistrarRevision, #txtTematicaRegistrarRevision,#txtAreaRegistrarRevision,#txtTituloRegistrarRevision,#txtNombreTutorRegistrarRevision,#txtApellidoTutorRegistrarRevision")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
+		for (int i = 0; i < teg1.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			teg1.get(i).setEstatus(nombre+" "+apellido);
+		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
-			if (teg.getFecha().toString().toLowerCase()
+			if (servicioEstudiante.buscarEstudiantePorTeg(teg)
+					.get(0)
+					.getNombre()
+					.toLowerCase()
+					.contains(
+							txtEstudianteRevision.getValue()
+									.toLowerCase())
+					&& teg.getFecha().toString().toLowerCase()
 					.contains(txtFechaRegistrarRevision.getValue().toLowerCase())
 
 					&& teg.getTematica()
@@ -157,6 +177,7 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	public void mostrarDatosCatalogo() {
 		if(ltbTrabajosRegistrados.getItemCount()!=0){
 		Listitem listItem = ltbTrabajosRegistrados.getSelectedItem();
+		if(listItem!=null){
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", tegDatosCatalogo.getId());
@@ -168,7 +189,7 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 		window.doModal();
 		vistaRegistrarRevision.recibir("catalogos/VCatalogoRegistrarRevision");
 		}
-
+		}
 	}
 
 }

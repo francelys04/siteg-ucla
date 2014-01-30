@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.Estudiante;
 import modelo.SolicitudTutoria;
 
 import org.springframework.security.core.Authentication;
@@ -40,7 +41,8 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 	private Textbox txtDescripcionSolicitud;
 	@Wire
 	private Textbox txtFechaSolicitud;
-
+	@Wire
+	private Textbox txtNombreEstudianteSolicitud;
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -49,21 +51,43 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 		if (map != null || map == null) {
 			List<SolicitudTutoria> solicitudes = servicioTutoria
 					.buscarSolicitudPorRevisar(ObtenerUsuarioProfesor());
+			for (int i = 0; i < solicitudes.size(); i++) {
+				List<Estudiante> es = servicioEstudiante
+						.buscarSolicitudesEstudiante(solicitudes.get(i));
+				String nombre = es.get(0).getNombre();
+				String apellido = es.get(0).getApellido();
+				solicitudes.get(i).setEstatus(nombre+" "+apellido);
+			}
 			ltbSolicitud.setModel(new ListModelList<SolicitudTutoria>(
 					solicitudes));
 		}
 	}
-	//permite filtar los datos del catalogo
+
+	// permite filtar los datos del catalogo
 	@Listen("onChange = #txtFechaSolicitud,#txtAreaSolicitud,#txtTematicaSolicitud,#txtDescripcionSolicitud")
 	public void filtrarDatosCatalogo() {
 		List<SolicitudTutoria> solicitudes = servicioTutoria
 				.buscarSolicitudPorRevisar(ObtenerUsuarioProfesor());
+		for (int i = 0; i < solicitudes.size(); i++) {
+			List<Estudiante> es = servicioEstudiante
+					.buscarSolicitudesEstudiante(solicitudes.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			solicitudes.get(i).setEstatus(nombre+" "+apellido);
+		}
 		List<SolicitudTutoria> solicitud2 = new ArrayList<SolicitudTutoria>();
 
 		for (SolicitudTutoria solicitud : solicitudes) {
 			if (solicitud.getFecha().toString().toLowerCase()
 					.contains(txtFechaSolicitud.getValue().toLowerCase())
-
+					&& servicioEstudiante
+							.buscarSolicitudesEstudiante(solicitud)
+							.get(0)
+							.getNombre()
+							.toLowerCase()
+							.contains(
+									txtNombreEstudianteSolicitud.getValue()
+											.toLowerCase())
 					&& solicitud
 							.getTematica()
 							.getareaInvestigacion()
@@ -86,21 +110,24 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 		ltbSolicitud.setModel(new ListModelList<SolicitudTutoria>(solicitud2));
 
 	}
-	//permite llebas los datos del teg a la vista Evaluar Tutorias
+
+	// permite llebas los datos del teg a la vista Evaluar Tutorias
 	@Listen("onDoubleClick = #ltbSolicitud")
 	public void seleccionarSolicitud() {
-		if(ltbSolicitud.getItemCount()!=0){
-		Listitem listItem = ltbSolicitud.getSelectedItem();
-		SolicitudTutoria solicitudSeleccionada = (SolicitudTutoria) listItem
-				.getValue();
-		long id = solicitudSeleccionada.getId();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
-		Sessions.getCurrent().setAttribute("catalogoSolicitud", map);
-		Window window = (Window) Executions.createComponents(
-				"/vistas/transacciones/VEvaluarTutorias.zul", null, null);
-		window.doModal();
-		vista.recibir("catalogos/VCatalogoSolicitudTutorias");
+		if (ltbSolicitud.getItemCount() != 0) {
+			Listitem listItem = ltbSolicitud.getSelectedItem();
+			if(listItem!=null){
+			SolicitudTutoria solicitudSeleccionada = (SolicitudTutoria) listItem
+					.getValue();
+			long id = solicitudSeleccionada.getId();
+			final HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("id", id);
+			Sessions.getCurrent().setAttribute("catalogoSolicitud", map);
+			Window window = (Window) Executions.createComponents(
+					"/vistas/transacciones/VEvaluarTutorias.zul", null, null);
+			window.doModal();
+			vista.recibir("catalogos/VCatalogoSolicitudTutorias");
+			}
 		}
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.Estudiante;
 import modelo.Jurado;
 import modelo.Profesor;
 import modelo.Programa;
@@ -32,7 +33,8 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 
 	@Wire
 	private Listbox ltbCalificarDefensa;
-
+	@Wire
+	private Textbox txtEstudianteCalificarDefensa;
 	@Wire
 	private Textbox txtMostrarFechaCalificar;
 	@Wire
@@ -54,7 +56,13 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 	void inicializar(Component comp) {
 
 		List<Teg> t = buscar();
-
+		for (int i = 0; i < t.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(t.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			t.get(i).setEstatus(nombre+" "+apellido);
+		}
+		
 		ltbCalificarDefensa.setModel(new ListModelList<Teg>(t));
 		Selectors.wireComponents(comp, this, false);
 
@@ -82,10 +90,23 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 	@Listen("onChange = #txtMostrarFechaCalificar,#txtMostrarTematicaCalificar,#txtMostrarAreaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,# txtMostrarApellidoTutorCalificar")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscar();
+		for (int i = 0; i < teg1.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			teg1.get(i).setEstatus(nombre+" "+apellido);
+		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
-			if (teg.getFecha()
+			if (servicioEstudiante.buscarEstudiantePorTeg(teg)
+					.get(0)
+					.getNombre()
+					.toLowerCase()
+					.contains(
+							txtEstudianteCalificarDefensa.getValue()
+									.toLowerCase())
+					&&teg.getFecha()
 					.toString()
 					.toLowerCase()
 					.contains(txtMostrarFechaCalificar.getValue().toLowerCase())
@@ -136,6 +157,7 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 	public void mostrarDatosCatalogo() {
 		if(ltbCalificarDefensa.getItemCount()!=0){
 		Listitem listItem = ltbCalificarDefensa.getSelectedItem();
+		if(listItem!=null){
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", tegDatosCatalogo.getId());
@@ -147,7 +169,7 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 				"/vistas/transacciones/VCalificarDefensa.zul", null, null);
 		window.doModal();
 		ventanarecibida.recibir("catalogos/VCatalogoCalificarDefensa");
-
+		}
 	}
 	}
 }

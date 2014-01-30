@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
@@ -39,7 +40,8 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	
 	CRegistrarAvance vistaRegistrarAvance = new CRegistrarAvance();
-
+	@Wire
+	private Textbox txtEstudianteAvance;
 	@Wire
 	private Listbox ltbProyectosFactibles;
 	@Wire
@@ -62,7 +64,12 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 		// TODO Auto-generated method stub
 
 		List<Teg> tegs = buscarDatos();
-
+		for (int i = 0; i < tegs.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			tegs.get(i).setEstatus(nombre+" "+apellido);
+		}
 		ltbProyectosFactibles.setModel(new ListModelList<Teg>(tegs));
 
 		Selectors.wireComponents(comp, this, false);
@@ -111,10 +118,23 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	@Listen("onChange = #txtFechaRegistrarAvance, #txtTematicaRegistrarAvance,#txtAreaRegistrarAvance,#txtTituloRegistrarAvance,#txtNombreTutorRegistrarAvance,#txtApellidoTutorRegistrarAvance")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
+		for (int i = 0; i < teg1.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			teg1.get(i).setEstatus(nombre+" "+apellido);
+		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
-			if (teg.getFecha().toString().toLowerCase()
+			if (servicioEstudiante.buscarEstudiantePorTeg(teg)
+					.get(0)
+					.getNombre()
+					.toLowerCase()
+					.contains(
+							txtEstudianteAvance.getValue()
+									.toLowerCase())
+									&&teg.getFecha().toString().toLowerCase()
 					.contains(txtFechaRegistrarAvance.getValue().toLowerCase())
 
 					&& teg.getTematica()
@@ -158,6 +178,7 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	public void mostrarDatosCatalogo() {
 		if(ltbProyectosFactibles.getItemCount()!=0){
 		Listitem listItem = ltbProyectosFactibles.getSelectedItem();
+		if(listItem!=null){
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", tegDatosCatalogo.getId());
@@ -170,18 +191,7 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 		vistaRegistrarAvance.recibir("catalogos/VCatalogoRegistrarAvance");
 		//vistaRegistrarAvance.recibir("catalogos/VCatalogoAsignarComision");
 		}
-
+		}
 	}
-	
-	
-	
-	
-	
-
-
-	
-	
-	
-
 }
 

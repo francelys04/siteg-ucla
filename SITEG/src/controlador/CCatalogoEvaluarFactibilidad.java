@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.Estudiante;
 import modelo.Factibilidad;
 import modelo.Jurado;
 import modelo.Profesor;
@@ -43,6 +44,8 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 	CEvaluarFactibilidad vistaFactibilidad = new CEvaluarFactibilidad();
 
 	@Wire
+	private Textbox txtEstudianteFactibilidad;
+	@Wire
 	private Listbox ltbListaFactibilidad;
 	@Wire
 	private Window wdwCatalogoEvaluarFactibilidad;
@@ -64,7 +67,12 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 		// TODO Auto-generated method stub
 
 		List<Teg> tegs = buscarDatos();
-
+		for (int i = 0; i < tegs.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			tegs.get(i).setEstatus(nombre+" "+apellido);
+		}
 		ltbListaFactibilidad.setModel(new ListModelList<Teg>(tegs));
 
 		Selectors.wireComponents(comp, this, false);
@@ -104,6 +112,12 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 	@Listen("onChange = #txtMostrarFechaFactibilidad, #txtMostrarTematicaFactibilidad,#txtMostrarAreaFactibilidad,#txtMostrarTituloFactibilidad,#txtMostrarNombreTutorFactibilidad,# txtMostrarApellidoTutorFactibilidad")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
+		for (int i = 0; i < teg1.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			teg1.get(i).setEstatus(nombre+" "+apellido);
+		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
@@ -113,7 +127,13 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 					.contains(
 							txtMostrarFechaFactibilidad.getValue()
 									.toLowerCase())
-
+						&& servicioEstudiante.buscarEstudiantePorTeg(teg)
+							.get(0)
+							.getNombre()
+							.toLowerCase()
+							.contains(
+									txtEstudianteFactibilidad.getValue()
+											.toLowerCase())
 					&& teg.getTematica()
 							.getNombre()
 							.toLowerCase()
@@ -161,6 +181,7 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 	public void mostrarDatosCatalogo() {
 		if(ltbListaFactibilidad.getItemCount()!=0){
 		Listitem listItem = ltbListaFactibilidad.getSelectedItem();
+		if(listItem!=null){
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", tegDatosCatalogo.getId());
@@ -171,7 +192,7 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 				"/vistas/transacciones/VEvaluarFactibilidad.zul", null, null);
 		window.doModal();
 		vistaFactibilidad.recibir("catalogos/VCatalogoEvaluarFactibilidad");
-        
+		}
 	}
 	}
 	

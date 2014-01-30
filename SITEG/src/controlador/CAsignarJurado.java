@@ -63,6 +63,7 @@ public class CAsignarJurado extends CGeneral {
 	STipoJurado servicioTipoJurado = GeneradorBeans.getServicioTipoJurado();
 	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
 	SGrupo serviciogrupo = GeneradorBeans.getServicioGrupo();
+
 	@Wire
 	private Textbox txtProgramaAtenderDefensa;
 	@Wire
