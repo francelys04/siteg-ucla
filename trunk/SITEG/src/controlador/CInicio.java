@@ -13,6 +13,7 @@ import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Noticia;
 import modelo.Programa;
+import modelo.SolicitudTutoria;
 import configuracion.GeneradorBeans;
 import controlador.CConsultarEstatus;
 
@@ -210,13 +211,16 @@ public class CInicio extends CGeneral {
 					
 					Estudiante estudiante = servicioEstudiante.buscarEstudiante(cedula);
 					
-					if (servicioTutoria.buscarSolicitud(estudiante) != null  ||
-							servicioTeg.buscarTegPorEstudiante(estudiante) != null ) {
+					
+					if (servicioTutoria.buscarSolicitud(estudiante).size() != 0  ||
+							servicioTeg.buscarTegPorEstudiante(estudiante).size() != 0 ) {
 						
 						cedulaEstatus.setValue(null);
 						CConsultarEstatus consultarestatus = new CConsultarEstatus();
 						consultarestatus.recibirCedula(cedula);
+						
 					}else{
+						
 						Messagebox
 						.show("Estudiante apto para realizar la solicitud de tutor de Trabajo Especial de Grado",
 								"Informacion", Messagebox.OK,
@@ -226,8 +230,8 @@ public class CInicio extends CGeneral {
 	
 					Messagebox
 							.show("Estudiante no autorizado para realizar un Trabajo Especial de Grado",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
+									"Error", Messagebox.OK,
+									Messagebox.ERROR);
 				
 				}
 	
