@@ -139,7 +139,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	//Permite aceptar la factibilidad de un proyecto
 	@Listen("onClick = #btnAceptarRegistrarFactibilidad")
 	public void aceptarfactibilidad(){
-		Messagebox.show("¿Desea aceptar la factibilidad del proyecto?",
+		Messagebox.show("ï¿½Desea aceptar la factibilidad del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
@@ -148,14 +148,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 		String estatus = "Proyecto Factible";
 		Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
 		teg2.setEstatus(estatus);
-		servicioTeg.guardar(teg2);
-		for (int i = 0; i < ltbEstudianteRegistrarFactibilidad.getItemCount(); i++) {
-	        Estudiante estudiante = ltbEstudianteRegistrarFactibilidad.getItems().get(i).getValue();
-	        enviarEmailNotificacion(estudiante.getCorreoElectronico(), "Su Proyecto es Factible");
-	        
-		}
-		
-		
+		servicioTeg.guardar(teg2);	
 		Messagebox.show("Datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
 		salir();
 						}
@@ -166,7 +159,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	//Permite rechazar la factibilidad de un proyecto
 	@Listen("onClick = #btnRechazarRegistrarFactibilidad")
 	public void rechazarfactibilidad() {
-		Messagebox.show("¿Desea rechazar factibilidad del proyecto?",
+		Messagebox.show("ï¿½Desea rechazar factibilidad del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {

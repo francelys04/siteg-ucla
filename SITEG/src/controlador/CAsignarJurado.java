@@ -213,14 +213,6 @@ public class CAsignarJurado extends CGeneral {
 		
 	}
 
-	//Metodo que permite guardar los integrantes del jurado sin finalizar
-	//es decir xi no ha llegado al maximo de miembros de la condicion
-	//por ese programa
-	@Listen("onClick = #btnAceptarDefensaMientrasTanto")
-	public void aceptarDefensa() {
-		Guardar();
-	}
-	
 	//Metodo que permite finalizar la asignacion del jurado
 	@Listen("onClick = #btnAceptarDefensa")
 	public void aceptarDefensaDefinitiva() {
@@ -233,18 +225,26 @@ public class CAsignarJurado extends CGeneral {
 							Messagebox.EXCLAMATION);
 
 		} else {
-		
+			boolean tipoBlanco =false;
 			for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
 				Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
 				tipoJurado = ((Combobox) ((listItem.getChildren().get(3)))
 						.getFirstChild()).getValue();
-				cedula = ((Label) ((listItem.getChildren().get(0))).getFirstChild()).getValue();
+				
 				if (tipoJurado == "") {
-					Messagebox.show("Debe seleccionar un tipo para cada jurado",
-							"Error", Messagebox.OK, Messagebox.ERROR);
+					tipoBlanco=true;
 				}
+			}	
+			if(tipoBlanco==true){
+				Messagebox.show("Debe seleccionar un tipo para cada jurado",
+						"Error", Messagebox.OK, Messagebox.ERROR);
+			}
 				else{
-					
+					for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
+						Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
+						tipoJurado = ((Combobox) ((listItem.getChildren().get(3)))
+								.getFirstChild()).getValue();
+						cedula = ((Label) ((listItem.getChildren().get(0))).getFirstChild()).getValue();
 										
 										Set<Grupo> gruposUsuario = new HashSet<Grupo>();
 										Grupo grupo = servicioGrupo.BuscarPorNombre("ROLE_JURADO");
@@ -271,6 +271,8 @@ public class CAsignarJurado extends CGeneral {
 											servicioUsuario.guardar(usuario);
 											user = servicioUsuario.buscarUsuarioPorNombre(profesor.getCedula());
 											profesor.setUsuario(user);
+											String mensaje="Usted foma parte del Jurado su usuario: "+usuario.getNombre()+" y contraseña: "+usuario.getPassword();
+											enviarEmailNotificacion(profesor.getCorreoElectronico(), mensaje);
 											servicioProfesor.guardarProfesor(profesor);
 											}	
 											else
@@ -349,78 +351,6 @@ public class CAsignarJurado extends CGeneral {
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwAsignarJurado.onClose();
-	}
-
-	//Metodo que permite guardar un jurado asi este no este completamente asigando
-	//es decir no este completo segun las condiciones del programa 
-	public void Guardar() {
-		
-		int valorcondicion = buscarCondicionVigenteEspecifica("Numero de integrantes del jurado", programa).getValor();
-
-		Listitem listJurado = ltbJuradoSeleccionado.getSelectedItem();
-		if (listJurado == null)
-			Messagebox
-					.show("Debe Seleccionar los profesores que conformaran el jurado",
-							"Error", Messagebox.OK, Messagebox.ERROR);
-		else {
-
-			int valorItem = ltbJuradoSeleccionado.getItemCount();
-
-			if (valorItem > valorcondicion) {
-
-				Messagebox
-						.show("El numero de profesores seleccionados excede al numero de integrantes del jurado para este programa",
-								"Error", Messagebox.OK, Messagebox.ERROR);
-
-			} else {
-
-				if (valorItem == valorcondicion) {
-
-					Messagebox
-							.show("El numero de profesores que conforman la comision evaluadora esta completo, por favor seleccione el boton de finalizar",
-									"Advertencia", Messagebox.OK,
-									Messagebox.EXCLAMATION);
-
-				} else {
-										
-					for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
-						Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
-					tipoJurado = ((Combobox) ((listItem.getChildren().get(3))).getFirstChild()).getValue();
-					cedula = ((Label) ((listItem.getChildren().get(0))).getFirstChild()).getValue();
-						if (tipoJurado == "") {
-							Messagebox.show("Debe seleccionar un tipo para cada jurado",
-									"Error", Messagebox.OK, Messagebox.ERROR);
-						}
-						else{
-							
-												List<Jurado> jurados = new ArrayList<Jurado>();
-												Teg teg1 = servicioTeg.buscarTeg(idTeg);
-												long cedula1 =  Long.parseLong (cedula);
-												Profesor profesorJurado = servicioProfesor.buscarProfesorPorCedula(String.valueOf(cedula1));
-												TipoJurado tipo = servicioTipoJurado.buscarPorNombre(tipoJurado);
-												Jurado jurado = new Jurado(teg1, profesorJurado, tipo);
-												jurados.add(jurado);
-												servicioJurado.guardar(jurados);
-												Messagebox.show("Los datos del jurado fueron guardados exitosamente",
-														"Informacion", Messagebox.OK,
-														Messagebox.INFORMATION);
-												
-												
-												
-												salir();
-											
-												
-									
-						}
-					}	
-									
-					}	
-				
-					
-				}
-
-			}
-
-		}
+	}	
 
 	}	

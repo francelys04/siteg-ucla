@@ -182,6 +182,7 @@ public class CAsignarComision extends CGeneral {
 			List<Profesor> profesores = servicioProfesor.buscarActivos();
 			lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
 					profesores));
+			lsbProfesoresSeleccionados.setModel(new ListModelList<Profesor>());
 
 		} else {
 
@@ -336,7 +337,7 @@ public class CAsignarComision extends CGeneral {
 
 				} else {
 					Messagebox.show(
-							"¿Desea guardar los miembros de la comision?",
+							"ï¿½Desea guardar los miembros de la comision?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener() {
@@ -344,75 +345,10 @@ public class CAsignarComision extends CGeneral {
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
 
-										Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-										Grupo grupo = servicioGrupo
-												.BuscarPorNombre("ROLE_COMISION");
-										gruposUsuario.add(grupo);
-										byte[] imagenUsuario = null;
-										URL url = getClass().getResource(
-												"/configuracion/usuario.png");
-										try {
-											imagenx.setContent(new AImage(url));
-										} catch (IOException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-										imagenUsuario = imagenx.getContent()
-												.getByteData();
+										
 
 										Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
-										for (int i = 0; i < lsbProfesoresSeleccionados
-												.getItemCount(); i++) {
-											Profesor profesor = lsbProfesoresSeleccionados
-													.getItems().get(i)
-													.getValue();
-											profesoresSeleccionados
-													.add(profesor);
-											Usuario user = servicioUsuario
-													.buscarUsuarioPorNombre(profesor
-															.getCedula());
-											if (user == null) {
-												Usuario usuario = new Usuario(
-														0,
-														profesor.getCedula(),
-														passwordEncoder
-																.encode(profesor
-																		.getCedula()),
-														true, gruposUsuario,
-														imagenUsuario);
-												servicioUsuario
-														.guardar(usuario);
-												user = servicioUsuario
-														.buscarUsuarioPorNombre(profesor
-																.getCedula());
-												profesor.setUsuario(user);
-												servicioProfesor
-														.guardarProfesor(profesor);
-											} else {
-
-												List<Grupo> grupino = new ArrayList<Grupo>();
-												grupino = serviciogrupo
-														.buscarGruposDelUsuario(user);
-												Grupo grupo2 = servicioGrupo
-														.BuscarPorNombre("ROLE_COMISION");
-												Set<Grupo> gruposU = new HashSet<Grupo>();
-												for (int f = 0; f < grupino
-														.size(); ++f) {
-													Grupo g = grupino.get(f);
-													System.out
-															.println(grupino
-																	.get(f)
-																	.getNombre());
-													gruposU.add(g);
-												}
-												gruposU.add(grupo2);
-
-												user.setGrupos(gruposU);
-
-												servicioUsuario.guardar(user);
-											}
-										}
-
+										
 										Teg tegSeleccionado = servicioTeg
 												.buscarTeg(auxiliarId);
 										tegSeleccionado
@@ -451,7 +387,7 @@ public class CAsignarComision extends CGeneral {
 
 				if (valorItem == valorcondicion) {
 					Messagebox
-							.show("¿Desea finalizar la asignacion de la comision evaluadora?",
+							.show("ï¿½Desea finalizar la asignacion de la comision evaluadora?",
 									"Dialogo de confirmacion", Messagebox.OK
 											| Messagebox.CANCEL,
 									Messagebox.QUESTION,
@@ -459,6 +395,23 @@ public class CAsignarComision extends CGeneral {
 										public void onEvent(Event evt)
 												throws InterruptedException {
 											if (evt.getName().equals("onOK")) {
+												Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+												Grupo grupo = servicioGrupo
+														.BuscarPorNombre("ROLE_COMISION");
+												gruposUsuario.add(grupo);
+												byte[] imagenUsuario = null;
+												URL url = getClass().getResource(
+														"/configuracion/usuario.png");
+												try {
+													imagenx.setContent(new AImage(url));
+												} catch (IOException e) {
+													// TODO Auto-generated catch block
+													e.printStackTrace();
+												}
+												imagenUsuario = imagenx.getContent()
+														.getByteData();
+																													
+												
 												Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
 												for (int i = 0; i < lsbProfesoresSeleccionados
 														.getItemCount(); i++) {
@@ -467,7 +420,54 @@ public class CAsignarComision extends CGeneral {
 															.getValue();
 													profesoresSeleccionados
 															.add(profesor);
-												}
+													Usuario user = servicioUsuario
+															.buscarUsuarioPorNombre(profesor
+																	.getCedula());
+													if (user == null) {
+														Usuario usuario = new Usuario(
+																0,
+																profesor.getCedula(),
+																passwordEncoder
+																		.encode(profesor
+																				.getCedula()),
+																true, gruposUsuario,
+																imagenUsuario);
+														servicioUsuario
+																.guardar(usuario);
+														user = servicioUsuario
+																.buscarUsuarioPorNombre(profesor
+																		.getCedula());
+														profesor.setUsuario(user);
+														servicioProfesor
+																.guardarProfesor(profesor);
+														String mensaje= "Su usuario es: "+usuario.getNombre()+"y su contraseÃ±a:" +usuario.getPassword();
+														enviarEmailNotificacion(profesor.getCorreoElectronico(), mensaje);
+													} else {
+
+														List<Grupo> grupino = new ArrayList<Grupo>();
+														grupino = serviciogrupo
+																.buscarGruposDelUsuario(user);
+														Grupo grupo2 = servicioGrupo
+																.BuscarPorNombre("ROLE_COMISION");
+														Set<Grupo> gruposU = new HashSet<Grupo>();
+														for (int f = 0; f < grupino
+																.size(); ++f) {
+															Grupo g = grupino.get(f);
+															System.out
+																	.println(grupino
+																			.get(f)
+																			.getNombre());
+															gruposU.add(g);
+														}
+														gruposU.add(grupo2);
+
+														user.setGrupos(gruposU);
+
+														servicioUsuario.guardar(user);
+													}
+												
+
+												
 
 												Teg tegSeleccionado = servicioTeg
 														.buscarTeg(auxiliarId);
@@ -483,6 +483,7 @@ public class CAsignarComision extends CGeneral {
 																Messagebox.OK,
 																Messagebox.INFORMATION);
 												salir();
+												}
 											}
 										}
 									});

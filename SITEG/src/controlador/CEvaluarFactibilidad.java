@@ -218,17 +218,6 @@ public class CEvaluarFactibilidad extends CGeneral {
 			}
 
 			if (dejeenblanco == false) {
-				for (int i = 0; i < ltbEstudianteEvaluarFactibilidad
-						.getItemCount(); i++) {
-					Estudiante estudiante = ltbEstudianteEvaluarFactibilidad
-							.getItems().get(i).getValue();
-					enviarEmailNotificacion(
-							estudiante.getCorreoElectronico(),
-							"Observacion de la Evalucion de Factibilidad:"
-									+ txtObservacionEvaluarFactibilidad
-											.getValue());
-
-				}
 				String estatus1 = "Factibilidad Evaluada";
 				teg.setEstatus(estatus1);
 				servicioTeg.guardar(teg);
