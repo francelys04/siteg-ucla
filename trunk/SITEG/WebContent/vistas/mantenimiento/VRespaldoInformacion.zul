@@ -1,5 +1,6 @@
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native" xmlns:h="http://www.w3.org/1999/xhtml">
 <window id="wdwRespaldoInformacion" title="Respaldo de Informacion"
-	border="normal" width="100%" height="200px" closable="true"
+	border="normal" width="100%" height="455px" closable="true"
 	apply="controlador.CRespaldoInformacion">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -42,49 +43,131 @@
 	<separator />
 	<separator />
 	<separator />
-	<groupbox width="95%" height="100px"
+	<groupbox width="95%" height="350px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
 		<panel border="normal" width="95%"
 			style="margin-left:2%;margin-right:3%" height="60%">
 			<panelchildren>
+				<groupbox style="margin:5px;" width="99%" mold="3d">
+					<grid width="100%" style="border:normal;"
+						height="100%">
+						<columns>
+							<column label="" width="100%" height="100%" />
+						</columns>
+						<rows>
+							<row>
+								<radiogroup id="rgDestino"
+									onCheck="choice.value = self.selectedItem.label">
+									<grid>
+										<rows>
+											<row>
+												<hbox>
+													<radio
+														id="rbLocal">
+														<attribute name="onCheck">
+															<![CDATA[
+																gbDispositivo.setVisible(false);
+															]]>
+														</attribute>
+													</radio>
+													<label
+														value="Local" />
+												</hbox>
+
+												<hbox>
+													<radio
+														id="rbDispositivo">
+														<attribute name="onCheck">
+														<![CDATA[
+															gbDispositivo.setVisible(true);
+														]]>
+														</attribute>
+													</radio>
+													<label
+														value="Dispositivo Externo" />
+												</hbox>
+											</row>
+										</rows>
+									</grid>
+								</radiogroup>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox style="margin:5px;" width="99%" mold="3d"
+					id="gbDispositivo" visible="false">
+					<caption label="Seleccione el dispositivo" />
+					<grid>
+						<rows>
+							<row>
+								<hbox>
+									<textbox id="txtRuta" width="350px" />
+									<button label="Seleccionar">
+										<attribute name="onClick">
+											seleccionarRuta();
+										</attribute>
+									</button>
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
 				<div sclass="alert-info" align="center">
 					<separator />
 					<div sclass="btn-group">
 						<hbox>
-						<button id="btnRespaldar" tabindex="1"
-							sclass="btn" tooltip="pupRespaldar" label="Respaldar"
-							image="/public/imagenes/iconos/guardar.png">
-						</button>
-						<separator />
-						<button id="btnSalir" tabindex="2" sclass="btn"
-							tooltip="pupSalir" label="Salir"
-							image="/public/imagenes/iconos/aceptar.png">
-						</button>
+							<button id="btnRespaldar" tabindex="1"
+								sclass="btn" tooltip="pupRespaldar" label="Respaldar"
+								image="/public/imagenes/iconos/guardar.png">
+							</button>
+							<separator />
+							<button id="btnSalir" tabindex="2"
+								sclass="btn" tooltip="pupSalir" label="Salir"
+								image="/public/imagenes/iconos/salir.png">
+							</button>
 						</hbox>
 						<separator />
 					</div>
 				</div>
 			</panelchildren>
 		</panel>
-
-
 		<separator />
 		<separator />
-
 		<!-- Lista de popus -->
 		<popup id="pupRespaldar">
 			<toolbarbutton
 				label="Presione aquí para respaldar la informacion" />
 		</popup>
 		<popup id="pupSalir">
-			<toolbarbutton
-				label="Salir de la vista" />
+			<toolbarbutton label="Salir de la vista" />
 		</popup>
 		<!-- Fin de popus -->
 
 	</groupbox>
+	<zscript>
+		<![CDATA[
+		import javax.swing.*;
+		import java.util.Date;
+		public void seleccionarRuta() {
+	
+			JFileChooser chooser = new JFileChooser();
+			// Titulo que llevara la ventana
+			chooser.setDialogTitle("Seleccione...");
+	
+			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	
+			chooser.showOpenDialog(null);
+	
+			//Retornando el directorio destino directorio
+			if (chooser.getSelectedFile() != null) {
+				txtRuta.setValue(chooser.getSelectedFile().getPath());
+			}
+		}
+		]]>
+	</zscript>
+
 
 	<separator />
 	<separator />
@@ -92,3 +175,4 @@
 	<separator />
 	<separator />
 </window>
+</zk>
