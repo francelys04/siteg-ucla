@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RProfesoresMasSolicitados" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="89b2ba1e-47e3-46e8-a599-f058ab72e350">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.7513148009015777"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="estatus" class="java.lang.String"/>
 	<parameter name="tematica" class="java.lang.String"/>
 	<parameter name="inicio" class="java.util.Date"/>
 	<parameter name="fin" class="java.util.Date"/>
-	<field name="profesor.cedula" class="java.lang.String"/>
-	<field name="profesor.nombre" class="java.lang.String"/>
-	<field name="profesor.apellido" class="java.lang.String"/>
-	<field name="estatus" class="java.lang.String"/>
+	<field name="tutor.cedula" class="java.lang.String"/>
+	<field name="tutor.nombre" class="java.lang.String"/>
+	<field name="tutor.apellido" class="java.lang.String"/>
+	<field name="id" class="java.lang.Long"/>
+	<field name="duracion" class="java.lang.Long"/>
 	<variable name="estatus_COUNT" class="java.lang.Integer" calculation="Count"/>
-	<group name="profes">
-		<groupExpression><![CDATA[$F{profesor.cedula}]]></groupExpression>
-	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -73,22 +71,28 @@
 				<reportElement x="229" y="128" width="114" height="20" uuid="9e6189c8-5192-449a-a96d-a0bd7d2e43ef"/>
 				<text><![CDATA[Fecha de culminacion]]></text>
 			</staticText>
-			<stackedBarChart>
+			<bar3DChart>
 				<chart>
-					<reportElement x="40" y="180" width="485" height="317" uuid="4a74205d-05b6-4bd1-9bc0-b9e5ad3ceb89"/>
+					<reportElement x="72" y="196" width="426" height="266" uuid="bd770651-1c72-4a31-8529-aae9d01c0d32"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<categoryDataset>
 					<categorySeries>
-						<seriesExpression><![CDATA[$F{profesor.nombre}]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{profesor.nombre}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{profes_COUNT}]]></valueExpression>
-						<labelExpression><![CDATA[$F{profesor.nombre}]]></labelExpression>
+						<seriesExpression><![CDATA["Total Solicitud"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tutor.cedula}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{id}]]></valueExpression>
+						<labelExpression><![CDATA[$F{tutor.nombre}]]></labelExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Solicitud:"+$P{estatus}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tutor.cedula}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{duracion}]]></valueExpression>
+						<labelExpression><![CDATA[$F{tutor.nombre}]]></labelExpression>
 					</categorySeries>
 				</categoryDataset>
-				<barPlot>
+				<bar3DPlot>
 					<plot/>
 					<itemLabel/>
 					<categoryAxisFormat>
@@ -97,8 +101,8 @@
 					<valueAxisFormat>
 						<axisFormat/>
 					</valueAxisFormat>
-				</barPlot>
-			</stackedBarChart>
+				</bar3DPlot>
+			</bar3DChart>
 		</band>
 	</summary>
 </jasperReport>

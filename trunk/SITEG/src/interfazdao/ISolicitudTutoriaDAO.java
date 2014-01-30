@@ -11,6 +11,7 @@ import modelo.Tematica;
 import modelo.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Long> {
 
@@ -53,4 +54,7 @@ public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Lo
 
 	public List<SolicitudTutoria> findByProfesorAndFechaBetween(
 			Profesor profesor, Date fechaInicio, Date fechaFin);
+
+	@Query("select count(e) from SolicitudTutoria e where e.profesor=?1")
+	public long countByProfesor(Profesor profesor);
 }
