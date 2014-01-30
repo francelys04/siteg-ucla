@@ -25,12 +25,12 @@
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
 					sclass="search-query" placeholder="Área" id="txtAreaSolicitud" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
 					sclass="search-query" placeholder="Temática"
 					id="txtTematicaSolicitud" />
 			</auxheader>

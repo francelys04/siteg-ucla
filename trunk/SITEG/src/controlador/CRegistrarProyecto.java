@@ -92,6 +92,8 @@ public class CRegistrarProyecto extends CGeneral {
 	@Wire
 	private Window wdwRegistrarProyecto;
 	@Wire
+	private Textbox txtTutorRegistrarProyecto;
+	@Wire
 	private Listbox lsbEstudiantesRegistrarProyecto;
 	private static long idTem;
 	private String idProf;
@@ -107,9 +109,9 @@ public class CRegistrarProyecto extends CGeneral {
 
 		List<Teg> tegEstudiante = ServicioTeg
 				.buscarTegPorEstudiante(estudiante);
-		//Permite verificar los estatus del teg para asi
-		//validar si este puede registrarlo de ser asi
-		//llena los datos en la vista
+		// Permite verificar los estatus del teg para asi
+		// validar si este puede registrarlo de ser asi
+		// llena los datos en la vista
 		try {
 			if (solicitudAceptada != null) {
 
@@ -122,8 +124,7 @@ public class CRegistrarProyecto extends CGeneral {
 						String teg = tegEstudiante.get(i).getEstatus();
 						if (teg != "Proyecto No Factible") {
 
-							Messagebox.show(
-									"Ya posee un proyecto registrado",
+							Messagebox.show("Ya posee un proyecto registrado",
 									"Advertencia", Messagebox.OK,
 									Messagebox.EXCLAMATION);
 							wdwRegistrarProyecto.onClose();
@@ -140,15 +141,12 @@ public class CRegistrarProyecto extends CGeneral {
 							txtTituloRegistrarProyecto
 									.setValue(solicitudAceptada
 											.getDescripcion());
-							txtCedulaTutorRegistrarProyecto
-									.setValue(solicitudAceptada.getProfesor()
-											.getCedula());
-							txtNombreTutorRegistrarProyecto
-									.setValue(solicitudAceptada.getProfesor()
-											.getNombre());
-							txtApellidoTutorRegistrarProyecto
-									.setValue(solicitudAceptada.getProfesor()
+							txtTutorRegistrarProyecto.setValue(solicitudAceptada
+									.getProfesor().getNombre()
+									+ " "
+									+ solicitudAceptada.getProfesor()
 											.getApellido());
+
 							List<Estudiante> estudiantes = servicioEstudiante
 									.buscarSolicitudesEstudiante(solicitudAceptada);
 							lsbEstudiantesRegistrarProyecto
@@ -166,12 +164,10 @@ public class CRegistrarProyecto extends CGeneral {
 							.getTematica().getNombre());
 					txtTituloRegistrarProyecto.setValue(solicitudAceptada
 							.getDescripcion());
-					txtCedulaTutorRegistrarProyecto.setValue(solicitudAceptada
-							.getProfesor().getCedula());
-					txtNombreTutorRegistrarProyecto.setValue(solicitudAceptada
-							.getProfesor().getNombre());
-					txtApellidoTutorRegistrarProyecto
-							.setValue(solicitudAceptada.getProfesor()
+					txtTutorRegistrarProyecto.setValue(solicitudAceptada
+							.getProfesor().getNombre()
+							+ " "
+							+ solicitudAceptada.getProfesor()
 									.getApellido());
 					List<Estudiante> estudiantes = servicioEstudiante
 							.buscarSolicitudesEstudiante(solicitudAceptada);
@@ -201,71 +197,83 @@ public class CRegistrarProyecto extends CGeneral {
 		if ((txtTituloRegistrarProyecto.getText().compareTo("") == 0)
 				|| (txtProgramaRegistrarProyecto.getText().compareTo("") == 0)
 				|| (txtAreaRegistrarProyecto.getText().compareTo("") == 0)
-				|| (txtCedulaTutorRegistrarProyecto.getText().compareTo("") == 0)
-				|| (txtNombreTutorRegistrarProyecto.getText().compareTo("") == 0)
-				|| (txtApellidoTutorRegistrarProyecto.getText().compareTo("") == 0)
 				|| (txtTematicaRegistrarProyecto.getText().compareTo("") == 0)) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show("¿Desea registrar el proyecto de trabajo especial de grado?",
-					"Dialogo de confirmacion", Messagebox.OK
-							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
-						public void onEvent(Event evt)
-								throws InterruptedException {
-							if (evt.getName().equals("onOK")) {
+			Messagebox
+					.show("¿Desea registrar el proyecto de trabajo especial de grado?",
+							"Dialogo de confirmacion", Messagebox.OK
+									| Messagebox.CANCEL, Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
 
-								Date fecha = dbfechaRegistrarProyecto
-										.getValue();
-								String titulo = txtTituloRegistrarProyecto
-										.getValue();
-								Tematica tematica = ServicioTematica
-										.buscarTematica(idTem);
-								Profesor tutor = ServicioProfesor
-										.buscarProfesorPorCedula(idProf);
-								String descripcion = null;
-								long duracion = 0;
-								String estatus = "Solicitando Registro";
-								Date fechaEntrega = null;
-								Date fechaInicio = null;
-								Set<Profesor> profesores = null;
-								Estudiante estudiante = ObtenerUsuarioEstudiante();
-								SolicitudTutoria solicitudAceptada = ServicioSolicitudTutoria
-										.buscarSolicitudAceptadaEstudiante(estudiante);
-								List<Estudiante> estudiantesSolicitud = servicioEstudiante
-										.buscarSolicitudesEstudiante(solicitudAceptada);
-								Set<Estudiante> estudiantesPorSolicitud = new HashSet<Estudiante>();
-								for (int i = 0; i < estudiantesSolicitud.size(); i++) {
-									Estudiante estudiantes = estudiantesSolicitud.get(i);
-									estudiantesPorSolicitud.add(estudiantes);
+										Date fecha = dbfechaRegistrarProyecto
+												.getValue();
+										String titulo = txtTituloRegistrarProyecto
+												.getValue();
+										Tematica tematica = ServicioTematica
+												.buscarTematica(idTem);
+										Profesor tutor = ServicioProfesor
+												.buscarProfesorPorCedula(idProf);
+										String descripcion = null;
+										long duracion = 0;
+										String estatus = "Solicitando Registro";
+										Date fechaEntrega = null;
+										Date fechaInicio = null;
+										Set<Profesor> profesores = null;
+										Estudiante estudiante = ObtenerUsuarioEstudiante();
+										SolicitudTutoria solicitudAceptada = ServicioSolicitudTutoria
+												.buscarSolicitudAceptadaEstudiante(estudiante);
+										List<Estudiante> estudiantesSolicitud = servicioEstudiante
+												.buscarSolicitudesEstudiante(solicitudAceptada);
+										Set<Estudiante> estudiantesPorSolicitud = new HashSet<Estudiante>();
+										for (int i = 0; i < estudiantesSolicitud
+												.size(); i++) {
+											Estudiante estudiantes = estudiantesSolicitud
+													.get(i);
+											estudiantesPorSolicitud
+													.add(estudiantes);
+										}
+
+										Teg proyecto = new Teg(id, titulo,
+												fecha, fechaInicio,
+												fechaEntrega, descripcion,
+												duracion, tutor, estatus,
+												tematica, profesores,
+												estudiantesPorSolicitud);
+										ServicioTeg.guardar(proyecto);
+										id = 0;
+										cancelarRegistroProyecto();
+										Messagebox
+												.show("Proyecto de trabajo especial de grado registrado exitosamente",
+														"Informacion",
+														Messagebox.OK,
+														Messagebox.INFORMATION);
+										wdwRegistrarProyecto.onClose();
+
+									}
 								}
-
-								Teg proyecto = new Teg(id, titulo, fecha,
-										fechaInicio, fechaEntrega, descripcion,
-										duracion, tutor, estatus, tematica,
-										profesores, estudiantesPorSolicitud);
-								ServicioTeg.guardar(proyecto);
-								id = 0;
-								cancelarRegistroProyecto();
-								Messagebox.show(
-										"Proyecto de trabajo especial de grado registrado exitosamente",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-								wdwRegistrarProyecto.onClose();
-
-							}
-						}
-					});
+							});
 
 		}
 
 	}
-	//limpia los datos que son modificables en la vista
+
+	// limpia los datos que son modificables en la vista
 	@Listen("onClick = #btnCancelarRegistrarProyecto")
 	public void cancelarRegistroProyecto() {
-		
+
 		txtTituloRegistrarProyecto.setValue("");
+
+	}
+
+	@Listen("onClick = #btnSalirRegistrarProyecto")
+	public void salirRegistroProyecto() {
+
+		wdwRegistrarProyecto.onClose();
 
 	}
 

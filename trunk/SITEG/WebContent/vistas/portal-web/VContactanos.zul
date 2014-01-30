@@ -117,7 +117,7 @@
 					<div sclass="btn-group">
 
 						<button id="btnEnviarCorreo" sclass="btn"
-							label="Enviar" image="/public/imagenes/iconos/guardar.png"
+							label="Enviar" image="/public/imagenes/iconos/enviar.png"
 							tabindex="6">
 						</button>
 						<button id="btnCancelarCorreo" sclass="btn"

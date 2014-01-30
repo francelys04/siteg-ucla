@@ -337,7 +337,7 @@ public class CAsignarComision extends CGeneral {
 
 				} else {
 					Messagebox.show(
-							"ï¿½Desea guardar los miembros de la comision?",
+							"¿Desea guardar los miembros de la comision?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener() {
@@ -387,7 +387,7 @@ public class CAsignarComision extends CGeneral {
 
 				if (valorItem == valorcondicion) {
 					Messagebox
-							.show("ï¿½Desea finalizar la asignacion de la comision evaluadora?",
+							.show("¿Desea finalizar la asignacion de la comision evaluadora?",
 									"Dialogo de confirmacion", Messagebox.OK
 											| Messagebox.CANCEL,
 									Messagebox.QUESTION,

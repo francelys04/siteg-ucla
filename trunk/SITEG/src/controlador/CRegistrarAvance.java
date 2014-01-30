@@ -99,19 +99,20 @@ public class CRegistrarAvance extends CGeneral {
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		
-
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("tegCatalogo");
-		//permite traer los datos del teg a la vista si el map es diferente de nulo
+		// permite traer los datos del teg a la vista si el map es diferente de
+		// nulo
 		if (map != null) {
 			if (map.get("id") != null) {
 				long codigo = (Long) map.get("id");
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-				List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg2);
-				txtProgramaRegistrarAvance.setValue(est.get(0).getPrograma().getNombre());
+				List<Estudiante> est = servicioEstudiante
+						.buscarEstudiantesDelTeg(teg2);
+				txtProgramaRegistrarAvance.setValue(est.get(0).getPrograma()
+						.getNombre());
 				txtAreaRegistrarAvance.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
 				txtTematicaRegistrarAvance.setValue(teg2.getTematica()
@@ -136,7 +137,8 @@ public class CRegistrarAvance extends CGeneral {
 		vistaRecibida = vista;
 
 	}
-	//permite salir y refrescar las vistas
+
+	// permite salir y refrescar las vistas
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -145,7 +147,8 @@ public class CRegistrarAvance extends CGeneral {
 		Executions.sendRedirect("/vistas/arbol.zul");
 		wdwRegistrarAvance.onClose();
 	}
-	//guarda las observacion en la base de datos
+
+	// guarda las observacion en la base de datos
 	@Listen("onClick = #btnAgregarObservacionrAvance")
 	public void guardarAvance() {
 
@@ -188,7 +191,8 @@ public class CRegistrarAvance extends CGeneral {
 		}
 
 	}
-//Permite finalizar los avance cambia el estatus del teg
+
+	// Permite finalizar los avance cambia el estatus del teg
 	@Listen("onClick = #btnFinalizarRegistrarAvance")
 	public void finalizarRegistrarAvance() {
 
@@ -197,27 +201,30 @@ public class CRegistrarAvance extends CGeneral {
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-							
+
 							Teg tegAvance = servicioTeg.buscarTeg(auxiliarId);
 							tegAvance.setEstatus("Avances Finalizados");
 							servicioTeg.guardar(tegAvance);
 							Messagebox
 									.show("Avances del Trabajo Especial de Grado finalizados exitosamente",
-											"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 							salir();
 						}
 					}
 				});
 	}
-	//limpia los campos modificables de la vista
+
+	// limpia los campos modificables de la vista
 	@Listen("onClick = #btnCancelarRegistrarAvance")
 	public void cancelarRegistrarAvance() {
 
 		txtObservacionRegistrarAvance.setValue("");
 
 	}
-	//permite llenar la lista de avances para que estas se puedan observar
-	//para que se tome la desicion de finalizar
+
+	// permite llenar la lista de avances para que estas se puedan observar
+	// para que se tome la desicion de finalizar
 	public void llenarListas() {
 
 		Teg tegAvance = servicioTeg.buscarTeg(auxiliarId);
@@ -239,6 +246,13 @@ public class CRegistrarAvance extends CGeneral {
 
 			System.out.println("NullPointerException");
 		}
+
+	}
+
+	@Listen("onClick = #btnSalirRegistrarAvance")
+	public void salirRegistrarAvance() {
+
+		wdwRegistrarAvance.onClose();
 
 	}
 

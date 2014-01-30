@@ -54,10 +54,6 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	private Textbox txtAreaRegistrarAvance;
 	@Wire
 	private Textbox txtTituloRegistrarAvance;
-	@Wire
-	private Textbox txtNombreTutorRegistrarAvance;
-	@Wire
-	private Textbox txtApellidoTutorRegistrarAvance;
 
 	@Override
 	void inicializar(Component comp) {
@@ -115,7 +111,7 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 
 	// Metodo que permite filtrar un teg de acuerdo a la fecha, tematica, area,
 	// titulo, nombre y apellido del tutor
-	@Listen("onChange = #txtFechaRegistrarAvance, #txtTematicaRegistrarAvance,#txtAreaRegistrarAvance,#txtTituloRegistrarAvance,#txtNombreTutorRegistrarAvance,#txtApellidoTutorRegistrarAvance")
+	@Listen("onChange = #txtFechaRegistrarAvance, #txtTematicaRegistrarAvance,#txtAreaRegistrarAvance,#txtTituloRegistrarAvance")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
 		for (int i = 0; i < teg1.size(); i++) {
@@ -149,19 +145,7 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 
 					&& teg.getTitulo()
 							.toLowerCase()
-							.contains(txtTituloRegistrarAvance.getValue().toLowerCase())
-					&& teg.getTutor()
-							.getNombre()
-							.toLowerCase()
-							.contains(
-									txtNombreTutorRegistrarAvance.getValue()
-											.toLowerCase())
-					&& teg.getTutor()
-							.getApellido()
-							.toLowerCase()
-							.contains(
-									txtApellidoTutorRegistrarAvance.getValue()
-											.toLowerCase()))
+							.contains(txtTituloRegistrarAvance.getValue().toLowerCase()))
 
 			{
 				teg2.add(teg);

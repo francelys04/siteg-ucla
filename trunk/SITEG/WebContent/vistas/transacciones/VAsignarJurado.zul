@@ -1,5 +1,5 @@
 <window id="wdwAsignarJurado" title="Asignar Jurado" border="normal"
-	width="900px" height="710px" closable="true"
+	width="900px" height="780px" closable="true"
 	apply="controlador.CAsignarJurado">
 	<separator />
 
@@ -36,6 +36,19 @@
 		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
 		122); }
 
+		.z-panel-tl, .z-panel-tr, .z-panel-tl-gray, .z-panel-tr-gray,
+		.z-panel-bl, .z-panel-br { background: #3276b1;
+		background-image: none; }
+
+		.z-panel-hl { background: #3276b1; background-image: none; }
+
+		.z-panel-hr { background: #3276b1; background-image: mome; }
+
+		.z-panel-hm { background: #3276b1; background-image: none; }
+
+		.z-panel-hm .z-panel-header, .z-panel-header { color: #fff; }
+
+
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
@@ -68,23 +81,19 @@
 	<popup id="pupBtnCancelar">
 		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
 	</popup>
+	<popup id="pupBtnSalir">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
 	<!-- fin de popus -->
 
 	<separator />
 	<separator />
 	<image id="imagenx" width="80px" height="50px" visible="false" />
 
-	<groupbox height="630px" style="margin-left:2%;margin-right:1%">
+	<groupbox height="695px" style="margin-left:2%;margin-right:1%">
 
 		<separator />
 		<separator />
-
-
-		<label value="Programa:"
-			style="margin-left:2%;font-weight:bold;color: rgb(0, 84, 122)" />
-		<textbox id="txtProgramaAtenderDefensa"
-			style="margin-left:5%;color:black !important;" disabled="true"
-			width="25%" />
 
 		<div align="right">
 			<label value="Fecha:"
@@ -96,21 +105,183 @@
 			</datebox>
 		</div>
 
+		<label value="Programa:"
+			style="margin-left:2%;font-weight:bold;color: rgb(0, 84, 122)" />
+		<textbox id="txtProgramaAtenderDefensa"
+			style="margin-left:5%;color:black !important;" disabled="true"
+			width="25%" />
+
+		<separator />
+
+		<label value="Tutor:"
+			style="margin-left:2%;font-weight:bold;font-weight:bold;color: rgb(0, 84, 122)" />
+		<textbox id="txtTutorAsignarJurado"
+			style="margin-left:68px;color:black !important;" width="180px"
+			disabled="true" />
+
+		<separator />
+		<separator />
 		<separator />
 		<separator />
 
 		<tabbox style="margin-left:2%;margin-right:1%" width="auto"
 			height="430px">
 			<tabs>
+				<tab label="Jurado" tooltip="pupDatosJurado" />
 				<tab label="Datos del Trabajo"
 					tooltip="pupDatosTrabajo" />
 				<tab label="Datos del Estudiante"
 					tooltip="pupDatosEstudiante" />
-				<tab label="Datos del Tutor" tooltip="pupDatosTutor" />
-				<tab label="Jurado" tooltip="pupDatosJurado" />
 
 			</tabs>
 			<tabpanels>
+
+
+				<tabpanel height="300px">
+					<separator />
+					<separator />
+
+					<grid sclass="fgrid"
+						style="margin-left:2%;margin-right:1%">
+						<columns>
+							<column width="100%" height="30px" />
+						</columns>
+						<rows>
+
+							<row>
+								<hbox>
+									<label
+										id="lblCondicionAtenderDefensa" style="font-weight:bold" />
+								</hbox>
+
+							</row>
+
+							<row>
+
+								<separator />
+
+							</row>
+
+
+
+							<row>
+								<hbox>
+									<panel
+										title="Profesores Disponibles" width="300px">
+										<panelchildren>
+											<listbox
+												id="ltbJuradoDisponible" height="250px"
+												oddRowSclass="non-odd" checkmark="true"
+												emptyMessage="No hay items registrados">
+												<listhead>
+													<listheader
+														label="Cédula" />
+													<listheader
+														label="Nombre" />
+													<listheader
+														label="Apellido" />
+												</listhead>
+												<template
+													name="model">
+													<listitem>
+														<listcell>
+															<label
+																value="${each.cedula}">
+															</label>
+														</listcell>
+														<listcell
+															label="${each.nombre}">
+														</listcell>
+														<listcell
+															label="${each.apellido}">
+														</listcell>
+														<listcell>
+															<combobox
+																readonly="true" inplace="true" width="70px">
+																<comboitem
+																	label="Principal" />
+																<comboitem
+																	label="Suplente" />
+															</combobox>
+														</listcell>
+													</listitem>
+												</template>
+											</listbox>
+										</panelchildren>
+									</panel>
+
+
+									<panel width="60px"
+										style="margin-left:20px;margin-top:80px">
+										<panelchildren>
+											<div>
+
+												<button
+													id="btnAgregarJurado" sclass="btn"
+													image="/public/imagenes/iconos/right.png"
+													tooltiptext="Agregar Items" width="35px" />
+												<separator />
+												<button sclass="btn"
+													id="btnRemoverJurado"
+													image="/public/imagenes/iconos/left.png"
+													tooltiptext="Quitar Items" width="35px" />
+
+											</div>
+										</panelchildren>
+									</panel>
+
+									<panel title="Jurado"
+										width="380px">
+										<panelchildren>
+											<listbox
+												id="ltbJuradoSeleccionado" height="250px"
+												oddRowSclass="non-odd" checkmark="true"
+												emptyMessage="No se han seleccionado items">
+												<listhead>
+													<listheader
+														label="Cédula" />
+													<listheader
+														label="Nombre" />
+													<listheader
+														label="Apellido" />
+													<listheader
+														label="Tipo de Jurado" width="25%" />
+												</listhead>
+
+												<template
+													name="model">
+													<listitem>
+														<listcell>
+															<label
+																value="${each.cedula}">
+															</label>
+														</listcell>
+														<listcell
+															label="${each.nombre}">
+														</listcell>
+														<listcell
+															label="${each.apellido}">
+														</listcell>
+														<listcell>
+															<combobox
+																readonly="true" inplace="true">
+																<comboitem
+																	label="Principal" />
+																<comboitem
+																	label="Suplente" />
+															</combobox>
+														</listcell>
+													</listitem>
+												</template>
+
+											</listbox>
+										</panelchildren>
+									</panel>
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</tabpanel>
 
 				<tabpanel height="200px">
 					<separator />
@@ -234,150 +405,7 @@
 					</grid>
 				</tabpanel>
 
-				<tabpanel height="300px">
-					<separator />
-					<separator />
 
-					<grid sclass="fgrid"
-						style="margin-left:2%;margin-right:1%">
-						<columns>
-							<column width="100%" height="30px" />
-						</columns>
-						<rows>
-
-							<row>
-								<hbox>
-									<label
-										id="lblCondicionAtenderDefensa" style="font-weight:bold" />
-								</hbox>
-
-							</row>
-
-							<row>
-
-								<separator />
-
-							</row>
-
-
-
-							<row>
-								<hbox>
-									<panel
-										title="Profesores Disponibles" width="300px">
-										<panelchildren>
-											<listbox
-												id="ltbJuradoDisponible" height="250px"
-												oddRowSclass="non-odd" checkmark="true"
-												emptyMessage="No hay items registrados">
-												<listhead>
-													<listheader
-														label="Cédula" />
-													<listheader
-														label="Nombre" />
-													<listheader
-														label="Apellido" />
-												</listhead>
-												<template
-													name="model">
-													<listitem>
-														<listcell>
-															<label
-																value="${each.cedula}">
-															</label>
-														</listcell>
-														<listcell
-															label="${each.nombre}">
-														</listcell>
-														<listcell
-															label="${each.apellido}">
-														</listcell>
-														<listcell>
-															<combobox
-																readonly="true" inplace="true" width="70px">
-																<comboitem
-																	label="Principal" />
-																<comboitem
-																	label="Suplente" />
-															</combobox>
-														</listcell>
-													</listitem>
-												</template>
-											</listbox>
-										</panelchildren>
-									</panel>
-
-
-									<panel width="60px"
-										style="margin-left:20px;margin-top:80px">
-										<panelchildren>
-											<div>
-
-												<button
-													id="btnAgregarJurado" sclass="btn"
-													image="/public/imagenes/iconos/right.png"
-													tooltiptext="Agregar Items" width="35px" />
-												<separator />
-												<button sclass="btn"
-													id="btnRemoverJurado"
-													image="/public/imagenes/iconos/left.png"
-													tooltiptext="Quitar Items" width="35px" />
-
-											</div>
-										</panelchildren>
-									</panel>
-
-									<panel title="Jurado"
-										width="380px">
-										<panelchildren>
-											<listbox
-												id="ltbJuradoSeleccionado" height="250px"
-												oddRowSclass="non-odd" checkmark="true"
-												emptyMessage="No se han seleccionado items">
-												<listhead>
-													<listheader
-														label="Cédula" />
-													<listheader
-														label="Nombre" />
-													<listheader
-														label="Apellido" />
-													<listheader
-														label="Tipo de Jurado" width="25%" />
-												</listhead>
-
-												<template
-													name="model">
-													<listitem>
-														<listcell>
-															<label value ="${each.cedula}"></label>
-														</listcell>
-														<listcell
-															label="${each.nombre}">
-														</listcell>
-														<listcell
-															label="${each.apellido}">
-														</listcell>
-														<listcell>
-															<combobox
-																readonly="true" 
-																inplace="true">
-																<comboitem
-																	label="Principal" />
-																<comboitem
-																	label="Suplente" />
-															</combobox>
-														</listcell>
-													</listitem>
-												</template>
-
-											</listbox>
-										</panelchildren>
-									</panel>
-								</hbox>
-							</row>
-						</rows>
-					</grid>
-				</tabpanel>
 			</tabpanels>
 		</tabbox>
 		<separator />
@@ -398,15 +426,15 @@
 							tabindex="12" tooltip="pupBtnFinalizar">
 						</button>
 
-						<button id="btnAceptarDefensaMientrasTanto"
-							sclass="btn" label="Guardar"
-							image="/public/imagenes/iconos/guardar.png" tabindex="12"
-							tooltip="pupBtnGuardar">
-						</button>
-
 						<button id="btnCancelarDefensa" label="Cancelar"
 							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
 							tabindex="13" tooltip="pupBtnCancelar">
+						</button>
+
+						<button id="btnSalirAsignarJurado" label="Salir"
+							width="110px" sclass="btn"
+							image="/public/imagenes/iconos/salir.png" tabindex="14"
+							tooltip="pupBtnSalir">
 						</button>
 
 						<separator />
