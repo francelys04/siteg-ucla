@@ -61,12 +61,6 @@ public class CAtenderDefensa extends CGeneral {
 	@Wire
 	private Textbox txtTituloAtenderDefensa;
 	@Wire
-	private Textbox txtCedulaTutorAtenderDefensa;
-	@Wire
-	private Textbox txtNombreTutorAtenderDefensa;
-	@Wire
-	private Textbox txtApellidoTutorAtenderDefensa;
-	@Wire
 	private Label lblCondicionAtenderDefensa;
 	@Wire
 	private Listbox ltbEstudiantesAtenderDefensa;
@@ -80,16 +74,21 @@ public class CAtenderDefensa extends CGeneral {
 	private Timebox tmbHoraDefensa;
 	@Wire
 	private Window wdwAtenderDefensa;
+	@Wire
+	private Textbox txtTutorProgramarDefensa;
+	@Wire
+	private Listbox ltbJuradoAtenderDefensa;
 	// @Wire
 	// private Combobox cmbDefensaTipoJurado;
 	private static String vistaRecibida;
 	private static long idTeg = 0;
 	long idDefensa = 0;
-    private static Programa programa;
+	private static Programa programa;
+
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		//Permite mapear los datos del catalogo a la vista Atender Defensa
+		// Permite mapear los datos del catalogo a la vista Atender Defensa
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("catalogoSolicitudDefensa");
@@ -98,24 +97,35 @@ public class CAtenderDefensa extends CGeneral {
 				idTeg = (Long) map.get("id");
 				Teg teg = servicioTeg.buscarTeg(idTeg);
 				llenarListas(teg);
-				
-				txtCedulaTutorAtenderDefensa.setValue(teg.getTutor()
-						.getCedula());
-				txtNombreTutorAtenderDefensa.setValue(teg.getTutor()
-						.getNombre());
-				txtApellidoTutorAtenderDefensa.setValue(teg.getTutor()
-						.getApellido());
+
+				txtTutorProgramarDefensa.setValue(teg.getTutor().getNombre()
+						+ " " + teg.getTutor().getApellido());
+
 				txtAreaAtenderDefensa.setValue(teg.getTematica()
 						.getareaInvestigacion().getNombre());
 				txtTematicaAtenderDefensa.setValue(teg.getTematica()
 						.getNombre());
-				//para que se guie por el programa del estudiante
-				List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
+				// para que se guie por el programa del estudiante
+				List<Estudiante> est = servicioEstudiante
+						.buscarEstudiantesDelTeg(teg);
+				
+				List<Jurado> jurados = servicioJurado.buscarJuradoDeTeg(teg);
+				List<Profesor> profesoresJurado = new ArrayList<Profesor>();
+				for (int i = 0; i < jurados.size(); i++) {
+
+					Profesor profesor = jurados.get(i).getProfesor();
+					profesoresJurado.add(profesor);
+				}
+				
+				
+				ltbJuradoAtenderDefensa.setModel(new ListModelList<Profesor>(
+						profesoresJurado));
+			
 				programa = est.get(0).getPrograma();
-				txtProgramaAtenderDefensa.setValue(est.get(0).getPrograma().getNombre());
+				txtProgramaAtenderDefensa.setValue(est.get(0).getPrograma()
+						.getNombre());
 				txtTituloAtenderDefensa.setValue(teg.getTitulo());
-				
-				
+
 			}
 		}
 	}
@@ -124,22 +134,26 @@ public class CAtenderDefensa extends CGeneral {
 		vistaRecibida = vista;
 
 	}
-//Metodo que permite llenar la lista de los estudiantes
+
+	// Metodo que permite llenar la lista de los estudiantes
 	public void llenarListas(Teg teg) {
 		List<Estudiante> estudiantesTeg = servicioEstudiante
 				.buscarEstudiantePorTeg(teg);
 		ltbEstudiantesAtenderDefensa.setModel(new ListModelList<Estudiante>(
 				estudiantesTeg));
 	}
-//Metodo que permite guardar los datos de la defensa
+
+	// Metodo que permite guardar los datos de la defensa
 	@Listen("onClick = #btnAceptarDefensa")
 	public void aceptarDefensa() {
-		if (tmbHoraDefensa.getValue()== null || txtLugarDefensa.getText().compareTo("")== 0 || dtbFechaDefensa.getValue() == null ){
+		if (tmbHoraDefensa.getValue() == null
+				|| txtLugarDefensa.getText().compareTo("") == 0
+				|| dtbFechaDefensa.getValue() == null) {
 
-			Messagebox.show("Debe completar todos los campos","Error", Messagebox.OK,
-							Messagebox.ERROR);
-			
-		}else{
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
+
+		} else {
 			Messagebox.show("¿Desea guardar los datos dela defensa?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
@@ -147,42 +161,44 @@ public class CAtenderDefensa extends CGeneral {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
-			
-			
-			Teg teg = servicioTeg.buscarTeg(idTeg);
-			Date fecha = dtbFechaDefensa.getValue();
-			Date hora = tmbHoraDefensa.getValue();
-			String lugar = txtLugarDefensa.getValue();
-			Profesor profesor = ObtenerUsuarioProfesor();
-			
-			String estatus = "Por Defender";
-			Defensa defensa = new Defensa(idDefensa, teg, fecha, hora, lugar,
-					 estatus,profesor);
-			servicioDefensa.guardarDefensa(defensa);			
-			String estatus1 ="Defensa Asignada";
-			System.out.println(idTeg);
-			Teg teg1 = servicioTeg.buscarTeg(idTeg);
-			teg1.setEstatus(estatus1);
-			servicioTeg.guardar(teg1);
-			Messagebox.show("Datos de la defensa guardados con exito","Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-			salir();
-			
+
+								Teg teg = servicioTeg.buscarTeg(idTeg);
+								Date fecha = dtbFechaDefensa.getValue();
+								Date hora = tmbHoraDefensa.getValue();
+								String lugar = txtLugarDefensa.getValue();
+								Profesor profesor = ObtenerUsuarioProfesor();
+
+								String estatus = "Por Defender";
+								Defensa defensa = new Defensa(idDefensa, teg,
+										fecha, hora, lugar, estatus, profesor);
+								servicioDefensa.guardarDefensa(defensa);
+								String estatus1 = "Defensa Asignada";
+								System.out.println(idTeg);
+								Teg teg1 = servicioTeg.buscarTeg(idTeg);
+								teg1.setEstatus(estatus1);
+								servicioTeg.guardar(teg1);
+								Messagebox
+										.show("Datos de la defensa guardados con exito",
+												"Informacion", Messagebox.OK,
+												Messagebox.INFORMATION);
+								salir();
+
 							}
 						}
 					});
 		}
 
 	}
-	
-//metodo para limpiar los campos
+
+	// metodo para limpiar los campos
 	@Listen("onClick = #btnCancelarDefensa")
 	public void cancelarDefensa() {
 		txtLugarDefensa.setValue("");
 		dtbFechaDefensa.setValue(null);
-		
+
 	}
-//metodo para cerrar y refrescar las vistas
+
+	// metodo para cerrar y refrescar las vistas
 	public void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -192,5 +208,11 @@ public class CAtenderDefensa extends CGeneral {
 		wdwAtenderDefensa.onClose();
 	}
 
-	
+	@Listen("onClick = #btnSalirDefensa")
+	public void SalirDefensa() {
+
+		wdwAtenderDefensa.onClose();
+
+	}
+
 }

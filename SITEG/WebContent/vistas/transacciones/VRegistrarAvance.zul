@@ -1,5 +1,5 @@
 <window id="wdwRegistrarAvance" title="Registrar Avances"
-	border="normal" width="740px" height="770px" closable="true"
+	border="normal" width="740px" height="800px" closable="true"
 	apply="controlador.CRegistrarAvance">
 	<separator />
 
@@ -35,6 +35,20 @@
 
 		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
 		122); }
+		
+		.z-panel-tl, .z-panel-tr, .z-panel-tl-gray, .z-panel-tr-gray,
+		.z-panel-bl, .z-panel-br { background: #3276b1;
+		background-image: none; }
+
+		.z-panel-hl { background: #3276b1; background-image: none; }
+
+		.z-panel-hr { background: #3276b1; background-image: mome; }
+
+		.z-panel-hm { background: #3276b1; background-image: none; }
+
+		.z-panel-hm .z-panel-header, .z-panel-header { color: #fff; }
+
+
 
 
 	</style>
@@ -45,33 +59,36 @@
 	<!-- Lista de popus -->
 	<popup id="pupDatosProyecto">
 		<toolbarbutton
-			label="Presione aquí para visualizar los datos del proyecto" />
+			label="Presione aqui para visualizar los datos del proyecto" />
 	</popup>
 	<popup id="pupDatosEstudiante">
 		<toolbarbutton
-			label="Presione aquí para visualizar los datos del estudiante" />
+			label="Presione aqui para visualizar los datos del estudiante" />
 	</popup>
 	<popup id="pupDatosObservacion">
 		<toolbarbutton
-			label="Presione aquí para visualizar el campo de observacion" />
+			label="Presione aqui para visualizar el campo de observacion" />
 	</popup>
 	<popup id="pupAgregarObservacion">
 		<toolbarbutton
-			label="Presione aquí para agregar observaciones del avance" />
+			label="Presione aqui para agregar observaciones del avance" />
 	</popup>
 	<popup id="pupBtnFinalizar">
 		<toolbarbutton
 			label="Presione aquí para finalizar el registro de avances" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
+		<toolbarbutton label="Presione aqui para cancelar la seleccion" />
+	</popup>
+	<popup id="pupBtnSalir">
+		<toolbarbutton label="Presione aqui para salir" />
 	</popup>
 	<!-- fin de popus -->
 
 	<separator />
 	<separator />
 
-	<groupbox height="685px" width="690px"
+	<groupbox height="730px" width="690px"
 		style="margin-left:2%;margin-right:1%">
 
 		<separator />
@@ -99,15 +116,47 @@
 		<separator />
 
 
+		<panel height="150px" title="Estudiante(s)"
+			style="margin-left:20px;margin-right:20px" border="normal">
+			<panelchildren>
+				<listbox id="lsbEstudiantesTeg" sclass="fgrid"
+					mold="paging" pageSize="1" style="margin-left:3%;margin-right:3%;margin-top:15px"
+					emptyMessage="No hay Estudiantes registrados actualmente">
+
+					<listhead>
+						<listheader label="Cédula" align="center" />
+						<listheader label="Nombre" align="center" />
+						<listheader label="Apellido" align="center" />
+						<listheader label="Correo" align="center" />
+					</listhead>
+
+					<template name="model">
+						<listitem>
+							<listcell label="${each.cedula}" />
+							<listcell label="${each.nombre}" />
+							<listcell label="${each.apellido}" />
+							<listcell label="${each.correoElectronico}" />
+						</listitem>
+					</template>
+				</listbox>
+			</panelchildren>
+		</panel>
+		
+		<separator />
+		<separator />
+		<separator />
+		<separator />
+
+
+
+
 		<tabbox style="margin-left:2%;margin-right:1%" width="650px"
-			height="480px">
+			height="350px">
 			<tabs>
-				<tab label="Observaciones"
+				<tab label="Avances del proyecto"
 					tooltip="pupDatosObservacion" />
 				<tab label="Datos del Proyecto"
 					tooltip="pupDatosProyecto" />
-				<tab label="Datos del Estudiante"
-					tooltip="pupDatosEstudiante" />
 
 
 			</tabs>
@@ -130,8 +179,8 @@
 
 							<row>
 								<textbox
-									id="txtObservacionRegistrarAvance" width="570px" rows="5"
-									cols="200" />
+									id="txtObservacionRegistrarAvance" width="570px" rows="3"
+									cols="300" />
 							</row>
 						</rows>
 					</grid>
@@ -142,7 +191,7 @@
 
 
 					<listbox id="ltbAvancesRegistrados" sclass="fgrid"
-						height="170px" style="margin-left:2%;margin-right:2%"
+						height="130px" style="margin-left:2%;margin-right:2%"
 						emptyMessage="No hay avances registrados actualmente">
 						<listhead>
 							<listheader label="Fecha" width="20%"
@@ -215,36 +264,6 @@
 
 				</tabpanel>
 
-
-				<tabpanel height="150px">
-					<separator />
-					<separator />
-					<separator />
-					<separator />
-
-					<listbox id="lsbEstudiantesTeg" sclass="fgrid"
-						style="margin-left:3%;margin-right:3%"
-						emptyMessage="No hay Estudiantes registrados actualmente">
-
-						<listhead>
-							<listheader label="Cédula" align="center" />
-							<listheader label="Nombre" align="center" />
-							<listheader label="Apellido" align="center" />
-							<listheader label="Correo" align="center" />
-						</listhead>
-
-						<template name="model">
-							<listitem>
-								<listcell label="${each.cedula}" />
-								<listcell label="${each.nombre}" />
-								<listcell label="${each.apellido}" />
-								<listcell
-									label="${each.correoElectronico}" />
-							</listitem>
-						</template>
-					</listbox>
-				</tabpanel>
-
 			</tabpanels>
 
 		</tabbox>
@@ -277,7 +296,7 @@
 						<button id="btnSalirRegistrarAvance"
 							width="110px" sclass="btn" label="Salir"
 							image="/public/imagenes/iconos/salir.png" tabindex="15"
-							tooltip="pupBtnCancelar">
+							tooltip="pupBtnSalir">
 						</button>
 
 

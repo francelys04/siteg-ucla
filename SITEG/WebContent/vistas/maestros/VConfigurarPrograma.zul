@@ -154,7 +154,7 @@
 								<hbox>
 									<panel title="Áreas Disponibles"
 										width="340px">
-										<panelchildren>
+										<panelchildren >
 											<listbox
 												id="ltbAreasDisponibles" height="200px"
 												oddRowSclass="non-odd" checkmark="true"
@@ -488,6 +488,10 @@
 						<button id="btnCancelarConfigurarPrograma"
 							sclass="btn" label="Cancelar"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="13">
+						</button>
+						<button id="btnSalirConfigurarPrograma" width="110px"
+							sclass="btn" label="Salir"
+							image="/public/imagenes/iconos/salir.png" tabindex="14">
 						</button>
 
 						<separator />

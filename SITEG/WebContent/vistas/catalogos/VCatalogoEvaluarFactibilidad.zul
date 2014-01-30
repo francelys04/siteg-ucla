@@ -20,26 +20,26 @@
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox sclass="search-query"
-					id="txtEstudianteFactibilidad" placeholder="Fecha" instant="true"
-					width="60%" value="" onChange="" />
+					id="txtEstudianteFactibilidad" placeholder="Nombre" instant="true"
+					width="55%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox sclass="search-query"
 					id="txtMostrarFechaFactibilidad" placeholder="Fecha" instant="true"
-					width="60%" value="" onChange="" />
+					width="55%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox sclass="search-query"
 					id="txtMostrarAreaFactibilidad" placeholder="Área" instant="true"
-					width="60%" value="" onChange="" />
+					width="55%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox sclass="search-query"
 					id="txtMostrarTematicaFactibilidad" placeholder="Temática"
-					instant="true" width="60%" value="" onChange="" />
+					instant="true" width="55%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
@@ -51,14 +51,14 @@
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox sclass="search-query"
 					id="txtMostrarNombreTutorFactibilidad" placeholder="Nomre"
-					instant="true" width="60%" value="" onChange="" />
+					instant="true" width="55%" value="" onChange="" />
 			</auxheader>
 
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox sclass="search-query"
 					id="txtMostrarApellidoTutorFactibilidad" placeholder="Apellido"
-					instant="true" width="60%" value="" onChange="" />
+					instant="true" width="55%" value="" onChange="" />
 			</auxheader>
 		</auxhead>
 

@@ -68,17 +68,13 @@ public class CRegistrarTeg extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionRegistrarTeg;
 	@Wire
+	private Textbox txtTutorRegistrarTrabajo;
+	@Wire
 	private Datebox dtbFechaInicioRegistrarTeg;
 	@Wire
 	private Datebox dtbFechaEntregaRegistrarTeg;
 	@Wire
 	private Spinner spnDuracionRegistrarTeg;
-	@Wire
-	private Textbox txtCedulaTutorRegistrarTeg;
-	@Wire
-	private Textbox txtNombreTutorRegistrarTeg;
-	@Wire
-	private Textbox txtApellidoTutorRegistrarTeg;
 	@Wire
 	private Listbox lsbEstudiantesRegistrarTeg;
 	@Wire
@@ -97,9 +93,9 @@ public class CRegistrarTeg extends CGeneral {
 
 		Teg tegEstudiante = servicioTeg
 				.buscarTegEstudiantePorEstatus(estudiante);
-		
-		//verifica el estado actual del TEG
-		//y lleno los datos del teg del estudiante en la vista
+
+		// verifica el estado actual del TEG
+		// y lleno los datos del teg del estudiante en la vista
 		try {
 			if (tegEstudiante == null) {
 
@@ -118,12 +114,11 @@ public class CRegistrarTeg extends CGeneral {
 				txtTematicaRegistrarTeg.setValue(tegEstudiante.getTematica()
 						.getNombre());
 				txtTituloRegistrarTeg.setValue(tegEstudiante.getTitulo());
-				txtCedulaTutorRegistrarTeg.setValue(tegEstudiante.getTutor()
-						.getCedula());
-				txtNombreTutorRegistrarTeg.setValue(tegEstudiante.getTutor()
-						.getNombre());
-				txtApellidoTutorRegistrarTeg.setValue(tegEstudiante.getTutor()
-						.getApellido());
+				txtTutorRegistrarTrabajo.setValue(tegEstudiante.getTutor()
+						.getNombre()
+						+ " "
+						+ tegEstudiante.getTutor().getApellido());
+
 				List<Estudiante> estudiantes = servicioEstudiante
 						.buscarEstudiantesDelTeg(tegEstudiante);
 				lsbEstudiantesRegistrarTeg
@@ -137,10 +132,11 @@ public class CRegistrarTeg extends CGeneral {
 		}
 
 	}
-	//Metodo que permite registrar un Trabajo Especial de Grado
+
+	// Metodo que permite registrar un Trabajo Especial de Grado
 	@Listen("onClick = #btnGuardarRegistrarTeg")
-	public void guardarTeg(){
-		
+	public void guardarTeg() {
+
 		if ((txtTituloRegistrarTeg.getText().compareTo("") == 0)
 				|| (txtDescripcionRegistrarTeg.getText().compareTo("") == 0)
 				|| (dtbFechaInicioRegistrarTeg.getText().compareTo("") == 0)
@@ -148,8 +144,9 @@ public class CRegistrarTeg extends CGeneral {
 				|| (spnDuracionRegistrarTeg.getText().compareTo("") == 0)) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
-		}else {
-			Messagebox.show("¿Desea guardar los datos del Trabajo Especial de Grado?",
+		} else {
+			Messagebox.show(
+					"¿Desea guardar los datos del Trabajo Especial de Grado?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -157,47 +154,61 @@ public class CRegistrarTeg extends CGeneral {
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
 
-								Teg tegRegistrado = servicioTeg.buscarTeg(auxiliarId);
-								tegRegistrado.setTitulo(txtTituloRegistrarTeg.getValue());
-								tegRegistrado.setDescripcion(txtDescripcionRegistrarTeg.getValue());
-								tegRegistrado.setFechaInicio(dtbFechaInicioRegistrarTeg.getValue());
-								tegRegistrado.setFechaEntrega(dtbFechaEntregaRegistrarTeg.getValue());
-								tegRegistrado.setDuracion(spnDuracionRegistrarTeg.getValue());
+								Teg tegRegistrado = servicioTeg
+										.buscarTeg(auxiliarId);
+								tegRegistrado.setTitulo(txtTituloRegistrarTeg
+										.getValue());
+								tegRegistrado
+										.setDescripcion(txtDescripcionRegistrarTeg
+												.getValue());
+								tegRegistrado
+										.setFechaInicio(dtbFechaInicioRegistrarTeg
+												.getValue());
+								tegRegistrado
+										.setFechaEntrega(dtbFechaEntregaRegistrarTeg
+												.getValue());
+								tegRegistrado
+										.setDuracion(spnDuracionRegistrarTeg
+												.getValue());
 								tegRegistrado.setEstatus("TEG Registrado");
 								java.util.Date fechaEstatus = new Date();
-								TegEstatus tegEstatus = new TegEstatus(0, tegRegistrado, "TEG Registrado", fechaEstatus);
+								TegEstatus tegEstatus = new TegEstatus(0,
+										tegRegistrado, "TEG Registrado",
+										fechaEstatus);
 								servicioTegEstatus.guardar(tegEstatus);
 								servicioTeg.guardar(tegRegistrado);
 								cancelarRegistroTeg();
-								Messagebox.show(
-										"Trabajo Especial de Grado registrado exitosamente",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
+								Messagebox
+										.show("Trabajo Especial de Grado registrado exitosamente",
+												"Informacion", Messagebox.OK,
+												Messagebox.INFORMATION);
 								wdwRegistrarTeg.onClose();
-								
+
 							}
 						}
 					});
 
 		}
-		
-		
-		
+
 	}
-	//limpia los campos
+
+	// limpia los campos
 	@Listen("onClick = #btnCancelarRegistrarTeg")
-	public void cancelarRegistroTeg(){
-		
+	public void cancelarRegistroTeg() {
+
 		txtDescripcionRegistrarTeg.setValue("");
 		txtTituloRegistrarTeg.setValue("");
 		dtbFechaInicioRegistrarTeg.setValue(null);
 		dtbFechaEntregaRegistrarTeg.setValue(null);
 		spnDuracionRegistrarTeg.setValue(null);
-		
-		
-		
-		
+
 	}
-	
-	
+
+	@Listen("onClick = #btnSalirRegistrarTeg")
+	public void salirRegistroTeg() {
+
+		wdwRegistrarTeg.onClose();
+
+	}
+
 }

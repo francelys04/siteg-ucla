@@ -355,12 +355,14 @@
 							sclass="btn" label="Cancelar"
 							image="public/imagenes/iconos/limpiar.png" tabindex="13">
 						</button>
-						<button id="btnSalirSolicitudTutoria" width="110px"
-							sclass="btn" label="Salir"
-							image="public/imagenes/iconos/salir.png" tabindex="14">
+						<button id="btnSalirSolicitudTutoria"
+							sclass="btn" label="salir" width="110px"
+							image="public/imagenes/iconos/salir.png" tabindex="13">
 						</button>
 						<separator />
-
+						
+						<separator />
+					
 					</div>
 				</div>
 			</panelchildren>

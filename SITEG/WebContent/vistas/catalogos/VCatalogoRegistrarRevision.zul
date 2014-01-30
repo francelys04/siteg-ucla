@@ -19,44 +19,31 @@
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtEstudianteRevision"
 					sclass="search-query" placeholder="Fecha" instant="true"
-					width="60%" value="" onChange="" />
+					width="65%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtFechaRegistrarRevision"
 					sclass="search-query" placeholder="Fecha" instant="true"
-					width="60%" value="" onChange="" />
+					width="65%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtAreaRegistrarRevision"
-					sclass="search-query" placeholder="Área" instant="true" width="60%"
+					sclass="search-query" placeholder="Área" instant="true" width="65%"
 					value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtTematicaRegistrarRevision"
 					sclass="search-query" placeholder="Temática" instant="true"
-					width="60%" value="" onChange="" />
+					width="65%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtTituloRegistrarRevision"
 					sclass="search-query" placeholder="Título" instant="true"
 					width="75%" value="" onChange="" />
-			</auxheader>
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtNombreTutorRegistrarRevision"
-					sclass="search-query" placeholder="Nombre" instant="true"
-					width="60%" value="" onChange="" />
-			</auxheader>
-
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox id="txtApellidoTutorRegistrarRevision"
-					sclass="search-query" placeholder="Apellido" instant="true"
-					width="60%" value="" onChange="" />
 			</auxheader>
 		</auxhead>
 
@@ -66,8 +53,6 @@
 			<listheader label="Área" align="center" />
 			<listheader label="Temática" align="center" />
 			<listheader label="Título" align="center" width="25%" />
-			<listheader label="Nombre del Tutor" align="center" />
-			<listheader label="Apellido del Tutor" align="center" />
 		</listhead>
 
 
@@ -79,8 +64,6 @@
 					label="${each.tematica.areaInvestigacion.nombre}" />
 				<listcell label="${each.tematica.nombre}" />
 				<listcell label="${each.titulo}" />
-				<listcell label="${each.tutor.nombre}" />
-				<listcell label="${each.tutor.apellido}" />
 			</listitem>
 		</template>
 	</listbox>
