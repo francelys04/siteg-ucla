@@ -50,6 +50,8 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	@Wire
+	private Textbox txtEstudianteProyecto;
+	@Wire
 	private Listbox ltbSolcitudRegistroProyecto;
 	@Wire
 	private Window wdwCatalogoSolicitudRegistroProyecto;
@@ -77,6 +79,12 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 		 */
 	
 		List<Teg>  t = buscarDatos();
+		for (int i = 0; i < t.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(t.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			t.get(i).setEstatus(nombre+" "+apellido);
+		}
 		ltbSolcitudRegistroProyecto.setModel(new ListModelList<Teg> (t));
 		Selectors.wireComponents(comp, this, false) ;
 
@@ -96,10 +104,23 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	@Listen("onChange = #txtMostrarFecha,#txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,# txtMostrarApellidoTutor")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
+		for (int i = 0; i < teg1.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			teg1.get(i).setEstatus(nombre+" "+apellido);
+		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
-			if (teg
+			if (servicioEstudiante.buscarEstudiantePorTeg(teg)
+					.get(0)
+					.getNombre()
+					.toLowerCase()
+					.contains(
+							txtEstudianteProyecto.getValue()
+									.toLowerCase())
+									&&teg
 					.getFecha().toString()
 					.toLowerCase()
 					.contains(
@@ -152,6 +173,7 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	public void mostrarDatosCatalogo() {	
 		if(ltbSolcitudRegistroProyecto.getItemCount()!=0){
 			Listitem listItem = ltbSolcitudRegistroProyecto.getSelectedItem();
+			if(listItem!=null){
 			Teg tegDatosCatalogo = (Teg) listItem.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("id", tegDatosCatalogo.getId());			
@@ -162,6 +184,7 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 					"/vistas/transacciones/VVerificarSolicitudProyecto.zul", null, null);	 				
 			window.doModal();
 			vistaVerificar.recibir("catalogos/VCatalogoSolicitudRegistroProyecto");
+		}
 		}
 	}
 	public List<Teg> buscarDatos()

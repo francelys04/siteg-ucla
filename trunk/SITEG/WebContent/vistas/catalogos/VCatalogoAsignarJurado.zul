@@ -13,6 +13,12 @@
 		style="margin-left:10px;margin-right:10px" emptyMessage="No hay solicitudes de defensa registradas">
 
 		<auxhead sclass="category-center">
+		<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="60%"
+					sclass="search-query" placeholder="Fecha"
+					id="txtEstudianteJurado" />
+			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox instant="true" width="60%"
@@ -54,6 +60,7 @@
 		</auxhead>
 
 		<listhead>
+			<listheader label="Estudiante" align="center" />
 			<listheader label="Fecha" align="center" />
 			<listheader label="Área" align="center" />
 			<listheader label="Temática" align="center" />
@@ -65,6 +72,7 @@
 
 		<template name="model">
 			<listitem>
+				<listcell label="${each.estatus}" />
 				<listcell label="${each.fechaEntrega}" />
 				<listcell label="${each.tematica.areaInvestigacion.nombre}" />
 				<listcell label="${each.tematica.nombre}" />

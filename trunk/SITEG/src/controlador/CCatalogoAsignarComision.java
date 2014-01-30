@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
@@ -40,7 +41,8 @@ public class CCatalogoAsignarComision extends CGeneral {
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	
 	CAsignarComision vistaComision = new CAsignarComision();
-
+	@Wire
+	private Textbox txtEstudianteComision;
 	@Wire
 	private Listbox ltbProyectosRegistrados;
 	@Wire
@@ -65,7 +67,12 @@ public class CCatalogoAsignarComision extends CGeneral {
 		List<Teg> tegs = buscarDatos();
 		
 		
-		
+		for (int i = 0; i < tegs.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			tegs.get(i).setEstatus(nombre+" "+apellido);
+		}
      
 		
 
@@ -118,12 +125,25 @@ public class CCatalogoAsignarComision extends CGeneral {
 	@Listen("onChange = #txtMostrarFecha, #txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,# txtMostrarApellidoTutor")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
+		for (int i = 0; i < teg1.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			teg1.get(i).setEstatus(nombre+" "+apellido);
+		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
 			if (teg.getFecha().toString().toLowerCase()
 					.contains(txtMostrarFecha.getValue().toLowerCase())
-
+					&& 
+					servicioEstudiante.buscarEstudiantePorTeg(teg)
+							.get(0)
+							.getNombre()
+							.toLowerCase()
+							.contains(
+									txtEstudianteComision.getValue()
+											.toLowerCase())
 					&& teg.getTematica()
 							.getNombre()
 							.toLowerCase()
@@ -164,6 +184,7 @@ public class CCatalogoAsignarComision extends CGeneral {
 	public void mostrarDatosCatalogo() {
 		if(ltbProyectosRegistrados.getItemCount()!=0){
 		Listitem listItem = ltbProyectosRegistrados.getSelectedItem();
+		if(listItem!=null){
 		Teg tegDatosCatalogo = (Teg) listItem.getValue();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", tegDatosCatalogo.getId());
@@ -174,15 +195,7 @@ public class CCatalogoAsignarComision extends CGeneral {
 				"/vistas/transacciones/VAsignarComision.zul", null, null);
 		window.doModal();
 		vistaComision.recibir("catalogos/VCatalogoAsignarComision");
-		
-
+		}
 	}
 	}
-	
-
-
-	
-	
-	
-
 }

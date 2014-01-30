@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.Estudiante;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 
@@ -30,7 +31,8 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	CAtenderDefensa vista = new CAtenderDefensa();
-	
+	@Wire
+	private Textbox txtEstudianteDefensa;
 	@Wire
 	private Textbox txtFechaSolicitudDefensa;
 	@Wire
@@ -60,13 +62,17 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 			}else{
 			tegsDefensa.add(tegsDefensa1.get(0));
 			for(int i =1; i<tegsDefensa1.size();i++){
-				System.out.println("id"+tegsDefensa1.get(i).getId());
 				long temp = tegsDefensa1.get(i-1).getId();
-				System.out.println("temporal"+temp);
 				if(temp !=tegsDefensa1.get(i).getId()){
 					tegsDefensa.add(tegsDefensa1.get(i));
 				}
 				
+			}
+			for (int i = 0; i < tegsDefensa.size(); i++) {
+				List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegsDefensa.get(i));
+				String nombre = es.get(0).getNombre();
+				String apellido = es.get(0).getApellido();
+				tegsDefensa.get(i).setEstatus(nombre+" "+apellido);
 			}
 			System.out.println(tegsDefensa.toString());
 			ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegsDefensa));
@@ -78,9 +84,21 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 	public void filtrarCatalogo(){
 		
 		List<Teg> tegs = new ArrayList<Teg>();
-
+		for (int i = 0; i < tegs.size(); i++) {
+			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = es.get(0).getNombre();
+			String apellido = es.get(0).getApellido();
+			tegs.get(i).setEstatus(nombre+" "+apellido);
+		}
 		for (Teg teg : tegsDefensa) {
-			if (teg.getTematica().getareaInvestigacion().getNombre()
+			if (servicioEstudiante.buscarEstudiantePorTeg(teg)
+					.get(0)
+					.getNombre()
+					.toLowerCase()
+					.contains(
+							txtEstudianteDefensa.getValue()
+									.toLowerCase())
+					&&teg.getTematica().getareaInvestigacion().getNombre()
 					.toLowerCase()
 					.contains(txtAreaSolicitudDefensa.getValue().toLowerCase())
 					&& teg
@@ -117,6 +135,7 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 		
 		if(ltbSolicitudesDefensa.getItemCount()!= 0){
 		Listitem listItem = ltbSolicitudesDefensa.getSelectedItem();
+		if(listItem!=null){
 		Teg tegSeleccionado = (Teg)listItem.getValue();
 		long id = tegSeleccionado.getId();
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -126,6 +145,7 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 				"/vistas/transacciones/VAtenderDefensa.zul", null, null);	 				
 		window.doModal();
 		vista.recibir("catalogos/VCatalogoSolicitudDefensa");
+	}
 	}
 	}
 }

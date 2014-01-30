@@ -72,6 +72,7 @@ public class CAsignarComision extends CGeneral {
 			.getServicioCondicionPrograma();
 	SGrupo serviciogrupo = GeneradorBeans.getServicioGrupo();
 
+	
 	@Wire
 	private Datebox dbfecha;
 	@Wire

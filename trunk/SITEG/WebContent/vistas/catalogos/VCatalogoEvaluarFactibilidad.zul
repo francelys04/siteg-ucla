@@ -20,6 +20,12 @@
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox sclass="search-query"
+					id="txtEstudianteFactibilidad" placeholder="Fecha" instant="true"
+					width="60%" value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox sclass="search-query"
 					id="txtMostrarFechaFactibilidad" placeholder="Fecha" instant="true"
 					width="60%" value="" onChange="" />
 			</auxheader>
@@ -57,6 +63,7 @@
 		</auxhead>
 
 		<listhead>
+			<listheader label="Estudiante" align="center" />
 			<listheader label="Fecha" align="center" />
 			<listheader label="Área" align="center" />
 			<listheader label="Temática" align="center" />
@@ -68,6 +75,7 @@
 
 		<template name="model">
 			<listitem>
+				<listcell label="${each.estatus}" />
 				<listcell label="${each.fecha}" />
 				<listcell
 					label="${each.tematica.areaInvestigacion.nombre}" />
