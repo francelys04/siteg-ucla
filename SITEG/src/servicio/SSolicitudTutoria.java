@@ -143,4 +143,10 @@ public class SSolicitudTutoria {
 		solicitudes=interfaceSolicitud.findByProfesorAndFechaBetween(profesor,fechaInicio,fechaFin);
 		return solicitudes;
 	}
+	
+	public Long contarSolicitudes(Profesor profesor){
+		long valor =0;
+		valor = interfaceSolicitud.countByProfesor(profesor);
+		return valor;
+	}
 }
