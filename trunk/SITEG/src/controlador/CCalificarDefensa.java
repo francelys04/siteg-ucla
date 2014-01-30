@@ -163,10 +163,7 @@ public class CCalificarDefensa extends CGeneral {
 			
 			Listitem listItem = ltbitem.getItemAtIndex(i);
 			String valor = ((Textbox)((listItem.getChildren().get(1))).getFirstChild()).getValue();
-			System.out.print(valor);
 			if (valor.equals("")){
-				System.out.print("entre al if");
-				System.out.print(valor);
 				 Messagebox.show("Debe Colocar su Apreciacion en todos los item","Informacion", Messagebox.OK,Messagebox.INFORMATION);	
 				 i = ltbitem.getItemCount();
 				 dejeenblanco = true;
@@ -185,39 +182,21 @@ public class CCalificarDefensa extends CGeneral {
 	if(dejeenblanco==false){	
 		
 		if (rdoAprobado.isChecked()==true){
-			System.out.println("entre en aprobado");
 			
-			String estatus1 = "TEG Aprobado";
-			
-			System.out.println(ltbEstudiantesCalificar.getItemCount());
-				for (int i = 0; i < ltbEstudiantesCalificar.getItemCount(); i++) {
-		            Estudiante estudiante = ltbEstudiantesCalificar.getItems().get(i).getValue();
-		            valor2.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), estatus1));
-		            Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
-		            salir();
-			 } 	  
-				teg1.setEstatus(estatus1);
-				servicioTeg.guardar(teg1);
+			String estatus1 = "TEG Aprobado";		
+		    Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+		     salir(); 	  
+		     teg1.setEstatus(estatus1);
+			servicioTeg.guardar(teg1);
 				
 			}
 		
 			
 		else if (rdoReprobado.isChecked()==true) {
 			
-			System.out.println("reprobo");
-			
-			System.out.println(ltbEstudiantesCalificar.getItemCount());
-			String estatus2 =  "TEG Reprobado";
+		String estatus2 =  "TEG Reprobado";
 		teg1.setEstatus(estatus2);
 		servicioTeg.guardar(teg1);
-		
-		
-		//enviarEmailNotificacion();
-		for (int i = 0; i < ltbEstudiantesCalificar.getItemCount(); i++) {
-            Estudiante estudiante = ltbEstudiantesCalificar.getItems().get(i).getValue();
-            valor2.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), estatus2));
-           
-	 }
 		 Messagebox.show("datos guardados exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
          salir();
 		}

@@ -249,35 +249,18 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 										}
 									}
 
-									else if (rdoCompleto.isChecked() == true) {
-
+									else if (rdoCompleto.isChecked() == true) {		
 										Teg teg = servicioTeg.buscarTeg(auxId2);
 										String estatus = "Proyecto Registrado";
 										teg.setEstatus(estatus);
 										servicioTeg.guardar(teg);
-										if (txtObservacion.getValue()
-												.compareTo("") == 0) {
-											txtObservacion
-													.setValue("Sus requisitos estan correctos y completos");
-										}
+										Messagebox
+										.show("Datos guardados exitosamente",
+												"Informacion",
+												Messagebox.OK,
+												Messagebox.INFORMATION);
+								salir();
 
-										// enviarEmailNotificacion();
-										for (int i = 0; i < ltbEstudiantesTeg
-												.getItemCount(); i++) {
-											Estudiante estudiante = ltbEstudiantesTeg
-													.getItems().get(i)
-													.getValue();
-											valor.add(enviarEmailNotificacion(
-													estudiante
-															.getCorreoElectronico(),
-													txtObservacion.getValue()));
-											Messagebox
-													.show("Datos guardados exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
-											salir();
-										}
 									}
 								}
 							}
