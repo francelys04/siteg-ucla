@@ -57,4 +57,7 @@ public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Lo
 
 	@Query("select count(e) from SolicitudTutoria e where e.profesor=?1")
 	public long countByProfesor(Profesor profesor);
+
+	@Query("select count(e) from SolicitudTutoria e where e.profesor=?1 and e.tematica=?2")
+	public long countByProfesorAndTematica(Profesor profesor, Tematica tematica);
 }
