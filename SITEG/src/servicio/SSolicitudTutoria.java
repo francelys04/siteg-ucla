@@ -149,4 +149,12 @@ public class SSolicitudTutoria {
 		valor = interfaceSolicitud.countByProfesor(profesor);
 		return valor;
 	}
+
+	public long contarSolicitudesPorTematica(Profesor profesor,
+			Tematica tematica) {
+		// TODO Auto-generated method stub
+		long valor =0;
+		valor = interfaceSolicitud.countByProfesorAndTematica(profesor,tematica);
+		return valor;
+	}
 }
