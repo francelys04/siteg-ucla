@@ -233,32 +233,37 @@ public class STeg {
 
 	
 	
-	public List<Long> buscarUltimasTematicasProgramaAreaEstatus(String estatus, AreaInvestigacion area,Date fechaInicio,Date fechaFin) {
+	public List<Long> buscarUltimasTematicasProgramaAreaEstatus(String estatusProyectoTeg1,String estatusProyectoTeg2, AreaInvestigacion area,Date fechaInicio,Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Long> tegs;
-		tegs =interfaceTeg.buscarUltimasTematicasProgramaAreaEstatus(estatus, area, fechaInicio, fechaFin);
+		tegs =interfaceTeg.buscarUltimasTematicasProgramaAreaEstatus(estatusProyectoTeg1,estatusProyectoTeg2, area, fechaInicio, fechaFin);
 		return tegs;
 	}
-	public List<Long> buscarUltimasTematicasProgramaEstatus(String estatus, Programa programa,Date fechaInicio,Date fechaFin) {
+	public List<Long> buscarUltimasTematicasProgramaEstatus(String estatusProyectoTeg1,String estatusProyectoTeg2, Programa programa,Date fechaInicio,Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Long> tegs;
-		tegs =interfaceTeg.buscarUltimasTematicasProgramaEstatus(estatus,programa, fechaInicio, fechaFin);
+		tegs =interfaceTeg.buscarUltimasTematicasProgramaEstatus(estatusProyectoTeg1,estatusProyectoTeg2,programa, fechaInicio, fechaFin);
 		return tegs;
 	}
-	public List<Long> buscarUltimasEstatus(String estatus,Date fechaInicio,Date fechaFin) {
+	public List<Long> buscarUltimasEstatus(String estatusProyectoTeg1,String estatusProyectoTeg2,Date fechaInicio,Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Long> tegs;
-		tegs =interfaceTeg.buscarUltimasEstatus(estatus, fechaInicio, fechaFin);
+		tegs =interfaceTeg.buscarUltimasEstatus(estatusProyectoTeg1,estatusProyectoTeg2, fechaInicio, fechaFin);
 		return tegs;
 	}
 	
-	public List<Teg> buscarUltimasOrdenadasEstatus(String estatus, List<Tematica> tematicas,Date fechaInicio,Date fechaFin) {
+	public List<Teg> buscarUltimasOrdenadasEstatus(String estatusProyectoTeg1,String estatusProyectoTeg2, List<Tematica> tematicas,Date fechaInicio,Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
-		tegs =interfaceTeg.buscarUltimasOrdenadasEstatus(estatus, tematicas, fechaInicio, fechaFin);
+		tegs =interfaceTeg.buscarUltimasOrdenadasEstatus(estatusProyectoTeg1,estatusProyectoTeg2, tematicas, fechaInicio, fechaFin);
 		return tegs;
 	}
-
-
+	public long contadorEstatus(String estatusProyectoTeg, Tematica tematica,Date fechaInicio,Date fechaFin) {
+		// TODO Auto-generated method stub
+		long tegs;
+		tegs =interfaceTeg.countByEstatus(estatusProyectoTeg, tematica, fechaInicio, fechaFin);
+		return tegs;
+	}
+	
 
 }
