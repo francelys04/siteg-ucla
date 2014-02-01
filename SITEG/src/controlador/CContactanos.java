@@ -44,9 +44,8 @@ public class CContactanos extends CGeneral {
 	private Textbox txtMensaje;
 	@Wire
 	private Window wdwContactanos;
-	
+
 	public static String correoProgramas;
-	
 
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
@@ -58,52 +57,66 @@ public class CContactanos extends CGeneral {
 		cmbProgramaContactanos.setModel(new ListModelList<Programa>(programas));
 
 	}
-	
+
 	// Devuelve true en caso de que se envie el email de manera correcta, o
 	// devuelve false si no se pudo enviar el email
 
 	@Listen("onClick = #btnEnviarCorreo")
 	public void enviarCorreo() {
-		Messagebox.show("¿Desea enviar el correo?",
-				"Dialogo de confirmacion", Messagebox.OK
-						| Messagebox.CANCEL, Messagebox.QUESTION,
+
+		if ((cmbProgramaContactanos.getText().compareTo("") == 0)
+				|| (txtNombre.getText().compareTo("") == 0)
+				|| (txtCorreo.getText().compareTo("") == 0)
+				|| (txtAsunto.getText().compareTo("") == 0)
+				|| (txtMensaje.getText().compareTo("") == 0)) {
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
+		}else{
+			
+		Messagebox.show("¿Desea enviar el correo?", "Dialogo de confirmacion",
+				Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
-					public void onEvent(Event evt)
-							throws InterruptedException {
+					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-		String nombre = txtNombre.getText();
-		String asunto = txtAsunto.getText();
-		String correo = txtCorreo.getText();
-		String mensaje = txtMensaje.getText();
-		
-		String cuerpo = "Nombre: " + nombre + "\n\n Asunto: " + asunto +  " \n\n Correo: " + correo + " \n\n Mensaje: " + mensaje + ".";
-		String n = cmbProgramaContactanos.getValue();
-		Programa programa = servicioPrograma.buscarPorNombrePrograma(n);
-		correoProgramas = programa.getCorreo();
-		
-	
-		boolean valor = enviarEmailNotificacion(correoProgramas, cuerpo);
-		
-		
-		if (valor == true) {
-			Messagebox.show("Correo enviado", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
-			cancelarCorreo();
-			wdwContactanos.onClose();
-		} else {
-			Messagebox.show(
-					"Disculpe en estos momentos no se envio el Mensaje",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
-			cancelarCorreo();
-			wdwContactanos.onClose();
-		}
+							String nombre = txtNombre.getText();
+							String asunto = txtAsunto.getText();
+							String correo = txtCorreo.getText();
+							String mensaje = txtMensaje.getText();
+
+							String cuerpo = "Nombre: " + nombre
+									+ "\n\n Asunto: " + asunto
+									+ " \n\n Correo: " + correo
+									+ " \n\n Mensaje: " + mensaje + ".";
+							String n = cmbProgramaContactanos.getValue();
+							Programa programa = servicioPrograma
+									.buscarPorNombrePrograma(n);
+							correoProgramas = programa.getCorreo();
+
+							boolean valor = enviarEmailNotificacion(
+									correoProgramas, cuerpo);
+
+							if (valor == true) {
+								Messagebox.show("Correo enviado",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+								cancelarCorreo();
+								wdwContactanos.onClose();
+							} else {
+								Messagebox
+										.show("Disculpe en estos momentos no se envio el Mensaje",
+												"Informacion", Messagebox.OK,
+												Messagebox.INFORMATION);
+								cancelarCorreo();
+								wdwContactanos.onClose();
+							}
 						}
 					}
 				});
-
+		}
 
 	}
-//permite limpiar los campos
+
+	// permite limpiar los campos
 	@Listen("onClick = #btnCancelarCorreo")
 	public void cancelarCorreo() {
 
@@ -113,6 +126,13 @@ public class CContactanos extends CGeneral {
 		txtAsunto.setValue("");
 		txtMensaje.setValue("");
 		cmbProgramaContactanos.setValue("");
+
+	}
+
+	@Listen("onClick = #btnSalirCorreo")
+	public void salirCorreo() {
+
+		wdwContactanos.onClose();
 
 	}
 

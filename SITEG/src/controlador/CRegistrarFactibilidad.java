@@ -159,7 +159,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	//Permite rechazar la factibilidad de un proyecto
 	@Listen("onClick = #btnRechazarRegistrarFactibilidad")
 	public void rechazarfactibilidad() {
-		Messagebox.show("ï¿½Desea rechazar factibilidad del proyecto?",
+		Messagebox.show("¿Desea rechazar factibilidad del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {

@@ -222,14 +222,16 @@ public class CInicio extends CGeneral {
 					}else{
 						
 						Messagebox
-						.show("Estudiante apto para realizar la solicitud de tutor de Trabajo Especial de Grado",
+						.show("Estudiante apto para realizar un Trabajo Especial de Grado",
 								"Informacion", Messagebox.OK,
 								Messagebox.INFORMATION);
+						cedulaEstatus.setValue(null);
+						
 					}
 				} else {
 	
 					Messagebox
-							.show("Estudiante no autorizado para realizar un Trabajo Especial de Grado",
+							.show("Estudiante no apto para realizar un Trabajo Especial de Grado",
 									"Error", Messagebox.OK,
 									Messagebox.ERROR);
 				

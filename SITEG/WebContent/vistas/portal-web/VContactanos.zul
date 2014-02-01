@@ -124,6 +124,10 @@
 							label="Cancelar" image="/public/imagenes/iconos/limpiar.png"
 							tabindex="7">
 						</button>
+						<button id="btnSalirCorreo" sclass="btn" width="110px"
+							label="Salir" image="/public/imagenes/iconos/salir.png"
+							tabindex="8">
+						</button>
 					</div>
 					<separator />
 
