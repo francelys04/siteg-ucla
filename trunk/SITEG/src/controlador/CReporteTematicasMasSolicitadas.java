@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.mail.Address;
 import javax.mail.Message;
@@ -22,6 +23,7 @@ import javax.swing.filechooser.FileSystemView;
 
 import modelo.AreaInvestigacion;
 import modelo.Estudiante;
+import modelo.Profesor;
 import modelo.Programa;
 import modelo.ProgramaArea;
 import modelo.SolicitudTutoria;
@@ -78,6 +80,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 
 	Programa programa = new Programa();
 	AreaInvestigacion area = new AreaInvestigacion();
+	String estatusProyectoTeg1, estatusProyectoTeg2 = "";
 
 	/********** Proyectos Solicitados **************/
 
@@ -113,13 +116,17 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
 		String etapaTeg = cmbEtapaTeg.getValue();
-		String estatus = cmbEstatus.getValue();
-		System.out.println("es" + estatus);
+
+		// String estatus = cmbEstatus.getValue();
+		// System.out.println("es" + estatus);
 		Date fechaInicio = new Date();
 		Date fechaFin = new Date();
 		fechaInicio = dtbFechaInicio.getValue();
 		fechaFin = dtbFechaFin.getValue();
 		List<Long> tematicasSeleccionadas = new ArrayList();
+		System.out.println("estatus1:" + estatusProyectoTeg1);
+		System.out.println("estatus2:" + estatusProyectoTeg2);
+
 		if (fechaFin == null || fechaInicio == null
 				|| fechaInicio.after(fechaFin)) {
 			Messagebox.show(
@@ -131,13 +138,15 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 				AreaInvestigacion area1 = servicioArea.buscarArea(Long
 						.parseLong(idArea));
 				tematicasSeleccionadas = servicioTeg
-						.buscarUltimasTematicasProgramaAreaEstatus(estatus,
+						.buscarUltimasTematicasProgramaAreaEstatus(
+								estatusProyectoTeg1, estatusProyectoTeg2,
 								area1, fechaInicio, fechaFin);
 			}
 
 			if (nombrePrograma.equals("Todos")) {
 				tematicasSeleccionadas = servicioTeg.buscarUltimasEstatus(
-						estatus, fechaInicio, fechaFin);
+						estatusProyectoTeg1, estatusProyectoTeg2, fechaInicio,
+						fechaFin);
 			}
 
 			if (!nombrePrograma.equals("Todos") && nombreArea.equals("Todos")) {
@@ -146,13 +155,11 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 						.parseLong(idPrograma));
 				System.out.println("programa" + programa1.getNombre());
 				tematicasSeleccionadas = servicioTeg
-						.buscarUltimasTematicasProgramaEstatus(estatus,
+						.buscarUltimasTematicasProgramaEstatus(
+								estatusProyectoTeg1, estatusProyectoTeg2,
 								programa1, fechaInicio, fechaFin);
-
 			}
-
 		}
-
 		if (tematicasSeleccionadas.size() != 0) {
 
 			/*************************** Contador de Lista ************* ******************/
@@ -213,31 +220,44 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 						.buscarTematica(tematicasOrdenados.get(i));
 				tematicasFinales.add(tematicaFinal);
 			}
+			System.out.println("tematicas."+tematicasFinales.size());
+			
 			List<Teg> tegsSegunUltimasTematicas = servicioTeg
-					.buscarUltimasOrdenadasEstatus(estatus, tematicasFinales,
-							fechaInicio, fechaFin);
-
+					.buscarUltimasOrdenadasEstatus(estatusProyectoTeg1,
+							estatusProyectoTeg2, tematicasFinales, fechaInicio,
+							fechaFin);
+			List<Teg> tegsTematicasComparativo= new ArrayList();
+			long contadorFactibleAprobado = 0, contadorNoFactibleReprobado = 0;
+			for (int i = 0; i < tematicasFinales.size(); i++) {
+				contadorFactibleAprobado=servicioTeg.contadorEstatus(estatusProyectoTeg1, tematicasFinales.get(i), fechaInicio, fechaFin);
+				contadorNoFactibleReprobado=servicioTeg.contadorEstatus(estatusProyectoTeg2,tematicasFinales.get(i), fechaInicio, fechaFin);
+				Teg teg=new Teg(contadorFactibleAprobado,"",null,null,null,null,contadorNoFactibleReprobado,null,"",tematicasFinales.get(i),null,null);
+				tegsTematicasComparativo.add(teg);
+				contadorFactibleAprobado=0;
+				contadorNoFactibleReprobado=0;
+			}
 			FileSystemView filesys = FileSystemView.getFileSystemView();
 			Map parametro = new HashMap();
-
 			String rutaUrl = obtenerDirectorio();
 			String reporteSrc = rutaUrl
 					+ "SITEG/vistas/reportes/estadisticos/compilados/RTematicasMasSolicitadas.jasper";
-			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+		String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
 
-			parametro.put("titulo",
-					"UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
-							+ " DECANATO DE CIENCIAS Y TECNOLOGIA"
-							+ "DIRECCION DE PROGRAMA");
+			parametro.put("titulo", "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
+				+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
+				+ "DIRECCION DE PROGRAMA");
 			parametro.put("programaNombre", cmbPrograma.getValue());
 			parametro.put("areaNombre", cmbArea.getValue());
 			parametro.put("etapaTeg", etapaTeg);
+			parametro.put("estatusProyectoTeg1", estatusProyectoTeg1);
+			parametro.put("estatusProyectoTeg2", estatusProyectoTeg2);
+			parametro.put("fechaInicio", fechaInicio);
+			parametro.put("fechaFin", fechaFin);
 			parametro.put("logoUcla", reporteImage + "logo ucla.png");
 			parametro.put("logoCE", reporteImage + "logo CE.png");
-
 			jstVistaPrevia.setSrc(reporteSrc);
 			jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-					tegsSegunUltimasTematicas));
+					tegsTematicasComparativo));
 			jstVistaPrevia.setType("pdf");
 			jstVistaPrevia.setParameters(parametro);
 		} else {
@@ -269,17 +289,23 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 	public void seleccionarEtapaTeg() throws JRException {
 		List<String> listaComboEstatus = new ArrayList();
 		String etapaNombre = cmbEtapaTeg.getValue();
-		cmbEstatus.setDisabled(false);
+		// cmbEstatus.setDisabled(false);
 		if (etapaNombre.equals("Proyecto")) {
-			listaComboEstatus.add("Factible");
-			listaComboEstatus.add("No Factible");
+			estatusProyectoTeg1 = "Factible";
+			estatusProyectoTeg2 = "No Factible";
+
+			// listaComboEstatus.add("Factible");
+			// listaComboEstatus.add("No Factible");
 
 		}
 		if (etapaNombre.equals("Teg")) {
-			listaComboEstatus.add("Aprobado");
-			listaComboEstatus.add("Reprobado");
+			estatusProyectoTeg1 = "Aprobado";
+			estatusProyectoTeg2 = "Reprobado";
+
+			// listaComboEstatus.add("Aprobado");
+			// listaComboEstatus.add("Reprobado");
 		}
-		cmbEstatus.setModel(new ListModelList<String>(listaComboEstatus));
+		// cmbEstatus.setModel(new ListModelList<String>(listaComboEstatus));
 	}
 
 	@Listen("onClick = #btnCancelarTematicasSolicitadas")
@@ -289,8 +315,6 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		cmbArea.setValue("");
 		cmbArea.setDisabled(true);
 		cmbEtapaTeg.setValue("");
-		cmbEstatus.setValue("");
-		cmbEstatus.setDisabled(true);
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
 

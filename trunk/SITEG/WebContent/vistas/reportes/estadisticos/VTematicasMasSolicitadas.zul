@@ -123,7 +123,7 @@
 					</combobox>
 				
 
-					<hlayout>
+	<!-- 				<hlayout>
 						<label value="Estatus:" style="font-weight:bold" />
 					</hlayout>
 					<combobox id="cmbEstatus" readonly="true"
@@ -133,6 +133,7 @@
 						</template>
 
 					</combobox>
+		 -->
 				</row>
 
 			</rows>
