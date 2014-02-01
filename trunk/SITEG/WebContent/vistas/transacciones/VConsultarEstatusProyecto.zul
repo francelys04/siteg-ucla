@@ -57,7 +57,8 @@
 				<row>
 					<hlayout>
 
-						<label value="Programa:" style="font-weight:bold;color: rgb(0, 84, 122)" />
+						<label value="Programa:"
+							style="font-weight:bold;color: rgb(0, 84, 122)" />
 					</hlayout>
 
 					<textbox id="txtProgramaEstudiante" width="180px"
@@ -68,7 +69,8 @@
 				<row>
 					<hlayout>
 
-						<label value="Cédula:" style="font-weight:bold;color: rgb(0, 84, 122)" />
+						<label value="Cédula:"
+							style="font-weight:bold;color: rgb(0, 84, 122)" />
 					</hlayout>
 
 					<textbox id="txtCedulaEstudiante" width="120px"
@@ -78,7 +80,8 @@
 				<row>
 
 					<hlayout>
-						<label value="Nombre:" style="font-weight:bold;color: rgb(0, 84, 122)" />
+						<label value="Nombre:"
+							style="font-weight:bold;color: rgb(0, 84, 122)" />
 					</hlayout>
 
 					<hbox>
@@ -170,17 +173,18 @@
 					<hbox>
 						<image src="/public/imagenes/iconos/estatus.png"
 							id="imgRevisandoAvances" />
-						<label value="Revisando Avances del Proyecto"
+						<label value="Proyecto deTrabajo Especial de Grado en Desarrollo"
 							style="color:black;margin-left:20px" />
 					</hbox>
 				</row>
+
 
 				<row>
 					<hbox>
 						<image src="/public/imagenes/iconos/estatus.png"
 							id="imgRevisionesFinalizadasProyecto" />
 						<label
-							value="Revisiones Finalizadas del Proyecto"
+							value="Avances Finalizados del Proyecto"
 							style="color:black;margin-left:20px" />
 					</hbox>
 				</row>
@@ -195,12 +199,15 @@
 					</hbox>
 				</row>
 
+
+
+
 				<row>
 					<hbox>
 						<image src="/public/imagenes/iconos/estatus.png"
 							id="imgRevisionesAvances" />
 						<label
-							value="Revisando Avances del Trabajo Especial de Grado"
+							value="Trabajo Especial de Grado en Desarrollo"
 							style="color:black;margin-left:20px" />
 					</hbox>
 				</row>
@@ -247,7 +254,7 @@
 						<image src="/public/imagenes/iconos/estatus.png"
 							id="imgTrabajoEspecial" />
 						<label
-							value="Trabajo Especial de Grado Aprobado"
+							value="Trabajo Especial de Grado Finalizado"
 							style="color:black;margin-left:20px" />
 					</hbox>
 				</row>

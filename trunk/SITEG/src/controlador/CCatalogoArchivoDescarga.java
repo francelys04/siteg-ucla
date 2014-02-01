@@ -128,7 +128,7 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 	
 	//si encontrado = true permite descargar un archivo en infromacion de interes
 	//si no mapea los datos a lhacia las vista VArchivoDescarga
-	@Listen("onClick = #ltbArchivoDescarga")
+	@Listen("onDoubleClick = #ltbArchivoDescarga")
 	public void descargarArchivo(){
 		try {
 		if(ltbArchivoDescarga.getItemCount()!=0){

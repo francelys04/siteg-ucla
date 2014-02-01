@@ -129,7 +129,7 @@ public class CCatalogoArchivo extends CGeneral {
 
 	}
 	
-	@Listen("onClick = #ltbArchivo")
+	@Listen("onDoubleClick = #ltbArchivo")
 	public void descargarArchivo(){
 		if(ltbArchivo.getItemCount()!=0){
 		Listitem listItem = ltbArchivo.getSelectedItem();

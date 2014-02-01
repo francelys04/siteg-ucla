@@ -467,8 +467,9 @@ public class CAsignarComision extends CGeneral {
 													}
 												
 
+												}
 												
-
+												
 												Teg tegSeleccionado = servicioTeg
 														.buscarTeg(auxiliarId);
 												tegSeleccionado
@@ -483,7 +484,7 @@ public class CAsignarComision extends CGeneral {
 																Messagebox.OK,
 																Messagebox.INFORMATION);
 												salir();
-												}
+												
 											}
 										}
 									});
