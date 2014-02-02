@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReporteTeg" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86643447-ad29-4b3c-8409-5f8e59397c3f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="72"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#0099CC"/>
@@ -48,6 +48,14 @@
 			<line>
 				<reportElement x="-26" y="65" width="618" height="1" uuid="e373a65e-22ee-47b7-8506-987da53d5349"/>
 			</line>
+			<image>
+				<reportElement x="492" y="9" width="76" height="39" uuid="4bd49432-12c4-4f72-bb8e-2f8d9806db93"/>
+				<imageExpression><![CDATA["/reporte/logo dcyt.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="5" y="4" width="72" height="59" uuid="18ac09f2-bcce-4abb-8cc7-6beb973d92c8"/>
+				<imageExpression><![CDATA["/reporte/logo ucla.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -230,6 +238,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
 			</staticText>
+			<image>
+				<reportElement x="15" y="0" width="62" height="40" uuid="57f2cf65-77df-43bb-9c8b-a45414a55db7"/>
+				<imageExpression><![CDATA["/reporte/logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</pageFooter>
 	<summary>
