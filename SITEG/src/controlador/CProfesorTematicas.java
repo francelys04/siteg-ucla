@@ -49,6 +49,8 @@ public class CProfesorTematicas extends CGeneral {
 	private Listbox lsbTematicasProfesorDisponibles;
 	@Wire
 	private Listbox lsbTematicasProfesorSeleccionadas;
+	@Wire
+	private Window wdwProfesorTematica;
 
 	@Override
 	void inicializar(Component comp) {
@@ -58,7 +60,8 @@ public class CProfesorTematicas extends CGeneral {
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-		//permite llenar los datos del catlago a la vista si el map es disferente de null
+		// permite llenar los datos del catlago a la vista si el map es
+		// disferente de null
 		if (map != null) {
 			if ((String) map.get("cedula") != null) {
 
@@ -75,7 +78,8 @@ public class CProfesorTematicas extends CGeneral {
 		}
 
 	}
-	//permite ver la lista de profesores activos
+
+	// permite ver la lista de profesores activos
 	@Listen("onClick = #btnCatalogoProfesorTematica")
 	public void buscarProfesor() {
 
@@ -86,66 +90,71 @@ public class CProfesorTematicas extends CGeneral {
 		catalogo.recibir("maestros/VProfesorTematica");
 
 	}
-	//permite mover una tematica de disponible a seleccionada
+
+	// permite mover una tematica de disponible a seleccionada
 	@Listen("onClick = #btnAgergarProfesorTematicas")
 	public void moverDerechaTematica() {
 
-		Listitem list1 = lsbTematicasProfesorDisponibles.getSelectedItem();
-		if (list1 == null)
-			Messagebox.show("Seleccione una Tematica");
-		else
-			list1.setParent(lsbTematicasProfesorSeleccionadas);
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable) lsbTematicasProfesorDisponibles
+				.getModel()).getSelection();
+            System.out.println(selectedItems.size());
+		((ListModelList) lsbTematicasProfesorSeleccionadas.getModel())
+				.addAll(selectedItems);
+		((ListModelList) lsbTematicasProfesorDisponibles.getModel())
+				.removeAll(selectedItems);
+		
 	}
-	//permite mover una tematica de seleccionada a disponible
+
+	// permite mover una tematica de seleccionada a disponible
 	@Listen("onClick = #btnRemoverProfesorTematicas")
 	public void moverIzquierdaArea() {
-		Listitem list2 = lsbTematicasProfesorSeleccionadas.getSelectedItem();
-		System.out.println(list2.getValue().toString());
-		if (list2 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list2.setParent(lsbTematicasProfesorDisponibles);
+		
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable)lsbTematicasProfesorSeleccionadas.getModel()).getSelection();
+		((ListModelList)lsbTematicasProfesorDisponibles.getModel()).addAll(selectedItems);
+		((ListModelList)lsbTematicasProfesorSeleccionadas.getModel()).removeAll(selectedItems);
 	}
-	//permite guardar la asignacion de tematicas a un profesor
+
+	// permite guardar la asignacion de tematicas a un profesor
 	@Listen("onClick = #btnGuardarProfesorTematicas")
 	public void guardar() {
-		if(lsbTematicasProfesorSeleccionadas.getItemCount()!=0){
-		Messagebox.show("¿Desea guardar la configuracion realizada?",
-				"Dialogo de confirmacion", Messagebox.OK
-						| Messagebox.CANCEL, Messagebox.QUESTION,
-				new org.zkoss.zk.ui.event.EventListener() {
-					public void onEvent(Event evt)
-							throws InterruptedException {
-						if (evt.getName().equals("onOK")) {
-		Profesor profesor = servicioProfesor
-				.buscarProfesorPorCedula(txtCedulaProfesorTematica.getValue());
+		if (lsbTematicasProfesorSeleccionadas.getItemCount() != 0) {
+			Messagebox.show("¿Desea guardar la configuracion realizada?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+								Profesor profesor = servicioProfesor
+										.buscarProfesorPorCedula(txtCedulaProfesorTematica
+												.getValue());
 
-		Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
-		for (int i = 0; i < lsbTematicasProfesorSeleccionadas.getItemCount(); i++) {
-			Tematica tema = lsbTematicasProfesorSeleccionadas.getItems().get(i)
-					.getValue();
-			tematicasProfesor.add(tema);
-		}
+								Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
+								for (int i = 0; i < lsbTematicasProfesorSeleccionadas
+										.getItemCount(); i++) {
+									Tematica tema = lsbTematicasProfesorSeleccionadas
+											.getItems().get(i).getValue();
+									tematicasProfesor.add(tema);
+								}
 
-		profesor.setTematicas(tematicasProfesor);
-		servicioProfesor.guardarProfesor(profesor);
-		limpiarCampos();
-		Messagebox.show(
-				"Configuracion guardada con exito",
-				"Informacion", Messagebox.OK,
-				Messagebox.INFORMATION);
-	}
-}
-});
-		}else{
-			Messagebox.show(
-					"Debe seleccionar al menos una tematica",
-					"Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
-			
+								profesor.setTematicas(tematicasProfesor);
+								servicioProfesor.guardarProfesor(profesor);
+								limpiarCampos();
+								Messagebox.show(
+										"Configuracion guardada con exito",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+							}
+						}
+					});
+		} else {
+			Messagebox.show("Debe seleccionar al menos una tematica",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
 		}
 	}
-//Limpia los campos
+
+	// Limpia los campos
 	@Listen("onClick = #btnCancelarProfesorTematicas")
 	public void limpiarCampos() {
 		txtCedulaProfesorTematica.setValue("");
@@ -155,10 +164,9 @@ public class CProfesorTematicas extends CGeneral {
 		lsbTematicasProfesorSeleccionadas.getItems().clear();
 	}
 
-	//llena la lista de tematicas disponibles y seleccionadas
+	// llena la lista de tematicas disponibles y seleccionadas
 	private void llenaListas() {
 
-		
 		String ProfesorCedula = txtCedulaProfesorTematica.getValue();
 		Profesor profesor = servicioProfesor
 				.buscarProfesorPorCedula(ProfesorCedula);
@@ -170,6 +178,8 @@ public class CProfesorTematicas extends CGeneral {
 			List<Tematica> tema = serviciotematica.buscarActivos();
 			lsbTematicasProfesorDisponibles
 					.setModel(new ListModelList<Tematica>(tema));
+			lsbTematicasProfesorSeleccionadas
+			.setModel(new ListModelList<Tematica>());
 
 		} else {
 
@@ -190,8 +200,18 @@ public class CProfesorTematicas extends CGeneral {
 			}
 
 		}
-		
-		}
 
+		lsbTematicasProfesorSeleccionadas.setMultiple(true);
+		lsbTematicasProfesorDisponibles.setMultiple(true);
+
+	}
+
+	// Limpia los campos
+	@Listen("onClick = #btnSalirProfesorTematicas")
+	public void salirProfesorTematicas() {
+
+		wdwProfesorTematica.onClose();
+
+	}
 
 }

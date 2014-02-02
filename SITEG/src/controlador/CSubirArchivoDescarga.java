@@ -62,6 +62,8 @@ public class CSubirArchivoDescarga extends CGeneral {
 	private Listbox ltbArchivoDescarga;
 	@Wire
 	private Combobox cmbPrograma;
+	@Wire
+	private Window wdwSubirArchivoDescarga;
 
 	private long id = 0;
 	private int longitudByte;
@@ -216,6 +218,14 @@ public class CSubirArchivoDescarga extends CGeneral {
 		window.doModal();
 		CCatalogoItem catalogo = new CCatalogoItem();
 	}
+	
+	@Listen("onClick = #btnSalirArchivoDescarga") 
+	public void salirArchivoDescarga(){
+	
+		wdwSubirArchivoDescarga.onClose();
+		
+		
+}
 	
 	
 	
