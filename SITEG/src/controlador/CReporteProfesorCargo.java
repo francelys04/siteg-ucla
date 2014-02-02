@@ -209,22 +209,6 @@ public class CReporteProfesorCargo extends CGeneral {
 		idTematica = tematica.getId();
 	}
 
-	@Listen("onClick = #btnProfesorReporteProfesorTeg")
-	public void buscarProfesor() {
-
-		final HashMap<String, Object> map2 = new HashMap<String, Object>();
-
-		map2.put("area", cmbArea.getValue());
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map2);
-		catalogo.recibir("reportes/no estructurados/VReporteProfesorTeg",
-				Long.parseLong(cmbPrograma.getSelectedItem().getId()),
-				Long.parseLong(cmbTematica.getSelectedItem().getId()));
-
-		Window window = (Window) Executions.createComponents(
-				"/vistas/catalogos/VCatalogoProfesorTematica.zul", null, null);
-		window.doModal();
-
-	}
 
 	@Listen("onClick = #btnGenerarReporteProfesorCargo")
 	public void generarReporteProfesorTeg() throws JRException {
