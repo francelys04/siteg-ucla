@@ -144,13 +144,14 @@ public class CReporteTeg extends CGeneral {
 	}
 	
 	@Listen("onClick = #btnGenerarReporteTeg")
-    public void generarReporteTEG(){
+    public void generarReporteTEG() throws JRException{
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
 		String nombreTematica = cmbTematica.getValue();
 		Date fechaInicio = dtbFechaInicio.getValue();
 		Date fechaFin = dtbFechaFin.getValue();
 		String estatus = cmbEstatus.getValue();
+		List<Teg> teg = null;
 		if (fechaFin == null || fechaInicio == null
 				|| fechaInicio.after(fechaFin)) {
 			        Messagebox.show(
@@ -162,7 +163,7 @@ public class CReporteTeg extends CGeneral {
 					String idTematica = cmbTematica.getSelectedItem().getId();
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
-					 List<Teg> teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(estatus,
+					teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(estatus,
 							                                       tematica1, fechaInicio, fechaFin);
 					 Messagebox.show("1",
 							     "Informacion", Messagebox.OK,
@@ -180,7 +181,7 @@ public class CReporteTeg extends CGeneral {
 					 String estatusTeg5="TEG Aprobado";
 					 String estatusTeg6="TEG Reprobado";
 					 String estatusTeg7="Jurado Asignado";
-					 List<Teg> teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus(estatusTeg1, 
+					 teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus(estatusTeg1, 
 							          estatusTeg2, estatusTeg3, estatusTeg4, estatusTeg5, estatusTeg6, estatusTeg7,
 							          tematica1,fechaInicio, fechaFin);
 					 Messagebox.show(
@@ -193,7 +194,7 @@ public class CReporteTeg extends CGeneral {
 					 String idPrograma = cmbPrograma.getSelectedItem().getId();
 					 Programa programa1 = servicioPrograma.buscar(Long
 								.parseLong(idPrograma));
-					 List<Teg> teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus, programa1, fechaInicio, fechaFin);
+					 teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus, programa1, fechaInicio, fechaFin);
 					 Messagebox.show(
 							  "3",
 							     "Informacion", Messagebox.OK,
@@ -211,7 +212,7 @@ public class CReporteTeg extends CGeneral {
 					 String estatusTeg5="TEG Aprobado";
 					 String estatusTeg6="TEG Reprobado";
 					 String estatusTeg7="Jurado Asignado";
-					 List<Teg> teg = servicioTeg.buscarTegPorProgramaVariasAreasVariosEstatus(estatusTeg1, 
+					 teg = servicioTeg.buscarTegPorProgramaVariasAreasVariosEstatus(estatusTeg1, 
 					                estatusTeg2, estatusTeg3, estatusTeg4, estatusTeg5, estatusTeg6, estatusTeg7,
 					                programa1,fechaInicio, fechaFin);
 					 Messagebox.show(
@@ -220,7 +221,7 @@ public class CReporteTeg extends CGeneral {
 							   Messagebox.INFORMATION);	
 				 }
 				 if(nombrePrograma.equals("Todos") && !estatus.equals("Todos")){
-					 List<Teg> teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(estatus, fechaInicio, 
+					 teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(estatus, fechaInicio, 
 							         fechaFin);
 					 Messagebox.show(
 							  "5",
@@ -236,7 +237,7 @@ public class CReporteTeg extends CGeneral {
 					 String estatusTeg5="TEG Aprobado";
 					 String estatusTeg6="TEG Reprobado";
 					 String estatusTeg7="Jurado Asignado";
-					 List<Teg> teg = servicioTeg.buscarTegPorVariosProgramasVariosEstatus(estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4, estatusTeg5, estatusTeg6, estatusTeg7, fechaInicio, fechaFin);
+					 teg = servicioTeg.buscarTegPorVariosProgramasVariosEstatus(estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4, estatusTeg5, estatusTeg6, estatusTeg7, fechaInicio, fechaFin);
 					 Messagebox.show(
 							  "6",
 							     "Informacion", Messagebox.OK,
@@ -244,6 +245,17 @@ public class CReporteTeg extends CGeneral {
 					
 				 }
 		
+				    FileSystemView filesys = FileSystemView.getFileSystemView();
+					Map p = new HashMap();
+				    p.put("programa", cmbPrograma.getValue());
+					p.put("FechaInicio",dtbFechaInicio.getValue());
+					p.put("FechaFin",dtbFechaFin.getValue());
+					p.put("Area",cmbArea.getValue());
+					p.put("Tematica",cmbTematica.getValue());
+					p.put("Estatus",cmbEstatus.getValue());
+					JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/ReporteTEG.jasper"));
+					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(teg));
+					JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ListaTeg.pdf"); 
 		}
 	
 	}
