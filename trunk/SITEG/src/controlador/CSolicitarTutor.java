@@ -350,19 +350,7 @@ public class CSolicitarTutor extends CGeneral {
 				if (profesor == null) {
 					Messagebox.show("El profesor no existe", "Advertencia",
 							Messagebox.OK, Messagebox.EXCLAMATION);
-				} else {
-
-					List<Teg> teg2 = servicioTeg
-							.buscarTutoriaProfesor(profesor);
-					String nombre2 = "Numero de tutorias por profesor";
-
-					if (teg2.size() >= buscarCondicionVigenteEspecifica(
-							nombre2, pruebaCondicion.getPrograma()).getValor()) {
-						Messagebox
-								.show("El profesor ya tiene un maximo de proyectos asignados",
-										"Advertencia", Messagebox.OK,
-										Messagebox.EXCLAMATION);
-					} else {
+				}  else {
 						Messagebox.show(
 								"¿Desea enviar la solicitud de tutoria?",
 								"Dialogo de confirmacion", Messagebox.OK
@@ -407,7 +395,7 @@ public class CSolicitarTutor extends CGeneral {
 				}
 			}
 		}
-	}
+	
 
 	// limpia todos los campos de la vista
 	@Listen("onClick = #btnCancelarSolicitudTutoria")

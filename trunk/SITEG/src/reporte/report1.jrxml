@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="137d1746-aea3-409d-abd1-d411106e9ff6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="programa" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="lapso" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreprograma" class="java.lang.String"/>
+	<parameter name="nombrelapso" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT p.nombre as programa, a.nombre as area_investigacion, r.nombre as requisito, i.nombre as item_evaluacion,c.nombre as condicion,pc.valor as valor
+  FROM programa p, lapso lp, area_investigacion a, requisito r, item_evaluacion as i, condicion c,
+  programa_area pa, programa_item pi, programa_requisito pr, condicion_programa pc
+  WHERE p.id = $P{programa} and lp.id = $P{lapso} and p.id = pa.programa_id and a.id = pa.area_investigacion_id and
+   lp.id = pa.lapso_id and p.id = pr.programa_id and r.id = pr.requisito_id and lp.id = pr.lapso_id
+   and p.id = pi.programa_id and i.id = pi.item_evaluacion_id and lp.id = pi.lapso_id and p.id = pc.programa_id and c.id = pc.condicion_id and
+  lp.id = pc.lapso_id GROUP BY p.nombre, a.nombre,lp.nombre,r.nombre,i.nombre,c.nombre,pc.valor;]]>
+	</queryString>
+	<field name="programa" class="java.lang.String"/>
+	<field name="area_investigacion" class="java.lang.String"/>
+	<field name="requisito" class="java.lang.String"/>
+	<field name="item_evaluacion" class="java.lang.String"/>
+	<field name="condicion" class="java.lang.String"/>
+	<field name="valor" class="java.lang.Integer"/>
+	<group name="nombre">
+		<groupExpression><![CDATA[]]></groupExpression>
+	</group>
+	<group name="area_investigacion">
+		<groupExpression><![CDATA[$F{area_investigacion}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="145" y="28" width="236" height="20" uuid="2b401b2d-39a6-4a25-9413-71ad7403831e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Configuraciones Realizadas a Programa]]></text>
+			</staticText>
+			<image>
+				<reportElement x="19" y="13" width="57" height="53" uuid="cf7176f2-e9e6-44e1-a6c9-529ab23e00d6"/>
+				<imageExpression><![CDATA["C:\\Users\\JOSE\\workspace\\SITEG\\src\\reporte\\logo ucla.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="486" y="13" width="69" height="53" uuid="abb2d3d1-7a0a-4735-8fef-941317b3afaf"/>
+				<imageExpression><![CDATA["C:\\Users\\JOSE\\workspace\\SITEG\\src\\reporte\\logo CE.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="86" y="18" width="156" height="20" uuid="90dd5a93-cb67-4266-9b93-12753d634d85"/>
+				<textFieldExpression><![CDATA[$P{nombreprograma}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="18" width="100" height="20" uuid="a6cd808d-0f75-40b2-b569-d45c2752a2e8"/>
+				<textFieldExpression><![CDATA[$P{nombrelapso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="18" width="111" height="18" uuid="d57517f2-349d-4706-98f7-07b9d97714a9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="18" width="111" height="18" uuid="f21dabb2-54e2-4c9b-a68b-c2a3a71ce12f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lapso:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="19" y="2" width="116" height="20" uuid="62938fa5-30e0-4f9e-98e8-f7df65ca5985"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Area de Investigacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="2" width="59" height="20" uuid="9d2d7bb0-0a81-4a36-a15a-dfb25cadddc2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Requisito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="2" width="110" height="20" uuid="f0264da6-f0f7-4aec-8195-00c56d0e2efb"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Item de Evaluacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="2" width="97" height="20" uuid="5bb62093-253c-4faf-a701-ef9026a74251"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Condicion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="19" y="7" width="100" height="46" uuid="5c279579-9880-4faf-902b-ae3e5b3f4214"/>
+				<textFieldExpression><![CDATA[$F{area_investigacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="7" width="100" height="46" uuid="99581094-a15e-400f-8dcf-c0c0b52b6bda"/>
+				<textFieldExpression><![CDATA[$F{requisito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="7" width="100" height="46" uuid="6a620fc8-b643-450f-a5fe-45bba0a7d208"/>
+				<textFieldExpression><![CDATA[$F{item_evaluacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="7" width="134" height="46" uuid="eb8a72e8-9a5b-48ad-b415-d47e7474ede9"/>
+				<textFieldExpression><![CDATA[$F{condicion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="555" y="7" width="17" height="46" uuid="073c5e98-b3f9-40b8-a4d9-2bfb41589b47"/>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="38" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="62" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="513" y="34" width="51" height="20" uuid="8311d275-6a15-4a3e-ad26-85c2f6268f69"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="180" y="34" width="216" height="20" uuid="ba345a22-85a4-4ead-81f2-652c5e842464"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="468" y="34" width="73" height="20" uuid="e422ac41-4237-4bd1-bcdf-d5927c3d3fb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+ "de"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="66" y="9" width="69" height="53" uuid="9201fc8f-bb2a-4287-866b-2cfede2c7281"/>
+				<imageExpression><![CDATA["C:\\Users\\JOSE\\workspace\\SITEG\\src\\reporte\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="12" splitType="Stretch"/>
+	</summary>
+</jasperReport>
