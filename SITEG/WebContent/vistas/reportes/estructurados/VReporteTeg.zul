@@ -1,5 +1,5 @@
 <window id="wdwReporteTeg" 
-	title="Lista de Trabajos Espacial de Grado" 
+	title="Lista de Trabajos Especial de Grado" 
 	border="normal" width="60%" height="400px" closable="true"  apply="controlador.CReporteTeg">
 	
 	<style dynamic="true">
@@ -40,7 +40,7 @@
 		style="font-weight:bold;color:red;margin-center:2%">
 	</label> -->
 	
-		<label value="Lista de Trabajos Espacial de Grado" 	
+		<label value="Lista de Trabajos Especial de Grado" 	
 				style="font-weight:bold;margin-left:35%;margin-right:20%">
 		</label>
 	<separator />
