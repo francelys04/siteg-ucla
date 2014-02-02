@@ -124,6 +124,7 @@ public class CReporteSolicitudes extends CGeneral {
 		     JasperViewer.viewReport(jasperPrint,false);
 		     
 		     com.close();
+		     cancelar();
 
 		}catch(JRException e)
 		{
@@ -133,7 +134,7 @@ public class CReporteSolicitudes extends CGeneral {
 	
 	
 	@Listen("onClick = #btnSalirReporteSolicitud")
-	public void cancelarTematicasSolicitadas() throws JRException {
+	public void cancelar() throws JRException {
 
 		cmbProgramaReporteSolicitud.setValue("");
 		cmbAreaReporteSolicitud.setValue("");
