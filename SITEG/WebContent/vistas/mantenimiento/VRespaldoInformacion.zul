@@ -104,10 +104,7 @@
 							<row>
 								<hbox>
 									<textbox id="txtRuta" width="350px" />
-									<button label="Seleccionar">
-										<attribute name="onClick">
-											seleccionarRuta();
-										</attribute>
+									<button id="btnSleccionar" label="Seleccionar">
 									</button>
 								</hbox>
 							</row>
@@ -146,29 +143,6 @@
 		<!-- Fin de popus -->
 
 	</groupbox>
-	<zscript>
-		<![CDATA[
-		import javax.swing.*;
-		import java.util.Date;
-		public void seleccionarRuta() {
-	
-			JFileChooser chooser = new JFileChooser();
-			// Titulo que llevara la ventana
-			chooser.setDialogTitle("Seleccione...");
-	
-			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-	
-			chooser.showOpenDialog(null);
-	
-			//Retornando el directorio destino directorio
-			if (chooser.getSelectedFile() != null) {
-				txtRuta.setValue(chooser.getSelectedFile().getPath());
-			}
-		}
-		]]>
-	</zscript>
-
-
 	<separator />
 	<separator />
 	<separator />
