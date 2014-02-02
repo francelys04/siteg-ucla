@@ -62,29 +62,31 @@ public class CNoticia extends CGeneral {
 	private Media media;
 	@Wire
 	private Button btnEliminarNoticia;
-	
-	
+	@Wire
+	private Window wdwNoticia;
+
 	private long id = 0;
-	 
-	
-	/* Metodo para inicializar componentes al momento que se ejecuta las vistas
-	  tanto VDescarga como VCatalogoNoticia*/
-	
+
+	/*
+	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
+	 * tanto VDescarga como VCatalogoNoticia
+	 */
+
 	@Override
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		/*Listado de todos las Noticias que se encuentran activas, cuyo
+		/*
+		 * Listado de todos las Noticias que se encuentran activas, cuyo
 		 * estatus=true con el servicioNoticia mediante el metodo buscarActivos
 		 */
 
-	
 		Selectors.wireComponents(comp, this, false);
 
 		/*
 		 * Permite retornar el valor asignado previamente guardado al
 		 * seleccionar un item de la vista VNoticia
 		 */
-	
+
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("noticiaCatalogo");
 		/*
@@ -92,93 +94,116 @@ public class CNoticia extends CGeneral {
 		 * VNoticiaa.zul si la varible map tiene algun dato contenido
 		 */
 		if (map != null) {
-			if ( map.get("id") != null) {
+			if (map.get("id") != null) {
 
 				long codigo = (long) map.get("id");
 				Noticia noticia2 = servicioNoticia.buscarNoticia(codigo);
-				txtNombreNoticia.setValue( noticia2.getNombre());
-				txtDescripcionNoticia.setValue( noticia2.getDescripcion());
+				txtNombreNoticia.setValue(noticia2.getNombre());
+				txtDescripcionNoticia.setValue(noticia2.getDescripcion());
 				btnEliminarNoticia.setDisabled(false);
 				BufferedImage imag;
 				try {
-					imag = ImageIO.read(new ByteArrayInputStream( noticia2.getImagen()));
+					imag = ImageIO.read(new ByteArrayInputStream(noticia2
+							.getImagen()));
 					imagen.setContent(imag);
-					id =  noticia2.getId();
+					id = noticia2.getId();
 					map.clear();
 					map = null;
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 		}
-		
+
 	}
 
-	//Aca se muestra el catalogo de las Noticias Registradas
+	// Aca se muestra el catalogo de las Noticias Registradas
 	@Listen("onClick = #btnCatalogoNoticia")
 	public void buscarDescarga() {
 
-	Window window = (Window) Executions.createComponents(
+		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoNoticia.zul", null, null);
 		window.doModal();
 	}
-	
-	//Aca se guardan las Noticias
+
+	// Aca se guardan las Noticias
 	@Listen("onClick = #btnGuardarNoticia")
 	public void guardarDescarga() {
-		List <Noticia> noticia = servicioNoticia.buscarActivos();
-		if(noticia.size() == 3){
-			Messagebox.show("Ya existen tres noticias debe eliminar una","Informacion", Messagebox.OK,Messagebox.INFORMATION);
-		}else{
-			Messagebox.show("¿Desea guardar los datos de la noticia?",
-					"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-					Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
-						public void onEvent(Event evt) throws InterruptedException {
-							if (evt.getName().equals("onOK")) {
-		String nombre = txtNombreNoticia.getValue();
-		String descripcion = txtDescripcionNoticia.getValue();
-		Boolean estatus = true;
-		byte[] image = imagen.getContent().getByteData();
-		Profesor profesor = ObtenerUsuarioProfesor();
-		Usuario usuario = profesor.getUsuario();
-		Noticia noticia1 = new Noticia(id,nombre,descripcion, estatus,image,usuario);
-		servicioNoticia.guardar(noticia1);
-		cancelarNoticia();
-		Messagebox.show("Noticia resgistrada satisfactoriamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+		List<Noticia> noticia = servicioNoticia.buscarActivos();
+		if (noticia.size() == 3) {
+			Messagebox.show("Ya existen tres noticias debe eliminar una",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+		} else {
+
+			if ((txtNombreNoticia.getText().compareTo("") == 0)
+					|| (txtDescripcionNoticia.getText().compareTo("") == 0)) {
+				Messagebox.show("Debe completar todos los campos", "Error",
+						Messagebox.OK, Messagebox.ERROR);
+			} else {
+
+				Messagebox.show("¿Desea guardar los datos de la noticia?",
+						"Dialogo de confirmacion", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new org.zkoss.zk.ui.event.EventListener() {
+							public void onEvent(Event evt)
+									throws InterruptedException {
+								if (evt.getName().equals("onOK")) {
+									String nombre = txtNombreNoticia.getValue();
+									String descripcion = txtDescripcionNoticia
+											.getValue();
+									Boolean estatus = true;
+									byte[] image = imagen.getContent()
+											.getByteData();
+									Profesor profesor = ObtenerUsuarioProfesor();
+									Usuario usuario = profesor.getUsuario();
+									Noticia noticia1 = new Noticia(id, nombre,
+											descripcion, estatus, image,
+											usuario);
+									servicioNoticia.guardar(noticia1);
+									cancelarNoticia();
+									Messagebox
+											.show("Noticia resgistrada satisfactoriamente",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+								}
 							}
-						}
-					});
+						});
+			}
 		}
 	}
 
-	//Aca se eliminan logicamente las Noticias
+	// Aca se eliminan logicamente las Noticias
 	@Listen("onClick = #btnEliminarNoticia")
-	public void eliminarNoticia() {	
+	public void eliminarNoticia() {
 		Messagebox.show("¿Desea eliminar los datos de la noticia?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-		Noticia noticia = servicioNoticia.buscarNoticia(id);
-		noticia.setEstatus(false);
-		servicioNoticia.guardar(noticia);
-		cancelarNoticia();
-		Messagebox.show("Noticia eliminada satisfactoriamente","Informacion", Messagebox.OK,Messagebox.INFORMATION);
+							Noticia noticia = servicioNoticia.buscarNoticia(id);
+							noticia.setEstatus(false);
+							servicioNoticia.guardar(noticia);
+							cancelarNoticia();
+							Messagebox.show(
+									"Noticia eliminada satisfactoriamente",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
 						}
 					}
 				});
 	}
 
-	//Aca se mandan a limpiar los campos de textos de la vista
+	// Aca se mandan a limpiar los campos de textos de la vista
 	@Listen("onClick = #btnCancelarNoticia")
 	public void cancelarNoticia() {
 		id = 0;
 		txtNombreNoticia.setValue("");
 		txtDescripcionNoticia.setValue("");
 		imagen.setSrc(null);
-	
+
 	}
 
 	@Listen("onUpload = #fudImagenNoticia")
@@ -188,5 +213,11 @@ public class CNoticia extends CGeneral {
 
 	}
 
-	
+	@Listen("onClick = #btnSalirNoticia")
+	public void salirNoticia() {
+
+		wdwNoticia.onClose();
+
+	}
+
 }
