@@ -284,7 +284,6 @@ public class CReporteProfesorCargo extends CGeneral {
 
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		Map<String, Object> p = new HashMap<String, Object>();
-		p.put("titulo", "LISTA DE PROFESORES CON EL ROL QUE DESEMPEÑAN EN CADA TRABAJO ESPECIAL DE GRADO");
 		p.put("fecha", new Date());
 		p.put("fecha1", fechaInicio);
 		p.put("fecha2", fechaFin);
