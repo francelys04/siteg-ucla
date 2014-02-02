@@ -80,6 +80,7 @@ public class CRespaldoInformacion extends CGeneral {
 		} catch (IOException e) {
 
 		}
+		txtRuta.setText("");
 
 	}
 	/**
