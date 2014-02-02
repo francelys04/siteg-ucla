@@ -88,7 +88,7 @@
 					
 						<combobox id="cmbPrograma" width="100%" readonly="true">
 							<template name="model">
-							<comboitem label="${each.nombre}" />
+							<comboitem label="${each.nombre}" id="${each.id}" />
 							</template>
 						</combobox>
 						<hlayout>
@@ -96,7 +96,7 @@
 						</hlayout>
 							<combobox id="cmbArea" width="100%" readonly="true">
 							<template name="model">
-								<comboitem label="${each.nombre}" />
+								<comboitem label="${each.nombre}" id="${each.id}"/>
 							</template>
 							</combobox>
 						
@@ -109,7 +109,7 @@
 					</hlayout>
 						<combobox id="cmbTematica" width="100%" readonly="true">
 						<template name="model">
-							<comboitem label="${each.nombre}" />
+							<comboitem label="${each.nombre}" id="${each.id}" />
 						</template>
 						</combobox>				
 					<hlayout>
