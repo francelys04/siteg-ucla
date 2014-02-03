@@ -1,6 +1,6 @@
 <window id="wdwReporteDefensa" 
 	title="Lista de Defensas" 
-	border="normal" width="60%" height="400px" closable="true"  apply="controlador.CReporteDefensa">
+	border="normal" width="60%" height="1000px" closable="true"  apply="controlador.CReporteDefensa">
 	
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -158,5 +158,6 @@
 	</panel>
 	<separator />
 	<separator />
+	<jasperreport id="jstVistaPrevia"></jasperreport>
 	<separator />
 </window>
