@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPromedioTegFechaEntrega" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e9a57e9-1821-4ad6-99eb-89f85f82c952">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="67"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoCE" class="java.lang.String"/>
 	<parameter name="areaNombre" class="java.lang.String"/>
@@ -147,7 +147,7 @@
 		<band height="283" splitType="Stretch">
 			<pie3DChart>
 				<chart>
-					<reportElement x="133" y="93" width="312" height="173" uuid="917fb892-4ae9-4384-806c-bc9928999fd3"/>
+					<reportElement x="133" y="93" width="312" height="173" uuid="5e278737-a021-4cee-8883-3a8dc7ae7375"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -166,7 +166,7 @@
 						<valueExpression><![CDATA[$F{contadorMayores}]]></valueExpression>
 					</pieSeries>
 				</pieDataset>
-				<pie3DPlot>
+				<pie3DPlot labelFormat="{2}">
 					<plot/>
 					<itemLabel/>
 				</pie3DPlot>
