@@ -54,11 +54,12 @@
 		<![CDATA[SELECT *
 FROM cronograma;]]>
 	</queryString>
-	<field name="titulo" class="java.lang.String"/>
-	<field name="estudiantes.nombre" class="java.lang.String"/>
-	<field name="tutor.nombre" class="java.lang.String"/>
-	<field name="tematica.nombre" class="java.lang.String"/>
-	<field name="estatus" class="java.lang.String"/>
+	<field name="teg.titulo" class="java.lang.String"/>
+	<field name="nombreEstudiantes" class="java.lang.String"/>
+	<field name="teg.tutor.nombre" class="java.lang.String"/>
+	<field name="teg.tematica.nombre" class="java.lang.String"/>
+	<field name="teg.estatus" class="java.lang.String"/>
+	<field name="teg.tutor.apellido" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -226,27 +227,27 @@ FROM cronograma;]]>
 			<textField>
 				<reportElement style="table" x="0" y="0" width="123" height="35" uuid="7e6fd325-8971-42e9-93e5-08e72c8235e4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{teg.titulo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="table" x="123" y="-1" width="114" height="36" uuid="714e987a-3e8a-4b8e-8fae-825a6f517d1d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{estudiantes.nombre}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombreEstudiantes}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="table" x="237" y="-1" width="109" height="36" backcolor="#009999" uuid="7238de55-08e5-4bf0-9e85-b88813db62f8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{tutor.nombre}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{teg.tutor.nombre}+"p "+$F{teg.tutor.apellido}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement style="table" x="346" y="-1" width="101" height="36" uuid="3aa53367-7912-440e-9a14-2fa0913d788e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{tematica.nombre}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{teg.tematica.nombre}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement style="table" x="447" y="-1" width="125" height="36" uuid="dae0d805-0b86-45b8-bb93-06c366ddf9be"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{teg.estatus}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
