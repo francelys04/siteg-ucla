@@ -1,6 +1,6 @@
 <window id="wdwReporteProyecto" 
 	title="Lista de Proyectos" 
-	border="normal" width="60%" height="400px" closable="true"  apply="controlador.CReporteProyecto">
+	border="normal" width="60%" height="900px" closable="true"  apply="controlador.CReporteProyecto">
 	
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
