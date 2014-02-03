@@ -108,7 +108,7 @@
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="411" y="72" width="34" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
+				<reportElement x="389" y="72" width="34" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -122,7 +122,7 @@
 				<text><![CDATA[Tematica:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="466" y="72" width="102" height="20" uuid="2fe181fc-7880-4a61-895e-d8da6a80c9ee"/>
+				<reportElement x="445" y="72" width="102" height="20" uuid="2fe181fc-7880-4a61-895e-d8da6a80c9ee"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -150,7 +150,7 @@
 				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="409" y="107" width="54" height="20" uuid="e6a9d5b1-86ad-4226-a242-47577ed23a53"/>
+				<reportElement x="389" y="107" width="54" height="20" uuid="e6a9d5b1-86ad-4226-a242-47577ed23a53"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -164,7 +164,7 @@
 				<text><![CDATA[Lista de Defensa]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="468" y="107" width="138" height="20" uuid="8b96cf9c-bdc1-47e1-9f32-7789a4c1a7af"/>
+				<reportElement x="445" y="107" width="138" height="20" uuid="8b96cf9c-bdc1-47e1-9f32-7789a4c1a7af"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -175,50 +175,50 @@
 	<columnHeader>
 		<band height="29" splitType="Stretch">
 			<rectangle>
-				<reportElement x="1" y="2" width="119" height="27" forecolor="#000000" backcolor="#0099FF" uuid="8bd4b856-7049-47db-8603-ab48b23347d2"/>
+				<reportElement x="0" y="2" width="161" height="27" forecolor="#000000" backcolor="#0099FF" uuid="8bd4b856-7049-47db-8603-ab48b23347d2"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="115" y="2" width="119" height="27" forecolor="#000000" backcolor="#0099FF" uuid="980e494e-8ab2-49a7-a264-26b78f15dfef"/>
+				<reportElement x="162" y="2" width="111" height="27" forecolor="#000000" backcolor="#0099FF" uuid="980e494e-8ab2-49a7-a264-26b78f15dfef"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="234" y="2" width="116" height="27" forecolor="#000000" backcolor="#0099FF" uuid="ceb48c03-206b-4f93-bfb5-7788660177b3"/>
+				<reportElement x="273" y="2" width="116" height="27" forecolor="#000000" backcolor="#0099FF" uuid="ceb48c03-206b-4f93-bfb5-7788660177b3"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="37" y="6" width="39" height="20" uuid="e3b3edd0-5a50-4c76-ab84-fcff9a150a4f"/>
+				<reportElement x="64" y="6" width="39" height="20" uuid="e3b3edd0-5a50-4c76-ab84-fcff9a150a4f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Titulo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="139" y="6" width="69" height="18" uuid="9fce1809-c845-40c3-92d8-959d9dc43491"/>
+				<reportElement x="186" y="6" width="69" height="18" uuid="9fce1809-c845-40c3-92d8-959d9dc43491"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estudiante]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="263" y="6" width="35" height="20" uuid="91598d21-3d90-4b9d-ab24-0369b62d10d0"/>
+				<reportElement x="315" y="6" width="35" height="20" uuid="91598d21-3d90-4b9d-ab24-0369b62d10d0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tutor]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="470" y="2" width="103" height="27" forecolor="#000000" backcolor="#0099FF" uuid="078cb79c-bde7-4f71-b9da-790d90e5765d"/>
+				<reportElement x="486" y="2" width="87" height="27" forecolor="#000000" backcolor="#0099FF" uuid="078cb79c-bde7-4f71-b9da-790d90e5765d"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="488" y="6" width="69" height="20" uuid="3846d418-2dd0-4797-b403-ceed743992b4"/>
+				<reportElement x="499" y="6" width="69" height="20" uuid="3846d418-2dd0-4797-b403-ceed743992b4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="350" y="2" width="119" height="27" forecolor="#000000" backcolor="#0099FF" uuid="b01a9f1d-6df1-48c6-8b87-d8ee8f7bdf8a"/>
+				<reportElement x="389" y="2" width="97" height="27" forecolor="#000000" backcolor="#0099FF" uuid="b01a9f1d-6df1-48c6-8b87-d8ee8f7bdf8a"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="371" y="6" width="69" height="20" uuid="56fe563b-0f7d-4663-9c96-5fe5632eb40d"/>
+				<reportElement x="401" y="6" width="69" height="20" uuid="56fe563b-0f7d-4663-9c96-5fe5632eb40d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -229,27 +229,27 @@
 	<detail>
 		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement style="table" x="1" y="0" width="114" height="20" uuid="b47d4027-0a55-4895-85dc-f1ad1e21173f"/>
+				<reportElement style="table" x="1" y="0" width="160" height="20" uuid="b47d4027-0a55-4895-85dc-f1ad1e21173f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{tituloTeg}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table" x="115" y="0" width="119" height="20" uuid="a571b3fc-0a9f-4c6c-96f2-db3f990f79ef"/>
+				<reportElement style="table" x="162" y="0" width="111" height="20" uuid="a571b3fc-0a9f-4c6c-96f2-db3f990f79ef"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombreEstudiante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table" x="234" y="0" width="116" height="20" uuid="87c2e0a5-c2f6-4e65-8a0f-af8541edb51e"/>
+				<reportElement style="table" x="273" y="0" width="116" height="20" uuid="87c2e0a5-c2f6-4e65-8a0f-af8541edb51e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombreTutor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table" x="350" y="0" width="120" height="20" uuid="621cf105-4574-4c62-bd9f-3ddf361d62ad"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement style="table" x="389" y="0" width="97" height="20" uuid="621cf105-4574-4c62-bd9f-3ddf361d62ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{estatusDefensa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table" x="470" y="0" width="103" height="20" uuid="0beaf8f8-7305-4050-be35-25453901e6ac"/>
+				<reportElement style="table" x="486" y="0" width="87" height="20" uuid="0beaf8f8-7305-4050-be35-25453901e6ac"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fechaDefensa}]]></textFieldExpression>
 			</textField>
