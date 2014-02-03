@@ -1,131 +1,70 @@
-<?page id="wdwCatalogoTutoresDisponibles"  title="Catalogo Tutores Disponibles" contentType="text/html;charset=UTF-8"?>
-<zk>
-	<window title="Catalogo Tutores Disponibles" border="normal"
-		width="100%" id="wdwCatalogoTutoresDisponibles" height="400px"
-		closable="true">
+<window title="Catalogo Tutores Disponibles" border="normal" width="98%"
+	id="wdwCatalogoTutores" apply="controlador.CCatalogoTutorDisponible"
+	closable="true">
 
-		<style id="estilo">
 
-			.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
-			div.z-cell,div.z-grid { border: none; overflow: hidden;
-			zoom: 1; background: white; border-top: none; border-left:
-			none; border-right: none; border-bottom: none; }
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+	<separator />
 
-			.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
-			.z-cell { background-color: #F7F7F7; border-bottom: 1px
-			solid transparent; border-left: 1px solid transparent;
-			border-top: 1px solid transparent; }
-
-			.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
-			.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0
-			0 transparent; }
-
-			.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
-			.z-cell,.fgrid tr.z-grid-odd { background: white }
-
-			.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
-			background: white; border-top: none; }
-
-		</style>
-
-		<style src="/public/css/bootstrap.css" />
-		<style src="/public/css/style.css" />
-
-		<separator />
-		<separator />
-		<separator />
-		<separator />
-
-		<grid sclass="fgrid" style="margin-left:2%">
-			<columns>
-				<column width="70px" height="40px" />
-			</columns>
-			<rows>
-
-				<row>
-					<hlayout>
-						<label value="Programa:" style="color:black" />
-					</hlayout>
-					<hbox>
-						<combobox id="cmbProgramaTutorDisponible">
-							<template name="model">
-								<comboitem label="${each.nombre}" />
-							</template>
-						</combobox>
-
-						<hlayout>
-							<label value="Area de Investigación:"
-								style="color:black;margin-left:20px" />
-						</hlayout>
-
-						<combobox id="cmbAreaTutorDisponible"
-							style="margin-left:8px">
-							<template name="model">
-								<comboitem label="${each.nombre}" />
-							</template>
-						</combobox>
-
-					</hbox>
-				</row>
-			</rows>
-		</grid>
-
-		<separator />
-		<separator />
-
-		<listbox id="ltbTutores" mold="paging" pageSize="10"
-			emptyMessage="No hay tutores disponibles"
-			style="margin-left:10px;margin-right:10px">
-
-			<auxhead sclass="category-center">
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="70%"
-						id="txtNombreTutorDisponible" />
-				</auxheader>
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="70%"
-						id="txtApellidoTutorDisponible" />
-				</auxheader>
-				<auxheader>
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="70%"
-						id="txtCedulaTutorDisponible" />
-				</auxheader>
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="70%"
-						id="txtCorreoTutorDisponible" />
-				</auxheader>
-
-				<auxheader>
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="70%"
-						id="txtTelefonoTutorDisponible" />
-				</auxheader>
-			</auxhead>
-
-			<listhead>
-				<listheader label="Nombre" align="center" />
-				<listheader label="Apellido" align="center" />
-				<listheader label="Cédula" align="center" />
-				<listheader label="Correo" align="center" />
-				<listheader label="Teléfono" align="center" />
-			</listhead>
-
+	<hbox>
+		<label value="Programa:" style="margin-left:15px" />
+		<combobox id="cmbProgramaTutores" width="220px" readonly="true"
+			style="margin-left:40px" tabindex="10">
 			<template name="model">
-				<listitem>
-					<listcell label="${each.nombre}" />
-					<listcell label="${each.apellido}" />
-					<listcell label="${each.cedula}" />
-					<listcell label="${each.correoElectronico}" />
-					<listcell label="${each.telefono_movil}" />
-				</listitem>
+				<comboitem label="${each.nombre}" id="${each.id}" />
 			</template>
-		</listbox>
-		<separator />
-		<separator />
-		<separator />
-	</window>
-</zk>
+		</combobox>
+
+	</hbox>
+	<separator />
+	
+	<listbox id="ltbTutores" width="100%" mold="paging" pageSize="10"
+		emptyMessage="Seleccione un programa para ver los tutores disponibles">
+
+
+
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Cédula" id="txtCedulaTutor" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="75%"
+					sclass="search-query" placeholder="Nombre" id="txtNombreTutor" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="75%"
+					sclass="search-query" placeholder="Apellido" id="txtApellidoTutor" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="75%"
+					sclass="search-query" placeholder="Correo" id="txtCorreoTutor" />
+			</auxheader>
+
+
+		</auxhead>
+		<listhead>
+			<listheader label="Cédula" align="center" width="20%" />
+			<listheader label="Nombre" align="center" />
+			<listheader label="Apellido" align="center" />
+			<listheader label="Correo" align="center" />
+
+		</listhead>
+
+
+		<template name="model">
+			<listitem>
+				<listcell label="${each.cedula}" />
+				<listcell label="${each.nombre}" />
+				<listcell label="${each.apellido}" />
+				<listcell label="${each.correoElectronico}" />
+
+			</listitem>
+		</template>
+	</listbox>
+</window>

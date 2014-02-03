@@ -1,15 +1,16 @@
-<window title="Catalogo Area" border="normal" width="795px"
+<window title="Catalogo Areas de Investigación" border="normal" width="820px"
 	id="wdwCatalogoArea" apply="controlador.CCatalogoAreaInvestigacion"
 	closable="true">
 
-	
+
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<separator />
 
 	<hbox>
-		<label id="lblPrograma" value="Programa:" />
-		<combobox id="cmbPrograma" width="180px" readonly="true"
-			style="margin-left:60px" tabindex="10">
+		<label id="lblPrograma" value="Programa:" style="margin-left:15px"/>
+		<combobox id="cmbPrograma" width="220px" readonly="true"
+			style="margin-left:40px" tabindex="10">
 			<template name="model">
 				<comboitem label="${each.nombre}" id="${each.id}" />
 			</template>
