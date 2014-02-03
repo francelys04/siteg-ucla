@@ -28,6 +28,7 @@ import modelo.ProgramaArea;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
+import modelo.reporte.ListaTeg;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -35,6 +36,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -55,6 +57,7 @@ import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
 
+
 import servicio.SAreaInvestigacion;
 import servicio.SJurado;
 import servicio.SPrograma;
@@ -66,29 +69,7 @@ import servicio.SEstudiante;
 
 @Controller
 public class CReporteTeg extends CGeneral {
-	public static class ElementoReporte {
-		private Teg teg;
-		private String nombreEstudiantes;
-		
-		public ElementoReporte(Teg teg, String nombreEstudiantes) {
-			super();
-			this.teg = teg;
-			this.nombreEstudiantes = nombreEstudiantes;
-		}
-		public Teg getTeg() {
-			return teg;
-		}
-		public void setTeg(Teg teg) {
-			this.teg = teg;
-		}
-		public String getNombreEstudiantes() {
-			return nombreEstudiantes;
-		}
-		public void setNombreEstudiantes(String nombreEstudiantes) {
-			this.nombreEstudiantes = nombreEstudiantes;
-		}
 
-}
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
@@ -282,7 +263,7 @@ public class CReporteTeg extends CGeneral {
 				 }
 
 		
-				 List<ElementoReporte> elementos = new ArrayList<ElementoReporte>();
+				 List<ListaTeg> elementos = new ArrayList<ListaTeg>();
 				 for (Teg t : teg) {
 				 List<Estudiante> estudiantes= servicioEstudiante.buscarEstudiantePorTeg(t);
 				 
@@ -291,7 +272,8 @@ public class CReporteTeg extends CGeneral {
 						nombreEstudiantes += e.getNombre() +" "+e.getApellido()+" ";
 						}
 					
-				 elementos.add(new ElementoReporte(t, nombreEstudiantes));
+				 elementos.add(new ListaTeg(t, nombreEstudiantes));
+				 
 				 }
 				    FileSystemView filesys = FileSystemView.getFileSystemView();
 					Map p = new HashMap();
