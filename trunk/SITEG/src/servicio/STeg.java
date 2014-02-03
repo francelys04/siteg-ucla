@@ -314,4 +314,18 @@ public class STeg {
 		tegs= interfaceTeg.buscarTegTodos(fechaInicio, fechaFin);
 		return tegs;
 	}
+	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(String estatus1, String estatus2, 
+	         String estatus3, String estatus4, Tematica tematica, Date fechaInicio, Date fechaFin){
+		return interfaceTeg.buscarTegporFechayVariosEstatus1(estatus1, estatus2, estatus3, estatus4, tematica, fechaInicio, fechaFin);
+}
+public List<Teg> buscarTegPorProgramaVariasAreasVariosEstatus1(String estatus1, String estatus2, 
+	         String estatus3, String estatus4, Programa programa, Date fechaInicio, Date fechaFin){
+		return interfaceTeg.buscarTegPorProgramaVariasAreasVariosEstatus1(estatus1, estatus2, estatus3, estatus4, programa, fechaInicio, fechaFin);
+	}
+	
+public List<Teg> buscarTegPorVariosProgramasVariosEstatus1(String estatus1, String estatus2, 
+	         String estatus3, String estatus4, Date fechaInicio, Date fechaFin){
+		  return interfaceTeg.buscarTegPorVariosProgramasVariosEstatus1(estatus1, estatus2, estatus3, estatus4, fechaInicio, fechaFin);
+		
+	}
 }
