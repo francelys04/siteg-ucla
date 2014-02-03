@@ -249,7 +249,7 @@ public class CReporteDefensa extends CGeneral {
 					"La fecha de inicio debe ser primero que la fecha de fin",
 					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
-			List<Defensa> defensas = servicioDefensa.buscarDefensaTegSegunEstatus(estatusdefensa,fechaInicio, fechaFin);
+			List<Defensa> defensas = servicioDefensa.buscardefensaPorDosFechas(fechaInicio, fechaFin);
 			for (Defensa defensa : defensas) {
 				 
 					 List<Estudiante> estudiantes= servicioEstudiante.buscarEstudiantePorTeg(defensa.getTeg());
@@ -259,25 +259,39 @@ public class CReporteDefensa extends CGeneral {
 							nombreEstudiantes += e.getNombre() +" "+e.getApellido()+" ";
 							}
 						
-				if (defensa.getEstatus().equals("Por Defender") || defensa.getEstatus().equals("Todos")) {
+				if (defensa.getEstatus().equals("Por Defender")) {
 					elementos.add(new ElementoReporte(
 							defensa.getTeg().getTitulo(),
 							defensa.getProfesor().getNombre() + " " + defensa.getProfesor().getApellido(),
 							nombreEstudiantes,
-							defensa.getEstatus(),
+							"Por Defender",
 							defensa.getFecha()));
-				}
-				else 
-				if (defensa.getEstatus().equals("Defensa Finalizada") || defensa.getEstatus().equals("Todos")) {
+					
+				} else{
+					
+				if (defensa.getEstatus().equals("Defensa Finalizada")) {
 							elementos.add(new ElementoReporte(
 							defensa.getTeg().getTitulo(),
 							defensa.getProfesor().getNombre() + " " + defensa.getProfesor().getApellido(),
 							nombreEstudiantes,
-							defensa.getEstatus(),
+							"Defensa Finalizada",
 							defensa.getFecha()));
+							Messagebox.show(
+									"ENTRO FINALIZADA",
+									"Error", Messagebox.OK, Messagebox.ERROR);
+					}
+				}
+			
+				if(defensa.getEstatus().equals("Todos")){
+					elementos.add(new ElementoReporte(
+							defensa.getTeg().getTitulo(),
+							defensa.getProfesor().getNombre() + " " + defensa.getProfesor().getApellido(),
+							nombreEstudiantes,
+							"Todos",
+							defensa.getFecha()));
+				
 				}
 			}
-			
 			Collections.sort(elementos, new Comparator<ElementoReporte>() {
 				public int compare(ElementoReporte a, ElementoReporte b) {
 				return a.tituloTeg.compareTo(b.tituloTeg);
