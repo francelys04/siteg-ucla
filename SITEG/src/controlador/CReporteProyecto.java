@@ -291,7 +291,7 @@ public class CReporteProyecto extends CGeneral {
 		 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
 		
 		
-		p.put("programa", cmbPrograma.getValue());
+		 			p.put("Programa", cmbPrograma.getValue());
 					p.put("FechaInicio",dtbFechaInicio.getValue());
 					p.put("FechaFin",dtbFechaFin.getValue());
 					p.put("Area",cmbArea.getValue());
