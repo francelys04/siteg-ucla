@@ -56,6 +56,5 @@ public class SDefensa {
 		Date fechaInicio, Date fechaFin) {
 		return interfaceDefensa.findByFechaBetween(fechaInicio, fechaFin);
 	}
-
-	
+		
 }
