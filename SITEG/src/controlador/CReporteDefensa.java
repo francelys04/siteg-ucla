@@ -68,6 +68,7 @@ import servicio.STeg;
 import servicio.STematica;
 import servicio.SDefensa;
 import modelo.Teg;
+import modelo.reporte.DefensaTeg;
 @Controller
 public class CReporteDefensa extends CGeneral {
 	
@@ -76,104 +77,29 @@ public class CReporteDefensa extends CGeneral {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static class ElementoReporte {
-		
-		private String tituloTeg;
-		private String nombreTutor;
-		private String nombreEstudiante;
-		private String estatusDefensa;
-		private Date fechaDefensa ;
-
-
-	 public ElementoReporte(String tituloteg, String nombretutor, String nombreEstudiante, String estatusdefensa, Date fechaDefensa) {
-			super();
-			this.tituloTeg = tituloteg;
-			this.nombreTutor = nombretutor;
-			this.nombreEstudiante = nombreEstudiante;
-			this.estatusDefensa = estatusdefensa;
-			this.fechaDefensa= fechaDefensa;
-		}
-
-
-	public String getTituloTeg() {
-		return tituloTeg;
-	}
-
-
-	public void setTituloTeg(String tituloTeg) {
-		this.tituloTeg = tituloTeg;
-	}
-
-
-	public String getNombreTutor() {
-		return nombreTutor;
-	}
-
-
-	public void setNombreTutor(String nombreTutor) {
-		this.nombreTutor = nombreTutor;
-	}
-
-
-	public String getEstatusDefensa() {
-		return estatusDefensa;
-	}
-
-
-	public void setEstatusDefensa(String estatusDefensa) {
-		this.estatusDefensa = estatusDefensa;
-	}
-
-
-	public String getNombreEstudiante() {
-		return nombreEstudiante;
-	}
-
-
-	public void setNombrestudiante(String nombrestudiante) {
-		this.nombreEstudiante = nombrestudiante;
-	}
-
-
-	public Date getFechaDefensa() {
-		return fechaDefensa;
-	}
-
-
-	public void setFechaDefensa(Date fechaDefensa) {
-		this.fechaDefensa = fechaDefensa;
-	}
-	
-	}
-
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
 	SDefensa servicioDefensa = GeneradorBeans.getServicioDefensa();
+
 	
 	@Wire
-	private Window wdwReporteDefensa;
-	
+	private Window wdwReporteDefensa;	
 	@Wire
 	private Datebox dtbFechaInicio;
-
 	@Wire
 	private Datebox dtbFechaFin;
-
 	@Wire
 	private Combobox cmbPrograma;
-	
 	@Wire
 	private Combobox cmbArea;
 	@Wire
 	private Combobox cmbTematica;
 	@Wire
 	private Combobox cmbEstatus;
-	
 	@Wire
 	private Jasperreport jstVistaPrevia;
 	
-	
-	
+
 	private String[] estatusDefensa = { "Todos", "Por Defender", "Defensa Finalizada"};
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
@@ -246,7 +172,7 @@ public class CReporteDefensa extends CGeneral {
 		System.out.println(tipoDefensa);
 		
 		
-		List<ElementoReporte> elementos = new ArrayList<ElementoReporte>();
+		List<DefensaTeg> elementos = new ArrayList<DefensaTeg>();
 
 		if (fechaFin == null || fechaInicio == null || fechaInicio.after(fechaFin)) {
 			Messagebox.show(
@@ -264,7 +190,7 @@ public class CReporteDefensa extends CGeneral {
 							}
 						
 				if (defensa.getEstatus().equals("Por Defender")) {
-					elementos.add(new ElementoReporte(
+					elementos.add(new DefensaTeg(
 							defensa.getTeg().getTitulo(),
 							defensa.getProfesor().getNombre() + " " + defensa.getProfesor().getApellido(),
 							nombreEstudiantes,
@@ -274,7 +200,7 @@ public class CReporteDefensa extends CGeneral {
 				} else{
 					
 				if (defensa.getEstatus().equals("Defensa Finalizada")) {
-							elementos.add(new ElementoReporte(
+							elementos.add(new DefensaTeg(
 							defensa.getTeg().getTitulo(),
 							defensa.getProfesor().getNombre() + " " + defensa.getProfesor().getApellido(),
 							nombreEstudiantes,
@@ -287,7 +213,7 @@ public class CReporteDefensa extends CGeneral {
 				}
 			
 				if(defensa.getEstatus().equals("Todos")){
-					elementos.add(new ElementoReporte(
+					elementos.add(new DefensaTeg(
 							defensa.getTeg().getTitulo(),
 							defensa.getProfesor().getNombre() + " " + defensa.getProfesor().getApellido(),
 							nombreEstudiantes,
@@ -296,9 +222,9 @@ public class CReporteDefensa extends CGeneral {
 				
 				}
 			}
-			Collections.sort(elementos, new Comparator<ElementoReporte>() {
-				public int compare(ElementoReporte a, ElementoReporte b) {
-				return a.tituloTeg.compareTo(b.tituloTeg);
+			Collections.sort(elementos, new Comparator<DefensaTeg>() {
+				public int compare(DefensaTeg a, DefensaTeg b) {
+				return a.getTituloTeg().compareTo(b.getTituloTeg());
 				}});
 		}
 
