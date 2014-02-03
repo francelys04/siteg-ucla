@@ -229,23 +229,28 @@
 	<detail>
 		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement x="5" y="0" width="100" height="20" uuid="b47d4027-0a55-4895-85dc-f1ad1e21173f"/>
+				<reportElement style="table" x="1" y="0" width="114" height="20" uuid="b47d4027-0a55-4895-85dc-f1ad1e21173f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{tituloTeg}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="123" y="0" width="111" height="20" uuid="a571b3fc-0a9f-4c6c-96f2-db3f990f79ef"/>
+				<reportElement style="table" x="115" y="0" width="119" height="20" uuid="a571b3fc-0a9f-4c6c-96f2-db3f990f79ef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombreEstudiante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="240" y="0" width="100" height="20" uuid="87c2e0a5-c2f6-4e65-8a0f-af8541edb51e"/>
+				<reportElement style="table" x="234" y="0" width="116" height="20" uuid="87c2e0a5-c2f6-4e65-8a0f-af8541edb51e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombreTutor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="363" y="0" width="100" height="20" uuid="621cf105-4574-4c62-bd9f-3ddf361d62ad"/>
+				<reportElement style="table" x="350" y="0" width="120" height="20" uuid="621cf105-4574-4c62-bd9f-3ddf361d62ad"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{estatusDefensa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="473" y="0" width="100" height="20" uuid="0beaf8f8-7305-4050-be35-25453901e6ac"/>
+				<reportElement style="table" x="470" y="0" width="103" height="20" uuid="0beaf8f8-7305-4050-be35-25453901e6ac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fechaDefensa}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -271,6 +276,6 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="15" splitType="Stretch"/>
+		<band height="14" splitType="Stretch"/>
 	</summary>
 </jasperReport>
