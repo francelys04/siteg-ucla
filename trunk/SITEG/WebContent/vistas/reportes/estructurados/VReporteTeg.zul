@@ -1,6 +1,6 @@
 <window id="wdwReporteTeg" 
 	title="Lista de Trabajos Especial de Grado" 
-	border="normal" width="60%" height="400px" closable="true"  apply="controlador.CReporteTeg">
+	border="normal" width="60%" height="1000px" closable="true"  apply="controlador.CReporteTeg">
 	
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -157,6 +157,7 @@
 		</panelchildren>
 	</panel>
 	<separator />
+	<jasperreport id="jstVistaPrevia"></jasperreport>
 	<separator />
-	<separator />
+	
 </window>
