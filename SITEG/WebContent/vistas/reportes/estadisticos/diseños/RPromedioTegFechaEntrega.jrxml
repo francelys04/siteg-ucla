@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPromedioTegFechaEntrega" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e9a57e9-1821-4ad6-99eb-89f85f82c952">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="67"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
+	<parameter name="areaNombre" class="java.lang.String"/>
+	<parameter name="tematicaNombre" class="java.lang.String"/>
+	<parameter name="programaNombre" class="java.lang.String"/>
+	<parameter name="fechaInicio" class="java.lang.String"/>
+	<parameter name="fechaFin" class="java.lang.String"/>
+	<field name="contadorMenores" class="java.lang.Number"/>
+	<field name="contadorIguales" class="java.lang.Number"/>
+	<field name="contadorMayores" class="java.lang.Number"/>
+	<field name="teg.tematica.nombre" class="java.lang.String"/>
+	<field name="teg.titulo" class="java.lang.String"/>
+	<field name="teg.id" class="java.lang.String"/>
+	<variable name="contadorMenores_SUM" class="java.lang.String"/>
+	<variable name="contadorIguales_SUM" class="java.lang.String"/>
+	<variable name="contadorMayores_SUM" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="10" width="88" height="62" uuid="a0a12603-16db-4f56-ab8f-90825eef7bf7"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame">
+				<reportElement x="487" y="10" width="85" height="62" uuid="f180eb63-0eb0-47fa-b189-c5f8cbe92a83"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="126" y="10" width="347" height="39" uuid="9af60cd5-e9be-4bc7-bfc4-3f43b53d00b1"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="159" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="467" y="56" width="100" height="20" uuid="58486f4a-8051-4cf8-8366-ef8826e1bbe9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="415" y="56" width="83" height="20" uuid="b1b56a42-8433-4b93-8ad7-422cb89971ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="56" width="66" height="20" uuid="9a39218f-8219-47cc-ac17-3eebef6aff6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Programa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="21" width="290" height="20" uuid="932c4f33-853b-4484-b579-65fab33584b6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Promedio de Tiempo de Entrega del Teg]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="56" width="197" height="20" uuid="bb69d308-3ea6-4839-9534-53a8ad3b06da"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{programaNombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="76" width="66" height="20" uuid="19f5d662-eaa4-4c55-af69-016f2d4ffc45"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Area:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="96" width="66" height="20" uuid="2de9c885-01f1-4744-95b4-92211512fc08"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Tematica:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="76" width="198" height="20" uuid="cc1ec0d2-0045-43ff-b55f-a18e0c526a88"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{areaNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="96" width="197" height="20" uuid="b26965d6-94fd-480a-b993-a7cb32d16204"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{tematicaNombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="116" width="173" height="20" uuid="097b6aed-dad3-4b34-9642-29baeaa9f0ca"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Rango de fecha especificado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="136" width="80" height="20" uuid="e8b247b9-2b17-4d22-810f-86f8a591e5ab"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicio:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="88" y="136" width="77" height="20" uuid="d76f3af6-e647-4cb7-a96a-c6d999611795"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="165" y="136" width="67" height="20" uuid="acc78615-40b1-465e-a834-d88556d1338c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Fin:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="232" y="136" width="100" height="20" uuid="43f11e01-7354-4618-b6b8-33d02eacca2b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{fechaFin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="283" splitType="Stretch">
+			<pie3DChart>
+				<chart>
+					<reportElement x="133" y="93" width="312" height="173" uuid="917fb892-4ae9-4384-806c-bc9928999fd3"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<pieSeries>
+						<keyExpression><![CDATA["Entrega Anticipado"]]></keyExpression>
+						<valueExpression><![CDATA[$F{contadorMenores}]]></valueExpression>
+					</pieSeries>
+					<pieSeries>
+						<keyExpression><![CDATA["Entrega a Tiempo"]]></keyExpression>
+						<valueExpression><![CDATA[$F{contadorIguales}]]></valueExpression>
+					</pieSeries>
+					<pieSeries>
+						<keyExpression><![CDATA["Entrega con Atraso"]]></keyExpression>
+						<valueExpression><![CDATA[$F{contadorMayores}]]></valueExpression>
+					</pieSeries>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+			<staticText>
+				<reportElement x="166" y="6" width="249" height="20" uuid="884929a0-2e25-458a-b1b0-9216436d228f"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de entregas de los tegs]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="103" y="36" width="112" height="20" backcolor="#66CCFF" uuid="58429df5-9868-4a66-9f25-1c932bdf66e2"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entrega Anticipado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="215" y="36" width="117" height="20" backcolor="#66CCFF" uuid="7807b0f6-a78e-4f50-a89e-ac5b9bd5f8d0"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entrega a Tiempo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="332" y="36" width="113" height="20" backcolor="#66CCFF" uuid="68075501-061d-4df3-82c0-d6e11afddbf2"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entrega con Atraso]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="103" y="56" width="112" height="20" uuid="13457271-2abf-4e01-a589-8be787eef5f3"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contadorMenores}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="56" width="117" height="20" uuid="cb280969-ff63-4f36-8d57-e85545a0c85e"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contadorIguales}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="56" width="113" height="20" uuid="77737628-32f3-4155-8b7f-70921cc215c7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contadorMayores}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
