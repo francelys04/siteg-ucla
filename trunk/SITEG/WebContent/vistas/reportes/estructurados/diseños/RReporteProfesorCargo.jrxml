@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VReporteProfesorCargo" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86643447-ad29-4b3c-8409-5f8e59397c3f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="52"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#0099CC"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#0099CC"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#0099CC"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#0099CC"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="4df9d0ba-82ad-41e3-a9eb-b393e5bc8d1e"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="fecha2" class="java.util.Date"/>
+	<parameter name="fecha1" class="java.util.Date"/>
+	<parameter name="nombre" class="java.lang.String"/>
+	<parameter name="fecha" class="java.util.Date"/>
+	<parameter name="area" class="java.lang.String"/>
+	<parameter name="tematica" class="java.lang.String"/>
+	<parameter name="programa" class="java.lang.String"/>
+	<parameter name="cargo" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="cargo" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="estatusTeg" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<line>
+				<reportElement x="-22" y="63" width="618" height="1" uuid="9169f7ba-fddf-44c4-b5e1-7b168cae821a"/>
+			</line>
+			<image>
+				<reportElement x="490" y="4" width="82" height="54" uuid="badd9d1c-0382-47bd-be91-fa905d5d0325"/>
+				<imageExpression><![CDATA["/reporte/logo dcyt.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="1" y="0" width="74" height="58" uuid="51c8a38b-3e5f-438c-b875-bdceeaa3cfc4"/>
+				<imageExpression><![CDATA["/reporte/logo ucla.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="107" y="8" width="347" height="39" uuid="d9164343-a3e5-45d7-8ae9-853b4aeb9d2d"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="137" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="68" width="49" height="20" uuid="eb41311e-92e3-4213-84e8-3d6fe439f408"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="68" width="73" height="20" uuid="97c0d305-331f-4e24-a6c3-8e72d30ad399"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha1})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="111" width="37" height="20" uuid="6a1873cb-9395-41b9-95fb-6d79bcc4fb81"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="111" width="73" height="20" uuid="67e38e60-488e-4d5e-aa77-742c4a5324a3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha2})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="401" y="35" width="44" height="20" uuid="48e89b5f-5a63-450c-be5e-6ceca18df5cd"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="445" y="35" width="112" height="20" uuid="92c0b828-4665-49c3-ac3c-955c7a5ad175"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="341" y="68" width="48" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="341" y="111" width="59" height="20" uuid="e99113b9-b056-4d57-983a-8ed5e3c4c7b3"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tematica:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="417" y="68" width="155" height="20" uuid="2fe181fc-7880-4a61-895e-d8da6a80c9ee"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="111" width="155" height="20" uuid="897dd153-9e78-4624-bd76-fac2acdbeb24"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tematica}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="139" y="68" width="76" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="215" y="68" width="87" height="20" uuid="e666f2ac-f82d-4323-8fc6-1161f175a172"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="111" width="87" height="20" uuid="8b96cf9c-bdc1-47e1-9f32-7789a4c1a7af"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cargo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="139" y="100" width="65" height="31" uuid="e6a9d5b1-86ad-4226-a242-47577ed23a53"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rol Profesor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="6" width="571" height="20" uuid="cb5cc90b-210c-42e3-b769-a81483469be2"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Lista de Profesores con el Rol que desempeñan en cada Trabajo Especial de Grado]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="266" y="2" width="102" height="27" uuid="e3b3edd0-5a50-4c76-ab84-fcff9a150a4f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titulo del TEG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="2" width="102" height="27" uuid="a2e7ef94-3950-4e36-8ea5-2ddd1bf0a03b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rol]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="2" width="102" height="27" uuid="9f7928db-fc98-42fc-b6db-3d52288fbe6f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatus del TEG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="102" height="27" uuid="91598d21-3d90-4b9d-ab24-0369b62d10d0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profesor]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="27" width="571" height="1" uuid="b2f3d772-605c-4249-b936-a481207edfeb"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="266" y="5" width="143" height="20" uuid="43e17aa0-3f41-4dfd-aae2-d1f648af7d62"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="5" width="100" height="20" uuid="6b17d4cd-0c9b-4596-b649-3710bc1491ed"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="5" width="122" height="20" uuid="e0f8a18e-441d-487c-9321-d5dc250b74ee"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="5" width="124" height="20" uuid="355c013b-7ada-4fc5-bbd7-fe7fac836187"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estatusTeg}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="12" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="472" y="8" width="100" height="20" uuid="fe301ea2-cc2d-4e12-847b-fd4f95d8c77a"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="1" y="3" width="49" height="30" uuid="81d32369-d5b7-41f7-b4a4-f53557b8cfc3"/>
+				<imageExpression><![CDATA["/reporte/logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="173" y="13" width="216" height="20" uuid="91f222fa-eba4-44a2-a3ec-49c3d436066b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="15" splitType="Stretch"/>
+	</summary>
+</jasperReport>
