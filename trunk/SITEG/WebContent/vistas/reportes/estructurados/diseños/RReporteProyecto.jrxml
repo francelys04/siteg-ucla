@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReporteProyecto" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86643447-ad29-4b3c-8409-5f8e59397c3f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="22"/>
+	<property name="ireport.y" value="9"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#0099CC"/>
@@ -31,6 +31,7 @@
 	<parameter name="Tematica" class="java.lang.String"/>
 	<parameter name="Programa" class="java.lang.String"/>
 	<parameter name="Estatus" class="java.lang.String"/>
+	<parameter name="Fecha" class="java.lang.String"/>
 	<field name="teg.titulo" class="java.lang.String"/>
 	<field name="nombreEstudiantes" class="java.lang.String"/>
 	<field name="teg.tutor.nombre" class="java.lang.String"/>
@@ -104,7 +105,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{Fecha})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="379" y="72" width="34" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
@@ -114,7 +115,7 @@
 				<text><![CDATA[Area:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="162" y="107" width="59" height="20" uuid="e99113b9-b056-4d57-983a-8ed5e3c4c7b3"/>
+				<reportElement x="178" y="107" width="59" height="20" uuid="e99113b9-b056-4d57-983a-8ed5e3c4c7b3"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -128,21 +129,21 @@
 				<textFieldExpression><![CDATA[$P{Area}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="227" y="107" width="136" height="20" uuid="897dd153-9e78-4624-bd76-fac2acdbeb24"/>
+				<reportElement x="243" y="107" width="136" height="20" uuid="897dd153-9e78-4624-bd76-fac2acdbeb24"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Tematica}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="162" y="72" width="65" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
+				<reportElement x="178" y="72" width="65" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Programa:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="229" y="72" width="134" height="20" uuid="e666f2ac-f82d-4323-8fc6-1161f175a172"/>
+				<reportElement x="245" y="72" width="134" height="20" uuid="e666f2ac-f82d-4323-8fc6-1161f175a172"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -258,7 +259,7 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="12" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="40" splitType="Stretch">
