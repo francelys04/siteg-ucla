@@ -44,6 +44,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Label;
@@ -53,6 +54,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
+import controlador.CReporteDefensa.ElementoReporte;
 
 import servicio.SAreaInvestigacion;
 import servicio.SJurado;
@@ -109,6 +111,8 @@ public class CReporteProyecto extends CGeneral {
 	private Combobox cmbArea;
 	@Wire
 	private Combobox cmbTematica;
+	@Wire
+	private Jasperreport jstVistaPrevia;
 	
 	private String[] estatusTeg = { "Todos", "Proyecto Registrado","Proyecto Factible","Proyecto deTrabajo Especial de Grado en Desarrollo",
 			"Avances Finalizados del Proyecto"};
@@ -271,8 +275,37 @@ public class CReporteProyecto extends CGeneral {
 						}
 					
 				 elementos.add(new ElementoReporte(t, nombreEstudiantes));
+				 
+					Collections.sort(elementos, new Comparator<ElementoReporte>() {
+						public int compare(ElementoReporte a, ElementoReporte b) {
+						return a.teg.getTitulo().compareTo(b.teg.getTitulo());
+						}});
 				 }
-				    FileSystemView filesys = FileSystemView.getFileSystemView();
+				 
+				 FileSystemView filesys = FileSystemView.getFileSystemView();
+		Map<String, Object> p = new HashMap<String, Object>();
+		String rutaUrl = obtenerDirectorio();
+		 String reporteSrc = rutaUrl
+		 +
+		 "SITEG/vistas/reportes/estructurados/compilados/RReporteProyecto.jasper";
+		 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+		
+		
+		p.put("programa", cmbPrograma.getValue());
+					p.put("FechaInicio",dtbFechaInicio.getValue());
+					p.put("FechaFin",dtbFechaFin.getValue());
+					p.put("Area",cmbArea.getValue());
+					p.put("Tematica",cmbTematica.getValue());
+					p.put("Estatus",cmbEstatus.getValue());
+
+		 jstVistaPrevia.setSrc(reporteSrc);
+		 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+		 elementos));
+		 jstVistaPrevia.setType("pdf");
+		 jstVistaPrevia.setParameters(p);
+		 
+		 
+				   /* FileSystemView filesys = FileSystemView.getFileSystemView();
 					Map p = new HashMap();
 				    p.put("programa", cmbPrograma.getValue());
 					p.put("FechaInicio",dtbFechaInicio.getValue());
@@ -282,7 +315,7 @@ public class CReporteProyecto extends CGeneral {
 					p.put("Estatus",cmbEstatus.getValue());
 					JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/ReporteTEG.jasper"));
 					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(elementos));
-					JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ListaProyecto.pdf"); 
+					JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ListaProyecto.pdf"); */
 		}
 	
 	}
