@@ -142,9 +142,7 @@ public class CReporteDefensa extends CGeneral {
 	public void setFechaDefensa(Date fechaDefensa) {
 		this.fechaDefensa = fechaDefensa;
 	}
-
-	 
-	 
+	
 	}
 
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
@@ -181,32 +179,47 @@ public class CReporteDefensa extends CGeneral {
 	@Override
 	
 	void inicializar(Component comp) {
-		cmbEstatus.setModel(new ListModelList<String>(estatusDefensa));
-		List<Programa> programas = servicioPrograma.buscarActivas();
+		Programa programaa = new Programa(987, "Todos", "", "", true, null);
+		programas = servicioPrograma.buscarActivas();
+		programas.add(programaa);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
-		
+		cmbEstatus.setModel(new ListModelList<String>(estatusDefensa));
+
 	}
 	
 
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() {
-		cmbArea.setValue("");
-		cmbTematica.setValue("");
-
+		if (cmbPrograma.getValue().equals("Todos")) {
+			cmbArea.setValue("Todos");
+			cmbTematica.setValue("Todos");
+		}
+		else {
+			 cmbArea.setValue("");
+			 cmbTematica.setValue("");
 		Programa programa = (Programa) cmbPrograma.getSelectedItem().getValue();
 		areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
 				.buscar(programa.getId()));
+		AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos", "", true);
+	 	areas.add(area);
 		cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 
 	}
+}
 
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
+		if (cmbArea.getValue().equals("Todos")) {
+			
+			cmbTematica.setValue("Todos");
+		}
+		else {
 		cmbTematica.setValue("");
 		AreaInvestigacion tematica = (AreaInvestigacion) cmbArea.getSelectedItem().getValue();
 		tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
 				.buscarArea(tematica.getId()));
 		cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
+		}
 	}
 
 	@Listen("onSelect = #cmbTematica")
@@ -236,7 +249,7 @@ public class CReporteDefensa extends CGeneral {
 					"La fecha de inicio debe ser primero que la fecha de fin",
 					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
-			List<Defensa> defensas = servicioDefensa.buscardefensaPorDosFechas(fechaInicio, fechaFin);
+			List<Defensa> defensas = servicioDefensa.buscarDefensaTegSegunEstatus(estatusdefensa,fechaInicio, fechaFin);
 			for (Defensa defensa : defensas) {
 				 
 					 List<Estudiante> estudiantes= servicioEstudiante.buscarEstudiantePorTeg(defensa.getTeg());
