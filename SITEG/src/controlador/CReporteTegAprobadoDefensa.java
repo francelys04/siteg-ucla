@@ -23,12 +23,13 @@ import javax.swing.filechooser.FileSystemView;
 
 import modelo.AreaInvestigacion;
 
+import modelo.Defensa;
+import modelo.Estudiante;
 import modelo.Programa;
 import modelo.ProgramaArea;
 
 import modelo.Teg;
 import modelo.Tematica;
-import modelo.reporte.PromedioTegFechaEntrega;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
@@ -62,13 +63,14 @@ import org.zkoss.zul.Window;
 import configuracion.GeneradorBeans;
 
 import servicio.SAreaInvestigacion;
+import servicio.SDefensa;
 import servicio.SPrograma;
 import servicio.SProgramaArea;
 import servicio.STeg;
 import servicio.STematica;
 
 @Controller
-public class CReportePromedioTegFechaEntrega extends CGeneral {
+public class CReporteTegAprobadoDefensa extends CGeneral {
 
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SProgramaArea servicioProgramaArea = GeneradorBeans
@@ -76,7 +78,9 @@ public class CReportePromedioTegFechaEntrega extends CGeneral {
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
 	STematica servicioTematica = GeneradorBeans.getSTematica();
-
+	SDefensa servicioDefensa=GeneradorBeans.getServicioDefensa();
+	
+	
 	Programa programa = new Programa();
 	AreaInvestigacion area = new AreaInvestigacion();
 	Tematica tematica = new Tematica();
@@ -107,8 +111,8 @@ public class CReportePromedioTegFechaEntrega extends CGeneral {
 
 	}
 
-	@Listen("onClick = #btnGenerarReportePromedioTegFechaEntrega")
-	public void generarPromedioTegFechaEntrega() throws JRException {
+	@Listen("onClick = #btnGenerarReporteTegAprobadoDefensa")
+	public void generarTegsAprobadosDefensa() throws JRException {
 
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
@@ -119,105 +123,81 @@ public class CReportePromedioTegFechaEntrega extends CGeneral {
 		fechaInicio = dtbFechaInicio.getValue();
 		fechaFin = dtbFechaFin.getValue();
 
-		List<Teg> tegsSeleccionados = new ArrayList();
-		List<PromedioTegFechaEntrega> tegsFechaEntrega = new ArrayList();
-		long contadorMenores = 0;
-		long contadorMayores = 0;
-		long contadorIguales = 0;
-
+		List<Defensa> defensasSeleccionadas = new ArrayList();
+		String estatus="Aprobado";
+		
+		System.out.println("das:"+defensasSeleccionadas.size());
 		if (fechaFin == null || fechaInicio == null
 				|| fechaInicio.after(fechaFin)) {
 			Messagebox.show(
 					"La fecha de inicio debe ser primero que la fecha de fin",
 					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
-			
 			if (nombrePrograma.equals("Todos")) {
-				tegsSeleccionados= servicioTeg.buscarTegTodos(fechaInicio, fechaFin);
+				
+			defensasSeleccionadas = servicioDefensa.buscarDefensaTegSegunEstatus(estatus,fechaInicio,fechaFin);
 			}
 			else
 			if (!nombrePrograma.equals("Todos") && nombreArea.equals("Todos")) {
-				tegsSeleccionados=servicioTeg.buscarTegsSegunPrograma(programa, fechaInicio, fechaFin);
-			}
+				defensasSeleccionadas=servicioDefensa.buscarDefensaTegSegunEstatusPrograma(estatus, programa, fechaInicio, fechaFin);
+				}
 			else
 			if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && !nombreTematica.equals("Todos")) {
-			    Tematica tematica= servicioTematica.buscarTematicaPorNombre(nombreTematica);
-				tegsSeleccionados= servicioTeg.buscarTegsDeTematicaPorDosFechas(tematica, fechaInicio, fechaFin);
-			}else
+				    Tematica tematica= servicioTematica.buscarTematicaPorNombre(nombreTematica);
+					defensasSeleccionadas=servicioDefensa.buscarDefensaTegSegunEstatusTematica(estatus, tematica, fechaInicio, fechaFin);
+				}else
 			if(!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && nombreTematica.equals("Todos")){
-				tegsSeleccionados=servicioTeg.buscarTegsSegunArea(area, fechaInicio, fechaFin);
+				defensasSeleccionadas=servicioDefensa.buscarDefensaTegSegunEstatusArea(estatus, area, fechaInicio, fechaFin);
+				}
+
+		}
+		if(defensasSeleccionadas.size()!=0){
+			
+
+			for (int i = 0; i < defensasSeleccionadas.size(); i++) {
+				List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(defensasSeleccionadas.get(i).getTeg());
+				
+				if(estudiantes.size()!=0){
+				
+				String nombre = estudiantes.get(0).getNombre();
+				String apellido = estudiantes.get(0).getApellido();
+				defensasSeleccionadas.get(i).getTeg().setEstatus(nombre+" "+apellido);
+				}
 			}
 			
-			if (tegsSeleccionados.size() != 0) {
-				for (int i = 0; i < tegsSeleccionados.size(); i++) {
-					if (tegsSeleccionados.get(i).getFecha()
-							.before(tegsSeleccionados.get(i).getFechaEntrega())) {
-						contadorMenores = contadorMenores + 1;
-
-						PromedioTegFechaEntrega tegFechaEntrega = new PromedioTegFechaEntrega(
-								tegsSeleccionados.get(i), contadorMenores,
-								contadorIguales, contadorMayores);
-						tegsFechaEntrega.add(tegFechaEntrega);
-					} else {
-						if (tegsSeleccionados.get(i).getFechaEntrega()
-								.before(tegsSeleccionados.get(i).getFecha())) {
-							contadorMayores = contadorMayores + 1;
-
-							PromedioTegFechaEntrega tegFechaEntrega = new PromedioTegFechaEntrega(
-									tegsSeleccionados.get(i), contadorMenores,
-									contadorIguales, contadorMayores);
-							tegsFechaEntrega.add(tegFechaEntrega);
-						} else {
-							contadorIguales = contadorIguales + 1;
-
-							PromedioTegFechaEntrega tegFechaEntrega = new PromedioTegFechaEntrega(
-									tegsSeleccionados.get(i), contadorMenores,
-									contadorIguales, contadorMayores);
-							tegsFechaEntrega.add(tegFechaEntrega);
-						}
-					}
-					
-				}
-				for(int i=0;i<tegsFechaEntrega.size();i++){
-					System.out.println("datos:"+tegsFechaEntrega.get(i).getTeg().getTematica().getNombre());
-					System.out.println("menores:"+tegsFechaEntrega.get(i).getContadorMenores());
-					System.out.println("iguales:"+tegsFechaEntrega.get(i).getContadorIguales());
-					System.out.println("Mayores:"+tegsFechaEntrega.get(i).getContadorMayores());
-					
-				}
-				 FileSystemView filesys = FileSystemView.getFileSystemView();
-				 Map parametro = new HashMap();
-				 String rutaUrl = obtenerDirectorio();
-				 String reporteSrc = rutaUrl
-				 +
-				 "SITEG/vistas/reportes/estadisticos/compilados/RPromedioTegFechaEntrega.jasper";
-				 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-				
-				 
-				 parametro.put("titulo",
-				 "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
-				 + "DECANATO DE CIENCIAS Y TECNOLOGIA"
-				 + "DIRECCION DE PROGRAMA");
-				 parametro.put("programaNombre", cmbPrograma.getValue());
-				 parametro.put("areaNombre", cmbArea.getValue());
-				 parametro.put("tematicaNombre", cmbTematica.getValue());
-				 parametro.put("fechaInicio", fechaInicio);
-				 parametro.put("fechaFin", fechaFin);
-				 parametro.put("logoUcla", reporteImage + "logo ucla.png");
-				 parametro.put("logoCE", reporteImage + "logo CE.png");
-				 jstVistaPrevia.setSrc(reporteSrc);
-				 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-				 tegsFechaEntrega));
-				 jstVistaPrevia.setType("pdf");
-				 jstVistaPrevia.setParameters(parametro);
-				
-			} 
-		 
-		 else {
-		 Messagebox.show("No ha informacion disponible para este intervalo");
-		 }
+			
+			
+			
+			
+			 FileSystemView filesys = FileSystemView.getFileSystemView();
+			 Map parametro = new HashMap();
+			 String rutaUrl = obtenerDirectorio();
+			 String reporteSrc = rutaUrl
+			 +
+			 "SITEG/vistas/reportes/estructurados/compilados/RTegAprobadoDefensa.jasper";
+			 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+			
+			 parametro.put("titulo",
+			 "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
+			 + "DECANATO DE CIENCIAS Y TECNOLOGIA"
+			 + "DIRECCION DE PROGRAMA");
+			 parametro.put("programaNombre", cmbPrograma.getValue());
+			 parametro.put("areaNombre", cmbArea.getValue());
+			 parametro.put("tematicaNombre", cmbTematica.getValue());
+			 parametro.put("fechaInicio", fechaInicio);
+			 parametro.put("fechaFin", fechaFin);
+			 parametro.put("logoUcla", reporteImage + "logo ucla.png");
+			 parametro.put("logoCE", reporteImage + "logo CE.png");
+			 jstVistaPrevia.setSrc(reporteSrc);
+			 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+			 defensasSeleccionadas));
+			 jstVistaPrevia.setType("pdf");
+			 jstVistaPrevia.setParameters(parametro);
+			
 		}
-
+		else{
+			Messagebox.show("No ha informacion disponible para este intervalo");
+		}
 	}
 
 	@Listen("onSelect = #cmbPrograma")
@@ -261,8 +241,8 @@ public class CReportePromedioTegFechaEntrega extends CGeneral {
 		}
 	}
 
-	@Listen("onClick = #btnSalirReportePromedioTegFechaEntrega")
-	public void cancelarPromedioTegFechaEntrega() throws JRException {
+	@Listen("onClick = #btnSalirReporteTegAprobadoDefensa")
+	public void cancelarTegsAprobadosDefensa() throws JRException {
 
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
