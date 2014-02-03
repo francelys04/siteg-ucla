@@ -61,15 +61,40 @@ import servicio.SProgramaArea;
 import servicio.SSolicitudTutoria;
 import servicio.STeg;
 import servicio.STematica;
+import servicio.SEstudiante;
 
 @Controller
 public class CReporteTeg extends CGeneral {
+	public static class ElementoReporte {
+		private Teg teg;
+		private String nombreEstudiantes;
+		
+		public ElementoReporte(Teg teg, String nombreEstudiantes) {
+			super();
+			this.teg = teg;
+			this.nombreEstudiantes = nombreEstudiantes;
+		}
+		public Teg getTeg() {
+			return teg;
+		}
+		public void setTeg(Teg teg) {
+			this.teg = teg;
+		}
+		public String getNombreEstudiantes() {
+			return nombreEstudiantes;
+		}
+		public void setNombreEstudiantes(String nombreEstudiantes) {
+			this.nombreEstudiantes = nombreEstudiantes;
+		}
+
+}
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
 	STematica servicioTematica = GeneradorBeans.getSTematica();
 	SProgramaArea servicioProgramaArea = GeneradorBeans
 			.getServicioProgramaArea();
+	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	@Wire
 	private Window wdwReporteTeg;
 	@Wire
@@ -245,6 +270,17 @@ public class CReporteTeg extends CGeneral {
 					
 				 }
 		
+				 List<ElementoReporte> elementos = new ArrayList<ElementoReporte>();
+				 for (Teg t : teg) {
+				 List<Estudiante> estudiantes= servicioEstudiante.buscarEstudiantePorTeg(t);
+				 
+						String nombreEstudiantes = "";
+						for (Estudiante e : estudiantes) {
+						nombreEstudiantes += e.getNombre() +" "+e.getApellido()+" ";
+						}
+					
+				 elementos.add(new ElementoReporte(t, nombreEstudiantes));
+				 }
 				    FileSystemView filesys = FileSystemView.getFileSystemView();
 					Map p = new HashMap();
 				    p.put("programa", cmbPrograma.getValue());
@@ -254,7 +290,7 @@ public class CReporteTeg extends CGeneral {
 					p.put("Tematica",cmbTematica.getValue());
 					p.put("Estatus",cmbEstatus.getValue());
 					JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/ReporteTEG.jasper"));
-					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(teg));
+					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(elementos));
 					JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ListaTeg.pdf"); 
 		}
 	
