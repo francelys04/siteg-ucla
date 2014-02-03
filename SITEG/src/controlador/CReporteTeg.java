@@ -190,9 +190,9 @@ public class CReporteTeg extends CGeneral {
 							.parseLong(idTematica));
 					teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(estatus,
 							                                       tematica1, fechaInicio, fechaFin);
-					 Messagebox.show("1",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);
+//					 Messagebox.show("1",
+//							     "Informacion", Messagebox.OK,
+//							   Messagebox.INFORMATION);
 				}
 			 
 				 if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && estatus.equals("Todos")) {
@@ -209,10 +209,10 @@ public class CReporteTeg extends CGeneral {
 					 teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus(estatusTeg1, 
 							          estatusTeg2, estatusTeg3, estatusTeg4, estatusTeg5, estatusTeg6, estatusTeg7,
 							          tematica1,fechaInicio, fechaFin);
-					 Messagebox.show(
-							  "2",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);
+//					 Messagebox.show(
+//							  "2",
+//							     "Informacion", Messagebox.OK,
+//							   Messagebox.INFORMATION);
 				 }
 					 
 				 if(!nombrePrograma.equals("Todos") && nombreArea.equals("Todos") && !estatus.equals("Todos")){
@@ -220,10 +220,10 @@ public class CReporteTeg extends CGeneral {
 					 Programa programa1 = servicioPrograma.buscar(Long
 								.parseLong(idPrograma));
 					 teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus, programa1, fechaInicio, fechaFin);
-					 Messagebox.show(
-							  "3",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);
+//					 Messagebox.show(
+//							  "3",
+//							     "Informacion", Messagebox.OK,
+//							   Messagebox.INFORMATION);
 						
 				 }
 				 if(!nombrePrograma.equals("Todos") && nombreArea.equals("Todos") && estatus.equals("Todos")){
@@ -240,19 +240,19 @@ public class CReporteTeg extends CGeneral {
 					 teg = servicioTeg.buscarTegPorProgramaVariasAreasVariosEstatus(estatusTeg1, 
 					                estatusTeg2, estatusTeg3, estatusTeg4, estatusTeg5, estatusTeg6, estatusTeg7,
 					                programa1,fechaInicio, fechaFin);
-					 Messagebox.show(
-							  "4",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);	
+//					 Messagebox.show(
+//							  "4",
+//							     "Informacion", Messagebox.OK,
+//							   Messagebox.INFORMATION);	
 				 }
 				 if(nombrePrograma.equals("Todos") && !estatus.equals("Todos")){
 					 teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(estatus, fechaInicio, 
 							         fechaFin);
-					 Messagebox.show(
-							  "5",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);
-				 }
+//					 Messagebox.show(
+//							  "5",
+//							     "Informacion", Messagebox.OK,
+//							   Messagebox.INFORMATION);
+         		 }
 				 
 				 if(nombrePrograma.equals("Todos") && estatus.equals("Todos")){
 					 String estatusTeg1="TEG Registrado";
@@ -263,10 +263,10 @@ public class CReporteTeg extends CGeneral {
 					 String estatusTeg6="TEG Reprobado";
 					 String estatusTeg7="Jurado Asignado";
 					 teg = servicioTeg.buscarTegPorVariosProgramasVariosEstatus(estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4, estatusTeg5, estatusTeg6, estatusTeg7, fechaInicio, fechaFin);
-					 Messagebox.show(
-							  "6",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);
+//					 Messagebox.show(
+//							  "6",
+//							     "Informacion", Messagebox.OK,
+//							   Messagebox.INFORMATION);
 					
 				 }
 		
@@ -292,7 +292,8 @@ public class CReporteTeg extends CGeneral {
 					JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/ReporteTEG.jasper"));
 					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(elementos));
 					JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ListaTeg.pdf"); 
-		}
+				 }
+		 
 	
 	}
 

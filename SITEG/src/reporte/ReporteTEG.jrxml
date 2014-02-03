@@ -92,15 +92,15 @@ FROM cronograma;]]>
 				<text><![CDATA[Lista de Teg]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="165" y="86" width="66" height="20" uuid="a6ed1faf-3dbb-4c27-9195-91073d69d201"/>
+				<reportElement x="165" y="84" width="66" height="20" uuid="a6ed1faf-3dbb-4c27-9195-91073d69d201"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Programa:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="202" y="86" width="100" height="20" uuid="50af7a99-47df-4be9-8753-2cbca87b85b0"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="217" y="84" width="121" height="20" uuid="50af7a99-47df-4be9-8753-2cbca87b85b0"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -121,11 +121,6 @@ FROM cronograma;]]>
 					<pen lineWidth="2.5"/>
 				</graphicElement>
 			</line>
-			<textField>
-				<reportElement x="38" y="84" width="101" height="20" uuid="9f35f391-f456-4387-a8fa-9fa776cf9945"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{FechaInicio}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="0" y="83" width="36" height="20" uuid="1a2a4bf7-9641-45bc-abea-d34846269eda"/>
 				<textElement verticalAlignment="Middle">
@@ -134,53 +129,58 @@ FROM cronograma;]]>
 				<text><![CDATA[Desde:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="105" width="36" height="20" uuid="777e5b82-27d9-4e12-953a-41ff9e94fc35"/>
+				<reportElement x="1" y="105" width="36" height="20" uuid="777e5b82-27d9-4e12-953a-41ff9e94fc35"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hasta:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="38" y="105" width="101" height="20" uuid="441e2558-b919-495c-b8b1-6ad9047d1062"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{FechaFin}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="193" y="106" width="100" height="20" uuid="3e91a806-28bb-41f3-b470-b4eec4ac174e"/>
+				<reportElement x="193" y="104" width="164" height="20" uuid="3e91a806-28bb-41f3-b470-b4eec4ac174e"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{Area}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="165" y="106" width="52" height="20" uuid="7feb1133-d831-4703-8087-11bf26d3a927"/>
+				<reportElement x="165" y="104" width="52" height="20" uuid="7feb1133-d831-4703-8087-11bf26d3a927"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Area:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="378" y="86" width="100" height="20" uuid="a7c45a4c-706e-4d91-941c-d3e966620593"/>
+				<reportElement x="421" y="84" width="138" height="20" uuid="a7c45a4c-706e-4d91-941c-d3e966620593"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{Tematica}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="328" y="86" width="50" height="20" uuid="bec51c9b-94a8-44bb-9977-66fdd3aa1b73"/>
+				<reportElement x="371" y="84" width="50" height="20" uuid="bec51c9b-94a8-44bb-9977-66fdd3aa1b73"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tematica:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="366" y="106" width="100" height="20" uuid="529a0d98-d07a-49c9-a1bb-ae4852e8a680"/>
+				<reportElement x="409" y="104" width="150" height="20" uuid="529a0d98-d07a-49c9-a1bb-ae4852e8a680"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{Estatus}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="328" y="106" width="100" height="20" uuid="26702227-bece-48a4-af87-1975e44e2a6a"/>
+				<reportElement x="372" y="104" width="100" height="20" uuid="26702227-bece-48a4-af87-1975e44e2a6a"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10"/>
 				</textElement>
 				<text><![CDATA[Estatus:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="34" y="83" width="100" height="20" uuid="f5eb289d-9fab-4005-b24c-a28d619e3e36"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{FechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="32" y="105" width="100" height="20" uuid="1cfa7727-fb11-428b-912d-f57b7da5c176"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{FechaFin}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -190,7 +190,7 @@ FROM cronograma;]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[titulo]]></text>
+				<text><![CDATA[Titulo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="table" mode="Opaque" x="123" y="1" width="114" height="20" backcolor="#3399FF" uuid="6750fb24-b307-4280-b614-5b0dbb84aff8"/>
@@ -218,7 +218,7 @@ FROM cronograma;]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[estatus]]></text>
+				<text><![CDATA[Estatus]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -237,7 +237,7 @@ FROM cronograma;]]>
 			<textField>
 				<reportElement style="table" x="237" y="-1" width="109" height="36" backcolor="#009999" uuid="7238de55-08e5-4bf0-9e85-b88813db62f8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{teg.tutor.nombre}+"p "+$F{teg.tutor.apellido}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{teg.tutor.nombre}+" "+$F{teg.tutor.apellido}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement style="table" x="346" y="-1" width="101" height="36" uuid="3aa53367-7912-440e-9a14-2fa0913d788e"/>
