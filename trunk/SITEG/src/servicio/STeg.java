@@ -297,4 +297,21 @@ public class STeg {
 		  return interfaceTeg.buscarTegPorVariosProgramasVariosEstatus(estatus1, estatus2, estatus3, estatus4, estatus5, estatus6, estatus7, fechaInicio, fechaFin);
 		
 	}
+	public List<Teg> buscarTegsSegunArea(AreaInvestigacion area, Date fechaInicio, Date fechaFin){
+		List<Teg> tegs;
+		tegs= interfaceTeg.buscarTegArea(area, fechaInicio, fechaFin);
+		return tegs;
+		
+	}
+	public List<Teg> buscarTegsSegunPrograma(Programa programa, Date fechaInicio, Date fechaFin){
+		List<Teg> tegs;
+		tegs= interfaceTeg.buscarTegPrograma(programa, fechaInicio, fechaFin);
+		return tegs;
+		
+	}
+	public List<Teg> buscarTegTodos(Date fechaInicio, Date fechaFin){
+		List<Teg> tegs;
+		tegs= interfaceTeg.buscarTegTodos(fechaInicio, fechaFin);
+		return tegs;
+	}
 }
