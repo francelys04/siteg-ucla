@@ -28,6 +28,7 @@ import modelo.ProgramaArea;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
+import modelo.reporte.Proyecto;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -54,7 +55,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
-import controlador.CReporteDefensa.ElementoReporte;
 
 import servicio.SAreaInvestigacion;
 import servicio.SJurado;
@@ -67,36 +67,18 @@ import servicio.SEstudiante;
 
 @Controller
 public class CReporteProyecto extends CGeneral {
-	public static class ElementoReporte {
-		private Teg teg;
-		private String nombreEstudiantes;
-		
-		public ElementoReporte(Teg teg, String nombreEstudiantes) {
-			super();
-			this.teg = teg;
-			this.nombreEstudiantes = nombreEstudiantes;
-		}
-		public Teg getTeg() {
-			return teg;
-		}
-		public void setTeg(Teg teg) {
-			this.teg = teg;
-		}
-		public String getNombreEstudiantes() {
-			return nombreEstudiantes;
-		}
-		public void setNombreEstudiantes(String nombreEstudiantes) {
-			this.nombreEstudiantes = nombreEstudiantes;
-		}
 
-}
+	public CReporteProyecto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
 	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
+	SProgramaArea servicioProgramaArea = GeneradorBeans.getServicioProgramaArea();
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
+	
 	@Wire
 	private Window wdwReporteTeg;
 	@Wire
@@ -193,11 +175,7 @@ public class CReporteProyecto extends CGeneral {
 					String idTematica = cmbTematica.getSelectedItem().getId();
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
-					teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(estatus,
-							                                       tematica1, fechaInicio, fechaFin);
-					 Messagebox.show("1",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);
+					teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(estatus, tematica1, fechaInicio, fechaFin);
 				}
 			 
 				 if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && estatus.equals("Todos")) {
@@ -211,22 +189,13 @@ public class CReporteProyecto extends CGeneral {
 					 String estatusTeg4="Avances Finalizados del Proyecto";
 					 teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(estatusTeg1, 
 							          estatusTeg2, estatusTeg3, estatusTeg4, tematica1,fechaInicio, fechaFin);
-					 Messagebox.show(
-							  "2",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);
 				 }
 					 
 				 if(!nombrePrograma.equals("Todos") && nombreArea.equals("Todos") && !estatus.equals("Todos")){
 					 String idPrograma = cmbPrograma.getSelectedItem().getId();
 					 Programa programa1 = servicioPrograma.buscar(Long
 								.parseLong(idPrograma));
-					 teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus, programa1, fechaInicio, fechaFin);
-					 Messagebox.show(
-							  "3",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);
-						
+					 teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus, programa1, fechaInicio, fechaFin);	
 				 }
 				 if(!nombrePrograma.equals("Todos") && nombreArea.equals("Todos") && estatus.equals("Todos")){
 					 String idPrograma = cmbPrograma.getSelectedItem().getId();
@@ -238,18 +207,10 @@ public class CReporteProyecto extends CGeneral {
 					 String estatusTeg4="Avances Finalizados del Proyecto";
 					 teg = servicioTeg.buscarTegPorProgramaVariasAreasVariosEstatus1(estatusTeg1, 
 					                estatusTeg2, estatusTeg3, estatusTeg4, programa1,fechaInicio, fechaFin);
-					 Messagebox.show(
-							  "4",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);	
 				 }
 				 if(nombrePrograma.equals("Todos") && !estatus.equals("Todos")){
 					 teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(estatus, fechaInicio, 
 							         fechaFin);
-					 Messagebox.show(
-							  "5",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);
 				 }
 				 
 				 if(nombrePrograma.equals("Todos") && estatus.equals("Todos")){
@@ -257,15 +218,10 @@ public class CReporteProyecto extends CGeneral {
 					 String estatusTeg2="Proyecto Factible";
 					 String estatusTeg3="Proyecto deTrabajo Especial de Grado en Desarrollo";
 					 String estatusTeg4="Avances Finalizados del Proyecto";
-					 teg = servicioTeg.buscarTegPorVariosProgramasVariosEstatus1(estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4, fechaInicio, fechaFin);
-					 Messagebox.show(
-							  "6",
-							     "Informacion", Messagebox.OK,
-							   Messagebox.INFORMATION);
-					
+					 teg = servicioTeg.buscarTegPorVariosProgramasVariosEstatus1(estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4, fechaInicio, fechaFin);					
 				 }
 		
-				 List<ElementoReporte> elementos = new ArrayList<ElementoReporte>();
+				 List<Proyecto> elementos = new ArrayList<Proyecto>();
 				 for (Teg t : teg) {
 				 List<Estudiante> estudiantes= servicioEstudiante.buscarEstudiantePorTeg(t);
 				 
@@ -274,11 +230,11 @@ public class CReporteProyecto extends CGeneral {
 						nombreEstudiantes += e.getNombre() +" "+e.getApellido()+" ";
 						}
 					
-				 elementos.add(new ElementoReporte(t, nombreEstudiantes));
+				 elementos.add(new Proyecto(t, nombreEstudiantes));
 				 
-					Collections.sort(elementos, new Comparator<ElementoReporte>() {
-						public int compare(ElementoReporte a, ElementoReporte b) {
-						return a.teg.getTitulo().compareTo(b.teg.getTitulo());
+					Collections.sort(elementos, new Comparator<Proyecto>() {
+						public int compare(Proyecto a, Proyecto b) {
+						return a.getTeg().getTitulo().compareTo(b.getTeg().getTitulo());
 						}});
 				 }
 				 
@@ -291,6 +247,7 @@ public class CReporteProyecto extends CGeneral {
 		 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
 		
 		
+		 			p.put("Fecha", new Date());
 		 			p.put("Programa", cmbPrograma.getValue());
 					p.put("FechaInicio",dtbFechaInicio.getValue());
 					p.put("FechaFin",dtbFechaFin.getValue());
@@ -304,19 +261,7 @@ public class CReporteProyecto extends CGeneral {
 		 jstVistaPrevia.setType("pdf");
 		 jstVistaPrevia.setParameters(p);
 		 
-		 
-				   /* FileSystemView filesys = FileSystemView.getFileSystemView();
-					Map p = new HashMap();
-				    p.put("programa", cmbPrograma.getValue());
-					p.put("FechaInicio",dtbFechaInicio.getValue());
-					p.put("FechaFin",dtbFechaFin.getValue());
-					p.put("Area",cmbArea.getValue());
-					p.put("Tematica",cmbTematica.getValue());
-					p.put("Estatus",cmbEstatus.getValue());
-					JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/ReporteTEG.jasper"));
-					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(elementos));
-					JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ListaProyecto.pdf"); */
-		}
+		 		}
 	
 	}
 
