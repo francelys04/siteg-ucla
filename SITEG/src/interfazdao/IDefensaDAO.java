@@ -27,4 +27,6 @@ public interface IDefensaDAO extends JpaRepository<Defensa, Long> {
 
 	@Query("select defensa from Defensa defensa where defensa.teg in (select teg from Teg teg where teg.estatus=?1 and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?2)) and teg.fecha between ?3 and ?4 )")
 	public List<Defensa> buscarDefensaTegSegunEstatusPrograma(String estatus,Programa programa,Date fechaInicio,Date fechaFin);
+	
+	public List<Defensa> findByFechaBetween(Date fechaInicio, Date fechaFin);	
 }
