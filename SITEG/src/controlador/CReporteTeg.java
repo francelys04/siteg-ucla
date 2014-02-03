@@ -44,6 +44,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Label;
@@ -109,6 +110,8 @@ public class CReporteTeg extends CGeneral {
 	private Combobox cmbArea;
 	@Wire
 	private Combobox cmbTematica;
+	@Wire
+	private Jasperreport jstVistaPrevia;
 	private String[] estatusTeg = { "Todos", "TEG Registrado","Revisiones Finalizadas","Solicitando Defensa",
 			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado", "Jurado Asignado" };
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
@@ -177,12 +180,20 @@ public class CReporteTeg extends CGeneral {
 		Date fechaFin = dtbFechaFin.getValue();
 		String estatus = cmbEstatus.getValue();
 		List<Teg> teg = null;
+	if ((cmbPrograma.getValue() =="") || (cmbArea.getValue()=="") || (cmbTematica.getValue()=="") || (cmbEstatus.getValue()=="")) {
+		    Messagebox.show(
+				  "Datos imcompletos",
+				     "Informacion", Messagebox.OK,
+				   Messagebox.INFORMATION);
+	   }
+		
+	else{
 		if (fechaFin == null || fechaInicio == null
 				|| fechaInicio.after(fechaFin)) {
 			        Messagebox.show(
 					"La fecha de inicio debe ser primero que la fecha de fin",
 					"Error", Messagebox.OK, Messagebox.ERROR);
-	   } 
+	          } 
 		 else {
 			 if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && !estatus.equals("Todos")) {
 					String idTematica = cmbTematica.getSelectedItem().getId();
@@ -269,6 +280,7 @@ public class CReporteTeg extends CGeneral {
 //							   Messagebox.INFORMATION);
 					
 				 }
+
 		
 				 List<ElementoReporte> elementos = new ArrayList<ElementoReporte>();
 				 for (Teg t : teg) {
@@ -283,18 +295,28 @@ public class CReporteTeg extends CGeneral {
 				 }
 				    FileSystemView filesys = FileSystemView.getFileSystemView();
 					Map p = new HashMap();
+					 String rutaUrl = obtenerDirectorio();
+					 String reporteSrc = rutaUrl
+					 +
+					 "SITEG/vistas/reportes/estructurados/compilados/ReporteTEG.jasper";
+					 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
 				    p.put("programa", cmbPrograma.getValue());
 					p.put("FechaInicio",dtbFechaInicio.getValue());
 					p.put("FechaFin",dtbFechaFin.getValue());
 					p.put("Area",cmbArea.getValue());
 					p.put("Tematica",cmbTematica.getValue());
 					p.put("Estatus",cmbEstatus.getValue());
-					JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/ReporteTEG.jasper"));
-					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(elementos));
-					JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ListaTeg.pdf"); 
-				 }
+					//JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/ReporteTEG.jasper"));
+					//JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(elementos));
+					//JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ListaTeg.pdf"); 
+					jstVistaPrevia.setSrc(reporteSrc);
+					 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+					 elementos));
+					 jstVistaPrevia.setType("pdf");
+					 jstVistaPrevia.setParameters(p);
+		 }
 		 
-	
+	}
 	}
 
 	@Listen("onClick = #btnSalirReporteTeg")
