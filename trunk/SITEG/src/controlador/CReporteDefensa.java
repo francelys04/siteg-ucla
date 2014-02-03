@@ -48,6 +48,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Label;
@@ -167,6 +168,9 @@ public class CReporteDefensa extends CGeneral {
 	private Combobox cmbTematica;
 	@Wire
 	private Combobox cmbEstatus;
+	
+	@Wire
+	private Jasperreport jstVistaPrevia;
 	
 	
 	
@@ -300,6 +304,13 @@ public class CReporteDefensa extends CGeneral {
 
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		Map<String, Object> p = new HashMap<String, Object>();
+		String rutaUrl = obtenerDirectorio();
+		 String reporteSrc = rutaUrl
+		 +
+		 "SITEG/vistas/reportes/estructurados/compilados/RReporteDefensa.jasper";
+		 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+		
+		
 		p.put("fecha", new Date());
 		p.put("fecha1", fechaInicio);
 		p.put("fecha2", fechaFin);
@@ -308,20 +319,12 @@ public class CReporteDefensa extends CGeneral {
 		p.put("programa", programa1);
 		p.put("estatus", estatusdefensa);
 
-		JasperReport jasperReport = (JasperReport) JRLoader
-				.loadObject(getClass().getResource(
-						"/reporte/RReporteDefensa.jasper"));
-
-		JasperPrint jasperPrint = JasperFillManager.fillReport(
-				jasperReport, p, new JRBeanCollectionDataSource(elementos));
+		 jstVistaPrevia.setSrc(reporteSrc);
+		 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+		 elementos));
+		 jstVistaPrevia.setType("pdf");
+		 jstVistaPrevia.setParameters(p);
 		
-		String ruta = filesys.getHomeDirectory().toString() + "/reporte.pdf";
-		JasperExportManager.exportReportToPdfFile(jasperPrint, ruta);
-		
-		Messagebox.show("Su reporte fue guardado en: " + ruta,
-				"Información", Messagebox.OK,
-				Messagebox.INFORMATION);
-
 	}
 
 	@Listen("onClick = #btnSalirReporteSolicitud")
