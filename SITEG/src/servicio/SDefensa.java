@@ -52,5 +52,10 @@ public class SDefensa {
 		return defensas;
 	}
 	
+	public List<Defensa> buscardefensaPorDosFechas(
+		Date fechaInicio, Date fechaFin) {
+		return interfaceDefensa.findByFechaBetween(fechaInicio, fechaFin);
+	}
+
 	
 }
