@@ -27,6 +27,7 @@ import modelo.ProgramaArea;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
+import modelo.reporte.ProfesorCargo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -43,6 +44,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Label;
@@ -63,53 +65,7 @@ import servicio.STematica;
 
 @Controller
 public class CReporteProfesorCargo extends CGeneral {
-	public static class ElementoReporte {
-		private String nombre;
-		private String titulo;
-		private String cargo;
-		private String estatusTeg;
-
-
-		public ElementoReporte(String nombre, String titulo, String cargo, String estatusTeg) {
-			super();
-			this.nombre = nombre;
-			this.titulo = titulo;
-			this.cargo = cargo;
-			this.estatusTeg = estatusTeg;
-		}
-
-		public String getNombre() {
-			return nombre;
-		}
-		
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
-		
-		public String getTitulo() {
-			return titulo;
-		}
-		
-		public void setTitulo(String titulo) {
-			this.titulo = titulo;
-		}
-		
-		public String getCargo() {
-			return cargo;
-		}
-		
-		public void setCargo(String cargo) {
-			this.cargo = cargo;
-		}
-		
-		public String getEstatusTeg() {
-			return estatusTeg;
-		}
-
-		public void setEstatusTeg(String estatusTeg) {
-			this.estatusTeg = estatusTeg;
-		}
-	}
+	
 	
 	SJurado servicioJurado = GeneradorBeans.getServicioJurado();
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
@@ -139,6 +95,8 @@ public class CReporteProfesorCargo extends CGeneral {
 	private Combobox cmbArea;
 	@Wire
 	private Combobox cmbTematica;
+	@Wire
+	private Jasperreport jstVistaPrevia;
 	private String[] estatusProfesor = { "Todos", "Tutor",
 			"Comision Evaluadora", "Jurado" };
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
@@ -223,7 +181,7 @@ public class CReporteProfesorCargo extends CGeneral {
 		System.out.println(tipoCargo);
 		//Profesor profesor = servicioProfesor.buscarProfesorPorCedula(cedula);
 
-		List<ElementoReporte> elementos = new ArrayList<ElementoReporte>();
+		List<ProfesorCargo> elementos = new ArrayList<ProfesorCargo>();
 
 		if (fechaFin == null || fechaInicio == null || fechaInicio.after(fechaFin)) {
 			Messagebox.show(
@@ -234,7 +192,7 @@ public class CReporteProfesorCargo extends CGeneral {
 			for (Teg teg : tegs) {
 				Profesor profesorTutor = teg.getTutor();
 				if (tipoCargo.equals("Tutor") || tipoCargo.equals("Todos")) {
-					elementos.add(new ElementoReporte(
+					elementos.add(new ProfesorCargo(
 							profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 							teg.getTitulo(),
 							"Tutor", teg.getEstatus()));
@@ -243,7 +201,7 @@ public class CReporteProfesorCargo extends CGeneral {
 				if (tipoCargo.equals("Jurado") || tipoCargo.equals("Todos")) {
 					for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(teg)) {
 						Profesor profesorJurado = jurado.getProfesor();
-						elementos.add(new ElementoReporte(
+						elementos.add(new ProfesorCargo(
 								profesorJurado.getNombre() + " " + profesorJurado.getApellido(),
 								teg.getTitulo(),
 								"Jurado - " + jurado.getTipoJurado().getNombre(), teg.getEstatus()));
@@ -252,7 +210,7 @@ public class CReporteProfesorCargo extends CGeneral {
 				
 				if (tipoCargo.equals("Comision Evaluadora") || tipoCargo.equals("Todos")) {
 					for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(teg)) {
-						elementos.add(new ElementoReporte(
+						elementos.add(new ProfesorCargo(
 								profesorComision.getNombre() + " " + profesorComision.getApellido(),
 								teg.getTitulo(),
 								"Comision", teg.getEstatus()));
@@ -260,36 +218,38 @@ public class CReporteProfesorCargo extends CGeneral {
 				}
 			}
 
-			Collections.sort(elementos, new Comparator<ElementoReporte>() {
-				public int compare(ElementoReporte a, ElementoReporte b) {
-				return a.nombre.compareTo(b.nombre);
+			Collections.sort(elementos, new Comparator<ProfesorCargo>() {
+				public int compare(ProfesorCargo a, ProfesorCargo b) {
+				return a.getNombre().compareTo(b.getNombre());
 				}});
 		}
 
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		Map<String, Object> p = new HashMap<String, Object>();
-		p.put("fecha", new Date());
-		p.put("fecha1", fechaInicio);
-		p.put("fecha2", fechaFin);
-		p.put("area", area1);
-		p.put("tematica", tematica1);
-		p.put("programa", programa1);
-		p.put("cargo", tipoCargo);
-
-		JasperReport jasperReport = (JasperReport) JRLoader
-				.loadObject(getClass().getResource(
-						"/reporte/RReporteProfesorCargo.jasper"));
-
-		JasperPrint jasperPrint = JasperFillManager.fillReport(
-				jasperReport, p, new JRBeanCollectionDataSource(elementos));
+		String rutaUrl = obtenerDirectorio();
+		 String reporteSrc = rutaUrl
+		 +
+		 "SITEG/vistas/reportes/estructurados/compilados/RReporteProfesorCargo.jasper";
+		 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
 		
-		String ruta = filesys.getHomeDirectory().toString() + "/reporte.pdf";
-		JasperExportManager.exportReportToPdfFile(jasperPrint, ruta);
 		
-		Messagebox.show("Su reporte fue guardado en: " + ruta,
-				"Información", Messagebox.OK,
-				Messagebox.INFORMATION);
+		 p.put("fecha", new Date());
+			p.put("fecha1", fechaInicio);
+			p.put("fecha2", fechaFin);
+			p.put("area", area1);
+			p.put("tematica", tematica1);
+			p.put("programa", programa1);
+			p.put("cargo", tipoCargo);
 
+		 jstVistaPrevia.setSrc(reporteSrc);
+		 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+		 elementos));
+		 jstVistaPrevia.setType("pdf");
+		 jstVistaPrevia.setParameters(p);
+		 
+		
+
+		
 	}
 	@Listen("onClick = #btnSalirReporteProfesorCargo")
 	public void cancelarItem() {
