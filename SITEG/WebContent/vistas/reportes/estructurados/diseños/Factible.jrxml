@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Factible" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb15444e-75ec-4b31-b233-2dc66cb0303a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="225"/>
+	<queryString>
+		<![CDATA[Select estudiante.nombre ne, estudiante.apellido ae, estudiante.cedula ce, teg.titulo te, programa.nombre pn, profesor.nombre np, profesor.apellido ap, profesor.nombre dn , profesor.apellido da from estudiante, teg, programa, profesor, estudiante_teg,tematica,area_investigacion,programa_area where estudiante.cedula= estudiante_teg.estudiante_cedula and estudiante_teg.teg_id=teg.id and estudiante.programa_id = programa.id and teg.profesor_cedula = profesor.cedula and teg.id=147 and teg.tematica_id = tematica.id and tematica.area_investigacion_id = area_investigacion.id and area_investigacion.id = programa_area.area_investigacion_id and programa_area.programa_id = programa.id;]]>
+	</queryString>
+	<field name="ne" class="java.lang.String"/>
+	<field name="ae" class="java.lang.String"/>
+	<field name="ce" class="java.lang.String"/>
+	<field name="te" class="java.lang.String"/>
+	<field name="pn" class="java.lang.String"/>
+	<field name="np" class="java.lang.String"/>
+	<field name="ap" class="java.lang.String"/>
+	<field name="dn" class="java.lang.String"/>
+	<field name="da" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="88" splitType="Stretch">
+			<image>
+				<reportElement x="9" y="2" width="130" height="75" uuid="231bac07-f2c3-4459-8d7a-efa173b790cd"/>
+				<imageExpression><![CDATA["C:\\Users\\andrea\\Documents\\Ucla\\LOGOUCLABLANCOAZUL.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="462" y="11" width="110" height="66" uuid="2f46ea4e-468d-417b-9064-a9ac8988e574"/>
+				<imageExpression><![CDATA["C:\\Users\\andrea\\Documents\\Ucla\\DCYT.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="163" y="11" width="246" height="29" uuid="63271463-7e77-4f8d-8178-73fd678d023b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[    Universidad Centroccidental Lisandro Alvarado      Decanato de Ciencias y Tecnología      ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="218" y="37" width="137" height="14" uuid="0e5400e3-ff53-4f86-bf84-b0c8e5eeec64"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pn}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="330" splitType="Stretch">
+			<staticText>
+				<reportElement x="354" y="12" width="67" height="14" uuid="a477c8e7-48d8-4fe2-a4e7-0eb3eac8d07b"/>
+				<text><![CDATA[Barquisimeto, ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="29" width="68" height="16" uuid="87f8011a-342f-4963-8eb9-7656a1e19892"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Ciudadado(a)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="15" y="44" width="30" height="17" uuid="2902e208-510d-43b3-97c9-8c165ecd3d0f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{np}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="45" width="50" height="16" uuid="7cdf1c7f-0123-4c59-8cbb-c06e2aa4b3e2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ap}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="61" width="100" height="16" uuid="ee859871-190f-4dc8-b135-caefad742ebd"/>
+				<text><![CDATA[Departamento de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="77" width="100" height="16" uuid="bc302fdf-0eef-4ec6-a207-ab0394f367b2"/>
+				<text><![CDATA[Presente.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="126" width="517" height="16" uuid="cd78b985-77d7-49fb-bcf2-7189edbde888"/>
+				<text><![CDATA[Me dirijo a usted, con el objeto de notificarle que el Proyecto de Trabajo Especial de Grado de la bachiller]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="32" y="143" width="36" height="15" uuid="4151dc34-73ef-4aec-9bc6-2b93538e20a2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ne}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="143" width="43" height="15" uuid="20c601a9-b189-4a64-8d30-609a43749e7c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ae}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="144" width="61" height="15" uuid="b1420fe4-e56b-4992-a3be-6bbe0a69bb38"/>
+				<textFieldExpression><![CDATA[$F{ce}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="115" y="144" width="179" height="15" uuid="e5778904-8775-41a1-a5b9-e80253e78a72"/>
+				<text><![CDATA[titular de la Cédula de Identidad N° ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="144" width="46" height="15" uuid="622f79d4-d664-49b3-8753-96ca6de80732"/>
+				<text><![CDATA[. Titulado]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="397" y="143" width="90" height="15" uuid="170a9c38-e185-4eea-8896-14c6a67b57af"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{te}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="491" y="143" width="69" height="15" uuid="627981fc-5257-43ac-ba6e-7e60a6a24995"/>
+				<text><![CDATA[fue aprobado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="161" width="155" height="14" uuid="1ed1c212-9ee6-488a-a4d2-c3d7156db7b5"/>
+				<text><![CDATA[por la Comisión de Currículo de ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="194" width="168" height="15" uuid="d83e59a3-ba0b-4a29-8e42-dc4b986794b8"/>
+				<text><![CDATA[Deseandoles el mayor de los exitos.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="258" width="572" height="13" uuid="3f6d723d-09cf-4208-93d3-d3ba872a6e94"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Atentamente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="184" y="161" width="164" height="14" uuid="c7e0be72-3bd2-42da-885d-bfdb253ee0d9"/>
+				<textFieldExpression><![CDATA[$F{pn}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="223" y="282" width="47" height="13" uuid="0bae8493-dae8-4929-b90d-c0aa61b260b8"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Profesor]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="262" y="282" width="51" height="13" uuid="903cc39e-f91e-493e-92cf-a3b0b29d9dd4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="297" y="282" width="53" height="13" uuid="5fbb05f7-449e-41e8-accb-7c7ae555e0af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{da}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="295" width="572" height="14" uuid="0683124d-a078-45f3-8cb7-12e38bf5857b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Director de Programa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="308" width="572" height="14" uuid="b91570d3-f077-42e2-86b0-d089dc976bc0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pn}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="31" y="158" width="80" height="1" uuid="c962f008-f402-4d3c-912a-b02b7a754057"/>
+			</line>
+			<line>
+				<reportElement x="178" y="175" width="162" height="1" uuid="0d5049cd-9b8c-486d-81d1-dd242afbba92"/>
+			</line>
+			<line>
+				<reportElement x="395" y="158" width="90" height="1" uuid="d8603d9d-6155-4c59-9e5a-a7be7eeb5abc"/>
+			</line>
+			<line>
+				<reportElement x="279" y="158" width="75" height="1" uuid="d4413dde-bd14-4bbf-97ca-66fb64d722cb"/>
+			</line>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="69">
+			<staticText>
+				<reportElement x="131" y="49" width="310" height="16" uuid="e0cb53b4-b246-4f43-be8a-2cddae67a48b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Avenida Las Industrias. Nucleo Obelisco. Edificio N. Planta Baja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="32" width="137" height="16" uuid="d547e833-43d0-4e47-b847-2500ef3ee843"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA["Una Voz del Pensamiento"]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
