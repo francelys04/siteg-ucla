@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="db8faee9-7e3e-4b36-b0b5-048315993d1f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     a."nombre",
+     a."descripcion",
+     a."correo",
+     a."profesor_cedula",
+     p."cedula",
+     p."nombre" AS nombreprofesor,
+     p."apellido" AS apellidoprofesor
+FROM
+     "profesor" p INNER JOIN "programa" a ON p."cedula" = a."profesor_cedula"
+WHERE
+     a.estatus = 'true']]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="correo" class="java.lang.String"/>
+	<field name="profesor_cedula" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="nombreprofesor" class="java.lang.String"/>
+	<field name="apellidoprofesor" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="133" y="0" width="362" height="39" uuid="a93558bd-eaf1-4c6f-86bd-57c4fdcbf968"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="88" height="62" uuid="93bc4694-7788-4720-8151-2baea5ba6fc3"/>
+				<imageExpression><![CDATA["/reporte/logo ucla.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="178" y="0" width="224" height="20" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Lista de Programas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="59" y="2" width="50" height="20" uuid="131c116d-9f41-4090-9a47-f7387ff23f5e"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="2" width="54" height="20" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="2" width="116" height="20" uuid="406d6b3f-e2c9-494f-b5c1-42b0e936673b"/>
+				<text><![CDATA[Director de Programa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="220" height="20" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="206" height="20" uuid="39ae1f72-7cbf-4f86-a6e2-62c0be636c7c"/>
+				<textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="462" y="0" width="44" height="20" uuid="a35ff3e6-fb9c-489e-b362-bb035cd8ac71"/>
+				<textFieldExpression><![CDATA[$F{nombreprofesor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="506" y="0" width="45" height="20" uuid="b0d3f699-361d-41d5-80eb-bbe46d2dfc38"/>
+				<textFieldExpression><![CDATA[$F{apellidoprofesor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="178" y="34" width="216" height="20" uuid="81e7c97f-1907-4395-8209-2cfbcf9186d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="476" y="34" width="73" height="20" uuid="9775a217-d99c-4283-b0a8-9092ae0ce9f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+ "de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="521" y="34" width="51" height="20" uuid="7836edf7-c8e8-4fcb-be5a-ce4306de3405"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

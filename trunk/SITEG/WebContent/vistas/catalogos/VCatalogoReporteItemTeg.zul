@@ -1,0 +1,111 @@
+<window title="Lista de Tegs" border="normal"
+	width="100%" height="500px" closable="true"
+	apply="controlador.CCatalogoReporteItemTeg">
+	<separator />
+	<separator />
+	<separator />
+
+	
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+	<hbox>
+	<label value="Estatus:" style="margin-left:5px" />
+<combobox id="cmbEstatus" readonly="true" inplace="true">
+		<comboitem label="Aprobado" />
+		<comboitem label="Reprobado" />
+</combobox> 
+</hbox>
+
+					<separator />
+					<separator />
+
+	<listbox id="ltbReporteItemTeg" mold="paging" pageSize="6"
+		style="margin-left:10px;margin-right:10px"
+		emptyMessage="No hay TEG para Calificar Defensa">
+		
+
+
+
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtEstudianteCalificarDefensa"
+					sclass="search-query" placeholder="Nombre" instant="true"
+					width="55%" value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtMostrarFechaCalificar"
+					sclass="search-query" placeholder="Fecha" instant="true"
+					width="55%" value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtMostrarAreaCalificar"
+					sclass="search-query" placeholder="Área" instant="true" width="55%"
+					value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtMostrarTematicaCalificar"
+					sclass="search-query" placeholder="Temática" instant="true"
+					width="55%" value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtMostrarTituloCalificar"
+					sclass="search-query" placeholder="Título" instant="true"
+					width="75%" value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtMostrarNombreTutorCalificar"
+					sclass="search-query" placeholder="Nombre" instant="true"
+					width="55%" value="" onChange="" />
+			</auxheader>
+
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtMostrarApellidoTutorCalificar"
+					sclass="search-query" placeholder="Apellido" instant="true"
+					width="55%" value="" onChange="" />
+			</auxheader>
+
+
+		</auxhead>
+
+		<listhead>
+			<listheader label="Estudiante" align="center" />
+			<listheader label="Fecha" align="center" />
+			<listheader label="Área" align="center" />
+			<listheader label="Temática" align="center" />
+			<listheader label="Título" align="center" width="25%" />
+			<listheader label="Nombre Tutor" align="center" />
+			<listheader label="Apellido Tutor" align="center" />
+		</listhead>
+
+		<template name="model">
+			<listitem>
+				<listcell label="${each.estatus}" />
+				<listcell label="${each.fecha}" />
+				<listcell
+					label="${each.tematica.areaInvestigacion.nombre}" />
+				<listcell label="${each.tematica.nombre}" />
+				<listcell label="${each.titulo}" />
+				<listcell label="${each.tutor.nombre}" />
+				<listcell label="${each.tutor.apellido}" />
+
+			</listitem>
+		</template>
+
+
+
+	</listbox>
+
+	<separator />
+	<separator />
+	<separator />
+
+
+
+</window>
