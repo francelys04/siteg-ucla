@@ -65,6 +65,11 @@ public List<Estudiante> buscarEstudiantesDelTeg(Teg teg){
 	return estudiantes;
 }
 
+public List<Estudiante> buscarEstudiantesPorPrograma(Programa programa) {
+	List<Estudiante> estudiantes;
+	estudiantes = interfaceEstudiante.findByPrograma(programa);
+	return estudiantes;
+}
 
 }
 
