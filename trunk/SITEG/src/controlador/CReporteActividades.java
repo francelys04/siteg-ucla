@@ -70,9 +70,7 @@ public class CReporteActividades extends CGeneral {
 		     p.put("logoUcla", reporteImage + "logo ucla.png");
 			 p.put("logoCE", reporteImage + "logo CE.png");
 		     
-		     //p.put("nombre", );
-		     //System.out.println(cmbCronogramaPrograma.getValue());
-		     //p.put("lapso", cmbCronogramaLapso.getValue());	
+		  
 		     JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/RActividades.jasper"));
 		     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,p, new JRBeanCollectionDataSource(actividades));
 		     JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ReporteActividades.pdf"); 
@@ -82,7 +80,7 @@ public class CReporteActividades extends CGeneral {
 				Messagebox.INFORMATION);
 		}
 		
-	@Listen("onClick = #btnCancelarReporteCronograma")
+	@Listen("onClick = #btnCancelarReporteActividades")
    public void Salir(){
 	   wdwReporteActividades.onClose();
    
