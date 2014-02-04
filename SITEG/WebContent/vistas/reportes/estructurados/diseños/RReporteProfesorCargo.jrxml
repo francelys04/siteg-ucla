@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VReporteProfesorCargo" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86643447-ad29-4b3c-8409-5f8e59397c3f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="52"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#0099CC"/>
@@ -24,7 +24,6 @@
 		</box>
 	</style>
 	<subDataset name="Table Dataset 1" uuid="4df9d0ba-82ad-41e3-a9eb-b393e5bc8d1e"/>
-	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="fecha2" class="java.util.Date"/>
 	<parameter name="fecha1" class="java.util.Date"/>
 	<parameter name="nombre" class="java.lang.String"/>
@@ -172,7 +171,19 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="29" splitType="Stretch">
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="233" y="0" width="212" height="29" backcolor="#0099FF" uuid="26980ca9-3638-41f8-b098-d0df227a6749"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="123" y="0" width="110" height="29" backcolor="#0099FF" uuid="d5e36183-d3c8-469d-a666-374758779292"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="445" y="2" width="126" height="27" forecolor="#000000" backcolor="#0099FF" uuid="d3adad6d-5188-4a55-9ac7-39af4156857a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="123" height="29" backcolor="#0099FF" uuid="59cab6f8-da56-4955-b7db-f7cf12e39a47"/>
+			</rectangle>
 			<staticText>
 				<reportElement x="266" y="2" width="102" height="27" uuid="e3b3edd0-5a50-4c76-ab84-fcff9a150a4f"/>
 				<textElement verticalAlignment="Middle">
@@ -181,57 +192,54 @@
 				<text><![CDATA[Titulo del TEG]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="131" y="2" width="102" height="27" uuid="a2e7ef94-3950-4e36-8ea5-2ddd1bf0a03b"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="161" y="2" width="26" height="27" uuid="a2e7ef94-3950-4e36-8ea5-2ddd1bf0a03b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Rol]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="434" y="2" width="102" height="27" uuid="9f7928db-fc98-42fc-b6db-3d52288fbe6f"/>
+				<reportElement x="449" y="2" width="102" height="27" uuid="9f7928db-fc98-42fc-b6db-3d52288fbe6f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estatus del TEG]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="2" width="102" height="27" uuid="91598d21-3d90-4b9d-ab24-0369b62d10d0"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement mode="Transparent" x="10" y="2" width="102" height="27" uuid="91598d21-3d90-4b9d-ab24-0369b62d10d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Profesor]]></text>
 			</staticText>
-			<line>
-				<reportElement x="1" y="27" width="571" height="1" uuid="b2f3d772-605c-4249-b936-a481207edfeb"/>
-			</line>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement x="266" y="5" width="143" height="20" uuid="43e17aa0-3f41-4dfd-aae2-d1f648af7d62"/>
-				<textElement>
+				<reportElement style="table" x="233" y="0" width="212" height="28" uuid="43e17aa0-3f41-4dfd-aae2-d1f648af7d62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="131" y="5" width="100" height="20" uuid="6b17d4cd-0c9b-4596-b649-3710bc1491ed"/>
-				<textElement>
+				<reportElement style="table" x="123" y="0" width="110" height="28" uuid="6b17d4cd-0c9b-4596-b649-3710bc1491ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cargo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1" y="5" width="122" height="20" uuid="e0f8a18e-441d-487c-9321-d5dc250b74ee"/>
-				<textElement>
+				<reportElement style="table" x="1" y="0" width="122" height="28" uuid="e0f8a18e-441d-487c-9321-d5dc250b74ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="5" width="124" height="20" uuid="355c013b-7ada-4fc5-bbd7-fe7fac836187"/>
-				<textElement>
+				<reportElement style="table" x="445" y="0" width="127" height="28" uuid="355c013b-7ada-4fc5-bbd7-fe7fac836187"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{estatusTeg}]]></textFieldExpression>
@@ -239,7 +247,7 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="12" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="37" splitType="Stretch">
