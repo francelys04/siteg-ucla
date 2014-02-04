@@ -26,7 +26,8 @@ public List<Actividad> buscarActividad(){
 }
 public List<Actividad> buscarActivos(){
 	List<Actividad> actividades;
-	actividades= interfaceActividad.buscarActividadesActivos();
+	actividades= interfaceActividad.findByEstatusTrue();//nuevo
+	//actividades= interfaceActividad.buscarActividadesActivos();
 	return actividades;
 }
 public List<Actividad> buscarActividadSinCronograma(Programa programa,

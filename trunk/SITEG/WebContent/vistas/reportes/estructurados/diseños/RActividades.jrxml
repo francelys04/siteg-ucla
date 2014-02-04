@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RActividades" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cd361bf6-59f1-447d-99a0-5bf206aca812">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nombre" class="java.lang.String"/>
+	<parameter name="descripcion" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="101" y="18" width="347" height="39" uuid="b572ba3b-42d1-4fdb-b031-5d20d895fa14"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="15" y="16" width="74" height="58" uuid="7fe1f88e-4d76-4891-b05b-06a3245b7d7a"/>
+				<imageExpression><![CDATA["/reporte/logo ucla.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="462" y="16" width="82" height="54" uuid="3147a01b-7440-4fa3-954e-088e3d8b1da6"/>
+				<imageExpression><![CDATA["/reporte/logo dcyt.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="136" y="15" width="260" height="20" uuid="9aaf7c24-8c06-46f2-8c45-4f8337ebd777"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Lista de Actividades]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<rectangle>
+				<reportElement x="15" y="11" width="206" height="27" forecolor="#000000" backcolor="#0099FF" uuid="fcd6c25b-b2c6-489f-9b91-12604de2f180"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="62" y="11" width="104" height="27" uuid="718219c0-d79d-40d4-a4cb-f4b3e73d49c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="221" y="11" width="311" height="27" forecolor="#000000" backcolor="#0099FF" uuid="a9497d0e-be69-4d19-b072-55078d62ee76"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="279" y="12" width="183" height="27" uuid="fd305667-7076-4fce-9fbf-078db035fcb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción de la Actividad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement mode="Transparent" x="221" y="4" width="311" height="25" uuid="987e3fb5-98a4-4400-a052-38b69148dfcb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="4" width="206" height="25" uuid="494de44a-631d-4167-b29d-303c63f28f7f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="8" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="15" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="44" splitType="Stretch">
+			<image>
+				<reportElement x="15" y="5" width="61" height="39" uuid="15094891-d506-458f-96d7-7f81a4182424"/>
+				<imageExpression><![CDATA["/reporte/logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="180" y="10" width="216" height="20" uuid="a68a920a-f3a7-48ac-aa95-67d362cfd75a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>
