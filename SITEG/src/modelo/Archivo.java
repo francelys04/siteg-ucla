@@ -38,7 +38,7 @@ public class Archivo {
 	@Column(name="estatus")
 	private Boolean estatus;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name="programa_id", referencedColumnName = "id")
 	private Programa programa;
 	
