@@ -31,7 +31,7 @@
 	<parameter name="Tematica" class="java.lang.String"/>
 	<parameter name="Programa" class="java.lang.String"/>
 	<parameter name="Estatus" class="java.lang.String"/>
-	<parameter name="Fecha" class="java.lang.String"/>
+	<parameter name="Fecha" class="java.util.Date"/>
 	<field name="teg.titulo" class="java.lang.String"/>
 	<field name="nombreEstudiantes" class="java.lang.String"/>
 	<field name="teg.tutor.nombre" class="java.lang.String"/>
