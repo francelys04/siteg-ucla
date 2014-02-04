@@ -46,6 +46,12 @@ public class STeg {
 		return tegs;
 
 	}
+	public List<Teg> buscarTegs(String estatus) {
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatus(estatus);
+		return tegs;
+
+	}
 	// Evaluar Revisiones
 	public List<Teg> buscarTegRegistrado() {
 		List<Teg> tegs;
