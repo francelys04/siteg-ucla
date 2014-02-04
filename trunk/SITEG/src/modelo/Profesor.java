@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class Profesor {
 
 	@Id
-	@Column(name = "cedula", nullable = false)
+	@Column(name = "cedula", nullable = false, length = 10)
 	private String cedula;
 
 	@Column(name = "nombre", length = 100)
