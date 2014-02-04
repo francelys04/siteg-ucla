@@ -38,6 +38,12 @@ public class SProfesor {
 		profesores = interfazProfesor.findByEstatusTrue();
 		return profesores;
 	}
+	public List<Profesor> buscarTodos() {
+		// TODO Auto-generated method stub
+		List<Profesor> profesores;
+		profesores = interfazProfesor.findAll();
+		return profesores;
+	}
 
 	public Profesor buscarProfesorLoggeado(Usuario u) {
 		// TODO Auto-generated method stub
@@ -85,6 +91,11 @@ public class SProfesor {
 		return profesores;
 	}
 	
+	//public List<Profesor> buscarProfesoresPorTematicayEstatus(Tematica tematica, Boolean estatus) {
+		List<Profesor> profesores;
+		//profesores = interfazProfesor.buscarProfesoresPorTematicasyEstatus(tematica,estatus);
+		//return profesores;
+	//}
 	
 	
 }
