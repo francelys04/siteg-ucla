@@ -1,11 +1,25 @@
 package controlador;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.swing.filechooser.FileSystemView;
 
 import modelo.AreaInvestigacion;
 import modelo.Programa;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -16,6 +30,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -151,6 +166,32 @@ public class CCatalogoPrograma extends CGeneral {
 			wdwCatalogoPrograma.onClose();
 		}
 
+	}
+	@Listen("onClick = #btnImprimir")
+	public void imprimir() throws SQLException{
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres","equipo2");
+		  FileSystemView filesys = FileSystemView.getFileSystemView();
+		 JasperReport jasperReport;
+		try {
+			
+			jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/RPrograma.jasper"));
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, con);			
+			JasperViewer.viewReport(jasperPrint, false);
+			con.close();
+			//JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/RPrograma.pdf");
+		  
+		} catch (JRException e) {
+			System.out.println(e);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   		
 	}
 
 }

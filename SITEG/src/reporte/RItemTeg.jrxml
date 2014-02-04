@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RItemTeg" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d2f0436e-cada-4241-81d9-b6a7fbc5f192">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="a1bed596-d8f7-4f9b-b34e-33a7c170fc5c"/>
+	<parameter name="idteg" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tutor" class="java.lang.String"/>
+	<parameter name="tematica" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="estudiantes" class="java.util.List"/>
+	<queryString>
+		<![CDATA[select ie.nombre, idf.ponderacion, ie.tipo from item_evaluacion ie, item_defensa idf, teg t, defensa d  where ie.id=idf.item_id and idf.defensa_id=d.id and d.teg_id=t.id and d.teg_id=$P{idteg} UNION select ie.nombre, ifa.ponderacion, ie.tipo from item_evaluacion ie, item_factibilidad ifa, teg t, factibilidad f  where ie.id=ifa.item_evaluacion_id and ifa.factibilidad_id=f.id and f.teg_id=t.id and f.teg_id=$P{idteg}]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="ponderacion" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<group name="tipo">
+		<groupExpression><![CDATA[$F{tipo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="116" y="0" width="347" height="39" uuid="21f5d61a-5923-4c01-98c1-fde18f722a17"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="133" splitType="Stretch">
+			<staticText>
+				<reportElement x="169" y="0" width="224" height="20" uuid="d4c8b7df-91d1-418c-8ee9-8ef2916c9fb4"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Items de un TEG]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="142" y="32" width="100" height="20" uuid="cb1c8d9a-46dc-4198-a98a-f5b15d3d604c"/>
+				<textFieldExpression><![CDATA[$P{tutor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="32" width="100" height="20" uuid="5858a34d-c6cc-4e5b-a59d-92add98ee355"/>
+				<text><![CDATA[Tutor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="72" width="100" height="20" uuid="b9497726-2e67-4c54-98ae-15e86324fc51"/>
+				<text><![CDATA[Tematica:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="52" width="100" height="20" uuid="b49accd1-f25d-4755-b887-479c0e4b3587"/>
+				<text><![CDATA[Titulo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="142" y="72" width="100" height="20" uuid="f156ae38-2fa9-42be-9545-8ce6170ba42f"/>
+				<textFieldExpression><![CDATA[$P{tematica}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="142" y="52" width="100" height="20" uuid="78a72d71-609d-49aa-9072-2ab891157cc7"/>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="142" y="92" width="100" height="20" uuid="de20da77-6a9b-430b-8363-834b9d2aeafb"/>
+				<textFieldExpression><![CDATA[""+$P{estudiantes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="92" width="100" height="20" uuid="6974ddae-d5e1-424f-be50-0c391694fe97"/>
+				<text><![CDATA[Estudiantes:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="55" y="0" width="44" height="20" uuid="f2ad6792-50ed-4df4-a55f-ef80f0953a1f"/>
+				<text><![CDATA[Item]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="259" y="0" width="69" height="20" uuid="fea5b43f-70bd-4a9a-8022-84bfacdbb6ea"/>
+				<text><![CDATA[Apreciacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="0" width="33" height="20" uuid="89b8fc7f-f2ef-43cd-a84e-42d1e72faf8d"/>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="242" height="32" uuid="59ba33c1-7134-44be-9733-8e768e72260f"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="2" width="149" height="20" uuid="f066eab7-137c-43cd-92bc-54c046759a63"/>
+				<textFieldExpression><![CDATA[$F{ponderacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="2" width="100" height="20" uuid="8a02a418-6fc2-4128-991c-d843d60305b5"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="189" y="37" width="216" height="20" uuid="7a476cd4-98de-42a6-bcb1-707afe178fd5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="522" y="37" width="51" height="20" uuid="3e48d161-0f71-45b9-8931-8947126522d3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="477" y="37" width="73" height="20" uuid="fe6e9d28-45ef-4000-8678-4c833150dfbf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+ "de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

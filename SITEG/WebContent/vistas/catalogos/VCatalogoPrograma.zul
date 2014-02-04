@@ -36,4 +36,29 @@
 			</listitem>
 		</template>
 	</listbox>
+		<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:3%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
+					<separator />
+					<div sclass="btn-group">
+
+						<button id="btnImprimir" tabindex="4"
+							sclass="btn" label="Imprimir">
+						</button>
+
+						<button id="btnSalir" label="Salir" width="110px"
+							sclass="btn"
+							image="/public/imagenes/iconos/salir.png" tabindex="7">
+						</button>
+						<separator />
+					</div>
+
+				</div>
+			</panelchildren>
+		</panel>
+		<jasperreport id="jstVistaPrevia" height="40%" width="100%"></jasperreport>
+	
+	
+	
 </window>
