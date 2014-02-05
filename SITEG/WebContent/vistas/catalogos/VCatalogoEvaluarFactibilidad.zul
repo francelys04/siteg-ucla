@@ -1,7 +1,7 @@
 <window id="wdwCatalogoEvaluarFactibilidad"
 	title="Proyectos con Comision Asignada" border="normal" width="100%"
 	height="600px" closable="true"
-	apply="controlador.CCatalogoEvaluarFactibilidad">
+	apply="controlador.catalogo.CCatalogoEvaluarFactibilidad">
 
 	<separator />
 	<separator />

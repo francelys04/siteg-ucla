@@ -1,11 +1,9 @@
 package interfazdao;
 import java.util.List;
-
-import modelo.ItemFactibilidad;
-import modelo.ItemEvaluacion;
 import modelo.Factibilidad;
+import modelo.compuesta.ItemFactibilidad;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+
    public interface IItemFactibilidadDAO extends JpaRepository<ItemFactibilidad, String> {
 
 	//  @Query ("select i from ItemFactibilidad i where i.factibilidad=?1")

@@ -145,7 +145,7 @@
 				<text><![CDATA[Resumen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="130" y="43" width="100" height="20" backcolor="#33FF99" uuid="cb3c2b57-a27a-4158-bd6e-8b2f6b13f650"/>
+				<reportElement mode="Opaque" x="130" y="43" width="100" height="20" forecolor="#000000" backcolor="#00CCCC" uuid="cb3c2b57-a27a-4158-bd6e-8b2f6b13f650"/>
 				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 					<pen lineWidth="1.75" lineStyle="Double"/>
 					<topPen lineWidth="1.75" lineStyle="Double"/>
@@ -153,11 +153,13 @@
 					<bottomPen lineWidth="1.75" lineStyle="Double"/>
 					<rightPen lineWidth="1.75" lineStyle="Double"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[tematica.nombre]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="230" y="43" width="100" height="20" backcolor="#33FF99" uuid="e4d51fb6-4ab4-4e43-9fbc-aeebb55a34c6"/>
+				<reportElement mode="Opaque" x="230" y="43" width="100" height="20" forecolor="#000000" backcolor="#00CCCC" uuid="e4d51fb6-4ab4-4e43-9fbc-aeebb55a34c6"/>
 				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 					<pen lineWidth="1.75" lineStyle="Double"/>
 					<topPen lineWidth="1.75" lineStyle="Double"/>
@@ -165,11 +167,13 @@
 					<bottomPen lineWidth="1.75" lineStyle="Double"/>
 					<rightPen lineWidth="1.75" lineStyle="Double"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{estatusProyectoTeg1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="330" y="43" width="100" height="20" backcolor="#33FF99" uuid="47a73247-b073-4f36-8da6-7cf8dba6ee2a"/>
+				<reportElement mode="Opaque" x="330" y="43" width="100" height="20" forecolor="#000000" backcolor="#00CCCC" uuid="47a73247-b073-4f36-8da6-7cf8dba6ee2a"/>
 				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 					<pen lineWidth="1.75" lineStyle="Double"/>
 					<topPen lineWidth="1.75" lineStyle="Double"/>
@@ -177,11 +181,13 @@
 					<bottomPen lineWidth="1.75" lineStyle="Double"/>
 					<rightPen lineWidth="1.75" lineStyle="Double"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{estatusProyectoTeg2}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="430" y="43" width="100" height="20" backcolor="#999999" uuid="57da7b6b-340b-4591-b8e8-460f14ffc43c"/>
+				<reportElement mode="Opaque" x="430" y="43" width="100" height="20" forecolor="#000000" backcolor="#00CCCC" uuid="57da7b6b-340b-4591-b8e8-460f14ffc43c"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -189,7 +195,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 		</band>
@@ -223,7 +231,7 @@
 				<textFieldExpression><![CDATA[$F{duracion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="430" y="-1" width="100" height="20" backcolor="#CCCCCC" uuid="6c9d42df-0210-4cdc-8a53-83bef128ddb7"/>
+				<reportElement mode="Opaque" x="430" y="-1" width="100" height="20" backcolor="#99FFFF" uuid="6c9d42df-0210-4cdc-8a53-83bef128ddb7"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -295,7 +303,7 @@
 				</bar3DPlot>
 			</bar3DChart>
 			<staticText>
-				<reportElement mode="Opaque" x="130" y="0" width="100" height="20" backcolor="#999999" uuid="2833fabc-8023-4079-bd49-d8849a050fa1"/>
+				<reportElement mode="Opaque" x="130" y="0" width="100" height="20" backcolor="#00CCCC" uuid="2833fabc-8023-4079-bd49-d8849a050fa1"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -303,11 +311,13 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="230" y="0" width="100" height="20" backcolor="#CCCCCC" uuid="87a92252-c4ef-4b1c-9758-fc4cb4a43d50"/>
+				<reportElement mode="Opaque" x="230" y="0" width="100" height="20" backcolor="#99FFFF" uuid="87a92252-c4ef-4b1c-9758-fc4cb4a43d50"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -319,7 +329,7 @@
 				<textFieldExpression><![CDATA[$V{id_SUM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="330" y="0" width="100" height="20" backcolor="#CCCCCC" uuid="c6a53412-44c0-4204-a800-5fcffd75efd3"/>
+				<reportElement mode="Opaque" x="330" y="0" width="100" height="20" backcolor="#99FFFF" uuid="c6a53412-44c0-4204-a800-5fcffd75efd3"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -331,7 +341,14 @@
 				<textFieldExpression><![CDATA[$V{duracion_SUM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="430" y="-1" width="100" height="20" backcolor="#666666" uuid="7e7ddf84-a71d-46c5-b137-74e8ef65ca09"/>
+				<reportElement mode="Opaque" x="430" y="-1" width="100" height="21" backcolor="#99FFFF" uuid="7e7ddf84-a71d-46c5-b137-74e8ef65ca09"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$V{id_SUM}+$V{duracion_SUM}]]></textFieldExpression>
 			</textField>

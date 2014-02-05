@@ -85,7 +85,7 @@ public class CRegistrarTeg extends CGeneral {
 	private Button btnCancelarRegistrarTeg;
 	private static long auxiliarId = 0;
 
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		Estudiante estudiante = ObtenerUsuarioEstudiante();
 		Programa programa = new Programa();

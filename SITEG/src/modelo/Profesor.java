@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.compuesta.Jurado;
+import modelo.seguridad.Usuario;
+
 @Entity
 @Table(name = "profesor")
 public class Profesor {

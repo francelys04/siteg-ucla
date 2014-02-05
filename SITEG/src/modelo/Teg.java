@@ -17,6 +17,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import modelo.compuesta.Jurado;
+import modelo.compuesta.TegRequisito;
+
 @Entity
 @Table(name = "teg")
 public class Teg {

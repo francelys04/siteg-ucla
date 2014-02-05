@@ -1,6 +1,6 @@
 <window title="Lista de Tegs" border="normal"
 	width="100%" height="500px" closable="true"
-	apply="controlador.CCatalogoReporteItemTeg">
+	apply="controlador.catalogo.CCatalogoReporteItemTeg">
 	<separator />
 	<separator />
 	<separator />

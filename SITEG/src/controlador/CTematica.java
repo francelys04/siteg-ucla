@@ -42,6 +42,7 @@ import servicio.SPrograma;
 import servicio.STematica;
 import servicio.SAreaInvestigacion;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoTematica;
 
 //es un controlador de tematica y su catalogo
 @Controller
@@ -80,7 +81,7 @@ public class CTematica extends CGeneral {
 	private long id = 0;
 
 	// metodo para llenar combo y mapear
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		List<AreaInvestigacion> areas = servicioArea.buscarActivos();
 		List<Tematica> tematicas = servicioTematica.buscarActivos();

@@ -38,6 +38,8 @@ import servicio.SActividad;
 import servicio.SArchivo;
 import servicio.SPrograma;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoArchivoDescarga;
+import controlador.catalogo.CCatalogoItem;
 
 
 
@@ -75,6 +77,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 	  tanto VDescarga como VCatalogoDescarga*/
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		List<Programa> programa = servicioPrograma.buscarActivas();
@@ -211,7 +214,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 	//permite ver los la lista de archivos registrados
 	@Listen("onClick = #btnCatalogoDescarga") 
 		public void verCatalogo(){
-		CCatalogoArchivoDescarga cata = new controlador.CCatalogoArchivoDescarga();
+		CCatalogoArchivoDescarga cata = new CCatalogoArchivoDescarga();
 		cata.metodoApagar();
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoArchivoDescarga.zul", null, null);

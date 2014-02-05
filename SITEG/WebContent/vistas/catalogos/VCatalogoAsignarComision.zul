@@ -1,6 +1,6 @@
 <window id="wdwCatalogoAsignarComision" title="Proyectos Verificados"
 	border="normal" width="100%" height="600px" closable="true"
-	apply="controlador.CCatalogoAsignarComision">
+	apply="controlador.catalogo.CCatalogoAsignarComision">
 	<separator />
 	<separator />
 	<separator />

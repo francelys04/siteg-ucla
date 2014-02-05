@@ -6,9 +6,7 @@ import java.util.List;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.SolicitudTutoria;
-import modelo.Teg;
 import modelo.Tematica;
-import modelo.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

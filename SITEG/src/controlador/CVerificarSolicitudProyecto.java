@@ -18,10 +18,11 @@ import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Programa;
-import modelo.ProgramaArea;
+
 import modelo.Requisito;
 import modelo.Teg;
-import modelo.TegRequisito;
+import modelo.compuesta.TegRequisito;
+
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -111,6 +112,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 

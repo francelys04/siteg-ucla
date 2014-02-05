@@ -2,21 +2,14 @@ package servicio;
 
 import java.util.Date;
 import java.util.List;
-
-import interfazdao.IActividadDAO;
 import interfazdao.IEstudianteDAO;
 import interfazdao.ITegDAO;
-
-import modelo.Actividad;
 import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
-import modelo.Requisito;
-import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
-import modelo.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

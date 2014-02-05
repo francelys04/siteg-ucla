@@ -6,14 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Condicion;
-import modelo.CondicionPrograma;
 import modelo.Defensa;
 import modelo.Estudiante;
-import modelo.Jurado;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
 import modelo.TipoJurado;
+import modelo.compuesta.Jurado;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -86,6 +85,7 @@ public class CAtenderDefensa extends CGeneral {
 	private static Programa programa;
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		// Permite mapear los datos del catalogo a la vista Atender Defensa

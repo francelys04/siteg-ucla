@@ -10,10 +10,12 @@ import java.util.Set;
 
 import modelo.AreaInvestigacion;
 import modelo.Estudiante;
-import modelo.Grupo;
+
 import modelo.ItemEvaluacion;
 import modelo.SolicitudTutoria;
-import modelo.Usuario;
+import modelo.seguridad.Grupo;
+import modelo.seguridad.Usuario;
+
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,9 +39,11 @@ import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
 import servicio.SEstudiante;
-import servicio.SGrupo;
+
 import servicio.SSolicitudTutoria;
-import servicio.SUsuario;
+import servicio.seguridad.SGrupo;
+import servicio.seguridad.SUsuario;
+
 
 @Controller
 public class CSolicitudTutoria extends CGeneral {
@@ -75,6 +79,7 @@ public class CSolicitudTutoria extends CGeneral {
 			"Su Tutoria ha sido rechazada, por favor intente con otro tutor" };
 	
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		Selectors.wireComponents(comp, this, false);	

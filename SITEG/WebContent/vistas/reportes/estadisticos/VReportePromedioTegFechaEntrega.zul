@@ -1,6 +1,6 @@
 <window id="wdwReportePromedioTegFechaEntrega" 
 	title="Promedio de tiempo de los tegs segun las fechas de entregas  " 
-	border="normal" width="60%" height="500px" closable="true"  apply="controlador.CReportePromedioTegFechaEntrega"
+	border="normal" width="60%" height="500px" closable="true"  apply="controlador.reporte.CReportePromedioTegFechaEntrega"
 >
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row

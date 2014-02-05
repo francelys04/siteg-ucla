@@ -1,6 +1,6 @@
 <window id="wdwReinicioClave" title="Reinicio de Contraseña"
 	width="600px" height="320px" border="normal" closable="true"
-	apply="controlador.CReinicioClave">
+	apply="controlador.seguridad.CReinicioClave">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row

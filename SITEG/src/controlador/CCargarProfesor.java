@@ -11,7 +11,7 @@ import modelo.Profesor;
 import modelo.Categoria;
 import modelo.Programa;
 import modelo.Tematica;
-import modelo.Usuario;
+import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -22,8 +22,8 @@ import org.zkoss.zul.Window;
 
 import servicio.SCategoria;
 import servicio.SProfesor;
-import servicio.SUsuario;
 import servicio.SPrograma;
+import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
 
 @Controller
@@ -150,6 +150,7 @@ public class CCargarProfesor extends CGeneral {
 	
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		

@@ -1,5 +1,5 @@
 <window title="Catalogo Tipo de Jurado" border="normal" width="800px"
-	id="wdwCatalogoTipoJurado" apply="controlador.CCatalogoTipoJurado"
+	id="wdwCatalogoTipoJurado" apply="controlador.catalogo.CCatalogoTipoJurado"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />

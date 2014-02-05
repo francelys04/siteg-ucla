@@ -1,5 +1,5 @@
 <window title="Catalogo Usuario" border="normal" width="870px"
-	id="wdwCatalogoUsuario" apply="controlador.CCatalogoUsuario"
+	id="wdwCatalogoUsuario" apply="controlador.catalogo.CCatalogoUsuario"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />

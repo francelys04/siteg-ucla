@@ -6,7 +6,7 @@ import modelo.Estudiante;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
-import modelo.Usuario;
+import modelo.seguridad.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

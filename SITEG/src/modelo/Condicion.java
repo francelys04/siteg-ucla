@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.compuesta.CondicionPrograma;
+
 @Entity
 @Table(name = "condicion")
 public class Condicion {

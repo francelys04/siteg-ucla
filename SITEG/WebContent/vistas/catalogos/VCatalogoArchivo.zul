@@ -1,7 +1,7 @@
 <?page  title="Biblioteca Virtual" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="Biblioteca Virtual" border="normal" width="90%"
-		id="wdwCatalogoArchivo" apply="controlador.CCatalogoArchivo"
+		id="wdwCatalogoArchivo" apply="controlador.catalogo.CCatalogoArchivo"
 		closable="true">
 
 		<style src="/public/css/bootstrap.css" />

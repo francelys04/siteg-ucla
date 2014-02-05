@@ -2,17 +2,12 @@ package interfazdao;
 
 import java.util.Date;
 import java.util.List;
-
-
-import modelo.Actividad;
 import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
-import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
-import modelo.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

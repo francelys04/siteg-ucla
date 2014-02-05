@@ -1,5 +1,5 @@
 <window title="Catalogo Areas de Investigación" border="normal" width="820px"
-	id="wdwCatalogoArea" apply="controlador.CCatalogoAreaInvestigacion"
+	id="wdwCatalogoArea" apply="controlador.catalogo.CCatalogoAreaInvestigacion"
 	closable="true">
 
 

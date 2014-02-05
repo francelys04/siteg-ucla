@@ -3,14 +3,10 @@ package servicio;
 import java.util.List;
 
 import interfazdao.IProfesorDAO;
-
-
 import modelo.Profesor;
-import modelo.Programa;
 import modelo.Teg;
 import modelo.Tematica;
-import modelo.Usuario;
-
+import modelo.seguridad.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -92,7 +88,7 @@ public class SProfesor {
 	}
 	
 	//public List<Profesor> buscarProfesoresPorTematicayEstatus(Tematica tematica, Boolean estatus) {
-		List<Profesor> profesores;
+		//List<Profesor> profesores;
 		//profesores = interfazProfesor.buscarProfesoresPorTematicasyEstatus(tematica,estatus);
 		//return profesores;
 	//}

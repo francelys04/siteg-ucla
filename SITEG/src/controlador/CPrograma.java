@@ -10,13 +10,13 @@ import java.util.Set;
 
 import modelo.AreaInvestigacion;
 import modelo.Condicion;
-import modelo.CondicionPrograma;
-import modelo.Grupo;
+
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
+import modelo.compuesta.CondicionPrograma;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +53,8 @@ import servicio.SLapso;
 import servicio.SProfesor;
 import servicio.SPrograma;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoProfesor;
+import controlador.catalogo.CCatalogoPrograma;
 
 @Controller
 public class CPrograma extends CGeneral {
@@ -102,7 +104,7 @@ public class CPrograma extends CGeneral {
 	 */
 	long id = 0;
 
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		txtDirectorPrograma.setDisabled(true);
 		Selectors.wireComponents(comp, this, false);

@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import modelo.compuesta.ItemFactibilidad;
+
 @Entity
 @Table(name = "factibilidad")
 public class Factibilidad {

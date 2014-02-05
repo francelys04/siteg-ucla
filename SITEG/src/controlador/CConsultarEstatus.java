@@ -83,6 +83,7 @@ public class CConsultarEstatus extends CGeneral {
 	private static String cedulaRecibida;
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 

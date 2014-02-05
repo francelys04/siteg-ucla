@@ -3,17 +3,14 @@ package controlador;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import modelo.CondicionPrograma;
 import modelo.Defensa;
 import modelo.Estudiante;
-import modelo.ItemDefensa;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
-import modelo.TegRequisito;
+import modelo.compuesta.ItemDefensa;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -86,6 +83,7 @@ public class CCalificarDefensa extends CGeneral {
 	SItemDefensa servicioItem = GeneradorBeans.getServicioItemDefensa();
 
 	@Override
+	public
 	void inicializar(Component comp) {
 
 		Selectors.wireComponents(comp, this, false);

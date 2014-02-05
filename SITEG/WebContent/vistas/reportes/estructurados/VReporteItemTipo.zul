@@ -1,5 +1,5 @@
 <window  id="wdwReporteItemTipo" title="Configuraciones de un Programa" border="normal"
-	width="100%" height="450px" closable="true" apply="controlador.CReporteItemTipo">
+	width="100%" height="450px" closable="true" apply="controlador.reporte.CReporteItemTipo">
 	
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row

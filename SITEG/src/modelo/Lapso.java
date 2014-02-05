@@ -12,6 +12,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import modelo.compuesta.CondicionPrograma;
+import modelo.compuesta.Cronograma;
+import modelo.compuesta.ProgramaArea;
+import modelo.compuesta.ProgramaItem;
+import modelo.compuesta.ProgramaRequisito;
+
 @Entity
 @Table(name = "lapso")
 public class Lapso {

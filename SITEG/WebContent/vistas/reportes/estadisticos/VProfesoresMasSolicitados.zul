@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesorMasSolicitados"
 	title="Estadistica de profesores con mas solicitudes recibidas"
-	border="normal" width="70%" height="700px" closable="true" apply="controlador.CReporteProfesoresMasSolicitados"
+	border="normal" width="70%" height="700px" closable="true" apply="controlador.reporte.CReporteProfesoresMasSolicitados"
 >
 
 	<style dynamic="true">

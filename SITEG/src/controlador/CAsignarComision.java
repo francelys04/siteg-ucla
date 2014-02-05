@@ -11,15 +11,15 @@ import java.util.Set;
 
 import modelo.Actividad;
 import modelo.AreaInvestigacion;
-import modelo.CondicionPrograma;
 import modelo.Estudiante;
-import modelo.Grupo;
 import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
-import modelo.Usuario;
+import modelo.compuesta.CondicionPrograma;
+import modelo.seguridad.Grupo;
+import modelo.seguridad.Usuario;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,15 +49,15 @@ import org.zkoss.zul.Window;
 
 import servicio.SActividad;
 import servicio.SEstudiante;
-import servicio.SGrupo;
 import servicio.SProfesor;
 import servicio.SPrograma;
 import servicio.SProgramaRequisito;
 import servicio.SRequisito;
 import servicio.STeg;
-import servicio.SUsuario;
 import servicio.SLapso;
 import servicio.SCondicionPrograma;
+import servicio.seguridad.SGrupo;
+import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
 
 public class CAsignarComision extends CGeneral {
@@ -120,6 +120,7 @@ public class CAsignarComision extends CGeneral {
 	public static int j;
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 

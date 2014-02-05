@@ -1,25 +1,17 @@
 package interfazdao;
 
-
-
-
-
 import java.util.List;
-
-
-import modelo.AreaInvestigacion;
 import modelo.Lapso;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
-import modelo.TegRequisito;
+import modelo.compuesta.TegRequisito;
+import modelo.compuesta.id.TegRequisitoId;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface  ITegRequisitoDAO extends JpaRepository<TegRequisito, String>{
-	
-	
+public interface  ITegRequisitoDAO extends JpaRepository<TegRequisito, TegRequisitoId>{
 	
 	@Query("select tr.requisito from TegRequisito tr  where tr.teg = ?1 ")
 	public List<Requisito> buscaTegRequisitosSeleccionados(Teg teg);

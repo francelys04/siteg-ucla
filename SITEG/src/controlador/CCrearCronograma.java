@@ -6,11 +6,9 @@ import java.util.List;
 
 import modelo.Actividad;
 import modelo.AreaInvestigacion;
-import modelo.CondicionPrograma;
-import modelo.Cronograma;
 import modelo.Lapso;
 import modelo.Programa;
-import modelo.ProgramaArea;
+import modelo.compuesta.Cronograma;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -48,14 +46,17 @@ public class CCrearCronograma extends CGeneral {
 	@Wire
 	private Listbox ltbActividadesSeleccionadas;
 
+	List<Cronograma> cronogramas = new ArrayList();
+	List<Actividad> actividades = new ArrayList();
+
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		List<Programa> programas = servicioPrograma.buscarActivas();
 
 		// llenarActividades();
-
 		if (cmbLapsoCrearCronograma != null) {
 
 			cmbLapsoCrearCronograma.setModel(new ListModelList<Lapso>(lapsos));
@@ -70,20 +71,74 @@ public class CCrearCronograma extends CGeneral {
 	@Listen("onClick = #btnAgregarActividades")
 	public void moverDerechaActividad() {
 
-		Listitem list1 = ltbActividadesDisponibles.getSelectedItem();
-		if (list1 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list1.setParent(ltbActividadesSeleccionadas);
+		List<Integer> itemEliminar = new ArrayList();
+		List<Listitem> listitemEliminar = new ArrayList();
+		List<Listitem> listItem = ltbActividadesDisponibles.getItems();
+		if (listItem.size() != 0) {
+			for (int i = 0; i < listItem.size(); i++) {
+
+				if (listItem.get(i).isSelected()) {
+
+					Actividad actividad = listItem.get(i).getValue();
+					System.out.println("acatividades:" + actividad.getNombre());
+					actividades.remove(actividad);
+					Cronograma cronograma = new Cronograma();
+					cronograma.setActividad(actividad);
+					cronogramas.add(cronograma);
+					ltbActividadesSeleccionadas
+							.setModel(new ListModelList<Cronograma>(cronogramas));
+					listitemEliminar.add(listItem.get(i));
+				}
+
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbActividadesDisponibles.removeItemAt(listitemEliminar.get(i)
+					.getIndex());
+		}
+
+		ltbActividadesSeleccionadas.setMultiple(false);
+		ltbActividadesSeleccionadas.setCheckmark(false);
+		ltbActividadesSeleccionadas.setMultiple(true);
+		ltbActividadesSeleccionadas.setCheckmark(true);
+
 	}
 
 	@Listen("onClick = #btnRemoverActividades")
 	public void moverIzquierdaActividad() {
-		Listitem list2 = ltbActividadesSeleccionadas.getSelectedItem();
-		if (list2 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list2.setParent(ltbActividadesDisponibles);
+
+		List<Integer> itemEliminar = new ArrayList();
+		List<Listitem> listitemEliminar = new ArrayList();
+
+		List<Listitem> listItem2 = ltbActividadesSeleccionadas.getItems();
+		if (listItem2.size() != 0) {
+			for (int i = 0; i < listItem2.size(); i++) {
+
+				if (listItem2.get(i).isSelected()) {
+
+					Cronograma cronograma = listItem2.get(i).getValue();
+					System.out.println("cronograma:"
+							+ cronograma.getActividad().getNombre());
+					cronogramas.remove(cronograma);
+					Actividad actividad = new Actividad();
+					actividad.setNombre(cronograma.getActividad().getNombre());
+					actividades.add(actividad);
+					ltbActividadesDisponibles
+							.setModel(new ListModelList<Actividad>(actividades));
+					listitemEliminar.add(listItem2.get(i));
+				}
+
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbActividadesSeleccionadas.removeItemAt(listitemEliminar.get(i)
+					.getIndex());
+		}
+		ltbActividadesDisponibles.setMultiple(false);
+		ltbActividadesDisponibles.setCheckmark(false);
+		ltbActividadesDisponibles.setMultiple(true);
+		ltbActividadesDisponibles.setCheckmark(true);
+
 	}
 
 	@Listen("onClick = #btnCancelarCronograma")
@@ -92,8 +147,7 @@ public class CCrearCronograma extends CGeneral {
 		cmbProgramaCrearCronograma.setValue("");
 		ltbActividadesSeleccionadas.getItems().clear();
 		ltbActividadesDisponibles.getItems().clear();
-		
-		
+
 	}
 
 	@Listen("onClick = #btnCrearCronograma")
@@ -118,10 +172,12 @@ public class CCrearCronograma extends CGeneral {
 			Date fechaFin = ((Datebox) ((listItem.getChildren().get(2)))
 					.getFirstChild()).getValue();
 			System.out.println(fechaFin);
-			if (fechaFin == null || fechaInicio == null || fechaInicio.after(fechaFin)) {
+			if (fechaFin == null || fechaInicio == null
+					|| fechaInicio.after(fechaFin)) {
 				error = true;
 			}
-			//fechaFin.equals(null) || fechaInicio.equals(null) || fechaInicio.after(fechaFin)
+			// fechaFin.equals(null) || fechaInicio.equals(null) ||
+			// fechaInicio.after(fechaFin)
 			int id = ((Spinner) ((listItem.getChildren().get(3)))
 					.getFirstChild()).getValue();
 			Actividad actividad = servicioActividad.buscarActividad(id);
@@ -132,9 +188,8 @@ public class CCrearCronograma extends CGeneral {
 		}
 		if (!error) {
 			servicioCronograma.guardar(cronogramas);
-			Messagebox
-			.show("Cronograma Registrado con exito",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			Messagebox.show("Cronograma Registrado con exito", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
 			limpiarCampos();
 		} else {
 			Messagebox
@@ -161,6 +216,10 @@ public class CCrearCronograma extends CGeneral {
 	}
 
 	private void llenarActividades() {
+		if (ltbActividadesDisponibles.isMultiple())
+			ltbActividadesDisponibles.setMultiple(false);
+		if (ltbActividadesSeleccionadas.isMultiple())
+			ltbActividadesSeleccionadas.setMultiple(false);
 		Lapso lapso = servicioLapso.buscarLapso(Long
 				.parseLong(cmbLapsoCrearCronograma.getSelectedItem().getId()));
 		Programa programa = servicioPrograma
@@ -174,5 +233,13 @@ public class CCrearCronograma extends CGeneral {
 				cronogramas));
 		ltbActividadesDisponibles.setModel(new ListModelList<Actividad>(
 				actividades));
+		ltbActividadesSeleccionadas.setMultiple(false);
+		ltbActividadesSeleccionadas.setCheckmark(false);
+		ltbActividadesSeleccionadas.setMultiple(true);
+		ltbActividadesSeleccionadas.setCheckmark(true);
+		ltbActividadesDisponibles.setMultiple(false);
+		ltbActividadesDisponibles.setCheckmark(false);
+		ltbActividadesDisponibles.setMultiple(true);
+		ltbActividadesDisponibles.setCheckmark(true);
 	}
 }

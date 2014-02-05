@@ -1,6 +1,6 @@
 <window id="wdwReporteTegAprobadoDefensa" 
 	title="Lista de Tegs Aprobados " 
-	border="normal" width="60%" height="500px" closable="true"  apply="controlador.CReporteTegAprobadoDefensa"
+	border="normal" width="60%" height="500px" closable="true"  apply="controlador.reporte.CReporteTegAprobadoDefensa"
 >
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row

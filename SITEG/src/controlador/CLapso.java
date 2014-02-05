@@ -8,8 +8,8 @@ import java.util.List;
 
 import modelo.Actividad;
 import modelo.Condicion;
-import modelo.CondicionPrograma;
 import modelo.Lapso;
+import modelo.compuesta.CondicionPrograma;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +40,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoLapso;
 
 import servicio.SCondicion;
 import servicio.SLapso;
@@ -84,7 +85,7 @@ public class CLapso extends CGeneral {
 
 	// Metodo para cargar el catalogo de lapsos academicos
 
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		if (txtNombreLapso == null) {

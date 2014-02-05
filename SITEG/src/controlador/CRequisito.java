@@ -37,6 +37,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoRequisito;
 
 import servicio.SRequisito;
 
@@ -64,7 +65,7 @@ public class CRequisito extends CGeneral {
 	private Window wdwRequisito;
 	private long id = 0;
 
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		//Permite llenar los datos del requisito en la vista 
 		//si el map es diferente a null
 			List<Requisito> requisitos = servicioRequisito.buscarActivos();

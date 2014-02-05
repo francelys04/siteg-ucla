@@ -9,7 +9,8 @@ import modelo.Factibilidad;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
-import modelo.ItemFactibilidad;
+import modelo.compuesta.ItemFactibilidad;
+
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -33,7 +34,7 @@ import servicio.STeg;
 import servicio.SItemFactibilidad;
 
 import configuracion.GeneradorBeans;
-import controlador.CCatalogoRegistrarFactibilidad;
+
 import controlador.CGeneral;
 
 public class CRegistrarFactibilidad extends CGeneral {
@@ -76,6 +77,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	private static Programa programa;
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		//permite cargar los datos del item seleccionado en el catalogo		

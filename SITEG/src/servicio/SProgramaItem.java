@@ -7,7 +7,7 @@ import interfazdao.IProgramaItemDAO;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
 import modelo.Programa;
-import modelo.ProgramaItem;
+import modelo.compuesta.ProgramaItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

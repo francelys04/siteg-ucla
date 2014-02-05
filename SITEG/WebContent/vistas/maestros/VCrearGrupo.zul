@@ -1,7 +1,7 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="Crear Grupo" border="normal" width="100%"
-		height="auto" closable="true" apply="controlador.CCrearGrupo">
+		height="auto" closable="true" apply="controlador.seguridad.CCrearGrupo">
 
 		<style dynamic="true">
 			.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row

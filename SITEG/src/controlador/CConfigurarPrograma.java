@@ -3,16 +3,17 @@ package controlador;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import modelo.AreaInvestigacion;
-import modelo.CondicionPrograma;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
 import modelo.Programa;
-import modelo.ProgramaArea;
-import modelo.ProgramaItem;
-import modelo.ProgramaRequisito;
 import modelo.Requisito;
+import modelo.compuesta.CondicionPrograma;
+import modelo.compuesta.ProgramaArea;
+import modelo.compuesta.ProgramaItem;
+import modelo.compuesta.ProgramaRequisito;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -77,6 +78,7 @@ public class CConfigurarPrograma extends CGeneral {
 	private Listbox ltbRequisitosSeleccionadas;
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
@@ -98,61 +100,76 @@ public class CConfigurarPrograma extends CGeneral {
 	@Listen("onClick = #btnAgregarRequisitos")
 	public void moverDerechaRequisitos() {
 
-		Listitem list1 = ltbRequisitosDisponibles.getSelectedItem();
-		if (list1 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list1.setParent(ltbRequisitosSeleccionadas);
+		
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbRequisitosDisponibles
+				.getModel()).getSelection();
+            System.out.println(selectedItems.size());
+		((ListModelList) ltbRequisitosSeleccionadas.getModel())
+				.addAll(selectedItems);
+		((ListModelList) ltbRequisitosDisponibles.getModel())
+				.removeAll(selectedItems);
+		
+//		
 	}
 
 	@Listen("onClick = #btnRemoverRequisitos")
 	public void moverIzquierdaRequisitos() {
-		Listitem list2 = ltbRequisitosSeleccionadas.getSelectedItem();
-		System.out.println(list2.getValue().toString());
-		if (list2 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list2.setParent(ltbRequisitosDisponibles);
+		
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbRequisitosSeleccionadas
+				.getModel()).getSelection();
+            System.out.println(selectedItems.size());
+		((ListModelList) ltbRequisitosDisponibles.getModel())
+				.addAll(selectedItems);
+		((ListModelList) ltbRequisitosSeleccionadas.getModel())
+				.removeAll(selectedItems);
+		
+//		
 	}
 
 	@Listen("onClick = #btnAgregarAreas")
 	public void moverDerechaArea() {
 
-		Listitem list1 = ltbAreasDisponibles.getSelectedItem();
-		if (list1 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list1.setParent(ltbAreasSeleccionadas);
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbAreasDisponibles
+				.getModel()).getSelection();
+            System.out.println(selectedItems.size());
+		((ListModelList) ltbAreasSeleccionadas.getModel())
+				.addAll(selectedItems);
+		((ListModelList) ltbAreasDisponibles.getModel())
+				.removeAll(selectedItems);
 	}
 
 	@Listen("onClick = #btnRemoverAreas")
 	public void moverIzquierdaArea() {
-		Listitem list2 = ltbAreasSeleccionadas.getSelectedItem();
-		System.out.println(list2.getValue().toString());
-		if (list2 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list2.setParent(ltbAreasDisponibles);
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbAreasSeleccionadas
+				.getModel()).getSelection();
+            System.out.println(selectedItems.size());
+		((ListModelList) ltbAreasDisponibles.getModel())
+				.addAll(selectedItems);
+		((ListModelList) ltbAreasSeleccionadas.getModel())
+				.removeAll(selectedItems);
 	}
 
 	@Listen("onClick = #btnAgregarItems")
 	public void moverDerechaItems() {
 
-		Listitem list1 = ltbItemsDisponibles.getSelectedItem();
-		if (list1 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list1.setParent(ltbItemsSeleccionados);
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbItemsDisponibles
+				.getModel()).getSelection();
+            System.out.println(selectedItems.size());
+		((ListModelList) ltbItemsSeleccionados.getModel())
+				.addAll(selectedItems);
+		((ListModelList) ltbItemsDisponibles.getModel())
+				.removeAll(selectedItems);
 	}
 
 	@Listen("onClick = #btnRemoverItems")
 	public void moverIzquierdaItems() {
-		Listitem list2 = ltbItemsSeleccionados.getSelectedItem();
-		System.out.println(list2.getValue().toString());
-		if (list2 == null)
-			Messagebox.show("Seleccione un Item");
-		else
-			list2.setParent(ltbItemsDisponibles);
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbItemsSeleccionados
+				.getModel()).getSelection();
+            System.out.println(selectedItems.size());
+		((ListModelList) ltbItemsDisponibles.getModel())
+				.addAll(selectedItems);
+		((ListModelList) ltbItemsSeleccionados.getModel())
+				.removeAll(selectedItems);
 	}
 
 	@Listen("onClick = #btnGuardarConfiguracionPrograma")
@@ -326,6 +343,20 @@ public class CConfigurarPrograma extends CGeneral {
 				requisitosIzquierda));
 		ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(
 				requisitosDerecha));
+		
+		ltbAreasDisponibles.setMultiple(true);
+		ltbAreasDisponibles.setCheckmark(true);
+		ltbAreasSeleccionadas.setMultiple(true);
+		ltbAreasSeleccionadas.setCheckmark(true);
+		ltbRequisitosDisponibles.setMultiple(true);
+		ltbRequisitosDisponibles.setCheckmark(true);
+		ltbRequisitosSeleccionadas.setMultiple(true);
+		ltbRequisitosSeleccionadas.setCheckmark(true);
+		ltbItemsDisponibles.setMultiple(true);
+		ltbItemsDisponibles.setCheckmark(true);
+		ltbItemsSeleccionados.setMultiple(true);
+		ltbItemsSeleccionados.setCheckmark(true);
+		
 		}
 	
 

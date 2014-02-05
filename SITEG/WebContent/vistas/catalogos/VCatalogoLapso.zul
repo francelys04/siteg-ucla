@@ -1,5 +1,5 @@
 <window title="Catálogo Lapso Académico" border="normal" width="800px"
-	id="wdwCatalogoLapso" apply="controlador.CCatalogoLapso"
+	id="wdwCatalogoLapso" apply="controlador.catalogo.CCatalogoLapso"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />

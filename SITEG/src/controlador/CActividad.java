@@ -41,6 +41,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoActividad;
 
 import servicio.SActividad;
 
@@ -79,7 +80,7 @@ public class CActividad extends CGeneral {
 	 *@author Edgar
 	 *@param comp 
 	 */
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		/**
 		 * Listado de todos las actividades que se encuentran activos, cuyo

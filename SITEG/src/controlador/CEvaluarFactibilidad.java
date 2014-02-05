@@ -9,13 +9,12 @@ import modelo.Actividad;
 import modelo.Defensa;
 import modelo.Estudiante;
 import modelo.Factibilidad;
-import modelo.ItemDefensa;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
-import modelo.ItemFactibilidad;
+import modelo.compuesta.ItemFactibilidad;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -42,7 +41,6 @@ import servicio.SLapso;
 import servicio.SProgramaItem;
 
 import configuracion.GeneradorBeans;
-import controlador.CCatalogoRegistrarFactibilidad;
 import controlador.CGeneral;
 
 public class CEvaluarFactibilidad extends CGeneral {
@@ -91,6 +89,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 	private static Programa programa;
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 

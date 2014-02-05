@@ -9,7 +9,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import modelo.Noticia;
 import modelo.Profesor;
-import modelo.Usuario;
+import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.util.media.Media;
@@ -33,7 +33,8 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import servicio.SNoticia;
-import servicio.SUsuario;
+import servicio.seguridad.SUsuario;
+
 import configuracion.GeneradorBeans;
 
 @Controller
@@ -73,6 +74,7 @@ public class CNoticia extends CGeneral {
 	 */
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		/*

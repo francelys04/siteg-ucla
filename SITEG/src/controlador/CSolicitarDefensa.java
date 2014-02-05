@@ -45,6 +45,7 @@ public class CSolicitarDefensa extends CGeneral {
 	private String[] estatus = { "Revisiones Finalizadas", "Solicitando Defensa" };
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		// Acomodar

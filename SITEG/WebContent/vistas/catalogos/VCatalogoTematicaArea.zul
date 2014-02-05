@@ -1,5 +1,5 @@
 <window title="Catalogo Tematica" border="normal" width="800px"
-	id="wdwCatalogoTematica" apply="controlador.CCatalogoTematicaArea"
+	id="wdwCatalogoTematica" apply="controlador.catalogo.CCatalogoTematicaArea"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />

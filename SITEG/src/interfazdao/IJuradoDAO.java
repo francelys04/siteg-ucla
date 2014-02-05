@@ -1,11 +1,10 @@
 package interfazdao;
 
 import java.util.List;
-
-import modelo.Jurado;
-import modelo.JuradoId;
 import modelo.Profesor;
 import modelo.Teg;
+import modelo.compuesta.Jurado;
+import modelo.compuesta.id.JuradoId;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

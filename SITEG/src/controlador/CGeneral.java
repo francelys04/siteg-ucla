@@ -12,12 +12,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import modelo.Condicion;
-import modelo.CondicionPrograma;
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
-import modelo.Usuario;
+import modelo.compuesta.CondicionPrograma;
+import modelo.seguridad.Usuario;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,23 +33,23 @@ import servicio.SProgramaArea;
 import servicio.SSolicitudTutoria;
 import servicio.STegEstatus;
 import servicio.STematica;
-import servicio.SUsuario;
+import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
 import java.net.URL;
 
 @Controller
 public abstract class CGeneral extends SelectorComposer<Component> {
 
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
-	STegEstatus servicioTegEstatus = GeneradorBeans.getServicioTegEstatus();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
+	protected SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
+	protected SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
+	protected SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
+	protected SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
+	protected STegEstatus servicioTegEstatus = GeneradorBeans.getServicioTegEstatus();
+	protected SProgramaArea servicioProgramaArea = GeneradorBeans
 			.getServicioProgramaArea();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SSolicitudTutoria servicioSolicitudTutoria = GeneradorBeans.getServicioTutoria();
+	protected SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
+	protected STematica servicioTematica = GeneradorBeans.getSTematica();
+	protected SSolicitudTutoria servicioSolicitudTutoria = GeneradorBeans.getServicioTutoria();
 	/*
 	 * Metodo para inicializar componentes implementado en todos los controladores
 	 */
@@ -60,7 +60,7 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		inicializar(comp);
 	}
 
-	abstract void inicializar(Component comp);
+	public abstract void inicializar(Component comp);
 	
 	public Profesor ObtenerUsuarioProfesor() {
 		// Agarrar datos del usuario

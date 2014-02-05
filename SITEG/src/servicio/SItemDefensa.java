@@ -1,8 +1,7 @@
 package servicio;
 
 import interfazdao.IItemDefensaDAO;
-
-import modelo.ItemDefensa;
+import modelo.compuesta.ItemDefensa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

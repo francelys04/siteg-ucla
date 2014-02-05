@@ -4,8 +4,8 @@ import java.util.List;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
 import modelo.Programa;
-import modelo.ProgramaItem;
-import modelo.ProgramaItemId;
+import modelo.compuesta.ProgramaItem;
+import modelo.compuesta.id.ProgramaItemId;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

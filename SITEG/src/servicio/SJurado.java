@@ -4,9 +4,9 @@ import java.util.List;
 
 import interfazdao.IJuradoDAO;
 
-import modelo.Jurado;
 import modelo.Profesor;
 import modelo.Teg;
+import modelo.compuesta.Jurado;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

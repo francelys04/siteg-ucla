@@ -1,6 +1,6 @@
 <window id="wdwCatalogoRegistrarFactibilidad"
 	title="Proyectos Evaluados" border="normal" width="100%" height="600px"
-	apply="controlador.CCatalogoRegistrarFactibilidad" closable="true">
+	apply="controlador.catalogo.CCatalogoRegistrarFactibilidad" closable="true">
 	<separator />
 	<separator />
 	<separator />

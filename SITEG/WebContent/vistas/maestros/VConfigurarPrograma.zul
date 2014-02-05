@@ -157,7 +157,7 @@
 										<panelchildren >
 											<listbox
 												id="ltbAreasDisponibles" height="200px"
-												oddRowSclass="non-odd" checkmark="true"
+												oddRowSclass="non-odd"
 												emptyMessage="No hay areas registradas">
 												<listhead>
 													<listheader
@@ -200,7 +200,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbAreasSeleccionadas" height="200px"
-												oddRowSclass="non-odd" checkmark="true"
+												oddRowSclass="non-odd"
 												emptyMessage="No se han seleccionado areas">
 												<listhead>
 													<listheader
@@ -249,7 +249,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbRequisitosDisponibles" height="200px"
-												oddRowSclass="non-odd" checkmark="true"
+												oddRowSclass="non-odd" 
 												emptyMessage="No hay requisitos registrados">
 												<listhead>
 													<listheader
@@ -292,7 +292,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbRequisitosSeleccionadas" height="200px"
-												oddRowSclass="non-odd" checkmark="true"
+												oddRowSclass="non-odd" 
 												emptyMessage="No se han seleccionado requisitos">
 												<listhead>
 													<listheader
@@ -341,7 +341,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbItemsDisponibles" height="200px"
-												oddRowSclass="non-odd" checkmark="true"
+												oddRowSclass="non-odd" 
 												emptyMessage="No hay items registrados">
 												<listhead>
 													<listheader
@@ -389,7 +389,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbItemsSeleccionados" height="200px"
-												oddRowSclass="non-odd" checkmark="true"
+												oddRowSclass="non-odd" 
 												emptyMessage="No se han seleccionado items">
 												<listhead>
 													<listheader

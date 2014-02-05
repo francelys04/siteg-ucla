@@ -130,14 +130,14 @@
 				<row>
 					<hbox>
 						<panel title="Actividades Disponibles"
-							width="400px">
+							width="320px">
 							<panelchildren>
+
 								<listbox id="ltbActividadesDisponibles"
-									height="250px" emptyMessage="No hay actividades registradas"
-									oddRowSclass="non-odd" checkmark="true">
+									height="160px" 
+									emptyMessage="No hay Actividades registrados">
 									<listhead>
-										<listheader label="Nombre"
-											width="100%" />
+										<listheader width="100%" label="Nombre" />
 									</listhead>
 									<template name="model">
 										<listitem>
@@ -183,21 +183,18 @@
 
 
 						<panel title="Actividades Seleccionadas"
-							width="550px">
+							width="400px">
 							<panelchildren>
 
-								<listbox
-									id="ltbActividadesSeleccionadas" height="250px"
-									checkmark="true"
-									emptyMessage="No hay actividades seleccionadas">
+								<listbox id="ltbActividadesSeleccionadas"
+									 height="160px"
+									emptyMessage="No ha Seleccionado ningun Grupo"
+									>
 									<listhead>
-										<listheader label="Nombre"
-											width="60%" />
-										<listheader
-											label="Fecha Inicio" />
+										<listheader label="Nombre" />
+										<listheader label="Fecha Inicio" />
 										<listheader label="Fecha Fin" />
 									</listhead>
-
 									<template name="model">
 										<listitem>
 											<listcell
@@ -218,7 +215,6 @@
 											</listcell>
 										</listitem>
 									</template>
-
 								</listbox>
 							</panelchildren>
 						</panel>

@@ -8,7 +8,7 @@ import java.util.List;
 
 import modelo.Estudiante;
 import modelo.Programa;
-import modelo.Usuario;
+import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +40,9 @@ import org.zkoss.zul.Window;
 
 import servicio.SEstudiante;
 import servicio.SPrograma;
-import servicio.SUsuario;
+import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoEstudiante;
 
 @Controller
 public class CEstudiante extends CGeneral {
@@ -99,6 +100,7 @@ public class CEstudiante extends CGeneral {
 	// asi como tambien permite settear los atributos a los campos luego de
 	// seleccionar desde el catalogo
 	@Override
+	public
 	void inicializar(Component comp) {
 
 		List<Programa> programas = servicioPrograma.buscarActivas();

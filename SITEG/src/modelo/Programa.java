@@ -13,6 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.compuesta.CondicionPrograma;
+import modelo.compuesta.Cronograma;
+import modelo.compuesta.ProgramaArea;
+import modelo.compuesta.ProgramaItem;
+import modelo.compuesta.ProgramaRequisito;
+
 @Entity
 @Table(name = "programa")
 public class Programa {

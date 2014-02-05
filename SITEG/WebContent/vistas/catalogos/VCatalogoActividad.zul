@@ -1,5 +1,5 @@
 <window title="Catalogo Actividad" border="normal" width="800px"
-	id="wdwCatalogoActividad" apply="controlador.CCatalogoActividad"
+	id="wdwCatalogoActividad" apply="controlador.catalogo.CCatalogoActividad"
 	closable="true">
 	
 	<style src="/public/css/bootstrap.css" />

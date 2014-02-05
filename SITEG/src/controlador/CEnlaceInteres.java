@@ -12,7 +12,7 @@ import modelo.Actividad;
 import modelo.EnlaceInteres;
 import modelo.Noticia;
 import modelo.Profesor;
-import modelo.Usuario;
+import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.util.media.Media;
@@ -37,8 +37,9 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import servicio.SNoticia;
 import servicio.SEnlaceInteres;
-import servicio.SUsuario;
+import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoEnlaceInteres;
 
 @Controller
 public class CEnlaceInteres extends CGeneral {
@@ -76,6 +77,7 @@ public class CEnlaceInteres extends CGeneral {
 	 */
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		
