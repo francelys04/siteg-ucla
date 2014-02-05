@@ -33,7 +33,7 @@ public interface IDefensaDAO extends JpaRepository<Defensa, Long> {
 	@Query("select defensa from Defensa defensa where defensa.teg.estatus=?1 and defensa.teg.fecha between ?2 and ?3")
 	public List<Defensa> buscarDefensaTegSegunEstatus2(String estatus,Date fechaInicio,Date fechaFin);
 
-	//
+	
 	@Query("select defensa from Defensa defensa where defensa.teg.fecha between ?1 and ?2")
 	public List<Defensa> buscarDefensaTeg2(Date fechaInicio, Date fechaFin);
 	
