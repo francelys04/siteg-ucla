@@ -36,6 +36,14 @@ public class SDefensa {
 		defensas=interfaceDefensa.buscarDefensaTegSegunEstatus(estatus,fechaInicio,fechaFin);
 		return defensas;
 	}
+	
+	public List<Defensa> buscarDefensaTegSegunEstatus2(String estatus,Date fechaInicio,Date fechaFin){
+		List<Defensa> defensas;
+		defensas=interfaceDefensa.buscarDefensaTegSegunEstatus2(estatus,fechaInicio,fechaFin);
+		return defensas;
+	}
+
+	
 	public List<Defensa> buscarDefensaTegSegunEstatusTematica(String estatus,Tematica tematica,Date fechaInicio,Date fechaFin){
 		List<Defensa> defensas;
 		defensas=interfaceDefensa.buscarDefensaTegSegunEstatusTematica(estatus,tematica,fechaInicio,fechaFin);
@@ -55,6 +63,29 @@ public class SDefensa {
 	public List<Defensa> buscardefensaPorDosFechas(
 		Date fechaInicio, Date fechaFin) {
 		return interfaceDefensa.findByFechaBetween(fechaInicio, fechaFin);
+	}
+	
+	
+	
+	public List<Defensa> buscarDefensaTegSegunTematica(Tematica tematica,Date fechaInicio,Date fechaFin){
+		List<Defensa> defensas;
+		defensas=interfaceDefensa.buscarDefensaTegSegunTematica(tematica,fechaInicio,fechaFin);
+		return defensas;
+	}
+	public List<Defensa> buscarDefensaTegSegunPrograma(Programa programa,Date fechaInicio,Date fechaFin){
+		List<Defensa> defensas;
+		defensas=interfaceDefensa.buscarDefensaTegSegunPrograma(programa,fechaInicio,fechaFin);
+		return defensas;
+	}
+	public List<Defensa> buscarDefensaTegSegunArea(AreaInvestigacion area,Date fechaInicio,Date fechaFin){
+		List<Defensa> defensas;
+		defensas=interfaceDefensa.buscarDefensaTegSegunArea(area,fechaInicio,fechaFin);
+		return defensas;
+	}
+	public List<Defensa> buscarDefensaTeg2(Date fechaInicio,Date fechaFin){
+		List<Defensa> defensas;
+		defensas=interfaceDefensa.buscarDefensaTeg2(fechaInicio,fechaFin);
+		return defensas;
 	}
 		
 }
