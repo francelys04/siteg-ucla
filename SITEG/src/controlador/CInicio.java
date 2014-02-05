@@ -105,11 +105,11 @@ public class CInicio extends CGeneral {
 
 		}
 	
-//		if(imgNoticiaUno != null){
-//			imgNoticiaUno.setContent(getImagen());
-//			imgNoticiaDos.setContent(getImagen());
-//			imgNoticiaTres.setContent(getImagen());		
-//			}
+		if(imgNoticiaUno != null){
+			imgNoticiaUno.setContent(getImagen());
+			imgNoticiaDos.setContent(getImagen());
+			imgNoticiaTres.setContent(getImagen());		
+			}
 	}
 	//inician metodos para mostrar imagenes en el slide
 
