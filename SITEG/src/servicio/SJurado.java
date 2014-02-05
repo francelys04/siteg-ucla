@@ -36,4 +36,9 @@ public class SJurado {
 		return j;
 		
 	}
+
+	public void limpiar(List<Jurado> jurados) {
+		// TODO Auto-generated method stub
+		interfaceJurado.delete(jurados);
+	}
 }

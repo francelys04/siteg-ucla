@@ -428,7 +428,7 @@
 						</button>
 
 						<button id="btnAceptarDefensaMientrasTanto" label="Guardar"
-							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
+							sclass="btn" image="/public/imagenes/iconos/guardar.png"
 							tabindex="13" tooltip="pupBtnCancelar">
 						</button>
 						<button id="btnCancelarDefensa" label="Cancelar"
