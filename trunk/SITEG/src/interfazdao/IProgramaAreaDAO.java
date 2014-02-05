@@ -5,8 +5,7 @@ import java.util.List;
 import modelo.AreaInvestigacion;
 import modelo.Lapso;
 import modelo.Programa;
-import modelo.ProgramaArea;
-import modelo.Usuario;
+import modelo.compuesta.ProgramaArea;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

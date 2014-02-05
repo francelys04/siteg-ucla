@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesorTematica"
 	title="Lista de Profesores asociados a Tematicas"
-	border="normal" width="70%" height="700px" closable="true" apply="controlador.CReporteProfesorTematica"
+	border="normal" width="70%" height="700px" closable="true" apply="controlador.reporte.CReporteProfesorTematica"
 >
 
 	<style dynamic="true">

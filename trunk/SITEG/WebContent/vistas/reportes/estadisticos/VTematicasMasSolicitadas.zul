@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesorCargo"
 	title="Tematicas"
-	border="normal" width="60%" height="auto" closable="true" apply="controlador.CReporteTematicasMasSolicitadas">
+	border="normal" width="60%" height="auto" closable="true" apply="controlador.reporte.CReporteTematicasMasSolicitadas">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;

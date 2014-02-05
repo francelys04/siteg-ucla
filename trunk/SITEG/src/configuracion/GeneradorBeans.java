@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import servicio.STegRequisito;
 
 import servicio.SActividad;
-import servicio.SArbol;
+
 import servicio.SArchivo;
 import servicio.SAreaInvestigacion;
 import servicio.SCategoria;
@@ -19,7 +19,6 @@ import servicio.SDefensa;
 import servicio.SEnlaceInteres;
 import servicio.SEstudiante;
 import servicio.SFactibilidad;
-import servicio.SGrupo;
 import servicio.SItem;
 import servicio.SItemDefensa;
 import servicio.SItemFactibilidad;
@@ -37,8 +36,10 @@ import servicio.STeg;
 import servicio.STegEstatus;
 import servicio.STematica;
 import servicio.STipoJurado;
-import servicio.SUsuario;
 import servicio.SAvance;
+import servicio.seguridad.SArbol;
+import servicio.seguridad.SGrupo;
+import servicio.seguridad.SUsuario;
 
 public class GeneradorBeans implements ApplicationContextAware {
 

@@ -171,7 +171,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbJuradoDisponible" height="250px"
-												oddRowSclass="non-odd" checkmark="true"
+												oddRowSclass="non-odd"
 												emptyMessage="No hay items registrados">
 												<listhead>
 													<listheader
@@ -181,31 +181,31 @@
 													<listheader
 														label="Apellido" />
 												</listhead>
-												<template
-													name="model">
-													<listitem>
-														<listcell>
-															<label
-																value="${each.cedula}">
-															</label>
-														</listcell>
-														<listcell
-															label="${each.nombre}">
-														</listcell>
-														<listcell
-															label="${each.apellido}">
-														</listcell>
-														<listcell>
-															<combobox
-																readonly="true" inplace="true" width="70px">
-																<comboitem
-																	label="Principal" />
-																<comboitem
-																	label="Suplente" />
-															</combobox>
-														</listcell>
-													</listitem>
-												</template>
+													<template name="model">
+												<listitem>
+													<listcell>
+														<spinner
+														ButtonVisible="false"
+															inplace="true" value="${each.cedula}" width="98%"
+															readonly="true" />
+													</listcell>
+													<listcell
+														label="${each.nombre}">
+													</listcell>
+													<listcell
+														label="${each.apellido}">
+													</listcell>
+													<listcell>
+														<combobox
+															readonly="true" inplace="true" width="70px">
+															<comboitem
+																label="Principal" />
+															<comboitem
+																label="Asistente" />
+														</combobox>
+													</listcell>
+												</listitem>
+											</template>
 											</listbox>
 										</panelchildren>
 									</panel>
@@ -235,7 +235,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbJuradoSeleccionado" height="250px"
-												oddRowSclass="non-odd" checkmark="true"
+												oddRowSclass="non-odd"
 												emptyMessage="No se han seleccionado items">
 												<listhead>
 													<listheader
@@ -248,31 +248,32 @@
 														label="Tipo de Jurado" width="25%" />
 												</listhead>
 
-												<template
-													name="model">
-													<listitem>
-														<listcell>
-															<label
-																value="${each.cedula}">
-															</label>
-														</listcell>
-														<listcell
-															label="${each.nombre}">
-														</listcell>
-														<listcell
-															label="${each.apellido}">
-														</listcell>
-														<listcell>
-															<combobox
-																readonly="true" inplace="true">
-																<comboitem
-																	label="Principal" />
-																<comboitem
-																	label="Suplente" />
-															</combobox>
-														</listcell>
-													</listitem>
-												</template>
+												<template name="model">
+												<listitem>
+													<listcell>
+														<spinner
+														ButtonVisible="false"
+															inplace="true" value="${each.profesor.cedula}"
+															width="98%" readonly="true" />
+													</listcell>
+													<listcell
+														label="${each.profesor.nombre}">
+													</listcell>
+													<listcell
+														label="${each.profesor.apellido}">
+													</listcell>
+													<listcell>
+														<combobox
+															readonly="true" value="${each.tipoJurado.nombre}"
+															inplace="true">
+															<comboitem
+																label="Principal" />
+															<comboitem
+																label="Asistente" />
+														</combobox>
+													</listcell>
+												</listitem>
+											</template>
 
 											</listbox>
 										</panelchildren>
@@ -426,6 +427,10 @@
 							tabindex="12" tooltip="pupBtnFinalizar">
 						</button>
 
+						<button id="btnAceptarDefensaMientrasTanto" label="Guardar"
+							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
+							tabindex="13" tooltip="pupBtnCancelar">
+						</button>
 						<button id="btnCancelarDefensa" label="Cancelar"
 							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
 							tabindex="13" tooltip="pupBtnCancelar">

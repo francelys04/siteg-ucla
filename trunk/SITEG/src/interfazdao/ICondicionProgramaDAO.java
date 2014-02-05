@@ -1,11 +1,10 @@
 package interfazdao;
 
 import java.util.List;
-
-import modelo.CondicionPrograma;
-import modelo.CondicionProgramaId;
 import modelo.Lapso;
 import modelo.Programa;
+import modelo.compuesta.CondicionPrograma;
+import modelo.compuesta.id.CondicionProgramaId;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

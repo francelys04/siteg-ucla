@@ -1,6 +1,6 @@
 <window id="wdwReporteInformeFactibilidad" 
 	title="Informe de Factibilidad" 
-	border="normal" width="60%" height="500px" closable="true"  apply="controlador.CReporteInformeFactibilidad"
+	border="normal" width="60%" height="500px" closable="true"  apply="controlador.reporte.CReporteInformeFactibilidad"
 >
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row

@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import modelo.seguridad.Usuario;
+
 @Entity
 @Table(name = "estudiante")
 public class Estudiante {

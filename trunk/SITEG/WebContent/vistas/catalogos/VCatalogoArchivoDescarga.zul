@@ -1,6 +1,6 @@
 <window title="Catalogo de Descargas" border="normal" width="825px"
 	id="wdwCatalogoArchivoDescarga"
-	apply="controlador.CCatalogoArchivoDescarga" closable="true">
+	apply="controlador.catalogo.CCatalogoArchivoDescarga" closable="true">
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />

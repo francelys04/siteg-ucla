@@ -1,5 +1,5 @@
 <window title="Catalogo Profesor" border="normal" width="795px"
-	id="wdwCatalogoProfesor" apply="controlador.CCatalogoProfesor"
+	id="wdwCatalogoProfesor" apply="controlador.catalogo.CCatalogoProfesor"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />

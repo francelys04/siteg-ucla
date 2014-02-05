@@ -1,6 +1,6 @@
 <window title="Solicitudes de Tutoría" border="normal" width="100%"
 	height="600px" closable="true"
-	apply="controlador.CCatalogoSolicitudTutoria">
+	apply="controlador.catalogo.CCatalogoSolicitudTutoria">
 	<separator />
 	<separator />
 	<separator />

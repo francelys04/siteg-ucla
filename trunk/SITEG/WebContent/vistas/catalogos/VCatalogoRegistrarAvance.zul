@@ -1,6 +1,6 @@
 <window id="wdwCatalogoRegistrarAvances" title="Proyectos Factibles"
 	border="normal" width="100%" height="600px" closable="true"
-	apply="controlador.CCatalogoRegistrarAvance">
+	apply="controlador.catalogo.CCatalogoRegistrarAvance">
 	<separator />
 	<separator />
 	<separator />

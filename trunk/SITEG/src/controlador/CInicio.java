@@ -7,15 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-
-import modelo.Cronograma;
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Noticia;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
+import modelo.compuesta.Cronograma;
 import configuracion.GeneradorBeans;
 import controlador.CConsultarEstatus;
+import controlador.catalogo.CCatalogoArchivoDescarga;
+import controlador.catalogo.CCatalogoAreaInvestigacion;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -94,6 +95,7 @@ public class CInicio extends CGeneral {
 
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
@@ -103,11 +105,11 @@ public class CInicio extends CGeneral {
 
 		}
 	
-		if(imgNoticiaUno != null){
-			imgNoticiaUno.setContent(getImagen());
-			imgNoticiaDos.setContent(getImagen());
-			imgNoticiaTres.setContent(getImagen());		
-			}
+//		if(imgNoticiaUno != null){
+//			imgNoticiaUno.setContent(getImagen());
+//			imgNoticiaDos.setContent(getImagen());
+//			imgNoticiaTres.setContent(getImagen());		
+//			}
 	}
 	//inician metodos para mostrar imagenes en el slide
 
@@ -193,7 +195,7 @@ public class CInicio extends CGeneral {
 		Window wdwInformacionInteres = (Window) Executions.createComponents(
 				"/vistas/portal-web/VInformacionInteres.zul", null, null);
 		wdwInformacionInteres.doModal();
-		CCatalogoArchivoDescarga cata = new controlador.CCatalogoArchivoDescarga();
+		CCatalogoArchivoDescarga cata = new CCatalogoArchivoDescarga();
 		cata.metodoPrender();
 		CCatalogoAreaInvestigacion areas = new CCatalogoAreaInvestigacion();
 		areas.metodoApagar();

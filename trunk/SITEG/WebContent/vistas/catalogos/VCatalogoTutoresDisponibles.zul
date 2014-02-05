@@ -1,5 +1,5 @@
 <window title="Catalogo Tutores Disponibles" border="normal" width="98%"
-	id="wdwCatalogoTutores" apply="controlador.CCatalogoTutorDisponible"
+	id="wdwCatalogoTutores" apply="controlador.catalogo.CCatalogoTutorDisponible"
 	closable="true">
 
 

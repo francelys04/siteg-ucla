@@ -1,5 +1,5 @@
 <zk><?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
-<window id="uploadVideo" border="none" height="100%" apply="fiddle.TestVM" >
+<window id="uploadVideo" border="none" height="100%" apply="controlador.seguridad.CArbol" >
 
 	<borderlayout sclass="complex-layout" height="99%">
 		<north size="100px" border="normal">

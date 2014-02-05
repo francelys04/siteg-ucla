@@ -1,6 +1,6 @@
 <window title="Solicitudes de Defensa" border="normal" width="100%"
 	height="600px" closable="true"
-	apply="controlador.CCatalogoAsignarJurado">
+	apply="controlador.catalogo.CCatalogoAsignarJurado">
 	<separator />
 	<separator />
 	<separator />

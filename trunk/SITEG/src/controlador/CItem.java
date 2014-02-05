@@ -29,6 +29,7 @@ import org.zkoss.zul.Window;
 
 import servicio.SItem;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoItem;
 
 @Controller
 public class CItem extends CGeneral {
@@ -56,7 +57,7 @@ public class CItem extends CGeneral {
 	private Window wdwItem;
 	private long id = 0;
 
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		List<ItemEvaluacion> items = servicioItem.buscarItemsActivos();
 		// System.out.println(items.get(0).getNombre());

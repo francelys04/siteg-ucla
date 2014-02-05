@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import modelo.seguridad.Usuario;
+
 @Entity
 @Table(name="enlace_interes")
 public class EnlaceInteres {

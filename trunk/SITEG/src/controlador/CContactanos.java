@@ -50,6 +50,7 @@ public class CContactanos extends CGeneral {
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 

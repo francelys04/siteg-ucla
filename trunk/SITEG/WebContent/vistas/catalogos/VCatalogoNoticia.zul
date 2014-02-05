@@ -1,7 +1,7 @@
 <?page id="wdwCatalogoDescarga"  title="Catalogo Descarga" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="Catalogo Noticia" border="normal" width="800px"
-		id="wdwCatalogoNoticia" apply="controlador.CCatalogoNoticia"
+		id="wdwCatalogoNoticia" apply="controlador.catalogo.CCatalogoNoticia"
 		closable="true">
 
 		<style src="/public/css/bootstrap.css" />

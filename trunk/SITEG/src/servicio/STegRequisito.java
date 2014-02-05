@@ -9,7 +9,7 @@ import modelo.Lapso;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
-import modelo.TegRequisito;
+import modelo.compuesta.TegRequisito;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 <window title="Solicitudes de registro de proyectos" border="normal"
 	width="100%" height="600px" closable="true"
-	apply="controlador.CCatalogoSolicitudRegistroProyecto">
+	apply="controlador.catalogo.CCatalogoSolicitudRegistroProyecto">
 	<separator />
 	<separator />
 	<separator />

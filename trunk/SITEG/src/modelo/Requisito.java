@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.compuesta.ProgramaRequisito;
+import modelo.compuesta.TegRequisito;
+
 @Entity
 @Table(name = "requisito")
 public class Requisito {

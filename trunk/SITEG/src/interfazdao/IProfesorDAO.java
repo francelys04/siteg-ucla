@@ -1,14 +1,10 @@
 package interfazdao;
 
 import java.util.List;
-
-
-
 import modelo.Profesor;
-import modelo.Programa;
 import modelo.Teg;
 import modelo.Tematica;
-import modelo.Usuario;
+import modelo.seguridad.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

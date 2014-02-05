@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.compuesta.ItemDefensa;
+import modelo.compuesta.ItemFactibilidad;
+import modelo.compuesta.ProgramaItem;
+
 @Entity
 @Table(name = "item_evaluacion")
 public class ItemEvaluacion {

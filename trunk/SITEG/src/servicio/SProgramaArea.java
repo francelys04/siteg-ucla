@@ -3,11 +3,10 @@ package servicio;
 import java.util.List;
 
 import interfazdao.IProgramaAreaDAO;
-
 import modelo.AreaInvestigacion;
 import modelo.Lapso;
 import modelo.Programa;
-import modelo.ProgramaArea;
+import modelo.compuesta.ProgramaArea;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

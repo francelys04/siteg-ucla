@@ -24,6 +24,7 @@ import org.zkoss.zul.Window;
 
 import servicio.SAreaInvestigacion;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoAreaInvestigacion;
 //constructor de la clases area de investigacion y de su catalogo
 @Controller
 public class CAreaInvestigacion extends CGeneral {
@@ -54,7 +55,7 @@ public class CAreaInvestigacion extends CGeneral {
 	
 
 	
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		//busca todas las areas y llena un listado
 		List<AreaInvestigacion> area = servicioArea.buscarActivos();

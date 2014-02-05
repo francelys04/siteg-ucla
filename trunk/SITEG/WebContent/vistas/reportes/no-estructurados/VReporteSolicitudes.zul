@@ -1,7 +1,7 @@
 
 <window id="wdwReporteProfesorTeg"
 	title="Solicitudes por Programa"
-	border="normal" width="70%" height="700px" closable="true" apply="controlador.CReporteSolicitudes"
+	border="normal" width="70%" height="700px" closable="true" apply="controlador.reporte.CReporteSolicitudes"
 	>
 
 	<style dynamic="true">

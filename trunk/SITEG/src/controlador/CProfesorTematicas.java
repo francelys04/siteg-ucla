@@ -27,6 +27,7 @@ import org.zkoss.zul.Window;
 import servicio.SProfesor;
 import servicio.STematica;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoProfesor;
 
 @Controller
 public class CProfesorTematicas extends CGeneral {
@@ -53,6 +54,7 @@ public class CProfesorTematicas extends CGeneral {
 	private Window wdwProfesorTematica;
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 

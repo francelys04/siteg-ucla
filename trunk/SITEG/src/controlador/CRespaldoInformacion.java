@@ -33,6 +33,7 @@ public class CRespaldoInformacion extends CGeneral {
 	private Window wdwRespaldoInformacion;
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 

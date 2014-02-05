@@ -4,8 +4,7 @@ import java.util.List;
 
 import interfazdao.IItemFactibilidadDAO;
 import modelo.Factibilidad;
-import modelo.ItemDefensa;
-import modelo.ItemFactibilidad;
+import modelo.compuesta.ItemFactibilidad;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

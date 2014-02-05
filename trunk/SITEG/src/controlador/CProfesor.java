@@ -10,7 +10,8 @@ import modelo.Categoria;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Tematica;
-import modelo.Usuario;
+import modelo.seguridad.Usuario;
+
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -31,9 +32,11 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import servicio.SCategoria;
 import servicio.SProfesor;
-import servicio.SUsuario;
+
 import servicio.SPrograma;
+import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoProfesor;
 
 public class CProfesor extends CGeneral {
 
@@ -85,6 +88,7 @@ public class CProfesor extends CGeneral {
 	private Button btnEliminarProfesor;
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		List<Categoria> categorias = servicioCategoria.buscarCategoria();

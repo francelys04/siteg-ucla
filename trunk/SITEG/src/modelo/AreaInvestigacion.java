@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.compuesta.ProgramaArea;
+
 @Entity
 @Table(name="area_investigacion")
 public class AreaInvestigacion {

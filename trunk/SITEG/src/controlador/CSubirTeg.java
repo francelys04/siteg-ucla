@@ -38,7 +38,7 @@ import servicio.SActividad;
 import servicio.SArchivo;
 import servicio.SPrograma;
 import servicio.STeg;
-import servicio.SUsuario;
+
 import configuracion.GeneradorBeans;
 
 
@@ -72,6 +72,7 @@ public class CSubirTeg extends CGeneral {
 	  tanto VDescarga como VCatalogoDescarga*/
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		

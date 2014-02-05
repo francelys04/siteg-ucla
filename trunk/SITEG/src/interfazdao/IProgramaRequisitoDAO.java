@@ -3,9 +3,9 @@ package interfazdao;
 import java.util.List;
 import modelo.Lapso;
 import modelo.Programa;
-import modelo.ProgramaRequisito;
-import modelo.ProgramaRequisitoId;
 import modelo.Requisito;
+import modelo.compuesta.ProgramaRequisito;
+import modelo.compuesta.id.ProgramaRequisitoId;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

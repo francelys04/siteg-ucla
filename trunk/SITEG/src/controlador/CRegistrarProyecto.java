@@ -15,7 +15,7 @@ import modelo.Factibilidad;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
-import modelo.ItemFactibilidad;
+
 import modelo.SolicitudTutoria;
 import modelo.Tematica;
 
@@ -49,13 +49,14 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import servicio.SEstudiante;
-import servicio.SUsuario;
+
 import servicio.SPrograma;
 import servicio.SAreaInvestigacion;
 import servicio.STematica;
 import servicio.STeg;
 import servicio.SProfesor;
 import servicio.SSolicitudTutoria;
+import servicio.seguridad.SUsuario;
 
 import configuracion.GeneradorBeans;
 import controlador.CGeneral;
@@ -99,7 +100,7 @@ public class CRegistrarProyecto extends CGeneral {
 	private String idProf;
 	private static long id;
 
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		Estudiante estudiante = ObtenerUsuarioEstudiante();
 		Programa programa = estudiante.getPrograma();

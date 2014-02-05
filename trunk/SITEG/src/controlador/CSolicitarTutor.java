@@ -18,9 +18,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import modelo.Categoria;
-import modelo.CondicionPrograma;
+
 import modelo.Estudiante;
-import modelo.ProgramaArea;
+
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
@@ -66,6 +66,7 @@ import servicio.SAreaInvestigacion;
 import servicio.SProfesor;
 import servicio.SPrograma;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoProfesorTematica;
 
 //es un controlador de Solicitar Tutor
 @Controller
@@ -152,7 +153,7 @@ public class CSolicitarTutor extends CGeneral {
 	List<Estudiante> gridEstudiante = new ArrayList<Estudiante>();
 
 	// metodo para mapear los datos del Tutor
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		List<Programa> programas = servicioPrograma.buscarActivas();
 

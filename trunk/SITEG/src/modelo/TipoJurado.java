@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.compuesta.Jurado;
+
 @Entity
 @Table(name="tipo_jurado")
 public class TipoJurado {

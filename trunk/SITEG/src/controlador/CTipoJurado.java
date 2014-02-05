@@ -39,6 +39,7 @@ import org.zkoss.zul.Window;
 
 import servicio.STipoJurado;
 import configuracion.GeneradorBeans;
+import controlador.catalogo.CCatalogoTipoJurado;
 
 @Controller
 public class CTipoJurado extends CGeneral {
@@ -65,7 +66,7 @@ public class CTipoJurado extends CGeneral {
 	private Window wdwTipoJurado;
 	private long id = 0;
 
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		List<TipoJurado> tipoJurado = servicioTipoJurado.buscarActivos();
 

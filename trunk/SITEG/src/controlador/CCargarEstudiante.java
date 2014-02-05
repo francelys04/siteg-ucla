@@ -13,7 +13,7 @@ import javax.swing.JFileChooser;
 
 import modelo.Estudiante;
 import modelo.Programa;
-import modelo.Usuario;
+import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +43,7 @@ import org.zkoss.zul.Window;
 
 import servicio.SEstudiante;
 import servicio.SPrograma;
-import servicio.SUsuario;
+import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
 
 @Controller
@@ -160,8 +160,10 @@ public class CCargarEstudiante extends CGeneral {
 	}
 
 	@Override
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
+	
 }

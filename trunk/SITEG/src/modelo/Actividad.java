@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.compuesta.Cronograma;
+
 @Entity
 @Table(name = "actividad")
 public class Actividad {

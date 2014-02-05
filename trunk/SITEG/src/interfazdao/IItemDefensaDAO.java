@@ -1,7 +1,7 @@
 package interfazdao;
 
-import modelo.ItemDefensa;
 
+import modelo.compuesta.ItemDefensa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

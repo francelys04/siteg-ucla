@@ -6,9 +6,9 @@ import interfazdao.ICondicionProgramaDAO;
 import interfazdao.ILapsoDAO;
 
 import modelo.Actividad;
-import modelo.CondicionPrograma;
 import modelo.Lapso;
 import modelo.Programa;
+import modelo.compuesta.CondicionPrograma;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

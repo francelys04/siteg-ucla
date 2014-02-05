@@ -1,5 +1,5 @@
 <window title="Catalogo Requisito" border="normal" width="800px"
-	id="wdwCatalogoRequisito" apply="controlador.CCatalogoRequisito"
+	id="wdwCatalogoRequisito" apply="controlador.catalogo.CCatalogoRequisito"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />

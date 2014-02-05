@@ -10,14 +10,14 @@ import java.util.Set;
 import modelo.Actividad;
 import modelo.AreaInvestigacion;
 import modelo.Avance;
-import modelo.CondicionPrograma;
+
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
-import modelo.Usuario;
+
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,11 +47,12 @@ import servicio.SPrograma;
 import servicio.SProgramaRequisito;
 import servicio.SRequisito;
 import servicio.STeg;
-import servicio.SUsuario;
+
 import servicio.SLapso;
 import servicio.SCondicionPrograma;
 import configuracion.GeneradorBeans;
 import servicio.SAvance;
+import servicio.seguridad.SUsuario;
 
 public class CRegistrarRevision extends CGeneral {
 
@@ -95,6 +96,7 @@ public class CRegistrarRevision extends CGeneral {
 	private static long auxIdPrograma = 0;
 
 	@Override
+	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
