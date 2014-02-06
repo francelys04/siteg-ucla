@@ -66,105 +66,105 @@
 	<pageHeader>
 		<band height="145" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="72" width="49" height="20" uuid="eb41311e-92e3-4213-84e8-3d6fe439f408"/>
+				<reportElement x="-9" y="41" width="49" height="20" uuid="eb41311e-92e3-4213-84e8-3d6fe439f408"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Desde:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="50" y="72" width="73" height="20" uuid="97c0d305-331f-4e24-a6c3-8e72d30ad399"/>
+				<reportElement x="40" y="41" width="73" height="20" uuid="97c0d305-331f-4e24-a6c3-8e72d30ad399"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha1})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="107" width="37" height="20" uuid="6a1873cb-9395-41b9-95fb-6d79bcc4fb81"/>
+				<reportElement x="163" y="41" width="37" height="20" uuid="6a1873cb-9395-41b9-95fb-6d79bcc4fb81"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hasta:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="50" y="107" width="73" height="20" uuid="67e38e60-488e-4d5e-aa77-742c4a5324a3"/>
+				<reportElement x="200" y="41" width="73" height="20" uuid="67e38e60-488e-4d5e-aa77-742c4a5324a3"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha2})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="401" y="36" width="44" height="20" uuid="48e89b5f-5a63-450c-be5e-6ceca18df5cd"/>
+				<reportElement x="416" y="9" width="44" height="20" uuid="48e89b5f-5a63-450c-be5e-6ceca18df5cd"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="445" y="35" width="112" height="20" uuid="92c0b828-4665-49c3-ac3c-955c7a5ad175"/>
+				<reportElement x="460" y="8" width="112" height="20" uuid="92c0b828-4665-49c3-ac3c-955c7a5ad175"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="389" y="72" width="34" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
+				<reportElement x="-9" y="76" width="34" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Area:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="139" y="107" width="59" height="20" uuid="e99113b9-b056-4d57-983a-8ed5e3c4c7b3"/>
+				<reportElement x="163" y="76" width="59" height="20" uuid="e99113b9-b056-4d57-983a-8ed5e3c4c7b3"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tematica:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="445" y="72" width="102" height="20" uuid="2fe181fc-7880-4a61-895e-d8da6a80c9ee"/>
+				<reportElement x="27" y="76" width="136" height="20" uuid="2fe181fc-7880-4a61-895e-d8da6a80c9ee"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="204" y="107" width="136" height="20" uuid="897dd153-9e78-4624-bd76-fac2acdbeb24"/>
+				<reportElement x="222" y="76" width="118" height="20" uuid="897dd153-9e78-4624-bd76-fac2acdbeb24"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tematica}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="139" y="72" width="65" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
+				<reportElement x="336" y="41" width="65" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Programa:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="206" y="72" width="183" height="20" uuid="e666f2ac-f82d-4323-8fc6-1161f175a172"/>
+				<reportElement x="401" y="41" width="183" height="20" uuid="e666f2ac-f82d-4323-8fc6-1161f175a172"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="389" y="107" width="54" height="20" uuid="e6a9d5b1-86ad-4226-a242-47577ed23a53"/>
+				<reportElement x="347" y="76" width="54" height="20" uuid="e6a9d5b1-86ad-4226-a242-47577ed23a53"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estatus:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="151" y="8" width="260" height="20" uuid="d39052b0-54ca-421f-b947-929fe0b39cd0"/>
+				<reportElement x="156" y="114" width="260" height="20" uuid="d39052b0-54ca-421f-b947-929fe0b39cd0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[Lista de Defensa]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="445" y="107" width="138" height="20" uuid="8b96cf9c-bdc1-47e1-9f32-7789a4c1a7af"/>
+				<reportElement x="401" y="76" width="138" height="20" uuid="8b96cf9c-bdc1-47e1-9f32-7789a4c1a7af"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>

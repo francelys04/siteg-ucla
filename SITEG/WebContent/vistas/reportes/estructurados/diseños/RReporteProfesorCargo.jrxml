@@ -179,7 +179,7 @@
 				<reportElement x="123" y="0" width="110" height="29" backcolor="#0099FF" uuid="d5e36183-d3c8-469d-a666-374758779292"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="445" y="2" width="126" height="27" forecolor="#000000" backcolor="#0099FF" uuid="d3adad6d-5188-4a55-9ac7-39af4156857a"/>
+				<reportElement x="445" y="0" width="126" height="29" forecolor="#000000" backcolor="#0099FF" uuid="d3adad6d-5188-4a55-9ac7-39af4156857a"/>
 			</rectangle>
 			<rectangle>
 				<reportElement x="0" y="0" width="123" height="29" backcolor="#0099FF" uuid="59cab6f8-da56-4955-b7db-f7cf12e39a47"/>
