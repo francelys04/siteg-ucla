@@ -1,9 +1,23 @@
-<window title="Catalogo Programa" border="normal" width="800px"
+<window title="Catálogo Programa" border="normal" width="800px"
 	id="wdwCatalogoPrograma" apply="controlador.catalogo.CCatalogoPrograma"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionPrograma">
+		<toolbarbutton
+			label="Doble clic para seleccionar un programa" />
+	</popup>
+	<popup id="pupImprimirPrograma">
+		<toolbarbutton
+			label="Presione aquí para imprimir la lista de programas" />
+	</popup>
+	<popup id="pupSalirCatalogo">
+		<toolbarbutton
+			label="Presione aquí para salir" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox id="ltbPrograma" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay programas registrados">
@@ -30,7 +44,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionPrograma">
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.descripcion}" />
 			</listitem>
@@ -43,11 +57,12 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button id="btnImprimir" tabindex="4"
-							sclass="btn" label="Imprimir">
+						<button id="btnImprimir" tabindex="5"
+							tooltip="pupImprimirPrograma" sclass="btn" label="Imprimir">
 						</button>
 
-						<button id="btnSalir" label="Salir" width="110px"
+						<button id="btnSalir" label="Salir" width="110px" 
+						    tooltip="pupSalirCatalogo"
 							sclass="btn"
 							image="/public/imagenes/iconos/salir.png" tabindex="7">
 						</button>

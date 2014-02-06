@@ -44,10 +44,10 @@
 	<!-- Lista de popus -->
 	<popup id="pupExaminarEstudiantes">
 		<toolbarbutton
-			label="Presione aqui para buscar la lista de los estudiantes" />
+			label="Presione aquí para buscar la lista de los estudiantes" />
 	</popup>
 	<popup id="pupSalirCargarEstudiante">
-		<toolbarbutton label="Presione aqui para salir" />
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<!-- fin de popus -->
 

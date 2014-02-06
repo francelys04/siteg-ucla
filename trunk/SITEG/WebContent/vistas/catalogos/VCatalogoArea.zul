@@ -1,4 +1,4 @@
-<window title="Catalogo Areas de Investigación" border="normal" width="820px"
+<window title="Catálogo Areas de Investigación" border="normal" width="820px"
 	id="wdwCatalogoArea" apply="controlador.catalogo.CCatalogoAreaInvestigacion"
 	closable="true">
 
@@ -6,6 +6,12 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 	<separator />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionArea">
+		<toolbarbutton
+			label="Doble clic para seleccionar un área de investigación" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<hbox>
 		<label id="lblPrograma" value="Programa:" style="margin-left:15px"/>
@@ -46,7 +52,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionArea">
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.descripcion}" />
 
