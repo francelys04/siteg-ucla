@@ -1,5 +1,5 @@
 <window id="wdwReporteDefensa" 
-	title="Lista de Defensas" 
+	title="Lista de Defensas de Trabajos Especiales de Grado" 
 	border="normal" width="60%" height="800px" closable="true"  apply="controlador.reporte.CReporteDefensa">
 	
 	<style dynamic="true">
@@ -40,8 +40,8 @@
 		style="font-weight:bold;color:red;margin-center:2%">
 	</label> -->
 	
-		<label value="Lista de Defensas" 	
-				style="font-weight:bold;margin-left:35%;margin-right:20%">
+		<label value="Defensas de Trabajos Especiales de Grado" 	
+				style="font-weight:bold;margin-left:33%;margin-right:20%">
 		</label>
 	<separator />
 	<separator />
@@ -58,30 +58,7 @@
 			<rows>  
 			
 				<row>
-					
-					<hlayout width="100%">
-							<label value="Fecha Inicio Registro:"
-							style="font-weight:bold" />
-			        </hlayout>
-							<datebox id="dtbFechaInicio" cols="12"
-					     	style="margin-right:30px;color:black !important;" width="130px"
-					     	format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-							</datebox>
-
-					
-					<hlayout width="100%">
-						<label value="Fecha Fin Registro:" style="font-weight:bold" />
-					</hlayout>
-						<datebox id="dtbFechaFin" cols="12"
-				        style="margin-right:30px;color:black !important;" width="130px"
-				        format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-						</datebox>		
-													
-				</row>	
-				
-				
-				<row>
-						<hlayout>
+					<hlayout>
 							<label value="Programa:"
 							style="font-weight:bold" />
 					</hlayout>
@@ -98,13 +75,10 @@
 							<template name="model">
 								<comboitem label="${each.nombre}" />
 							</template>
-							</combobox>
-						
-		
-				</row>
-				
+							</combobox>								
+				</row>	
 				<row>
-				<hlayout>
+						<hlayout>
 				    	<label value="Temática:" style="font-weight:bold" />
 					</hlayout>
 						<combobox id="cmbTematica" width="100%" readonly="true">
@@ -113,7 +87,7 @@
 						</template>
 						</combobox>				
 					<hlayout>
-						<label value="Estatus:"
+						<label value="Estatus de la defensa:"
 						style="font-weight:bold" />
 					</hlayout>				
 						<combobox id="cmbEstatus" width="100%" readonly="true">
@@ -121,6 +95,30 @@
 							<comboitem label="${each}" />
 							</template>
 						</combobox>		
+				
+		
+				</row>
+				
+				<row>
+				
+									
+					<hlayout width="100%">
+							<label value="Fecha Inicio Registro:"
+							style="font-weight:bold" />
+			        </hlayout>
+							<datebox id="dtbFechaInicio" cols="12"
+					     	style="margin-right:30px;color:black !important;" width="130px"
+					     	format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
+							</datebox>
+
+					
+					<hlayout width="100%">
+						<label value="Fecha Fin Registro:" style="font-weight:bold" />
+					</hlayout>
+						<datebox id="dtbFechaFin" cols="12"
+				        style="margin-right:30px;color:black !important;" width="130px"
+				        format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
+						</datebox>	
 				</row>
 					
 		</rows>		
