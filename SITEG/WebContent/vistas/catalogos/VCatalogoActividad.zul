@@ -1,9 +1,16 @@
-<window title="Catalogo Actividad" border="normal" width="800px"
+<window title="Catálogo Actividad" border="normal" width="800px"
 	id="wdwCatalogoActividad" apply="controlador.catalogo.CCatalogoActividad"
 	closable="true">
 	
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionActividad">
+		<toolbarbutton
+			label="Doble clic para seleccionar una actividad" />
+	</popup>
+	<!-- Fin de popus -->
+	
 
 	<listbox id="ltbActividad" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay actividades registradas">
@@ -34,7 +41,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionActividad">
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.descripcion}" />
 

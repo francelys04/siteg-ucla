@@ -1,4 +1,4 @@
-<window id="wdwArea" title="Área de Investigación" border="normal"
+<window id="wdwArea" title="Áreas de Investigación" border="normal"
 	width="100%" height="410px" closable="true"
 	apply="controlador.CAreaInvestigacion">
 
@@ -44,30 +44,30 @@
 	<!-- Lista de popus -->
 	<popup id="pupNombreArea">
 		<toolbarbutton
-			label="Ingrese aquí el nombre del area de investigacion" />
+			label="Ingrese aquí el nombre del área de investigación" />
 	</popup>
 	<popup id="pupDescripcionArea">
 		<toolbarbutton
-			label="Ingrese aquí la descripción del area de investigacion" />
+			label="Ingrese aquí la descripción del área de investigación" />
 	</popup>
 	<popup id="pupGuardarArea">
 		<toolbarbutton
-			label="Presione aquí para guardar los datos de un area de investigacion" />
+			label="Presione aquí para guardar los datos de un área de investigación" />
 	</popup>
 	<popup id="pupCancelarArea">
 		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupEliminarArea">
 		<toolbarbutton
-			label="Presione aqui para eliminar los datos de un area de investigacion" />
+			label="Presione aquí para eliminar los datos de un área de investigación" />
 	</popup>
 	<popup id="pupSalirArea">
 		<toolbarbutton
-			label="Presione aqui para salir" />
+			label="Presione aquí para salir" />
 	</popup>
 	<popup id="pupCatalogoArea">
 		<toolbarbutton
-			label="Presione aqui para ver la lista de las areas de investigacion" />
+			label="Presione aquí para ver la lista de las áreas de investigación" />
 	</popup>
 
 	<!-- Fin de popus -->

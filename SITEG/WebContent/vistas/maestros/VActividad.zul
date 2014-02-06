@@ -67,19 +67,19 @@
 			label="Presione aquí para guardar los datos de una actividad" />
 	</popup>
 	<popup id="pupCancelarActividad">
-		<toolbarbutton label="Presione aquí para limpar los campos" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupEliminarActividad">
 		<toolbarbutton
-			label="Presione aqui para eliminar los datos de una actividad" />
+			label="Presione aquí para eliminar los datos de una actividad" />
 	</popup>
 	<popup id="pupSalirActividad">
 		<toolbarbutton
-			label="Presione aqui para salir" />
+			label="Presione aquí para salir" />
 	</popup>
 	<popup id="pupCatalogoActividad">
 		<toolbarbutton
-			label="Presione aqui para ver la lista de actividades" />
+			label="Presione aquí para ver la lista de actividades" />
 	</popup>
 	<!-- Fin de popus -->
 
@@ -141,7 +141,7 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button id="btnGuardarActividad" tabindex="4"
+						<button id="btnGuardarActividad" tabindex="5"
 							sclass="btn" tooltip="pupGuardarActividad" label="Guardar"
 							image="/public/imagenes/iconos/guardar.png">
 						</button>
