@@ -2,9 +2,7 @@ package servicio;
 
 import java.util.List;
 
-import modelo.Actividad;
 import modelo.Avance;
-import modelo.Estudiante;
 import modelo.Teg;
 import interfazdao.IAvanceDAO;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,7 +4,6 @@ import java.util.List;
 
 import interfazdao.ICondicionDAO;
 
-import modelo.Actividad;
 import modelo.Condicion;
 
 import org.springframework.beans.factory.annotation.Autowired;

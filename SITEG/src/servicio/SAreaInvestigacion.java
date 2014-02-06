@@ -5,7 +5,6 @@ import interfazdao.IAreaInvestigacionDAO;
 import java.util.List;
 import modelo.AreaInvestigacion;
 import modelo.Lapso;
-import modelo.Profesor;
 import modelo.Programa;
 
 import org.springframework.beans.factory.annotation.Autowired;

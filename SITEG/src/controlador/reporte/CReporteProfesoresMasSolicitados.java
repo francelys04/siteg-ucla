@@ -28,6 +28,7 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModelList;
@@ -57,6 +58,8 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	private Combobox cmbTematicaReporteProfesoresSolicitados;
 	@Wire
 	private Combobox cmbSolicitudesReporteProfesoresSolicitados;
+	@Wire
+	private Jasperreport jstVistaProfesores;	
 	private String[] estatusSolicitud = {"Aceptada", "Rechazada","Por Revisar"};
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
@@ -127,32 +130,11 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 					"La fecha de inicio debe ser primero que la fecha de fin",
 					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
-			if(estatus.equals("")||tematica.equals("")){
+			if(estatus.equals("")||cmbTematicaReporteProfesoresSolicitados.getValue().equals("")){
 				Messagebox.show(
 						"Debe completar todos los campos",
 						"Error", Messagebox.OK, Messagebox.ERROR);
 		}else{
-//			if (estatus.equals(estatusSolicitud[3])) {
-//				if (cmbTematicaReporteProfesoresSolicitados.getValue().equals(estatusSolicitud[3])) {
-////					todos todos
-//					solicitudes = servicioSolicitudTutoria.buscarTodasSolicitudesEntreFechas(fechaInicio, fechaFin);
-//					System.out.println("Todos"+solicitudes.size());
-//					profesores =ordenar(solicitudes);
-//					for(int i=0; i<profesores.size();i++){
-//						solicitudTutorias = servicioSolicitudTutoria.buscarPorProfesorEntreFechas(profesores.get(i),fechaInicio,fechaFin);
-//						solicitudesFinales.addAll(solicitudTutorias);
-//					}
-//				} else {
-////					todos estatus una tematica
-//					solicitudes = servicioSolicitudTutoria.buscarSolicitudesPorTematicaEntreFechas(tematica,fechaInicio, fechaFin);
-//					System.out.println("Todos estatus una tematica"+solicitudes.size());
-//					profesores =ordenar(solicitudes);
-//					for(int i=0; i<profesores.size();i++){
-//						solicitudTutorias = servicioSolicitudTutoria.buscarPorProfesorTematicaEntreFechas(profesores.get(i), tematica, fechaInicio,fechaFin);
-//						solicitudesFinales.addAll(solicitudTutorias);
-//					}
-//				}
-//			} else {
 				if (cmbTematicaReporteProfesoresSolicitados.getValue().equals("Todos"))  {
 //					todos tematicas un estatus
 					solicitudes = servicioSolicitudTutoria.buscarSolicitudesPorEstatusEntreFechas(estatus, fechaInicio, fechaFin);
@@ -186,24 +168,31 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 					
 				}
 			//}
-			FileSystemView filesys = FileSystemView.getFileSystemView();
-			Map<String, Object> p = new HashMap<String, Object>();
-			p.put("titulo", "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
-					+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
-					+ "DIRECCION DE PROGRAMA");
-			p.put("inicio", fechaInicio);
-			p.put("fin", fechaFin);
-			p.put("estatus", estatus);
+			Map<String, Object> mapa = new HashMap<String, Object>();
+//			mapa.put("titulo", "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
+//					+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
+//					+ "DIRECCION DE PROGRAMA");
+			mapa.put("inicio", fechaInicio);
+			mapa.put("fin", fechaFin);
+			mapa.put("estatus", estatus);
 			if(cmbTematicaReporteProfesoresSolicitados.getValue().equals("Todos"))
-				p.put("tematica", "Todas las tematicas");
-				else p.put("tematica", tematica.getNombre());
-			JasperReport jasperReport = (JasperReport) JRLoader
-					.loadObject(getClass().getResource(
-							"/reporte/RProfesoresMasSolicitados.jasper"));
-			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					jasperReport, p, new JRBeanCollectionDataSource(tegs));
-			JasperExportManager.exportReportToPdfFile(jasperPrint, filesys
-					.getHomeDirectory().toString() + "/reporteGrafica.pdf");
+				mapa.put("tematica", "Todas las tematicas");
+				else mapa.put("tematica", tematica.getNombre());
+			if(cmbProgramaReporteProfesoresSolicitados.getValue().equals("Todos"))
+				mapa.put("programa", "Todos los Programas");
+			else mapa.put("programa", cmbProgramaReporteProfesoresSolicitados.getValue());
+			if(cmbAreaReporteProfesoresSolicitados.getValue().equals("Todos"))
+				mapa.put("area", "Todas las areas");
+			else mapa.put("area", cmbAreaReporteProfesoresSolicitados.getValue());
+			String rutaUrl = obtenerDirectorio();
+			String reporteSrc = rutaUrl
+					+ "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
+//		String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+		jstVistaProfesores.setSrc(reporteSrc);
+		jstVistaProfesores.setDatasource(new JRBeanCollectionDataSource(
+				tegs));
+		jstVistaProfesores.setType("pdf");
+		jstVistaProfesores.setParameters(mapa);
 		}
 		}
 	}
