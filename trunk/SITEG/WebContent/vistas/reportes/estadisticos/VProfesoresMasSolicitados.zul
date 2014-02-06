@@ -115,7 +115,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 					<datebox id="dtbInicioReporteProfesoresSolicitados"
-						 readonly="true" format="yyyy/MM/dd"
+						 readonly="true" format="short" mold="rounded"
 						>
 					</datebox>
 					
@@ -126,7 +126,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 					<datebox id="dtbFinReporteProfesoresSolicitados"
-						 readonly="true" format="yyyy/MM/dd"
+						 readonly="true" format="short" mold="rounded"
 						>
 					</datebox>
 				</row>
@@ -161,6 +161,7 @@
 		</panelchildren>
 	</panel>
 	<separator />
+	<jasperreport id="jstVistaProfesores" height="40%" width="100%"></jasperreport>
 	<separator />
 	<separator />
 </window>

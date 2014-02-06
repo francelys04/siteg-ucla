@@ -2,7 +2,6 @@ package servicio;
 
 import java.util.List;
 
-import modelo.Categoria;
 import modelo.Profesor;
 import modelo.Programa;
 

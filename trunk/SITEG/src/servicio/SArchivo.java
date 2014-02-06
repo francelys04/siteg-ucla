@@ -3,9 +3,7 @@ package servicio;
 import java.util.List;
 
 import interfazdao.IArchivoDAO;
-import interfazdao.IAreaInvestigacionDAO;
 import modelo.Archivo;
-import modelo.AreaInvestigacion;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,6 @@ import java.util.List;
 import interfazdao.ICondicionProgramaDAO;
 import interfazdao.ILapsoDAO;
 
-import modelo.Actividad;
 import modelo.Lapso;
 import modelo.Programa;
 import modelo.compuesta.CondicionPrograma;

@@ -5,7 +5,6 @@ import java.util.List;
 
 import modelo.AreaInvestigacion;
 import modelo.Lapso;
-import modelo.Profesor;
 import modelo.Programa;
 
 import org.springframework.data.jpa.repository.JpaRepository;

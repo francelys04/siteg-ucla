@@ -3,7 +3,6 @@ package interfazdao;
 
 import java.util.List;
 
-import modelo.Categoria;
 import modelo.Profesor;
 import modelo.Programa;
 

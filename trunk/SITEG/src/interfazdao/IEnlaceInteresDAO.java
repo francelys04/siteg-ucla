@@ -2,9 +2,6 @@ package interfazdao;
 
 import java.util.List;
 
-import modelo.Actividad;
-import modelo.Archivo;
-import modelo.AreaInvestigacion;
 import modelo.EnlaceInteres;
 
 import org.springframework.data.jpa.repository.JpaRepository;

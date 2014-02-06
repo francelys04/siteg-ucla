@@ -2,13 +2,8 @@ package servicio;
 
 import java.util.List;
 
-import interfazdao.IArchivoDAO;
-import interfazdao.IAreaInvestigacionDAO;
 import interfazdao.IEnlaceInteresDAO;
-import modelo.Archivo;
-import modelo.AreaInvestigacion;
 import modelo.EnlaceInteres;
-import modelo.Noticia;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
