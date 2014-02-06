@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesor" 
 	title="Lista de Profesores con sus Trabajos Especiales de Grado " 
-	border="normal" width="60%" height="800px" closable="true"  apply="controlador.reporte.CReporteProfesorCargo"
+	border="normal" width="60%" height="800px" closable="true"  apply="controlador.reporte.CReporteProfesor"
 >
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
