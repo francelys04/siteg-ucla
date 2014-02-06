@@ -1,6 +1,6 @@
 <window id="wdwReporteInformeFactibilidad" 
 	title="Informe de Factibilidad" 
-	border="normal" width="60%" height="500px" closable="true"  apply="controlador.reporte.CReporteInformeFactibilidad"
+	border="normal" width="80%" height="450px" closable="true"  apply="controlador.reporte.CReporteInformeFactibilidad"
 >
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -33,6 +33,21 @@
 		background: white; border-top: none; }
 
 	</style>
+	<style src="/public/css/bootstrap.css" />
+
+
+	<!-- Lista de popus -->
+	<popup id="pupGenerarReporteInformeFactibilidad">
+		<toolbarbutton label="Generar Reporte" />
+	</popup>
+	<popup id="pupCancelarReporteInformeFactibilidad">
+		<toolbarbutton label="Salir" />
+	</popup>
+	<popup id="pupCatalogoProyectoTeg">
+		<toolbarbutton label="Presiona aqui para ver la Lista de Proyectos" />
+	</popup>
+
+	<!-- Fin de popus -->
 	
 	<separator />
 	<separator />
@@ -40,7 +55,7 @@
 		style="font-weight:bold;color:red;margin-center:2%">
 	</label> -->
 	
-		<label value="Informe Factibilidad" 	
+		<label value="Informe de Factibilidad" 	
 				style="font-weight:bold;margin-left:35%;margin-right:20%">
 		</label>
 	<separator />
@@ -53,7 +68,7 @@
 			<separator />
 				<grid sclass="fgrid">
 					<columns>
-						<column width="17%" height="17%" />
+						<column width="20%" height="17%" />
 					</columns>
 			<rows>  
 			
@@ -86,9 +101,9 @@
 							style="font-weight:bold" />
 					</hlayout>
 					
-						<combobox id="cmbPrograma" width="100%" readonly="true">
+						<combobox id="cmbProgramaFactibilidad" width="100%" readonly="true">
 							<template name="model">
-							<comboitem label="${each.programa}" id="${each.id}" />
+							<comboitem label="${each.nombre}" id="${each.id}" />
 							</template>
 						</combobox>
 						<hlayout>
@@ -96,7 +111,7 @@
 						</hlayout>
 							<combobox id="cmbArea" width="100%" readonly="true">
 							<template name="model">
-								<comboitem label="${each.area}" id="${each.id}"/>
+								<comboitem label="${each.nombre}" id="${each.id}"/>
 							</template>
 							</combobox>
 						
@@ -109,19 +124,36 @@
 					</hlayout>
 						<combobox id="cmbTematica" width="100%" readonly="true">
 						<template name="model">
-							<comboitem label="${each.tematica}" />
+							<comboitem label="${each.nombre}" />
 						</template>
 						</combobox>	
 									
 					<hlayout>
 				    	<label value="Tipo:" style="font-weight:bold" />
 					</hlayout>
-						<combobox id="TipoFactibilidad" width="100%" readonly="true">
+						<combobox id="cmbTipoFactibilidad" width="100%" readonly="true">
 						<template name="model">
-							<comboitem label="${each.tipofactibilidad}" />
+							<comboitem label="${each}" />
 						</template>
 						</combobox>	
 						
+				</row>
+				<row>
+				  	<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label value="Proyecto"
+							style="font-weight:bold" />
+					</hlayout>
+					<hbox>
+
+						<textbox id="txtProyecto" width="100%" />
+						<button id="btnCatalogoProyectoTeg"
+							tooltip="pupCatalogoProyectoTeg" sclass="btn"
+							style="margin-left:15px" tabindex="1"
+							image="/public/imagenes/iconos/catalogo.png" />
+					</hbox>
 				</row>
 		</rows>		
 		</grid>
@@ -144,10 +176,12 @@
 
 					<button id="btnGenerarReporteInformeFactibilidad"
 						label="Generar Reporte" sclass="btn"
+						tooltip="pupGenerarReporteInformeFactibilidad"
 						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
 					</button>
 					<button id="btnSalirReporteInformeFactibilidad"
 						label="Cancelar" sclass="btn"
+						tooltip="pupCancelarReporteInformeFactibilidad"
 						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
 					</button>
 					<separator />
@@ -158,6 +192,7 @@
 	</panel>
 	<separator />
 	<jasperreport id="report" height="500px"></jasperreport>
+	<iframe id ="frame"></iframe>
 	<separator />
 	<separator />
 </window>
