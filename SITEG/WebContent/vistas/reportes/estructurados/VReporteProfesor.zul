@@ -40,7 +40,7 @@
 		style="font-weight:bold;color:red;margin-center:2%">
 	</label> -->
 	
-		<label value="Profesores con sus Tegs" 	
+		<label value="Profesores con el rol que desempeñan en Tegs" 	
 				style="font-weight:bold;margin-left:38%;margin-right:20%">
 		</label>
 	<separator />
