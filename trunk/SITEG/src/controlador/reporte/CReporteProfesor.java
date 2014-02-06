@@ -28,7 +28,7 @@ import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
 import modelo.compuesta.Jurado;
-import modelo.reporte.ProfesorCargo;
+import modelo.reporte.ProfesorTeg;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -146,23 +146,34 @@ public class CReporteProfesor extends CGeneral {
 
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccinarPrograma() {
-		cmbArea.setValue("");
-		cmbTematica.setValue("");
-
-		Programa programa = (Programa) cmbPrograma.getSelectedItem().getValue();
-		areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
-				.buscar(programa.getId()));
-		cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
-
-	}
+		if (cmbPrograma.getValue().equals("Todos")) {
+			cmbArea.setValue("Todos");
+			cmbTematica.setValue("Todos");
+		}
+		else{
+		    cmbArea.setValue("");
+		    cmbTematica.setValue("");
+		    Programa programa = (Programa) cmbPrograma.getSelectedItem().getValue();
+		     areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
+				    .buscar(programa.getId()));
+		 	AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos", "", true);
+		 	areas.add(area);
+		    cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+		}	}
 
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
-		cmbTematica.setValue("");
-		AreaInvestigacion tematica = (AreaInvestigacion) cmbArea.getSelectedItem().getValue();
-		tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-				.buscarArea(tematica.getId()));
-		cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
+		if (cmbArea.getValue().equals("Todos")) {
+			
+			cmbTematica.setValue("Todos");
+		}
+		else{
+		   cmbTematica.setValue("");
+		    AreaInvestigacion tematica = (AreaInvestigacion) cmbArea.getSelectedItem().getValue();
+		    tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
+				        .buscarArea(tematica.getId()));
+		    cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
+	}
 	}
 
 	@Listen("onSelect = #cmbTematica")
@@ -183,9 +194,7 @@ public class CReporteProfesor extends CGeneral {
 		Tematica tematica = servicioTematica.buscarTematica(idTematica);
 		String tipoCargo = (String) cmbEstatus.getSelectedItem().getValue();
 		System.out.println(tipoCargo);
-		//Profesor profesor = servicioProfesor.buscarProfesorPorCedula(cedula);
-
-		List<ProfesorCargo> elementos = new ArrayList<ProfesorCargo>();
+		List<ProfesorTeg> elementos = new ArrayList<ProfesorTeg>();
 
 		if (fechaFin == null || fechaInicio == null || fechaInicio.after(fechaFin)) {
 			Messagebox.show(
@@ -194,9 +203,10 @@ public class CReporteProfesor extends CGeneral {
 		} else {
 			List<Teg> tegs = servicioTeg.buscarTegsDeTematicaPorDosFechas(tematica, fechaInicio, fechaFin);
 			for (Teg teg : tegs) {
+				 		
 				Profesor profesorTutor = teg.getTutor();
 				if (tipoCargo.equals("Tutor") || tipoCargo.equals("Todos")) {
-					elementos.add(new ProfesorCargo(
+					elementos.add(new ProfesorTeg(
 							profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 							teg.getTitulo(),
 							"Tutor", teg.getEstatus()));
@@ -205,7 +215,7 @@ public class CReporteProfesor extends CGeneral {
 				if (tipoCargo.equals("Jurado") || tipoCargo.equals("Todos")) {
 					for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(teg)) {
 						Profesor profesorJurado = jurado.getProfesor();
-						elementos.add(new ProfesorCargo(
+						elementos.add(new ProfesorTeg(
 								profesorJurado.getNombre() + " " + profesorJurado.getApellido(),
 								teg.getTitulo(),
 								"Jurado - " + jurado.getTipoJurado().getNombre(), teg.getEstatus()));
@@ -214,7 +224,7 @@ public class CReporteProfesor extends CGeneral {
 				
 				if (tipoCargo.equals("Comision Evaluadora") || tipoCargo.equals("Todos")) {
 					for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(teg)) {
-						elementos.add(new ProfesorCargo(
+						elementos.add(new ProfesorTeg(
 								profesorComision.getNombre() + " " + profesorComision.getApellido(),
 								teg.getTitulo(),
 								"Comision", teg.getEstatus()));
@@ -222,8 +232,8 @@ public class CReporteProfesor extends CGeneral {
 				}
 			}
 
-			Collections.sort(elementos, new Comparator<ProfesorCargo>() {
-				public int compare(ProfesorCargo a, ProfesorCargo b) {
+			Collections.sort(elementos, new Comparator<ProfesorTeg>() {
+				public int compare(ProfesorTeg a, ProfesorTeg b) {
 				return a.getNombre().compareTo(b.getNombre());
 				}});
 		}
@@ -251,8 +261,6 @@ public class CReporteProfesor extends CGeneral {
 		 jstVistaPrevia.setType("pdf");
 		 jstVistaPrevia.setParameters(p);
 		 
-		
-
 		
 	}
 	@Listen("onClick = #btnSalirReporteProfesorCargo")
