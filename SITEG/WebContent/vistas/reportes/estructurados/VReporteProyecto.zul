@@ -1,6 +1,6 @@
 <window id="wdwReporteProyecto" 
 	title="Lista de Proyectos" 
-	border="normal" width="60%" height="900px" closable="true"  apply="controlador.reporte.CReporteProyecto">
+	border="normal" width="60%" height="800px" closable="true"  apply="controlador.reporte.CReporteProyecto">
 	
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -40,8 +40,8 @@
 		style="font-weight:bold;color:red;margin-center:2%">
 	</label> -->
 	
-		<label value="Lista de Proyectos" 	
-				style="font-weight:bold;margin-left:35%;margin-right:20%">
+		<label value="Proyectos" 	
+				style="font-weight:bold;margin-left:45%;margin-right:20%">
 		</label>
 	<separator />
 	<separator />
@@ -58,30 +58,7 @@
 			<rows>  
 			
 				<row>
-					
-					<hlayout width="100%">
-							<label value="Fecha Inicio Registro:"
-							style="font-weight:bold" />
-			        </hlayout>
-							<datebox id="dtbFechaInicio" cols="12"
-					     	style="margin-right:30px;color:black !important;" width="130px"
-					     	format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-							</datebox>
-
-					
-					<hlayout width="100%">
-						<label value="Fecha Fin Registro:" style="font-weight:bold" />
-					</hlayout>
-						<datebox id="dtbFechaFin" cols="12"
-				        style="margin-right:30px;color:black !important;" width="130px"
-				        format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-						</datebox>		
-													
-				</row>	
-				
-				
-				<row>
-						<hlayout>
+				<hlayout>
 							<label value="Programa:"
 							style="font-weight:bold" />
 					</hlayout>
@@ -100,11 +77,10 @@
 							</template>
 							</combobox>
 						
-		
-				</row>
-				
+				</row>					
 				<row>
-				<hlayout>
+			
+					<hlayout>
 				    	<label value="Temática:" style="font-weight:bold" />
 					</hlayout>
 						<combobox id="cmbTematica" width="100%" readonly="true">
@@ -113,14 +89,40 @@
 						</template>
 						</combobox>				
 					<hlayout>
-						<label value="Estatus:"
+						<label value="Estatus del proyecto:"
 						style="font-weight:bold" />
 					</hlayout>				
 						<combobox id="cmbEstatus" width="100%" readonly="true">
 							<template name="model">
 							<comboitem label="${each}" />
 							</template>
-						</combobox>		
+						</combobox>			
+							
+		
+					
+				</row>
+				
+				<row>
+						
+											<hlayout width="100%">
+							<label value="Fecha Inicio Registro:"
+							style="font-weight:bold" />
+			        </hlayout>
+							<datebox id="dtbFechaInicio" cols="12"
+					     	style="margin-right:30px;color:black !important;" width="130px"
+					     	format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
+							</datebox>
+
+					
+					<hlayout width="100%">
+						<label value="Fecha Fin Registro:" style="font-weight:bold" />
+					</hlayout>
+						<datebox id="dtbFechaFin" cols="12"
+				        style="margin-right:30px;color:black !important;" width="130px"
+				        format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
+						</datebox>		
+						
+							
 				</row>
 					
 		</rows>		
