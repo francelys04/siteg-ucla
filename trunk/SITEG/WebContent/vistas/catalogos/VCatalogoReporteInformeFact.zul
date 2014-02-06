@@ -1,0 +1,49 @@
+<window id="wdwCatalogoReporteInformeFact"
+	title="Proyectos" border="normal" width="60%" height="600px"
+	apply="controlador.catalogo.CCatalogoReporteInformeFact" closable="true">
+	<separator />
+	<separator />
+	<separator />
+
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+
+	<listbox id="ltbListaInformeFactibilidad" mold="paging" pageSize="10"
+		style="margin-left:10px;margin-right:10px"
+		emptyMessage="No hay proyectos evaluados actualmente">
+
+
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtTituloInformeFactibilidad"
+					sclass="search-query" placeholder="Título" instant="true"
+					width="75%" value="" onChange="" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox id="txtEstudianteInformeFactibilidad"
+					sclass="search-query" placeholder="Fecha" instant="true"
+					width="55%" value="" onChange="" />
+			</auxheader>
+		</auxhead>
+
+		<listhead>
+			<listheader label="Título" align="center" width="50%" />
+			<listheader label="Estudiante" align="center" />
+		</listhead>
+
+
+		<template name="model">
+			<listitem>
+				<listcell label="${each.titulo}" />
+				<listcell label="${each.estatus}" />
+				
+			</listitem>
+		</template>
+	</listbox>
+
+	<separator />
+	<separator />
+	<separator />
+</window>
