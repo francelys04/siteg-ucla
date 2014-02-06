@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesor" 
-	title="Lista profesores con los cargos que desempeñan en Trabajos especiales de grado " 
-	border="normal" width="60%" height="500px" closable="true"  apply="controlador.reporte.CReporteProfesorCargo"
+	title="Lista de Profesores con sus Trabajos Especiales de Grado " 
+	border="normal" width="60%" height="800px" closable="true"  apply="controlador.reporte.CReporteProfesorCargo"
 >
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -40,8 +40,8 @@
 		style="font-weight:bold;color:red;margin-center:2%">
 	</label> -->
 	
-		<label value="Lista de Profesores por Tegs" 	
-				style="font-weight:bold;margin-left:35%;margin-right:20%">
+		<label value="Profesores con sus Tegs" 	
+				style="font-weight:bold;margin-left:38%;margin-right:20%">
 		</label>
 	<separator />
 	<separator />
@@ -58,30 +58,7 @@
 			<rows>  
 			
 				<row>
-					
-					<hlayout width="100%">
-							<label value="Fecha Inicio Registro:"
-							style="font-weight:bold" />
-			        </hlayout>
-							<datebox id="dtbCronogramaFechaInicio" cols="12"
-					     	style="margin-right:30px;color:black !important;" width="130px"
-					     	format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-							</datebox>
-
-					
-					<hlayout width="100%">
-						<label value="Fecha Fin Registro:" style="font-weight:bold" />
-					</hlayout>
-						<datebox id="dtbCronogramaFechaHasta" cols="12"
-				        style="margin-right:30px;color:black !important;" width="130px"
-				        format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-						</datebox>		
-													
-				</row>	
-				
-				
-				<row>
-						<hlayout>
+							<hlayout>
 							<label value="Programa:"
 							style="font-weight:bold" />
 					</hlayout>
@@ -99,11 +76,11 @@
 								<comboitem label="${each.nombre}" />
 							</template>
 							</combobox>
-						
-		
-				</row>
 				
+				</row>	
 				<row>
+					
+				
 				<hlayout>
 				    	<label value="Temática:" style="font-weight:bold" />
 					</hlayout>
@@ -121,6 +98,28 @@
 							<comboitem label="${each}" />
 							</template>
 						</combobox>		
+				
+				</row>
+				
+				<row>
+				
+				<hlayout width="100%">
+							<label value="Fecha Inicio Registro:"
+							style="font-weight:bold" />
+			        </hlayout>
+							<datebox id="dtbCronogramaFechaInicio" cols="12"
+					     	style="margin-right:30px;color:black !important;" width="130px"
+					     	format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
+							</datebox>
+
+					
+					<hlayout width="100%">
+						<label value="Fecha Fin Registro:" style="font-weight:bold" />
+					</hlayout>
+						<datebox id="dtbCronogramaFechaHasta" cols="12"
+				        style="margin-right:30px;color:black !important;" width="130px"
+				        format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
+						</datebox>		
 				</row>
 					
 		</rows>		
