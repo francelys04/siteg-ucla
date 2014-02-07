@@ -61,7 +61,9 @@ public class CRegistrarFactibilidad extends CGeneral {
 	@Wire
 	private Textbox txtObservacionRegistrarFactibilidad;
 	@Wire
-	private Textbox txtTutorRegistrarFactibilidad;
+	private Textbox txtNombreTutorRegistrarFactibilidad;
+	@Wire
+	private Textbox txtApellidoTutorRegistrarFactibilidad;
 	@Wire
 	private Listbox ltbEstudianteRegistrarFactibilidad;
 	@Wire
@@ -106,7 +108,8 @@ public class CRegistrarFactibilidad extends CGeneral {
 				ltbItemsFactibilidad.setModel(new ListModelList<ItemFactibilidad>(
 						itemsFactibilidad));
 				
-				txtTutorRegistrarFactibilidad.setValue(teg2.getTutor().getNombre() + " " + teg2.getTutor().getApellido());
+				txtNombreTutorRegistrarFactibilidad.setValue(teg2.getTutor().getNombre());
+				txtApellidoTutorRegistrarFactibilidad.setValue(teg2.getTutor().getApellido());
 				 
 				 
 				
@@ -141,7 +144,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	//Permite aceptar la factibilidad de un proyecto
 	@Listen("onClick = #btnAceptarRegistrarFactibilidad")
 	public void aceptarfactibilidad(){
-		Messagebox.show("ï¿½Desea aceptar la factibilidad del proyecto?",
+		Messagebox.show("¿Desea aceptar la factibilidad del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {

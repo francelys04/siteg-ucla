@@ -134,10 +134,10 @@
 							<panelchildren>
 
 								<listbox id="ltbActividadesDisponibles"
-									height="160px" 
-									emptyMessage="No hay Actividades registrados">
+									height="250px" emptyMessage="No hay Actividades registrados">
 									<listhead>
-										<listheader width="100%" label="Nombre" />
+										<listheader width="100%"
+											label="Nombre" />
 									</listhead>
 									<template name="model">
 										<listitem>
@@ -163,19 +163,19 @@
 							</panelchildren>
 						</panel>
 
-						<panel width="40px"
-							style="margin:0 auto;padding:35px;">
+						<panel width="60px"
+							style="margin-left:10px;margin-top:80px">
 							<panelchildren>
 								<div>
 
 									<button id="btnAgregarActividades"
 										sclass="btn" image="/public/imagenes/iconos/right.png"
-										tooltiptext="Agregar Items" width="35px" />
+										tooltiptext="Agregar Items" />
 									<separator />
 									<button sclass="btn"
 										id="btnRemoverActividades"
 										image="/public/imagenes/iconos/left.png"
-										tooltiptext="Quitar Items" width="35px" />
+										tooltiptext="Quitar Items" />
 
 								</div>
 							</panelchildren>
@@ -183,17 +183,18 @@
 
 
 						<panel title="Actividades Seleccionadas"
-							width="400px">
+							width="600px">
 							<panelchildren>
 
-								<listbox id="ltbActividadesSeleccionadas"
-									 height="160px"
-									emptyMessage="No ha Seleccionado ningun Grupo"
-									>
+								<listbox
+									id="ltbActividadesSeleccionadas" height="250px"
+									emptyMessage="No ha Seleccionado ningun Grupo">
 									<listhead>
 										<listheader label="Nombre" />
-										<listheader label="Fecha Inicio" />
-										<listheader label="Fecha Fin" />
+										<listheader label="Fecha Inicio"
+											width="20%" />
+										<listheader label="Fecha Fin"
+											width="20%" />
 									</listhead>
 									<template name="model">
 										<listitem>
@@ -241,6 +242,10 @@
 						<button id="btnCancelarCronograma"
 							label="Cancelar" sclass="btn"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="13">
+						</button>
+						<button id="btnSalirCronograma" width="110px"
+							label="Salir" sclass="btn"
+							image="/public/imagenes/iconos/salir.png" tabindex="13">
 						</button>
 						<separator />
 					</div>

@@ -200,8 +200,8 @@ public class CSolicitudTutoria extends CGeneral {
 	}
 	
 	
-	@Listen("onClick = #	btnSalirTutoria")
-	public void salirActividad() {
+	@Listen("onClick = #btnSalirTutoria")
+	public void salirTutoria() {
 	
 		wdwEvaluarTutorias.onClose();
 		

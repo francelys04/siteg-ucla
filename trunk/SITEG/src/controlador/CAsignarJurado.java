@@ -24,6 +24,7 @@ import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -79,7 +80,9 @@ public class CAsignarJurado extends CGeneral {
 	@Wire
 	private Window wdwAsignarJurado;
 	@Wire
-	private Textbox txtTutorAsignarJurado;
+	private Textbox txtNombreTutorAsignarJurado;
+	@Wire
+	private Textbox txtApellidoTutorAsignarJurado;
 	@Wire
 	private Image imagenx;
 	private static String vistaRecibida;
@@ -104,8 +107,10 @@ public class CAsignarJurado extends CGeneral {
 				Teg teg = servicioTeg.buscarTeg(idTeg);
 				llenarListas(teg);
 
-				txtTutorAsignarJurado.setValue(teg.getTutor().getNombre() + " "
-						+ teg.getTutor().getApellido());
+				txtNombreTutorAsignarJurado
+						.setValue(teg.getTutor().getNombre());
+				txtApellidoTutorAsignarJurado.setValue(teg.getTutor()
+						.getApellido());
 
 				txtAreaAtenderDefensa.setValue(teg.getTematica()
 						.getareaInvestigacion().getNombre());
@@ -225,13 +230,28 @@ public class CAsignarJurado extends CGeneral {
 	@Listen("onClick = #btnAceptarDefensa")
 	public void aceptarDefensaDefinitiva() {
 		if (validarJurado() && guardardatos()) {
-			Teg teg = servicioTeg.buscarTeg(idTeg);
-			teg.setEstatus("Jurado Asignado");
-			servicioTeg.guardar(teg);
-			crearUsuariosJurado();
-			Messagebox.show("Solicitud de Defensa finalizada exitosamente",
-					"Información", Messagebox.OK, Messagebox.INFORMATION);
-			salirAsignarJurado();
+
+			Messagebox.show("¿Desea guardar los miembros del jurado?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+
+								Teg teg = servicioTeg.buscarTeg(idTeg);
+								teg.setEstatus("Jurado Asignado");
+								servicioTeg.guardar(teg);
+								crearUsuariosJurado();
+								Messagebox.show(
+										"Jurados asignados exitosamente",
+										"Información", Messagebox.OK,
+										Messagebox.INFORMATION);
+								salirAsignarJurado();
+
+							}
+						}
+					});
 		} else {
 			Messagebox.show(
 					"El numero de profesores en el jurado no es el correcto, debe ser: "
@@ -285,7 +305,7 @@ public class CAsignarJurado extends CGeneral {
 			}
 			String mensaje = "Usted foma parte del Jurado de un nuevo teg su usuario es: "
 					+ user.getNombre()
-					+ " y su contraseÃ±a: "
+					+ " y su contrasena: "
 					+ profesorJurado.getCedula();
 			enviarEmailNotificacion(profesorJurado.getCorreoElectronico(),
 					mensaje);
@@ -296,7 +316,7 @@ public class CAsignarJurado extends CGeneral {
 	public void aceptarDefensa() {
 		if (guardardatos()) {
 			Messagebox
-					.show("Solicitud de Defensa guardada para futuras modificaciones",
+					.show("Integrantes del jurado guardados para futuras modificaciones",
 							"Información", Messagebox.OK,
 							Messagebox.INFORMATION);
 			salirAsignarJurado();

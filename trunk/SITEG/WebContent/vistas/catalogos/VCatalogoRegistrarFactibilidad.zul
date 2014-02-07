@@ -24,7 +24,7 @@
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtMostrarFechaFactibilidad"
 					sclass="search-query" placeholder="Fecha" instant="true"
-					width="55%" value="" onChange="" />
+					width="50%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
@@ -61,7 +61,7 @@
 
 		<listhead>
 			<listheader label="Estudiante" align="center" />
-			<listheader label="Fecha" align="center" />
+			<listheader label="Fecha" align="center" width="12%"/>
 			<listheader label="Área" align="center" />
 			<listheader label="Temática" align="center" />
 			<listheader label="Título" align="center" width="25%" />
