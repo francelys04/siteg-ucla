@@ -74,7 +74,9 @@ public class CAtenderDefensa extends CGeneral {
 	@Wire
 	private Window wdwAtenderDefensa;
 	@Wire
-	private Textbox txtTutorProgramarDefensa;
+	private Textbox txtNombreTutorProgramarDefensa;
+	@Wire
+	private Textbox txtApellidoTutorProgramarDefensa;
 	@Wire
 	private Listbox ltbJuradoAtenderDefensa;
 	// @Wire
@@ -98,8 +100,8 @@ public class CAtenderDefensa extends CGeneral {
 				Teg teg = servicioTeg.buscarTeg(idTeg);
 				llenarListas(teg);
 
-				txtTutorProgramarDefensa.setValue(teg.getTutor().getNombre()
-						+ " " + teg.getTutor().getApellido());
+				txtNombreTutorProgramarDefensa.setValue(teg.getTutor().getNombre());
+				txtApellidoTutorProgramarDefensa.setValue(teg.getTutor().getApellido());
 
 				txtAreaAtenderDefensa.setValue(teg.getTematica()
 						.getareaInvestigacion().getNombre());

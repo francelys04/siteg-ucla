@@ -1,52 +1,62 @@
 <zk><?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
-<window id="uploadVideo" border="none" height="100%" apply="controlador.seguridad.CArbol" >
+	<window id="uploadVideo" border="none" height="100%"
+		apply="controlador.seguridad.CArbol">
 
-	<borderlayout sclass="complex-layout" height="99%">
-		<north size="100px" border="normal">
-		<div>
-				<image src="/public/imagenes/portal/banner.png" width="100%"
-					height="100px" />
-			</div>
-		</north>
-		<!-- Inicio del menu (Arbol)-->
-		<west size="25%" flex="true" maxsize="250" splittable="false"
-			collapsible="true">
-			<tree id="treeMenu" width="99%">			
-				<template name="model">
-					<treeitem context="menupopup">
-						<treerow >
-							<treecell label="${each.label}" />							
-						</treerow>
-					</treeitem>
-				</template>
-			</tree>	
-		</west>
-		<!-- Fin del banner de contenido-->
-		<center border="none" >
-			<borderlayout sclass="complex-layout" style="overflow-y:scroll;" height="99%">
-				<north size="70px" border="none">
-					<div align="right"
-						style="margin-right:20px;padding:5px">
-					<image id="imagenes"  width="80px" height="50px"/>  
-						<label style="color: red" value="Usuario: ${desktop.execution.userPrincipal.name}" />
-						<a href="../j_spring_security_logout" style="color: blue"> Cerrar Sesion</a>
-					</div>
-				</north>
-				<center autoscroll="true">
-					<div>
-						<include id="formularios"></include>
-					</div>
-				</center>
-			</borderlayout>
-		</center>
-		<south height="20px" border="normal" style="background-color:rgb(241, 249, 255)">
-			<div align="center" style="margin:0 auto">
-				<label
-					value=" SITEG © 2013 Elaborado por Singleton - Todos los Derechos Reservados">
-				</label>
-			</div>
-		</south>
+		<borderlayout sclass="complex-layout" height="99%">
+			<north size="100px" border="normal">
+				<div>
+					<image src="/public/imagenes/portal/banner.png"
+						width="100%" height="100px" />
+				</div>
+			</north>
+			<!-- Inicio del menu (Arbol)-->
+			<west size="25%" flex="true" maxsize="250"
+				splittable="false" collapsible="true">
+				<tree id="treeMenu" width="99%">
+					<template name="model">
+						<treeitem context="menupopup">
+							<treerow>
+								<treecell label="${each.label}" />
+							</treerow>
+						</treeitem>
+					</template>
+				</tree>
+			</west>
+			<!-- Fin del banner de contenido-->
+			<center border="none" >
+				<borderlayout sclass="complex-layout"
+					style="overflow-y:scroll;" height="99%">
+					<north size="70px" border="none">
+						<div align="right"
+							style="margin-right:20px;padding:5px">
+							<image id="imagenes" width="80px"
+								height="60px" />
+							<label style="color: red;margin-left:10px"
+								value="Usuario: ${desktop.execution.userPrincipal.name}" />
+							<a href="../j_spring_security_logout"
+								style="color: blue">
+								Cerrar Sesion
+							</a>
+						</div>
+					</north>
+					<center autoscroll="true">
+						<div >
+							<include id="formularios"></include>
+							
 
-	</borderlayout>
-</window>
+						</div>
+					</center>
+				</borderlayout>
+			</center>
+			<south height="20px" border="normal"
+				style="background-color:rgb(241, 249, 255)">
+				<div align="center" style="margin:0 auto">
+					<label
+						value=" SITEG © 2013 Elaborado por Singleton - Todos los Derechos Reservados">
+					</label>
+				</div>
+			</south>
+
+		</borderlayout>
+	</window>
 </zk>

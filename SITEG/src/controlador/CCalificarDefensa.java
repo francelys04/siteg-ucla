@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -54,8 +55,9 @@ public class CCalificarDefensa extends CGeneral {
 	@Wire
 	private Listbox ltbEstudiantesCalificar;
 	@Wire
-	private Textbox txtTutorCalificarDefensa;
-
+	private Textbox txtNombreTutorCalificarDefensa;
+	@Wire
+	private Textbox txtApellidoTutorCalificarDefensa;
 	@Wire
 	private Radiogroup rdgCalificacion;
 	@Wire
@@ -72,6 +74,7 @@ public class CCalificarDefensa extends CGeneral {
 	private static String vistaRecibida;
 	private static long auxId;
 	private static boolean dejeenblanco = false;
+	private static Teg teg1;
 
 	private static Programa p;
 	ArrayList<Boolean> valor2 = new ArrayList<Boolean>();
@@ -83,8 +86,7 @@ public class CCalificarDefensa extends CGeneral {
 	SItemDefensa servicioItem = GeneradorBeans.getServicioItemDefensa();
 
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -107,8 +109,10 @@ public class CCalificarDefensa extends CGeneral {
 				txtAreaCalificar.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
 				txtTematicaCalificar.setValue(teg2.getTematica().getNombre());
-				txtTutorCalificarDefensa.setValue(teg2.getTutor().getNombre()
-						+ " " + teg2.getTutor().getApellido());
+				txtNombreTutorCalificarDefensa.setValue(teg2.getTutor()
+						.getNombre());
+				txtApellidoTutorCalificarDefensa.setValue(teg2.getTutor()
+						.getApellido());
 				List<Estudiante> est = servicioEstudiante
 						.buscarEstudiantesDelTeg(teg2);
 				ltbEstudiantesCalificar.setModel(new ListModelList<Estudiante>(
@@ -148,7 +152,7 @@ public class CCalificarDefensa extends CGeneral {
 		} else {
 			long auxId2;
 			auxId2 = auxId;
-			Teg teg1 = servicioTeg.buscarTeg(auxId2);
+			teg1 = servicioTeg.buscarTeg(auxId2);
 
 			for (int i = 0; i < ltbitem.getItemCount(); i++) {
 
@@ -173,31 +177,45 @@ public class CCalificarDefensa extends CGeneral {
 
 			}
 
-			if (dejeenblanco == false) {
+			Messagebox.show("¿Desea guardar la calificacion del Trabajo Especial de Grado?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
 
-				if (rdoAprobado.isChecked() == true) {
+								if (dejeenblanco == false) {
 
-					String estatus1 = "TEG Aprobado";
-					Messagebox.show("datos guardados exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-					salir();
-					teg1.setEstatus(estatus1);
-					servicioTeg.guardar(teg1);
+									if (rdoAprobado.isChecked() == true) {
 
-				}
+										String estatus1 = "TEG Aprobado";
+										Messagebox.show(
+												"Calificacion guardada exitosamente",
+												"Informacion", Messagebox.OK,
+												Messagebox.INFORMATION);
+										salir();
+										teg1.setEstatus(estatus1);
+										servicioTeg.guardar(teg1);
 
-				else if (rdoReprobado.isChecked() == true) {
+									}
 
-					String estatus2 = "TEG Reprobado";
-					teg1.setEstatus(estatus2);
-					servicioTeg.guardar(teg1);
-					Messagebox.show("datos guardados exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-					salir();
-				}
-			}
+									else if (rdoReprobado.isChecked() == true) {
+
+										String estatus2 = "TEG Reprobado";
+										teg1.setEstatus(estatus2);
+										servicioTeg.guardar(teg1);
+										Messagebox.show(
+												"Calificacion guardada exitosamente",
+												"Informacion", Messagebox.OK,
+												Messagebox.INFORMATION);
+										salir();
+									}
+								}
+
+							}
+						}
+					});
 		}
 
 	}

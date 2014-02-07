@@ -1,5 +1,5 @@
 <window  id="wdwProfesorTematica" title="Temáticas de un profesor" border="normal" width="100%"
-	height="580px" closable="true"
+	height="600px" closable="true"
 	apply="controlador.CProfesorTematicas">
 	<separator />
 
@@ -68,7 +68,7 @@
 	<separator />
 
 
-	<groupbox width="95%" height="475px" style="margin-left:2%">
+	<groupbox width="95%" height="490px" style="margin-left:2%">
 		<separator />
 		<separator />
 		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
@@ -137,7 +137,7 @@
 
 		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 			<columns>
-				<column width="95%" height="30%" />
+				<column width="98%" height="30%" />
 			</columns>
 			<rows>
 
@@ -167,19 +167,19 @@
 
 
 						<panel width="60px"
-							style="margin-left:20px;margin-top:80px">
+							style="margin-left:10px;margin-top:80px">
 							<panelchildren>
 								<div>
 
 									<button
 										id="btnAgergarProfesorTematicas" sclass="btn"
 										image="/public/imagenes/iconos/right.png"
-										tooltiptext="Agregar Tematicas" width="35px" />
+										tooltiptext="Agregar Tematicas"  />
 									<separator />
 									<button sclass="btn"
 										id="btnRemoverProfesorTematicas"
 										image="/public/imagenes/iconos/left.png"
-										tooltiptext="Remover Tematicas" width="35px" />
+										tooltiptext="Remover Tematicas"  />
 
 								</div>
 							</panelchildren>
@@ -212,6 +212,8 @@
 			</rows>
 		</grid>
 
+		<separator />
+		<separator />
 		<separator />
 		<separator />
 

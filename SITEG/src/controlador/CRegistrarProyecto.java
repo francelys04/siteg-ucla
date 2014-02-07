@@ -93,8 +93,6 @@ public class CRegistrarProyecto extends CGeneral {
 	@Wire
 	private Window wdwRegistrarProyecto;
 	@Wire
-	private Textbox txtTutorRegistrarProyecto;
-	@Wire
 	private Listbox lsbEstudiantesRegistrarProyecto;
 	private static long idTem;
 	private String idProf;
@@ -142,10 +140,11 @@ public class CRegistrarProyecto extends CGeneral {
 							txtTituloRegistrarProyecto
 									.setValue(solicitudAceptada
 											.getDescripcion());
-							txtTutorRegistrarProyecto.setValue(solicitudAceptada
-									.getProfesor().getNombre()
-									+ " "
-									+ solicitudAceptada.getProfesor()
+							txtNombreTutorRegistrarProyecto
+									.setValue(solicitudAceptada.getProfesor()
+											.getNombre());
+							txtApellidoTutorRegistrarProyecto
+									.setValue(solicitudAceptada.getProfesor()
 											.getApellido());
 
 							List<Estudiante> estudiantes = servicioEstudiante
@@ -165,10 +164,10 @@ public class CRegistrarProyecto extends CGeneral {
 							.getTematica().getNombre());
 					txtTituloRegistrarProyecto.setValue(solicitudAceptada
 							.getDescripcion());
-					txtTutorRegistrarProyecto.setValue(solicitudAceptada
-							.getProfesor().getNombre()
-							+ " "
-							+ solicitudAceptada.getProfesor()
+					txtNombreTutorRegistrarProyecto.setValue(solicitudAceptada
+							.getProfesor().getNombre());
+					txtApellidoTutorRegistrarProyecto
+							.setValue(solicitudAceptada.getProfesor()
 									.getApellido());
 					List<Estudiante> estudiantes = servicioEstudiante
 							.buscarSolicitudesEstudiante(solicitudAceptada);

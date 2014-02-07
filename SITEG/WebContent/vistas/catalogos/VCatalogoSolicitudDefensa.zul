@@ -21,7 +21,7 @@
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="55%"
+				<textbox instant="true" width="45%"
 					sclass="search-query" placeholder="Fecha"
 					id="txtFechaSolicitudDefensa" />
 			</auxheader>
@@ -61,7 +61,7 @@
 
 		<listhead>
 			<listheader label="Estudiante" align="center" />
-			<listheader label="Fecha" align="center" />
+			<listheader label="Fecha" align="center" width="12%"/>
 			<listheader label="Área" align="center" />
 			<listheader label="Temática" align="center" />
 			<listheader label="Título" align="center" width="25%" />

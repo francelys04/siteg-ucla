@@ -1,5 +1,5 @@
-<window title="Configurar Programa" border="normal" width="100%"
-	height="650px" closable="true"
+<window id="wdwCrearCronograma" title="Configurar Programa"
+	border="normal" width="100%" height="650px" closable="true"
 	apply="controlador.CConfigurarPrograma">
 	<separator />
 
@@ -48,6 +48,8 @@
 
 		.z-panel-hm .z-panel-header, .z-panel-header { color: #fff; }
 
+		.z-spinner, .z-doublespinner { display: inline; }
+		
 
 
 	</style>
@@ -154,7 +156,7 @@
 								<hbox>
 									<panel title="Áreas Disponibles"
 										width="340px">
-										<panelchildren >
+										<panelchildren>
 											<listbox
 												id="ltbAreasDisponibles" height="200px"
 												oddRowSclass="non-odd"
@@ -177,19 +179,19 @@
 
 
 									<panel width="60px"
-										style="margin-left:20px;margin-top:80px">
+										style="margin-left:10px;margin-top:80px">
 										<panelchildren>
 											<div>
 
 												<button
 													id="btnAgregarAreas" sclass="btn"
 													image="/public/imagenes/iconos/right.png"
-													tooltiptext="Agregar Items" width="35px" />
+													tooltiptext="Agregar Items" />
 												<separator />
 												<button sclass="btn"
 													id="btnRemoverAreas"
 													image="/public/imagenes/iconos/left.png"
-													tooltiptext="Quitar Items" width="35px" />
+													tooltiptext="Quitar Items" />
 
 											</div>
 										</panelchildren>
@@ -249,7 +251,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbRequisitosDisponibles" height="200px"
-												oddRowSclass="non-odd" 
+												oddRowSclass="non-odd"
 												emptyMessage="No hay requisitos registrados">
 												<listhead>
 													<listheader
@@ -269,19 +271,19 @@
 
 
 									<panel width="60px"
-										style="margin-left:20px;margin-top:80px">
+										style="margin-left:10px;margin-top:80px">
 										<panelchildren>
 											<div>
 
 												<button
 													id="btnAgregarRequisitos" sclass="btn"
 													image="/public/imagenes/iconos/right.png"
-													tooltiptext="Agregar Requisitos" width="35px" />
+													tooltiptext="Agregar Requisitos" />
 												<separator />
 												<button sclass="btn"
 													id="btnRemoverRequisitos"
 													image="/public/imagenes/iconos/left.png"
-													tooltiptext="Quitar Requisitos" width="35px" />
+													tooltiptext="Quitar Requisitos" />
 
 											</div>
 										</panelchildren>
@@ -292,7 +294,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbRequisitosSeleccionadas" height="200px"
-												oddRowSclass="non-odd" 
+												oddRowSclass="non-odd"
 												emptyMessage="No se han seleccionado requisitos">
 												<listhead>
 													<listheader
@@ -341,7 +343,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbItemsDisponibles" height="200px"
-												oddRowSclass="non-odd" 
+												oddRowSclass="non-odd"
 												emptyMessage="No hay items registrados">
 												<listhead>
 													<listheader
@@ -366,19 +368,19 @@
 
 
 									<panel width="60px"
-										style="margin-left:20px;margin-top:80px">
+										style="margin-left:10px;margin-top:80px">
 										<panelchildren>
 											<div>
 
 												<button
 													id="btnAgregarItems" sclass="btn"
 													image="/public/imagenes/iconos/right.png"
-													tooltiptext="Agregar Items" width="35px" />
+													tooltiptext="Agregar Items" />
 												<separator />
 												<button sclass="btn"
 													id="btnRemoverItems"
 													image="/public/imagenes/iconos/left.png"
-													tooltiptext="Quitar Items" width="35px" />
+													tooltiptext="Quitar Items" />
 
 											</div>
 										</panelchildren>
@@ -389,7 +391,7 @@
 										<panelchildren>
 											<listbox
 												id="ltbItemsSeleccionados" height="200px"
-												oddRowSclass="non-odd" 
+												oddRowSclass="non-odd"
 												emptyMessage="No se han seleccionado items">
 												<listhead>
 													<listheader
@@ -489,8 +491,8 @@
 							sclass="btn" label="Cancelar"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 						</button>
-						<button id="btnSalirConfigurarPrograma" width="110px"
-							sclass="btn" label="Salir"
+						<button id="btnSalirConfigurarPrograma"
+							width="110px" sclass="btn" label="Salir"
 							image="/public/imagenes/iconos/salir.png" tabindex="14">
 						</button>
 

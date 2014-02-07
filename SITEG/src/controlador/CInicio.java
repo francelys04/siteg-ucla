@@ -74,7 +74,7 @@ public class CInicio extends CGeneral {
 	@Wire
 	private Window wdwCrono;
 	@Wire
-	private Label lblOlvidoClave;	
+	private Label lblOlvidoClave;
 	@Wire
 	private Image imgNoticiaUno;
 	@Wire
@@ -89,14 +89,10 @@ public class CInicio extends CGeneral {
 	int longitud;
 	int index = 0;
 
-	
-
 	public static long idPrograma;
 
-
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
 		List<Programa> programa = servicioPrograma.buscarActivas();
@@ -104,23 +100,25 @@ public class CInicio extends CGeneral {
 			cmbPrograma.setModel(new ListModelList<Programa>(programa));
 
 		}
-	
-		if(imgNoticiaUno != null){
+
+		if (imgNoticiaUno != null) {
 			imgNoticiaUno.setContent(getImagen());
 			imgNoticiaDos.setContent(getImagen());
-			imgNoticiaTres.setContent(getImagen());		
-			}
+			imgNoticiaTres.setContent(getImagen());
+		}
 	}
-	//inician metodos para mostrar imagenes en el slide
 
-	private List<BufferedImage> getListaImagenes () {
-		List<Noticia> noticia= servicioNoticia.buscarActivos();
+	// inician metodos para mostrar imagenes en el slide
+
+	private List<BufferedImage> getListaImagenes() {
+		List<Noticia> noticia = servicioNoticia.buscarActivos();
 		if (listaImagenes == null) {
 			// modify here for dynamic assign images
 			listaImagenes = new ArrayList<BufferedImage>();
-			for (int i = 0; i <noticia.size(); i++)
+			for (int i = 0; i < noticia.size(); i++)
 				try {
-					listaImagenes.add(ImageIO.read(new ByteArrayInputStream(noticia.get(i).getImagen())));
+					listaImagenes.add(ImageIO.read(new ByteArrayInputStream(
+							noticia.get(i).getImagen())));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -129,13 +127,14 @@ public class CInicio extends CGeneral {
 		longitud = listaImagenes.size();
 		return listaImagenes;
 	}
-	private BufferedImage getImagen () {
+
+	private BufferedImage getImagen() {
 		BufferedImage imagen = getListaImagenes().get(index);
-		index = (index+1) % longitud;
+		index = (index + 1) % longitud;
 		return imagen;
 	}
-	
-//fin de metodo del slide show
+
+	// fin de metodo del slide show
 	@Listen("onSelect = #cmbPrograma")
 	public void llenarCronograma() {
 		idPrograma = Long.parseLong(cmbPrograma.getSelectedItem().getId());
@@ -154,6 +153,7 @@ public class CInicio extends CGeneral {
 				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 		window.doModal();
 	}
+
 	@Listen("onClick = #lblOlvidoClave")
 	public void reiniciarClave() {
 		Window window = (Window) Executions.createComponents(
@@ -203,47 +203,48 @@ public class CInicio extends CGeneral {
 
 	@Listen("onClick = #btnConsultarEstatus")
 	public void ventanaEmergente(Event e) {
-		
-		if(cedulaEstatus.getValue()!=null){
+
+		if (cedulaEstatus.getValue() != null) {
 
 			String cedula = Integer.toString(cedulaEstatus.getValue());
-	
+
 			if (cedula != "") {
 				if (servicioEstudiante.buscarEstudiante(cedula) != null) {
-					
-					Estudiante estudiante = servicioEstudiante.buscarEstudiante(cedula);
-					
-					
-					if (servicioTutoria.buscarSolicitud(estudiante).size() != 0  ||
-							servicioTeg.buscarTegPorEstudiante(estudiante).size() != 0 ) {
-						
+
+					Estudiante estudiante = servicioEstudiante
+							.buscarEstudiante(cedula);
+
+					if (servicioTutoria.buscarSolicitud(estudiante).size() != 0
+							|| servicioTeg.buscarTegPorEstudiante(estudiante)
+									.size() != 0) {
+
 						cedulaEstatus.setValue(null);
 						CConsultarEstatus consultarestatus = new CConsultarEstatus();
 						consultarestatus.recibirCedula(cedula);
-						
-					}else{
-						
+
+					} else {
+
 						Messagebox
-						.show("Estudiante apto para realizar un Trabajo Especial de Grado",
-								"Informacion", Messagebox.OK,
-								Messagebox.INFORMATION);
+								.show("Estudiante apto para realizar un Trabajo Especial de Grado",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
 						cedulaEstatus.setValue(null);
-						
+
 					}
 				} else {
-	
+
 					Messagebox
 							.show("Estudiante no apto para realizar un Trabajo Especial de Grado",
-									"Error", Messagebox.OK,
-									Messagebox.ERROR);
-				
+									"Error", Messagebox.OK, Messagebox.ERROR);
+					cedulaEstatus.setValue(null);
+
 				}
-	
+
 			}
-		}else{
-			Messagebox
-			.show("Introduzca su numero de cedula para realizar la consulta","Error", Messagebox.OK,
-											Messagebox.ERROR);
+		} else {
+			Messagebox.show(
+					"Introduzca su numero de cedula para realizar la consulta",
+					"Error", Messagebox.OK, Messagebox.ERROR);
 		}
 
 	}

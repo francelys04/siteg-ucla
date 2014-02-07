@@ -76,8 +76,6 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 	@Wire
 	private Textbox txtApellidoTutorVerificar;
 	@Wire
-	private Textbox txtTutorVerificarSolicitud;
-	@Wire
 	private Listbox ltbSolcitudRegistroProyecto;
 	@Wire
 	private Textbox txtObservacion;
@@ -132,7 +130,8 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 				// programa por el estudiante del primer estudiante del teg2
 				txtProgramaRegistrarAvances.setValue(est.get(0).getPrograma()
 						.getNombre());
-				txtTutorVerificarSolicitud.setValue(teg2.getTutor().getNombre() + " " + teg2.getTutor().getApellido());
+				txtNombreTutorVerificar.setValue(teg2.getTutor().getNombre());
+				txtApellidoTutorVerificar.setValue(teg2.getTutor().getApellido());
 				txtTituloVerificar.setValue(teg2.getTitulo());
 				txtAreaVerificar.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());

@@ -1,5 +1,6 @@
-<window title="Catalogo Profesor" border="normal" width="800px"
-	id="wdwCatalogoProfesorArea" apply="controlador.catalogo.CCatalogoProfesorTematica"
+<window title="Catalogo Tutores Disponibles" border="normal" width="800px"
+	id="wdwCatalogoProfesorArea"
+	apply="controlador.catalogo.CCatalogoProfesorTematica"
 	closable="true">
 
 	<style src="/public/css/bootstrap.css" />
@@ -10,22 +11,26 @@
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Cédula"
 					id="txtCedulaMostrarProfesor" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Nombre"
 					id="txtNombreMostrarProfesor" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Apellido"
 					id="txtApellidoMostrarProfesor" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="70%"
+					sclass="search-query" placeholder="Correo"
 					id="txtCorreoMostrarProfesor" />
 			</auxheader>
 		</auxhead>

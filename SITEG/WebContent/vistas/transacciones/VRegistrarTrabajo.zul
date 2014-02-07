@@ -36,6 +36,8 @@
 		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
 		122); }
 
+		.z-spinner, .z-doublespinner { display: inline; }
+
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
@@ -94,34 +96,40 @@
 				format="short" onCreate="self.value = new Date()" mold="rounded">
 			</datebox>
 		</div>
+		<label value="Programa:"
+			style="font-weight:bold;color: rgb(0, 84, 122);margin-left:3%" />
+		<textbox id="txtProgramaRegistraTeg" width="250px"
+			style="margin-left:30px;color:black !important;" disabled="true" />
+
+		<separator />
 
 		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 			<columns>
-				<column width="10%" height="40px" />
+				<column width="130px" height="40px" />
 			</columns>
 			<rows>
 
 				<row>
-					<hlayout>
-						<label value="Programa:"
-							style="font-weight:bold;color: rgb(0, 84, 122)" />
-					</hlayout>
 
-					<textbox id="txtProgramaRegistraTeg" width="250px"
-						style="color:black !important;margin-left:15px" disabled="True" />
+					<label value="Nombre del Tutor:" width="300px"
+						style="margin-left:3%;font-weight:bold" />
+
+					<hbox>
+
+						<textbox id="txtNombreTutorRegistrarTrabajo"
+							style="color:black !important;" width="180px" disabled="true" />
+						<label value="Apellido del Tutor:"
+							style="margin-left:20px;font-weight:bold" />
+						<textbox id="txtApellidoTutorRegistrarTrabajo"
+							style="margin-left:20px;color:black !important;" width="180px"
+							disabled="true" />
+					</hbox>
+
 
 				</row>
 			</rows>
 		</grid>
-
-		<separator />
-
-		<label value="Tutor:"
-			style="margin-left:3%;font-weight:bold;font-weight:bold;color: rgb(0, 84, 122)" />
-		<textbox id="txtTutorRegistrarTrabajo"
-			style="margin-left:63px;color:black !important;" width="180px"
-			disabled="true" />
-
+		
 		<separator />
 		<separator />
 		<separator />
@@ -320,8 +328,8 @@
 					<separator />
 					<div sclass="btn-group">
 						<button id="btnGuardarRegistrarTeg"
-							label="Guardar" sclass="btn"
-							image="/public/imagenes/iconos/guardar.png" tabindex="12"
+							label="Finalizar" sclass="btn"
+							image="/public/imagenes/iconos/finalizar.png" tabindex="12"
 							tooltip="pupBtnGuardar">
 						</button>
 						<button id="btnCancelarRegistrarTeg"

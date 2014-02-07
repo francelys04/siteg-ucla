@@ -68,7 +68,9 @@ public class CRegistrarTeg extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionRegistrarTeg;
 	@Wire
-	private Textbox txtTutorRegistrarTrabajo;
+	private Textbox txtNombreTutorRegistrarTrabajo;
+	@Wire
+	private Textbox txtApellidoTutorRegistrarTrabajo;
 	@Wire
 	private Datebox dtbFechaInicioRegistrarTeg;
 	@Wire
@@ -114,10 +116,10 @@ public class CRegistrarTeg extends CGeneral {
 				txtTematicaRegistrarTeg.setValue(tegEstudiante.getTematica()
 						.getNombre());
 				txtTituloRegistrarTeg.setValue(tegEstudiante.getTitulo());
-				txtTutorRegistrarTrabajo.setValue(tegEstudiante.getTutor()
-						.getNombre()
-						+ " "
-						+ tegEstudiante.getTutor().getApellido());
+				txtNombreTutorRegistrarTrabajo.setValue(tegEstudiante.getTutor()
+						.getNombre());
+				txtApellidoTutorRegistrarTrabajo.setValue(tegEstudiante.getTutor()
+						.getApellido());
 
 				List<Estudiante> estudiantes = servicioEstudiante
 						.buscarEstudiantesDelTeg(tegEstudiante);
