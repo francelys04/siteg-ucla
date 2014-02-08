@@ -111,7 +111,6 @@ public class CReporteDefensa extends CGeneral {
 		cmbEstatus.setModel(new ListModelList<String>(estatusDefensa));
 
 	}
-	
 
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() {
@@ -134,8 +133,7 @@ public class CReporteDefensa extends CGeneral {
 
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
-		if (cmbArea.getValue().equals("Todos")) {
-			
+		if (cmbArea.getValue().equals("Todos")) {	
 			cmbTematica.setValue("Todos");
 		}
 		else {
@@ -160,7 +158,6 @@ public class CReporteDefensa extends CGeneral {
 		String nombreArea = cmbArea.getValue();
 		String nombreTematica = cmbTematica.getValue();
 		String nombrePrograma= cmbPrograma.getValue();
-//		String estatusDefensa =cmbEstatus.getValue();
 		AreaInvestigacion area = servicioArea.buscarArea(idArea);
 		Tematica tematica = servicioTematica.buscarTematica(idTematica);
 		String tipoDefensa = (String) cmbEstatus.getSelectedItem().getValue();
@@ -168,8 +165,7 @@ public class CReporteDefensa extends CGeneral {
 		System.out.println(nombrePrograma);
 		System.out.println(nombreTematica);
 		
-		List<Defensa> defensas =new ArrayList();
-				
+		List<Defensa> defensas =new ArrayList();		
 		List<DefensaTeg> elementos = new ArrayList<DefensaTeg>();
 
 		if (fechaFin == null || fechaInicio == null
@@ -178,28 +174,27 @@ public class CReporteDefensa extends CGeneral {
 					"La fecha de inicio debe ser primero que la fecha de fin",
 					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else if(!tipoDefensa.equals("Todos")) {
+			
 			if (nombrePrograma.equals("Todos")) {
 				
 			defensas = servicioDefensa.buscarDefensaTegSegunEstatus2(tipoDefensa,fechaInicio,fechaFin);
 					}
 			else
 			if (!nombrePrograma.equals("Todos") && nombreArea.equals("Todos")) {
-				defensas=servicioDefensa.buscarDefensaTegSegunEstatusPrograma(tipoDefensa, programa, fechaInicio, fechaFin);
-				
-				
+				defensas=servicioDefensa.buscarDefensaTegSegunEstatusPrograma2(tipoDefensa, programa, fechaInicio, fechaFin);
 				}
 			else
 			if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && !nombreTematica.equals("Todos")) {
 				    tematica= servicioTematica.buscarTematicaPorNombre(nombreTematica);
-				    defensas=servicioDefensa.buscarDefensaTegSegunEstatusTematica(tipoDefensa, tematica, fechaInicio, fechaFin);
+				    defensas=servicioDefensa.buscarDefensaTegSegunEstatusTematica2(tipoDefensa, tematica, fechaInicio, fechaFin);
 				}else
 			if(!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && nombreTematica.equals("Todos")){
-				defensas=servicioDefensa.buscarDefensaTegSegunEstatusArea(tipoDefensa, area, fechaInicio, fechaFin);
+				defensas=servicioDefensa.buscarDefensaTegSegunEstatusArea2(tipoDefensa, area, fechaInicio, fechaFin);
 				}
 		}else{
 			if (nombrePrograma.equals("Todos")) {
 				
-				defensas = servicioDefensa.buscarDefensaTeg2(fechaInicio,fechaFin);
+				defensas = servicioDefensa.buscarDefensaTeg(fechaInicio,fechaFin);
 				}
 				else
 				if (!nombrePrograma.equals("Todos") && nombreArea.equals("Todos")) {
@@ -216,24 +211,20 @@ public class CReporteDefensa extends CGeneral {
 		}
 		
 		if(defensas.size()!=0){
-			
-
 			for (Defensa defensa : defensas) {
-				 
 				 List<Estudiante> estudiantes= servicioEstudiante.buscarEstudiantePorTeg(defensa.getTeg());
 				 
 						String nombreEstudiantes = "";
 						for (Estudiante e : estudiantes) {
 						nombreEstudiantes += e.getNombre() +" "+e.getApellido()+" ";
 						}
-						elementos.add(new DefensaTeg(
+							elementos.add(new DefensaTeg(
 								defensa.getTeg().getTitulo(),
 								defensa.getProfesor().getNombre() + " " + defensa.getProfesor().getApellido(),
 								nombreEstudiantes,
 								defensa.getEstatus(),
 								defensa.getFecha()));
-
-}
+			}
 			
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		Map<String, Object> p = new HashMap<String, Object>();
@@ -250,11 +241,10 @@ public class CReporteDefensa extends CGeneral {
 		p.put("area", nombreArea);
 		p.put("tematica", nombreTematica);
 		p.put("programa", nombrePrograma);
-		p.put("estatus", estatusDefensa);
+		p.put("estatus", tipoDefensa);
 
 		 jstVistaPrevia.setSrc(reporteSrc);
-		 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-		 elementos));
+		 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(elementos));
 		 jstVistaPrevia.setType("pdf");
 		 jstVistaPrevia.setParameters(p);
 		}
@@ -262,6 +252,7 @@ public class CReporteDefensa extends CGeneral {
 			Messagebox.show("No ha informacion disponible para este intervalo");
 		}
 	}
+	
 	@Listen("onClick = #btnSalirReporteSolicitud")
 	public void cancelarTematicasSolicitadas() throws JRException {
 
