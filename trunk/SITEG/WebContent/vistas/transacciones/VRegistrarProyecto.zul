@@ -207,7 +207,7 @@
 							</row>
 							<row>
 								<textbox id="txtTituloRegistrarProyecto"
-									width="620px" rows="4" cols="100" style="color:black" />
+									width="620px" rows="4" cols="100" />
 							</row>
 						</rows>
 					</grid>

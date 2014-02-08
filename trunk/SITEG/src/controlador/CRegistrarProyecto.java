@@ -15,6 +15,7 @@ import modelo.Factibilidad;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
+import modelo.TegEstatus;
 
 import modelo.SolicitudTutoria;
 import modelo.Tematica;
@@ -246,6 +247,17 @@ public class CRegistrarProyecto extends CGeneral {
 												estudiantesPorSolicitud);
 										ServicioTeg.guardar(proyecto);
 										id = 0;
+
+										// Guardar datos en la tabla teg_estatus
+										java.util.Date fechaEstatus = new Date();
+										Teg ultimoTeg = ServicioTeg
+												.buscarUltimoTeg();
+										TegEstatus tegEstatus = new TegEstatus(
+												0, ultimoTeg,
+												"Solicitando Registro",
+												fechaEstatus);
+										servicioTegEstatus.guardar(tegEstatus);
+
 										cancelarRegistroProyecto();
 										Messagebox
 												.show("Proyecto de trabajo especial de grado registrado exitosamente",

@@ -6,6 +6,7 @@ import interfazdao.IEstudianteDAO;
 import interfazdao.ITegDAO;
 import modelo.AreaInvestigacion;
 import modelo.Estudiante;
+import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
@@ -139,6 +140,14 @@ public class STeg {
 		tegs = interfaceTeg.findByEstatus(estatus[3]);
 		return tegs;
 
+	}
+	
+	
+	/*Buscar ultimo teg registrado */
+	public Teg buscarUltimoTeg(){
+		Teg ultimoTeg;
+		ultimoTeg = interfaceTeg.findById(interfaceTeg.ultimoTegRegistrado());
+		return ultimoTeg;
 	}
 	
 	
