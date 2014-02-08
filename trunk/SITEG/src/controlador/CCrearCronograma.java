@@ -71,7 +71,6 @@ public class CCrearCronograma extends CGeneral {
 	@Listen("onClick = #btnAgregarActividades")
 	public void moverDerechaActividad() {
 
-		List<Integer> itemEliminar = new ArrayList();
 		List<Listitem> listitemEliminar = new ArrayList();
 		List<Listitem> listItem = ltbActividadesDisponibles.getItems();
 		if (listItem.size() != 0) {
@@ -80,7 +79,6 @@ public class CCrearCronograma extends CGeneral {
 				if (listItem.get(i).isSelected()) {
 
 					Actividad actividad = listItem.get(i).getValue();
-					System.out.println("acatividades:" + actividad.getNombre());
 					actividades.remove(actividad);
 					Cronograma cronograma = new Cronograma();
 					cronograma.setActividad(actividad);
@@ -93,8 +91,7 @@ public class CCrearCronograma extends CGeneral {
 			}
 		}
 		for (int i = 0; i < listitemEliminar.size(); i++) {
-			ltbActividadesDisponibles.removeItemAt(listitemEliminar.get(i)
-					.getIndex());
+			ltbActividadesDisponibles.removeItemAt(listitemEliminar.get(i).getIndex());
 		}
 
 		ltbActividadesSeleccionadas.setMultiple(false);
@@ -107,9 +104,7 @@ public class CCrearCronograma extends CGeneral {
 	@Listen("onClick = #btnRemoverActividades")
 	public void moverIzquierdaActividad() {
 
-		List<Integer> itemEliminar = new ArrayList();
 		List<Listitem> listitemEliminar = new ArrayList();
-
 		List<Listitem> listItem2 = ltbActividadesSeleccionadas.getItems();
 		if (listItem2.size() != 0) {
 			for (int i = 0; i < listItem2.size(); i++) {
@@ -117,12 +112,8 @@ public class CCrearCronograma extends CGeneral {
 				if (listItem2.get(i).isSelected()) {
 
 					Cronograma cronograma = listItem2.get(i).getValue();
-					System.out.println("cronograma:"
-							+ cronograma.getActividad().getNombre());
 					cronogramas.remove(cronograma);
-					Actividad actividad = new Actividad();
-					actividad.setNombre(cronograma.getActividad().getNombre());
-					actividades.add(actividad);
+					actividades.add(cronograma.getActividad());
 					ltbActividadesDisponibles
 							.setModel(new ListModelList<Actividad>(actividades));
 					listitemEliminar.add(listItem2.get(i));
@@ -225,9 +216,9 @@ public class CCrearCronograma extends CGeneral {
 		Programa programa = servicioPrograma
 				.buscar((Long.parseLong(cmbProgramaCrearCronograma
 						.getSelectedItem().getId())));
-		List<Cronograma> cronogramas = servicioCronograma
+		cronogramas = servicioCronograma
 				.buscarCronogramaPorLapsoYPrograma(programa, lapso);
-		List<Actividad> actividades = servicioActividad
+		actividades = servicioActividad
 				.buscarActividadSinCronograma(programa, lapso);
 		ltbActividadesSeleccionadas.setModel(new ListModelList<Cronograma>(
 				cronogramas));
