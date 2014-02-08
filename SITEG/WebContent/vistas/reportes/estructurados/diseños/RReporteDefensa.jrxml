@@ -42,7 +42,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="69" splitType="Stretch">
+		<band height="67" splitType="Stretch">
 			<staticText>
 				<reportElement x="109" y="11" width="347" height="39" uuid="0bd59200-a470-47d5-b44f-5dcc433e3ded"/>
 				<textElement textAlignment="Center">
@@ -51,7 +51,10 @@
 				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
 			</staticText>
 			<line>
-				<reportElement x="-26" y="65" width="618" height="1" uuid="e373a65e-22ee-47b7-8506-987da53d5349"/>
+				<reportElement x="-29" y="65" width="628" height="1" forecolor="#0066FF" uuid="e373a65e-22ee-47b7-8506-987da53d5349"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
 			</line>
 			<image>
 				<reportElement x="486" y="11" width="82" height="54" uuid="1f218b76-040c-47f1-aa76-485e28d4658a"/>
@@ -66,86 +69,86 @@
 	<pageHeader>
 		<band height="145" splitType="Stretch">
 			<staticText>
-				<reportElement x="-9" y="41" width="49" height="20" uuid="eb41311e-92e3-4213-84e8-3d6fe439f408"/>
+				<reportElement x="3" y="41" width="49" height="20" uuid="eb41311e-92e3-4213-84e8-3d6fe439f408"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Desde:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="40" y="41" width="73" height="20" uuid="97c0d305-331f-4e24-a6c3-8e72d30ad399"/>
+				<reportElement x="52" y="41" width="73" height="20" uuid="97c0d305-331f-4e24-a6c3-8e72d30ad399"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha1})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="163" y="41" width="37" height="20" uuid="6a1873cb-9395-41b9-95fb-6d79bcc4fb81"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hasta:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="200" y="41" width="73" height="20" uuid="67e38e60-488e-4d5e-aa77-742c4a5324a3"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha2})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="416" y="9" width="44" height="20" uuid="48e89b5f-5a63-450c-be5e-6ceca18df5cd"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="460" y="8" width="112" height="20" uuid="92c0b828-4665-49c3-ac3c-955c7a5ad175"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-9" y="76" width="34" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
+				<reportElement x="5" y="76" width="32" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Area:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="163" y="76" width="59" height="20" uuid="e99113b9-b056-4d57-983a-8ed5e3c4c7b3"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tematica:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="27" y="76" width="136" height="20" uuid="2fe181fc-7880-4a61-895e-d8da6a80c9ee"/>
+				<reportElement x="37" y="76" width="119" height="20" uuid="2fe181fc-7880-4a61-895e-d8da6a80c9ee"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="222" y="76" width="118" height="20" uuid="897dd153-9e78-4624-bd76-fac2acdbeb24"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tematica}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="336" y="41" width="65" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
+				<reportElement x="347" y="41" width="65" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Programa:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="401" y="41" width="183" height="20" uuid="e666f2ac-f82d-4323-8fc6-1161f175a172"/>
+				<reportElement x="416" y="41" width="183" height="20" uuid="e666f2ac-f82d-4323-8fc6-1161f175a172"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
 			</textField>
@@ -166,10 +169,16 @@
 			<textField>
 				<reportElement x="401" y="76" width="138" height="20" uuid="8b96cf9c-bdc1-47e1-9f32-7789a4c1a7af"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{estatus}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="-19" y="-69" width="618" height="1" forecolor="#0066FF" uuid="b8aaf1ac-a29e-45fc-ad4d-d02d2d317432"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -186,21 +195,21 @@
 			<staticText>
 				<reportElement x="64" y="6" width="39" height="20" uuid="e3b3edd0-5a50-4c76-ab84-fcff9a150a4f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Titulo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="186" y="6" width="69" height="18" uuid="9fce1809-c845-40c3-92d8-959d9dc43491"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estudiante]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="315" y="6" width="35" height="20" uuid="91598d21-3d90-4b9d-ab24-0369b62d10d0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tutor]]></text>
 			</staticText>
@@ -208,11 +217,11 @@
 				<reportElement x="486" y="2" width="87" height="27" forecolor="#000000" backcolor="#0099FF" uuid="078cb79c-bde7-4f71-b9da-790d90e5765d"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="499" y="6" width="69" height="20" uuid="3846d418-2dd0-4797-b403-ceed743992b4"/>
+				<reportElement x="486" y="6" width="87" height="20" uuid="3846d418-2dd0-4797-b403-ceed743992b4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Fecha]]></text>
+				<text><![CDATA[Fecha defensa]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="389" y="2" width="97" height="27" forecolor="#000000" backcolor="#0099FF" uuid="b01a9f1d-6df1-48c6-8b87-d8ee8f7bdf8a"/>
@@ -220,22 +229,26 @@
 			<staticText>
 				<reportElement x="401" y="6" width="69" height="20" uuid="56fe563b-0f7d-4663-9c96-5fe5632eb40d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estatus Defensa]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="28" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement style="table" x="1" y="0" width="160" height="20" uuid="b47d4027-0a55-4895-85dc-f1ad1e21173f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{tituloTeg}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="table" x="162" y="0" width="111" height="20" uuid="a571b3fc-0a9f-4c6c-96f2-db3f990f79ef"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nombreEstudiante}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -256,7 +269,7 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="12" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="40" splitType="Stretch">
