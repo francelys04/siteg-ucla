@@ -1,12 +1,14 @@
 <window id="wdwReporteDefensa" 
 	title="Lista de Defensas de Trabajos Especiales de Grado" 
-	border="normal" width="60%" height="800px" closable="true"  apply="controlador.reporte.CReporteDefensa">
+	border="normal" width="100%" height="800px" closable="true"  apply="controlador.reporte.CReporteDefensa">
 	
-	<style dynamic="true">
+			<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: none; color:none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
+		
+		
 
 	</style>
 
@@ -14,8 +16,8 @@
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: white;color: none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
@@ -32,13 +34,60 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
+
+		
+
 	</style>
+	
+	
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+	
+	
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionarPrograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
+	</popup>
+	<popup id="pupSeleccionarArea">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el area" />
+	</popup>
+	<popup id="pupSeleccionarTematica">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la temática" />
+	</popup>
+	<popup id="pupSeleccionarEstatus">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el estatus" />
+	</popup>
+	<popup id="pupInicioLapso">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de inicio de defensas" />
+	</popup>
+	<popup id="pupFinLapso">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de fin de defensas" />
+	</popup>
+	
+	<popup id="pupGenerarReporte">
+		<toolbarbutton
+			label="Presione aqui para mostrar el reporte" />
+	</popup>
+	<popup id="pupSalirReporte">
+		<toolbarbutton
+			label="Presione aqui para salir" />
+	</popup>
+	
+	<!-- Fin de popus -->
 	
 	<separator />
 	<separator />
 	<!-- <label value="(*) "
 		style="font-weight:bold;color:red;margin-center:2%">
-	</label> -->
+		</label> -->
 	
 		<label value="Defensas de Trabajos Especiales de Grado" 	
 				style="font-weight:bold;margin-left:33%;margin-right:20%">
@@ -63,15 +112,19 @@
 							style="font-weight:bold" />
 					</hlayout>
 					
-						<combobox id="cmbPrograma" width="100%" readonly="true">
+						<combobox id="cmbPrograma" readonly="true" 
+							tabindex="1" width="200px" tooltip="pupSeleccionarPrograma">
 							<template name="model">
 							<comboitem label="${each.nombre}" />
 							</template>
 						</combobox>
+						
 						<hlayout>
-							<label value="Area:" style="font-weight:bold" width="100%" />
+							<label value="Area:" 
+							style="font-weight:bold" width="100%" tooltip="pupSeleccionarArea" />
 						</hlayout>
-							<combobox id="cmbArea" width="100%" readonly="true">
+							<combobox id="cmbArea" readonly="true"
+							tabindex="1" width="200px" tooltip="pupSeleccionarArea">
 							<template name="model">
 								<comboitem label="${each.nombre}" />
 							</template>
@@ -79,9 +132,10 @@
 				</row>	
 				<row>
 						<hlayout>
-				    	<label value="Temática:" style="font-weight:bold" />
+				    	<label value="Temática:" style="font-weight:bold" tooltip="pupSeleccionarTematica" />
 					</hlayout>
-						<combobox id="cmbTematica" width="100%" readonly="true">
+						<combobox id="cmbTematica" readonly="true"
+						tabindex="1" width="200px" tooltip="pupSeleccionarTematica">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
@@ -90,7 +144,8 @@
 						<label value="Estatus de la defensa:"
 						style="font-weight:bold" />
 					</hlayout>				
-						<combobox id="cmbEstatus" width="100%" readonly="true">
+						<combobox id="cmbEstatus" readonly="true" 
+						tabindex="1" width="200px" tooltip="pupSeleccionarEstatus">
 							<template name="model">
 							<comboitem label="${each}" />
 							</template>
@@ -102,23 +157,26 @@
 				<row>
 				
 									
-					<hlayout width="100%">
-							<label value="Fecha Inicio Registro:"
+					<hlayout>
+						<label value="Fecha inicio defensas:"
 							style="font-weight:bold" />
-			        </hlayout>
-							<datebox id="dtbFechaInicio" cols="12"
-					     	style="margin-right:30px;color:black !important;" width="130px"
-					     	format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-							</datebox>
+					</hlayout>
+
+					<datebox id="dtbFechaInicio" cols="12" width="150px"
+						tabindex="3" format="dd/MM/yyyy" tooltip="pupInicioLapso"
+						style="margin-right:15px">
+					</datebox>
 
 					
-					<hlayout width="100%">
-						<label value="Fecha Fin Registro:" style="font-weight:bold" />
+					<hlayout>
+						<label value="Fecha Fin defensas:"
+							style="font-weight:bold" />
 					</hlayout>
-						<datebox id="dtbFechaFin" cols="12"
-				        style="margin-right:30px;color:black !important;" width="130px"
-				        format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-						</datebox>	
+
+					<datebox id="dtbFechaFin" cols="12" width="150px"
+						tabindex="3" format="dd/MM/yy" tooltip="pupFinLapso"
+						style="margin-right:15px">
+					</datebox>				
 				</row>
 					
 		</rows>		
@@ -133,19 +191,19 @@
 	<separator />
 	<separator />
 
-	<panel border="normal" width="100%"
-		style="margin-left:2%;margin-right:3%">
-		<panelchildren>
+	<panel border="normal" width="95%"
+			style="margin-left:2%;margin-right:3%">
+			<panelchildren>
 			<div sclass="alert-info" align="center">
 				<separator />
 				<div sclass="btn-group">
 
 					<button id="btnGenerarReporteDefensa"
-						label="Generar Reporte" sclass="btn"
+						label="Generar Reporte" sclass="btn" tooltip="pupGenerarReporte"
 						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
 					</button>
 					<button id="btnSalirReporteDefensa"
-						label="Cancelar" sclass="btn"
+						label="Cancelar" sclass="btn" tooltip="pupSalirReporte"
 						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
 					</button>
 					<separator />
