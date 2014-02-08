@@ -1,6 +1,7 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -18,6 +19,7 @@ import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Programa;
+import modelo.TegEstatus;
 
 import modelo.Requisito;
 import modelo.Teg;
@@ -254,6 +256,15 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 										Teg teg = servicioTeg.buscarTeg(auxId2);
 										String estatus = "Proyecto Registrado";
 										teg.setEstatus(estatus);
+										
+										/* Guardar datos en la tabla teg_estatus*/
+										java.util.Date fechaEstatus = new Date();
+										TegEstatus tegEstatus = new TegEstatus(0,
+												teg, "Proyecto Registrado",
+												fechaEstatus);
+										servicioTegEstatus.guardar(tegEstatus);
+										
+										
 										servicioTeg.guardar(teg);
 										Messagebox
 										.show("Datos guardados exitosamente",
