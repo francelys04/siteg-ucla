@@ -173,11 +173,15 @@ public class CRegistrarTeg extends CGeneral {
 										.setDuracion(spnDuracionRegistrarTeg
 												.getValue());
 								tegRegistrado.setEstatus("TEG Registrado");
+								
+								
+								
 								java.util.Date fechaEstatus = new Date();
 								TegEstatus tegEstatus = new TegEstatus(0,
 										tegRegistrado, "TEG Registrado",
 										fechaEstatus);
 								servicioTegEstatus.guardar(tegEstatus);
+								
 								servicioTeg.guardar(tegRegistrado);
 								cancelarRegistroTeg();
 								Messagebox
