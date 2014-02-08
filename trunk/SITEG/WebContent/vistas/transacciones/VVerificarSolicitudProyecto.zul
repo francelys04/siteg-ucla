@@ -85,6 +85,12 @@
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
+	<popup id="pupBtnAgregarRequisitos">
+		<toolbarbutton label="Presione aquí para agregar requisitos" />
+	</popup>
+	<popup id="pupBtnRemoverRequisitos">
+		<toolbarbutton label="Presione aquí para remover requisitos" />
+	</popup>
 
 	<!-- fin de popus -->
 
@@ -213,12 +219,12 @@
 												<button
 													id="btnAgregarRequisitos" sclass="btn"
 													image="/public/imagenes/iconos/right.png"
-													tooltiptext="Agregar Requisitos" />
+													tooltip="pupBtnAgregarRequisitos" />
 												<separator />
 												<button sclass="btn"
 													id="btnRemoverRequisitos"
 													image="/public/imagenes/iconos/left.png"
-													tooltiptext="Quitar Requisitos" />
+													tooltip="pupBtnRemoverRequisitos" />
 
 											</div>
 										</panelchildren>
