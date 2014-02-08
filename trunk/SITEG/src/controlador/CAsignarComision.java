@@ -17,6 +17,7 @@ import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
+import modelo.TegEstatus;
 import modelo.compuesta.CondicionPrograma;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
@@ -72,7 +73,6 @@ public class CAsignarComision extends CGeneral {
 			.getServicioCondicionPrograma();
 	SGrupo serviciogrupo = GeneradorBeans.getServicioGrupo();
 
-	
 	@Wire
 	private Datebox dbfecha;
 	@Wire
@@ -116,8 +116,7 @@ public class CAsignarComision extends CGeneral {
 	public static int j;
 
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
 		Selectors.wireComponents(comp, this, false);
@@ -129,10 +128,12 @@ public class CAsignarComision extends CGeneral {
 				long codigo = (Long) map.get("id");
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-				txtNombreTutorAsignarComision.setValue(teg2.getTutor().getNombre());
-				txtApellidoTutorAsignarComision.setValue(teg2.getTutor().getApellido());
+				txtNombreTutorAsignarComision.setValue(teg2.getTutor()
+						.getNombre());
+				txtApellidoTutorAsignarComision.setValue(teg2.getTutor()
+						.getApellido());
 				txtTituloComision.setValue(teg2.getTitulo());
-				
+
 				txtAreaComision.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
 				txtTematicaComision.setValue(teg2.getTematica().getNombre());
@@ -254,36 +255,61 @@ public class CAsignarComision extends CGeneral {
 	// comision evaluadora
 	@Listen("onClick = #btnAgregarProfesoresComision")
 	public void agregarProfesor() {
-		Set selectedItems = ((org.zkoss.zul.ext.Selectable)lsbProfesoresDisponibles.getModel()).getSelection();
-		int valor= selectedItems.size()+lsbProfesoresSeleccionados.getItemCount();
-	    System.out.println(valor);
-		if (valor <= valorCondicion())
-		{
-		
-			((ListModelList)lsbProfesoresSeleccionados.getModel()).addAll(selectedItems);
-			((ListModelList)lsbProfesoresDisponibles.getModel()).removeAll(selectedItems);
-		}
-		else
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable) lsbProfesoresDisponibles
+				.getModel()).getSelection();
+		int valor = selectedItems.size()
+				+ lsbProfesoresSeleccionados.getItemCount();
+		System.out.println(valor);
+		if (valor <= valorCondicion()) {
+
+			if (selectedItems.size() == 0) {
+
+				Messagebox.show("Debe seleccionar un profesor ", "Advertencia",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+
+			} else {
+
+				((ListModelList) lsbProfesoresSeleccionados.getModel())
+						.addAll(selectedItems);
+				((ListModelList) lsbProfesoresDisponibles.getModel())
+						.removeAll(selectedItems);
+
+			}
+		} else
 
 		{
-			Messagebox.show("El numero de profesores seleccionados excede al numero de integrantes de la comision evaluadora, ya que debe ser: "+ buscarCondicionVigenteEspecifica(
-					"Numero de integrantes de la comision", programa)
-					.getValor(), "Error", Messagebox.OK,Messagebox.ERROR);
-
+			Messagebox
+					.show("El numero de profesores seleccionados excede al numero de integrantes de la comision evaluadora, ya que debe ser: "
+							+ buscarCondicionVigenteEspecifica(
+									"Numero de integrantes de la comision",
+									programa).getValor(), "Error",
+							Messagebox.OK, Messagebox.ERROR);
 
 		}
 
-		
 	}
 
 	// Metodo que permite quitar los profesores de la lista de integrantes de la
 	// comision evaluadora
 	@Listen("onClick = #btnRemoverProfesoresComision")
 	public void removerProfesor() {
-		Set selectedItems = ((org.zkoss.zul.ext.Selectable)lsbProfesoresSeleccionados.getModel()).getSelection();
-		((ListModelList)lsbProfesoresDisponibles.getModel()).addAll(selectedItems);
-		((ListModelList)lsbProfesoresSeleccionados.getModel()).removeAll(selectedItems);
-		
+		Set selectedItems = ((org.zkoss.zul.ext.Selectable) lsbProfesoresSeleccionados
+				.getModel()).getSelection();
+
+		if (selectedItems.size() == 0) {
+
+			Messagebox.show("Debe seleccionar un profesor ", "Advertencia",
+					Messagebox.OK, Messagebox.EXCLAMATION);
+
+		} else {
+
+			((ListModelList) lsbProfesoresDisponibles.getModel())
+					.addAll(selectedItems);
+			((ListModelList) lsbProfesoresSeleccionados.getModel())
+					.removeAll(selectedItems);
+
+		}
+
 	}
 
 	// Metodo que permite limpiar las listas tanto de los profesores disponibles
@@ -307,13 +333,13 @@ public class CAsignarComision extends CGeneral {
 		Listitem listProfesoresSeleccionados = lsbProfesoresSeleccionados
 				.getSelectedItem();
 
-		if (listProfesoresSeleccionados == null)
+		int valorItem = lsbProfesoresSeleccionados.getItemCount();
+
+		if (valorItem == 0)
 			Messagebox
 					.show("Debe Seleccionar los profesores que conformaran la comision evaluadora",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		else {
-
-			int valorItem = lsbProfesoresSeleccionados.getItemCount();
 
 			if (valorItem > valorcondicion) {
 
@@ -343,14 +369,34 @@ public class CAsignarComision extends CGeneral {
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
 
+										Teg tegSeleccionado = servicioTeg
+												.buscarTeg(auxiliarId);
 										
+										Set<Profesor> profesores = null;
+										tegSeleccionado.setProfesores(profesores);
+										
+
+										/*
+										 * Metodo para eliminar integrantes de
+										 * la comision
+										 */
+										List<Profesor> profesoresComision = servicioProfesor
+												.buscarComisionDelTeg(tegSeleccionado);
 
 										Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
 										
-										Teg tegSeleccionado = servicioTeg
-												.buscarTeg(auxiliarId);
+										for (int i = 0; i < lsbProfesoresSeleccionados
+												.getItemCount(); i++) {
+											Profesor profesor = lsbProfesoresSeleccionados
+													.getItems().get(i)
+													.getValue();
+											profesoresSeleccionados
+													.add(profesor);
+										}
+
 										tegSeleccionado
 												.setProfesores(profesoresSeleccionados);
+
 										servicioTeg.guardar(tegSeleccionado);
 										Messagebox
 												.show("Los datos de la comision fueron guardados exitosamente, pero todavia faltan miembros",
@@ -377,122 +423,140 @@ public class CAsignarComision extends CGeneral {
 
 		Listitem listProfesoresSeleccionados = lsbProfesoresSeleccionados
 				.getSelectedItem();
-		
 
-			int valorItem = lsbProfesoresSeleccionados.getItemCount();
+		int valorItem = lsbProfesoresSeleccionados.getItemCount();
 
-	
+		if (valorItem == 0) {
 
-				if (valorItem == valorcondicion) {
-					Messagebox
-							.show("¿Desea finalizar la asignacion de la comision evaluadora?",
-									"Dialogo de confirmacion", Messagebox.OK
-											| Messagebox.CANCEL,
-									Messagebox.QUESTION,
-									new org.zkoss.zk.ui.event.EventListener() {
-										public void onEvent(Event evt)
-												throws InterruptedException {
-											if (evt.getName().equals("onOK")) {
-												Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-												Grupo grupo = servicioGrupo
-														.BuscarPorNombre("ROLE_COMISION");
-												gruposUsuario.add(grupo);
-												byte[] imagenUsuario = null;
-												URL url = getClass().getResource(
-														"/configuracion/usuario.png");
-												try {
-													imagenx.setContent(new AImage(url));
-												} catch (IOException e) {
-													// TODO Auto-generated catch block
-													e.printStackTrace();
-												}
-												imagenUsuario = imagenx.getContent()
-														.getByteData();
-																													
-												
-												Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
-												for (int i = 0; i < lsbProfesoresSeleccionados
-														.getItemCount(); i++) {
-													Profesor profesor = lsbProfesoresSeleccionados
-															.getItems().get(i)
-															.getValue();
-													profesoresSeleccionados
-															.add(profesor);
-													Usuario user = servicioUsuario
-															.buscarUsuarioPorNombre(profesor
-																	.getCedula());
-													if (user == null) {
-														Usuario usuario = new Usuario(
-																0,
-																profesor.getCedula(),
-																passwordEncoder
-																		.encode(profesor
-																				.getCedula()),
-																true, gruposUsuario,
-																imagenUsuario);
-														servicioUsuario
-																.guardar(usuario);
-														user = servicioUsuario
-																.buscarUsuarioPorNombre(profesor
-																		.getCedula());
-														profesor.setUsuario(user);
-														servicioProfesor
-																.guardarProfesor(profesor);
-														String mensaje= "Su usuario es: "+usuario.getNombre()+"y su contraseÃ±a:" +usuario.getPassword();
-														enviarEmailNotificacion(profesor.getCorreoElectronico(), mensaje);
-													} else {
+			Messagebox
+					.show("Debe Seleccionar los profesores que conformaran la comision evaluadora",
+							"Error", Messagebox.OK, Messagebox.ERROR);
 
-														List<Grupo> grupino = new ArrayList<Grupo>();
-														grupino = serviciogrupo
-																.buscarGruposDelUsuario(user);
-														Grupo grupo2 = servicioGrupo
-																.BuscarPorNombre("ROLE_COMISION");
-														Set<Grupo> gruposU = new HashSet<Grupo>();
-														for (int f = 0; f < grupino
-																.size(); ++f) {
-															Grupo g = grupino.get(f);
-															System.out
-																	.println(grupino
-																			.get(f)
-																			.getNombre());
-															gruposU.add(g);
-														}
-														gruposU.add(grupo2);
-
-														user.setGrupos(gruposU);
-
-														servicioUsuario.guardar(user);
-													}
-												
-
-												}
-												
-												
-												Teg tegSeleccionado = servicioTeg
-														.buscarTeg(auxiliarId);
-												tegSeleccionado
-														.setProfesores(profesoresSeleccionados);
-												tegSeleccionado
-														.setEstatus("Comision Asignada");
-												servicioTeg
-														.guardar(tegSeleccionado);
-												Messagebox
-														.show("Comision asignada exitosamente",
-																"Informacion",
-																Messagebox.OK,
-																Messagebox.INFORMATION);
-												salir();
-												
-											}
+		} else if (valorItem == valorcondicion) {
+			Messagebox
+					.show("¿Desea finalizar la asignacion de la comision evaluadora?",
+							"Dialogo de confirmacion", Messagebox.OK
+									| Messagebox.CANCEL, Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+										Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+										Grupo grupo = servicioGrupo
+												.BuscarPorNombre("ROLE_COMISION");
+										gruposUsuario.add(grupo);
+										byte[] imagenUsuario = null;
+										URL url = getClass().getResource(
+												"/configuracion/usuario.png");
+										try {
+											imagenx.setContent(new AImage(url));
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
 										}
-									});
-				} 
+										imagenUsuario = imagenx.getContent()
+												.getByteData();
 
-			}
+										Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
+										for (int i = 0; i < lsbProfesoresSeleccionados
+												.getItemCount(); i++) {
+											Profesor profesor = lsbProfesoresSeleccionados
+													.getItems().get(i)
+													.getValue();
+											profesoresSeleccionados
+													.add(profesor);
+											Usuario user = servicioUsuario
+													.buscarUsuarioPorNombre(profesor
+															.getCedula());
+											if (user == null) {
+												Usuario usuario = new Usuario(
+														0,
+														profesor.getCedula(),
+														passwordEncoder
+																.encode(profesor
+																		.getCedula()),
+														true, gruposUsuario,
+														imagenUsuario);
+												servicioUsuario
+														.guardar(usuario);
+												user = servicioUsuario
+														.buscarUsuarioPorNombre(profesor
+																.getCedula());
+												profesor.setUsuario(user);
+												servicioProfesor
+														.guardarProfesor(profesor);
+												String mensaje = "Su usuario es: "
+														+ usuario.getNombre()
+														+ "y su contraseÃ±a:"
+														+ usuario.getPassword();
+												enviarEmailNotificacion(
+														profesor.getCorreoElectronico(),
+														mensaje);
+											} else {
 
-		
+												List<Grupo> grupino = new ArrayList<Grupo>();
+												grupino = serviciogrupo
+														.buscarGruposDelUsuario(user);
+												Grupo grupo2 = servicioGrupo
+														.BuscarPorNombre("ROLE_COMISION");
+												Set<Grupo> gruposU = new HashSet<Grupo>();
+												for (int f = 0; f < grupino
+														.size(); ++f) {
+													Grupo g = grupino.get(f);
+													System.out
+															.println(grupino
+																	.get(f)
+																	.getNombre());
+													gruposU.add(g);
+												}
+												gruposU.add(grupo2);
 
-	
+												user.setGrupos(gruposU);
+
+												servicioUsuario.guardar(user);
+											}
+
+										}
+
+										Teg tegSeleccionado = servicioTeg
+												.buscarTeg(auxiliarId);
+										tegSeleccionado
+												.setProfesores(profesoresSeleccionados);
+
+										tegSeleccionado
+												.setEstatus("Comision Asignada");
+
+										/* Guardar datos en la tabla teg_estatus */
+										java.util.Date fechaEstatus = new Date();
+										TegEstatus tegEstatus = new TegEstatus(
+												0, tegSeleccionado,
+												"Comision Asignada",
+												fechaEstatus);
+										servicioTegEstatus.guardar(tegEstatus);
+
+										servicioTeg.guardar(tegSeleccionado);
+										Messagebox
+												.show("Comision asignada exitosamente",
+														"Informacion",
+														Messagebox.OK,
+														Messagebox.INFORMATION);
+										salir();
+
+									}
+								}
+							});
+		} else {
+
+			Messagebox
+					.show("El numero de profesores seleccionados como integrantes de la comision evaluadora debe ser: "
+							+ buscarCondicionVigenteEspecifica(
+									"Numero de integrantes de la comision",
+									programa).getValor(), "Error",
+							Messagebox.OK, Messagebox.ERROR);
+
+		}
+
+	}
 
 	@Listen("onClick = #btnSalirComision")
 	public void salirComision() {

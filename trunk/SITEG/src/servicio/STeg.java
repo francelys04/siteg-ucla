@@ -11,6 +11,7 @@ import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
 import modelo.Tematica;
+import modelo.compuesta.Cronograma;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -150,8 +151,7 @@ public class STeg {
 		return ultimoTeg;
 	}
 	
-	
-	
+		
 	public Teg buscarTegConRevisionFinal(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		Teg teg;
