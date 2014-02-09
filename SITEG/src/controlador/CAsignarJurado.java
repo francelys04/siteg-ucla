@@ -331,10 +331,8 @@ public class CAsignarJurado extends CGeneral {
 	public boolean validarJurado() {
 		if (ltbJuradoSeleccionado.getItemCount() == buscarCondicionVigenteEspecifica(
 				"Numero de integrantes del jurado", programa).getValor()) {
-			System.out.println("aqui");
 			return true;
 		} else
-			System.out.println("alla");
 		return false;
 	}
 
