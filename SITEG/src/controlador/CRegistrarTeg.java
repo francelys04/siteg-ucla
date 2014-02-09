@@ -175,7 +175,7 @@ public class CRegistrarTeg extends CGeneral {
 								tegRegistrado.setEstatus("TEG Registrado");
 								
 								
-								
+								/* Guardar datos en la tabla teg_estatus */
 								java.util.Date fechaEstatus = new Date();
 								TegEstatus tegEstatus = new TegEstatus(0,
 										tegRegistrado, "TEG Registrado",

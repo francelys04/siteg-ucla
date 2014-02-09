@@ -23,7 +23,7 @@
 				</tree>
 			</west>
 			<!-- Fin del banner de contenido-->
-			<center border="none" >
+			<center border="none">
 				<borderlayout sclass="complex-layout"
 					style="overflow-y:scroll;" height="99%">
 					<north size="70px" border="none">
@@ -40,9 +40,10 @@
 						</div>
 					</north>
 					<center autoscroll="true">
-						<div >
+						<div align="center"
+							style="background-image: url('../public/imagenes/portal/fondo.png'); background-repeat:no-repeat">
 							<include id="formularios"></include>
-							
+
 
 						</div>
 					</center>

@@ -14,6 +14,7 @@ import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
+import modelo.TegEstatus;
 import modelo.compuesta.ItemFactibilidad;
 
 import org.zkoss.zk.ui.Component;
@@ -91,8 +92,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 	private static Programa programa;
 
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
 		Selectors.wireComponents(comp, this, false);
@@ -121,9 +121,11 @@ public class CEvaluarFactibilidad extends CGeneral {
 						.getareaInvestigacion().getNombre());
 				txtTematicaEvaluarFactibilidad.setValue(teg2.getTematica()
 						.getNombre());
-				
-				txtNombreTutorEvaluarFactibilidad.setValue(teg2.getTutor().getNombre());
-				txtApellidoTutorEvaluarFactibilidad.setValue(teg2.getTutor().getApellido());
+
+				txtNombreTutorEvaluarFactibilidad.setValue(teg2.getTutor()
+						.getNombre());
+				txtApellidoTutorEvaluarFactibilidad.setValue(teg2.getTutor()
+						.getApellido());
 				txtTituloEvaluarFactibilidad.setValue(teg2.getTitulo());
 
 				Lapso lapso = servicioLapso.buscarLapsoVigente();
@@ -176,8 +178,9 @@ public class CEvaluarFactibilidad extends CGeneral {
 		Factibilidad factibilidad = new Factibilidad(id, teg, profesor, fecha,
 				Observacion, estatus);
 		if (txtObservacionEvaluarFactibilidad.getValue().compareTo("") == 0) {
-			Messagebox.show("Debe Colocar una Observacion", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			Messagebox
+					.show("Debe ingresar una Observacion sobre la evaluacion realizada",
+							"Error", Messagebox.OK, Messagebox.ERROR);
 
 		} else {
 			if (factibilidad3 == null) {
@@ -203,10 +206,9 @@ public class CEvaluarFactibilidad extends CGeneral {
 						.getFirstChild()).getValue();
 				System.out.print(valor);
 				if (valor.equals("")) {
-					Messagebox.show(
-							"Debe Colocar su Apreciacion en todos los item",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					Messagebox
+							.show("Debe ingresar una Apreciacion en cada uno de los item de evaluacion",
+									"Error", Messagebox.OK, Messagebox.ERROR);
 					i = ltbItemsFactibilidad.getItemCount();
 					dejeenblanco = true;
 
@@ -220,13 +222,45 @@ public class CEvaluarFactibilidad extends CGeneral {
 			}
 
 			if (dejeenblanco == false) {
-				String estatus1 = "Factibilidad Evaluada";
-				teg.setEstatus(estatus1);
-				servicioTeg.guardar(teg);
-				Messagebox.show(
-						"Datos de la evaluacion registrados exitosamente",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
-				salir();
+
+				Messagebox
+						.show("¿Desea guardar los datos de la evaluacion de factibilidad?",
+								"Dialogo de confirmacion", Messagebox.OK
+										| Messagebox.CANCEL,
+								Messagebox.QUESTION,
+								new org.zkoss.zk.ui.event.EventListener() {
+									public void onEvent(Event evt)
+											throws InterruptedException {
+										if (evt.getName().equals("onOK")) {
+											
+											Teg tegFactibilidad = servicioTeg.buscarTeg(auxiliarId);
+
+											String estatus1 = "Factibilidad Evaluada";
+											tegFactibilidad.setEstatus(estatus1);
+
+											/*
+											 * Guardar datos en la tabla
+											 * teg_estatus
+											 */
+											java.util.Date fechaEstatus = new Date();
+											TegEstatus tegEstatus = new TegEstatus(
+													0, tegFactibilidad,
+													"Factibilidad Evaluada",
+													fechaEstatus);
+											servicioTegEstatus
+													.guardar(tegEstatus);
+
+											servicioTeg.guardar(tegFactibilidad);
+											Messagebox
+													.show("Datos de la evaluacion registrados exitosamente",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+											salir();
+
+										}
+									}
+								});
 
 			}
 
