@@ -75,8 +75,8 @@ public class CSolicitudTutoria extends CGeneral {
 	private static String vistaRecibida;
 	private static String estatusSolicitud;
 	private String[] mensaje = {
-			"Su Tutoria ha sido aprobada, le enviamos su usuario y contrasena",
-			"Su Tutoria ha sido rechazada, por favor intente con otro tutor" };
+			"Su Solicitud de Tutoria ha sido aprobada, le enviamos su usuario y contrasena",
+			"Su Solicitud de Tutoria ha sido rechazada, por favor intente con otro tutor" };
 	
 	@Override
 	public

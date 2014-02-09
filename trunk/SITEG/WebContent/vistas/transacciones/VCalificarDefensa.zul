@@ -165,14 +165,14 @@
 										style="font-weight:bold" />
 
 
-									<combobox id="cmbAreaTematica" style="margin-left:20px"
-										readonly="true" tabindex="1" width="180px"
-										tooltip="pupAreaTematica">
-										<comboitem label="No aplica" />
-										<comboitem label="Honorifica" />
-										<comboitem label="Publicacion" />
-
-									</combobox>
+									<combobox id="cmbMencionTeg"
+							readonly="true" autodrop="true" width="140px" tabindex="12"
+							style="margin-left:55px">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
 
 								</hbox>
 

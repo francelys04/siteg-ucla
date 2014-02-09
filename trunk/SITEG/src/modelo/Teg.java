@@ -87,6 +87,10 @@ public class Teg {
 	@JoinTable(name = "estudiante_teg", joinColumns = { @JoinColumn(name = "teg_id") }, inverseJoinColumns = { @JoinColumn(name = "estudiante_cedula") })
 	private Set<Estudiante> estudiantes;
 
+	@ManyToOne
+	@JoinColumn(name="mencion_id", referencedColumnName="id")
+	private Mencion mencion;
+	
 	public Teg() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -253,6 +257,14 @@ public class Teg {
 
 	public void setEstatusTeg(Set<TegEstatus> estatusTeg) {
 		this.estatusTeg = estatusTeg;
+	}
+
+	public Mencion getMencion() {
+		return mencion;
+	}
+
+	public void setMencion(Mencion mencion) {
+		this.mencion = mencion;
 	}
 
 }

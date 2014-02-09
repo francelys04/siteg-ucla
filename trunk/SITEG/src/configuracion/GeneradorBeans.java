@@ -24,6 +24,7 @@ import servicio.SItemDefensa;
 import servicio.SItemFactibilidad;
 import servicio.SJurado;
 import servicio.SLapso;
+import servicio.SMencion;
 import servicio.SNoticia;
 import servicio.SProfesor;
 import servicio.SPrograma;
@@ -185,5 +186,9 @@ public class GeneradorBeans implements ApplicationContextAware {
 	
 	public static SEnlaceInteres getServicioEnlace() {
 		return applicationContext.getBean(SEnlaceInteres.class);	
+	}
+	
+	public static SMencion getServicioMencion() {
+		return applicationContext.getBean(SMencion.class);	
 	}
 }
