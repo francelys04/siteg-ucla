@@ -71,6 +71,14 @@
 		<toolbarbutton
 			label="Presione aquí para visualizar los datos de la comision" />
 	</popup>
+	<popup id="pupD">
+		<toolbarbutton
+			label="Presione aquí para agregar un profesor" />
+	</popup>
+	<popup id="pupI">
+		<toolbarbutton
+			label="Presione aquí para remover un profesor" />
+	</popup>
 	<popup id="pupBtnGuardar">
 		<toolbarbutton label="Presione aquí para guardar la comision" />
 	</popup>
@@ -79,7 +87,7 @@
 			label="Presione aquí para finalizar la seleccion de la comision" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí para salir" />
@@ -226,13 +234,13 @@
 												<button
 													id="btnAgregarProfesoresComision" sclass="btn"
 													image="/public/imagenes/iconos/right.png"
-													tooltiptext="Presione aquí para agregar un profesor"
+													tooltip="pupD"
 													/>
 												<separator />
 												<button
 													id="btnRemoverProfesoresComision" sclass="btn"
 													image="/public/imagenes/iconos/left.png"
-													tooltiptext="Presione aquí para remover un profesor"
+													tooltip="pupI"
 													 />
 
 											</div>
@@ -317,6 +325,7 @@
 							<row>
 								<textbox id="txtTituloComision"
 									style="color:black !important;" disabled="true" width="620px"
+									tooltiptext="Ingrese aqui el titulo"
 									rows="4" cols="100" />
 							</row>
 						</rows>

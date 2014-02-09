@@ -180,7 +180,9 @@
 							<row>
 								<textbox
 									id="txtObservacionRegistrarAvance" width="570px" rows="3"
-									cols="300" />
+									cols="300" 
+									tooltiptext="Ingrese aqui la observacion"
+									/>
 							</row>
 						</rows>
 					</grid>

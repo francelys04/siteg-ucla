@@ -47,7 +47,7 @@
 		<toolbarbutton label="Presione aquí para solicitar la defenza" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
+		<toolbarbutton label="Presione aquí para impiar los campos" />
 	</popup>
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí para salir" />

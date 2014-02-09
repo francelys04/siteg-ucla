@@ -80,7 +80,7 @@
 			label="Presione aquí para guardar la verificacion" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí para salir" />
@@ -381,7 +381,9 @@
 
 				<row>
 					<textbox id="txtObservacion" width="600px" rows="2"
-						cols="100" />
+						cols="100" 
+						tooltiptext="Ingrese aqui la observacion"	
+					/>
 				</row>
 			</rows>
 		</grid>

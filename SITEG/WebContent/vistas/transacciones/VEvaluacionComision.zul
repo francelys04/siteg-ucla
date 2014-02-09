@@ -117,7 +117,7 @@
 	</popup>
 	<popup id="pupBtnCancelar">
 		<toolbarbutton
-			label="Presione aquí para cancelar la seleccion" />
+			label="Presione aquí para limpiar los campos" />
 	</popup>
 	<!-- fin de popus -->
 
@@ -261,7 +261,9 @@
 
 						<row>
 							<textbox id="txtObservacionTutorias"
-								width="97%" rows="8" cols="200" />
+								width="97%" rows="8" cols="200"
+								tooltiptext="Ingrese aqui las observaciones"		
+							/>
 						</row>
 					</rows>
 				</grid>

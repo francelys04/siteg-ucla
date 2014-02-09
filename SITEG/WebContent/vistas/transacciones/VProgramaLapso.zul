@@ -152,7 +152,7 @@
 	</popup>
 	<popup id="pupI">
 		<toolbarbutton
-			label="Presione aquí para retirar lapsos seleccionados" />
+			label="Presione aquí para remover lapsos seleccionados" />
 	</popup>
 	<popup id="pupBtnGuardar">
 		<toolbarbutton
@@ -160,7 +160,7 @@
 	</popup>
 	<popup id="pupBtnCancelar">
 		<toolbarbutton
-			label="Presione aquí para cancelar la seleccion" />
+			label="Presione aquí para limpiar los campos" />
 	</popup>
 	<!-- fin de popus -->
 	
