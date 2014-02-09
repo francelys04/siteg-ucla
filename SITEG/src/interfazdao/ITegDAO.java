@@ -48,6 +48,10 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 			String estatusProyectoFactible);
 	
 	
+	
+	public List<Teg> findByEstatusOrEstatus(String estatusProyectoFactible, String estatusProyectoEnDesarrollo);
+	
+	
 	/*Busca ultim teg registrado*/
 	@Query("select max(t.id) from Teg t")
 	public Long ultimoTegRegistrado();
