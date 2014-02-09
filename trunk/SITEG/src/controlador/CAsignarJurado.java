@@ -3,6 +3,7 @@ package controlador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,7 @@ import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
+import modelo.TegEstatus;
 import modelo.TipoJurado;
 import modelo.compuesta.Jurado;
 import modelo.seguridad.Grupo;
@@ -238,9 +240,12 @@ public class CAsignarJurado extends CGeneral {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
-
+								String estatus = "Jurado Asignado";
+								java.util.Date fechaEstatus = new Date();
 								Teg teg = servicioTeg.buscarTeg(idTeg);
-								teg.setEstatus("Jurado Asignado");
+								TegEstatus tegEstatus = new TegEstatus(0, teg, estatus, fechaEstatus);
+								servicioTegEstatus.guardar(tegEstatus);
+								teg.setEstatus(estatus);
 								servicioTeg.guardar(teg);
 								crearUsuariosJurado();
 								Messagebox.show(
