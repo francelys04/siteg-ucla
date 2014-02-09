@@ -1,9 +1,11 @@
 package controlador;
 
+import java.util.Date;
 import java.util.List;
 
 import modelo.Estudiante;
 import modelo.Teg;
+import modelo.TegEstatus;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -94,6 +96,9 @@ public class CSolicitarDefensa extends CGeneral {
 					public void onEvent(Event evt)
 							throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
+		java.util.Date fechaEstatus = new Date();					
+		TegEstatus tegEstatus = new TegEstatus(0, teg, estatus[1], fechaEstatus);
+		servicioTegEstatus.guardar(tegEstatus);
 		teg.setEstatus(estatus[1]);
 		servicioTeg.guardar(teg);
 		Messagebox.show(

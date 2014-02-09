@@ -17,6 +17,7 @@ import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
+import modelo.TegEstatus;
 
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -206,11 +207,14 @@ public class CRegistrarRevision extends CGeneral {
 							public void onEvent(Event evt)
 									throws InterruptedException {
 								if (evt.getName().equals("onOK")) {
-
+									String estatus = "Revisiones Finalizadas";
 									Teg tegAvance = servicioTeg
 											.buscarTeg(auxiliarId);
+									java.util.Date fechaEstatus = new Date();					
+									TegEstatus tegEstatus = new TegEstatus(0, tegAvance, estatus, fechaEstatus);
+									servicioTegEstatus.guardar(tegEstatus);
 									tegAvance
-											.setEstatus("Revisiones Finalizadas");
+											.setEstatus(estatus);
 									servicioTeg.guardar(tegAvance);
 									Messagebox
 											.show("Revisiones del Trabajo Especial de Grado finalizadas exitosamente",
