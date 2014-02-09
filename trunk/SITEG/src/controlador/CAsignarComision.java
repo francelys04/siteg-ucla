@@ -201,7 +201,9 @@ public class CAsignarComision extends CGeneral {
 					profesoresDisponibles));
 
 		}
+		lsbProfesoresDisponibles.setMultiple(false);
 		lsbProfesoresDisponibles.setMultiple(true);
+		lsbProfesoresSeleccionados.setMultiple(false);
 		lsbProfesoresSeleccionados.setMultiple(true);
 
 	}
@@ -317,10 +319,7 @@ public class CAsignarComision extends CGeneral {
 	@Listen("onClick = #btnCancelarComision")
 	public void limpiarCampos() {
 
-		List<Profesor> profesores = servicioProfesor.buscarActivos();
-		lsbProfesoresDisponibles.setModel(new ListModelList<Profesor>(
-				profesores));
-		lsbProfesoresSeleccionados.getItems().clear();
+		llenarListas();
 
 	}
 
