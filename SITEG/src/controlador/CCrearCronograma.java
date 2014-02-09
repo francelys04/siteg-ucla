@@ -46,13 +46,19 @@ public class CCrearCronograma extends CGeneral {
 	@Wire
 	private Listbox ltbActividadesSeleccionadas;
 
+	private static boolean actividadesCargadas;
+	private static boolean actividadesSeleccionadas;
+
 	List<Cronograma> cronogramas = new ArrayList();
 	List<Actividad> actividades = new ArrayList();
 
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+
+		actividadesCargadas = false;
+		actividadesSeleccionadas = false;
+
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		List<Programa> programas = servicioPrograma.buscarActivas();
 
@@ -71,27 +77,57 @@ public class CCrearCronograma extends CGeneral {
 	@Listen("onClick = #btnAgregarActividades")
 	public void moverDerechaActividad() {
 
-		List<Listitem> listitemEliminar = new ArrayList();
-		List<Listitem> listItem = ltbActividadesDisponibles.getItems();
-		if (listItem.size() != 0) {
-			for (int i = 0; i < listItem.size(); i++) {
+		if (actividadesCargadas == true) {
 
-				if (listItem.get(i).isSelected()) {
+			List<Listitem> listitemEliminar = new ArrayList();
+			List<Listitem> listItem = ltbActividadesDisponibles.getItems();
+		
+			if (listItem.size() != 0) {
+				
+				System.out.println("lista distinta de cero");
+				
+				for (int i = 0; i < listItem.size(); i++) {
 
-					Actividad actividad = listItem.get(i).getValue();
-					actividades.remove(actividad);
-					Cronograma cronograma = new Cronograma();
-					cronograma.setActividad(actividad);
-					cronogramas.add(cronograma);
-					ltbActividadesSeleccionadas
-							.setModel(new ListModelList<Cronograma>(cronogramas));
-					listitemEliminar.add(listItem.get(i));
+					if (listItem.get(i).isSelected()) {
+						
+						System.out.println("item seleccionado");
+
+						actividadesSeleccionadas = true;
+						Actividad actividad = listItem.get(i).getValue();
+						actividades.remove(actividad);
+						Cronograma cronograma = new Cronograma();
+						cronograma.setActividad(actividad);
+						cronogramas.add(cronograma);
+						ltbActividadesSeleccionadas
+								.setModel(new ListModelList<Cronograma>(
+										cronogramas));
+						listitemEliminar.add(listItem.get(i));
+					}
+
 				}
+			} 
+			
+			
+			if(actividadesSeleccionadas == false){
+				
+				System.out.println("no seleccione actividades");
+
+				Messagebox.show("Debe seleccionar una actividad ",
+						"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 
 			}
-		}
-		for (int i = 0; i < listitemEliminar.size(); i++) {
-			ltbActividadesDisponibles.removeItemAt(listitemEliminar.get(i).getIndex());
+
+			for (int i = 0; i < listitemEliminar.size(); i++) {
+				ltbActividadesDisponibles.removeItemAt(listitemEliminar.get(i)
+						.getIndex());
+			}
+
+		} else {
+
+			Messagebox
+					.show("Debe seleccionar el lapso academico y el programa al cual se le creara el cronograma",
+							"Error", Messagebox.OK, Messagebox.ERROR);
+
 		}
 
 		ltbActividadesSeleccionadas.setMultiple(false);
@@ -104,27 +140,46 @@ public class CCrearCronograma extends CGeneral {
 	@Listen("onClick = #btnRemoverActividades")
 	public void moverIzquierdaActividad() {
 
-		List<Listitem> listitemEliminar = new ArrayList();
-		List<Listitem> listItem2 = ltbActividadesSeleccionadas.getItems();
-		if (listItem2.size() != 0) {
-			for (int i = 0; i < listItem2.size(); i++) {
+		if (actividadesCargadas == true) {
 
-				if (listItem2.get(i).isSelected()) {
+			List<Listitem> listitemEliminar = new ArrayList();
+			List<Listitem> listItem2 = ltbActividadesSeleccionadas.getItems();
+			if (listItem2.size() != 0) {
+				for (int i = 0; i < listItem2.size(); i++) {
 
-					Cronograma cronograma = listItem2.get(i).getValue();
-					cronogramas.remove(cronograma);
-					actividades.add(cronograma.getActividad());
-					ltbActividadesDisponibles
-							.setModel(new ListModelList<Actividad>(actividades));
-					listitemEliminar.add(listItem2.get(i));
+					if (listItem2.get(i).isSelected()) {
+
+						Cronograma cronograma = listItem2.get(i).getValue();
+						cronogramas.remove(cronograma);
+						actividades.add(cronograma.getActividad());
+						ltbActividadesDisponibles
+								.setModel(new ListModelList<Actividad>(
+										actividades));
+						listitemEliminar.add(listItem2.get(i));
+					}
+
 				}
+			} 
+			
+			if(actividadesSeleccionadas == false) {
+
+				Messagebox.show("Debe seleccionar una actividad ",
+						"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 
 			}
+
+			for (int i = 0; i < listitemEliminar.size(); i++) {
+				ltbActividadesSeleccionadas.removeItemAt(listitemEliminar
+						.get(i).getIndex());
+			}
+
+		} else {
+
+			Messagebox
+					.show("Debe seleccionar el lapso academico y el programa al cual se le creara el cronograma",
+							"Error", Messagebox.OK, Messagebox.ERROR);
 		}
-		for (int i = 0; i < listitemEliminar.size(); i++) {
-			ltbActividadesSeleccionadas.removeItemAt(listitemEliminar.get(i)
-					.getIndex());
-		}
+
 		ltbActividadesDisponibles.setMultiple(false);
 		ltbActividadesDisponibles.setCheckmark(false);
 		ltbActividadesDisponibles.setMultiple(true);
@@ -138,6 +193,8 @@ public class CCrearCronograma extends CGeneral {
 		cmbProgramaCrearCronograma.setValue("");
 		ltbActividadesSeleccionadas.getItems().clear();
 		ltbActividadesDisponibles.getItems().clear();
+		actividadesCargadas = false;
+		actividadesSeleccionadas = false;
 
 	}
 
@@ -207,6 +264,9 @@ public class CCrearCronograma extends CGeneral {
 	}
 
 	private void llenarActividades() {
+
+		actividadesCargadas = true;
+
 		if (ltbActividadesDisponibles.isMultiple())
 			ltbActividadesDisponibles.setMultiple(false);
 		if (ltbActividadesSeleccionadas.isMultiple())
@@ -216,10 +276,10 @@ public class CCrearCronograma extends CGeneral {
 		Programa programa = servicioPrograma
 				.buscar((Long.parseLong(cmbProgramaCrearCronograma
 						.getSelectedItem().getId())));
-		cronogramas = servicioCronograma
-				.buscarCronogramaPorLapsoYPrograma(programa, lapso);
-		actividades = servicioActividad
-				.buscarActividadSinCronograma(programa, lapso);
+		cronogramas = servicioCronograma.buscarCronogramaPorLapsoYPrograma(
+				programa, lapso);
+		actividades = servicioActividad.buscarActividadSinCronograma(programa,
+				lapso);
 		ltbActividadesSeleccionadas.setModel(new ListModelList<Cronograma>(
 				cronogramas));
 		ltbActividadesDisponibles.setModel(new ListModelList<Actividad>(

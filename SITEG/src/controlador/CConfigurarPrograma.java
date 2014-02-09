@@ -77,14 +77,16 @@ public class CConfigurarPrograma extends CGeneral {
 	@Wire
 	private Listbox ltbRequisitosSeleccionadas;
 
+	private static boolean listasCargadas;
+
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+
+		listasCargadas = false;
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		List<Programa> programas = servicioPrograma.buscarActivas();
-		
 
 		if (cmbLapsoConfigurarPrograma != null) {
 
@@ -100,76 +102,229 @@ public class CConfigurarPrograma extends CGeneral {
 	@Listen("onClick = #btnAgregarRequisitos")
 	public void moverDerechaRequisitos() {
 
-		
-		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbRequisitosDisponibles
-				.getModel()).getSelection();
-            System.out.println(selectedItems.size());
-		((ListModelList) ltbRequisitosSeleccionadas.getModel())
-				.addAll(selectedItems);
-		((ListModelList) ltbRequisitosDisponibles.getModel())
-				.removeAll(selectedItems);
-		
-//		
+		try {
+			if (listasCargadas == true) {
+
+				Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbRequisitosDisponibles
+						.getModel()).getSelection();
+
+				if (selectedItems.size() == 0) {
+
+					Messagebox.show("Debe seleccionar un requisito ",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+
+				} else {
+
+					((ListModelList) ltbRequisitosSeleccionadas.getModel())
+							.addAll(selectedItems);
+					((ListModelList) ltbRequisitosDisponibles.getModel())
+							.removeAll(selectedItems);
+
+				}
+			} else {
+
+				Messagebox
+						.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+								"Error", Messagebox.OK,
+								Messagebox.ERROR);
+
+			}
+		} catch (NullPointerException e) {
+
+		}
+
 	}
 
 	@Listen("onClick = #btnRemoverRequisitos")
 	public void moverIzquierdaRequisitos() {
-		
-		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbRequisitosSeleccionadas
-				.getModel()).getSelection();
-            System.out.println(selectedItems.size());
-		((ListModelList) ltbRequisitosDisponibles.getModel())
-				.addAll(selectedItems);
-		((ListModelList) ltbRequisitosSeleccionadas.getModel())
-				.removeAll(selectedItems);
-		
-//		
+
+		try {
+
+			if (listasCargadas == true) {
+				Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbRequisitosSeleccionadas
+						.getModel()).getSelection();
+
+				if (selectedItems.size() == 0) {
+
+					Messagebox.show("Debe seleccionar un requisito ",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+
+				} else {
+
+					((ListModelList) ltbRequisitosDisponibles.getModel())
+							.addAll(selectedItems);
+					((ListModelList) ltbRequisitosSeleccionadas.getModel())
+							.removeAll(selectedItems);
+
+				}
+			} else {
+
+				Messagebox
+				.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+						"Error", Messagebox.OK,
+						Messagebox.ERROR);
+
+			}
+		} catch (NullPointerException e) {
+
+		}
+
 	}
 
 	@Listen("onClick = #btnAgregarAreas")
 	public void moverDerechaArea() {
 
-		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbAreasDisponibles
-				.getModel()).getSelection();
-            System.out.println(selectedItems.size());
-		((ListModelList) ltbAreasSeleccionadas.getModel())
-				.addAll(selectedItems);
-		((ListModelList) ltbAreasDisponibles.getModel())
-				.removeAll(selectedItems);
+		try {
+
+			if (listasCargadas == true) {
+
+				Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbAreasDisponibles
+						.getModel()).getSelection();
+
+				if (selectedItems.size() == 0) {
+
+					Messagebox.show(
+							"Debe seleccionar un area de investigacion ",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+
+				} else {
+
+					((ListModelList) ltbAreasSeleccionadas.getModel())
+							.addAll(selectedItems);
+					((ListModelList) ltbAreasDisponibles.getModel())
+							.removeAll(selectedItems);
+
+				}
+			} else {
+
+				Messagebox
+				.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+						"Error", Messagebox.OK,
+						Messagebox.ERROR);
+
+			}
+
+		} catch (NullPointerException e) {
+
+		}
+
 	}
 
 	@Listen("onClick = #btnRemoverAreas")
 	public void moverIzquierdaArea() {
-		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbAreasSeleccionadas
-				.getModel()).getSelection();
-            System.out.println(selectedItems.size());
-		((ListModelList) ltbAreasDisponibles.getModel())
-				.addAll(selectedItems);
-		((ListModelList) ltbAreasSeleccionadas.getModel())
-				.removeAll(selectedItems);
+
+		try {
+
+			if (listasCargadas == true) {
+
+				Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbAreasSeleccionadas
+						.getModel()).getSelection();
+
+				if (selectedItems.size() == 0) {
+
+					Messagebox.show(
+							"Debe seleccionar un area de investigacion ",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+
+				} else {
+
+					((ListModelList) ltbAreasDisponibles.getModel())
+							.addAll(selectedItems);
+					((ListModelList) ltbAreasSeleccionadas.getModel())
+							.removeAll(selectedItems);
+
+				}
+			} else {
+
+				Messagebox
+				.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+						"Error", Messagebox.OK,
+						Messagebox.ERROR);
+
+			}
+		} catch (NullPointerException e) {
+
+		}
+
 	}
 
 	@Listen("onClick = #btnAgregarItems")
 	public void moverDerechaItems() {
 
-		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbItemsDisponibles
-				.getModel()).getSelection();
-            System.out.println(selectedItems.size());
-		((ListModelList) ltbItemsSeleccionados.getModel())
-				.addAll(selectedItems);
-		((ListModelList) ltbItemsDisponibles.getModel())
-				.removeAll(selectedItems);
+		try {
+
+			if (listasCargadas == true) {
+
+				Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbItemsDisponibles
+						.getModel()).getSelection();
+
+				if (selectedItems.size() == 0) {
+
+					Messagebox.show("Debe seleccionar un item de evaluacion ",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+
+				} else {
+
+					((ListModelList) ltbItemsSeleccionados.getModel())
+							.addAll(selectedItems);
+					((ListModelList) ltbItemsDisponibles.getModel())
+							.removeAll(selectedItems);
+
+				}
+			} else {
+
+				Messagebox
+				.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+						"Error", Messagebox.OK,
+						Messagebox.ERROR);
+
+			}
+		} catch (NullPointerException e) {
+
+		}
+
 	}
 
 	@Listen("onClick = #btnRemoverItems")
 	public void moverIzquierdaItems() {
-		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbItemsSeleccionados
-				.getModel()).getSelection();
-            System.out.println(selectedItems.size());
-		((ListModelList) ltbItemsDisponibles.getModel())
-				.addAll(selectedItems);
-		((ListModelList) ltbItemsSeleccionados.getModel())
-				.removeAll(selectedItems);
+
+		try {
+
+			if (listasCargadas == true) {
+
+				Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbItemsSeleccionados
+						.getModel()).getSelection();
+
+				if (selectedItems.size() == 0) {
+
+					Messagebox.show("Debe seleccionar un item de evaluacion ",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+
+				} else {
+
+					((ListModelList) ltbItemsDisponibles.getModel())
+							.addAll(selectedItems);
+					((ListModelList) ltbItemsSeleccionados.getModel())
+							.removeAll(selectedItems);
+
+				}
+			} else {
+
+				Messagebox
+				.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+						"Error", Messagebox.OK,
+						Messagebox.ERROR);
+			}
+		} catch (NullPointerException e) {
+
+		}
+
 	}
 
 	@Listen("onClick = #btnGuardarConfiguracionPrograma")
@@ -235,8 +390,8 @@ public class CConfigurarPrograma extends CGeneral {
 		programasItems = new ArrayList<ProgramaItem>();
 		System.out.print(ltbItemsSeleccionados.getItemCount());
 		for (int i = 0; i < ltbItemsSeleccionados.getItemCount(); i++) {
-			System.out.print(ltbItemsSeleccionados.getItems().get(i)
-					.getValue());
+			System.out
+					.print(ltbItemsSeleccionados.getItems().get(i).getValue());
 			ItemEvaluacion item = ltbItemsSeleccionados.getItems().get(i)
 					.getValue();
 			ProgramaItem programaItem = new ProgramaItem(programa, item, lapso);
@@ -259,10 +414,8 @@ public class CConfigurarPrograma extends CGeneral {
 			condicionesProgramas.add(condicionProgramaReal);
 		}
 		servicioCondicionPrograma.guardar(condicionesProgramas);
-		Messagebox.show(
-				"Configuraciones guardas exitosamente",
-				"Informacion", Messagebox.OK,
-				Messagebox.INFORMATION);
+		Messagebox.show("Configuraciones guardas exitosamente", "Informacion",
+				Messagebox.OK, Messagebox.INFORMATION);
 		limpiarCampos();
 	}
 
@@ -271,20 +424,21 @@ public class CConfigurarPrograma extends CGeneral {
 		cmbLapsoConfigurarPrograma.setValue("");
 		cmbProgramaConfigurarPrograma.setValue("");
 		ltbAreasDisponibles.getItems().clear();
-		
-		 ltbAreasSeleccionadas.getItems().clear();
-	
-		 ltbItemsDisponibles.getItems().clear();
-		
-		 ltbItemsSeleccionados.getItems().clear();
-		
-		 ltbCondiciones.getItems().clear();
-		
-		 ltbRequisitosDisponibles.getItems().clear();
 
+		ltbAreasSeleccionadas.getItems().clear();
+
+		ltbItemsDisponibles.getItems().clear();
+
+		ltbItemsSeleccionados.getItems().clear();
+
+		ltbCondiciones.getItems().clear();
+
+		ltbRequisitosDisponibles.getItems().clear();
+
+		ltbRequisitosSeleccionadas.getItems().clear();
 		
-		 ltbRequisitosSeleccionadas.getItems().clear();
-	     
+		listasCargadas = false;
+
 	}
 
 	@Listen("onChange = #cmbProgramaConfigurarPrograma")
@@ -306,12 +460,12 @@ public class CConfigurarPrograma extends CGeneral {
 
 	public void llenarListas() {
 		
-		long idLapso = Long
-				.parseLong( cmbLapsoConfigurarPrograma.getSelectedItem().getId());
-		System.out.println("idlapso");
-		System.out.println(idLapso);
-		Lapso lapso = servicioLapso
-				.buscarLapso(idLapso);
+		listasCargadas = true;
+
+		long idLapso = Long.parseLong(cmbLapsoConfigurarPrograma
+				.getSelectedItem().getId());
+		
+		Lapso lapso = servicioLapso.buscarLapso(idLapso);
 		Programa programa = servicioPrograma.buscar((Long
 				.parseLong(cmbProgramaConfigurarPrograma.getSelectedItem()
 						.getId())));
@@ -343,7 +497,7 @@ public class CConfigurarPrograma extends CGeneral {
 				requisitosIzquierda));
 		ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(
 				requisitosDerecha));
-		
+
 		ltbAreasDisponibles.setMultiple(true);
 		ltbAreasDisponibles.setCheckmark(true);
 		ltbAreasSeleccionadas.setMultiple(true);
@@ -356,8 +510,7 @@ public class CConfigurarPrograma extends CGeneral {
 		ltbItemsDisponibles.setCheckmark(true);
 		ltbItemsSeleccionados.setMultiple(true);
 		ltbItemsSeleccionados.setCheckmark(true);
-		
-		}
-	
+
+	}
 
 }

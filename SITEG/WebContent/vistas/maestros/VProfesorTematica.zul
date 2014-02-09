@@ -149,7 +149,7 @@
 								<listbox
 									emptyMessage="No hay tematicas registradas"
 									id="lsbTematicasProfesorDisponibles" height="200px"
-									oddRowSclass="non-odd" checkmark="true">
+									checkmark="true">
 
 									<listhead>
 										<listheader label="Nombre" />
@@ -191,7 +191,7 @@
 								<listbox
 									emptyMessage="No hay tematicas seleccionadas"
 									id="lsbTematicasProfesorSeleccionadas" height="200px"
-									oddRowSclass="non-odd" checkmark="true">
+									 checkmark="true">
 									<listhead>
 										<listheader label="Nombre" />
 									</listhead>
@@ -205,8 +205,6 @@
 								</listbox>
 							</panelchildren>
 						</panel>
-
-
 					</hbox>
 				</row>
 			</rows>
