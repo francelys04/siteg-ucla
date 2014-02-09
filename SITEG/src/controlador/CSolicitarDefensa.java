@@ -50,46 +50,59 @@ public class CSolicitarDefensa extends CGeneral {
 	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		// Acomodar
-		teg = servicioTeg.buscarTegPorEstudiante(ObtenerUsuarioEstudiante())
-				.get(0);
-		List<Estudiante> estudiantes = servicioEstudiante
-				.buscarEstudiantePorTeg(teg);
-		
-		if (teg.getEstatus().equals(estatus[0])) {
-			//se guia es por el programa del estudiante
-			txtProgramaSolicitarDefensa.setValue(estudiantes.get(0).getPrograma().getNombre());
-			txtAreaSolicitarDefensa.setValue(teg.getTematica()
-					.getareaInvestigacion().getNombre());
-			txtTematicaSolicitarDefensa.setValue(teg.getTematica().getNombre());
-			txtTituloSolicitarDefensa.setValue(teg.getTitulo());
-			ltbEstudiantesSolicitarDefensa
-					.setModel(new ListModelList<Estudiante>(estudiantes));
-		} else {
-			if (teg.getEstatus().equals(estatus[1])) {
-				Messagebox.show(
-						"Ya posee una solicitud de defensa",
-						"Advertencia", Messagebox.OK,
-						Messagebox.EXCLAMATION);
-				cancelar();
+		try {
+			teg = servicioTeg.buscarTegPorEstudiante(ObtenerUsuarioEstudiante())
+					.get(0);
+			List<Estudiante> estudiantes = servicioEstudiante
+					.buscarEstudiantePorTeg(teg);
+			
+			if (teg.getEstatus().equals(estatus[0])) {
+				//se guia es por el programa del estudiante
+				txtProgramaSolicitarDefensa.setValue(estudiantes.get(0).getPrograma().getNombre());
+				txtAreaSolicitarDefensa.setValue(teg.getTematica()
+						.getareaInvestigacion().getNombre());
+				txtTematicaSolicitarDefensa.setValue(teg.getTematica().getNombre());
+				txtTituloSolicitarDefensa.setValue(teg.getTitulo());
+				ltbEstudiantesSolicitarDefensa
+						.setModel(new ListModelList<Estudiante>(estudiantes));
 			} else {
-				Messagebox.show(
-						"No puede solicitar defensa",
-						"Advertencia", Messagebox.OK,
-						Messagebox.EXCLAMATION);
-				cancelar();
+				if (teg.getEstatus().equals(estatus[1])) {
+					Messagebox.show(
+							"Ya posee una solicitud de defensa",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+					cancelar();
+				} else {
+					Messagebox.show(
+							"No puede solicitar defensa",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+					cancelar();
+				}
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			Messagebox.show("No puede solicitar defensa",
+			"Advertencia", Messagebox.OK,
+			Messagebox.EXCLAMATION);
+			cancelar();
 		}
+		
 	}
 
-	
+	/**
+     * Metodo que cierra la ventana solicitar defensa 
+     */
 	public void cancelar() {
 		wdwSolicitarDefensa.onClose();
 	}
-
+    /**
+     * Metodo que solicita la defensa de un trabajo especial de grado 
+     * ademas cambia el estatus del Teg a estatus solicitando defensa 
+     */
 	@Listen("onClick = #btnSolicitarDefensa")
 	public void solicitarDefensa() {
-		Messagebox.show("¿Desea solicitar la defensa de su trabajo especial de grado?",
+		Messagebox.show("ï¿½Desea solicitar la defensa de su trabajo especial de grado?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {
