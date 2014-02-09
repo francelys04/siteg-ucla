@@ -11,6 +11,7 @@ import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
+import modelo.TegEstatus;
 import modelo.TipoJurado;
 import modelo.compuesta.Jurado;
 
@@ -170,13 +171,16 @@ public class CAtenderDefensa extends CGeneral {
 								String lugar = txtLugarDefensa.getValue();
 								Profesor profesor = ObtenerUsuarioProfesor();
 
-								String estatus = "Por Defender";
+								String estatus = "Defensa Programada";
 								Defensa defensa = new Defensa(idDefensa, teg,
 										fecha, hora, lugar, estatus, profesor);
 								servicioDefensa.guardarDefensa(defensa);
 								String estatus1 = "Defensa Asignada";
 								System.out.println(idTeg);
 								Teg teg1 = servicioTeg.buscarTeg(idTeg);
+								java.util.Date fechaEstatus = new Date();					
+								TegEstatus tegEstatus = new TegEstatus(0, teg1, estatus1, fechaEstatus);
+								servicioTegEstatus.guardar(tegEstatus);
 								teg1.setEstatus(estatus1);
 								servicioTeg.guardar(teg1);
 								Messagebox

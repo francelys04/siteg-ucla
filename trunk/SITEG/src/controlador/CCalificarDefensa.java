@@ -11,6 +11,7 @@ import modelo.Lapso;
 import modelo.Mencion;
 import modelo.Programa;
 import modelo.Requisito;
+import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.TegEstatus;
 import modelo.compuesta.ItemDefensa;
@@ -85,7 +86,6 @@ public class CCalificarDefensa extends CGeneral {
 	private static Programa p;
 	ArrayList<Boolean> valor2 = new ArrayList<Boolean>();
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SEstudiante servicioEstu = GeneradorBeans.getServicioEstudiante();
 	SProgramaItem servicioProgratem = GeneradorBeans.getServicioProgramaItem();
 	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
 	SDefensa serviciodefensa = GeneradorBeans.getServicioDefensa();
@@ -103,7 +103,7 @@ public class CCalificarDefensa extends CGeneral {
 				long codigo = (Long) map.get("id");
 				auxId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(codigo);
-				List<Estudiante> estudiante = servicioEstu
+				List<Estudiante> estudiante = servicioEstudiante
 						.buscarEstudiantePorTeg(teg2);
 				if (estudiante.size() != 0) {
 					p = estudiante.get(0).getPrograma();
@@ -149,6 +149,14 @@ public class CCalificarDefensa extends CGeneral {
 
 	}
 
+	public void actualizarSolicitud(){
+		Estudiante estudiante = ltbEstudiantesCalificar
+				.getItems().get(0).getValue();
+		SolicitudTutoria solicitud = servicioSolicitudTutoria.buscarSolicitudAceptadaEstudiante(estudiante);
+		solicitud.setEstatus("Finalizada");
+		servicioSolicitudTutoria.guardar(solicitud);
+	}
+	
 	@Listen("onClick = #btnGuardar")
 	public void guardar() {
 		dejeenblanco = false;
@@ -166,11 +174,9 @@ public class CCalificarDefensa extends CGeneral {
 			long auxId2;
 			auxId2 = auxId;
 			teg1 = servicioTeg.buscarTeg(auxId2);
+			Defensa defensa = serviciodefensa.buscarDefensaDadoTeg(teg1);
 			final List<ItemDefensa> items = new ArrayList<ItemDefensa>();
 			for (int i = 0; i < ltbitem.getItemCount(); i++) {
-
-				Defensa defensa = serviciodefensa.buscarDefensaDadoTeg(teg1);
-
 				Listitem listItem = ltbitem.getItemAtIndex(i);
 				String valor = ((Textbox) ((listItem.getChildren().get(1)))
 						.getFirstChild()).getValue();
@@ -203,34 +209,28 @@ public class CCalificarDefensa extends CGeneral {
 									TegEstatus tegEstatus = new TegEstatus();
 									java.util.Date fechaEstatus = new Date();
 									if (rdoAprobado.isChecked() == true) {
-
-										String estatus1 = "TEG Aprobado";
-										Messagebox.show(
-												"Calificacion guardada exitosamente",
-												"Informacion", Messagebox.OK,
-												Messagebox.INFORMATION);
+										String estatus1 = "TEG Aprobado";										
 										tegEstatus = new TegEstatus(0, teg1, estatus1, fechaEstatus);
-										servicioTegEstatus.guardar(tegEstatus);
-										teg1.setMencion(mencion);
 										teg1.setEstatus(estatus1);
-										servicioTeg.guardar(teg1);
-										salir();
 									}
-
 									else if (rdoReprobado.isChecked() == true) {
-
 										String estatus2 = "TEG Reprobado";
 										tegEstatus = new TegEstatus(0, teg1, estatus2, fechaEstatus);
-										servicioTegEstatus.guardar(tegEstatus);
 										teg1.setEstatus(estatus2);
-										teg1.setMencion(mencion);
-										servicioTeg.guardar(teg1);
-										Messagebox.show(
-												"Calificacion guardada exitosamente",
-												"Informacion", Messagebox.OK,
-												Messagebox.INFORMATION);
-										salir();
+										
 									}
+									Messagebox.show(
+											"Calificacion guardada exitosamente",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
+									Defensa defensa = serviciodefensa.buscarDefensaDadoTeg(teg1);
+									defensa.setEstatus("Defensa Evaluada");
+									teg1.setMencion(mencion);
+									serviciodefensa.guardarDefensa(defensa);
+									servicioTegEstatus.guardar(tegEstatus);
+									servicioTeg.guardar(teg1);
+									actualizarSolicitud();
+									salir();
 								}
 							}
 						});

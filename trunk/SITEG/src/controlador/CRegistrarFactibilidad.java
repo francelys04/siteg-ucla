@@ -4,10 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.Actividad;
 import modelo.Estudiante;
 import modelo.Factibilidad;
-import modelo.Profesor;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
@@ -21,7 +19,6 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Combobox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
@@ -30,7 +27,6 @@ import org.zkoss.zul.Window;
 
 import servicio.SEstudiante;
 import servicio.SFactibilidad;
-import servicio.SProfesor;
 import servicio.SPrograma;
 import servicio.STeg;
 import servicio.SItemFactibilidad;
@@ -199,10 +195,10 @@ public class CRegistrarFactibilidad extends CGeneral {
 									.getItems().get(0).getValue();
 							SolicitudTutoria solicitudAceptada = ServicioSolicitudTutoria
 									.buscarSolicitudAceptadaEstudiante(estudianteTeg);
+							System.out.println(solicitudAceptada.getId());
 							String estatusSolicitud = "Finalizada";
 							solicitudAceptada.setEstatus(estatusSolicitud);
-							
-							solicitudAceptada.getId();
+							servicioSolicitudTutoria.guardar(solicitudAceptada);
 
 							String estatus = "Proyecto No Factible";
 							Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
