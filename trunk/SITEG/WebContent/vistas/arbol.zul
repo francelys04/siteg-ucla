@@ -40,7 +40,7 @@
 						</div>
 					</north>
 					<center autoscroll="true">
-						<div align="center"
+						<div
 							style="background-image: url('../public/imagenes/portal/fondo.png'); background-repeat:no-repeat">
 							<include id="formularios"></include>
 

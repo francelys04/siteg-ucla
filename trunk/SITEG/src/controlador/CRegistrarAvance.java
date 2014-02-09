@@ -17,7 +17,7 @@ import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
-
+import modelo.TegEstatus;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -95,11 +95,13 @@ public class CRegistrarAvance extends CGeneral {
 	private long id = 0;
 	private static long auxiliarId = 0;
 	private static long auxIdPrograma = 0;
+	private static boolean estatusTeg;
 
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+		
+		estatusTeg = false;
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -170,19 +172,49 @@ public class CRegistrarAvance extends CGeneral {
 
 								Teg tegAvance = servicioTeg
 										.buscarTeg(auxiliarId);
+
+								if (tegAvance.getEstatus().equals("Proyecto en Desarrollo")){
+									
+									estatusTeg = true;
+								}
+									
+									
+								
+								if(estatusTeg == false){
+									
+									/*
+									 * Guardar estatus de Proyecto en
+									 * Desarrrollo en el TEG
+									 */
+									tegAvance
+											.setEstatus("Proyecto en Desarrollo");
+									servicioTeg.guardar(tegAvance);
+
+									/* Guardar datos en la tabla teg_estatus */
+									java.util.Date fechaEstatus = new Date();
+									TegEstatus tegEstatus = new TegEstatus(0,
+											tegAvance,
+											"Proyecto en Desarrollo",
+											fechaEstatus);
+									servicioTegEstatus.guardar(tegEstatus);
+									
+								}
+
+
 								Date fecha = dtbRegistrarAvance.getValue();
 								String observacion = txtObservacionRegistrarAvance
 										.getValue();
 								String estatus = "Avance Proyecto";
 								Avance avance = new Avance(id, fecha,
 										observacion, estatus, tegAvance);
+
 								servicioAvance.guardar(avance);
 								cancelarRegistrarAvance();
 								id = 0;
 								llenarListas();
 
 								Messagebox
-										.show("Avance del Trabajo Especial de Grado registrado exitosamente",
+										.show("Avance del proyecto registrado exitosamente",
 												"Informacion", Messagebox.OK,
 												Messagebox.INFORMATION);
 
@@ -206,9 +238,17 @@ public class CRegistrarAvance extends CGeneral {
 
 							Teg tegAvance = servicioTeg.buscarTeg(auxiliarId);
 							tegAvance.setEstatus("Avances Finalizados");
+
+							/* Guardar datos en la tabla teg_estatus */
+							java.util.Date fechaEstatus = new Date();
+							TegEstatus tegEstatus = new TegEstatus(0,
+									tegAvance, "Avances Finalizados",
+									fechaEstatus);
+							servicioTegEstatus.guardar(tegEstatus);
+
 							servicioTeg.guardar(tegAvance);
 							Messagebox
-									.show("Avances del Trabajo Especial de Grado finalizados exitosamente",
+									.show("Avances del proyecto finalizados exitosamente",
 											"Informacion", Messagebox.OK,
 											Messagebox.INFORMATION);
 							salir();
