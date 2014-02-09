@@ -1,5 +1,7 @@
 package servicio;
 
+import java.util.List;
+
 import interfazdao.IItemDefensaDAO;
 import modelo.compuesta.ItemDefensa;
 
@@ -13,6 +15,11 @@ public class SItemDefensa {
 	
 	public void guardar(ItemDefensa itemdefensa){
 		interfaceItemDefensa.save(itemdefensa);
+	}
+
+	public void guardarVarios(List<ItemDefensa> items) {
+		// TODO Auto-generated method stub
+		interfaceItemDefensa.save(items);
 	}
 
 }

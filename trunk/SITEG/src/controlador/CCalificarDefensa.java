@@ -166,7 +166,7 @@ public class CCalificarDefensa extends CGeneral {
 			long auxId2;
 			auxId2 = auxId;
 			teg1 = servicioTeg.buscarTeg(auxId2);
-
+			final List<ItemDefensa> items = new ArrayList<ItemDefensa>();
 			for (int i = 0; i < ltbitem.getItemCount(); i++) {
 
 				Defensa defensa = serviciodefensa.buscarDefensaDadoTeg(teg1);
@@ -185,20 +185,20 @@ public class CCalificarDefensa extends CGeneral {
 					ItemEvaluacion item = ltbitem.getItems().get(i).getValue();
 					ItemDefensa itemdefensa = new ItemDefensa(item, defensa,
 							valor);
-					servicioItem.guardar(itemdefensa);
+					//servicioItem.guardar(itemdefensa);
+					items.add(itemdefensa);
 				}
 
 			}
-
-			Messagebox.show("¿Desea guardar la calificacion del Trabajo Especial de Grado?",
-					"Dialogo de confirmacion", Messagebox.OK
-							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
-						public void onEvent(Event evt)
-								throws InterruptedException {
-							if (evt.getName().equals("onOK")) {
-
-								if (dejeenblanco == false) {
+								if (!dejeenblanco) {
+									Messagebox.show("¿Desea guardar la calificacion del Trabajo Especial de Grado?",
+											"Dialogo de confirmacion", Messagebox.OK
+													| Messagebox.CANCEL, Messagebox.QUESTION,
+											new org.zkoss.zk.ui.event.EventListener() {
+												public void onEvent(Event evt)
+														throws InterruptedException {
+													if (evt.getName().equals("onOK")) {
+									servicioItem.guardarVarios(items);
 									Mencion mencion = servicioMencion.buscar(Long.parseLong(cmbMencionTeg.getSelectedItem().getId()));
 									TegEstatus tegEstatus = new TegEstatus();
 									java.util.Date fechaEstatus = new Date();
@@ -232,10 +232,9 @@ public class CCalificarDefensa extends CGeneral {
 										salir();
 									}
 								}
-
 							}
-						}
-					});
+						});
+								}	
 		}
 		}
 	}
