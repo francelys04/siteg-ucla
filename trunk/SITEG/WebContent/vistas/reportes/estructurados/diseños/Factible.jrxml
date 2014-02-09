@@ -2,9 +2,13 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Factible" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb15444e-75ec-4b31-b233-2dc66cb0303a">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="225"/>
+	<property name="ireport.y" value="170"/>
+	<parameter name="proyecto" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[Select estudiante.nombre ne, estudiante.apellido ae, estudiante.cedula ce, teg.titulo te, programa.nombre pn, profesor.nombre np, profesor.apellido ap, profesor.nombre dn , profesor.apellido da from estudiante, teg, programa, profesor, estudiante_teg,tematica,area_investigacion,programa_area where estudiante.cedula= estudiante_teg.estudiante_cedula and estudiante_teg.teg_id=teg.id and estudiante.programa_id = programa.id and teg.profesor_cedula = profesor.cedula and teg.id=147 and teg.tematica_id = tematica.id and tematica.area_investigacion_id = area_investigacion.id and area_investigacion.id = programa_area.area_investigacion_id and programa_area.programa_id = programa.id;]]>
+		<![CDATA[Select estudiante.nombre ne, estudiante.apellido ae, estudiante.cedula ce, teg.titulo te, programa.nombre pn, profesor.nombre np, profesor.apellido ap, profesor.nombre dn , profesor.apellido da from estudiante, teg, programa, profesor, estudiante_teg,tematica,area_investigacion,programa_area where estudiante.cedula= estudiante_teg.estudiante_cedula and estudiante_teg.teg_id=teg.id and estudiante.programa_id = programa.id and teg.profesor_cedula = profesor.cedula and teg.id=$P{proyecto} and teg.tematica_id = tematica.id and tematica.area_investigacion_id = area_investigacion.id and area_investigacion.id = programa_area.area_investigacion_id and programa_area.programa_id = programa.id;]]>
 	</queryString>
 	<field name="ne" class="java.lang.String"/>
 	<field name="ae" class="java.lang.String"/>
@@ -20,28 +24,37 @@
 	</background>
 	<title>
 		<band height="88" splitType="Stretch">
-			<image>
-				<reportElement x="9" y="2" width="130" height="75" uuid="231bac07-f2c3-4459-8d7a-efa173b790cd"/>
-				<imageExpression><![CDATA["C:\\Users\\andrea\\Documents\\Ucla\\LOGOUCLABLANCOAZUL.jpg"]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="462" y="11" width="110" height="66" uuid="2f46ea4e-468d-417b-9064-a9ac8988e574"/>
-				<imageExpression><![CDATA["C:\\Users\\andrea\\Documents\\Ucla\\DCYT.jpg"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement x="163" y="11" width="246" height="29" uuid="63271463-7e77-4f8d-8178-73fd678d023b"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[    Universidad Centroccidental Lisandro Alvarado      Decanato de Ciencias y Tecnología      ]]></text>
+				<reportElement x="113" y="25" width="350" height="39" uuid="be2a96f0-074b-4e5a-b5d7-c025300f6600"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[    Universidad Centroccidental Lisandro Alvarado    Decanato de Ciencias y Tecnología            ]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="218" y="37" width="137" height="14" uuid="0e5400e3-ff53-4f86-bf84-b0c8e5eeec64"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{pn}]]></textFieldExpression>
-			</textField>
+			<line>
+				<reportElement x="-21" y="86" width="612" height="1" forecolor="#0066FF" uuid="c47c68e6-53dc-45c1-ad04-89256394e3f9"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<image>
+				<reportElement x="492" y="17" width="82" height="54" uuid="89b519ee-8b71-4dea-bec4-85db870cc09a"/>
+				<imageExpression><![CDATA["/reporte/logo dcyt.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="3" y="15" width="74" height="58" uuid="2abb98a0-9267-4d28-bfd7-d35c92c5895d"/>
+				<imageExpression><![CDATA["/reporte/logo ucla.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="-19" y="0" width="610" height="2" forecolor="#0066FF" uuid="766cf580-6afa-4a5b-b121-5992fd643f36"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="330" splitType="Stretch">
+		<band height="342" splitType="Stretch">
 			<staticText>
 				<reportElement x="354" y="12" width="67" height="14" uuid="a477c8e7-48d8-4fe2-a4e7-0eb3eac8d07b"/>
 				<text><![CDATA[Barquisimeto, ]]></text>
@@ -52,7 +65,7 @@
 				<text><![CDATA[Ciudadado(a)]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="15" y="44" width="30" height="17" uuid="2902e208-510d-43b3-97c9-8c165ecd3d0f"/>
+				<reportElement x="15" y="44" width="34" height="17" uuid="2902e208-510d-43b3-97c9-8c165ecd3d0f"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{np}]]></textFieldExpression>
 			</textField>
@@ -158,20 +171,35 @@
 			<line>
 				<reportElement x="279" y="158" width="75" height="1" uuid="d4413dde-bd14-4bbf-97ca-66fb64d722cb"/>
 			</line>
+			<textField>
+				<reportElement x="423" y="12" width="100" height="14" uuid="c8878e8c-6055-4312-b946-f22ad7db6b54"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="156" y="98" width="260" height="20" uuid="df462bbc-26e4-47f4-a7ed-619fca83364a"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Informe de Factibilidad]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<pageFooter>
-		<band height="69">
+		<band height="64">
+			<textField>
+				<reportElement x="473" y="26" width="100" height="17" uuid="d10ce796-3d65-4374-9392-28e2743b9646"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="131" y="49" width="310" height="16" uuid="e0cb53b4-b246-4f43-be8a-2cddae67a48b"/>
+				<reportElement x="178" y="24" width="216" height="20" uuid="f3cfdc8b-6ba2-4dbc-b107-b2cdd5f05a63"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Avenida Las Industrias. Nucleo Obelisco. Edificio N. Planta Baja]]></text>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="218" y="32" width="137" height="16" uuid="d547e833-43d0-4e47-b847-2500ef3ee843"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA["Una Voz del Pensamiento"]]></text>
-			</staticText>
+			<image>
+				<reportElement x="8" y="15" width="61" height="39" uuid="d3e7c345-e6fa-4988-a8b2-d4b6a9fae4d7"/>
+				<imageExpression><![CDATA["/reporte/logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</pageFooter>
 	<summary>

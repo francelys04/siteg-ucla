@@ -1,12 +1,11 @@
-<window id="wdwReporteInformeFactibilidad" 
-	title="Informe de Factibilidad" 
-	border="normal" width="80%" height="450px" closable="true"  apply="controlador.reporte.CReporteInformeFactibilidad"
->
+<window id="wdwReporteInformeFactibilidad" 	title="Informe de Factibilidad" border="normal" 
+	width="100%" height="800px" closable="true"  apply="controlador.reporte.CReporteInformeFactibilidad" >
+	
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: none; color:none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 	</style>
 
@@ -14,8 +13,8 @@
 
 		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
 		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
+		background: white;color: none; border-top: none; border-left:
+		none; border-right: none; border-bottom: none; }
 
 		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
 		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
@@ -32,11 +31,37 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
+
+
 	</style>
+
+
 	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 
 	<!-- Lista de popus -->
+	
+	<popup id="pupProgramaFactibilidad">
+		<toolbarbutton label="Seleccione un Programa" />
+	</popup>
+	<popup id="pupAreaFactibilidad">
+		<toolbarbutton label="Seleccione un Area" />
+	</popup>
+	<popup id="pupTematicaFactibilidad">
+		<toolbarbutton label="Seleccione una Tematica" />
+	</popup>
+	<popup id="pupTipoFactibilidad">
+		<toolbarbutton label="Seleccione el Tipo de Estatus" />
+	</popup>
+	<popup id="pupFechaInicioFactibilidad">
+		<toolbarbutton label="Seleccione una Fecha de inicio del registro del Proyecto" />
+	</popup>
+	<popup id="pupFechaFinFactibilidad">
+		<toolbarbutton label="Seleccione una Fecha final del registro del Proyecto" />
+	</popup>
 	<popup id="pupGenerarReporteInformeFactibilidad">
 		<toolbarbutton label="Generar Reporte" />
 	</popup>
@@ -51,129 +76,123 @@
 	
 	<separator />
 	<separator />
-	<!-- <label value="(*) "
-		style="font-weight:bold;color:red;margin-center:2%">
-	</label> -->
+	<label value="(*) "
+		style="font-weight:bold;color:red;margin-left:2%">
+	</label>
+	<label value="Campos Obligatorios"
+		style="font-weight:bold;color: rgb(0, 84, 122)">
+	</label>
 	
-		<label value="Informe de Factibilidad" 	
-				style="font-weight:bold;margin-left:35%;margin-right:20%">
-		</label>
 	<separator />
+	<label value="Informe de Factibilidad de un Proyecto"
+		style="font-weight:bold;margin-left:33%;margin-right:20%">
+	</label>
 	<separator />
 	<separator />
 	<separator />
 
-		<groupbox width="auto%" style="margin-left:2%;margin-right:1%">
-			<separator />
-			<separator />
-				<grid sclass="fgrid">
-					<columns>
-						<column width="20%" height="17%" />
-					</columns>
-			<rows>  
-			
-				<row>
-					
-					<hlayout width="100%">
-							<label value="Fecha Inicio Registro:"
-							style="font-weight:bold" />
-			        </hlayout>
-							<datebox id="dtbFechaInicio" cols="12"
-					     	style="margin-right:30px;color:black !important;" width="100%"
-					     	format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-							</datebox>
-
-					
-					<hlayout width="100%">
-						<label value="Fecha Fin Registro:" style="font-weight:bold" />
-					</hlayout>
-						<datebox id="dtbFechaFin" cols="12"
-				        style="margin-right:30px;color:black !important;" width="100%"
-				        format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-						</datebox>		
-													
-				</row>	
-				
-				
-				<row>
-						<hlayout>
-							<label value="Programa:"
-							style="font-weight:bold" />
-					</hlayout>
-					
-						<combobox id="cmbProgramaFactibilidad" width="100%" readonly="true">
-							<template name="model">
-							<comboitem label="${each.nombre}" id="${each.id}" />
-							</template>
-						</combobox>
-						<hlayout>
-							<label value="Area:" style="font-weight:bold" width="100%" />
-						</hlayout>
-							<combobox id="cmbArea" width="100%" readonly="true">
-							<template name="model">
-								<comboitem label="${each.nombre}" id="${each.id}"/>
-							</template>
-							</combobox>
-						
-		
-				</row>
-				
-				<row>
+	<groupbox width="96%" style="margin-left:2%;margin-right:1%" height="330px">
+		<separator />
+		<separator />
+		<grid sclass="fgrid">
+		<columns>
+			<column width="15%" height="40px" />
+		</columns>
+		<rows>  			
+			<row>
+				<hlayout>
+					<label value="Programa:" style="font-weight:bold" />
+				</hlayout>
+				<hbox>
+					<combobox id="cmbProgramaFactibilidad" width="250px" readonly="true"
+						tooltip="pupProgramaFactibilidad" tabindex="1">
+						<template name="model">
+						<comboitem label="${each.nombre}" id="${each.id}" />
+						</template>
+					</combobox>
 					<hlayout>
-				    	<label value="Temática:" style="font-weight:bold" />
+						<label value="Area:" style="font-weight:bold;margin-left:90px" width="100%" />
 					</hlayout>
-						<combobox id="cmbTematica" width="100%" readonly="true">
+					<combobox id="cmbArea" width="250px" readonly="true"
+						tooltip="pupAreaFactibilidad" tabindex="2" maxlength="100" style="margin-left:110px">
+						<template name="model">
+							<comboitem label="${each.nombre}" id="${each.id}"/>
+						</template>
+					</combobox>
+				</hbox>
+			</row>
+				
+			<row>
+				<hlayout>
+			    	<label value="Temática:" style="font-weight:bold" />
+				</hlayout>
+				<hbox>
+					<combobox id="cmbTematica" width="250px" readonly="true"
+						tooltip="pupTematicaFactibilidad" tabindex="3" >
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
-						</combobox>	
-									
+					</combobox>										
 					<hlayout>
-				    	<label value="Tipo:" style="font-weight:bold" />
+				    	<label value="Tipo:" style="font-weight:bold;margin-left:90px" />
 					</hlayout>
-						<combobox id="cmbTipoFactibilidad" width="100%" readonly="true">
+					<combobox id="cmbTipoFactibilidad" width="250px" readonly="true"
+						tooltip="pupTipoFactibilidad" tabindex="4" style="margin-left:110px">
 						<template name="model">
 							<comboitem label="${each}" />
 						</template>
-						</combobox>	
-						
-				</row>
-				<row>
-				  	<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red">
-						</label>
-						<label value="Proyecto"
-							style="font-weight:bold" />
+					</combobox>
+				</hbox>			
+			</row>
+			
+			<row>
+				<hlayout width="100%">
+						<label value="Fecha Inicio Registro:"
+						style="font-weight:bold" />
+		        </hlayout>
+				<hbox>
+					<datebox id="dtbFechaInicio" cols="12"
+			     	style="margin-right:30px;color:black !important;" width="250px"
+			     	format="dd/MM/yy" onCreate="self.value = new Date()" mold="rounded" readonly="true"
+			     	tooltip="pupFechaInicioFactibilidad" tabindex="5" >
+					</datebox>
+				
+					<hlayout width="100%">
+						<label value="Fecha Fin Registro:" style="font-weight:bold;margin-left:60px" />
 					</hlayout>
-					<hbox>
-
-						<textbox id="txtProyecto" width="100%" />
-						<button id="btnCatalogoProyectoTeg"
-							tooltip="pupCatalogoProyectoTeg" sclass="btn"
-							style="margin-left:15px" tabindex="1"
-							image="/public/imagenes/iconos/catalogo.png" />
-					</hbox>
-				</row>
+					<datebox id="dtbFechaFin" cols="12"
+			        style="margin-right:30px;color:black !important;margin-left:25px" width="250px"
+			        format="dd/MM/yy" onCreate="self.value = new Date()" mold="rounded" readonly="true"
+			        tooltip="pupFechaFinFactibilidad" tabindex="6">
+					</datebox>	
+				</hbox>									
+			</row>	
+			<row>
+			  	<hlayout>
+					<label value="*"
+						style="font-weight:bold;color:red">
+					</label>
+					<label value="Proyecto"
+						style="font-weight:bold" />
+				</hlayout>
+				<hbox>
+					<textbox id="txtProyecto" width="175px" />
+					<button id="btnCatalogoProyectoTeg" tooltip="pupCatalogoProyectoTeg" sclass="btn"
+					style="margin-left:15px" tabindex="7" image="/public/imagenes/iconos/catalogo.png" />
+				</hbox>
+			</row>
 		</rows>		
-		</grid>
-		<separator />
-		<separator />
-	</groupbox>
+	</grid>
 	<separator />
 	<separator />
 	<separator />
 	<separator />
-	<separator />
-	<separator />
-
-	<panel border="normal" width="100%"
+	<panel border="normal" width="95%"
 		style="margin-left:2%;margin-right:3%">
 		<panelchildren>
 			<div sclass="alert-info" align="center">
 				<separator />
 				<div sclass="btn-group">
-
 					<button id="btnGenerarReporteInformeFactibilidad"
 						label="Generar Reporte" sclass="btn"
 						tooltip="pupGenerarReporteInformeFactibilidad"
@@ -184,15 +203,16 @@
 						tooltip="pupCancelarReporteInformeFactibilidad"
 						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
 					</button>
-					<separator />
 				</div>
-
+			<separator />	
 			</div>
 		</panelchildren>
-	</panel>
-	<separator />
-	<jasperreport id="report" height="500px"></jasperreport>
+	</panel>	
+	
+	<!-- <jasperreport id="report" height="500px"></jasperreport> -->
 	<iframe id ="frame"></iframe>
 	<separator />
+	</groupbox>
+	<jasperreport id="jstVistaPrevia" style="margin-left:2%;margin-right:1%" width="95%"  height="330px"></jasperreport>
 	<separator />
 </window>

@@ -12,14 +12,20 @@ import java.util.Map;
 
 import javax.swing.filechooser.FileSystemView;
 
+import modelo.Categoria;
 import modelo.Defensa;
+import modelo.Estudiante;
+import modelo.Profesor;
 import modelo.Tematica;
 import modelo.AreaInvestigacion;
 import modelo.Programa;
 import modelo.Teg;
+import modelo.compuesta.id.ProgramaAreaId;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JRField;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -110,6 +116,7 @@ public class CReporteInformeFactibilidad extends CGeneral {
 		programas.add(programaa);
 		cmbProgramaFactibilidad.setModel(new ListModelList<Programa>(programas));
 		cmbTipoFactibilidad.setModel(new ListModelList<String>(estatusproyectos));
+		
 		System.out.println(estatusproyectos[1]);
 		
 		Selectors.wireComponents(comp, this, false);
@@ -118,7 +125,7 @@ public class CReporteInformeFactibilidad extends CGeneral {
 				.getCurrent().getAttribute("itemsCatalogo");
 		
 		if (map != null) {
-			/*if (map.get("id") != null){
+		/*if (map.get("id") != null){
 				txtProyecto.setValue((String) map.get("id"));
 				}*/
 		if ((Long) map.get("id") != null) {
@@ -126,90 +133,27 @@ public class CReporteInformeFactibilidad extends CGeneral {
 			/*
 			 * Creacion de objeto cargado con el servicioPrograma mediante
 			 * el metodo buscar dado a su id y asi llenar los textbox de la
-			 * vista VPrograma
+			 * vista VReporteInformeFactibilidad
 			 */
 			Teg teg = servicioTeg.buscarTeg(id);
-			
+			List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
 			txtProyecto.setValue(String.valueOf(teg.getId()));
+			/*Programa programa = servicioPrograma.buscar((Long) map
+					.get("programa"));*/
+			cmbProgramaFactibilidad.setValue(est.get(0).getPrograma().getNombre());
+			cmbProgramaFactibilidad.setModel(new ListModelList<Programa>(programas));
+			cmbArea.setValue(teg.getTematica().getareaInvestigacion().getNombre());
+			cmbTematica.setValue(teg.getTematica().getNombre());
+			/*cmbTipoFactibilidad.setModel(new ListModelList<String>(estatusproyectos));*/
+			cmbTipoFactibilidad.setValue(teg.getEstatus());
+			dtbFechaInicio.setValue(teg.getFechaInicio());
+			dtbFechaFin.setValue(teg.getFechaEntrega());
 			map.clear();
 			map = null;
+			
 		}	
 		}
 	}
-
-/*	@Listen("onClick = #btnGenerarReporteInformeFactibilidad")
-	 public void GenerarInforme() throws JRException, IOException{
-		String nombreArea = cmbArea.getValue();
-		String nombrePrograma = cmbPrograma.getValue();
-		String nombreTematica = cmbTematica.getValue();
-		String nombreTipo = cmbTipo.getValue();
-		
-		Date fechaInicio = new Date();
-		Date fechaFin = new Date();
-		fechaInicio = dtbFechaInicio.getValue();
-		fechaFin = dtbFechaFin.getValue();
-		
-		
-		if ((cmbPrograma.getValue() =="") || (cmbArea.getValue()=="") || (cmbTematica.getValue()==""))
-				|| (cmbTipo.getValue()=="") {
-			    Messagebox.show(
-					  "Datos imcompletos",
-					     "Informacion", Messagebox.OK,
-					   Messagebox.INFORMATION);
-		   }
-		else{
-			List<Teg> TegProyectoFactible = new ArrayList();
-			System.out.println("das:"+TegProyectoFactible.size());
-			
-			if (fechaFin == null || fechaInicio == null
-					|| fechaInicio.after(fechaFin)) {
-				Messagebox.show(
-						"La fecha de inicio debe ser primero que la fecha de fin",
-						"Error", Messagebox.OK, Messagebox.ERROR);
-				
-				} else {
-					if (nombrePrograma.equals("Todos")) {
-						
-						TegProyectoFactible = servicioTeg.buscarTegSegunEstatus(estatus,fechaInicio,fechaFin);
-					}
-					else
-					if (!nombrePrograma.equals("Todos") && nombreArea.equals("Todos")) {
-						TegProyectoFactible=servicioTeg.buscarDefensaTegSegunEstatusPrograma(estatus, programa, fechaInicio, fechaFin);
-						}
-					else
-					if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && !nombreTematica.equals("Todos")) {
-						    Tematica tematica= servicioTematica.buscarTematicaPorNombre(nombreTematica);
-						    TegProyectoFactible=servicioTeg.buscarDefensaTegSegunEstatusTematica(estatus, tematica, fechaInicio, fechaFin);
-						}else
-					if(!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && nombreTematica.equals("Todos")){
-						TegProyectoFactible=servicioTeg.buscarDefensaTegSegunEstatusArea(estatus, area, fechaInicio, fechaFin);
-						}
-
-				}
-			}
-				
-		     AreaInvestigacion area = servicioArea.buscarArea(Long
-				.parseLong(cmbArea.getSelectedItem().getId()));
-		     Programa programa = servicioPrograma
-				.buscar((Long.parseLong(cmbPrograma
-						.getSelectedItem().getId())));
-		     FileSystemView filesys = FileSystemView.getFileSystemView();
-		     List<Cronograma> cronograma = servicioCronograma.buscarCronogramaPorLapsoYPrograma(programa, lapso);
-		     Map p = new HashMap();
-		
-		     p.put("programa", cmbPrograma.getValue());
-		     System.out.println(cmbPrograma.getValue());
-		     p.put("area", cmbArea.getValue());	
-		     JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("SITEG/WebContent/vistas/reportes/estructurados/compilados/Factible.jasper"));
-		    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(programa));
-		     JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"SITEG/WebContent/vistas/reportes/estructurados/diseños/Factible.jrxml"); 
-		     Messagebox.show(
-				"Se ha generado exitosamente el reporte",
-				"Informacion", Messagebox.OK,
-				Messagebox.INFORMATION);
-		}
-		
-	}*/
 	
 	@Listen("onSelect = #cmbProgramaFactibilidad")
 	public void seleccionarPrograma() throws JRException {
@@ -250,7 +194,7 @@ public class CReporteInformeFactibilidad extends CGeneral {
 		}
 	}
 	
-	// Metodo que permite abrir la vista VCatalago en forma modal //
+	// Metodo que permite abrir la vista VCatalagoinformefact en forma modal //
 		@Listen("onClick = #btnCatalogoProyectoTeg")
 		public void buscarProyecto() {
 			Window window = (Window) Executions.createComponents(
@@ -259,6 +203,84 @@ public class CReporteInformeFactibilidad extends CGeneral {
 			catalogo.recibir("reportes/estructurados/VReporteInformeFactibilidad");
 
 		}
+		
+	 	@Listen("onClick = #btnGenerarReporteInformeFactibilidad")
+		 public void GenerarInforme() throws JRException, IOException{
+		/*	String nombrePrograma = cmbProgramaFactibilidad.getValue();
+			Tematica tematica = servicioTematica.buscarTematica(idTematica);
+			AreaInvestigacion area = tematica.getareaInvestigacion();
+			String nombreArea = cmbArea.getValue();
+			String nombreTematica = cmbTematica.getValue();
+			String nombreTipo = cmbTipoFactibilidad.getValue();
+			Date fechaInicio = dtbFechaInicio.getValue();
+			Date fechaFin = dtbFechaFin.getValue();*/
+			
+			
+			
+			if (txtProyecto.getValue()==""){
+				 Messagebox.show( "Debe seleccionar un Proyecto",
+						     "Error", Messagebox.OK,Messagebox.INFORMATION);
+				
+			}
+			
+			
+			/*if ((cmbProgramaFactibilidad.getValue() =="") || (cmbArea.getValue()=="") || (cmbTematica.getValue()=="")
+					|| (cmbTipoFactibilidad.getValue()=="")) {
+				    Messagebox.show(
+						  "Datos imcompletos",
+						     "Informacion", Messagebox.OK,
+						   Messagebox.INFORMATION);
+			   }
+			else{
+				List<Teg> TegProyectoFactible = new ArrayList();
+				System.out.println("das:"+TegProyectoFactible.size());
+				
+				if (fechaFin == null || fechaInicio == null
+						|| fechaInicio.after(fechaFin)) {
+					Messagebox.show(
+							"La fecha de inicio debe ser menor que la fecha de fin",
+							"Error", Messagebox.OK, Messagebox.ERROR);
+					
+					} else {
+						if (nombrePrograma.equals("Todos")) {
+							
+							TegProyectoFactible = servicioTeg.buscarTegSegunEstatus(estatus,fechaInicio,fechaFin);
+						}
+						else
+						if (!nombrePrograma.equals("Todos") && nombreArea.equals("Todos")) {
+							TegProyectoFactible=servicioTeg.buscarDefensaTegSegunEstatusPrograma(estatus, programa, fechaInicio, fechaFin);
+							}
+						else
+						if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && !nombreTematica.equals("Todos")) {
+							    Tematica tematica= servicioTematica.buscarTematicaPorNombre(nombreTematica);
+							    TegProyectoFactible=servicioTeg.buscarDefensaTegSegunEstatusTematica(estatus, tematica, fechaInicio, fechaFin);
+							}else
+						if(!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && nombreTematica.equals("Todos")){
+							TegProyectoFactible=servicioTeg.buscarDefensaTegSegunEstatusArea(estatus, area, fechaInicio, fechaFin);
+							}
+
+					}
+				}
+*/				 Teg teg = servicioTeg.buscarTeg(id);
+			     Long proyecto = teg.getId();
+			    
+			    FileSystemView filesys = FileSystemView.getFileSystemView();
+			    Map<String, Object> p = new HashMap<String, Object>();
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl + "SITEG/vistas/reportes/estructurados/compilados/Factible.jasper";
+				String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+				
+				p.put("fecha", new Date());
+			    p.put("proyecto", proyecto);
+			    System.out.println(proyecto);
+			    
+				 jstVistaPrevia.setSrc(reporteSrc);
+				 jstVistaPrevia.setType("pdf");
+				 jstVistaPrevia.setParameters(p);
+			    
+		}
+			
+		
 	
 	@Listen("onClick = #btnCancelarReporteInformeFactibilidad")
    public void Salir(){
