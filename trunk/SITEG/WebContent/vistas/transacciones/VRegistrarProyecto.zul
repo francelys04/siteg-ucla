@@ -59,7 +59,7 @@
 		<toolbarbutton label="Presione aquí para guardar el proyecto" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí para salir" />
@@ -207,7 +207,9 @@
 							</row>
 							<row>
 								<textbox id="txtTituloRegistrarProyecto"
-									width="620px" rows="4" cols="100" />
+									width="620px" rows="4" cols="100" 
+									tooltiptext="Ingrese aqui el titulo del proyecto"	
+								/>
 							</row>
 						</rows>
 					</grid>

@@ -42,7 +42,20 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
-
+	<!-- Lista de popus -->
+	<popup id="pupBtnAgregar">
+		<toolbarbutton label="Presione aquí para agregar un estudiante" />
+	</popup>
+	<popup id="pupBtnGuardar">
+		<toolbarbutton label="Presione aquí para solicitar el tutor" />
+	</popup>
+	<popup id="pupBtnCancelar">
+		<toolbarbutton label="Presione aquí para impiar los campos" />
+	</popup>
+	<popup id="pupBtnSalir">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+	<!-- fin de popus -->
 
 	<label value="(*) "
 		style="font-weight:bold;color:red;margin-left:2%">
@@ -147,7 +160,9 @@
 
 				<row>
 					<textbox id="txtTituloSolicitud" width="590px"
-						tabindex="4" rows="3" cols="100" />
+						tabindex="4" rows="3" cols="100" 
+						tooltiptext="Ingrese aqui el titulo"	
+					/>
 				</row>
 
 
@@ -183,11 +198,14 @@
 
 								<hbox>
 									<textbox id="txtCedulaEstudiante"
-										tabindex="5" width="140px" />
+										tabindex="5" width="140px" 
+										tooltiptext="Ingrese aqui la cedula del estudiante"	
+									/>
 
 									<button id="btnAgregarEstudiante"
 										tabindex="6" sclass="btn" style="margin-left:10px"
-										image="public/imagenes/iconos/agregar.png">
+										image="public/imagenes/iconos/agregar.png"
+										tooltip="pupBtnAgregar">
 									</button>
 
 								</hbox>
@@ -279,7 +297,9 @@
 								<hbox>
 
 									<textbox id="txtCedulaProfesor"
-										tabindex="7" width="100px" />
+										tabindex="7" width="100px" 
+										tooltiptext="Ingrese aqui la cedula del profesor"	
+									/>
 
 									<button id="btnCatalogoProfesorArea"
 										tabindex="8" sclass="btn" style="margin-left:10px"
@@ -299,7 +319,9 @@
 
 								<hbox>
 									<textbox id="txtNombreProfesor"
-										width="160px" tabindex="9" />
+										width="160px" tabindex="9" 
+										tooltiptext="Ingrese aqui el nombre del profesor"	
+									/>
 
 									<hlayout>
 										<label value="*"
@@ -309,7 +331,9 @@
 									</hlayout>
 
 									<textbox id="txtApellidoProfesor"
-										width="160px" style="margin-left:10px" tabindex="10" />
+										width="160px" style="margin-left:10px" tabindex="10" 
+										tooltiptext="Ingrese aqui el apellido del profesor"	
+									/>
 								</hbox>
 							</row>
 
@@ -323,7 +347,9 @@
 								</hlayout>
 
 								<textbox id="txtCorreoProfesor"
-									width="180px" tabindex="11" />
+									width="180px" tabindex="11" 
+									tooltiptext="Ingrese aqui el correo del profesor"	
+								/>
 
 
 							</row>
@@ -349,15 +375,18 @@
 
 						<button id="btnEnviarSolicitudtutoria"
 							label="Enviar" sclass="btn"
-							image="public/imagenes/iconos/enviar.png" tabindex="12">
+							image="public/imagenes/iconos/enviar.png" tabindex="12"
+							tooltip="pupBtnGuardar">
 						</button>
 						<button id="btnCancelarSolicitudTutoria"
 							sclass="btn" label="Cancelar"
-							image="public/imagenes/iconos/limpiar.png" tabindex="13">
+							image="public/imagenes/iconos/limpiar.png" tabindex="13"
+							tooltip="pupBtnCancelar">
 						</button>
 						<button id="btnSalirSolicitudTutoria"
 							sclass="btn" label="salir" width="110px"
-							image="public/imagenes/iconos/salir.png" tabindex="13">
+							image="public/imagenes/iconos/salir.png" tabindex="13"
+							tooltip="pupBtnSalir">
 						</button>
 						<separator />
 						

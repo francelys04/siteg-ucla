@@ -67,7 +67,7 @@
 			label="Presione aquí para finalizar la seleccion de las defensas" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí para salir" />

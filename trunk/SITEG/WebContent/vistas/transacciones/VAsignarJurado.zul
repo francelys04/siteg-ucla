@@ -71,6 +71,14 @@
 		<toolbarbutton
 			label="Presione aquí para visualizar los datos del jurado" />
 	</popup>
+	<popup id="pupD">
+		<toolbarbutton
+			label="Presione aquí para agregar items" />
+	</popup>
+	<popup id="pupI">
+		<toolbarbutton
+			label="Presione aquí para remover items" />
+	</popup>
 	<popup id="pupBtnGuardar">
 		<toolbarbutton label="Presione aquí para guardar la comision" />
 	</popup>
@@ -79,7 +87,7 @@
 			label="Presione aquí para finalizar la seleccion de las defensas" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton label="Presione aquí para cancelar la seleccion" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí para salir" />
@@ -239,12 +247,12 @@
 												<button
 													id="btnAgregarJurado" sclass="btn"
 													image="/public/imagenes/iconos/right.png"
-													tooltiptext="Agregar Items" />
+													tooltiptext="pupD" />
 												<separator />
 												<button sclass="btn"
 													id="btnRemoverJurado"
 													image="/public/imagenes/iconos/left.png"
-													tooltiptext="Quitar Items" />
+													tooltiptext="pupI" />
 
 											</div>
 										</panelchildren>
