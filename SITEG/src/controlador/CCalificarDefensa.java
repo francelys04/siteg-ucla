@@ -1,15 +1,18 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import modelo.Defensa;
 import modelo.Estudiante;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
+import modelo.Mencion;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
+import modelo.TegEstatus;
 import modelo.compuesta.ItemDefensa;
 
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -35,6 +39,7 @@ import servicio.SDefensa;
 import servicio.SEstudiante;
 import servicio.SItemDefensa;
 import servicio.SLapso;
+import servicio.SMencion;
 import servicio.SProgramaItem;
 import servicio.STeg;
 import configuracion.GeneradorBeans;
@@ -64,7 +69,8 @@ public class CCalificarDefensa extends CGeneral {
 	private Radio rdoAprobado;
 	@Wire
 	private Radio rdoReprobado;
-
+	@Wire
+	private Combobox cmbMencionTeg;
 	@Wire
 	private Window wdwCalificarDefensa;
 
@@ -84,6 +90,7 @@ public class CCalificarDefensa extends CGeneral {
 	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
 	SDefensa serviciodefensa = GeneradorBeans.getServicioDefensa();
 	SItemDefensa servicioItem = GeneradorBeans.getServicioItemDefensa();
+	SMencion servicioMencion = GeneradorBeans.getServicioMencion();
 
 	@Override
 	public void inicializar(Component comp) {
@@ -91,12 +98,10 @@ public class CCalificarDefensa extends CGeneral {
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("tegCatalogo");
-
 		if (map != null) {
 			if (map.get("id") != null) {
 				long codigo = (Long) map.get("id");
 				auxId = codigo;
-
 				Teg teg2 = servicioTeg.buscarTeg(codigo);
 				List<Estudiante> estudiante = servicioEstu
 						.buscarEstudiantePorTeg(teg2);
@@ -121,6 +126,9 @@ public class CCalificarDefensa extends CGeneral {
 				List<ItemEvaluacion> item = servicioProgratem
 						.buscarItemsEnPrograma(p, lapso);
 				List<ItemEvaluacion> item2 = new ArrayList<ItemEvaluacion>();
+				List<Mencion>menciones = servicioMencion.buscarActivos();
+				cmbMencionTeg
+				.setModel(new ListModelList<Mencion>(menciones));
 				for (int i = 0; i < item.size(); i++) {
 					if (item.get(i).getTipo().equals("Defensa")) {
 						item2.add(item.get(i));
@@ -144,10 +152,15 @@ public class CCalificarDefensa extends CGeneral {
 	@Listen("onClick = #btnGuardar")
 	public void guardar() {
 		dejeenblanco = false;
-		if ((rdoAprobado.isChecked() == false)
+		if(cmbMencionTeg.getValue().equals("")){
+			Messagebox.show(
+					"Debe Seleccionar una mencion para el TEG",
+					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+		}else{
+			if ((rdoAprobado.isChecked() == false)
 				&& (rdoReprobado.isChecked() == false)) {
 			Messagebox.show(
-					"Debe indicar si el TEG se encuentra Aprobado o Reproado",
+					"Debe indicar si el TEG se encuentra Aprobado o Reprobado",
 					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 		} else {
 			long auxId2;
@@ -186,7 +199,9 @@ public class CCalificarDefensa extends CGeneral {
 							if (evt.getName().equals("onOK")) {
 
 								if (dejeenblanco == false) {
-
+									Mencion mencion = servicioMencion.buscar(Long.parseLong(cmbMencionTeg.getSelectedItem().getId()));
+									TegEstatus tegEstatus = new TegEstatus();
+									java.util.Date fechaEstatus = new Date();
 									if (rdoAprobado.isChecked() == true) {
 
 										String estatus1 = "TEG Aprobado";
@@ -194,16 +209,21 @@ public class CCalificarDefensa extends CGeneral {
 												"Calificacion guardada exitosamente",
 												"Informacion", Messagebox.OK,
 												Messagebox.INFORMATION);
-										salir();
+										tegEstatus = new TegEstatus(0, teg1, estatus1, fechaEstatus);
+										servicioTegEstatus.guardar(tegEstatus);
+										teg1.setMencion(mencion);
 										teg1.setEstatus(estatus1);
 										servicioTeg.guardar(teg1);
-
+										salir();
 									}
 
 									else if (rdoReprobado.isChecked() == true) {
 
 										String estatus2 = "TEG Reprobado";
+										tegEstatus = new TegEstatus(0, teg1, estatus2, fechaEstatus);
+										servicioTegEstatus.guardar(tegEstatus);
 										teg1.setEstatus(estatus2);
+										teg1.setMencion(mencion);
 										servicioTeg.guardar(teg1);
 										Messagebox.show(
 												"Calificacion guardada exitosamente",
@@ -217,7 +237,7 @@ public class CCalificarDefensa extends CGeneral {
 						}
 					});
 		}
-
+		}
 	}
 
 	private void salir() {
