@@ -1,5 +1,6 @@
 package controlador.seguridad;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
@@ -16,6 +17,9 @@ import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.seguridad.Usuario;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.keygen.KeyGenerators;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -41,7 +45,7 @@ public class CReinicioClave extends CGeneral {
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	@Wire
 	private Window wdwReinicioClave;
 	@Wire
@@ -63,21 +67,18 @@ public class CReinicioClave extends CGeneral {
 	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Listen("onClick = #btnEnviarCorreo")
 	public void reiniciarClave() {
-    
+		String password = KeyGenerators.string().generateKey();
 		if(txtNombreUsuario.getText().compareTo("") != 0 && txtCorreoUsuario.getText().compareTo("") != 0){
-			
 			String nombreUsuario=txtNombreUsuario.getValue();
 			String correoUsuario=txtCorreoUsuario.getValue();
 			Usuario usuario=servicioUsuario.buscarUsuarioPorNombre(txtNombreUsuario.getValue());
-		//	int claveUsuario = ((int) Math.random() * 100);
-			
-			valorCorreo.add(enviarEmailNotificacion(correoUsuario, mensaje+" Usuario: "+nombreUsuario+"  "+"Contraseña: "+nombreUsuario));
+			usuario.setPassword(passwordEncoder.encode(password));
+			servicioUsuario.guardar(usuario);
+			valorCorreo.add(enviarEmailNotificacion(correoUsuario, mensaje+" Usuario: "+nombreUsuario+"  "+"Contraseña: "+password));
 			confirmacion(valorCorreo);
-
 			wdwReinicioClave.onClose();
 		}
 }
