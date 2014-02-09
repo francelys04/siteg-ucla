@@ -234,7 +234,7 @@
 					<separator />
 
 					<listbox id="ltbEstudianteRegistrarFactibilidad"
-						style="margin-left:30px;margin-right:30px"
+						style="margin-left:10px;margin-right:10px"
 						emptyMessage="No hay estudiantes registrados">
 
 
