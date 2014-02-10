@@ -6,12 +6,15 @@
 
 		<style src="/public/css/bootstrap.css" />
 		<style src="/public/css/style.css" />
-			<!-- Lista de popus -->
+
+		<!-- Lista de popus -->
 	<popup id="pupSeleccionNoticia">
 		<toolbarbutton
-			label="Doble clic para seleccionar la noticia />
+			label="Doble clic para seleccionar la noticia" />
 	</popup>
 	<!-- Fin de popus -->
+	
+	
 
 		<listbox id="ltbNoticia" width="100%">
 
