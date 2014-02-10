@@ -90,7 +90,7 @@ public class CNoticia extends CGeneral {
 		 */
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("noticiaCatalogo");
+				.getCurrent().getAttribute("itemsCatalogo");
 		/*
 		 * Validacion para vaciar la informacion del VNoticia a la vista
 		 * VNoticiaa.zul si la varible map tiene algun dato contenido

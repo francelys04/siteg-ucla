@@ -129,7 +129,7 @@
 				</row>
 			</rows>
 		</grid>
-		
+
 		<separator />
 		<separator />
 		<separator />
@@ -197,9 +197,8 @@
 							</row>
 							<row>
 								<textbox id="txtTituloRegistrarTeg"
-									width="520px" rows="2" cols="100" 
-									tooltiptext="Ingrese aqui el titulo"	
-								/>
+									width="520px" rows="2" cols="100"
+									tooltiptext="Ingrese aqui el titulo" />
 							</row>
 
 							<row>
@@ -216,9 +215,8 @@
 							</row>
 							<row>
 								<textbox id="txtDescripcionRegistrarTeg"
-									width="520px" rows="2" cols="100" 
-									tooltiptext="Ingrese aqui la descripcion"	
-								/>
+									width="520px" rows="2" cols="100"
+									tooltiptext="Ingrese aqui la descripcion" />
 							</row>
 
 							<row>
@@ -252,7 +250,8 @@
 
 										<datebox
 											id="dtbFechaEntregaRegistrarTeg" width="130px" format="short"
-											style="margin-left:5px" />
+											style="margin-left:5px;color:black !important;"
+											disabled="true" />
 
 									</hbox>
 

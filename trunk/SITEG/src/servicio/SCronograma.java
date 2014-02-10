@@ -3,6 +3,7 @@ package servicio;
 import java.util.List;
 
 import interfazdao.ICronogramaDAO;
+import modelo.Actividad;
 import modelo.Lapso;
 import modelo.Programa;
 import modelo.compuesta.Cronograma;
@@ -24,6 +25,13 @@ public class SCronograma {
 		cronogramas = interfaceCronograma.findByProgramaAndLapsoOrderByFechaInicioAsc(programa, lapso);
 		return cronogramas;
 	}
+	
+	public Cronograma buscarCronogramaPorLapsoProgramaYActividad(Programa programa, Lapso lapso, Actividad actividad){
+		Cronograma cronogramaActividad;
+		cronogramaActividad = interfaceCronograma.findByProgramaAndLapsoAndActividad(programa, lapso, actividad);
+		return cronogramaActividad;
+	}
+	
 
 	public void limpiar(List<Cronograma> cronogramas) {
 		// TODO Auto-generated method stub

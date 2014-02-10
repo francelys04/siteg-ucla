@@ -94,9 +94,9 @@ public class CCatalogoNoticia extends CGeneral {
 			Noticia descargaDatosCatalogo = (Noticia) listItem.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("id", descargaDatosCatalogo.getId());
-			String vista = "portal-web/VNoticia.zul";
+			String vista = "portal-web/VNoticia";
 			map.put("vista", vista);
-			Sessions.getCurrent().setAttribute("noticiaCatalogo", map);
+			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 			Executions.sendRedirect("/vistas/arbol.zul");
 			wdwCatalogoNoticia.onClose();
 			}
