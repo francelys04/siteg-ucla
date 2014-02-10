@@ -6,6 +6,12 @@
 		
 		<style src="/public/css/bootstrap.css" />
 		<style src="/public/css/style.css" />
+			<!-- Lista de popus -->
+	<popup id="pupSeleccionGrupo">
+		<toolbarbutton
+			label="Doble clic para seleccionar el grupo" />
+	</popup>
+	<!-- Fin de popus -->
 		
 		<listbox id="ltbGrupo" width="100%">
 			<auxhead sclass="category-center">
@@ -20,7 +26,7 @@
 
 			</listhead>
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionGrupo">
 					<listcell label="${each.nombre}" />
 				</listitem>
 			</template>

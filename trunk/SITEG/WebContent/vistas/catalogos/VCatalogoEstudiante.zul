@@ -4,6 +4,12 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+		<!-- Lista de popus -->
+	<popup id="pupSeleccionEstudiante">
+		<toolbarbutton
+			label="Doble clic para seleccionar el estudiante" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox id="ltbEstudiante" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay estudiantes registrados">
@@ -56,7 +62,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionEstudiante">
 				<listcell label="${each.cedula}" />
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.apellido}" />

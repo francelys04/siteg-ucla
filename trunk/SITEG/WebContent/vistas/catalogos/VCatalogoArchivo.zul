@@ -6,6 +6,11 @@
 
 		<style src="/public/css/bootstrap.css" />
 		<style src="/public/css/style.css" />
+		<popup id="pupSeleccionArchivo">
+		<toolbarbutton
+			label="Doble clic para seleccionar un archivo" />
+	   </popup>
+	<!-- Fin de popus -->
 
 		<listbox id="ltbArchivo" width="100%" mold="paging"
 			pageSize="10" emptyMessage="No hay archivos registrados">
@@ -39,7 +44,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionArchivo">
 					<listcell label="${each.nombre}" />
 					<listcell label="${each.descripcion}" />
 					<listcell label="${each.programa.nombre}" />

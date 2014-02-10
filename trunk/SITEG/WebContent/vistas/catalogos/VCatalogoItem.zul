@@ -4,6 +4,12 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+		<!-- Lista de popus -->
+	<popup id="pupSeleccionItem">
+		<toolbarbutton
+			label="Doble clic para seleccionar el item" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox id="ltbItem" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay items de evaluación registrados">
@@ -36,7 +42,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionItem">
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.tipo}" />
 				<listcell label="${each.descripcion}" />

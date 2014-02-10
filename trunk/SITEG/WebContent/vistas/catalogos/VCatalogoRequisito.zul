@@ -4,6 +4,12 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionRequisitos">
+		<toolbarbutton
+			label="Doble clic para seleccionar el requisito" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox id="ltbRequisito" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay requisitos registrados">
@@ -28,7 +34,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionRequisitos">
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.descripcion}" />
 			</listitem>

@@ -49,30 +49,30 @@
 	</popup>
 	<popup id="pupInicioLapso">
 		<toolbarbutton
-			label="Ingrese aquí la fecha de inicio del lapso académico" />
+			label="Presione aquí para seleccionar la fecha de inicio del lapso académico" />
 	</popup>
 	<popup id="pupFinLapso">
 		<toolbarbutton
-			label="Ingrese aquí la fecha final del lapso académico" />
+			label="Presione aquí para seleccionar la fecha final del lapso académico" />
 	</popup>
 	<popup id="pupGuardarLapso">
 		<toolbarbutton
-			label="Presione aquí la fecha final del lapso académico" />
+			label="Presione aquí para guardar los datos de un lapso académico" />
 	</popup>
 	<popup id="pupCancelarLapso">
-		<toolbarbutton label="Presione aquí para limpar los campos" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupEliminarLapso">
 		<toolbarbutton
-			label="Presione aqui para eliminar los datos de un lapso académico" />
+			label="Presione aquí para eliminar los datos de un lapso académico" />
 	</popup>
 	<popup id="pupCatalogoLapso">
 		<toolbarbutton
-			label="Presione aqui para ver la lista de lapsos académicos" />
+			label="Presione aquí para ver la lista de lapsos académicos" />
 	</popup>
 	<popup id="pupSalirLapso">
 		<toolbarbutton
-			label="Presione aqui para salir" />
+			label="Presione aquí para salir" />
 	</popup>
 	<!-- Fin de popus -->
 

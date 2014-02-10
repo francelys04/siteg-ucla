@@ -8,6 +8,13 @@
 	
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionTeg">
+		<toolbarbutton
+			label="Doble clic para seleccionar el trabajo especial de grado" />
+	</popup>
+	<!-- Fin de popus -->
+	
 	<hbox>
 	<label value="Estatus:" style="margin-left:5px" />
 <combobox id="cmbEstatus" readonly="true" inplace="true">
@@ -85,7 +92,7 @@
 		</listhead>
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionTeg">
 				<listcell label="${each.estatus}" />
 				<listcell label="${each.fecha}" />
 				<listcell

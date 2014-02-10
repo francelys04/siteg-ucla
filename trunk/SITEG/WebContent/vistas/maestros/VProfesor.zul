@@ -43,54 +43,51 @@
 
 	<!-- Lista de popus -->
 	<popup id="pupCedulaProfesor">
-		<toolbarbutton label="Ingrese aqui la cedula del profesor" />
+		<toolbarbutton label="Ingrese aquí la cédula del profesor" />
 	</popup>
 	<popup id="pupCategoriaProfesor">
-		<toolbarbutton label="Seleccione la categoria del profesor" />
+		<toolbarbutton label="Presione aquí para seleccionar la categoría" />
 	</popup>
 	<popup id="pupNombreProfesor">
-		<toolbarbutton label="Ingrese aqui el nombre del profesor" />
+		<toolbarbutton label="Ingrese aquí el nombre del profesor" />
 	</popup>
 	<popup id="pupApellidoProfesor">
-		<toolbarbutton label="Ingrese aqui el apellido del profesor" />
+		<toolbarbutton label="Ingrese aquí el apellido del profesor" />
 	</popup>
 	<popup id="pupDireccionProfesor">
-		<toolbarbutton label="Ingrese aqui la direccion del profesor" />
+		<toolbarbutton label="Ingrese aquí la dirección del profesor" />
 	</popup>
 	<popup id="pupSexoProfesor">
-		<toolbarbutton label="Seleccione aqui el sexo del profesor" />
+		<toolbarbutton label="Seleccione aquí el sexo del profesor" />
 	</popup>
 	<popup id="pupTelefonoMovilProfesor">
 		<toolbarbutton
-			label="Ingrese aqui el telefono movil del profesor" />
+			label="Ingrese aquí el teléfono móvil del profesor" />
 	</popup>
 	<popup id="pupTelefonoFijoProfesor">
 		<toolbarbutton
-			label="Ingrese aqui el telefono fijo del profesor" />
+			label="Ingrese aquí el teléfono fijo del profesor" />
 	</popup>
 	<popup id="pupCorreoProfesor">
-		<toolbarbutton label="Ingrese aqui el correo del profesor" />
-	</popup>
-	<popup id="pupProgramaProfesor">
-		<toolbarbutton label="Seleccione el programa del profesor" />
+		<toolbarbutton label="Ingrese aquí el correo del profesor" />
 	</popup>
 	<popup id="pupGuardarProfesor">
 		<toolbarbutton
-			label="Presione aqui para guardar los datos del profesor" />
+			label="Presione aquí para guardar los datos del profesor" />
 	</popup>
 	<popup id="pupCancelarProfesor">
-		<toolbarbutton label="Presione aqui para limpiar los campos" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 		<popup id="pupSalirProfesor">
-		<toolbarbutton label="Presione aqui para salir" />
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<popup id="pupEliminarProfesor">
 		<toolbarbutton
-			label="Presione aqui para eliminar los datos del profesor" />
+			label="Presione aquí para eliminar los datos del profesor" />
 	</popup>
 	<popup id="pupCatalogoProfesor">
 		<toolbarbutton
-			label="Presione aqui para ver la lista de profesores" />
+			label="Presione aquí para ver la lista de profesores" />
 	</popup>
 	<!-- Fin de popus -->
 
