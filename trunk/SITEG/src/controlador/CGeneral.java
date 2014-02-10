@@ -27,12 +27,16 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 
 import servicio.SAreaInvestigacion;
 import servicio.SCondicionPrograma;
+import servicio.SDefensa;
 import servicio.SEstudiante;
+import servicio.SJurado;
 import servicio.SProfesor;
 import servicio.SProgramaArea;
 import servicio.SSolicitudTutoria;
+import servicio.STeg;
 import servicio.STegEstatus;
 import servicio.STematica;
+import servicio.STipoJurado;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
@@ -41,6 +45,10 @@ import java.net.URL;
 @Controller
 public abstract class CGeneral extends SelectorComposer<Component> {
 
+	protected STeg servicioTeg = GeneradorBeans.getServicioTeg();
+	protected SDefensa servicioDefensa = GeneradorBeans.getServicioDefensa();
+	protected SJurado servicioJurado = GeneradorBeans.getServicioJurado();
+	protected STipoJurado servicioTipoJurado = GeneradorBeans.getServicioTipoJurado();
 	protected SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	protected SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
 	protected SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
