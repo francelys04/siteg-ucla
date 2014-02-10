@@ -10,10 +10,12 @@ import java.util.Set;
 
 import modelo.Actividad;
 import modelo.Estudiante;
+import modelo.Lapso;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.Teg;
 import modelo.TegEstatus;
+import modelo.compuesta.Cronograma;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,12 +50,16 @@ import configuracion.GeneradorBeans;
 
 import servicio.SActividad;
 import servicio.STeg;
+import servicio.SLapso;
+import servicio.SCronograma;
 
 @Controller
 public class CRegistrarTeg extends CGeneral {
 
 	SActividad servicioActividad = GeneradorBeans.getServicioActividad();
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
+	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
+	SCronograma servicioCronograma = GeneradorBeans.getServicioCronograma();
 
 	@Wire
 	private Textbox txtProgramaRegistraTeg;
@@ -125,6 +131,13 @@ public class CRegistrarTeg extends CGeneral {
 						.buscarEstudiantesDelTeg(tegEstudiante);
 				lsbEstudiantesRegistrarTeg
 						.setModel(new ListModelList<Estudiante>(estudiantes));
+				
+				
+				Lapso lapsoVigente = servicioLapso.buscarLapsoVigente();
+				Actividad actividadFechaTeg = servicioActividad.buscarActividadPorNombre("Fecha de entrega del trabajo especial de grado");
+				Cronograma cronogramaActividad = servicioCronograma.buscarCronogramaPorLapsoProgramaYActividad(programa, lapsoVigente, actividadFechaTeg);
+				dtbFechaEntregaRegistrarTeg.setValue(cronogramaActividad.getFechaFin());
+				
 
 			}
 
