@@ -17,6 +17,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -49,6 +50,8 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 	private Textbox txtApellidoTutorSolicitudDefensa;
 	@Wire
 	private Listbox ltbSolicitudesDefensa;
+	@Wire
+	private Window wdwCatalogoSolicitudDefensa;
 	private List<Teg> tegsDefensa1 = new ArrayList<Teg>();
 	private List<Teg> tegsDefensa = new ArrayList<Teg>();
 	@Override
@@ -57,6 +60,7 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
+		try{
 		if(map != null || map==null){
 			//Permite llenar la lista del teg que tienen por estatus Solicitando Defensa
 			tegsDefensa1 = servicioTeg.buscarTegPorProgramaParaDefensa2(servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
@@ -80,6 +84,14 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 			System.out.println(tegsDefensa.toString());
 			ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegsDefensa));
 		}
+		}
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+						Messagebox.show("No tiene permisos para atender solicitudes de defensa",
+						"Advertencia", Messagebox.OK,
+						Messagebox.EXCLAMATION);
+						wdwCatalogoSolicitudDefensa.onClose();
 		}
 	}
 	//Permite filtrar los datos del catalogo

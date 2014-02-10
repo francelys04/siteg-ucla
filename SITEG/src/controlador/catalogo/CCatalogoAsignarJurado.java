@@ -18,6 +18,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -50,6 +51,8 @@ public class CCatalogoAsignarJurado extends CGeneral {
 	private Textbox txtApellidoTutorSolicitudDefensa;
 	@Wire
 	private Listbox ltbSolicitudesDefensa;
+	@Wire
+	private Window wdwCatalogoAsignarJurado;
 	private List<Teg> tegsDefensa1 = new ArrayList<Teg>();
 	private List<Teg> tegsDefensa = new ArrayList<Teg>();
 	@Override
@@ -58,6 +61,7 @@ public class CCatalogoAsignarJurado extends CGeneral {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
+		try{
 		if(map != null || map==null){
 			//Metodo que permite cargar los tegs en el listbox median utilizacion de servicios
 			tegsDefensa1 = servicioTeg.buscarTegPorProgramaParaDefensa(servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
@@ -79,6 +83,13 @@ public class CCatalogoAsignarJurado extends CGeneral {
 			}
 			ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegsDefensa));
 			}
+		}
+		} catch (Exception e) {
+			// TODO: handle exception
+						Messagebox.show("No tiene permisos para asignar jurados",
+						"Advertencia", Messagebox.OK,
+						Messagebox.EXCLAMATION);
+						wdwCatalogoAsignarJurado.onClose();
 		}
 	}
 	//Metodo que permite el fitrado de datos

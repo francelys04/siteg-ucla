@@ -95,6 +95,7 @@ public class CRegistrarTeg extends CGeneral {
 
 	public void inicializar(Component comp) {
 
+		try {
 		Estudiante estudiante = ObtenerUsuarioEstudiante();
 		Programa programa = new Programa();
 		programa = estudiante.getPrograma();
@@ -104,7 +105,7 @@ public class CRegistrarTeg extends CGeneral {
 
 		// verifica el estado actual del TEG
 		// y lleno los datos del teg del estudiante en la vista
-		try {
+		
 			if (tegEstudiante == null) {
 
 				Messagebox
@@ -141,9 +142,11 @@ public class CRegistrarTeg extends CGeneral {
 
 			}
 
-		} catch (NullPointerException e) {
-
-			System.out.println("NullPointerException");
+		} catch (Exception e) {
+			Messagebox.show("No tiene permisos para registrar un TEG",
+					"Advertencia", Messagebox.OK,
+					Messagebox.EXCLAMATION);
+				salirRegistroTeg();
 		}
 
 	}
