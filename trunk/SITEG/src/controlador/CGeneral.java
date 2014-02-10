@@ -33,6 +33,7 @@ import servicio.SProgramaArea;
 import servicio.SSolicitudTutoria;
 import servicio.STegEstatus;
 import servicio.STematica;
+import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
 import java.net.URL;
@@ -41,6 +42,7 @@ import java.net.URL;
 public abstract class CGeneral extends SelectorComposer<Component> {
 
 	protected SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
+	protected SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
 	protected SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	protected SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	protected SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
