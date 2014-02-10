@@ -137,14 +137,14 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="5" y="83" width="45" height="20" uuid="b888242a-3beb-46ee-8760-1808819f9add"/>
+				<reportElement x="5" y="83" width="63" height="20" uuid="b888242a-3beb-46ee-8760-1808819f9add"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Titulo:]]></text>
+				<text><![CDATA[Titulo Teg:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="51" y="84" width="365" height="34" uuid="3b83c799-3e9c-41ef-85c0-b01b28246227"/>
+				<reportElement x="68" y="84" width="348" height="34" uuid="3b83c799-3e9c-41ef-85c0-b01b28246227"/>
 				<textElement verticalAlignment="Top">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -188,11 +188,11 @@
 				<reportElement x="460" y="2" width="112" height="27" forecolor="#000000" backcolor="#0099FF" uuid="b01a9f1d-6df1-48c6-8b87-d8ee8f7bdf8a"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="479" y="6" width="69" height="20" uuid="56fe563b-0f7d-4663-9c96-5fe5632eb40d"/>
+				<reportElement x="468" y="6" width="80" height="20" uuid="56fe563b-0f7d-4663-9c96-5fe5632eb40d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[mas 7 dias]]></text>
+				<text><![CDATA[mas de 6 dias]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

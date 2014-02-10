@@ -147,12 +147,21 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		String nombreTeg = txtTegTitulo.getValue();
 
 		List<String> nombreEstatus = new ArrayList();
-		nombreEstatus.add("Solicitar Tutoria");
-		nombreEstatus.add("Atender Tutoria");
-		nombreEstatus.add("Solicitar Registro");
-		nombreEstatus.add("Atender Registro");
-		nombreEstatus.add("Registrar Avances");
-		nombreEstatus.add("Finalizar Avances");
+		nombreEstatus.add("Solicitando Registro");
+		nombreEstatus.add("Proyecto Registrado");
+		nombreEstatus.add("Comision Asignada");
+		nombreEstatus.add("Factibilidad Evaluada");
+		nombreEstatus.add("Proyecto Factible");
+		nombreEstatus.add("Proyecto en Desarrollo");
+		nombreEstatus.add("Avances Finalizados");
+		nombreEstatus.add("TEG Registrado");
+		nombreEstatus.add("Trabajo en Desarrollo");
+		nombreEstatus.add("Revisiones Finalizadas");
+		nombreEstatus.add("Solicitando Defensa");
+		nombreEstatus.add("Jurado Asignado");
+		nombreEstatus.add("Defensa Asignada");
+		nombreEstatus.add("TEG Aprobado");
+		
 
 		float contador13 = 0;
 		float contador46 = 0;
