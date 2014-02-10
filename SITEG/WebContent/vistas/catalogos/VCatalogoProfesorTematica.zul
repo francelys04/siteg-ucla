@@ -8,7 +8,7 @@
 		<!-- Lista de popus -->
 	<popup id="pupSeleccionTutor">
 		<toolbarbutton
-			label="Doble clic para seleccionar el profesor />
+			label="Doble clic para seleccionar el profesor" />
 	</popup>
 	<!-- Fin de popus -->
 

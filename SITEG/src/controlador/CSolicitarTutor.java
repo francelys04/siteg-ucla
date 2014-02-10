@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -28,11 +29,16 @@ import modelo.AreaInvestigacion;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.TipoJurado;
+import modelo.seguridad.Grupo;
+import modelo.seguridad.Usuario;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
@@ -47,6 +53,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -116,6 +123,8 @@ public class CSolicitarTutor extends CGeneral {
 	private Textbox txtApellidoProfesor;
 	@Wire
 	private Textbox txtCorreoProfesor;
+	@Wire
+	private Image imagenTutor;
 
 	// atributos de la pantalla del catalogo
 	@Wire
@@ -133,6 +142,7 @@ public class CSolicitarTutor extends CGeneral {
 	@Wire
 	private Window wdwCatalogoProfesorArea;
 
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	private long id;
 	private static long valor;
 	public static String combo;
@@ -382,6 +392,7 @@ public class CSolicitarTutor extends CGeneral {
 
 											servicioSolicitarTutor
 													.guardarSolicitud(solicitud2);
+											crearUsuarioProfesor(profesor);
 											enviarEmailNotificacion();
 											Messagebox
 													.show("Su solicitud de tutoria ha sido enviada exitosamente",
@@ -397,7 +408,37 @@ public class CSolicitarTutor extends CGeneral {
 			}
 		}
 	
-
+	private void crearUsuarioProfesor(
+			Profesor profesor) {
+		// TODO Auto-generated method stub
+		Usuario usuario	= new Usuario();
+		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+		List<Grupo> grupos = new ArrayList<Grupo>();
+		Grupo grupo = new Grupo();
+		grupo = servicioGrupo.BuscarPorNombre("ROLE_PROFESOR");
+		byte[] imagenUsuario = null;
+		URL url = getClass().getResource("/configuracion/usuario.png");
+		try {
+			imagenTutor.setContent(new AImage(url));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		imagenUsuario = imagenTutor.getContent().getByteData();
+		gruposUsuario.add(grupo);
+		if(profesor.getUsuario()==null){
+		usuario	= new Usuario(0, profesor.getCedula(), passwordEncoder.encode(profesor.getCedula()), true, gruposUsuario, imagenUsuario);
+		}else{
+			usuario = profesor.getUsuario();
+			grupos = servicioGrupo.buscarGruposDelUsuario(usuario);
+			for (int j = 0; j < grupos.size(); j++) {
+				gruposUsuario.add(grupos.get(j));
+			}
+			usuario.setGrupos(gruposUsuario);
+		}
+		servicioUsuario.guardar(usuario);
+	}
+	
 	// limpia todos los campos de la vista
 	@Listen("onClick = #btnCancelarSolicitudTutoria")
 	public void cancelarSolicitud() {
@@ -557,9 +598,11 @@ public class CSolicitarTutor extends CGeneral {
 			String mensaje = " Solicitud de tutoria \n\n " + "Estudiante: "
 					+ estudiante.getNombre() + " , " + estudiante.getApellido()
 					+ "\n\n con Titulo de Proyecto: "
-					+ txtTituloSolicitud.getValue();
+					+ txtTituloSolicitud.getValue()
+					+ "\n\n Su Usuario es:"
+					+ profesor.getCedula() +" y su contraseña:"+ profesor.getCedula();
 
-			enviarEmailNotificacion(estudiante.getCorreoElectronico(), mensaje);
+			enviarEmailNotificacion(profesor.getCorreoElectronico(), mensaje);
 
 		}
 
