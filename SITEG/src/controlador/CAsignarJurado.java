@@ -51,15 +51,20 @@ import servicio.STeg;
 import servicio.STipoJurado;
 import servicio.seguridad.SGrupo;
 
+/*Controlador asociado a la vista de asignar jurado, que permite
+ * agregar los integrantes del jurado a un determinado TEG*/
 @Controller
 public class CAsignarJurado extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SDefensa servicioDefensa = GeneradorBeans.getServicioDefensa();
-	SJurado servicioJurado = GeneradorBeans.getServicioJurado();
-	STipoJurado servicioTipoJurado = GeneradorBeans.getServicioTipoJurado();
-	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
-			.getServicioCondicionPrograma();
+	private static String vistaRecibida;
+	long idTeg = 0;
+	private static Programa programa;
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	List<Profesor> juradoDisponible = new ArrayList<Profesor>();
+	List<Jurado> juradoOcupado = new ArrayList<Jurado>();
+	Profesor tutor = new Profesor();
+	Jurado jurado = new Jurado();
+	Boolean tutorEnJurado = false;
 
 	@Wire
 	private Textbox txtProgramaAtenderDefensa;
@@ -87,17 +92,13 @@ public class CAsignarJurado extends CGeneral {
 	private Textbox txtApellidoTutorAsignarJurado;
 	@Wire
 	private Image imagenx;
-	private static String vistaRecibida;
-	long idTeg = 0;
-	private static Programa programa;
-	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
-	List<Profesor> juradoDisponible = new ArrayList();
-	List<Jurado> juradoOcupado = new ArrayList();
-	Profesor tutor = new Profesor();
-	Jurado jurado = new Jurado();
-	Boolean tutorEnJurado = false;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
+	 * recibido del catalogo exista yse llenan los campos y listas
+	 * correspondientes de la vista, asicomo los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -119,12 +120,11 @@ public class CAsignarJurado extends CGeneral {
 						.getareaInvestigacion().getNombre());
 				txtTematicaAtenderDefensa.setValue(teg.getTematica()
 						.getNombre());
-				// para que se guie por el programa del estudiante
-				List<Estudiante> est = servicioEstudiante
+				List<Estudiante> estudiantes = servicioEstudiante
 						.buscarEstudiantesDelTeg(teg);
-				programa = est.get(0).getPrograma();
-				txtProgramaAtenderDefensa.setValue(est.get(0).getPrograma()
-						.getNombre());
+				programa = estudiantes.get(0).getPrograma();
+				txtProgramaAtenderDefensa.setValue(estudiantes.get(0)
+						.getPrograma().getNombre());
 				txtTituloAtenderDefensa.setValue(teg.getTitulo());
 				lblCondicionAtenderDefensa
 						.setValue("Recuerde que la cantidad de integrantes del juarado es de: "
@@ -136,11 +136,14 @@ public class CAsignarJurado extends CGeneral {
 		}
 	}
 
-	// metodo que permite mover un profesor de disponible a seleccionado
+	/*
+	 * Metodo que permite mover uno o varios profesores hacia la lista de la
+	 * derecha.
+	 */
 	@Listen("onClick = #btnAgregarJurado")
 	public void moverDerechaJurado() {
 
-		List<Listitem> listitemEliminar = new ArrayList();
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 		List<Listitem> listItem = ltbJuradoDisponible.getItems();
 		if (listItem.size() != 0) {
 			for (int i = 0; i < listItem.size(); i++) {
@@ -169,11 +172,14 @@ public class CAsignarJurado extends CGeneral {
 
 	}
 
-	// metodo que permite mover un profesor de seleccionado a disponible
+	/*
+	 * Metodo que permite mover uno o varios profesores hacia la lista de la
+	 * izquierda.
+	 */
 	@Listen("onClick = #btnRemoverJurado")
 	public void moverIzquierdaJurado() {
 
-		List<Listitem> listitemEliminar = new ArrayList();
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 		List<Listitem> listItem2 = ltbJuradoSeleccionado.getItems();
 		if (listItem2.size() != 0) {
 			for (int i = 0; i < listItem2.size(); i++) {
@@ -183,7 +189,6 @@ public class CAsignarJurado extends CGeneral {
 					juradoDisponible.add(jurado.getProfesor());
 					ltbJuradoDisponible.setModel(new ListModelList<Profesor>(
 							juradoDisponible));
-
 					listitemEliminar.add(listItem2.get(i));
 				}
 			}
@@ -203,9 +208,10 @@ public class CAsignarJurado extends CGeneral {
 
 	}
 
-	// Metodo para llenar las listas de jurados tanto disponibles (para ser
-	// seleccionado)
-	// como los que ya han sido seleccionado en un teg (se los trae de la bd)
+	/*
+	 * Metodo que permite llenar las listas de jurados disponibles, es decir,
+	 * por asignar al teg, como los integrantes actuales del jurado
+	 */
 	public void llenarListas(Teg teg) {
 		List<Estudiante> estudiantesTeg = servicioEstudiante
 				.buscarEstudiantePorTeg(teg);
@@ -229,7 +235,13 @@ public class CAsignarJurado extends CGeneral {
 
 	}
 
-	// Metodo que permite finalizar la asignacion del jurado
+	/*
+	 * Metodo que permite finalizar la asignacion del jurado al teg, en el cual
+	 * se cambia de estatus al teg, ademas de que se actualiza el historial de
+	 * cambios del teg y se asignan usuarios a los integrantes del jurado. Todo
+	 * esto se cumple si y solo si los metodos implicados dentro de este
+	 * retornan valor verdadero
+	 */
 	@Listen("onClick = #btnAceptarDefensa")
 	public void aceptarDefensaDefinitiva() {
 
@@ -275,6 +287,11 @@ public class CAsignarJurado extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite la creacion de usuarios a todos los integrantes del
+	 * jurado. Estos usuarios cuentan con el rol de jurado. Ademas se envia el
+	 * usuario y la contraseña a cada integrante via email
+	 */
 	void crearUsuariosJurado() {
 		Usuario user = new Usuario();
 		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
@@ -325,6 +342,10 @@ public class CAsignarJurado extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite guardar de manera temporal la asignacion de jurados,
+	 * si y solo, el metodo de validacion retorna verdadero
+	 */
 	@Listen("onClick = #btnAceptarDefensaMientrasTanto")
 	public void aceptarDefensa() {
 		if (guardardatos()) {
@@ -336,6 +357,11 @@ public class CAsignarJurado extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite validar que la cantidad de integrantes del jurado sea
+	 * la misma que la configurada para el programa en el lapso actual, retorna
+	 * verdadero si se cumple y falso si no se cumple
+	 */
 	public boolean validarJurado() {
 		if (ltbJuradoSeleccionado.getItemCount() == buscarCondicionVigenteEspecifica(
 				"Numero de integrantes del jurado", programa).getValor()) {
@@ -344,6 +370,11 @@ public class CAsignarJurado extends CGeneral {
 			return false;
 	}
 
+	/*
+	 * Metodo que permite almacenar los datos de los jurados en la base de
+	 * datos, si y solo si, se cumple que cada integrante del jurado posee un
+	 * tipo asociado. Retorna verdadero si se cumple y falso en caso contrario
+	 */
 	public boolean guardardatos() {
 		Teg teg = servicioTeg.buscarTeg(idTeg);
 		List<Jurado> jurados = new ArrayList<Jurado>();
@@ -383,6 +414,9 @@ public class CAsignarJurado extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
+	 */
 	@Listen("onClick = #btnCancelarDefensa")
 	public void cancelarDefensa() {
 		Teg teg = servicioTeg.buscarTeg(idTeg);
@@ -391,6 +425,7 @@ public class CAsignarJurado extends CGeneral {
 
 	}
 
+	/* Metodo que permite cerrar la pantalla actualizando los cambios realizados */
 	@Listen("onClick = #btnSalirAsignarJurado")
 	public void salirAsignarJurado() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
