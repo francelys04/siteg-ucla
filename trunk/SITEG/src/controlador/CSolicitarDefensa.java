@@ -102,7 +102,7 @@ public class CSolicitarDefensa extends CGeneral {
      */
 	@Listen("onClick = #btnSolicitarDefensa")
 	public void solicitarDefensa() {
-		Messagebox.show("ï¿½Desea solicitar la defensa de su trabajo especial de grado?",
+		Messagebox.show("¿Desea solicitar la defensa de su trabajo especial de grado?",
 				"Dialogo de confirmacion", Messagebox.OK
 						| Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener() {

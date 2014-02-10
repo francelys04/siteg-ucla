@@ -95,13 +95,14 @@ public class CRegistrarRevision extends CGeneral {
 	private long id = 0;
 	private static long auxiliarId = 0;
 	private static long auxIdPrograma = 0;
+	private static boolean estatusTeg;
 
 	@Override
 	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		;
+		estatusTeg = false;
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -169,6 +170,35 @@ public class CRegistrarRevision extends CGeneral {
 
 										Teg tegRevision = servicioTeg
 												.buscarTeg(auxiliarId);
+										
+										if (tegRevision.getEstatus().equals("Trabajo en Desarrollo")){
+											
+											estatusTeg = true;
+										}
+										
+										
+										if(estatusTeg == false){
+											
+											/*
+											 * Guardar estatus de Proyecto en
+											 * Desarrrollo en el TEG
+											 */
+											tegRevision
+													.setEstatus("Trabajo en Desarrollo");
+											servicioTeg.guardar(tegRevision);
+
+											/* Guardar datos en la tabla teg_estatus */
+											java.util.Date fechaEstatus = new Date();
+											TegEstatus tegEstatus = new TegEstatus(0,
+													tegRevision,
+													"Trabajo en Desarrollo",
+													fechaEstatus);
+											servicioTegEstatus.guardar(tegEstatus);
+											
+										}
+										
+										
+										
 										Date fecha = dtbRegistrarRevision
 												.getValue();
 										String observacion = txtObservacionRegistrarRevision
@@ -210,11 +240,15 @@ public class CRegistrarRevision extends CGeneral {
 									String estatus = "Revisiones Finalizadas";
 									Teg tegAvance = servicioTeg
 											.buscarTeg(auxiliarId);
+									
+									/* Guardar datos en la tabla teg_estatus */
 									java.util.Date fechaEstatus = new Date();					
 									TegEstatus tegEstatus = new TegEstatus(0, tegAvance, estatus, fechaEstatus);
 									servicioTegEstatus.guardar(tegEstatus);
 									tegAvance
 											.setEstatus(estatus);
+									
+									
 									servicioTeg.guardar(tegAvance);
 									Messagebox
 											.show("Revisiones del Trabajo Especial de Grado finalizadas exitosamente",

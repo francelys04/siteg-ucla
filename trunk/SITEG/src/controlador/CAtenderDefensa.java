@@ -157,7 +157,7 @@ public class CAtenderDefensa extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("¿Desea guardar los datos dela defensa?",
+			Messagebox.show("¿Desea guardar los datos de la defensa?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
