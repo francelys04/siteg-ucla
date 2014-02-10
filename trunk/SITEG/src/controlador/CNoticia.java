@@ -67,6 +67,7 @@ public class CNoticia extends CGeneral {
 	private Window wdwNoticia;
 
 	private long id = 0;
+	private static boolean noticiaCatalogo;
 
 	/*
 	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
@@ -77,6 +78,9 @@ public class CNoticia extends CGeneral {
 	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+		
+		noticiaCatalogo = false;
+		
 		/*
 		 * Listado de todos las Noticias que se encuentran activas, cuyo
 		 * estatus=true con el servicioNoticia mediante el metodo buscarActivos
@@ -97,8 +101,10 @@ public class CNoticia extends CGeneral {
 		 */
 		if (map != null) {
 			if (map.get("id") != null) {
+				
 
 				long codigo = (long) map.get("id");
+				noticiaCatalogo = true;
 				Noticia noticia2 = servicioNoticia.buscarNoticia(codigo);
 				txtNombreNoticia.setValue(noticia2.getNombre());
 				txtDescripcionNoticia.setValue(noticia2.getDescripcion());
@@ -134,7 +140,7 @@ public class CNoticia extends CGeneral {
 	@Listen("onClick = #btnGuardarNoticia")
 	public void guardarDescarga() {
 		List<Noticia> noticia = servicioNoticia.buscarActivos();
-		if (noticia.size() == 3) {
+		if (noticia.size() == 3 && noticiaCatalogo == false) {
 			Messagebox.show("Ya existen tres noticias debe eliminar una",
 					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 		} else {
@@ -164,6 +170,7 @@ public class CNoticia extends CGeneral {
 											descripcion, estatus, image,
 											usuario);
 									servicioNoticia.guardar(noticia1);
+									noticiaCatalogo = false;
 									cancelarNoticia();
 									Messagebox
 											.show("Noticia resgistrada satisfactoriamente",
@@ -205,6 +212,7 @@ public class CNoticia extends CGeneral {
 		txtNombreNoticia.setValue("");
 		txtDescripcionNoticia.setValue("");
 		imagen.setSrc(null);
+		noticiaCatalogo = false;
 
 	}
 
