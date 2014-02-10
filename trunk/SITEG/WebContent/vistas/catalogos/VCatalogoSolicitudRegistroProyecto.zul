@@ -10,7 +10,7 @@
 	<!-- Lista de popus -->
 	<popup id="pupSeleccionProyecto">
 		<toolbarbutton
-			label="Doble clic para seleccionar el proyecto />
+			label="Doble clic para seleccionar el proyecto" />
 	</popup>
 	<!-- Fin de popus -->
 

@@ -100,7 +100,7 @@ public class CRegistrarProyecto extends CGeneral {
 	private static long id;
 
 	public void inicializar(Component comp) {
-
+		try {
 		Estudiante estudiante = ObtenerUsuarioEstudiante();
 		Programa programa = estudiante.getPrograma();
 
@@ -112,7 +112,7 @@ public class CRegistrarProyecto extends CGeneral {
 		// Permite verificar los estatus del teg para asi
 		// validar si este puede registrarlo de ser asi
 		// llena los datos en la vista
-		try {
+		
 			if (solicitudAceptada != null) {
 
 				idTem = solicitudAceptada.getTematica().getId();
@@ -186,8 +186,12 @@ public class CRegistrarProyecto extends CGeneral {
 
 			}
 
-		} catch (NullPointerException e) {
-
+		} catch (Exception e) {
+			// TODO: handle exception
+						Messagebox.show("No tiene permisos para registrar un proyecto",
+						"Advertencia", Messagebox.OK,
+						Messagebox.EXCLAMATION);
+						salirRegistroProyecto();
 		}
 
 	}
