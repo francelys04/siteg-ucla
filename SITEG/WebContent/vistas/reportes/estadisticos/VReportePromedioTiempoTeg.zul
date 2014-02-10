@@ -1,7 +1,7 @@
-<window id="wdwReportePromedioTegFechaEntrega" 
-	title="Promedio de tiempo de los tegs segun las fechas de entregas  " 
-	border="normal" width="60%" height="500px" closable="true"  apply="controlador.reporte.CReportePromedioTegFechaEntrega"
->
+<window id="wdwReportePromedioTiempoTeg"
+	title="Promedio de tiempo con respecto a las etapas de teg  "
+	border="normal" width="60%" height="500px" closable="true"
+	apply="controlador.reporte.CReportePromedioTiempoTeg">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -33,89 +33,81 @@
 		background: white; border-top: none; }
 
 	</style>
-	
+
 	<separator />
 	<separator />
 	<!-- <label value="(*) "
 		style="font-weight:bold;color:red;margin-center:2%">
-	</label> -->
-	
-		<label value="Promedio de tiempo de los tegs segun las fechas de entregas " 	
-				style="font-weight:bold;margin-left:35%;margin-right:20%">
-		</label>
+		</label> -->
+
+	<label value="Filtrado de Busqueda "
+		style="font-weight:bold;margin-left:35%;margin-right:20%">
+	</label>
 	<separator />
 	<separator />
 	<separator />
 	<separator />
 
-		<groupbox width="auto%" style="margin-left:2%;margin-right:1%">
-			<separator />
-			<separator />
-				<grid sclass="fgrid">
-					<columns>
-						<column width="17%" height="17%" />
-					</columns>
-			<rows>  
-			
+	<groupbox width="auto%" style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
+		<grid sclass="fgrid">
+			<columns>
+				<column width="19%" height="17%" />
+			</columns>
+			<rows>
 				<row>
-					
-					<hlayout width="100%">
-							<label value="Fecha Inicio Registro:"
+					<hlayout>
+						<label value="Programa:"
 							style="font-weight:bold" />
-			        </hlayout>
-							<datebox id="dtbFechaInicio" cols="12"
-					     	style="margin-right:30px;color:black !important;" width="100%"
-					     	format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-							</datebox>
+					</hlayout>
 
-					
-					<hlayout width="100%">
-						<label value="Fecha Fin Registro:" style="font-weight:bold" />
+					<combobox id="cmbPrograma" width="100%"
+						readonly="true">
+						<template name="model">
+							<comboitem label="${each.nombre}"
+								id="${each.id}" />
+						</template>
+					</combobox>
+					<hlayout>
+						<label value="Area:" style="font-weight:bold"
+							width="100%" />
 					</hlayout>
-						<datebox id="dtbFechaFin" cols="12"
-				        style="margin-right:30px;color:black !important;" width="100%"
-				        format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-						</datebox>		
-													
-				</row>	
-				
-				
-				<row>
-						<hlayout>
-							<label value="Programa:"
-							style="font-weight:bold" />
-					</hlayout>
-					
-						<combobox id="cmbPrograma" width="100%" readonly="true">
-							<template name="model">
-							<comboitem label="${each.nombre}" id="${each.id}" />
-							</template>
-						</combobox>
-						<hlayout>
-							<label value="Area:" style="font-weight:bold" width="100%" />
-						</hlayout>
-							<combobox id="cmbArea" width="100%" readonly="true">
-							<template name="model">
-								<comboitem label="${each.nombre}" id="${each.id}"/>
-							</template>
-							</combobox>
-						
-		
+					<combobox id="cmbArea" width="100%"
+						readonly="true">
+						<template name="model">
+							<comboitem label="${each.nombre}"
+								id="${each.id}" />
+						</template>
+					</combobox>
 				</row>
-				
 				<row>
-				<hlayout>
-				    	<label value="Temática:" style="font-weight:bold" />
+					<hlayout>
+						<label value="Temática:"
+							style="font-weight:bold" />
 					</hlayout>
-						<combobox id="cmbTematica" width="100%" readonly="true">
+					<combobox id="cmbTematica" width="100%"
+						readonly="true">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
-						</combobox>				
-				
+					</combobox>
 				</row>
-					
-		</rows>		
+				<row>
+					<hlayout>
+						<label value="Tegs:" style="font-weight:bold" />
+					</hlayout>
+
+					<textbox id="txtTegTitulo" width="100%"
+						readonly="true" rows="2" cols="100" tabindex="2" />
+
+
+					<button id="btnCatalogoTeg" sclass="btn"
+						style="margin-left:15px"
+						image="/public/imagenes/iconos/catalogo.png" tabindex="3" />
+				</row>
+
+			</rows>
 		</grid>
 		<separator />
 		<separator />
@@ -134,7 +126,8 @@
 				<separator />
 				<div sclass="btn-group">
 
-					<button id="btnGenerarReportePromedioTegFechaEntrega"
+					<button
+						id="btnGenerarReportePromedioTegFechaEntrega"
 						label="Generar Reporte" sclass="btn"
 						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
 					</button>

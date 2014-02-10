@@ -168,4 +168,19 @@ public List<Teg> buscarTegPorProgramaVariasAreasVariosEstatus1(String estatus1,S
 @Query("select teg from Teg teg where teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4 and fecha between ?5 and ?6 Order by teg.tematica.id")
 public List<Teg> buscarTegPorVariosProgramasVariosEstatus1(String estatus1,String estatus2,String estatus3,String estatus4, Date fechaInicio,Date fechaFin);
 
+
+@Query("select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?1) and teg.estatus=?2")
+public List<Teg> buscarTegSegunArea(AreaInvestigacion area,String estatus);
+
+@Query("select teg from Teg teg where teg.tematica=?1 and teg.estatus=?2")
+public List<Teg> buscarTegSegunTematica(Tematica tematica,String estatus);
+
+@Query("select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?1)) and teg.estatus=?2")
+public List<Teg> buscarTegSegunPrograma(Programa programa,String estatus);
+
+@Query("select teg from Teg teg where teg in ?1")
+public List<Teg> buscarSegunTegs(List<Teg> tegs);
+
+
+
 }
