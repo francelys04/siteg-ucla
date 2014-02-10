@@ -61,7 +61,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	@Wire
 	private Jasperreport jstVistaProfesores;
 	private String[] estatusSolicitud = { "Aceptada", "Rechazada",
-			"Por Revisar" };
+			"Por Revisar", "Finalizada" };
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
@@ -231,11 +231,12 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 //					JasperExportManager.exportReportToPdfFile(jasperPrint,
 //							filesys.getHomeDirectory().toString()
 //									+ "/reporteProfesoresSolicitados.pdf");
+					
+					
 					 String rutaUrl = obtenerDirectorio();
 					 String reporteSrc = rutaUrl
 					 +
 					 "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
-					 // String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
 					 jstVistaProfesores.setSrc(reporteSrc);
 					 jstVistaProfesores.setDatasource(new
 					 JRBeanCollectionDataSource(
