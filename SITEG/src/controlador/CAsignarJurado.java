@@ -94,8 +94,9 @@ public class CAsignarJurado extends CGeneral {
 	SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
 	List<Profesor> juradoDisponible = new ArrayList();
 	List<Jurado> juradoOcupado = new ArrayList();
-
+	Profesor tutor = new Profesor();
 	Jurado jurado = new Jurado();
+	Boolean tutorEnJurado = false;
 
 	@Override
 	public void inicializar(Component comp) {
@@ -108,7 +109,7 @@ public class CAsignarJurado extends CGeneral {
 				idTeg = (Long) map.get("id");
 				Teg teg = servicioTeg.buscarTeg(idTeg);
 				llenarListas(teg);
-
+				tutor = teg.getTutor();
 				txtNombreTutorAsignarJurado
 						.setValue(teg.getTutor().getNombre());
 				txtApellidoTutorAsignarJurado.setValue(teg.getTutor()
@@ -231,32 +232,38 @@ public class CAsignarJurado extends CGeneral {
 	// Metodo que permite finalizar la asignacion del jurado
 	@Listen("onClick = #btnAceptarDefensa")
 	public void aceptarDefensaDefinitiva() {
+
 		if (validarJurado() && guardardatos()) {
+			if (tutorEnJurado) {
+				Messagebox.show("¿Desea guardar los miembros del jurado?",
+						"Dialogo de confirmacion", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new org.zkoss.zk.ui.event.EventListener() {
+							public void onEvent(Event evt)
+									throws InterruptedException {
+								if (evt.getName().equals("onOK")) {
+									String estatus = "Jurado Asignado";
+									java.util.Date fechaEstatus = new Date();
+									Teg teg = servicioTeg.buscarTeg(idTeg);
+									TegEstatus tegEstatus = new TegEstatus(0,
+											teg, estatus, fechaEstatus);
+									servicioTegEstatus.guardar(tegEstatus);
+									teg.setEstatus(estatus);
+									servicioTeg.guardar(teg);
+									crearUsuariosJurado();
+									Messagebox.show(
+											"Jurados asignados exitosamente",
+											"Información", Messagebox.OK,
+											Messagebox.INFORMATION);
+									salirAsignarJurado();
 
-			Messagebox.show("¿Desea guardar los miembros del jurado?",
-					"Dialogo de confirmacion", Messagebox.OK
-							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
-						public void onEvent(Event evt)
-								throws InterruptedException {
-							if (evt.getName().equals("onOK")) {
-								String estatus = "Jurado Asignado";
-								java.util.Date fechaEstatus = new Date();
-								Teg teg = servicioTeg.buscarTeg(idTeg);
-								TegEstatus tegEstatus = new TegEstatus(0, teg, estatus, fechaEstatus);
-								servicioTegEstatus.guardar(tegEstatus);
-								teg.setEstatus(estatus);
-								servicioTeg.guardar(teg);
-								crearUsuariosJurado();
-								Messagebox.show(
-										"Jurados asignados exitosamente",
-										"Información", Messagebox.OK,
-										Messagebox.INFORMATION);
-								salirAsignarJurado();
-
+								}
 							}
-						}
-					});
+						});
+			} else {
+				Messagebox.show("El tutor debe pertenecer al jurado", "Error",
+						Messagebox.OK, Messagebox.ERROR);
+			}
 		} else {
 			Messagebox.show(
 					"El numero de profesores en el jurado no es el correcto, debe ser: "
@@ -265,6 +272,7 @@ public class CAsignarJurado extends CGeneral {
 									programa).getValor(), "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		}
+
 	}
 
 	void crearUsuariosJurado() {
@@ -333,7 +341,7 @@ public class CAsignarJurado extends CGeneral {
 				"Numero de integrantes del jurado", programa).getValor()) {
 			return true;
 		} else
-		return false;
+			return false;
 	}
 
 	public boolean guardardatos() {
@@ -346,6 +354,7 @@ public class CAsignarJurado extends CGeneral {
 			jurados.clear();
 		}
 		for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
+
 			Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
 			String tipojurado = ((Combobox) ((listItem.getChildren().get(3)))
 					.getFirstChild()).getValue();
@@ -356,6 +365,10 @@ public class CAsignarJurado extends CGeneral {
 					.getFirstChild()).getValue();
 			Profesor profesorJurado = servicioProfesor
 					.buscarProfesorPorCedula(String.valueOf(cedula));
+			if (tutor.getCedula().equals(
+					String.valueOf(profesorJurado.getCedula()))) {
+				tutorEnJurado = true;
+			}
 			TipoJurado tipo = servicioTipoJurado.buscarPorNombre(tipojurado);
 			Jurado jurado = new Jurado(teg, profesorJurado, tipo);
 			jurados.add(jurado);
@@ -373,7 +386,9 @@ public class CAsignarJurado extends CGeneral {
 	@Listen("onClick = #btnCancelarDefensa")
 	public void cancelarDefensa() {
 		Teg teg = servicioTeg.buscarTeg(idTeg);
+		tutorEnJurado = false;
 		llenarListas(teg);
+
 	}
 
 	@Listen("onClick = #btnSalirAsignarJurado")
