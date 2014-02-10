@@ -1,0 +1,59 @@
+<window title="Catálogo Teg" border="normal" width="800px"
+	id="wdwCatalogoTeg" apply="controlador.catalogo.CCatalogoTeg"
+	closable="true">
+	
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionTeg">
+		<toolbarbutton
+			label="Doble clic para seleccionar un teg" />
+	</popup>
+	<!-- Fin de popus -->
+	
+
+	<listbox id="ltbTeg" width="100%" mold="paging" pageSize="10"
+		emptyMessage="No hay tegs registrados">
+
+
+
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="80%"
+					sclass="search-query" placeholder="Titulo"
+					id="txtTituloMostrarTeg" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="80%"
+					sclass="search-query" placeholder="Descripción"
+					id="txtDescripcionMostrarTeg" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="80%"
+					sclass="search-query" placeholder="Tutor"
+					id="txtTutorMostrarTeg" />
+			</auxheader>
+
+
+		</auxhead>
+		<listhead>
+			<listheader label="Titulo" align="center" />
+			<listheader label="Descripción" align="center" />
+			<listheader label="Tutor" align="center" />
+			
+		</listhead>
+
+
+		<template name="model">
+			<listitem tooltip="pupSeleccionTeg">
+				<listcell label="${each.titulo}" />
+				<listcell label="${each.descripcion}" />
+				<listcell label="${each.tutor.nombre}" />
+				
+			</listitem>
+		</template>
+	</listbox>
+</window>

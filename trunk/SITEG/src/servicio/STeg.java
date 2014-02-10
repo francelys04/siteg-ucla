@@ -28,8 +28,7 @@ public class STeg {
 			"Proyecto No Factible", "Avances Finalizados", "TEG Registrado",
 			"Revisiones Finalizadas", "Solicitando Defensa",
 			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado",
-			"Jurado Asignado", "Proyecto en Desarrollo",
-			"Trabajo en Desarrollo" };
+			"Jurado Asignado" };
 
 	public Teg buscarTeg(long id) {
 		return interfaceTeg.findOne(id);
@@ -54,7 +53,7 @@ public class STeg {
 	// Evaluar Revisiones
 	public List<Teg> buscarTegRegistrado() {
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatusOrEstatus(estatus[7], estatus[15]);
+		tegs = interfaceTeg.findByEstatus(estatus[7]);
 		return tegs;
 
 	}
@@ -135,7 +134,7 @@ public class STeg {
 	public List<Teg> buscarProyectoFactible() {
 
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatusOrEstatus(estatus[4], estatus[14]);
+		tegs = interfaceTeg.findByEstatus(estatus[4]);
 		return tegs;
 
 	}
@@ -394,4 +393,28 @@ public class STeg {
 				estatus2, estatus3, estatus4, fechaInicio, fechaFin);
 
 	}
+	
+	public List<Teg> buscarTegSegunAreaInvestigacionEstatus(AreaInvestigacion area, String estatus){
+		List<Teg> tegs;
+		tegs= interfaceTeg.buscarTegSegunArea(area, estatus);
+		return tegs;
+	}
+	public List<Teg> buscarTegSegunTematicaEstatus(Tematica tematica, String estatus){
+		List<Teg> tegs;
+		tegs= interfaceTeg.buscarTegSegunTematica(tematica, estatus);
+		return tegs;
+	}
+	public List<Teg> buscarTegSegunProgramaEstatus(Programa programa, String estatus){
+		List<Teg> tegs;
+		tegs= interfaceTeg.buscarTegSegunPrograma(programa, estatus);
+		return tegs;
+	}
+	public List<Teg> buscarSegunTegs(List<Teg> tegs){
+		List<Teg> tegsSeleccionados;
+		tegsSeleccionados= interfaceTeg.buscarSegunTegs(tegs);
+		return tegsSeleccionados;
+	}
+	
+	
+	
 }
