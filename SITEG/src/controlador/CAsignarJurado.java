@@ -373,17 +373,11 @@ public class CAsignarJurado extends CGeneral {
 	@Listen("onClick = #btnCancelarDefensa")
 	public void cancelarDefensa() {
 		Teg teg = servicioTeg.buscarTeg(idTeg);
-		List<Profesor> juradoDisponible = servicioProfesor
-				.buscarProfesorJuradoDadoTeg(teg);
-		ltbJuradoDisponible.setModel(new ListModelList<Profesor>(
-				juradoDisponible));
-		ltbJuradoSeleccionado.getItems().clear();
-
+		llenarListas(teg);
 	}
 
 	@Listen("onClick = #btnSalirAsignarJurado")
 	public void salirAsignarJurado() {
-
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
 		map.put("vista", vista);
