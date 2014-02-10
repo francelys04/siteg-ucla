@@ -4,6 +4,12 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionTematica">
+		<toolbarbutton
+			label="Doble clic para seleccionar la temática" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox id="ltbTematica" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay tematicas registradas">
@@ -40,7 +46,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionTematica">
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.areaInvestigacion.nombre}" />
 				<listcell label="${each.descripcion}" />

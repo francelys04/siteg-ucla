@@ -55,19 +55,19 @@
 			label="Presione aquí para guardar los datos del tipo de jurado" />
 	</popup>
 	<popup id="pupCancelarTipoJurado">
-		<toolbarbutton label="Presione aquí para limpar los campos" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupEliminarTipoJurado">
 		<toolbarbutton
-			label="Presione aqui para eliminar los datos del tipo de jurado" />
+			label="Presione aquí para eliminar los datos del tipo de jurado" />
 	</popup>
 	<popup id="pupCatalogoTipoJurado">
 		<toolbarbutton
-			label="Presione aqui para ver la lista de tipos de jurados" />
+			label="Presione aquí para ver la lista de tipos de jurados" />
 	</popup>
 	<popup id="pupSalirTipoJurado">
 		<toolbarbutton
-			label="Presione aqui para salirs" />
+			label="Presione aquí para salir" />
 	</popup>
 	<!-- Fin de popus -->
 

@@ -61,28 +61,31 @@
 	<popup id="pupDescripcionPrograma">
 		<toolbarbutton label="Ingresa aquí la descripción del programa" />
 	</popup>
+	<popup id="pupCorreoPrograma">
+		<toolbarbutton label="Ingresa aquí el correo del programa" />
+	</popup>
 	<popup id="pupGuardarPrograma">
 		<toolbarbutton
-			label="Presione aqui para guardar los datos de un programa" />
+			label="Presione aquí para guardar los datos de un programa" />
 	</popup>
 	<popup id="pupCancelarPrograma">
-		<toolbarbutton label="Presione aqui para limpar los campos" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupEliminarPrograma">
 		<toolbarbutton
-			label="Presione aqui para eliminar los datos de un programa" />
+			label="Presione aquí para eliminar los datos de un programa" />
 	</popup>
 	<popup id="pupSalirPrograma">
 		<toolbarbutton
-			label="Presione aqui para salir" />
+			label="Presione aquí para salir" />
 	</popup>
 	<popup id="pupCatalogoPrograma">
 		<toolbarbutton
-			label="Presione aqui para ver la lista de programas" />
+			label="Presione aquí para ver la lista de programas" />
 	</popup>
 	<popup id="pupCatalogoDirectorPrograma">
 		<toolbarbutton
-			label="Presione aqui para ver la lista de profesores" />
+			label="Presione aquí para ver la lista de profesores" />
 	</popup>
 	<!-- Fin de popus -->
 
@@ -158,7 +161,7 @@
 
 					<hbox>
 						<textbox id="txtCorreoPrograma" width="230px"
-							maxlength="100" tooltip="pupNombrePrograma" tabindex="5" />
+							maxlength="100" tooltip="pupCorreoPrograma" tabindex="5" />
 					</hbox>
 				</row>
 

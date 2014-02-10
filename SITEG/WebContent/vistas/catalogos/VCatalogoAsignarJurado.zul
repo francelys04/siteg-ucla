@@ -8,6 +8,12 @@
 	
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionTeg">
+		<toolbarbutton
+			label="Doble clic para seleccionar el trabajo especial de grado" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox mold="paging" pageSize="6" id="ltbSolicitudesDefensa"
 		style="margin-left:10px;margin-right:10px" emptyMessage="No hay solicitudes de defensa registradas">
@@ -71,7 +77,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionTeg">
 				<listcell label="${each.estatus}" />
 				<listcell label="${each.fechaEntrega}" />
 				<listcell label="${each.tematica.areaInvestigacion.nombre}" />

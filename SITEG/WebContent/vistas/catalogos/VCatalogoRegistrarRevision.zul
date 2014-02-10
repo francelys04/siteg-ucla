@@ -8,6 +8,12 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+		<!-- Lista de popus -->
+	<popup id="pupSeleccionTeg">
+		<toolbarbutton
+			label="Doble clic para seleccionar el trabajo especial de grado" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox id="ltbTrabajosRegistrados" mold="paging" pageSize="10"
 		style="margin-left:10px;margin-right:10px"
@@ -57,7 +63,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionTeg">
 				<listcell label="${each.estatus}" />
 				<listcell label="${each.fecha}" />
 				<listcell

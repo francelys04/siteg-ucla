@@ -43,6 +43,32 @@
 
 		<style src="/public/css/bootstrap.css" />
 		<style src="/public/css/style.css" />
+		<!-- Lista de popus -->
+	<popup id="pupNombreGrupo">
+		<toolbarbutton label="Ingrese aquí el nombre del grupo" />
+	</popup>
+	<popup id="pupCatalogoGrupo">
+		<toolbarbutton
+			label="Presione aquí para ver la lista de grupos" />
+	</popup>
+	<popup id="pupCancelarGrupo">
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
+	</popup>
+	<popup id="pupGuardarGrupo">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos de un grupo" />
+	</popup>
+	<popup id="pupEliminarGrupo">
+		<toolbarbutton
+			label="Presione aquí para eliminar los datos de un grupo" />
+	</popup>
+	<popup id="pupAgregarFuncionalidadGrupo">
+		<toolbarbutton
+			label="Presione aquí para agregar una funcionalidad" />
+	</popup>
+
+	<!-- Fin de popus -->
+		
 
 		<separator />
 		<separator />
@@ -78,8 +104,8 @@
 								style="font-weight:bold" />
 						</hlayout>
 						<hbox>
-							<textbox id="txtNombreGrupo" width="210px" />
-							<button id="btnCatalogoGrupo" sclass="btn"
+							<textbox id="txtNombreGrupo" width="210px" tooltip="pupNombreGrupo" />
+							<button id="btnCatalogoGrupo" sclass="btn" tooltip="pupCatalogoGrupo"
 								image="/public/imagenes/iconos/catalogo.png"
 								style="margin-left:10px">
 							</button>
@@ -122,7 +148,7 @@
 							<template name="model">
 								<treeitem context="menupopup"
 									open="true">
-									<treerow>
+									<treerow tooltip="pupAgregarFuncionalidadGrupo">
 										<treecell label="${each.label}" />
 									</treerow>
 								</treeitem>
@@ -180,15 +206,15 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button id="btnGuardarGrupo" label="Guardar"
+						<button id="btnGuardarGrupo" label="Guardar" tooltip="pupGuardarGrupo"
 							sclass="btn" image="/public/imagenes/iconos/guardar.png"
 							tabindex="13">
 						</button>
-						<button id="btnCancelarGrupo" label="Cancelar"
+						<button id="btnCancelarGrupo" label="Cancelar" tooltip="pupCancelarGrupo"
 							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
 							tabindex="13">
 						</button>
-						<button id="btnEliminarGrupo" label="Eliminar"
+						<button id="btnEliminarGrupo" label="Eliminar" tooltip="pupEliminarGrupo"
 							sclass="btn" disabled="true"
 							image="/public/imagenes/iconos/eliminar.png" tabindex="13">
 						</button>

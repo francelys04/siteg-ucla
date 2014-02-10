@@ -6,6 +6,12 @@
 
 		<style src="/public/css/bootstrap.css" />
 		<style src="/public/css/style.css" />
+			<!-- Lista de popus -->
+	<popup id="pupSeleccionEnlace">
+		<toolbarbutton
+			label="Doble clic para seleccionar el enlace de interés" />
+	</popup>
+	<!-- Fin de popus -->
 
 		<listbox id="ltbEnlace" width="100%">
 
@@ -31,7 +37,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEnlace">
 					<listcell label="${each.nombre}" />
 					<listcell label="${each.url}" />
 

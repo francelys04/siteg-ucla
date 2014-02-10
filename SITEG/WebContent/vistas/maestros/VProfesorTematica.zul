@@ -54,6 +54,38 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	
+	<!-- Lista de popus -->
+	<popup id="pupCatalogoProfesoresTematica">
+		<toolbarbutton label="Presione aquí para ver la lista de profesores" />
+	</popup>
+	<popup id="pupSeleccionarTematicas">
+		<toolbarbutton
+			label="Presione aquí para seleccionar una temática" />
+	</popup>
+	<popup id="pupAgregarTematicas">
+		<toolbarbutton
+			label="Presione aquí para agregar temáticas" />
+	</popup>
+	<popup id="pupRemoverTematicas">
+		<toolbarbutton
+			label="Presione aquí para remover temáticas" />
+	</popup>		
+	<popup id="pupCancelarProfesorTematica">
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
+	</popup>
+	<popup id="pupGuardarProfesorTematica">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos" />
+	</popup>
+	<popup id="pupSalirProfesorTematica">
+		<toolbarbutton
+			label="Presione aquí para salir" />
+	</popup>
+
+	<!-- Fin de popus -->
+	
+	
 
 	<separator />
 
@@ -91,7 +123,7 @@
 							<textbox id="txtCedulaProfesorTematica"
 								width="150px" style="margin-left:20px" disabled="True" />
 
-							<button id="btnCatalogoProfesorTematica"
+							<button id="btnCatalogoProfesorTematica" tooltip="pupCatalogoProfesoresTematica"
 								sclass="btn" style="margin-left:10%"
 								image="/public/imagenes/iconos/catalogo.png">
 							</button>
@@ -156,7 +188,7 @@
 									</listhead>
 									<template name="model">
 										<listitem>
-											<listcell
+											<listcell tooltip="pupSeleccionarTematicas"
 												label="${each.nombre}">
 											</listcell>
 										</listitem>
@@ -172,14 +204,14 @@
 								<div>
 
 									<button
-										id="btnAgergarProfesorTematicas" sclass="btn"
+										id="btnAgergarProfesorTematicas" sclass="btn" tooltip="pupAgregarTematicas"
 										image="/public/imagenes/iconos/right.png"
-										tooltiptext="Agregar Tematicas"  />
+								     />
 									<separator />
 									<button sclass="btn"
-										id="btnRemoverProfesorTematicas"
+										id="btnRemoverProfesorTematicas" tooltip="pupRemoverTematicas"
 										image="/public/imagenes/iconos/left.png"
-										tooltiptext="Remover Tematicas"  />
+									 />
 
 								</div>
 							</panelchildren>
@@ -221,15 +253,15 @@
 				<div sclass="alert-info" align="center">
 					<separator />
 					<div sclass="btn-group">
-						<button id="btnGuardarProfesorTematicas"
+						<button id="btnGuardarProfesorTematicas" tooltip="pupGuardarProfesorTematica"
 							label="Guardar" sclass="btn"
 							image="/public/imagenes/iconos/guardar.png" tabindex="12">
 						</button>
-						<button id="btnCancelarProfesorTematicas"
+						<button id="btnCancelarProfesorTematicas" tooltip="pupCancelarProfesorTematica"
 							label="Cancelar" sclass="btn"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 						</button>
-						<button id="btnSalirProfesorTematicas"
+						<button id="btnSalirProfesorTematicas" tooltip="pupSalirProfesorTematica"
 							width="110px" label="Salir" sclass="btn"
 							image="/public/imagenes/iconos/salir.png" tabindex="14">
 						</button>

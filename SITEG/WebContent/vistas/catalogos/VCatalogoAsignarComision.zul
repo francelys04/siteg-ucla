@@ -7,6 +7,11 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+		<popup id="pupSeleccionProyecto">
+		<toolbarbutton
+			label="Doble clic para seleccionar un proyecto" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox id="ltbProyectosRegistrados" mold="paging" pageSize="10"
 		style="margin-left:10px;margin-right:10px"
@@ -70,7 +75,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionProyecto">
 				<listcell label="${each.estatus}" />
 				<listcell label="${each.fecha}" />
 				<listcell

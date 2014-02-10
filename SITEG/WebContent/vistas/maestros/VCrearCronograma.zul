@@ -54,6 +54,40 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupLapsoCronograma">
+		<toolbarbutton label="Presione aquí para seleccionar un lapso académico" />
+	</popup>
+	<popup id="pupProgramaCronograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar un programa" />
+	</popup>
+	<popup id="pupSeleccionarActividadCronograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar una actividad" />
+	</popup>
+	<popup id="pupAgregarActividadCronograma">
+		<toolbarbutton
+			label="Presione aquí para agregar actividades" />
+	</popup>
+	<popup id="pupRemoverActividadCronograma">
+		<toolbarbutton
+			label="Presione aquí para remover actividades" />
+	</popup>		
+	<popup id="pupCancelarCronograma">
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
+	</popup>
+	<popup id="pupGuardarCronograma">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos de un cronograma" />
+	</popup>
+	<popup id="pupSalirCronograma">
+		<toolbarbutton
+			label="Presione aquí para salir" />
+	</popup>
+
+	<!-- Fin de popus -->
+	
 
 	<separator />
 
@@ -84,7 +118,7 @@
 						<label value="Lapso:" style="font-weight:bold" />
 					</hlayout>
 
-					<combobox id="cmbLapsoCrearCronograma"
+					<combobox id="cmbLapsoCrearCronograma" tooltip="pupLapsoCronograma"
 						readonly="true" autodrop="true" width="140px" tabindex="12"
 						style="margin-left:20px">
 						<template name="model">
@@ -103,7 +137,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<combobox id="cmbProgramaCrearCronograma"
+					<combobox id="cmbProgramaCrearCronograma" tooltip="pupProgramaCronograma"
 						readonly="true" autodrop="true" width="190px" tabindex="12"
 						style="margin-left:20px">
 						<template name="model">
@@ -134,14 +168,14 @@
 							<panelchildren>
 
 								<listbox id="ltbActividadesDisponibles"
-									height="250px" emptyMessage="No hay Actividades registrados">
+									height="250px" emptyMessage="No hay actividades registradas">
 									<listhead>
 										<listheader width="100%"
 											label="Nombre" />
 									</listhead>
 									<template name="model">
 										<listitem>
-											<listcell
+											<listcell tooltip="pupSeleccionarActividadCronograma"
 												label="${each.nombre} ">
 											</listcell>
 											<listcell>
@@ -168,14 +202,14 @@
 							<panelchildren>
 								<div>
 
-									<button id="btnAgregarActividades"
+									<button id="btnAgregarActividades" 
 										sclass="btn" image="/public/imagenes/iconos/right.png"
-										tooltiptext="Agregar Items" />
+										tooltip="pupAgregarActividadCronograma" />
 									<separator />
 									<button sclass="btn"
 										id="btnRemoverActividades"
 										image="/public/imagenes/iconos/left.png"
-										tooltiptext="Quitar Items" />
+										tooltip="pupRemoverActividadCronograma" />
 
 								</div>
 							</panelchildren>
@@ -188,7 +222,7 @@
 
 								<listbox
 									id="ltbActividadesSeleccionadas" height="250px"
-									emptyMessage="No ha Seleccionado ningun Grupo">
+									emptyMessage="No ha seleccionado ninguna actividad">
 									<listhead>
 										<listheader label="Nombre" />
 										<listheader label="Fecha Inicio"
@@ -235,16 +269,16 @@
 				<div sclass="alert-info" align="center">
 					<separator />
 					<div sclass="btn-group">
-						<button id="btnCrearCronograma" label="Guardar"
+						<button id="btnCrearCronograma" label="Guardar" tooltip="pupGuardarCronograma"
 							sclass="btn" image="/public/imagenes/iconos/guardar.png"
 							tabindex="12">
 						</button>
-						<button id="btnCancelarCronograma"
+						<button id="btnCancelarCronograma" tooltip="pupCancelarCronograma"
 							label="Cancelar" sclass="btn"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 						</button>
 						<button id="btnSalirCronograma" width="110px"
-							label="Salir" sclass="btn"
+							label="Salir" sclass="btn" tooltip="pupSalirCronograma"
 							image="/public/imagenes/iconos/salir.png" tabindex="13">
 						</button>
 						<separator />

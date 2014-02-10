@@ -9,6 +9,12 @@
 	
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+		<!-- Lista de popus -->
+	<popup id="pupSeleccionProyecto">
+		<toolbarbutton
+			label="Doble clic para seleccionar el proyecto" />
+	</popup>
+	<!-- Fin de popus -->
 
 
 	<listbox id="ltbListaFactibilidad" mold="paging" pageSize="10"
@@ -74,7 +80,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionProyecto">
 				<listcell label="${each.estatus}" />
 				<listcell label="${each.fecha}" />
 				<listcell

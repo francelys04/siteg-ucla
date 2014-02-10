@@ -42,32 +42,32 @@
 
 	<!-- Lista de popus -->
 	<popup id="pupAreaTematica">
-		<toolbarbutton label="Seleccione el area de la tematica" />
+		<toolbarbutton label="Presione aquí para seleccionar el área" />
 	</popup>
 	<popup id="pupNombreTematica">
-		<toolbarbutton label="Ingrese aquí el nombre de la tematica" />
+		<toolbarbutton label="Ingrese aquí el nombre de la temática" />
 	</popup>
 	<popup id="pupDescripcionTematica">
 		<toolbarbutton
-			label="Ingrese aquí la descripción de la tematica" />
+			label="Ingrese aquí la descripción de la temática" />
 	</popup>
 	<popup id="pupGuardarTematica">
 		<toolbarbutton
-			label="Presione aquí para guardar los datos de la tematica" />
+			label="Presione aquí para guardar los datos de la temática" />
 	</popup>
 	<popup id="pupCancelarTematica">
-		<toolbarbutton label="Presione aquí para limpar los campos" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupEliminarTematica">
 		<toolbarbutton
-			label="Presione aqui para eliminar los datos de la tematica" />
+			label="Presione aquí para eliminar los datos de la temática" />
 	</popup>
 	<popup id="pupSalirTematica">
-		<toolbarbutton label="Presione aqui para salir" />
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<popup id="pupCatalogoTematica">
 		<toolbarbutton
-			label="Presione aqui para ver la lista de tematicas" />
+			label="Presione aquí para ver la lista de temáticas" />
 	</popup>
 	<!-- Fin de popus -->
 

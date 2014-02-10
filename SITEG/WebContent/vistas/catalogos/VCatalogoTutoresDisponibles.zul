@@ -6,7 +6,12 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 	<separator />
-
+    <!-- Lista de popus -->
+	<popup id="pupSeleccionTutoresDisponibles">
+		<toolbarbutton
+			label="Doble clic para seleccionar el profesor" />
+	</popup>
+	<!-- Fin de popus -->
 	<hbox>
 		<label value="Programa:" style="margin-left:15px" />
 		<combobox id="cmbProgramaTutores" width="220px" readonly="true"
@@ -58,7 +63,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionTutoresDisponibles">
 				<listcell label="${each.cedula}" />
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.apellido}" />

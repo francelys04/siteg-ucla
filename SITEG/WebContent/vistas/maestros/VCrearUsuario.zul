@@ -39,6 +39,59 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionarUsuario">
+		<toolbarbutton label="Seleccione aquí a quien se le asignará un usuario" />
+	</popup>
+	<popup id="pupCatalogoPosibleUsuario">
+		<toolbarbutton
+			label="Presione aquí para ver la lista de posibles usuarios" />
+	</popup>
+	<popup id="pupCatalogoUsuarios">
+		<toolbarbutton
+			label="Presione aquí para ver la lista de usuarios" />
+	</popup>
+	<popup id="pupNombreUsuario">
+		<toolbarbutton
+			label="Ingrese aquí el nombre del usuario" />
+	</popup>		
+	<popup id="pupContrasennaUsuario">
+		<toolbarbutton label="Ingrese aquí la contraseña del usuario" />
+	</popup>
+	<popup id="pupCorreoUsuario">
+		<toolbarbutton
+			label="Ingrese aquí el correo del usuario" />
+	</popup>
+	<popup id="pupCargarImagenUsuario">
+		<toolbarbutton
+			label="Presione aquí para subir imagen" />
+	</popup>
+	<popup id="pupSeleccionarGrupoUsuario">
+		<toolbarbutton
+			label="Presione aquí para seleccionar un grupo" />
+	</popup>
+	<popup id="pupAgregarGrupoUsuario">
+		<toolbarbutton
+			label="Presione aquí para agregar grupos" />
+	</popup>
+	<popup id="pupRemoverGrupoUsuario">
+		<toolbarbutton
+			label="Presione aquí para remover grupos" />
+	</popup>
+	<popup id="pupGuardarUsuario">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos de un usuario" />
+	</popup>
+	<popup id="pupCancelarUsuario">
+		<toolbarbutton
+			label="Presione aquí para limpiar los campos" />
+	</popup>
+	<popup id="pupEliminarUsuario">
+		<toolbarbutton
+			label="Presione aquí para eliminar un usuario" />
+	</popup>
+
+	<!-- Fin de popus -->
 
 	<separator />
 	<separator />
@@ -74,7 +127,7 @@
 
 					<hbox>
 						<radiogroup id="rdgProfesorEstudianteOtro"
-							width="50px">
+							width="50px" tooltip="pupSeleccionarUsuario">
 							<radio id="rdoProfesor" label="Profesor"
 								width="20px" />
 							<radio id="rdoEstudiante" label="Estudiante"
@@ -83,7 +136,7 @@
 								width="20px" style="margin-left:20px" />
 						</radiogroup>
 
-						<button id="btnCatalogoProfesorEstudiante"
+						<button id="btnCatalogoProfesorEstudiante" tooltip="pupCatalogoPosibleUsuario"
 							sclass="btn" image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:30px">
 						</button>
@@ -104,9 +157,9 @@
 
 					<hbox>
 
-						<textbox id="txtNombreUsuario" width="200px" />
+						<textbox id="txtNombreUsuario" width="200px" tooltip="pupNombreUsuario"/>
 
-						<button id="btnCatalogoUsuario" sclass="btn"
+						<button id="btnCatalogoUsuario" sclass="btn" tooltip="pupCatalogoUsuarios"
 							image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:23px">
 						</button>
@@ -123,7 +176,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtPasswordUsuario" type="password"
+					<textbox id="txtPasswordUsuario" type="password" tooltip="pupContrasennaUsuario"
 						width="260px" />
 
 				</row>
@@ -136,7 +189,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 					<hbox>
-						<textbox id="txtCorreo" width="190px" />
+						<textbox id="txtCorreo" width="190px" tooltip="pupCorreoUsuario"/>
 					</hbox>
 				</row>
 
@@ -190,7 +243,7 @@
 									</listhead>
 									<template name="model">
 										<listitem>
-											<listcell
+											<listcell tooltip="pupSeleccionarGrupoUsuario"
 												label="${each.nombre}">
 											</listcell>
 										</listitem>
@@ -205,13 +258,13 @@
 							<panelchildren>
 								<div>
 
-									<button id="pasar1" sclass="btn"
+									<button id="pasar1" sclass="btn" tooltip="pupAgregarGrupoUsuario"
 										image="/public/imagenes/iconos/right.png"
-										tooltiptext="Agregar Grupos" width="35px" />
+										width="35px" />
 									<separator />
-									<button id="pasar2" sclass="btn"
+									<button id="pasar2" sclass="btn" tooltip="pupRemoverGrupoUsuario"
 										image="/public/imagenes/iconos/left.png"
-										tooltiptext="Quitar Grupos" width="35px" />
+									 width="35px" />
 
 								</div>
 							</panelchildren>
@@ -254,15 +307,15 @@
 					<div sclass="btn-group">
 
 
-						<button id="btnGuardarUsuario" label="Guardar"
+						<button id="btnGuardarUsuario" label="Guardar" tooltip="pupGuardarUsuario"
 							sclass="btn" image="/public/imagenes/iconos/guardar.png"
 							tabindex="13">
 						</button>
-						<button id="btnCancelarUsuario" label="Cancelar"
+						<button id="btnCancelarUsuario" label="Cancelar" tooltip="pupCancelarUsuario"
 							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
 							tabindex="14">
 						</button>
-						<button id="btnEliminarUsuario" label="Eliminar"
+						<button id="btnEliminarUsuario" label="Eliminar" tooltip="pupEliminarUsuario"
 							sclass="btn" disabled="true"
 							image="/public/imagenes/iconos/eliminar.png" tabindex="15">
 						</button>

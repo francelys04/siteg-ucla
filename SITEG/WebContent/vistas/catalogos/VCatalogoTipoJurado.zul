@@ -4,6 +4,12 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionTipoJurado">
+		<toolbarbutton
+			label="Doble clic para seleccionar el tipo de jurado" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox id="ltbTipoJurado" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay tipos de jurado registrados">
@@ -28,7 +34,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionTipoJurado">
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.descripcion}" />
 			</listitem>

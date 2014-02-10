@@ -7,6 +7,12 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionProyecto">
+		<toolbarbutton
+			label="Doble clic para seleccionar el proyecto" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox id="ltbSolicitud" mold="paging" pageSize="6"
 		style="margin-left:10px;margin-right:10px"
@@ -51,7 +57,7 @@
 			<listheader label="Descripción" width="30%" align="center" />
 		</listhead>
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionProyecto">
 				<listcell label="${each.estatus}" />
 				<listcell label="${each.fecha}" />
 				<listcell

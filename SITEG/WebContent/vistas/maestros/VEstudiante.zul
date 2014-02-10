@@ -45,52 +45,52 @@
 
 	<!-- Lista de popus -->
 	<popup id="pupCedulaEstudiante">
-		<toolbarbutton label="Ingrese aqui la cedula del estudiante" />
+		<toolbarbutton label="Ingrese aquí la cédula del estudiante" />
 	</popup>
 	<popup id="pupProgramaEstudiante">
-		<toolbarbutton label="Seleccione el programa del estudiante" />
+		<toolbarbutton label="Presione aquí para seleccionar el programa" />
 	</popup>
 	<popup id="pupNombreEstudiante">
-		<toolbarbutton label="Ingrese aqui el nombre del estudiante" />
+		<toolbarbutton label="Ingrese aquí el nombre del estudiante" />
 	</popup>
 	<popup id="pupApellidoEstudiante">
-		<toolbarbutton label="Ingrese aqui el apellido del estudiante" />
+		<toolbarbutton label="Ingrese aquí el apellido del estudiante" />
 	</popup>
 	<popup id="pupSexoEstudiante">
-		<toolbarbutton label="Seleccione aqui el sexo del estudiante" />
+		<toolbarbutton label="Seleccione aquí el sexo del estudiante" />
 	</popup>
 	<popup id="pupDireccionEstudiante">
-		<toolbarbutton label="Ingrese aqui la direccion del estudiante" />
+		<toolbarbutton label="Ingrese aquí la dirección del estudiante" />
 	</popup>
 	<popup id="pupTelefonoMovilEstudiante">
 		<toolbarbutton
-			label="Ingrese aqui el telefono movil del estudiante" />
+			label="Ingrese aquí el teléfono móvil del estudiante" />
 	</popup>
 	<popup id="pupTelefonoFijoEstudiante">
 		<toolbarbutton
-			label="Ingrese aqui el telefono fijo del estudiante" />
+			label="Ingrese aquí el teléfono fijo del estudiante" />
 	</popup>
 	<popup id="pupCorreoEstudiante">
-		<toolbarbutton label="Ingrese aqui el correo del estudiante" />
+		<toolbarbutton label="Ingrese aquí el correo del estudiante" />
 	</popup>
 	<popup id="pupGuardarEstudiante">
 		<toolbarbutton
-			label="Presione aqui para guardar los datos del estudiante" />
+			label="Presione aquí para guardar los datos del estudiante" />
 	</popup>
 	<popup id="pupCancelarEstudiante">
-		<toolbarbutton label="Presione aqui para limpiar los campos" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupEliminarEstudiante">
 		<toolbarbutton
-			label="Presione aqui para eliminar los datos del estudiante" />
+			label="Presione aquí para eliminar los datos del estudiante" />
 	</popup>
 	<popup id="pupSalirEstudiante">
 		<toolbarbutton
-			label="Presione aqui para salir" />
+			label="Presione aquí para salir" />
 	</popup>
 	<popup id="pupCatalogoEstudiante">
 		<toolbarbutton
-			label="Presione aqui para ver la lista de estudiantes" />
+			label="Presione aquí para ver la lista de estudiantes" />
 	</popup>
 	<!-- Fin de popus -->
 

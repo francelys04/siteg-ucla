@@ -45,7 +45,7 @@
 		<toolbarbutton label="Ingrese aquí el nombre del item" />
 	</popup>
 	<popup id="pupTipoItem">
-		<toolbarbutton label="Ingrese aquí el tipo del item" />
+		<toolbarbutton label="Presione aquí para seleccionar el tipo del item" />
 	</popup>
 	<popup id="pupDescripcionItem">
 		<toolbarbutton label="Ingrese aquí la descripción del item" />
@@ -63,10 +63,10 @@
 	</popup>
 	<popup id="pupEliminarItem">
 		<toolbarbutton
-			label="Presione aqui para eliminar los datos de un item" />
+			label="Presione aquí para eliminar los datos de un item" />
 	</popup>
 	<popup id="pupCatalogoItem">
-		<toolbarbutton label="Presione aqui para ver la lista de items" />
+		<toolbarbutton label="Presione aquí para ver la lista de items" />
 	</popup>
 
 	<!-- Fin de popus -->

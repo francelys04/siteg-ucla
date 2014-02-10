@@ -4,6 +4,12 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionUsuario">
+		<toolbarbutton
+			label="Doble clic para seleccionar el usuario" />
+	</popup>
+	<!-- Fin de popus -->
 
 	<listbox id="ltbUsuario" width="100%">
 		<auxhead sclass="category-center">
@@ -23,7 +29,7 @@
 
 
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionUsuario">
 				<listcell label="${each.nombre}" />
 			</listitem>
 		</template>

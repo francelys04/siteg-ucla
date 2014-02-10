@@ -37,6 +37,28 @@
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+    <!-- Lista de popus -->
+	<popup id="pupContrasennaEditarUsuario">
+		<toolbarbutton label="Ingrese aquí la nueva contraseña" />
+	</popup>
+	<popup id="pupConfirmarContrasennaEditarUsuario">
+		<toolbarbutton
+			label="Ingrese aquí la confirmación de la nueva contraseña" />
+	</popup>		
+	<popup id="pupCancelarEditarUsuario">
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
+	</popup>
+	<popup id="pupGuardarEditarUsuario">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos del usuario" />
+	</popup>
+	<popup id="pupSalirCronograma">
+		<toolbarbutton
+			label="Presione aquí para salir" />
+	</popup>
+
+	<!-- Fin de popus -->
+
 
 	<separator />
 	<separator />
@@ -88,7 +110,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtClaveUsuarioNueva" type="password"
+					<textbox id="txtClaveUsuarioNueva" type="password" tooltip="pupContrasennaEditarUsuario"
 						width="250px" tabindex="8" />
 
 				</row>
@@ -102,7 +124,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtClaveUsuarioConfirmar"
+					<textbox id="txtClaveUsuarioConfirmar" tooltip="pupConfirmarContrasennaEditarUsuario"
 						type="password" width="250px" tabindex="8" />
 				</row>
 				<row>
@@ -141,14 +163,13 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button id="btnGuardarUsuarioEditar"
+						<button id="btnGuardarUsuarioEditar" tooltip="pupGuardarEditarUsuario"
 							label="Guardar" sclass="btn"
 							image="/public/imagenes/iconos/guardar.png" tabindex="13">
 						</button>
 
-						<button id="btnCancelarActividad"
+						<button id="btnCancelarActividad" tooltip="pupCancelarEditarUsuario"
 							label="Cancelar" sclass="btn" tabindex="4"
-							tooltip="pupCancelarActividad"
 							image="/public/imagenes/iconos/limpiar.png">
 						</button>
 
