@@ -28,7 +28,8 @@ public class STeg {
 			"Proyecto No Factible", "Avances Finalizados", "TEG Registrado",
 			"Revisiones Finalizadas", "Solicitando Defensa",
 			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado",
-			"Jurado Asignado" };
+			"Jurado Asignado", "Proyecto en Desarrollo",
+			"Trabajo en Desarrollo" };
 
 	public Teg buscarTeg(long id) {
 		return interfaceTeg.findOne(id);
@@ -53,7 +54,7 @@ public class STeg {
 	// Evaluar Revisiones
 	public List<Teg> buscarTegRegistrado() {
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatus(estatus[7]);
+		tegs = interfaceTeg.findByEstatusOrEstatus(estatus[7], estatus[15]);
 		return tegs;
 
 	}
@@ -134,7 +135,7 @@ public class STeg {
 	public List<Teg> buscarProyectoFactible() {
 
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatus(estatus[4]);
+		tegs = interfaceTeg.findByEstatusOrEstatus(estatus[4], estatus[14]);
 		return tegs;
 
 	}
