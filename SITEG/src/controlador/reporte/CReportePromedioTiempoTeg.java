@@ -100,9 +100,9 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 	@Wire
 	private Combobox cmbTematica;
 	@Wire
-	private Jasperreport jstVistaPrevia;
+	private Window wdwReportePromedioTiempoTeg;
 	@Wire
-	private Textbox txtTegTitulo;
+	private Jasperreport jstVistaPrevia;
 
 	@Override
 	public void inicializar(Component comp) {
@@ -112,39 +112,10 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 				null);
 		programas.add(programaTodos);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-
-		if (map != null) {
-			if (map.get("id") != null) {
-				idTeg = (Long) map.get("id");
-				Teg teg = servicioTeg.buscarTeg(idTeg);
-				txtTegTitulo.setValue(teg.getTitulo());
-			}
-			if (map.get("nombrePrograma") != null) {
-				String nombrePrograma = (String) map.get("nombrePrograma");
-				cmbPrograma.setValue(nombrePrograma);
-			}
-			if (map.get("nombreArea") != null) {
-				String nombreArea = (String) map.get("nombreArea");
-				cmbArea.setValue(nombreArea);
-			}
-			if (map.get("nombreTematica") != null) {
-				String nombreTematica = (String) map.get("nombreTematica");
-				cmbTematica.setValue(nombreTematica);
-			}
-
-			map.clear();
-			map = null;
-		}
-
 	}
 
-	@Listen("onClick = #btnGenerarReportePromedioTegFechaEntrega")
-	public void generarPromedioTegFechaEntrega() throws JRException {
-
-		String nombreTeg = txtTegTitulo.getValue();
+	@Listen("onClick = #btnGenerarReportePromedioTiempoTeg")
+	public void generarPromedioTiempoTeg() throws JRException {
 
 		List<String> nombreEstatus = new ArrayList();
 		nombreEstatus.add("Solicitando Registro");
@@ -161,40 +132,53 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		nombreEstatus.add("Jurado Asignado");
 		nombreEstatus.add("Defensa Asignada");
 		nombreEstatus.add("TEG Aprobado");
-		
+		nombreEstatus.add("TEG Reprobado");
 
-		float contador13 = 0;
-		float contador46 = 0;
-		float contador7 = 0;
-		int cantidadTotal = 0;
-
+		long contador13 = 0;
+		long contador46 = 0;
+		long contador7 = 0;
+		long cantidadTotal = 0;
+		String estatus1 = "";
+		String estatus2 = "";
 		List<PromedioTiempoTeg> tegsPromedios = new ArrayList();
-		List<Teg> tegsAprobados = new ArrayList();
+		int tamañoListaEstatus = nombreEstatus.size();
 
-		if (nombreTeg.equals("")) {
-			tegsAprobados = tegs;
-			nombreTeg = "Todos";
-		} else {
-			Teg teg = servicioTeg.buscarTeg(idTeg);
-			tegsAprobados.add(teg);
+		if (tamañoListaEstatus % 2 != 0) {
+			tamañoListaEstatus = tamañoListaEstatus - 3;
 		}
-
-		System.out.println("teg:" + tegsAprobados.size());
-		if (tegs.size() != 0 || tegsAprobados.size() != 0) {
-
+		filtrarDatosBusqueda();
+		if (tegs.size() != 0) {
 			for (int i = 0; i < nombreEstatus.size(); i++) {
-
+				
 				List<TegEstatus> tegEstatus1 = servicioTegEstatus
-						.buscarEstatusSegunTeg(nombreEstatus.get(i),
-								tegsAprobados);
+						.buscarEstatusSegunTeg(nombreEstatus.get(i), tegs);
 				List<TegEstatus> tegEstatus2 = servicioTegEstatus
-						.buscarEstatusSegunTeg(nombreEstatus.get(i + 1),
-								tegsAprobados);
+						.buscarEstatusSegunTeg(nombreEstatus.get(i + 1), tegs);
+
+				if (nombreEstatus.size() % 2 != 0 && tamañoListaEstatus == i) {
+					List<TegEstatus> tegEstatus3 = servicioTegEstatus
+							.buscarEstatusSegunTeg(nombreEstatus.get(i + 2),
+									tegs);
+					if (tegEstatus3.size() != 0) {
+						for (int q = 0; q < tegEstatus3.size(); q++) {
+							tegEstatus2.add(tegEstatus3.get(q));
+						}
+
+					}
+					estatus1 = nombreEstatus.get(i);
+					estatus2 = nombreEstatus.get(i + 1) + "/"
+							+ nombreEstatus.get(i + 2);
+
+					i = nombreEstatus.size();
+
+				} else {
+
+					estatus1 = nombreEstatus.get(i);
+					estatus2 = nombreEstatus.get(i + 1);
+				}
 
 				for (int j = 0; j < tegEstatus1.size(); j++) {
-
 					for (int v = 0; v < tegEstatus2.size(); v++) {
-
 						if (tegEstatus1.get(j).getTeg().getId() == tegEstatus1
 								.get(v).getTeg().getId()) {
 
@@ -217,8 +201,8 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 									/ (24 * 60 * 60 * 1000));
 
 							cantidadTotal = cantidadTotal + 1;
-							
-							if (direfenciaDias >= 1 && direfenciaDias <= 3) {
+
+							if (direfenciaDias >= 0 && direfenciaDias <= 3) {
 								contador13 = contador13 + 1;
 							} else if (direfenciaDias >= 4
 									&& direfenciaDias <= 6) {
@@ -230,12 +214,8 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 
 					}
 				}
-				contador13 = contador13 / cantidadTotal;
-				contador46 = contador46 / cantidadTotal;
-				contador7 = contador7 / cantidadTotal;
-				PromedioTiempoTeg promedio = new PromedioTiempoTeg(
-						nombreEstatus.get(i) + "-" + nombreEstatus.get(i + 1),
-						contador13, contador46, contador7);
+				PromedioTiempoTeg promedio = new PromedioTiempoTeg(estatus1
+						+ "-" + estatus2, contador13, contador46, contador7);
 				tegsPromedios.add(promedio);
 
 				contador13 = 0;
@@ -251,7 +231,6 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			String reporteSrc = rutaUrl
 					+ "SITEG/vistas/reportes/estadisticos/compilados/RPromedioTiempoTeg.jasper";
 			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-
 			parametro.put("titulo",
 					"UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
 							+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
@@ -259,7 +238,6 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			parametro.put("programaNombre", cmbPrograma.getValue());
 			parametro.put("areaNombre", cmbArea.getValue());
 			parametro.put("tematicaNombre", cmbTematica.getValue());
-			parametro.put("tegTitulo", nombreTeg);
 			parametro.put("logoUcla", reporteImage + "logo ucla.png");
 			parametro.put("logoCE", reporteImage + "logo CE.png");
 			parametro.put("logoSiteg", reporteImage + "logo.png");
@@ -271,8 +249,10 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 
 		} else {
 			Messagebox.show("No hay informacion disponible");
+			cancelarPromedioTiempoTeg();
 		}
 	}
+
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() throws JRException {
 		String idPrograma = cmbPrograma.getSelectedItem().getId();
@@ -285,6 +265,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 
 		} else {
 			cmbArea.setDisabled(false);
+			cmbArea.setValue("");
 			programa = servicioPrograma.buscar(Long.parseLong(idPrograma));
 			List<AreaInvestigacion> programaAreas = servicioProgramaArea
 					.buscarAreasDePrograma(programa);
@@ -294,6 +275,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			cmbArea.setModel(new ListModelList<AreaInvestigacion>(programaAreas));
 		}
 	}
+
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() throws JRException {
 		String idArea = cmbArea.getSelectedItem().getId();
@@ -303,6 +285,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			cmbTematica.setDisabled(true);
 		} else {
 			cmbTematica.setDisabled(false);
+			cmbTematica.setValue("");
 			area = servicioArea.buscarArea(Long.parseLong(idArea));
 			List<Tematica> tematicasTodos = servicioTematica
 					.buscarTematicasDeArea(area);
@@ -312,59 +295,54 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			cmbTematica.setModel(new ListModelList<Tematica>(tematicasTodos));
 		}
 	}
-	@Listen("onClick = #btnSalirReportePromedioTegFechaEntrega")
-	public void cancelarPromedioTegFechaEntrega() throws JRException {
+
+	@Listen("onClick = #btnCancelarReportePromedioTiempoTeg")
+	public void cancelarPromedioTiempoTeg() throws JRException {
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbArea.setDisabled(true);
 		cmbTematica.setValue("");
 		cmbTematica.setDisabled(true);
-		txtTegTitulo.setValue("");
+		tegs = null;
 		jstVistaPrevia.setSrc("");
 		jstVistaPrevia.setDatasource(null);
 	}
-	@Listen("onClick = #btnCatalogoTeg")
-	public void buscarTeg() {
-
-		String nombreArea = cmbArea.getValue();
-		String nombrePrograma = cmbPrograma.getValue();
-		String nombreTematica = cmbTematica.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("nombreArea", nombreArea);
-		map.put("nombrePrograma", nombrePrograma);
-		map.put("nombreTematica", nombreTematica);
-		map.put("tegs", tegs);
-		Sessions.getCurrent().setAttribute("itemsReporte", map);
-		Window window = (Window) Executions.createComponents(
-				"/vistas/catalogos/VCatalogoTeg.zul", null, null);
-		window.doModal();
-		catalogo.recibir("reportes/estadisticos/VReportePromedioTiempoTeg");
+	@Listen("onClick = #btnSalirReportePromedioTiempoTeg")
+	public void salirPromedioTiempoTeg() throws JRException {
+		cancelarPromedioTiempoTeg();
+		wdwReportePromedioTiempoTeg.onClose();
 	}
-	@Listen("onChange = #cmbPrograma,#cmbArea,#cmbTematica")
+	
+	
 	public void filtrarDatosBusqueda() {
 
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
 		String nombreTematica = cmbTematica.getValue();
-		String estatus = "TEG Aprobado";
+		String estatusAprobado = "TEG Aprobado";
+		String estatusReprobado = "TEG Reprobado";
 		tegs = null;
 		if (nombrePrograma.equals("Todos")) {
-			tegs = servicioTeg.buscarTegs(estatus);
+			tegs = servicioTeg.buscarTegSegunEstatus(estatusAprobado,
+					estatusReprobado);
 		} else if (!nombrePrograma.equals("Todos")
 				&& nombreArea.equals("Todos")) {
-			tegs = servicioTeg.buscarTegSegunProgramaEstatus(programa, estatus);
+			tegs = servicioTeg.buscarTegSegunProgramaEstatus(programa,
+					estatusAprobado, estatusReprobado);
 		} else if (!nombrePrograma.equals("Todos")
 				&& !nombreArea.equals("Todos")
 				&& !nombreTematica.equals("Todos")) {
 			Tematica tematica = servicioTematica
 					.buscarTematicaPorNombre(nombreTematica);
-			tegs = servicioTeg.buscarTegSegunTematicaEstatus(tematica, estatus);
+			tegs = servicioTeg.buscarTegSegunTematicaEstatus(tematica,
+					estatusAprobado, estatusReprobado);
 		} else if (!nombrePrograma.equals("Todos")
 				&& !nombreArea.equals("Todos")
 				&& nombreTematica.equals("Todos")) {
 			tegs = servicioTeg.buscarTegSegunAreaInvestigacionEstatus(area,
-					estatus);
+					estatusAprobado, estatusReprobado);
 		}
+
 	}
 
 }
