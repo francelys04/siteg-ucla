@@ -351,63 +351,49 @@ public class CAsignarComision extends CGeneral {
 
 			} else {
 
-				if (valorItem == valorcondicion) {
+				Messagebox.show("¿Desea guardar los miembros de la comision?",
+						"Dialogo de confirmacion", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new org.zkoss.zk.ui.event.EventListener() {
+							public void onEvent(Event evt)
+									throws InterruptedException {
+								if (evt.getName().equals("onOK")) {
 
-					Messagebox
-							.show("El numero de profesores que conforman la comision evaluadora esta completo, por favor seleccione el boton de finalizar",
-									"Advertencia", Messagebox.OK,
-									Messagebox.EXCLAMATION);
+									Teg tegSeleccionado = servicioTeg
+											.buscarTeg(auxiliarId);
 
-				} else {
-					Messagebox.show(
-							"¿Desea guardar los miembros de la comision?",
-							"Dialogo de confirmacion", Messagebox.OK
-									| Messagebox.CANCEL, Messagebox.QUESTION,
-							new org.zkoss.zk.ui.event.EventListener() {
-								public void onEvent(Event evt)
-										throws InterruptedException {
-									if (evt.getName().equals("onOK")) {
+									Set<Profesor> profesores = null;
+									tegSeleccionado.setProfesores(profesores);
 
-										Teg tegSeleccionado = servicioTeg
-												.buscarTeg(auxiliarId);
-										
-										Set<Profesor> profesores = null;
-										tegSeleccionado.setProfesores(profesores);
-										
+									/*
+									 * Metodo para eliminar integrantes de la
+									 * comision
+									 */
+									List<Profesor> profesoresComision = servicioProfesor
+											.buscarComisionDelTeg(tegSeleccionado);
 
-										/*
-										 * Metodo para eliminar integrantes de
-										 * la comision
-										 */
-										List<Profesor> profesoresComision = servicioProfesor
-												.buscarComisionDelTeg(tegSeleccionado);
+									Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
 
-										Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
-										
-										for (int i = 0; i < lsbProfesoresSeleccionados
-												.getItemCount(); i++) {
-											Profesor profesor = lsbProfesoresSeleccionados
-													.getItems().get(i)
-													.getValue();
-											profesoresSeleccionados
-													.add(profesor);
-										}
-
-										tegSeleccionado
-												.setProfesores(profesoresSeleccionados);
-
-										servicioTeg.guardar(tegSeleccionado);
-										Messagebox
-												.show("Los datos de la comision fueron guardados exitosamente, pero todavia faltan miembros",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
-										salir();
+									for (int i = 0; i < lsbProfesoresSeleccionados
+											.getItemCount(); i++) {
+										Profesor profesor = lsbProfesoresSeleccionados
+												.getItems().get(i).getValue();
+										profesoresSeleccionados.add(profesor);
 									}
-								}
-							});
-				}
 
+									tegSeleccionado
+											.setProfesores(profesoresSeleccionados);
+
+									servicioTeg.guardar(tegSeleccionado);
+									Messagebox
+											.show("Los datos de la comision fueron guardados exitosamente, pero todavia faltan miembros",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									salir();
+								}
+							}
+						});
 			}
 
 		}
