@@ -58,6 +58,15 @@ public class Tematica {
 		this.areaInvestigacion = areaInvestigacion;
 	}
 
+	
+	public Tematica(long id, String nombre, String descripcion, Boolean estatus) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.estatus = estatus;
+	}
+
 	public long getId() {
 		return id;
 	}
