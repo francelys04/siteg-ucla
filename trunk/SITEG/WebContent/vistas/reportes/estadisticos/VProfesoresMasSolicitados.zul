@@ -1,7 +1,7 @@
 <window id="wdwReporteProfesorMasSolicitados"
-	title="Estadistica de profesores con mas solicitudes recibidas"
-	border="normal" width="70%" height="700px" closable="true" apply="controlador.reporte.CReporteProfesoresMasSolicitados"
->
+	title="Profesores con mas Solicitudes de Tutoria" border="normal"
+	width="60%" height="300px" closable="true"
+	apply="controlador.reporte.CReporteProfesoresMasSolicitados">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -40,91 +40,91 @@
 	<!-- <label value="(*) "
 		style="font-weight:bold;color:red;margin-center:2%">
 		</label> -->
-	<label value="Filtrado de datos:"
-		style="font-weight:bold;margin-left:35%;margin-right:20%">
-	</label>
-	<separator />
-	<separator />
-	<separator />
-	<separator />
+	<!-- 	<label value="Filtrado de datos:" -->
+	<!-- 		style="font-weight:bold;margin-left:35%;margin-right:20%"> -->
+	<!-- 	</label> -->
+	<!-- 	<separator /> -->
+	<!-- 	<separator /> -->
+	<!-- 	<separator /> -->
+	<!-- 	<separator /> -->
 
 	<groupbox width="auto%" style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
 		<grid sclass="fgrid">
 			<columns>
-				<column width="17%" height="17%" />
+				<column width="50%" height="17%" />
+				<column width="50%" height="17%" />
 			</columns>
 			<rows>
 				<row>
-
-					<hlayout width="100px">
-						<label value="*"
-							style="font-weight:bold;color:red" />
-						<label value="Programa "
-							style="font-weight:bold" />
-					</hlayout>
-					<combobox id="cmbProgramaReporteProfesoresSolicitados"
-						width="100%">
-						<template name="model">
-							<comboitem label="${each.nombre}" id="${each.id}" />
-						</template>
-					</combobox>
-
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red" />
-						<label value="Area" style="font-weight:bold" />
-					</hlayout>
-					<combobox id="cmbAreaReporteProfesoresSolicitados"
-						width="100%">
-						<template name="model">
-							<comboitem label="${each.nombre}" id="${each.id}" />
-						</template>
-					</combobox>
-					
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red" />
-						<label value="Temática"
-							style="font-weight:bold" />
-					</hlayout>
-					<combobox id="cmbTematicaReporteProfesoresSolicitados" width="100%">
-						<template name="model">
-						<comboitem label="${each.nombre}" id="${each.id}" />
-						</template>
-					</combobox>
+					<hbox>
+						<hlayout width="100px">
+							<label value="Programa "
+								style="font-weight:bold" />
+						</hlayout>
+						<combobox
+							id="cmbProgramaReporteProfesoresSolicitados"
+							value="Seleccione un Programa" readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
+					</hbox>
+					<hbox>
+						<hlayout width="100px">
+							<label value="Area"
+								style="font-weight:bold" />
+						</hlayout>
+						<combobox
+							id="cmbAreaReporteProfesoresSolicitados" readonly="true"
+							width="100%" value="Seleccione un Area">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
+					</hbox>
 				</row>
 				<row>
-				
-				<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red" />
-						<label value="Estatus"
-							style="font-weight:bold" />
-					</hlayout>
-				<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red"  />
-						<label value="Fecha Inicio Registro"
-							style="font-weight:bold" />
-					</hlayout>
-					<datebox id="dtbInicioReporteProfesoresSolicitados"
-						 readonly="true" format="short" mold="rounded"
-						>
-					</datebox>
-					
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red"  />
-						<label value="Fecha Fin Registro"
-							style="font-weight:bold" />
-					</hlayout>
-					<datebox id="dtbFinReporteProfesoresSolicitados"
-						 readonly="true" format="short" mold="rounded"
-						>
-					</datebox>
+					<hbox>
+						<hlayout width="100px">
+							<label value="Temática"
+								style="font-weight:bold" />
+						</hlayout>
+						<combobox
+							id="cmbTematicaReporteProfesoresSolicitados"
+							value="Seleccione una Tematica" readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
+					</hbox>
 				</row>
+				<row>
+					<hbox>
+						<hlayout width="100px">
+							<label value="Fecha Inicio"
+								style="font-weight:bold" />
+						</hlayout>
+						<datebox
+							id="dtbInicioReporteProfesoresSolicitados" readonly="true"
+							format="short" mold="rounded" width="100%">
+						</datebox>
+					</hbox>
+					<hbox>
+						<hlayout width="100px">
+							<label value="Fecha Fin"
+								style="font-weight:bold" />
+						</hlayout>
+						<datebox id="dtbFinReporteProfesoresSolicitados"
+							readonly="true" format="short" mold="rounded" width="100%">
+						</datebox>
+					</hbox>
+				</row>
+
 			</rows>
 		</grid>
 		<separator />
