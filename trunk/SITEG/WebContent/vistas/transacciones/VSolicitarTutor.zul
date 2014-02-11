@@ -1,7 +1,7 @@
 <window id="wdwSolicitarTutoria" title="Solicitar Tutor" border="normal"
-	width="750px" height="730px" closable="true" >
+	width="750px" height="730px" closable="true" 
 	
-	<!-- apply="controlador.CSolicitarTutor" -->
+	apply="controlador.CSolicitarTutor" >
 	
 	<separator />
 
