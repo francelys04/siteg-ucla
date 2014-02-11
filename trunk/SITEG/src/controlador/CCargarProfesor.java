@@ -98,7 +98,7 @@ public class CCargarProfesor extends CGeneral {
 					linea = br.readLine();
 					idcategoria = Long.parseLong(linea);
 					
-					Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
+					Usuario usuario = servicioUsuario.buscarUsuarioPorNombre(cedula);
 
 					// busco el programa con el id que tengo en el txt para
 					// registrar
