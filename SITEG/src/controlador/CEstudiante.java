@@ -205,7 +205,7 @@ public class CEstudiante extends CGeneral {
 										.buscarPorNombrePrograma(programas);
 
 
-								Usuario usuario = servicioUsuario.buscarUsuarioPorNombre("");
+								Usuario usuario = servicioUsuario.buscarUsuarioPorNombre(cedula);
 								Estudiante estudiante = new Estudiante(cedula,
 										nombre, apellido, correo, sexo,
 										direccion, telefonoMovil, telefonoFijo,

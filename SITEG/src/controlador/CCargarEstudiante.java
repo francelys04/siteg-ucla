@@ -115,7 +115,7 @@ public class CCargarEstudiante extends CGeneral {
 					idprograma = Long.parseLong(linea);
 
 					Usuario usuario = servicioUsuario
-							.buscarUsuarioPorNombre("");
+							.buscarUsuarioPorNombre(cedula);
 					// busco el programa con el id que tengo en el txt para
 					// registrar
 					Programa p = new Programa();
