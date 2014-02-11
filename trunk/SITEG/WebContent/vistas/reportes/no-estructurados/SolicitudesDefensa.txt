@@ -1,0 +1,5 @@
+[TITULO		ESTUDIANTE		TUTOR		PROGRAMA		AREA		TEMATICA]
+
+[Ecuaciones diferenciales implementadas en la ingenieria	Gregory Yajure 	Carla Mendoza 	Licenciatura en Matematica	Matematica pura	Algebra]	
+[Ecuaciones diferenciales implementadas en la ingenieria	Gregory Yajure 	Vanesa Duno 	Licenciatura en Matematica	Matematica pura	Analisis y analisis funcional]	
+[ II	Gregory Yajure 			Matematica aplicada	Ecuaciones diferenciales]	
