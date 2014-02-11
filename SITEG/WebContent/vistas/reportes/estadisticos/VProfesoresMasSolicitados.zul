@@ -103,11 +103,6 @@
 						<label value="Estatus"
 							style="font-weight:bold" />
 					</hlayout>
-					<combobox id="cmbSolicitudesReporteProfesoresSolicitados" width="100%">
-						<template name="model">
-							<comboitem label="${each}" />
-						</template>
-					</combobox>
 				<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red"  />

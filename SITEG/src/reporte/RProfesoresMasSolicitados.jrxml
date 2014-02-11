@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RProfesoresMasSolicitados" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="89b2ba1e-47e3-46e8-a599-f058ab72e350">
 	<property name="ireport.zoom" value="1.210000000000003"/>
-	<property name="ireport.x" value="27"/>
-	<property name="ireport.y" value="348"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="375"/>
 	<parameter name="titulo" class="java.lang.String"/>
-	<parameter name="estatus" class="java.lang.String"/>
 	<parameter name="tematica" class="java.lang.String"/>
 	<parameter name="inicio" class="java.util.Date"/>
 	<parameter name="fin" class="java.util.Date"/>
@@ -13,12 +12,9 @@
 	<field name="tutor.cedula" class="java.lang.String"/>
 	<field name="tutor.nombre" class="java.lang.String"/>
 	<field name="tutor.apellido" class="java.lang.String"/>
-	<field name="id" class="java.lang.Long"/>
-	<field name="duracion" class="java.lang.Long"/>
-	<variable name="estatus_COUNT" class="java.lang.Integer" calculation="Count"/>
-	<variable name="duracion_SUM" class="java.lang.Long" resetType="Column" calculation="Sum">
-		<variableExpression><![CDATA[$F{duracion}]]></variableExpression>
-	</variable>
+	<field name="primerValor" class="java.lang.Long"/>
+	<field name="segundoValor" class="java.lang.Long"/>
+	<field name="tercerValor" class="java.lang.Long"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -103,19 +99,12 @@
 				<text><![CDATA[Tematica:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="72" y="225" width="272" height="20" uuid="cd363f2c-7f61-44f7-af67-c13c15519bb6"/>
+				<reportElement x="125" y="219" width="272" height="20" uuid="cd363f2c-7f61-44f7-af67-c13c15519bb6"/>
 				<textElement>
 					<font size="14" isBold="true" isUnderline="true"/>
 				</textElement>
-				<text><![CDATA[Tutores con mas solicitudes en estatus:]]></text>
+				<text><![CDATA[Tutores con mas solicitudes de tutoria]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="344" y="225" width="179" height="20" uuid="c0234410-c62a-4e01-be05-9fa24e320f3d"/>
-				<textElement>
-					<font size="14" isBold="true" isUnderline="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{estatus}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="103" y="34" width="357" height="47" uuid="be3e0a5a-ef6f-4964-80c7-ed32a1bc7608"/>
 				<textElement>
@@ -127,18 +116,6 @@
 	</title>
 	<columnHeader>
 		<band height="43">
-			<textField>
-				<reportElement mode="Opaque" x="425" y="23" width="86" height="20" backcolor="#99CCFF" uuid="111a4884-3d1a-4901-bb5a-ae0851616dcd"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{estatus}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="23" width="118" height="20" backcolor="#99CCFF" uuid="fb59ca4f-92d5-441b-a01a-95eb64e9d8b0"/>
 				<box>
@@ -175,7 +152,7 @@
 				<text><![CDATA[Apellido]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="511" y="23" width="61" height="20" backcolor="#99CCFF" uuid="94d62b10-e0e8-4b4c-a8a2-61a959eff286"/>
+				<reportElement mode="Opaque" x="460" y="23" width="66" height="20" backcolor="#99CCFF" uuid="94d62b10-e0e8-4b4c-a8a2-61a959eff286"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -185,10 +162,10 @@
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Porcentaje de solicitudes]]></text>
+				<text><![CDATA[Por Revisar]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="326" y="23" width="99" height="20" backcolor="#99CCFF" uuid="65738b71-80d8-4a2d-81c0-26928e7b25dd"/>
+				<reportElement mode="Opaque" x="326" y="23" width="63" height="20" backcolor="#99CCFF" uuid="65738b71-80d8-4a2d-81c0-26928e7b25dd"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -198,7 +175,7 @@
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Total Recibidas]]></text>
+				<text><![CDATA[Aceptadas]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="326" y="0" width="246" height="23" backcolor="#99CCFF" uuid="526f54a7-fd06-4e2d-990a-c8f352e7eae1"/>
@@ -213,23 +190,36 @@
 				</textElement>
 				<text><![CDATA[Solicitudes]]></text>
 			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="20">
-			<textField>
-				<reportElement x="511" y="0" width="40" height="20" uuid="30e290e3-54f6-4d8e-ba2c-d4c0102c8413"/>
+			<staticText>
+				<reportElement mode="Opaque" x="526" y="23" width="46" height="20" backcolor="#99CCFF" uuid="33d481b0-e13e-42d7-91dd-1f822b6a5e53"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Right">
+				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{duracion}*100/$F{id}]]></textFieldExpression>
-			</textField>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="389" y="23" width="71" height="20" backcolor="#99CCFF" uuid="facbf68f-f22f-45aa-8336-86f54d9be768"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Rechazadas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
 			<textField>
 				<reportElement x="0" y="0" width="118" height="20" uuid="d120340b-9314-4b9a-abe7-73107b8354a8"/>
 				<box>
@@ -265,31 +255,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tutor.apellido}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="551" y="0" width="21" height="20" uuid="58cd4f3c-32e5-46ad-8969-d10f7ae620ac"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[%]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="425" y="0" width="86" height="20" uuid="f267d36f-2c02-460f-9dd3-19b6bbd74314"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{duracion}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="326" y="0" width="99" height="20" uuid="be80c350-0189-4974-a01f-e3cf88fa56f6"/>
+				<reportElement x="326" y="0" width="63" height="20" uuid="508b4b7c-50b0-4348-bbc5-5b9a18c63d69"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -297,7 +264,42 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tercerValor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="389" y="0" width="71" height="20" uuid="45799331-ef54-49d8-8bec-b7ee667ce34f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{primerValor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="66" height="20" uuid="770bcbd3-04b8-4a24-934c-5b63f99fb849"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{segundoValor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="526" y="0" width="46" height="20" uuid="be2afaee-f249-48a4-bd8d-3cebe08f25c8"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{primerValor}+$F{segundoValor}+$F{tercerValor}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -327,16 +329,22 @@
 				</chart>
 				<categoryDataset>
 					<categorySeries>
-						<seriesExpression><![CDATA["Total Solicitudes"]]></seriesExpression>
+						<seriesExpression><![CDATA["Solicitudes Aceptadas"]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{tutor.cedula}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{id}]]></valueExpression>
-						<labelExpression><![CDATA[$F{tutor.cedula}.valueOf($F{id})]]></labelExpression>
+						<valueExpression><![CDATA[100*$F{tercerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})]]></valueExpression>
+						<labelExpression><![CDATA[(100*$F{tercerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})).toString()]]></labelExpression>
 					</categorySeries>
 					<categorySeries>
-						<seriesExpression><![CDATA["Solicitudes:"+$P{estatus}]]></seriesExpression>
+						<seriesExpression><![CDATA["Solicitudes Rechazadas:"]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{tutor.cedula}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{duracion}]]></valueExpression>
-						<labelExpression><![CDATA[$F{tutor.cedula}.valueOf( $F{duracion} )]]></labelExpression>
+						<valueExpression><![CDATA[100*$F{primerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})]]></valueExpression>
+						<labelExpression><![CDATA[(100*$F{primerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})).toString()]]></labelExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Solicitudes por revisar"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tutor.cedula}]]></categoryExpression>
+						<valueExpression><![CDATA[100*$F{segundoValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})]]></valueExpression>
+						<labelExpression><![CDATA[(100*$F{segundoValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})).toString()]]></labelExpression>
 					</categorySeries>
 				</categoryDataset>
 				<bar3DPlot>
@@ -351,25 +359,11 @@
 				</bar3DPlot>
 			</bar3DChart>
 			<staticText>
-				<reportElement x="81" y="22" width="242" height="20" uuid="9d4ec63f-81da-4b07-8fa5-f5d196757658"/>
+				<reportElement x="118" y="22" width="389" height="20" uuid="9d4ec63f-81da-4b07-8fa5-f5d196757658"/>
 				<textElement>
 					<font size="12" isBold="true" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[Comparación entre solicitudes recibidas y]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="323" y="22" width="74" height="20" uuid="78ff8575-e075-4443-bb0a-73ef34ab2226"/>
-				<textElement>
-					<font size="12" isBold="true" isUnderline="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{estatus}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="397" y="22" width="109" height="20" uuid="60e58a74-94ae-474a-9181-e61b1f424d30"/>
-				<textElement>
-					<font size="12" isBold="true" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[por tutor (cedula)]]></text>
+				<text><![CDATA[Comparacion entre tutores(cedula) con mas solicitudes de tutoria]]></text>
 			</staticText>
 		</band>
 	</summary>
