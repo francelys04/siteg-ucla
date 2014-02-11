@@ -1,8 +1,5 @@
 package modelo.reporte;
 
-import modelo.Teg;
-import modelo.TegEstatus;
-
 public class PromedioTiempoTeg {
 
 	
