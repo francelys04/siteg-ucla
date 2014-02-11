@@ -22,6 +22,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -69,6 +70,8 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+		cmbAreaReporteProfesoresSolicitados.setDisabled(false);
+		cmbTematicaReporteProfesoresSolicitados.setDisabled(false);
 		programas = servicioPrograma.buscarActivas();
 		Programa programaa = new Programa(10000000, "Todos", "", "", true, null);
 		programas.add(programaa);
@@ -84,6 +87,8 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		if (cmbProgramaReporteProfesoresSolicitados.getValue().equals("Todos")) {
 			cmbAreaReporteProfesoresSolicitados.setValue("Todos");
 			cmbTematicaReporteProfesoresSolicitados.setValue("Todos");
+			cmbAreaReporteProfesoresSolicitados.setDisabled(true);
+			cmbTematicaReporteProfesoresSolicitados.setDisabled(true);
 		} else {
 			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
 					.buscar(Long
@@ -92,6 +97,8 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 			System.out.println(areas.toString());
 			cmbAreaReporteProfesoresSolicitados
 					.setModel(new ListModelList<AreaInvestigacion>(areas));
+			cmbAreaReporteProfesoresSolicitados.setDisabled(false);
+			cmbTematicaReporteProfesoresSolicitados.setDisabled(false);
 		}
 	}
 
@@ -226,12 +233,6 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 					}
 				}
 				if (!datosVacios) {
-					for(int w=0;w<masSolicitados.size();w++){
-						System.out.println("Primer"+masSolicitados.get(w).getPrimerValor());
-						System.out.println("segundo"+masSolicitados.get(w).getSegundoValor());
-						System.out.println("tercer"+masSolicitados.get(w).getTercerValor());
-						System.out.println("tutor"+masSolicitados.get(w).getTutor().getCedula());
-					}
 					Map<String, Object> mapa = new HashMap<String, Object>();
 					mapa.put("inicio", fechaInicio);
 					mapa.put("fin", fechaFin);
@@ -262,10 +263,10 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 					 "/reporte/RProfesoresMasSolicitados.jasper"));
 					 JasperPrint jasperPrint = JasperFillManager.fillReport(
 					 jasperReport, mapa, new JRBeanCollectionDataSource(masSolicitados));
-					 JasperExportManager.exportReportToPdfFile(jasperPrint,
-					 filesys.getHomeDirectory().toString()
-					 + "/reportePr.pdf");
-
+//					 JasperExportManager.exportReportToPdfFile(jasperPrint,
+//					 filesys.getHomeDirectory().toString()
+//					 + "/reportePr.pdf");
+					 JasperViewer.viewReport(jasperPrint,false);
 //					String rutaUrl = obtenerDirectorio();
 //					String reporteSrc = rutaUrl
 //							+ "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
