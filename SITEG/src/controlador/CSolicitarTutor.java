@@ -197,6 +197,10 @@ public class CSolicitarTutor extends CGeneral {
 
 		}
 
+		txtCedulaProfesor.setDisabled(true);
+		txtNombreProfesor.setDisabled(true);
+		txtApellidoProfesor.setDisabled(true);
+		txtCorreoProfesor.setDisabled(true);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 
