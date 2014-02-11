@@ -40,7 +40,7 @@ public class CCrearCronograma extends CGeneral {
 	@Wire
 	private Combobox cmbLapsoCrearCronograma;
 	@Wire
-	private Combobox cmbProgramaCrearCronograma;
+	private Textbox txtProgramaCrearCronograma;
 	@Wire
 	private Listbox ltbActividadesDisponibles;
 	@Wire
@@ -60,17 +60,17 @@ public class CCrearCronograma extends CGeneral {
 		actividadesSeleccionadas = false;
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
-		List<Programa> programas = servicioPrograma.buscarActivas();
+		if (txtProgramaCrearCronograma.getValue().compareTo("") == 0){
+			Programa programa1 = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+			txtProgramaCrearCronograma.setValue(programa1.getNombre());
+		}
 
 		// llenarActividades();
 		if (cmbLapsoCrearCronograma != null) {
-
 			cmbLapsoCrearCronograma.setModel(new ListModelList<Lapso>(lapsos));
-
-			cmbProgramaCrearCronograma.setModel(new ListModelList<Programa>(
-					programas));
-
+			
 		}
+		
 
 	}
 
@@ -190,7 +190,6 @@ public class CCrearCronograma extends CGeneral {
 	@Listen("onClick = #btnCancelarCronograma")
 	public void limpiarCampos() {
 		cmbLapsoCrearCronograma.setValue("");
-		cmbProgramaCrearCronograma.setValue("");
 		ltbActividadesSeleccionadas.getItems().clear();
 		ltbActividadesDisponibles.getItems().clear();
 		actividadesCargadas = false;
@@ -203,9 +202,7 @@ public class CCrearCronograma extends CGeneral {
 		boolean error = false;
 		Lapso lapso = servicioLapso.buscarLapso(Long
 				.parseLong(cmbLapsoCrearCronograma.getSelectedItem().getId()));
-		Programa programa = servicioPrograma
-				.buscar((Long.parseLong(cmbProgramaCrearCronograma
-						.getSelectedItem().getId())));
+		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 
 		List<Cronograma> cronogramas = servicioCronograma
 				.buscarCronogramaPorLapsoYPrograma(programa, lapso);
@@ -248,20 +245,12 @@ public class CCrearCronograma extends CGeneral {
 
 	@Listen("onChange = #cmbLapsoCrearCronograma")
 	public void buscarPrograma() {
-		if (!cmbLapsoCrearCronograma.getValue().equals("")
-				&& !cmbProgramaCrearCronograma.getValue().equals("")) {
+		if (!cmbLapsoCrearCronograma.getValue().equals(""))
+				 {
 			llenarActividades();
 		}
 	}
 
-	@Listen("onChange = #cmbProgramaCrearCronograma")
-	public void buscarLapso() {
-		if (!cmbLapsoCrearCronograma.getValue().equals("")
-				&& !cmbProgramaCrearCronograma.getValue().equals("")) {
-			llenarActividades();
-		}
-
-	}
 
 	private void llenarActividades() {
 
@@ -273,9 +262,7 @@ public class CCrearCronograma extends CGeneral {
 			ltbActividadesSeleccionadas.setMultiple(false);
 		Lapso lapso = servicioLapso.buscarLapso(Long
 				.parseLong(cmbLapsoCrearCronograma.getSelectedItem().getId()));
-		Programa programa = servicioPrograma
-				.buscar((Long.parseLong(cmbProgramaCrearCronograma
-						.getSelectedItem().getId())));
+		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 		cronogramas = servicioCronograma.buscarCronogramaPorLapsoYPrograma(
 				programa, lapso);
 		actividades = servicioActividad.buscarActividadSinCronograma(programa,

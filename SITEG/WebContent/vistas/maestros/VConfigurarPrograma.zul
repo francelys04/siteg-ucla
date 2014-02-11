@@ -107,14 +107,10 @@
 								style="font-weight:bold" />
 						</hlayout>
 
-						<combobox id="cmbProgramaConfigurarPrograma"
-							readonly="true" autodrop="true" width="190px" tabindex="12"
+						<textbox id="txtProgramaConfigurarPrograma"
+							readonly="true" width="190px" tabindex="12"
 							style="margin-left:35px">
-							<template name="model">
-								<comboitem label="${each.nombre}"
-									id="${each.id}" />
-							</template>
-						</combobox>
+						</textbox>
 
 					</hbox>
 

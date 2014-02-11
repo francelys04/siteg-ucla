@@ -137,14 +137,10 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<combobox id="cmbProgramaCrearCronograma" tooltip="pupProgramaCronograma"
-						readonly="true" autodrop="true" width="190px" tabindex="12"
+					<textbox id="txtProgramaCrearCronograma" tooltip="pupProgramaCronograma"
+						readonly="true"  width="190px" tabindex="12"
 						style="margin-left:20px">
-						<template name="model">
-							<comboitem label="${each.nombre}"
-								id="${each.id}" />
-						</template>
-					</combobox>
+					</textbox>
 				</row>
 			</rows>
 
