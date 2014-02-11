@@ -85,12 +85,14 @@ public class CCatalogoProfesorTematica extends CGeneral {
 	}
 
 
-
+	
+	
 public void recibir(String vista,long programa, long tematica) {
 	vistaRecibida = vista;
 
 	programaRecibido = programa;
 	tematicaRecibida = tematica;
+	
 	
 
 	
@@ -213,6 +215,17 @@ public void recibir(String vista,long programa, long tematica) {
 			return profe;
 			
 		}
+	
 		
 
+
+   @Listen ("onClick = #btnSalir")
+    public void salir(){
+	   Window window = (Window) Executions.createComponents(
+				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
+		window.doModal();
+		wdwCatalogoProfesorArea.onClose();
+	
 }
+}
+
