@@ -27,6 +27,7 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.SimpleGroupsModel;
 import org.zkoss.zul.Spinner;
+import org.zkoss.zul.Textbox;
 
 import servicio.SAreaInvestigacion;
 import servicio.SCondicionPrograma;
@@ -60,7 +61,7 @@ public class CConfigurarPrograma extends CGeneral {
 	@Wire
 	private Combobox cmbLapsoConfigurarPrograma;
 	@Wire
-	private Combobox cmbProgramaConfigurarPrograma;
+	private Textbox txtProgramaConfigurarPrograma;
 	@Wire
 	private Listbox ltbAreasDisponibles;
 	@Wire
@@ -86,15 +87,17 @@ public class CConfigurarPrograma extends CGeneral {
 		listasCargadas = false;
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
-		List<Programa> programas = servicioPrograma.buscarActivas();
+		if (txtProgramaConfigurarPrograma.getValue().compareTo("") == 0){
+			Programa programa1 = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+			txtProgramaConfigurarPrograma.setValue(programa1.getNombre());
+		}
 
 		if (cmbLapsoConfigurarPrograma != null) {
 
 			cmbLapsoConfigurarPrograma
 					.setModel(new ListModelList<Lapso>(lapsos));
 
-			cmbProgramaConfigurarPrograma.setModel(new ListModelList<Programa>(
-					programas));
+			//cmbProgramaConfigurarPrograma.setModel(new ListModelList<Programa>(programas));
 
 		}
 	}
@@ -332,9 +335,7 @@ public class CConfigurarPrograma extends CGeneral {
 		Lapso lapso = servicioLapso
 				.buscarLapso(Long.parseLong(cmbLapsoConfigurarPrograma
 						.getSelectedItem().getId()));
-		Programa programa = servicioPrograma.buscar((Long
-				.parseLong(cmbProgramaConfigurarPrograma.getSelectedItem()
-						.getId())));
+		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 		List<ProgramaArea> programasAreas = new ArrayList<ProgramaArea>();
 		List<AreaInvestigacion> areas = servicioProgramaArea
 				.buscarAreasDePrograma(programa, lapso);
@@ -388,7 +389,6 @@ public class CConfigurarPrograma extends CGeneral {
 			servicioProgramaItem.limpiar(programasItems);
 		}
 		programasItems = new ArrayList<ProgramaItem>();
-		System.out.print(ltbItemsSeleccionados.getItemCount());
 		for (int i = 0; i < ltbItemsSeleccionados.getItemCount(); i++) {
 			System.out
 					.print(ltbItemsSeleccionados.getItems().get(i).getValue());
@@ -400,12 +400,10 @@ public class CConfigurarPrograma extends CGeneral {
 		servicioProgramaItem.guardar(programasItems);
 
 		List<CondicionPrograma> condicionesProgramas = new ArrayList<CondicionPrograma>();
-		System.out.println("numero" + ltbCondiciones.getItemCount());
 		for (int i = 0; i < ltbCondiciones.getItemCount(); i++) {
 			Listitem listItem = ltbCondiciones.getItemAtIndex(i);
 			int valor = ((Spinner) ((listItem.getChildren().get(1)))
 					.getFirstChild()).getValue();
-			System.out.println(valor);
 			CondicionPrograma condicionPrograma = ltbCondiciones.getItems()
 					.get(i).getValue();
 			CondicionPrograma condicionProgramaReal = new CondicionPrograma(
@@ -422,7 +420,7 @@ public class CConfigurarPrograma extends CGeneral {
 	@Listen("onClick = #btnCancelarConfigurarPrograma")
 	public void limpiarCampos() {
 		cmbLapsoConfigurarPrograma.setValue("");
-		cmbProgramaConfigurarPrograma.setValue("");
+		
 		ltbAreasDisponibles.getItems().clear();
 
 		ltbAreasSeleccionadas.getItems().clear();
@@ -441,18 +439,17 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
-	@Listen("onChange = #cmbProgramaConfigurarPrograma")
+	/*@Listen("onChange = #cmbProgramaConfigurarPrograma")
 	public void buscarPrograma() {
 		if (!cmbLapsoConfigurarPrograma.getValue().equals("")
 				&& !cmbProgramaConfigurarPrograma.getValue().equals("")) {
 			llenarListas();
 		}
-	}
+	}*/
 
 	@Listen("onChange = #cmbLapsoConfigurarPrograma")
 	public void buscarLapso() {
-		if (!cmbLapsoConfigurarPrograma.getValue().equals("")
-				&& !cmbProgramaConfigurarPrograma.getValue().equals("")) {
+		if (!cmbLapsoConfigurarPrograma.getValue().equals("")) {
 			llenarListas();
 		}
 
@@ -466,9 +463,7 @@ public class CConfigurarPrograma extends CGeneral {
 				.getSelectedItem().getId());
 		
 		Lapso lapso = servicioLapso.buscarLapso(idLapso);
-		Programa programa = servicioPrograma.buscar((Long
-				.parseLong(cmbProgramaConfigurarPrograma.getSelectedItem()
-						.getId())));
+		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 		List<AreaInvestigacion> areasIzquierda = servicioArea
 				.buscarAreasSinPrograma(programa, lapso);
 		List<AreaInvestigacion> areasDerecha = servicioProgramaArea
