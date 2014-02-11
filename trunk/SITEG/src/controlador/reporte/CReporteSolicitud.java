@@ -182,7 +182,7 @@ public class CReporteSolicitud extends CGeneral {
 
 			cmbTematica.setValue("Todos");
 			tematicas = servicioTematica.buscarActivos();
-			Tematica tema = new Tematica(10000, "Todos", "", true);
+			Tematica tema = new Tematica(10000, "Todos", "", true, null);
 			tematicas.add(tema);
 			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
 		} else {
@@ -190,7 +190,7 @@ public class CReporteSolicitud extends CGeneral {
 			area1 = (AreaInvestigacion) cmbArea.getSelectedItem().getValue();
 			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
 					.buscarArea(area1.getId()));
-			Tematica tema = new Tematica(10000, "Todos", "", true);
+			Tematica tema = new Tematica(10000, "Todos", "", true, null);
 			tematicas.add(tema);
 			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
 		}
