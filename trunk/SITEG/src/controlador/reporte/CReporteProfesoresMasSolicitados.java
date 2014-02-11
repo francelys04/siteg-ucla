@@ -14,6 +14,7 @@ import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
+import modelo.reporte.MasSolicitados;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -57,8 +58,6 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	@Wire
 	private Combobox cmbTematicaReporteProfesoresSolicitados;
 	@Wire
-	private Combobox cmbSolicitudesReporteProfesoresSolicitados;
-	@Wire
 	private Jasperreport jstVistaProfesores;
 	private String[] estatusSolicitud = { "Aceptada", "Rechazada",
 			"Por Revisar", "Finalizada" };
@@ -73,8 +72,6 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		programas = servicioPrograma.buscarActivas();
 		Programa programaa = new Programa(10000000, "Todos", "", "", true, null);
 		programas.add(programaa);
-		cmbSolicitudesReporteProfesoresSolicitados
-				.setModel(new ListModelList<String>(estatusSolicitud));
 		cmbProgramaReporteProfesoresSolicitados
 				.setModel(new ListModelList<Programa>(programas));
 		Selectors.wireComponents(comp, this, false);
@@ -120,13 +117,13 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		Date fechaInicio = dtbInicioReporteProfesoresSolicitados.getValue();
 		Date fechaFin = dtbFinReporteProfesoresSolicitados.getValue();
 		Tematica tematica = servicioTematica.buscarTematica(idTematica);
-		String estatus = cmbSolicitudesReporteProfesoresSolicitados.getValue();
 		List<SolicitudTutoria> solicitudes = new ArrayList<SolicitudTutoria>();
 		List<SolicitudTutoria> solicitudesFinales = new ArrayList<SolicitudTutoria>();
 		List<SolicitudTutoria> solicitudTutorias = new ArrayList<SolicitudTutoria>();
 		List<Teg> tegs = new ArrayList<Teg>();
 		List<String> profesores = new ArrayList<String>();
 		List<Integer> contadores = new ArrayList<Integer>();
+		List<MasSolicitados> masSolicitados = new ArrayList<MasSolicitados>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (fechaFin == null || fechaInicio == null
 				|| fechaInicio.after(fechaFin)) {
@@ -134,18 +131,12 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 					"La fecha de inicio debe ser primero que la fecha de fin",
 					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
-			if (estatus.equals("")
-					|| cmbTematicaReporteProfesoresSolicitados.getValue()
-							.equals("")) {
-				Messagebox.show("Debe completar todos los campos", "Error",
-						Messagebox.OK, Messagebox.ERROR);
-			} else {
 				if (cmbTematicaReporteProfesoresSolicitados.getValue().equals(
 						"Todos")) {
 					// todos tematicas un estatus
 					solicitudes = servicioSolicitudTutoria
-							.buscarSolicitudesPorEstatusEntreFechas(estatus,
-									fechaInicio, fechaFin);
+							.buscarTodasSolicitudesEntreFechas(fechaInicio,
+									fechaFin);
 					if (solicitudes.size() == 0) {
 						datosVacios = true;
 					} else {
@@ -159,19 +150,38 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 									.buscarProfesorPorCedula(profesores.get(i));
 							long valor = servicioSolicitudTutoria
 									.contarSolicitudes(profesor);
-							System.out.println("id" + valor);
-							System.out.println("duracion" + contadores.get(i));
-							Teg teg = new Teg(valor, "", null, null, null, "",
-									contadores.get(i), profesor, "", null,
-									null, null);
-							tegs.add(teg);
+							solicitudesFinales = servicioSolicitudTutoria.buscarPorProfesorEntreFechas(profesor, fechaInicio, fechaFin);
+							long primerValor = 0; 
+							long segundoValor = 0; 
+							long tercerValor = 0;
+							for(int j =0;j<solicitudesFinales.size();j++){
+								if(solicitudesFinales.get(j).getEstatus().equals(estatusSolicitud[1]))
+										primerValor ++;
+								else{
+									if(solicitudesFinales.get(j).getEstatus().equals(estatusSolicitud[2]))
+										segundoValor ++;
+										else 
+											tercerValor ++;
+								}
+							
+							
+//							System.out.println("id" + valor);
+//							System.out.println("duracion" + contadores.get(i));
+//							Teg teg = new Teg(valor, "", null, null, null, "",
+//									contadores.get(i), profesor, "", null,
+//									null, null);
+//							tegs.add(teg);
+							}
+							MasSolicitados masSolicita = new MasSolicitados(primerValor, segundoValor, tercerValor, profesor, null);
+							masSolicitados.add(masSolicita);
 						}
+						System.out.println(masSolicitados.size());
 					}
 				} else {
 					// un estatus una tematica
 					solicitudes = servicioSolicitudTutoria
-							.buscarSolicitudesPorTematicaEstatusEntreFechas(
-									tematica, estatus, fechaInicio, fechaFin);
+							.buscarSolicitudesPorTematicaEntreFechas(tematica,
+									fechaInicio, fechaFin);
 					if (solicitudes.size() == 0) {
 						datosVacios = true;
 					} else {
@@ -186,21 +196,45 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 							long valor = servicioSolicitudTutoria
 									.contarSolicitudesPorTematica(profesor,
 											tematica);
-							System.out.println("id" + valor);
-							System.out.println("duracion" + contadores.get(i));
-							Teg teg = new Teg(valor, "", null, null, null, "",
-									contadores.get(i), profesor, "", null,
-									null, null);
-							tegs.add(teg);
+							solicitudesFinales = servicioSolicitudTutoria.buscarPorProfesorTematicaEntreFechas(profesor, tematica, fechaInicio, fechaFin);
+							long primerValor = 0; 
+							long segundoValor = 0; 
+							long tercerValor = 0;
+							for(int j =0;j<solicitudesFinales.size();j++){
+								if(solicitudesFinales.get(j).getEstatus().equals(estatusSolicitud[1]))
+										primerValor ++;
+								else{
+									if(solicitudesFinales.get(j).getEstatus().equals(estatusSolicitud[2]))
+										segundoValor ++;
+										else 
+											tercerValor ++;
+								}
+							
+							
+//							System.out.println("id" + valor);
+//							System.out.println("duracion" + contadores.get(i));
+//							Teg teg = new Teg(valor, "", null, null, null, "",
+//									contadores.get(i), profesor, "", null,
+//									null, null);
+//							tegs.add(teg);
+							}
+							MasSolicitados masSolicita = new MasSolicitados(primerValor, segundoValor, tercerValor, profesor, null);
+							masSolicitados.add(masSolicita);
 						}
+						System.out.println(masSolicitados.size());
 
 					}
 				}
 				if (!datosVacios) {
+					for(int w=0;w<masSolicitados.size();w++){
+						System.out.println("Primer"+masSolicitados.get(w).getPrimerValor());
+						System.out.println("segundo"+masSolicitados.get(w).getSegundoValor());
+						System.out.println("tercer"+masSolicitados.get(w).getTercerValor());
+						System.out.println("tutor"+masSolicitados.get(w).getTutor().getCedula());
+					}
 					Map<String, Object> mapa = new HashMap<String, Object>();
 					mapa.put("inicio", fechaInicio);
 					mapa.put("fin", fechaFin);
-					mapa.put("estatus", estatus);
 					if (cmbTematicaReporteProfesoresSolicitados.getValue()
 							.equals("Todos"))
 						mapa.put("tematica", "Todas las tematicas");
@@ -219,35 +253,31 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 					else
 						mapa.put("area",
 								cmbAreaReporteProfesoresSolicitados.getValue());
-//					Metodo utilizado para los que de error el preview
-//					FileSystemView filesys = FileSystemView.getFileSystemView();
-//					JasperReport jasperReport = (JasperReport) JRLoader
-//							.loadObject(getClass()
-//									.getResource(
-//											"/reporte/RProfesoresMasSolicitados.jasper"));
-//					JasperPrint jasperPrint = JasperFillManager.fillReport(
-//							jasperReport, mapa, new JRBeanCollectionDataSource(
-//									tegs));
-//					JasperExportManager.exportReportToPdfFile(jasperPrint,
-//							filesys.getHomeDirectory().toString()
-//									+ "/reporteProfesoresSolicitados.pdf");
-					
-					
-					 String rutaUrl = obtenerDirectorio();
-					 String reporteSrc = rutaUrl
-					 +
-					 "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
-					 jstVistaProfesores.setSrc(reporteSrc);
-					 jstVistaProfesores.setDatasource(new
-					 JRBeanCollectionDataSource(
-					 tegs));
-					 jstVistaProfesores.setType("pdf");
-					 jstVistaProfesores.setParameters(mapa);
+					// Metodo utilizado para los que de error el preview
+					 FileSystemView filesys =
+					 FileSystemView.getFileSystemView();
+					 JasperReport jasperReport = (JasperReport) JRLoader
+					 .loadObject(getClass()
+					 .getResource(
+					 "/reporte/RProfesoresMasSolicitados.jasper"));
+					 JasperPrint jasperPrint = JasperFillManager.fillReport(
+					 jasperReport, mapa, new JRBeanCollectionDataSource(masSolicitados));
+					 JasperExportManager.exportReportToPdfFile(jasperPrint,
+					 filesys.getHomeDirectory().toString()
+					 + "/reportePr.pdf");
+
+//					String rutaUrl = obtenerDirectorio();
+//					String reporteSrc = rutaUrl
+//							+ "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
+//					jstVistaProfesores.setSrc(reporteSrc);
+//					jstVistaProfesores
+//							.setDatasource(new JRBeanCollectionDataSource(masSolicitados));
+//					jstVistaProfesores.setType("pdf");
+//					jstVistaProfesores.setParameters(mapa);
 				} else {
 					Messagebox
 							.show("No hay informacion disponible para esta selección");
 				}
-			}
 		}
 	}
 
