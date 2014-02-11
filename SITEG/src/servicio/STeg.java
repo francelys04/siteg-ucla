@@ -239,6 +239,18 @@ public class STeg {
 				fechaFin);
 		return tegs;
 	}
+	
+	public List<Teg> buscarTegPorProgramaUnEstatus(String estatus, Programa programa, Date fechaInicio, Date fechaFin){
+		return interfaceTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus, programa, fechaInicio, fechaFin);
+	}
+
+	public List<Teg> buscarTegsSegunAreaUnEstatus(AreaInvestigacion area, Date fechaInicio, Date fechaFin,String estatus){
+		List<Teg> tegs;
+		tegs= interfaceTeg.buscarTegAreaestatus(area, fechaInicio, fechaFin,estatus);
+		return tegs;
+		
+	}
+
 
 	// Acomodar
 	// public Teg buscarTegUnicoPorEstudiante(Estudiante
