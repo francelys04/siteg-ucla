@@ -34,7 +34,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
-
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -55,7 +54,6 @@ import org.zkoss.zul.Window;
 import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
-
 import servicio.SAreaInvestigacion;
 import servicio.SJurado;
 import servicio.SPrograma;
@@ -68,13 +66,18 @@ import servicio.SEstudiante;
 @Controller
 public class CReporteTeg extends CGeneral {
 
+	public CReporteTeg() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
 	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
+	SProgramaArea servicioProgramaArea = GeneradorBeans.getServicioProgramaArea();
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
+	
 	@Wire
 	private Window wdwReporteTeg;
 	@Wire
@@ -91,8 +94,10 @@ public class CReporteTeg extends CGeneral {
 	private Combobox cmbTematica;
 	@Wire
 	private Jasperreport jstVistaPrevia;
-	private String[] estatusTeg = { "Todos", "TEG Registrado","Revisiones Finalizadas","Solicitando Defensa",
-			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado", "Jurado Asignado" };
+	private String[] estatusTeg = { "Todos", "TEG Registrado",
+			"Revisiones Finalizadas", "Solicitando Defensa",
+			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado",
+			"Jurado Asignado" };
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
@@ -100,8 +105,7 @@ public class CReporteTeg extends CGeneral {
 	long idArea = 0;
 
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		programas = servicioPrograma.buscarActivas();
 		Programa programaa = new Programa(987, "Todos", "", "", true, null);
@@ -116,16 +120,17 @@ public class CReporteTeg extends CGeneral {
 		if (cmbPrograma.getValue().equals("Todos")) {
 			cmbArea.setValue("Todos");
 			cmbTematica.setValue("Todos");
-		}
-		else{
-		    cmbArea.setValue("");
-		    cmbTematica.setValue("");
-		    Programa programa = (Programa) cmbPrograma.getSelectedItem().getValue();
-		     areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
-				    .buscar(programa.getId()));
-		 	AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos", "", true);
-		 	areas.add(area);
-		    cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+		} else {
+			cmbArea.setValue("");
+			cmbTematica.setValue("");
+			Programa programa = (Programa) cmbPrograma.getSelectedItem()
+					.getValue();
+			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
+					.buscar(programa.getId()));
+			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
+					"", true);
+			areas.add(area);
+			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 		}
 
 	}
@@ -133,26 +138,26 @@ public class CReporteTeg extends CGeneral {
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
 		if (cmbArea.getValue().equals("Todos")) {
-		
+
 			cmbTematica.setValue("Todos");
+		} else {
+			cmbTematica.setValue("");
+			AreaInvestigacion tematica = (AreaInvestigacion) cmbArea
+					.getSelectedItem().getValue();
+			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
+					.buscarArea(tematica.getId()));
+			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
 		}
-		else{
-		   cmbTematica.setValue("");
-		    AreaInvestigacion tematica = (AreaInvestigacion) cmbArea.getSelectedItem().getValue();
-		    tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-				        .buscarArea(tematica.getId()));
-		    cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
 	}
-}
 
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
-		//idTematica = tematica.getId();
+		// idTematica = tematica.getId();
 	}
-	
+
 	@Listen("onClick = #btnGenerarReporteTeg")
-    public void generarReporteTEG() throws JRException{
+	public void generarReporteTEG() throws JRException {
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
 		String nombreTematica = cmbTematica.getValue();
@@ -160,144 +165,137 @@ public class CReporteTeg extends CGeneral {
 		Date fechaFin = dtbFechaFin.getValue();
 		String estatus = cmbEstatus.getValue();
 		List<Teg> teg = null;
-	if ((cmbPrograma.getValue() =="") || (cmbArea.getValue()=="") || (cmbTematica.getValue()=="") || (cmbEstatus.getValue()=="")) {
-		    Messagebox.show(
-				  "Datos imcompletos",
-				     "Informacion", Messagebox.OK,
-				   Messagebox.INFORMATION);
-	   }
-		
-	else{
-		if (fechaFin == null || fechaInicio == null
-				|| fechaInicio.after(fechaFin)) {
-			        Messagebox.show(
-					"La fecha de inicio debe ser primero que la fecha de fin",
-					"Error", Messagebox.OK, Messagebox.ERROR);
-	          } 
-		 else {
-			 if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && !estatus.equals("Todos")) {
+		if ((cmbPrograma.getValue() == "") || (cmbArea.getValue() == "")
+				|| (cmbTematica.getValue() == "")
+				|| (cmbEstatus.getValue() == "")) {
+			Messagebox.show("Datos imcompletos", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+
+		else {
+			if (fechaFin == null || fechaInicio == null
+					|| fechaInicio.after(fechaFin)) {
+				Messagebox
+						.show("La fecha de inicio debe ser primero que la fecha de fin",
+								"Error", Messagebox.OK, Messagebox.ERROR);
+			} else {
+				if (!nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& !estatus.equals("Todos")) {
 					String idTematica = cmbTematica.getSelectedItem().getId();
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
-					teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(estatus,
-							                                       tematica1, fechaInicio, fechaFin);
-//					 Messagebox.show("1",
-//							     "Informacion", Messagebox.OK,
-//							   Messagebox.INFORMATION);
-				}
-			 
-				 if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && estatus.equals("Todos")) {
-					 String idTematica = cmbTematica.getSelectedItem().getId();
-					 Tematica tematica1 = servicioTematica.buscarTematica(Long
-								.parseLong(idTematica));
-					 String estatusTeg1="TEG Registrado";
-					 String estatusTeg2="Revisiones Finalizadas";
-					 String estatusTeg3="Solicitando Defensa";
-					 String estatusTeg4="Defensa Asignada";
-					 String estatusTeg5="TEG Aprobado";
-					 String estatusTeg6="TEG Reprobado";
-					 String estatusTeg7="Jurado Asignado";
-					 teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus(estatusTeg1, 
-							          estatusTeg2, estatusTeg3, estatusTeg4, estatusTeg5, estatusTeg6, estatusTeg7,
-							          tematica1,fechaInicio, fechaFin);
-//					 Messagebox.show(
-//							  "2",
-//							     "Informacion", Messagebox.OK,
-//							   Messagebox.INFORMATION);
-				 }
-					 
-				 if(!nombrePrograma.equals("Todos") && nombreArea.equals("Todos") && !estatus.equals("Todos")){
-					 String idPrograma = cmbPrograma.getSelectedItem().getId();
-					 Programa programa1 = servicioPrograma.buscar(Long
-								.parseLong(idPrograma));
-					 teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus, programa1, fechaInicio, fechaFin);
-//					 Messagebox.show(
-//							  "3",
-//							     "Informacion", Messagebox.OK,
-//							   Messagebox.INFORMATION);
-						
-				 }
-				 if(!nombrePrograma.equals("Todos") && nombreArea.equals("Todos") && estatus.equals("Todos")){
-					 String idPrograma = cmbPrograma.getSelectedItem().getId();
-					 Programa programa1 = servicioPrograma.buscar(Long
-								.parseLong(idPrograma));
-					 String estatusTeg1="TEG Registrado";
-					 String estatusTeg2="Revisiones Finalizadas";
-					 String estatusTeg3="Solicitando Defensa";
-					 String estatusTeg4="Defensa Asignada";
-					 String estatusTeg5="TEG Aprobado";
-					 String estatusTeg6="TEG Reprobado";
-					 String estatusTeg7="Jurado Asignado";
-					 teg = servicioTeg.buscarTegPorProgramaVariasAreasVariosEstatus(estatusTeg1, 
-					                estatusTeg2, estatusTeg3, estatusTeg4, estatusTeg5, estatusTeg6, estatusTeg7,
-					                programa1,fechaInicio, fechaFin);
-//					 Messagebox.show(
-//							  "4",
-//							     "Informacion", Messagebox.OK,
-//							   Messagebox.INFORMATION);	
-				 }
-				 if(nombrePrograma.equals("Todos") && !estatus.equals("Todos")){
-					 teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(estatus, fechaInicio, 
-							         fechaFin);
-//					 Messagebox.show(
-//							  "5",
-//							     "Informacion", Messagebox.OK,
-//							   Messagebox.INFORMATION);
-         		 }
-				 
-				 if(nombrePrograma.equals("Todos") && estatus.equals("Todos")){
-					 String estatusTeg1="TEG Registrado";
-					 String estatusTeg2="Revisiones Finalizadas";
-					 String estatusTeg3="Solicitando Defensa";
-					 String estatusTeg4="Defensa Asignada";
-					 String estatusTeg5="TEG Aprobado";
-					 String estatusTeg6="TEG Reprobado";
-					 String estatusTeg7="Jurado Asignado";
-					 teg = servicioTeg.buscarTegPorVariosProgramasVariosEstatus(estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4, estatusTeg5, estatusTeg6, estatusTeg7, fechaInicio, fechaFin);
-//					 Messagebox.show(
-//							  "6",
-//							     "Informacion", Messagebox.OK,
-//							   Messagebox.INFORMATION);
-					
-				 }
+					teg = servicioTeg
+							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+									estatus, tematica1, fechaInicio, fechaFin);
 
-		
-				 List<ListaTeg> elementos = new ArrayList<ListaTeg>();
-				 for (Teg t : teg) {
-				 List<Estudiante> estudiantes= servicioEstudiante.buscarEstudiantePorTeg(t);
-				 
-						String nombreEstudiantes = "";
-						for (Estudiante e : estudiantes) {
-						nombreEstudiantes += e.getNombre() +" "+e.getApellido()+" ";
-						}
-					
-				 elementos.add(new ListaTeg(t, nombreEstudiantes));
-				 
-				 }
-				    FileSystemView filesys = FileSystemView.getFileSystemView();
-					Map p = new HashMap();
-					 String rutaUrl = obtenerDirectorio();
-					 String reporteSrc = rutaUrl
-					 +
-					 "SITEG/vistas/reportes/estructurados/compilados/ReporteTEG.jasper";
-					 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-				    p.put("programa", cmbPrograma.getValue());
-					p.put("FechaInicio",dtbFechaInicio.getValue());
-					p.put("FechaFin",dtbFechaFin.getValue());
-					p.put("Area",cmbArea.getValue());
-					p.put("Tematica",cmbTematica.getValue());
-					p.put("Estatus",cmbEstatus.getValue());
-					//JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/ReporteTEG.jasper"));
-					//JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(elementos));
-					//JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ListaTeg.pdf"); 
-					jstVistaPrevia.setSrc(reporteSrc);
-					 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-					 elementos));
-					 jstVistaPrevia.setType("pdf");
-					 jstVistaPrevia.setParameters(p);
-		 }
-		 
-	}
+				}
+
+				if (!nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& estatus.equals("Todos")) {
+					String idTematica = cmbTematica.getSelectedItem().getId();
+					Tematica tematica1 = servicioTematica.buscarTematica(Long
+							.parseLong(idTematica));
+					String estatusTeg1 = "TEG Registrado";
+					String estatusTeg2 = "Revisiones Finalizadas";
+					String estatusTeg3 = "Solicitando Defensa";
+					String estatusTeg4 = "Defensa Asignada";
+					String estatusTeg5 = "TEG Aprobado";
+					String estatusTeg6 = "TEG Reprobado";
+					String estatusTeg7 = "Jurado Asignado";
+					teg = servicioTeg
+							.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus(
+									estatusTeg1, estatusTeg2, estatusTeg3,
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, tematica1, fechaInicio,
+									fechaFin);
+				}
+
+				if (!nombrePrograma.equals("Todos")
+						&& nombreArea.equals("Todos")
+						&& !estatus.equals("Todos")) {
+					String idPrograma = cmbPrograma.getSelectedItem().getId();
+					Programa programa1 = servicioPrograma.buscar(Long
+							.parseLong(idPrograma));
+					teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(
+							estatus, programa1, fechaInicio, fechaFin);
+				}
+				if (!nombrePrograma.equals("Todos")
+						&& nombreArea.equals("Todos")
+						&& estatus.equals("Todos")) {
+					String idPrograma = cmbPrograma.getSelectedItem().getId();
+					Programa programa1 = servicioPrograma.buscar(Long
+							.parseLong(idPrograma));
+					String estatusTeg1 = "TEG Registrado";
+					String estatusTeg2 = "Revisiones Finalizadas";
+					String estatusTeg3 = "Solicitando Defensa";
+					String estatusTeg4 = "Defensa Asignada";
+					String estatusTeg5 = "TEG Aprobado";
+					String estatusTeg6 = "TEG Reprobado";
+					String estatusTeg7 = "Jurado Asignado";
+					teg = servicioTeg
+							.buscarTegPorProgramaVariasAreasVariosEstatus(
+									estatusTeg1, estatusTeg2, estatusTeg3,
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, programa1, fechaInicio,
+									fechaFin);
+				}
+				if (nombrePrograma.equals("Todos") && !estatus.equals("Todos")) {
+					teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
+							estatus, fechaInicio, fechaFin);
+				}
+
+				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
+					String estatusTeg1 = "TEG Registrado";
+					String estatusTeg2 = "Revisiones Finalizadas";
+					String estatusTeg3 = "Solicitando Defensa";
+					String estatusTeg4 = "Defensa Asignada";
+					String estatusTeg5 = "TEG Aprobado";
+					String estatusTeg6 = "TEG Reprobado";
+					String estatusTeg7 = "Jurado Asignado";
+					teg = servicioTeg.buscarTegPorVariosProgramasVariosEstatus(
+							estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4,
+							estatusTeg5, estatusTeg6, estatusTeg7, fechaInicio,
+							fechaFin);
+				}
+
+				List<ListaTeg> elementos = new ArrayList<ListaTeg>();
+				for (Teg t : teg) {
+					List<Estudiante> estudiantes = servicioEstudiante
+							.buscarEstudiantePorTeg(t);
+
+					String nombreEstudiantes = "";
+					for (Estudiante e : estudiantes) {
+						nombreEstudiantes += e.getNombre() + " "
+								+ e.getApellido() + " ";
+					}
+
+					elementos.add(new ListaTeg(t, nombreEstudiantes));
+
+				}
+				FileSystemView filesys = FileSystemView.getFileSystemView();
+				Map p = new HashMap();
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl
+						+ "SITEG/vistas/reportes/estructurados/compilados/ReporteTEG.jasper";
+				String reporteImage = rutaUrl
+						+ "SITEG/public/imagenes/reportes/";
+				p.put("programa", cmbPrograma.getValue());
+				p.put("FechaInicio", dtbFechaInicio.getValue());
+				p.put("FechaFin", dtbFechaFin.getValue());
+				p.put("Area", cmbArea.getValue());
+				p.put("Tematica", cmbTematica.getValue());
+				p.put("Estatus", cmbEstatus.getValue());
+
+				jstVistaPrevia.setSrc(reporteSrc);
+				jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+						elementos));
+				jstVistaPrevia.setType("pdf");
+				jstVistaPrevia.setParameters(p);
+			}
+
+		}
 	}
 
 	@Listen("onClick = #btnSalirReporteTeg")
@@ -308,7 +306,5 @@ public class CReporteTeg extends CGeneral {
 		cmbTematica.setValue("");
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
-		//wdwReporteTeg.onClose();
-		
 	}
 }
