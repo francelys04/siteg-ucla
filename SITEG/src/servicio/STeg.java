@@ -6,12 +6,10 @@ import interfazdao.IEstudianteDAO;
 import interfazdao.ITegDAO;
 import modelo.AreaInvestigacion;
 import modelo.Estudiante;
-import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
 import modelo.Tematica;
-import modelo.compuesta.Cronograma;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
