@@ -66,7 +66,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="145" splitType="Stretch">
+		<band height="118" splitType="Stretch">
 			<staticText>
 				<reportElement x="416" y="9" width="44" height="20" uuid="48e89b5f-5a63-450c-be5e-6ceca18df5cd"/>
 				<textElement>
@@ -96,11 +96,11 @@
 				<text><![CDATA[Programa:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="88" y="121" width="412" height="20" uuid="d39052b0-54ca-421f-b947-929fe0b39cd0"/>
+				<reportElement x="79" y="93" width="412" height="20" uuid="d39052b0-54ca-421f-b947-929fe0b39cd0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[Promedio de Tiempo con respecto a las Etapas del Teg]]></text>
+				<text><![CDATA[Promedio de la Gestión del Teg]]></text>
 			</staticText>
 			<line>
 				<reportElement x="-19" y="-69" width="618" height="1" forecolor="#0066FF" uuid="b8aaf1ac-a29e-45fc-ad4d-d02d2d317432"/>
@@ -135,20 +135,6 @@
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="5" y="83" width="63" height="20" uuid="b888242a-3beb-46ee-8760-1808819f9add"/>
-				<textElement>
-					<font fontName="SansSerif" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Titulo Teg:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="68" y="84" width="348" height="34" uuid="3b83c799-3e9c-41ef-85c0-b01b28246227"/>
-				<textElement verticalAlignment="Top">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{tegTitulo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -199,13 +185,13 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="258" y="0" width="98" height="20" uuid="99301a42-fd07-4159-8d60-09695b0a8494"/>
+				<reportElement x="258" y="0" width="99" height="20" uuid="99301a42-fd07-4159-8d60-09695b0a8494"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{contadorDia13}]]></textFieldExpression>
@@ -217,7 +203,7 @@
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{contadorDia46}]]></textFieldExpression>

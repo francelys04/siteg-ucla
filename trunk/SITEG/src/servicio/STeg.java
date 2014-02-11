@@ -407,24 +407,29 @@ public class STeg {
 
 	}
 	
-	public List<Teg> buscarTegSegunAreaInvestigacionEstatus(AreaInvestigacion area, String estatus){
+	public List<Teg> buscarTegSegunAreaInvestigacionEstatus(AreaInvestigacion area, String estatus1,String estatus2){
 		List<Teg> tegs;
-		tegs= interfaceTeg.buscarTegSegunArea(area, estatus);
+		tegs= interfaceTeg.buscarTegSegunArea(area, estatus1,estatus2);
 		return tegs;
 	}
-	public List<Teg> buscarTegSegunTematicaEstatus(Tematica tematica, String estatus){
+	public List<Teg> buscarTegSegunTematicaEstatus(Tematica tematica, String estatus1,String estatus2){
 		List<Teg> tegs;
-		tegs= interfaceTeg.buscarTegSegunTematica(tematica, estatus);
+		tegs= interfaceTeg.buscarTegSegunTematica(tematica, estatus1,estatus2);
 		return tegs;
 	}
-	public List<Teg> buscarTegSegunProgramaEstatus(Programa programa, String estatus){
+	public List<Teg> buscarTegSegunProgramaEstatus(Programa programa, String estatus1,String estatus2){
 		List<Teg> tegs;
-		tegs= interfaceTeg.buscarTegSegunPrograma(programa, estatus);
+		tegs= interfaceTeg.buscarTegSegunPrograma(programa, estatus1,estatus2);
 		return tegs;
 	}
 	public List<Teg> buscarSegunTegs(List<Teg> tegs){
 		List<Teg> tegsSeleccionados;
 		tegsSeleccionados= interfaceTeg.buscarSegunTegs(tegs);
+		return tegsSeleccionados;
+	}
+	public List<Teg> buscarTegSegunEstatus(String estatus1,String estatus2){
+		List<Teg> tegsSeleccionados;
+		tegsSeleccionados= interfaceTeg.buscarTegSegunEstatus(estatus1,estatus2);
 		return tegsSeleccionados;
 	}
 	
