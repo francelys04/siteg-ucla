@@ -26,9 +26,9 @@ import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 public class CCatalogoGrupo extends CGeneral {
-	SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
 
-	
+	private static String vistaRecibida;
+
 	@Wire
 	private Textbox txtNombreMostrarGrupo;
 	@Wire
@@ -36,24 +36,22 @@ public class CCatalogoGrupo extends CGeneral {
 	@Wire
 	private Window wdwCatalogoGrupo;
 
-
-	private static String vistaRecibida;
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * grupos disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
-		//Llena el catalogo con los grupos activos
+	public void inicializar(Component comp) {
 		List<Grupo> grupos = servicioGrupo.buscarActivos();
 		ltbGrupo.setModel(new ListModelList<Grupo>(grupos));
 	
-		Selectors.wireComponents(comp, this, false);
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-		
-		System.out.println("Map"+map);
 	}
-	//permite filtrar los datos del catalogo grupo
+	
+	/*
+	 * Metodo que permite filtrar los grupos disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre estos.
+	 */
 	@Listen("onChange = #txtNombreMostarGrupo")
 	public void filtrarDatosCatalogo() {
 		List<Grupo> grupos = servicioGrupo.buscarActivos();
@@ -75,13 +73,20 @@ public class CCatalogoGrupo extends CGeneral {
 		ltbGrupo.setModel(new ListModelList<Grupo>(grupos1));
 
 	}
-
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
-		System.out.println("Recibir vista"+vista);
 
 	}
-//permite mapear los datos a la vista recibida
+	/*
+	 * Metodo que permite obtener el objeto Grupo al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbGrupo")
 	public void mostrarDatosCatalogo() {
 		if(ltbGrupo.getItemCount()!=0){
@@ -92,11 +97,8 @@ public class CCatalogoGrupo extends CGeneral {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-	
 		if(map2!=null)
 			map=map2;
-		
-		
 		map.put("id", grupo1.getId());
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);

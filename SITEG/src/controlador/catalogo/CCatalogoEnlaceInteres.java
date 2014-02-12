@@ -29,14 +29,13 @@ import servicio.SArchivo;
 import servicio.SNoticia;
 import servicio.SEnlaceInteres;
 
-
 import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 @Controller
 public class CCatalogoEnlaceInteres extends CGeneral {
 
-	SEnlaceInteres servicioEnlace = GeneradorBeans.getServicioEnlace();
+	private static String vistaRecibida;
 
 	@Wire
 	private Textbox txtNombreMostrarEnlace;
@@ -48,58 +47,67 @@ public class CCatalogoEnlaceInteres extends CGeneral {
 	private Window wdwCatalogoEnlace;
 	@Wire
 	private Image imagen;
-	private static String vistaRecibida;
-	
-	
+
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todas los
+	 * enlaces de interes disponibles y se llena el listado del mismo en el
+	 * componente lista de la vista.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-	//Se llena el catalogo con las noticias
-		List<EnlaceInteres> enlace = servicioEnlace.buscarActivos();	
+		List<EnlaceInteres> enlace = servicioEnlace.buscarActivos();
 		ltbEnlace.setModel(new ListModelList<EnlaceInteres>(enlace));
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("enlaceCatalogo");
-	
-		
+
 	}
-	
+
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
-	
-    
-	//Aca se filtran las busqueda en el catalogo, ya sea por nombre o por descripcion
-		@Listen("onChange = #txtNombreMostrarEnlace, #txtUrlMostrarEnlace")
-		public void filtrarDatosCatalogo() {
-			List<EnlaceInteres> enlace1 = servicioEnlace.buscarActivos();
-			List<EnlaceInteres> enlace2 = new ArrayList<EnlaceInteres>();
 
-			for (EnlaceInteres enlace : enlace1) {
-				if (enlace
-						.getNombre()
-						.toLowerCase()
-						.contains(
-								txtNombreMostrarEnlace.getValue().toLowerCase())
+	/*
+	 * Metodo que permite filtrar los enlaces de interes disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre y la
+	 * url de estas.
+	 */
+	@Listen("onChange = #txtNombreMostrarEnlace, #txtUrlMostrarEnlace")
+	public void filtrarDatosCatalogo() {
+		List<EnlaceInteres> enlace1 = servicioEnlace.buscarActivos();
+		List<EnlaceInteres> enlace2 = new ArrayList<EnlaceInteres>();
+
+		for (EnlaceInteres enlace : enlace1) {
+			if (enlace.getNombre().toLowerCase()
+					.contains(txtNombreMostrarEnlace.getValue().toLowerCase())
 					&& enlace
-					.getUrl()
-					.toLowerCase()
-					.contains(txtUrlMostrarEnlace.getValue().toLowerCase())
-						)
-						
-					enlace2.add(enlace);
-				}
-			ltbEnlace.setModel(new ListModelList<EnlaceInteres>(enlace2));
-			}
-		
-		//Aca se selecciona una Descarga del catalogo
-		@Listen("onDoubleClick = #ltbEnlace")
-		public void mostrarDatosCatalogo() {
-			
-			if( ltbEnlace.getSelectedCount()!=0){
+							.getUrl()
+							.toLowerCase()
+							.contains(
+									txtUrlMostrarEnlace.getValue()
+											.toLowerCase()))
+
+				enlace2.add(enlace);
+		}
+		ltbEnlace.setModel(new ListModelList<EnlaceInteres>(enlace2));
+	}
+
+	/*
+	 * Metodo que permite obtener el objeto EnlaceInteres al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 */
+	@Listen("onDoubleClick = #ltbEnlace")
+	public void mostrarDatosCatalogo() {
+
+		if (ltbEnlace.getSelectedCount() != 0) {
 			Listitem listItem = ltbEnlace.getSelectedItem();
-			EnlaceInteres enlaceDatosCatalogo = (EnlaceInteres) listItem.getValue();
+			EnlaceInteres enlaceDatosCatalogo = (EnlaceInteres) listItem
+					.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("id", enlaceDatosCatalogo.getId());
 			String vista = vistaRecibida;
@@ -107,12 +115,9 @@ public class CCatalogoEnlaceInteres extends CGeneral {
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 			Executions.sendRedirect("/vistas/arbol.zul");
 			wdwCatalogoEnlace.onClose();
-								
-			}
-		
+
 		}
 
-	
+	}
 
 }
-

@@ -23,7 +23,8 @@ import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 public class CCatalogoLapso extends CGeneral {
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
+
+	private static String vistaRecibida;
 
 	@Wire
 	private Listbox ltbLapso;
@@ -37,30 +38,31 @@ public class CCatalogoLapso extends CGeneral {
 	private Textbox txtFechaInicialMostrarLapso;
 	@Wire
 	private Textbox txtFechaFinalMostrarLapso;
-	@Wire
-	private Textbox txtNombreLapso;
 
-	private static String vistaRecibida;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * disponibles disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
+	 */
 	public void inicializar(Component comp) {
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
-		//llena el catalogo con la lista de lapsos 
-		if (txtNombreLapso == null) {
-			ltbLapso.setModel(new ListModelList<Lapso>(lapsos));
-		}
-
-		Selectors.wireComponents(comp, this, false);
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-
+		ltbLapso.setModel(new ListModelList<Lapso>(lapsos));
 	}
-
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
 
-	// Filtra por nombre
+	/*
+	 * Metodo que permite filtrar los lapsos disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre de estos.
+	 */
 	@Listen("onChange = #txtNombreMostrarLapso")
 	public void filtrarDatosCatalogo() {
 		List<Lapso> lapsos1 = servicioLapso.buscarActivos();
@@ -78,7 +80,11 @@ public class CCatalogoLapso extends CGeneral {
 
 	}
 
-	// Carga los lapsos desde el catalogo hacia el formulario lapso academico
+	/*
+	 * Metodo que permite obtener el objeto Lapso al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbLapso")
 	public void mostrarDatosCatalogo() {
 

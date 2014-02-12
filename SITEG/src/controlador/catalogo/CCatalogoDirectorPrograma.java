@@ -28,12 +28,11 @@ import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 public class CCatalogoDirectorPrograma extends CGeneral {
-	
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	
+
+	private static String vistaRecibida;
+	List<Profesor> profesores = new ArrayList();
 	@Wire
 	private Listbox ltbProfesor;
-	
 	@Wire
 	private Combobox cmbCategoriaProfesor;
 	@Wire
@@ -50,47 +49,52 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 	private Textbox txtCorreoMostrarProfesor;
 	@Wire
 	private Textbox txtCategoriaMostrarProfesor;
-	 private static String vistaRecibida;
-	
+
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el map
+	 * recibido del catalogo exista y se llenan las listas correspondientes de
+	 * la vista dado una condicional, que si se cumple se mostrara los
+	 * profesores sin usuarios sino todos los profesores activos.
+	 */
 	public void inicializar(Component comp) {
-		
-		
-		// TODO Auto-generated method stub
-				//Llena la lista con los profesroes que no son direstores de programa
-			
-				if (cmbCategoriaProfesor == null) {
-					List<Profesor> profesores = servicioProfesor.buscarProfesoresSinPrograma();
-					ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
-				}
 
-				HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-						.getCurrent().getAttribute("itemsCatalogo");
+		profesores = servicioProfesor.buscarProfesoresSinPrograma();
+		ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
 
-				if (map != null) {
-					if (map.get("usuario") != null) {
-						List<Profesor> profesores = servicioProfesor
-								.buscarProfesorSinUsuario();
-						ltbProfesor.setModel(new ListModelList<Profesor>(
-								profesores));
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
 
-					} else {
-						List<Profesor> profesores = servicioProfesor
-								.buscarActivos();
-						ltbProfesor.setModel(new ListModelList<Profesor>(
-								profesores));
+		if (map != null) {
+			if (map.get("usuario") != null) {
+				List<Profesor> profesores = servicioProfesor
+						.buscarProfesorSinUsuario();
+				ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
 
-					}
+			} else {
+				List<Profesor> profesores = servicioProfesor.buscarActivos();
+				ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
 
-					Selectors.wireComponents(comp, this, false);
-				}
-				
+			}
+
+			Selectors.wireComponents(comp, this, false);
+		}
+
 	}
-	
-	public void recibir (String vista)
-	{
+
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
+	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
-	//permite filtrar los datos del catalogo
+
+	/*
+	 * Metodo que permite filtrar los profesores disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar la cedula, nombre, apellido,
+	 * correo y categoria.
+	 */
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor,#txtProgramaMostrarProfesor")
 	public void filtrarDatosCatalogo() {
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
@@ -100,8 +104,7 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 			if (profesor
 					.getCedula()
 					.toLowerCase()
-					.contains(
-							txtCedulaMostrarProfesor.getValue().toLowerCase())
+					.contains(txtCedulaMostrarProfesor.getValue().toLowerCase())
 					&& profesor
 							.getNombre()
 							.toLowerCase()
@@ -135,38 +138,38 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 		ltbProfesor.setModel(new ListModelList<Profesor>(profesores2));
 
 	}
-	//permite mapear los datos a la vista recibida
+
+	/*
+	 * Metodo que permite obtener el objeto Profesor al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su cedula,
+	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbProfesor")
 	public void mostrarDatosCatalogo() {
-		
+
 		if (vistaRecibida == null) {
 
 			vistaRecibida = "maestros/VProfesor";
 
 		} else {
-		if(ltbProfesor.getItemCount()!=0){
-		Listitem listItem = ltbProfesor.getSelectedItem();
-		Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-	
-		if(map2!=null)
-			map=map2;
-		map.put("cedula", profesorDatosCatalogo.getCedula());
-		String vista = vistaRecibida;
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoProfesor.onClose();
-		}
+			if (ltbProfesor.getItemCount() != 0) {
+				Listitem listItem = ltbProfesor.getSelectedItem();
+				Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
+
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
+						.getCurrent().getAttribute("itemsCatalogo");
+
+				if (map2 != null)
+					map = map2;
+				map.put("cedula", profesorDatosCatalogo.getCedula());
+				String vista = vistaRecibida;
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+				Executions.sendRedirect("/vistas/arbol.zul");
+				wdwCatalogoProfesor.onClose();
+			}
 		}
 	}
-	
-	
-	
-	
-	
 
 }

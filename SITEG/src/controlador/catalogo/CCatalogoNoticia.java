@@ -32,8 +32,7 @@ import controlador.CGeneral;
 @Controller
 public class CCatalogoNoticia extends CGeneral {
 
-	SNoticia servicioNoticia = GeneradorBeans.getServicioNoticia();
-
+	
 	@Wire
 	private Textbox txtNombreMostrarNoticia;
 	@Wire
@@ -44,21 +43,25 @@ public class CCatalogoNoticia extends CGeneral {
 	private Window wdwCatalogoNoticia;
 	@Wire
 	private Image imagen;
+	
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se se buscan todas las
+	 * noticias disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-	//Se llena el catalogo con las noticias
 		List<Noticia> noticia = servicioNoticia.buscarActivos();	
 		ltbNoticia.setModel(new ListModelList<Noticia>(noticia));
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("noticiaCatalogo");
-	
-		
 	}
 	
     
-	//Aca se filtran las busqueda en el catalogo, ya sea por nombre o por descripcion
+	/*
+	 * Metodo que permite filtrar las noticias disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre y la
+	 * descripcion de estas.
+	 */
 		@Listen("onChange = #txtNombreMostrarNoticia, #txtDescripcionMostrarNoticia")
 		public void filtrarDatosCatalogo() {
 			List<Noticia> noticia1 = servicioNoticia.buscarActivos();
@@ -81,7 +84,11 @@ public class CCatalogoNoticia extends CGeneral {
 			ltbNoticia.setModel(new ListModelList<Noticia>(noticia2));
 			}
 		
-		//Aca se selecciona una Descarga del catalogo
+		/*
+		 * Metodo que permite obtener el objeto Noticia al realizar el evento
+		 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+		 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+		 */
 		@Listen("onDoubleClick = #ltbNoticia")
 		public void mostrarDatosCatalogo() {
 			List<Noticia> noticia = servicioNoticia.buscarActivos();
