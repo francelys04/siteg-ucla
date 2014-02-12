@@ -30,9 +30,12 @@ import servicio.SArchivo;
 import servicio.SAreaInvestigacion;
 import servicio.SCondicionPrograma;
 import servicio.SDefensa;
+import servicio.SEnlaceInteres;
 import servicio.SEstudiante;
+import servicio.SItem;
 import servicio.SJurado;
 import servicio.SLapso;
+import servicio.SNoticia;
 import servicio.SProfesor;
 import servicio.SPrograma;
 import servicio.SProgramaArea;
@@ -68,7 +71,10 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 	protected SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
 	protected SLapso servicioLapso = GeneradorBeans.getServicioLapso();
 	protected SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	
+	protected SEnlaceInteres servicioEnlace = GeneradorBeans.getServicioEnlace();
+	protected SItem servicioItem = GeneradorBeans.getServicioItem();
+	protected SNoticia servicioNoticia = GeneradorBeans.getServicioNoticia();
+
 	
 	
 	/*

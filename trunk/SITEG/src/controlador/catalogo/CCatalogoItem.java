@@ -23,7 +23,10 @@ import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 public class CCatalogoItem extends CGeneral {
-	SItem servicioItem = GeneradorBeans.getServicioItem();
+
+
+	private long id = 0;
+	private static String vistaRecibida;
 
 	@Wire
 	private Textbox txtNombreItem;
@@ -43,25 +46,24 @@ public class CCatalogoItem extends CGeneral {
 	private Textbox txtTipoMostrarItem;
 	@Wire
 	private Textbox txtDescripcionMostrarItem;
-	private long id = 0;
-	private static String vistaRecibida;
 
+	
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * items disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public	void inicializar(Component comp) {
 
 		List<ItemEvaluacion> items = servicioItem.buscarItemsActivos();
-		//llena el catalogo con los items activos
-
-		if (txtNombreItem == null) {
-			ltbItem.setModel(new ListModelList<ItemEvaluacion>(items));
-		}
-		Selectors.wireComponents(comp, this, false);
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
+		ltbItem.setModel(new ListModelList<ItemEvaluacion>(items));
 	}
-//permite filtrar los datos del catalogo item
+	/*
+	 * Metodo que permite filtrar los items disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre,
+	 * descripcion y tipo de estos.
+	 */
 	@Listen("onChange = #txtNombreMostrarItem, #txtTipoMostrarItem, #txtDescripcionMostrarItem")
 	public void filtrarDatosCatalogo() {
 		List<ItemEvaluacion> item = servicioItem.buscarItemsActivos();
@@ -94,12 +96,20 @@ public class CCatalogoItem extends CGeneral {
 		ltbItem.setModel(new ListModelList<ItemEvaluacion>(item2));
 
 	}
-
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
-//permite enviar los datos a la vista recibida
+	/*
+	 * Metodo que permite obtener el objeto Item al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbItem")
 	public void mostrarDatosCatalogo() {
 		

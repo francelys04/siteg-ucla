@@ -33,30 +33,10 @@ import servicio.SPrograma;
 
 public class CCatalogoEstudiante extends CGeneral {
 
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	@Wire
-	private Combobox cmbProgramaEstudiante;
-	@Wire
-	private Textbox txtCedulaEstudiante;
-	@Wire
-	private Textbox txtNombreEstudiante;
-	@Wire
-	private Textbox txtApellidoEstudiante;
-	@Wire
-	private Radiogroup rdgSexoEstudiante;
-	@Wire
-	private Radio rdoSexoFEstudiante;
-	@Wire
-	private Radio rdoSexoMEstudiante;
-	@Wire
-	private Textbox txtDireccionEstudiante;
-	@Wire
-	private Textbox txtTelefonoMovilEstudiante;
-	@Wire
-	private Textbox txtTelefonoFijoEstudiante;
-	@Wire
-	private Textbox txtCorreoEstudiante;
+	List<Estudiante> estudiantes = new ArrayList();
+	private static String vistaRecibida;
+	private static boolean variable = false;
+	public static List<Estudiante> estudiantes1;
 
 	@Wire
 	private Listbox ltbEstudiante;
@@ -72,43 +52,35 @@ public class CCatalogoEstudiante extends CGeneral {
 	private Textbox txtCorreoMostrarEstudiante;
 	@Wire
 	private Textbox txtProgramaMostrarEstudiante;
-	private static String vistaRecibida;
-	private static boolean variable = false;
-	public static  List<Estudiante> estudiantes1;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el map
+	 * recibido del catalogo exista y se llenan las listas correspondientes de
+	 * la vista dado una condicional, que si se cumple se mostrara los
+	 * estudiantes sin usuarios sino todos los estudiantes activos.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		//llena el catalogo con los datos del estudiante
-		List<Programa> programas = servicioPrograma.buscarActivas();
+		List<Estudiante> estudiantes = servicioEstudiante.buscarActivos();
+		ltbEstudiante.setModel(new ListModelList<Estudiante>(estudiantes));
 
-		
-		if (cmbProgramaEstudiante == null) {
-			List<Estudiante> estudiantes = servicioEstudiante
-					.buscarActivos();
-			ltbEstudiante.setModel(new ListModelList<Estudiante>(estudiantes));
-		} else {
-			cmbProgramaEstudiante.setModel(new ListModelList<Programa>(
-					programas));
-		}
-		 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 
 		if (map != null) {
 			if (map.get("usuario") != null) {
-				variable= true;
-				List<Estudiante> estudiantes = servicioEstudiante
+				variable = true;
+				List<Estudiante> estudiantes1 = servicioEstudiante
 						.buscarEstudianteSinUsuario();
 				ltbEstudiante.setModel(new ListModelList<Estudiante>(
-						estudiantes));
+						estudiantes1));
 
 			} else {
-				List<Estudiante> estudiantes = servicioEstudiante
+				List<Estudiante> estudiantes1 = servicioEstudiante
 						.buscarActivos();
 				ltbEstudiante.setModel(new ListModelList<Estudiante>(
-						estudiantes));
+						estudiantes1));
 
 			}
 
@@ -117,20 +89,21 @@ public class CCatalogoEstudiante extends CGeneral {
 
 	}
 
-	// Metodo que permite el filtrado en el catalogo, por medio de los
-	// diferentes campos que este posee
+	/*
+	 * Metodo que permite filtrar los estudiantes disponibles, dado a la
+	 * condicional de la variable booleana si es igual a "true" se mostraran los
+	 * estudiantes sin usuario sino si es "false" seran todos los estudiantes
+	 * activos, mediante el componente de la lista, donde se podra visualizar la
+	 * cedula, nombre, apellido, correo y programa
+	 */
 	@Listen("onChange = #txtCedulaMostrarEstudiante,#txtNombreMostrarEstudiante,#txtApellidoMostrarEstudiante,#txtCorreoMostrarEstudiante,#txtProgramaMostrarEstudiante")
 	public void filtrarDatosCatalogo() {
-		
-		if (variable == true)
-		{
-			 estudiantes1 = servicioEstudiante
-			.buscarEstudianteSinUsuario();
-			
-		}
-		else
-		{
-		 estudiantes1 = servicioEstudiante.buscarActivos();
+
+		if (variable == true) {
+			estudiantes1 = servicioEstudiante.buscarEstudianteSinUsuario();
+
+		} else {
+			estudiantes1 = servicioEstudiante.buscarActivos();
 		}
 		List<Estudiante> estudiantes2 = new ArrayList<Estudiante>();
 
@@ -179,41 +152,38 @@ public class CCatalogoEstudiante extends CGeneral {
 
 	}
 
-	// Metodo que luego de presionar doble click sobre una fila del catalogo
-	// almacena los datos en un mapa, para luego colocarlos en la vista
-	// correspondiente
+	/*
+	 * Metodo que permite obtener el objeto Estudiante al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su cedula,
+	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbEstudiante")
 	public void mostrarDatosCatalogo() {
-		
+
 		if (vistaRecibida == null) {
 
 			vistaRecibida = "maestros/VEstudiante";
 
 		} else {
-		if(ltbEstudiante.getItemCount()!=0){
-		Listitem listItem = ltbEstudiante.getSelectedItem();
-		Estudiante estudianteDatosCatalogo = (Estudiante) listItem.getValue();
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
+			if (ltbEstudiante.getItemCount() != 0) {
+				Listitem listItem = ltbEstudiante.getSelectedItem();
+				Estudiante estudianteDatosCatalogo = (Estudiante) listItem
+						.getValue();
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
+						.getCurrent().getAttribute("itemsCatalogo");
 
-		if (map2 != null)
-			map = map2;
+				if (map2 != null)
+					map = map2;
 
-		map.put("cedula", estudianteDatosCatalogo.getCedula());
-		String vista = vistaRecibida;
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoEstudiante.onClose();
-		}
+				map.put("cedula", estudianteDatosCatalogo.getCedula());
+				String vista = vistaRecibida;
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+				Executions.sendRedirect("/vistas/arbol.zul");
+				wdwCatalogoEstudiante.onClose();
+			}
 		}
 	}
-
-	/**
-	 * Metodo para recibir la vista a la que va dirigida el catalogo
-	 * 
-	 * @date 15-12-2013
-	 */
 
 }
