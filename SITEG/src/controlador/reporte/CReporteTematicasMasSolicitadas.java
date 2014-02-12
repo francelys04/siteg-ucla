@@ -95,7 +95,9 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 	@Wire
 	private Combobox cmbEstatus;
 	@Wire
-	private Combobox cmbEtapaTeg;
+	private Combobox cmbFaseTeg;
+	@Wire
+	private Window wdwReporteTematicasMasSolicitadas;
 	@Wire
 	private Jasperreport jstVistaPrevia;
 
@@ -116,10 +118,8 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
-		String etapaTeg = cmbEtapaTeg.getValue();
+		String faseTeg = cmbFaseTeg.getValue();
 
-		// String estatus = cmbEstatus.getValue();
-		// System.out.println("es" + estatus);
 		Date fechaInicio = new Date();
 		Date fechaFin = new Date();
 		fechaInicio = dtbFechaInicio.getValue();
@@ -249,13 +249,15 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 				+ "DIRECCION DE PROGRAMA");
 			parametro.put("programaNombre", cmbPrograma.getValue());
 			parametro.put("areaNombre", cmbArea.getValue());
-			parametro.put("etapaTeg", etapaTeg);
+			parametro.put("faseTeg", faseTeg);
 			parametro.put("estatusProyectoTeg1", estatusProyectoTeg1);
 			parametro.put("estatusProyectoTeg2", estatusProyectoTeg2);
 			parametro.put("fechaInicio", fechaInicio);
 			parametro.put("fechaFin", fechaFin);
 			parametro.put("logoUcla", reporteImage + "logo ucla.png");
 			parametro.put("logoCE", reporteImage + "logo CE.png");
+			parametro.put("logoSiteg", reporteImage + "logo.png");
+			
 			jstVistaPrevia.setSrc(reporteSrc);
 			jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
 					tegsTematicasComparativo));
@@ -286,41 +288,37 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		}
 	}
 
-	@Listen("onSelect = #cmbEtapaTeg")
-	public void seleccionarEtapaTeg() throws JRException {
+	@Listen("onSelect = #cmbFaseTeg")
+	public void seleccionarfaseTeg() throws JRException {
 		List<String> listaComboEstatus = new ArrayList();
-		String etapaNombre = cmbEtapaTeg.getValue();
-		// cmbEstatus.setDisabled(false);
-		if (etapaNombre.equals("Proyecto")) {
+		String faseNombre = cmbFaseTeg.getValue();
+		if (faseNombre.equals("Proyecto")) {
 			estatusProyectoTeg1 = "Proyecto Factible";
 			estatusProyectoTeg2 = "Proyecto No Factible";
-
-			// listaComboEstatus.add("Factible");
-			// listaComboEstatus.add("No Factible");
-
 		}
-		if (etapaNombre.equals("Teg")) {
+		if (faseNombre.equals("Teg")) {
 			estatusProyectoTeg1 = "TEG Aprobado";
 			estatusProyectoTeg2 = "TEG Reprobado";
-
-			// listaComboEstatus.add("Aprobado");
-			// listaComboEstatus.add("Reprobado");
 		}
-		// cmbEstatus.setModel(new ListModelList<String>(listaComboEstatus));
 	}
-
 	@Listen("onClick = #btnCancelarTematicasSolicitadas")
 	public void cancelarTematicasSolicitadas() throws JRException {
 
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbArea.setDisabled(true);
-		cmbEtapaTeg.setValue("");
+		cmbFaseTeg.setValue("");
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
 
 		jstVistaPrevia.setSrc("");
 		jstVistaPrevia.setDatasource(null);
+	}
+	@Listen("onClick = #btnSalirTematicasSolicitadas")
+	public void salirTematicasSolicitadas() throws JRException {
+
+		cancelarTematicasSolicitadas();
+		wdwReporteTematicasMasSolicitadas.onClose();
 	}
 
 }
