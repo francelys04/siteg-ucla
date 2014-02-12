@@ -13,6 +13,9 @@
 			<west size="25%" flex="true" maxsize="250"
 				splittable="false" collapsible="true">
 				<tree id="treeMenu" width="99%">
+					<treecols>
+						<treecol label="Menu" />
+					</treecols>
 					<template name="model">
 						<treeitem context="menupopup">
 							<treerow>
@@ -40,19 +43,18 @@
 						</div>
 					</north>
 					<center autoscroll="true">
-						<div
-							style="background-image: url('../public/imagenes/portal/fondo.png'); background-repeat:no-repeat">
+						<div>
 							<include id="formularios"></include>
-
-
+							<image
+								src="/public/imagenes/portal/fondo.png" width="100%" height="100%"/>
 						</div>
 					</center>
 				</borderlayout>
 			</center>
 			<south height="20px" border="normal"
-				style="background-color:rgb(241, 249, 255)">
+				style="background-color: #3276b1">
 				<div align="center" style="margin:0 auto">
-					<label
+					<label style="color:white"
 						value=" SITEG © 2013 Elaborado por Singleton - Todos los Derechos Reservados">
 					</label>
 				</div>

@@ -1,17 +1,15 @@
-<window title="Catalogo Tutores Disponibles" border="normal" width="800px"
-	id="wdwCatalogoProfesorArea"
+<window title="Catalogo Tutores Disponibles" border="normal"
+	width="800px" id="wdwCatalogoProfesorArea"
 	apply="controlador.catalogo.CCatalogoProfesorTematica">
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
-		<!-- Lista de popus -->
+	<!-- Lista de popus -->
 	<popup id="pupSeleccionTutor">
-		<toolbarbutton
-			label="Doble clic para seleccionar el profesor" />
+		<toolbarbutton label="Doble clic para seleccionar el profesor" />
 	</popup>
 	<popup id="pupSalirCatalogo">
-		<toolbarbutton
-			label="Presione aquí para salir" />
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<!-- Fin de popus -->
 
@@ -59,22 +57,21 @@
 			</listitem>
 		</template>
 	</listbox>
-	<panel border="normal" width="95%"
-			style="margin-left:2%;margin-right:3%">
-			<panelchildren>
-				<div sclass="alert-info" align="center">
+	<separator />
+	<panel border="normal" width="100%">
+		<panelchildren>
+			<div sclass="alert-info" align="center">
+				<separator />
+				<div sclass="btn-group">
+
+					<button id="btnSalir" label="Salir" width="110px"
+						tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="7">
+					</button>
 					<separator />
-					<div sclass="btn-group">
-
-						<button id="btnSalir" label="Salir" width="110px" 
-						    tooltip="pupSalirCatalogo"
-							sclass="btn"
-							image="/public/imagenes/iconos/salir.png" tabindex="7">
-						</button>
-						<separator />
-					</div>
-
 				</div>
-			</panelchildren>
-		</panel>
+
+			</div>
+		</panelchildren>
+	</panel>
 </window>

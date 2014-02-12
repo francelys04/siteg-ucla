@@ -406,7 +406,7 @@
 							tabindex="13" tooltip="pupBtnCancelar">
 						</button>
 						<button id="btnSalirVerificarSolicitud"
-							width="110px" label="Salir" sclass="btn"
+							width="130px" label="Salir" sclass="btn"
 							image="/public/imagenes/iconos/salir.png" tabindex="14"
 							tooltip="pupBtnSalir">
 						</button>

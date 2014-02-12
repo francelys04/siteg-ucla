@@ -97,7 +97,7 @@ public class CContactanos extends CGeneral {
 									correoProgramas, cuerpo);
 
 							if (valor == true) {
-								Messagebox.show("Correo enviado",
+								Messagebox.show("Correo enviado exitosamente",
 										"Informacion", Messagebox.OK,
 										Messagebox.INFORMATION);
 								cancelarCorreo();
