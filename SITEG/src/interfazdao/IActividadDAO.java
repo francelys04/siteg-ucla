@@ -13,10 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IActividadDAO extends JpaRepository<Actividad, Long> {
 
-	@Query("select a from Actividad a where a.estatus=true")
-	public List<Actividad> buscarActividadesActivos();
-	
-	public List<Actividad> findByEstatusTrue(); //nuevo
+	public List<Actividad> findByEstatusTrue();
 
 	public Actividad findById(long id);
 	

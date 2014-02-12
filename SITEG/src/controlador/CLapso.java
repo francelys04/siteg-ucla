@@ -1,57 +1,36 @@
 package controlador;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.Actividad;
 import modelo.Condicion;
 import modelo.Lapso;
 import modelo.compuesta.CondicionPrograma;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
-import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoLapso;
 
-import servicio.SCondicion;
-import servicio.SLapso;
-import servicio.SPrograma;
-
+/*Controlador que permite realizar las operaciones basicas (CRUD)
+ * sobre la entidad Lapso*/
 @Controller
 public class CLapso extends CGeneral {
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
+	
 	CCatalogoLapso catalogo = new CCatalogoLapso();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SCondicion servicioCondicion = GeneradorBeans.getServicioCondicion();
 	@Wire
 	private Textbox txtNombreLapso;
 	@Wire
@@ -61,36 +40,19 @@ public class CLapso extends CGeneral {
 	@Wire
 	private Datebox dtbFinLapso;
 	@Wire
-	private Listbox ltbLapso;
-	@Wire
-	private Window wdwCatalogoLapso;
-	@Wire
-	private Textbox txtCedulaMostrarEstudiante;
-	@Wire
-	private Textbox txtNombreMostrarLapso;
-	@Wire
-	private Textbox txtFechaInicialMostrarLapso;
-	@Wire
-	private Textbox txtFechaFinalMostrarLapso;
-	@Wire
 	private Window wdwLapsoAcademico;
-
 	@Wire
 	private Button btnEliminarLapso;
-
 	@Wire
 	private Button btnGuardarLapso;
 	private long id = 0;
-	public static long idLapso = 0;
 
-	// Metodo para cargar el catalogo de lapsos academicos
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
 	public void inicializar(Component comp) {
-
-		List<Lapso> lapsos = servicioLapso.buscarActivos();
-		if (txtNombreLapso == null) {
-			ltbLapso.setModel(new ListModelList<Lapso>(lapsos));
-		}
 
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -113,7 +75,10 @@ public class CLapso extends CGeneral {
 
 	}
 
-	// Muestra el catalogo de lapsos
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnCatalogoLapsos")
 	public void buscarLapso() {
 
@@ -124,7 +89,8 @@ public class CLapso extends CGeneral {
 
 	}
 
-	// Guarda un lapso
+	/* Metodo que permite el guardado o modificacion de una entidad Lapso, asi como la
+	 * asignacion, de ser necesaria, de las condiciones por programa para el lapso actual */
 	@Listen("onClick = #btnGuardarLapso")
 	public void guardarLapsoAcademico() {
 
@@ -196,7 +162,7 @@ public class CLapso extends CGeneral {
 		}
 	}
 
-	// Elimina un lapso
+	/* Metodo que permite la eliminacion logica de una entidad Lapso */
 	@Listen("onClick = #btnEliminarLapso")
 	public void eliminarLapso() {
 		Messagebox.show("¿Desea eliminar los datos del lapso academico?",
@@ -219,7 +185,10 @@ public class CLapso extends CGeneral {
 
 	}
 
-	// Coloca todos los campos en blanco
+	/*
+	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
+	 * variable global id
+	 */
 	@Listen("onClick = #btnCancelarLapso")
 	public void cancelarLapso() {
 		btnEliminarLapso.setDisabled(true);
@@ -227,13 +196,13 @@ public class CLapso extends CGeneral {
 		dtbInicioLapso.setValue(null);
 		dtbFinLapso.setValue(null);
 		btnEliminarLapso.setDisabled(true);
+		id=0;
 	}
 	
+	/* Metodo que permite cerrar la ventana correspondiente a los lapsos academicos */
 	@Listen("onClick = #btnSalirLapso")
 	public void salirLapso() {
-		
 		wdwLapsoAcademico.onClose();
-		
 	}
 
 }

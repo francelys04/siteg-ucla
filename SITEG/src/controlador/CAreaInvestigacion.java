@@ -1,11 +1,6 @@
 package controlador;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import javax.persistence.GeneratedValue;
 import modelo.AreaInvestigacion;
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -16,31 +11,20 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-
-import servicio.SAreaInvestigacion;
-import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoAreaInvestigacion;
-//constructor de la clases area de investigacion y de su catalogo
+
+/*Controlador que permite realizar las operaciones basicas (CRUD)
+ * sobre la entidad AreaInvestigacion*/
 @Controller
 public class CAreaInvestigacion extends CGeneral {
-	//servicio 
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	
 
-	//atributos de la vista de registrar area
 	@Wire
 	private Textbox txtNombreArea;
 	@Wire
 	private Textbox txtDescripcionArea;
-	
-   //atributos del catalogo de area
-	@Wire
-	private Listbox ltbArea;
 	@Wire
 	private Window wdwCatalogoArea;
 	@Wire
@@ -52,17 +36,13 @@ public class CAreaInvestigacion extends CGeneral {
 	@Wire
 	private Window wdwArea;
 	private long id = 0;
-	
 
-	
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
 	public void inicializar(Component comp) {
-
-		//busca todas las areas y llena un listado
-		List<AreaInvestigacion> area = servicioArea.buscarActivos();
-
-		if(txtNombreArea==null){
-			ltbArea.setModel(new ListModelList<AreaInvestigacion>(area));
-			}
 
 		Selectors.wireComponents(comp, this, false);
 
@@ -73,20 +53,23 @@ public class CAreaInvestigacion extends CGeneral {
 			if (map.get("id") != null) {
 
 				long codigo = (Long) map.get("id");
-				AreaInvestigacion a = servicioArea
-						.buscarArea(codigo);
-				txtNombreArea.setValue(a.getNombre());
-				txtDescripcionArea.setValue(a.getDescripcion());
-				id = a.getId();
+				AreaInvestigacion area = servicioArea.buscarArea(codigo);
+				txtNombreArea.setValue(area.getNombre());
+				txtDescripcionArea.setValue(area.getDescripcion());
+				id = area.getId();
 				btnEliminarArea.setDisabled(false);
 				map.clear();
 				map = null;
-				
+
 			}
 		}
 
 	}
-//abre la ventana del catalogo
+
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnBuscarArea")
 	public void buscarArea() {
 		CCatalogoAreaInvestigacion areas = new CCatalogoAreaInvestigacion();
@@ -98,14 +81,18 @@ public class CAreaInvestigacion extends CGeneral {
 		catalogo.recibir("maestros/VAreaInvestigacion");
 
 	}
-//guarda un area
+
+	/*
+	 * Metodo que permite el guardado o modificacion de una entidad
+	 * AreaInvestigacion
+	 */
 	@Listen("onClick = #btnGuardarArea")
 	public void guardarArea() {
-		if(txtNombreArea.getText().compareTo("")==0 
-			|| txtDescripcionArea.getText().compareTo("")==0){
+		if (txtNombreArea.getText().compareTo("") == 0
+				|| txtDescripcionArea.getText().compareTo("") == 0) {
 			Messagebox.show("Debe completar todos los campos", "Error",
-					Messagebox.OK, Messagebox.ERROR);			
-		}else{
+					Messagebox.OK, Messagebox.ERROR);
+		} else {
 			Messagebox.show("¿Desea guardar el area de investigacion?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
@@ -114,48 +101,54 @@ public class CAreaInvestigacion extends CGeneral {
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
 								String nombre = txtNombreArea.getValue();
-								String descripcion = txtDescripcionArea.getValue();
+								String descripcion = txtDescripcionArea
+										.getValue();
 								Boolean estado = true;
-								AreaInvestigacion area = new AreaInvestigacion(id, nombre,descripcion, estado);
+								AreaInvestigacion area = new AreaInvestigacion(
+										id, nombre, descripcion, estado);
 								servicioArea.guardar(area);
-								 Messagebox.show("Area de investigacion registrada exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+								Messagebox
+										.show("Area de investigacion registrada exitosamente",
+												"Informacion", Messagebox.OK,
+												Messagebox.INFORMATION);
 								cancelarArea();
 								id = 0;
-								
+
 							}
 						}
 					});
-			
-			
-			
-		
-		
 		}
 	}
-//elimina un area
+
+	/* Metodo que permite la eliminacion logica de una entidad AreaInvestigacion */
 	@Listen("onClick = #btnEliminarArea")
 	public void eliminarArea() {
-		Messagebox.show("¿Desea eliminar los datos del de area de investigacion?",
-				"Dialogo de confirmacion", Messagebox.OK
-						| Messagebox.CANCEL, Messagebox.QUESTION,
-				new org.zkoss.zk.ui.event.EventListener() {
-					public void onEvent(Event evt)
-							throws InterruptedException {
+		Messagebox.show(
+				"¿Desea eliminar los datos del de area de investigacion?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-							AreaInvestigacion area = servicioArea.buscarArea(id);
+							AreaInvestigacion area = servicioArea
+									.buscarArea(id);
 							area.setEstatus(false);
 							servicioArea.guardar(area);
-							 Messagebox.show("Area de investigacion eliminada exitosamente","Informacion", Messagebox.OK,Messagebox.INFORMATION); 
+							Messagebox
+									.show("Area de investigacion eliminada exitosamente",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 							cancelarArea();
-							
-							
+
 						}
 					}
 				});
-		
 
 	}
-//limpia los campos de la ventana
+
+	/*
+	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
+	 * variable global id
+	 */
 	@Listen("onClick = #btnCancelarArea")
 	public void cancelarArea() {
 
@@ -163,16 +156,14 @@ public class CAreaInvestigacion extends CGeneral {
 		txtDescripcionArea.setValue("");
 		btnEliminarArea.setDisabled(true);
 		id = 0;
-
 	}
-	
-	
+
+	/*
+	 * Metodo que permite cerrar la ventana correspondiente a las areas de
+	 * investigacion
+	 */
 	@Listen("onClick = #btnSalirArea")
 	public void salirArea() {
-
 		wdwArea.onClose();
-
 	}
-
 }
-
