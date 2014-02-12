@@ -1,6 +1,6 @@
-<window id="wdwReporteTematicasMasSolicitadas"
-	title="Tematicas con mas solicitudes"
-	border="normal" width="60%" height="auto" closable="true" apply="controlador.reporte.CReporteTematicasMasSolicitadas">
+<window id="wdwReporteProfesorCargo"
+	title="Tematicas mas Solicitadas"
+	border="normal" width="100%" height="400px" closable="true" apply="controlador.reporte.CReporteTematicasMasSolicitadas">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -32,45 +32,17 @@
 		background: white; border-top: none; }
 
 	</style>
-<!-- Lista de popus -->
-	<popup id="pupSeleccionarFechaDesde">
-		<toolbarbutton
-			label="Presione aquí para seleccionar la fecha de inicio del registro" />
-	</popup>
-	<popup id="pupSeleccionarFechaHasta">
-		<toolbarbutton
-			label="Presione aquí para seleccionar la fecha de fin del registro" />
-	</popup>
-	<popup id="pupSeleccionarPrograma">
-		<toolbarbutton
-			label="Presione aquí para seleccionar el programa" />
-	</popup>
-	<popup id="pupSeleccionarArea">
-		<toolbarbutton
-			label="Presione aquí para seleccionar el area" />
-	</popup>
-	<popup id="pupSeleccionarFase">
-		<toolbarbutton
-			label="Presione aquí para seleccionar la fase del teg" />
-	</popup>
-	<popup id="pupGenerarReporte">
-		<toolbarbutton
-			label="Presione aqui para mostrar el reporte" />
-	</popup>
-		<popup id="pupCancelarReporte">
-		<toolbarbutton
-			label="Presione aqui para limpiar los campos" /></popup>
-	<popup id="pupSalirReporte">
-		<toolbarbutton
-			label="Presione aqui para salir del reporte" />
-	</popup>
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+
+
 	<separator />
 	<separator />
 	<!-- <label value="(*) "
 		style="font-weight:bold;color:red;margin-center:2%">
 		</label> -->
 
-	<label value="Filtrado de busqueda"
+	<label value=""
 		style="font-weight:bold;margin-left:35%;margin-right:20%">
 	</label>
 	<separator />
@@ -88,23 +60,52 @@
 				<column width="17%" height="17%" />
 			</columns>
 			<rows>
+
+				<row>
+					
+					<hlayout width="100%">
+						<label value="Fecha Inicio:"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbFechaInicio" cols="12" 
+						style="margin-right:30px;color:black !important;" width="100%"
+						format="dd/MM/yyyy" onCreate="self.value = new Date()" mold="rounded"
+						readonly="true">
+					</datebox>
+
+
+					<hlayout width="100%">
+						<label value="Fecha Fin:"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbFechaFin" cols="12"
+						style="margin-right:30px;color:black !important;" width="100%"
+						format="dd/MM/yyyy" onCreate="self.value = new Date()" mold="rounded"
+						readonly="true">
+					</datebox>
+
+				</row>
+
+
 				<row>
 					<hlayout>
 						<label value="Programa:"
 							style="font-weight:bold" />
 					</hlayout>
 
-					<combobox id="cmbPrograma" width="100%" tooltip="pupSeleccionarPrograma"
+					<combobox id="cmbPrograma" width="100%"
 						readonly="true">
 						<template name="model">
 							<comboitem label="${each.nombre}" id="${each.id}" />
 						</template>
 					</combobox>
+				
+				
 					<hlayout>
 						<label value="Area:" style="font-weight:bold"
 							width="100%" />
 					</hlayout>
-					<combobox id="cmbArea" width="100%" tooltip="pupSeleccionarArea"
+					<combobox id="cmbArea" width="100%"
 						readonly="true">
 						<template name="model">
 							<comboitem label="${each.nombre}"  id="${each.id}" />
@@ -117,40 +118,19 @@
 				<row>
 
 					<hlayout>
-						<label value="Fase:" style="font-weight:bold" />
+						<label value="Etapa del Teg:" style="font-weight:bold" />
 					</hlayout>
-					<combobox id="cmbFaseTeg" readonly="true" width="100%" tooltip="pupSeleccionarFase"
-						tabindex="12">
+					<combobox id="cmbFaseTeg" readonly="true" width="100%"
+						tabindex="12" tooltip="pupEtapa">
 						<comboitem label="Proyecto" />
 						<comboitem label="Teg" />
 
 					</combobox>
-			</row>
+				
 
-				<row>
-
-					<hlayout width="100%">
-						<label value="Fecha Inicio Registro:"
-							style="font-weight:bold" />
-					</hlayout>
-					<datebox id="dtbFechaInicio" cols="12" 
-						style="margin-right:30px;color:black !important;" width="100%" tooltip="pupSeleccionarFechaDesde"
-						format="short" onCreate="self.value = new Date()" mold="rounded"
-						readonly="true">
-					</datebox>
-
-
-					<hlayout width="100%">
-						<label value="Fecha Fin Registro:"
-							style="font-weight:bold" />
-					</hlayout>
-					<datebox id="dtbFechaFin" cols="12"
-						style="margin-right:30px;color:black !important;" width="100%" tooltip="pupSeleccionarFechaHasta"
-						format="short" onCreate="self.value = new Date()" mold="rounded"
-						readonly="true">
-					</datebox>
-
+	
 				</row>
+
 			</rows>
 		</grid>
 		<separator />
@@ -170,11 +150,11 @@
 				<separator />
 				<div sclass="btn-group">
 
-					<button id="btnGenerarTematicasSolicitadas" tooltip="pupGenerarReporte"
+					<button id="btnGenerarTematicasSolicitadas"
 						label="Generar Reporte" sclass="btn"
-						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
+						image="/public/imagenes/iconos/guardar.png" tabindex="13">
 					</button>
-					<button id="btnCancelarTematicasSolicitadas" tooltip="pupCancelarReporte"
+					<button id="btnCancelarTematicasSolicitadas"
 						label="Cancelar" sclass="btn"
 						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 					</button>
