@@ -292,16 +292,16 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		String etapaNombre = cmbEtapaTeg.getValue();
 		// cmbEstatus.setDisabled(false);
 		if (etapaNombre.equals("Proyecto")) {
-			estatusProyectoTeg1 = "Factible";
-			estatusProyectoTeg2 = "No Factible";
+			estatusProyectoTeg1 = "Proyecto Factible";
+			estatusProyectoTeg2 = "Proyecto No Factible";
 
 			// listaComboEstatus.add("Factible");
 			// listaComboEstatus.add("No Factible");
 
 		}
 		if (etapaNombre.equals("Teg")) {
-			estatusProyectoTeg1 = "Aprobado";
-			estatusProyectoTeg2 = "Reprobado";
+			estatusProyectoTeg1 = "TEG Aprobado";
+			estatusProyectoTeg2 = "TEG Reprobado";
 
 			// listaComboEstatus.add("Aprobado");
 			// listaComboEstatus.add("Reprobado");
