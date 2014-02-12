@@ -13,6 +13,8 @@ import javax.swing.JFileChooser;
 
 import modelo.Estudiante;
 import modelo.Programa;
+import modelo.Requisito;
+import modelo.compuesta.TegRequisito;
 import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -54,8 +57,11 @@ public class CCargarEstudiante extends CGeneral {
 	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 
 	@Wire
+	private Listbox ltbEstudiantesCargados;
+	@Wire
 	private Window wdwCargarEstudiante;
 	private File f;
+	private static List<Estudiante> estudiantesCargados;
 
 	@Listen("onClick = #btnCargarListaEstudiantes")
 	public void cargarEstudiante() {
@@ -80,6 +86,7 @@ public class CCargarEstudiante extends CGeneral {
 				FileReader fr = new FileReader(f);
 				BufferedReader br = new BufferedReader(fr);
 				String linea = null;
+				estudiantesCargados = new ArrayList<Estudiante>();
 
 				// si no esta vacio el txt empieza a leer hasta que no encuentre
 				// linea
@@ -127,19 +134,21 @@ public class CCargarEstudiante extends CGeneral {
 							correo, sexo, direccion, telefonomovil,
 							telefonofijo, estatus, p, usuario);
 
-					servicioEstudiante.guardar(estudiante);
+					estudiantesCargados.add(estudiante);
+
 				}
 				br.close();
 				fr.close();
-				Messagebox.show("Estudiantes registrados exitosamente",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
+				ltbEstudiantesCargados.setModel(new ListModelList<Estudiante>(
+						estudiantesCargados));
 
 			} catch (Exception ex) {
 
 				ex.printStackTrace();
 
 				Messagebox
-						.show("Debe elegir un archivo con el formato .txt para que los datos sean guardados correctamente",
+						.show("Debe elegir un archivo con el formato .txt para que los datos sean cargados correctamente",
 								"Error", Messagebox.OK, Messagebox.ERROR);
 			}
 		}
@@ -159,11 +168,40 @@ public class CCargarEstudiante extends CGeneral {
 
 	}
 
+	@Listen("onClick = #btnGuardarCargarEstudiante")
+	public void CargarEstudiante() {
+
+		Messagebox.show("¿Desea guardar los datos de los estudiantes?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+
+							for (int i = 0; i < estudiantesCargados.size(); i++) {
+
+								Estudiante estudiante = estudiantesCargados
+										.get(i);
+								servicioEstudiante.guardar(estudiante);
+
+							}
+
+							Messagebox
+									.show("Datos de los estudiantes guardados esxitosamente",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
+							ltbEstudiantesCargados.getItems().clear();
+							
+
+						}
+					}
+				});
+
+	}
+
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
 }

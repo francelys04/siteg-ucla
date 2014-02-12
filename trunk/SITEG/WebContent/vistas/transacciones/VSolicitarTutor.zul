@@ -1,8 +1,7 @@
 <window id="wdwSolicitarTutoria" title="Solicitar Tutor" border="normal"
-	width="750px" height="730px" closable="true" 
-	
-	apply="controlador.CSolicitarTutor" >
-	
+	width="750px" height="730px" closable="true"
+	apply="controlador.CSolicitarTutor">
+
 	<separator />
 
 	<style dynamic="true">
@@ -67,7 +66,7 @@
 	</label>
 	<separator />
 	<separator />
-<image id="imagenTutor" width="80px" height="50px" visible="false" />
+	<image id="imagenTutor" width="80px" height="50px" visible="false" />
 	<div align="right">
 		<label value="Fecha:"
 			style="margin-right:10px;font-weight:bold;color: rgb(0, 84, 122)">
@@ -200,7 +199,7 @@
 					<separator />
 					<grid sclass="fgrid" style="margin-left:2%">
 						<columns>
-							<column width="20%" height="30px" />
+							<column width="15%" height="30px" />
 						</columns>
 						<rows>
 							<row>
@@ -215,7 +214,8 @@
 								<hbox>
 
 									<textbox id="txtCedulaProfesor"
-										tabindex="7" width="100px"
+										style="color:black !important;" disabled="true" tabindex="7"
+										width="100px"
 										tooltiptext="Ingrese aqui la cedula del profesor" />
 
 									<button id="btnCatalogoProfesorArea"
@@ -236,7 +236,8 @@
 
 								<hbox>
 									<textbox id="txtNombreProfesor"
-										width="160px" tabindex="9"
+										style="color:black !important;" disabled="true" width="160px"
+										tabindex="9"
 										tooltiptext="Ingrese aqui el nombre del profesor" />
 
 									<hlayout>
@@ -247,7 +248,8 @@
 									</hlayout>
 
 									<textbox id="txtApellidoProfesor"
-										width="160px" style="margin-left:10px" tabindex="10"
+										disabled="true" width="160px"
+										style="margin-left:10px;color:black !important;" tabindex="10"
 										tooltiptext="Ingrese aqui el apellido del profesor" />
 								</hbox>
 							</row>
@@ -262,7 +264,8 @@
 								</hlayout>
 
 								<textbox id="txtCorreoProfesor"
-									width="180px" tabindex="11"
+									style="color:black !important;" disabled="true" width="180px"
+									tabindex="11"
 									tooltiptext="Ingrese aqui el correo del profesor" />
 
 
@@ -286,28 +289,6 @@
 				<column width="610px" height="20px" />
 			</columns>
 			<rows>
-			
-			<!--  
-				<row>
-					<hbox>
-						<hlayout>
-							<label value="*"
-								style="font-weight:bold;color:red" />
-							<label value="Programa:"
-								style="font-weight:bold" />
-						</hlayout>
-
-						<combobox id="cmbProgramaSolicitud"
-							width="220px" readonly="true" style="margin-left:30px"
-							tabindex="1">
-							<template name="model">
-								<comboitem label="${each.nombre}"
-									value="${each.id}" id="${each.id}" />
-							</template>
-						</combobox>
-					</hbox>
-				</row>
-			-->
 
 				<row>
 					<hbox>
@@ -320,7 +301,7 @@
 						</hlayout>
 
 						<combobox id="cmbAreaSolicitud" readonly="true"
-							width="170px" style="margin-left:60px" tabindex="2">
+							width="170px" style="margin-left:40px" tabindex="2">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
