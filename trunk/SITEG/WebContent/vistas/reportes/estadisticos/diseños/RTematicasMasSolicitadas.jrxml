@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTematicasMasSolicitadas" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" uuid="36ffbc72-cbd9-445b-a96c-f98bc807a7c7">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="206"/>
+	<property name="ireport.y" value="90"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<subDataset name="dataset1" uuid="c666fdd0-72bf-4a97-9beb-4ec2760da0c1"/>
 	<parameter name="titulo" class="java.lang.String"/>
@@ -191,7 +191,7 @@
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Tematicas con mas Solicitadas ]]></text>
+				<text><![CDATA[Tematicas con mas Solicitudes ]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
