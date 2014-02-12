@@ -163,12 +163,12 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button id="btnGuardarUsuarioEditar" tooltip="pupGuardarEditarUsuario"
+						<button id="btnGuardarEditarUsuario" tooltip="pupGuardarEditarUsuario"
 							label="Guardar" sclass="btn"
 							image="/public/imagenes/iconos/guardar.png" tabindex="13">
 						</button>
 
-						<button id="btnCancelarActividad" tooltip="pupCancelarEditarUsuario"
+						<button id="btnCancelarEditarUsuario" tooltip="pupCancelarEditarUsuario"
 							label="Cancelar" sclass="btn" tabindex="4"
 							image="/public/imagenes/iconos/limpiar.png">
 						</button>

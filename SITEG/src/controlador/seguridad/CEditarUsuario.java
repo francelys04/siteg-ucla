@@ -4,8 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+
 import javax.imageio.ImageIO;
 
+import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
 import org.springframework.security.core.Authentication;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -24,6 +28,7 @@ import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -83,11 +88,11 @@ public class CEditarUsuario extends CGeneral {
 
 	}
 
-	@Listen("onClick = #btnGuardarUsuarioEditar")
+	@Listen("onClick = #btnGuardarEditarUsuario")
 	public void editarUsuario(Event event) throws IOException {
 
 		if(txtClaveUsuarioNueva.getValue().equals(txtClaveUsuarioConfirmar.getValue())){
-			Messagebox.show("¿Desea guardar los cambios?",
+			Messagebox.show("ï¿½Desea guardar los cambios?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -140,9 +145,15 @@ public class CEditarUsuario extends CGeneral {
 	else {
 		Messagebox.show("No coinciden las claves", "Error",
 				Messagebox.OK, Messagebox.ERROR);
-		
-		
 	}
 }
+	
+	@Listen("onClick = #btnCancelarEditarUsuario")
+	public void cancelarUsuario() throws IOException {
+		txtClaveUsuarioNueva.setValue("");
+		txtClaveUsuarioConfirmar.setValue("");
+		imagenUsuarioEditar.setContent(new AImage(url));
+
+	}
 
 }
