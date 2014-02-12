@@ -48,10 +48,6 @@ import controlador.catalogo.CCatalogoEstudiante;
 public class CEstudiante extends CGeneral {
 
 	CCatalogoEstudiante catalogo = new CCatalogoEstudiante();
-
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	
 	@Wire
 	private Combobox cmbProgramaEstudiante;
