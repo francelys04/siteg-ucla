@@ -33,6 +33,8 @@ import controlador.CGeneral;
 @Controller
 public class CCatalogoCalificarDefensa extends CGeneral {
 
+	CCalificarDefensa ventanarecibida = new CCalificarDefensa();
+
 	@Wire
 	private Listbox ltbCalificarDefensa;
 	@Wire
@@ -49,70 +51,86 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 	private Textbox txtMostrarNombreTutorCalificar;
 	@Wire
 	private Textbox txtMostrarApellidoTutorCalificar;
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SJurado servicioj = GeneradorBeans.getServicioJurado();
-	CCalificarDefensa ventanarecibida = new CCalificarDefensa();
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
+	 * disponibles mediante el metodo "buscar()", recorriendolo uno a uno
+	 * para luego cargar una lista de estudiantes por teg donde mediante la
+	 * implementacion del servicio de busqueda se va obteniendo su nombre y su
+	 * apellido y se va seteando temporalmente en la variable estatus del teg
+	 * para poder visualizarlo en el componente lista de teg de la vista.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
-		List<Teg> t = buscar();
-		for (int i = 0; i < t.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(t.get(i));
-			String nombre = es.get(0).getNombre();
-			String apellido = es.get(0).getApellido();
-			t.get(i).setEstatus(nombre+" "+apellido);
+		List<Teg> teg = buscar();
+		for (int i = 0; i < teg.size(); i++) {
+			List<Estudiante> estudiante = servicioEstudiante
+					.buscarEstudiantePorTeg(teg.get(i));
+			String nombre = estudiante.get(0).getNombre();
+			String apellido = estudiante.get(0).getApellido();
+			teg.get(i).setEstatus(nombre + " " + apellido);
 		}
-		
-		ltbCalificarDefensa.setModel(new ListModelList<Teg>(t));
-		Selectors.wireComponents(comp, this, false);
 
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("tegCatalogo");
-
+		ltbCalificarDefensa.setModel(new ListModelList<Teg>(teg));
 	}
-//busca los tegs de un profesor el cual el estatus sea defensa asignada
+
+	/*
+	 * Metodo que permite retornar una lista de tegs dado a un profesor, donde
+	 * el estatus sea "Defensa Asignada"
+	 */
 	public List<Teg> buscar() {
-		List<Jurado> j = servicioj
+		List<Jurado> jurado = servicioJurado
 				.buscarTegDeProfesor(ObtenerUsuarioProfesor());
 
-		List<Teg> t = new ArrayList<Teg>();
-		for (int i = 0; i < j.size(); i++) {
-			Teg teg = j.get(i).getTeg();
+		List<Teg> tegs = new ArrayList<Teg>();
+		for (int i = 0; i < jurado.size(); i++) {
+			Teg teg = jurado.get(i).getTeg();
 
 			if (teg.getEstatus().equals("Defensa Asignada")) {
 
-				t.add(teg);
+				tegs.add(teg);
 			}
 		}
-		return t;
+		return tegs;
 	}
-//Permite hacer el filtrado en el catalogo
+
+	/*
+	 * Metodo que permite filtrar los tegs disponibles, donde dado a una lista
+	 * de estudiantes que se carga con la implementacion del servicio de
+	 * busqueda, se obtiene a su vez el nombre y apellido del estudiante y se
+	 * setea en la variable estatus por cada teg,, donde se podra visualizar
+	 * mediante el componente lista de la vista el nombre y apellido del
+	 * estudiante, la fecha, la tematica, el area, el titulo y el nombre y
+	 * apellido del tutor.
+	 */
 	@Listen("onChange = #txtMostrarFechaCalificar,#txtMostrarTematicaCalificar,#txtMostrarAreaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,# txtMostrarApellidoTutorCalificar")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscar();
 		for (int i = 0; i < teg1.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			List<Estudiante> es = servicioEstudiante
+					.buscarEstudiantePorTeg(teg1.get(i));
 			String nombre = es.get(0).getNombre();
 			String apellido = es.get(0).getApellido();
-			teg1.get(i).setEstatus(nombre+" "+apellido);
+			teg1.get(i).setEstatus(nombre + " " + apellido);
 		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
-			if (servicioEstudiante.buscarEstudiantePorTeg(teg)
+			if (servicioEstudiante
+					.buscarEstudiantePorTeg(teg)
 					.get(0)
 					.getNombre()
 					.toLowerCase()
 					.contains(
 							txtEstudianteCalificarDefensa.getValue()
 									.toLowerCase())
-					&&teg.getFecha()
-					.toString()
-					.toLowerCase()
-					.contains(txtMostrarFechaCalificar.getValue().toLowerCase())
+					&& teg.getFecha()
+							.toString()
+							.toLowerCase()
+							.contains(
+									txtMostrarFechaCalificar.getValue()
+											.toLowerCase())
 
 					&& teg.getTematica()
 							.getNombre()
@@ -155,24 +173,30 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 		ltbCalificarDefensa.setModel(new ListModelList<Teg>(teg2));
 
 	}
-//permite mapear los datos a la vista calificar defensa
+
+	/*
+	 * Metodo que permite obtener el objeto Teg al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+	 * para luego poder ser mapeado dado a su id y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbCalificarDefensa")
 	public void mostrarDatosCatalogo() {
-		if(ltbCalificarDefensa.getItemCount()!=0){
-		Listitem listItem = ltbCalificarDefensa.getSelectedItem();
-		if(listItem!=null){
-		Teg tegDatosCatalogo = (Teg) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", tegDatosCatalogo.getId());
-		String vista = "transacciones/VCalificarDefensa";
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("tegCatalogo", map);
+		if (ltbCalificarDefensa.getItemCount() != 0) {
+			Listitem listItem = ltbCalificarDefensa.getSelectedItem();
+			if (listItem != null) {
+				Teg tegDatosCatalogo = (Teg) listItem.getValue();
+				final HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("id", tegDatosCatalogo.getId());
+				String vista = "transacciones/VCalificarDefensa";
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("tegCatalogo", map);
 
-		Window window = (Window) Executions.createComponents(
-				"/vistas/transacciones/VCalificarDefensa.zul", null, null);
-		window.doModal();
-		ventanarecibida.recibir("catalogos/VCatalogoCalificarDefensa");
+				Window window = (Window) Executions.createComponents(
+						"/vistas/transacciones/VCalificarDefensa.zul", null,
+						null);
+				window.doModal();
+				ventanarecibida.recibir("catalogos/VCatalogoCalificarDefensa");
+			}
 		}
-	}
 	}
 }

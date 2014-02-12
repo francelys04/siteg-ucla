@@ -25,12 +25,16 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 
+import servicio.SActividad;
+import servicio.SArchivo;
 import servicio.SAreaInvestigacion;
 import servicio.SCondicionPrograma;
 import servicio.SDefensa;
 import servicio.SEstudiante;
 import servicio.SJurado;
+import servicio.SLapso;
 import servicio.SProfesor;
+import servicio.SPrograma;
 import servicio.SProgramaArea;
 import servicio.SSolicitudTutoria;
 import servicio.STeg;
@@ -60,6 +64,13 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 	protected SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
 	protected STematica servicioTematica = GeneradorBeans.getSTematica();
 	protected SSolicitudTutoria servicioSolicitudTutoria = GeneradorBeans.getServicioTutoria();
+	protected SActividad servicioActividad = GeneradorBeans.getServicioActividad();
+	protected SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
+	protected SLapso servicioLapso = GeneradorBeans.getServicioLapso();
+	protected SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+	
+	
+	
 	/*
 	 * Metodo para inicializar componentes implementado en todos los controladores
 	 */
