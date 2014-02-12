@@ -29,7 +29,8 @@ import controlador.CGeneral;
 @Controller
 public class CCatalogoActividad extends CGeneral {
 
-	SActividad servicioActividad = GeneradorBeans.getServicioActividad();
+	private long id = 0;
+	private static String vistaRecibida;
 
 	@Wire
 	private Listbox ltbActividad;
@@ -40,45 +41,34 @@ public class CCatalogoActividad extends CGeneral {
 	@Wire
 	private Window wdwCatalogoActividad;
 	@Wire
-	private Textbox txtNombreActividad;
-	@Wire
-	private Textbox txtDescripcionActividad;
-	private long id = 0;
-	@Wire
 	private Window wdwActividad;
 
-	private static String vistaRecibida;
-
-	/**
-	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
-	 * tanto VActividad como VCatalogoActividad
-	 * 
-	 * @date 09-12-2013
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se se buscan todas las
+	 * actividades disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
 	 */
-
 	public void inicializar(Component comp) {
 
-		// busca todas las areas y llena un listado
 		List<Actividad> actividad = servicioActividad.buscarActivos();
-
-		if (txtNombreActividad == null) {
-			ltbActividad.setModel(new ListModelList<Actividad>(actividad));
-		}
-
-		Selectors.wireComponents(comp, this, false);
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-
+		ltbActividad.setModel(new ListModelList<Actividad>(actividad));
 	}
 
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	// Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
-	// descripcion
+	/*
+	 * Metodo que permite filtrar las actividades disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre y la
+	 * descripcion de estas.
+	 */
 	@Listen("onChange = #txtNombreMostrarActividad,#txtDescripcionMostrarActividad")
 	public void filtrarDatosCatalogo() {
 		List<Actividad> actividad1 = servicioActividad.buscarActivos();
@@ -104,20 +94,24 @@ public class CCatalogoActividad extends CGeneral {
 
 	}
 
-	// Aca se selecciona una actividad del catalogo
+	/*
+	 * Metodo que permite obtener el objeto Actividad al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+	 * para luego poder ser enviada mediante un map a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbActividad")
 	public void mostrarDatosCatalogo() {
-		if(ltbActividad.getItemCount() !=0){
-		Listitem listItem = ltbActividad.getSelectedItem();
-		Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", actividadDatosCatalogo.getId());
-		String vista = vistaRecibida;
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
+		if (ltbActividad.getItemCount() != 0) {
+			Listitem listItem = ltbActividad.getSelectedItem();
+			Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
+			final HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("id", actividadDatosCatalogo.getId());
+			String vista = vistaRecibida;
+			map.put("vista", vista);
+			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+			Executions.sendRedirect("/vistas/arbol.zul");
 
-		wdwCatalogoActividad.onClose();
+			wdwCatalogoActividad.onClose();
 		}
 	}
 

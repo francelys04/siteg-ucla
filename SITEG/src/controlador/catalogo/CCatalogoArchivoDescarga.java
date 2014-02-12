@@ -19,14 +19,15 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import servicio.SArchivo;
 
-
 import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 @Controller
 public class CCatalogoArchivoDescarga extends CGeneral {
 
-	SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
+	private long id = 0;
+	private static boolean encontrado = true;
+	private static String vistaRecibida;
 
 	@Wire
 	private Listbox ltbArchivoDescarga;
@@ -38,62 +39,40 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 	private Textbox txtProgramaMostrarArchivoDescarga;
 	@Wire
 	private Window wdwCatalogoArchivoDescarga;
-	@Wire
-	private Textbox txtNombreActividadDescarga;
-	@Wire
-	private Textbox txtDescripcionActividadDescarga;
-	
-	private long id = 0;
-	private static boolean encontrado=true;
-	
-    
 
-	private static String vistaRecibida;
-
-	/**
-	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
-	 * tanto VActividad como VCatalogoActividad
-	 * 
-	 * @date 09-12-2013
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se se buscan todos los
+	 * archivos disponibles de Descarga y se llena el listado del mismo en el
+	 * componente lista de la vista.
 	 */
 	public void inicializar(Component comp) {
-
-		/*
-		 * Listado de todos las actividades que se encuentran activos, cuyo
-		 * estatus=true con el servicioActividad mediante el metodo
-		 * buscarActivos
-		 */
 		List<Archivo> archivo = servicioArchivo.buscarActivos("Descarga");
 		ltbArchivoDescarga.setModel(new ListModelList<Archivo>(archivo));
-			
-		
-
-		Selectors.wireComponents(comp, this, false);
-
-	
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("archivoCatalogo");
-		/*
-		 * Validacion para vaciar la informacion del VActividad a la vista
-		 * VActividad.zul si la varible map tiene algun dato contenido
-		 */
-
 	}
 
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
-	public void metodoApagar(){
-		encontrado=false;
-	}
-	public void metodoPrender(){
-		encontrado=true;
+
+	public void metodoApagar() {
+		encontrado = false;
 	}
 
-	// Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
-	// descripcion
+	public void metodoPrender() {
+		encontrado = true;
+	}
+
+	/*
+	 * Metodo que permite filtrar los archivos disponibles de Teg, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre, la
+	 * descripcion y el programa de estos.
+	 */
 	@Listen("onChange = #txtNombreMostrarArchivoDescarga,#txtDescripcionMostrarArchivoDescarga,#txtProgramaMostrarArchivoDescarga")
 	public void filtrarDatosCatalogo() {
 		List<Archivo> archivo1 = servicioArchivo.buscarActivos("Descarga");
@@ -104,20 +83,21 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 					.getNombre()
 					.toLowerCase()
 					.contains(
-							txtNombreMostrarArchivoDescarga.getValue().toLowerCase())
+							txtNombreMostrarArchivoDescarga.getValue()
+									.toLowerCase())
 					&& archivo
 							.getDescripcion()
 							.toLowerCase()
 							.contains(
-									txtDescripcionMostrarArchivoDescarga.getValue()
-											.toLowerCase())
-						&& archivo
-							.getPrograma().getNombre()
+									txtDescripcionMostrarArchivoDescarga
+											.getValue().toLowerCase())
+					&& archivo
+							.getPrograma()
+							.getNombre()
 							.toLowerCase()
 							.contains(
-									txtProgramaMostrarArchivoDescarga.getValue()
-											.toLowerCase()))
-			{
+									txtProgramaMostrarArchivoDescarga
+											.getValue().toLowerCase())) {
 				archivo2.add(archivo);
 			}
 		}
@@ -126,38 +106,46 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 
 	}
 
-	
-	//si encontrado = true permite descargar un archivo en infromacion de interes
-	//si no mapea los datos a lhacia las vista VArchivoDescarga
+	/*
+	 * Metodo que permite dado al retorno de la variable booleana de
+	 * encontrado, si es "true", se obtendra el objeto Archivo al realizar el
+	 * evento doble clic sobre un item en especifico en la lista, y se extraera
+	 * su id, para luego implementar el servicio de busqueda y cargar otro
+	 * objeto Archivo la cual mediante la instruccion Filedownload.save podra
+	 * ser descargado en una ubicacion que le indique el usuario. Sino, si la
+	 * variable encontrado es igual a "false" el objeto extraido al seleccionar
+	 * un item de la lista, sera mapeada con su id para ser enviada a la vista
+	 * VSubirArchivoDescarga.
+	 */
 	@Listen("onDoubleClick = #ltbArchivoDescarga")
-	public void descargarArchivo(){
+	public void descargarArchivo() {
 		try {
-		if(ltbArchivoDescarga.getItemCount()!=0){
-		if (encontrado==true) {
-			Listitem listItem = ltbArchivoDescarga.getSelectedItem();
-			Archivo archivo3= (Archivo) listItem.getValue();		
-			Archivo archivo4 = servicioArchivo.buscarArchivo(archivo3.getId());
-			Filedownload.save(archivo4.getContenidoDocumento(), archivo4.getTipoDocumento(), archivo4.getNombre());
-			
-		}else{
-			Listitem listItem = ltbArchivoDescarga.getSelectedItem();
-			Archivo archivo = (Archivo) listItem.getValue();
-			final HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", archivo.getId());
-			String vista = "portal-web/VSubirArchivoDescarga";
-			map.put("vista", vista);
-			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			Executions.sendRedirect("/vistas/arbol.zul");
-			wdwCatalogoArchivoDescarga.onClose();
-			
-			
-		}
-		}
+			if (ltbArchivoDescarga.getItemCount() != 0) {
+				if (encontrado == true) {
+					Listitem listItem = ltbArchivoDescarga.getSelectedItem();
+					Archivo archivo3 = (Archivo) listItem.getValue();
+					Archivo archivo4 = servicioArchivo.buscarArchivo(archivo3
+							.getId());
+					Filedownload.save(archivo4.getContenidoDocumento(),
+							archivo4.getTipoDocumento(), archivo4.getNombre());
+
+				} else {
+					Listitem listItem = ltbArchivoDescarga.getSelectedItem();
+					Archivo archivo = (Archivo) listItem.getValue();
+					final HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("id", archivo.getId());
+					String vista = "portal-web/VSubirArchivoDescarga";
+					map.put("vista", vista);
+					Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+					Executions.sendRedirect("/vistas/arbol.zul");
+					wdwCatalogoArchivoDescarga.onClose();
+
+				}
+			}
 		} catch (NullPointerException e) {
 
 			System.out.println("NullPointerException");
 		}
 	}
-	
 
 }
