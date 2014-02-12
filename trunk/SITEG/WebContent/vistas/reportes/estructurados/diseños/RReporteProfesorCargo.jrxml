@@ -41,15 +41,12 @@
 	</background>
 	<title>
 		<band height="69" splitType="Stretch">
-			<line>
-				<reportElement x="-22" y="63" width="618" height="1" uuid="9169f7ba-fddf-44c4-b5e1-7b168cae821a"/>
-			</line>
 			<image>
-				<reportElement x="490" y="4" width="82" height="54" uuid="badd9d1c-0382-47bd-be91-fa905d5d0325"/>
+				<reportElement x="490" y="6" width="82" height="54" uuid="badd9d1c-0382-47bd-be91-fa905d5d0325"/>
 				<imageExpression><![CDATA["/reporte/logo dcyt.png"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="1" y="0" width="74" height="58" uuid="51c8a38b-3e5f-438c-b875-bdceeaa3cfc4"/>
+				<reportElement x="1" y="5" width="74" height="58" uuid="51c8a38b-3e5f-438c-b875-bdceeaa3cfc4"/>
 				<imageExpression><![CDATA["/reporte/logo ucla.png"]]></imageExpression>
 			</image>
 			<staticText>
@@ -59,6 +56,18 @@
 				</textElement>
 				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
 			</staticText>
+			<line>
+				<reportElement x="-25" y="68" width="621" height="1" forecolor="#0066FF" uuid="0c9ed515-6476-4091-b997-b6b845522291"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-25" y="1" width="621" height="1" uuid="11be206c-bd1f-4220-a86e-d06500c225d8"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineColor="#0066FF"/>
+				</graphicElement>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
