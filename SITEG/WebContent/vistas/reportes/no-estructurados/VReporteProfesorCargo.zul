@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesorCargo" 
 	title="Lista profesores con los cargos que desempeñan en Trabajos especiales de grado " 
-	border="normal" width="60%" height="500px" closable="true"  apply="controlador.reporte.CReporteProfesorCargo"
+	border="normal" width="60%" height="500px" closable="true"  apply="controlador.reporte.CReporteProfesor"
 >
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -34,6 +34,46 @@
 
 	</style>
 	
+		<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+		
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionarPrograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
+	</popup>
+	<popup id="pupSeleccionarArea">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el area" />
+	</popup>
+	<popup id="pupSeleccionarTematica">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la temática" />
+	</popup>
+	<popup id="pupSeleccionarRol">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el rol" />
+	</popup>
+	<popup id="pupInicioLapso">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de inicio de Teg" />
+	</popup>
+	<popup id="pupFinLapso">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de fin de Teg" />
+	</popup>
+	
+	<popup id="pupGenerarReporte">
+		<toolbarbutton
+			label="Presione aqui para mostrar el reporte" />
+	</popup>
+	<popup id="pupSalirReporte">
+		<toolbarbutton
+			label="Presione aqui para salir" />
+	</popup>
+	
+	<!-- Fin de popus -->
+	
 	<separator />
 	<separator />
 	<!-- <label value="(*) "
@@ -57,28 +97,7 @@
 					</columns>
 			<rows>  
 			
-				<row>
-					
-					<hlayout width="100%">
-							<label value="Fecha Inicio Registro:"
-							style="font-weight:bold" />
-			        </hlayout>
-							<datebox id="dtbCronogramaFechaInicio" cols="12"
-					     	style="margin-right:30px;color:black !important;" width="130px"
-					     	format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-							</datebox>
-
-					
-					<hlayout width="100%">
-						<label value="Fecha Fin Registro:" style="font-weight:bold" />
-					</hlayout>
-						<datebox id="dtbCronogramaFechaHasta" cols="12"
-				        style="margin-right:30px;color:black !important;" width="130px"
-				        format="short" onCreate="self.value = new Date()" mold="rounded" readonly="true">
-						</datebox>		
-													
-				</row>	
-				
+		
 				
 				<row>
 						<hlayout>
@@ -86,42 +105,68 @@
 							style="font-weight:bold" />
 					</hlayout>
 					
-						<combobox id="cmbPrograma" width="100%" readonly="true">
+					<combobox id="cmbPrograma" readonly="true" 
+							tabindex="1" width="200px" tooltip="pupSeleccionarPrograma">
 							<template name="model">
 							<comboitem label="${each.nombre}" />
 							</template>
 						</combobox>
+						
+						
 						<hlayout>
 							<label value="Area:" style="font-weight:bold" width="100%" />
 						</hlayout>
-							<combobox id="cmbArea" width="100%" readonly="true">
+						<combobox id="cmbArea" readonly="true"
+							tabindex="1" width="200px" tooltip="pupSeleccionarArea">
 							<template name="model">
 								<comboitem label="${each.nombre}" />
 							</template>
-							</combobox>
-						
-		
+								
 				</row>
 				
 				<row>
 				<hlayout>
 				    	<label value="Temática:" style="font-weight:bold" />
 					</hlayout>
-						<combobox id="cmbTematica" width="100%" readonly="true">
+					<combobox id="cmbTematica" readonly="true"
+						tabindex="1" width="200px" tooltip="pupSeleccionarTematica">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
-						</combobox>				
-					<hlayout>
+						</combobox>
 						<label value="Rol del profesor:"
 						style="font-weight:bold" />
 					</hlayout>				
-						<combobox id="cmbEstatus" width="100%" readonly="true">
+						<combobox id="cmbEstatus" readonly="true" 
+						tabindex="1" width="200px" tooltip="pupSeleccionarRol">
 							<template name="model">
 							<comboitem label="${each}" />
 							</template>
 						</combobox>		
 				</row>
+				
+						<row>
+					
+					<hlayout width="100%">
+							<label value="Fecha Inicio Registro:"
+							style="font-weight:bold" />
+			        </hlayout>
+							<datebox id="dtbCronogramaFechaInicio" cols="12" width="150px"
+						tabindex="3" format="dd/MM/yyyy" tooltip="pupInicioLapso"
+						style="margin-right:15px">
+						</datebox>
+
+					
+					<hlayout width="100%">
+						<label value="Fecha Fin Registro:" style="font-weight:bold" />
+					</hlayout>
+						<datebox id="dtbCronogramaFechaHasta"cols="12" width="150px"
+						tabindex="3" format="dd/MM/yy" tooltip="pupFinLapso"
+						style="margin-right:15px">
+						</datebox>		
+													
+				</row>	
+				
 					
 		</rows>		
 		</grid>
@@ -143,11 +188,11 @@
 				<div sclass="btn-group">
 
 					<button id="btnGenerarReporteProfesorCargo"
-						label="Generar Reporte" sclass="btn"
+						label="Generar Reporte" sclass="btn" tooltip="pupGenerarReporte"
 						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
 					</button>
 					<button id="btnSalirReporteProfesorCargo"
-						label="Cancelar" sclass="btn"
+						label="Cancelar" sclass="btn" tooltip="pupSalirReporte"
 						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
 					</button>
 					<separator />
