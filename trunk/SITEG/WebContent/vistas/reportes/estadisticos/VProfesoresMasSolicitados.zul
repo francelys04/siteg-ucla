@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesorMasSolicitados"
 	title="Profesores con mas Solicitudes de Tutoria" border="normal"
-	width="60%" height="300px" closable="true"
+	width="100%" height="400px" closable="true"
 	apply="controlador.reporte.CReporteProfesoresMasSolicitados">
 
 	<style dynamic="true">
@@ -34,6 +34,9 @@
 		background: white; border-top: none; }
 
 	</style>
+	
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<separator />
 	<separator />
@@ -53,13 +56,35 @@
 		<separator />
 		<grid sclass="fgrid">
 			<columns>
-				<column width="50%" height="17%" />
-				<column width="50%" height="17%" />
+				<column width="17%" height="17%" />
 			</columns>
 			<rows>
+			<row>
+					
+						<hlayout width="100%">
+							<label value="Fecha Inicio:"
+								style="font-weight:bold"/>
+						</hlayout>
+						<datebox
+							id="dtbInicioReporteProfesoresSolicitados" cols="12" readonly="true"
+							style="margin-right:30px;color:black !important;"
+							 mold="rounded" width="100%"  format="dd/MM/yyyy">
+						</datebox>
+					
+					
+						<hlayout width="100%">
+							<label value="Fecha Fin:"
+								style="font-weight:bold"  />
+						</hlayout>
+						<datebox id="dtbFinReporteProfesoresSolicitados" cols="12"
+						style="margin-right:30px;color:black !important;"
+							readonly="true"  mold="rounded" width="100%" format="dd/MM/yyyy">
+						</datebox>
+					
+				</row>
 				<row>
-					<hbox>
-						<hlayout width="100px">
+				
+						<hlayout >
 							<label value="Programa "
 								style="font-weight:bold" />
 						</hlayout>
@@ -71,9 +96,11 @@
 									id="${each.id}" />
 							</template>
 						</combobox>
-					</hbox>
-					<hbox>
-						<hlayout width="100px">
+					
+					</row>
+					<row>
+					
+						<hlayout>
 							<label value="Area"
 								style="font-weight:bold" />
 						</hlayout>
@@ -85,11 +112,8 @@
 									id="${each.id}" />
 							</template>
 						</combobox>
-					</hbox>
-				</row>
-				<row>
-					<hbox>
-						<hlayout width="100px">
+				
+						<hlayout>
 							<label value="Temática"
 								style="font-weight:bold" />
 						</hlayout>
@@ -101,29 +125,9 @@
 									id="${each.id}" />
 							</template>
 						</combobox>
-					</hbox>
+					
 				</row>
-				<row>
-					<hbox>
-						<hlayout width="100px">
-							<label value="Fecha Inicio"
-								style="font-weight:bold" />
-						</hlayout>
-						<datebox
-							id="dtbInicioReporteProfesoresSolicitados" readonly="true"
-							format="short" mold="rounded" width="100%">
-						</datebox>
-					</hbox>
-					<hbox>
-						<hlayout width="100px">
-							<label value="Fecha Fin"
-								style="font-weight:bold" />
-						</hlayout>
-						<datebox id="dtbFinReporteProfesoresSolicitados"
-							readonly="true" format="short" mold="rounded" width="100%">
-						</datebox>
-					</hbox>
-				</row>
+				
 
 			</rows>
 		</grid>
@@ -145,9 +149,13 @@
 						label="Generar Reporte" sclass="btn"
 						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
 					</button>
-					<button id="btnSalirReporteProfesoresSolicitados"
+					<button id="btnCancelarReporteProfesoresSolicitados"
 						label="Cancelar" sclass="btn"
-						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
+						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					</button>
+					<button id="btnSalirReporteProfesoresSolicitados" tooltip="pupSalirReporte"
+						label="Salir" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="14">
 					</button>
 					<separator />
 				</div>

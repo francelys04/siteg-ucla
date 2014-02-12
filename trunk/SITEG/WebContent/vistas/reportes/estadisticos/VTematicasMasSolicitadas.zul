@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesorCargo"
-	title="Tematicas"
-	border="normal" width="60%" height="auto" closable="true" apply="controlador.reporte.CReporteTematicasMasSolicitadas">
+	title="Tematicas mas Solicitadas"
+	border="normal" width="100%" height="400px" closable="true" apply="controlador.reporte.CReporteTematicasMasSolicitadas">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -32,6 +32,9 @@
 		background: white; border-top: none; }
 
 	</style>
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+
 
 	<separator />
 	<separator />
@@ -39,7 +42,7 @@
 		style="font-weight:bold;color:red;margin-center:2%">
 		</label> -->
 
-	<label value="Tematicas Mas Solicitadas"
+	<label value=""
 		style="font-weight:bold;margin-left:35%;margin-right:20%">
 	</label>
 	<separator />
@@ -59,25 +62,25 @@
 			<rows>
 
 				<row>
-
+					
 					<hlayout width="100%">
-						<label value="Fecha Inicio Registro:"
+						<label value="Fecha Inicio:"
 							style="font-weight:bold" />
 					</hlayout>
 					<datebox id="dtbFechaInicio" cols="12" 
 						style="margin-right:30px;color:black !important;" width="100%"
-						format="short" onCreate="self.value = new Date()" mold="rounded"
+						format="dd/MM/yyyy" onCreate="self.value = new Date()" mold="rounded"
 						readonly="true">
 					</datebox>
 
 
 					<hlayout width="100%">
-						<label value="Fecha Fin Registro:"
+						<label value="Fecha Fin:"
 							style="font-weight:bold" />
 					</hlayout>
 					<datebox id="dtbFechaFin" cols="12"
 						style="margin-right:30px;color:black !important;" width="100%"
-						format="short" onCreate="self.value = new Date()" mold="rounded"
+						format="dd/MM/yyyy" onCreate="self.value = new Date()" mold="rounded"
 						readonly="true">
 					</datebox>
 
@@ -96,6 +99,8 @@
 							<comboitem label="${each.nombre}" id="${each.id}" />
 						</template>
 					</combobox>
+				
+				
 					<hlayout>
 						<label value="Area:" style="font-weight:bold"
 							width="100%" />
@@ -123,17 +128,7 @@
 					</combobox>
 				
 
-	<!-- 				<hlayout>
-						<label value="Estatus:" style="font-weight:bold" />
-					</hlayout>
-					<combobox id="cmbEstatus" readonly="true"
-						width="100%" tabindex="12" tooltip="pupEstatus">
-						<template name="model">
-							<comboitem label="${each}" />
-						</template>
-
-					</combobox>
-		 -->
+	
 				</row>
 
 			</rows>
@@ -162,6 +157,10 @@
 					<button id="btnCancelarTematicasSolicitadas"
 						label="Cancelar" sclass="btn"
 						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					</button>
+					<button id="btnSalirTematicasSolicitadas" tooltip="pupSalirReporte"
+						label="Salir" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="14">
 					</button>
 					<separator />
 				</div>
