@@ -235,9 +235,12 @@ public class CReporteProfesorTeg extends CGeneral {
 			p.put("apellido", profesor.getApellido());
 			p.put("fecha1", fechaInicio);
 			p.put("fecha2", fechaFin);
-			JasperReport jasperReport = (JasperReport) JRLoader
-					.loadObject(getClass().getResource(
-							"/reporte/RProyectosProfesor.jasper"));
+			 String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl
+						+ "SITEG/vistas/reportes/salidas/compilados/RProyectosProfesor.jasper";
+
+			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+			
 			JasperPrint jasperPrint = JasperFillManager.fillReport(
 					jasperReport, p, new JRBeanCollectionDataSource(tegs));
 			JasperExportManager.exportReportToPdfFile(jasperPrint, filesys

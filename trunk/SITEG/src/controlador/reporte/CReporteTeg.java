@@ -75,9 +75,10 @@ public class CReporteTeg extends CGeneral {
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
 	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SProgramaArea servicioProgramaArea = GeneradorBeans.getServicioProgramaArea();
+	SProgramaArea servicioProgramaArea = GeneradorBeans
+			.getServicioProgramaArea();
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	
+
 	@Wire
 	private Window wdwReporteTeg;
 	@Wire
@@ -287,6 +288,9 @@ public class CReporteTeg extends CGeneral {
 				p.put("Area", cmbArea.getValue());
 				p.put("Tematica", cmbTematica.getValue());
 				p.put("Estatus", cmbEstatus.getValue());
+				p.put("logoUcla", reporteImage + "logo ucla.png");
+				p.put("logoCE", reporteImage + "logo CE.png");
+				p.put("logoSiteg", reporteImage + "logo.png");
 
 				jstVistaPrevia.setSrc(reporteSrc);
 				jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(

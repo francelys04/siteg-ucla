@@ -64,17 +64,20 @@ public class CReporteActividades extends CGeneral {
 		     FileSystemView filesys = FileSystemView.getFileSystemView();
 		     List<Actividad> actividades = servicioActividad.buscarActivos();
 		     String rutaUrl = obtenerDirectorio();
-		    /* String reporteSrc = rutaUrl
+		     String reporteSrc = rutaUrl
 					 +
-					 "SITEG/vistas/reportes/estructurados/compilados/RActividades.jasper";*/
+					 "SITEG/vistas/reportes/salidas/compilados/RActividades.jasper";
 		     String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
 		     Map p = new HashMap();
 		     p.put("logoUcla", reporteImage + "logo ucla.png");
 			 p.put("logoCE", reporteImage + "logo CE.png");
+			 p.put("logoSiteg", reporteImage + "logo.png");
+			 
 		     
 		  
-		     JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/RActividades.jasper"));
-		     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,p, new JRBeanCollectionDataSource(actividades));
+
+			 JasperReport	jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);   
+			 JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,p, new JRBeanCollectionDataSource(actividades));
 		     JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ReporteActividades.pdf"); 
 		     Messagebox.show(
 				"Se ha generado exitosamente el reporte",

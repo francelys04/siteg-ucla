@@ -242,7 +242,10 @@ public class CReporteDefensa extends CGeneral {
 		p.put("tematica", nombreTematica);
 		p.put("programa", nombrePrograma);
 		p.put("estatus", tipoDefensa);
-
+		p.put("logoUcla", reporteImage + "logo ucla.png");
+		p.put("logoCE", reporteImage + "logo CE.png");
+		p.put("logoSiteg", reporteImage + "logo.png");
+		     
 		 jstVistaPrevia.setSrc(reporteSrc);
 		 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(elementos));
 		 jstVistaPrevia.setType("pdf");

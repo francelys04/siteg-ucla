@@ -272,6 +272,10 @@ public class CReporteInformeFactibilidad extends CGeneral {
 				
 				p.put("fecha", new Date());
 			    p.put("proyecto", proyecto);
+			    p.put("logoUcla", reporteImage + "logo ucla.png");
+			 	 p.put("logoCE", reporteImage + "logo CE.png");
+			     p.put("logoSiteg", reporteImage + "logo.png");
+			     
 			    System.out.println(proyecto);
 			    
 				 jstVistaPrevia.setSrc(reporteSrc);

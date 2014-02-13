@@ -254,6 +254,9 @@ public class CReporteProfesor extends CGeneral {
 			p.put("tematica", tematica1);
 			p.put("programa", programa1);
 			p.put("cargo", tipoCargo);
+			p.put("logoUcla", reporteImage + "logo ucla.png");
+			p.put("logoCE", reporteImage + "logo CE.png");
+			p.put("logoSiteg", reporteImage + "logo.png");
 
 		 jstVistaPrevia.setSrc(reporteSrc);
 		 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(

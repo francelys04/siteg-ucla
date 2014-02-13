@@ -211,12 +211,22 @@ public class CReporteProfesorTematica extends CGeneral {
 			}
 			FileSystemView filesys = FileSystemView.getFileSystemView();
 			Map<String, Object> p = new HashMap<String, Object>();
+			String rutaUrl = obtenerDirectorio();
+			String reporteSrc = rutaUrl
+					+ "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
+			String reporteImage = rutaUrl
+					+ "SITEG/public/imagenes/reportes/";
+
+		
 			p.put("titulo", "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
 					+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
 					+ "DIRECCION DE PROGRAMA");
 			p.put("tematica", tematica.getNombre());
 			p.put("area", tematica.getareaInvestigacion().getNombre());
 			p.put("programa", tematica.getareaInvestigacion().getProgramasAreas());
+			p.put("logoUcla", reporteImage + "logo ucla.png");
+			p.put("logoCE", reporteImage + "logo CE.png");
+			p.put("logoSiteg", reporteImage + "logo.png");
 			
 			JasperReport jasperReport = (JasperReport) JRLoader
 					.loadObject(getClass().getResource(

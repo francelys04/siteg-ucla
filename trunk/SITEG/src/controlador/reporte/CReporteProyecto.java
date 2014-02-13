@@ -252,6 +252,9 @@ public class CReporteProyecto extends CGeneral {
 					p.put("Area",cmbArea.getValue());
 					p.put("Tematica",cmbTematica.getValue());
 					p.put("Estatus",cmbEstatus.getValue());
+				    p.put("logoUcla", reporteImage + "logo ucla.png");
+					p.put("logoCE", reporteImage + "logo CE.png");
+					p.put("logoSiteg", reporteImage + "logo.png");
 
 		 jstVistaPrevia.setSrc(reporteSrc);
 		 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(

@@ -74,6 +74,13 @@ public class CReporteConfigurar extends CGeneral {
 		
 		try{
 			 FileSystemView filesys = FileSystemView.getFileSystemView();
+			  String rutaUrl = obtenerDirectorio();
+			     String reporteSrc = rutaUrl
+						 +
+						 "SITEG/vistas/reportes/salidas/compilados/report1.jasper";
+			     String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+			   
+			    
 			Map p = new HashMap();
 			
 			
@@ -83,7 +90,10 @@ public class CReporteConfigurar extends CGeneral {
 			
 		     p.put("nombreprograma", cmbConfiguracionPrograma.getValue());
 		     p.put("nombrelapso", cmbConfiguracionLapso.getValue());
-			 JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/report1.jasper"));
+		    p.put("logoUcla", reporteImage + "logo ucla.png");
+			 p.put("logoCE", reporteImage + "logo CE.png");
+			 p.put("logoSiteg", reporteImage + "logo.png");
+			 JasperReport jasperReport = (JasperReport)JRLoader.loadObject(reporteSrc);
 			
 		     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,p,com);
 		    

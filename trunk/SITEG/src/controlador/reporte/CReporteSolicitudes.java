@@ -36,11 +36,10 @@ import servicio.SPrograma;
 import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
-
 @Controller
 public class CReporteSolicitudes extends CGeneral {
 	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	
+
 	@Wire
 	private Datebox dtbInicioReporteSolicitud;
 	@Wire
@@ -54,99 +53,116 @@ public class CReporteSolicitudes extends CGeneral {
 	@Wire
 	private Combobox cmbEstatusReporteSolicitud;
 	long idTematica = 0;
-	private String[] estatusSolicitud = {"Aceptada", "Rechazada","Por Revisar"};
+	private String[] estatusSolicitud = { "Aceptada", "Rechazada",
+			"Por Revisar" };
 	private Connection com;
+
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		cmbEstatusReporteSolicitud.setModel(new ListModelList<String>(
 				estatusSolicitud));
 		List<Programa> programas = servicioPrograma.buscarActivas();
 		cmbProgramaReporteSolicitud.setModel(new ListModelList<Programa>(
 				programas));
-		
+
 	}
+
 	@Listen("onSelect = #cmbProgramaReporteSolicitud")
-	public void buscarArea(){
-		List<AreaInvestigacion> areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
-			.buscar(Long.parseLong(cmbProgramaReporteSolicitud
-					.getSelectedItem().getId())));
-		cmbAreaReporteSolicitud
-		.setModel(new ListModelList<AreaInvestigacion>(areas));
+	public void buscarArea() {
+		List<AreaInvestigacion> areas = servicioProgramaArea
+				.buscarAreasDePrograma(servicioPrograma.buscar(Long
+						.parseLong(cmbProgramaReporteSolicitud
+								.getSelectedItem().getId())));
+		cmbAreaReporteSolicitud.setModel(new ListModelList<AreaInvestigacion>(
+				areas));
 	}
+
 	@Listen("onSelect = #cmbAreaReporteSolicitud")
 	public void seleccionarTematica() {
 		cmbTematicaReporteSolicitud.setValue("");
-		List<Tematica> tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-				.buscarArea(Long.parseLong(cmbAreaReporteSolicitud
-						.getSelectedItem().getId())));
+		List<Tematica> tematicas = servicioTematica
+				.buscarTematicasDeArea(servicioArea.buscarArea(Long
+						.parseLong(cmbAreaReporteSolicitud.getSelectedItem()
+								.getId())));
 		cmbTematicaReporteSolicitud.setModel(new ListModelList<Tematica>(
 				tematicas));
 	}
-	@Listen("onSelect = #cmbTematicaReporteSolicitud")
-	public void tomarIdTematica(){
-		idTematica =Long.parseLong(cmbTematicaReporteSolicitud.getSelectedItem().getId());
-	}
-	
-	
-	@Listen("onClick = #btnGenerarReporteSolicitud")
-	 public void GenerarReporte() throws SQLException{
-		try{
-			Class.forName("org.postgresql.Driver");
-			com = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres", "equipo2");
-			
-		}catch (ClassNotFoundException ei){
-			ei.printStackTrace();
-			
-		}
-		
-		try{
-			 FileSystemView filesys = FileSystemView.getFileSystemView();
-			Map p = new HashMap();
-			
-			
-			 p.put("programa", Long.parseLong(cmbProgramaReporteSolicitud.getSelectedItem().getId()));
-			 java.util.Date date = dtbInicioReporteSolicitud.getValue(); 
-			 java.util.Date date1 = dtbFinReporteSolicitud.getValue();
-			 java.text.SimpleDateFormat dtbInicioReporteSolicitud=new java.text.SimpleDateFormat("yyyy/MM/dd");
-			 java.text.SimpleDateFormat dtbFinReporteSolicitud=new java.text.SimpleDateFormat("yyyy/MM/dd");
-				String	fechaInicio= dtbInicioReporteSolicitud.format(date);
-				String  fechaFin = dtbFinReporteSolicitud.format(date1);
-		   System.out.println( fechaInicio);
-		   System.out.println( fechaFin);
-		     p.put("nombreprograma", cmbProgramaReporteSolicitud.getValue());
-		    p.put("fechainicio",fechaInicio);
-		    p.put("fechafin", fechaFin);
-		    p.put("tematica", Long.parseLong(cmbTematicaReporteSolicitud.getSelectedItem().getId()));
-		    p.put("estatus", cmbEstatusReporteSolicitud.getValue());
-			 JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/ReporteSolicitud.jasper"));
-			
-		     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,p,com);
-		    
-		     JasperViewer.viewReport(jasperPrint,false);
-		     
-		     com.close();
-		     cancelar();
 
-		}catch(JRException e)
-		{
+	@Listen("onSelect = #cmbTematicaReporteSolicitud")
+	public void tomarIdTematica() {
+		idTematica = Long.parseLong(cmbTematicaReporteSolicitud
+				.getSelectedItem().getId());
+	}
+
+	@Listen("onClick = #btnGenerarReporteSolicitud")
+	public void GenerarReporte() throws SQLException {
+		try {
+			Class.forName("org.postgresql.Driver");
+			com = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/siteg", "postgres",
+					"equipo2");
+
+		} catch (ClassNotFoundException ei) {
+			ei.printStackTrace();
+
+		}
+
+		try {
+			FileSystemView filesys = FileSystemView.getFileSystemView();
+			String rutaUrl = obtenerDirectorio();
+			String reporteSrc = rutaUrl
+					+ "SITEG/vistas/reportes/salidas/compilados/ReporteSolicitud.jasper";
+			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+			Map p = new HashMap();
+
+			p.put("programa", Long.parseLong(cmbProgramaReporteSolicitud
+					.getSelectedItem().getId()));
+			java.util.Date date = dtbInicioReporteSolicitud.getValue();
+			java.util.Date date1 = dtbFinReporteSolicitud.getValue();
+			java.text.SimpleDateFormat dtbInicioReporteSolicitud = new java.text.SimpleDateFormat(
+					"yyyy/MM/dd");
+			java.text.SimpleDateFormat dtbFinReporteSolicitud = new java.text.SimpleDateFormat(
+					"yyyy/MM/dd");
+			String fechaInicio = dtbInicioReporteSolicitud.format(date);
+			String fechaFin = dtbFinReporteSolicitud.format(date1);
+			System.out.println(fechaInicio);
+			System.out.println(fechaFin);
+			p.put("nombreprograma", cmbProgramaReporteSolicitud.getValue());
+			p.put("fechainicio", fechaInicio);
+			p.put("fechafin", fechaFin);
+			p.put("tematica", Long.parseLong(cmbTematicaReporteSolicitud
+					.getSelectedItem().getId()));
+			p.put("estatus", cmbEstatusReporteSolicitud.getValue());
+			p.put("logoUcla", reporteImage + "logo ucla.png");
+			p.put("logoCE", reporteImage + "logo CE.png");
+			p.put("logoSiteg", reporteImage + "logo.png");
+
+			JasperReport jasperReport = (JasperReport) JRLoader
+					.loadObject(reporteSrc);
+
+			JasperPrint jasperPrint = JasperFillManager.fillReport(
+					jasperReport, p, com);
+
+			JasperViewer.viewReport(jasperPrint, false);
+
+			com.close();
+			cancelar();
+
+		} catch (JRException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	@Listen("onClick = #btnSalirReporteSolicitud")
 	public void cancelar() throws JRException {
 
 		cmbProgramaReporteSolicitud.setValue("");
 		cmbAreaReporteSolicitud.setValue("");
-		
+
 		cmbTematicaReporteSolicitud.setValue("");
 		dtbInicioReporteSolicitud.setValue(new Date());
 		dtbFinReporteSolicitud.setValue(new Date());
 
-		
 	}
-	
 
 }
