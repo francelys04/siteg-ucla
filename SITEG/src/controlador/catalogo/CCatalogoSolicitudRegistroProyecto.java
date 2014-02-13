@@ -100,9 +100,9 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
 		for (int i = 0; i < teg1.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
-			String nombre = es.get(0).getNombre();
-			String apellido = es.get(0).getApellido();
+			List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			String nombre = estudiantes.get(0).getNombre();
+			String apellido = estudiantes.get(0).getApellido();
 			teg1.get(i).setEstatus(nombre+" "+apellido);
 		}
 		List<Teg> teg2 = new ArrayList<Teg>();

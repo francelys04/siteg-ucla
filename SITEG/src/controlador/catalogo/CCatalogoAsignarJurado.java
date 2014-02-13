@@ -32,9 +32,10 @@ import servicio.STeg;
 @Controller
 public class CCatalogoAsignarJurado extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	CAsignarJurado vista = new CAsignarJurado();
+	private List<Teg> tegsDefensa1 = new ArrayList<Teg>();
+	private List<Teg> tegsDefensa = new ArrayList<Teg>();
+
 	@Wire
 	private Textbox txtEstudianteJurado;
 	@Wire
@@ -53,112 +54,116 @@ public class CCatalogoAsignarJurado extends CGeneral {
 	private Listbox ltbSolicitudesDefensa;
 	@Wire
 	private Window wdwCatalogoAsignarJurado;
-	private List<Teg> tegsDefensa1 = new ArrayList<Teg>();
-	private List<Teg> tegsDefensa = new ArrayList<Teg>();
+
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
+	 * disponibles dado el programa segun sea el profesor loggeado,
+	 * recorriendolo uno a uno para luego cargar una lista de estudiantes por
+	 * teg donde mediante la implementacion del servicio de busqueda se va
+	 * obteniendo su nombre y su apellido y se va seteando temporalmente en la
+	 * variable estatus del teg para poder visualizarlo en el componente lista
+	 * de teg de la vista.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-		try{
-		if(map != null || map==null){
-			//Metodo que permite cargar los tegs en el listbox median utilizacion de servicios
-			tegsDefensa1 = servicioTeg.buscarTegPorProgramaParaDefensa(servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
-			if(!tegsDefensa1.isEmpty()) {
-	
-				tegsDefensa.add(tegsDefensa1.get(0));
-			for(int i =1; i<tegsDefensa1.size();i++){
-				long temp = tegsDefensa1.get(i-1).getId();
-				if(temp !=tegsDefensa1.get(i).getId()){
+		tegsDefensa1 = servicioTeg
+				.buscarTegPorProgramaParaDefensa(servicioPrograma
+						.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
+		if (!tegsDefensa1.isEmpty()) {
+
+			tegsDefensa.add(tegsDefensa1.get(0));
+			for (int i = 1; i < tegsDefensa1.size(); i++) {
+				long temp = tegsDefensa1.get(i - 1).getId();
+				if (temp != tegsDefensa1.get(i).getId()) {
 					tegsDefensa.add(tegsDefensa1.get(i));
 				}
-				
+
 			}
 			for (int i = 0; i < tegsDefensa.size(); i++) {
-				List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegsDefensa.get(i));
-				String nombre = es.get(0).getNombre();
-				String apellido = es.get(0).getApellido();
-				tegsDefensa.get(i).setEstatus(nombre+" "+apellido);
+				List<Estudiante> estudiantes = servicioEstudiante
+						.buscarEstudiantePorTeg(tegsDefensa.get(i));
+				String nombre = estudiantes.get(0).getNombre();
+				String apellido = estudiantes.get(0).getApellido();
+				tegsDefensa.get(i).setEstatus(nombre + " " + apellido);
 			}
 			ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegsDefensa));
-			}
-		}
-		} catch (Exception e) {
-			// TODO: handle exception
-						Messagebox.show("No tiene permisos para asignar jurados",
-						"Advertencia", Messagebox.OK,
-						Messagebox.EXCLAMATION);
-						wdwCatalogoAsignarJurado.onClose();
 		}
 	}
-	//Metodo que permite el fitrado de datos
+
+	/*
+	 * Metodo que permite filtrar los tegs disponibles, mediante el componente
+	 * de la lista, donde se podra visualizar la fecha, el nombre y apellido del
+	 * estudiante, la tematica, el area, el titulo y el nombre y apellido del
+	 * tutor.
+	 */
 	@Listen("onChange = #txtAreaSolicitudDefensa,#txtTematicaSolicitudDefensa,#txtTituloSolicitudDefensa,#txtNombreTutorSolicitudDefensa,#txtApellidoTutorSolicitudDefensa")
-	public void filtrarCatalogo(){
-		
+	public void filtrarCatalogo() {
+
 		List<Teg> tegs = new ArrayList<Teg>();
 		for (int i = 0; i < tegs.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
-			String nombre = es.get(0).getNombre();
-			String apellido = es.get(0).getApellido();
-			tegs.get(i).setEstatus(nombre+" "+apellido);
+			List<Estudiante> estudiantes = servicioEstudiante
+					.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = estudiantes.get(0).getNombre();
+			String apellido = estudiantes.get(0).getApellido();
+			tegs.get(i).setEstatus(nombre + " " + apellido);
 		}
 		for (Teg teg : tegsDefensa) {
-			if (
-					servicioEstudiante.buscarEstudiantePorTeg(teg)
-					.get(0)
-					.getNombre()
-					.toLowerCase()
-					.contains(
-							txtEstudianteJurado.getValue()
-									.toLowerCase())
-									&&
-								teg.getTematica().getareaInvestigacion().getNombre()
-					.toLowerCase()
-					.contains(txtAreaSolicitudDefensa.getValue().toLowerCase())
-					&& teg
-							.getTematica()
+			if (servicioEstudiante.buscarEstudiantePorTeg(teg).get(0)
+					.getNombre().toLowerCase()
+					.contains(txtEstudianteJurado.getValue().toLowerCase())
+					&& teg.getTematica()
+							.getareaInvestigacion()
+							.getNombre()
+							.toLowerCase()
+							.contains(
+									txtAreaSolicitudDefensa.getValue()
+											.toLowerCase())
+					&& teg.getTematica()
 							.getNombre()
 							.toLowerCase()
 							.contains(
 									txtTematicaSolicitudDefensa.getValue()
 											.toLowerCase())
-					&& teg
-							.getTitulo()
-							.toLowerCase()
+					&& teg.getTitulo().toLowerCase()
 							.contains(txtTituloSolicitudDefensa.getValue())
-					&& teg
-							.getTutor()
+					&& teg.getTutor()
 							.getNombre()
 							.toLowerCase()
 							.contains(txtNombreTutorSolicitudDefensa.getValue())
-					&& teg
-							.getTutor()
+					&& teg.getTutor()
 							.getApellido()
 							.toLowerCase()
-							.contains(txtApellidoTutorSolicitudDefensa.getValue())) {
+							.contains(
+									txtApellidoTutorSolicitudDefensa.getValue())) {
 				tegs.add(teg);
 			}
 		}
 
 		ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegs));
 	}
-	//Metodo para seleccionar un Teg haciendo doble clic a las lista
+
+	/*
+	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
+	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
+	 * poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbSolicitudesDefensa")
-	public void seleccionarLista(){
-		if(ltbSolicitudesDefensa.getItemCount()!= 0){
-		Listitem listItem = ltbSolicitudesDefensa.getSelectedItem();
-		if(listItem!=null){
-		Teg tegSeleccionado = (Teg)listItem.getValue();
-		long id = tegSeleccionado.getId();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id",id);
-		Sessions.getCurrent().setAttribute("catalogoSolicitudDefensa", map);
-		Window window = (Window) Executions.createComponents(
-				"/vistas/transacciones/VAsignarJurado.zul", null, null);	 				
-		window.doModal();
-		vista.recibir("catalogos/VCatalogoAsignarJurado");
+	public void seleccionarLista() {
+		if (ltbSolicitudesDefensa.getItemCount() != 0) {
+			Listitem listItem = ltbSolicitudesDefensa.getSelectedItem();
+			if (listItem != null) {
+				Teg tegSeleccionado = (Teg) listItem.getValue();
+				long id = tegSeleccionado.getId();
+				final HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("id", id);
+				Sessions.getCurrent().setAttribute("catalogoSolicitudDefensa",
+						map);
+				Window window = (Window) Executions.createComponents(
+						"/vistas/transacciones/VAsignarJurado.zul", null, null);
+				window.doModal();
+				vista.recibir("catalogos/VCatalogoAsignarJurado");
+			}
 		}
-	}
 	}
 }
