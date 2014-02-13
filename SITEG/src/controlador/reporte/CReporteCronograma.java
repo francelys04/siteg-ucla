@@ -86,12 +86,24 @@ public class CReporteCronograma extends CGeneral {
 						.getSelectedItem().getId())));
 		     FileSystemView filesys = FileSystemView.getFileSystemView();
 		     List<Cronograma> cronograma = servicioCronograma.buscarCronogramaPorLapsoYPrograma(programa, lapso);
+		     String rutaUrl = obtenerDirectorio();
+		     String reporteSrc = rutaUrl
+					 +
+					 "SITEG/vistas/reportes/salidas/compilados/report1.jasper";
+		     String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+		   
+		    
 		     Map p = new HashMap();
 		
 		     p.put("programa", cmbCronogramaPrograma.getValue());
 		     System.out.println(cmbCronogramaPrograma.getValue());
 		     p.put("lapso", cmbCronogramaLapso.getValue());	
-		     JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/ReporteCronograma.jasper"));
+		     p.put("logoUcla", reporteImage + "logo ucla.png");
+		 	 p.put("logoCE", reporteImage + "logo CE.png");
+		     p.put("logoSiteg", reporteImage + "logo.png");
+		     
+
+			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
 		     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, new JRBeanCollectionDataSource(cronograma));
 		     JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/ReporteCronograma.pdf"); 
 		     Messagebox.show(

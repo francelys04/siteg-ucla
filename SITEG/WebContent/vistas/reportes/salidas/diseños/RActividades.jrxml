@@ -5,6 +5,9 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="descripcion" class="java.lang.String"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
+	<parameter name="logoSiteg" class="java.lang.String"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="descripcion" class="java.lang.String"/>
 	<background>
@@ -21,11 +24,11 @@
 			</staticText>
 			<image>
 				<reportElement x="15" y="16" width="74" height="58" uuid="7fe1f88e-4d76-4891-b05b-06a3245b7d7a"/>
-				<imageExpression><![CDATA["/reporte/logo ucla.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="462" y="16" width="82" height="54" uuid="3147a01b-7440-4fa3-954e-088e3d8b1da6"/>
-				<imageExpression><![CDATA["/reporte/logo dcyt.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -89,7 +92,7 @@
 		<band height="44" splitType="Stretch">
 			<image>
 				<reportElement x="15" y="5" width="61" height="39" uuid="15094891-d506-458f-96d7-7f81a4182424"/>
-				<imageExpression><![CDATA["/reporte/logo.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="180" y="10" width="216" height="20" uuid="a68a920a-f3a7-48ac-aa95-67d362cfd75a"/>

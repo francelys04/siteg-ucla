@@ -41,37 +41,41 @@ public class CReporteItemTipo extends CGeneral {
 	List<ItemEvaluacion> items = new ArrayList<ItemEvaluacion>();
 
 	@Override
-	public	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		items = servicioItem.buscarItemsActivos();
 	}
 
 	@Listen("onClick = #btnGenerarReporteItemTipo")
-	 public void GenerarCronograma() throws JRException{
-		
+	public void GenerarCronograma() throws JRException {
+
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		items = servicioItem.buscarItemsActivos();
+		String rutaUrl = obtenerDirectorio();
+		String reporteSrc = rutaUrl + "SITEG/vistas/reportes/salidas/compilados/ReporteItemTipo.jasper";
+		String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+		
 		Map p = new HashMap();
 		p.put("titulo", "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
-		+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
-		+ "DIRECCION DE PROGRAMA");
+				+ "DECANATO DE CIENCIAS Y TECNOLOGIA" + "DIRECCION DE PROGRAMA");
+		p.put("logoUcla", reporteImage + "logo ucla.png");
+		p.put("logoCE", reporteImage + "logo CE.png");
+		p.put("logoSiteg", reporteImage + "logo.png");
+
 		JasperReport jasperReport = (JasperReport) JRLoader
-		.loadObject(getClass().getResource(
-		"/reporte/ReporteItemTipo.jasper"));
-		JasperPrint jasperPrint = JasperFillManager.fillReport(
-		jasperReport, p, new JRBeanCollectionDataSource(items));
+				.loadObject(reporteSrc);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,
+				new JRBeanCollectionDataSource(items));
 		JasperExportManager.exportReportToPdfFile(jasperPrint, filesys
-		.getHomeDirectory().toString() + "/ReporteItemTipo.pdf");
-		Messagebox.show(
-		"Se ha generado exitosamente el reporte",
-		"Informacion", Messagebox.OK,
-		Messagebox.INFORMATION);
+				.getHomeDirectory().toString() + "/ReporteItemTipo.pdf");
+		Messagebox.show("Se ha generado exitosamente el reporte",
+				"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 
 	}
-	
+
 	@Listen("onClick = #btnCancelarReporteItemTipo")
-	public void Salir(){
+	public void Salir() {
 		wdwReporteItemTipo.onClose();
 	}
-		
+
 }
