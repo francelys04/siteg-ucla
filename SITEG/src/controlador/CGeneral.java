@@ -40,6 +40,7 @@ import servicio.SNoticia;
 import servicio.SProfesor;
 import servicio.SPrograma;
 import servicio.SProgramaArea;
+import servicio.SRequisito;
 import servicio.SSolicitudTutoria;
 import servicio.STeg;
 import servicio.STegEstatus;
@@ -76,6 +77,7 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 	protected STematica servicioTematica = GeneradorBeans.getSTematica();
 	protected STipoJurado servicioTipoJurado = GeneradorBeans.getServicioTipoJurado();
 	protected SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
+	protected SRequisito servicioRequisito = GeneradorBeans.getServicioRequisito();
 
 	/*
 	 * Metodo para inicializar componentes implementado en todos los controladores
