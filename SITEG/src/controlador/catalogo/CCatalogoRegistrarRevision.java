@@ -33,10 +33,7 @@ import controlador.CRegistrarRevision;
 
 @Controller
 public class CCatalogoRegistrarRevision extends CGeneral {
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	
+
 	CRegistrarRevision vistaRegistrarRevision = new CRegistrarRevision();
 	@Wire
 	private Textbox txtEstudianteRevision;
@@ -57,36 +54,41 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	@Wire
 	private Textbox txtApellidoTutorRegistrarRevision;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
+	 * disponibles mediante el metodo "buscarDatos()", recorriendolo uno a uno
+	 * para luego cargar una lista de estudiantes por teg donde mediante la
+	 * implementacion del servicio de busqueda se va obteniendo su nombre y su
+	 * apellido y se va seteando temporalmente en la variable estatus del teg
+	 * para poder visualizarlo en el componente lista de teg de la vista.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
 		List<Teg> tegs = buscarDatos();
 		for (int i = 0; i < tegs.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
-			String nombre = es.get(0).getNombre();
-			String apellido = es.get(0).getApellido();
-			tegs.get(i).setEstatus(nombre+" "+apellido);
+			List<Estudiante> estudiantes = servicioEstudiante
+					.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = estudiantes.get(0).getNombre();
+			String apellido = estudiantes.get(0).getApellido();
+			tegs.get(i).setEstatus(nombre + " " + apellido);
 		}
 		ltbTrabajosRegistrados.setModel(new ListModelList<Teg>(tegs));
-
-		Selectors.wireComponents(comp, this, false);
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-	
 	}
 
-	// Metodo que permite obtener una lista de los teg de acuerdo al
-	//profesor que se encuentra loggeado
+	/*
+	 * Metodo que permite retornar un lista de los tegs, donde se recorre tanto
+	 * la lista del teg como los profesores activos, donde se compara si coincide las
+	 * cedulas de cada uno de los profesores para cargar la lista de tegs.
+	 */
 	public List<Teg> buscarDatos() {
 
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		List<Teg> tegs = servicioTeg.buscarTegRegistrado();
 
 		Profesor profesor1 = new Profesor();
-		List<Teg> t = new ArrayList<Teg>();
+		List<Teg> tegs1 = new ArrayList<Teg>();
 
 		for (int i = 0; i < tegs.size(); i++) {
 
@@ -101,53 +103,65 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 				}
 			}
 			if (encontre == true) {
-				t.add(tegs.get(i));
+				tegs1.add(tegs.get(i));
 
 			}
 
 		}
 
-		ltbTrabajosRegistrados.setModel(new ListModelList<Teg>(t));
-		return t;
+		ltbTrabajosRegistrados.setModel(new ListModelList<Teg>(tegs1));
+		return tegs1;
 	}
 
-	// Metodo que permite filtrar un teg de acuerdo a la fecha, tematica, area,
-	// titulo, nombre y apellido del tutor
+	/*
+	 * Metodo que permite filtrar los tegs disponibles dado el metodo
+	 * "buscarDatos()", mediante el componente de la lista, donde se podra
+	 * visualizar el nombre y apellido del estudiante, la fecha, la
+	 * tematica, el area y el titulo, el nombre y apellido del tutor de estos.
+	 */
 	@Listen("onChange = #txtFechaRegistrarRevision, #txtTematicaRegistrarRevision,#txtAreaRegistrarRevision,#txtTituloRegistrarRevision,#txtNombreTutorRegistrarRevision,#txtApellidoTutorRegistrarRevision")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
 		for (int i = 0; i < teg1.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
-			String nombre = es.get(0).getNombre();
-			String apellido = es.get(0).getApellido();
-			teg1.get(i).setEstatus(nombre+" "+apellido);
+			List<Estudiante> estudiantes = servicioEstudiante
+					.buscarEstudiantePorTeg(teg1.get(i));
+			String nombre = estudiantes.get(0).getNombre();
+			String apellido = estudiantes.get(0).getApellido();
+			teg1.get(i).setEstatus(nombre + " " + apellido);
 		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
-			if (servicioEstudiante.buscarEstudiantePorTeg(teg)
-					.get(0)
-					.getNombre()
-					.toLowerCase()
-					.contains(
-							txtEstudianteRevision.getValue()
-									.toLowerCase())
-					&& teg.getFecha().toString().toLowerCase()
-					.contains(txtFechaRegistrarRevision.getValue().toLowerCase())
+			if (servicioEstudiante.buscarEstudiantePorTeg(teg).get(0)
+					.getNombre().toLowerCase()
+					.contains(txtEstudianteRevision.getValue().toLowerCase())
+					&& teg.getFecha()
+							.toString()
+							.toLowerCase()
+							.contains(
+									txtFechaRegistrarRevision.getValue()
+											.toLowerCase())
 
 					&& teg.getTematica()
 							.getNombre()
 							.toLowerCase()
 							.contains(
-									txtTematicaRegistrarRevision.getValue().toLowerCase())
+									txtTematicaRegistrarRevision.getValue()
+											.toLowerCase())
 
-					&& teg.getTematica().getareaInvestigacion().getNombre()
+					&& teg.getTematica()
+							.getareaInvestigacion()
+							.getNombre()
 							.toLowerCase()
-							.contains(txtAreaRegistrarRevision.getValue().toLowerCase())
+							.contains(
+									txtAreaRegistrarRevision.getValue()
+											.toLowerCase())
 
 					&& teg.getTitulo()
 							.toLowerCase()
-							.contains(txtTituloRegistrarRevision.getValue().toLowerCase())
+							.contains(
+									txtTituloRegistrarRevision.getValue()
+											.toLowerCase())
 					&& teg.getTutor()
 							.getNombre()
 							.toLowerCase()
@@ -158,8 +172,8 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 							.getApellido()
 							.toLowerCase()
 							.contains(
-									txtApellidoTutorRegistrarRevision.getValue()
-											.toLowerCase()))
+									txtApellidoTutorRegistrarRevision
+											.getValue().toLowerCase()))
 
 			{
 				teg2.add(teg);
@@ -169,27 +183,31 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 		ltbTrabajosRegistrados.setModel(new ListModelList<Teg>(teg2));
 
 	}
-	
-	
-	//Metodo que permite mostrar los datos del catalogo
+
+	/*
+	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
+	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
+	 * poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbTrabajosRegistrados")
 	public void mostrarDatosCatalogo() {
-		if(ltbTrabajosRegistrados.getItemCount()!=0){
-		Listitem listItem = ltbTrabajosRegistrados.getSelectedItem();
-		if(listItem!=null){
-		Teg tegDatosCatalogo = (Teg) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", tegDatosCatalogo.getId());
-		String vista = "transacciones/VRegistrarRevision";
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("tegCatalogo", map);
-		Window window = (Window) Executions.createComponents(
-				"/vistas/transacciones/VRegistrarRevision.zul", null, null);
-		window.doModal();
-		vistaRegistrarRevision.recibir("catalogos/VCatalogoRegistrarRevision");
-		}
+		if (ltbTrabajosRegistrados.getItemCount() != 0) {
+			Listitem listItem = ltbTrabajosRegistrados.getSelectedItem();
+			if (listItem != null) {
+				Teg tegDatosCatalogo = (Teg) listItem.getValue();
+				final HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("id", tegDatosCatalogo.getId());
+				String vista = "transacciones/VRegistrarRevision";
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("tegCatalogo", map);
+				Window window = (Window) Executions.createComponents(
+						"/vistas/transacciones/VRegistrarRevision.zul", null,
+						null);
+				window.doModal();
+				vistaRegistrarRevision
+						.recibir("catalogos/VCatalogoRegistrarRevision");
+			}
 		}
 	}
 
 }
-

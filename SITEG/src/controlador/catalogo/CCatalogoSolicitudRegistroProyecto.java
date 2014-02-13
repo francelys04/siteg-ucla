@@ -46,11 +46,9 @@ import controlador.CVerificarSolicitudProyecto;
 
 @Controller
 public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
+	
+	CVerificarSolicitudProyecto vistaVerificar = new CVerificarSolicitudProyecto();
+
 	@Wire
 	private Textbox txtEstudianteProyecto;
 	@Wire
@@ -70,40 +68,34 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	@Wire
 	private Textbox txtMostrarApellidoTutor;
 	
-	CVerificarSolicitudProyecto vistaVerificar = new CVerificarSolicitudProyecto();
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
+	 * disponibles mediante el metodo "buscarDatos()", recorriendolo uno a uno
+	 * para luego cargar una lista de estudiantes por teg donde mediante la
+	 * implementacion del servicio de busqueda se va obteniendo su nombre y su
+	 * apellido y se va seteando temporalmente en la variable estatus del teg
+	 * para poder visualizarlo en el componente lista de teg de la vista.
+	 */
 	@Override
 	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		/*
-		 * Listado de todos los teg cuyo
-		 * estatus=SolicitandoRegistro
-		 */
-	
-		List<Teg>  t = buscarDatos();
-		for (int i = 0; i < t.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(t.get(i));
-			String nombre = es.get(0).getNombre();
-			String apellido = es.get(0).getApellido();
-			t.get(i).setEstatus(nombre+" "+apellido);
+		List<Teg>  tegs = buscarDatos();
+		for (int i = 0; i < tegs.size(); i++) {
+			List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = estudiantes.get(0).getNombre();
+			String apellido = estudiantes.get(0).getApellido();
+			tegs.get(i).setEstatus(nombre+" "+apellido);
 		}
-		ltbSolcitudRegistroProyecto.setModel(new ListModelList<Teg> (t));
+		ltbSolcitudRegistroProyecto.setModel(new ListModelList<Teg> (tegs));
 		Selectors.wireComponents(comp, this, false) ;
-
-		/*
-		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item de la vista VActividad
-		 */
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("tegCatalogo");
-		/*
-		 * Validacion para vaciar la informacion del VActividad a la vista
-		 * VActividad.zul si la varible map tiene algun dato contenido	 */
-		
 	}
-	
+	/*
+	 * Metodo que permite filtrar los tegs disponibles dado el metodo
+	 * "buscarDatos()", mediante el componente de la lista, donde se podra
+	 * visualizar el nombre y apellido del estudiante, la fecha, la
+	 * tematica, el area y el titulo, el nombre y apellido del tutor de estos.
+	 */
 	@Listen("onChange = #txtMostrarFecha,#txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,# txtMostrarApellidoTutor")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
@@ -171,7 +163,11 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 
 	}
 	
-	//permite llevar los datos del teg a las vista verificar solicitud de proyecto
+	/*
+	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
+	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
+	 * poder ser mapeada y enviada a la vista a la vista asociada.
+	 */
 	@Listen("onDoubleClick = #ltbSolcitudRegistroProyecto")
 	public void mostrarDatosCatalogo() {	
 		if(ltbSolcitudRegistroProyecto.getItemCount()!=0){
@@ -190,12 +186,17 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 		}
 		}
 	}
+	/*
+	 * Metodo que permite retornar una lista de los tegs, donde se recorre tanto
+	 * una lista del teg como los profesores activos, donde se compara si coincide las
+	 * cedulas de cada uno de los profesores para cargar la lista de tegs.
+	 */
 	public List<Teg> buscarDatos()
 	{
 			List<Profesor>  profesores = servicioProfesor.buscarActivos();
 			List<Teg>  tegs = servicioTeg.BuscarTegSolicitandoRegistro();
 			Profesor profesor1 = new Profesor();		
-			List<Teg> t = new ArrayList<Teg>();			
+			List<Teg> tegs1 = new ArrayList<Teg>();			
 			for (int i = 0; i < tegs.size(); i++) {
 				profesor1 = tegs.get(i).getTutor();
 				boolean encontre = false;
@@ -206,10 +207,10 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 					}
 				}
 				if (encontre == true) {
-					t.add(tegs.get(i));
+					tegs1.add(tegs.get(i));
 
 				}
 			}
-			return t;
+			return tegs1;
 	}	
 }

@@ -58,12 +58,7 @@ import servicio.SSolicitudTutoria;
 @Controller
 public class CCatalogoTutorDisponible extends CGeneral {
 
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SAreaInvestigacion servicioAreaInvestigacion = GeneradorBeans
-			.getServicioArea();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	SSolicitudTutoria servicioSolicitud = GeneradorBeans.getServicioTutoria();
+	private static long idPrograma;
 
 	@Wire
 	private Combobox cmbProgramaTutores;
@@ -77,27 +72,24 @@ public class CCatalogoTutorDisponible extends CGeneral {
 	private Textbox txtApellidoTutor;
 	@Wire
 	private Textbox txtCorreoTutor;
-	private static long idPrograma;
 
-	// Metodo heredado del controlador CGeneral que permite inicializar los
-	// componentes de zk
-	// asi como tambien permite settear los atributos a los campos luego de
-	// seleccionar desde el catalogo
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * programas disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
+	 */
 	public void inicializar(Component comp) {
 
 		List<Programa> programa = servicioPrograma.buscarActivas();
-		if (cmbProgramaTutores != null) {
-			cmbProgramaTutores.setModel(new ListModelList<Programa>(programa));
-
-		}
-
-		Selectors.wireComponents(comp, this, false);
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-
+		cmbProgramaTutores.setModel(new ListModelList<Programa>(programa));
 	}
 
+	/*
+	 * Metodo que permite retornar una lista de profesores, donde se va
+	 * recorriendo los profesores cuyas cedulas coincidan con las que se
+	 * encuentran en las solicitudes de tutorias generedas, para asi cargar una
+	 * lista de profesores
+	 */
 	@Listen("onSelect = #cmbProgramaTutores")
 	public List<Profesor> llenarLista() {
 
@@ -108,7 +100,7 @@ public class CCatalogoTutorDisponible extends CGeneral {
 		Programa progra = servicioPrograma.buscarPorId(idPrograma);
 		CondicionPrograma condicion = buscarCondicionVigenteEspecifica(
 				variable, progra);
-		List<SolicitudTutoria> solicitudTutoria = servicioSolicitud
+		List<SolicitudTutoria> solicitudTutoria = servicioSolicitudTutoria
 				.buscarAceptadas();
 		int valor = condicion.getValor();
 
@@ -137,8 +129,11 @@ public class CCatalogoTutorDisponible extends CGeneral {
 
 	}
 
-	// Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
-	// descripcion
+	/*
+	 * Metodo que permite filtrar los profesores disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre y la
+	 * apellido de estos.
+	 */
 	@Listen("onChange = #txtCedulaTutor,#txtNombreTutor,#txtApellidoTutor,#txtCorreoTutor")
 	public void filtrarDatosCatalogo() {
 
@@ -150,13 +145,12 @@ public class CCatalogoTutorDisponible extends CGeneral {
 					.contains(txtCedulaTutor.getValue().toLowerCase())
 					&& profesor.getNombre().toLowerCase()
 							.contains(txtNombreTutor.getValue().toLowerCase())
-					&& profesor.getApellido().toLowerCase()
-							.contains(txtApellidoTutor.getValue().toLowerCase())
-							&& profesor.getCorreoElectronico()
+					&& profesor
+							.getApellido()
 							.toLowerCase()
-							.contains(
-									txtCorreoTutor.getValue()
-											.toLowerCase())) {
+							.contains(txtApellidoTutor.getValue().toLowerCase())
+					&& profesor.getCorreoElectronico().toLowerCase()
+							.contains(txtCorreoTutor.getValue().toLowerCase())) {
 				profesor2.add(profesor);
 			}
 		}

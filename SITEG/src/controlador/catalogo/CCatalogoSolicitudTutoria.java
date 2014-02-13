@@ -30,7 +30,6 @@ import controlador.CSolicitudTutoria;
 @Controller
 public class CCatalogoSolicitudTutoria extends CGeneral {
 
-	SSolicitudTutoria servicioTutoria = GeneradorBeans.getServicioTutoria();
 	CSolicitudTutoria vista = new CSolicitudTutoria();
 
 	@Wire
@@ -45,38 +44,51 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 	private Textbox txtFechaSolicitud;
 	@Wire
 	private Textbox txtNombreEstudianteSolicitud;
+
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todas las
+	 * solicitudes de tutorias disponibles, recorriendolo uno a uno para luego
+	 * cargar una lista de estudiantes por solicitud donde mediante la
+	 * implementacion del servicio de busqueda se va obteniendo su nombre y su
+	 * apellido y se va seteando temporalmente en la variable estatus del teg
+	 * para poder visualizarlo en el componente lista de solicitud de tutoria de
+	 * la vista.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null || map == null) {
-			List<SolicitudTutoria> solicitudes = servicioTutoria
+			List<SolicitudTutoria> solicitudes = servicioSolicitudTutoria
 					.buscarSolicitudPorRevisar(ObtenerUsuarioProfesor());
 			for (int i = 0; i < solicitudes.size(); i++) {
-				List<Estudiante> es = servicioEstudiante
+				List<Estudiante> estudiantes = servicioEstudiante
 						.buscarSolicitudesEstudiante(solicitudes.get(i));
-				String nombre = es.get(0).getNombre();
-				String apellido = es.get(0).getApellido();
-				solicitudes.get(i).setEstatus(nombre+" "+apellido);
+				String nombre = estudiantes.get(0).getNombre();
+				String apellido = estudiantes.get(0).getApellido();
+				solicitudes.get(i).setEstatus(nombre + " " + apellido);
 			}
 			ltbSolicitud.setModel(new ListModelList<SolicitudTutoria>(
 					solicitudes));
 		}
 	}
 
-	// permite filtar los datos del catalogo
+	/*
+	 * Metodo que permite filtrar las solicitudes de tutorias disponibles,
+	 * mediante el componente de la lista, donde se podra visualizar el nombre y
+	 * apellido del estudiante, la tematica, el area de estas.
+	 */
 	@Listen("onChange = #txtFechaSolicitud,#txtAreaSolicitud,#txtTematicaSolicitud,#txtDescripcionSolicitud")
 	public void filtrarDatosCatalogo() {
-		List<SolicitudTutoria> solicitudes = servicioTutoria
+		List<SolicitudTutoria> solicitudes = servicioSolicitudTutoria
 				.buscarSolicitudPorRevisar(ObtenerUsuarioProfesor());
 		for (int i = 0; i < solicitudes.size(); i++) {
 			List<Estudiante> es = servicioEstudiante
 					.buscarSolicitudesEstudiante(solicitudes.get(i));
 			String nombre = es.get(0).getNombre();
 			String apellido = es.get(0).getApellido();
-			solicitudes.get(i).setEstatus(nombre+" "+apellido);
+			solicitudes.get(i).setEstatus(nombre + " " + apellido);
 		}
 		List<SolicitudTutoria> solicitud2 = new ArrayList<SolicitudTutoria>();
 
@@ -114,22 +126,27 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 
 	}
 
-	// permite llebas los datos del teg a la vista Evaluar Tutorias
+	/*
+	 * Metodo que permite obtener el objeto SolicitudTutoria al realizar el
+	 * evento doble clic sobre un item en especifico en la lista, extrayendo asi
+	 * su id, para luego poder ser mapeada y enviada a la vista asociado a ella.
+	 */
 	@Listen("onDoubleClick = #ltbSolicitud")
 	public void seleccionarSolicitud() {
 		if (ltbSolicitud.getItemCount() != 0) {
 			Listitem listItem = ltbSolicitud.getSelectedItem();
-			if(listItem!=null){
-			SolicitudTutoria solicitudSeleccionada = (SolicitudTutoria) listItem
-					.getValue();
-			long id = solicitudSeleccionada.getId();
-			final HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", id);
-			Sessions.getCurrent().setAttribute("catalogoSolicitud", map);
-			Window window = (Window) Executions.createComponents(
-					"/vistas/transacciones/VEvaluarTutorias.zul", null, null);
-			window.doModal();
-			vista.recibir("catalogos/VCatalogoSolicitudTutorias");
+			if (listItem != null) {
+				SolicitudTutoria solicitudSeleccionada = (SolicitudTutoria) listItem
+						.getValue();
+				long id = solicitudSeleccionada.getId();
+				final HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("id", id);
+				Sessions.getCurrent().setAttribute("catalogoSolicitud", map);
+				Window window = (Window) Executions.createComponents(
+						"/vistas/transacciones/VEvaluarTutorias.zul", null,
+						null);
+				window.doModal();
+				vista.recibir("catalogos/VCatalogoSolicitudTutorias");
 			}
 		}
 	}

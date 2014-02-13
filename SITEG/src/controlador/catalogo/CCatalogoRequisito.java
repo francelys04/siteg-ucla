@@ -31,7 +31,7 @@ import controlador.CGeneral;
 @Controller
 public class CCatalogoRequisito extends CGeneral {
 
-	SRequisito servicioRequisito = GeneradorBeans.getServicioRequisito();
+	private static String vistaRecibida;
 
 	@Wire
 	private Listbox ltbRequisito;
@@ -49,39 +49,19 @@ public class CCatalogoRequisito extends CGeneral {
 	@Wire
 	private Window wdwCatalogoRequisito;
 
-	private static String vistaRecibida;
-
-	/**
-	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
-	 * tanto VActividad como VCatalogoActividad
-	 * 
-	 * @date 09-12-2013
+	
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan lista
+	 * correspondientes de la vista, asicomo los objetos empleados dentro de
+	 * este controlador.
 	 */
 	public void inicializar(Component comp) {
 
-		/*
-		 * Listado de todos las actividades que se encuentran activos, cuyo
-		 * estatus=true con el servicioActividad mediante el metodo
-		 * buscarActivos
-		 */
-
 		List<Requisito> requisito = servicioRequisito.buscarActivos();
-
-		/*
-		 * Validacion para mostrar el listado de actividades mediante el
-		 * componente ltbActividad dependiendo si se encuentra ejecutando la
-		 * vista VCatalogoActividad
-		 */
-		if (txtNombreRequisito == null) {
-			ltbRequisito.setModel(new ListModelList<Requisito>(requisito));
-		}
-
+		ltbRequisito.setModel(new ListModelList<Requisito>(requisito));
+		
 		Selectors.wireComponents(comp, this, false);
-
-		/*
-		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item de la vista VActividad
-		 */
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("requisitoCatalogo");
@@ -106,24 +86,20 @@ public class CCatalogoRequisito extends CGeneral {
 		}
 	}
 
-	/**
-	 * Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
-	 * descripcion
-	 * 
-	 * @date 09-12-2013
-	 */
-
-	/**
-	 * Aca se selecciona una actividad del catalogo
-	 * 
-	 * @date 09-12-2013
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
 
-	// Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
-	// descripcion
+	/*
+	 * Metodo que permite filtrar los requisitos disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre y la
+	 * descripcion de estos.
+	 */
 	@Listen("onChange = #txtNombreMostrarRequisito,#txtDescripcionMostrarRequisito")
 	public void filtrarDatosCatalogo() {
 		List<Requisito> requisito1 = servicioRequisito.buscarActivos();
@@ -149,7 +125,11 @@ public class CCatalogoRequisito extends CGeneral {
 
 	}
 
-	// Aca se selecciona una actividad del catalogo
+	/*
+	 * Metodo que permite obtener el objeto Requisito al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbRequisito")
 	public void mostrarDatosCatalogo() {
 		

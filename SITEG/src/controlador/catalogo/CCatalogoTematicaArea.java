@@ -33,17 +33,9 @@ import controlador.CGeneral;
 @Controller
 public class CCatalogoTematicaArea extends CGeneral {
 
-	STematica servicioTematica = GeneradorBeans.getSTematica();
+	private static AreaInvestigacion area;
+	private long id = 0;
 
-	// atributos de la vista tematica
-	@Wire
-	private Combobox cmbAreaTematica;
-	@Wire
-	private Textbox txtNombreTematica;
-	@Wire
-	private Textbox txtDescripcionTematica;
-
-	// atributos de la pantalla del catalogo
 	@Wire
 	private Listbox ltbTematica;
 	@Wire
@@ -52,66 +44,32 @@ public class CCatalogoTematicaArea extends CGeneral {
 	private Textbox txtAreaMostrarTematica;
 	@Wire
 	private Textbox txtDescripcionMostrarTematica;
-	private long id = 0;
-
 	@Wire
 	private Window wdwCatalogoTematica;
 
-	private static AreaInvestigacion area;
+	
 
-	/**
-	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
-	 * tanto VActividad como VCatalogoTematicaArea
-	 * 
-	 * @date 09-12-2013
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todas las
+	 * tematicas por area disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
 	 */
 	public void inicializar(Component comp) {
 
-		/*
-		 * Listado de todos las tematicas que se encuentran activos, cuyo
-		 * estatus=true
-		 */
-		
 		List<Tematica> tematica = servicioTematica.buscarTematicasDeArea(area);
-
-		/*
-		 * Validacion para mostrar el listado de tematicas
-		 */
-		
-			ltbTematica.setModel(new ListModelList<Tematica>(tematica));
+		ltbTematica.setModel(new ListModelList<Tematica>(tematica));
 	
 
-		Selectors.wireComponents(comp, this, false);
-
-		/*
-		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item
-		 */
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("tematicaCatalogo");
-		
-
 	}
-
-	/**
-	 * Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
-	 * descripcion
-	 * 
-	 * @date 09-12-2013
-	 */
-
-	/**
-	 * Aca se selecciona una actividad del catalogo
-	 * 
-	 * @date 09-12-2013
-	 */
 	public void recibirId (AreaInvestigacion a) {
 		area = a;
 	}
 
-	// filtra en el catalogo
-
+	/*
+	 * Metodo que permite filtrar las tematicas disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre, area y 
+	 * descripcion de estas.
+	 */
 	@Listen("onChange = #txtNombreMostrarTematica,#txtAreaMostrarTematica,#txtDescripcionMostrarTematica")
 	public void filtrarDatosCatalogo() {
 		List<Tematica> tematicas1 = servicioTematica.buscarActivos();

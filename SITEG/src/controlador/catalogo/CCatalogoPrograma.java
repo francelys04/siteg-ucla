@@ -40,7 +40,7 @@ import controlador.CGeneral;
 
 public class CCatalogoPrograma extends CGeneral {
 
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+	private static String vistaRecibida;
 
 	@Wire
 	private Listbox ltbPrograma;
@@ -50,52 +50,36 @@ public class CCatalogoPrograma extends CGeneral {
 	private Textbox txtNombreMostrarPrograma;
 	@Wire
 	private Textbox txtDescripcionMostrarPrograma;
-	private static String vistaRecibida;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * programas disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
+	 */
 	public void inicializar(Component comp) {
-
-		/*
-		 * Listado de todos los programas que se encuentran activos, cuyo
-		 * estatus=true con el servicioPrograma mediante el metodo buscarActivas
-		 */
 		List<Programa> programas = servicioPrograma.buscarActivas();
-
-		/*
-		 * Validacion para mostrar el listado de programas mediante el
-		 * componente ltbPrograma dependiendo si se encuentra ejecutando la
-		 * vista VCatalogoPrograma
-		 */
-		if (ltbPrograma != null) {
-			ltbPrograma.setModel(new ListModelList<Programa>(programas));
-		}
-
-		Selectors.wireComponents(comp, this, false);
-		/*
-		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item de la vista VCatalogo
-		 */
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-
-	}
-
-	public void recibir(String vista) {
-		vistaRecibida = vista;
-		
+		ltbPrograma.setModel(new ListModelList<Programa>(programas));
 	}
 
 	/*
-	 * Metodo para filtrar los programas dado a el nombre y descripcion y del
-	 * programa en la vista VCatalogoPrograma
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
+	public void recibir(String vista) {
+		vistaRecibida = vista;
+
+	}
+
+	/*
+	 * Metodo que permite filtrar los programas disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre y la
+	 * descripcion de estos.
 	 */
 	@Listen("onChange = #txtNombreMostrarPrograma,#txtDescripcionMostrarPrograma")
 	public void filtrarDatosCatalogo() {
 		List<Programa> programas1 = servicioPrograma.buscarActivas();
 		List<Programa> programas2 = new ArrayList<Programa>();
-		/*
-		 * Ciclo que permite recorrer cada uno de los programas asociandolo con
-		 * el filtreo del nombre y descripcion del programa
-		 */
 		for (Programa programa : programas1) {
 			if (programa
 					.getNombre()
@@ -117,82 +101,62 @@ public class CCatalogoPrograma extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite pasar los datos del programa a VPrograma mostrado en
-	 * la vista VCatalogoPrograma
+	 * Metodo que permite obtener el objeto Progrma al realizar el evento doble
+	 * clic sobre un item en especifico en la lista, extrayendo asi su id, para
+	 * luego poder ser mapeada y enviada a la vista asociada a ella.
 	 */
 	@Listen("onDoubleClick = #ltbPrograma")
 	public void mostrarDatosCatalogo() {
 
 		if (vistaRecibida == null) {
-			
+
 			vistaRecibida = "maestros/VPrograma";
 
 		} else {
-
-			// Programa seleccionado en el catalogo VCatalogoPrograma
 			Listitem listItem = ltbPrograma.getSelectedItem();
-
-			/*
-			 * Creacion de objecto cargado con el servicioPrograma la cual
-			 * mediante el metodo buscarPorNombrePrograma nos retornara los
-			 * datos del programa dado al valor del item seleccionado en la
-			 * vista VCatalgoPrograma
-			 */
 			Programa programaDatos = servicioPrograma
 					.buscarPorNombrePrograma(((Programa) listItem.getValue())
 							.getNombre());
-			/*
-			 * Permite asignar uno o mas valores para poder ser utilizado en
-			 * otra region del proyecto
-			 */
 			final HashMap<String, Object> map = new HashMap<String, Object>();
-			/*
-			 * Permite guardar el id del programa seleccionado asociandolo con
-			 * el nombre de id en la variable map
-			 */
 			map.put("id", programaDatos.getId());
-			/*
-			 * Permite asignar el map asociandolo con el nombre de
-			 * programasCatalogo utilizando Sessions, setiandolo para
-			 * posteriormente retornar su valor y asi transportar los datos a la
-			 * vista VPrograma
-			 */
 			String vista = vistaRecibida;
 			map.put("vista", vista);
-
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-
 			Executions.sendRedirect("/vistas/arbol.zul");
-			// Permite cerrar la vista VCatalogo
 			wdwCatalogoPrograma.onClose();
 		}
 
 	}
+
 	@Listen("onClick = #btnImprimir")
-	public void imprimir() throws SQLException{
+	public void imprimir() throws SQLException {
 		try {
 			Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres","equipo2");
-		  FileSystemView filesys = FileSystemView.getFileSystemView();
-		 JasperReport jasperReport;
+		Connection con = DriverManager
+				.getConnection("jdbc:postgresql://localhost:5432/siteg",
+						"postgres", "1234");
+		FileSystemView filesys = FileSystemView.getFileSystemView();
+		JasperReport jasperReport;
 		try {
-			
-			jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/RPrograma.jasper"));
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, con);			
+			String rutaUrl = obtenerDirectorio();
+			String reporteSrc = rutaUrl
+					+ "SITEG/vistas/reportes/salidas/compilados/RPrograma.jasper";
+
+			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(
+					jasperReport, null, con);
 			JasperViewer.viewReport(jasperPrint, false);
 			con.close();
-			//JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/RPrograma.pdf");
-		  
 		} catch (JRException e) {
 			System.out.println(e);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	   		
+
 	}
 
 }

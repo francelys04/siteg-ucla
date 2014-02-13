@@ -32,17 +32,9 @@ import controlador.CGeneral;
 @Controller
 public class CCatalogoTematica extends CGeneral {
 
-	STematica servicioTematica = GeneradorBeans.getSTematica();
+	private long id = 0;
+	private static String vistaRecibida;
 
-	// atributos de la vista tematica
-	@Wire
-	private Combobox cmbAreaTematica;
-	@Wire
-	private Textbox txtNombreTematica;
-	@Wire
-	private Textbox txtDescripcionTematica;
-
-	// atributos de la pantalla del catalogo
 	@Wire
 	private Listbox ltbTematica;
 	@Wire
@@ -51,60 +43,34 @@ public class CCatalogoTematica extends CGeneral {
 	private Textbox txtAreaMostrarTematica;
 	@Wire
 	private Textbox txtDescripcionMostrarTematica;
-	private long id = 0;
-
 	@Wire
 	private Window wdwCatalogoTematica;
 
-	private static String vistaRecibida;
-
-	/**
-	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
-	 *
-	 * 
-	 * @date 09-12-2013
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todas las
+	 * tematicas disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
 	 */
 	public void inicializar(Component comp) {
 
-		/*
-		 * Listado de todos las tematicas que se encuentran activas
-		 * 
-		 */
-
 		List<Tematica> tematica = servicioTematica.buscarActivos();
-
-		
-		if (txtNombreTematica == null) {
-			ltbTematica.setModel(new ListModelList<Tematica>(tematica));
-		}
-
-		Selectors.wireComponents(comp, this, false);
-
-		/*
-		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item de la vista VActividad
-		 */
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("tematicaCatalogo");
-		
-
+		ltbTematica.setModel(new ListModelList<Tematica>(tematica));
 	}
 
-	/**
-	 * Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
-	 * descripcion
-	 * 
-	 * @date 09-12-2013
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
 	 */
-
-	
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
 
-	// filtra en el catalogo
-
+	/*
+	 * Metodo que permite filtrar las tematicas disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre, area y *
+	 * descripcion de estas.
+	 */
 	@Listen("onChange = #txtNombreMostrarTematica,#txtAreaMostrarTematica,#txtDescripcionMostrarTematica")
 	public void filtrarDatosCatalogo() {
 		List<Tematica> tematicas1 = servicioTematica.buscarActivos();
@@ -137,35 +103,39 @@ public class CCatalogoTematica extends CGeneral {
 
 	}
 
-	// Aca se selecciona una tematica del catalogo
+	/*
+	 * Metodo que permite obtener el objeto Tematica al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbTematica")
 	public void mostrarDatosCatalogo() {
-		if(ltbTematica.getItemCount()!=0){
+		if (ltbTematica.getItemCount() != 0) {
 
-		try {
-		if (vistaRecibida == null) {
+			try {
+				if (vistaRecibida == null) {
 
-			vistaRecibida = "maestros/VTematica";
+					vistaRecibida = "maestros/VTematica";
 
-		} else {
-			
-			Listitem listItem = ltbTematica.getSelectedItem();
-			Tematica tematicaDatosCatalogo = (Tematica) listItem.getValue();
-			final HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", tematicaDatosCatalogo.getId());
-			String vista = vistaRecibida;
-			map.put("vista", vista);
-			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			Executions.sendRedirect("/vistas/arbol.zul");
-			wdwCatalogoTematica.onClose();
-			
-		}
-		} catch (NullPointerException e) {
+				} else {
 
-			System.out.println("NullPointerException");
-		}
-		
+					Listitem listItem = ltbTematica.getSelectedItem();
+					Tematica tematicaDatosCatalogo = (Tematica) listItem
+							.getValue();
+					final HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("id", tematicaDatosCatalogo.getId());
+					String vista = vistaRecibida;
+					map.put("vista", vista);
+					Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+					Executions.sendRedirect("/vistas/arbol.zul");
+					wdwCatalogoTematica.onClose();
+
+				}
+			} catch (NullPointerException e) {
+
+				System.out.println("NullPointerException");
+			}
+
 		}
 	}
-	}
-		
+}
