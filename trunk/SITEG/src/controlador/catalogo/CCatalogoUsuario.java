@@ -28,7 +28,8 @@ import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 public class CCatalogoUsuario extends CGeneral {
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
+	
+	private static String vistaRecibida;
 
 	@Wire
 	private Textbox txtNombreMostrarUsuario;
@@ -40,23 +41,21 @@ public class CCatalogoUsuario extends CGeneral {
 	private Window wdwCatalogoUsuario;
 
 
-	private static String vistaRecibida;
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * usuarios disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
-		//llena la lista con los usuario activos
+	public	void inicializar(Component comp) {
 		List<Usuario> usuarios = servicioUsuario.buscarActivos();
 		ltbUsuario.setModel(new ListModelList<Usuario>(usuarios));
 	
-		Selectors.wireComponents(comp, this, false);
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-		
-		System.out.println("Map"+map);
 	}
-	//permite filtrar por el nombre de usuario
+	/*
+	 * Metodo que permite filtrar los usuarios disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre de estos.
+	 */
 	@Listen("onChange = #txtNombreMostarUsuario")
 	public void filtrarDatosCatalogo() {
 		List<Usuario> usuarios = servicioUsuario.buscarActivos();
@@ -77,13 +76,21 @@ public class CCatalogoUsuario extends CGeneral {
 		ltbUsuario.setModel(new ListModelList<Usuario>(usuarios1));
 
 	}
-
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 		System.out.println("Recibir vista"+vista);
 
 	}
-
+	/*
+	 * Metodo que permite obtener el objeto Usuario al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbUsuario")
 	public void mostrarDatosCatalogo() {
 		if(ltbUsuario.getItemCount()!=0){
@@ -94,11 +101,8 @@ public class CCatalogoUsuario extends CGeneral {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-	
 		if(map2!=null)
 			map=map2;
-		
-		
 		map.put("id", usuario1.getId());
 		map.put("vista", vista);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);

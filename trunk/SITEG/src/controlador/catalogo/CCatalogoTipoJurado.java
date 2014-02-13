@@ -48,7 +48,8 @@ import servicio.STipoJurado;
 @Controller
 public class CCatalogoTipoJurado extends CGeneral {
 
-	STipoJurado servicioTipoJurado = GeneradorBeans.getServicioTipoJurado();
+	private long id = 0;
+	private static String vistaRecibida;
 
 	@Wire
 	private Textbox txtNombreTipoJurado;
@@ -62,35 +63,35 @@ public class CCatalogoTipoJurado extends CGeneral {
 	private Listbox ltbTipoJurado;
 	@Wire
 	private Window wdwCatalogoTipoJurado;
-	private long id = 0;
-
-	private static String vistaRecibida;
-
+	
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todas los
+	 * tipos de jurados disponibles y se llena el listado del mismo en el componente
+	 * lista de la vista.
+	 */
 	@Override
 	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		//llena la lista con los tipos de jurados activos
 		List<TipoJurado> tipoJurado = servicioTipoJurado.buscarActivos();
-
-		if (txtNombreTipoJurado == null) {
-			ltbTipoJurado.setModel(new ListModelList<TipoJurado>(tipoJurado));
-		}
-
-		Selectors.wireComponents(comp, this, false);
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-
+		ltbTipoJurado.setModel(new ListModelList<TipoJurado>(tipoJurado));
 	}
-
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	// Aca se filtran las busqueda en el catalogo, ya sea por nombre o por
-	// descripcion
+	/*
+	 * Metodo que permite filtrar los tipos de jurados disponibles, mediante el
+	 * componente de la lista, donde se podra visualizar el nombre y la
+	 * descripcion de estas.
+	 */
 	@Listen("onChange = #txtNombreMostrarTipoJurado,#txtDescripcionMostrarTipoJurado")
 	public void filtrarDatosCatalogo() {
 		List<TipoJurado> tipoJurado1 = servicioTipoJurado.buscarActivos();
@@ -115,7 +116,11 @@ public class CCatalogoTipoJurado extends CGeneral {
 		ltbTipoJurado.setModel(new ListModelList<TipoJurado>(tipoJurado2));
 
 	}
-	//lleva los datos del item seleccionado a la vista recibida
+	/*
+	 * Metodo que permite obtener el objeto TipoJurado al realizar el evento
+	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
+	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbTipoJurado")
 	public void mostrarDatosCatalogo() {
 		if(ltbTipoJurado.getItemCount()!=0){

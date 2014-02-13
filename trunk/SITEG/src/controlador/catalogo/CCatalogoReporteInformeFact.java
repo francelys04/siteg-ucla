@@ -28,9 +28,8 @@ import controlador.CGeneral;
 
 public class CCatalogoReporteInformeFact extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	
-	
+	private static String vistaReporte;
+
 	@Wire
 	private Listbox ltbListaInformeFactibilidad;
 	@Wire
@@ -40,30 +39,33 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 	@Wire
 	private Textbox txtTituloInformeFactibilidad;
 	
-	private static String vistaReporte;
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
+	 * disponibles mediante el metodo "buscarDatos()", recorriendolo uno a uno
+	 * para luego cargar una lista de estudiantes por teg donde mediante la
+	 * implementacion del servicio de busqueda se va obteniendo su nombre y su
+	 * apellido y se va seteando temporalmente en la variable estatus del teg
+	 * para poder visualizarlo en el componente lista de teg de la vista.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-
 		List<Teg> tegs = buscarDatos();
 		for (int i = 0; i < tegs.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
-			String nombre = es.get(0).getNombre();
-			String apellido = es.get(0).getApellido();
+			List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = estudiantes.get(0).getNombre();
+			String apellido = estudiantes.get(0).getApellido();
 			tegs.get(i).setEstatus(nombre+" "+apellido);
 		}
 		ltbListaInformeFactibilidad.setModel(new ListModelList<Teg>(tegs));
 
-		Selectors.wireComponents(comp, this, false);
-
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-	
 	}
 
-	// Metodo que permite obtener una lista de los teg de acuerdo al
-	// programa del profesor que se encuentra loggeado
+	/*
+	 * Metodo que permite retornar un lista de los tegs, donde se recorre tanto
+	 * la lista del teg como los profesores activos, donde se compara si coincide las
+	 * cedulas de cada uno de los profesores para cargar la lista de tegs.
+	 */
 	public List<Teg> buscarDatos() {
 
 		List<Profesor> profesores = servicioProfesor
@@ -71,7 +73,7 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 		List<Teg> tegs = servicioTeg.buscarProyectoFactible();
 
 		Profesor profesor1 = new Profesor();
-		List<Teg> t = new ArrayList<Teg>();
+		List<Teg> tegs1 = new ArrayList<Teg>();
 
 		for (int i = 0; i < tegs.size(); i++) {
 
@@ -83,22 +85,29 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 				}
 			}
 			if (encontre == true) {
-				t.add(tegs.get(i));
+				tegs1.add(tegs.get(i));
 			}
 		}
 
-		ltbListaInformeFactibilidad.setModel(new ListModelList<Teg>(t));
-		return t;
+		ltbListaInformeFactibilidad.setModel(new ListModelList<Teg>(tegs1));
+		return tegs1;
 	}
-	
+	/*
+	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
+	 * este catalogo para poder redireccionar al mismo luego de realizar la
+	 * operacion correspondiente a este.
+	 */
 	public void recibir(String vista) {
 		vistaReporte = vista;
 		
 	}
 	
 
-	// Metodo que permite filtrar un teg de acuerdo al
-	// titulo proyecto y nombre de estudiante
+	/*
+	 * Metodo que permite filtrar los tegs disponibles dado el metodo
+	 * "buscarDatos()", mediante el componente de la lista, donde se podra
+	 * visualizar el nombre y apellido del estudiante y el titulo de estos.
+	 */
 	@Listen("onChange = #txtEstudianteInformeFactibilidad, #txtTituloInformeFactibilidad")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
@@ -148,7 +157,11 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 		}
 	}*/
 	
-	
+	/*
+	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
+	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
+	 * poder ser mapeada y enviada a la vista asociada a ella.
+	 */
 	@Listen("onDoubleClick = #ltbListaInformeFactibilidad")
 	public void mostrarDatosCatalogo() {
 		if (vistaReporte == null) {

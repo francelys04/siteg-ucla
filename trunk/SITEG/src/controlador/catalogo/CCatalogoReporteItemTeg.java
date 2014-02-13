@@ -45,6 +45,8 @@ import controlador.CGeneral;
 @Controller
 public class CCatalogoReporteItemTeg extends CGeneral {
 
+	CCalificarDefensa ventanarecibida = new CCalificarDefensa();
+
 	@Wire
 	private Listbox ltbReporteItemTeg;
 	@Wire
@@ -63,60 +65,71 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 	private Textbox txtMostrarApellidoTutorCalificar;
 	@Wire
 	private Combobox cmbEstatus;
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SJurado servicioj = GeneradorBeans.getServicioJurado();
-	CCalificarDefensa ventanarecibida = new CCalificarDefensa();
 
+	/*
+	 * Metodo heredado del Controlador CGeneral
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
-
-		Selectors.wireComponents(comp, this, false);
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("tegCatalogo");
-
+	public void inicializar(Component comp) {
 	}
-//busca los tegs 
+
+	/*
+	 * Metodo que permite buscar todos los tegs disponibles con el item
+	 * seleccionado de la lista dado al evento onSelect, recorriendolo uno a uno
+	 * para luego cargar una lista de estudiantes por teg donde mediante la
+	 * implementacion del servicio de busqueda se va obteniendo su nombre y su
+	 * apellido y se va seteando temporalmente en la variable estatus del teg
+	 * para poder visualizarlo en el componente lista de teg de la vista.
+	 */
 	@Listen("onSelect= #cmbEstatus")
 	public List<Teg> buscar() {
-		List<Teg> t = servicioTeg.buscarTegs(cmbEstatus.getValue());
-		for (int i = 0; i < t.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(t.get(i));
-			String nombre = es.get(0).getNombre();
-			String apellido = es.get(0).getApellido();
-			t.get(i).setEstatus(nombre+" "+apellido);
+		List<Teg> tegs = servicioTeg.buscarTegs(cmbEstatus.getValue());
+		for (int i = 0; i < tegs.size(); i++) {
+			List<Estudiante> estudiantes = servicioEstudiante
+					.buscarEstudiantePorTeg(tegs.get(i));
+			String nombre = estudiantes.get(0).getNombre();
+			String apellido = estudiantes.get(0).getApellido();
+			tegs.get(i).setEstatus(nombre + " " + apellido);
 		}
-		
-		ltbReporteItemTeg.setModel(new ListModelList<Teg>(t));
-		
 
-		return t;
+		ltbReporteItemTeg.setModel(new ListModelList<Teg>(tegs));
+
+		return tegs;
 	}
-//Permite hacer el filtrado en el catalogo
+
+	/*
+	 * Metodo que permite filtrar los tegs disponibles dado el metodo
+	 * "buscar()", mediante el componente de la lista, donde se podra
+	 * visualizar la fecha, el nombre y apellido del estudiante, la fecha, la
+	 * tematica, el area, el titulo, el nombre y apellido del tutor de estos.
+	 */
 	@Listen("onChange = #txtMostrarFechaCalificar,#txtMostrarTematicaCalificar,#txtMostrarAreaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,# txtMostrarApellidoTutorCalificar")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscar();
 		for (int i = 0; i < teg1.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			List<Estudiante> es = servicioEstudiante
+					.buscarEstudiantePorTeg(teg1.get(i));
 			String nombre = es.get(0).getNombre();
 			String apellido = es.get(0).getApellido();
-			teg1.get(i).setEstatus(nombre+" "+apellido);
+			teg1.get(i).setEstatus(nombre + " " + apellido);
 		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
-			if (servicioEstudiante.buscarEstudiantePorTeg(teg)
+			if (servicioEstudiante
+					.buscarEstudiantePorTeg(teg)
 					.get(0)
 					.getNombre()
 					.toLowerCase()
 					.contains(
 							txtEstudianteCalificarDefensa.getValue()
 									.toLowerCase())
-					&&teg.getFecha()
-					.toString()
-					.toLowerCase()
-					.contains(txtMostrarFechaCalificar.getValue().toLowerCase())
+					&& teg.getFecha()
+							.toString()
+							.toLowerCase()
+							.contains(
+									txtMostrarFechaCalificar.getValue()
+											.toLowerCase())
 
 					&& teg.getTematica()
 							.getNombre()
@@ -159,55 +172,67 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 		ltbReporteItemTeg.setModel(new ListModelList<Teg>(teg2));
 
 	}
-//permite mapear los datos a la vista calificar defensa
+
+	
 	@Listen("onDoubleClick = #ltbReporteItemTeg")
 	public void mostrarDatosCatalogo() {
-		if(ltbReporteItemTeg.getItemCount()!=0){
-		Listitem listItem = ltbReporteItemTeg.getSelectedItem();
-		if(listItem!=null){
-		Teg teg = (Teg) listItem.getValue();
-		
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		  FileSystemView filesys = FileSystemView.getFileSystemView();
-		 JasperReport jasperReport;
-		try {
-			Connection con;
-			
-			con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres","equipo2");
-			Map p = new HashMap();
-			List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(teg);
-			List<String>estu = new ArrayList<String>();
-			for (int i=0; i<estudiantes.size(); i++){
-				String nombre= estudiantes.get(i).getNombre();
-				String apellido =estudiantes.get(i).getApellido();
-				estu.add(nombre+" "+apellido);
-				
+		if (ltbReporteItemTeg.getItemCount() != 0) {
+			Listitem listItem = ltbReporteItemTeg.getSelectedItem();
+			if (listItem != null) {
+				Teg teg = (Teg) listItem.getValue();
+
+				try {
+					Class.forName("org.postgresql.Driver");
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				FileSystemView filesys = FileSystemView.getFileSystemView();
+				JasperReport jasperReport;
+				try {
+					Connection con;
+
+					con = DriverManager.getConnection(
+							"jdbc:postgresql://localhost:5432/siteg",
+							"postgres", "equipo2");
+					Map p = new HashMap();
+					List<Estudiante> estudiantes = servicioEstudiante
+							.buscarEstudiantePorTeg(teg);
+					List<String> estu = new ArrayList<String>();
+					for (int i = 0; i < estudiantes.size(); i++) {
+						String nombre = estudiantes.get(i).getNombre();
+						String apellido = estudiantes.get(i).getApellido();
+						estu.add(nombre + " " + apellido);
+
+					}
+					String tutor = teg.getTutor().getNombre() + " "
+							+ teg.getTutor().getApellido();
+					p.put("idteg", teg.getId());
+					p.put("estudiantes", estu);
+					p.put("tutor", tutor);
+					p.put("tematica", teg.getTematica().getNombre());
+					p.put("titulo", teg.getTitulo());
+					
+					String rutaUrl = obtenerDirectorio();
+					String reporteSrc = rutaUrl
+							+ "SITEG/vistas/reportes/salidas/compilados/RItemTeg.jasper";
+
+					jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, p, con);
+					JasperViewer.viewReport(jasperPrint, false);
+					con.close();
+					// JasperExportManager.exportReportToPdfFile(jasperPrint,
+					// filesys.getHomeDirectory().toString()+"/RPrograma.pdf");
+
+				} catch (JRException | SQLException e) {
+					System.out.println(e);
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
-			String tutor = teg.getTutor().getNombre() +" "+ teg.getTutor().getApellido();
-			p.put("idteg", teg.getId());
-			p.put("estudiantes",estu);
-			p.put("tutor", tutor);
-			p.put("tematica", teg.getTematica().getNombre());
-			p.put("titulo", teg.getTitulo());
-			jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResource("/reporte/RItemTeg.jasper"));
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, con);
-			JasperViewer.viewReport(jasperPrint,false);	
-			con.close();
-			//JasperExportManager.exportReportToPdfFile(jasperPrint, filesys.getHomeDirectory().toString()+"/RPrograma.pdf");
-		  
-		} catch (JRException | SQLException e) {
-			System.out.println(e);
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
-		}
-	}
 	}
 }
