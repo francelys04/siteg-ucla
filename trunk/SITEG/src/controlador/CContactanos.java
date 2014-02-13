@@ -47,8 +47,6 @@ public class CContactanos extends CGeneral {
 
 	public static String correoProgramas;
 
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-
 	@Override
 	public
 	void inicializar(Component comp) {

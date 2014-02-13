@@ -1,67 +1,42 @@
 package controlador;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.Requisito;
-import modelo.Tematica;
 import modelo.AreaInvestigacion;
+import modelo.Tematica;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SPrograma;
-import servicio.STematica;
-import servicio.SAreaInvestigacion;
-import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoTematica;
 
-//es un controlador de tematica y su catalogo
+/*Controlador que permite realizar las operaciones basicas (CRUD)
+ * sobre la entidad Tematica*/
 @Controller
 public class CTematica extends CGeneral {
 
-	// servicios para los dos modelos implicados
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
 	CCatalogoTematica catalogo = new CCatalogoTematica();
 
-	// atributos de la vista tematica
 	@Wire
 	private Combobox cmbAreaTematica;
 	@Wire
 	private Textbox txtNombreTematica;
 	@Wire
 	private Textbox txtDescripcionTematica;
-
-	// atributos de la pantalla del catalogo
 	@Wire
 	private Listbox ltbTematica;
 	@Wire
@@ -80,19 +55,15 @@ public class CTematica extends CGeneral {
 	private Window wdwTematica;
 	private long id = 0;
 
-	// metodo para llenar combo y mapear
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
 	public void inicializar(Component comp) {
 
 		List<AreaInvestigacion> areas = servicioArea.buscarActivos();
-		List<Tematica> tematicas = servicioTematica.buscarActivos();
-
-		if (cmbAreaTematica == null) {
-			ltbTematica.setModel(new ListModelList<Tematica>(tematicas));
-		} else {
-			cmbAreaTematica
-					.setModel(new ListModelList<AreaInvestigacion>(areas));
-
-		}
+		cmbAreaTematica.setModel(new ListModelList<AreaInvestigacion>(areas));
 
 		Selectors.wireComponents(comp, this, false);
 
@@ -116,7 +87,10 @@ public class CTematica extends CGeneral {
 
 	}
 
-	// al darle al boton me muestra el catalogo
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnBuscarTematica")
 	public void buscarTematica() {
 
@@ -127,7 +101,7 @@ public class CTematica extends CGeneral {
 
 	}
 
-	// guarda al darle clic
+	/* Metodo que permite el guardado o modificacion de una entidad Tematica */
 	@Listen("onClick = #btnGuardarTematica")
 	public void guardarTematica() {
 
@@ -164,7 +138,7 @@ public class CTematica extends CGeneral {
 										"Informacion", Messagebox.OK,
 										Messagebox.INFORMATION);
 								id = 0;
-								
+
 							}
 						}
 					});
@@ -172,7 +146,7 @@ public class CTematica extends CGeneral {
 		}
 	}
 
-	// elimina al darle clic
+	/* Metodo que permite la eliminacion logica de una entidad Tematica */
 	@Listen("onClick = #btnEliminarTematica")
 	public void eliminarTematica() {
 		Messagebox.show("¿Desea eliminar los datos de la tematica?",
@@ -181,23 +155,25 @@ public class CTematica extends CGeneral {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 
-							Tematica tematica = servicioTematica.buscarTematica(id);
+							Tematica tematica = servicioTematica
+									.buscarTematica(id);
 							tematica.setEstatus(false);
 							servicioTematica.guardar(tematica);
 							cancelarTematica();
-							Messagebox.show(
-									"Tematica eliminada exitosamente",
+							Messagebox.show("Tematica eliminada exitosamente",
 									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
-							
+
 						}
 					}
 				});
-		
-		
+
 	}
 
-	// coloca los campos de la vista en blanco
+	/*
+	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
+	 * variable global id
+	 */
 	@Listen("onClick = #btnCancelarTematica")
 	public void cancelarTematica() {
 		id = 0;
@@ -207,13 +183,11 @@ public class CTematica extends CGeneral {
 		btnEliminarTematica.setDisabled(true);
 
 	}
-	
+
+	/* Metodo que permite cerrar la ventana correspondiente a las tematicas */
 	@Listen("onClick = #btnSalirTematica")
 	public void salirTematica() {
-		
 		wdwTematica.onClose();
-		
-
 	}
 
 }
