@@ -1,50 +1,31 @@
 package controlador;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.Actividad;
 import modelo.Requisito;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoRequisito;
 
-import servicio.SRequisito;
-
+/*Controlador que permite realizar las operaciones basicas (CRUD)
+ * sobre la entidad Requisito*/
 @Controller
 public class CRequisito extends CGeneral {
-	SRequisito servicioRequisito = GeneradorBeans.getServicioRequisito();
-
 	CCatalogoRequisito catalogo = new CCatalogoRequisito();
 
 	@Wire
@@ -65,14 +46,12 @@ public class CRequisito extends CGeneral {
 	private Window wdwRequisito;
 	private long id = 0;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
 	public void inicializar(Component comp) {
-		//Permite llenar los datos del requisito en la vista 
-		//si el map es diferente a null
-			List<Requisito> requisitos = servicioRequisito.buscarActivos();
-
-		if (txtNombreRequisito == null)
-			ltbRequisito.setModel(new ListModelList<Requisito>(requisitos));
-
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -92,7 +71,11 @@ public class CRequisito extends CGeneral {
 		}
 
 	}
-	//Permite ver la lis de requisitos activos
+	
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnBuscarRequisito")
 	public void buscarRequisito() {
 
@@ -102,7 +85,7 @@ public class CRequisito extends CGeneral {
 		catalogo.recibir("maestros/VRequisito");
 
 	}
-	//Permite guardar un requisito
+	/* Metodo que permite el guardado o modificacion de una entidad Requisito */
 	@Listen("onClick = #btnGuardarRequisito")
 	public void guardarRequisito() {
 
@@ -139,6 +122,7 @@ public class CRequisito extends CGeneral {
 		}
 	}
 
+	/* Metodo que permite la eliminacion logica de una entidad Requisito */
 	@Listen("onClick = #btnEliminarRequisito")
 	public void eliminarRequisito() {
 
@@ -163,6 +147,10 @@ public class CRequisito extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
+	 * variable global id
+	 */
 	@Listen("onClick = #btnCancelarRequisito")
 	public void cancelarRequisito() {
 		id = 0;
@@ -172,15 +160,11 @@ public class CRequisito extends CGeneral {
 
 	}
 	
-	
+	/* Metodo que permite cerrar la ventana correspondiente a los requisitos */
 	@Listen("onClick = #btnSalirRequisito")
 	public void salirRequisito() {
 		
 		wdwRequisito.onClose();
 
 	}
-	
-
-	
-
 }

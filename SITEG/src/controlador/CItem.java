@@ -33,7 +33,6 @@ import controlador.catalogo.CCatalogoItem;
 
 @Controller
 public class CItem extends CGeneral {
-	SItem servicioItem = GeneradorBeans.getServicioItem();
 
 	@Wire
 	private Textbox txtNombreItem;

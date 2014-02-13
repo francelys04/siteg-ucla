@@ -1,50 +1,31 @@
 package controlador;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.Requisito;
 import modelo.TipoJurado;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.STipoJurado;
-import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoTipoJurado;
 
+/*Controlador que permite realizar las operaciones basicas (CRUD)
+ * sobre la entidad TipoJurado*/
 @Controller
 public class CTipoJurado extends CGeneral {
-
-	STipoJurado servicioTipoJurado = GeneradorBeans.getServicioTipoJurado();
 
 	CCatalogoTipoJurado catalogo = new CCatalogoTipoJurado();
 
@@ -66,20 +47,18 @@ public class CTipoJurado extends CGeneral {
 	private Window wdwTipoJurado;
 	private long id = 0;
 
-	public void inicializar(Component comp) {
-
-		List<TipoJurado> tipoJurado = servicioTipoJurado.buscarActivos();
-
-		if (txtNombreTipoJurado == null) {
-			ltbTipoJurado.setModel(new ListModelList<TipoJurado>(tipoJurado));
-		}
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
+	public void inicializar(Component comp) { 
 
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-
-		// Aca se hace un mapeo para asignar los valores a las caja de textos
+		
 		if (map != null) {
 			if (map.get("id") != null) {
 
@@ -96,7 +75,10 @@ public class CTipoJurado extends CGeneral {
 		}
 	}
 
-	// Aca se muestra el catalogo de los Tipo de Jurado Registrados
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnCatalogoTipoJurado")
 	public void buscarTipoJurado() {
 
@@ -107,7 +89,7 @@ public class CTipoJurado extends CGeneral {
 
 	}
 
-	// Aca se guardan los Tipo de Jurado
+	/* Metodo que permite el guardado o modificacion de una entidad TipoJurado */
 	@Listen("onClick = #btnGuardarTipoJurado")
 	public void guardarTipoJurado() {
 
@@ -147,7 +129,7 @@ public class CTipoJurado extends CGeneral {
 
 	}
 
-	// Aca se eliminan logicamente los Tipo de Jurado
+	/* Metodo que permite la eliminacion logica de una entidad TipoJurado */
 	@Listen("onClick = #btnEliminarTipoJurado")
 	public void eliminarTipoJurado() {
 
@@ -171,7 +153,10 @@ public class CTipoJurado extends CGeneral {
 
 	}
 
-	// Aca se mandan a limpiar los campos de textos de la vista
+	/*
+	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
+	 * variable global id
+	 */
 	@Listen("onClick = #btnCancelarTipoJurado")
 	public void cancelarTipoJurado() {
 		id = 0;
@@ -180,13 +165,10 @@ public class CTipoJurado extends CGeneral {
 		btnEliminarTipoJurado.setDisabled(true);
 	}
 
+	/* Metodo que permite cerrar la ventana correspondiente a los tipos de jurado */
 	@Listen("onClick = #btnSalirTipoJurado")
 	public void salirTipoJurado() {
-		
 		wdwTipoJurado.onClose();
-		
-		
-		
 	}
 
 }

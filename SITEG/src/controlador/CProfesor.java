@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Set;
 
 import modelo.Categoria;
-
 import modelo.Profesor;
-import modelo.Programa;
 import modelo.Tematica;
 import modelo.seguridad.Usuario;
 
-
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -24,26 +22,18 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-import servicio.SCategoria;
-import servicio.SProfesor;
 
-import servicio.SPrograma;
-import servicio.seguridad.SUsuario;
-import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoProfesor;
 
+/*Controlador que permite realizar las operaciones basicas (CRUD)
+ * sobre la entidad Profesor*/
+@Controller
 public class CProfesor extends CGeneral {
-
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SCategoria servicioCategoria = GeneradorBeans.getServicioCategoria();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
 	CCatalogoProfesor catalogo = new CCatalogoProfesor();
 	@Wire
@@ -87,19 +77,16 @@ public class CProfesor extends CGeneral {
 	@Wire
 	private Button btnEliminarProfesor;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		List<Categoria> categorias = servicioCategoria.buscarCategoria();
-
-		List<Profesor> profesores = servicioProfesor.buscarActivos();
-		if (cmbCategoriaProfesor == null) {
-			ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
-		} else {
-			cmbCategoriaProfesor.setModel(new ListModelList<Categoria>(
-					categorias));
-		}
+		cmbCategoriaProfesor.setModel(new ListModelList<Categoria>(categorias));
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -133,7 +120,10 @@ public class CProfesor extends CGeneral {
 
 	}
 
-	// Permite ver la lista de profesores
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnCatalogoProfesor")
 	public void buscarProfesor() {
 
@@ -145,7 +135,7 @@ public class CProfesor extends CGeneral {
 
 	}
 
-	// guarda los datos de un profesor
+	/* Metodo que permite el guardado o modificacion de una entidad Profesor */
 	@Listen("onClick = #btnGuardarProfesor")
 	public void guardarProfesor() {
 
@@ -212,7 +202,9 @@ public class CProfesor extends CGeneral {
 		}
 	}
 
-	// limpiar los campos
+	/*
+	 * Metodo que permite limpiar los campos de la vista
+	 */
 	@Listen("onClick = #btnCancelarProfesor")
 	public void cancelarProfesor() {
 
@@ -238,7 +230,7 @@ public class CProfesor extends CGeneral {
 
 	}
 
-	// elimina los datos de un profesor
+	/* Metodo que permite la eliminacion logica de una entidad Profesor */
 	@Listen("onClick = #btnEliminarProfesor")
 	public void eliminarProfesor() {
 
@@ -262,12 +254,11 @@ public class CProfesor extends CGeneral {
 
 	}
 
-	// elimina los datos de un profesor
+	/* Metodo que permite cerrar la ventana correspondiente a los profesores */
 	@Listen("onClick = #btnSalirProfesor")
 	public void salirProfesor() {
 
 		wdwProfesor.onClose();
 
 	}
-
 }

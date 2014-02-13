@@ -1,81 +1,38 @@
 package controlador;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import modelo.AreaInvestigacion;
 import modelo.Condicion;
-
-import modelo.ItemEvaluacion;
-import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
-import modelo.Requisito;
 import modelo.compuesta.CondicionPrograma;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SAreaInvestigacion;
-import servicio.SCondicion;
-import servicio.SCondicionPrograma;
-import servicio.SLapso;
-import servicio.SProfesor;
-import servicio.SPrograma;
-import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoProfesor;
 import controlador.catalogo.CCatalogoPrograma;
 
+/*Controlador que permite realizar las operaciones basicas (CRUD)
+ * sobre la entidad Programa*/
 @Controller
 public class CPrograma extends CGeneral {
 
-	/*
-	 * Inicializacion del servicioPrograma que permitira realizar las
-	 * operaciones con las entidades relacionadas con base de datos
-	 */
-
 	CCatalogoPrograma catalogo = new CCatalogoPrograma();
 	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
-			.getServicioCondicionPrograma();
-	SCondicion servicioCondicion = GeneradorBeans.getServicioCondicion();
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	/*
-	 * Declaracion de componentes dado a sus id, implementados en las vistas
-	 * VPrograma y VCatalago
-	 */
 	@Wire
 	private Textbox txtNombrePrograma;
 	@Wire
@@ -98,26 +55,19 @@ public class CPrograma extends CGeneral {
 	private Textbox txtDirectorPrograma;
 	@Wire
 	private Window wdwPrograma;
-	/*
-	 * Inicializacion de la varible global id que sera asociado con el id del
-	 * programa
-	 */
 	long id = 0;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
 	public void inicializar(Component comp) {
 
 		txtDirectorPrograma.setDisabled(true);
 		Selectors.wireComponents(comp, this, false);
-		/*
-		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item de la vista VCatalogo
-		 */
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-		/*
-		 * Validacion para vaciar la informacion del VCatalogo a la vista
-		 * VPrograma.zul si la varible map tiene algun dato contenido
-		 */
 		if (map != null) {
 			if (map.get("cedula") != null){
 				txtDirectorPrograma.setValue((String) map.get("cedula"));
@@ -132,11 +82,6 @@ public class CPrograma extends CGeneral {
 				txtCorreoPrograma.setValue((String) map.get("correoPrograma"));
 			if ((Long) map.get("id") != null) {
 				id = ((Long) map.get("id"));
-				/*
-				 * Creacion de objeto cargado con el servicioPrograma mediante
-				 * el metodo buscar dado a su id y asi llenar los textbox de la
-				 * vista VPrograma
-				 */
 				Programa programa = servicioPrograma.buscar(id);
 				txtNombrePrograma.setValue(programa.getNombre());
 				txtDescripcionPrograma.setValue(programa.getDescripcion());
@@ -150,7 +95,10 @@ public class CPrograma extends CGeneral {
 
 	}
 
-	// Metodo que permite abrir la vista VCatalago en forma modal //
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnBuscarPrograma")
 	public void buscarPrograma() {
 		Window window = (Window) Executions.createComponents(
@@ -160,6 +108,12 @@ public class CPrograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite abrir el catalogo de profesores que no son directores de programa
+	 * se envia al metodo del catalogo el nombre de la vista a la que deben regresar los valores,
+	 * asi como los valores q se encuentran en la vista actualmente para que no sean eliminados cuando
+	 * regrese el catalogo con la informacion
+	 */
 	@Listen("onClick = #btnCatalogoDirectorPrograma")
 	public void buscarDirector() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
@@ -184,7 +138,8 @@ public class CPrograma extends CGeneral {
 		catalogoProfesor.recibir("maestros/VPrograma");
 	}
 
-	// Metodo para guardar un programa
+	/* Metodo que permite el guardado o modificacion de una entidad Programa, asi como la asignacion, de ser
+	 * necesario, de las condiciones vigentes a dicho programa */
 	@Listen("onClick = #btnGuardarPrograma")
 	public void guardarPrograma() {
 		if ((txtNombrePrograma.getText().compareTo("") == 0)
@@ -208,8 +163,6 @@ public class CPrograma extends CGeneral {
 								String correo = txtCorreoPrograma.getValue();
 								Boolean estatus = true;
 								Profesor directorPrograma = servicioProfesor.buscarProfesorPorCedula(txtDirectorPrograma.getValue());
-								System.out.println(directorPrograma.getCedula());
-								System.out.println(id);
 								Programa programa = new Programa(id, nombre,
 										descripcion, correo, estatus,
 										directorPrograma);
@@ -246,7 +199,7 @@ public class CPrograma extends CGeneral {
 		}
 	}
 
-	// Metodo para eliminar un programa dado su id
+	/* Metodo que permite la eliminacion logica de una entidad Programa */
 	@Listen("onClick = #btnEliminarPrograma")
 	public void eliminarPrograma() {
 		Messagebox.show("¿Desea eliminar los datos del programa?",
@@ -267,7 +220,10 @@ public class CPrograma extends CGeneral {
 				});
 	}
 
-	// Metodo para limpiar los componentes textbox y variable id
+	/*
+	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
+	 * variable global id
+	 */
 	@Listen("onClick = #btnCancelarPrograma")
 	public void cancelarPrograma() {
 		id = 0;
@@ -278,13 +234,9 @@ public class CPrograma extends CGeneral {
 		txtDirectorPrograma.setValue("");
 	}
 	
-	
+	/* Metodo que permite cerrar la ventana correspondiente a los programas */
 	@Listen("onClick = #btnSalirPrograma")
 	public void salirPrograma() {
-		
-		
 		wdwPrograma.onClose();
-		
 	}
-
 }

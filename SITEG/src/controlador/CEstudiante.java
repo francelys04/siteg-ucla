@@ -44,11 +44,13 @@ import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoEstudiante;
 
+/*Controlador que permite realizar las operaciones basicas (CRUD)
+ * sobre la entidad Estudiante*/
 @Controller
 public class CEstudiante extends CGeneral {
 
 	CCatalogoEstudiante catalogo = new CCatalogoEstudiante();
-	
+
 	@Wire
 	private Combobox cmbProgramaEstudiante;
 	@Wire
@@ -91,23 +93,16 @@ public class CEstudiante extends CGeneral {
 	@Wire
 	private Window wdwEstudiante;
 
-	// Metodo heredado del controlador CGeneral que permite inicializar los
-	// componentes de zk
-	// asi como tambien permite settear los atributos a los campos luego de
-	// seleccionar desde el catalogo
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		List<Programa> programas = servicioPrograma.buscarActivas();
-		List<Estudiante> estudiantes = servicioEstudiante.buscarActivos();
-
-		if (cmbProgramaEstudiante == null) {
-			ltbEstudiante.setModel(new ListModelList<Estudiante>(estudiantes));
-		} else {
-			cmbProgramaEstudiante.setModel(new ListModelList<Programa>(
-					programas));
-		}
+		cmbProgramaEstudiante.setModel(new ListModelList<Programa>(programas));
 
 		Selectors.wireComponents(comp, this, false);
 
@@ -130,7 +125,8 @@ public class CEstudiante extends CGeneral {
 				}
 				txtDireccionEstudiante.setValue(estudiante.getDireccion());
 				txtTelefonoMovilEstudiante.setValue(estudiante.getTelefono());
-				txtTelefonoFijoEstudiante.setValue(estudiante.getTelefono_fijo());
+				txtTelefonoFijoEstudiante.setValue(estudiante
+						.getTelefono_fijo());
 				txtCorreoEstudiante.setValue(estudiante.getCorreoElectronico());
 				cmbProgramaEstudiante.setValue(estudiante.getPrograma()
 						.getNombre());
@@ -142,8 +138,10 @@ public class CEstudiante extends CGeneral {
 
 	}
 
-	// Metodo que permite visualizar el catalogo, activado por el boton de
-	// buscar
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnCatalogoEstudiante")
 	public void buscarEstudiante() {
 
@@ -154,11 +152,13 @@ public class CEstudiante extends CGeneral {
 
 	}
 
-	// Metodo que permite tomar los datos de la vista y luego de llamar un
-	// servicio almacenarlos en la base de datos
+	/*
+	 * Metodo que permite el guardado o modificacion de una entidad Estudiante,
+	 * asi como la verificacion y guardado de su respectivo objeto usuario
+	 */
 	@Listen("onClick = #btnGuardarEstudiante")
 	public void guardarEstudiante() {
-		
+
 		if (txtCedulaEstudiante.getText().compareTo("") == 0
 				|| txtNombreEstudiante.getText().compareTo("") == 0
 				|| txtApellidoEstudiante.getText().compareTo("") == 0
@@ -187,21 +187,21 @@ public class CEstudiante extends CGeneral {
 								String correo = txtCorreoEstudiante.getValue();
 								String direccion = txtDireccionEstudiante
 										.getValue();
-								String telefonoFijo =txtTelefonoMovilEstudiante
-												.getValue();
+								String telefonoFijo = txtTelefonoMovilEstudiante
+										.getValue();
 								String telefonoMovil = txtTelefonoFijoEstudiante
-												.getValue();
+										.getValue();
 								String programas = cmbProgramaEstudiante
 										.getValue();
-								String sexo = rdgSexoEstudiante.getSelectedItem()
-										.getLabel();
+								String sexo = rdgSexoEstudiante
+										.getSelectedItem().getLabel();
 								Boolean estatus = true;
 
 								Programa programa = servicioPrograma
 										.buscarPorNombrePrograma(programas);
 
-
-								Usuario usuario = servicioUsuario.buscarUsuarioPorNombre(cedula);
+								Usuario usuario = servicioUsuario
+										.buscarUsuarioPorNombre(cedula);
 								Estudiante estudiante = new Estudiante(cedula,
 										nombre, apellido, correo, sexo,
 										direccion, telefonoMovil, telefonoFijo,
@@ -220,8 +220,7 @@ public class CEstudiante extends CGeneral {
 		}
 	}
 
-	// Metodo que buscar un objeto dado un codigo y lo elimina logicamente de la
-	// base de datos
+	/* Metodo que permite la eliminacion logica de una entidad Estudiante */
 	@Listen("onClick = #btnEliminarEstudiante")
 	public void eliminarEstudiante() {
 		Messagebox.show("¿Desea eliminar los datos del estudiante?",
@@ -246,35 +245,37 @@ public class CEstudiante extends CGeneral {
 
 	}
 
-	// Metodo que limpia los campos de la vista
+	/*
+	 * Metodo que permite limpiar los campos de la vista
+	 */
 	@Listen("onClick = #btnCancelarEstudiante")
 	public void cancelarEstudiante() {
 		txtCedulaEstudiante.setConstraint("");
 		txtCedulaEstudiante.setValue("");
-		txtCedulaEstudiante.setConstraint("/.+[0-9]+/: Debe ingresar una cedula valida");
+		txtCedulaEstudiante
+				.setConstraint("/.+[0-9]+/: Debe ingresar una cedula valida");
 		txtNombreEstudiante.setValue("");
 		txtApellidoEstudiante.setValue("");
 		rdgSexoEstudiante.setSelectedItem(null);
 		txtDireccionEstudiante.setValue("");
 		txtTelefonoMovilEstudiante.setConstraint("");
 		txtTelefonoMovilEstudiante.setValue("");
-		txtTelefonoMovilEstudiante.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+		txtTelefonoMovilEstudiante
+				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
 		txtTelefonoFijoEstudiante.setConstraint("");
 		txtTelefonoFijoEstudiante.setValue("");
-		txtTelefonoFijoEstudiante.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+		txtTelefonoFijoEstudiante
+				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
 		txtCorreoEstudiante.setValue("");
 		cmbProgramaEstudiante.setValue("");
 		btnEliminarEstudiante.setDisabled(true);
 
 	}
-	
-	
-	
+
+	/* Metodo que permite cerrar la ventana correspondiente a los estudiantes */
 	@Listen("onClick = #btnSalirEstudiante")
 	public void salirEstudiante() {
-		
-
 		wdwEstudiante.onClose();
 	}
-	
+
 }

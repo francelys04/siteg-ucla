@@ -3,7 +3,6 @@ package controlador;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -24,24 +23,15 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Image;
-import org.zkoss.zul.Intbox;
-import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-import servicio.SNoticia;
-import servicio.seguridad.SUsuario;
 
-import configuracion.GeneradorBeans;
-
+/*Controlador que permite realizar las operaciones basicas (CRUD)
+ * sobre la entidad Noticia*/
 @Controller
 public class CNoticia extends CGeneral {
-
-	SNoticia servicioNoticia = GeneradorBeans.getServicioNoticia();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 
 	@Wire
 	private Textbox txtNombreNoticia;
@@ -70,39 +60,22 @@ public class CNoticia extends CGeneral {
 	private static boolean noticiaCatalogo;
 
 	/*
-	 * Metodo para inicializar componentes al momento que se ejecuta las vistas
-	 * tanto VDescarga como VCatalogoNoticia
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
 	 */
-
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		
 		noticiaCatalogo = false;
-		
-		/*
-		 * Listado de todos las Noticias que se encuentran activas, cuyo
-		 * estatus=true con el servicioNoticia mediante el metodo buscarActivos
-		 */
-
 		Selectors.wireComponents(comp, this, false);
-
-		/*
-		 * Permite retornar el valor asignado previamente guardado al
-		 * seleccionar un item de la vista VNoticia
-		 */
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-		/*
-		 * Validacion para vaciar la informacion del VNoticia a la vista
-		 * VNoticiaa.zul si la varible map tiene algun dato contenido
-		 */
 		if (map != null) {
 			if (map.get("id") != null) {
 				
-
 				long codigo = (long) map.get("id");
 				noticiaCatalogo = true;
 				Noticia noticia2 = servicioNoticia.buscarNoticia(codigo);
@@ -127,7 +100,10 @@ public class CNoticia extends CGeneral {
 
 	}
 
-	// Aca se muestra el catalogo de las Noticias Registradas
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnCatalogoNoticia")
 	public void buscarDescarga() {
 
@@ -136,7 +112,7 @@ public class CNoticia extends CGeneral {
 		window.doModal();
 	}
 
-	// Aca se guardan las Noticias
+	/* Metodo que permite el guardado o modificacion de una entidad Noticia */
 	@Listen("onClick = #btnGuardarNoticia")
 	public void guardarDescarga() {
 		List<Noticia> noticia = servicioNoticia.buscarActivos();
@@ -184,7 +160,7 @@ public class CNoticia extends CGeneral {
 		}
 	}
 
-	// Aca se eliminan logicamente las Noticias
+	/* Metodo que permite la eliminacion logica de una entidad Noticia */
 	@Listen("onClick = #btnEliminarNoticia")
 	public void eliminarNoticia() {
 		Messagebox.show("¿Desea eliminar los datos de la noticia?",
@@ -205,7 +181,10 @@ public class CNoticia extends CGeneral {
 				});
 	}
 
-	// Aca se mandan a limpiar los campos de textos de la vista
+	/*
+	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
+	 * variable global id
+	 */
 	@Listen("onClick = #btnCancelarNoticia")
 	public void cancelarNoticia() {
 		id = 0;
@@ -216,6 +195,9 @@ public class CNoticia extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite subir una imagen al formulario
+	 */
 	@Listen("onUpload = #fudImagenNoticia")
 	public void processMedia(UploadEvent event) {
 		media = event.getMedia();
@@ -223,6 +205,7 @@ public class CNoticia extends CGeneral {
 
 	}
 
+	/* Metodo que permite cerrar la ventana correspondiente a las noticias */
 	@Listen("onClick = #btnSalirNoticia")
 	public void salirNoticia() {
 
