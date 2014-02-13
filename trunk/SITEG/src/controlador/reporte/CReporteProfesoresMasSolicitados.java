@@ -279,8 +279,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				mapa.put("logoCE", reporteImage + "logo CE.png");
 				mapa.put("logoSiteg", reporteImage + "logo.png");
 				JasperReport jasperReport = (JasperReport) JRLoader
-						.loadObject(getClass().getResource(
-								"/reporte/RProfesoresMasSolicitados.jasper"));
+						.loadObject(reporteSrc);
 
 				JasperPrint jasperPrint = JasperFillManager.fillReport(
 						jasperReport, mapa, new JRBeanCollectionDataSource(
@@ -301,7 +300,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				// jstVistaProfesores.setParameters(mapa);
 			} else {
 				Messagebox
-						.show("No hay informacion disponible para esta selección");
+						.show("No hay informacion disponible para esta selecciï¿½n");
 			}
 		}
 	}

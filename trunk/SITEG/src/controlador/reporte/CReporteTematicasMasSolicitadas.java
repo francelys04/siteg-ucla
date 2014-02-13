@@ -237,6 +237,11 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 				contadorFactibleAprobado=0;
 				contadorNoFactibleReprobado=0;
 			}
+			for(int i=0;i<tegsTematicasComparativo.size();i++){
+				System.out.println("tematicasAprobados:"+tegsTematicasComparativo.get(i).getId());
+				System.out.println("tematicasReprobados:"+tegsTematicasComparativo.get(i).getDuracion());
+				
+			}
 			FileSystemView filesys = FileSystemView.getFileSystemView();
 			Map parametro = new HashMap();
 			String rutaUrl = obtenerDirectorio();
