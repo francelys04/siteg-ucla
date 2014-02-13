@@ -28,18 +28,26 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import servicio.SActividad;
 import servicio.SArchivo;
 import servicio.SAreaInvestigacion;
+import servicio.SCategoria;
 import servicio.SCondicion;
 import servicio.SCondicionPrograma;
+import servicio.SCronograma;
 import servicio.SDefensa;
 import servicio.SEnlaceInteres;
 import servicio.SEstudiante;
+import servicio.SFactibilidad;
 import servicio.SItem;
+import servicio.SItemDefensa;
+import servicio.SItemFactibilidad;
 import servicio.SJurado;
 import servicio.SLapso;
+import servicio.SMencion;
 import servicio.SNoticia;
 import servicio.SProfesor;
 import servicio.SPrograma;
 import servicio.SProgramaArea;
+import servicio.SProgramaItem;
+import servicio.SProgramaRequisito;
 import servicio.SRequisito;
 import servicio.SSolicitudTutoria;
 import servicio.STeg;
@@ -54,30 +62,54 @@ import java.net.URL;
 @Controller
 public abstract class CGeneral extends SelectorComposer<Component> {
 
-	protected SActividad servicioActividad = GeneradorBeans.getServicioActividad();
+	protected SActividad servicioActividad = GeneradorBeans
+			.getServicioActividad();
 	protected SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
-	protected SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	protected SCondicion servicioCondicion = GeneradorBeans.getServicioCondicion();
-	protected SCondicionPrograma servicioCondicionPrograma = GeneradorBeans.getServicioCondicionPrograma();
+	protected SAreaInvestigacion servicioArea = GeneradorBeans
+			.getServicioArea();
+	protected SCategoria servicioCategoria = GeneradorBeans
+			.getServicioCategoria();
+	protected SCondicion servicioCondicion = GeneradorBeans
+			.getServicioCondicion();
+	protected SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
+			.getServicioCondicionPrograma();
+	protected SCronograma servicioCronograma = GeneradorBeans.getServicioCronograma();
 	protected SDefensa servicioDefensa = GeneradorBeans.getServicioDefensa();
-	protected SEnlaceInteres servicioEnlace = GeneradorBeans.getServicioEnlace();
-	protected SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
+	protected SEnlaceInteres servicioEnlace = GeneradorBeans
+			.getServicioEnlace();
+	protected SEstudiante servicioEstudiante = GeneradorBeans
+			.getServicioEstudiante();
+	protected SFactibilidad servicioFactibilidad = GeneradorBeans
+			.getServicioFactibilidad();
 	protected SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
 	protected SItem servicioItem = GeneradorBeans.getServicioItem();
+	protected SItemDefensa servicioItemDefensa = GeneradorBeans
+			.getServicioItemDefensa();
+	protected SItemFactibilidad servicioItemFactibilidad = GeneradorBeans
+			.getServicioItemFactibilidad();
 	protected SJurado servicioJurado = GeneradorBeans.getServicioJurado();
 	protected SLapso servicioLapso = GeneradorBeans.getServicioLapso();
+	protected SMencion servicioMencion = GeneradorBeans.getServicioMencion();
 	protected SNoticia servicioNoticia = GeneradorBeans.getServicioNoticia();
 	protected SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	protected SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	protected SProgramaArea servicioProgramaArea = GeneradorBeans
 			.getServicioProgramaArea();
-	protected SSolicitudTutoria servicioSolicitudTutoria = GeneradorBeans.getServicioTutoria();
+	protected SProgramaItem servicioProgramaItem = GeneradorBeans
+			.getServicioProgramaItem();
+	protected SProgramaRequisito servicioProgramaRequisito = GeneradorBeans
+			.getServicioProgramaRequisito();
+	protected SRequisito servicioRequisito = GeneradorBeans
+			.getServicioRequisito();
+	protected SSolicitudTutoria servicioSolicitudTutoria = GeneradorBeans
+			.getServicioTutoria();
 	protected STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	protected STegEstatus servicioTegEstatus = GeneradorBeans.getServicioTegEstatus();
+	protected STegEstatus servicioTegEstatus = GeneradorBeans
+			.getServicioTegEstatus();
 	protected STematica servicioTematica = GeneradorBeans.getSTematica();
-	protected STipoJurado servicioTipoJurado = GeneradorBeans.getServicioTipoJurado();
+	protected STipoJurado servicioTipoJurado = GeneradorBeans
+			.getServicioTipoJurado();
 	protected SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-	protected SRequisito servicioRequisito = GeneradorBeans.getServicioRequisito();
 
 	/*
 	 * Metodo para inicializar componentes implementado en todos los controladores
