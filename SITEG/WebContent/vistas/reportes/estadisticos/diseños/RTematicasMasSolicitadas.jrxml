@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTematicasMasSolicitadas" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" uuid="36ffbc72-cbd9-445b-a96c-f98bc807a7c7">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="90"/>
+	<property name="ireport.y" value="45"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<subDataset name="dataset1" uuid="c666fdd0-72bf-4a97-9beb-4ec2760da0c1"/>
 	<parameter name="titulo" class="java.lang.String"/>
@@ -336,26 +336,25 @@
 					<categorySeries>
 						<seriesExpression><![CDATA["Total"]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{tematica.nombre}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{id}+$F{duracion}]]></valueExpression>
-						<labelExpression><![CDATA["hola"]]></labelExpression>
+						<valueExpression><![CDATA[(($F{id}+$F{duracion})/($F{id}+$F{duracion}))]]></valueExpression>
+						<labelExpression><![CDATA[(($F{id}+$F{duracion})*100/($F{id}+$F{duracion})).toString()+"%"]]></labelExpression>
 					</categorySeries>
 					<categorySeries>
 						<seriesExpression><![CDATA[$P{estatusProyectoTeg1}]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{tematica.nombre}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{id}]]></valueExpression>
+						<valueExpression><![CDATA[(($F{duracion})/($F{id}+$F{duracion}))]]></valueExpression>
+						<labelExpression><![CDATA[(($F{duracion}*100)/($F{id}+$F{duracion})).toString()+"%"]]></labelExpression>
 					</categorySeries>
 				</categoryDataset>
-				<bar3DPlot isShowLabels="false">
+				<bar3DPlot isShowLabels="true">
 					<plot/>
 					<itemLabel/>
 					<categoryAxisFormat>
-						<axisFormat verticalTickLabels="false"/>
+						<axisFormat tickLabelMask="" verticalTickLabels="false"/>
 					</categoryAxisFormat>
 					<valueAxisFormat>
 						<axisFormat tickLabelMask="0%"/>
 					</valueAxisFormat>
-					<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
-					<rangeAxisMaxValueExpression><![CDATA[1]]></rangeAxisMaxValueExpression>
 				</bar3DPlot>
 			</bar3DChart>
 		</band>

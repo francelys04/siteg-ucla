@@ -141,10 +141,10 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		String estatus1 = "";
 		String estatus2 = "";
 		List<PromedioTiempoTeg> tegsPromedios = new ArrayList();
-		int tamañoListaEstatus = nombreEstatus.size();
+		int tamaÃ±oListaEstatus = nombreEstatus.size();
 
-		if (tamañoListaEstatus % 2 != 0) {
-			tamañoListaEstatus = tamañoListaEstatus - 3;
+		if (tamaÃ±oListaEstatus % 2 != 0) {
+			tamaÃ±oListaEstatus = tamaÃ±oListaEstatus - 3;
 		}
 		filtrarDatosBusqueda();
 		if (tegs.size() != 0) {
@@ -155,7 +155,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 				List<TegEstatus> tegEstatus2 = servicioTegEstatus
 						.buscarEstatusSegunTeg(nombreEstatus.get(i + 1), tegs);
 
-				if (nombreEstatus.size() % 2 != 0 && tamañoListaEstatus == i) {
+				if (nombreEstatus.size() % 2 != 0 && tamaÃ±oListaEstatus == i) {
 					List<TegEstatus> tegEstatus3 = servicioTegEstatus
 							.buscarEstatusSegunTeg(nombreEstatus.get(i + 2),
 									tegs);
