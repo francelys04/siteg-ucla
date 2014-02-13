@@ -84,10 +84,10 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 		List<SolicitudTutoria> solicitudes = servicioSolicitudTutoria
 				.buscarSolicitudPorRevisar(ObtenerUsuarioProfesor());
 		for (int i = 0; i < solicitudes.size(); i++) {
-			List<Estudiante> es = servicioEstudiante
+			List<Estudiante> estudiantes = servicioEstudiante
 					.buscarSolicitudesEstudiante(solicitudes.get(i));
-			String nombre = es.get(0).getNombre();
-			String apellido = es.get(0).getApellido();
+			String nombre = estudiantes.get(0).getNombre();
+			String apellido = estudiantes.get(0).getApellido();
 			solicitudes.get(i).setEstatus(nombre + " " + apellido);
 		}
 		List<SolicitudTutoria> solicitud2 = new ArrayList<SolicitudTutoria>();

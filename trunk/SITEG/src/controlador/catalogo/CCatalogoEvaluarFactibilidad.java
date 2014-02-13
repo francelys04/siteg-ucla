@@ -181,7 +181,7 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 	/*
 	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
 	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
-	 * poder ser mapeada y enviada a la vista "VEvaluarFactibilidad".
+	 * poder ser mapeada y enviada a la vista asociada a ella.
 	 */
 	@Listen("onDoubleClick = #ltbListaFactibilidad")
 	public void mostrarDatosCatalogo() {
