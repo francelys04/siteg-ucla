@@ -51,10 +51,6 @@ import configuracion.GeneradorBeans;
 
 @Controller
 public class CCargarEstudiante extends CGeneral {
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 
 	@Wire
 	private Listbox ltbEstudiantesCargados;

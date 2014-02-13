@@ -37,15 +37,6 @@ import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 public class CRegistrarFactibilidad extends CGeneral {
-	SFactibilidad servicioFactibilidad = GeneradorBeans
-			.getServicioFactibilidad();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SItemFactibilidad servicioItemFactibilidad = GeneradorBeans
-			.getServicioItemFactibilidad();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SSolicitudTutoria ServicioSolicitudTutoria = GeneradorBeans
-			.getServicioTutoria();
 
 	@Wire
 	private Listbox ltbListaFactibilidad;
@@ -193,7 +184,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 							 */
 							estudianteTeg = ltbEstudianteRegistrarFactibilidad
 									.getItems().get(0).getValue();
-							SolicitudTutoria solicitudAceptada = ServicioSolicitudTutoria
+							SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
 									.buscarSolicitudAceptadaEstudiante(estudianteTeg);
 							System.out.println(solicitudAceptada.getId());
 							String estatusSolicitud = "Finalizada";

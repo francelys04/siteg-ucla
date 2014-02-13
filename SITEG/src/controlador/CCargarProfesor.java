@@ -28,12 +28,6 @@ import configuracion.GeneradorBeans;
 
 @Controller
 public class CCargarProfesor extends CGeneral {
-	SProfesor servicioProfesor = GeneradorBeans
-			.getServicioProfesor();
-	SCategoria servicioCategoria = GeneradorBeans
-			.getServicioCategoria();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	
 	@Wire
 	private Window wdwCargarProfesor;

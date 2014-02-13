@@ -80,17 +80,6 @@ import controlador.catalogo.CCatalogoProfesorTematica;
 public class CSolicitarTutor extends CGeneral {
 
 	private static final int Estudiante = 0;
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
-	SAreaInvestigacion servicioAreaInvestigacion = GeneradorBeans
-			.getServicioArea();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SSolicitudTutoria servicioSolicitarTutor = GeneradorBeans
-			.getServicioTutoria();
 	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
 
 	@Wire
@@ -248,8 +237,7 @@ public class CSolicitarTutor extends CGeneral {
 	public void tematicaSolicitud() {
 
 		String area = cmbAreaSolicitud.getValue();
-		AreaInvestigacion area2 = servicioAreaInvestigacion
-				.buscarAreaPorNombre(area);
+		AreaInvestigacion area2 = servicioArea.buscarAreaPorNombre(area);
 
 		List<Tematica> tematicas = servicioTematica
 				.buscarTematicasDeArea(area2);
@@ -369,7 +357,7 @@ public class CSolicitarTutor extends CGeneral {
 												profesor, tematica2,
 												estudiante2);
 
-										servicioSolicitarTutor
+										servicioSolicitudTutoria
 												.guardarSolicitud(solicitud2);
 										crearUsuarioProfesor(profesor);
 										enviarEmailNotificacion();
@@ -460,9 +448,9 @@ public class CSolicitarTutor extends CGeneral {
 
 				else {
 
-					SolicitudTutoria solicitud = servicioSolicitarTutor
+					SolicitudTutoria solicitud = servicioSolicitudTutoria
 							.buscarSolicitudEstudiantePorRevisar(estudiante);
-					SolicitudTutoria solicitudAceptada = servicioSolicitarTutor
+					SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
 							.buscarSolicitudAceptadaEstudiante(estudiante);
 					if (solicitud != null) {
 						Messagebox

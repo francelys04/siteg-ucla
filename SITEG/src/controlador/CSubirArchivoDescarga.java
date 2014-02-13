@@ -45,11 +45,6 @@ import controlador.catalogo.CCatalogoItem;
 
 @Controller
 public class CSubirArchivoDescarga extends CGeneral {
-	
-	
-	SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-
 	@Wire
 	private Textbox txtNombreArchivoDescarga;
 	@Wire

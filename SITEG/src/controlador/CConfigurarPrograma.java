@@ -44,20 +44,6 @@ import configuracion.GeneradorBeans;
 @Controller
 public class CConfigurarPrograma extends CGeneral {
 
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SRequisito servicioRequisito = GeneradorBeans.getServicioRequisito();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
-	SItem servicioItem = GeneradorBeans.getServicioItem();
-	SProgramaItem servicioProgramaItem = GeneradorBeans
-			.getServicioProgramaItem();
-	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
-			.getServicioCondicionPrograma();
-	SProgramaRequisito servicioProgramaRequisito = GeneradorBeans
-			.getServicioProgramaRequisito();
-
 	@Wire
 	private Combobox cmbLapsoConfigurarPrograma;
 	@Wire

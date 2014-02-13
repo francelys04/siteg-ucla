@@ -63,11 +63,6 @@ public class CUsuario extends CGeneral {
 	CCatalogoEstudiante catalogoEstudiante = new CCatalogoEstudiante();
 	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
 
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-	SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-
 	// Declaracion de la clase que permite encriptar las contraseñas
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 

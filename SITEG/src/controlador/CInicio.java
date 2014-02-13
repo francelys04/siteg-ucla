@@ -50,13 +50,6 @@ import servicio.STeg;
 
 @Controller
 public class CInicio extends CGeneral {
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	SCronograma servicioCronograma = GeneradorBeans.getServicioCronograma();
-	SSolicitudTutoria servicioTutoria = GeneradorBeans.getServicioTutoria();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SNoticia servicioNoticia = GeneradorBeans.getServicioNoticia();
 	@Wire
 	private Intbox cedulaEstatus;
 	@Wire
@@ -214,7 +207,7 @@ public class CInicio extends CGeneral {
 					Estudiante estudiante = servicioEstudiante
 							.buscarEstudiante(cedula);
 
-					if (servicioTutoria.buscarSolicitud(estudiante).size() != 0
+					if (servicioSolicitudTutoria.buscarSolicitud(estudiante).size() != 0
 							|| servicioTeg.buscarTegPorEstudiante(estudiante)
 									.size() != 0) {
 

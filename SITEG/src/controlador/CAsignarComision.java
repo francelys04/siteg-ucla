@@ -9,21 +9,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import modelo.Actividad;
-import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
-import modelo.Requisito;
 import modelo.Teg;
 import modelo.TegEstatus;
 import modelo.compuesta.CondicionPrograma;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.zkoss.image.AImage;
@@ -38,40 +33,21 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SActividad;
-import servicio.SEstudiante;
-import servicio.SProfesor;
-import servicio.SPrograma;
-import servicio.SProgramaRequisito;
-import servicio.SRequisito;
-import servicio.STeg;
-import servicio.SLapso;
-import servicio.SCondicionPrograma;
-import servicio.seguridad.SGrupo;
-import servicio.seguridad.SUsuario;
-import configuracion.GeneradorBeans;
-
 public class CAsignarComision extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
-			.getServicioCondicionPrograma();
-	SGrupo serviciogrupo = GeneradorBeans.getServicioGrupo();
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	private long id = 0;
+	private static long auxiliarId = 0;
+	private static long auxIdPrograma = 0;
+	private static Programa programa;
+	private static String vistaRecibida;
 
 	@Wire
 	private Datebox dbfecha;
@@ -101,19 +77,8 @@ public class CAsignarComision extends CGeneral {
 	private Window wdwCatalogoAsignarComision;
 	@Wire
 	private Button btnGuardarComision;
-
-	private static String vistaRecibida;
-
 	@Wire
 	private Image imagenx;
-	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	private List<Profesor> profesores;
-	SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
-	private long id = 0;
-	private static long auxiliarId = 0;
-	private static long auxIdPrograma = 0;
-	private static Programa programa;
-	public static int j;
 
 	@Override
 	public void inicializar(Component comp) {
@@ -480,7 +445,7 @@ public class CAsignarComision extends CGeneral {
 											} else {
 
 												List<Grupo> grupino = new ArrayList<Grupo>();
-												grupino = serviciogrupo
+												grupino = servicioGrupo
 														.buscarGruposDelUsuario(user);
 												Grupo grupo2 = servicioGrupo
 														.BuscarPorNombre("ROLE_COMISION");

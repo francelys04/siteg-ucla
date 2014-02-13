@@ -45,12 +45,6 @@ import configuracion.GeneradorBeans;
 
 @Controller
 public class CSubirTeg extends CGeneral {
-	
-	
-	SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-
 	@Wire
 	private Textbox txtNombreArchivo;
 	@Wire

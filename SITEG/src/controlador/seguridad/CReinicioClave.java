@@ -42,9 +42,6 @@ import servicio.seguridad.SUsuario;
 @Controller
 public class CReinicioClave extends CGeneral {
 
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	@Wire
 	private Window wdwReinicioClave;
