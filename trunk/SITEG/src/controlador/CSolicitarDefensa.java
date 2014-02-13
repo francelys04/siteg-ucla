@@ -26,9 +26,6 @@ import servicio.STeg;
 
 @Controller
 public class CSolicitarDefensa extends CGeneral {
-
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-
 	@Wire
 	private Datebox dtbFechaSolicitarDefensa;
 	@Wire

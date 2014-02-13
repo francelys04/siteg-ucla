@@ -48,9 +48,6 @@ public class CCrearGrupo extends CGeneral {
 
 	long id = 0;
 	TreeModel _model;
-	SArbol servicioArbol = GeneradorBeans.getServicioArbol();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-	SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
 
 	CCatalogoGrupo catalogoGrupo = new CCatalogoGrupo();
 	public static List<String> funcionalidades = new ArrayList();

@@ -57,12 +57,6 @@ import servicio.seguridad.SUsuario;
 
 public class CRegistrarRevision extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAvance servicioAvance = GeneradorBeans.getServicioAvance();
 	@Wire
 	private Datebox dtbRegistrarRevision;
 	@Wire

@@ -46,12 +46,6 @@ import servicio.STipoJurado;
 @Controller
 public class CAtenderDefensa extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SDefensa servicioDefensa = GeneradorBeans.getServicioDefensa();
-	SJurado servicioJurado = GeneradorBeans.getServicioJurado();
-	STipoJurado servicioTipoJurado = GeneradorBeans.getServicioTipoJurado();
-	SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
-			.getServicioCondicionPrograma();
 	@Wire
 	private Textbox txtProgramaAtenderDefensa;
 	@Wire

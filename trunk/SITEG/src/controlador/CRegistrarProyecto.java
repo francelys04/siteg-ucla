@@ -65,16 +65,6 @@ import controlador.CGeneral;
 @Controller
 public class CRegistrarProyecto extends CGeneral {
 
-	SEstudiante ServicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SUsuario ServicioUsuario = GeneradorBeans.getServicioUsuario();
-	SPrograma ServicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion ServicioArea = GeneradorBeans.getServicioArea();
-	STematica ServicioTematica = GeneradorBeans.getSTematica();
-	STeg ServicioTeg = GeneradorBeans.getServicioTeg();
-	SProfesor ServicioProfesor = GeneradorBeans.getServicioProfesor();
-	SSolicitudTutoria ServicioSolicitudTutoria = GeneradorBeans
-			.getServicioTutoria();
-
 	@Wire
 	private Textbox txtProgramaRegistrarProyecto;
 	@Wire
@@ -104,10 +94,10 @@ public class CRegistrarProyecto extends CGeneral {
 		Estudiante estudiante = ObtenerUsuarioEstudiante();
 		Programa programa = estudiante.getPrograma();
 
-		SolicitudTutoria solicitudAceptada = ServicioSolicitudTutoria
+		SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
 				.buscarSolicitudAceptadaEstudiante(estudiante);
 
-		List<Teg> tegEstudiante = ServicioTeg
+		List<Teg> tegEstudiante = servicioTeg
 				.buscarTegPorEstudiante(estudiante);
 		// Permite verificar los estatus del teg para asi
 		// validar si este puede registrarlo de ser asi
@@ -219,9 +209,9 @@ public class CRegistrarProyecto extends CGeneral {
 												.getValue();
 										String titulo = txtTituloRegistrarProyecto
 												.getValue();
-										Tematica tematica = ServicioTematica
+										Tematica tematica = servicioTematica
 												.buscarTematica(idTem);
-										Profesor tutor = ServicioProfesor
+										Profesor tutor = servicioProfesor
 												.buscarProfesorPorCedula(idProf);
 										String descripcion = null;
 										long duracion = 0;
@@ -230,7 +220,7 @@ public class CRegistrarProyecto extends CGeneral {
 										Date fechaInicio = null;
 										Set<Profesor> profesores = null;
 										Estudiante estudiante = ObtenerUsuarioEstudiante();
-										SolicitudTutoria solicitudAceptada = ServicioSolicitudTutoria
+										SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
 												.buscarSolicitudAceptadaEstudiante(estudiante);
 										List<Estudiante> estudiantesSolicitud = servicioEstudiante
 												.buscarSolicitudesEstudiante(solicitudAceptada);
@@ -249,12 +239,12 @@ public class CRegistrarProyecto extends CGeneral {
 												duracion, tutor, estatus,
 												tematica, profesores,
 												estudiantesPorSolicitud);
-										ServicioTeg.guardar(proyecto);
+										servicioTeg.guardar(proyecto);
 										id = 0;
 
 										// Guardar datos en la tabla teg_estatus
 										java.util.Date fechaEstatus = new Date();
-										Teg ultimoTeg = ServicioTeg
+										Teg ultimoTeg = servicioTeg
 												.buscarUltimoTeg();
 										TegEstatus tegEstatus = new TegEstatus(
 												0, ultimoTeg,

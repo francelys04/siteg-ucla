@@ -39,10 +39,6 @@ import servicio.STeg;
 
 public class CConsultarEstatus extends CGeneral {
 
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SSolicitudTutoria servicioTutoria = GeneradorBeans.getServicioTutoria();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-
 	@Wire
 	private Textbox txtCedulaEstudiante;
 	@Wire
@@ -99,8 +95,8 @@ public class CConsultarEstatus extends CGeneral {
 		List<SolicitudTutoria> solicitudTutoria = null;
 		List<Teg> teg = null;
 
-		if (servicioTutoria.buscarSolicitud(estudiante) != null) {
-			solicitudTutoria = servicioTutoria.buscarSolicitud(estudiante);
+		if (servicioSolicitudTutoria.buscarSolicitud(estudiante) != null) {
+			solicitudTutoria = servicioSolicitudTutoria.buscarSolicitud(estudiante);
 		}
 		if (servicioTeg.buscarTegPorEstudiante(estudiante) != null) {
 			teg = servicioTeg.buscarTegPorEstudiante(estudiante);

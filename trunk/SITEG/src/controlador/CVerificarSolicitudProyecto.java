@@ -58,11 +58,6 @@ import configuracion.GeneradorBeans;
 @Controller
 public class CVerificarSolicitudProyecto extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SRequisito servicioRequisito = GeneradorBeans.getServicioRequisito();
-	STegRequisito servicioTegRequisito = GeneradorBeans
-			.getServicioTegRequisito();
 	@Wire
 	private Textbox txtProgramaRegistrarAvances;
 	@Wire
@@ -106,10 +101,6 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 	private static String vistaRecibida;
 	private static int numero;
 	ArrayList<Boolean> valor = new ArrayList<Boolean>();
-	SProgramaRequisito servicioRequisitoPrograma = GeneradorBeans
-			.getServicioProgramaRequisito();
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
 	@Override
 	public

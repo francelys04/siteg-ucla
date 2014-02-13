@@ -28,6 +28,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import servicio.SActividad;
 import servicio.SArchivo;
 import servicio.SAreaInvestigacion;
+import servicio.SAvance;
 import servicio.SCategoria;
 import servicio.SCondicion;
 import servicio.SCondicionPrograma;
@@ -52,8 +53,10 @@ import servicio.SRequisito;
 import servicio.SSolicitudTutoria;
 import servicio.STeg;
 import servicio.STegEstatus;
+import servicio.STegRequisito;
 import servicio.STematica;
 import servicio.STipoJurado;
+import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
@@ -64,9 +67,11 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 
 	protected SActividad servicioActividad = GeneradorBeans
 			.getServicioActividad();
+	protected SArbol servicioArbol = GeneradorBeans.getServicioArbol();
 	protected SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
 	protected SAreaInvestigacion servicioArea = GeneradorBeans
 			.getServicioArea();
+	protected SAvance servicioAvance = GeneradorBeans.getServicioAvance();
 	protected SCategoria servicioCategoria = GeneradorBeans
 			.getServicioCategoria();
 	protected SCondicion servicioCondicion = GeneradorBeans
@@ -106,6 +111,8 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 	protected STeg servicioTeg = GeneradorBeans.getServicioTeg();
 	protected STegEstatus servicioTegEstatus = GeneradorBeans
 			.getServicioTegEstatus();
+	protected STegRequisito servicioTegRequisito = GeneradorBeans
+			.getServicioTegRequisito();
 	protected STematica servicioTematica = GeneradorBeans.getSTematica();
 	protected STipoJurado servicioTipoJurado = GeneradorBeans
 			.getServicioTipoJurado();

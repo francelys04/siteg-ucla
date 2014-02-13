@@ -85,13 +85,8 @@ public class CCalificarDefensa extends CGeneral {
 
 	private static Programa p;
 	ArrayList<Boolean> valor2 = new ArrayList<Boolean>();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SProgramaItem servicioProgratem = GeneradorBeans.getServicioProgramaItem();
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	SDefensa serviciodefensa = GeneradorBeans.getServicioDefensa();
-	SItemDefensa servicioItem = GeneradorBeans.getServicioItemDefensa();
-	SMencion servicioMencion = GeneradorBeans.getServicioMencion();
-
+	
+	
 	@Override
 	public void inicializar(Component comp) {
 
@@ -123,7 +118,7 @@ public class CCalificarDefensa extends CGeneral {
 				ltbEstudiantesCalificar.setModel(new ListModelList<Estudiante>(
 						est));
 				Lapso lapso = servicioLapso.buscarLapsoVigente();
-				List<ItemEvaluacion> item = servicioProgratem
+				List<ItemEvaluacion> item = servicioProgramaItem
 						.buscarItemsEnPrograma(p, lapso);
 				List<ItemEvaluacion> item2 = new ArrayList<ItemEvaluacion>();
 				List<Mencion>menciones = servicioMencion.buscarActivos();
@@ -174,7 +169,7 @@ public class CCalificarDefensa extends CGeneral {
 			long auxId2;
 			auxId2 = auxId;
 			teg1 = servicioTeg.buscarTeg(auxId2);
-			Defensa defensa = serviciodefensa.buscarDefensaDadoTeg(teg1);
+			Defensa defensa = servicioDefensa.buscarDefensaDadoTeg(teg1);
 			final List<ItemDefensa> items = new ArrayList<ItemDefensa>();
 			for (int i = 0; i < ltbitem.getItemCount(); i++) {
 				Listitem listItem = ltbitem.getItemAtIndex(i);
@@ -204,7 +199,7 @@ public class CCalificarDefensa extends CGeneral {
 												public void onEvent(Event evt)
 														throws InterruptedException {
 													if (evt.getName().equals("onOK")) {
-									servicioItem.guardarVarios(items);
+									servicioItemDefensa.guardarVarios(items);
 									Mencion mencion = servicioMencion.buscar(Long.parseLong(cmbMencionTeg.getSelectedItem().getId()));
 									TegEstatus tegEstatus = new TegEstatus();
 									java.util.Date fechaEstatus = new Date();
@@ -223,10 +218,10 @@ public class CCalificarDefensa extends CGeneral {
 											"Calificacion guardada exitosamente",
 											"Informacion", Messagebox.OK,
 											Messagebox.INFORMATION);
-									Defensa defensa = serviciodefensa.buscarDefensaDadoTeg(teg1);
+									Defensa defensa = servicioDefensa.buscarDefensaDadoTeg(teg1);
 									defensa.setEstatus("Defensa Evaluada");
 									teg1.setMencion(mencion);
-									serviciodefensa.guardarDefensa(defensa);
+									servicioDefensa.guardarDefensa(defensa);
 									servicioTegEstatus.guardar(tegEstatus);
 									servicioTeg.guardar(teg1);
 									actualizarSolicitud();

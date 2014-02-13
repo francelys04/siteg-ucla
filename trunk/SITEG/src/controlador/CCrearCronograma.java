@@ -33,10 +33,6 @@ import servicio.SPrograma;
 @Controller
 public class CCrearCronograma extends CGeneral {
 
-	SCronograma servicioCronograma = GeneradorBeans.getServicioCronograma();
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SActividad servicioActividad = GeneradorBeans.getServicioActividad();
 	@Wire
 	private Combobox cmbLapsoCrearCronograma;
 	@Wire

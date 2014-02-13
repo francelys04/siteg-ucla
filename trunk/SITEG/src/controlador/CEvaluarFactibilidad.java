@@ -46,16 +46,6 @@ import controlador.CGeneral;
 
 public class CEvaluarFactibilidad extends CGeneral {
 
-	SFactibilidad servicioFactibilidad = GeneradorBeans
-			.getServicioFactibilidad();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SItemFactibilidad servicioItemFactibilidad = GeneradorBeans
-			.getServicioItemFactibilidad();
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	SProgramaItem servicioProgramaItem = GeneradorBeans
-			.getServicioProgramaItem();
-
 	@Wire
 	private Datebox db1;
 	@Wire

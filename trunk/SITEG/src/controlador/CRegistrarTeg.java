@@ -56,11 +56,6 @@ import servicio.SCronograma;
 @Controller
 public class CRegistrarTeg extends CGeneral {
 
-	SActividad servicioActividad = GeneradorBeans.getServicioActividad();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	SCronograma servicioCronograma = GeneradorBeans.getServicioCronograma();
-
 	@Wire
 	private Textbox txtProgramaRegistraTeg;
 	@Wire

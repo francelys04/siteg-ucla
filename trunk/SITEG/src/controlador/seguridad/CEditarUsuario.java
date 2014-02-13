@@ -40,7 +40,6 @@ import controlador.CGeneral;
 @Controller
 public class CEditarUsuario extends CGeneral {
 
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	URL url = getClass().getResource("/configuracion/usuario.png");

@@ -47,11 +47,6 @@ import servicio.seguridad.SUsuario;
 
 @Controller
 public class CSolicitudTutoria extends CGeneral {
-
-	SSolicitudTutoria servicioTutoria = GeneradorBeans.getServicioTutoria();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
-	SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
 	@Wire
 	private Datebox dtbFechaEvaluarTutoria;
 	@Wire
@@ -90,7 +85,7 @@ public class CSolicitudTutoria extends CGeneral {
 		if (map != null) {
 			if (map.get("id") != null) {
 				id = (Long) map.get("id");
-				solicitud = servicioTutoria.buscarSolicitud(id);
+				solicitud = servicioSolicitudTutoria.buscarSolicitud(id);
 				List<Estudiante> estudiantes = servicioEstudiante.buscarSolicitudesEstudiante(solicitud);
 				ltbSolicitudesEstudiantes.setModel(new ListModelList<Estudiante>(estudiantes));
 				txtAreaEvaluarTutorias.setValue(solicitud.getTematica().getareaInvestigacion().getNombre());
@@ -142,7 +137,7 @@ public class CSolicitudTutoria extends CGeneral {
 			}			
 			valor.add(enviarEmailNotificacion(estudiante.getCorreoElectronico(), mensaje[0]+" Usuario: "+user.getNombre()+"  "+"Contrasena: "+user.getNombre()));
 		}
-		servicioTutoria.guardarSolicitud(solicitud);
+		servicioSolicitudTutoria.guardarSolicitud(solicitud);
 		confirmacion(valor);
 		salir();
 						}
@@ -161,7 +156,7 @@ public class CSolicitudTutoria extends CGeneral {
 						if (evt.getName().equals("onOK")) {
 		solicitud.setEstatus("Rechazada");
 		estatusSolicitud = "Rechazada";
-		servicioTutoria.guardarSolicitud(solicitud);
+		servicioSolicitudTutoria.guardarSolicitud(solicitud);
 		for (int i = 0; i < ltbSolicitudesEstudiantes.getItemCount(); i++){
 			Estudiante estudiante = ltbSolicitudesEstudiantes.getItems().get(i)
 					.getValue();

@@ -31,8 +31,6 @@ import controlador.catalogo.CCatalogoProfesor;
 
 @Controller
 public class CProfesorTematicas extends CGeneral {
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	STematica serviciotematica = GeneradorBeans.getSTematica();
 	CCatalogoProfesor catalogo = new CCatalogoProfesor();
 
 	@Wire
@@ -238,12 +236,12 @@ public class CProfesorTematicas extends CGeneral {
 		String ProfesorCedula = txtCedulaProfesorTematica.getValue();
 		Profesor profesor = servicioProfesor
 				.buscarProfesorPorCedula(ProfesorCedula);
-		List<Tematica> tematicasDerecha = serviciotematica
+		List<Tematica> tematicasDerecha = servicioTematica
 				.buscarTematicasDelProfesor(profesor);
 
 		if (tematicasDerecha.size() == 0) {
 
-			List<Tematica> tema = serviciotematica.buscarActivos();
+			List<Tematica> tema = servicioTematica.buscarActivos();
 			lsbTematicasProfesorDisponibles
 					.setModel(new ListModelList<Tematica>(tema));
 			lsbTematicasProfesorSeleccionadas
@@ -260,7 +258,7 @@ public class CProfesorTematicas extends CGeneral {
 				ids.add(id);
 			}
 			if (ids.toString() != "[]") {
-				List<Tematica> tematicasIzquierda = serviciotematica
+				List<Tematica> tematicasIzquierda = servicioTematica
 						.buscarTematicasSinProfesor(ids);
 				lsbTematicasProfesorDisponibles
 						.setModel(new ListModelList<Tematica>(
