@@ -3,9 +3,12 @@ package servicio;
 import java.util.Date;
 import java.util.List;
 import interfazdao.ISolicitudTutoriaDAO;
+import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Profesor;
+import modelo.Programa;
 import modelo.SolicitudTutoria;
+import modelo.Teg;
 import modelo.Tematica;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -152,4 +155,27 @@ public class SSolicitudTutoria {
 		valor = interfaceSolicitud.countByProfesorAndTematica(profesor,tematica);
 		return valor;
 	}
+	public List<SolicitudTutoria> buscarSolicitudPorVariosProgramaUnEstatus(String estatus,
+			Date fechaInicio, Date fechaFin) {
+		return interfaceSolicitud.buscarSolicitudPorVariosProgramaUnEstatus(estatus,
+				fechaInicio, fechaFin);
+	}
+	
+	public List<SolicitudTutoria> buscarSolicitudPorProgramaUnEstatus(String estatus, Programa programa, Date fechaInicio, Date fechaFin){
+		return interfaceSolicitud.buscarSolicitudPorProgramaVariasAreasUnEstatus(estatus, programa, fechaInicio, fechaFin);
+	}
+	
+	public List<SolicitudTutoria> buscarSolicitudDeUnaTematicaPorDosFechasyUnEstatus(
+			String estatus, Tematica tematica, Date fechaInicio, Date fechaFin) {
+		return interfaceSolicitud.buscarSolicitudPorFechayEstatus(estatus, tematica,
+				fechaInicio, fechaFin);
+	}
+	public List<SolicitudTutoria> buscarSolicitudSegunAreaUnEstatus(AreaInvestigacion area, Date fechaInicio, Date fechaFin,String estatus){
+		List<SolicitudTutoria> solicitudes;
+		solicitudes= interfaceSolicitud.buscarSolicitudAreaestatus(area, fechaInicio, fechaFin,estatus);
+		return solicitudes;
+		
+	}	
+	
+	
 }
