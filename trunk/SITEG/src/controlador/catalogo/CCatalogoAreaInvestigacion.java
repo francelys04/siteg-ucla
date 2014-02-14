@@ -19,6 +19,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Popup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -37,6 +38,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 	private static long idPrograma1;
 	public static List<AreaInvestigacion> area1;
 
+	@Wire
 	private Label lblPrograma;
 	@Wire
 	private Listbox ltbArea;
@@ -60,18 +62,23 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		cmbPrograma.setModel(new ListModelList<Programa>(programa));
 		List<AreaInvestigacion> area = servicioArea.buscarActivos();
 
+		try {
 		if (encontrado == true) {
 			ltbArea.setEmptyMessage("No hay areas de investigacion registradas");
 			ltbArea.setTooltiptext("Doble clic para seleccionar el area");
 			ltbArea.setModel(new ListModelList<AreaInvestigacion>(area));
 			cmbPrograma.setVisible(false);
 			lblPrograma.setVisible(false);
-			System.out.println("paso if");
+			
 		} else {
 			ltbArea.setTooltiptext("Doble clic para ver las tematicas del area");
 			ltbArea.setEmptyMessage("Seleccione un programa para ver las areas");
 			cmbPrograma.setVisible(true);
 
+		}
+		} catch (Exception e) {
+			// TODO: handle exception
+					System.out.println("");
 		}
 	}
 

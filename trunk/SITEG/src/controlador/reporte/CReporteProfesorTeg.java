@@ -17,6 +17,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -68,20 +69,24 @@ public class CReporteProfesorTeg extends CGeneral {
 	private Combobox cmbAreaReporteProfesorTeg;
 	@Wire
 	private Combobox cmbTematicaReporteProfesorTeg;
-	private String[] estatusProyecto = { "Todos", "Solicitando Registro",
+
+	private String[] estatusProyecto = { "Solicitando Registro",
 			"Proyecto Registrado", "Comision Asignada",
 			"Factibilidad Evaluada", "Proyecto Factible",
-			"Proyecto No Factible", "Avances Finalizados", "TEG Registrado",
-			"Revisiones Finalizadas", "Solicitando Defensa",
-			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado" };
+			"Proyecto No Factible", "Proyecto en Desarrollo",
+			"Avances Finalizados", "TEG Registrado", "Trabajo en Desarrollo",
+			"Revisiones Finalizadas", "Solicitando Defensa", "Jurado Asignado",
+			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado"
+
+	};
+
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
 	long idTematica = 0;
 
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		programas = servicioPrograma.buscarActivas();
 		Programa programaa = new Programa(987, "Todos", "", "", true, null);
@@ -172,15 +177,16 @@ public class CReporteProfesorTeg extends CGeneral {
 					"/vistas/catalogos/VCatalogoProfesor.zul", null, null);
 			window.doModal();
 
-			catalogoProfesor.recibir("reportes/no estructurados/VReporteProfesorTeg");
+			catalogoProfesor
+					.recibir("reportes/no-estructurados/VReporteProfesorTeg");
 		} else {
 			map2.put("area", cmbAreaReporteProfesorTeg.getValue());
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map2);
-			catalogo.recibir("reportes/no estructurados/VReporteProfesorTeg", Long
-					.parseLong(cmbProgramaReporteProfesorTeg.getSelectedItem()
-							.getId()), Long
-					.parseLong(cmbTematicaReporteProfesorTeg.getSelectedItem()
-							.getId()));
+			catalogo.recibir("reportes/no-estructurados/VReporteProfesorTeg",
+					Long.parseLong(cmbProgramaReporteProfesorTeg
+							.getSelectedItem().getId()), Long
+							.parseLong(cmbTematicaReporteProfesorTeg
+									.getSelectedItem().getId()));
 
 			Window window = (Window) Executions.createComponents(
 					"/vistas/catalogos/VCatalogoProfesorTematica.zul", null,
@@ -207,22 +213,30 @@ public class CReporteProfesorTeg extends CGeneral {
 		} else {
 			if (estatus.equals(estatusProyecto[0])) {
 				System.out.println(cmbTematicaReporteProfesorTeg.getValue());
-				if (cmbTematicaReporteProfesorTeg.getValue().equals(estatusProyecto[0])) {
-					tegs= servicioTeg.buscarTodosTegsDeTutorPorDosFechas(profesor,fechaInicio, fechaFin);
-					System.out.println("Todos"+tegs.size());
+				if (cmbTematicaReporteProfesorTeg.getValue().equals(
+						estatusProyecto[0])) {
+					tegs = servicioTeg.buscarTodosTegsDeTutorPorDosFechas(
+							profesor, fechaInicio, fechaFin);
+					System.out.println("Todos" + tegs.size());
 				} else {
-					tegs = servicioTeg.buscarTegsDeTutorPorDosFechasYTematica(profesor,
-							tematica, fechaInicio, fechaFin);
-					System.out.println("Todos estatus una tematica"+tegs.size());
+					tegs = servicioTeg.buscarTegsDeTutorPorDosFechasYTematica(
+							profesor, tematica, fechaInicio, fechaFin);
+					System.out.println("Todos estatus una tematica"
+							+ tegs.size());
 				}
 			} else {
-				if (cmbTematicaReporteProfesorTeg.getValue().equals(estatusProyecto[0])) {
-					tegs= servicioTeg.buscarTegsDeTutorPorDosFechasYEstatus(profesor, estatus, fechaInicio, fechaFin);
-					System.out.println("Todas tematicas un estatus"+tegs.size());
+				if (cmbTematicaReporteProfesorTeg.getValue().equals(
+						estatusProyecto[0])) {
+					tegs = servicioTeg.buscarTegsDeTutorPorDosFechasYEstatus(
+							profesor, estatus, fechaInicio, fechaFin);
+					System.out.println("Todas tematicas un estatus"
+							+ tegs.size());
 				} else {
-					tegs = servicioTeg.buscarTegsDeTutorPorTematicaPorDosFechasYEstatus(
-							profesor, tematica, estatus, fechaInicio, fechaFin);
-					System.out.println("Una tematica un estatus"+tegs.size());
+					tegs = servicioTeg
+							.buscarTegsDeTutorPorTematicaPorDosFechasYEstatus(
+									profesor, tematica, estatus, fechaInicio,
+									fechaFin);
+					System.out.println("Una tematica un estatus" + tegs.size());
 				}
 			}
 			FileSystemView filesys = FileSystemView.getFileSystemView();
@@ -235,20 +249,35 @@ public class CReporteProfesorTeg extends CGeneral {
 			p.put("apellido", profesor.getApellido());
 			p.put("fecha1", fechaInicio);
 			p.put("fecha2", fechaFin);
-			 String rutaUrl = obtenerDirectorio();
-				String reporteSrc = rutaUrl
-						+ "SITEG/vistas/reportes/salidas/compilados/RProyectosProfesor.jasper";
-
-			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+			String rutaUrl = obtenerDirectorio();
+			String reporteSrc = rutaUrl
+					+ "SITEG/vistas/reportes/salidas/compilados/RProyectosProfesor.jasper";
 			
+			
+			JasperReport jasperReport = (JasperReport) JRLoader
+					.loadObject(reporteSrc);
+
 			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					jasperReport, p, new JRBeanCollectionDataSource(tegs));
-			JasperExportManager.exportReportToPdfFile(jasperPrint, filesys
-					.getHomeDirectory().toString() + "/reporte.pdf");
+					jasperReport, p , new JRBeanCollectionDataSource(
+							tegs));
+			// JasperExportManager.exportReportToPdfFile(jasperPrint,
+			// filesys.getHomeDirectory().toString()
+			// + "/reportePr.pdf");
+			JasperViewer.viewReport(jasperPrint, false);
+			// String rutaUrl = obtenerDirectorio();
+			// String reporteSrc = rutaUrl
+			// +
+			// "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
+			// jstVistaProfesores.setSrc(reporteSrc);
+			// jstVistaProfesores
+			// .setDatasource(new
+			// JRBeanCollectionDataSource(masSolicitados));
+			// jstVistaProfesores.setType("pdf");
+			// jstVistaProfesores.setParameters(mapa);
+			
 
 		}
-		
+
 	}
 
 }
-

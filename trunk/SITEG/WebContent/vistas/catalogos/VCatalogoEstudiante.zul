@@ -1,10 +1,10 @@
 <window title="Catalogo Estudiante" border="normal" width="850px"
-	id="wdwCatalogoEstudiante" apply="controlador.catalogo.CCatalogoEstudiante"
-	closable="true">
+	id="wdwCatalogoEstudiante"
+	apply="controlador.catalogo.CCatalogoEstudiante" closable="true">
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
-		<!-- Lista de popus -->
+	<!-- Lista de popus -->
 	<popup id="pupSeleccionEstudiante">
 		<toolbarbutton
 			label="Doble clic para seleccionar el estudiante" />
@@ -72,4 +72,30 @@
 			</listitem>
 		</template>
 	</listbox>
+
+	<separator />
+
+	<panel border="normal" width="100%">
+		<panelchildren>
+			<div sclass="alert-info" align="center">
+				<separator />
+				<div sclass="btn-group">
+
+					<button id="btnImprimir" label="Imprimir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/imprimir.png" tabindex="7">
+					</button>
+					<button id="btnSalirCatalogoEstudiante" label="Salir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="7">
+					</button>
+					<separator />
+				</div>
+
+			</div>
+		</panelchildren>
+	</panel>
+
+	<separator />
+
 </window>

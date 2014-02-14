@@ -6,16 +6,14 @@
 	<style src="/public/css/style.css" />
 	<!-- Lista de popus -->
 	<popup id="pupSeleccionPrograma">
-		<toolbarbutton
-			label="Doble clic para seleccionar un programa" />
+		<toolbarbutton label="Doble clic para seleccionar un programa" />
 	</popup>
 	<popup id="pupImprimirPrograma">
 		<toolbarbutton
 			label="Presione aquí para imprimir la lista de programas" />
 	</popup>
 	<popup id="pupSalirCatalogo">
-		<toolbarbutton
-			label="Presione aquí para salir" />
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<!-- Fin de popus -->
 
@@ -50,30 +48,31 @@
 			</listitem>
 		</template>
 	</listbox>
-		<panel border="normal" width="95%"
-			style="margin-left:2%;margin-right:3%">
-			<panelchildren>
-				<div sclass="alert-info" align="center">
+	
+	<separator />
+	
+	<panel border="normal" width="100%">
+		<panelchildren>
+			<div sclass="alert-info" align="center">
+				<separator />
+				<div sclass="btn-group">
+
+					<button id="btnImprimir" tabindex="5" width="110px"
+						tooltip="pupImprimirPrograma" sclass="btn" label="Imprimir"
+						image="/public/imagenes/iconos/imprimir.png">
+					</button>
+
+					<button id="btnSalir" label="Salir" width="110px"
+						tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="7">
+					</button>
 					<separator />
-					<div sclass="btn-group">
-
-						<button id="btnImprimir" tabindex="5"
-							tooltip="pupImprimirPrograma" sclass="btn" label="Imprimir">
-						</button>
-
-						<button id="btnSalir" label="Salir" width="110px" 
-						    tooltip="pupSalirCatalogo"
-							sclass="btn"
-							image="/public/imagenes/iconos/salir.png" tabindex="7">
-						</button>
-						<separator />
-					</div>
-
 				</div>
-			</panelchildren>
-		</panel>
-		<jasperreport id="jstVistaPrevia" height="40%" width="100%"></jasperreport>
+
+			</div>
+		</panelchildren>
+	</panel>
+	<separator />
 	
-	
-	
+	<jasperreport id="jstVistaPrevia" height="40%" width="100%"></jasperreport>
 </window>

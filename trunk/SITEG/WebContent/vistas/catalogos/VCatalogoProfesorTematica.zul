@@ -1,5 +1,5 @@
 <window title="Catalogo Tutores Disponibles" border="normal"
-	width="800px" id="wdwCatalogoProfesorArea"
+	width="900px" id="wdwCatalogoProfesorArea"
 	apply="controlador.catalogo.CCatalogoProfesorTematica">
 
 	<style src="/public/css/bootstrap.css" />
@@ -42,10 +42,10 @@
 			</auxheader>
 		</auxhead>
 		<listhead>
-			<listheader label="Cédula" align="center" />
+			<listheader label="Cédula" align="center" width="15%" />
 			<listheader label="Nombre" align="center" />
 			<listheader label="Apellido" align="center" />
-			<listheader label="Correo" align="center" />
+			<listheader label="Correo" align="center" width="28%" />
 		</listhead>
 
 		<template name="model">
@@ -74,4 +74,6 @@
 			</div>
 		</panelchildren>
 	</panel>
+	
+	<separator />
 </window>

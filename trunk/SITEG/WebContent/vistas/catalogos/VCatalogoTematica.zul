@@ -6,8 +6,7 @@
 	<style src="/public/css/style.css" />
 	<!-- Lista de popus -->
 	<popup id="pupSeleccionTematica">
-		<toolbarbutton
-			label="Doble clic para seleccionar la temática" />
+		<toolbarbutton label="Doble clic para seleccionar la temática" />
 	</popup>
 	<!-- Fin de popus -->
 
@@ -53,4 +52,30 @@
 			</listitem>
 		</template>
 	</listbox>
+
+	<separator />
+
+	<panel border="normal" width="100%">
+		<panelchildren>
+			<div sclass="alert-info" align="center">
+				<separator />
+				<div sclass="btn-group">
+
+					<button id="btnImprimir" label="Imprimir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/imprimir.png" tabindex="7">
+					</button>
+					<button id="btnSalirCatalogoTematica" label="Salir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="7">
+					</button>
+					<separator />
+				</div>
+
+			</div>
+		</panelchildren>
+	</panel>
+
+	<separator />
+
 </window>
