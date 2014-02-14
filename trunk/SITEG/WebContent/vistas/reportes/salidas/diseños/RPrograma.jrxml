@@ -4,46 +4,24 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT
-     a."nombre",
-     a."descripcion",
-     a."correo",
-     a."profesor_cedula",
-     p."cedula",
-     p."nombre" AS nombreprofesor,
-     p."apellido" AS apellidoprofesor
-FROM
-     "profesor" p INNER JOIN "programa" a ON p."cedula" = a."profesor_cedula"
-WHERE
-     a.estatus = 'true']]>
+		<![CDATA[]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
-	<field name="descripcion" class="java.lang.String"/>
 	<field name="correo" class="java.lang.String"/>
-	<field name="profesor_cedula" class="java.lang.String"/>
-	<field name="cedula" class="java.lang.String"/>
-	<field name="nombreprofesor" class="java.lang.String"/>
-	<field name="apellidoprofesor" class="java.lang.String"/>
+	<field name="directorPrograma.nombre" class="java.lang.String"/>
+	<field name="directorPrograma.apellido" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="115" y="0" width="347" height="54" uuid="63ec3c04-e36a-4c2b-9ce2-64442638cb6a"/>
+				<reportElement x="115" y="0" width="375" height="54" uuid="63ec3c04-e36a-4c2b-9ce2-64442638cb6a"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
 			</staticText>
-			<image>
-				<reportElement x="0" y="0" width="74" height="58" uuid="18c7157c-4ce2-4f6f-a834-ce65b23756b4"/>
-				<imageExpression><![CDATA["/reporte/logo ucla.png"]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="490" y="0" width="82" height="54" uuid="c4dfbc6e-94f5-4a25-86a5-61eaccf022c9"/>
-				<imageExpression><![CDATA["/reporte/logo dcyt.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -97,12 +75,12 @@ WHERE
 			<textField>
 				<reportElement x="402" y="0" width="88" height="20" uuid="a35ff3e6-fb9c-489e-b362-bb035cd8ac71"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{nombreprofesor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{directorPrograma.nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="490" y="0" width="82" height="20" uuid="b0d3f699-361d-41d5-80eb-bbe46d2dfc38"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{apellidoprofesor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{directorPrograma.apellido}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -121,10 +99,6 @@ WHERE
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="0" y="24" width="49" height="30" uuid="8da32f6c-5150-49b1-98bf-7fee73bdca73"/>
-				<imageExpression><![CDATA["/reporte/logo.png"]]></imageExpression>
-			</image>
 		</band>
 	</pageFooter>
 	<summary>
