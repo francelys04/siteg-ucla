@@ -139,11 +139,16 @@ public class CCatalogoPrograma extends CGeneral {
 			String reporteSrc = rutaUrl
 					+ "SITEG/vistas/reportes/salidas/compilados/RPrograma.jasper";
 			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-			 Map p = new HashMap();
+		    Map p = new HashMap();
+			p.put("logoUcla", reporteImage + "logo ucla.png");
+			p.put("logoCE", reporteImage + "logo CE.png");
+			p.put("logoSiteg", reporteImage + "logo.png");
+				
+				
 			 
 
 			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null,  new JRBeanCollectionDataSource(programas));
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,  new JRBeanCollectionDataSource(programas));
 			JasperViewer.viewReport(jasperPrint, false);
 			
 		} catch (JRException e) {

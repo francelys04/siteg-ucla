@@ -237,15 +237,21 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 					}
 					String tutor = teg.getTutor().getNombre() + " "
 							+ teg.getTutor().getApellido();
+					String rutaUrl = obtenerDirectorio();
+					String reporteSrc = rutaUrl
+							+ "SITEG/vistas/reportes/salidas/compilados/RItemTegDefensa.jasper";
+					  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+					
+					p.put("logoUcla", reporteImage + "logo ucla.png");
+					p.put("logoCE", reporteImage + "logo CE.png");
+					p.put("logoSiteg", reporteImage + "logo.png");
+						
 					p.put("estudiantes", estu);
 					p.put("tutor", tutor);
 					p.put("tematica", teg.getTematica().getNombre());
 					p.put("titulo", teg.getTitulo());
 
-					String rutaUrl = obtenerDirectorio();
-					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/salidas/compilados/RItemTegDefensa.jasper";
-			
+				
 					try {
 						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
 						JasperPrint jasperPrint;
@@ -275,15 +281,22 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 						}
 						String tutor = teg.getTutor().getNombre() + " "
 								+ teg.getTutor().getApellido();
+						String rutaUrl = obtenerDirectorio();
+						String reporteSrc = rutaUrl
+								+ "SITEG/vistas/reportes/salidas/compilados/RItemTeg.jasper";
+						
+						String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+							
+						p.put("logoUcla", reporteImage + "logo ucla.png");
+						p.put("logoCE", reporteImage + "logo CE.png");
+						p.put("logoSiteg", reporteImage + "logo.png");
+				
 						p.put("estudiantes", estu);
 						p.put("tutor", tutor);
 						p.put("tematica", teg.getTematica().getNombre());
 						p.put("titulo", teg.getTitulo());
 
-						String rutaUrl = obtenerDirectorio();
-						String reporteSrc = rutaUrl
-								+ "SITEG/vistas/reportes/salidas/compilados/RItemTeg.jasper";
-				
+					
 						try {
 							jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
 							JasperPrint jasperPrint;
