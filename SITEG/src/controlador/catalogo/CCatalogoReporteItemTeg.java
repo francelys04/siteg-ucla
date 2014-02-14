@@ -10,14 +10,20 @@ import java.util.Map;
 
 import javax.swing.filechooser.FileSystemView;
 
+import modelo.AreaInvestigacion;
+import modelo.Defensa;
 import modelo.Estudiante;
+import modelo.Factibilidad;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
+import modelo.compuesta.ItemDefensa;
+import modelo.compuesta.ItemFactibilidad;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
@@ -32,6 +38,8 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Radio;
+import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -65,12 +73,21 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 	private Textbox txtMostrarApellidoTutorCalificar;
 	@Wire
 	private Combobox cmbEstatus;
+	@Wire
+	private Radiogroup rdgEtapa;
+	@Wire
+	private Radio rdoTEG;
+	@Wire
+	private Radio rdoProyecto;
+	String estatusTeg[] = { "TEG Aprobado", "TEG Reprobado" };
+	String estatusProyecto[] = { "Proyecto Factible", "Proyecto No Factible" };
 
 	/*
 	 * Metodo heredado del Controlador CGeneral
 	 */
 	@Override
 	public void inicializar(Component comp) {
+
 	}
 
 	/*
@@ -81,6 +98,29 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 	 * apellido y se va seteando temporalmente en la variable estatus del teg
 	 * para poder visualizarlo en el componente lista de teg de la vista.
 	 */
+
+	@Listen("onCheck = #rdgEtapa")
+	public void llenarCombo() {
+		if (rdoProyecto.isChecked() == true) {
+			try {
+				cmbEstatus.setModel(new ListModelList<String>(estatusProyecto));
+			} catch (Exception e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (rdoTEG.isChecked() == true) {
+			try {
+				cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
+			} catch (Exception e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	@Listen("onSelect= #cmbEstatus")
 	public List<Teg> buscar() {
 		List<Teg> tegs = servicioTeg.buscarTegs(cmbEstatus.getValue());
@@ -91,17 +131,17 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 			String apellido = estudiantes.get(0).getApellido();
 			tegs.get(i).setEstatus(nombre + " " + apellido);
 		}
-
+		if(!tegs.isEmpty()){
 		ltbReporteItemTeg.setModel(new ListModelList<Teg>(tegs));
-
+		}
 		return tegs;
 	}
 
 	/*
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
-	 * "buscar()", mediante el componente de la lista, donde se podra
-	 * visualizar la fecha, el nombre y apellido del estudiante, la fecha, la
-	 * tematica, el area, el titulo, el nombre y apellido del tutor de estos.
+	 * "buscar()", mediante el componente de la lista, donde se podra visualizar
+	 * la fecha, el nombre y apellido del estudiante, la fecha, la tematica, el
+	 * area, el titulo, el nombre y apellido del tutor de estos.
 	 */
 	@Listen("onChange = #txtMostrarFechaCalificar,#txtMostrarTematicaCalificar,#txtMostrarAreaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,# txtMostrarApellidoTutorCalificar")
 	public void filtrarDatosCatalogo() {
@@ -173,29 +213,18 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 
 	}
 
-	
 	@Listen("onDoubleClick = #ltbReporteItemTeg")
 	public void mostrarDatosCatalogo() {
 		if (ltbReporteItemTeg.getItemCount() != 0) {
 			Listitem listItem = ltbReporteItemTeg.getSelectedItem();
 			if (listItem != null) {
 				Teg teg = (Teg) listItem.getValue();
+				if(rdoProyecto.isChecked() == true){
+				Factibilidad factibilidad =servicioFactibilidad.buscarFactibilidadPorTeg(teg);
+				 List <ItemFactibilidad> itemsFactibilidad = servicioItemFactibilidad.buscarItemFactibilidad(factibilidad);
+				 FileSystemView filesys = FileSystemView.getFileSystemView();
+				 JasperReport jasperReport;
 
-				try {
-					Class.forName("org.postgresql.Driver");
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				FileSystemView filesys = FileSystemView.getFileSystemView();
-				JasperReport jasperReport;
-				try {
-					Connection con;
-
-					con = DriverManager.getConnection(
-							"jdbc:postgresql://localhost:5432/siteg",
-							"postgres", "equipo2");
 					Map p = new HashMap();
 					List<Estudiante> estudiantes = servicioEstudiante
 							.buscarEstudiantePorTeg(teg);
@@ -208,30 +237,72 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 					}
 					String tutor = teg.getTutor().getNombre() + " "
 							+ teg.getTutor().getApellido();
-					p.put("idteg", teg.getId());
 					p.put("estudiantes", estu);
 					p.put("tutor", tutor);
 					p.put("tematica", teg.getTematica().getNombre());
 					p.put("titulo", teg.getTitulo());
-					
+
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/salidas/compilados/RItemTeg.jasper";
+							+ "SITEG/vistas/reportes/salidas/compilados/RItemTegDefensa.jasper";
+			
+					try {
+						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+						JasperPrint jasperPrint;
+						jasperPrint = JasperFillManager.fillReport(
+						jasperReport, p, new JRBeanCollectionDataSource(itemsFactibilidad));
+						JasperViewer.viewReport(jasperPrint, false);
+					} catch (JRException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+								 
+				 }else if(rdoTEG.isChecked() == true){
+					Defensa defensa =servicioDefensa.buscarDefensaDadoTeg(teg);
+					List<ItemDefensa> itemsDefensa = servicioItemDefensa.buscarItemDefensa(defensa);
+					FileSystemView filesys = FileSystemView.getFileSystemView();
+					 JasperReport jasperReport;
 
-					jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-					JasperPrint jasperPrint = JasperFillManager.fillReport(
-							jasperReport, p, con);
-					JasperViewer.viewReport(jasperPrint, false);
-					con.close();
-					// JasperExportManager.exportReportToPdfFile(jasperPrint,
-					// filesys.getHomeDirectory().toString()+"/RPrograma.pdf");
+						Map p = new HashMap();
+						List<Estudiante> estudiantes = servicioEstudiante
+								.buscarEstudiantePorTeg(teg);
+						List<String> estu = new ArrayList<String>();
+						for (int i = 0; i < estudiantes.size(); i++) {
+							String nombre = estudiantes.get(i).getNombre();
+							String apellido = estudiantes.get(i).getApellido();
+							estu.add(nombre + " " + apellido);
 
-				} catch (JRException | SQLException e) {
-					System.out.println(e);
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+						}
+						String tutor = teg.getTutor().getNombre() + " "
+								+ teg.getTutor().getApellido();
+						p.put("estudiantes", estu);
+						p.put("tutor", tutor);
+						p.put("tematica", teg.getTematica().getNombre());
+						p.put("titulo", teg.getTitulo());
+
+						String rutaUrl = obtenerDirectorio();
+						String reporteSrc = rutaUrl
+								+ "SITEG/vistas/reportes/salidas/compilados/RItemTeg.jasper";
+				
+						try {
+							jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+							JasperPrint jasperPrint;
+							jasperPrint = JasperFillManager.fillReport(
+							jasperReport, p, new JRBeanCollectionDataSource(itemsDefensa));
+							JasperViewer.viewReport(jasperPrint, false);
+						} catch (JRException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					
+					
+					
+					
+					
+					
 				}
-
+				
+				
 			}
 		}
 	}

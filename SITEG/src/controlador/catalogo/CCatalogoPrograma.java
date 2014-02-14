@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.swing.filechooser.FileSystemView;
 
+import modelo.Actividad;
 import modelo.AreaInvestigacion;
 import modelo.Programa;
 import net.sf.jasperreports.engine.JRException;
@@ -129,28 +130,22 @@ public class CCatalogoPrograma extends CGeneral {
 	}
 
 	@Listen("onClick = #btnImprimir")
-	public void imprimir() throws SQLException {
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		Connection con = DriverManager
-				.getConnection("jdbc:postgresql://localhost:5432/siteg",
-						"postgres", "1234");
+	public void imprimir() throws SQLException {	
 		FileSystemView filesys = FileSystemView.getFileSystemView();
+		List<Programa> programas = servicioPrograma.buscarActivas(); 
 		JasperReport jasperReport;
 		try {
 			String rutaUrl = obtenerDirectorio();
 			String reporteSrc = rutaUrl
 					+ "SITEG/vistas/reportes/salidas/compilados/RPrograma.jasper";
+			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+			 Map p = new HashMap();
+			 
 
 			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					jasperReport, null, con);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null,  new JRBeanCollectionDataSource(programas));
 			JasperViewer.viewReport(jasperPrint, false);
-			con.close();
+			
 		} catch (JRException e) {
 			System.out.println(e);
 			// TODO Auto-generated catch block
