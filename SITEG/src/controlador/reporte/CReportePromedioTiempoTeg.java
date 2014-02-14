@@ -42,6 +42,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.util.media.AMedia;
@@ -241,11 +242,22 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			parametro.put("logoUcla", reporteImage + "logo ucla.png");
 			parametro.put("logoCE", reporteImage + "logo CE.png");
 			parametro.put("logoSiteg", reporteImage + "logo.png");
-			jstVistaPrevia.setSrc(reporteSrc);
-			jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-					tegsPromedios));
-			jstVistaPrevia.setType("pdf");
-			jstVistaPrevia.setParameters(parametro);
+			
+			
+			JasperReport jasperReport = (JasperReport) JRLoader
+					.loadObject(reporteSrc);
+
+			
+			JasperPrint jasperPrint = JasperFillManager.fillReport(
+					jasperReport, parametro, new JRBeanCollectionDataSource(
+							tegsPromedios));
+			
+			JasperViewer.viewReport(jasperPrint, false);
+//			jstVistaPrevia.setSrc(reporteSrc);
+//			jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+//					tegsPromedios));
+//			jstVistaPrevia.setType("pdf");
+//			jstVistaPrevia.setParameters(parametro);
 
 		} else {
 			Messagebox.show("No hay informacion disponible");
