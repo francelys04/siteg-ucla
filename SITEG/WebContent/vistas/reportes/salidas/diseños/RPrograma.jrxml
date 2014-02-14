@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoSiteg" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -16,12 +19,20 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="115" y="0" width="375" height="54" uuid="63ec3c04-e36a-4c2b-9ce2-64442638cb6a"/>
+				<reportElement x="105" y="0" width="375" height="54" uuid="63ec3c04-e36a-4c2b-9ce2-64442638cb6a"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="1" width="100" height="50" uuid="798b01b1-e252-4c47-a84e-c84a82b55117"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="483" y="1" width="89" height="53" uuid="ed09169c-2a5d-4790-9371-4204644f40f8"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -99,6 +110,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="0" y="4" width="100" height="50" uuid="1a7287bc-c88c-4542-8b99-eb5e3a7f9808"/>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
+			</image>
 		</band>
 	</pageFooter>
 	<summary>

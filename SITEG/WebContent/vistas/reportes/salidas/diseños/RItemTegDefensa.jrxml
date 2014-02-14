@@ -8,6 +8,9 @@
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="tematica" class="java.lang.String"/>
 	<parameter name="estudiantes" class="java.util.List"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoSiteg" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -25,12 +28,20 @@
 	<title>
 		<band height="81" splitType="Stretch">
 			<staticText>
-				<reportElement x="116" y="0" width="364" height="54" uuid="9860a2ea-f208-4efe-b97b-b7defdca626d"/>
+				<reportElement x="116" y="0" width="362" height="54" uuid="9860a2ea-f208-4efe-b97b-b7defdca626d"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="1" width="100" height="50" uuid="7d647b92-307a-42fd-88c6-53fff80092af"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="478" y="2" width="94" height="50" uuid="e487d9cd-8503-433d-836a-97cbc60a34b2"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -133,6 +144,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="0" y="9" width="100" height="50" uuid="c43c2db2-1c78-4858-b807-fc8b89375c76"/>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
+			</image>
 		</band>
 	</pageFooter>
 	<summary>
