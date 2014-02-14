@@ -1,6 +1,6 @@
 <window title="Catalogo Tipo de Jurado" border="normal" width="800px"
-	id="wdwCatalogoTipoJurado" apply="controlador.catalogo.CCatalogoTipoJurado"
-	closable="true">
+	id="wdwCatalogoTipoJurado"
+	apply="controlador.catalogo.CCatalogoTipoJurado" closable="true">
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
@@ -40,4 +40,25 @@
 			</listitem>
 		</template>
 	</listbox>
+
+	<separator />
+
+	<panel border="normal" width="100%">
+		<panelchildren>
+			<div sclass="alert-info" align="center">
+				<separator />
+				<div sclass="btn-group">
+					<button id="btnSalirCatalogoTipoJurado" label="Salir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="7">
+					</button>
+					<separator />
+				</div>
+
+			</div>
+		</panelchildren>
+	</panel>
+
+	<separator />
+
 </window>

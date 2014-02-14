@@ -1,7 +1,7 @@
 <window title="Catálogo Actividad" border="normal" width="800px"
-	id="wdwCatalogoActividad" apply="controlador.catalogo.CCatalogoActividad"
-	closable="true">
-	
+	id="wdwCatalogoActividad"
+	apply="controlador.catalogo.CCatalogoActividad" closable="true">
+
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 	<!-- Lista de popus -->
@@ -10,7 +10,7 @@
 			label="Doble clic para seleccionar una actividad" />
 	</popup>
 	<!-- Fin de popus -->
-	
+
 
 	<listbox id="ltbActividad" width="100%" mold="paging" pageSize="10"
 		emptyMessage="No hay actividades registradas">
@@ -48,4 +48,30 @@
 			</listitem>
 		</template>
 	</listbox>
+
+	<separator />
+
+	<panel border="normal" width="100%">
+		<panelchildren>
+			<div sclass="alert-info" align="center">
+				<separator />
+				<div sclass="btn-group">
+
+					<button id="btnImprimir" label="Imprimir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/imprimir.png" tabindex="7">
+					</button>
+					<button id="btnSalirCatalogoActividad" label="Salir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="7">
+					</button>
+					<separator />
+				</div>
+
+			</div>
+		</panelchildren>
+	</panel>
+
+	<separator />
+
 </window>

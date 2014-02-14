@@ -1,5 +1,6 @@
-<window title="Catálogo Areas de Investigación" border="normal" width="820px"
-	id="wdwCatalogoArea" apply="controlador.catalogo.CCatalogoAreaInvestigacion"
+<window title="Catálogo Areas de Investigación" border="normal"
+	width="820px" id="wdwCatalogoArea"
+	apply="controlador.catalogo.CCatalogoAreaInvestigacion"
 	closable="true">
 
 
@@ -14,7 +15,8 @@
 	<!-- Fin de popus -->
 
 	<hbox>
-		<label id="lblPrograma" value="Programa:" style="margin-left:15px"/>
+		<label id="lblPrograma" value="Programa:"
+			style="margin-left:15px" />
 		<combobox id="cmbPrograma" width="220px" readonly="true"
 			style="margin-left:40px" tabindex="10">
 			<template name="model">
@@ -59,4 +61,31 @@
 			</listitem>
 		</template>
 	</listbox>
+
+	<separator />
+
+	<panel border="normal" width="100%">
+		<panelchildren>
+			<div sclass="alert-info" align="center">
+				<separator />
+				<div sclass="btn-group">
+
+					<button id="btnImprimir" label="Imprimir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/imprimir.png" tabindex="7">
+					</button>
+					<button id="btnSalirCatalogoArea" label="Salir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="7">
+					</button>
+					<separator />
+				</div>
+
+			</div>
+		</panelchildren>
+	</panel>
+
+	<separator />
+
+
 </window>

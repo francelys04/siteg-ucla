@@ -1,13 +1,12 @@
 <window title="Catalogo Requisito" border="normal" width="800px"
-	id="wdwCatalogoRequisito" apply="controlador.catalogo.CCatalogoRequisito"
-	closable="true">
+	id="wdwCatalogoRequisito"
+	apply="controlador.catalogo.CCatalogoRequisito" closable="true">
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 	<!-- Lista de popus -->
 	<popup id="pupSeleccionRequisitos">
-		<toolbarbutton
-			label="Doble clic para seleccionar el requisito" />
+		<toolbarbutton label="Doble clic para seleccionar el requisito" />
 	</popup>
 	<!-- Fin de popus -->
 
@@ -40,4 +39,30 @@
 			</listitem>
 		</template>
 	</listbox>
+	<separator />
+
+	<panel border="normal" width="100%">
+		<panelchildren>
+			<div sclass="alert-info" align="center">
+				<separator />
+				<div sclass="btn-group">
+
+					<button id="btnImprimir" label="Imprimir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/imprimir.png" tabindex="7">
+					</button>
+					<button id="btnSalirCatalogoRequisito" label="Salir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="7">
+					</button>
+					<separator />
+				</div>
+
+			</div>
+		</panelchildren>
+	</panel>
+
+	<separator />
+
+
 </window>

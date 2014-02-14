@@ -1,8 +1,6 @@
-<window id="wdwReporteProfesorTematica"
-	title="Lista de Profesores asociados a Tematicas"
-	border="normal" width="70%" height="700px" closable="true" apply="controlador.reporte.CReporteProfesorTematica"
->
-
+<window id="wdwReporteProfesorCargo" title="Tematicas mas Solicitadas"
+	border="normal" width="100%" height="385px" closable="true"
+	apply="controlador.reporte.CReporteTematicasMasSolicitadas">
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -33,51 +31,135 @@
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
 
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
+
 	</style>
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
 	<separator />
 	<separator />
-	<!-- <label value="(*) "
-		style="font-weight:bold;color:red;margin-center:2%">
-		</label> -->
-	<label value="Lista de Profesores por Tematica"
-		style="font-weight:bold;margin-left:35%;margin-right:20%">
-	</label>
-	<separator />
-	<separator />
-	<separator />
-	<separator />
 
-	<groupbox width="auto%" style="margin-left:2%;margin-right:1%">
-		
-	</groupbox>
+	<groupbox width="95%" height="320px"
+		style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
+		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+			<columns>
+				<column width="800px" height="60px" />
+			</columns>
+			<rows>
 
-	<separator />
-	<separator />
-	<separator />
-	<separator />
-	<panel border="normal" width="100%"
-		style="margin-left:2%;margin-right:3%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
+				<row>
+					<hbox>
+						<label value="Fecha Inicio:"
+							style="font-weight:bold" />
 
-					<button id="btnGenerarReporte"
-						label="Generar Reporte" sclass="btn"
-						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
-					</button>
-					<button id="btnSalirReporte"
-						label="Cancelar" sclass="btn"
-						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
-					</button>
+						<datebox id="dtbFechaInicio" cols="12"
+							readonly="true" style="color:black !important;margin-left:40px"
+							mold="rounded" width="150px" format="dd/MM/yyyy">
+						</datebox>
+
+						<label value="Fecha Fin:"
+							style="font-weight:bold;margin-left:60px" />
+
+						<datebox id="dtbFechaFin" cols="12"
+							style="margin-left:30px;color:black !important;" readonly="true"
+							mold="rounded" width="150px" format="dd/MM/yyyy">
+						</datebox>
+					</hbox>
+
+				</row>
+			</rows>
+		</grid>
+
+		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+			<columns>
+				<column width="15%" height="60px" />
+			</columns>
+			<rows>
+
+				<row>
+					<hlayout>
+						<label value="Programa:"
+							style="font-weight:bold" />
+					</hlayout>
+
+					<hbox>
+						<combobox id="cmbPrograma" readonly="true"
+							width="250px" value="-- Seleccione un Programa --">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
+
+						<hlayout>
+							<label value="Ãrea:"
+								style="font-weight:bold;margin-left:60px" />
+						</hlayout>
+						<combobox style="margin-left:30px" id="cmbArea"
+							value="-- Seleccione un Area --" readonly="true" width="250px">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
+					</hbox>
+				</row>
+
+				<row>
+					<label value="Etapa del TEG: "
+						style="font-weight:bold" />
+
+					<combobox id="cmbFaseTeg"
+						value="-- Seleccione una Etapa --" readonly="true"
+						width="250px">
+						<comboitem label="Proyecto" />
+						<comboitem label="Teg" />
+					</combobox>
+
+				</row>
+			</rows>
+		</grid>
+
+		<separator />
+		<separator />
+		<separator />
+		<separator />
+
+		<panel border="normal" width="auto%"
+			style="margin-left:2%;margin-right:3%">
+			<panelchildren>
+				<div sclass="alert-info" align="center">
 					<separator />
-				</div>
+					<div sclass="btn-group">
 
-			</div>
-		</panelchildren>
-	</panel>
+						<button id="btnGenerarTematicasSolicitadas"
+							label="Generar Reporte" sclass="btn"
+							image="/public/imagenes/iconos/generar.png" tabindex="13">
+						</button>
+						<button id="btnCancelarTematicasSolicitadas"
+							label="Cancelar" sclass="btn"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+						</button>
+						<button id="btnSalirTematicasSolicitadas"
+							width="120px" tooltip="pupSalirReporte" label="Salir"
+							sclass="btn" image="/public/imagenes/iconos/salir.png"
+							tabindex="14">
+						</button>
+						<separator />
+					</div>
+
+				</div>
+			</panelchildren>
+		</panel>
+	</groupbox>
 	<separator />
+	<separator />
+
+	<jasperreport id="jstVistaPrevia" height="40%" width="100%"></jasperreport>
 	<separator />
 	<separator />
 </window>
