@@ -87,7 +87,7 @@
 						<label value="Desde" style="font-weight:bold" />
 					</hlayout>
 					<datebox id="dtbDesde" readonly="true"
-						format="yyyy/MM/dd">
+						format="yyyy/MM/dd" onCreate="self.value = new Date()">
 					</datebox>
 
 					<hlayout>
@@ -96,7 +96,7 @@
 						<label value="Hasta" style="font-weight:bold" />
 					</hlayout>
 					<datebox id="dtbHasta" readonly="true"
-						format="yyyy/MM/dd">
+						format="yyyy/MM/dd" onCreate="self.value = new Date()">
 					</datebox>
 
 				</row>
@@ -108,25 +108,22 @@
 						<label value="Programa "
 							style="font-weight:bold" />
 					</hlayout>
-					<combobox id="cmbPrograma" width="100%">
+					<combobox id="cmbPrograma" width="60%"
+						readonly="true">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
 						</template>
 					</combobox>
-
-
-
-
 				</row>
-
 				<row>
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red" />
 						<label value="Area" style="font-weight:bold" />
 					</hlayout>
-					<combobox id="cmbArea" width="100%">
+					<combobox id="cmbArea" width="60%"
+						readonly="true">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -139,7 +136,8 @@
 						<label value="Temática"
 							style="font-weight:bold" />
 					</hlayout>
-					<combobox id="cmbTematica" width="100%">
+					<combobox id="cmbTematica" width="60%"
+						readonly="true">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -148,6 +146,9 @@
 				</row>
 			</rows>
 		</grid>
+		<separator />
+		<separator />
+		<separator />
 		<separator />
 		<separator />
 
@@ -166,8 +167,12 @@
 							label="Exportar en Texto Plano" sclass="btn"
 							image="/public/imagenes/iconos/aceptar.png" tabindex="13">
 						</button>
-						<button id="btnSalir" label="Cancelar"
+						<button id="btnCancelar" label="Cancelar"
 							sclass="btn" image="/public/imagenes/iconos/rechazar.png"
+							tabindex="14">
+						</button>
+						<button id="btnSalir" label="Salir"
+							sclass="btn" image="/public/imagenes/iconos/salir.png"
 							tabindex="14">
 						</button>
 						<separator />
