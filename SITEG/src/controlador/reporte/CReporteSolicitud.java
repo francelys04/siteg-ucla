@@ -40,6 +40,7 @@ import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 
+import org.zkoss.zul.Button;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
@@ -131,6 +132,8 @@ public class CReporteSolicitud extends CGeneral {
 
 	@Wire
 	private Listbox ltbElegiAreaTematica;
+	@Wire
+	private Button btnExportarPlano;
 
 	static Programa programa1 = new Programa();
 	static AreaInvestigacion area1 = new AreaInvestigacion();
@@ -151,25 +154,17 @@ public class CReporteSolicitud extends CGeneral {
 	public void inicializar(Component comp) {
 		ltbElegiArea.setVisible(false);
 
-		ltbElegiPrograma.setVisible(false);
-		ltbElegiProgramaArea.setVisible(false);
-		ltbElegiProgramaAreaTematica.setVisible(false);
-		ltbElegiProgramaAreaTematica.setVisible(false);
-		ltbElegiAreaTematica.setVisible(false);
-		ltbTodo.setVisible(false);
-		ltbElegiArea.setVisible(false);
-		ltbElegiPrograma1.setVisible(false);
-		ltbElegiProgramaArea1.setVisible(false);
-		ltbElegiProgramaAreaTematica1.setVisible(false);
-		ltbElegiProgramaAreaTematica1.setVisible(false);
-		ltbElegiAreaTematica1.setVisible(false);
-		ltbTodo1.setVisible(false);
-		ltbElegiArea1.setVisible(false);
-
+		cancelar();
+		btnExportarPlano.setDisabled(true);
 		Programa programaa = new Programa(987, "Todos", "", "", true, null);
 		programas = servicioPrograma.buscarActivas();
 		programas.add(programaa);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
+		cmbPrograma.setValue("Todos");
+		cmbArea.setValue("Todos");
+		cmbTematica.setValue("Todos");
+		
+		
 
 	}
 
@@ -194,14 +189,7 @@ public class CReporteSolicitud extends CGeneral {
 
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() {
-		if ((rdoDefensa.isChecked() == false)
-				&& (rdoTutoria.isChecked() == false)
-				&& (rdoProyecto.isChecked() == false)
-				&& (rdoTEG.isChecked() == false)) {
-			Messagebox
-					.show("Debe Seleccionar el tipo de solicitud que quiere consultar",
-							"Error", Messagebox.OK, Messagebox.ERROR);
-		} else if (cmbPrograma.getValue().equals("Todos")) {
+		if (cmbPrograma.getValue().equals("Todos")) {
 			cmbArea.setValue("Todos");
 			cmbTematica.setValue("Todos");
 			areas = servicioArea.buscarActivos();
@@ -258,31 +246,16 @@ public class CReporteSolicitud extends CGeneral {
 
 	@Listen("onClick = #btnGenerar")
 	public void generarReporteDefensa() throws JRException {
-		ltbElegiArea.setVisible(false);
-
-		ltbElegiPrograma.setVisible(false);
-		ltbElegiProgramaArea.setVisible(false);
-		ltbElegiProgramaAreaTematica.setVisible(false);
-		ltbElegiProgramaAreaTematica.setVisible(false);
-		ltbElegiAreaTematica.setVisible(false);
-		ltbTodo.setVisible(false);
-
+		cancelar();
 		if ((rdoDefensa.isChecked() == false)
 				&& (rdoTutoria.isChecked() == false)
 				&& (rdoProyecto.isChecked() == false)
 				&& (rdoTEG.isChecked() == false)) {
-			Messagebox
-					.show("Debe Seleccionar el tipo de solicitud que quiere consultar",
+			Messagebox.show("Debe Seleccionar el tipo de solicitud que quiere consultar",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		}
 		if (rdoTutoria.isChecked() == true) {
-			ltbElegiArea.setVisible(false);
-			ltbElegiPrograma.setVisible(false);
-			ltbElegiProgramaArea.setVisible(false);
-			ltbElegiProgramaAreaTematica.setVisible(false);
-
-			ltbTodo.setVisible(false);
-
+			cancelar();
 		}
 
 		/*
@@ -305,7 +278,9 @@ public class CReporteSolicitud extends CGeneral {
 				Messagebox
 						.show("La fecha de inicio debe ser primero que la fecha de fin",
 								"Error", Messagebox.OK, Messagebox.ERROR);
+				btnExportarPlano.setDisabled(true);
 			} else {
+				btnExportarPlano.setDisabled(false);
 				/*
 				 * SELECIONO TODO TODO
 				 */
@@ -387,9 +362,11 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
-						}
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
+					}
 				}
 				/*
 				 * seleccione un programa
@@ -474,8 +451,10 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
 					}
 				}
 				/*
@@ -569,8 +548,10 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
 					}
 				}
 				/*
@@ -657,9 +638,12 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
 					}
+					
 
 				}
 				/*
@@ -749,8 +733,10 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
 					}
 
 				}
@@ -847,8 +833,10 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
 					}
 				}
 
@@ -870,7 +858,9 @@ public class CReporteSolicitud extends CGeneral {
 				Messagebox
 						.show("La fecha de inicio debe ser primero que la fecha de fin",
 								"Error", Messagebox.OK, Messagebox.ERROR);
+				btnExportarPlano.setDisabled(true);
 			} else {
+				btnExportarPlano.setDisabled(false);
 				/*
 				 * SELECIONO TODO TODO
 				 */
@@ -945,8 +935,10 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
 					}
 				}
 				/*
@@ -1024,8 +1016,10 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
 					}
 				}
 				/*
@@ -1104,8 +1098,11 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);;
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
+						;
 					}
 				}
 				/*
@@ -1183,8 +1180,10 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
 					}
 
 				}
@@ -1265,8 +1264,10 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
 					}
 
 				}
@@ -1348,8 +1349,10 @@ public class CReporteSolicitud extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No ha informacion disponible para este intervalo",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No ha informacion disponible para este intervalo",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+						btnExportarPlano.setDisabled(true);
 					}
 				}
 
@@ -1359,14 +1362,22 @@ public class CReporteSolicitud extends CGeneral {
 
 	}
 
-	@Listen("onClick = #btnSalir")
-	public void cancelarTematicasSolicitadas() throws JRException {
-
+	@Listen("onClick = #btnCancelar")
+	public void cancelarSolicitudes() throws JRException {
+		cancelar();
+		rdoDefensa.setChecked(false);
+		rdoProyecto.setChecked(false);
+		rdoTEG.setChecked(false);
+		rdoTutoria.setChecked(false);		
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbTematica.setValue("");
 		dtbDesde.setValue(new Date());
 		dtbHasta.setValue(new Date());
+		cmbPrograma.setValue("Todos");
+		cmbArea.setValue("Todos");
+		cmbTematica.setValue("Todos");
+		btnExportarPlano.setDisabled(true);
 	}
 
 	// *************************
@@ -2068,9 +2079,11 @@ public class CReporteSolicitud extends CGeneral {
 				String rutaUrl = obtenerDirectorio();
 				int cantidad = rutaUrl.indexOf(".");
 				String rutaUrl2 = rutaUrl.substring(0, cantidad);
-				String ruta = rutaUrl2 + "SITEG/WebContent/vistas/reportes/no-estructurados/";
+				String ruta = rutaUrl2
+						+ "SITEG/WebContent/vistas/reportes/no-estructurados/";
 				String sFichero = "";
-				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy" + "_"+ "hhmmss");
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy" + "_"
+						+ "hhmmss");
 				Calendar cal = Calendar.getInstance(); // hoy
 				String valor = sdf.format(cal.getTime());
 				sFichero = ruta + "SolicitudesDefensa.txt";
@@ -2159,11 +2172,13 @@ public class CReporteSolicitud extends CGeneral {
 							linea.append("\t");
 							linea.append(elementos.get(x).getNombreEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x).getApellidoEstudiante());
+							linea.append(elementos.get(x)
+									.getApellidoEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getCorreoEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDireccionEstudiante());
+							linea.append(elementos.get(x)
+									.getDireccionEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getArea());
 							linea.append("\t");
@@ -2171,7 +2186,8 @@ public class CReporteSolicitud extends CGeneral {
 							linea.append("\t");
 							linea.append(elementos.get(x).getTematica());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDescripcionTematica());
+							linea.append(elementos.get(x)
+									.getDescripcionTematica());
 							linea.append("]");
 							linea.append("\t");
 
@@ -2269,15 +2285,18 @@ public class CReporteSolicitud extends CGeneral {
 							linea.append("\t");
 							linea.append(elementos.get(x).getNombreEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x).getApellidoEstudiante());
+							linea.append(elementos.get(x)
+									.getApellidoEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getCorreoEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDireccionEstudiante());
+							linea.append(elementos.get(x)
+									.getDireccionEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getTematica());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDescripcionTematica());
+							linea.append(elementos.get(x)
+									.getDescripcionTematica());
 							linea.append("]");
 							linea.append("\t");
 
@@ -2365,17 +2384,14 @@ public class CReporteSolicitud extends CGeneral {
 							linea.append("\t");
 							linea.append(elementos.get(x).getDireccionTutor());
 							linea.append("\t");
-							linea.append(elementos.get(x)
-									.getCedulaEstudiante());
+							linea.append(elementos.get(x).getCedulaEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x)
-									.getNombreEstudiante());
+							linea.append(elementos.get(x).getNombreEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x)
 									.getApellidoEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x)
-									.getCorreoEstudiante());
+							linea.append(elementos.get(x).getCorreoEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x)
 									.getDireccionEstudiante());
@@ -2483,19 +2499,23 @@ public class CReporteSolicitud extends CGeneral {
 							linea.append("\t");
 							linea.append(elementos.get(x).getNombreEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x).getApellidoEstudiante());
+							linea.append(elementos.get(x)
+									.getApellidoEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getCorreoEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDireccionEstudiante());
+							linea.append(elementos.get(x)
+									.getDireccionEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getPrograma());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDescripcionPrograma());
+							linea.append(elementos.get(x)
+									.getDescripcionPrograma());
 							linea.append("\t");
 							linea.append(elementos.get(x).getTematica());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDescripcionTematica());
+							linea.append(elementos.get(x)
+									.getDescripcionTematica());
 							linea.append("]");
 							linea.append("\t");
 
@@ -2594,15 +2614,18 @@ public class CReporteSolicitud extends CGeneral {
 							linea.append("\t");
 							linea.append(elementos.get(x).getNombreEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x).getApellidoEstudiante());
+							linea.append(elementos.get(x)
+									.getApellidoEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getCorreoEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDireccionEstudiante());
+							linea.append(elementos.get(x)
+									.getDireccionEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getPrograma());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDescripcionPrograma());
+							linea.append(elementos.get(x)
+									.getDescripcionPrograma());
 							linea.append("]");
 							linea.append("\t");
 
@@ -2713,17 +2736,20 @@ public class CReporteSolicitud extends CGeneral {
 							linea.append("\t");
 							linea.append(elementos.get(x).getNombreEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x).getApellidoEstudiante());
+							linea.append(elementos.get(x)
+									.getApellidoEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getCorreoEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getCorreoEstudiante());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDireccionEstudiante());
+							linea.append(elementos.get(x)
+									.getDireccionEstudiante());
 							linea.append("\t");
 							linea.append(elementos.get(x).getPrograma());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDescripcionPrograma());
+							linea.append(elementos.get(x)
+									.getDescripcionPrograma());
 							linea.append("\t");
 							linea.append(elementos.get(x).getArea());
 							linea.append("\t");
@@ -2731,7 +2757,8 @@ public class CReporteSolicitud extends CGeneral {
 							linea.append("\t");
 							linea.append(elementos.get(x).getTematica());
 							linea.append("\t");
-							linea.append(elementos.get(x).getDescripcionTematica());
+							linea.append(elementos.get(x)
+									.getDescripcionTematica());
 							linea.append("]");
 							linea.append("\t");
 
@@ -2755,7 +2782,12 @@ public class CReporteSolicitud extends CGeneral {
 
 		}
 	}
-
+	@Listen("onClick= #btnSalir")
+	public void salir(){
+		wdwReporteSolicitud.onClose();
+	}
+	
+	
 	@Listen("onClick= #btnExportarPlano")
 	public void exportarReporte() {
 		try {
