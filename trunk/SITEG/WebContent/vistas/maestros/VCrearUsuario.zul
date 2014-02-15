@@ -189,7 +189,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 					<hbox>
-						<textbox id="txtCorreo" width="190px" tooltip="pupCorreoUsuario" constraint="/.+@.+\.[a-z]+/: Debe introducir un texto como: valor@ejemplo.com"/>
+						<textbox id="txtCorreo" width="190px" tooltip="pupCorreoUsuario"/>
 					</hbox>
 				</row>
 

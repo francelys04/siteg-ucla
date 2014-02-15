@@ -137,8 +137,8 @@ public class CAsignarJurado extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite mover uno o varios profesores hacia la lista de la
-	 * derecha.
+	 * Metodo que permite mover uno o varios profesores hacia la lista de integrantes
+	 * del jurado.
 	 */
 	@Listen("onClick = #btnAgregarJurado")
 	public void moverDerechaJurado() {
@@ -173,8 +173,8 @@ public class CAsignarJurado extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite mover uno o varios profesores hacia la lista de la
-	 * izquierda.
+	 * Metodo que permite mover uno o varios profesores integrantes del jurado hacia la lista de la
+	 * izquierda (profesores disponibles).
 	 */
 	@Listen("onClick = #btnRemoverJurado")
 	public void moverIzquierdaJurado() {

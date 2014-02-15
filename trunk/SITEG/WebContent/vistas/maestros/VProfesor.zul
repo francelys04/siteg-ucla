@@ -252,7 +252,7 @@
 						<label value="Correo:" style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtCorreoProfesor" width="260px" constraint="/.+@.+\.[a-z]+/: Debe introducir un texto como: valor@ejemplo.com"
+					<textbox id="txtCorreoProfesor" width="260px"
 						maxlength="100" tooltip="pupCorreoProfesor" tabindex="11" />
 
 

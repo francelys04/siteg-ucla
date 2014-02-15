@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +22,7 @@ import modelo.seguridad.Usuario;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -40,6 +42,9 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+/*Controlador que se encarga de añadir los profesores integrantes de la
+ * comision evaluadura para un determinado teg*/
+@Controller
 public class CAsignarComision extends CGeneral {
 
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -80,6 +85,11 @@ public class CAsignarComision extends CGeneral {
 	@Wire
 	private Image imagenx;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -103,7 +113,6 @@ public class CAsignarComision extends CGeneral {
 						.getareaInvestigacion().getNombre());
 				txtTematicaComision.setValue(teg2.getTematica().getNombre());
 				Teg tegPorCodigo = servicioTeg.buscarTeg(auxiliarId);
-				// se toma es el programa del estudiante asociado a el teg.
 				List<Estudiante> estudiantes = servicioEstudiante
 						.buscarEstudiantesDelTeg(tegPorCodigo);
 				programa = estudiantes.get(0).getPrograma();
@@ -127,15 +136,13 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
-	// Llena la lista de los profesores disponibles y los que ya han sido
-	// asignados si es el caso
+	/*
+	 * Metodo que se encarga de llenar la lista de profesores disponibles, asi
+	 * como la lista de los profesores que integran la comision evaluadora
+	 */
 	public void llenarListas() {
 
-		Programa programa = new Programa();
-
 		Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-
-		// para guiarse por el programa del estudiante
 		List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg2);
 		programa = est.get(0).getPrograma();
 		List<Profesor> profesoresComision = servicioProfesor
@@ -173,13 +180,19 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
+	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	// busca la condicion de cantidad de miembros de la comision
-	// se debe guiar con el programa del estudiante
+	/*
+	 * Metodo que permite buscar la cantidad de integrantes de la comision en el
+	 * lapso actual y para el programa del trabajo asociado
+	 */
 	public int valorCondicion() {
 
 		Teg tegComision = new Teg();
@@ -189,24 +202,16 @@ public class CAsignarComision extends CGeneral {
 		List<Estudiante> est = servicioEstudiante
 				.buscarEstudiantesDelTeg(tegComision);
 		auxIdPrograma = est.get(0).getPrograma().getId();
-		Lapso lapso = servicioLapso.buscarLapsoVigente();
 		Programa programa = servicioPrograma.buscar(auxIdPrograma);
-		List<CondicionPrograma> condicion = servicioCondicionPrograma
-				.buscarCondicionesPrograma(programa, lapso);
-
-		for (int i = 0; i < condicion.size(); i++) {
-
-			if (condicion.get(i).getCondicion().getNombre()
-					.equals("Numero de integrantes de la comision")) {
-				valor = condicion.get(i).getValor();
-
-			}
-		}
-
+		valor = buscarCondicionVigenteEspecifica(
+				"Numero de integrantes de la comision", programa).getValor();
 		return valor;
-
 	}
 
+	/*
+	 * Metodo que permite cerrar la ventana, actualizando los cambios realizados
+	 * en el resto del sistema
+	 */
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -216,17 +221,16 @@ public class CAsignarComision extends CGeneral {
 		wdwAsignarComision.onClose();
 	}
 
-	Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-
-	// Metodo que permite agregar los profesores a la lista de integrantes de la
-	// comision evaluadora
+	/*
+	 * Metodo que permite añadir a los profesores de la lista de disponibles
+	 * hacia la lista de integrantes de la comision
+	 */
 	@Listen("onClick = #btnAgregarProfesoresComision")
 	public void agregarProfesor() {
 		Set selectedItems = ((org.zkoss.zul.ext.Selectable) lsbProfesoresDisponibles
 				.getModel()).getSelection();
 		int valor = selectedItems.size()
 				+ lsbProfesoresSeleccionados.getItemCount();
-		System.out.println(valor);
 		if (valor <= valorCondicion()) {
 
 			if (selectedItems.size() == 0) {
@@ -256,8 +260,10 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
-	// Metodo que permite quitar los profesores de la lista de integrantes de la
-	// comision evaluadora
+	/*
+	 * Metodo que permite añadir a los profesores de la lista de integrantes de
+	 * la comision hacia la lista de profesores disponibles
+	 */
 	@Listen("onClick = #btnRemoverProfesoresComision")
 	public void removerProfesor() {
 		Set selectedItems = ((org.zkoss.zul.ext.Selectable) lsbProfesoresSeleccionados
@@ -279,16 +285,19 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
-	// Metodo que permite limpiar las listas tanto de los profesores disponibles
-	// como el de los seleccionados para formar parte de la comision evaluador
+	/*
+	 * Metodo que permite hacer un llamado al metodo de actualizacion de las
+	 * listas
+	 */
 	@Listen("onClick = #btnCancelarComision")
 	public void limpiarCampos() {
-
 		llenarListas();
-
 	}
 
-	// Metodo que permite guardar los integrantes de la comision evaluadora
+	/*
+	 * Metodo que permite almacenar en la base de datos a los integrantes de la
+	 * comision evaluadora en el respectivo teg
+	 */
 	@Listen("onClick = #btnGuardarComision")
 	public void GuardarComision() {
 
@@ -334,9 +343,6 @@ public class CAsignarComision extends CGeneral {
 									 * Metodo para eliminar integrantes de la
 									 * comision
 									 */
-									List<Profesor> profesoresComision = servicioProfesor
-											.buscarComisionDelTeg(tegSeleccionado);
-
 									Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
 
 									for (int i = 0; i < lsbProfesoresSeleccionados
@@ -365,7 +371,13 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
-	// Metodo que permite guardar los integrantes de la comision evaluadora
+	/*
+	 * Metodo que permite almacenar en la base de datos a los integrantes de la
+	 * comision evaluadora en el respectivo teg, asi como tambien permite el
+	 * cambio de estatus en el trabajo especial de grado, actualizando la tabla
+	 * respectiva de cambios de estatus en la fecha actual. Ademas de que envia un
+	 * usuario a cada miembro de la comision
+	 */
 	@Listen("onClick = #btnFinalizarComision")
 	public void finalizarComision() {
 
@@ -453,10 +465,6 @@ public class CAsignarComision extends CGeneral {
 												for (int f = 0; f < grupino
 														.size(); ++f) {
 													Grupo g = grupino.get(f);
-													System.out
-															.println(grupino
-																	.get(f)
-																	.getNombre());
 													gruposU.add(g);
 												}
 												gruposU.add(grupo2);
@@ -508,6 +516,7 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirComision")
 	public void salirComision() {
 
