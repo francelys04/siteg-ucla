@@ -26,28 +26,103 @@ public class Proyecto{
 	private String descripcionTematica;
 	private String area;
 	private String descripcionArea;
+	private java.util.Date fechadefensa;
+	private java.util.Date horadefensa;
+	private String lugardefensa;
+	private String profesordefensa;
+	private String observacionfactibilidad;
 	
 	public Proyecto(Teg teg, String nombreEstudiante) {
 		super();
 		this.teg = teg;
 		this.nombreEstudiante = nombreEstudiante;
 	}
-	/*public Proyecto(String tituloTeg, String nombreTutor,
-			String nombreEstudiante,
-			String programa, String tematica, String area) {
+	
+	
+	
+	
+	public Proyecto(String tituloTeg, String descripcionTeg,
+			java.util.Date fechaTeg, String cedulaProfesor, String nombreTutor,
+			String apellidoTutor, String correoTutor, String direccionTutor,
+			String cedulaEstudiante, String nombreEstudiante,
+			String apellidoEstudiante, String correoEstudiante,
+			String direccionEstudiante, String programa, String correoPrograma,
+			String descripcionPrograma, String tematica,
+			String descripcionTematica, String area, String descripcionArea,
+			java.util.Date fechadefensa, String profesordefensa,
+			String observacionfactibilidad) {
 		super();
 		this.tituloTeg = tituloTeg;
+		this.descripcionTeg = descripcionTeg;
+		this.fechaTeg = fechaTeg;
+		this.cedulaProfesor = cedulaProfesor;
 		this.nombreTutor = nombreTutor;
+		this.apellidoTutor = apellidoTutor;
+		this.correoTutor = correoTutor;
+		this.direccionTutor = direccionTutor;
+		this.cedulaEstudiante = cedulaEstudiante;
 		this.nombreEstudiante = nombreEstudiante;
-		
-		
+		this.apellidoEstudiante = apellidoEstudiante;
+		this.correoEstudiante = correoEstudiante;
+		this.direccionEstudiante = direccionEstudiante;
 		this.programa = programa;
+		this.correoPrograma = correoPrograma;
+		this.descripcionPrograma = descripcionPrograma;
 		this.tematica = tematica;
+		this.descripcionTematica = descripcionTematica;
 		this.area = area;
-	}*/
-	
-	
-	
+		this.descripcionArea = descripcionArea;
+		this.fechadefensa = fechadefensa;
+		this.profesordefensa = profesordefensa;
+		this.observacionfactibilidad = observacionfactibilidad;
+	}
+
+
+
+
+
+
+
+	public Proyecto(String tituloTeg, String descripcionTeg,
+			java.util.Date fechaTeg, String cedulaProfesor, String nombreTutor,
+			String apellidoTutor, String correoTutor, String direccionTutor,
+			String cedulaEstudiante, String nombreEstudiante,
+			String apellidoEstudiante, String correoEstudiante,
+			String direccionEstudiante, String programa, String correoPrograma,
+			String descripcionPrograma, String tematica,
+			String descripcionTematica, String area, String descripcionArea,
+			java.util.Date fechadefensa, java.util.Date horadefensa, String lugardefensa,
+			String profesordefensa) {
+		super();
+		this.tituloTeg = tituloTeg;
+		this.descripcionTeg = descripcionTeg;
+		this.fechaTeg = fechaTeg;
+		this.cedulaProfesor = cedulaProfesor;
+		this.nombreTutor = nombreTutor;
+		this.apellidoTutor = apellidoTutor;
+		this.correoTutor = correoTutor;
+		this.direccionTutor = direccionTutor;
+		this.cedulaEstudiante = cedulaEstudiante;
+		this.nombreEstudiante = nombreEstudiante;
+		this.apellidoEstudiante = apellidoEstudiante;
+		this.correoEstudiante = correoEstudiante;
+		this.direccionEstudiante = direccionEstudiante;
+		this.programa = programa;
+		this.correoPrograma = correoPrograma;
+		this.descripcionPrograma = descripcionPrograma;
+		this.tematica = tematica;
+		this.descripcionTematica = descripcionTematica;
+		this.area = area;
+		this.descripcionArea = descripcionArea;
+		this.fechadefensa = fechadefensa;
+		this.horadefensa = horadefensa;
+		this.lugardefensa = lugardefensa;
+		this.profesordefensa = profesordefensa;
+	}
+
+
+
+
 	public Proyecto(String tituloTeg, String descripcionTeg,
 			java.util.Date fecha, String cedulaProfesor, String nombreTutor,
 			String apellidoTutor, String correoTutor, String direccionTutor,
