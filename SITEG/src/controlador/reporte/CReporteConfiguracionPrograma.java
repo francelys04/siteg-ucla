@@ -85,143 +85,159 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 	@Listen("onClick = #btnGenerarReporteConfiguracion")
 	public void GenerarReporte() throws JRException {
 
-		long idprograma = Long.parseLong(cmbConfiguracionPrograma
-				.getSelectedItem().getId());
-		programa = servicioPrograma.buscar(idprograma);
-		long idlapso = Long.parseLong(cmbConfiguracionLapso.getSelectedItem()
-				.getId());
-		lapso = servicioLapso.buscarLapso(idlapso);
-		if (rdocondicion.isChecked() == true) {
+		if (cmbConfiguracionPrograma.getText().compareTo("") == 0
+				|| cmbConfiguracionLapso.getText().compareTo("") == 0
+				|| (rdoitem.isChecked() == false
+						&& rdoarea.isChecked() == false
+						&& rdocondicion.isChecked() == false && rdorequisito
+						.isChecked() == false)) {
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
 
-			System.out.println("pase por donde era");
-			List<CondicionPrograma> condicion = servicioCondicionPrograma
-					.buscarCondicionesPrograma(programa, lapso);
-			if (condicion.size() != 0) {
+		} else {
 
-				Map p = new HashMap();
-				Map<String, Object> mapa = new HashMap<String, Object>();
-				mapa.put("nombreprograma", cmbConfiguracionPrograma.getValue());
-				mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
+			long idprograma = Long.parseLong(cmbConfiguracionPrograma
+					.getSelectedItem().getId());
+			programa = servicioPrograma.buscar(idprograma);
+			long idlapso = Long.parseLong(cmbConfiguracionLapso
+					.getSelectedItem().getId());
+			lapso = servicioLapso.buscarLapso(idlapso);
+			if (rdocondicion.isChecked() == true) {
 
-				// Metodo utilizado para los que de error el preview
-				FileSystemView filesys = FileSystemView.getFileSystemView();
-				String rutaUrl = obtenerDirectorio();
-				String reporteSrc = rutaUrl
-						+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaCondicion.jasper";
-				String reporteImage = rutaUrl
-						+ "SITEG/public/imagenes/reportes/";
+				System.out.println("pase por donde era");
+				List<CondicionPrograma> condicion = servicioCondicionPrograma
+						.buscarCondicionesPrograma(programa, lapso);
+				if (condicion.size() != 0) {
 
-				JasperReport jasperReport = (JasperReport) JRLoader
-						.loadObject(reporteSrc);
+					Map p = new HashMap();
+					Map<String, Object> mapa = new HashMap<String, Object>();
+					mapa.put("nombreprograma",
+							cmbConfiguracionPrograma.getValue());
+					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
 
-				JasperPrint jasperPrint = JasperFillManager.fillReport(
-						jasperReport, mapa, new JRBeanCollectionDataSource(
-								condicion));
+					// Metodo utilizado para los que de error el preview
+					FileSystemView filesys = FileSystemView.getFileSystemView();
+					String rutaUrl = obtenerDirectorio();
+					String reporteSrc = rutaUrl
+							+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaCondicion.jasper";
+					String reporteImage = rutaUrl
+							+ "SITEG/public/imagenes/reportes/";
 
-				JasperViewer.viewReport(jasperPrint, false);
+					JasperReport jasperReport = (JasperReport) JRLoader
+							.loadObject(reporteSrc);
 
-			} else {
-				Messagebox
-						.show("No ha informacion disponible para este intervalo");
-			}
-		} else if (rdoarea.isChecked() == true) {
-			List<AreaInvestigacion> programaarea = servicioProgramaArea
-					.buscarAreasDePrograma(programa, lapso);
-			if (programaarea.size() != 0) {
-                
-				Map p = new HashMap();
-				Map<String, Object> mapa = new HashMap<String, Object>();
-				mapa.put("nombreprograma", cmbConfiguracionPrograma.getValue());
-				mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, mapa, new JRBeanCollectionDataSource(
+									condicion));
 
-				// Metodo utilizado para los que de error el preview
-				FileSystemView filesys = FileSystemView.getFileSystemView();
-				String rutaUrl = obtenerDirectorio();
-				String reporteSrc = rutaUrl
-						+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaArea.jasper";
-				String reporteImage = rutaUrl
-						+ "SITEG/public/imagenes/reportes/";
+					JasperViewer.viewReport(jasperPrint, false);
 
-				JasperReport jasperReport = (JasperReport) JRLoader
-						.loadObject(reporteSrc);
+				} else {
+					Messagebox
+							.show("No ha informacion disponible para este intervalo");
+				}
+			} else if (rdoarea.isChecked() == true) {
+				List<AreaInvestigacion> programaarea = servicioProgramaArea
+						.buscarAreasDePrograma(programa, lapso);
+				if (programaarea.size() != 0) {
 
-				JasperPrint jasperPrint = JasperFillManager.fillReport(
-						jasperReport, mapa, new JRBeanCollectionDataSource(
-								programaarea));
+					Map p = new HashMap();
+					Map<String, Object> mapa = new HashMap<String, Object>();
+					mapa.put("nombreprograma",
+							cmbConfiguracionPrograma.getValue());
+					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
 
-				JasperViewer.viewReport(jasperPrint, false);
+					// Metodo utilizado para los que de error el preview
+					FileSystemView filesys = FileSystemView.getFileSystemView();
+					String rutaUrl = obtenerDirectorio();
+					String reporteSrc = rutaUrl
+							+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaArea.jasper";
+					String reporteImage = rutaUrl
+							+ "SITEG/public/imagenes/reportes/";
 
-			} else {
-				Messagebox
-						.show("No ha informacion disponible para este intervalo");
-			}
+					JasperReport jasperReport = (JasperReport) JRLoader
+							.loadObject(reporteSrc);
 
-		} else if (rdoitem.isChecked() == true) {
-			List<ItemEvaluacion> programaitem = servicioProgramaItem
-					.buscarItemsEnPrograma(programa, lapso);
-			if (programaitem.size() != 0) {
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, mapa, new JRBeanCollectionDataSource(
+									programaarea));
 
-				Map p = new HashMap();
-				Map<String, Object> mapa = new HashMap<String, Object>();
-				mapa.put("nombreprograma", cmbConfiguracionPrograma.getValue());
-				mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
+					JasperViewer.viewReport(jasperPrint, false);
 
-				// Metodo utilizado para los que de error el preview
-				FileSystemView filesys = FileSystemView.getFileSystemView();
-				String rutaUrl = obtenerDirectorio();
-				String reporteSrc = rutaUrl
-						+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaItem.jasper";
-				String reporteImage = rutaUrl
-						+ "SITEG/public/imagenes/reportes/";
+				} else {
+					Messagebox
+							.show("No ha informacion disponible para este intervalo");
+				}
 
-				JasperReport jasperReport = (JasperReport) JRLoader
-						.loadObject(reporteSrc);
+			} else if (rdoitem.isChecked() == true) {
+				List<ItemEvaluacion> programaitem = servicioProgramaItem
+						.buscarItemsEnPrograma(programa, lapso);
+				if (programaitem.size() != 0) {
 
-				JasperPrint jasperPrint = JasperFillManager.fillReport(
-						jasperReport, mapa, new JRBeanCollectionDataSource(
-								programaitem));
+					Map p = new HashMap();
+					Map<String, Object> mapa = new HashMap<String, Object>();
+					mapa.put("nombreprograma",
+							cmbConfiguracionPrograma.getValue());
+					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
 
-				JasperViewer.viewReport(jasperPrint, false);
+					// Metodo utilizado para los que de error el preview
+					FileSystemView filesys = FileSystemView.getFileSystemView();
+					String rutaUrl = obtenerDirectorio();
+					String reporteSrc = rutaUrl
+							+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaItem.jasper";
+					String reporteImage = rutaUrl
+							+ "SITEG/public/imagenes/reportes/";
 
-			} else {
-				Messagebox
-						.show("No ha informacion disponible para este intervalo");
-			}
+					JasperReport jasperReport = (JasperReport) JRLoader
+							.loadObject(reporteSrc);
 
-		}
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, mapa, new JRBeanCollectionDataSource(
+									programaitem));
 
-		else if (rdorequisito.isChecked() == true) {
-			List<Requisito> programarequisito = servicioProgramaRequisito
-					.buscarRequisitos(programa, lapso);
-			if (programarequisito.size() != 0) {
+					JasperViewer.viewReport(jasperPrint, false);
 
-				Map p = new HashMap();
-				Map<String, Object> mapa = new HashMap<String, Object>();
-				mapa.put("nombreprograma", cmbConfiguracionPrograma.getValue());
-				mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
+				} else {
+					Messagebox
+							.show("No ha informacion disponible para este intervalo");
+				}
 
-				// Metodo utilizado para los que de error el preview
-				FileSystemView filesys = FileSystemView.getFileSystemView();
-				String rutaUrl = obtenerDirectorio();
-				String reporteSrc = rutaUrl
-						+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaRequisito.jasper";
-				String reporteImage = rutaUrl
-						+ "SITEG/public/imagenes/reportes/";
-
-				JasperReport jasperReport = (JasperReport) JRLoader
-						.loadObject(reporteSrc);
-
-				JasperPrint jasperPrint = JasperFillManager.fillReport(
-						jasperReport, mapa, new JRBeanCollectionDataSource(
-								programarequisito));
-
-				JasperViewer.viewReport(jasperPrint, false);
-
-			} else {
-				Messagebox
-						.show("No ha informacion disponible para este intervalo");
 			}
 
+			else if (rdorequisito.isChecked() == true) {
+				List<Requisito> programarequisito = servicioProgramaRequisito
+						.buscarRequisitos(programa, lapso);
+				if (programarequisito.size() != 0) {
+
+					Map p = new HashMap();
+					Map<String, Object> mapa = new HashMap<String, Object>();
+					mapa.put("nombreprograma",
+							cmbConfiguracionPrograma.getValue());
+					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
+
+					// Metodo utilizado para los que de error el preview
+					FileSystemView filesys = FileSystemView.getFileSystemView();
+					String rutaUrl = obtenerDirectorio();
+					String reporteSrc = rutaUrl
+							+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaRequisito.jasper";
+					String reporteImage = rutaUrl
+							+ "SITEG/public/imagenes/reportes/";
+
+					JasperReport jasperReport = (JasperReport) JRLoader
+							.loadObject(reporteSrc);
+
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, mapa, new JRBeanCollectionDataSource(
+									programarequisito));
+
+					JasperViewer.viewReport(jasperPrint, false);
+
+				} else {
+					Messagebox
+							.show("No ha informacion disponible para este intervalo");
+				}
+
+			}
 		}
 
 	}
@@ -231,14 +247,15 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 
 		cmbConfiguracionPrograma.setValue("");
 		cmbConfiguracionLapso.setValue("");
+		rdgConfiguracion.setSelectedItem(null);
 
 	}
+
 	@Listen("onClick = #btnSalirReporteConfigurcion")
 	public void salir() throws JRException {
 
 		wdwReporteConfigurar.onClose();
 
 	}
-
 
 }
