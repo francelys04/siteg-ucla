@@ -177,13 +177,17 @@
 					</button>
 
 					<button id="btnExportarPlano"
-						label="Exportar en Texto Plano" sclass="btn"
-						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
-					</button>
-					<button id="btnSalir"
-						label="Cancelar" sclass="btn"
-						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
-					</button>
+							label="Exportar en Texto Plano" sclass="btn"
+							image="/public/imagenes/iconos/aceptar.png" tabindex="13">
+						</button>
+						<button id="btnCancelar" label="Cancelar"
+							sclass="btn" image="/public/imagenes/iconos/rechazar.png"
+							tabindex="14">
+						</button>
+						<button id="btnSalir" label="Salir"
+							sclass="btn" image="/public/imagenes/iconos/salir.png"
+							tabindex="14">
+						</button>
 					<separator />
 				</div>
 

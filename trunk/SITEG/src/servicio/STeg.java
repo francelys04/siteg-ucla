@@ -410,6 +410,11 @@ public class STeg {
 		tegs= interfaceTeg.buscarTegSegunArea(area, estatus1,estatus2);
 		return tegs;
 	}
+	public List<Teg> buscarTegSegunAreaInvestigacionPorDosFechasyEstatus(AreaInvestigacion area, String estatus1,String estatus2,String estatus3,String estatus4,Date fechaInicio,Date fechaFin){
+		List<Teg> tegs;
+		tegs= interfaceTeg.buscarTegSegunAreaInvestigacionPorDosFechasyEstatus(area, estatus1,estatus2,estatus3,estatus4,fechaInicio,fechaFin);
+		return tegs;
+	}
 	public List<Teg> buscarTegSegunTematicaEstatus(Tematica tematica, String estatus1,String estatus2){
 		List<Teg> tegs;
 		tegs= interfaceTeg.buscarTegSegunTematica(tematica, estatus1,estatus2);
