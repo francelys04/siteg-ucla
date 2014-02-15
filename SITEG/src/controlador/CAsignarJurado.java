@@ -202,7 +202,11 @@ public class CAsignarJurado extends CGeneral {
 		ltbJuradoDisponible.setMultiple(true);
 		ltbJuradoDisponible.setCheckmark(true);
 	}
-
+	
+	/*
+	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
+	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
