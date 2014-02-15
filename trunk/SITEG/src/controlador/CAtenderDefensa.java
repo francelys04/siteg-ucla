@@ -43,9 +43,15 @@ import servicio.SJurado;
 import servicio.STeg;
 import servicio.STipoJurado;
 
+/*Controlador que permite atender las solicitudes de defensa
+ * asignadole un lugar una fecha y una hora*/
 @Controller
 public class CAtenderDefensa extends CGeneral {
 
+	private static String vistaRecibida;
+	private static long idTeg = 0;
+	long idDefensa = 0;
+	private static Programa programa;
 	@Wire
 	private Textbox txtProgramaAtenderDefensa;
 	@Wire
@@ -74,18 +80,16 @@ public class CAtenderDefensa extends CGeneral {
 	private Textbox txtApellidoTutorProgramarDefensa;
 	@Wire
 	private Listbox ltbJuradoAtenderDefensa;
-	// @Wire
-	// private Combobox cmbDefensaTipoJurado;
-	private static String vistaRecibida;
-	private static long idTeg = 0;
-	long idDefensa = 0;
-	private static Programa programa;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
+	 * recibido del catalogo exista yse llenan los campos y listas
+	 * correspondientes de la vista, asicomo los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		// Permite mapear los datos del catalogo a la vista Atender Defensa
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("catalogoSolicitudDefensa");
@@ -94,18 +98,18 @@ public class CAtenderDefensa extends CGeneral {
 				idTeg = (Long) map.get("id");
 				Teg teg = servicioTeg.buscarTeg(idTeg);
 				llenarListas(teg);
-
-				txtNombreTutorProgramarDefensa.setValue(teg.getTutor().getNombre());
-				txtApellidoTutorProgramarDefensa.setValue(teg.getTutor().getApellido());
+				txtNombreTutorProgramarDefensa.setValue(teg.getTutor()
+						.getNombre());
+				txtApellidoTutorProgramarDefensa.setValue(teg.getTutor()
+						.getApellido());
 
 				txtAreaAtenderDefensa.setValue(teg.getTematica()
 						.getareaInvestigacion().getNombre());
 				txtTematicaAtenderDefensa.setValue(teg.getTematica()
 						.getNombre());
-				// para que se guie por el programa del estudiante
 				List<Estudiante> est = servicioEstudiante
 						.buscarEstudiantesDelTeg(teg);
-				
+
 				List<Jurado> jurados = servicioJurado.buscarJuradoDeTeg(teg);
 				List<Profesor> profesoresJurado = new ArrayList<Profesor>();
 				for (int i = 0; i < jurados.size(); i++) {
@@ -113,11 +117,10 @@ public class CAtenderDefensa extends CGeneral {
 					Profesor profesor = jurados.get(i).getProfesor();
 					profesoresJurado.add(profesor);
 				}
-				
-				
+
 				ltbJuradoAtenderDefensa.setModel(new ListModelList<Profesor>(
 						profesoresJurado));
-			
+
 				programa = est.get(0).getPrograma();
 				txtProgramaAtenderDefensa.setValue(est.get(0).getPrograma()
 						.getNombre());
@@ -127,12 +130,19 @@ public class CAtenderDefensa extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
+	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	// Metodo que permite llenar la lista de los estudiantes
+	/*
+	 * Metodo que permite llenar la lista de los estudiantes pertenecientes al
+	 * teg
+	 */
 	public void llenarListas(Teg teg) {
 		List<Estudiante> estudiantesTeg = servicioEstudiante
 				.buscarEstudiantePorTeg(teg);
@@ -140,7 +150,12 @@ public class CAtenderDefensa extends CGeneral {
 				estudiantesTeg));
 	}
 
-	// Metodo que permite guardar los datos de la defensa
+	/*
+	 * Metodo que permite aceptar la solicitud de defensa, cambiando el estatus
+	 * del teg. Ademas se logra guardar en la respectiva tabla de historial de
+	 * cambios de estatus y se almacena en la base de datos la defensa referente
+	 * al teg actual
+	 */
 	@Listen("onClick = #btnAceptarDefensa")
 	public void aceptarDefensa() {
 		if (tmbHoraDefensa.getValue() == null
@@ -172,8 +187,9 @@ public class CAtenderDefensa extends CGeneral {
 								String estatus1 = "Defensa Asignada";
 								System.out.println(idTeg);
 								Teg teg1 = servicioTeg.buscarTeg(idTeg);
-								java.util.Date fechaEstatus = new Date();					
-								TegEstatus tegEstatus = new TegEstatus(0, teg1, estatus1, fechaEstatus);
+								java.util.Date fechaEstatus = new Date();
+								TegEstatus tegEstatus = new TegEstatus(0, teg1,
+										estatus1, fechaEstatus);
 								servicioTegEstatus.guardar(tegEstatus);
 								teg1.setEstatus(estatus1);
 								servicioTeg.guardar(teg1);
@@ -190,7 +206,9 @@ public class CAtenderDefensa extends CGeneral {
 
 	}
 
-	// metodo para limpiar los campos
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
+	 */
 	@Listen("onClick = #btnCancelarDefensa")
 	public void cancelarDefensa() {
 		txtLugarDefensa.setValue("");
@@ -198,7 +216,10 @@ public class CAtenderDefensa extends CGeneral {
 
 	}
 
-	// metodo para cerrar y refrescar las vistas
+	/*
+	 * Metodo que permite cerrar la ventana, actualizando los cambios realizados
+	 * en el resto del sistema
+	 */
 	public void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -208,6 +229,7 @@ public class CAtenderDefensa extends CGeneral {
 		wdwAtenderDefensa.onClose();
 	}
 
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirDefensa")
 	public void SalirDefensa() {
 
