@@ -436,7 +436,7 @@ public class CReporteSolicitudes extends CGeneral {
 	    
 	 AreaInvestigacion area1 =servicioArea.buscarArea(idarea);
 		
-		 solicitud = servicioSolicitud.buscarSolicitudSegunAreaUnEstatus(area1, fechaInicio, fechaFin, nombreEstatus);
+		 solicitud = servicioSolicitud.buscarSolicitudSegunAreaUnEstatus1(area1, fechaInicio, fechaFin, nombreEstatus);
 			if (solicitud.size() != 0) {
 				elementos.clear();
 				for (SolicitudTutoria s : solicitud) {
@@ -573,7 +573,7 @@ public class CReporteSolicitudes extends CGeneral {
 	    
 			Tematica tematica1 = servicioTematica.buscarTematica(idTematica);
 		
-		 solicitud = servicioSolicitud.buscarSolicitudPorProgramaUnEstatus(nombreEstatus,programa1, fechaInicio, fechaFin);
+		 solicitud = servicioSolicitud.buscarSolicitudPorProgramaUnEstatus1(nombreEstatus,programa1, fechaInicio, fechaFin);
 			if (solicitud.size() != 0) {
 				elementos.clear();
 				for (SolicitudTutoria s : solicitud) {

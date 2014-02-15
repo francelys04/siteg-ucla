@@ -64,6 +64,8 @@ public class SEstudiante {
 		estudiantes1 = interfaceEstudiante.findByTegs(teg);
 		return estudiantes1;
 	}
+	
+	
 
 	public List<Estudiante> buscarEstudiantesDelTeg(Teg teg) {
 		List<Estudiante> estudiantes;
