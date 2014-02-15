@@ -155,30 +155,38 @@ public class SSolicitudTutoria {
 		valor = interfaceSolicitud.countByProfesorAndTematica(profesor,tematica);
 		return valor;
 	}
-	public List<SolicitudTutoria> buscarSolicitudPorVariosProgramaUnEstatus(String estatus,
+	public List<SolicitudTutoria> buscarSolicitudPorVariosProgramaUnEstatus(
 			Date fechaInicio, Date fechaFin) {
-		return interfaceSolicitud.buscarSolicitudPorVariosProgramaUnEstatus(estatus,
+		return interfaceSolicitud.buscarSolicitudPorVariosProgramaUnEstatus(
 				fechaInicio, fechaFin);
 	}
+	public List<SolicitudTutoria> buscarSolicitudPorProgramaUnEstatus1(String estatus,Programa programa, Date fechaInicio, Date fechaFin){
+		return interfaceSolicitud.buscarSolicitudPorProgramaVariasAreasUnEstatus(programa, fechaInicio, fechaFin);
+	}
 	
-	public List<SolicitudTutoria> buscarSolicitudPorProgramaUnEstatus(String estatus, Programa programa, Date fechaInicio, Date fechaFin){
-		return interfaceSolicitud.buscarSolicitudPorProgramaVariasAreasUnEstatus(estatus, programa, fechaInicio, fechaFin);
+	public List<SolicitudTutoria> buscarSolicitudPorProgramaUnEstatus(Programa programa, Date fechaInicio, Date fechaFin){
+		return interfaceSolicitud.buscarSolicitudPorProgramaVariasAreasUnEstatus(programa, fechaInicio, fechaFin);
 	}
 	public List<SolicitudTutoria> buscarSolicitudPorPrograma( Programa programa, Date fechaInicio, Date fechaFin){
 		return interfaceSolicitud.buscarSolicitudPorProgramaVariasAreas( programa, fechaInicio, fechaFin);
 	}
 	
-	public List<SolicitudTutoria> buscarSolicitudDeUnaTematicaPorDosFechasyUnEstatus(
-			String estatus, Tematica tematica, Date fechaInicio, Date fechaFin) {
-		return interfaceSolicitud.buscarSolicitudPorFechayEstatus(estatus, tematica,
+	public List<SolicitudTutoria> buscarSolicitudDeUnaTematicaPorDosFechasyUnEstatus(Tematica tematica, Date fechaInicio, Date fechaFin) {
+		return interfaceSolicitud.buscarSolicitudPorFechayEstatus(tematica,
 				fechaInicio, fechaFin);
 	}
-	public List<SolicitudTutoria> buscarSolicitudSegunAreaUnEstatus(AreaInvestigacion area, Date fechaInicio, Date fechaFin,String estatus){
+	public List<SolicitudTutoria> buscarSolicitudSegunAreaUnEstatus(AreaInvestigacion area, Date fechaInicio, Date fechaFin){
 		List<SolicitudTutoria> solicitudes;
-		solicitudes= interfaceSolicitud.buscarSolicitudAreaestatus(area, fechaInicio, fechaFin,estatus);
+		solicitudes= interfaceSolicitud.buscarSolicitudAreaestatus(area, fechaInicio, fechaFin);
 		return solicitudes;
 		
 	}	
+	public List<SolicitudTutoria> buscarSolicitudSegunAreaUnEstatus1(AreaInvestigacion area, Date fechaInicio, Date fechaFin, String estatus){
+		List<SolicitudTutoria> solicitudes;
+		solicitudes= interfaceSolicitud.buscarSolicitudAreaestatus1(area, fechaInicio, fechaFin, estatus);
+		return solicitudes;
+		
+	}
 	
 	
 }
