@@ -164,7 +164,7 @@
 						<template name="model">
 							<listitem>
 								<listcell label="${each.item.nombre}" />
-								<listcell label="${each.ponderacion}" maxlength="100"/>
+								<listcell label="${each.ponderacion}"/>
 							</listitem>
 						</template>
 					</listbox>

@@ -203,7 +203,7 @@
 												emptyMessage="No hay items registrados">
 												<listhead>
 													<listheader
-														label="Cédula" />
+														label="Cédula" width="40%"/>
 													<listheader
 														label="Nombre" />
 													<listheader
@@ -213,9 +213,8 @@
 													name="model">
 													<listitem>
 														<listcell>
-															<spinner
-																ButtonVisible="false" inplace="true"
-																value="${each.cedula}" width="98%" readonly="true" />
+															
+																<intbox value="${each.cedula}" width="98%" readonly="true"/>
 														</listcell>
 														<listcell
 															label="${each.nombre}">
@@ -267,7 +266,7 @@
 												emptyMessage="No se han seleccionado items">
 												<listhead>
 													<listheader
-														label="Cédula" />
+														label="Cédula" width="40%"/>
 													<listheader
 														label="Nombre" />
 													<listheader
@@ -279,11 +278,8 @@
 												<template
 													name="model">
 													<listitem>
-														<listcell>
-															<spinner
-																ButtonVisible="false" inplace="true"
-																value="${each.profesor.cedula}" width="98%"
-																readonly="true" />
+														<listcell>												
+																<intbox value="${each.profesor.cedula}" width="98%" readonly="true"/>
 														</listcell>
 														<listcell
 															label="${each.profesor.nombre}">

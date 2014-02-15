@@ -33,23 +33,14 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Image;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-
-import configuracion.GeneradorBeans;
-
-import servicio.SCondicionPrograma;
-import servicio.SDefensa;
-import servicio.SJurado;
-import servicio.STeg;
-import servicio.STipoJurado;
-import servicio.seguridad.SGrupo;
 
 /*Controlador asociado a la vista de asignar jurado, que permite
  * agregar los integrantes del jurado a un determinado TEG*/
@@ -314,7 +305,7 @@ public class CAsignarJurado extends CGeneral {
 		gruposUsuario.add(grupo);
 		for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
 			Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
-			long cedula = ((Spinner) ((listItem.getChildren().get(0)))
+			long cedula = ((Intbox) ((listItem.getChildren().get(0)))
 					.getFirstChild()).getValue();
 			Profesor profesorJurado = servicioProfesor
 					.buscarProfesorPorCedula(String.valueOf(cedula));
@@ -396,7 +387,7 @@ public class CAsignarJurado extends CGeneral {
 			if (tipojurado == "") {
 				error = true;
 			}
-			long cedula = ((Spinner) ((listItem.getChildren().get(0)))
+			long cedula = ((Intbox) ((listItem.getChildren().get(0)))
 					.getFirstChild()).getValue();
 			Profesor profesorJurado = servicioProfesor
 					.buscarProfesorPorCedula(String.valueOf(cedula));

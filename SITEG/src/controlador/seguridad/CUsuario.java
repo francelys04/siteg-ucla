@@ -218,6 +218,7 @@ public class CUsuario extends CGeneral {
 		  map.clear();
 		  map = null;
 		 } 
+		 txtCorreo.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 	}
 
 	@Listen("onClick = #rdoOtro,#rdoEstudiante,#rdoProfesor")
@@ -339,14 +340,23 @@ public class CUsuario extends CGeneral {
 		txtPasswordUsuario.setDisabled(false);
 		btnEliminarUsuario.setDisabled(true);
 		btnCatalogoUsuario.setVisible(false);
+		txtCorreo.setConstraint("");
 		txtCorreo.setValue("");
+		txtCorreo.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 		txtCorreo.setDisabled(false);
-		
 	    btnCatalogoProfesorEstudiante.setVisible(true);
 		rdoProfesor.setDisabled(false);
 		rdoEstudiante.setDisabled(false);
 		rdoOtro.setDisabled(false);
-		
+		ltbGruposAgregados.setMultiple(false);
+		ltbGruposAgregados.setCheckmark(false);
+		ltbGruposAgregados.setMultiple(true);
+		ltbGruposAgregados.setCheckmark(true);
+
+		ltbGruposDisponibles.setMultiple(false);
+		ltbGruposDisponibles.setCheckmark(false);
+		ltbGruposDisponibles.setMultiple(true);
+		ltbGruposDisponibles.setCheckmark(true);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 

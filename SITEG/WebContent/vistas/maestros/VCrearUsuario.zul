@@ -189,7 +189,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 					<hbox>
-						<textbox id="txtCorreo" width="190px" tooltip="pupCorreoUsuario"/>
+						<textbox id="txtCorreo" width="190px" tooltip="pupCorreoUsuario" maxlength="100"/>
 					</hbox>
 				</row>
 
