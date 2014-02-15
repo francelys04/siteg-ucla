@@ -1,0 +1,210 @@
+<window title="Lista de Tegs" border="normal" width="100%"
+	height="500px" closable="true"
+	apply="controlador.reporte.CReporteAvances" id="wdwReporteAvances">
+
+	<style dynamic="true">
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+	</style>
+
+	<style id="estilo">
+
+		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
+		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
+		transparent; border-left: 1px solid transparent; border-top: 1px
+		solid transparent; }
+
+		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
+		transparent; }
+
+		.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd { background: white }
+
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
+		background: white; border-top: none; } tr.z-row-over >
+		td.z-row-inner > .z-row-cnt { color: rgb(0, 84, 122); }
+
+	</style>
+
+	<separator />
+	<separator />
+	<separator />
+
+
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionTeg">
+		<toolbarbutton
+			label="Doble clic para seleccionar el trabajo especial de grado" />
+	</popup>
+	<!-- Fin de popus -->
+
+	<groupbox>
+		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+			<columns>
+				<column width="95%" height="40px" />
+			</columns>
+			<rows>
+				<row>
+					<radiogroup id="rdgEtapa"
+						style="margin-left:30px">
+
+						<radio id="rdoProyecto" label="Proyecto"
+							style="margin-left:10px;color: rgb(0, 100, 122)" />
+						<radio id="rdoTEG"
+							label="Trabajo Especial de Grado"
+							style="margin-left:60px;color: rgb(0, 84, 122)" />
+					</radiogroup>
+
+				</row>
+			</rows>
+		</grid>
+
+		<separator />
+		<separator />
+
+
+		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
+			<columns>
+				<column width="10%" height="40px" />
+			</columns>
+
+			<rows>
+				<row>
+					<label value="Estatus:" style="margin-left:35px" />
+					<combobox id="cmbEstatus" readonly="true"
+						width="190px">
+						<template name="model">
+							<comboitem label="${each}" />
+						</template>
+
+					</combobox>
+				</row>
+			</rows>
+
+		</grid>
+
+
+		<separator />
+		<separator />
+		<panel>
+			<panelchildren>
+				<listbox id="ltbReporteItemTeg" mold="paging"
+					pageSize="6" style="margin-left:10px;margin-right:10px"
+					emptyMessage="No hay TEG con revisiones ">
+					<auxhead sclass="category-center">
+						<auxheader colspan="1">
+							<image
+								src="/public/imagenes/iconos/filtro.png" />
+							<textbox id="txtEstudianteCalificarDefensa"
+								sclass="search-query" placeholder="Nombre" instant="true"
+								width="55%" value="" onChange="" />
+						</auxheader>
+						<auxheader colspan="1">
+							<image
+								src="/public/imagenes/iconos/filtro.png" />
+							<textbox id="txtMostrarFechaCalificar"
+								sclass="search-query" placeholder="Fecha" instant="true"
+								width="55%" value="" onChange="" />
+						</auxheader>
+						<auxheader colspan="1">
+							<image
+								src="/public/imagenes/iconos/filtro.png" />
+							<textbox id="txtMostrarAreaCalificar"
+								sclass="search-query" placeholder="Área" instant="true"
+								width="55%" value="" onChange="" />
+						</auxheader>
+						<auxheader colspan="1">
+							<image
+								src="/public/imagenes/iconos/filtro.png" />
+							<textbox id="txtMostrarTematicaCalificar"
+								sclass="search-query" placeholder="Temática" instant="true"
+								width="55%" value="" onChange="" />
+						</auxheader>
+						<auxheader colspan="1">
+							<image
+								src="/public/imagenes/iconos/filtro.png" />
+							<textbox id="txtMostrarTituloCalificar"
+								sclass="search-query" placeholder="Título" instant="true"
+								width="75%" value="" onChange="" />
+						</auxheader>
+						<auxheader colspan="1">
+							<image
+								src="/public/imagenes/iconos/filtro.png" />
+							<textbox id="txtMostrarNombreTutorCalificar"
+								sclass="search-query" placeholder="Nombre" instant="true"
+								width="55%" value="" onChange="" />
+						</auxheader>
+						<auxheader colspan="1">
+							<image
+								src="/public/imagenes/iconos/filtro.png" />
+							<textbox
+								id="txtMostrarApellidoTutorCalificar" sclass="search-query"
+								placeholder="Apellido" instant="true" width="55%" value=""
+								onChange="" />
+						</auxheader>
+					</auxhead>
+					<listhead>
+						<listheader label="Estudiante" align="center" />
+						<listheader label="Fecha" align="center" />
+						<listheader label="Área" align="center" />
+						<listheader label="Temática" align="center" />
+						<listheader label="Título" align="center"
+							width="25%" />
+						<listheader label="Nombre Tutor" align="center" />
+						<listheader label="Apellido Tutor"
+							align="center" />
+					</listhead>
+
+					<template name="model">
+						<listitem tooltip="pupSeleccionTeg">
+							<listcell label="${each.estatus}" />
+							<listcell label="${each.fecha}" />
+							<listcell
+								label="${each.tematica.areaInvestigacion.nombre}" />
+							<listcell label="${each.tematica.nombre}" />
+							<listcell label="${each.titulo}" />
+							<listcell label="${each.tutor.nombre}" />
+							<listcell label="${each.tutor.apellido}" />
+						</listitem>
+					</template>
+				</listbox>
+				<separator />
+				<separator />
+				<separator />
+				<separator />
+				<separator />
+
+
+				<panel border="normal" width="100%">
+					<panelchildren>
+						<div sclass="alert-info" align="center">
+							<separator />
+							<div sclass="btn-group">
+								<button id="btnSalir" label="Salir"
+									width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+									image="/public/imagenes/iconos/salir.png" tabindex="7">
+								</button>
+								<separator />
+							</div>
+
+						</div>
+					</panelchildren>
+				</panel>
+
+			</panelchildren>
+		</panel>
+	</groupbox>
+
+
+</window>

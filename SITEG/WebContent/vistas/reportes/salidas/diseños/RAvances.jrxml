@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RItemTeg" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d2f0436e-cada-4241-81d9-b6a7fbc5f192">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="a1bed596-d8f7-4f9b-b34e-33a7c170fc5c"/>
+	<parameter name="tutor" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="tematica" class="java.lang.String"/>
+	<parameter name="estudiantes" class="java.util.List"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoSiteg" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
+	<parameter name="tituloPrincipal" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="observacion" class="java.lang.String"/>
+	<group name="tipo">
+		<groupExpression><![CDATA[]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="116" y="0" width="347" height="54" uuid="9860a2ea-f208-4efe-b97b-b7defdca626d"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="100" height="50" uuid="8ee6c2d2-1196-450d-a8ca-2014614e34f7"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="472" y="1" width="100" height="50" uuid="c4f50bf5-cf7d-4efb-b25c-fcfef538e8cc"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="137" splitType="Stretch">
+			<staticText>
+				<reportElement x="16" y="41" width="100" height="20" uuid="5858a34d-c6cc-4e5b-a59d-92add98ee355"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tutor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="73" width="100" height="20" uuid="b9497726-2e67-4c54-98ae-15e86324fc51"/>
+				<textElement>
+					<font size="12" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tematica:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="73" width="100" height="20" uuid="b49accd1-f25d-4755-b887-479c0e4b3587"/>
+				<textElement>
+					<font size="12" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Titulo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="41" width="100" height="20" uuid="6974ddae-d5e1-424f-be50-0c391694fe97"/>
+				<textElement>
+					<font size="12" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Estudiantes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="128" y="45" width="100" height="20" uuid="439cd5cb-7be7-45d5-b8da-2cfaecf882b2"/>
+				<textFieldExpression><![CDATA[$P{tutor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="128" y="73" width="139" height="51" uuid="6c726705-7c37-48f0-8cb9-bcc64a3f52e1"/>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="73" width="138" height="20" uuid="d54d612b-70a7-4a8b-96d0-7a5d25f7fb8c"/>
+				<textFieldExpression><![CDATA[$P{tematica}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="45" width="139" height="20" uuid="9adce1ac-20ab-4548-ade6-42c55eb58be2"/>
+				<textFieldExpression><![CDATA[""+$P{estudiantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="217" y="0" width="168" height="20" uuid="d438df40-ea39-4b77-9464-081ac4deb3ef"/>
+				<textElement>
+					<font fontName="Arial" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tituloPrincipal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="79" y="0" width="49" height="20" uuid="f2ad6792-50ed-4df4-a55f-ef80f0953a1f"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="0" width="234" height="20" uuid="fea5b43f-70bd-4a9a-8022-84bfacdbb6ea"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observacion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="53" y="0" width="100" height="20" uuid="42212e82-4845-4cc3-93a0-4f83dabae4f6"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="267" y="0" width="288" height="31" uuid="88505c7b-c160-448a-b216-b6906fd3cd3c"/>
+				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="40" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement x="189" y="37" width="216" height="20" uuid="7a476cd4-98de-42a6-bcb1-707afe178fd5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="490" y="39" width="82" height="20" uuid="3e48d161-0f71-45b9-8931-8947126522d3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="9" width="100" height="50" uuid="8960b058-2c20-4d22-b1fb-8946fd106d94"/>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
