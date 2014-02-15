@@ -1,5 +1,5 @@
 <window id="wdwReporteProfesorCargo"
-	title="Profesores con los roles que desempeñan en los Trabajos especiales de grado "
+	title="Profesores con los roles que desempeñan en los Trabajos Especiales de Grado "
 	border="normal" width="100%" height="450px" closable="true"
 	apply="controlador.reporte.CReporteProfesor">
 	<style dynamic="true">
