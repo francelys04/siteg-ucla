@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProgramaCondicion" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2181a71c-9fc1-4561-b9d0-6221ad80f1e5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nombreprograma" class="java.lang.String"/>
+	<parameter name="nombrelapso" class="java.lang.String"/>
+	<field name="condicion.nombre" class="java.lang.String"/>
+	<field name="valor" class="java.lang.String"/>
+	<field name="condicion.descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="114" y="10" width="345" height="39" uuid="4438c944-4ea9-4894-bae8-6523b80db068"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="0" width="571" height="1" forecolor="#0066FF" uuid="6193ff80-9393-48ec-aafd-d5be6b27e305"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="61" width="571" height="1" forecolor="#0066FF" uuid="e4bb6cc0-4b82-46f9-b34e-dd54161e3546"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="70" y="0" width="164" height="20" uuid="16280d77-b96b-4192-8f7a-ddf3304ae9db"/>
+				<textFieldExpression><![CDATA[$P{nombreprograma}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="0" width="100" height="20" uuid="48b18d2d-2f17-4b25-b1ca-6806817ce568"/>
+				<textFieldExpression><![CDATA[$P{nombrelapso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="0" width="69" height="20" uuid="a713ccb4-c390-4e6a-b76c-0c7bc246e1a0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="0" width="69" height="20" uuid="d014c7c4-2886-4551-b009-4acce58c15c9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lapso:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="29" y="2" width="100" height="20" uuid="25aaf500-db4f-48a7-b303-fdf2c7b48128"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Condicion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="2" width="100" height="20" uuid="13ab1a57-d123-44c3-845a-d282cc89b536"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="2" width="100" height="20" uuid="8d5c213d-ba32-4af1-8ada-bf8a40bbc546"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="38" splitType="Stretch">
+			<textField>
+				<reportElement x="19" y="10" width="120" height="25" uuid="67be95ef-bd2d-40f2-b0f1-d90efdae378b"/>
+				<textFieldExpression><![CDATA[$F{condicion.nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="10" width="128" height="26" uuid="093380e5-4cfa-4e3b-8459-b1c123f0c2fa"/>
+				<textFieldExpression><![CDATA[$F{condicion.descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="10" width="100" height="25" uuid="e8612c85-2a57-4efa-89db-a957727075c6"/>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="187" y="34" width="172" height="20" uuid="d175b380-0b98-4916-adc7-72d91595cd57"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

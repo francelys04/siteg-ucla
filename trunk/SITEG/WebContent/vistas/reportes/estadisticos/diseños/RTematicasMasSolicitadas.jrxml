@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTematicasMasSolicitadas" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" uuid="36ffbc72-cbd9-445b-a96c-f98bc807a7c7">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="45"/>
+	<property name="ireport.y" value="178"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<subDataset name="dataset1" uuid="c666fdd0-72bf-4a97-9beb-4ec2760da0c1"/>
 	<parameter name="titulo" class="java.lang.String"/>
@@ -40,9 +40,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="61" splitType="Stretch">
+		<band height="68" splitType="Stretch">
 			<staticText>
-				<reportElement x="121" y="4" width="347" height="39" uuid="3fefbbad-9126-4307-a3aa-99222f8cbf12"/>
+				<reportElement x="121" y="4" width="345" height="39" uuid="3fefbbad-9126-4307-a3aa-99222f8cbf12"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -350,7 +350,7 @@
 					<plot/>
 					<itemLabel/>
 					<categoryAxisFormat>
-						<axisFormat tickLabelMask="" verticalTickLabels="false"/>
+						<axisFormat verticalTickLabels="false"/>
 					</categoryAxisFormat>
 					<valueAxisFormat>
 						<axisFormat tickLabelMask="0%"/>

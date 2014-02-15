@@ -1,7 +1,7 @@
 
 <window id="wdwReporteProfesorTeg"
 	title="Solicitudes por Programa"
-	border="normal" width="70%" height="700px" closable="true" apply="controlador.reporte.CReporteSolicitudes"
+	border="normal" width="70%" height="400px" closable="true" apply="controlador.reporte.CReporteSolicitudes"
 	>
 
 	<style dynamic="true">
@@ -36,7 +36,8 @@
 
 	</style>
 
-	
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 	
 	<separator />
 	<separator />
@@ -51,6 +52,31 @@
 				<column width="17%" height="17%" />
 			</columns>
 			<rows>
+			<row>
+			<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red"  />
+						<label value="Fecha Inicio Registro"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbInicioReporteSolicitud"
+						 readonly="true" format="yyyy/MM/dd"
+						>
+					</datebox>
+					
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red"  />
+						<label value="Fecha Fin Registro"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbFinReporteSolicitud"
+						 readonly="true" format="yyyy/MM/dd"
+						>
+					</datebox>
+					
+
+				</row>
 				<row>
 
 					<hlayout width="100px">
@@ -65,6 +91,20 @@
 							<comboitem label="${each.nombre}" id="${each.id}" />
 						</template>
 					</combobox>
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red" />
+						<label value="Estatus"
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbEstatusReporteSolicitud" width="100%">
+						<template name="model">
+							<comboitem label="${each}" />
+						</template>
+					</combobox>
+					</row>
+					
+					<row>
 
 					<hlayout>
 						<label value="*"
@@ -91,43 +131,10 @@
 					</combobox>
 				</row>
 		
-				<row>
 				
-				<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red" />
-						<label value="Estatus"
-							style="font-weight:bold" />
-					</hlayout>
-					<combobox id="cmbEstatusReporteSolicitud" width="100%">
-						<template name="model">
-							<comboitem label="${each}" />
-						</template>
-					</combobox>
-				<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red"  />
-						<label value="Fecha Inicio Registro"
-							style="font-weight:bold" />
-					</hlayout>
-					<datebox id="dtbInicioReporteSolicitud"
-						 readonly="true" format="yyyy/MM/dd"
-						>
-					</datebox>
-					
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red"  />
-						<label value="Fecha Fin Registro"
-							style="font-weight:bold" />
-					</hlayout>
-					<datebox id="dtbFinReporteSolicitud"
-						 readonly="true" format="yyyy/MM/dd"
-						>
-					</datebox>
-					
-
-				</row>
+				
+				
+				
 			</rows>
 		</grid>
 		<separator />
@@ -148,11 +155,18 @@
 
 					<button id="btnGenerarReporteSolicitud"
 						label="Generar Reporte" sclass="btn"
-						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
+						image="/public/imagenes/iconos/generar.png" tabindex="13">
+					</button>
+				
+					
+					
+					<button id="btnCancelarReporteSolicitud"
+						label="Cancelar" sclass="btn"
+						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 					</button>
 					<button id="btnSalirReporteSolicitud"
-						label="Cancelar" sclass="btn"
-						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
+						tooltip="pupSalirReporte" label="Salir" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="14">
 					</button>
 					<separator />
 				</div>
