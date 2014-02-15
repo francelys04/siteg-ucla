@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteSolicitud" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fc1c7490-9735-490c-8db2-d966f2698c14">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechainicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechafin" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="tituloTeg" class="java.lang.String"/>
+	<field name="tematica" class="java.lang.String"/>
+	<field name="nombreTutor" class="java.lang.String"/>
+	<field name="nombreEstudiante" class="java.lang.String"/>
+	<field name="programa" class="java.lang.String"/>
+	<field name="area" class="java.lang.String"/>
+	<field name="estatus" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="571" height="1" forecolor="#0066FF" uuid="dca5fbf6-0e35-4924-a93b-e8cc22fe7f4f"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="121" y="26" width="345" height="39" uuid="4a9db36f-041b-48b5-81ed-b09048587c64"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="233" y="4" width="111" height="18" uuid="7565ad7e-ad87-4ddf-9bed-9ddbe890a377"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="308" y="2" width="100" height="20" uuid="2d2b27d3-5353-46ca-809f-3c3ebd9f5beb"/>
+				<textFieldExpression><![CDATA[$P{fechainicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="408" y="2" width="111" height="18" uuid="615479c3-9bf9-4663-a5ce-6fa658406b5a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="457" y="2" width="100" height="20" uuid="f25db57b-1eb0-44f3-a0c4-963dd8ac54c6"/>
+				<textFieldExpression><![CDATA[$P{fechafin}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="6" y="0" width="571" height="1" forecolor="#0066FF" uuid="36ecf267-c98f-4ce2-8663-a0f575bb0913"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="219" y="38" width="125" height="22" uuid="bb416094-61fe-4cc5-a01d-3e63e8ee4564"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitudes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="4" width="61" height="22" uuid="3706c4ab-848a-43c6-9790-11e59ef1fec3"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tematica]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="7" width="72" height="19" uuid="41b0ec3f-e824-42f5-bd6f-4cdd4ef6589c"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tematica}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="38" width="48" height="20" uuid="0458874a-def5-4b98-9484-a470800a69b2"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="38" width="100" height="20" uuid="d51cbf82-230f-4a48-a30b-2eeb27fc4fcc"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{area}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="292" y="9" width="78" height="20" uuid="caa21e38-b5a6-4b9c-aed1-af9d324e6249"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tutor Academico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="393" y="9" width="73" height="20" uuid="b9465861-249f-441c-9dd1-b36ff02b2e48"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estudiante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="9" width="67" height="20" uuid="d08e9a48-b3a5-44e4-8d50-33d58ff159e6"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="9" width="64" height="20" uuid="abcd22bb-7cb2-4824-ade7-c15d0a7e2171"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatus]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="9" width="100" height="20" uuid="d293fcce-0b79-4695-8e5f-72f2ff506eee"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titulo Tentativo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="280" y="6" width="106" height="19" uuid="a85ccc87-a9d9-4112-a476-f8b9aaa69aa8"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreTutor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="386" y="6" width="99" height="20" uuid="b2ab3c5c-6281-4f11-a0e1-a4251f8ee073"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreEstudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="107" height="25" uuid="7738d526-c8eb-4a0a-9bdd-b22d6b09f834"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{programa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="493" y="5" width="78" height="20" uuid="cb15e4ff-978c-46c5-8ede-f4cb8b9ae58c"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="6" width="100" height="20" uuid="c43904d8-7134-4971-be55-39ab44239344"/>
+				<textFieldExpression><![CDATA[$F{tituloTeg}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="23"/>
+		<band height="24"/>
+	</detail>
+	<columnFooter>
+		<band height="52" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="73" splitType="Stretch">
+			<staticText>
+				<reportElement x="124" y="35" width="216" height="20" uuid="deab755d-9b4b-4af2-986c-dd7452dad84b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="412" y="35" width="73" height="20" uuid="8ee547b2-35f1-47d3-bfcb-5af8cba208d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+ "de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="457" y="35" width="51" height="20" uuid="64a5f40f-2858-4061-a64f-216b120e2601"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

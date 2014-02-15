@@ -164,6 +164,9 @@ public class SSolicitudTutoria {
 	public List<SolicitudTutoria> buscarSolicitudPorProgramaUnEstatus(String estatus, Programa programa, Date fechaInicio, Date fechaFin){
 		return interfaceSolicitud.buscarSolicitudPorProgramaVariasAreasUnEstatus(estatus, programa, fechaInicio, fechaFin);
 	}
+	public List<SolicitudTutoria> buscarSolicitudPorPrograma( Programa programa, Date fechaInicio, Date fechaFin){
+		return interfaceSolicitud.buscarSolicitudPorProgramaVariasAreas( programa, fechaInicio, fechaFin);
+	}
 	
 	public List<SolicitudTutoria> buscarSolicitudDeUnaTematicaPorDosFechasyUnEstatus(
 			String estatus, Tematica tematica, Date fechaInicio, Date fechaFin) {

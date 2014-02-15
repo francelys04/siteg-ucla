@@ -15,6 +15,7 @@ public class Solicitud{
 	private String programa;
 	private String tematica;
 	private String area;
+	private String estatus;
 	
 	public Solicitud(Teg teg, String nombreEstudiante) {
 		super();
@@ -33,6 +34,28 @@ public class Solicitud{
 		this.programa = programa;
 		this.tematica = tematica;
 		this.area = area;
+	}
+	
+	
+	public Solicitud(String tituloTeg, String nombreTutor,
+			String nombreEstudiante, String programa, String tematica,
+			String area, String estatus) {
+		super();
+		this.tituloTeg = tituloTeg;
+		this.nombreTutor = nombreTutor;
+		this.nombreEstudiante = nombreEstudiante;
+		this.programa = programa;
+		this.tematica = tematica;
+		this.area = area;
+		this.estatus = estatus;
+	}
+	
+	
+	public String getEstatus() {
+		return estatus;
+	}
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
 	}
 	public String getTituloTeg() {
 		return tituloTeg;

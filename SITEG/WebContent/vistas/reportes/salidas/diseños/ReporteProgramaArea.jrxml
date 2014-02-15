@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProgramaArea" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cec9b096-a3d1-402e-9c53-24047c45ef88">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nombreprograma" class="java.lang.String"/>
+	<parameter name="nombrelapso" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="124" y="20" width="345" height="39" uuid="959f72ab-3a64-480c-92b7-2e5f9ff8c159"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="11" y="71" width="571" height="1" forecolor="#0066FF" uuid="3a51c09c-dfda-4aeb-98f9-6f6bab86e103"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="11" y="10" width="571" height="1" forecolor="#0066FF" uuid="ddf951e7-90ce-4dd9-866b-3e489a1c9c2d"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="15" width="69" height="20" uuid="ac4a0d37-5e97-4ba1-9c61-fb6a1743b4c9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="15" width="164" height="20" uuid="33a5e4e2-d5d8-4e05-a353-180b21585239"/>
+				<textFieldExpression><![CDATA[$P{nombreprograma}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="15" width="69" height="20" uuid="bfa2fcee-a640-457a-bee8-05fb0db7913e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lapso:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="424" y="15" width="100" height="20" uuid="82801bf6-e812-4bf6-b637-3d21ddb0f54b"/>
+				<textFieldExpression><![CDATA[$P{nombrelapso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="94" y="41" width="100" height="20" uuid="71005f8c-6233-4d55-a43d-4d0d5503df71"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="41" width="100" height="20" uuid="19b57985-a062-4cec-b6d4-9333e1d7efac"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="80" y="4" width="137" height="20" uuid="03be34a5-9396-4c48-8989-fd7a1b90275d"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="4" width="301" height="30" uuid="02d6d194-16e3-4688-b02d-631fc39e4662"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="194" y="0" width="172" height="20" uuid="9077e82c-790f-4e76-a38c-e4cef9bcf09d"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
