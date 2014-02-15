@@ -1,5 +1,5 @@
 <window id="wdwReporteProfesorCargo" 
-	title="Lista profesores con los cargos que desempeñan en Trabajos especiales de grado " 
+	title="Profesores con los roles que desempeñan en los Trabajos Especiales de Grado" 
 	border="normal" width="60%" height="500px" closable="true"  apply="controlador.reporte.CReporteProfesor"
 >
 	<style dynamic="true">
@@ -31,12 +31,16 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
+		
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
+		
 
 	</style>
-	
-		<style src="/public/css/bootstrap.css" />
+
+	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
-		
+
 	<!-- Lista de popus -->
 	<popup id="pupSeleccionarPrograma">
 		<toolbarbutton
