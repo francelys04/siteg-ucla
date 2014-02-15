@@ -290,6 +290,8 @@ public class CReporteEvaluacion extends CGeneral {
 						String direccionTutor = t.getTutor().getDireccion();
                      if (rdoDefensa.isChecked() == true)
                      {
+                    	 System.out.println("pase por defensa");
+                    	 System.out.println(teg.size());
                     	 String lugar = t.getDefensa().getLugar();
                     	 Date fecha1 = t.getDefensa().getFecha();
                     	 Date hora = t.getDefensa().getHora();

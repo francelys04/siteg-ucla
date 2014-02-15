@@ -41,6 +41,52 @@ public class Proyecto{
 	
 	
 	
+	
+
+
+	public Proyecto(String tituloTeg, String descripcionTeg,
+			java.util.Date fechaTeg, String cedulaProfesor, String nombreTutor,
+			String apellidoTutor, String correoTutor, String direccionTutor,
+			String cedulaEstudiante, String nombreEstudiante,
+			String apellidoEstudiante, String correoEstudiante,
+			String direccionEstudiante, String programa, String correoPrograma,
+			String descripcionPrograma, String tematica,
+			String descripcionTematica, String area, String descripcionArea,
+			java.util.Date fechadefensa, java.util.Date horadefensa,
+			String lugardefensa, String profesordefensa) {
+		super();
+		this.tituloTeg = tituloTeg;
+		this.descripcionTeg = descripcionTeg;
+		this.fechaTeg = fechaTeg;
+		this.cedulaProfesor = cedulaProfesor;
+		this.nombreTutor = nombreTutor;
+		this.apellidoTutor = apellidoTutor;
+		this.correoTutor = correoTutor;
+		this.direccionTutor = direccionTutor;
+		this.cedulaEstudiante = cedulaEstudiante;
+		this.nombreEstudiante = nombreEstudiante;
+		this.apellidoEstudiante = apellidoEstudiante;
+		this.correoEstudiante = correoEstudiante;
+		this.direccionEstudiante = direccionEstudiante;
+		this.programa = programa;
+		this.correoPrograma = correoPrograma;
+		this.descripcionPrograma = descripcionPrograma;
+		this.tematica = tematica;
+		this.descripcionTematica = descripcionTematica;
+		this.area = area;
+		this.descripcionArea = descripcionArea;
+		this.fechadefensa = fechadefensa;
+		this.horadefensa = horadefensa;
+		this.lugardefensa = lugardefensa;
+		this.profesordefensa = profesordefensa;
+	}
+
+
+
+
+
+
+
 	public Proyecto(String tituloTeg, String descripcionTeg,
 			java.util.Date fechaTeg, String cedulaProfesor, String nombreTutor,
 			String apellidoTutor, String correoTutor, String direccionTutor,
@@ -84,46 +130,6 @@ public class Proyecto{
 
 
 	public Proyecto(String tituloTeg, String descripcionTeg,
-			java.util.Date fechaTeg, String cedulaProfesor, String nombreTutor,
-			String apellidoTutor, String correoTutor, String direccionTutor,
-			String cedulaEstudiante, String nombreEstudiante,
-			String apellidoEstudiante, String correoEstudiante,
-			String direccionEstudiante, String programa, String correoPrograma,
-			String descripcionPrograma, String tematica,
-			String descripcionTematica, String area, String descripcionArea,
-			java.util.Date fechadefensa, java.util.Date horadefensa, String lugardefensa,
-			String profesordefensa) {
-		super();
-		this.tituloTeg = tituloTeg;
-		this.descripcionTeg = descripcionTeg;
-		this.fechaTeg = fechaTeg;
-		this.cedulaProfesor = cedulaProfesor;
-		this.nombreTutor = nombreTutor;
-		this.apellidoTutor = apellidoTutor;
-		this.correoTutor = correoTutor;
-		this.direccionTutor = direccionTutor;
-		this.cedulaEstudiante = cedulaEstudiante;
-		this.nombreEstudiante = nombreEstudiante;
-		this.apellidoEstudiante = apellidoEstudiante;
-		this.correoEstudiante = correoEstudiante;
-		this.direccionEstudiante = direccionEstudiante;
-		this.programa = programa;
-		this.correoPrograma = correoPrograma;
-		this.descripcionPrograma = descripcionPrograma;
-		this.tematica = tematica;
-		this.descripcionTematica = descripcionTematica;
-		this.area = area;
-		this.descripcionArea = descripcionArea;
-		this.fechadefensa = fechadefensa;
-		this.horadefensa = horadefensa;
-		this.lugardefensa = lugardefensa;
-		this.profesordefensa = profesordefensa;
-	}
-
-
-
-
-	public Proyecto(String tituloTeg, String descripcionTeg,
 			java.util.Date fecha, String cedulaProfesor, String nombreTutor,
 			String apellidoTutor, String correoTutor, String direccionTutor,
 			String cedulaEstudiante, String nombreEstudiante,
@@ -153,6 +159,107 @@ public class Proyecto{
 		this.area = area;
 		this.descripcionArea = descripcionArea;
 	}
+	
+	public java.util.Date getFechadefensa() {
+		return fechadefensa;
+	}
+
+
+
+
+
+
+
+	public void setFechadefensa(java.util.Date fechadefensa) {
+		this.fechadefensa = fechadefensa;
+	}
+
+
+
+
+
+
+
+	public java.util.Date getHoradefensa() {
+		return horadefensa;
+	}
+
+
+
+
+
+
+
+	public void setHoradefensa(java.util.Date horadefensa) {
+		this.horadefensa = horadefensa;
+	}
+
+
+
+
+
+
+
+	public String getLugardefensa() {
+		return lugardefensa;
+	}
+
+
+
+
+
+
+
+	public void setLugardefensa(String lugardefensa) {
+		this.lugardefensa = lugardefensa;
+	}
+
+
+
+
+
+
+
+	public String getProfesordefensa() {
+		return profesordefensa;
+	}
+
+
+
+
+
+
+
+	public void setProfesordefensa(String profesordefensa) {
+		this.profesordefensa = profesordefensa;
+	}
+
+
+
+
+
+
+
+	public String getObservacionfactibilidad() {
+		return observacionfactibilidad;
+	}
+
+
+
+
+
+
+
+	public void setObservacionfactibilidad(String observacionfactibilidad) {
+		this.observacionfactibilidad = observacionfactibilidad;
+	}
+
+
+
+
+
+
+
 	public String getTituloTeg() {
 		return tituloTeg;
 	}

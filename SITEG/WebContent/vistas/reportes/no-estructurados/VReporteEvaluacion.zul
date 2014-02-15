@@ -164,6 +164,34 @@
 		</grid>
 		<separator />
 		<separator />
+		
+		<panel border="normal" width="100%"
+		style="margin-left:2%;margin-right:3%">
+		<panelchildren>
+			<div sclass="alert-info" align="center">
+				<separator />
+				<div sclass="btn-group">
+				<button id="btnGenerar"
+						label="Generar Reporte" sclass="btn"
+						image="/public/imagenes/iconos/generar.png" tabindex="13">
+					</button>
+
+					<button id="btnExportarPlano"
+						label="Exportar en Texto Plano" sclass="btn"
+						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
+					</button>
+					<button id="btnSalir"
+						label="Cancelar" sclass="btn"
+						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
+					</button>
+					<separator />
+				</div>
+
+			</div>
+		</panelchildren>
+	</panel>
+		
+		
 	</groupbox>
 
 <separator />
@@ -911,31 +939,7 @@
 	<separator />
 	<separator />
 	<separator />
-	<panel border="normal" width="100%"
-		style="margin-left:2%;margin-right:3%">
-		<panelchildren>
-			<div sclass="alert-info" align="center">
-				<separator />
-				<div sclass="btn-group">
-				<button id="btnGenerar"
-						label="Generar Reporte" sclass="btn"
-						image="/public/imagenes/iconos/generar.png" tabindex="13">
-					</button>
-
-					<button id="btnExportarPlano"
-						label="Exportar en Texto Plano" sclass="btn"
-						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
-					</button>
-					<button id="btnSalir"
-						label="Cancelar" sclass="btn"
-						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
-					</button>
-					<separator />
-				</div>
-
-			</div>
-		</panelchildren>
-	</panel>
+	
 	<separator />
 	<separator />
 	<separator />
