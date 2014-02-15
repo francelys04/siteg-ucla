@@ -143,7 +143,7 @@
 
 					<hbox>
 
-						<textbox id="txtCedulaProfesor" width="90%"
+						<textbox id="txtCedulaProfesor" width="90%" maxlength="10"
 							constraint="/.+[0-9]+/: Debe ingresar una cédula válida"
 							tabindex="2" tooltip="pupCedulaProfesor" />
 
@@ -226,7 +226,7 @@
 
 					<hbox>
 						<textbox id="txtTelefonoMovilProfesor"
-							maxlength="100"
+							maxlength="15"
 							constraint="/.+[0-9]+/: Debe ingresar un telefono valido"
 							width="90%" tabindex="9" tooltip="pupTelefonoMovilProfesor" />
 
@@ -236,7 +236,7 @@
 						</hlayout>
 
 						<textbox id="txtTelefonoFijoProfesor"
-							maxlength="100"
+							maxlength="15"
 							constraint="/.+[0-9]+/: Debe ingresar un telefono valido"
 							tooltip="pupTelefonoFijoProfesor" width="90%"
 							style="margin-left:15px" tabindex="10" />
@@ -252,7 +252,7 @@
 						<label value="Correo:" style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtCorreoProfesor" width="260px"
+					<textbox id="txtCorreoProfesor" width="260px" constraint="/.+@.+\.[a-z]+/: Debe introducir un texto como: valor@ejemplo.com"
 						maxlength="100" tooltip="pupCorreoProfesor" tabindex="11" />
 
 

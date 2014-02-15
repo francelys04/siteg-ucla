@@ -175,7 +175,7 @@
 												label="${each.nombre}">
 											</listcell>
 											<listcell>
-												<textbox width="90%" />
+												<textbox width="90%" maxlength="100"/>
 
 											</listcell>
 										</listitem>

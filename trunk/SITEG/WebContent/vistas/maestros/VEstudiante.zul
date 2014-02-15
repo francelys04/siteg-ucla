@@ -142,7 +142,7 @@
 					<hbox>
 
 						<textbox id="txtCedulaEstudiante" width="90%"
-							tabindex="2" tooltip="pupCedulaEstudiante"
+							tabindex="2" tooltip="pupCedulaEstudiante" maxlength="10"
 							constraint="/.+[0-9]+/: Debe ingresar una cedula valida" />
 
 
@@ -229,7 +229,7 @@
 
 					<hbox>
 						<textbox id="txtTelefonoMovilEstudiante"
-							maxlength="100" width="100%" tabindex="9"
+							maxlength="15" width="100%" tabindex="9"
 							tooltip="pupTelefonoMovilEstudiante"
 							constraint="/.+[0-9]+/: Debe ingresar un telefono valido" />
 
@@ -238,9 +238,9 @@
 								style="font-weight:bold;margin-left:30px" />
 						</hlayout>
 
-						<textbox id="txtTelefonoFijoEstudiante"
+						<textbox id="txtTelefonoFijoEstudiante" maxlength="15"
 							width="90%" style="margin-left:15px" tabindex="10"
-							maxlength="100" tooltip="pupTelefonoFijoEstudiante"
+							tooltip="pupTelefonoFijoEstudiante"
 							constraint="/.+[0-9]+/: Debe ingresar un telefono valido" />
 					</hbox>
 				</row>
@@ -252,7 +252,7 @@
 						<label value="Correo:" style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtCorreoEstudiante" width="260px"
+					<textbox id="txtCorreoEstudiante" width="260px" constraint="/.+@.+\.[a-z]+/: Debe introducir un texto como: valor@ejemplo.com"
 						maxlength="100" tabindex="11" tooltip="pupCorreoEstudiante" />
 				</row>
 

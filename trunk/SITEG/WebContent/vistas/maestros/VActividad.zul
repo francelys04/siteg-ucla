@@ -103,7 +103,7 @@
 					<hbox>
 
 						<textbox id="txtNombreActividad" width="270px"
-							maxlength="500" tooltip="pupNombreActividad" tabindex="1" />
+							maxlength="100" tooltip="pupNombreActividad" tabindex="1" />
 
 
 						<button id="btnCatalogoActividad" tabindex="2"

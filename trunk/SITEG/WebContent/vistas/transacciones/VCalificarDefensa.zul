@@ -198,7 +198,7 @@
 												</listcell>
 												<listcell>
 													<textbox
-														width="90%" />
+														width="90%"  maxlength="100"/>
 
 												</listcell>
 											</listitem>

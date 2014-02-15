@@ -122,7 +122,7 @@
 					<hbox>
 
 						<textbox id="txtNombreTematica" width="280px"
-							maxlength="300" tabindex="2" tooltip="pupNombreTematica" />
+							maxlength="100" tabindex="2" tooltip="pupNombreTematica" />
 
 						<button id="btnBuscarTematica" sclass="btn"
 							tabindex="3" tooltip="pupCatalogoTematica"

@@ -11,9 +11,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import modelo.Condicion;
 import modelo.Estudiante;
-import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.compuesta.CondicionPrograma;
@@ -60,7 +58,6 @@ import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
 import configuracion.GeneradorBeans;
-import java.net.URL;
 
 @Controller
 public abstract class CGeneral extends SelectorComposer<Component> {

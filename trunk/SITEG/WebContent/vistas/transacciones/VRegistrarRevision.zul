@@ -179,7 +179,7 @@
 							<row>
 								<textbox
 									id="txtObservacionRegistrarRevision" tabindex="1" width="570px"
-									rows="3" cols="100" 
+									rows="3" cols="100"  maxlength="500"
 									tooltiptext="Ingrese aqui la observacion"	
 								/>
 

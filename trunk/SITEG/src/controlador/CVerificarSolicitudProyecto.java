@@ -54,7 +54,8 @@ import servicio.SRequisito;
 import servicio.STeg;
 import servicio.STegRequisito;
 import configuracion.GeneradorBeans;
-
+/*Controlador que permite verificar si un proyecto de trabajo de grado
+ * cumple con los requisitos establecidos por el programa*/
 @Controller
 public class CVerificarSolicitudProyecto extends CGeneral {
 
@@ -107,8 +108,6 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		// permite obteber los datos del teg seleccionado en el catalogo
-		// si el map es diferente de null
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("tegCatalogo");

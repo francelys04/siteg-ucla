@@ -207,7 +207,7 @@
 							</row>
 							<row>
 								<textbox id="txtTituloRegistrarProyecto"
-									width="620px" rows="4" cols="100" 
+									width="620px" rows="4" cols="100" maxlength="500"
 									tooltiptext="Ingrese aqui el titulo del proyecto"	
 								/>
 							</row>
