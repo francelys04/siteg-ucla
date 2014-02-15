@@ -402,6 +402,7 @@ public class CSolicitarTutor extends CGeneral {
 			for (int j = 0; j < grupos.size(); j++) {
 				gruposUsuario.add(grupos.get(j));
 			}
+			System.out.println(grupos.size());
 			usuario.setGrupos(gruposUsuario);
 		}
 		servicioUsuario.guardar(usuario);

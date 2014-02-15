@@ -338,7 +338,7 @@
 
 				<row>
 					<textbox id="txtTituloSolicitud" width="590px"
-						tabindex="4" rows="3" cols="100"
+						tabindex="4" rows="3" cols="100" maxlength="500"
 						tooltiptext="Ingrese aqui el titulo" />
 				</row>
 

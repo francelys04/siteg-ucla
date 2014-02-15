@@ -24,6 +24,7 @@ import controlador.catalogo.CCatalogoActividad;
 public class CActividad extends CGeneral {
 
 	CCatalogoActividad catalogo = new CCatalogoActividad();
+	private long id = 0;
 	@Wire
 	private Textbox txtNombreActividad;
 	@Wire
@@ -42,7 +43,6 @@ public class CActividad extends CGeneral {
 	private Button btnGuardarActividad;
 	@Wire
 	private Window wdwActividad;
-	private long id = 0;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
