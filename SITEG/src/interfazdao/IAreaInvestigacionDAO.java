@@ -16,10 +16,7 @@ public interface IAreaInvestigacionDAO extends JpaRepository<AreaInvestigacion, 
 	 public AreaInvestigacion findByNombre(String nombre);
 
 	public List<AreaInvestigacion> findByEstatusTrue();
-
-	public AreaInvestigacion findById(long codigo);
 	
-	//Grid de la izquierda	
 	@Query("select a from AreaInvestigacion a where a.id not in (select aa.area from ProgramaArea aa where aa.programa = ?1 and aa.lapso = ?2)")
 	public List<AreaInvestigacion> buscarDisponibles(Programa programa, Lapso lapso);
 	

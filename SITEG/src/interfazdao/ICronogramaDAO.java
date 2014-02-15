@@ -14,8 +14,6 @@ public interface ICronogramaDAO extends JpaRepository<Cronograma, CronogramaId> 
 
 	public List<Cronograma> findByProgramaAndLapsoOrderByFechaInicioAsc(Programa programa, Lapso lapso);
 	
-	
-	/*Busca la actividad que contien la fecha de entrega del TEG*/
 	public Cronograma findByProgramaAndLapsoAndActividad(Programa programa, Lapso lapso, Actividad actividad);
 	
 }

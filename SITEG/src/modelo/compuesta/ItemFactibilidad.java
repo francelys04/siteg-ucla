@@ -27,7 +27,7 @@ public class ItemFactibilidad {
 	@JoinColumn(name = "factibilidad_id", referencedColumnName = "id")
 	private Factibilidad factibilidad;
 	
-	@Column(name ="ponderacion")
+	@Column(name ="ponderacion", length = 100)
 	private String ponderacion;
 
 	public ItemFactibilidad() {

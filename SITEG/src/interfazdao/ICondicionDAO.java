@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ICondicionDAO extends JpaRepository<Condicion, Long> {
 
-	@Query("select c from Condicion c where c.estatus=true")
+
 	public List<Condicion> findByEstatusTrue();
 	
 

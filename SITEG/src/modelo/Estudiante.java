@@ -35,10 +35,10 @@ public class Estudiante {
 	@Column(name = "direcion", length = 500)
 	private String direccion;
 
-	@Column(name = "telefono_movil", length = 100)
+	@Column(name = "telefono_movil", length = 15)
 	private String telefono_movil;
 	
-	@Column(name = "telefono_fijo", length = 100)
+	@Column(name = "telefono_fijo", length = 15)
 	private String telefono_fijo;
 
 	@Column(name = "estatus")

@@ -139,7 +139,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtDescripcionItem" rows="5" cols="100" maxlength="600"
+					<textbox id="txtDescripcionItem" rows="5" cols="100" maxlength="500"
 						width="52%" tabindex="4" tooltip="pupDescripcionItem" />
 
 				</row>

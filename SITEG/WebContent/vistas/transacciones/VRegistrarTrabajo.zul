@@ -198,7 +198,7 @@
 							<row>
 								<textbox id="txtTituloRegistrarTeg"
 									width="520px" rows="2" cols="100"
-									tooltiptext="Ingrese aqui el titulo" />
+									tooltiptext="Ingrese aqui el titulo" maxlength="500"/>
 							</row>
 
 							<row>
@@ -215,7 +215,7 @@
 							</row>
 							<row>
 								<textbox id="txtDescripcionRegistrarTeg"
-									width="520px" rows="2" cols="100"
+									width="520px" rows="2" cols="100" maxlength="500"
 									tooltiptext="Ingrese aqui la descripcion" />
 							</row>
 

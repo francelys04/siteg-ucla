@@ -23,7 +23,7 @@ public class SAreaInvestigacion {
 
 	// busca un area por nombre
 	public AreaInvestigacion buscarArea(long codigo) {
-		return interfaceArea.findById(codigo);
+		return interfaceArea.findOne(codigo);
 	}
 
 	// busca todos los areas y los mete en una lista

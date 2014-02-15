@@ -70,8 +70,8 @@ public class Teg {
 	@OneToMany(mappedBy = "teg")
 	private Set<TegEstatus> estatusTeg;
 	
-	@OneToMany(mappedBy = "teg")
-	private Set<Factibilidad> factibilidades;
+	@OneToOne(mappedBy="teg")
+	private Factibilidad factibilidad;
 
 	@OneToMany(mappedBy = "teg")
 	private Set<TegRequisito> requisitosTegs;
@@ -235,12 +235,12 @@ public class Teg {
 		this.estudiantes = estudiantes;
 	}
 
-	public Set<Factibilidad> getFactibilidades() {
-		return factibilidades;
+	public Factibilidad getFactibilidad() {
+		return factibilidad;
 	}
 
-	public void setFactibilidades(Set<Factibilidad> factibilidades) {
-		this.factibilidades = factibilidades;
+	public void setFactibilidad(Factibilidad factibilidad) {
+		this.factibilidad = factibilidad;
 	}
 
 	public Defensa getDefensa() {

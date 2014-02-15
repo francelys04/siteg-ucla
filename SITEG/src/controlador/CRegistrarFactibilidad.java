@@ -150,6 +150,9 @@ public class CRegistrarFactibilidad extends CGeneral {
 
 							String estatus = "Proyecto Factible";
 							Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
+							Factibilidad factibilidad = servicioFactibilidad.buscarFactibilidadPorTeg(teg2);
+							factibilidad.setEstatus("Factibilidad Aceptada");
+							servicioFactibilidad.guardar(factibilidad);
 							teg2.setEstatus(estatus);
 
 							/* Guardar datos en la tabla teg_estatus */
@@ -193,6 +196,9 @@ public class CRegistrarFactibilidad extends CGeneral {
 
 							String estatus = "Proyecto No Factible";
 							Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
+							Factibilidad factibilidad = servicioFactibilidad.buscarFactibilidadPorTeg(teg2);
+							factibilidad.setEstatus("Factibilidad Rechazada");
+							servicioFactibilidad.guardar(factibilidad);
 							teg2.setEstatus(estatus);
 
 							/* Guardar datos en la tabla teg_estatus */
@@ -221,7 +227,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 					}
 				});
 	}
-
+	
 	@Listen("onClick = #btnSalirRegistrarFactibilidad")
 	public void salirRegistrarFactibilidad() {
 

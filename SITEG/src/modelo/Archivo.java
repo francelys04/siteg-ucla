@@ -23,16 +23,16 @@ public class Archivo {
 	@Column(name = "descripcion", length = 500)
 	private String descripcion;
 	
-	@Column(name = "tipo_documento", length = 100)
+	@Column(name = "documento_tipo", length = 100)
 	private String tipoDocumento;
 	
-	@Column(name = "tipo_archivo", length = 100)
+	@Column(name = "archivo_tipo", length = 100)
 	private String tipoArchivo;
 	
 	@Column(name = "documento")
 	private byte[] contenidoDocumento = new byte[] {};
 	
-	@Column(name = "tamano_documento")
+	@Column(name = "documento_tamanio")
 	private Long tamanoDocumento = 0l;
 	
 	@Column(name="estatus")

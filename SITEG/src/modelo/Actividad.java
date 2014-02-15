@@ -20,7 +20,7 @@ public class Actividad {
 	@Column(name = "id", nullable = false)
 	private long id;
 
-	@Column(name = "nombre", length = 500)
+	@Column(name = "nombre", length = 100)
 	private String nombre;
 
 	@Column(name = "descripcion", length = 500)
