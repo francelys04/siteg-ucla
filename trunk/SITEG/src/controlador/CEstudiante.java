@@ -135,7 +135,7 @@ public class CEstudiante extends CGeneral {
 				map = null;
 			}
 		}
-
+		txtCorreoEstudiante.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 	}
 
 	/*
@@ -266,7 +266,9 @@ public class CEstudiante extends CGeneral {
 		txtTelefonoFijoEstudiante.setValue("");
 		txtTelefonoFijoEstudiante
 				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+		txtCorreoEstudiante.setConstraint("");
 		txtCorreoEstudiante.setValue("");
+		txtCorreoEstudiante.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 		cmbProgramaEstudiante.setValue("");
 		btnEliminarEstudiante.setDisabled(true);
 

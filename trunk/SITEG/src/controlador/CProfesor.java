@@ -117,7 +117,7 @@ public class CProfesor extends CGeneral {
 			map.clear();
 			map = null;
 		}
-
+		txtCorreoProfesor.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 	}
 
 	/*
@@ -224,7 +224,9 @@ public class CProfesor extends CGeneral {
 		txtTelefonoFijoProfesor.setValue("");
 		txtTelefonoFijoProfesor
 				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+		txtCorreoProfesor.setConstraint("");
 		txtCorreoProfesor.setValue("");
+		txtCorreoProfesor.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 		cmbCategoriaProfesor.setValue("");
 		btnEliminarProfesor.setDisabled(true);
 
