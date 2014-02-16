@@ -27,7 +27,7 @@ public class SActividad {
 
 	public List<Actividad> buscarActivos() {
 		List<Actividad> actividades;
-		actividades = interfaceActividad.findByEstatusTrue();
+		actividades = interfaceActividad.findByEstatusTrueOrderByNombreAsc();
 		return actividades;
 	}
 
@@ -45,10 +45,10 @@ public class SActividad {
 		return actividad;
 	}
 
-	public List<Actividad> ListadoActividades() {
-		List<Actividad> actividades;
-		actividades = interfaceActividad.actividadesPorNombre();
-		return actividades;
-	}
+//	public List<Actividad> ListadoActividades() {
+//		List<Actividad> actividades;
+//		actividades = interfaceActividad.actividadesPorNombre();
+//		return actividades;
+//	}
 
 }

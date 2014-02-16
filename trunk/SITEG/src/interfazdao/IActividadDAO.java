@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IActividadDAO extends JpaRepository<Actividad, Long> {
 
-	public List<Actividad> findByEstatusTrue();
+	public List<Actividad> findByEstatusTrueOrderByNombreAsc();
 
 	public Actividad findById(long id);
 	
@@ -22,8 +22,5 @@ public interface IActividadDAO extends JpaRepository<Actividad, Long> {
 			Lapso lapso);
 
 	public Actividad findByNombre(String label);
-	
-	@Query("select a from Actividad a where a.estatus=true order by a.nombre asc")
-	public List<Actividad> actividadesPorNombre();
 }
 
