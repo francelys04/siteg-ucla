@@ -8,6 +8,13 @@
 	<popup id="pupSeleccionProfesor">
 		<toolbarbutton label="Doble clic para seleccionar un profesor" />
 	</popup>
+	<popup id="pupImprimirProfesores">
+		<toolbarbutton
+			label="Presione aquí para imprimir la lista de Profesores" />
+	</popup>
+	<popup id="pupSalirCatalogo">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
 	<!-- Fin de popus -->
 
 	<listbox id="ltbProfesor" width="100%" mold="paging" pageSize="10"
@@ -73,7 +80,7 @@
 				<div sclass="btn-group">
 
 					<button id="btnImprimir" label="Imprimir" width="110px"
-						tooltip="pupSalirCatalogo" sclass="btn"
+						tooltip="pupImprimirProfesores" sclass="btn"
 						image="/public/imagenes/iconos/imprimir.png" tabindex="7">
 					</button>
 					<button id="btnSalirCatalogoProfesor" label="Salir" width="110px"
