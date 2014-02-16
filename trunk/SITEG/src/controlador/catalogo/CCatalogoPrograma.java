@@ -159,4 +159,9 @@ public class CCatalogoPrograma extends CGeneral {
 
 	}
 
+	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	@Listen("onClick = #btnSalir")
+	public void salirCatalogoPrograma() {
+		wdwCatalogoPrograma.onClose();
+	}
 }
