@@ -167,7 +167,6 @@ public class CCatalogoItem extends CGeneral {
 			
 		} catch (JRException e) {
 			System.out.println(e);
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
