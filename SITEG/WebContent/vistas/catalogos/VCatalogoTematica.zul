@@ -8,6 +8,13 @@
 	<popup id="pupSeleccionTematica">
 		<toolbarbutton label="Doble clic para seleccionar la temática" />
 	</popup>
+	<popup id="pupImprimirTematicas">
+		<toolbarbutton
+			label="Presione aquí para imprimir la lista de Temáticas" />
+	</popup>
+	<popup id="pupSalirCatalogo">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
 	<!-- Fin de popus -->
 
 	<listbox id="ltbTematica" width="100%" mold="paging" pageSize="15"
@@ -62,7 +69,7 @@
 				<div sclass="btn-group">
 
 					<button id="btnImprimir" label="Imprimir"
-						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						width="110px" tooltip="pupImprimirTematicas" sclass="btn"
 						image="/public/imagenes/iconos/imprimir.png" tabindex="7">
 					</button>
 					<button id="btnSalirCatalogoTematica" label="Salir"
