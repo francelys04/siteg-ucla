@@ -30,7 +30,7 @@ public List<Tematica> buscarTematicas(){
 //busca tematicas no eliminadas ok
 public List<Tematica> buscarActivos(){
 	List<Tematica> tematicas;
-	tematicas= interfaceTematica.buscarTematicasActivas();
+	tematicas= interfaceTematica.findByEstatusTrueOrderByAreaInvestigacionAsc();
 	return tematicas;
 }
 
