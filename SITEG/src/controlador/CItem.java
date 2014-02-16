@@ -96,7 +96,7 @@ public class CItem extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
 
-			Messagebox.show("Â¿Desea guardar los datos del Item?",
+			Messagebox.show("¿Desea guardar los datos del Item?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
