@@ -203,7 +203,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 	@Listen("onClick = #btnImprimir")
 	public void imprimir() throws SQLException {	
 		FileSystemView filesys = FileSystemView.getFileSystemView();
-		List<AreaInvestigacion> areas = servicioArea.ListadoAreas();
+		List<AreaInvestigacion> areas = servicioArea.buscarActivos();
 		JasperReport jasperReport;
 		try {
 			String rutaUrl = obtenerDirectorio();
