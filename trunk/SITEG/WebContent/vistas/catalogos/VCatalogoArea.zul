@@ -12,6 +12,13 @@
 		<toolbarbutton
 			label="Doble clic para seleccionar un área de investigación" />
 	</popup>
+	<popup id="pupImprimirAreasInvestigacion">
+		<toolbarbutton
+			label="Presione aquí para imprimir la lista de Areas de Investigacion" />
+	</popup>
+	<popup id="pupSalirCatalogo">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
 	<!-- Fin de popus -->
 
 	<hbox>
@@ -71,7 +78,7 @@
 				<div sclass="btn-group">
 
 					<button id="btnImprimir" label="Imprimir"
-						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						width="110px" tooltip="pupImprimirAreasInvestigacion" sclass="btn"
 						image="/public/imagenes/iconos/imprimir.png" tabindex="7">
 					</button>
 					<button id="btnSalirCatalogoArea" label="Salir"
