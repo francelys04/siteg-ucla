@@ -57,5 +57,10 @@ public class SAreaInvestigacion {
 		return areas;
 	}
 	
+	public List<AreaInvestigacion> ListadoAreas() {
+		List<AreaInvestigacion> areas;
+		areas = interfaceArea.areasPorNombre();
+		return areas;
+	}
 
 }
