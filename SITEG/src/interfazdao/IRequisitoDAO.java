@@ -18,6 +18,7 @@ public interface IRequisitoDAO extends JpaRepository<Requisito, Long> {
 	@Query("select r from Requisito r where r.id not in (select pr.requisito from ProgramaRequisito pr where pr.programa = ?1 and pr.lapso = ?2)")
 	public List<Requisito> buscarDisponibles(Programa programa, Lapso lapso);
 	
-	
+	@Query("select r from Requisito r where r.estatus=true order by r.nombre asc")
+	public List<Requisito> requisitosPorNombre();
 }
 
