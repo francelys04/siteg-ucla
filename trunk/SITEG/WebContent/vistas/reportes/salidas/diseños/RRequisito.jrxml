@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="db8faee9-7e3e-4b36-b0b5-048315993d1f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoSiteg" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="63ec3c04-e36a-4c2b-9ce2-64442638cb6a" x="105" y="0" width="375" height="54"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="798b01b1-e252-4c47-a84e-c84a82b55117" x="0" y="1" width="100" height="50"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="ed09169c-2a5d-4790-9371-4204644f40f8" x="483" y="1" width="89" height="53"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539" x="178" y="0" width="224" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Lista de Requisitos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="131c116d-9f41-4090-9a47-f7387ff23f5e" x="0" y="2" width="178" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3" x="178" y="2" width="305" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement uuid="ccde970c-cc21-4959-96f4-2dac0de1e335" x="0" y="1" width="178" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e6675813-6f16-4474-bac6-9e1f0a8b35b8" x="178" y="1" width="302" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="81e7c97f-1907-4395-8209-2cfbcf9186d4" x="178" y="34" width="216" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement uuid="7836edf7-c8e8-4fcb-be5a-ce4306de3405" x="521" y="34" width="51" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="1a7287bc-c88c-4542-8b99-eb5e3a7f9808" x="0" y="4" width="100" height="50"/>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
