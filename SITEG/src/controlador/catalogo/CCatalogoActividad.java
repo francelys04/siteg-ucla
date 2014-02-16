@@ -129,7 +129,7 @@ public class CCatalogoActividad extends CGeneral {
 	@Listen("onClick = #btnImprimir")
 	public void imprimir() throws SQLException {	
 		FileSystemView filesys = FileSystemView.getFileSystemView();
-		List<Actividad> actividades = servicioActividad.ListadoActividades();
+		List<Actividad> actividades = servicioActividad.buscarActivos();
 		JasperReport jasperReport;
 		try {
 			String rutaUrl = obtenerDirectorio();
