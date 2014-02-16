@@ -32,7 +32,7 @@ public class SEstudiante {
 
 	public List<Estudiante> buscarActivos() {
 		List<Estudiante> estudiantes;
-		estudiantes = interfaceEstudiante.buscarEstudiantesActivos();
+		estudiantes = interfaceEstudiante.findByEstatusTrueOrderByProgramaAsc();
 		return estudiantes;
 	}
 
