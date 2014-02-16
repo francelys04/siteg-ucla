@@ -96,7 +96,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 	@Wire
 	private Combobox cmbEstatus;
 	@Wire
-	private Combobox cmbFaseTeg;
+	private Combobox cmbEtapaTeg;
 	@Wire
 	private Window wdwReporteTematicasMasSolicitadas;
 	@Wire
@@ -118,7 +118,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
-		String faseTeg = cmbFaseTeg.getValue();
+		String etapaTeg = cmbEtapaTeg.getValue();
 
 		Date fechaInicio = new Date();
 		Date fechaFin = new Date();
@@ -265,7 +265,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 									+ "DIRECCION DE PROGRAMA");
 					parametro.put("programaNombre", cmbPrograma.getValue());
 					parametro.put("areaNombre", cmbArea.getValue());
-					parametro.put("faseTeg", faseTeg);
+					parametro.put("etapaTeg", etapaTeg);
 					parametro.put("estatusProyectoTeg1", estatusProyectoTeg1);
 					parametro.put("estatusProyectoTeg2", estatusProyectoTeg2);
 					parametro.put("fechaInicio", fechaInicio);
@@ -327,15 +327,15 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		}
 	}
 
-	@Listen("onSelect = #cmbFaseTeg")
-	public void seleccionarfaseTeg() throws JRException {
+	@Listen("onSelect = #cmbEtapaTeg")
+	public void seleccionarEtapaTeg() throws JRException {
 		List<String> listaComboEstatus = new ArrayList();
-		String faseNombre = cmbFaseTeg.getValue();
-		if (faseNombre.equals("Proyecto")) {
+		String etapaNombre = cmbEtapaTeg.getValue();
+		if (etapaNombre.equals("Proyecto")) {
 			estatusProyectoTeg1 = "Proyecto Factible";
 			estatusProyectoTeg2 = "Proyecto No Factible";
 		}
-		if (faseNombre.equals("Teg")) {
+		if (etapaNombre.equals("Teg")) {
 			estatusProyectoTeg1 = "TEG Aprobado";
 			estatusProyectoTeg2 = "TEG Reprobado";
 		}
@@ -347,7 +347,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbArea.setDisabled(true);
-		cmbFaseTeg.setValue("");
+		cmbEtapaTeg.setValue("");
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
 

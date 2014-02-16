@@ -10,7 +10,7 @@
 	<parameter name="areaNombre" class="java.lang.String"/>
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoCE" class="java.lang.String"/>
-	<parameter name="faseTeg" class="java.lang.String"/>
+	<parameter name="etapaTeg" class="java.lang.String"/>
 	<parameter name="fechaInicio" class="java.util.Date"/>
 	<parameter name="fechaFin" class="java.util.Date"/>
 	<parameter name="estatusProyectoTeg1" class="java.lang.String"/>
@@ -88,8 +88,8 @@
 				<textFieldExpression><![CDATA[$P{areaNombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="6" y="70" width="54" height="20" uuid="04add801-0ae2-4d0d-9ae2-068dcc9b3f23"/>
-				<text><![CDATA[Fase:]]></text>
+				<reportElement x="6" y="70" width="72" height="20" uuid="04add801-0ae2-4d0d-9ae2-068dcc9b3f23"/>
+				<text><![CDATA[Etapa del Teg:]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="466" y="4" width="100" height="20" uuid="2891d5a0-1f86-4bc4-b85d-7c3d154f9b8f"/>
@@ -124,8 +124,8 @@
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="60" y="70" width="225" height="20" uuid="d25af5f5-6a0f-4813-8de5-fdaf52f79dd7"/>
-				<textFieldExpression><![CDATA[$P{faseTeg}]]></textFieldExpression>
+				<reportElement x="78" y="70" width="207" height="20" uuid="a5e7e389-0661-437e-95e7-0619953f77bd"/>
+				<textFieldExpression><![CDATA[$P{etapaTeg}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

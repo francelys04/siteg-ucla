@@ -113,7 +113,7 @@
 					<label value="Etapa del TEG: "
 						style="font-weight:bold" />
 
-					<combobox id="cmbFaseTeg" readonly="true"
+					<combobox id="cmbEtapaTeg" readonly="true"
 						width="180px">
 						<comboitem label="Proyecto" />
 						<comboitem label="Teg" />
