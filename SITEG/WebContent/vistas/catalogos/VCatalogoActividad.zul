@@ -9,6 +9,13 @@
 		<toolbarbutton
 			label="Doble clic para seleccionar una actividad" />
 	</popup>
+	<popup id="pupImprimirActividad">
+		<toolbarbutton
+			label="Presione aquí para imprimir la lista de Actividades" />
+	</popup>
+	<popup id="pupSalirCatalogo">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
 	<!-- Fin de popus -->
 
 
