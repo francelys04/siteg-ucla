@@ -23,7 +23,7 @@ public interface IActividadDAO extends JpaRepository<Actividad, Long> {
 
 	public Actividad findByNombre(String label);
 	
-	@Query("select a.nombre, a.descripcion from Actividad a order by a.nombre asc")
+	@Query("select a from Actividad a order by a.nombre asc")
 	public List<Actividad> actividadesPorNombre();
 }
 
