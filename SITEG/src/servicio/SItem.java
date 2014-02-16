@@ -22,7 +22,7 @@ public void guardar(ItemEvaluacion item){
 
 public List<ItemEvaluacion> buscarItemsActivos(){
 	List<ItemEvaluacion> items;
-	items= interfaceItem.buscarItemsActivos();
+	items= interfaceItem.findByEstatusTrueOrdenByNombreAndTipoAsc();
 	return items;
 }
 public ItemEvaluacion buscarItem(long codigo){
@@ -37,10 +37,5 @@ public List<ItemEvaluacion> buscarItemsDisponibles(Programa programa,
 	return items;
 }
 
-public List<ItemEvaluacion> listadoItems() {
-	List<ItemEvaluacion> items;
-	items = interfaceItem.itemsPorNombre();
-	return items;
-}
 }
 
