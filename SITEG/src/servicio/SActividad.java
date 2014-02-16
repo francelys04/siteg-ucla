@@ -45,5 +45,10 @@ public class SActividad {
 		return actividad;
 	}
 
+	public List<Actividad> ListadoActividades() {
+		List<Actividad> actividades;
+		actividades = interfaceActividad.actividadesPorNombre();
+		return actividades;
+	}
 
 }
