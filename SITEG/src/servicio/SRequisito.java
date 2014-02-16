@@ -35,5 +35,12 @@ public List<Requisito> buscarRequisitosDisponibles(Programa programa, Lapso laps
 	requisitos = interfaceRequisito.buscarDisponibles(programa, lapso);
 	return requisitos;
 }
+
+public List<Requisito> listadoRequisitos() {
+	List<Requisito> requisitos;
+	requisitos = interfaceRequisito.requisitosPorNombre();
+	return requisitos;
+}
+
 }
 
