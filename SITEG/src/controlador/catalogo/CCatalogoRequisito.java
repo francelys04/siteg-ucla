@@ -166,7 +166,7 @@ public class CCatalogoRequisito extends CGeneral {
 	@Listen("onClick = #btnImprimir")
 	public void imprimir() throws SQLException {	
 		FileSystemView filesys = FileSystemView.getFileSystemView();
-		List<Requisito> requisitos = servicioRequisito.listadoRequisitos();
+		List<Requisito> requisitos = servicioRequisito.buscarActivos();
 		JasperReport jasperReport;
 		try {
 			String rutaUrl = obtenerDirectorio();
