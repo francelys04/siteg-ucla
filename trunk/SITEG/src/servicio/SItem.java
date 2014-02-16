@@ -37,5 +37,10 @@ public List<ItemEvaluacion> buscarItemsDisponibles(Programa programa,
 	return items;
 }
 
+public List<ItemEvaluacion> listadoItems() {
+	List<ItemEvaluacion> items;
+	items = interfaceItem.itemsPorNombre();
+	return items;
+}
 }
 
