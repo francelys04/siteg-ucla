@@ -26,7 +26,7 @@ public List<Requisito> buscarRequisito(){
 
 public List<Requisito> buscarActivos(){
 	List<Requisito> requisitos;
-	requisitos = interfaceRequisito.buscarRequisitosActivos();
+	requisitos = interfaceRequisito.findByEstatusTrueOrderByNombreAsc();
 	return requisitos;
 }
 
