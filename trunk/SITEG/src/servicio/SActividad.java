@@ -40,10 +40,15 @@ public class SActividad {
 	}
 
 	public Actividad buscarActividadPorNombre(String label) {
-		// TODO Auto-generated method stub
 		Actividad actividad;
 		actividad = interfaceActividad.findByNombre(label);
 		return actividad;
+	}
+	
+	public List<Actividad> ListadoActividades() {
+		List<Actividad> actividades;
+		actividades = interfaceActividad.actividadesPorNombre();
+		return actividades;
 	}
 
 }
