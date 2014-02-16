@@ -31,7 +31,7 @@ public class SProfesor {
 	public List<Profesor> buscarActivos() {
 		// TODO Auto-generated method stub
 		List<Profesor> profesores;
-		profesores = interfazProfesor.findByEstatusTrueOrderByCategoria();
+		profesores = interfazProfesor.findByEstatusTrueOrderByCategoriaAsc();
 		return profesores;
 	}
 	public List<Profesor> buscarTodos() {
