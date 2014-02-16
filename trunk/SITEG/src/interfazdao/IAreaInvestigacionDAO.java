@@ -23,7 +23,8 @@ public interface IAreaInvestigacionDAO extends JpaRepository<AreaInvestigacion, 
 	@Query("select a from AreaInvestigacion a where a.id in (select aa.area from ProgramaArea aa where aa.programa = ?1 and aa.lapso = ?2)")
 	public List<AreaInvestigacion> buscarAreasPrograma(Programa programa, Lapso lapso);
 	
-	
+	@Query("select a from AreaInvestigacion a where a.estatus=true order by a.nombre asc")
+	public List<AreaInvestigacion> areasPorNombre();
 	
 	
 }
