@@ -34,7 +34,7 @@ public class SAreaInvestigacion {
 	// busca todos los archivos sin eliminar en la base de dato
 	public List<AreaInvestigacion> buscarActivos() {
 		List<AreaInvestigacion> area;
-		area = interfaceArea.findByEstatusTrue();
+		area = interfaceArea.findByEstatusTrueOrderByNombreAsc();
 		return area;
 	}
 
