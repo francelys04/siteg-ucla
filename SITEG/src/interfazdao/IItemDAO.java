@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IItemDAO extends JpaRepository<ItemEvaluacion, String> {
 
-	public List<ItemEvaluacion> findByEstatusTrueOrderByNombreAndTipoAsc();
+	public List<ItemEvaluacion> findByEstatusTrueOrderByTipoAsc();
 
 	public ItemEvaluacion findById(long codigo);
 	
