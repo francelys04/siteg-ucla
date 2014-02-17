@@ -24,7 +24,7 @@ public List<TipoJurado> buscarTipoJurado(){
 }
 public List<TipoJurado> buscarActivos(){
 	List<TipoJurado> tipoJurados;
-	tipoJurados= interfaceTipoJurado.buscarTipoJuradoActivos();
+	tipoJurados= interfaceTipoJurado.findByEstatusTrueOrderByNombreAsc();
 	return tipoJurados;
 }
 public TipoJurado buscarPorNombre(String tipojurado) {
