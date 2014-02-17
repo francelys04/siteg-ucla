@@ -164,7 +164,7 @@ public class CCatalogoTipoJurado extends CGeneral {
 		try {
 			String rutaUrl = obtenerDirectorio();
 			String reporteSrc = rutaUrl
-					+ "SITEG/vistas/reportes/salidas/compilados/RTiposJurado.jasper";
+					+ "SITEG/vistas/reportes/salidas/compilados/RTiposJurados.jasper";
 			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
 		    Map p = new HashMap();
 			p.put("logoUcla", reporteImage + "logo ucla.png");
