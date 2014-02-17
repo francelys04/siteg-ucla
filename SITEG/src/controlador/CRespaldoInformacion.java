@@ -63,7 +63,7 @@ public class CRespaldoInformacion extends CGeneral {
 				+ ")";
 		String nombre = "SITEG" + fecha1 + ".sql";
 		if (rbLocal.isChecked()) {
-			ruta = obtenerDirectorio() + "SITEG/respaldos/";
+			ruta = obtenerDirectorio() + "SITEG/respaldos";
 			System.out.println("ruta" + ruta);
 			
 		} else {
