@@ -137,7 +137,7 @@
 					</hbox>
 
 				</row>
-
+				
 				<row>
 
 					<hbox>
@@ -159,6 +159,16 @@
 							style="color:black;margin-left:20px" />
 					</hbox>
 				</row>
+				
+				<row>
+					<hbox>
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgComisionEvaluadoraAsignada" />
+						<label
+							value="Comision Evaluadora Asignada"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
 
 				<row>
 					<hbox>
@@ -173,7 +183,7 @@
 					<hbox>
 						<image src="/public/imagenes/iconos/estatus.png"
 							id="imgRevisandoAvances" />
-						<label value="Proyecto deTrabajo Especial de Grado en Desarrollo"
+						<label value="Proyecto de Trabajo Especial de Grado en Desarrollo"
 							style="color:black;margin-left:20px" />
 					</hbox>
 				</row>
@@ -184,11 +194,11 @@
 						<image src="/public/imagenes/iconos/estatus.png"
 							id="imgRevisionesFinalizadasProyecto" />
 						<label
-							value="Avances Finalizados del Proyecto"
+							value="Avances del Proyecto Finalizados"
 							style="color:black;margin-left:20px" />
 					</hbox>
 				</row>
-
+				
 				<row>
 					<hbox>
 						<image src="/public/imagenes/iconos/estatus.png"
@@ -198,9 +208,6 @@
 							style="color:black;margin-left:20px" />
 					</hbox>
 				</row>
-
-
-
 
 				<row>
 					<hbox>
