@@ -56,6 +56,8 @@ public class CConsultarEstatus extends CGeneral {
 	@Wire
 	private Image imgProyectoRegistrado;
 	@Wire
+	private Image imgComisionEvaluadoraAsignada;
+	@Wire
 	private Image imgProyectoFactible;
 	@Wire
 	private Image imgRevisandoAvances;
@@ -70,11 +72,11 @@ public class CConsultarEstatus extends CGeneral {
 	@Wire
 	private Image imgSolicitandoDefensa;
 	@Wire
+	private Image imgJuradoAsignado;
+	@Wire
 	private Image imgDefensaAsignada;
 	@Wire
 	private Image imgTrabajoEspecial;
-	@Wire
-	private Image imgJuradoAsignado;
 
 	private static String cedulaRecibida;
 
@@ -102,17 +104,17 @@ public class CConsultarEstatus extends CGeneral {
 			teg = servicioTeg.buscarTegPorEstudiante(estudiante);
 		}
 
-		for (int x = 0; x < solicitudTutoria.size(); x = x + 1) {
-			if (solicitudTutoria.get(x).getEstatus().equals("Por Revisar") == true
-					|| solicitudTutoria.get(x).getEstatus().equals("Aceptada") == true) {
-				indiceSolicitud = x;
+		for (int i = 0; i < solicitudTutoria.size(); ++i) {
+			if (solicitudTutoria.get(i).getEstatus().equals("Por Revisar") == true
+					|| solicitudTutoria.get(i).getEstatus().equals("Aceptada") == true) {
+				indiceSolicitud = i;
 			}
 		}
 
-		for (int x = 0; x < teg.size(); x = x + 1) {
-			if (teg.get(x).getEstatus().equals("Proyecto No Factible") != true
-					|| teg.get(x).getEstatus().equals("TEG Reprobado") != true) {
-				indiceTeg = x;
+		for (int i = 0; i < teg.size(); ++i) {
+			if (teg.get(i).getEstatus().equals("Proyecto No Factible") != true
+					|| teg.get(i).getEstatus().equals("TEG Reprobado") != true) {
+				indiceTeg = i;
 			}
 		}
 
@@ -124,6 +126,7 @@ public class CConsultarEstatus extends CGeneral {
 				imgTutoriaAceptada.detach();
 				imgSolicitandoRegistro.detach();
 				imgProyectoRegistrado.detach();
+				imgComisionEvaluadoraAsignada.detach();
 				imgProyectoFactible.detach();
 				imgRevisandoAvances.detach();
 				imgRevisionesFinalizadasProyecto.detach();
@@ -131,9 +134,10 @@ public class CConsultarEstatus extends CGeneral {
 				imgRevisionesAvances.detach();
 				imgRevisionesFinalizadasTrabajo.detach();
 				imgSolicitandoDefensa.detach();
+				imgJuradoAsignado.detach();
 				imgDefensaAsignada.detach();
 				imgTrabajoEspecial.detach();
-				imgJuradoAsignado.detach();
+
 			} else {
 				if (solicitudTutoria.get(indiceSolicitud).getEstatus()
 						.equals("Aceptada") == true) {
@@ -147,11 +151,137 @@ public class CConsultarEstatus extends CGeneral {
 									.equals("Proyecto Registrado") != true) {
 
 								if (teg.get(indiceTeg).getEstatus()
-										.equals("Comision Asignada") == true
-										|| teg.get(indiceTeg)
-												.getEstatus()
-												.equals("Factibilidad Evaluada") == true) {
+										.equals("Comision Asignada") != true) {
+										
+									if (teg.get(indiceTeg).getEstatus()
+											.equals("Factibilidad Evaluada") != true) {
+	
+										if (teg.get(indiceTeg).getEstatus()
+												.equals("Proyecto Factible") != true) {
+											
+											if (teg.get(indiceTeg).getEstatus()
+													.equals("Proyecto en Desarrollo") != true) {
+	
+												if (teg.get(indiceTeg).getEstatus()
+														.equals("Avances Finalizados") != true) {
+		
+													if (teg.get(indiceTeg).getEstatus()
+															.equals("TEG Registrado") != true) {
+														
+														if (teg.get(indiceTeg).getEstatus()
+																.equals("Trabajo en Desarrollo") != true) {
+		
+															if (teg.get(indiceTeg)
+																	.getEstatus()
+																	.equals("Revisiones Finalizadas") != true) {
+			
+																if (teg.get(indiceTeg)
+																		.getEstatus()
+																		.equals("Solicitando Defensa") != true) {
+																	
+																	if (teg.get(indiceTeg)
+																			.getEstatus()
+																			.equals("Jurado Asignado") != true) {
+			
+																		if (teg.get(indiceTeg)
+																				.getEstatus()
+																				.equals("Defensa Asignada") == true) {
+				
+																			
+																			imgTrabajoEspecial.detach();
+																		}
+																	
+																	}else{
+																		
+																		imgDefensaAsignada.detach();
+																		imgTrabajoEspecial.detach();
+																		
+																	}
+																	
+																} else {
+																	
+																	imgJuradoAsignado.detach();
+																	imgDefensaAsignada.detach();
+																	imgTrabajoEspecial.detach();
+																}
+															} else {
+																
+																imgSolicitandoDefensa.detach();
+																imgJuradoAsignado.detach();
+																imgDefensaAsignada.detach();
+																imgTrabajoEspecial.detach();
+															}
+														
+														}else{
+															
+															imgRevisionesFinalizadasTrabajo.detach();
+															imgSolicitandoDefensa.detach();
+															imgJuradoAsignado.detach();
+															imgDefensaAsignada.detach();
+															imgTrabajoEspecial.detach();
+														}
+		
+													} else {
+													
+														imgRevisionesAvances.detach();
+														imgRevisionesFinalizadasTrabajo.detach();
+														imgSolicitandoDefensa.detach();
+														imgJuradoAsignado.detach();
+														imgDefensaAsignada.detach();
+														imgTrabajoEspecial.detach();
+													}
+												} else {
+													
+													imgRegistrarTrabajo.detach();
+													imgRevisionesAvances.detach();
+													imgRevisionesFinalizadasTrabajo.detach();
+													imgSolicitandoDefensa.detach();
+													imgJuradoAsignado.detach();
+													imgDefensaAsignada.detach();
+													imgTrabajoEspecial.detach();
+												}
+											
+											}else{
+												
+												imgRevisionesFinalizadasProyecto.detach();
+												imgRegistrarTrabajo.detach();
+												imgRevisionesAvances.detach();
+												imgRevisionesFinalizadasTrabajo.detach();
+												imgSolicitandoDefensa.detach();
+												imgJuradoAsignado.detach();
+												imgDefensaAsignada.detach();
+												imgTrabajoEspecial.detach();
+											}
+	
+										} else {
+										
+											imgRevisandoAvances.detach();
+											imgRevisionesFinalizadasProyecto.detach();
+											imgRegistrarTrabajo.detach();
+											imgRevisionesAvances.detach();
+											imgRevisionesFinalizadasTrabajo.detach();
+											imgSolicitandoDefensa.detach();
+											imgJuradoAsignado.detach();
+											imgDefensaAsignada.detach();
+											imgTrabajoEspecial.detach();
+										}
+	
+									}else{
 
+										imgProyectoFactible.detach();
+										imgRevisandoAvances.detach();
+										imgRevisionesFinalizadasProyecto.detach();
+										imgRegistrarTrabajo.detach();
+										imgRevisionesAvances.detach();
+										imgRevisionesFinalizadasTrabajo.detach();
+										imgSolicitandoDefensa.detach();
+										imgJuradoAsignado.detach();
+										imgDefensaAsignada.detach();
+										imgTrabajoEspecial.detach();
+									}
+								
+								}else{
+									
 									imgProyectoFactible.detach();
 									imgRevisandoAvances.detach();
 									imgRevisionesFinalizadasProyecto.detach();
@@ -159,96 +289,13 @@ public class CConsultarEstatus extends CGeneral {
 									imgRevisionesAvances.detach();
 									imgRevisionesFinalizadasTrabajo.detach();
 									imgSolicitandoDefensa.detach();
+									imgJuradoAsignado.detach();
 									imgDefensaAsignada.detach();
 									imgTrabajoEspecial.detach();
-									imgJuradoAsignado.detach();
-								} else {
-									if (teg.get(indiceTeg).getEstatus()
-											.equals("Proyecto Factible") != true) {
-
-										if (teg.get(indiceTeg).getEstatus()
-												.equals("Avances Finalizados") != true) {
-
-											if (teg.get(indiceTeg).getEstatus()
-													.equals("TEG Registrado") != true) {
-
-												if (teg.get(indiceTeg)
-														.getEstatus()
-														.equals("Revisiones Finalizadas") != true) {
-
-													if (teg.get(indiceTeg)
-															.getEstatus()
-															.equals("Solicitando Defensa") != true) {
-														
-														if (teg.get(indiceTeg)
-																.getEstatus()
-																.equals("Jurado Asignado") != true) {
-
-															if (teg.get(indiceTeg)
-																	.getEstatus()
-																	.equals("Defensa Asignada") == true) {
-	
-																imgTrabajoEspecial
-																		.detach();
-															}
-														
-														}else{
-															imgDefensaAsignada
-																	.detach();
-															imgTrabajoEspecial
-																	.detach();
-														}
-														
-													} else {
-														imgDefensaAsignada
-																.detach();
-														imgJuradoAsignado
-																.detach();
-														imgTrabajoEspecial
-																.detach();
-													}
-												} else {
-													imgSolicitandoDefensa
-															.detach();
-													imgDefensaAsignada.detach();
-													imgTrabajoEspecial.detach();
-													imgJuradoAsignado.detach();
-												}
-
-											} else {
-												imgRevisionesFinalizadasTrabajo
-														.detach();
-												imgSolicitandoDefensa.detach();
-												imgDefensaAsignada.detach();
-												imgTrabajoEspecial.detach();
-												imgJuradoAsignado.detach();
-											}
-										} else {
-											imgRegistrarTrabajo.detach();
-											imgRevisionesAvances.detach();
-											imgRevisionesFinalizadasTrabajo
-													.detach();
-											imgSolicitandoDefensa.detach();
-											imgDefensaAsignada.detach();
-											imgTrabajoEspecial.detach()
-											;imgJuradoAsignado.detach();
-										}
-
-									} else {
-										imgRevisionesFinalizadasProyecto
-												.detach();
-										imgRegistrarTrabajo.detach();
-										imgRevisionesAvances.detach();
-										imgRevisionesFinalizadasTrabajo
-												.detach();
-										imgSolicitandoDefensa.detach();
-										imgDefensaAsignada.detach();
-										imgTrabajoEspecial.detach();
-										imgJuradoAsignado.detach();
-									}
-
 								}
 							} else {
+
+								imgComisionEvaluadoraAsignada.detach();
 								imgProyectoFactible.detach();
 								imgRevisandoAvances.detach();
 								imgRevisionesFinalizadasProyecto.detach();
@@ -256,12 +303,14 @@ public class CConsultarEstatus extends CGeneral {
 								imgRevisionesAvances.detach();
 								imgRevisionesFinalizadasTrabajo.detach();
 								imgSolicitandoDefensa.detach();
+								imgJuradoAsignado.detach();
 								imgDefensaAsignada.detach();
 								imgTrabajoEspecial.detach();
-								imgJuradoAsignado.detach();
 							}
 						} else {
+							
 							imgProyectoRegistrado.detach();
+							imgComisionEvaluadoraAsignada.detach();
 							imgProyectoFactible.detach();
 							imgRevisandoAvances.detach();
 							imgRevisionesFinalizadasProyecto.detach();
@@ -269,9 +318,9 @@ public class CConsultarEstatus extends CGeneral {
 							imgRevisionesAvances.detach();
 							imgRevisionesFinalizadasTrabajo.detach();
 							imgSolicitandoDefensa.detach();
+							imgJuradoAsignado.detach();
 							imgDefensaAsignada.detach();
 							imgTrabajoEspecial.detach();
-							imgJuradoAsignado.detach();
 						}
 
 					} else {
@@ -288,6 +337,7 @@ public class CConsultarEstatus extends CGeneral {
 							imgDefensaAsignada.detach();
 							imgTrabajoEspecial.detach();
 							imgJuradoAsignado.detach();
+							imgComisionEvaluadoraAsignada.detach();
 							Messagebox
 									.show("Trabajo Especial de Grado No Factible o Reprobado",
 											"Información", Messagebox.OK,
@@ -306,6 +356,7 @@ public class CConsultarEstatus extends CGeneral {
 							imgDefensaAsignada.detach();
 							imgTrabajoEspecial.detach();
 							imgJuradoAsignado.detach();
+							imgComisionEvaluadoraAsignada.detach();
 						}
 
 					}
@@ -325,6 +376,7 @@ public class CConsultarEstatus extends CGeneral {
 					imgDefensaAsignada.detach();
 					imgTrabajoEspecial.detach();
 					imgJuradoAsignado.detach();
+					imgComisionEvaluadoraAsignada.detach();
 					Messagebox
 					.show("Tutoria del Proyecto Rechazada",
 							"Información", Messagebox.OK,
