@@ -1,17 +1,28 @@
 package controlador.catalogo;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import javax.swing.filechooser.FileSystemView;
 
 import modelo.Actividad;
 import modelo.Estudiante;
 import modelo.Requisito;
 import modelo.TipoJurado;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -143,5 +154,41 @@ public class CCatalogoTipoJurado extends CGeneral {
 			wdwCatalogoTipoJurado.onClose();
 		}
 	}
+	}
+	
+	@Listen("onClick = #btnImprimir")
+	public void imprimir() throws SQLException {	
+		FileSystemView filesys = FileSystemView.getFileSystemView();
+		List<TipoJurado> tiposJurado = servicioTipoJurado.buscarActivos();
+		JasperReport jasperReport;
+		try {
+			String rutaUrl = obtenerDirectorio();
+			String reporteSrc = rutaUrl
+					+ "SITEG/vistas/reportes/salidas/compilados/RTiposJurado.jasper";
+			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+		    Map p = new HashMap();
+			p.put("logoUcla", reporteImage + "logo ucla.png");
+			p.put("logoCE", reporteImage + "logo CE.png");
+			p.put("logoSiteg", reporteImage + "logo.png");
+				
+				
+			 
+
+			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,  new JRBeanCollectionDataSource(tiposJurado));
+			JasperViewer.viewReport(jasperPrint, false);
+			
+		} catch (JRException e) {
+			System.out.println(e);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	@Listen("onClick = #btnSalirCatalogoTipoJurado")
+	public void salirCatalogoTipoJurado() {
+		wdwCatalogoTipoJurado.onClose();
 	}
 }
