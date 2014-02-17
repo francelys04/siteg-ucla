@@ -9,6 +9,13 @@
 		<toolbarbutton
 			label="Doble clic para seleccionar el lapso académico" />
 	</popup>
+	<popup id="pupImprimirLapso">
+		<toolbarbutton
+			label="Presione aquí para imprimir la lista de Lapsos Académicos" />
+	</popup>
+	<popup id="pupSalirCatalogoLapso">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
 	<!-- Fin de popus -->
 
 
@@ -57,10 +64,16 @@
 				<separator />
 				<div sclass="btn-group">
 
-					<button id="btnSalirCatalogoProfesor" label="Salir"
+					<button id="btnImprimir" label="Imprimir"
+						width="110px" tooltip="pupImprimirLapso" sclass="btn"
+						image="/public/imagenes/iconos/imprimir.png" tabindex="1">
+					</button>
+					
+					<button id="btnSalirCatalogoLapso" label="Salir"
 						width="110px" tooltip="pupSalirCatalogoLapso" sclass="btn"
 						image="/public/imagenes/iconos/salir.png" tabindex="7">
 					</button>
+					
 					<separator />
 				</div>
 
