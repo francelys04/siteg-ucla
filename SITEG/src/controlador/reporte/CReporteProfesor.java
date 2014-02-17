@@ -243,7 +243,7 @@ public class CReporteProfesor extends CGeneral {
 		String rutaUrl = obtenerDirectorio();
 		 String reporteSrc = rutaUrl
 		 +
-		 "SITEG/vistas/reportes/estructurados/compilados/RReporteProfesorCargo.jasper";
+		 "SITEG/vistas/reportes/estructurados/compilados/RReporteProfesor.jasper";
 		 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
 		
 		
@@ -266,12 +266,30 @@ public class CReporteProfesor extends CGeneral {
 		 
 		
 	}
-	@Listen("onClick = #btnSalirReporteProfesorCargo")
-	public void cancelarItem() {
-		cmbEstatus.setValue("");
+		
+	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
+	@Listen("onClick = #btnCancelarReporteProfesorCargo")
+	public void cancelarTematicasSolicitadas() throws JRException {
+
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
-		cmbTematica.setValue("");;
-		
+		cmbArea.setDisabled(true);
+		cmbTematica.setValue("");
+		cmbEstatus.setValue("");
+		dtbCronogramaFechaInicio.setValue(new Date());
+		dtbCronogramaFechaHasta.setValue(new Date());
+
+//		jstVistaPrevia.setSrc("");
+//		jstVistaPrevia.setDatasource(null);
 	}
+
+	/* Metodo que permite cerrar la vista. */
+	@Listen("onClick = #btnSalirReporteProfesorCargo")
+	public void salirTematicasSolicitadas() throws JRException {
+
+		cancelarTematicasSolicitadas();
+		wdwReporteProfesor.onClose();
+	}
+	
+	
 }
