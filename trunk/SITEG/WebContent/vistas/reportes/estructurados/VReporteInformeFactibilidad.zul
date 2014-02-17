@@ -1,5 +1,5 @@
 <window id="wdwReporteInformeFactibilidad" 	title="Informe de Factibilidad" border="normal" 
-	width="100%" height="800px" closable="true"  apply="controlador.reporte.CReporteInformeFactibilidad" >
+	width="100%" height="450px" closable="true"  apply="controlador.reporte.CReporteInformeFactibilidad" >
 	
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -63,11 +63,14 @@
 		<toolbarbutton label="Seleccione una Fecha final del registro del Proyecto" />
 	</popup>
 	<popup id="pupGenerarReporteInformeFactibilidad">
-		<toolbarbutton label="Generar Reporte" />
+		<toolbarbutton label="Presione para Generar el Reporte" />
 	</popup>
 	<popup id="pupCancelarReporteInformeFactibilidad">
-		<toolbarbutton label="Salir" />
+		<toolbarbutton label="Presione para Cancelar el Reporte" />
 	</popup>
+	<popup id="pupSalirReporteInformeFactibilidad">
+		<toolbarbutton label="Presione para Salir" />
+	</popup> 
 	<popup id="pupCatalogoProyectoTeg">
 		<toolbarbutton label="Presiona aqui para ver la Lista de Proyectos" />
 	</popup>
@@ -193,15 +196,22 @@
 			<div sclass="alert-info" align="center">
 				<separator />
 				<div sclass="btn-group">
-					<button id="btnGenerarReporteInformeFactibilidad"
-						label="Generar Reporte" sclass="btn"
+					<button
+						id="btnGenerarReporteInformeFactibilidad" label="Generar"
+						sclass="btn" image="/public/imagenes/iconos/generar.png"
 						tooltip="pupGenerarReporteInformeFactibilidad"
-						image="/public/imagenes/iconos/aceptar.png" tabindex="13">
+						tabindex="13">
 					</button>
-					<button id="btnSalirReporteInformeFactibilidad"
-						label="Cancelar" sclass="btn"
+					<button
+						id="btnCancelarReporteInformeFactibilidad" label="Cancelar"
+						sclass="btn" image="/public/imagenes/iconos/limpiar.png"
 						tooltip="pupCancelarReporteInformeFactibilidad"
-						image="/public/imagenes/iconos/rechazar.png" tabindex="14">
+						tabindex="14">
+					</button>
+					<button
+						id="btnSalirReporteInformeFactibilidad" width="120px"
+						tooltip="pupSalirReporteInformeFactibilidad" label="Salir" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="15">
 					</button>
 				</div>
 			<separator />	
