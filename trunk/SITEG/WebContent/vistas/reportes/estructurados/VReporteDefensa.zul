@@ -220,6 +220,5 @@
 
 	<separator />
 	<separator />
-	<jasperreport id="jstVistaPrevia"></jasperreport>
 	<separator />
 </window>

@@ -33,6 +33,9 @@
 	<parameter name="tematica" class="java.lang.String"/>
 	<parameter name="programa" class="java.lang.String"/>
 	<parameter name="estatus" class="java.lang.String"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
+	<parameter name="logoSiteg" class="java.lang.String"/>
 	<field name="tituloTeg" class="java.lang.String"/>
 	<field name="nombreEstudiante" class="java.lang.String"/>
 	<field name="nombreTutor" class="java.lang.String"/>
@@ -57,12 +60,12 @@
 				</graphicElement>
 			</line>
 			<image>
-				<reportElement x="486" y="11" width="82" height="54" uuid="1f218b76-040c-47f1-aa76-485e28d4658a"/>
-				<imageExpression><![CDATA["/reporte/logo dcyt.png"]]></imageExpression>
+				<reportElement x="470" y="11" width="93" height="50" uuid="0f05d507-9e21-4b5b-ae04-d2634bd89b58"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="5" y="6" width="74" height="58" uuid="aace0c1b-990b-4e06-8dfd-f0ea4be501af"/>
-				<imageExpression><![CDATA["/reporte/logo ucla.png"]]></imageExpression>
+				<reportElement x="3" y="11" width="100" height="50" uuid="55f5e6f3-230d-4f46-9ebb-830917f55ace"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -283,8 +286,8 @@
 				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
 			</staticText>
 			<image>
-				<reportElement x="3" y="0" width="61" height="39" uuid="3519fa5f-6d39-4658-b506-f25e8071b97b"/>
-				<imageExpression><![CDATA["/reporte/logo.png"]]></imageExpression>
+				<reportElement x="5" y="13" width="60" height="26" uuid="355e164e-087e-4890-8aa1-13d49216bba7"/>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>
