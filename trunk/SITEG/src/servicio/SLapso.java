@@ -28,7 +28,7 @@ public class SLapso {
 
 	public List<Lapso> buscarActivos() {
 		List<Lapso> lapsos;
-		lapsos = interfaceLapso.buscarLapsosActivos();
+		lapsos = interfaceLapso.findByEstatusTrueOrderByNombreAsc();
 		return lapsos;
 	}
 
