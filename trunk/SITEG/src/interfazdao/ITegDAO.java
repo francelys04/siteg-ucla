@@ -91,14 +91,14 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 /******************************   Querys para ordenar segun id tematica segun programa segun area ***********************************************/
 	
 	//Lista para ordenar los ids de las tematicas segun un programa  segun un estatus y fecha inicio y fecha fin
-	@Query("select teg.tematica.id from Teg teg where teg.estatus=?1 or teg.estatus=?2 and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?3 ) and fecha between ?4 and ?5 Order by teg.tematica.id")
+	@Query("select teg.tematica.id from Teg teg where (teg.estatus=?1 or teg.estatus=?2) and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?3 ) and fecha between ?4 and ?5 Order by teg.tematica.id")
 	public List<Long> buscarUltimasTematicasProgramaAreaEstatus(String estatusProyectoTeg1,String estatusProyectoTeg2,AreaInvestigacion area,Date fechaInicio,Date fechaFin);
 	
 
 /******************************   Querys para ordenar segun id tematica segun programa para todas las areas ***********************************************/
 	
 	//Lista para ordenar los ids de las tematicas segun un programa  por estatus y fecha inicio y fecha fin
-	@Query("select teg.tematica.id from Teg teg where teg.estatus=?1 or teg.estatus=?2 and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?3)) and fecha between ?4 and ?5 Order by teg.tematica.id")
+	@Query("select teg.tematica.id from Teg teg where (teg.estatus=?1 or teg.estatus=?2) and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?3)) and fecha between ?4 and ?5 Order by teg.tematica.id")
 	public List<Long> buscarUltimasTematicasProgramaEstatus(String estatusProyectoTeg1,String estatusProyectoTeg2,Programa programa,Date fechaInicio,Date fechaFin);
 	
 
@@ -106,14 +106,14 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	
 	
 	//Lista para ordenar los ids de las tematicas para todos los programas por estatus  y fecha inicio y fecha fin
-	@Query("select teg.tematica.id from Teg teg where teg.estatus=?1 or teg.estatus=?2 and fecha between ?3 and ?4 Order by teg.tematica.id")
+	@Query("select teg.tematica.id from Teg teg where (teg.estatus=?1 or teg.estatus=?2) and fecha between ?3 and ?4 Order by teg.tematica.id")
 	public List<Long> buscarUltimasEstatus(String estatusProyectoTeg1,String estatusProyectoTeg2,Date fechaInicio,Date fechaFin);	
 
 	
 	
 /*******************************  Querys con las 5 tematicas mas solicitadas segun sus estatus *********************************/
 	
-	@Query("select teg from Teg teg where teg.estatus=?1 or teg.estatus=?2 and teg.tematica in ?3 and fecha between ?4 and ?5")
+	@Query("select teg from Teg teg where (teg.estatus=?1 or teg.estatus=?2) and teg.tematica in ?3 and fecha between ?4 and ?5")
 	public List<Teg> buscarUltimasOrdenadasEstatus(String estatusProyectoTeg1,String estatusProyectoTeg2,List<Tematica> tematicas,Date fechaInicio,Date fechaFin);
 
 	
