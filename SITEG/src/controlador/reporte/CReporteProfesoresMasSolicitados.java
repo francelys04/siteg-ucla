@@ -45,7 +45,14 @@ import servicio.SPrograma;
 
 @Controller
 public class CReporteProfesoresMasSolicitados extends CGeneral {
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
+
+	private String[] estatusSolicitud = { "Aceptada", "Rechazada",
+			"Por Revisar", "Finalizada" };
+	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
+	List<Tematica> tematicas = new ArrayList<Tematica>();
+	List<Programa> programas = new ArrayList<Programa>();
+	long idTematica = 0;
+
 	@Wire
 	private Window wdwReporteProfesorMasSolicitados;
 	@Wire
@@ -58,15 +65,13 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	private Combobox cmbAreaReporteProfesoresSolicitados;
 	@Wire
 	private Combobox cmbTematicaReporteProfesoresSolicitados;
-	@Wire
-	private Jasperreport jstVistaProfesores;
-	private String[] estatusSolicitud = { "Aceptada", "Rechazada",
-			"Por Revisar", "Finalizada" };
-	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
-	List<Tematica> tematicas = new ArrayList<Tematica>();
-	List<Programa> programas = new ArrayList<Programa>();
-	long idTematica = 0;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
+	 * seleccionar la opcion de "Todos" y se llena una lista del mismo en el
+	 * componente de la vista.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -77,9 +82,15 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		programas.add(programaa);
 		cmbProgramaReporteProfesoresSolicitados
 				.setModel(new ListModelList<Programa>(programas));
-		Selectors.wireComponents(comp, this, false);
+
 	}
 
+	/*
+	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
+	 * se puede seleccionar la opcion de "Todos" en el combo de las areas.
+	 */
 	@Listen("onSelect = #cmbProgramaReporteProfesoresSolicitados")
 	public void buscarArea() {
 		cmbAreaReporteProfesoresSolicitados.setValue("");
@@ -102,6 +113,9 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite cargar las tematicas dado al area seleccionado.
+	 */
 	@Listen("onSelect = #cmbAreaReporteProfesoresSolicitados")
 	public void seleccionarTematica() {
 		cmbTematicaReporteProfesoresSolicitados.setValue("");
@@ -112,12 +126,26 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				.setModel(new ListModelList<Tematica>(tematicas));
 	}
 
+	/*
+	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
+	 * uno en el campo del mismo.
+	 */
 	@Listen("onSelect = #cmbTematicaReporteProfesoresSolicitados")
 	public void tomarIdTematica() {
 		idTematica = Long.parseLong(cmbTematicaReporteProfesoresSolicitados
 				.getSelectedItem().getId());
 	}
 
+	/*
+	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
+	 * se generara un pdf donde se muestra una lista de los cinco profesores con
+	 * mas solicitades de esta seleccion, por medio de unos condicionales seran
+	 * cargados unos contadores que seran seteados a un objeto que permitira
+	 * reflejar en un grafico la variabilidad de las solicitudes por profesor,
+	 * donde mediante el componente "Jasperreport" se mapea una serie de
+	 * parametros y una lista previamente cargada que seran los datos que se
+	 * muestra en el documento.
+	 */
 	@Listen("onClick = #btnGenerarReporteProfesoresSolicitados")
 	public void generarReporte() throws JRException {
 		boolean datosVacios = false;
@@ -267,7 +295,6 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				else
 					mapa.put("area",
 							cmbAreaReporteProfesoresSolicitados.getValue());
-				// Metodo utilizado para los que de error el preview
 				FileSystemView filesys = FileSystemView.getFileSystemView();
 				String rutaUrl = obtenerDirectorio();
 				String reporteSrc = rutaUrl
@@ -284,20 +311,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				JasperPrint jasperPrint = JasperFillManager.fillReport(
 						jasperReport, mapa, new JRBeanCollectionDataSource(
 								masSolicitados));
-				// JasperExportManager.exportReportToPdfFile(jasperPrint,
-				// filesys.getHomeDirectory().toString()
-				// + "/reportePr.pdf");
 				JasperViewer.viewReport(jasperPrint, false);
-				// String rutaUrl = obtenerDirectorio();
-				// String reporteSrc = rutaUrl
-				// +
-				// "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
-				// jstVistaProfesores.setSrc(reporteSrc);
-				// jstVistaProfesores
-				// .setDatasource(new
-				// JRBeanCollectionDataSource(masSolicitados));
-				// jstVistaProfesores.setType("pdf");
-				// jstVistaProfesores.setParameters(mapa);
 			} else {
 				Messagebox
 						.show("No hay informacion disponible para esta selecci�n");
@@ -305,6 +319,14 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite mapear dos listas ordenadas de profesores y
+	 * contadores, donde es cargada mediante dos operaciones internas, la
+	 * primera es para contar la ocurrencia con respecto a los profesores en
+	 * base a las solicitudes recibidas y la segunda es para ordenarlos de mayor
+	 * a menor donde luego dado a esta lista cargada, se llena una lista con los
+	 * cinco profesores con mas solicitudes.
+	 */
 	public Map<String, Object> ordenar(List<SolicitudTutoria> solicitudes) {
 		List<String> profesores = new ArrayList();
 		List<Integer> contadores = new ArrayList();
