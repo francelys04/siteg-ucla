@@ -76,13 +76,6 @@ import servicio.STematica;
 @Controller
 public class CReportePromedioTiempoTeg extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	STegEstatus servicioTegEstatus = GeneradorBeans.getServicioTegEstatus();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
 	Programa programa = new Programa();
 	AreaInvestigacion area = new AreaInvestigacion();
 	Tematica tematica = new Tematica();
@@ -105,6 +98,12 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 	@Wire
 	private Jasperreport jstVistaPrevia;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
+	 * seleccionar la opcion de "Todos" y se llena una lista del mismo en el
+	 * componente de la vista.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -115,6 +114,17 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
 	}
 
+	/*
+	 * Metodo que permite generar un reporte, dado a una lista de tegs
+	 * previamente cargada al seleccionar un programa, area y tematica, se
+	 * generara un pdf donde se muestra una lista de las etapas del teg con la
+	 * cantidad de ocurrencia en unos intervalos de tiempo especificado de esta
+	 * seleccion, comparando su periodo de tiempo donde ha cambiado, ademas se
+	 * carga previamente una lista de las etapas de manera estatica dado si se
+	 * aprobo o se reprobo un teg, donde mediante el componente "Jasperreport"
+	 * sera mapea una serie de parametros y una lista previamente cargada que
+	 * seran los datos que se muestra en el documento.
+	 */
 	@Listen("onClick = #btnGenerarReportePromedioTiempoTeg")
 	public void generarPromedioTiempoTeg() throws JRException {
 
@@ -150,7 +160,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		filtrarDatosBusqueda();
 		if (tegs.size() != 0) {
 			for (int i = 0; i < nombreEstatus.size(); i++) {
-				
+
 				List<TegEstatus> tegEstatus1 = servicioTegEstatus
 						.buscarEstatusSegunTeg(nombreEstatus.get(i), tegs);
 				List<TegEstatus> tegEstatus2 = servicioTegEstatus
@@ -242,29 +252,27 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			parametro.put("logoUcla", reporteImage + "logo ucla.png");
 			parametro.put("logoCE", reporteImage + "logo CE.png");
 			parametro.put("logoSiteg", reporteImage + "logo.png");
-			
-			
+
 			JasperReport jasperReport = (JasperReport) JRLoader
 					.loadObject(reporteSrc);
 
-			
 			JasperPrint jasperPrint = JasperFillManager.fillReport(
 					jasperReport, parametro, new JRBeanCollectionDataSource(
 							tegsPromedios));
-			
-			JasperViewer.viewReport(jasperPrint, false);
-//			jstVistaPrevia.setSrc(reporteSrc);
-//			jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-//					tegsPromedios));
-//			jstVistaPrevia.setType("pdf");
-//			jstVistaPrevia.setParameters(parametro);
 
+			JasperViewer.viewReport(jasperPrint, false);
 		} else {
 			Messagebox.show("No hay informacion disponible");
 			cancelarPromedioTiempoTeg();
 		}
 	}
 
+	/*
+	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
+	 * se puede seleccionar la opcion de "Todos" en el combo de las areas
+	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() throws JRException {
 		String idPrograma = cmbPrograma.getSelectedItem().getId();
@@ -288,6 +296,12 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo tematica, ademas se adiciona un nuevo item donde se
+	 * puede seleccionar la opcion de "Todos" en el combo de las tematicas.
+	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() throws JRException {
 		String idArea = cmbArea.getSelectedItem().getId();
@@ -308,6 +322,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		}
 	}
 
+	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarReportePromedioTiempoTeg")
 	public void cancelarPromedioTiempoTeg() throws JRException {
 		cmbPrograma.setValue("");
@@ -319,13 +334,18 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		jstVistaPrevia.setSrc("");
 		jstVistaPrevia.setDatasource(null);
 	}
+
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirReportePromedioTiempoTeg")
 	public void salirPromedioTiempoTeg() throws JRException {
 		cancelarPromedioTiempoTeg();
 		wdwReportePromedioTiempoTeg.onClose();
 	}
-	
-	
+
+	/*
+	 * Metodo que permite cargar una lista de tegs Aprobados/Reprobados al
+	 * seleccionar un programa, area y tematica.
+	 */
 	public void filtrarDatosBusqueda() {
 
 		String nombreArea = cmbArea.getValue();
