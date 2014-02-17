@@ -158,7 +158,6 @@
 	<separator />
 	<separator />
 
-	<jasperreport id="jstVistaPrevia" height="40%" width="100%"></jasperreport>
 	<separator />
 	<separator />
 </window>
