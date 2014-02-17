@@ -66,18 +66,15 @@ import servicio.SEstudiante;
 @Controller
 public class CReporteTeg extends CGeneral {
 
-	public CReporteTeg() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
+	private String[] estatusTeg = { "Todos", "TEG Registrado",
+			"Revisiones Finalizadas", "Solicitando Defensa",
+			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado",
+			"Jurado Asignado" };
+	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
+	List<Tematica> tematicas = new ArrayList<Tematica>();
+	List<Programa> programas = new ArrayList<Programa>();
+	long idTematica = 0;
+	long idArea = 0;
 
 	@Wire
 	private Window wdwReporteTeg;
@@ -95,16 +92,14 @@ public class CReporteTeg extends CGeneral {
 	private Combobox cmbTematica;
 	@Wire
 	private Jasperreport jstVistaPrevia;
-	private String[] estatusTeg = { "Todos", "TEG Registrado",
-			"Revisiones Finalizadas", "Solicitando Defensa",
-			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado",
-			"Jurado Asignado" };
-	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
-	List<Tematica> tematicas = new ArrayList<Tematica>();
-	List<Programa> programas = new ArrayList<Programa>();
-	long idTematica = 0;
-	long idArea = 0;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
+	 * seleccionar la opcion de "Todos", junto a esto se tiene una lista
+	 * previamente cargada de manera estatica, los estatus de la defensa y se
+	 * llena una lista del mismo en el componente de la vista.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -116,6 +111,12 @@ public class CReporteTeg extends CGeneral {
 		cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
 	}
 
+	/*
+	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
+	 * se puede seleccionar la opcion de "Todos" en el combo de las areas
+	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccinarPrograma() {
 		if (cmbPrograma.getValue().equals("Todos")) {
@@ -136,6 +137,11 @@ public class CReporteTeg extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo tematica
+	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
 		if (cmbArea.getValue().equals("Todos")) {
@@ -151,12 +157,23 @@ public class CReporteTeg extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
+	 * uno en el campo del mismo.
+	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
 		// idTematica = tematica.getId();
 	}
 
+	/*
+	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
+	 * y unos estatus previamente establecidos, se generara un pdf donde se
+	 * muestra una lista de tegs de esta seleccion, mediante el componente
+	 * "Jasperreport" donde se mapea una serie de parametros y una lista
+	 * previamente cargada que seran los datos que se muestra en el documento.
+	 */
 	@Listen("onClick = #btnGenerarReporteTeg")
 	public void generarReporteTEG() throws JRException {
 		String nombreArea = cmbArea.getValue();
@@ -301,7 +318,7 @@ public class CReporteTeg extends CGeneral {
 
 		}
 	}
-
+/* Metodo que permite limpiar los campos de los filtros de busqueda.*/
 	@Listen("onClick = #btnSalirReporteTeg")
 	public void cancelarItem() {
 		cmbEstatus.setValue("");
