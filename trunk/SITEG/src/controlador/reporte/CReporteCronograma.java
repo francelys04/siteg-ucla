@@ -56,9 +56,9 @@ public class CReporteCronograma extends CGeneral {
 	private Window wdwReporteCronograma;
 
 	/*
-	 * Metodo heredado del Controlador CGeneral donde se buscan todas los
-	 * programas y lapsos disponibles y se llena el listado del mismo en el
-	 * componente lista de la vista.
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * programas y lapsos disponibles y se llena una lista del mismo en el
+	 * componente de la vista
 	 */
 	@Override
 	public void inicializar(Component comp) {
@@ -119,7 +119,8 @@ public class CReporteCronograma extends CGeneral {
 		}
 
 	}
-	/*Metodo que permite cerrar la vista*/
+
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnCancelarReporteCronograma")
 	public void Salir() {
 		wdwReporteCronograma.onClose();

@@ -72,18 +72,9 @@ import servicio.STematica;
 @Controller
 public class CReporteTematicasMasSolicitadas extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-
 	Programa programa = new Programa();
 	AreaInvestigacion area = new AreaInvestigacion();
 	String estatusProyectoTeg1, estatusProyectoTeg2 = "";
-
-	/********** Proyectos Solicitados **************/
 
 	@Wire
 	private Datebox dtbFechaInicio;
@@ -102,6 +93,12 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 	@Wire
 	private Jasperreport jstVistaPrevia;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
+	 * seleccionar la opcion de "Todos" y se llena una lista del mismo en el
+	 * componente de la vista.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -113,6 +110,17 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
+	 * se generara un pdf donde se muestra una lista de las cinco tematicas mas
+	 * solicitadas de esta seleccion, para esto se realiza varias operaciones
+	 * dentro de ella, donde primero se cuentan la cantidad de tematicas dado a
+	 * unos estatus y otros parametros, luego se ordena de mayor a menor y el
+	 * ultimo paso es donde cargan las cinco primeras tematicas de la lista
+	 * ordenada que se consiguio anteriormente, donde mediante el componente
+	 * "Jasperreport" se mapea una serie de parametros y una lista previamente
+	 * cargada que seran los datos que se muestra en el documento.
+	 */
 	@Listen("onClick = #btnGenerarTematicasSolicitadas")
 	public void generarProyectosSolicitados() throws JRException {
 
@@ -161,7 +169,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 								programa1, fechaInicio, fechaFin);
 			}
 			if (tematicasSeleccionadas.size() != 0) {
-				System.out.println("entro:"+tematicasSeleccionadas.size());
+				System.out.println("entro:" + tematicasSeleccionadas.size());
 
 				/*************************** Contador de Lista ************* ******************/
 				List<Long> tematicas = new ArrayList();
@@ -250,64 +258,55 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 							+ tegsTematicasComparativo.get(i).getDuracion());
 
 				}
-			
-					FileSystemView filesys = FileSystemView.getFileSystemView();
-					Map parametro = new HashMap();
-					String rutaUrl = obtenerDirectorio();
-					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/estadisticos/compilados/RTematicasMasSolicitadas.jasper";
-					String reporteImage = rutaUrl
-							+ "SITEG/public/imagenes/reportes/";
 
-					parametro.put("titulo",
-							"UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
-									+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
-									+ "DIRECCION DE PROGRAMA");
-					parametro.put("programaNombre", cmbPrograma.getValue());
-					parametro.put("areaNombre", cmbArea.getValue());
-					parametro.put("etapaTeg", etapaTeg);
-					parametro.put("estatusProyectoTeg1", estatusProyectoTeg1);
-					parametro.put("estatusProyectoTeg2", estatusProyectoTeg2);
-					parametro.put("fechaInicio", fechaInicio);
-					parametro.put("fechaFin", fechaFin);
-					parametro.put("logoUcla", reporteImage + "logo ucla.png");
-					parametro.put("logoCE", reporteImage + "logo CE.png");
-					parametro.put("logoSiteg", reporteImage + "logo.png");
+				FileSystemView filesys = FileSystemView.getFileSystemView();
+				Map parametro = new HashMap();
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl
+						+ "SITEG/vistas/reportes/estadisticos/compilados/RTematicasMasSolicitadas.jasper";
+				String reporteImage = rutaUrl
+						+ "SITEG/public/imagenes/reportes/";
 
-					JasperReport jasperReport = (JasperReport) JRLoader
-							.loadObject(reporteSrc);
+				parametro.put("titulo",
+						"UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
+								+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
+								+ "DIRECCION DE PROGRAMA");
+				parametro.put("programaNombre", cmbPrograma.getValue());
+				parametro.put("areaNombre", cmbArea.getValue());
+				parametro.put("etapaTeg", etapaTeg);
+				parametro.put("estatusProyectoTeg1", estatusProyectoTeg1);
+				parametro.put("estatusProyectoTeg2", estatusProyectoTeg2);
+				parametro.put("fechaInicio", fechaInicio);
+				parametro.put("fechaFin", fechaFin);
+				parametro.put("logoUcla", reporteImage + "logo ucla.png");
+				parametro.put("logoCE", reporteImage + "logo CE.png");
+				parametro.put("logoSiteg", reporteImage + "logo.png");
 
-					JasperPrint jasperPrint = JasperFillManager.fillReport(
-							jasperReport, parametro,
-							new JRBeanCollectionDataSource(
-									tegsTematicasComparativo));
+				JasperReport jasperReport = (JasperReport) JRLoader
+						.loadObject(reporteSrc);
 
-					JasperViewer.viewReport(jasperPrint, false);
-					//
-					// jstVistaPrevia.setSrc(reporteSrc);
-					// jstVistaPrevia.setDatasource(new
-					// JRBeanCollectionDataSource(
-					// tegsTematicasComparativo));
-					// jstVistaPrevia.setType("pdf");
-					// jstVistaPrevia.setParameters(parametro);
-//				} else {
-//					Messagebox
-//							.show("La fecha de inicio debe ser primero que la fecha de fin",
-//									"Error", Messagebox.OK, Messagebox.ERROR);
-//				}
+				JasperPrint jasperPrint = JasperFillManager
+						.fillReport(jasperReport, parametro,
+								new JRBeanCollectionDataSource(
+										tegsTematicasComparativo));
 
-			}
-			else{
+				JasperViewer.viewReport(jasperPrint, false);
+			} else {
 				Messagebox.show(
 						"No hay informacion disponible para este intervalo.",
-						"Informacion", Messagebox.OK,
-						Messagebox.INFORMATION);
-			
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
 			}
 		}
 
 	}
 
+	/*
+	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo area, ademas se adiciona un nuevo item donde se puede
+	 * seleccionar la opcion de "Todos" en el combo de las areas.
+	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() throws JRException {
 		String idPrograma = cmbPrograma.getSelectedItem().getId();
@@ -327,6 +326,11 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite dado a la seleccion de la "Etapa del Teg", cargar en
+	 * dos variables los estatus que seran enviados por parametro
+	 * posteriormente.
+	 */
 	@Listen("onSelect = #cmbEtapaTeg")
 	public void seleccionarEtapaTeg() throws JRException {
 		List<String> listaComboEstatus = new ArrayList();
@@ -341,6 +345,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		}
 	}
 
+	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarTematicasSolicitadas")
 	public void cancelarTematicasSolicitadas() throws JRException {
 
@@ -355,6 +360,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		jstVistaPrevia.setDatasource(null);
 	}
 
+	/* Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalirTematicasSolicitadas")
 	public void salirTematicasSolicitadas() throws JRException {
 
