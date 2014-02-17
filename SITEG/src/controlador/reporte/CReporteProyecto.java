@@ -24,6 +24,7 @@ import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
+import modelo.reporte.ListaTeg;
 import modelo.reporte.Proyecto;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -155,6 +156,7 @@ public class CReporteProyecto extends CGeneral {
 	
 	@Listen("onClick = #btnGenerarReporteProyecto")
     public void generarReporteTEG() throws JRException{
+		boolean datosVacios = false;
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
 		String nombreTematica = cmbTematica.getValue();
@@ -162,7 +164,156 @@ public class CReporteProyecto extends CGeneral {
 		Date fechaFin = dtbFechaFin.getValue();
 		String estatus = cmbEstatus.getValue();
 		List<Teg> teg = null;
-		if (fechaFin == null || fechaInicio == null
+		if ((cmbPrograma.getValue() == "") || (cmbArea.getValue() == "")
+				|| (cmbTematica.getValue() == "")
+				|| (cmbEstatus.getValue() == "")) {
+			Messagebox.show("Datos imcompletos", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+
+		else {
+			if (fechaFin == null || fechaInicio == null
+					|| fechaInicio.after(fechaFin)) {
+				Messagebox
+						.show("La fecha de inicio debe ser primero que la fecha de fin",
+								"Error", Messagebox.OK, Messagebox.ERROR);
+			} else {
+				if (!nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& !estatus.equals("Todos")) {
+					
+					String idTematica = cmbTematica.getSelectedItem().getId();
+					Tematica tematica1 = servicioTematica.buscarTematica(Long
+							.parseLong(idTematica));
+					teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(estatus, tematica1, fechaInicio, fechaFin);
+					if (teg.size() == 0) {
+						datosVacios = true;
+					} else {
+						datosVacios = false;
+					}
+				}
+
+				if (!nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& estatus.equals("Todos")) {
+					String idTematica = cmbTematica.getSelectedItem().getId();
+					 Tematica tematica1 = servicioTematica.buscarTematica(Long
+								.parseLong(idTematica));
+					
+					 String estatusTeg1="Proyecto Registrado";
+					 String estatusTeg2="Proyecto Factible";
+					 String estatusTeg3="Proyecto deTrabajo Especial de Grado en Desarrollo";
+					 String estatusTeg4="Avances Finalizados del Proyecto";
+					 teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(estatusTeg1, 
+							          estatusTeg2, estatusTeg3, estatusTeg4, tematica1,fechaInicio, fechaFin);
+					 if (teg.size() == 0) {
+							datosVacios = true;
+						} else {
+							datosVacios = false;
+						}
+				}
+
+				if (!nombrePrograma.equals("Todos")
+						&& nombreArea.equals("Todos")
+						&& !estatus.equals("Todos")) {
+					 String idPrograma = cmbPrograma.getSelectedItem().getId();
+					 Programa programa1 = servicioPrograma.buscar(Long
+								.parseLong(idPrograma));
+					 teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus, programa1, fechaInicio, fechaFin);	
+					 if (teg.size() == 0) {
+							datosVacios = true;
+						} else {
+							datosVacios = false;
+						}
+				}
+				if (!nombrePrograma.equals("Todos")
+						&& nombreArea.equals("Todos")
+						&& estatus.equals("Todos")) {
+					
+					 String idPrograma = cmbPrograma.getSelectedItem().getId();
+					 Programa programa1 = servicioPrograma.buscar(Long
+								.parseLong(idPrograma));
+					 String estatusTeg1="Proyecto Registrado";
+					 String estatusTeg2="Proyecto Factible";
+					 String estatusTeg3="Proyecto deTrabajo Especial de Grado en Desarrollo";
+					 String estatusTeg4="Avances Finalizados del Proyecto";
+					 teg = servicioTeg.buscarTegPorProgramaVariasAreasVariosEstatus1(estatusTeg1, 
+					                estatusTeg2, estatusTeg3, estatusTeg4, programa1,fechaInicio, fechaFin);
+					 if (teg.size() == 0) {
+							datosVacios = true;
+						} else {
+							datosVacios = false;
+						}
+				}
+				
+				if (nombrePrograma.equals("Todos") && !estatus.equals("Todos")) {
+					 teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(estatus, fechaInicio, 
+					         fechaFin);
+			 if (teg.size() == 0) {
+					datosVacios = true;
+				} else {
+					datosVacios = false;
+				}
+				}
+
+				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
+					String estatusTeg1="Proyecto Registrado";
+					 String estatusTeg2="Proyecto Factible";
+					 String estatusTeg3="Proyecto deTrabajo Especial de Grado en Desarrollo";
+					 String estatusTeg4="Avances Finalizados del Proyecto";
+					 teg = servicioTeg.buscarTegPorVariosProgramasVariosEstatus1(estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4, fechaInicio, fechaFin);					
+					 if (teg.size() == 0) {
+							datosVacios = true;
+						} else {
+							datosVacios = false;
+						}
+				}
+				 if (!datosVacios) {
+				List<ListaTeg> elementos = new ArrayList<ListaTeg>();
+				for (Teg t : teg) {
+					List<Estudiante> estudiantes = servicioEstudiante
+							.buscarEstudiantePorTeg(t);
+
+					String nombreEstudiantes = "";
+					for (Estudiante e : estudiantes) {
+						nombreEstudiantes += e.getNombre() + " "
+								+ e.getApellido() + " ";
+					}
+
+					elementos.add(new ListaTeg(t, nombreEstudiantes));
+
+				}
+				FileSystemView filesys = FileSystemView.getFileSystemView();
+				Map p = new HashMap();
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl
+						+ "SITEG/vistas/reportes/estructurados/compilados/RReporteProyecto.jasper";
+				String reporteImage = rutaUrl
+						+ "SITEG/public/imagenes/reportes/";
+				p.put("programa", cmbPrograma.getValue());
+				p.put("FechaInicio", dtbFechaInicio.getValue());
+				p.put("FechaFin", dtbFechaFin.getValue());
+				p.put("Area", cmbArea.getValue());
+				p.put("Tematica", cmbTematica.getValue());
+				p.put("Estatus", cmbEstatus.getValue());
+				p.put("logoUcla", reporteImage + "logo ucla.png");
+				p.put("logoCE", reporteImage + "logo CE.png");
+				p.put("logoSiteg", reporteImage + "logo.png");
+
+				jstVistaPrevia.setSrc(reporteSrc);
+				jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+						elementos));
+				jstVistaPrevia.setType("pdf");
+				jstVistaPrevia.setParameters(p);
+				 } else {
+						Messagebox
+								.show("No hay informacion disponible para esta selecci�n");
+					}
+			}
+
+		}
+	}
+		/*if (fechaFin == null || fechaInicio == null
 				|| fechaInicio.after(fechaFin)) {
 			        Messagebox.show(
 					"La fecha de inicio debe ser primero que la fecha de fin",
@@ -174,6 +325,11 @@ public class CReporteProyecto extends CGeneral {
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
 					teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(estatus, tematica1, fechaInicio, fechaFin);
+					if (teg.size() == 0) {
+						datosVacios = true;
+					} else {
+						datosVacios = false;
+					}
 				}
 			 
 				 if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && estatus.equals("Todos")) {
@@ -187,6 +343,11 @@ public class CReporteProyecto extends CGeneral {
 					 String estatusTeg4="Avances Finalizados del Proyecto";
 					 teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(estatusTeg1, 
 							          estatusTeg2, estatusTeg3, estatusTeg4, tematica1,fechaInicio, fechaFin);
+					 if (teg.size() == 0) {
+							datosVacios = true;
+						} else {
+							datosVacios = false;
+						}
 				 }
 					 
 				 if(!nombrePrograma.equals("Todos") && nombreArea.equals("Todos") && !estatus.equals("Todos")){
@@ -194,6 +355,11 @@ public class CReporteProyecto extends CGeneral {
 					 Programa programa1 = servicioPrograma.buscar(Long
 								.parseLong(idPrograma));
 					 teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus, programa1, fechaInicio, fechaFin);	
+					 if (teg.size() == 0) {
+							datosVacios = true;
+						} else {
+							datosVacios = false;
+						}
 				 }
 				 if(!nombrePrograma.equals("Todos") && nombreArea.equals("Todos") && estatus.equals("Todos")){
 					 String idPrograma = cmbPrograma.getSelectedItem().getId();
@@ -205,10 +371,20 @@ public class CReporteProyecto extends CGeneral {
 					 String estatusTeg4="Avances Finalizados del Proyecto";
 					 teg = servicioTeg.buscarTegPorProgramaVariasAreasVariosEstatus1(estatusTeg1, 
 					                estatusTeg2, estatusTeg3, estatusTeg4, programa1,fechaInicio, fechaFin);
+					 if (teg.size() == 0) {
+							datosVacios = true;
+						} else {
+							datosVacios = false;
+						}
 				 }
 				 if(nombrePrograma.equals("Todos") && !estatus.equals("Todos")){
 					 teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(estatus, fechaInicio, 
 							         fechaFin);
+					 if (teg.size() == 0) {
+							datosVacios = true;
+						} else {
+							datosVacios = false;
+						}
 				 }
 				 
 				 if(nombrePrograma.equals("Todos") && estatus.equals("Todos")){
@@ -217,8 +393,13 @@ public class CReporteProyecto extends CGeneral {
 					 String estatusTeg3="Proyecto deTrabajo Especial de Grado en Desarrollo";
 					 String estatusTeg4="Avances Finalizados del Proyecto";
 					 teg = servicioTeg.buscarTegPorVariosProgramasVariosEstatus1(estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4, fechaInicio, fechaFin);					
+					 if (teg.size() == 0) {
+							datosVacios = true;
+						} else {
+							datosVacios = false;
+						}
 				 }
-		
+				 if (!datosVacios) {
 				 List<Proyecto> elementos = new ArrayList<Proyecto>();
 				 for (Teg t : teg) {
 				 List<Estudiante> estudiantes= servicioEstudiante.buscarEstudiantePorTeg(t);
@@ -261,10 +442,14 @@ public class CReporteProyecto extends CGeneral {
 		 elementos));
 		 jstVistaPrevia.setType("pdf");
 		 jstVistaPrevia.setParameters(p);
+				 } else {
+						Messagebox
+								.show("No hay informacion disponible para esta selecci�n");
+					}
 		 
 		 		}
 	
-	}
+	}*/
 
 	@Listen("onClick = #btnSalirReporteProyecto")
 	public void cancelarItem() {
