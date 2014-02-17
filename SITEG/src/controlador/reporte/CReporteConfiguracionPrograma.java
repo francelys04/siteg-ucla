@@ -48,6 +48,9 @@ import controlador.CGeneral;
 @Controller
 public class CReporteConfiguracionPrograma extends CGeneral {
 
+	private static Programa programa;
+	private static Lapso lapso;
+
 	@Wire
 	private Combobox cmbConfiguracionPrograma;
 	@Wire
@@ -65,12 +68,11 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 	@Wire
 	private Radio rdorequisito;
 
-	private static Programa programa;
-	private static Lapso lapso;
-
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todas los
+	 * programas y lapsos disponibles y se llena el listado del mismo en el
+	 * componente lista de la vista.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		List<Programa> programas = servicioPrograma.buscarActivas();
@@ -82,6 +84,14 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite generar un reporte, dependiendo de la opcion que elija
+	 * , ya sea por condicion. por area, por item o por requisito se
+	 * generara un pdf donde se muestra una lista del mismo, mediante el
+	 * componente "Jasperreport" donde se mapea una serie de parametros y una
+	 * lista previamente cargada que seran los datos que se muestra en el
+	 * documento.
+	 */
 	@Listen("onClick = #btnGenerarReporteConfiguracion")
 	public void GenerarReporte() throws JRException {
 
@@ -115,7 +125,6 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
 
-					// Metodo utilizado para los que de error el preview
 					FileSystemView filesys = FileSystemView.getFileSystemView();
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
@@ -147,7 +156,6 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
 
-					// Metodo utilizado para los que de error el preview
 					FileSystemView filesys = FileSystemView.getFileSystemView();
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
@@ -180,7 +188,6 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
 
-					// Metodo utilizado para los que de error el preview
 					FileSystemView filesys = FileSystemView.getFileSystemView();
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
@@ -215,7 +222,6 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
 
-					// Metodo utilizado para los que de error el preview
 					FileSystemView filesys = FileSystemView.getFileSystemView();
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
@@ -242,6 +248,7 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 
 	}
 
+	/* Metodo que permite limpiar los campos de los filtros de busqueda */
 	@Listen("onClick = #btnCancelarReporteConfiguracion")
 	public void cancelar() throws JRException {
 
@@ -250,7 +257,7 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 		rdgConfiguracion.setSelectedItem(null);
 
 	}
-
+	/*Metodo que permite cerrar la vista*/
 	@Listen("onClick = #btnSalirReporteConfigurcion")
 	public void salir() throws JRException {
 
