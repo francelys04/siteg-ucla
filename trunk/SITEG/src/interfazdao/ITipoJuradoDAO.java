@@ -11,8 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ITipoJuradoDAO extends JpaRepository<TipoJurado, Long> {
 
-	@Query("select tj from TipoJurado tj where tj.estatus=true")
-	public List<TipoJurado> buscarTipoJuradoActivos();
+	public List<TipoJurado> findByEstatusTrueOrderByNombreAsc();
 
 	public TipoJurado findById(long id);
 
