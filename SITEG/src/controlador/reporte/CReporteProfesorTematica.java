@@ -48,11 +48,14 @@ import servicio.STematica;
 @Controller
 public class CReporteProfesorTematica extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
 	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
 	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
+	private String[] estatusProfesor = { "Todos", "true", "false" };
+	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
+	List<Tematica> tematicas = new ArrayList<Tematica>();
+	List<Programa> programas = new ArrayList<Programa>();
+	long idTematica = 0;
+
 	@Wire
 	private Window wdwReporteProfesorTematica;
 	@Wire
@@ -65,12 +68,16 @@ public class CReporteProfesorTematica extends CGeneral {
 	private Combobox cmbArea;
 	@Wire
 	private Combobox cmbTematica;
-	private String[] estatusProfesor = { "Todos", "true", "false" };
-	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
-	List<Tematica> tematicas = new ArrayList<Tematica>();
-	List<Programa> programas = new ArrayList<Programa>();
-	long idTematica = 0;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista, tambien se buscan todos los programas
+	 * disponibles, adicionando un nuevo item donde se puede seleccionar la
+	 * opcion de "Todos", junto a esto se tiene una lista previamente cargada de
+	 * manera estatica los estatus o roles del profesor y se llenan los campos
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public
 	void inicializar(Component comp) {
@@ -118,7 +125,12 @@ public class CReporteProfesorTematica extends CGeneral {
 			map = null;
 		}
 	}
-
+	/*
+	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
+	 * se puede seleccionar la opcion de "Todos" en el combo de las areas.
+	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccinarPrograma() {
 		cmbArea.setValue("");
@@ -134,7 +146,11 @@ public class CReporteProfesorTematica extends CGeneral {
 					.setModel(new ListModelList<AreaInvestigacion>(areas));
 		}
 	}
-
+	/*
+	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo tematica
+	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
 		cmbTematica.setValue("");
@@ -144,13 +160,19 @@ public class CReporteProfesorTematica extends CGeneral {
 		cmbTematica.setModel(new ListModelList<Tematica>(
 				tematicas));
 	}
-
+	/*
+	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
+	 * uno en el campo del mismo.
+	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
 		idTematica = Long.parseLong(cmbTematica
 				.getSelectedItem().getId());
 	}
-
+	/*
+	 * Metodo que permite dado al condicional, mapear los datos vaciados en la
+	 * vista, para poder ser utilizados en la vista asociada.
+	 */
 	@Listen("onClick = #btnProfesor")
 	public void buscarProfesor() {
 
@@ -181,7 +203,13 @@ public class CReporteProfesorTematica extends CGeneral {
 		}
 
 	}
-
+	/*
+	 * Metodo que permite generar un reporte, dado a una tematica y un estatus
+	 * del proyecto, se generara un pdf donde se muestra una lista de profesores
+	 * asociados a una tematica de esta seleccion, mediante el componente
+	 * "Jasperreport" donde se mapea una serie de parametros y una lista
+	 * previamente cargada que seran los datos que se muestra en el documento.
+	 */
 	@Listen("onClick = #btnGenerarReporte")
 	public void generarReporte() throws JRException {
 		String cedula = txtCedulaProfesor.getValue();
