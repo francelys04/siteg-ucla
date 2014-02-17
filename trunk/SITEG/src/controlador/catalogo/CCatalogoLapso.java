@@ -1,10 +1,21 @@
 package controlador.catalogo;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.swing.filechooser.FileSystemView;
 
 import modelo.Lapso;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -105,6 +116,42 @@ public class CCatalogoLapso extends CGeneral {
 			wdwCatalogoLapso.onClose();
 		}
 		}
+	}
+	
+	@Listen("onClick = #btnImprimir")
+	public void imprimir() throws SQLException {	
+		FileSystemView filesys = FileSystemView.getFileSystemView();
+		List<Lapso> lapsos = servicioLapso.buscarActivos();
+		JasperReport jasperReport;
+		try {
+			String rutaUrl = obtenerDirectorio();
+			String reporteSrc = rutaUrl
+					+ "SITEG/vistas/reportes/salidas/compilados/RLapsos.jasper";
+			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+		    Map p = new HashMap();
+			p.put("logoUcla", reporteImage + "logo ucla.png");
+			p.put("logoCE", reporteImage + "logo CE.png");
+			p.put("logoSiteg", reporteImage + "logo.png");
+				
+				
+			 
+
+			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,  new JRBeanCollectionDataSource(lapsos));
+			JasperViewer.viewReport(jasperPrint, false);
+			
+		} catch (JRException e) {
+			System.out.println(e);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	@Listen("onClick = #btnSalirCatalogoLapso")
+	public void salirCatalogoLapso() {
+		wdwCatalogoLapso.onClose();
 	}
 
 }
