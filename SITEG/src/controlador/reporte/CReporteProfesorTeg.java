@@ -47,10 +47,22 @@ import servicio.STematica;
 @Controller
 public class CReporteProfesorTeg extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
 	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
+	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
+	List<Tematica> tematicas = new ArrayList<Tematica>();
+	List<Programa> programas = new ArrayList<Programa>();
+	long idTematica = 0;
+	private String[] estatusProyecto = { "Solicitando Registro",
+			"Proyecto Registrado", "Comision Asignada",
+			"Factibilidad Evaluada", "Proyecto Factible",
+			"Proyecto No Factible", "Proyecto en Desarrollo",
+			"Avances Finalizados", "TEG Registrado", "Trabajo en Desarrollo",
+			"Revisiones Finalizadas", "Solicitando Defensa", "Jurado Asignado",
+			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado"
+
+	};
+
 	@Wire
 	private Window wdwReporteProfesorTeg;
 	@Wire
@@ -70,21 +82,15 @@ public class CReporteProfesorTeg extends CGeneral {
 	@Wire
 	private Combobox cmbTematicaReporteProfesorTeg;
 
-	private String[] estatusProyecto = { "Solicitando Registro",
-			"Proyecto Registrado", "Comision Asignada",
-			"Factibilidad Evaluada", "Proyecto Factible",
-			"Proyecto No Factible", "Proyecto en Desarrollo",
-			"Avances Finalizados", "TEG Registrado", "Trabajo en Desarrollo",
-			"Revisiones Finalizadas", "Solicitando Defensa", "Jurado Asignado",
-			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado"
-
-	};
-
-	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
-	List<Tematica> tematicas = new ArrayList<Tematica>();
-	List<Programa> programas = new ArrayList<Programa>();
-	long idTematica = 0;
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista, tambien se buscan todos los programas
+	 * disponibles, adicionando un nuevo item donde se puede seleccionar la
+	 * opcion de "Todos", junto a esto se tiene una lista previamente cargada de
+	 * manera estatica los estatus de la defensa y se llenan los campos
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -132,6 +138,12 @@ public class CReporteProfesorTeg extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde se puede
+	 * seleccionar la opcion de "Todos" en el combo de las areas.
+	 */
 	@Listen("onSelect = #cmbProgramaReporteProfesorTeg")
 	public void seleccinarPrograma() {
 		cmbAreaReporteProfesorTeg.setValue("");
@@ -148,6 +160,11 @@ public class CReporteProfesorTeg extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo tematica
+	 */
 	@Listen("onSelect = #cmbAreaReporteProfesorTeg")
 	public void seleccionarArea() {
 		cmbTematicaReporteProfesorTeg.setValue("");
@@ -158,12 +175,20 @@ public class CReporteProfesorTeg extends CGeneral {
 				tematicas));
 	}
 
+	/*
+	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
+	 * uno en el campo del mismo.
+	 */
 	@Listen("onSelect = #cmbTematicaReporteProfesorTeg")
 	public void seleccionarTematica() {
 		idTematica = Long.parseLong(cmbTematicaReporteProfesorTeg
 				.getSelectedItem().getId());
 	}
 
+	/*
+	 * Metodo que permite dado al condicional, mapear los datos vaciados en la
+	 * vista, para poder ser utilizados en la vista asociada.
+	 */
 	@Listen("onClick = #btnProfesorReporteProfesorTeg")
 	public void buscarProfesor() {
 
@@ -196,6 +221,13 @@ public class CReporteProfesorTeg extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite generar un reporte, dado a una tematica y un estatus
+	 * del proyecto, se generara un pdf donde se muestra una lista de teg
+	 * asociados a un profesor de esta seleccion, mediante el componente
+	 * "Jasperreport" donde se mapea una serie de parametros y una lista
+	 * previamente cargada que seran los datos que se muestra en el documento.
+	 */
 	@Listen("onClick = #btnGenerarReporteProfesorTeg")
 	public void generarReporteProfesorTeg() throws JRException {
 		String cedula = txtCedulaReporteProfesorTeg.getValue();
@@ -252,29 +284,13 @@ public class CReporteProfesorTeg extends CGeneral {
 			String rutaUrl = obtenerDirectorio();
 			String reporteSrc = rutaUrl
 					+ "SITEG/vistas/reportes/salidas/compilados/RProyectosProfesor.jasper";
-			
-			
+
 			JasperReport jasperReport = (JasperReport) JRLoader
 					.loadObject(reporteSrc);
 
 			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					jasperReport, p , new JRBeanCollectionDataSource(
-							tegs));
-			// JasperExportManager.exportReportToPdfFile(jasperPrint,
-			// filesys.getHomeDirectory().toString()
-			// + "/reportePr.pdf");
+					jasperReport, p, new JRBeanCollectionDataSource(tegs));
 			JasperViewer.viewReport(jasperPrint, false);
-			// String rutaUrl = obtenerDirectorio();
-			// String reporteSrc = rutaUrl
-			// +
-			// "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
-			// jstVistaProfesores.setSrc(reporteSrc);
-			// jstVistaProfesores
-			// .setDatasource(new
-			// JRBeanCollectionDataSource(masSolicitados));
-			// jstVistaProfesores.setType("pdf");
-			// jstVistaProfesores.setParameters(mapa);
-			
 
 		}
 
