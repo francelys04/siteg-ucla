@@ -9,6 +9,13 @@
 		<toolbarbutton
 			label="Doble clic para seleccionar el tipo de jurado" />
 	</popup>
+	<popup id="pupImprimirJurado">
+		<toolbarbutton
+			label="Presione aquí para imprimir la lista de Tipos de Jurado" />
+	</popup>
+	<popup id="pupSalirCatalogoJurado">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
 	<!-- Fin de popus -->
 
 	<listbox id="ltbTipoJurado" width="100%" mold="paging" pageSize="10"
@@ -48,8 +55,14 @@
 			<div sclass="alert-info" align="center">
 				<separator />
 				<div sclass="btn-group">
+					
+					<button id="btnImprimir" label="Imprimir"
+						width="110px" tooltip="pupImprimirJurado" sclass="btn"
+						image="/public/imagenes/iconos/imprimir.png" tabindex="1">
+					</button>
+					
 					<button id="btnSalirCatalogoTipoJurado" label="Salir"
-						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
+						width="110px" tooltip="pupSalirCatalogoJurado" sclass="btn"
 						image="/public/imagenes/iconos/salir.png" tabindex="7">
 					</button>
 					<separator />
