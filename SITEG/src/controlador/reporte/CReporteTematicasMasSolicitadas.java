@@ -90,8 +90,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 	private Combobox cmbEtapaTeg;
 	@Wire
 	private Window wdwReporteTematicasMasSolicitadas;
-	@Wire
-	private Jasperreport jstVistaPrevia;
+
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
@@ -356,8 +355,6 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
 
-		jstVistaPrevia.setSrc("");
-		jstVistaPrevia.setDatasource(null);
 	}
 
 	/* Metodo que permite cerrar la vista. */

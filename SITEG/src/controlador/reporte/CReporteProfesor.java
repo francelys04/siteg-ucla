@@ -71,15 +71,16 @@ import servicio.STematica;
 public class CReporteProfesor extends CGeneral {
 	
 	
-	SJurado servicioJurado = GeneradorBeans.getServicioJurado();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
 	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
 	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
+	private String[] estatusProfesor = { "Todos", "Tutor",
+			"Comision Evaluadora", "Jurado" };
+	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
+	List<Tematica> tematicas = new ArrayList<Tematica>();
+	List<Programa> programas = new ArrayList<Programa>();
+	long idTematica = 0;
+	long idArea = 0;
+	
 	@Wire
 	private Window wdwReporteProfesor;
 	@Wire
@@ -100,14 +101,16 @@ public class CReporteProfesor extends CGeneral {
 	private Combobox cmbTematica;
 	@Wire
 	private Jasperreport jstVistaPrevia;
-	private String[] estatusProfesor = { "Todos", "Tutor",
-			"Comision Evaluadora", "Jurado" };
-	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
-	List<Tematica> tematicas = new ArrayList<Tematica>();
-	List<Programa> programas = new ArrayList<Programa>();
-	long idTematica = 0;
-	long idArea = 0;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista, tambien se buscan todos los programas
+	 * disponibles, adicionando un nuevo item donde se puede seleccionar la
+	 * opcion de "Todos", junto a esto se tiene una lista previamente cargada de
+	 * manera estatica los estatus o roles del profesor y se llenan los campos
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public
 	void inicializar(Component comp) {
@@ -143,7 +146,12 @@ public class CReporteProfesor extends CGeneral {
 			}
 		}
 	}
-
+	/*
+	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
+	 * se puede seleccionar la opcion de "Todos" en el combo de las areas.
+	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccinarPrograma() {
 		if (cmbPrograma.getValue().equals("Todos")) {
@@ -160,7 +168,11 @@ public class CReporteProfesor extends CGeneral {
 		 	areas.add(area);
 		    cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 		}	}
-
+	/*
+	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo tematica
+	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
 		if (cmbArea.getValue().equals("Todos")) {
@@ -175,14 +187,24 @@ public class CReporteProfesor extends CGeneral {
 		    cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
 	}
 	}
-
+	/*
+	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
+	 * uno en el campo del mismo.
+	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
 		idTematica = tematica.getId();
 	}
 
-
+	/*
+	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
+	 * y tipo de cargo, se generara un pdf donde se muestra una lista de
+	 * profesores especificando tanto datos basicos como su rol en el teg de
+	 * esta seleccion, la cual esta condicionado, mediante el componente
+	 * "Jasperreport" donde se mapea una serie de parametros y una lista
+	 * previamente cargada que seran los datos que se muestra en el documento.
+	 */
 	@Listen("onClick = #btnGenerarReporteProfesorCargo")
 	public void generarReporteProfesorTeg() throws JRException {
 		Date fechaInicio = dtbCronogramaFechaInicio.getValue();
