@@ -48,22 +48,7 @@ import controlador.CGeneral;
 
 @Controller
 public class CReporteSolicitudes extends CGeneral {
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
 
-	@Wire
-	private Datebox dtbInicioReporteSolicitud;
-	@Wire
-	private Datebox dtbFinReporteSolicitud;
-	@Wire
-	private Combobox cmbProgramaReporteSolicitud;
-	@Wire
-	private Combobox cmbAreaReporteSolicitud;
-	@Wire
-	private Combobox cmbTematicaReporteSolicitud;
-	@Wire
-	private Combobox cmbEstatusReporteSolicitud;
-	@Wire
-	private Window wdwReporteSolicitudesTutoria;
 	long idTematica = 0;
 	private static Date fechaInicio;
 	private static Date fechaFin;
@@ -79,7 +64,27 @@ public class CReporteSolicitudes extends CGeneral {
 	List<SolicitudTutoria> solicitud = new ArrayList<SolicitudTutoria>();
 	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	private static long idarea;
+	@Wire
+	private Datebox dtbInicioReporteSolicitud;
+	@Wire
+	private Datebox dtbFinReporteSolicitud;
+	@Wire
+	private Combobox cmbProgramaReporteSolicitud;
+	@Wire
+	private Combobox cmbAreaReporteSolicitud;
+	@Wire
+	private Combobox cmbTematicaReporteSolicitud;
+	@Wire
+	private Combobox cmbEstatusReporteSolicitud;
+	@Wire
+	private Window wdwReporteSolicitudesTutoria;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
+	 * seleccionar la opcion de "Todos" y se llena una lista del mismo en el
+	 * componente de la vista.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		cmbEstatusReporteSolicitud.setModel(new ListModelList<String>(
@@ -93,6 +98,12 @@ public class CReporteSolicitudes extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
+	 * se puede seleccionar la opcion de "Todos" en el combo de las areas
+	 */
 	@Listen("onSelect =  #cmbProgramaReporteSolicitud")
 	public void seleccionarPrograma() {
 		if (cmbProgramaReporteSolicitud.getValue().equals("Todos")) {
@@ -119,6 +130,12 @@ public class CReporteSolicitudes extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo tematica, ademas se adiciona un nuevo item donde se
+	 * puede seleccionar la opcion de "Todos" en el combo de las tematicas.
+	 */
 	@Listen("onSelect = #cmbAreaReporteSolicitud")
 	public void seleccionarArea() {
 		if (cmbAreaReporteSolicitud.getValue().equals("Todos")) {
@@ -144,6 +161,10 @@ public class CReporteSolicitudes extends CGeneral {
 				.getId());
 	}
 
+	/*
+	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
+	 * uno en el campo del mismo.
+	 */
 	@Listen("onSelect = #cmbTematicaReporteSolicitud")
 	public void seleccionarTematica() {
 		if (cmbAreaReporteSolicitud.getValue().equals("Todos")) {
@@ -159,6 +180,13 @@ public class CReporteSolicitudes extends CGeneral {
 		idTematica = tematica.getId();
 	}
 
+	/*
+	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
+	 * y estatus de solicitud, se generara un pdf donde se muestra una lista de
+	 * las solicitudes de tutorias de esta seleccion, mediante el componente
+	 * "Jasperreport" se mapea una serie de parametros y una lista previamente
+	 * cargada que seran los datos que se muestra en el documento.
+	 */
 	@Listen("onClick = #btnGenerarReporteSolicitud")
 	public void GenerarReporte() throws JRException {
 
@@ -805,6 +833,7 @@ public class CReporteSolicitudes extends CGeneral {
 		}
 	}
 
+	/* Metodo que permite limpiar los campos de los filtros de busqueda */
 	@Listen("onClick = #btnCancelarReporteSolicitud")
 	public void cancelar() throws JRException {
 
@@ -817,13 +846,12 @@ public class CReporteSolicitudes extends CGeneral {
 
 	}
 
+	/* Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalirReporteSolicitud")
 	public void salirReporteSolicitud() throws JRException {
 
 		wdwReporteSolicitudesTutoria.onClose();
-		
-		
-	}
 
+	}
 
 }
