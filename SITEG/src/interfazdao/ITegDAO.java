@@ -183,16 +183,16 @@ public List<Teg> buscarTegPrograma(Programa programa, Date fechaInicio,Date fech
 public List<Teg> buscarTegTodos(Date fechaInicio,Date fechaFin);
 
 /******************************* Querys para buscar la lista de teg dado una tematica, Varios estatus, fecha inicio y fecha fin ******************************/	
-@Query("select teg from Teg teg where (teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4 and teg.tematica=?5 and fecha between ?6 and ?7)")
+@Query("select teg from Teg teg where ((teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4) and teg.tematica=?5 and fecha between ?6 and ?7)")
 public List<Teg> buscarTegporFechayVariosEstatus1(String estatus1,String estatus2,String estatus3,String estatus4, Tematica tematica, Date fechaInicio,Date fechaFin);
 
 /**********************************Querys para buscar la lista de teg dado varias areas, un programa, Varios estatus, fecha inicio y fecha fin ******************************/	
-@Query("select teg from Teg teg where teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4 and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?5)) and fecha between ?6 and ?7")
+@Query("select teg from Teg teg where (teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4) and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?5)) and fecha between ?6 and ?7")
 public List<Teg> buscarTegPorProgramaVariasAreasVariosEstatus1(String estatus1,String estatus2,String estatus3,String estatus4, Programa programa , Date fechaInicio,Date fechaFin);
 
 
 /**********************************Querys para buscar la lista de tg dado todos los programas y Varios estatus ***********************************************************/
-@Query("select teg from Teg teg where teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4 and fecha between ?5 and ?6 Order by teg.tematica.id")
+@Query("select teg from Teg teg where (teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4) and fecha between ?5 and ?6 Order by teg.tematica.id")
 public List<Teg> buscarTegPorVariosProgramasVariosEstatus1(String estatus1,String estatus2,String estatus3,String estatus4, Date fechaInicio,Date fechaFin);
 
 
