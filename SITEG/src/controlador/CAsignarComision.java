@@ -1,7 +1,6 @@
 package controlador;
 
 import java.io.IOException;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,12 +10,10 @@ import java.util.List;
 import java.util.Set;
 
 import modelo.Estudiante;
-import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
 import modelo.TegEstatus;
-import modelo.compuesta.CondicionPrograma;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
@@ -47,6 +44,7 @@ import org.zkoss.zul.Window;
 @Controller
 public class CAsignarComision extends CGeneral {
 
+	private static final long serialVersionUID = -6196104502013500872L;
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	private long id = 0;
 	private static long auxiliarId = 0;
@@ -328,7 +326,7 @@ public class CAsignarComision extends CGeneral {
 				Messagebox.show("¿Desea guardar los miembros de la comision?",
 						"Dialogo de confirmacion", Messagebox.OK
 								| Messagebox.CANCEL, Messagebox.QUESTION,
-						new org.zkoss.zk.ui.event.EventListener() {
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
 							public void onEvent(Event evt)
 									throws InterruptedException {
 								if (evt.getName().equals("onOK")) {
@@ -382,14 +380,8 @@ public class CAsignarComision extends CGeneral {
 	public void finalizarComision() {
 
 		int valorcondicion = valorCondicion();
-
-		Listitem listProfesoresSeleccionados = lsbProfesoresSeleccionados
-				.getSelectedItem();
-
 		int valorItem = lsbProfesoresSeleccionados.getItemCount();
-
 		if (valorItem == 0) {
-
 			Messagebox
 					.show("Debe Seleccionar los profesores que conformaran la comision evaluadora",
 							"Error", Messagebox.OK, Messagebox.ERROR);
@@ -399,7 +391,7 @@ public class CAsignarComision extends CGeneral {
 					.show("¿Desea finalizar la asignacion de la comision evaluadora?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
-							new org.zkoss.zk.ui.event.EventListener() {
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {

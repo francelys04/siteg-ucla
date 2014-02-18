@@ -33,6 +33,7 @@ import org.zkoss.zul.Window;
 @Controller
 public class CNoticia extends CGeneral {
 
+	private static final long serialVersionUID = -502940297770512719L;
 	@Wire
 	private Textbox txtNombreNoticia;
 	@Wire
@@ -130,7 +131,7 @@ public class CNoticia extends CGeneral {
 				Messagebox.show("¿Desea guardar los datos de la noticia?",
 						"Dialogo de confirmacion", Messagebox.OK
 								| Messagebox.CANCEL, Messagebox.QUESTION,
-						new org.zkoss.zk.ui.event.EventListener() {
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
 							public void onEvent(Event evt)
 									throws InterruptedException {
 								if (evt.getName().equals("onOK")) {
@@ -165,7 +166,7 @@ public class CNoticia extends CGeneral {
 	public void eliminarNoticia() {
 		Messagebox.show("¿Desea eliminar los datos de la noticia?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Noticia noticia = servicioNoticia.buscarNoticia(id);

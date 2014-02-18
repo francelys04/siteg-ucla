@@ -23,6 +23,7 @@ import controlador.catalogo.CCatalogoActividad;
 @Controller
 public class CActividad extends CGeneral {
 
+	private static final long serialVersionUID = -7144250834458342918L;
 	CCatalogoActividad catalogo = new CCatalogoActividad();
 	private long id = 0;
 	@Wire
@@ -94,7 +95,7 @@ public class CActividad extends CGeneral {
 			Messagebox.show("¿Desea guardar los datos de la actividad?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -124,7 +125,7 @@ public class CActividad extends CGeneral {
 	public void eliminarActividad() {
 		Messagebox.show("¿Desea eliminar los datos de la actividad?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Actividad actividad = servicioActividad

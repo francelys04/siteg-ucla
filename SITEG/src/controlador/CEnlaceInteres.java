@@ -45,6 +45,8 @@ import controlador.catalogo.CCatalogoEnlaceInteres;
  * sobre la entidad EnlaceInteres*/
 @Controller
 public class CEnlaceInteres extends CGeneral {
+	
+	private static final long serialVersionUID = -6297699990954496428L;
 	CCatalogoEnlaceInteres catalogo = new CCatalogoEnlaceInteres();
 	@Wire
 	private Textbox txtNombreEnlace;
@@ -143,7 +145,7 @@ public class CEnlaceInteres extends CGeneral {
 			Messagebox.show("¿Desea guardar los datos del enlace de interes?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -180,7 +182,7 @@ public class CEnlaceInteres extends CGeneral {
 		
 		Messagebox.show("¿Desea eliminar los datos del enlace de interes?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							EnlaceInteres enlace = servicioEnlace.buscarEnlace(id);

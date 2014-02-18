@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.Actividad;
-import modelo.Defensa;
 import modelo.Estudiante;
 import modelo.Factibilidad;
 import modelo.ItemEvaluacion;
@@ -24,7 +22,6 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -33,24 +30,21 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SEstudiante;
-import servicio.SFactibilidad;
-import servicio.SProgramaItem;
-import servicio.STeg;
-import servicio.SItemFactibilidad;
-import servicio.SLapso;
-import servicio.SProgramaItem;
-
-import configuracion.GeneradorBeans;
-import controlador.CGeneral;
-
+/*
+ * Controlador que permite asignar una ponderacion cualitativa a los items
+ * de evaluacion de factibilidad de un proyecto. Esta accion es realizada
+ * por parte de los integrantes de la comision evaluadora
+ */
 public class CEvaluarFactibilidad extends CGeneral {
 
+	private static final long serialVersionUID = -8096424069052210038L;
+	private static String vistaRecibida;
+	private static long auxiliarId = 0;
+	private static Programa programa;
 	@Wire
 	private Datebox db1;
 	@Wire
 	private Listbox ltbListaFactibilidad;
-
 	@Wire
 	private Listbox ltbItemsFactibilidad;
 	@Wire
@@ -75,12 +69,13 @@ public class CEvaluarFactibilidad extends CGeneral {
 	private Window wdwEvaluarFactibilidad;
 	@Wire
 	private Window wdwCatalogoEvaluarFactibilidad;
-	private static String vistaRecibida;
-	private long id = 0;
-	private static long auxiliarId = 0;
-	private static long auxIdPrograma = 0;
-	private static Programa programa;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos y listas
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -94,15 +89,12 @@ public class CEvaluarFactibilidad extends CGeneral {
 				long codigo = (Long) map.get("id");
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-
-				// se toma es el programa del estudiante asociado a el teg.
 				List<Estudiante> estudiantes = servicioEstudiante
 						.buscarEstudiantesDelTeg(teg2);
 
 				if (estudiantes.size() != 0) {
 					programa = estudiantes.get(0).getPrograma();
 				}
-
 				ltbEstudianteEvaluarFactibilidad
 						.setModel(new ListModelList<Estudiante>(estudiantes));
 
@@ -111,7 +103,6 @@ public class CEvaluarFactibilidad extends CGeneral {
 						.getareaInvestigacion().getNombre());
 				txtTematicaEvaluarFactibilidad.setValue(teg2.getTematica()
 						.getNombre());
-
 				txtNombreTutorEvaluarFactibilidad.setValue(teg2.getTutor()
 						.getNombre());
 				txtApellidoTutorEvaluarFactibilidad.setValue(teg2.getTutor()
@@ -130,18 +121,20 @@ public class CEvaluarFactibilidad extends CGeneral {
 				}
 				ltbItemsFactibilidad
 						.setModel(new ListModelList<ItemEvaluacion>(item2));
-
 			}
 		}
-
 	}
 
+	/*
+	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
+	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	// Permite salir y refrescar las vistas (Evaluar factibilidad y catalogo)
+	/* Metodo que permite cerrar la pantalla actualizando los cambios realizados */
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -151,7 +144,12 @@ public class CEvaluarFactibilidad extends CGeneral {
 		wdwEvaluarFactibilidad.onClose();
 	}
 
-	// Permite guardar los datos de la factibilidad
+	/*
+	 * Metodo que permite guardar las ponderaciones de los items de
+	 * factibilidad, creando un nuevo registro de factibilidad, de ser el caso y
+	 * se actualiza el estatus del TEG y la correspondiente tabla de historico
+	 * de cambios del TEG
+	 */
 	@Listen("onClick = #btnGuardarEvaluacionFactibilidad")
 	public void guardar() {
 
@@ -218,15 +216,17 @@ public class CEvaluarFactibilidad extends CGeneral {
 								"Dialogo de confirmacion", Messagebox.OK
 										| Messagebox.CANCEL,
 								Messagebox.QUESTION,
-								new org.zkoss.zk.ui.event.EventListener() {
+								new org.zkoss.zk.ui.event.EventListener<Event>() {
 									public void onEvent(Event evt)
 											throws InterruptedException {
 										if (evt.getName().equals("onOK")) {
-											
-											Teg tegFactibilidad = servicioTeg.buscarTeg(auxiliarId);
+
+											Teg tegFactibilidad = servicioTeg
+													.buscarTeg(auxiliarId);
 
 											String estatus1 = "Factibilidad Evaluada";
-											tegFactibilidad.setEstatus(estatus1);
+											tegFactibilidad
+													.setEstatus(estatus1);
 
 											/*
 											 * Guardar datos en la tabla
@@ -240,7 +240,8 @@ public class CEvaluarFactibilidad extends CGeneral {
 											servicioTegEstatus
 													.guardar(tegEstatus);
 
-											servicioTeg.guardar(tegFactibilidad);
+											servicioTeg
+													.guardar(tegFactibilidad);
 											Messagebox
 													.show("Datos de la evaluacion registrados exitosamente",
 															"Informacion",
@@ -257,6 +258,9 @@ public class CEvaluarFactibilidad extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
+	 */
 	@Listen("onClick = #btnCancelarEvaluacionFactibilidad")
 	public void cancelar() {
 		txtObservacionEvaluarFactibilidad.setValue("");
@@ -269,6 +273,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 
 	}
 
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirEvaluacionFactibilidad")
 	public void salirEvaluarFactibilidad() {
 

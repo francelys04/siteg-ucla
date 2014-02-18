@@ -35,6 +35,7 @@ import controlador.catalogo.CCatalogoProfesor;
 @Controller
 public class CProfesor extends CGeneral {
 
+	private static final long serialVersionUID = -3439594158179320756L;
 	CCatalogoProfesor catalogo = new CCatalogoProfesor();
 	@Wire
 	private Combobox cmbCategoriaProfesor;
@@ -156,7 +157,7 @@ public class CProfesor extends CGeneral {
 			Messagebox.show("¿Desea guardar los datos del profesor?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -238,7 +239,7 @@ public class CProfesor extends CGeneral {
 
 		Messagebox.show("¿Desea eliminar los datos del profesor?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							String cedula = txtCedulaProfesor.getValue();

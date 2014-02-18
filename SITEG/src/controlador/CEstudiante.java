@@ -1,8 +1,5 @@
 package controlador;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,37 +8,23 @@ import modelo.Programa;
 import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SEstudiante;
-import servicio.SPrograma;
-import servicio.seguridad.SUsuario;
-import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoEstudiante;
 
 /*Controlador que permite realizar las operaciones basicas (CRUD)
@@ -49,6 +32,7 @@ import controlador.catalogo.CCatalogoEstudiante;
 @Controller
 public class CEstudiante extends CGeneral {
 
+	private static final long serialVersionUID = 4825869502092751536L;
 	CCatalogoEstudiante catalogo = new CCatalogoEstudiante();
 
 	@Wire
@@ -176,7 +160,7 @@ public class CEstudiante extends CGeneral {
 			Messagebox.show("¿Desea guardar datos del estudiante?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -225,7 +209,7 @@ public class CEstudiante extends CGeneral {
 	public void eliminarEstudiante() {
 		Messagebox.show("¿Desea eliminar los datos del estudiante?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							String cedula = txtCedulaEstudiante.getValue();

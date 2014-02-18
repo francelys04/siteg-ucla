@@ -3,133 +3,54 @@ package controlador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Properties;
 import java.util.Set;
 
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-import modelo.Categoria;
-
+import modelo.AreaInvestigacion;
 import modelo.Estudiante;
-
+import modelo.Profesor;
+import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
-import modelo.AreaInvestigacion;
-import modelo.Profesor;
-import modelo.Programa;
-import modelo.TipoJurado;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.select.SelectorComposer;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Grid;
 import org.zkoss.zul.Image;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SEstudiante;
-import servicio.SProgramaArea;
-import servicio.SSolicitudTutoria;
-import servicio.STeg;
-import servicio.STematica;
-import servicio.SAreaInvestigacion;
-import servicio.SProfesor;
-import servicio.SPrograma;
-import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoProfesorTematica;
 
-//es un controlador de Solicitar Tutor
+/*
+ * Controlador que permite enviar una solicitud de tutoria a determinado
+ * profesor, esta debe realizarla un estudiante previamente registrado
+ * dentro del sistema SITEG
+ */
 @Controller
 public class CSolicitarTutor extends CGeneral {
 
-	private static final int Estudiante = 0;
+	private static final long serialVersionUID = -3742947611091908225L;
 	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
-
-	@Wire
-	private Datebox db1;
-	@Wire
-	private Button btnAgregarEstudiante;
-	@Wire
-	private Listbox ltbEstudiantes;
-
-	// atributos del Proyecto
-
-	@Wire
-	private Combobox cmbAreaSolicitud;
-	@Wire
-	private Combobox cmbTematicaSolicitud;
-	@Wire
-	private Textbox txtTituloSolicitud;
-
-	// atributos del Estudiante
-	@Wire
-	private Textbox txtCedulaEstudiante;
-
-	// atributos del Tutor
-	@Wire
-	private Textbox txtCedulaProfesor;
-	@Wire
-	private Textbox txtNombreProfesor;
-	@Wire
-	private Textbox txtApellidoProfesor;
-	@Wire
-	private Textbox txtCorreoProfesor;
-	@Wire
-	private Image imagenTutor;
-
-	// atributos de la pantalla del catalogo
-	@Wire
-	private Textbox txtCedulaMostrarProfesor;
-	@Wire
-	private Textbox txtNombreMostrarProfesor;
-	@Wire
-	private Textbox txtApellidoMostrarProfesor;
-	@Wire
-	private Textbox txtCorreoMostrarProfesor;
-	@Wire
-	private Textbox txtCategoriaMostrarProfesor;
-	@Wire
-	private Window wdwSolicitarTutoria;
-	@Wire
-	private Window wdwCatalogoProfesorArea;
-
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	private long id;
 	private static long valor;
@@ -146,36 +67,74 @@ public class CSolicitarTutor extends CGeneral {
 	public static Estudiante estudiante1;
 	public static Date fecha;
 
+	@Wire
+	private Datebox db1;
+	@Wire
+	private Button btnAgregarEstudiante;
+	@Wire
+	private Listbox ltbEstudiantes;
+	@Wire
+	private Combobox cmbAreaSolicitud;
+	@Wire
+	private Combobox cmbTematicaSolicitud;
+	@Wire
+	private Textbox txtTituloSolicitud;
+	@Wire
+	private Textbox txtCedulaEstudiante;
+	@Wire
+	private Textbox txtCedulaProfesor;
+	@Wire
+	private Textbox txtNombreProfesor;
+	@Wire
+	private Textbox txtApellidoProfesor;
+	@Wire
+	private Textbox txtCorreoProfesor;
+	@Wire
+	private Image imagenTutor;
+	@Wire
+	private Textbox txtCedulaMostrarProfesor;
+	@Wire
+	private Textbox txtNombreMostrarProfesor;
+	@Wire
+	private Textbox txtApellidoMostrarProfesor;
+	@Wire
+	private Textbox txtCorreoMostrarProfesor;
+	@Wire
+	private Textbox txtCategoriaMostrarProfesor;
+	@Wire
+	private Window wdwSolicitarTutoria;
+	@Wire
+	private Window wdwCatalogoProfesorArea;
+
 	private static List<Estudiante> EstudiantesColocados = new ArrayList<Estudiante>();
 
 	List<Estudiante> gridEstudiante = new ArrayList<Estudiante>();
 
-	// metodo para mapear los datos del Tutor
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
+	@Override
 	public void inicializar(Component comp) {
 
 		cmbAreaSolicitud.setModel(new ListModelList<AreaInvestigacion>());
-
 		if (combo1 == null) {
 			// cmbAreaSolicitud.setDisabled(true);
 		} else {
 			cmbAreaSolicitud.setValue(combo1);
 			combo1 = null;
 		}
-
 		if (combo2 == null) {
 			// cmbTematicaSolicitud.setDisabled(true);
 		} else {
 			cmbTematicaSolicitud.setValue(combo2);
 			combo2 = null;
-
 		}
-
 		if (descripcion != null) {
-
 			txtTituloSolicitud.setValue(descripcion);
 			descripcion = null;
 		}
-
 		if (EstudiantesColocados.size() != 0) {
 			for (int i = 0; i < EstudiantesColocados.size(); i++) {
 
@@ -183,9 +142,7 @@ public class CSolicitarTutor extends CGeneral {
 						EstudiantesColocados));
 			}
 			EstudiantesColocados.clear();
-
 		}
-
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 
@@ -204,16 +161,19 @@ public class CSolicitarTutor extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado original
+	 */
 	public void limpiarDatosEstudiante() {
-
 		txtCedulaEstudiante.setValue("");
-
 	}
 
+	/*
+	 * Metodo que permite llenar el combo de areas asociadas al programa de los
+	 * estudiantes de la solicitud; este combo se puede llenar luego de que al
+	 * menos un estudiante es agregado a la solicitud
+	 */
 	public void llenarcombo() {
-
-		System.out.println(programa.getNombre());
-
 		idcombo = programa.getId();
 		List<AreaInvestigacion> a = servicioProgramaArea
 				.buscarAreasDePrograma(programa);
@@ -221,82 +181,74 @@ public class CSolicitarTutor extends CGeneral {
 
 	}
 
-	// se activa el combo tematicas si selecciona un area
-	// obteniendo el area seleccionada
-
+	/* Metodo que permite llenar el combo de areas */
 	@Listen("onClick = #cmbAreaSolicitud")
-	public void llenarareas() {
-		idcombo = programa.getId();
-		List<AreaInvestigacion> a = servicioProgramaArea
-				.buscarAreasDePrograma(programa);
-		cmbAreaSolicitud.setModel(new ListModelList<AreaInvestigacion>(a));
-
+	public void llenarAreas() {
+		llenarcombo();
 	}
 
+	/*
+	 * Metodo que permite llenar el combo de tematicas luego de que se
+	 * selecciona un area
+	 */
 	@Listen("onSelect = #cmbAreaSolicitud")
 	public void tematicaSolicitud() {
-
 		String area = cmbAreaSolicitud.getValue();
 		AreaInvestigacion area2 = servicioArea.buscarAreaPorNombre(area);
-
 		List<Tematica> tematicas = servicioTematica
 				.buscarTematicasDeArea(area2);
 		cmbTematicaSolicitud.setModel(new ListModelList<Tematica>(tematicas));
 
 	}
 
+	/*
+	 * Metodo que permite obtener el id de la tematica seleccionada en el combo
+	 * respectivo
+	 */
 	@Listen("onSelect = #cmbTematicaSolicitud")
 	public void tematica() {
 		valor = Long.parseLong(cmbTematicaSolicitud.getSelectedItem().getId());
 
 	}
 
-	public String capturarArea() {
-		String a = cmbAreaSolicitud.getValue();
-		return a;
-	}
-
-	// permite ver la lista de profesores disponibles
+	/*
+	 * Metodo que permite mostrar el catalogo de profesores asociados a la
+	 * tematica expuesta en la solicitud
+	 */
 	@Listen("onClick = #btnCatalogoProfesorArea")
 	public void buscarProfesor() {
-
 		combo1 = cmbAreaSolicitud.getValue();
 		combo2 = cmbTematicaSolicitud.getValue();
 		descripcion = txtTituloSolicitud.getValue();
 		for (int i = 0; i < ltbEstudiantes.getItemCount(); i++) {
 			Estudiante e = ltbEstudiantes.getItems().get(i).getValue();
-
 			EstudiantesColocados.add(e);
-
 		}
-
 		if (combo2.compareTo("") == 0) {
-
 			Messagebox.show("Debe elegir la tematica", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 		}
-
 		if ((combo2.compareTo("") != 0)) {
-
 			catalogo.recibir("transacciones/VSolicitarTutor", idcombo, valor);
-
 			Window window = (Window) Executions.createComponents(
 					"/vistas/catalogos/VCatalogoProfesorTematica.zul", null,
 					null);
 			window.doModal();
-
 			wdwSolicitarTutoria.onClose();
 		}
 
 	}
 
-	// Permite realizar una peticion de tutoria
+	/*
+	 * Metodo que permite enviar una solicitud de tutoria a determinado
+	 * profesor, donde se hace el llamado a varios metodos dentro de este
+	 * controlador
+	 */
 	@Listen("onClick = #btnEnviarSolicitudtutoria")
 	public void enviarSolicitud() {
 
 		fecha = db1.getValue();
 		estado = "Por Revisar";
-
 		area = cmbAreaSolicitud.getValue();
 		tematica = cmbTematicaSolicitud.getValue();
 		titulo = txtTituloSolicitud.getValue();
@@ -304,15 +256,10 @@ public class CSolicitarTutor extends CGeneral {
 		String nombreProfesor = txtNombreProfesor.getValue();
 		String apellidoProfesor = txtApellidoProfesor.getValue();
 		String correoProfesor = txtCorreoProfesor.getValue();
-		Estudiante pruebaCondicion = ltbEstudiantes.getItems().get(0)
-				.getValue();
 		for (int i = 0; i < ltbEstudiantes.getItemCount(); i++) {
-			Estudiante e = ltbEstudiantes.getItems().get(i).getValue();
-
-			gridEstudiante.add(e);
-
+			Estudiante estudiante = ltbEstudiantes.getItems().get(i).getValue();
+			gridEstudiante.add(estudiante);
 		}
-
 		if (gridEstudiante.size() == 0) {
 			Messagebox.show("No hay estudiantes agregados", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
@@ -334,7 +281,7 @@ public class CSolicitarTutor extends CGeneral {
 					Messagebox.show("¿Desea enviar la solicitud de tutoria?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
-							new org.zkoss.zk.ui.event.EventListener() {
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
@@ -375,6 +322,11 @@ public class CSolicitarTutor extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite crear un usuario (en caso de que no lo posea) al
+	 * profesor que recibe la solicitud de tutoria. Este usuario pertenece al
+	 * grupo tutor
+	 */
 	private void crearUsuarioProfesor(Profesor profesor) {
 		// TODO Auto-generated method stub
 		Usuario usuario = new Usuario();
@@ -402,26 +354,24 @@ public class CSolicitarTutor extends CGeneral {
 			for (int j = 0; j < grupos.size(); j++) {
 				gruposUsuario.add(grupos.get(j));
 			}
-			System.out.println(grupos.size());
 			usuario.setGrupos(gruposUsuario);
 		}
 		servicioUsuario.guardar(usuario);
 	}
 
-	// limpia todos los campos de la vista
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado original
+	 */
 	@Listen("onClick = #btnCancelarSolicitudTutoria")
 	public void cancelarSolicitud() {
 		id = 0;
-
 		cmbAreaSolicitud.setValue("");
 		cmbTematicaSolicitud.setValue("");
 		cmbAreaSolicitud.setDisabled(true);
 		cmbTematicaSolicitud.setDisabled(true);
 		txtTituloSolicitud.setValue("");
-
 		txtCedulaEstudiante.setValue("");
 		ltbEstudiantes.getItems().clear();
-
 		txtCedulaProfesor.setValue("");
 		txtNombreProfesor.setValue("");
 		txtApellidoProfesor.setValue("");
@@ -429,12 +379,15 @@ public class CSolicitarTutor extends CGeneral {
 
 	}
 
-	// permite agrgar un estudiante a la vista
+	/*
+	 * Metodo que permite añadir un estudiante a la solicitud, se puede añadir
+	 * mas de un estudiante segun la cantidad de estudiantes que pueden realizar
+	 * un mismo teg configurada en el programa correspondiente al estudiante
+	 */
 	@Listen("onClick = #btnAgregarEstudiante")
 	public void AgregarEstudiante() {
 
 		String cedulaEstudiante = txtCedulaEstudiante.getValue();
-
 		if (cedulaEstudiante == "") {
 			Messagebox.show("Debe ingresar su cedula", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
@@ -445,55 +398,50 @@ public class CSolicitarTutor extends CGeneral {
 				Messagebox.show("Debe estar previamente Registrado",
 						"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 				txtCedulaEstudiante.setValue("");
-			} 
-
-				else {
-
-					SolicitudTutoria solicitud = servicioSolicitudTutoria
-							.buscarSolicitudEstudiantePorRevisar(estudiante);
-					SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
-							.buscarSolicitudAceptadaEstudiante(estudiante);
-					if (solicitud != null) {
-						Messagebox
-								.show("Ya tiene una solicitud de tutoria que se encuentra por revisar",
-										"Advertencia", Messagebox.OK,
-										Messagebox.EXCLAMATION);
+			} else {
+				SolicitudTutoria solicitud = servicioSolicitudTutoria
+						.buscarSolicitudEstudiantePorRevisar(estudiante);
+				SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
+						.buscarSolicitudAceptadaEstudiante(estudiante);
+				if (solicitud != null) {
+					Messagebox
+							.show("Ya tiene una solicitud de tutoria que se encuentra por revisar",
+									"Advertencia", Messagebox.OK,
+									Messagebox.EXCLAMATION);
+				} else {
+					if (solicitudAceptada != null) {
+						Messagebox.show(
+								"Ya tiene una solicitud de tutoria aceptada",
+								"Advertencia", Messagebox.OK,
+								Messagebox.EXCLAMATION);
 					} else {
-						if (solicitudAceptada != null) {
-							Messagebox
-									.show("Ya tiene una solicitud de tutoria aceptada",
-											"Advertencia", Messagebox.OK,
-											Messagebox.EXCLAMATION);
+						List<Teg> teg = servicioTeg
+								.buscarTegPorEstudiante(estudiante);
+						if (teg.size() > 0) {
+							Messagebox.show("Ya tiene un TEG en proceso",
+									"Advertencia", Messagebox.OK,
+									Messagebox.EXCLAMATION);
 						} else {
-							List<Teg> teg = servicioTeg
-									.buscarTegPorEstudiante(estudiante);
-							if (teg.size() > 0) {
-								Messagebox.show("Ya tiene un TEG en proceso",
-										"Advertencia", Messagebox.OK,
-										Messagebox.EXCLAMATION);
-							} 
-								else {
+							if (programa != null) {
 
-									if (programa != null) {
-
-										if (estudiante.getPrograma().getId() != programa.getId()) {
-											Messagebox.show(
-													"Los estudiantes deben ser del mismo programa",
-													"Advertencia", Messagebox.OK,
+								if (estudiante.getPrograma().getId() != programa
+										.getId()) {
+									Messagebox
+											.show("Los estudiantes deben ser del mismo programa",
+													"Advertencia",
+													Messagebox.OK,
 													Messagebox.EXCLAMATION);
-											txtCedulaEstudiante.setValue("");
-										}
-										else {
-											programa = estudiante.getPrograma();
-											gridEstudiante.add(estudiante);
-											ltbEstudiantes
-													.setModel(new ListModelList<Estudiante>(
-															gridEstudiante));
-											limpiarDatosEstudiante();
-											llenarcombo();
-									}
-									}
-									else {
+									txtCedulaEstudiante.setValue("");
+								} else {
+									programa = estudiante.getPrograma();
+									gridEstudiante.add(estudiante);
+									ltbEstudiantes
+											.setModel(new ListModelList<Estudiante>(
+													gridEstudiante));
+									limpiarDatosEstudiante();
+									llenarcombo();
+								}
+							} else {
 								programa = estudiante.getPrograma();
 								gridEstudiante.add(estudiante);
 								ltbEstudiantes
@@ -504,14 +452,16 @@ public class CSolicitarTutor extends CGeneral {
 							}
 						}
 					}
-
 				}
 			}
-				}
-
+		}
 	}
 
-	// enviar email al profesor
+	/*
+	 * Metodo que envia un correo electronico al profesor de la solicitud de
+	 * tutoria para informarle que posee una nueva solicitud, asi como su
+	 * usuario y contrasenia
+	 */
 	private void enviarEmailNotificacion() {
 		for (int i = 0; i < ltbEstudiantes.getItemCount(); i++) {
 			Estudiante estudiante = ltbEstudiantes.getItems().get(i).getValue();
@@ -523,16 +473,14 @@ public class CSolicitarTutor extends CGeneral {
 					+ txtTituloSolicitud.getValue() + "\n\n Su Usuario es:"
 					+ profesor.getCedula() + " y su contraseña:"
 					+ profesor.getCedula();
-
+			enviarEmailNotificacion(profesor.getCorreoElectronico(), mensaje);
 		}
-
 	}
 
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirSolicitudTutoria")
 	public void salirSolicitudTutoria() {
-
 		wdwSolicitarTutoria.onClose();
-
 	}
 
 }

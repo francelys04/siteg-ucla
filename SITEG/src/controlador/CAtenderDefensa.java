@@ -5,14 +5,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.Condicion;
 import modelo.Defensa;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
 import modelo.TegEstatus;
-import modelo.TipoJurado;
 import modelo.compuesta.Jurado;
 
 import org.springframework.stereotype.Controller;
@@ -23,25 +21,14 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Window;
-
-import configuracion.GeneradorBeans;
-
-import servicio.SCondicionPrograma;
-import servicio.SDefensa;
-import servicio.SJurado;
-import servicio.STeg;
-import servicio.STipoJurado;
 
 /*Controlador que permite atender las solicitudes de defensa
  * asignadole un lugar una fecha y una hora*/
@@ -83,8 +70,8 @@ public class CAtenderDefensa extends CGeneral {
 
 	/*
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
-	 * recibido del catalogo exista yse llenan los campos y listas
-	 * correspondientes de la vista, asicomo los objetos empleados dentro de
+	 * recibido del catalogo exista y se llenan los campos y listas
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
 	 * este controlador.
 	 */
 	@Override
@@ -207,7 +194,7 @@ public class CAtenderDefensa extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
+	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarDefensa")
 	public void cancelarDefensa() {

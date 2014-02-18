@@ -3,52 +3,29 @@ package controlador;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JFileChooser;
 
 import modelo.Estudiante;
 import modelo.Programa;
-import modelo.Requisito;
-import modelo.compuesta.TegRequisito;
 import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Components;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Path;
-import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.select.SelectorComposer;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SEstudiante;
-import servicio.SPrograma;
-import servicio.seguridad.SUsuario;
-import configuracion.GeneradorBeans;
-
+/*
+ * Controlador que permite almacenar en la base de datos un conjunto de
+ * estudiantes desde un archivo plano
+ */
 @Controller
 public class CCargarEstudiante extends CGeneral {
 
@@ -59,18 +36,18 @@ public class CCargarEstudiante extends CGeneral {
 	private File f;
 	private static List<Estudiante> estudiantesCargados;
 
+	/*
+	 * Metodo que permite buscar el archivo plano de los estudiantes en la
+	 * computadora y los carga en una lista
+	 */
 	@Listen("onClick = #btnCargarListaEstudiantes")
 	public void cargarEstudiante() {
 
-		// variables locales
 		String cedula, nombre, apellido, sexo, direccion, telefonomovil, telefonofijo, correo;
 		boolean estatus;
 		long idprograma;
-
-		// abre el examinar para elegir el archivo
 		javax.swing.JFileChooser j = new javax.swing.JFileChooser();
 
-		// abre el txt
 		int opcion = j.showOpenDialog(j);
 		if (opcion == JFileChooser.APPROVE_OPTION) {
 			String path = j.getSelectedFile().getAbsolutePath();
@@ -78,14 +55,10 @@ public class CCargarEstudiante extends CGeneral {
 			f = new File(path);
 
 			try {
-				// empieza a leer el txt
 				FileReader fr = new FileReader(f);
 				BufferedReader br = new BufferedReader(fr);
 				String linea = null;
 				estudiantesCargados = new ArrayList<Estudiante>();
-
-				// si no esta vacio el txt empieza a leer hasta que no encuentre
-				// linea
 				while ((linea = br.readLine()) != null) {
 
 					cedula = linea;
@@ -119,16 +92,13 @@ public class CCargarEstudiante extends CGeneral {
 
 					Usuario usuario = servicioUsuario
 							.buscarUsuarioPorNombre(cedula);
-					// busco el programa con el id que tengo en el txt para
-					// registrar
-					Programa p = new Programa();
-					p = servicioPrograma.buscar(idprograma);
-					// creo el estudiante y lo guardo
+					Programa programa = new Programa();
+					programa = servicioPrograma.buscar(idprograma);
 					Estudiante estudiante;
 
 					estudiante = new Estudiante(cedula, nombre, apellido,
 							correo, sexo, direccion, telefonomovil,
-							telefonofijo, estatus, p, usuario);
+							telefonofijo, estatus, programa, usuario);
 
 					estudiantesCargados.add(estudiante);
 
@@ -157,6 +127,7 @@ public class CCargarEstudiante extends CGeneral {
 		}
 	}
 
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirCargarEstudiante")
 	public void salirCargarEstudiante() {
 
@@ -164,6 +135,10 @@ public class CCargarEstudiante extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite guardar a los estudiantes que se encuentran en la
+	 * lista
+	 */
 	@Listen("onClick = #btnGuardarCargarEstudiante")
 	public void CargarEstudiante() {
 
@@ -186,7 +161,6 @@ public class CCargarEstudiante extends CGeneral {
 											"Informacion", Messagebox.OK,
 											Messagebox.INFORMATION);
 							ltbEstudiantesCargados.getItems().clear();
-							
 
 						}
 					}
@@ -194,6 +168,10 @@ public class CCargarEstudiante extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo heredado del Controlador CGeneral, en este caso no hay
+	 * instrucciones dentro ya que no se cargan variables al iniciar esta vista
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub

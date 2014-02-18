@@ -1,26 +1,15 @@
 package controlador;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import modelo.Actividad;
-import modelo.AreaInvestigacion;
 import modelo.Avance;
-
 import modelo.Estudiante;
-import modelo.Lapso;
-import modelo.Profesor;
-import modelo.Programa;
-import modelo.Requisito;
 import modelo.Teg;
 import modelo.TegEstatus;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -30,31 +19,25 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SActividad;
-import servicio.SEstudiante;
-import servicio.SProfesor;
-import servicio.SPrograma;
-import servicio.SProgramaRequisito;
-import servicio.SRequisito;
-import servicio.STeg;
-
-import servicio.SLapso;
-import servicio.SCondicionPrograma;
-import configuracion.GeneradorBeans;
-import servicio.SAvance;
-import servicio.seguridad.SUsuario;
-
+/*
+ * Controlador que permite guardar los avances realizados entre el tutor y
+ * el estudiante durante el proyecto
+ */
+@Controller
 public class CRegistrarAvance extends CGeneral {
+
+	private static final long serialVersionUID = 5336063690880490786L;
+	private static String vistaRecibida;
+	private long id = 0;
+	private static long auxiliarId = 0;
+	private static boolean estatusTeg;
+
 	@Wire
 	private Datebox dtbRegistrarAvance;
 	@Wire
@@ -80,26 +63,19 @@ public class CRegistrarAvance extends CGeneral {
 	@Wire
 	private Button btnFinalizarRegistrarAvance;
 
-	private static String vistaRecibida;
-
-	private List<Profesor> profesores;
-
-	private long id = 0;
-	private static long auxiliarId = 0;
-	private static long auxIdPrograma = 0;
-	private static boolean estatusTeg;
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		
-		estatusTeg = false;
 
+		estatusTeg = false;
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("tegCatalogo");
-		// permite traer los datos del teg a la vista si el map es diferente de
-		// nulo
 		if (map != null) {
 			if (map.get("id") != null) {
 				long codigo = (Long) map.get("id");
@@ -121,7 +97,6 @@ public class CRegistrarAvance extends CGeneral {
 						estudiantes));
 				llenarListas();
 				id = teg2.getId();
-
 				map.clear();
 				map = null;
 			}
@@ -129,12 +104,18 @@ public class CRegistrarAvance extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
+	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
-
 	}
 
-	// permite salir y refrescar las vistas
+	/*
+	 * Metodo que permite cerrar la ventana, actualizando los cambios realizados
+	 * en el resto del sistema
+	 */
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -144,7 +125,11 @@ public class CRegistrarAvance extends CGeneral {
 		wdwRegistrarAvance.onClose();
 	}
 
-	// guarda las observacion en la base de datos
+	/*
+	 * Metodo que permite guardar un avance al proyecto, pudiendo agregar mas
+	 * avances en el futuro, cambia el estatus del teg, y almacena el estatus en
+	 * la tabla de historial
+	 */
 	@Listen("onClick = #btnAgregarObservacionrAvance")
 	public void guardarAvance() {
 
@@ -157,7 +142,7 @@ public class CRegistrarAvance extends CGeneral {
 					"¿Desea guardar el avance del Trabajo Especial de Grado?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -165,33 +150,24 @@ public class CRegistrarAvance extends CGeneral {
 								Teg tegAvance = servicioTeg
 										.buscarTeg(auxiliarId);
 
-								if (tegAvance.getEstatus().equals("Proyecto en Desarrollo")){
-									
+								if (tegAvance.getEstatus().equals(
+										"Proyecto en Desarrollo")) {
+
 									estatusTeg = true;
 								}
-									
-									
-								
-								if(estatusTeg == false){
-									
-									/*
-									 * Guardar estatus de Proyecto en
-									 * Desarrrollo en el TEG
-									 */
+
+								if (estatusTeg == false) {
 									tegAvance
 											.setEstatus("Proyecto en Desarrollo");
 									servicioTeg.guardar(tegAvance);
-
-									/* Guardar datos en la tabla teg_estatus */
 									java.util.Date fechaEstatus = new Date();
 									TegEstatus tegEstatus = new TegEstatus(0,
 											tegAvance,
 											"Proyecto en Desarrollo",
 											fechaEstatus);
 									servicioTegEstatus.guardar(tegEstatus);
-									
-								}
 
+								}
 
 								Date fecha = dtbRegistrarAvance.getValue();
 								String observacion = txtObservacionRegistrarAvance
@@ -218,20 +194,24 @@ public class CRegistrarAvance extends CGeneral {
 
 	}
 
-	// Permite finalizar los avance cambia el estatus del teg
+	/*
+	 * Metodo que permite finalizar los avances del proyecto, al accionar este
+	 * evento se cambia el estatus del teg y el estudiante ya puede registrar su
+	 * trabajo especial de grado. Tambien en este metodo se actualiza el cambio
+	 * en la tabla de historial
+	 */
 	@Listen("onClick = #btnFinalizarRegistrarAvance")
 	public void finalizarRegistrarAvance() {
 
 		Messagebox.show("¿Desea finalizar los avances del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 
 							Teg tegAvance = servicioTeg.buscarTeg(auxiliarId);
 							tegAvance.setEstatus("Avances Finalizados");
-
-							/* Guardar datos en la tabla teg_estatus */
 							java.util.Date fechaEstatus = new Date();
 							TegEstatus tegEstatus = new TegEstatus(0,
 									tegAvance, "Avances Finalizados",
@@ -249,7 +229,9 @@ public class CRegistrarAvance extends CGeneral {
 				});
 	}
 
-	// limpia los campos modificables de la vista
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado original
+	 */
 	@Listen("onClick = #btnCancelarRegistrarAvance")
 	public void cancelarRegistrarAvance() {
 
@@ -257,8 +239,10 @@ public class CRegistrarAvance extends CGeneral {
 
 	}
 
-	// permite llenar la lista de avances para que estas se puedan observar
-	// para que se tome la desicion de finalizar
+	/*
+	 * Metodo que permite llenar la lista con los avances ya realizados en el
+	 * proyecto
+	 */
 	public void llenarListas() {
 
 		Teg tegAvance = servicioTeg.buscarTeg(auxiliarId);
@@ -283,11 +267,10 @@ public class CRegistrarAvance extends CGeneral {
 
 	}
 
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirRegistrarAvance")
 	public void salirRegistrarAvance() {
-
 		wdwRegistrarAvance.onClose();
-
 	}
 
 }

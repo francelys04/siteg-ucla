@@ -21,6 +21,7 @@ import controlador.catalogo.CCatalogoAreaInvestigacion;
 @Controller
 public class CAreaInvestigacion extends CGeneral {
 
+	private static final long serialVersionUID = -7394042309275160410L;
 	@Wire
 	private Textbox txtNombreArea;
 	@Wire
@@ -96,7 +97,7 @@ public class CAreaInvestigacion extends CGeneral {
 			Messagebox.show("¿Desea guardar el area de investigacion?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -126,7 +127,7 @@ public class CAreaInvestigacion extends CGeneral {
 		Messagebox.show(
 				"¿Desea eliminar los datos del de area de investigacion?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							AreaInvestigacion area = servicioArea

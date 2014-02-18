@@ -5,11 +5,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.swing.JFileChooser;
 
-import modelo.Profesor;
 import modelo.Categoria;
-import modelo.Programa;
+import modelo.Profesor;
 import modelo.Tematica;
 import modelo.seguridad.Usuario;
 
@@ -19,12 +19,6 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
-
-import servicio.SCategoria;
-import servicio.SProfesor;
-import servicio.SPrograma;
-import servicio.seguridad.SUsuario;
-import configuracion.GeneradorBeans;
 
 @Controller
 public class CCargarProfesor extends CGeneral {
