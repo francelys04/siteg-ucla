@@ -1,56 +1,55 @@
 package controlador.seguridad;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.security.Principal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
-import javax.imageio.ImageIO;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import modelo.Programa;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.ArbolModelo;
 import modelo.seguridad.ArbolNodo;
 import modelo.seguridad.Grupo;
-import org.hibernate.Hibernate;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Controller;
-import org.zkoss.bind.annotation.*;
-import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.SelectEvent;
-import org.zkoss.zk.ui.event.UploadEvent;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.*;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Tree;
+import org.zkoss.zul.TreeModel;
+import org.zkoss.zul.Treechildren;
+import org.zkoss.zul.Treeitem;
+import org.zkoss.zul.Window;
 
-import servicio.seguridad.SArbol;
-import servicio.seguridad.SGrupo;
-import servicio.seguridad.SUsuario;
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 import controlador.catalogo.CCatalogoGrupo;
 
+/*
+ * Controlador que permite crear un nuevo grupo, a su vez se asocian a este un
+ * subconjunto de las funcionalidades del sistema
+ */
 @Controller
 public class CCrearGrupo extends CGeneral {
 
+	private static final long serialVersionUID = -1689987977281226750L;
 	long id = 0;
 	TreeModel _model;
-
 	CCatalogoGrupo catalogoGrupo = new CCatalogoGrupo();
-	public static List<String> funcionalidades = new ArrayList();
+	public static List<String> funcionalidades = new ArrayList<String>();
 
 	@Wire
 	private Tree treeGrupo;
@@ -65,6 +64,10 @@ public class CCrearGrupo extends CGeneral {
 	@Wire
 	private Listbox ltbFuncionalidadesSeleccionados;
 
+	/*
+	 * Metodo heredado del controlador CGeneral, se hace el llamado al metodo
+	 * que crea el arbol de las funcionalidades del sistema
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -72,7 +75,6 @@ public class CCrearGrupo extends CGeneral {
 		treeGrupo.setModel(getModel());
 		treeGrupo.setCheckmark(true);
 		treeGrupo.setMultiple(true);
-
 
 		btnVisualizarFuncionalidades.setVisible(false);
 		Selectors.wireComponents(comp, this, false);
@@ -93,6 +95,9 @@ public class CCrearGrupo extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite retornar el modelo del arbol
+	 */
 	public TreeModel getModel() {
 		if (_model == null) {
 			_model = new ArbolModelo(getFooRoot());
@@ -101,7 +106,10 @@ public class CCrearGrupo extends CGeneral {
 
 	}
 
-	// create a FooNodes tree structure and return the root
+	/*
+	 * Metodo que permite crear el arbol-menu del sistema, en el cual cada
+	 * funcionalidad esta representada por un nodo hoja de este
+	 */
 	private ArbolNodo getFooRoot() {
 
 		ArbolNodo root = new ArbolNodo(null, 0, "");
@@ -130,7 +138,8 @@ public class CCrearGrupo extends CGeneral {
 		long temp1, temp2, temp3 = 0;
 		for (int i = 0; i < arboles.size(); i++) {
 			if (arboles.get(i).getHijo() == 0) {
-				oneLevelNode = new ArbolNodo(root, i, arboles.get(i).getNombre());
+				oneLevelNode = new ArbolNodo(root, i, arboles.get(i)
+						.getNombre());
 				root.appendChild(oneLevelNode);
 				temp1 = arboles.get(i).getId();
 				arboles.remove(i);
@@ -171,6 +180,10 @@ public class CCrearGrupo extends CGeneral {
 		return root;
 	}
 
+	/*
+	 * Metodo que permite verificar que solo sean seleccionados los nodos hoja,
+	 * para evitar añadir funcionalidades erroneas
+	 */
 	public boolean validarNodoHijo(SelectEvent<Treeitem, String> event) {
 
 		Treeitem itemSeleccionado = event.getReference();
@@ -199,36 +212,45 @@ public class CCrearGrupo extends CGeneral {
 					encontrado = true;
 				}
 				return encontrado;
-			} 
+			}
 		}
 		return encontrado;
 	}
 
+	/*
+	 * Metodo que permite mostrar un resumen de las funcionalidades que han sido
+	 * seleccionadas para el grupo
+	 */
 	public void llenarFuncionalidadesSeleccionadas() {
 		Grupo grupo = servicioGrupo.buscarGrupo(id);
 		List<Arbol> listaArbol = servicioArbol.buscarporGrupo(grupo);
-		int ItemEncontrado=0;
-		for(int i=0; i<listaArbol.size();i++){
-			
-			long padre=listaArbol.get(i).getId();
-			ItemEncontrado=0;
-			for(int j=0;j<listaArbol.size();j++){
+		int ItemEncontrado = 0;
+		for (int i = 0; i < listaArbol.size(); i++) {
+
+			long padre = listaArbol.get(i).getId();
+			ItemEncontrado = 0;
+			for (int j = 0; j < listaArbol.size(); j++) {
 				System.out.println("entro2");
-				long hijo=listaArbol.get(j).getHijo();
-				
-				if(padre==hijo){
-					ItemEncontrado=1;
-					j=listaArbol.size();
+				long hijo = listaArbol.get(j).getHijo();
+
+				if (padre == hijo) {
+					ItemEncontrado = 1;
+					j = listaArbol.size();
 				}
 			}
-			if(ItemEncontrado==0){
+			if (ItemEncontrado == 0) {
 				funcionalidades.add(listaArbol.get(i).getNombre());
 			}
 		}
-		ltbFuncionalidadesSeleccionados
-		.setModel(new ListModelList<String>(funcionalidades));
+		ltbFuncionalidadesSeleccionados.setModel(new ListModelList<String>(
+				funcionalidades));
 	}
 
+	/*
+	 * Metodo que permite que al seleccionar un nodo hoja del arbol, se marquen
+	 * con el check su respectivos antecesores. Se verifica que si existe un
+	 * nodo hermano marcado los antecesores no son desmarcados
+	 */
 	@Listen("onSelect = #treeGrupo")
 	public void selectedNode(SelectEvent<Treeitem, String> event) {
 		if (!validarNodoHijo(event)) {
@@ -340,54 +362,69 @@ public class CCrearGrupo extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que se encarga de guardar el grupo, asi como tambien todas las
+	 * funcionalidades que fueron asociadas a este
+	 */
 	@Listen("onClick = #btnGuardarGrupo")
 	public void guardarGrupo() {
 		Messagebox.show("¿Desea guardar los datos del grupo?",
-				"Dialogo de confirmacion", Messagebox.OK
-						| Messagebox.CANCEL, Messagebox.QUESTION,
-				new org.zkoss.zk.ui.event.EventListener() {
-					public void onEvent(Event evt)
-							throws InterruptedException {
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
+					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-		
-		List<Arbol> listaArbol = servicioArbol.listarArbol();
-		Set<Arbol> arboles = new HashSet<Arbol>();
-		Treechildren treeChildren = treeGrupo.getTreechildren();
-		Collection<Treeitem> lista = treeChildren.getItems();
-		String nombreGrupo = txtNombreGrupo.getValue();
-		Grupo grupo = servicioGrupo.BuscarPorNombre(nombreGrupo);
-		if (id == 0 && grupo == null || id != 0) {			
-			for (int i = 0; i < listaArbol.size(); i++) {
-				for (Iterator<?> iterator = lista.iterator(); iterator
-						.hasNext();) {
-					Treeitem treeitem = (Treeitem) iterator.next();
-					if (listaArbol.get(i).getNombre()
-							.equals(treeitem.getLabel())) {
-						if (treeitem.isSelected()) {
 
-							Arbol arbol = listaArbol.get(i);
-							arboles.add(arbol);
+							List<Arbol> listaArbol = servicioArbol
+									.listarArbol();
+							Set<Arbol> arboles = new HashSet<Arbol>();
+							Treechildren treeChildren = treeGrupo
+									.getTreechildren();
+							Collection<Treeitem> lista = treeChildren
+									.getItems();
+							String nombreGrupo = txtNombreGrupo.getValue();
+							Grupo grupo = servicioGrupo
+									.BuscarPorNombre(nombreGrupo);
+							if (id == 0 && grupo == null || id != 0) {
+								for (int i = 0; i < listaArbol.size(); i++) {
+									for (Iterator<?> iterator = lista
+											.iterator(); iterator.hasNext();) {
+										Treeitem treeitem = (Treeitem) iterator
+												.next();
+										if (listaArbol.get(i).getNombre()
+												.equals(treeitem.getLabel())) {
+											if (treeitem.isSelected()) {
+
+												Arbol arbol = listaArbol.get(i);
+												arboles.add(arbol);
+											}
+										}
+									}
+								}
+								Boolean estatus = true;
+								String nombre = txtNombreGrupo.getValue();
+								Grupo grupo1 = new Grupo(id, nombre, estatus,
+										arboles);
+								servicioGrupo.guardarGrupo(grupo1);
+								Messagebox.show(
+										"Grupo registrado exitosamente",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+								cancelarGrupo();
+							} else {
+								Messagebox.show("Grupo no disponible", "Error",
+										Messagebox.OK, Messagebox.ERROR);
+								cancelarGrupo();
+							}
 						}
 					}
-				}
-			}
-			Boolean estatus = true;
-			String nombre = txtNombreGrupo.getValue();
-			Grupo grupo1 = new Grupo(id, nombre, estatus, arboles);
-			servicioGrupo.guardarGrupo(grupo1);
-			Messagebox.show("Grupo registrado exitosamente", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
-			cancelarGrupo();
-		} else {
-			Messagebox.show("Grupo no disponible", "Error", Messagebox.OK,
-					Messagebox.ERROR);
-			cancelarGrupo();
-		}
-	}
-}
-});
+				});
 	}
 
+	/*
+	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
+	 * limpieza del arbol de las funcionalidades
+	 */
 	@Listen("onClick = #btnCancelarGrupo")
 	public void cancelarGrupo() {
 		txtNombreGrupo.setValue("");
@@ -419,13 +456,17 @@ public class CCrearGrupo extends CGeneral {
 		}
 		id = 0;
 		treeGrupo.setVisible(true);
-		
 		funcionalidades.clear();
-		ltbFuncionalidadesSeleccionados
-		.setModel(new ListModelList<String>(funcionalidades));
-		
+		ltbFuncionalidadesSeleccionados.setModel(new ListModelList<String>(
+				funcionalidades));
+
 	}
 
+	/*
+	 * Metodo que permite visualizar las funcionalidades asociadas a un
+	 * determinado grupo. Este boton aparece una vez que se ha buscado un grupo
+	 * desde el catalogo
+	 */
 	@Listen("onClick = #btnVisualizarFuncionalidades")
 	public void visualizarFuncionalidades() {
 		llenarFuncionalidadesSeleccionadas();
@@ -460,6 +501,7 @@ public class CCrearGrupo extends CGeneral {
 		}
 	}
 
+	/* Metodo que permite la eliminacion logica de una entidad Grupo */
 	@Listen("onClick = #btnEliminarGrupo")
 	public void eliminarGrupo() {
 		Grupo grupo = servicioGrupo.buscarGrupo(id);
@@ -468,6 +510,10 @@ public class CCrearGrupo extends CGeneral {
 		cancelarGrupo();
 	}
 
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnCatalogoGrupo")
 	public void buscarItem() {
 		Window window = (Window) Executions.createComponents(
@@ -475,7 +521,5 @@ public class CCrearGrupo extends CGeneral {
 		window.doModal();
 		catalogoGrupo.recibir("maestros/VCrearGrupo");
 	}
-
-
 
 }

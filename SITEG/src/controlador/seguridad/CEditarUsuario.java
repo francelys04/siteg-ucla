@@ -4,11 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
 import org.springframework.security.core.Authentication;
@@ -19,28 +17,21 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Image;
-import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
-import servicio.seguridad.SUsuario;
-
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 @Controller
 public class CEditarUsuario extends CGeneral {
 
-
+	private static final long serialVersionUID = -2486638520412829418L;
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	URL url = getClass().getResource("/configuracion/usuario.png");
 	
