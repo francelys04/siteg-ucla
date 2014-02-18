@@ -67,6 +67,9 @@
 	<popup id="pupGenerarReporte">
 		<toolbarbutton label="Presione aqui para mostrar el reporte" />
 	</popup>
+	<popup id="pupCancelarReporte">
+		<toolbarbutton label="Presione aqui para cancelar" />
+	</popup>
 	<popup id="pupSalirReporte">
 		<toolbarbutton label="Presione aqui para salir" />
 	</popup>
@@ -79,7 +82,7 @@
 		style="font-weight:bold;color:red;margin-center:2%">
 		</label> -->
 
-	<label value="Lista de Trabajos Especial de Grado"
+	<label value="Lista de Proyectos"
 		style="font-weight:bold;margin-left:35%;margin-right:20%">
 	</label>
 	<separator />
@@ -192,7 +195,7 @@
 							image="/public/imagenes/iconos/generar.png" tabindex="13">
 						</button>
 						<button id="btnCancelarReporteProyecto"
-							label="Cancelar" sclass="btn" tooltip="pupSalirReporte"
+							label="Cancelar" sclass="btn" tooltip="pupCancelarReporte"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 						</button>
 						<button id="btnSalirReporteProyecto" width="110px"

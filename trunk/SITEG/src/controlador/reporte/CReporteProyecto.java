@@ -121,7 +121,7 @@ public class CReporteProyecto extends CGeneral {
 	public void seleccinarPrograma() {
 		if (cmbPrograma.getValue().equals("Todos")) {
 			cmbArea.setValue("Todos");
-			cmbTematica.setValue("Todos");
+			cmbTematica.setValue("Todas");
 		} else {
 			cmbArea.setValue("");
 			cmbTematica.setValue("");
@@ -141,7 +141,7 @@ public class CReporteProyecto extends CGeneral {
 	public void seleccionarArea() {
 		if (cmbArea.getValue().equals("Todos")) {
 
-			cmbTematica.setValue("Todos");
+			cmbTematica.setValue("Todas");
 		} else {
 			
 			cmbTematica.setValue("");
@@ -190,13 +190,14 @@ public class CReporteProyecto extends CGeneral {
 			} else {
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& !estatus.equals("Todos")) {
+						&& !estatus.equals("Todos")
+						&& !nombreTematica.equals("Todas")) {
 
 					String idTematica = String.valueOf(((Tematica) cmbTematica
 							.getSelectedItem().getValue()).getId());
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
-					System.out.println(idTematica);
+					
 					teg = servicioTeg
 							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
 									estatus, tematica1, fechaInicio, fechaFin);
@@ -205,6 +206,31 @@ public class CReporteProyecto extends CGeneral {
 					} 
 				}
 
+				if (!nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& !estatus.equals("Todos")
+						&& nombreTematica.equals("Todas")) {
+
+					teg = servicioTeg
+							.buscarTegPorDosFechasyUnEstatus(
+									estatus, fechaInicio, fechaFin);
+					if (teg.size() == 0) {
+						datosVacios = true;
+					} 
+				}
+				if (!nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& estatus.equals("Todos")
+						&& nombreTematica.equals("Todas")) {
+
+					teg = servicioTeg
+							.buscarTegPorDosFechas(fechaInicio, fechaFin);
+					System.out.println("111");
+					if (teg.size() == 0) {
+						datosVacios = true;
+						System.out.println("222");
+					} 
+				}
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& estatus.equals("Todos")) {
@@ -335,7 +361,7 @@ public class CReporteProyecto extends CGeneral {
 	}
 
 	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
-	@Listen("onClick = #btnCancelarReporteProfesorCargo")
+	@Listen("onClick = #btnCancelarReporteProyecto")
 	public void cancelarTematicasSolicitadas() throws JRException {
 		cmbEstatus.setValue("");
 		cmbPrograma.setValue("");
@@ -348,7 +374,7 @@ public class CReporteProyecto extends CGeneral {
 	}
 
 	/* Metodo que permite cerrar la vista. */
-	@Listen("onClick = #btnSalirReporteProfesorCargo")
+	@Listen("onClick = #btnSalirReporteProyecto")
 	public void salirTematicasSolicitadas() throws JRException {
 
 		cancelarTematicasSolicitadas();
