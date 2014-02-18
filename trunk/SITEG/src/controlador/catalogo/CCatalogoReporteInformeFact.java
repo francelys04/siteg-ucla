@@ -70,7 +70,7 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 
 		List<Profesor> profesores = servicioProfesor
 				.buscarActivos();
-		List<Teg> tegs = servicioTeg.buscarProyectoFactible();
+		List<Teg> tegs = servicioTeg.buscarTegFactibilidad();
 
 		Profesor profesor1 = new Profesor();
 		List<Teg> tegs1 = new ArrayList<Teg>();
@@ -134,28 +134,6 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 		ltbListaInformeFactibilidad.setModel(new ListModelList<Teg>(teg2));
 
 	}
-	
-	
-	//Metodo que permite mostrar los datos del catalogo
-	/*@Listen("onDoubleClick = #ltbListaInformeFactibilidad")
-	public void mostrarDatosCatalogo() {
-		if(ltbListaInformeFactibilidad.getItemCount()!=0){
-		Listitem listItem = ltbListaInformeFactibilidad.getSelectedItem();
-		if(listItem!=null){
-		Teg tegDatosCatalogo = (Teg) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", tegDatosCatalogo.getId());
-		String vista = "reportes/estructurados/VReporteInformeFactibilidad";
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("tegCatalogo", map);
-		Window window = (Window) Executions.createComponents(
-				"/vistas/reportes/estructurados/VRegistrarAvance.zul", null, null);
-		window.doModal();
-		vistaReporte.recibir("catalogos/VCatalogoReporteInformeFactibilidad");
-		//vistaRegistrarAvance.recibir("catalogos/VCatalogoAsignarComision");
-		}
-		}
-	}*/
 	
 	/*
 	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic

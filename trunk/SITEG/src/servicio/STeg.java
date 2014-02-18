@@ -57,6 +57,13 @@ public class STeg {
 
 	}
 
+	public List<Teg> buscarTegFactibilidad() {
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatusOrEstatus(estatus[5], estatus[6]);
+		return tegs;
+
+	}
+	
 	public List<Teg> buscarActivos() {
 		List<Teg> tegs;
 		tegs = interfaceTeg.findAll();
