@@ -134,6 +134,16 @@ public class CCargarEstudiante extends CGeneral {
 		wdwCargarEstudiante.onClose();
 
 	}
+	
+	/* Metodo que permite limpiar los campos de la vista */
+	@Listen("onClick = #btnCancelarCargarEstudiante")
+	public void cancelarCargarEstudiante() {
+
+		ltbEstudiantesCargados.getItems().clear();
+
+	}
+	
+	
 
 	/*
 	 * Metodo que permite guardar a los estudiantes que se encuentran en la
@@ -160,7 +170,7 @@ public class CCargarEstudiante extends CGeneral {
 									.show("Datos de los estudiantes guardados esxitosamente",
 											"Informacion", Messagebox.OK,
 											Messagebox.INFORMATION);
-							ltbEstudiantesCargados.getItems().clear();
+							cancelarCargarEstudiante();
 
 						}
 					}

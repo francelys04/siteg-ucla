@@ -1,5 +1,6 @@
-<window id="wdwCargarProfesor" title="Cargar Profesores" border="normal" width="100%"
-	height="300px" closable="true" apply="controlador.CCargarProfesor">
+<window id="wdwCargarProfesor" title="Cargar Profesores" border="normal"
+	width="100%" height="700px" closable="true"
+	apply="controlador.CCargarProfesor">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -45,9 +46,15 @@
 		<toolbarbutton
 			label="Presione aquí para buscar la lista de los profesores" />
 	</popup>
-	<popup id="pupSalirCargarProfesor">
+	<popup id="pupGuardarCargarProfesores">
 		<toolbarbutton
-			label="Presione aquí para salir" />
+			label="Presione aquí para guardar los datos de los profesores" />
+	</popup>
+	<popup id="pupSalirCargarProfesores">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+	<popup id="pupCancelarCargarProfesores">
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<!-- fin de popus -->
 
@@ -67,12 +74,18 @@
 	<separator />
 	<separator />
 
-	<groupbox width="96%" style="margin-left:2%" height="150px">
+	<groupbox width="96%" style="margin-left:2%" height="560px">
 		<grid sclass="fgrid" style="margin-left:2%">
 			<columns>
 				<column width="150px" height="30px" />
 			</columns>
 			<rows>
+
+				<row>
+					<separator />
+
+				</row>
+
 
 				<row>
 					<hlayout>
@@ -104,6 +117,42 @@
 		<separator />
 		<separator />
 
+		<listbox id="ltbProfesoresCargados" width="90%" mold="paging"
+			height="330px" style="margin-left:30px" pageSize="7"
+			emptyMessage="No se ha cargado la lista de profesores">
+			<listhead>
+				<listheader label="Cédula" align="center" />
+				<listheader label="Nombre" align="center" />
+				<listheader label="Apellido" align="center" />
+				<listheader label="Categoría" align="center" />
+				<listheader label="Correo" align="center" />
+
+
+			</listhead>
+
+
+			<template name="model">
+				<listitem>
+					<listcell label="${each.cedula}" />
+					<listcell label="${each.nombre}" />
+					<listcell label="${each.apellido}" />
+					<listcell label="${each.categoria.nombre}" />
+					<listcell label="${each.correoElectronico}" />
+
+				</listitem>
+			</template>
+		</listbox>
+
+
+
+
+
+		<separator />
+		<separator />
+		<separator />
+		<separator />
+
+
 		<panel border="normal" width="95%"
 			style="margin-left:2%;margin-right:3%">
 			<panelchildren>
@@ -111,10 +160,19 @@
 					<separator />
 					<div sclass="btn-group">
 
+						<button id="btnGuardarCargarProfesor"
+							label="Guardar" width="110px" sclass="btn"
+							tooltip="pupGuardarCargarProfesores"
+							image="/public/imagenes/iconos/guardar.png" tabindex="7" />
+						<button id="btnCancelarCargarProfesor"
+							label="Cancelar" width="110px" sclass="btn"
+							tooltip="pupCancelarCargarProfesores"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="8" />
+
 						<button id="btnSalirCargarProfesor"
 							label="Salir" width="110px" sclass="btn"
-							tooltip="pupSalirCargarProfesor"
-							image="/public/imagenes/iconos/salir.png" tabindex="7" />
+							tooltip="pupSalirCargarProfesores"
+							image="/public/imagenes/iconos/salir.png" tabindex="9" />
 
 						<separator />
 					</div>
