@@ -52,7 +52,7 @@ public class CSolicitarTutor extends CGeneral {
 	private static final long serialVersionUID = -3742947611091908225L;
 	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	private long id;
+	private long id = 0;
 	private static long valor;
 	public static String estado;
 	public static String combo1;
@@ -308,6 +308,7 @@ public class CSolicitarTutor extends CGeneral {
 												.guardarSolicitud(solicitud2);
 										crearUsuarioProfesor(profesor);
 										enviarEmailNotificacion();
+										cancelarSolicitud();
 										Messagebox
 												.show("Su solicitud de tutoria ha sido enviada exitosamente",
 														"Informacion",
@@ -348,6 +349,8 @@ public class CSolicitarTutor extends CGeneral {
 			usuario = new Usuario(0, profesor.getCedula(),
 					passwordEncoder.encode(profesor.getCedula()), true,
 					gruposUsuario, imagenUsuario);
+			Usuario usuario1 = servicioUsuario.buscarUsuarioPorNombre(profesor.getCedula());
+			profesor.setUsuario(usuario1);
 		} else {
 			usuario = profesor.getUsuario();
 			grupos = servicioGrupo.buscarGruposDelUsuario(usuario);
@@ -376,6 +379,9 @@ public class CSolicitarTutor extends CGeneral {
 		txtNombreProfesor.setValue("");
 		txtApellidoProfesor.setValue("");
 		txtCorreoProfesor.setValue("");
+		programa = null;
+		
+		
 
 	}
 
