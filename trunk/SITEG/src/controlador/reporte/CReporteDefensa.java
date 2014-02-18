@@ -181,7 +181,7 @@ public class CReporteDefensa extends CGeneral {
 		String nombrePrograma = cmbPrograma.getValue();
 		AreaInvestigacion area = servicioArea.buscarArea(idArea);
 		Tematica tematica = servicioTematica.buscarTematica(idTematica);
-		String tipoDefensa = (String) cmbEstatus.getSelectedItem().getValue();
+		String tipoDefensa = cmbEstatus.getValue();
 		System.out.println(tipoDefensa);
 		System.out.println(nombrePrograma);
 		System.out.println(nombreTematica);
