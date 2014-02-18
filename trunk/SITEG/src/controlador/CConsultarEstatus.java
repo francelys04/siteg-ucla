@@ -1,44 +1,27 @@
 package controlador;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import modelo.AreaInvestigacion;
-import modelo.Categoria;
 import modelo.Estudiante;
-import modelo.Profesor;
-import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.Selectors;
-import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Image;
-import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-import servicio.SCategoria;
-import servicio.SProfesor;
-import configuracion.GeneradorBeans;
-import servicio.SEstudiante;
-import servicio.SSolicitudTutoria;
-import servicio.STeg;
 
+/*
+ * Controlador que permite verificar el estatus en que se encuentra la
+ * solicitud de tutoria, proyectro o TEG de cierto estudiante
+ */
 public class CConsultarEstatus extends CGeneral {
 
+	private static final long serialVersionUID = 8248202520359105018L;
+	private static String cedulaRecibida;
 	@Wire
 	private Textbox txtCedulaEstudiante;
 	@Wire
@@ -78,11 +61,14 @@ public class CConsultarEstatus extends CGeneral {
 	@Wire
 	private Image imgTrabajoEspecial;
 
-	private static String cedulaRecibida;
-
+	/*
+	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos y listas
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
 		txtCedulaEstudiante.setText(cedulaRecibida);
@@ -98,7 +84,8 @@ public class CConsultarEstatus extends CGeneral {
 		List<Teg> teg = null;
 
 		if (servicioSolicitudTutoria.buscarSolicitud(estudiante) != null) {
-			solicitudTutoria = servicioSolicitudTutoria.buscarSolicitud(estudiante);
+			solicitudTutoria = servicioSolicitudTutoria
+					.buscarSolicitud(estudiante);
 		}
 		if (servicioTeg.buscarTegPorEstudiante(estudiante) != null) {
 			teg = servicioTeg.buscarTegPorEstudiante(estudiante);
@@ -152,136 +139,174 @@ public class CConsultarEstatus extends CGeneral {
 
 								if (teg.get(indiceTeg).getEstatus()
 										.equals("Comision Asignada") != true) {
-										
+
 									if (teg.get(indiceTeg).getEstatus()
 											.equals("Factibilidad Evaluada") != true) {
-	
+
 										if (teg.get(indiceTeg).getEstatus()
 												.equals("Proyecto Factible") != true) {
-											
-											if (teg.get(indiceTeg).getEstatus()
+
+											if (teg.get(indiceTeg)
+													.getEstatus()
 													.equals("Proyecto en Desarrollo") != true) {
-	
-												if (teg.get(indiceTeg).getEstatus()
+
+												if (teg.get(indiceTeg)
+														.getEstatus()
 														.equals("Avances Finalizados") != true) {
-		
-													if (teg.get(indiceTeg).getEstatus()
+
+													if (teg.get(indiceTeg)
+															.getEstatus()
 															.equals("TEG Registrado") != true) {
-														
-														if (teg.get(indiceTeg).getEstatus()
+
+														if (teg.get(indiceTeg)
+																.getEstatus()
 																.equals("Trabajo en Desarrollo") != true) {
-		
-															if (teg.get(indiceTeg)
+
+															if (teg.get(
+																	indiceTeg)
 																	.getEstatus()
 																	.equals("Revisiones Finalizadas") != true) {
-			
-																if (teg.get(indiceTeg)
+
+																if (teg.get(
+																		indiceTeg)
 																		.getEstatus()
 																		.equals("Solicitando Defensa") != true) {
-																	
-																	if (teg.get(indiceTeg)
+
+																	if (teg.get(
+																			indiceTeg)
 																			.getEstatus()
 																			.equals("Jurado Asignado") != true) {
-			
-																		if (teg.get(indiceTeg)
+
+																		if (teg.get(
+																				indiceTeg)
 																				.getEstatus()
 																				.equals("Defensa Asignada") == true) {
-				
-																			
-																			imgTrabajoEspecial.detach();
+
+																			imgTrabajoEspecial
+																					.detach();
 																		}
-																	
-																	}else{
-																		
-																		imgDefensaAsignada.detach();
-																		imgTrabajoEspecial.detach();
-																		
+
+																	} else {
+
+																		imgDefensaAsignada
+																				.detach();
+																		imgTrabajoEspecial
+																				.detach();
+
 																	}
-																	
+
 																} else {
-																	
-																	imgJuradoAsignado.detach();
-																	imgDefensaAsignada.detach();
-																	imgTrabajoEspecial.detach();
+
+																	imgJuradoAsignado
+																			.detach();
+																	imgDefensaAsignada
+																			.detach();
+																	imgTrabajoEspecial
+																			.detach();
 																}
 															} else {
-																
-																imgSolicitandoDefensa.detach();
-																imgJuradoAsignado.detach();
-																imgDefensaAsignada.detach();
-																imgTrabajoEspecial.detach();
+
+																imgSolicitandoDefensa
+																		.detach();
+																imgJuradoAsignado
+																		.detach();
+																imgDefensaAsignada
+																		.detach();
+																imgTrabajoEspecial
+																		.detach();
 															}
-														
-														}else{
-															
-															imgRevisionesFinalizadasTrabajo.detach();
-															imgSolicitandoDefensa.detach();
-															imgJuradoAsignado.detach();
-															imgDefensaAsignada.detach();
-															imgTrabajoEspecial.detach();
+
+														} else {
+
+															imgRevisionesFinalizadasTrabajo
+																	.detach();
+															imgSolicitandoDefensa
+																	.detach();
+															imgJuradoAsignado
+																	.detach();
+															imgDefensaAsignada
+																	.detach();
+															imgTrabajoEspecial
+																	.detach();
 														}
-		
+
 													} else {
-													
-														imgRevisionesAvances.detach();
-														imgRevisionesFinalizadasTrabajo.detach();
-														imgSolicitandoDefensa.detach();
-														imgJuradoAsignado.detach();
-														imgDefensaAsignada.detach();
-														imgTrabajoEspecial.detach();
+
+														imgRevisionesAvances
+																.detach();
+														imgRevisionesFinalizadasTrabajo
+																.detach();
+														imgSolicitandoDefensa
+																.detach();
+														imgJuradoAsignado
+																.detach();
+														imgDefensaAsignada
+																.detach();
+														imgTrabajoEspecial
+																.detach();
 													}
 												} else {
-													
-													imgRegistrarTrabajo.detach();
-													imgRevisionesAvances.detach();
-													imgRevisionesFinalizadasTrabajo.detach();
-													imgSolicitandoDefensa.detach();
+
+													imgRegistrarTrabajo
+															.detach();
+													imgRevisionesAvances
+															.detach();
+													imgRevisionesFinalizadasTrabajo
+															.detach();
+													imgSolicitandoDefensa
+															.detach();
 													imgJuradoAsignado.detach();
 													imgDefensaAsignada.detach();
 													imgTrabajoEspecial.detach();
 												}
-											
-											}else{
-												
-												imgRevisionesFinalizadasProyecto.detach();
+
+											} else {
+
+												imgRevisionesFinalizadasProyecto
+														.detach();
 												imgRegistrarTrabajo.detach();
 												imgRevisionesAvances.detach();
-												imgRevisionesFinalizadasTrabajo.detach();
+												imgRevisionesFinalizadasTrabajo
+														.detach();
 												imgSolicitandoDefensa.detach();
 												imgJuradoAsignado.detach();
 												imgDefensaAsignada.detach();
 												imgTrabajoEspecial.detach();
 											}
-	
+
 										} else {
-										
+
 											imgRevisandoAvances.detach();
-											imgRevisionesFinalizadasProyecto.detach();
+											imgRevisionesFinalizadasProyecto
+													.detach();
 											imgRegistrarTrabajo.detach();
 											imgRevisionesAvances.detach();
-											imgRevisionesFinalizadasTrabajo.detach();
+											imgRevisionesFinalizadasTrabajo
+													.detach();
 											imgSolicitandoDefensa.detach();
 											imgJuradoAsignado.detach();
 											imgDefensaAsignada.detach();
 											imgTrabajoEspecial.detach();
 										}
-	
-									}else{
+
+									} else {
 
 										imgProyectoFactible.detach();
 										imgRevisandoAvances.detach();
-										imgRevisionesFinalizadasProyecto.detach();
+										imgRevisionesFinalizadasProyecto
+												.detach();
 										imgRegistrarTrabajo.detach();
 										imgRevisionesAvances.detach();
-										imgRevisionesFinalizadasTrabajo.detach();
+										imgRevisionesFinalizadasTrabajo
+												.detach();
 										imgSolicitandoDefensa.detach();
 										imgJuradoAsignado.detach();
 										imgDefensaAsignada.detach();
 										imgTrabajoEspecial.detach();
 									}
-								
-								}else{
-									
+
+								} else {
+
 									imgProyectoFactible.detach();
 									imgRevisandoAvances.detach();
 									imgRevisionesFinalizadasProyecto.detach();
@@ -308,7 +333,7 @@ public class CConsultarEstatus extends CGeneral {
 								imgTrabajoEspecial.detach();
 							}
 						} else {
-							
+
 							imgProyectoRegistrado.detach();
 							imgComisionEvaluadoraAsignada.detach();
 							imgProyectoFactible.detach();
@@ -377,12 +402,10 @@ public class CConsultarEstatus extends CGeneral {
 					imgTrabajoEspecial.detach();
 					imgJuradoAsignado.detach();
 					imgComisionEvaluadoraAsignada.detach();
-					Messagebox
-					.show("Tutoria del Proyecto Rechazada",
+					Messagebox.show("Tutoria del Proyecto Rechazada",
 							"Información", Messagebox.OK,
 							Messagebox.INFORMATION);
-					
-					
+
 				}
 
 			}
@@ -412,20 +435,24 @@ public class CConsultarEstatus extends CGeneral {
 				imgTrabajoEspecial.detach();
 				imgJuradoAsignado.detach();
 				Messagebox
-				.show("Estudiante apto para realizar un Trabajo Especial de Grado",
-						"Información", Messagebox.OK,
-						Messagebox.INFORMATION);
+						.show("Estudiante apto para realizar un Trabajo Especial de Grado",
+								"Información", Messagebox.OK,
+								Messagebox.INFORMATION);
 			}
 		}
 
 	}
 
+	/*
+	 * Metodo que permite obtener la cedula del estudiante que desea consultar
+	 * el estatus y ademas permite abrir la vista
+	 */
 	public void recibirCedula(String cedula) {
 		cedulaRecibida = cedula;
 		Window VConsultarEstatusProyecto = (Window) Executions
 				.createComponents(
-						"/vistas/transacciones/VConsultarEstatusProyecto.zul", null,
-						null);
+						"/vistas/transacciones/VConsultarEstatusProyecto.zul",
+						null, null);
 		VConsultarEstatusProyecto.doModal();
 
 	}

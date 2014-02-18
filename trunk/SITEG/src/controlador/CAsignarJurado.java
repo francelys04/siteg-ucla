@@ -85,9 +85,9 @@ public class CAsignarJurado extends CGeneral {
 	private Image imagenx;
 
 	/*
-	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
-	 * recibido del catalogo exista yse llenan los campos y listas
-	 * correspondientes de la vista, asicomo los objetos empleados dentro de
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos y listas
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
 	 * este controlador.
 	 */
 	@Override

@@ -1,7 +1,6 @@
 package controlador;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,28 +21,21 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listgroup;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.SimpleGroupsModel;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
 
-import servicio.SAreaInvestigacion;
-import servicio.SCondicionPrograma;
-import servicio.SItem;
-import servicio.SLapso;
-import servicio.SPrograma;
-import servicio.SProgramaArea;
-import servicio.SProgramaItem;
-import servicio.SProgramaRequisito;
-import servicio.SRequisito;
-
-import configuracion.GeneradorBeans;
-
+/*
+ * Controlador que le permite al director de programa configurar los
+ * requisitos, areas, items de evaluacion y condiciones que tendra dicho
+ * programa para un determinado lapso academico
+ */
 @Controller
 public class CConfigurarPrograma extends CGeneral {
 
+	private static final long serialVersionUID = 3465137893569110941L;
+	private static boolean listasCargadas;
 	@Wire
 	private Combobox cmbLapsoConfigurarPrograma;
 	@Wire
@@ -60,12 +52,15 @@ public class CConfigurarPrograma extends CGeneral {
 	private Listbox ltbCondiciones;
 	@Wire
 	private Listbox ltbRequisitosDisponibles;
-
 	@Wire
 	private Listbox ltbRequisitosSeleccionadas;
 
-	private static boolean listasCargadas;
-
+	/*
+	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos y listas
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -73,8 +68,9 @@ public class CConfigurarPrograma extends CGeneral {
 		listasCargadas = false;
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
-		if (txtProgramaConfigurarPrograma.getValue().compareTo("") == 0){
-			Programa programa1 = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		if (txtProgramaConfigurarPrograma.getValue().compareTo("") == 0) {
+			Programa programa1 = servicioPrograma
+					.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 			txtProgramaConfigurarPrograma.setValue(programa1.getNombre());
 		}
 
@@ -82,12 +78,13 @@ public class CConfigurarPrograma extends CGeneral {
 
 			cmbLapsoConfigurarPrograma
 					.setModel(new ListModelList<Lapso>(lapsos));
-
-			//cmbProgramaConfigurarPrograma.setModel(new ListModelList<Programa>(programas));
-
 		}
 	}
 
+	/*
+	 * Metodo que permite mover uno o varios requisitos hacia la lista de
+	 * requisitos del programa a configurar.
+	 */
 	@Listen("onClick = #btnAgregarRequisitos")
 	public void moverDerechaRequisitos() {
 
@@ -115,8 +112,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 				Messagebox
 						.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
-								"Error", Messagebox.OK,
-								Messagebox.ERROR);
+								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			}
 		} catch (NullPointerException e) {
@@ -125,6 +121,10 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite mover uno o varios requisitos asignados al programa a
+	 * la lista de la izquierda (requisitos disponibles).
+	 */
 	@Listen("onClick = #btnRemoverRequisitos")
 	public void moverIzquierdaRequisitos() {
 
@@ -151,9 +151,8 @@ public class CConfigurarPrograma extends CGeneral {
 			} else {
 
 				Messagebox
-				.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
-						"Error", Messagebox.OK,
-						Messagebox.ERROR);
+						.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			}
 		} catch (NullPointerException e) {
@@ -162,6 +161,10 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite mover una o varias areas hacia la lista de areas del
+	 * programa a configurar.
+	 */
 	@Listen("onClick = #btnAgregarAreas")
 	public void moverDerechaArea() {
 
@@ -190,9 +193,8 @@ public class CConfigurarPrograma extends CGeneral {
 			} else {
 
 				Messagebox
-				.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
-						"Error", Messagebox.OK,
-						Messagebox.ERROR);
+						.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			}
 
@@ -202,6 +204,10 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite mover una o varias areas asignadas al programa a la
+	 * lista de la izquierda (areas disponibles).
+	 */
 	@Listen("onClick = #btnRemoverAreas")
 	public void moverIzquierdaArea() {
 
@@ -230,9 +236,8 @@ public class CConfigurarPrograma extends CGeneral {
 			} else {
 
 				Messagebox
-				.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
-						"Error", Messagebox.OK,
-						Messagebox.ERROR);
+						.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			}
 		} catch (NullPointerException e) {
@@ -241,6 +246,10 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite mover uno o varios items de evaluacion hacia la lista
+	 * de items de evaluacion del programa a configurar.
+	 */
 	@Listen("onClick = #btnAgregarItems")
 	public void moverDerechaItems() {
 
@@ -268,9 +277,8 @@ public class CConfigurarPrograma extends CGeneral {
 			} else {
 
 				Messagebox
-				.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
-						"Error", Messagebox.OK,
-						Messagebox.ERROR);
+						.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			}
 		} catch (NullPointerException e) {
@@ -279,6 +287,10 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite mover uno o varios items de evaluacion asignados al
+	 * programa a la lista de la izquierda (items de evaluacion disponibles).
+	 */
 	@Listen("onClick = #btnRemoverItems")
 	public void moverIzquierdaItems() {
 
@@ -306,9 +318,8 @@ public class CConfigurarPrograma extends CGeneral {
 			} else {
 
 				Messagebox
-				.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
-						"Error", Messagebox.OK,
-						Messagebox.ERROR);
+						.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+								"Error", Messagebox.OK, Messagebox.ERROR);
 			}
 		} catch (NullPointerException e) {
 
@@ -316,12 +327,18 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite guardar las areas, requisitos e items de evaluacion
+	 * seleccionados para dicho programa. Asi como tambien los valores de las
+	 * condiciones respectivas
+	 */
 	@Listen("onClick = #btnGuardarConfiguracionPrograma")
 	public void guardar() {
 		Lapso lapso = servicioLapso
 				.buscarLapso(Long.parseLong(cmbLapsoConfigurarPrograma
 						.getSelectedItem().getId()));
-		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		Programa programa = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 		List<ProgramaArea> programasAreas = new ArrayList<ProgramaArea>();
 		List<AreaInvestigacion> areas = servicioProgramaArea
 				.buscarAreasDePrograma(programa, lapso);
@@ -403,53 +420,47 @@ public class CConfigurarPrograma extends CGeneral {
 		limpiarCampos();
 	}
 
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado original
+	 */
 	@Listen("onClick = #btnCancelarConfigurarPrograma")
 	public void limpiarCampos() {
 		cmbLapsoConfigurarPrograma.setValue("");
-		
 		ltbAreasDisponibles.getItems().clear();
-
 		ltbAreasSeleccionadas.getItems().clear();
-
 		ltbItemsDisponibles.getItems().clear();
-
 		ltbItemsSeleccionados.getItems().clear();
-
 		ltbCondiciones.getItems().clear();
-
 		ltbRequisitosDisponibles.getItems().clear();
-
 		ltbRequisitosSeleccionadas.getItems().clear();
-		
 		listasCargadas = false;
-
 	}
 
-	/*@Listen("onChange = #cmbProgramaConfigurarPrograma")
-	public void buscarPrograma() {
-		if (!cmbLapsoConfigurarPrograma.getValue().equals("")
-				&& !cmbProgramaConfigurarPrograma.getValue().equals("")) {
-			llenarListas();
-		}
-	}*/
-
+	/*
+	 * Metodo que permite buscar dinamicamente las configuraciones establecidas
+	 * para cierto lapso que se seleccione y el programa del director de
+	 * programa en sesion
+	 */
 	@Listen("onChange = #cmbLapsoConfigurarPrograma")
 	public void buscarLapso() {
 		if (!cmbLapsoConfigurarPrograma.getValue().equals("")) {
 			llenarListas();
 		}
-
 	}
 
+	/*
+	 * Metodo que permite buscar los requisitos, areas, items de evaluacion y
+	 * condiciones para cierto lapso, y cierto programa, para asi llenar las
+	 * listas respectivas de la vista
+	 */
 	public void llenarListas() {
-		
-		listasCargadas = true;
 
+		listasCargadas = true;
 		long idLapso = Long.parseLong(cmbLapsoConfigurarPrograma
 				.getSelectedItem().getId());
-		
 		Lapso lapso = servicioLapso.buscarLapso(idLapso);
-		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		Programa programa = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 		List<AreaInvestigacion> areasIzquierda = servicioArea
 				.buscarAreasSinPrograma(programa, lapso);
 		List<AreaInvestigacion> areasDerecha = servicioProgramaArea

@@ -4,27 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 import java.util.Set;
 
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-import modelo.Actividad;
-import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Programa;
-import modelo.TegEstatus;
-
 import modelo.Requisito;
 import modelo.Teg;
+import modelo.TegEstatus;
 import modelo.compuesta.TegRequisito;
-
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -35,29 +23,26 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Datebox;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SActividad;
-import servicio.SEstudiante;
-import servicio.SLapso;
-import servicio.SPrograma;
-import servicio.SProgramaRequisito;
-import servicio.SRequisito;
-import servicio.STeg;
-import servicio.STegRequisito;
-import configuracion.GeneradorBeans;
-/*Controlador que permite verificar si un proyecto de trabajo de grado
- * cumple con los requisitos establecidos por el programa*/
+/*
+ * Controlador que permite verificar si un proyecto de trabajo de grado
+ * cumple con los requisitos establecidos por el programa
+ */
 @Controller
 public class CVerificarSolicitudProyecto extends CGeneral {
+
+	private Programa programa = new Programa();
+	private static long auxId = 0;
+	private static String vistaRecibida;
+	private static int numero;
+	ArrayList<Boolean> valor = new ArrayList<Boolean>();
 
 	@Wire
 	private Textbox txtProgramaRegistrarAvances;
@@ -96,16 +81,14 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 	@Wire
 	private Datebox db1;
 
-	private long id = 0;
-	private static long auxId = 0;
-	private static long auxIdP = 0;
-	private static String vistaRecibida;
-	private static int numero;
-	ArrayList<Boolean> valor = new ArrayList<Boolean>();
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos y listas
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
 		Selectors.wireComponents(comp, this, false);
@@ -119,21 +102,19 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 				Teg teg2 = servicioTeg.buscarTeg(codigo);
 				List<Estudiante> est = servicioEstudiante
 						.buscarEstudiantesDelTeg(teg2);
-				// programa por el estudiante del primer estudiante del teg2
 				txtProgramaRegistrarAvances.setValue(est.get(0).getPrograma()
 						.getNombre());
 				txtNombreTutorVerificar.setValue(teg2.getTutor().getNombre());
-				txtApellidoTutorVerificar.setValue(teg2.getTutor().getApellido());
+				txtApellidoTutorVerificar.setValue(teg2.getTutor()
+						.getApellido());
 				txtTituloVerificar.setValue(teg2.getTitulo());
 				txtAreaVerificar.setValue(teg2.getTematica()
 						.getareaInvestigacion().getNombre());
 				txtTematicaVerificar.setValue(teg2.getTematica().getNombre());
 
 				ltbEstudiantesTeg.setModel(new ListModelList<Estudiante>(est));
-
-				id = est.get(0).getPrograma().getId();
-				llenarRequisitos(id, teg2);
-
+				programa = est.get(0).getPrograma();
+				llenarRequisitos(programa, teg2);
 				map.clear();
 				map = null;
 			}
@@ -141,7 +122,10 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 
 	}
 
-	// permite mover un requisito disponible a seleccionado
+	/*
+	 * Metodo que permite mover uno o varios requisitos hacia la lista de
+	 * requisitos entregados
+	 */
 	@Listen("onClick = #btnAgregarRequisitos")
 	public void moverDerechaRequisitos() {
 		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbRequisitosDisponibles
@@ -152,8 +136,11 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 				.removeAll(selectedItems);
 	}
 
-	// permite mover un requisito seleccionado a disponible si este no
-	// esta guarda en base de datos
+	/*
+	 * Metodo que permite mover uno o varios requisitos de la lista de
+	 * requisitos entregados a la lista de la izquierda (requisitos
+	 * disponibles).
+	 */
 	@Listen("onClick = #btnRemoverRequisitos")
 	public void moverIzquierdaRequisitos() {
 		Set selectedItems = ((org.zkoss.zul.ext.Selectable) ltbRequisitosSeleccionadas
@@ -164,22 +151,25 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 				.removeAll(selectedItems);
 	}
 
-	// limpia los campos
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
+	 */
 	@Listen("onClick = #btnCancelar")
 	public void cancelarVerificacion() {
 		long auxId3 = auxId;
 		Teg teg1 = servicioTeg.buscarTeg(auxId3);
-
-		// para guiarse por el programa del estudiante
-		List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg1);
-		long id = est.get(0).getPrograma().getId();
-		llenarRequisitos(id, teg1);
+		llenarRequisitos(programa, teg1);
 		rdoCompleto.setChecked(false);
 		rdoIncompleto.setChecked(false);
 		txtObservacion.setValue("");
 	}
 
-	// permite guardar la verificacion de requisitos
+	/*
+	 * Metodo que permite guardar los requisitos que han sido entregados por el
+	 * estudiante, cambiando el estatus de TEG asi como tambien actualizando los
+	 * cambios en la respectiva tabla de historial. Ademas se envia un correo al
+	 * estudiante informandole sobre el estatus de su teg
+	 */
 	@Listen("onClick = #btnGuardar")
 	public void GuardarVerificacion() {
 		if (ltbRequisitosSeleccionadas.getItems().size() == 0) {
@@ -242,26 +232,24 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 										}
 									}
 
-									else if (rdoCompleto.isChecked() == true) {		
+									else if (rdoCompleto.isChecked() == true) {
 										Teg teg = servicioTeg.buscarTeg(auxId2);
 										String estatus = "Proyecto Registrado";
 										teg.setEstatus(estatus);
-										
-										/* Guardar datos en la tabla teg_estatus*/
+
+										/* Guardar datos en la tabla teg_estatus */
 										java.util.Date fechaEstatus = new Date();
-										TegEstatus tegEstatus = new TegEstatus(0,
-												teg, "Proyecto Registrado",
+										TegEstatus tegEstatus = new TegEstatus(
+												0, teg, "Proyecto Registrado",
 												fechaEstatus);
 										servicioTegEstatus.guardar(tegEstatus);
-										
-										
+
 										servicioTeg.guardar(teg);
-										Messagebox
-										.show("Datos guardados exitosamente",
-												"Informacion",
-												Messagebox.OK,
+										Messagebox.show(
+												"Datos guardados exitosamente",
+												"Informacion", Messagebox.OK,
 												Messagebox.INFORMATION);
-								salir();
+										salir();
 
 									}
 								}
@@ -271,12 +259,13 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 		}
 	}
 
-	// llena la lista de requisitps disponibles y seleccionados
-	public void llenarRequisitos(long id, Teg teg) {
+	/*
+	 * Metodo que permite llenar las listas de requisitos consignados y no
+	 * consignados para el teg
+	 */
+	public void llenarRequisitos(Programa programa, Teg teg) {
 
 		Lapso lapso = servicioLapso.buscarLapsoVigente();
-		Programa programa = servicioPrograma.buscar(id);
-
 		List<Requisito> requisitosDerecha = servicioTegRequisito
 				.buscarTegRequisitoSeleccionados(teg);
 		List<Requisito> requisitoIzquierda = new ArrayList<Requisito>();
@@ -293,7 +282,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 
 	}
 
-	// permite salir y refrescar las vistas
+	/* Metodo que permite cerrar la pantalla actualizando los cambios realizados */
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -303,11 +292,16 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 		wdwVerificarSolicitudProyecto.onClose();
 	}
 
+	/*
+	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
+	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirVerificarSolicitud")
 	public void salirVerificarSolicitud() {
 

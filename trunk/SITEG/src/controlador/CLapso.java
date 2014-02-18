@@ -29,7 +29,8 @@ import controlador.catalogo.CCatalogoLapso;
  * sobre la entidad Lapso*/
 @Controller
 public class CLapso extends CGeneral {
-	
+
+	private static final long serialVersionUID = -3737502248287300642L;
 	CCatalogoLapso catalogo = new CCatalogoLapso();
 	@Wire
 	private Textbox txtNombreLapso;
@@ -89,8 +90,11 @@ public class CLapso extends CGeneral {
 
 	}
 
-	/* Metodo que permite el guardado o modificacion de una entidad Lapso, asi como la
-	 * asignacion, de ser necesaria, de las condiciones por programa para el lapso actual */
+	/*
+	 * Metodo que permite el guardado o modificacion de una entidad Lapso, asi
+	 * como la asignacion, de ser necesaria, de las condiciones por programa
+	 * para el lapso actual
+	 */
 	@Listen("onClick = #btnGuardarLapso")
 	public void guardarLapsoAcademico() {
 
@@ -99,18 +103,19 @@ public class CLapso extends CGeneral {
 				|| (dtbFinLapso.getText().compareTo("") == 0)) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
-		} else if(dtbInicioLapso.getValue().after(dtbFinLapso.getValue())){
-			Messagebox.show("La fecha de fin de lapso debe ser posterior a la fecha de inicio", "Error",
-					Messagebox.OK, Messagebox.ERROR);
-		} else{
+		} else if (dtbInicioLapso.getValue().after(dtbFinLapso.getValue())) {
+			Messagebox
+					.show("La fecha de fin de lapso debe ser posterior a la fecha de inicio",
+							"Error", Messagebox.OK, Messagebox.ERROR);
+		} else {
 			Messagebox.show("¿Desea guardar los datos del lapso academico?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
-								
+
 								String nombre = txtNombreLapso.getValue();
 								Date fechaInicio = dtbInicioLapso.getValue();
 								Date fechaFin = dtbFinLapso.getValue();
@@ -118,30 +123,44 @@ public class CLapso extends CGeneral {
 								Lapso lapso = new Lapso(id, nombre,
 										fechaInicio, fechaFin, estatus);
 								servicioLapso.guardar(lapso);
-								
-								
-								if(servicioPrograma.buscarActivas().size()!=0){
-									
-																		
-									for(int i = 0; i<servicioPrograma.buscarActivas().size();i++){
-										
-												
-										if(servicioCondicionPrograma.buscarCondicionesPrograma(servicioPrograma.buscarActivas().get(i),servicioLapso.BuscarLapsoActual()).isEmpty()){
-										
+
+								if (servicioPrograma.buscarActivas().size() != 0) {
+
+									for (int i = 0; i < servicioPrograma
+											.buscarActivas().size(); i++) {
+
+										if (servicioCondicionPrograma
+												.buscarCondicionesPrograma(
+														servicioPrograma
+																.buscarActivas()
+																.get(i),
+														servicioLapso
+																.BuscarLapsoActual())
+												.isEmpty()) {
+
 											System.out.println("pase por if2");
 											List<Condicion> condiciones = servicioCondicion
 													.buscarActivos();
 											List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
-											for (int j = 0; j < condiciones.size(); j++) {
-												Condicion condicion = condiciones.get(j);
+											for (int j = 0; j < condiciones
+													.size(); j++) {
+												Condicion condicion = condiciones
+														.get(j);
 												CondicionPrograma condicionPrograma = new CondicionPrograma();
-												condicionPrograma.setPrograma(servicioPrograma.buscarActivas().get(i));
-												Lapso ultimoLapso = servicioLapso.BuscarLapsoActual();
-											
-												condicionPrograma.setLapso(ultimoLapso);
-												condicionPrograma.setCondicion(condicion);
+												condicionPrograma
+														.setPrograma(servicioPrograma
+																.buscarActivas()
+																.get(i));
+												Lapso ultimoLapso = servicioLapso
+														.BuscarLapsoActual();
+
+												condicionPrograma
+														.setLapso(ultimoLapso);
+												condicionPrograma
+														.setCondicion(condicion);
 												condicionPrograma.setValor(0);
-												condicionesPrograma.add(condicionPrograma);
+												condicionesPrograma
+														.add(condicionPrograma);
 											}
 
 											servicioCondicionPrograma
@@ -167,7 +186,7 @@ public class CLapso extends CGeneral {
 	public void eliminarLapso() {
 		Messagebox.show("¿Desea eliminar los datos del lapso academico?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Lapso lapso = servicioLapso.buscarLapso(id);
@@ -196,10 +215,13 @@ public class CLapso extends CGeneral {
 		dtbInicioLapso.setValue(null);
 		dtbFinLapso.setValue(null);
 		btnEliminarLapso.setDisabled(true);
-		id=0;
+		id = 0;
 	}
-	
-	/* Metodo que permite cerrar la ventana correspondiente a los lapsos academicos */
+
+	/*
+	 * Metodo que permite cerrar la ventana correspondiente a los lapsos
+	 * academicos
+	 */
 	@Listen("onClick = #btnSalirLapso")
 	public void salirLapso() {
 		wdwLapsoAcademico.onClose();

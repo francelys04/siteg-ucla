@@ -19,31 +19,28 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SProfesor;
-import servicio.STematica;
-import configuracion.GeneradorBeans;
 import controlador.catalogo.CCatalogoProfesor;
 
+/*
+ * Metodo que permite asociar un conjunto de tematicas a determinado
+ * profesor
+ */
 @Controller
 public class CProfesorTematicas extends CGeneral {
-	CCatalogoProfesor catalogo = new CCatalogoProfesor();
 
+	private static final long serialVersionUID = 2268452016451121798L;
+	CCatalogoProfesor catalogo = new CCatalogoProfesor();
+	private static boolean tematicasCargadas;
 	@Wire
 	private Textbox txtCedulaProfesorTematica;
 	@Wire
-	private Listbox ltbProfesor;
-
-	@Wire
 	private Textbox txtApellidoProfesorTematica;
-
 	@Wire
 	private Textbox txtNombreProfesorTematica;
-
 	@Wire
 	private Listbox lsbTematicasProfesorDisponibles;
 	@Wire
@@ -51,23 +48,24 @@ public class CProfesorTematicas extends CGeneral {
 	@Wire
 	private Window wdwProfesorTematica;
 
-	private static boolean tematicasCargadas;
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos y listas
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
 		tematicasCargadas = false;
-		
+
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-		// permite llenar los datos del catlago a la vista si el map es
-		// disferente de null
 		if (map != null) {
 			if ((String) map.get("cedula") != null) {
-
 				txtCedulaProfesorTematica.setValue((String) map.get("cedula"));
 				Profesor profesor = servicioProfesor
 						.buscarProfesorPorCedula(txtCedulaProfesorTematica
@@ -82,7 +80,10 @@ public class CProfesorTematicas extends CGeneral {
 
 	}
 
-	// permite ver la lista de profesores activos
+	/*
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnCatalogoProfesorTematica")
 	public void buscarProfesor() {
 
@@ -94,7 +95,10 @@ public class CProfesorTematicas extends CGeneral {
 
 	}
 
-	// permite mover una tematica de disponible a seleccionada
+	/*
+	 * Metodo que permite mover una o varias tematicas hacia la lista de
+	 * tematicas seleccionadas
+	 */
 	@Listen("onClick = #btnAgergarProfesorTematicas")
 	public void moverDerechaTematica() {
 
@@ -124,8 +128,7 @@ public class CProfesorTematicas extends CGeneral {
 
 				Messagebox
 						.show("Debe seleccionar una profesor para agregarle las tematicas correspondientes ",
-								"Error", Messagebox.OK,
-								Messagebox.ERROR);
+								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			}
 		} catch (NullPointerException e) {
@@ -134,7 +137,10 @@ public class CProfesorTematicas extends CGeneral {
 
 	}
 
-	// permite mover una tematica de seleccionada a disponible
+	/*
+	 * Metodo que permite mover una o varias tematicas de la lista de
+	 * seleccionadas a la lista de la izquierda (tematicas disponibles).
+	 */
 	@Listen("onClick = #btnRemoverProfesorTematicas")
 	public void moverIzquierdaArea() {
 
@@ -163,8 +169,7 @@ public class CProfesorTematicas extends CGeneral {
 
 				Messagebox
 						.show("Debe seleccionar una profesor para agregarle las tematicas correspondientes ",
-								"Error", Messagebox.OK,
-								Messagebox.ERROR);
+								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			}
 		} catch (NullPointerException e) {
@@ -173,14 +178,17 @@ public class CProfesorTematicas extends CGeneral {
 
 	}
 
-	// permite guardar la asignacion de tematicas a un profesor
+	/*
+	 * Metodo que permite guardar la asociacion de las tematicas seleccionadas
+	 * con determinado profesor
+	 */
 	@Listen("onClick = #btnGuardarProfesorTematicas")
 	public void guardar() {
 		if (lsbTematicasProfesorSeleccionadas.getItemCount() != 0) {
 			Messagebox.show("¿Desea guardar la configuracion realizada?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -213,7 +221,9 @@ public class CProfesorTematicas extends CGeneral {
 		}
 	}
 
-	// Limpia los campos
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
+	 */
 	@Listen("onClick = #btnCancelarProfesorTematicas")
 	public void limpiarCampos() {
 		txtCedulaProfesorTematica.setValue("");
@@ -228,7 +238,10 @@ public class CProfesorTematicas extends CGeneral {
 		tematicasCargadas = false;
 	}
 
-	// llena la lista de tematicas disponibles y seleccionadas
+	/*
+	 * Metodo que permite llenar las listas de tematicas tanto disponibles como
+	 * seleccionadas para un determinado profesor
+	 */
 	private void llenaListas() {
 
 		tematicasCargadas = true;
@@ -274,7 +287,7 @@ public class CProfesorTematicas extends CGeneral {
 
 	}
 
-	// Limpia los campos
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirProfesorTematicas")
 	public void salirProfesorTematicas() {
 

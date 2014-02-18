@@ -31,6 +31,7 @@ import controlador.catalogo.CCatalogoPrograma;
 @Controller
 public class CPrograma extends CGeneral {
 
+	private static final long serialVersionUID = 7118786801690906815L;
 	CCatalogoPrograma catalogo = new CCatalogoPrograma();
 	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
 	@Wire
@@ -153,7 +154,7 @@ public class CPrograma extends CGeneral {
 			Messagebox.show("¿Desea guardar los datos del programa?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -204,7 +205,7 @@ public class CPrograma extends CGeneral {
 	public void eliminarPrograma() {
 		Messagebox.show("¿Desea eliminar los datos del programa?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Programa programa = servicioPrograma.buscar(id);

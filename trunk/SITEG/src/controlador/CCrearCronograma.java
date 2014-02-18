@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import modelo.Actividad;
-import modelo.AreaInvestigacion;
 import modelo.Lapso;
 import modelo.Programa;
 import modelo.compuesta.Cronograma;
@@ -23,16 +22,19 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
 
-import configuracion.GeneradorBeans;
-
-import servicio.SActividad;
-import servicio.SCronograma;
-import servicio.SLapso;
-import servicio.SPrograma;
-
+/*
+ * Controlador que le permite al director de programa configurar las
+ * actividades, es decir, crear el cronograma por el cual se regira dicho
+ * programa para un determinado lapso academico
+ */
 @Controller
 public class CCrearCronograma extends CGeneral {
 
+	private static final long serialVersionUID = -5977701710543879084L;
+	private static boolean actividadesCargadas;
+	private static boolean actividadesSeleccionadas;
+	List<Cronograma> cronogramas = new ArrayList<Cronograma>();
+	List<Actividad> actividades = new ArrayList<Actividad>();
 	@Wire
 	private Combobox cmbLapsoCrearCronograma;
 	@Wire
@@ -42,52 +44,48 @@ public class CCrearCronograma extends CGeneral {
 	@Wire
 	private Listbox ltbActividadesSeleccionadas;
 
-	private static boolean actividadesCargadas;
-	private static boolean actividadesSeleccionadas;
-
-	List<Cronograma> cronogramas = new ArrayList();
-	List<Actividad> actividades = new ArrayList();
-
+	/*
+	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos y listas
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-
 		actividadesCargadas = false;
 		actividadesSeleccionadas = false;
-
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
-		if (txtProgramaCrearCronograma.getValue().compareTo("") == 0){
-			Programa programa1 = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		if (txtProgramaCrearCronograma.getValue().compareTo("") == 0) {
+			Programa programa1 = servicioPrograma
+					.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 			txtProgramaCrearCronograma.setValue(programa1.getNombre());
 		}
-
-		// llenarActividades();
 		if (cmbLapsoCrearCronograma != null) {
 			cmbLapsoCrearCronograma.setModel(new ListModelList<Lapso>(lapsos));
-			
 		}
-		
 
 	}
 
+	/*
+	 * Metodo que permite mover una o varias actividades hacia la lista de
+	 * actividades del cronograma.
+	 */
 	@Listen("onClick = #btnAgregarActividades")
 	public void moverDerechaActividad() {
 
 		if (actividadesCargadas == true) {
 
-			List<Listitem> listitemEliminar = new ArrayList();
+			List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 			List<Listitem> listItem = ltbActividadesDisponibles.getItems();
-		
+
 			if (listItem.size() != 0) {
-				
+
 				System.out.println("lista distinta de cero");
-				
+
 				for (int i = 0; i < listItem.size(); i++) {
 
 					if (listItem.get(i).isSelected()) {
-						
-						System.out.println("item seleccionado");
-
 						actividadesSeleccionadas = true;
 						Actividad actividad = listItem.get(i).getValue();
 						actividades.remove(actividad);
@@ -101,16 +99,11 @@ public class CCrearCronograma extends CGeneral {
 					}
 
 				}
-			} 
-			
-			
-			if(actividadesSeleccionadas == false){
-				
-				System.out.println("no seleccione actividades");
+			}
 
+			if (actividadesSeleccionadas == false) {
 				Messagebox.show("Debe seleccionar una actividad ",
 						"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
-
 			}
 
 			for (int i = 0; i < listitemEliminar.size(); i++) {
@@ -133,18 +126,20 @@ public class CCrearCronograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite mover una o varias actividades asignadas al cronograma
+	 * a la lista de la izquierda (actividades disponibles).
+	 */
 	@Listen("onClick = #btnRemoverActividades")
 	public void moverIzquierdaActividad() {
 
 		if (actividadesCargadas == true) {
 
-			List<Listitem> listitemEliminar = new ArrayList();
+			List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 			List<Listitem> listItem2 = ltbActividadesSeleccionadas.getItems();
 			if (listItem2.size() != 0) {
 				for (int i = 0; i < listItem2.size(); i++) {
-
 					if (listItem2.get(i).isSelected()) {
-
 						Cronograma cronograma = listItem2.get(i).getValue();
 						cronogramas.remove(cronograma);
 						actividades.add(cronograma.getActividad());
@@ -155,10 +150,9 @@ public class CCrearCronograma extends CGeneral {
 					}
 
 				}
-			} 
-			
-			if(actividadesSeleccionadas == false) {
+			}
 
+			if (actividadesSeleccionadas == false) {
 				Messagebox.show("Debe seleccionar una actividad ",
 						"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 
@@ -183,6 +177,9 @@ public class CCrearCronograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado original
+	 */
 	@Listen("onClick = #btnCancelarCronograma")
 	public void limpiarCampos() {
 		cmbLapsoCrearCronograma.setValue("");
@@ -193,12 +190,17 @@ public class CCrearCronograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite guardar las actividades seleccionadas para el programa
+	 * en determinado lapso, creando asi el cronograma para el programa
+	 */
 	@Listen("onClick = #btnCrearCronograma")
 	public void crearCronograma() {
 		boolean error = false;
 		Lapso lapso = servicioLapso.buscarLapso(Long
 				.parseLong(cmbLapsoCrearCronograma.getSelectedItem().getId()));
-		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		Programa programa = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 
 		List<Cronograma> cronogramas = servicioCronograma
 				.buscarCronogramaPorLapsoYPrograma(programa, lapso);
@@ -212,13 +214,10 @@ public class CCrearCronograma extends CGeneral {
 					.getFirstChild()).getValue();
 			Date fechaFin = ((Datebox) ((listItem.getChildren().get(2)))
 					.getFirstChild()).getValue();
-			System.out.println(fechaFin);
 			if (fechaFin == null || fechaInicio == null
 					|| fechaInicio.after(fechaFin)) {
 				error = true;
 			}
-			// fechaFin.equals(null) || fechaInicio.equals(null) ||
-			// fechaInicio.after(fechaFin)
 			int id = ((Spinner) ((listItem.getChildren().get(3)))
 					.getFirstChild()).getValue();
 			Actividad actividad = servicioActividad.buscarActividad(id);
@@ -239,26 +238,33 @@ public class CCrearCronograma extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite buscar dinamicamente las actividades establecidas para
+	 * cierto lapso que se seleccione y el programa del director de programa en
+	 * sesion
+	 */
 	@Listen("onChange = #cmbLapsoCrearCronograma")
-	public void buscarPrograma() {
-		if (!cmbLapsoCrearCronograma.getValue().equals(""))
-				 {
+	public void buscarLapso() {
+		if (!cmbLapsoCrearCronograma.getValue().equals("")) {
 			llenarActividades();
 		}
 	}
 
-
+	/*
+	 * Metodo que permite buscar las actividades para cierto lapso, y cierto
+	 * programa, para asi llenar las listas respectivas de la vista
+	 */
 	private void llenarActividades() {
 
 		actividadesCargadas = true;
-
 		if (ltbActividadesDisponibles.isMultiple())
 			ltbActividadesDisponibles.setMultiple(false);
 		if (ltbActividadesSeleccionadas.isMultiple())
 			ltbActividadesSeleccionadas.setMultiple(false);
 		Lapso lapso = servicioLapso.buscarLapso(Long
 				.parseLong(cmbLapsoCrearCronograma.getSelectedItem().getId()));
-		Programa programa = servicioPrograma.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		Programa programa = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 		cronogramas = servicioCronograma.buscarCronogramaPorLapsoYPrograma(
 				programa, lapso);
 		actividades = servicioActividad.buscarActividadSinCronograma(programa,

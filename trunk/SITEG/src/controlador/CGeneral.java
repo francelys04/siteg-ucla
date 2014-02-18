@@ -70,6 +70,7 @@ import configuracion.GeneradorBeans;
 @Controller
 public abstract class CGeneral extends SelectorComposer<Component> {
 
+	private static final long serialVersionUID = 445877799825285911L;
 	protected SActividad servicioActividad = GeneradorBeans
 			.getServicioActividad();
 	protected SArbol servicioArbol = GeneradorBeans.getServicioArbol();

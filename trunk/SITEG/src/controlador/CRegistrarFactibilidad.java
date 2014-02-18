@@ -12,6 +12,7 @@ import modelo.Teg;
 import modelo.TegEstatus;
 import modelo.compuesta.ItemFactibilidad;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -25,18 +26,20 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SEstudiante;
-import servicio.SFactibilidad;
-import servicio.SPrograma;
-import servicio.STeg;
-import servicio.SItemFactibilidad;
-import servicio.SSolicitudTutoria;
-
-import configuracion.GeneradorBeans;
-
 import controlador.CGeneral;
 
+/*
+ * Controlador que permite indicar si un proyecto es factible o no,
+ * cambiando el estatus del teg
+ */
+@Controller
 public class CRegistrarFactibilidad extends CGeneral {
+
+	private static String vistaRecibida;
+	private long id = 0;
+	private static long auxiliarId = 0;
+	private static Programa programa;
+	private static Estudiante estudianteTeg;
 
 	@Wire
 	private Listbox ltbListaFactibilidad;
@@ -64,17 +67,16 @@ public class CRegistrarFactibilidad extends CGeneral {
 	private Window wdwRegistrarFactibilidad;
 	@Wire
 	private Window wdwCatalogoRegistrarFactibilidad;
-	private static String vistaRecibida;
-	private long id = 0;
-	private static long auxiliarId = 0;
-	private static long auxIdPrograma = 0;
-	private static Programa programa;
-	private static Estudiante estudianteTeg;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos y listas
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		// permite cargar los datos del item seleccionado en el catalogo
 		programa = servicioPrograma
 				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 
@@ -125,11 +127,16 @@ public class CRegistrarFactibilidad extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
+	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
+	/* Metodo que permite cerrar la pantalla actualizando los cambios realizados */
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -139,9 +146,13 @@ public class CRegistrarFactibilidad extends CGeneral {
 		wdwRegistrarFactibilidad.onClose();
 	}
 
-	// Permite aceptar la factibilidad de un proyecto
+	/*
+	 * Metodo que permite aceptar la factibilidad de un determinado proyecto,
+	 * cambiando asi el estatus del proyecto a Proyecto Factible. Ademas se
+	 * actualiza la tabla de cambios de estatus del teg
+	 */
 	@Listen("onClick = #btnAceptarRegistrarFactibilidad")
-	public void aceptarfactibilidad() {
+	public void aceptarFactibilidad() {
 		Messagebox.show("¿Desea aceptar la factibilidad del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
@@ -150,17 +161,15 @@ public class CRegistrarFactibilidad extends CGeneral {
 
 							String estatus = "Proyecto Factible";
 							Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-							Factibilidad factibilidad = servicioFactibilidad.buscarFactibilidadPorTeg(teg2);
+							Factibilidad factibilidad = servicioFactibilidad
+									.buscarFactibilidadPorTeg(teg2);
 							factibilidad.setEstatus("Factibilidad Aceptada");
 							servicioFactibilidad.guardar(factibilidad);
 							teg2.setEstatus(estatus);
-
-							/* Guardar datos en la tabla teg_estatus */
 							java.util.Date fechaEstatus = new Date();
 							TegEstatus tegEstatus = new TegEstatus(0, teg2,
 									"Proyecto Factible", fechaEstatus);
 							servicioTegEstatus.guardar(tegEstatus);
-
 							servicioTeg.guardar(teg2);
 							Messagebox.show("Datos guardados exitosamente",
 									"Informacion", Messagebox.OK,
@@ -172,7 +181,11 @@ public class CRegistrarFactibilidad extends CGeneral {
 
 	}
 
-	// Permite rechazar la factibilidad de un proyecto
+	/*
+	 * Metodo que permite rechazar la factibilidad de un determinado proyecto,
+	 * cambiando asi el estatus del proyecto a Proyecto No Factible. Ademas se
+	 * actualiza la tabla de cambios de estatus del teg
+	 */
 	@Listen("onClick = #btnRechazarRegistrarFactibilidad")
 	public void rechazarfactibilidad() {
 		Messagebox.show("¿Desea rechazar factibilidad del proyecto?",
@@ -180,11 +193,6 @@ public class CRegistrarFactibilidad extends CGeneral {
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-
-							/*
-							 * Finalizar la solicitud guardando el estatus
-							 * Finalizada
-							 */
 							estudianteTeg = ltbEstudianteRegistrarFactibilidad
 									.getItems().get(0).getValue();
 							SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
@@ -196,17 +204,15 @@ public class CRegistrarFactibilidad extends CGeneral {
 
 							String estatus = "Proyecto No Factible";
 							Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
-							Factibilidad factibilidad = servicioFactibilidad.buscarFactibilidadPorTeg(teg2);
+							Factibilidad factibilidad = servicioFactibilidad
+									.buscarFactibilidadPorTeg(teg2);
 							factibilidad.setEstatus("Factibilidad Rechazada");
 							servicioFactibilidad.guardar(factibilidad);
 							teg2.setEstatus(estatus);
-
-							/* Guardar datos en la tabla teg_estatus */
 							java.util.Date fechaEstatus = new Date();
 							TegEstatus tegEstatus = new TegEstatus(0, teg2,
 									"Proyecto No Factible", fechaEstatus);
 							servicioTegEstatus.guardar(tegEstatus);
-
 							servicioTeg.guardar(teg2);
 							for (int i = 0; i < ltbEstudianteRegistrarFactibilidad
 									.getItemCount(); i++) {
@@ -218,7 +224,6 @@ public class CRegistrarFactibilidad extends CGeneral {
 
 							}
 
-
 							Messagebox.show("Datos guardados exitosamente",
 									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
@@ -227,12 +232,10 @@ public class CRegistrarFactibilidad extends CGeneral {
 					}
 				});
 	}
-	
+
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirRegistrarFactibilidad")
 	public void salirRegistrarFactibilidad() {
-
 		wdwRegistrarFactibilidad.onClose();
-
 	}
-
 }
