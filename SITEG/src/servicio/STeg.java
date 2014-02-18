@@ -320,6 +320,16 @@ public class STeg {
 		return interfaceTeg.buscarTegPorFechayEstatus(estatus, tematica,
 				fechaInicio, fechaFin);
 	}
+	
+	public List<Teg> buscarTegPorDosFechasyUnEstatus(
+			String estatus, Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegPorFecha(estatus,fechaInicio, fechaFin);
+	}
+	
+	public List<Teg> buscarTegPorDosFechas(
+			 Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegFecha(fechaInicio, fechaFin);
+	}
 
 	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyVariosEstatus(
 			String estatus1, String estatus2, String estatus3, String estatus4,
