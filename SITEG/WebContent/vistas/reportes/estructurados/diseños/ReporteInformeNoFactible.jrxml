@@ -7,8 +7,11 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="fecha" class="java.lang.String"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
+	<parameter name="logoSiteg" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[Select estudiante.nombre ne, estudiante.apellido ae, estudiante.cedula ce, teg.titulo te, programa.nombre pn, profesor.nombre np, profesor.apellido ap, profesor.nombre dn , profesor.apellido da from estudiante, teg, programa, profesor, estudiante_teg,tematica,area_investigacion,programa_area where estudiante.cedula= estudiante_teg.estudiante_cedula and estudiante_teg.teg_id=teg.id and estudiante.programa_id = programa.id and teg.profesor_cedula = profesor.cedula and teg.id=$P{proyecto} and teg.tematica_id = tematica.id and tematica.area_investigacion_id = area_investigacion.id and area_investigacion.id = programa_area.area_investigacion_id and programa_area.programa_id = programa.id;]]>
+		<![CDATA[Select estudiante.nombre ne, estudiante.apellido ae, estudiante.cedula ce, teg.titulo te, programa.nombre pn, profesor.nombre np, profesor.apellido ap, profesor.nombre dn , profesor.apellido da, factibilidad.observacion ob from estudiante, teg, programa, profesor,factibilidad, estudiante_teg,tematica,area_investigacion,programa_area where estudiante.cedula= estudiante_teg.estudiante_cedula and estudiante_teg.teg_id=teg.id and estudiante.programa_id = programa.id and teg.profesor_cedula = profesor.cedula and teg.id=$P{proyecto} and teg.tematica_id = tematica.id and tematica.area_investigacion_id = area_investigacion.id and area_investigacion.id = programa_area.area_investigacion_id and programa_area.programa_id = programa.id and teg.id = factibilidad.teg_id;]]>
 	</queryString>
 	<field name="ne" class="java.lang.String"/>
 	<field name="ae" class="java.lang.String"/>
@@ -19,6 +22,7 @@
 	<field name="ap" class="java.lang.String"/>
 	<field name="dn" class="java.lang.String"/>
 	<field name="da" class="java.lang.String"/>
+	<field name="ob" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -37,20 +41,20 @@
 					<pen lineWidth="3.0"/>
 				</graphicElement>
 			</line>
-			<image>
-				<reportElement x="492" y="17" width="82" height="54" uuid="89b519ee-8b71-4dea-bec4-85db870cc09a"/>
-				<imageExpression><![CDATA["/reporte/logo dcyt.png"]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="3" y="15" width="74" height="58" uuid="2abb98a0-9267-4d28-bfd7-d35c92c5895d"/>
-				<imageExpression><![CDATA["/reporte/logo ucla.png"]]></imageExpression>
-			</image>
 			<line>
-				<reportElement x="-19" y="0" width="610" height="2" forecolor="#0066FF" uuid="766cf580-6afa-4a5b-b121-5992fd643f36"/>
+				<reportElement x="-28" y="-1" width="610" height="2" forecolor="#0066FF" uuid="766cf580-6afa-4a5b-b121-5992fd643f36"/>
 				<graphicElement>
 					<pen lineWidth="3.0"/>
 				</graphicElement>
 			</line>
+			<image>
+				<reportElement x="0" y="15" width="74" height="58" uuid="364b62f8-c5d4-484a-8bd2-5806d1601559"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="490" y="17" width="82" height="54" uuid="5aec0a33-9560-40e2-9bc4-1ac40b47c360"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -83,46 +87,42 @@
 				<text><![CDATA[Presente.-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="62" y="126" width="517" height="16" uuid="cd78b985-77d7-49fb-bcf2-7189edbde888"/>
-				<text><![CDATA[Me dirijo a usted, con el objeto de notificarle que el Proyecto de Trabajo Especial de Grado de la bachiller]]></text>
+				<reportElement x="59" y="118" width="510" height="16" uuid="cd78b985-77d7-49fb-bcf2-7189edbde888"/>
+				<text><![CDATA[Anexo a la presente las observaciones menores al Proyecto de Trabajo Especial de Grado presentado ante ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="32" y="143" width="36" height="15" uuid="4151dc34-73ef-4aec-9bc6-2b93538e20a2"/>
+				<reportElement x="166" y="134" width="36" height="15" uuid="4151dc34-73ef-4aec-9bc6-2b93538e20a2"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{ne}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="68" y="143" width="43" height="15" uuid="20c601a9-b189-4a64-8d30-609a43749e7c"/>
+				<reportElement x="202" y="134" width="43" height="15" uuid="20c601a9-b189-4a64-8d30-609a43749e7c"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{ae}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="289" y="144" width="61" height="15" uuid="b1420fe4-e56b-4992-a3be-6bbe0a69bb38"/>
+				<reportElement x="416" y="135" width="61" height="15" uuid="b1420fe4-e56b-4992-a3be-6bbe0a69bb38"/>
 				<textFieldExpression><![CDATA[$F{ce}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="115" y="144" width="179" height="15" uuid="e5778904-8775-41a1-a5b9-e80253e78a72"/>
+				<reportElement x="245" y="135" width="179" height="15" uuid="e5778904-8775-41a1-a5b9-e80253e78a72"/>
 				<text><![CDATA[titular de la Cédula de Identidad N° ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="351" y="144" width="46" height="15" uuid="622f79d4-d664-49b3-8753-96ca6de80732"/>
-				<text><![CDATA[. Titulado]]></text>
+				<reportElement x="478" y="135" width="86" height="15" uuid="622f79d4-d664-49b3-8753-96ca6de80732"/>
+				<text><![CDATA[, la cual lleva por ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="397" y="143" width="90" height="15" uuid="170a9c38-e185-4eea-8896-14c6a67b57af"/>
+				<reportElement x="37" y="149" width="119" height="15" uuid="170a9c38-e185-4eea-8896-14c6a67b57af"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{te}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="491" y="143" width="69" height="15" uuid="627981fc-5257-43ac-ba6e-7e60a6a24995"/>
-				<text><![CDATA[fue aprobado]]></text>
+				<reportElement x="31" y="179" width="478" height="14" uuid="1ed1c212-9ee6-488a-a4d2-c3d7156db7b5"/>
+				<text><![CDATA[Para mejorar la versión definitiva del proyecto, debe considerar la la siguiente observación:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="31" y="161" width="155" height="14" uuid="1ed1c212-9ee6-488a-a4d2-c3d7156db7b5"/>
-				<text><![CDATA[por la Comisión de Currículo de ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="62" y="194" width="168" height="15" uuid="d83e59a3-ba0b-4a29-8e42-dc4b986794b8"/>
+				<reportElement x="34" y="231" width="168" height="15" uuid="d83e59a3-ba0b-4a29-8e42-dc4b986794b8"/>
 				<text><![CDATA[Deseandoles el mayor de los exitos.]]></text>
 			</staticText>
 			<staticText>
@@ -130,10 +130,6 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Atentamente]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="184" y="161" width="164" height="14" uuid="c7e0be72-3bd2-42da-885d-bfdb253ee0d9"/>
-				<textFieldExpression><![CDATA[$F{pn}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="223" y="282" width="47" height="13" uuid="0bae8493-dae8-4929-b90d-c0aa61b260b8"/>
 				<textElement textAlignment="Center"/>
@@ -160,28 +156,50 @@
 				<textFieldExpression><![CDATA[$F{pn}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="31" y="158" width="80" height="1" uuid="c962f008-f402-4d3c-912a-b02b7a754057"/>
+				<reportElement x="165" y="149" width="80" height="1" uuid="c962f008-f402-4d3c-912a-b02b7a754057"/>
 			</line>
 			<line>
-				<reportElement x="178" y="175" width="162" height="1" uuid="0d5049cd-9b8c-486d-81d1-dd242afbba92"/>
+				<reportElement x="13" y="205" width="525" height="1" uuid="0d5049cd-9b8c-486d-81d1-dd242afbba92"/>
 			</line>
 			<line>
-				<reportElement x="395" y="158" width="90" height="1" uuid="d8603d9d-6155-4c59-9e5a-a7be7eeb5abc"/>
+				<reportElement x="37" y="164" width="119" height="1" uuid="d8603d9d-6155-4c59-9e5a-a7be7eeb5abc"/>
 			</line>
 			<line>
-				<reportElement x="279" y="158" width="75" height="1" uuid="d4413dde-bd14-4bbf-97ca-66fb64d722cb"/>
+				<reportElement x="403" y="149" width="75" height="1" uuid="d4413dde-bd14-4bbf-97ca-66fb64d722cb"/>
 			</line>
-			<textField>
-				<reportElement x="423" y="12" width="100" height="14" uuid="c8878e8c-6055-4312-b946-f22ad7db6b54"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="156" y="98" width="260" height="20" uuid="df462bbc-26e4-47f4-a7ed-619fca83364a"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[Informe de Factibilidad]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="421" y="12" width="100" height="14" uuid="0e89e415-587f-4232-aedb-ec6116d01242"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="134" width="148" height="15" uuid="197df748-ac0e-4510-bd4a-7604890ca3d3"/>
+				<text><![CDATA[esta Dirección por la bachiller]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="150" width="26" height="15" uuid="d23ef89d-17ce-4775-92ca-12d11cfda144"/>
+				<text><![CDATA[titulo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="206" width="530" height="15" uuid="c8c634a6-5692-4094-b1ae-a10fc283851d"/>
+				<text><![CDATA[Debe entregar dicha versión mejorada según el cronograma de actividades correspondiente a su Programa.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="12" y="191" width="482" height="15" uuid="b57faa5a-ee9d-47e0-b928-0d166958f7ad"/>
+				<textFieldExpression><![CDATA[$F{ob}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="161" y="151" width="109" height="15" uuid="415acbdd-55bb-4f63-9cfd-629d5ff2c4e4"/>
+				<text><![CDATA[, el cual es no factible. ]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -197,8 +215,8 @@
 				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
 			</staticText>
 			<image>
-				<reportElement x="8" y="15" width="61" height="39" uuid="d3e7c345-e6fa-4988-a8b2-d4b6a9fae4d7"/>
-				<imageExpression><![CDATA["/reporte/logo.png"]]></imageExpression>
+				<reportElement x="11" y="10" width="61" height="39" uuid="4cf3e6ff-7eaa-4742-8d8f-20ff6da77c21"/>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>
