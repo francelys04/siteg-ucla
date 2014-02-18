@@ -66,18 +66,20 @@ import modelo.reporte.Solicitud;
 @Controller
 public class CReporteSolicitud extends CGeneral {
 
-	public CReporteSolicitud() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	SDefensa servicioDefensa = GeneradorBeans.getServicioDefensa();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SSolicitudTutoria servicioSolicitudTutoria = GeneradorBeans
-			.getServicioTutoria();
+	static Programa programa1 = new Programa();
+	static AreaInvestigacion area1 = new AreaInvestigacion();
+	private static String estatusDefensa = "Solicitando Defensa";
+	private static String estatusProyecto = "Solicitando Registro";
+	private static String estatusTeg = "TEG Registrado";
+	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
+	List<Tematica> tematicas = new ArrayList<Tematica>();
+	List<Programa> programas = new ArrayList<Programa>();
+	long idTematica = 0;
+	long idArea = 0;
+	private static int chequeoEstatus = 0;
+	static List<Proyecto> elementos1 = new ArrayList<Proyecto>();
+	static List<Solicitud> elementos = new ArrayList<Solicitud>();
+	private static String NombreTxt;
 
 	@Wire
 	private Window wdwReporteSolicitud;
@@ -135,21 +137,13 @@ public class CReporteSolicitud extends CGeneral {
 	@Wire
 	private Button btnExportarPlano;
 
-	static Programa programa1 = new Programa();
-	static AreaInvestigacion area1 = new AreaInvestigacion();
-	private static String estatusDefensa = "Solicitando Defensa";
-	private static String estatusProyecto = "Solicitando Registro";
-	private static String estatusTeg = "TEG Registrado";
-	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
-	List<Tematica> tematicas = new ArrayList<Tematica>();
-	List<Programa> programas = new ArrayList<Programa>();
-	long idTematica = 0;
-	long idArea = 0;
-	private static int chequeoEstatus = 0;
-	static List<Proyecto> elementos1 = new ArrayList<Proyecto>();
-	static List<Solicitud> elementos = new ArrayList<Solicitud>();
-	private static String NombreTxt;
-
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
+	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
+	 * seleccionar la opcion de "Todos", asi mismo se setea el valor "Todos",
+	 * para el programa, area y tematica y se llena una lista del mismo en el
+	 * componente de la vista.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		ltbElegiArea.setVisible(false);
@@ -163,11 +157,10 @@ public class CReporteSolicitud extends CGeneral {
 		cmbPrograma.setValue("Todos");
 		cmbArea.setValue("Todos");
 		cmbTematica.setValue("Todos");
-		
-		
 
 	}
 
+	/* Metodo que permite limpiar los campos de la vista. */
 	public void cancelar() {
 
 		ltbElegiPrograma.setVisible(false);
@@ -187,6 +180,12 @@ public class CReporteSolicitud extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
+	 * se puede seleccionar la opcion de "Todos" en el combo de las areas
+	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() {
 		if (cmbPrograma.getValue().equals("Todos")) {
@@ -211,6 +210,12 @@ public class CReporteSolicitud extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo tematica, ademas se adiciona un nuevo item donde se
+	 * puede seleccionar la opcion de "Todos" en el combo de las tematicas
+	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
 		if (cmbArea.getValue().equals("Todos")) {
@@ -231,6 +236,10 @@ public class CReporteSolicitud extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
+	 * uno en el campo del mismo.
+	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
 		if (cmbArea.getValue().equals("Todos")) {
@@ -244,6 +253,14 @@ public class CReporteSolicitud extends CGeneral {
 		idTematica = tematica.getId();
 	}
 
+	/*
+	 * Metodo que permite generar un reporte, dado a un programa, area y
+	 * tematica se generara una lista con las solicitudes de tutorias,
+	 * proyectos,tegs o defensas, dependiendo de esta seleccion, mediante el
+	 * componente "Jasperreport" donde se mapea una serie de parametros y una
+	 * lista previamente cargada que seran los datos que se muestra en el
+	 * documento.
+	 */
 	@Listen("onClick = #btnGenerar")
 	public void generarReporteDefensa() throws JRException {
 		cancelar();
@@ -251,7 +268,8 @@ public class CReporteSolicitud extends CGeneral {
 				&& (rdoTutoria.isChecked() == false)
 				&& (rdoProyecto.isChecked() == false)
 				&& (rdoTEG.isChecked() == false)) {
-			Messagebox.show("Debe Seleccionar el tipo de solicitud que quiere consultar",
+			Messagebox
+					.show("Debe Seleccionar el tipo de solicitud que quiere consultar",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		}
 		if (rdoTutoria.isChecked() == true) {
@@ -643,7 +661,6 @@ public class CReporteSolicitud extends CGeneral {
 										Messagebox.INFORMATION);
 						btnExportarPlano.setDisabled(true);
 					}
-					
 
 				}
 				/*
@@ -1368,7 +1385,7 @@ public class CReporteSolicitud extends CGeneral {
 		rdoDefensa.setChecked(false);
 		rdoProyecto.setChecked(false);
 		rdoTEG.setChecked(false);
-		rdoTutoria.setChecked(false);		
+		rdoTutoria.setChecked(false);
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbTematica.setValue("");
@@ -2782,12 +2799,17 @@ public class CReporteSolicitud extends CGeneral {
 
 		}
 	}
+
+	/* Metdo que permite cerrar la vista. */
 	@Listen("onClick= #btnSalir")
-	public void salir(){
+	public void salir() {
 		wdwReporteSolicitud.onClose();
 	}
-	
-	
+
+	/*
+	 * Metdo que permite exportar en un archivo plano, los datos previamente
+	 * cargados.
+	 */
 	@Listen("onClick= #btnExportarPlano")
 	public void exportarReporte() {
 		try {
