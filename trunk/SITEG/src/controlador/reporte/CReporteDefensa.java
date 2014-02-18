@@ -68,8 +68,8 @@ import modelo.reporte.DefensaTeg;
 public class CReporteDefensa extends CGeneral {
 
 	Programa programa = new Programa();
-	private String[] estatusDefensa = { "Todos", "Por Defender",
-			"Defensa Finalizada" };
+	private String[] estatusDefensa = { "Todos", "Defensa Programada",
+			"Defensa Evaluada" };
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
@@ -194,7 +194,8 @@ public class CReporteDefensa extends CGeneral {
 			Messagebox.show(
 					"La fecha de inicio debe ser primero que la fecha de fin",
 					"Error", Messagebox.OK, Messagebox.ERROR);
-		} else if (!tipoDefensa.equals("Todos")) {
+		} else { 
+			if (!tipoDefensa.equals("Todos")) {
 
 			if (nombrePrograma.equals("Todos")) {
 
@@ -278,25 +279,48 @@ public class CReporteDefensa extends CGeneral {
 			p.put("logoCE", reporteImage + "logo CE.png");
 			p.put("logoSiteg", reporteImage + "logo.png");
 
-			jstVistaPrevia.setSrc(reporteSrc);
-			jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-					elementos));
-			jstVistaPrevia.setType("pdf");
-			jstVistaPrevia.setParameters(p);
+			JasperReport jasperReport = (JasperReport) JRLoader
+					.loadObject(reporteSrc);
+
+			JasperPrint jasperPrint = JasperFillManager
+					.fillReport(jasperReport, p,
+							new JRBeanCollectionDataSource(
+									elementos));
+
+			JasperViewer.viewReport(jasperPrint, false);
+			
 		} else {
-			Messagebox.show("No ha informacion disponible para este intervalo");
+			Messagebox.show(
+					"No hay informacion disponible para este intervalo.",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 		}
+		
+	  }
 	}
 
-	/* Metodo que permite limpiar los campos de los filtros de busqueda */
-	@Listen("onClick = #btnSalirReporteSolicitud")
-	public void cancelarTematicasSolicitadas() throws JRException {
+	
+	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
+	@Listen("onClick = #btnCancelarReporteDefensa")
+	public void cancelarReporteDefensa() throws JRException {
 
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
+		cmbArea.setDisabled(true);
 		cmbTematica.setValue("");
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
+		cmbEstatus.setValue("");
+
+	}
+
+	
+	/* Metodo que permite cerrar la vista. */
+	@Listen("onClick = #btnSalirReporteDefensa")
+	public void salirReporteDefensa() throws JRException {
+		
+		cancelarReporteDefensa();
+		wdwReporteDefensa.onClose();
+		
 	}
 
 }
