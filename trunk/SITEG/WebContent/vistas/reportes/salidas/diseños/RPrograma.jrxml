@@ -17,55 +17,88 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="103" splitType="Stretch">
 			<staticText>
-				<reportElement x="105" y="0" width="375" height="54" uuid="63ec3c04-e36a-4c2b-9ce2-64442638cb6a"/>
+				<reportElement x="116" y="13" width="345" height="59" uuid="63ec3c04-e36a-4c2b-9ce2-64442638cb6a"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado Decanato de Ciencias y Tecnología            ]]></text>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado
+Decanato de Ciencias y Tecnología
+Gestión de Trabajos Especiales de Grado
+]]></text>
 			</staticText>
 			<image>
-				<reportElement x="0" y="1" width="100" height="50" uuid="798b01b1-e252-4c47-a84e-c84a82b55117"/>
+				<reportElement x="0" y="13" width="100" height="72" uuid="798b01b1-e252-4c47-a84e-c84a82b55117"/>
 				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="483" y="1" width="89" height="53" uuid="ed09169c-2a5d-4790-9371-4204644f40f8"/>
+				<reportElement x="472" y="0" width="100" height="85" uuid="ed09169c-2a5d-4790-9371-4204644f40f8"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
+			<line>
+				<reportElement x="-12" y="-57" width="618" height="1" forecolor="#0066FF" uuid="164bac21-833b-4e6c-a6bb-4d6d6a29ce92"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-23" y="-15" width="618" height="1" forecolor="#0066FF" uuid="79b1cab4-3d27-4c49-a4d1-1519ddb086d6"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-23" y="102" width="618" height="1" forecolor="#0066FF" uuid="0d3a0a73-952d-4df6-97d4-3454486ca893"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="37" splitType="Stretch">
+		<band height="100" splitType="Stretch">
 			<staticText>
-				<reportElement x="178" y="0" width="224" height="20" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
+				<reportElement x="170" y="57" width="224" height="20" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[Lista de Programas]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="461" y="23" width="100" height="20" uuid="6e4a137c-2832-4182-844c-a74306055675"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="402" y="23" width="83" height="20" uuid="bdf86073-11f4-4d2d-8caa-3c4e4c47f0ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="38" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="2" width="178" height="20" uuid="131c116d-9f41-4090-9a47-f7387ff23f5e"/>
+				<reportElement x="12" y="2" width="141" height="20" uuid="131c116d-9f41-4090-9a47-f7387ff23f5e"/>
 				<textElement textAlignment="Center">
-					<font size="11" isBold="true" isUnderline="true"/>
+					<font size="11" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="178" y="2" width="224" height="20" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
+				<reportElement x="170" y="2" width="216" height="20" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
 				<textElement textAlignment="Center">
-					<font size="11" isBold="true" isUnderline="true"/>
+					<font size="11" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Correo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="402" y="2" width="170" height="20" uuid="406d6b3f-e2c9-494f-b5c1-42b0e936673b"/>
 				<textElement textAlignment="Center">
-					<font size="11" isBold="true" isUnderline="true"/>
+					<font size="11" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Director de Programa]]></text>
 			</staticText>
@@ -74,22 +107,22 @@
 	<detail>
 		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="1" width="178" height="20" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
+				<reportElement x="12" y="1" width="152" height="20" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="178" y="0" width="224" height="20" uuid="39ae1f72-7cbf-4f86-a6e2-62c0be636c7c"/>
+				<reportElement x="170" y="1" width="208" height="20" uuid="39ae1f72-7cbf-4f86-a6e2-62c0be636c7c"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="402" y="0" width="88" height="20" uuid="a35ff3e6-fb9c-489e-b362-bb035cd8ac71"/>
+				<reportElement x="412" y="1" width="88" height="20" uuid="a35ff3e6-fb9c-489e-b362-bb035cd8ac71"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{directorPrograma.nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="490" y="0" width="82" height="20" uuid="b0d3f699-361d-41d5-80eb-bbe46d2dfc38"/>
+				<reportElement x="472" y="1" width="82" height="20" uuid="b0d3f699-361d-41d5-80eb-bbe46d2dfc38"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{directorPrograma.apellido}]]></textFieldExpression>
 			</textField>

@@ -40,9 +40,9 @@ FROM cronograma;]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="63" splitType="Stretch">
+		<band height="72" splitType="Stretch">
 			<staticText>
-				<reportElement x="116" y="1" width="347" height="62" uuid="149cf748-e75e-4447-b257-a4022c765446"/>
+				<reportElement x="116" y="0" width="347" height="62" uuid="149cf748-e75e-4447-b257-a4022c765446"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -56,7 +56,7 @@ Gestión de Trabajos Especiales de Grado
 				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
 			</image>
 			<image scaleImage="FillFrame">
-				<reportElement x="487" y="1" width="85" height="62" uuid="1ce6cdf1-c980-4f0e-9a2f-5b9f222f13a3"/>
+				<reportElement x="482" y="0" width="85" height="62" uuid="1ce6cdf1-c980-4f0e-9a2f-5b9f222f13a3"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
 			<line>
@@ -72,7 +72,7 @@ Gestión de Trabajos Especiales de Grado
 			<staticText>
 				<reportElement x="175" y="80" width="224" height="20" uuid="cb4b4a31-545e-4c63-b1bf-dff9f81430e7"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true" isItalic="false" isUnderline="true" isStrikeThrough="false"/>
+					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[Cronograma de Actividades]]></text>
 			</staticText>
@@ -84,7 +84,7 @@ Gestión de Trabajos Especiales de Grado
 				<text><![CDATA[Programa:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="44" width="261" height="20" uuid="50af7a99-47df-4be9-8753-2cbca87b85b0"/>
+				<reportElement x="22" y="43" width="261" height="20" uuid="50af7a99-47df-4be9-8753-2cbca87b85b0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
 			</textField>
@@ -113,7 +113,7 @@ Gestión de Trabajos Especiales de Grado
 				<text><![CDATA[Lapso:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="-22" y="-67" width="618" height="1" forecolor="#0066FF" uuid="770c1ad3-cbee-4be6-bae4-ab5c8e948851"/>
+				<reportElement x="-24" y="-86" width="618" height="1" forecolor="#0066FF" uuid="770c1ad3-cbee-4be6-bae4-ab5c8e948851"/>
 				<graphicElement>
 					<pen lineWidth="3.0"/>
 				</graphicElement>
@@ -158,12 +158,12 @@ Gestión de Trabajos Especiales de Grado
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{actividad.nombre}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="dd/MM/yyyy">
 				<reportElement style="table" x="322" y="0" width="115" height="34" uuid="cb5a9c1b-c0e6-4c64-ad4a-6d34cb9cfaf6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="dd/MM/yyyy">
 				<reportElement style="table" x="437" y="0" width="111" height="34" uuid="28db2a45-cd82-4345-b265-99f0eb002670"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fechaFin}]]></textFieldExpression>
