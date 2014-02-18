@@ -47,8 +47,14 @@
 		<toolbarbutton
 			label="Presione aquí para buscar la lista de los estudiantes" />
 	</popup>
+	<popup id="pupGuardarCargarEstudiante">
+		<toolbarbutton label="Presione aquí para guardar los datos de los estudiantes" />
+	</popup>
 	<popup id="pupSalirCargarEstudiante">
 		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+	<popup id="pupCancelarCargarEstudiante">
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<!-- fin de popus -->
 
@@ -106,8 +112,8 @@
 		<separator />
 		<separator />
 
-		<listbox id="ltbEstudiantesCargados" width="90%" mold="paging" height="330px"
-			style="margin-left:30px" pageSize="7"
+		<listbox id="ltbEstudiantesCargados" width="90%" mold="paging"
+			height="330px" style="margin-left:30px" pageSize="7"
 			emptyMessage="No se ha cargado la lista de estudiantes">
 			<listhead>
 				<listheader label="Cédula" align="center" />
@@ -121,7 +127,7 @@
 
 
 			<template name="model">
-				<listitem tooltip="pupSeleccionEstudiante">
+				<listitem>
 					<listcell label="${each.cedula}" />
 					<listcell label="${each.nombre}" />
 					<listcell label="${each.apellido}" />
@@ -152,10 +158,14 @@
 							label="Guardar" width="110px" sclass="btn"
 							tooltip="pupGuardarCargarEstudiante"
 							image="/public/imagenes/iconos/guardar.png" tabindex="7" />
+						<button id="btnCancelarCargarEstudiante"
+							label="Cancelar" sclass="btn"
+							tooltip="pupCancelarCargarEstudiante"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="8" />
 						<button id="btnSalirCargarEstudiante"
 							label="Salir" width="110px" sclass="btn"
 							tooltip="pupSalirCargarEstudiante"
-							image="/public/imagenes/iconos/salir.png" tabindex="8" />
+							image="/public/imagenes/iconos/salir.png" tabindex="9" />
 
 						<separator />
 					</div>

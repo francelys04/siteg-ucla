@@ -3,7 +3,9 @@ package controlador;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.JFileChooser;
@@ -15,19 +17,33 @@ import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
+
+/*
+ * Controlador que permite almacenar en la base de datos un conjunto de
+ * estudiantes desde un archivo plano
+ */
 @Controller
 public class CCargarProfesor extends CGeneral {
-	
+
 	@Wire
 	private Window wdwCargarProfesor;
-	
+	@Wire
+	private Listbox ltbProfesoresCargados;
+	private static List<Profesor> profesoresCargados;
 	private File f;
 
+	/*
+	 * Metodo que permite buscar el archivo plano de los profesores en la
+	 * computadora y los carga en una lista
+	 */
 	@Listen("onClick = #btnCargarListaProfesores")
 	public void cargarProfesores() {
 
@@ -36,25 +52,24 @@ public class CCargarProfesor extends CGeneral {
 		boolean estatus;
 		long idcategoria, idprograma;
 
-		// abre el examinar para elegir el archivo
+		
 		javax.swing.JFileChooser j = new javax.swing.JFileChooser();
+
 		
-		
-		// abre el txt
 		int opcion = j.showOpenDialog(j);
 		if (opcion == JFileChooser.APPROVE_OPTION) {
 			String path = j.getSelectedFile().getAbsolutePath();
-			
+
 			f = new File(path);
 
 			try {
-				// empieza a leer el txt
+				
 				FileReader fr = new FileReader(f);
 				BufferedReader br = new BufferedReader(fr);
 				String linea = null;
+				profesoresCargados = new ArrayList<Profesor>();
 
-				// si no esta vacio el txt empieza a leer hasta que no encuentre
-				// linea
+				
 				while ((linea = br.readLine()) != null) {
 
 					cedula = linea;
@@ -85,28 +100,29 @@ public class CCargarProfesor extends CGeneral {
 
 					linea = br.readLine();
 					idcategoria = Long.parseLong(linea);
-					
-					Usuario usuario = servicioUsuario.buscarUsuarioPorNombre(cedula);
 
-					// busco el programa con el id que tengo en el txt para
-					// registrar
+					Usuario usuario = servicioUsuario
+							.buscarUsuarioPorNombre(cedula);
+
+				
 					Categoria categoria = new Categoria();
 					categoria = servicioCategoria.buscarPorId(idcategoria);
+
 					
-					// creo el profesor y lo guardo
 					Profesor profesor;
-					
+
 					Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
-					profesor = new Profesor(cedula, nombre, apellido, correo, sexo,
-							direccion, telefonomovil, telefonofijo,
+					profesor = new Profesor(cedula, nombre, apellido, correo,
+							sexo, direccion, telefonomovil, telefonofijo,
 							estatus, categoria, tematicasProfesor, usuario);
 
-					servicioProfesor.guardarProfesor(profesor);
+					profesoresCargados.add(profesor);
 				}
 				br.close();
 				fr.close();
-				Messagebox.show("Profesores registrados exitosamente",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
+				ltbProfesoresCargados.setModel(new ListModelList<Profesor>(
+						profesoresCargados));
 
 			} catch (Exception ex) {
 
@@ -120,28 +136,69 @@ public class CCargarProfesor extends CGeneral {
 
 		else {
 
-			Messagebox.show("Busqueda de la lista de profesores cancelada", "Advertencia",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			Messagebox.show("Busqueda de la lista de profesores cancelada",
+					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 
 		}
 	}
-	
-	
-	
+
+	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirCargarProfesor")
 	public void salirCargarProfesor() {
-	
+
 		wdwCargarProfesor.onClose();
-		
-		
+
+	}
+
+	
+	//Metodo para limpiar los campos
+	@Listen("onClick = #btnCancelarCargarProfesor")
+	public void cancelarCargarProfesor() {
+
+		ltbProfesoresCargados.getItems().clear();
+
+	}
+
+	/*
+	 * Metodo que permite guardar a los profesores que se encuentran en la
+	 * lista
+	 */
+	@Listen("onClick = #btnGuardarCargarProfesor")
+	public void CargarEstudiante() {
+
+		Messagebox.show("¿Desea guardar los datos de los profesores?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+
+							for (int i = 0; i < profesoresCargados.size(); i++) {
+
+								Profesor profesor = profesoresCargados.get(i);
+								servicioProfesor.guardarProfesor(profesor);
+
+							}
+
+							Messagebox
+									.show("Datos de los profesores guardados esxitosamente",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
+							cancelarCargarProfesor();
+
+						}
+					}
+				});
+
 	}
 	
+	/*
+	 * Metodo heredado del Controlador CGeneral, en este caso no hay
+	 * instrucciones dentro ya que no se cargan variables al iniciar esta vista
+	 */
 
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
-
