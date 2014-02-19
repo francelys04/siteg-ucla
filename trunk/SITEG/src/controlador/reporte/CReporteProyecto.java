@@ -106,6 +106,15 @@ public class CReporteProyecto extends CGeneral {
 	long idTematica = 0;
 	long idArea = 0;
 
+	/*
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista, tambien se buscan todos los programas
+	 * disponibles, adicionando un nuevo item donde se puede seleccionar la
+	 * opcion de "Todos", junto a esto se tiene una lista previamente cargada de
+	 * manera estatica los estatus o roles del profesor y se llenan los campos
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -116,7 +125,12 @@ public class CReporteProyecto extends CGeneral {
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
 		cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
 	}
-
+	/*
+	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
+	 * se puede seleccionar la opcion de "Todos" en el combo de las areas.
+	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccinarPrograma() {
 		if (cmbPrograma.getValue().equals("Todos")) {
@@ -136,7 +150,11 @@ public class CReporteProyecto extends CGeneral {
 		}
 
 	}
-
+	/*
+	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
+	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
+	 * valor en el campo tematica
+	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
 		if (cmbArea.getValue().equals("Todos")) {
@@ -154,13 +172,23 @@ public class CReporteProyecto extends CGeneral {
 			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
 		}
 	}
-
+	/*
+	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
+	 * uno en el campo del mismo.
+	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
 		// idTematica = tematica.getId();
 	}
-
+	/*
+	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
+	 * y tipo de cargo, se generara un pdf donde se muestra una lista de
+	 * profesores especificando tanto datos basicos como su rol en el teg de
+	 * esta seleccion, la cual esta condicionado, mediante el componente
+	 * "Jasperreport" donde se mapea una serie de parametros y una lista
+	 * previamente cargada que seran los datos que se muestra en el documento.
+	 */
 	@Listen("onClick = #btnGenerarReporteProyecto")
 	public void generarReporteTEG() throws JRException {
 		boolean datosVacios = false;
