@@ -221,9 +221,8 @@ public class CCrearCronograma extends CGeneral {
 			int id = ((Spinner) ((listItem.getChildren().get(3)))
 					.getFirstChild()).getValue();
 			Actividad actividad = servicioActividad.buscarActividad(id);
-			Boolean estatus = true;
 			Cronograma cronograma = new Cronograma(lapso, programa, actividad,
-					fechaInicio, fechaFin, estatus);
+					fechaInicio, fechaFin);
 			cronogramas.add(cronograma);
 		}
 		if (!error) {

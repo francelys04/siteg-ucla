@@ -22,7 +22,7 @@ public class EnlaceInteres {
 	@Column(name="nombre", length = 100)
 	private String nombre;
 
-	@Column(name="url", length = 500)
+	@Column(name="url", length = 250)
 	private String url;
 	
 	@Column(name="estatus")

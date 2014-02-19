@@ -44,20 +44,15 @@ public class Cronograma {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_fin")
 	private Date fechaFin;
-	
-	@Column(name = "estatus")
-	private Boolean estatus;
 
 	public Cronograma(Lapso lapso, Programa programa,
-			Actividad actividad, Date fechaInicio, Date fechaFin,
-			Boolean estatus) {
+			Actividad actividad, Date fechaInicio, Date fechaFin) {
 		super();
 		this.lapso = lapso;
 		this.programa = programa;
 		this.actividad = actividad;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.estatus = estatus;
 	}
 
 	public Cronograma() {
@@ -103,13 +98,5 @@ public class Cronograma {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
-	}
-
-	public Boolean getEstatus() {
-		return estatus;
-	}
-
-	public void setEstatus(Boolean estatus) {
-		this.estatus = estatus;
 	}
 }
