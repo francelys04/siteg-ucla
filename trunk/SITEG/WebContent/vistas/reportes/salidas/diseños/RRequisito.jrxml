@@ -81,7 +81,7 @@ Gestión de Trabajos Especiales de Grado
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="229" y="2" width="305" height="20" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
+				<reportElement x="229" y="2" width="329" height="20" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true" isUnderline="false"/>
 				</textElement>
@@ -92,12 +92,12 @@ Gestión de Trabajos Especiales de Grado
 	<detail>
 		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement x="11" y="0" width="198" height="20" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
+				<reportElement x="0" y="0" width="198" height="20" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="256" y="0" width="302" height="20" uuid="e6675813-6f16-4474-bac6-9e1f0a8b35b8"/>
+				<reportElement x="232" y="0" width="326" height="20" uuid="e6675813-6f16-4474-bac6-9e1f0a8b35b8"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>

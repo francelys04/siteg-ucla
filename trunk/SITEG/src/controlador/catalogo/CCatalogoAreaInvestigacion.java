@@ -31,6 +31,7 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Panel;
 import org.zkoss.zul.Popup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -61,6 +62,8 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 	private Textbox txtDescripcionMostrarArea;
 	@Wire
 	private Combobox cmbPrograma;
+	@Wire
+	private Panel palBotones;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se buscan todas las areas
@@ -81,10 +84,14 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 			cmbPrograma.setVisible(false);
 			lblPrograma.setVisible(false);
 			
+			
+			
 		} else {
 			ltbArea.setTooltiptext("Doble clic para ver las tematicas del area");
 			ltbArea.setEmptyMessage("Seleccione un programa para ver las areas");
 			cmbPrograma.setVisible(true);
+			palBotones.setVisible(false);
+			
 
 		}
 		} catch (Exception e) {

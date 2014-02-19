@@ -40,6 +40,8 @@ public class CSubirTeg extends CGeneral {
 	private Combobox cmbPrograma;
 	@Wire
 	private Window wdwSubirTeg;
+	public static Programa programaUsuario;
+
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se llenan los objetos
 	 * empleados dentro de este controlador.
@@ -48,9 +50,53 @@ public class CSubirTeg extends CGeneral {
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		List<Programa> programa = servicioPrograma.buscarActivas();
-		if (cmbPrograma != null) {
-			cmbPrograma.setModel(new ListModelList<Programa>(programa));
+		programaUsuarioLoggeado();
+
+	}
+	
+	
+
+	/*
+	 * Metodo que permite obtener el programa del usuario loggeado 
+	 * y validar que un estudiante para subir un teg, este debe tener el estatus TEG Aprobado
+	 */
+	public void programaUsuarioLoggeado() {
+
+		try {
+			programaUsuario = servicioPrograma
+					.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+
+			if (programaUsuario == null) {
+
+				Estudiante estudiante;
+				estudiante = ObtenerUsuarioEstudiante();
+				programaUsuario = estudiante.getPrograma();
+
+				if (programaUsuario != null) {
+
+					Teg tegEstudiante = servicioTeg
+							.buscarTegEstudiantePorEstatusAprobado(estudiante);
+
+					if (tegEstudiante == null) {
+
+						Messagebox
+								.show("El Trabajo Especial de Grado debe tener el estado de Aprobado",
+										"Advertencia", Messagebox.OK,
+										Messagebox.EXCLAMATION);
+						wdwSubirTeg.onClose();
+
+					}
+
+				}
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			Messagebox
+					.show("No tiene permisos para subir un Trabajo Especial de Grado",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+			wdwSubirTeg.onClose();
 
 		}
 
@@ -93,7 +139,7 @@ public class CSubirTeg extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
+	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarArchivo")
 	public void cancelar() {
@@ -104,6 +150,20 @@ public class CSubirTeg extends CGeneral {
 		archivo.equals(null);
 
 	}
+	
+	/*
+	 * Metodo que permite cerrar la vista subir Teg
+	 */
+	@Listen("onClick = #btnSalirSubirTeg")
+	public void salirSubirTeg() {
+
+		wdwSubirTeg.onClose();
+
+	}
+	
+	
+	
+	
 
 	/* Metodo que permite guardar el archivo del TEG */
 	@Listen("onClick = #btnGuardarArchivo")
