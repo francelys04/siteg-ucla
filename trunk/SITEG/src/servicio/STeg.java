@@ -333,9 +333,9 @@ public class STeg {
 		return interfaceTeg.buscarTegPorFecha(estatus,fechaInicio, fechaFin);
 	}
 	
-	public List<Teg> buscarTegPorDosFechas(
+	public List<Teg> buscarTegPorDosFechasyArea(AreaInvestigacion area1, 
 			 Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegFecha(fechaInicio, fechaFin);
+		return interfaceTeg.buscarTegFechaArea(area1, fechaInicio, fechaFin);
 	}
 
 	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyVariosEstatus(

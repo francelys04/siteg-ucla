@@ -124,13 +124,17 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	@Query("select teg from Teg teg where teg.estatus=?1 and teg.tematica=?2 and fecha between ?3 and ?4 ")
 	public List<Teg> buscarTegPorFechayEstatus(String estatus,Tematica tematica,Date fechaInicio,Date fechaFin);
 
-	   /******************************* Querys para buscar la lista de teg dado una tematica un estatus, fecha inicio y fecha fin ******************************/	
+	   /******************************* Querys para buscar la lista de teg dado una tematica, fecha inicio y fecha fin ******************************/	
 	    @Query("select teg from Teg teg where teg.estatus=?1 and fecha between ?2 and ?3 ")
 	    public List<Teg> buscarTegPorFecha(String estatus,Date fechaInicio,Date fechaFin);
 	
-	    /******************************* Querys para buscar la lista de teg dado una tematica un estatus, fecha inicio y fecha fin ******************************/	
-	    @Query("select teg from Teg teg where fecha between ?1 and ?2")
-	    public List<Teg> buscarTegFecha(Date fechaInicio,Date fechaFin);
+	//    /******************************* Querys para buscar la lista de teg dado un, fecha inicio y fecha fin ******************************/	
+	//    @Query("select teg from Teg teg where fecha between ?1 and ?2")
+	//    public List<Teg> buscarTegFechaArea(Date fechaInicio,Date fechaFin);
+	    
+	    /******************************* Querys para buscar la lista de teg dado un, fecha inicio y fecha fin ******************************/	
+	    @Query("select teg from Teg teg where teg.tematica.areaInvestigacion=?1 and fecha between ?2 and ?3")
+	    public List<Teg> buscarTegFechaArea(AreaInvestigacion area1, Date fechaInicio,Date fechaFin);
 	
 	/******************************* Querys para buscar la lista de teg dado una tematica, Varios estatus, fecha inicio y fecha fin ******************************/	
 @Query("select teg from Teg teg where (teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4 or teg.estatus=?5 or teg.estatus=?6 or teg.estatus=?7 and teg.tematica=?8) and fecha between ?9 and ?10")

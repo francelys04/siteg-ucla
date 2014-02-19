@@ -140,7 +140,6 @@ public class CReporteProyecto extends CGeneral {
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
 		if (cmbArea.getValue().equals("Todos")) {
-
 			cmbTematica.setValue("Todas");
 		} else {
 			
@@ -188,10 +187,11 @@ public class CReporteProyecto extends CGeneral {
 						.show("La fecha de inicio debe ser primero que la fecha de fin",
 								"Error", Messagebox.OK, Messagebox.ERROR);
 			} else {
+				/*buscar por una carrera, un area, una tematica y un estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& !estatus.equals("Todos")
-						&& !nombreTematica.equals("Todas")) {
+						&& !nombreTematica.equals("Todas")
+						&& !estatus.equals("Todos")) {
 
 					String idTematica = String.valueOf(((Tematica) cmbTematica
 							.getSelectedItem().getValue()).getId());
@@ -205,11 +205,11 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					} 
 				}
-
+				/*buscar por una carrera, un area, todas las tematica y un estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& !estatus.equals("Todos")
-						&& nombreTematica.equals("Todas")) {
+						&& nombreTematica.equals("Todas")
+						&& !estatus.equals("Todos")) {
 
 					teg = servicioTeg
 							.buscarTegPorDosFechasyUnEstatus(
@@ -218,21 +218,28 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					} 
 				}
+				/*buscar por una carrera, un area, todas las  tematica y todos los estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& estatus.equals("Todos")
-						&& nombreTematica.equals("Todas")) {
-
+						&& nombreTematica.equals("Todas")
+						&& estatus.equals("Todos")) {
+					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
+							.getSelectedItem().getValue()).getId());
+					AreaInvestigacion area1 = servicioArea.buscarArea(Long
+							.parseLong(idArea));
+					
 					teg = servicioTeg
-							.buscarTegPorDosFechas(fechaInicio, fechaFin);
+							.buscarTegPorDosFechasyArea(area1, fechaInicio, fechaFin);
 					System.out.println("111");
 					if (teg.size() == 0) {
 						datosVacios = true;
 						System.out.println("222");
 					} 
 				}
+				/*buscar por una carrera, un area, una  tematica y todos los estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
+						&& !nombreTematica.equals("Todas")
 						&& estatus.equals("Todos")) {
 					String idTematica = String.valueOf(((Tematica) cmbTematica
 							.getSelectedItem().getValue()).getId());
@@ -252,7 +259,7 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					} 
 				}
-
+				/*buscar por una carrera, todas las area y un estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& !estatus.equals("Todos")) {
@@ -267,6 +274,7 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					}
 				}
+				/*buscar por una carrera, todas las area y todos los estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& estatus.equals("Todos")) {
@@ -288,7 +296,7 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					}
 				}
-
+				/*buscar por todas las carrera, y un estatus*/
 				if (nombrePrograma.equals("Todos") && !estatus.equals("Todos")) {
 					teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
 							estatus, fechaInicio, fechaFin);
@@ -296,7 +304,7 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					}
 				}
-
+				/*buscar por todas las carrera, y todos los estatus*/
 				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
 					String estatusTeg1 = "Proyecto Registrado";
 					String estatusTeg2 = "Proyecto Factible";
@@ -320,7 +328,7 @@ public class CReporteProyecto extends CGeneral {
 						String nombreEstudiantes = "";
 						for (Estudiante e : estudiantes) {
 							nombreEstudiantes += e.getNombre() + " "
-									+ e.getApellido() + " ";
+									+ e.getApellido() + ". ";
 						}
 
 						elementos.add(new ListaTeg(t, nombreEstudiantes));
@@ -353,7 +361,7 @@ public class CReporteProyecto extends CGeneral {
 					jstVistaPrevia.setParameters(p);
 				} else {
 					Messagebox
-							.show("No hay informacion disponible para esta selecci�n");
+							.show("No hay informacion disponible para esta seleccion");
 				}
 			}
 
