@@ -25,10 +25,10 @@ public class Usuario {
 	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@Column(name = "nombre", length = 100, unique = true)
+	@Column(name = "nombre", length = 100, unique = true, nullable = false)
 	private String nombre;
 	
-	@Column(name = "password", length = 100)
+	@Column(name = "password", length = 100, nullable = false)
 	private String password;
 	
 	@Column(name = "estatus")
