@@ -127,7 +127,8 @@ public class STeg {
 		return teg;
 	}
 
-	/* Busca un teg asociado a un estudiante que tengan estatus avances aprobado */
+	
+	/* Busca un teg asociado a un estudiante que tenga estatus teg aprobado */
 	public Teg buscarTegEstudiantePorEstatusAprobado(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		Teg teg;
@@ -135,6 +136,7 @@ public class STeg {
 				estudiante);
 		return teg;
 	}
+	
 
 	/* Buscar los teg que tengan estatus Proyecto Registrado */
 	public List<Teg> buscarProyectoFactible() {

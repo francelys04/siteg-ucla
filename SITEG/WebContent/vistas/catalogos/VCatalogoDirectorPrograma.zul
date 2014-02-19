@@ -72,7 +72,7 @@
 				<separator />
 				<div sclass="btn-group">
 
-					<button id="btnSalir" label="Salir" width="110px"
+					<button id="btnSalirCatalogoDirector" label="Salir" width="110px"
 						tooltip="pupSalirCatalogo" sclass="btn"
 						image="/public/imagenes/iconos/salir.png" tabindex="7">
 					</button>

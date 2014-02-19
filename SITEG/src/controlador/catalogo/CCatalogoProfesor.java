@@ -51,6 +51,8 @@ public class CCatalogoProfesor extends CGeneral {
 	@Wire
 	private Window wdwCatalogoProfesor;
 	@Wire
+	private Window  wdwCatalogoDirectorPrograma;
+	@Wire
 	private Textbox txtCedulaMostrarProfesor;
 	@Wire
 	private Textbox txtNombreMostrarProfesor;
@@ -242,10 +244,16 @@ public class CCatalogoProfesor extends CGeneral {
 
 	}
 	
-	/* Metodo que permite cerrar la ventana correspondiente a las actividades */
+	/* Metodo que permite cerrar la ventana correspondiente al catalogo */
 	@Listen("onClick = #btnSalirCatalogoProfesor")
 	public void salirCatalogo() {
 		wdwCatalogoProfesor.onClose();
+	}
+	
+	/* Metodo que permite cerrar la ventana correspondiente al catalogo */
+	@Listen("onClick = #btnSalirCatalogoDirector")
+	public void salirCatalogoDirector() {
+		 wdwCatalogoDirectorPrograma.onClose();
 	}
 	
 
