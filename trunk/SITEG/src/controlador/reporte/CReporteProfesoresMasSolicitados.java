@@ -12,11 +12,9 @@ import modelo.AreaInvestigacion;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
-import modelo.Teg;
 import modelo.Tematica;
 import modelo.reporte.MasSolicitados;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -26,26 +24,20 @@ import net.sf.jasperreports.view.JasperViewer;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
-
-import servicio.SProfesor;
-import servicio.SPrograma;
 
 @Controller
 public class CReporteProfesoresMasSolicitados extends CGeneral {
 
+	private static final long serialVersionUID = 4396558516832165477L;
 	private String[] estatusSolicitud = { "Aceptada", "Rechazada",
 			"Por Revisar", "Finalizada" };
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
@@ -126,6 +118,26 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				.setModel(new ListModelList<Tematica>(tematicas));
 	}
 
+	/* Metodo que permite cerrar la vista */
+	@Listen("onClick = #btnSalirReporteProfesoresSolicitados")
+	public void salir(){
+		wdwReporteProfesorMasSolicitados.onClose();
+	}
+	
+	/*
+	 * Metodo que permite limpiar los campos de la vista y colocarlos en el
+	 * estado inicial
+	 */
+	@Listen("onClick = #btnCancelarReporteProfesoresSolicitados")
+	public void limpiarCampos(){
+		java.util.Date hoy = new Date();
+		cmbAreaReporteProfesoresSolicitados.setValue("");
+		cmbProgramaReporteProfesoresSolicitados.setValue("");
+		cmbTematicaReporteProfesoresSolicitados.setValue("");
+		dtbFinReporteProfesoresSolicitados.setValue(hoy);
+		dtbInicioReporteProfesoresSolicitados.setValue(hoy);
+		}
+	
 	/*
 	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
 	 * uno en el campo del mismo.
@@ -154,8 +166,6 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		Tematica tematica = servicioTematica.buscarTematica(idTematica);
 		List<SolicitudTutoria> solicitudes = new ArrayList<SolicitudTutoria>();
 		List<SolicitudTutoria> solicitudesFinales = new ArrayList<SolicitudTutoria>();
-		List<SolicitudTutoria> solicitudTutorias = new ArrayList<SolicitudTutoria>();
-		List<Teg> tegs = new ArrayList<Teg>();
 		List<String> profesores = new ArrayList<String>();
 		List<Integer> contadores = new ArrayList<Integer>();
 		List<MasSolicitados> masSolicitados = new ArrayList<MasSolicitados>();
@@ -168,23 +178,18 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		} else {
 			if (cmbTematicaReporteProfesoresSolicitados.getValue().equals(
 					"Todos")) {
-				// todos tematicas un estatus
 				solicitudes = servicioSolicitudTutoria
 						.buscarTodasSolicitudesEntreFechas(fechaInicio,
 								fechaFin);
 				if (solicitudes.size() == 0) {
 					datosVacios = true;
 				} else {
-					System.out.println("Todas tematicas un estatus"
-							+ solicitudes.size());
 					map = ordenar(solicitudes);
 					profesores = (List<String>) map.get("Profesores");
 					contadores = (List<Integer>) map.get("Contadores");
 					for (int i = 0; i < profesores.size(); i++) {
 						Profesor profesor = servicioProfesor
 								.buscarProfesorPorCedula(profesores.get(i));
-						long valor = servicioSolicitudTutoria
-								.contarSolicitudes(profesor);
 						solicitudesFinales = servicioSolicitudTutoria
 								.buscarPorProfesorEntreFechas(profesor,
 										fechaInicio, fechaFin);
@@ -202,42 +207,26 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 								else
 									tercerValor++;
 							}
-
-							// System.out.println("id" + valor);
-							// System.out.println("duracion" +
-							// contadores.get(i));
-							// Teg teg = new Teg(valor, "", null, null, null,
-							// "",
-							// contadores.get(i), profesor, "", null,
-							// null, null);
-							// tegs.add(teg);
 						}
 						MasSolicitados masSolicita = new MasSolicitados(
 								primerValor, segundoValor, tercerValor,
 								profesor, null);
 						masSolicitados.add(masSolicita);
 					}
-					System.out.println(masSolicitados.size());
 				}
 			} else {
-				// un estatus una tematica
 				solicitudes = servicioSolicitudTutoria
 						.buscarSolicitudesPorTematicaEntreFechas(tematica,
 								fechaInicio, fechaFin);
 				if (solicitudes.size() == 0) {
 					datosVacios = true;
 				} else {
-					System.out.println("Una tematica un estatus"
-							+ solicitudes.size());
 					map = ordenar(solicitudes);
 					profesores = (List<String>) map.get("Profesores");
 					contadores = (List<Integer>) map.get("Contadores");
 					for (int i = 0; i < profesores.size(); i++) {
 						Profesor profesor = servicioProfesor
 								.buscarProfesorPorCedula(profesores.get(i));
-						long valor = servicioSolicitudTutoria
-								.contarSolicitudesPorTematica(profesor,
-										tematica);
 						solicitudesFinales = servicioSolicitudTutoria
 								.buscarPorProfesorTematicaEntreFechas(profesor,
 										tematica, fechaInicio, fechaFin);
@@ -255,23 +244,12 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 								else
 									tercerValor++;
 							}
-
-							// System.out.println("id" + valor);
-							// System.out.println("duracion" +
-							// contadores.get(i));
-							// Teg teg = new Teg(valor, "", null, null, null,
-							// "",
-							// contadores.get(i), profesor, "", null,
-							// null, null);
-							// tegs.add(teg);
 						}
 						MasSolicitados masSolicita = new MasSolicitados(
 								primerValor, segundoValor, tercerValor,
 								profesor, null);
 						masSolicitados.add(masSolicita);
 					}
-					System.out.println(masSolicitados.size());
-
 				}
 			}
 			if (!datosVacios) {
@@ -297,14 +275,18 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 							cmbAreaReporteProfesoresSolicitados.getValue());
 				FileSystemView filesys = FileSystemView.getFileSystemView();
 				String rutaUrl = obtenerDirectorio();
+				
 				String reporteSrc = rutaUrl
 						+ "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
 				String reporteImage = rutaUrl
 						+ "SITEG/public/imagenes/reportes/";
-
+				System.out.println(reporteSrc);
 				mapa.put("logoUcla", reporteImage + "logo ucla.png");
 				mapa.put("logoCE", reporteImage + "logo CE.png");
 				mapa.put("logoSiteg", reporteImage + "logo.png");
+//				JasperReport jasperReport = (JasperReport) JRLoader
+//						.loadObject(getClass().getResource(
+//								"RProfesoresMasSolicitados.jasper"));
 				JasperReport jasperReport = (JasperReport) JRLoader
 						.loadObject(reporteSrc);
 
@@ -328,9 +310,9 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	 * cinco profesores con mas solicitudes.
 	 */
 	public Map<String, Object> ordenar(List<SolicitudTutoria> solicitudes) {
-		List<String> profesores = new ArrayList();
-		List<Integer> contadores = new ArrayList();
-		List<SolicitudTutoria> solicitudesTutoria = new ArrayList();
+		List<String> profesores = new ArrayList<String>();
+		List<Integer> contadores = new ArrayList<Integer>();
+		List<SolicitudTutoria> solicitudesTutoria = new ArrayList<SolicitudTutoria>();
 		SolicitudTutoria solicitud = solicitudes.get(0);
 		String profesor = solicitudes.get(0).getProfesor().getCedula();
 
@@ -352,9 +334,9 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		contadores.add(contadorProfesores);
 		solicitudesTutoria.add(solicitud);
 		/*************************** Ordenado de Lista ************* ******************/
-		List<String> profesoresOrdenados = new ArrayList();
-		List<Integer> contadoresOrdenados = new ArrayList();
-		List<SolicitudTutoria> solicitudesFinales = new ArrayList();
+		List<String> profesoresOrdenados = new ArrayList<String>();
+		List<Integer> contadoresOrdenados = new ArrayList<Integer>();
+		List<SolicitudTutoria> solicitudesFinales = new ArrayList<SolicitudTutoria>();
 		int valor = 0;
 		int valor2 = 0;
 		SolicitudTutoria solicit = new SolicitudTutoria();
