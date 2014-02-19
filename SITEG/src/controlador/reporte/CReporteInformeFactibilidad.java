@@ -96,7 +96,7 @@ public class CReporteInformeFactibilidad extends CGeneral {
 	@Wire
 	private Jasperreport jstVistaPrevia;
 	private Connection con;
-	
+	 
 	private String[] estatusproyectos = {"Proyecto Factible","Proyecto No Factible"};
 	
 	long id = 0;
@@ -117,8 +117,7 @@ public class CReporteInformeFactibilidad extends CGeneral {
 		programas.add(programaa);
 		cmbProgramaFactibilidad.setModel(new ListModelList<Programa>(programas));
 		cmbTipoFactibilidad.setModel(new ListModelList<String>(estatusproyectos));
-		
-		System.out.println(estatusproyectos[1]);
+
 		
 		Selectors.wireComponents(comp, this, false);
 		
@@ -261,58 +260,111 @@ public class CReporteInformeFactibilidad extends CGeneral {
 		
 		
 	 	@Listen("onClick = #btnGenerarReporteInformeFactibilidad")
-		 public void GenerarInforme() throws JRException, IOException, SQLException{	
-			if (txtProyecto.getValue()==""){
-				 Messagebox.show( "Debe seleccionar un Proyecto",
-						     "Error", Messagebox.OK,Messagebox.INFORMATION);
-				
+		 public void GenerarInforme()  {	
+	 		Teg teg = servicioTeg.buscarTeg(id);
+		    String estatus = teg.getEstatus();
+		/*    System.out.println(estatus);*/
+		    
+		    if (estatus.equals("Proyecto Factible")){
+		    	GenerarInformeFactible();
+				 System.out.println(estatus);
+			} else{
+					if (estatus.equals("Proyecto No Factible")){
+						GenerarInformeNoFactible();
+				}else {
+			 		if (txtProyecto.getValue()==""){
+						 Messagebox.show( "Debe seleccionar un Proyecto",
+								     "Error", Messagebox.OK,Messagebox.INFORMATION);
+					}
+				}
 			}
-				
+		} 
+		
+		public void GenerarInformeFactible() {
 			try {
 				Class.forName("org.postgresql.Driver");
 				con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres","equipo2");
 			}catch (ClassNotFoundException e1) {
 				e1.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-	
+			
 			Teg teg = servicioTeg.buscarTeg(id);
 		    Long proyecto = teg.getId();
 		    String estatus = teg.getEstatus();
+		    List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
+		    String ndirector = est.get(0).getPrograma().getDirectorPrograma().getNombre();
+		    String adirector = est.get(0).getPrograma().getDirectorPrograma().getApellido();
 		    System.out.println(proyecto);
-		    System.out.println(estatus);
-		    String reporteFact= "";
 		    
 		    try {
 		    FileSystemView filesys = FileSystemView.getFileSystemView();
 		    Map p = new HashMap();
 			String rutaUrl = obtenerDirectorio();
 			
-			/*if (estatus == "Proyecto Factible"){
-				reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
-
-			}else{ 
-				if (estatus == "Proyecto No Factible"){
-				reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeNoFactible.jasper";
-				}
-			}	
-*/				String reporteSrc = rutaUrl + "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
-				String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-				p.put("fecha", new Date());
-			    p.put("proyecto", proyecto);
-			    p.put("logoUcla", reporteImage + "logo ucla.png");
-			 	p.put("logoCE", reporteImage + "logo CE.png");
-			    p.put("logoSiteg", reporteImage + "logo.png");			    
-				JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, con);
-			    JasperViewer.viewReport(jasperPrint);
-			    con.close();
+			String reporteSrc = rutaUrl +  "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
+			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+			p.put("fecha", new Date().toLocaleString());
+		    p.put("proyecto", proyecto);
+		    p.put("ndirector", ndirector);
+		    p.put("adirector", adirector);
+		    p.put("logoUcla", reporteImage + "logo ucla.png");
+		 	p.put("logoCE", reporteImage + "logo CE.png");
+		    p.put("logoSiteg", reporteImage + "logo.png");			    
+			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, con);
+		    JasperViewer.viewReport(jasperPrint);
+		    con.close();
 			
-						    }catch (JRException e) {
+		    }catch (JRException | SQLException e) {
 				e.printStackTrace();
-			}    
-	 } 
-		
+			}
 	
+		}
+		
+		public void GenerarInformeNoFactible() {
+			try {
+				Class.forName("org.postgresql.Driver");
+				con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres","equipo2");
+			}catch (ClassNotFoundException | SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+			Teg teg = servicioTeg.buscarTeg(id);
+		    Long proyecto = teg.getId();
+		    String estatus = teg.getEstatus();
+		    List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
+		    String ndirector = est.get(0).getPrograma().getDirectorPrograma().getNombre();
+		    String adirector = est.get(0).getPrograma().getDirectorPrograma().getApellido();
+		    System.out.println(proyecto);
+		    
+		    try {
+		    FileSystemView filesys = FileSystemView.getFileSystemView();
+		    Map p = new HashMap();
+			String rutaUrl = obtenerDirectorio();
+			
+			String reporteSrc = rutaUrl +  "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeNoFactible.jasper";
+			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+			p.put("fecha", new Date().toLocaleString());
+		    p.put("proyecto", proyecto);
+		    p.put("ndirector", ndirector);
+		    p.put("adirector", adirector);
+		    p.put("logoUcla", reporteImage + "logo ucla.png");
+		 	p.put("logoCE", reporteImage + "logo CE.png");
+		    p.put("logoSiteg", reporteImage + "logo.png");			    
+			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, con);
+		    JasperViewer.viewReport(jasperPrint);
+		    con.close();
+			
+		    }catch (JRException | SQLException e) {
+				e.printStackTrace();
+			}
+	
+		}
+		
 	
 	@Listen("onClick = #btnCancelarReporteInformeFactibilidad")
    public void CancelarInformeFactibilidad(){

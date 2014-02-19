@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Factible" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb15444e-75ec-4b31-b233-2dc66cb0303a">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteInformeNoFactible" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb15444e-75ec-4b31-b233-2dc66cb0303a">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="170"/>
@@ -10,6 +10,8 @@
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoCE" class="java.lang.String"/>
 	<parameter name="logoSiteg" class="java.lang.String"/>
+	<parameter name="ndirector" class="java.lang.String"/>
+	<parameter name="adirector" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[Select estudiante.nombre ne, estudiante.apellido ae, estudiante.cedula ce, teg.titulo te, programa.nombre pn, profesor.nombre np, profesor.apellido ap, profesor.nombre dn , profesor.apellido da, factibilidad.observacion ob from estudiante, teg, programa, profesor,factibilidad, estudiante_teg,tematica,area_investigacion,programa_area where estudiante.cedula= estudiante_teg.estudiante_cedula and estudiante_teg.teg_id=teg.id and estudiante.programa_id = programa.id and teg.profesor_cedula = profesor.cedula and teg.id=$P{proyecto} and teg.tematica_id = tematica.id and tematica.area_investigacion_id = area_investigacion.id and area_investigacion.id = programa_area.area_investigacion_id and programa_area.programa_id = programa.id and teg.id = factibilidad.teg_id;]]>
 	</queryString>
@@ -52,7 +54,7 @@
 				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="490" y="17" width="82" height="54" uuid="5aec0a33-9560-40e2-9bc4-1ac40b47c360"/>
+				<reportElement x="489" y="17" width="82" height="54" uuid="5aec0a33-9560-40e2-9bc4-1ac40b47c360"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
 		</band>
@@ -91,12 +93,12 @@
 				<text><![CDATA[Anexo a la presente las observaciones menores al Proyecto de Trabajo Especial de Grado presentado ante ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="166" y="134" width="36" height="15" uuid="4151dc34-73ef-4aec-9bc6-2b93538e20a2"/>
+				<reportElement x="161" y="134" width="36" height="15" uuid="4151dc34-73ef-4aec-9bc6-2b93538e20a2"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{ne}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="202" y="134" width="43" height="15" uuid="20c601a9-b189-4a64-8d30-609a43749e7c"/>
+				<reportElement x="194" y="134" width="43" height="15" uuid="20c601a9-b189-4a64-8d30-609a43749e7c"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{ae}]]></textFieldExpression>
 			</textField>
@@ -113,8 +115,8 @@
 				<text><![CDATA[, la cual lleva por ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="37" y="149" width="119" height="15" uuid="170a9c38-e185-4eea-8896-14c6a67b57af"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="37" y="149" width="247" height="15" uuid="170a9c38-e185-4eea-8896-14c6a67b57af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{te}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -135,16 +137,6 @@
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Profesor]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="262" y="282" width="51" height="13" uuid="903cc39e-f91e-493e-92cf-a3b0b29d9dd4"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{dn}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="297" y="282" width="53" height="13" uuid="5fbb05f7-449e-41e8-accb-7c7ae555e0af"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{da}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="0" y="295" width="572" height="14" uuid="0683124d-a078-45f3-8cb7-12e38bf5857b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -156,33 +148,26 @@
 				<textFieldExpression><![CDATA[$F{pn}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="165" y="149" width="80" height="1" uuid="c962f008-f402-4d3c-912a-b02b7a754057"/>
+				<reportElement x="142" y="149" width="103" height="1" uuid="c962f008-f402-4d3c-912a-b02b7a754057"/>
 			</line>
 			<line>
-				<reportElement x="13" y="205" width="525" height="1" uuid="0d5049cd-9b8c-486d-81d1-dd242afbba92"/>
+				<reportElement x="26" y="205" width="525" height="1" uuid="0d5049cd-9b8c-486d-81d1-dd242afbba92"/>
 			</line>
 			<line>
-				<reportElement x="37" y="164" width="119" height="1" uuid="d8603d9d-6155-4c59-9e5a-a7be7eeb5abc"/>
+				<reportElement x="37" y="164" width="247" height="1" uuid="d8603d9d-6155-4c59-9e5a-a7be7eeb5abc"/>
 			</line>
 			<line>
 				<reportElement x="403" y="149" width="75" height="1" uuid="d4413dde-bd14-4bbf-97ca-66fb64d722cb"/>
 			</line>
 			<staticText>
-				<reportElement x="156" y="98" width="260" height="20" uuid="df462bbc-26e4-47f4-a7ed-619fca83364a"/>
+				<reportElement x="165" y="98" width="242" height="20" uuid="df462bbc-26e4-47f4-a7ed-619fca83364a"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[Informe de Factibilidad]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="421" y="12" width="100" height="14" uuid="0e89e415-587f-4232-aedb-ec6116d01242"/>
-				<textElement textAlignment="Justified" verticalAlignment="Top">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="8" y="134" width="148" height="15" uuid="197df748-ac0e-4510-bd4a-7604890ca3d3"/>
+				<reportElement x="8" y="134" width="144" height="15" uuid="197df748-ac0e-4510-bd4a-7604890ca3d3"/>
 				<text><![CDATA[esta Dirección por la bachiller]]></text>
 			</staticText>
 			<staticText>
@@ -194,13 +179,28 @@
 				<text><![CDATA[Debe entregar dicha versión mejorada según el cronograma de actividades correspondiente a su Programa.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="12" y="191" width="482" height="15" uuid="b57faa5a-ee9d-47e0-b928-0d166958f7ad"/>
+				<reportElement x="103" y="191" width="366" height="15" uuid="b57faa5a-ee9d-47e0-b928-0d166958f7ad"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{ob}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="161" y="151" width="109" height="15" uuid="415acbdd-55bb-4f63-9cfd-629d5ff2c4e4"/>
+				<reportElement x="284" y="151" width="109" height="15" uuid="415acbdd-55bb-4f63-9cfd-629d5ff2c4e4"/>
 				<text><![CDATA[, el cual es no factible. ]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="421" y="12" width="100" height="14" uuid="60adfe00-f21d-43d2-afef-bfa876381bda"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="282" width="55" height="13" uuid="a216117a-6530-4cfa-b887-c5019409a30a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{ndirector}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="317" y="282" width="55" height="13" uuid="befd893d-b292-4f19-86ba-41accf093ed9"/>
+				<textFieldExpression><![CDATA[$P{adirector}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<pageFooter>
