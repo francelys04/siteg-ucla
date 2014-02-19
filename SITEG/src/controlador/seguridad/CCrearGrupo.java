@@ -63,6 +63,8 @@ public class CCrearGrupo extends CGeneral {
 	private Button btnCancelarGrupo;
 	@Wire
 	private Listbox ltbFuncionalidadesSeleccionados;
+	@Wire
+	private Window wdwCrearGrupo;
 
 	/*
 	 * Metodo heredado del controlador CGeneral, se hace el llamado al metodo
@@ -509,6 +511,17 @@ public class CCrearGrupo extends CGeneral {
 		servicioGrupo.guardarGrupo(grupo);
 		cancelarGrupo();
 	}
+	
+	
+	/* Metodo que permite cerrar la vista crear grupo*/
+	@Listen("onClick = #btnSalirCrearGrupo")
+	public void salirGrupo() {
+		
+		wdwCrearGrupo.onClose();
+	
+	}
+
+	
 
 	/*
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo

@@ -123,6 +123,8 @@ public class CUsuario extends CGeneral {
 	private Textbox txtCorreo;
 	@Wire
 	private Label lblCorreo;
+	@Wire
+	private Window wdwCrearUsuario;
 
 	public void inicializar(Component comp) {
 
@@ -369,6 +371,16 @@ public class CUsuario extends CGeneral {
 		System.out.println("Map:" + map);
 
 	}
+	
+	
+	@Listen("onClick = #btnSalirUsuario")
+	public void salirUsuario() {
+		
+		wdwCrearUsuario.onClose();
+	}
+	
+	
+	
 
 	@Listen("onClick = #btnEliminarUsuario")
 	public void eliminarUsuario() throws IOException {

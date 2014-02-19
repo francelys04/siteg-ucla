@@ -25,6 +25,7 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
 /*
  * Controlador que le permite al director de programa configurar los
@@ -54,6 +55,8 @@ public class CConfigurarPrograma extends CGeneral {
 	private Listbox ltbRequisitosDisponibles;
 	@Wire
 	private Listbox ltbRequisitosSeleccionadas;
+	@Wire
+	private Window wdwConfigurarPrograma;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
@@ -435,7 +438,18 @@ public class CConfigurarPrograma extends CGeneral {
 		ltbRequisitosSeleccionadas.getItems().clear();
 		listasCargadas = false;
 	}
-
+	
+	
+	/*
+	 * Metodo que permite cerrar la vista de configurar programa
+	 */
+	@Listen("onClick = #btnSalirConfigurarPrograma")
+	public void salirConfigurarPrograma() {
+		
+		wdwConfigurarPrograma.onClose();
+	
+	}
+	
 	/*
 	 * Metodo que permite buscar dinamicamente las configuraciones establecidas
 	 * para cierto lapso que se seleccione y el programa del director de

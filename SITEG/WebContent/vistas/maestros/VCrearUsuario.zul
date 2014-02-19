@@ -1,5 +1,6 @@
-<window title="Crear Usuario" border="normal" width="100%"
-	height="720px" closable="true" apply="controlador.seguridad.CUsuario">
+<window id="wdwCrearUsuario" title="Crear Usuario" border="normal" width="100%"
+	height="720px" closable="true"
+	apply="controlador.seguridad.CUsuario">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -41,7 +42,8 @@
 	<style src="/public/css/style.css" />
 	<!-- Lista de popus -->
 	<popup id="pupSeleccionarUsuario">
-		<toolbarbutton label="Seleccione aquí a quien se le asignará un usuario" />
+		<toolbarbutton
+			label="Seleccione aquí a quien se le asignará un usuario" />
 	</popup>
 	<popup id="pupCatalogoPosibleUsuario">
 		<toolbarbutton
@@ -52,43 +54,38 @@
 			label="Presione aquí para ver la lista de usuarios" />
 	</popup>
 	<popup id="pupNombreUsuario">
-		<toolbarbutton
-			label="Ingrese aquí el nombre del usuario" />
-	</popup>		
+		<toolbarbutton label="Ingrese aquí el nombre del usuario" />
+	</popup>
 	<popup id="pupContrasennaUsuario">
 		<toolbarbutton label="Ingrese aquí la contraseña del usuario" />
 	</popup>
 	<popup id="pupCorreoUsuario">
-		<toolbarbutton
-			label="Ingrese aquí el correo del usuario" />
+		<toolbarbutton label="Ingrese aquí el correo del usuario" />
 	</popup>
 	<popup id="pupCargarImagenUsuario">
-		<toolbarbutton
-			label="Presione aquí para subir imagen" />
+		<toolbarbutton label="Presione aquí para subir imagen" />
 	</popup>
 	<popup id="pupSeleccionarGrupoUsuario">
-		<toolbarbutton
-			label="Presione aquí para seleccionar un grupo" />
+		<toolbarbutton label="Presione aquí para seleccionar un grupo" />
 	</popup>
 	<popup id="pupAgregarGrupoUsuario">
-		<toolbarbutton
-			label="Presione aquí para agregar grupos" />
+		<toolbarbutton label="Presione aquí para agregar grupos" />
 	</popup>
 	<popup id="pupRemoverGrupoUsuario">
-		<toolbarbutton
-			label="Presione aquí para remover grupos" />
+		<toolbarbutton label="Presione aquí para remover grupos" />
 	</popup>
 	<popup id="pupGuardarUsuario">
 		<toolbarbutton
 			label="Presione aquí para guardar los datos de un usuario" />
 	</popup>
 	<popup id="pupCancelarUsuario">
-		<toolbarbutton
-			label="Presione aquí para limpiar los campos" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupEliminarUsuario">
-		<toolbarbutton
-			label="Presione aquí para eliminar un usuario" />
+		<toolbarbutton label="Presione aquí para eliminar un usuario" />
+	</popup>
+	<popup id="pupSalirUsuario">
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 
 	<!-- Fin de popus -->
@@ -136,8 +133,9 @@
 								width="20px" style="margin-left:20px" />
 						</radiogroup>
 
-						<button id="btnCatalogoProfesorEstudiante" tooltip="pupCatalogoPosibleUsuario"
-							sclass="btn" image="/public/imagenes/iconos/catalogo.png"
+						<button id="btnCatalogoProfesorEstudiante"
+							tooltip="pupCatalogoPosibleUsuario" sclass="btn"
+							image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:30px">
 						</button>
 
@@ -157,9 +155,11 @@
 
 					<hbox>
 
-						<textbox id="txtNombreUsuario" width="200px" tooltip="pupNombreUsuario" maxlength="100"/>
+						<textbox id="txtNombreUsuario" width="200px"
+							tooltip="pupNombreUsuario" maxlength="100" />
 
-						<button id="btnCatalogoUsuario" sclass="btn" tooltip="pupCatalogoUsuarios"
+						<button id="btnCatalogoUsuario" sclass="btn"
+							tooltip="pupCatalogoUsuarios"
 							image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:23px">
 						</button>
@@ -176,8 +176,8 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtPasswordUsuario" type="password" tooltip="pupContrasennaUsuario"
-						width="260px" maxlength="20"/>
+					<textbox id="txtPasswordUsuario" type="password"
+						tooltip="pupContrasennaUsuario" width="260px" maxlength="20" />
 
 				</row>
 				<row>
@@ -189,7 +189,8 @@
 							style="font-weight:bold" />
 					</hlayout>
 					<hbox>
-						<textbox id="txtCorreo" width="190px" tooltip="pupCorreoUsuario" maxlength="100"/>
+						<textbox id="txtCorreo" width="190px"
+							tooltip="pupCorreoUsuario" maxlength="100" />
 					</hbox>
 				</row>
 
@@ -205,7 +206,7 @@
 					<hbox>
 
 						<fileupload id="fudImagenUsuario"
-							label="Cargar Imagen">
+							label="Subir Imagen">
 						</fileupload>
 
 						<image id="imagen" width="80px" height="50px"
@@ -236,14 +237,14 @@
 							<panelchildren>
 
 								<listbox id="ltbGruposDisponibles"
-									height="160px" 
-									emptyMessage="No hay Grupos registrados">
+									height="160px" emptyMessage="No hay Grupos registrados">
 									<listhead>
 										<listheader label="Nombre" />
 									</listhead>
 									<template name="model">
 										<listitem>
-											<listcell tooltip="pupSeleccionarGrupoUsuario"
+											<listcell
+												tooltip="pupSeleccionarGrupoUsuario"
 												label="${each.nombre}">
 											</listcell>
 										</listitem>
@@ -258,13 +259,13 @@
 							<panelchildren>
 								<div>
 
-									<button id="pasar1" sclass="btn" tooltip="pupAgregarGrupoUsuario"
-										image="/public/imagenes/iconos/right.png"
-										width="35px" />
+									<button id="pasar1" sclass="btn"
+										tooltip="pupAgregarGrupoUsuario"
+										image="/public/imagenes/iconos/right.png" />
 									<separator />
-									<button id="pasar2" sclass="btn" tooltip="pupRemoverGrupoUsuario"
-										image="/public/imagenes/iconos/left.png"
-									 width="35px" />
+									<button id="pasar2" sclass="btn"
+										tooltip="pupRemoverGrupoUsuario"
+										image="/public/imagenes/iconos/left.png" />
 
 								</div>
 							</panelchildren>
@@ -275,9 +276,8 @@
 							<panelchildren>
 
 								<listbox id="ltbGruposAgregados"
-									 height="160px"
-									emptyMessage="No ha Seleccionado ningun Grupo"
-									>
+									height="160px"
+									emptyMessage="No ha Seleccionado ningun Grupo">
 									<listhead>
 										<listheader label="Nombre" />
 									</listhead>
@@ -307,17 +307,21 @@
 					<div sclass="btn-group">
 
 
-						<button id="btnGuardarUsuario" label="Guardar" tooltip="pupGuardarUsuario"
-							sclass="btn" image="/public/imagenes/iconos/guardar.png"
-							tabindex="13">
+						<button id="btnGuardarUsuario" label="Guardar"
+							tooltip="pupGuardarUsuario" sclass="btn"
+							image="/public/imagenes/iconos/guardar.png" tabindex="13">
 						</button>
-						<button id="btnCancelarUsuario" label="Cancelar" tooltip="pupCancelarUsuario"
-							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
-							tabindex="14">
+						<button id="btnCancelarUsuario" label="Cancelar"
+							tooltip="pupCancelarUsuario" sclass="btn"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 						</button>
-						<button id="btnEliminarUsuario" label="Eliminar" tooltip="pupEliminarUsuario"
-							sclass="btn" disabled="true"
+						<button id="btnEliminarUsuario" label="Eliminar"
+							tooltip="pupEliminarUsuario" sclass="btn" disabled="true"
 							image="/public/imagenes/iconos/eliminar.png" tabindex="15">
+						</button>
+						<button id="btnSalirUsuario" label="Salir" width="110px"
+							tooltip="pupSalirUsuario" sclass="btn" 
+							image="/public/imagenes/iconos/salir.png" tabindex="16">
 						</button>
 						<separator />
 					</div>

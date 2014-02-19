@@ -21,6 +21,7 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
 /*
  * Controlador que le permite al director de programa configurar las
@@ -43,6 +44,8 @@ public class CCrearCronograma extends CGeneral {
 	private Listbox ltbActividadesDisponibles;
 	@Wire
 	private Listbox ltbActividadesSeleccionadas;
+	@Wire
+	private Window wdwCrearCronograma;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
@@ -189,6 +192,21 @@ public class CCrearCronograma extends CGeneral {
 		actividadesSeleccionadas = false;
 
 	}
+	
+	
+	/*
+	 * Metodo que permite cerrar la vista de crear cronograma
+	 */
+	@Listen("onClick = #btnSalirCronograma")
+	public void salirCronograma() {
+		
+		wdwCrearCronograma.onClose();
+
+	}
+	
+	
+	
+	
 
 	/*
 	 * Metodo que permite guardar las actividades seleccionadas para el programa

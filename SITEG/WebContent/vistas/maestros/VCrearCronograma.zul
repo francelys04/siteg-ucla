@@ -1,4 +1,4 @@
-<window title="Crear Cronograma" border="normal" width="130%"
+<window id="wdwCrearCronograma" title="Crear Cronograma" border="normal" width="130%"
 	height="655px" closable="true" apply="controlador.CCrearCronograma">
 
 	<separator />

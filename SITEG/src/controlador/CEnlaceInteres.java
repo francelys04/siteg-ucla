@@ -45,7 +45,7 @@ import controlador.catalogo.CCatalogoEnlaceInteres;
  * sobre la entidad EnlaceInteres*/
 @Controller
 public class CEnlaceInteres extends CGeneral {
-	
+
 	private static final long serialVersionUID = -6297699990954496428L;
 	CCatalogoEnlaceInteres catalogo = new CCatalogoEnlaceInteres();
 	@Wire
@@ -68,6 +68,8 @@ public class CEnlaceInteres extends CGeneral {
 	private Media media;
 	@Wire
 	private Button btnEliminarEnlace;
+	@Wire
+	private Window wdwEnlace;
 
 	private long id = 0;
 
@@ -78,10 +80,8 @@ public class CEnlaceInteres extends CGeneral {
 	 */
 
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		
 
 		Selectors.wireComponents(comp, this, false);
 
@@ -132,13 +132,25 @@ public class CEnlaceInteres extends CGeneral {
 		window.doModal();
 	}
 
-	/* Metodo que permite el guardado o modificacion de una entidad EnlaceInteres */
+	/*
+	 * Metodo que permite cerrar la vista de registrar el enlace de interes
+	 */
+	@Listen("onClick = #btnSalirEnlace")
+	public void salirDescarga() {
+
+		wdwEnlace.onClose();
+	}
+
+	/*
+	 * Metodo que permite el guardado o modificacion de una entidad
+	 * EnlaceInteres
+	 */
 	@Listen("onClick = #btnGuardarEnlace")
 	public void guardarEnlace() {
 
 		if ((txtNombreEnlace.getText().compareTo("") == 0)
 				|| (txtUrlEnlace.getText().compareTo("") == 0)) {
-				
+
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
@@ -172,20 +184,21 @@ public class CEnlaceInteres extends CGeneral {
 					});
 
 		}
-	
 
 	}
 
 	/* Metodo que permite la eliminacion logica de una entidad EnlaceInteres */
 	@Listen("onClick = #btnEliminarEnlace")
 	public void eliminarEnlace() {
-		
+
 		Messagebox.show("¿Desea eliminar los datos del enlace de interes?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-							EnlaceInteres enlace = servicioEnlace.buscarEnlace(id);
+							EnlaceInteres enlace = servicioEnlace
+									.buscarEnlace(id);
 							enlace.setEstatus(false);
 							servicioEnlace.guardar(enlace);
 							cancelarEnlace();
@@ -193,7 +206,7 @@ public class CEnlaceInteres extends CGeneral {
 									"Enlace de interes eliminado exitosamente",
 									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
-							
+
 						}
 					}
 				});
