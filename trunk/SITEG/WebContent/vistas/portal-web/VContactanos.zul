@@ -43,6 +43,34 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
+
+	<!-- Lista de popus -->
+	<popup id="pupProgramaContactanos">
+		<toolbarbutton label="Seleccione el programa" />
+	</popup>
+	<popup id="pupNombreContactanos">
+		<toolbarbutton label="Ingrese aquí el nombre y apellido" />
+	</popup>
+	<popup id="pupCorreoContactanos">
+		<toolbarbutton label="Ingrese aquí el correo electronico" />
+	</popup>
+	<popup id="pupAsuntoContactanos">
+		<toolbarbutton label="Ingrese aqui el asunto del correo" />
+	</popup>
+	<popup id="pupMensajeContactanos">
+		<toolbarbutton label="Ingrese aqui el mensaje" />
+	</popup>
+	<popup id="pupSalirContactanos">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+	<popup id="pupCancelarContactanos">
+		<toolbarbutton label="Presione aquí para limpiar" />
+	</popup>
+	<popup id="pupEnviarContactanos">
+		<toolbarbutton label="Presione aquí para enviar el correo" />
+	</popup>
+	<!-- Fin de popus -->
+
 	<separator />
 	<separator />
 
@@ -58,7 +86,7 @@
 
 				<row>
 					<combobox readonly="true" tabindex="1"
-						id="cmbProgramaContactanos">
+						tooltip="pupProgramaContactanos" id="cmbProgramaContactanos">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
 						</template>
@@ -70,7 +98,8 @@
 						style="font-weight:bold" />
 				</row>
 				<row>
-					<textbox id="txtNombre" width="190px" tabindex="2"/>
+					<textbox id="txtNombre" width="190px" tabindex="2"
+						tooltip="pupNombreContactanos" />
 				</row>
 
 				<row>
@@ -78,7 +107,8 @@
 						style="font-weight:bold" />
 				</row>
 				<row>
-					<textbox id="txtCorreo" width="190px" tabindex="3"/>
+					<textbox id="txtCorreo" width="190px" tabindex="3"
+						tooltip="pupCorreoContactanos" />
 				</row>
 
 				<row>
@@ -87,7 +117,8 @@
 				</row>
 
 				<row>
-					<textbox id="txtAsunto" width="270px" tabindex="4"/>
+					<textbox id="txtAsunto" width="270px" tabindex="4"
+						tooltip="pupAsuntoContactanos" />
 				</row>
 
 				<row>
@@ -96,8 +127,8 @@
 
 				<row>
 
-					<textbox id="txtMensaje" rows="5" cols="100" 
-						width="530px" tabindex="5" />
+					<textbox id="txtMensaje" rows="5" cols="100"
+						tooltip="pupMensajeContactanos" width="530px" tabindex="5" />
 
 				</row>
 
@@ -116,17 +147,17 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button id="btnEnviarCorreo" sclass="btn"
-							label="Enviar" image="/public/imagenes/iconos/enviar.png"
-							tabindex="6">
+						<button id="btnEnviarCorreo" sclass="btn" 
+							tooltip="pupEnviarContactanos" label="Enviar"
+							image="/public/imagenes/iconos/enviar.png" tabindex="6">
 						</button>
 						<button id="btnCancelarCorreo" sclass="btn"
-							label="Cancelar" image="/public/imagenes/iconos/limpiar.png"
-							tabindex="7">
+							tooltip="pupCancelarContactanos" label="Cancelar"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="7">
 						</button>
-						<button id="btnSalirCorreo" sclass="btn" width="110px"
-							label="Salir" image="/public/imagenes/iconos/salir.png"
-							tabindex="8">
+						<button id="btnSalirCorreo" sclass="btn"
+							tooltip="pupSalirContactanos" width="110px" label="Salir"
+							image="/public/imagenes/iconos/salir.png" tabindex="8">
 						</button>
 					</div>
 					<separator />

@@ -39,6 +39,27 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
+
+	<!-- Lista de popus -->
+	<popup id="pupNombreReinicioClave">
+		<toolbarbutton label="Ingrese aquí el nombre del usuario" />
+	</popup>
+	<popup id="pupCorreoReinicioClave">
+		<toolbarbutton label="Ingrese aquí el correo" />
+	</popup>
+	<popup id="pupEnviarReinicioClave">
+		<toolbarbutton
+			label="Presione aquí para enviar la contraseña al correo indicado" />
+	</popup>
+	<popup id="pupCancelarReinicioClave">
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
+	</popup>
+	<popup id="pupSalirReinicioClave">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+
+	<!-- Fin de popus -->
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -69,10 +90,11 @@
 							style="font-weight:bold;color:red">
 						</label>
 						<label id="lblNombreUsuario" value="Usuario:"
-							style="font-weight:bold"  />
+							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtNombreUsuario" width="180px" style="margin-left:15px"/>
+					<textbox id="txtNombreUsuario" width="180px"
+						tooltip="pupNombreReinicioClave" style="margin-left:15px" />
 
 				</row>
 
@@ -84,12 +106,13 @@
 							style="font-weight:bold;color:red">
 						</label>
 						<label id="lblCorreoUsuario" value="Correo:"
-							style="font-weight:bold"  />
+							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtCorreoUsuario" width="180px"  style="margin-left:15px"/>
+					<textbox id="txtCorreoUsuario" width="180px"
+						tooltip="pupCorreoReinicioClave" style="margin-left:15px" />
 				</row>
-				
+
 			</rows>
 		</grid>
 		<separator />
@@ -102,12 +125,16 @@
 					<div sclass="btn-group">
 
 						<button id="btnEnviarCorreo" sclass="btn"
-							label="Enviar" image="/public/imagenes/iconos/guardar.png"
-							tabindex="13">
+							tooltip="pupEnviarReinicioClave" label="Enviar"
+							image="/public/imagenes/iconos/enviar.png" tabindex="13">
 						</button>
 						<button id="btnCancelarCorreo" sclass="btn"
-							label="Cancelar" image="/public/imagenes/iconos/limpiar.png"
-							tabindex="14">
+							tooltip="pupCancelarReinicioClave" label="Cancelar"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+						</button>
+						<button id="btnSalirReninicioClave" sclass="btn"
+							tooltip="pupSalirReinicioClave" width="110px" label="Salir"
+							image="/public/imagenes/iconos/salir.png" tabindex="15">
 						</button>
 					</div>
 					<separator />

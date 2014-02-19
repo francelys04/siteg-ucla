@@ -38,6 +38,40 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
+
+	<!-- Lista de popus -->
+	<popup id="pupNombreNoticia">
+		<toolbarbutton label="Ingrese aquí el nombre de la noticia" />
+	</popup>
+	<popup id="pupDescripcionNoticia">
+		<toolbarbutton
+			label="Ingrese aquí la descripción de la noticia" />
+	</popup>
+	<popup id="pupGuardarNoticia">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos de la noticia" />
+	</popup>
+	<popup id="pupCancelarNoticia">
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
+	</popup>
+	<popup id="pupBuscarNoticia">
+		<toolbarbutton
+			label="Presione aquí para buscar la imagen de la noticia" />
+	</popup>
+	<popup id="pupEliminarNoticia">
+		<toolbarbutton
+			label="Presione aquí para eliminar los datos de la noticia" />
+	</popup>
+	<popup id="pupSalirNoticia">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+	<popup id="pupCatalogoNoticia">
+		<toolbarbutton
+			label="Presione aquí para ver la lista de noticias" />
+	</popup>
+
+	<!-- Fin de popus -->
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -71,9 +105,11 @@
 
 					<hbox>
 
-						<textbox id="txtNombreNoticia" width="120%" />
+						<textbox id="txtNombreNoticia" width="120%"
+							tooltip="pupNombreNoticia" />
 
 						<button id="btnCatalogoNoticia" sclass="btn"
+							tooltip="pupCatalogoNoticia"
 							image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:55px">
 						</button>
@@ -89,7 +125,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 					<textbox id="txtDescripcionNoticia" width="500px"
-						rows="4" cols="100" />
+						tooltip="pupDescripcionNoticia" rows="4" cols="100" />
 				</row>
 
 				<row>
@@ -104,7 +140,7 @@
 					<hbox>
 
 						<fileupload id="fudImagenNoticia"
-							label="Subir Imagen">
+							tooltip="pupBuscarNoticia" label="Subir Imagen">
 						</fileupload>
 
 						<image id="imagen" width="80px" height="50px" />
@@ -129,20 +165,20 @@
 					<div sclass="btn-group">
 
 						<button id="btnGuardarNoticia" label="Guardar"
-							sclass="btn" image="/public/imagenes/iconos/guardar.png"
-							tabindex="13">
+							tooltip="pupGuardarNoticia" sclass="btn"
+							image="/public/imagenes/iconos/guardar.png" tabindex="13">
 						</button>
 						<button id="btnCancelarNoticia" label="Cancelar"
-							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
-							tabindex="14">
+							tooltip="pupCancelarNoticia" sclass="btn"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 						</button>
-						<button id="btnEliminarNoticia" label="Eliminar" disabled="true"
-							sclass="btn" image="/public/imagenes/iconos/eliminar.png"
-							tabindex="15">
+						<button id="btnEliminarNoticia" label="Eliminar"
+							tooltip="pupEliminarNoticia" disabled="true" sclass="btn"
+							image="/public/imagenes/iconos/eliminar.png" tabindex="15">
 						</button>
-						<button id="btnSalirNoticia" label="Salir" width="110px"
-							sclass="btn" image="/public/imagenes/iconos/salir.png"
-							tabindex="16">
+						<button id="btnSalirNoticia" label="Salir"
+							tooltip="pupSalirNoticia" width="110px" sclass="btn"
+							image="/public/imagenes/iconos/salir.png" tabindex="16">
 						</button>
 						<separator />
 					</div>

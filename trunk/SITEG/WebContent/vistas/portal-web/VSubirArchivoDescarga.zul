@@ -67,6 +67,12 @@
 		<toolbarbutton
 			label="Presione aqui guardar los datos del archivo" />
 	</popup>
+	<popup id="pupSalirDescarga">
+		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
+	<popup id="pupBuscarDescarga">
+		<toolbarbutton label="Presione aqui para buscar el archivo" />
+	</popup>
 	<!-- Fin de popus -->
 
 
@@ -135,7 +141,7 @@
 						<textbox id="txtNombreArchivoDescarga"
 							tooltip="pupNombreDescarga" width="290px" disabled="true" />
 
-						<button id="btnArchivoDescarga" label="Examinar"
+						<button id="btnArchivoDescarga" label="Examinar" tooltip="pupBuscarDescarga"
 							style="margin-left:10px" upload="true">
 						</button>
 
@@ -188,7 +194,7 @@
 							image="/public/imagenes/iconos/eliminar.png" tabindex="14"
 							disabled="true">
 						</button>
-						<button id="btnSalirArchivoDescarga"
+						<button id="btnSalirArchivoDescarga" width="110px"
 							tooltip="pupSalirDescarga" sclass="btn" label="Salir"
 							image="/public/imagenes/iconos/salir.png" tabindex="15">
 						</button>

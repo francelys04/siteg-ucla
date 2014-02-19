@@ -100,5 +100,18 @@ public class CReinicioClave extends CGeneral {
 		txtNombreUsuario.setValue("");
 		txtCorreoUsuario.setValue("");
 	}
+	
+	/*
+	 * Metodo que permite cerrar la vista de reiniciar contraseña
+	 */
+	@Listen("onClick = #btnSalirReninicioClave")
+	public void salirReinicioClave() {
+		
+		wdwReinicioClave.onClose();
+	
+	}
+	
+	
+	
 
 }

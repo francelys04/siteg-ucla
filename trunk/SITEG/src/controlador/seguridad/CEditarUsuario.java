@@ -25,6 +25,7 @@ import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
@@ -47,6 +48,8 @@ public class CEditarUsuario extends CGeneral {
 	private Fileupload fudImagenUsuarioEditar;
 	@Wire
 	private Media mediaUsuarioEditar;
+	@Wire
+	private Window wdwEditarUsuario;
 	private long id = 0;
 
 	@Override
@@ -143,6 +146,14 @@ public class CEditarUsuario extends CGeneral {
 		txtClaveUsuarioNueva.setValue("");
 		txtClaveUsuarioConfirmar.setValue("");
 		imagenUsuarioEditar.setContent(new AImage(url));
+
+	}
+	
+	@Listen("onClick = #btnSalirEditarUsuario")
+	public void salirUsuario(){
+	
+		
+		wdwEditarUsuario.onClose();
 
 	}
 

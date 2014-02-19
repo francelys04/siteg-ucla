@@ -1,7 +1,8 @@
-<window id="wdwEnlace" title="Enlace de interes" border="normal" width="100%"
-	height="385px" closable="true" apply="controlador.CEnlaceInteres">
-	
-	
+<window id="wdwEnlace" title="Enlace de interes" border="normal"
+	width="100%" height="385px" closable="true"
+	apply="controlador.CEnlaceInteres">
+
+
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -39,6 +40,39 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
+	<!-- Lista de popus -->
+	<popup id="pupNombreEnlace">
+		<toolbarbutton label="Ingrese aquí el nombre del enlace" />
+	</popup>
+	<popup id="pupUrlEnlace">
+		<toolbarbutton label="Ingrese aquí el url del enlace" />
+	</popup>
+	<popup id="pupGuardarEnlace">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos del enlace" />
+	</popup>
+	<popup id="pupCancelarEnlace">
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
+	</popup>
+	<popup id="pupBuscarEnlace">
+		<toolbarbutton label="Presione aquí para buscar el enlace" />
+	</popup>
+	<popup id="pupEliminarEnlace">
+		<toolbarbutton
+			label="Presione aquí para eliminar los datos del enlace" />
+	</popup>
+	<popup id="pupSalirEnlace">
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+	<popup id="pupCatalogoEnlace">
+		<toolbarbutton
+			label="Presione aquí para ver la lista de enlaces" />
+	</popup>
+
+	<!-- Fin de popus -->
+
+
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -72,9 +106,11 @@
 
 					<hbox>
 
-						<textbox id="txtNombreEnlace" width="120%" />
+						<textbox id="txtNombreEnlace" width="120%"
+							tooltip="pupNombreEnlace" />
 
 						<button id="btnCatalogoEnlace" sclass="btn"
+							tooltip="pupCatalogoEnlace"
 							image="/public/imagenes/iconos/catalogo.png"
 							style="margin-left:55px">
 						</button>
@@ -86,10 +122,10 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Url:"
-							style="font-weight:bold" />
+						<label value="Url:" style="font-weight:bold" />
 					</hlayout>
-					<textbox id="txtUrlEnlace" width="300px" />
+					<textbox id="txtUrlEnlace" width="300px"
+						tooltip="pupUrlEnlace" />
 				</row>
 
 				<row>
@@ -104,7 +140,7 @@
 					<hbox>
 
 						<fileupload id="fudImagenEnlace"
-							label="Subir Imagen">
+							tooltip="pupBuscarEnlace" label="Subir Imagen">
 						</fileupload>
 
 						<image id="imagen" width="80px" height="50px" />
@@ -131,16 +167,20 @@
 					<div sclass="btn-group">
 
 						<button id="btnGuardarEnlace" label="Guardar"
-							sclass="btn" image="/public/imagenes/iconos/guardar.png"
-							tabindex="13">
+							tooltip="pupGuardarEnlace" sclass="btn"
+							image="/public/imagenes/iconos/guardar.png" tabindex="13">
 						</button>
 						<button id="btnCancelarEnlace" label="Cancelar"
-							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
-							tabindex="14">
+							tooltip="pupCancelarEnlace" sclass="btn"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 						</button>
-						<button id="btnEliminarEnlace" label="Eliminar"
-							sclass="btn" image="/public/imagenes/iconos/eliminar.png"
-							tabindex="15">
+						<button id="btnEliminarEnlace" label="Eliminar" disabled="true"
+							tooltip="pupEliminarEnlace" sclass="btn"
+							image="/public/imagenes/iconos/eliminar.png" tabindex="15">
+						</button>
+						<button id="btnSalirEnlace" label="Salir" width="110px"
+							tooltip="pupSalirEnlace" sclass="btn"
+							image="/public/imagenes/iconos/salir.png" tabindex="15">
 						</button>
 						<separator />
 					</div>
