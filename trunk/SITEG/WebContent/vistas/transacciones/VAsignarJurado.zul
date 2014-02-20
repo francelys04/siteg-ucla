@@ -214,7 +214,7 @@
 													<listitem>
 														<listcell>
 															
-																<intbox value="${each.cedula}" width="98%" readonly="true"/>
+																<intbox value="${each.cedula}"  width="60px" style="background-color:white;border:none" readonly="true"/>
 														</listcell>
 														<listcell
 															label="${each.nombre}">
@@ -279,7 +279,7 @@
 													name="model">
 													<listitem>
 														<listcell>												
-																<intbox value="${each.profesor.cedula}" width="auto%" readonly="true"/>
+																<intbox value="${each.profesor.cedula}" style="background-color:white;border:none" width="60px" readonly="true"/>
 														</listcell>
 														<listcell
 															label="${each.profesor.nombre}">

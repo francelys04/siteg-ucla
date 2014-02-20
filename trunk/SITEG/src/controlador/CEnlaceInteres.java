@@ -149,7 +149,8 @@ public class CEnlaceInteres extends CGeneral {
 	public void guardarEnlace() {
 
 		if ((txtNombreEnlace.getText().compareTo("") == 0)
-				|| (txtUrlEnlace.getText().compareTo("") == 0)) {
+				|| (txtUrlEnlace.getText().compareTo("") == 0)
+				|| imagen.getSrc() == null) {
 
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
