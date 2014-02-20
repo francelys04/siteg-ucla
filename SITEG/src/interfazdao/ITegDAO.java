@@ -67,18 +67,18 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 
 	public List<Teg> findByEstatusAndEstudiantesInOrderByIdAsc(String estatus, List<Estudiante> list);
 
-	public List<Teg> findByTutorAndTematicaAndFechaBetween(
+	public List<Teg> findByTutorAndTematicaAndFechaBetweenOrderByFechaAsc(
 			Profesor buscarProfesorPorCedula, Tematica tematica,
 			Date fechaInicio, Date fechaFin);
 
-	public List<Teg> findByTutorAndTematicaAndEstatusAndFechaBetween(
+	public List<Teg> findByTutorAndTematicaAndEstatusAndFechaBetweenOrderByFechaAsc(
 			Profesor profesor, Tematica tematica, String estatus2,
 			Date fechaInicio, Date fechaFin);
 
-	public List<Teg> findByTutorAndFechaBetween(Profesor profesor,
+	public List<Teg> findByTutorAndFechaBetweenOrderByFechaAsc(Profesor profesor,
 			Date fechaInicio, Date fechaFin);
 
-	public List<Teg> findByTutorAndEstatusAndFechaBetween(Profesor profesor,
+	public List<Teg> findByTutorAndEstatusAndFechaBetweenOrderByFechaAsc(Profesor profesor,
 			String estatus2, Date fechaInicio, Date fechaFin);
 	
 	@Query("select teg from Teg teg where teg.estatus=?1 and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?2 ) and fecha between ?3 and ?4 ")

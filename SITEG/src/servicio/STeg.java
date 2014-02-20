@@ -205,7 +205,7 @@ public class STeg {
 			Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByTutorAndTematicaAndFechaBetween(
+		tegs = interfaceTeg.findByTutorAndTematicaAndFechaBetweenOrderByFechaAsc(
 				buscarProfesorPorCedula, tematica, fechaInicio, fechaFin);
 		return tegs;
 	}
@@ -215,7 +215,7 @@ public class STeg {
 			Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByTutorAndTematicaAndEstatusAndFechaBetween(
+		tegs = interfaceTeg.findByTutorAndTematicaAndEstatusAndFechaBetweenOrderByFechaAsc(
 				profesor, tematica, estatus2, fechaInicio, fechaFin);
 		return tegs;
 	}
@@ -224,7 +224,7 @@ public class STeg {
 			Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByTutorAndFechaBetween(profesor, fechaInicio,
+		tegs = interfaceTeg.findByTutorAndFechaBetweenOrderByFechaAsc(profesor, fechaInicio,
 				fechaFin);
 		return tegs;
 	}
@@ -233,7 +233,7 @@ public class STeg {
 			String estatus2, Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByTutorAndEstatusAndFechaBetween(profesor,
+		tegs = interfaceTeg.findByTutorAndEstatusAndFechaBetweenOrderByFechaAsc(profesor,
 				estatus2, fechaInicio, fechaFin);
 		return tegs;
 	}
