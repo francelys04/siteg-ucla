@@ -37,9 +37,6 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
-
-import com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter;
-
 import servicio.SEstudiante;
 import servicio.SPrograma;
 import servicio.SSolicitudTutoria;

@@ -124,12 +124,10 @@
 						<label value="Programa:"
 							style="font-weight:bold" />
 					</hlayout>
-					<combobox readonly="true" id="cmbProgramaEstudiante"
+					<textbox id="txtProgramaEstudiante" disabled="true" style="color:black !important;"
 						tabindex="1" tooltip="pupProgramaEstudiante">
-						<template name="model">
-							<comboitem label="${each.nombre}" />
-						</template>
-					</combobox>
+						
+					</textbox>
 				</row>
 
 				<row>

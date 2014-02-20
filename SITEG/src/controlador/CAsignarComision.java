@@ -82,6 +82,7 @@ public class CAsignarComision extends CGeneral {
 	private Button btnGuardarComision;
 	@Wire
 	private Image imagenx;
+	
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
@@ -99,6 +100,7 @@ public class CAsignarComision extends CGeneral {
 		if (map != null) {
 			if (map.get("id") != null) {
 				long codigo = (Long) map.get("id");
+				
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
 				txtNombreTutorAsignarComision.setValue(teg2.getTutor()

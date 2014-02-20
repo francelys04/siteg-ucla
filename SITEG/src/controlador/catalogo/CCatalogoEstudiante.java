@@ -62,6 +62,7 @@ public class CCatalogoEstudiante extends CGeneral {
 	private Textbox txtCorreoMostrarEstudiante;
 	@Wire
 	private Textbox txtProgramaMostrarEstudiante;
+	private static Programa programaUsuario;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el map
@@ -72,8 +73,14 @@ public class CCatalogoEstudiante extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		List<Estudiante> estudiantes = servicioEstudiante.buscarActivos();
+		
+		programaUsuario = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		
+		List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantesPorPrograma(programaUsuario);
 		ltbEstudiante.setModel(new ListModelList<Estudiante>(estudiantes));
+		
+	
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
@@ -199,7 +206,7 @@ public class CCatalogoEstudiante extends CGeneral {
 	@Listen("onClick = #btnImprimir")
 	public void imprimir() throws SQLException {	
 		FileSystemView filesys = FileSystemView.getFileSystemView();
-		List<Estudiante> estudiantes = servicioEstudiante.buscarActivos();
+		List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantesPorPrograma(programaUsuario);
 		JasperReport jasperReport;
 		try {
 			String rutaUrl = obtenerDirectorio();

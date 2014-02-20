@@ -36,7 +36,7 @@ public class CEstudiante extends CGeneral {
 	CCatalogoEstudiante catalogo = new CCatalogoEstudiante();
 
 	@Wire
-	private Combobox cmbProgramaEstudiante;
+	private Textbox txtProgramaEstudiante;
 	@Wire
 	private Textbox txtCedulaEstudiante;
 	@Wire
@@ -76,6 +76,7 @@ public class CEstudiante extends CGeneral {
 	private Button btnEliminarEstudiante;
 	@Wire
 	private Window wdwEstudiante;
+	private static Programa programaUsuario;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
@@ -85,8 +86,22 @@ public class CEstudiante extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 
-		List<Programa> programas = servicioPrograma.buscarActivas();
-		cmbProgramaEstudiante.setModel(new ListModelList<Programa>(programas));
+		programaUsuario = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+
+		if (programaUsuario != null) {
+
+			txtProgramaEstudiante.setValue(programaUsuario.getNombre());
+
+		} else {
+
+			Messagebox
+					.show("No tiene permisos para registrar un estudiante",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+			wdwEstudiante.onClose();
+
+		}
 
 		Selectors.wireComponents(comp, this, false);
 
@@ -112,14 +127,15 @@ public class CEstudiante extends CGeneral {
 				txtTelefonoFijoEstudiante.setValue(estudiante
 						.getTelefono_fijo());
 				txtCorreoEstudiante.setValue(estudiante.getCorreoElectronico());
-				cmbProgramaEstudiante.setValue(estudiante.getPrograma()
+				txtProgramaEstudiante.setValue(estudiante.getPrograma()
 						.getNombre());
 				btnEliminarEstudiante.setDisabled(false);
 				map.clear();
 				map = null;
 			}
 		}
-		txtCorreoEstudiante.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
+		txtCorreoEstudiante
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 	}
 
 	/*
@@ -150,7 +166,6 @@ public class CEstudiante extends CGeneral {
 				|| txtDireccionEstudiante.getText().compareTo("") == 0
 				|| txtTelefonoMovilEstudiante.getText().compareTo("") == 0
 				|| txtTelefonoFijoEstudiante.getText().compareTo("") == 0
-				|| cmbProgramaEstudiante.getText().compareTo("") == 0
 				|| (rdoSexoFEstudiante.isChecked() == false && rdoSexoMEstudiante
 						.isChecked() == false)) {
 			Messagebox.show("Debe completar todos los campos", "Error",
@@ -175,7 +190,7 @@ public class CEstudiante extends CGeneral {
 										.getValue();
 								String telefonoMovil = txtTelefonoFijoEstudiante
 										.getValue();
-								String programas = cmbProgramaEstudiante
+								String programas = txtProgramaEstudiante
 										.getValue();
 								String sexo = rdgSexoEstudiante
 										.getSelectedItem().getLabel();
@@ -209,7 +224,8 @@ public class CEstudiante extends CGeneral {
 	public void eliminarEstudiante() {
 		Messagebox.show("¿Desea eliminar los datos del estudiante?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							String cedula = txtCedulaEstudiante.getValue();
@@ -252,8 +268,8 @@ public class CEstudiante extends CGeneral {
 				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
 		txtCorreoEstudiante.setConstraint("");
 		txtCorreoEstudiante.setValue("");
-		txtCorreoEstudiante.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
-		cmbProgramaEstudiante.setValue("");
+		txtCorreoEstudiante
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 		btnEliminarEstudiante.setDisabled(true);
 
 	}

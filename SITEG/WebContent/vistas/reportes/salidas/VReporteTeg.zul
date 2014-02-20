@@ -1,0 +1,215 @@
+<window id="wdwReporteTeg" title="Lista de Trabajos Especial de Grado"
+	border="normal" width="80%" height="1000px" closable="true"
+	apply="controlador.reporte.CReporteTeg">
+
+	<style dynamic="true">
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+	</style>
+
+	<style id="estilo">
+
+		.fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
+		div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+
+		.fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
+		.z-cell { background-color: #F7F7F7; border-bottom: 1px solid
+		transparent; border-left: 1px solid transparent; border-top: 1px
+		solid transparent; }
+
+		.fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
+		.z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
+		transparent; }
+
+		.fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
+		.z-cell,.fgrid tr.z-grid-odd { background: white }
+
+		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
+		background: white; border-top: none; }
+
+	</style>
+
+
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+
+
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionarPrograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
+	</popup>
+	<popup id="pupSeleccionarArea">
+		<toolbarbutton label="Presione aquí para seleccionar el area" />
+	</popup>
+	<popup id="pupSeleccionarTematica">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la temática" />
+	</popup>
+	<popup id="pupSeleccionarEstatus">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el estatus" />
+	</popup>
+	<popup id="pupInicioLapso">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de inicio de defensas" />
+	</popup>
+	<popup id="pupFinLapso">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de fin de defensas" />
+	</popup>
+
+	<popup id="pupGenerarReporte">
+		<toolbarbutton label="Presione aqui para mostrar el reporte" />
+	</popup>
+	<popup id="pupCancelarReporte">
+		<toolbarbutton label="Presione aqui para cancelar el reporte" />
+	</popup>
+	<popup id="pupSalirReporte">
+		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
+
+	<!-- Fin de popus -->
+
+	<separator />
+	<separator />
+	<!-- <label value="(*) "
+		style="font-weight:bold;color:red;margin-center:2%">
+		</label> -->
+
+	<label value="Lista de Trabajos Especial de Grado"
+		style="font-weight:bold;margin-left:35%;margin-right:20%">
+	</label>
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+
+	<groupbox width="auto%" style="margin-left:2%;margin-right:1%">
+		<separator />
+		<separator />
+		<grid sclass="fgrid">
+			<columns>
+				<column width="17%" height="17%" />
+			</columns>
+			<rows>
+
+				<row>
+					<hlayout>
+						<label value="Programa:"
+							style="font-weight:bold" />
+					</hlayout>
+
+					<combobox id="cmbPrograma" readonly="true"
+						tabindex="1" width="200px" tooltip="pupSeleccionarPrograma">
+						<template name="model">
+							<comboitem label="${each.nombre}" id="${each.id}"/>
+						</template>
+					</combobox>
+
+					<hlayout>
+						<label value="Area:" style="font-weight:bold"
+							width="100%" />
+					</hlayout>
+					<combobox id="cmbArea" readonly="true" tabindex="1"
+						width="200px" tooltip="pupSeleccionarArea">
+						<template name="model">
+							<comboitem label="${each.nombre}" id="${each.id}" />
+						</template>
+					</combobox>
+
+
+				</row>
+
+				<row>
+					<hlayout>
+						<label value="Temática:"
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbTematica" readonly="true"
+						tabindex="1" width="200px" tooltip="pupSeleccionarTematica">
+						<template name="model">
+							<comboitem label="${each.nombre}" id="${each.id}"/>
+						</template>
+					</combobox>
+					<hlayout>
+						<label value="Estatus:"
+							style="font-weight:bold" />
+					</hlayout>
+					<combobox id="cmbEstatus" readonly="true"
+						tabindex="1" width="200px" tooltip="pupSeleccionarEstatus">
+						<template name="model">
+							<comboitem label="${each}" />
+						</template>
+					</combobox>
+				</row>
+
+				<row>
+
+					<hlayout width="100%">
+						<label value="Fecha Inicio Registro:"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbFechaInicio" cols="12" width="150px"
+						tabindex="3" format="dd/MM/yyyy" tooltip="pupInicioLapso"
+						style="margin-right:15px">
+					</datebox>
+
+					<hlayout width="100%">
+						<label value="Fecha Fin Registro:"
+							style="font-weight:bold" />
+					</hlayout>
+					<datebox id="dtbFechaFin" cols="12" width="150px"
+						tabindex="3" format="dd/MM/yy" tooltip="pupFinLapso"
+						style="margin-right:15px">
+					</datebox>
+
+				</row>
+
+			</rows>
+		</grid>
+		<separator />
+		<separator />
+	</groupbox>
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+
+	<panel border="normal" width="100%"
+		style="margin-left:2%;margin-right:3%">
+		<panelchildren>
+			<div sclass="alert-info" align="center">
+				<separator />
+				<div sclass="btn-group">
+
+					<button id="btnGenerarReporteTeg" width="110px"
+						label="Generar" sclass="btn" tooltip="pupGenerarReporte"
+						image="/public/imagenes/iconos/generar.png" tabindex="14">
+					</button>
+					<button id="btnCancelarReporteTeg" label="Cancelar" width="110px"
+						sclass="btn" tooltip="pupCancelarReporte"
+						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					</button>
+					<button id="btnSalirReporteTeg" width="110px"
+						tooltip="pupSalirReporte" label="Salir" sclass="btn"
+						image="/public/imagenes/iconos/salir.png" tabindex="14">
+					</button>
+					<separator />
+				</div>
+
+			</div>
+		</panelchildren>
+	</panel>
+	<separator />
+	<jasperreport id="jstVistaPrevia"></jasperreport>
+	<separator />
+
+</window>

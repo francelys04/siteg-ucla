@@ -168,9 +168,8 @@
 								style="font-weight:bold" />
 						</hlayout>
 
-						<textbox id="txtProgramaConfigurarPrograma"
-							readonly="true" width="190px" tabindex="12"
-							style="margin-left:35px">
+						<textbox id="txtProgramaConfigurarPrograma" disabled="true"
+							width="190px" tabindex="12" style="margin-left:35px;color:black !important;">
 						</textbox>
 
 					</hbox>
@@ -188,10 +187,14 @@
 		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
 			height="320px">
 			<tabs>
-				<tab label="Areas de Investigación" tooltip="pupAreasConfigurarPrograma"/>
-				<tab label="Requisitos del proyecto" tooltip="pupRequisitosConfigurarPrograma"/>
-				<tab label="Items de evaluación" tooltip="pupItemsConfigurarPrograma"/>
-				<tab label="Condiciones" tooltip="pupCondicionesConfigurarPrograma"/>
+				<tab label="Areas de Investigación"
+					tooltip="pupAreasConfigurarPrograma" />
+				<tab label="Requisitos del proyecto"
+					tooltip="pupRequisitosConfigurarPrograma" />
+				<tab label="Items de evaluación"
+					tooltip="pupItemsConfigurarPrograma" />
+				<tab label="Condiciones"
+					tooltip="pupCondicionesConfigurarPrograma" />
 			</tabs>
 			<tabpanels>
 
@@ -552,9 +555,9 @@
 							tabindex="13">
 						</button>
 						<button id="btnSalirConfigurarPrograma"
-							tooltip="pupSalirConfigurarPrograma" width="110px"
-							sclass="btn" label="Salir"
-							image="/public/imagenes/iconos/salir.png" tabindex="14">
+							tooltip="pupSalirConfigurarPrograma" width="110px" sclass="btn"
+							label="Salir" image="/public/imagenes/iconos/salir.png"
+							tabindex="14">
 						</button>
 
 						<separator />

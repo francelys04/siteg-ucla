@@ -33,6 +33,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -186,8 +187,8 @@ public class CReporteTeg extends CGeneral {
 		if ((cmbPrograma.getValue() == "") || (cmbArea.getValue() == "")
 				|| (cmbTematica.getValue() == "")
 				|| (cmbEstatus.getValue() == "")) {
-			Messagebox.show("Datos imcompletos", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			Messagebox.show("Debe completar todos los campos", "Error", Messagebox.OK,
+					Messagebox.ERROR);
 		}
 
 		else {
@@ -292,40 +293,57 @@ public class CReporteTeg extends CGeneral {
 					elementos.add(new ListaTeg(t, nombreEstudiantes));
 
 				}
-				FileSystemView filesys = FileSystemView.getFileSystemView();
-				Map p = new HashMap();
-				String rutaUrl = obtenerDirectorio();
-				String reporteSrc = rutaUrl
+				if(elementos.size()!=0){
+				   FileSystemView filesys = FileSystemView.getFileSystemView();
+				   Map p = new HashMap();
+				   String rutaUrl = obtenerDirectorio();
+				   String reporteSrc = rutaUrl
 						+ "SITEG/vistas/reportes/estructurados/compilados/ReporteTEG.jasper";
-				String reporteImage = rutaUrl
+				   String reporteImage = rutaUrl
 						+ "SITEG/public/imagenes/reportes/";
-				p.put("programa", cmbPrograma.getValue());
-				p.put("FechaInicio", dtbFechaInicio.getValue());
-				p.put("FechaFin", dtbFechaFin.getValue());
-				p.put("Area", cmbArea.getValue());
-				p.put("Tematica", cmbTematica.getValue());
-				p.put("Estatus", cmbEstatus.getValue());
-				p.put("logoUcla", reporteImage + "logo ucla.png");
-				p.put("logoCE", reporteImage + "logo CE.png");
-				p.put("logoSiteg", reporteImage + "logo.png");
+				   p.put("programa", cmbPrograma.getValue());
+				   p.put("FechaInicio", dtbFechaInicio.getValue());
+				   p.put("FechaFin", dtbFechaFin.getValue());
+				   p.put("Area", cmbArea.getValue());
+				   p.put("Tematica", cmbTematica.getValue());
+				   p.put("Estatus", cmbEstatus.getValue());
+				   p.put("logoUcla", reporteImage + "logo ucla.png");
+				   p.put("logoCE", reporteImage + "logo CE.png");
+				   p.put("logoSiteg", reporteImage + "logo.png");
+				
+				   JasperReport jasperReport = (JasperReport) JRLoader
+							.loadObject(reporteSrc);
 
-				jstVistaPrevia.setSrc(reporteSrc);
-				jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-						elementos));
-				jstVistaPrevia.setType("pdf");
-				jstVistaPrevia.setParameters(p);
+					
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, p, new JRBeanCollectionDataSource(
+									elementos));
+					JasperViewer.viewReport(jasperPrint, false);
+
+				}
+				else{
+			    	 Messagebox.show("No hay información disponible");
+			    	 Cancelar();
+			         }
 			}
 
 		}
 	}
 /* Metodo que permite limpiar los campos de los filtros de busqueda.*/
-	@Listen("onClick = #btnSalirReporteTeg")
-	public void cancelarItem() {
+	
+	@Listen("onClick = #btnCancelarReporteTeg")
+	public void Cancelar() {
 		cmbEstatus.setValue("");
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbTematica.setValue("");
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
+	}
+	
+	@Listen("onClick = #btnSalirReporteTeg")
+	public void Salir(){
+		wdwReporteTeg.onClose();
+		
 	}
 }
