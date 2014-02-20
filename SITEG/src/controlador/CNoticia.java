@@ -68,7 +68,7 @@ public class CNoticia extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		
+
 		noticiaCatalogo = false;
 		Selectors.wireComponents(comp, this, false);
 
@@ -76,7 +76,7 @@ public class CNoticia extends CGeneral {
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
 			if (map.get("id") != null) {
-				
+
 				long codigo = (long) map.get("id");
 				noticiaCatalogo = true;
 				Noticia noticia2 = servicioNoticia.buscarNoticia(codigo);
@@ -123,7 +123,8 @@ public class CNoticia extends CGeneral {
 		} else {
 
 			if ((txtNombreNoticia.getText().compareTo("") == 0)
-					|| (txtDescripcionNoticia.getText().compareTo("") == 0)) {
+					|| (txtDescripcionNoticia.getText().compareTo("") == 0)
+					|| imagen.getSrc() == null) {
 				Messagebox.show("Debe completar todos los campos", "Error",
 						Messagebox.OK, Messagebox.ERROR);
 			} else {
@@ -166,7 +167,8 @@ public class CNoticia extends CGeneral {
 	public void eliminarNoticia() {
 		Messagebox.show("¿Desea eliminar los datos de la noticia?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Noticia noticia = servicioNoticia.buscarNoticia(id);

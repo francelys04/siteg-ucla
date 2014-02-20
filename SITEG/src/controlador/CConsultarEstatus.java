@@ -363,10 +363,7 @@ public class CConsultarEstatus extends CGeneral {
 							imgTrabajoEspecial.detach();
 							imgJuradoAsignado.detach();
 							imgComisionEvaluadoraAsignada.detach();
-							Messagebox
-									.show("Trabajo Especial de Grado No Factible o Reprobado",
-											"Información", Messagebox.OK,
-											Messagebox.INFORMATION);
+						
 
 						} else {
 							imgSolicitandoRegistro.detach();
@@ -402,9 +399,7 @@ public class CConsultarEstatus extends CGeneral {
 					imgTrabajoEspecial.detach();
 					imgJuradoAsignado.detach();
 					imgComisionEvaluadoraAsignada.detach();
-					Messagebox.show("Tutoria del Proyecto Rechazada",
-							"Información", Messagebox.OK,
-							Messagebox.INFORMATION);
+					
 
 				}
 
@@ -412,13 +407,7 @@ public class CConsultarEstatus extends CGeneral {
 
 		} else {
 			if (teg.isEmpty() == false && indiceSolicitud == -1) {
-				if (teg.get(indiceTeg).getEstatus().equals("TEG Aprobado") == true) {
-					Messagebox
-							.show("Felicidades!! Trabajo Especial de Grado Aprobado!",
-									"Información", Messagebox.OK,
-									Messagebox.INFORMATION);
-
-				}
+			
 			} else {
 				imgSolicitandoTutoria.detach();
 				imgTutoriaAceptada.detach();
