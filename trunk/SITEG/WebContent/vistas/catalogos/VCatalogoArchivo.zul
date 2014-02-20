@@ -6,11 +6,13 @@
 
 		<style src="/public/css/bootstrap.css" />
 		<style src="/public/css/style.css" />
+
+		<!--  popus  -->
 		<popup id="pupSeleccionArchivo">
-		<toolbarbutton
-			label="Doble clic para seleccionar un archivo" />
-	   </popup>
-	<!-- Fin de popus -->
+			<toolbarbutton
+				label="Doble clic para seleccionar un archivo" />
+		</popup>
+		<!-- Fin de popus -->
 
 		<listbox id="ltbArchivo" width="100%" mold="paging"
 			pageSize="10" emptyMessage="No hay archivos registrados">
@@ -39,7 +41,7 @@
 				<listheader label="Nombre" align="center" />
 				<listheader label="Descripción" align="center" />
 				<listheader label="Programa" align="center" />
-				<listheader label="Descarga" align="center" />
+				<listheader label="Descarga" align="center" width="15%" />
 			</listhead>
 
 

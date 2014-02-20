@@ -57,23 +57,19 @@
 	<!-- Lista de popus -->
 	<popup id="pupDatosProyecto">
 		<toolbarbutton
-			label="Presione aquí para visualizar los datos del proyecto" />
+			label="Presione aquí para visualizar los datos del trabajo" />
 	</popup>
-	<popup id="pupDatosEstudiante">
+	<popup id="pupDatosTrabajo">
 		<toolbarbutton
-			label="Presione aquí para visualizar los datos del estudiante" />
-	</popup>
-	<popup id="pupDatosTutor">
-		<toolbarbutton
-			label="Presione aquí para visualizar los datos del tutor" />
+			label="Presione aquí para visualizar los datos del trabajo" />
 	</popup>
 	<popup id="pupBtnGuardar">
 		<toolbarbutton
-			label="Presione aquí para agregar observaciones al trabajo" />
+			label="Presione aquí para guardar las revisiones" />
 	</popup>
 	<popup id="pupBtnFinalizar">
 		<toolbarbutton
-			label="Presione aquí para finalizar las revisiones del proyecto" />
+			label="Presione aquí para finalizar las revisiones" />
 	</popup>
 	<popup id="pupBtnCancelar">
 		<toolbarbutton label="Presione aquí para limpiar los campos" />
@@ -81,6 +77,15 @@
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
+	<popup id="pupRevisiones">
+		<toolbarbutton
+			label="Presione aquí para visualizar las revisiones" />
+	</popup>
+	<popup id="pupObservaciones">
+		<toolbarbutton label="Ingrese aquí las observaciones" />
+	</popup>
+
+
 	<!-- fin de popus -->
 
 	<separator />
@@ -123,7 +128,8 @@
 					emptyMessage="No hay Estudiantes registrados actualmente">
 
 					<listhead>
-						<listheader label="Cédula" align="center" width="15%"/>
+						<listheader label="Cédula" align="center"
+							width="15%" />
 						<listheader label="Nombre" align="center" />
 						<listheader label="Apellido" align="center" />
 						<listheader label="Correo" align="center" />
@@ -152,8 +158,9 @@
 		<tabbox style="margin-left:2%;margin-right:1%" width="720px"
 			height="350px">
 			<tabs>
-				<tab label="Observaciones" tooltip="pupDatosTutor" />
-				<tab label="Datos del Proyecto"
+				<tab label="Revisiones del Trabajo"
+					tooltip="pupRevisiones" />
+				<tab label="Datos del Trabajo"
 					tooltip="pupDatosProyecto" />
 
 
@@ -179,9 +186,8 @@
 							<row>
 								<textbox
 									id="txtObservacionRegistrarRevision" tabindex="1" width="570px"
-									rows="3" cols="100"  maxlength="500"
-									tooltiptext="Ingrese aqui la observacion"	
-								/>
+									rows="3" cols="100" maxlength="500"
+									tooltip="pupObservaciones" />
 
 							</row>
 						</rows>
@@ -300,7 +306,7 @@
 							tooltip="pupBtnCancelar">
 						</button>
 						<button id="btnSalirRegistrarRevision"
-							sclass="btn" label="Salir"
+							width="110px" sclass="btn" label="Salir"
 							image="/public/imagenes/iconos/salir.png" tabindex="15"
 							tooltip="pupBtnSalir">
 						</button>

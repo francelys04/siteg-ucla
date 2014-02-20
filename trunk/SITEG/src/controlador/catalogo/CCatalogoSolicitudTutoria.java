@@ -79,7 +79,7 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 	 * mediante el componente de la lista, donde se podra visualizar el nombre y
 	 * apellido del estudiante, la tematica, el area de estas.
 	 */
-	@Listen("onChange = #txtFechaSolicitud,#txtAreaSolicitud,#txtTematicaSolicitud,#txtDescripcionSolicitud")
+	@Listen("onChange = #txtNombreEstudianteSolicitud, #txtFechaSolicitud,#txtAreaSolicitud,#txtTematicaSolicitud,#txtDescripcionSolicitud")
 	public void filtrarDatosCatalogo() {
 		List<SolicitudTutoria> solicitudes = servicioSolicitudTutoria
 				.buscarSolicitudPorRevisar(ObtenerUsuarioProfesor());

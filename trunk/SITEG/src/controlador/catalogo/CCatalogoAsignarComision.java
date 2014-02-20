@@ -125,7 +125,7 @@ public class CCatalogoAsignarComision extends CGeneral {
 	 * visualizar el nombre y apellido del estudiante, la tematica, el area, el
 	 * titulo y el nombre y apellido del tutor.
 	 */
-	@Listen("onChange = #txtMostrarFecha, #txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,# txtMostrarApellidoTutor")
+	@Listen("onChange = #txtEstudianteComision, #txtMostrarFecha, #txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,#txtMostrarApellidoTutor")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
 		for (int i = 0; i < teg1.size(); i++) {

@@ -62,20 +62,23 @@
 							<!-- inicio Slide -->
 							<div
 								style="text-align:center;margin-left:20px">
-								
-									<h:ul id="diapos"
-										style="margin-top:7px;">
-										<h:li>
-											<image id="imgNoticiaTres" class="img"/>
-										</h:li>
-										<h:li>
-											<image  id="imgNoticiaDos" class="img"/>
-										</h:li>
-										<h:li>
-											<image id="imgNoticiaUno" class="img"/>
-										</h:li>
-									</h:ul>
-								
+
+								<h:ul id="diapos"
+									style="margin-top:7px;">
+									<h:li>
+										<image id="imgNoticiaTres"
+											class="img" />
+									</h:li>
+									<h:li>
+										<image id="imgNoticiaDos"
+											class="img" />
+									</h:li>
+									<h:li>
+										<image id="imgNoticiaUno"
+											class="img" />
+									</h:li>
+								</h:ul>
+
 							</div>
 							<!-- fin slide-->
 						</hbox>
@@ -393,9 +396,9 @@
 		</east>
 
 		<south height="20px" border="normal"
-			style="background-color:rgb(241, 249, 255)">
+			style="background-color: #3276b1">
 			<div align="center" style="margin:0 auto">
-				<label
+				<label style="color:white"
 					value=" SITEG © 2013 Elaborado por Singleton - Todos los Derechos Reservados">
 				</label>
 			</div>

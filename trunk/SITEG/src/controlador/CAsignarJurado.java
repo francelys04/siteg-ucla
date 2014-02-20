@@ -98,6 +98,7 @@ public class CAsignarJurado extends CGeneral {
 				.getCurrent().getAttribute("catalogoSolicitudDefensa");
 		if (map != null) {
 			if (map.get("id") != null) {
+				tutorEnJurado = false;
 				idTeg = (Long) map.get("id");
 				Teg teg = servicioTeg.buscarTeg(idTeg);
 				llenarListas(teg);
@@ -128,8 +129,8 @@ public class CAsignarJurado extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite mover uno o varios profesores hacia la lista de integrantes
-	 * del jurado.
+	 * Metodo que permite mover uno o varios profesores hacia la lista de
+	 * integrantes del jurado.
 	 */
 	@Listen("onClick = #btnAgregarJurado")
 	public void moverDerechaJurado() {
@@ -164,8 +165,8 @@ public class CAsignarJurado extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite mover uno o varios profesores integrantes del jurado hacia la lista de la
-	 * izquierda (profesores disponibles).
+	 * Metodo que permite mover uno o varios profesores integrantes del jurado
+	 * hacia la lista de la izquierda (profesores disponibles).
 	 */
 	@Listen("onClick = #btnRemoverJurado")
 	public void moverIzquierdaJurado() {
@@ -193,7 +194,7 @@ public class CAsignarJurado extends CGeneral {
 		ltbJuradoDisponible.setMultiple(true);
 		ltbJuradoDisponible.setCheckmark(true);
 	}
-	
+
 	/*
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
@@ -241,7 +242,13 @@ public class CAsignarJurado extends CGeneral {
 	public void aceptarDefensaDefinitiva() {
 
 		if (validarJurado() && guardardatos()) {
+
+			System.out.println(tutorEnJurado);
+
 			if (tutorEnJurado) {
+
+				System.out.println(tutorEnJurado);
+
 				Messagebox.show("¿Desea guardar los miembros del jurado?",
 						"Dialogo de confirmacion", Messagebox.OK
 								| Messagebox.CANCEL, Messagebox.QUESTION,
@@ -371,42 +378,46 @@ public class CAsignarJurado extends CGeneral {
 	 * tipo asociado. Retorna verdadero si se cumple y falso en caso contrario
 	 */
 	public boolean guardardatos() {
-		Teg teg = servicioTeg.buscarTeg(idTeg);
-		List<Jurado> jurados = new ArrayList<Jurado>();
-		boolean error = false;
-		jurados = servicioJurado.buscarJuradoDeTeg(teg);
-		if (!jurados.isEmpty()) {
-			servicioJurado.limpiar(jurados);
-			jurados.clear();
-		}
-		for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
 
-			Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
-			String tipojurado = ((Combobox) ((listItem.getChildren().get(3)))
-					.getFirstChild()).getValue();
-			if (tipojurado == "") {
-				error = true;
+
+			Teg teg = servicioTeg.buscarTeg(idTeg);
+			List<Jurado> jurados = new ArrayList<Jurado>();
+			boolean error = false;
+			jurados = servicioJurado.buscarJuradoDeTeg(teg);
+			if (!jurados.isEmpty()) {
+				servicioJurado.limpiar(jurados);
+				jurados.clear();
 			}
-			long cedula = ((Intbox) ((listItem.getChildren().get(0)))
-					.getFirstChild()).getValue();
-			Profesor profesorJurado = servicioProfesor
-					.buscarProfesorPorCedula(String.valueOf(cedula));
-			if (tutor.getCedula().equals(
-					String.valueOf(profesorJurado.getCedula()))) {
-				tutorEnJurado = true;
+			for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
+
+				Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
+				String tipojurado = ((Combobox) ((listItem.getChildren().get(3)))
+						.getFirstChild()).getValue();
+				if (tipojurado == "") {
+					error = true;
+				}
+				long cedula = ((Intbox) ((listItem.getChildren().get(0)))
+						.getFirstChild()).getValue();
+				Profesor profesorJurado = servicioProfesor
+						.buscarProfesorPorCedula(String.valueOf(cedula));
+				if (tutor.getCedula().equals(
+						String.valueOf(profesorJurado.getCedula()))) {
+					tutorEnJurado = true;
+				}
+				TipoJurado tipo = servicioTipoJurado
+						.buscarPorNombre(tipojurado);
+				Jurado jurado = new Jurado(teg, profesorJurado, tipo);
+				jurados.add(jurado);
 			}
-			TipoJurado tipo = servicioTipoJurado.buscarPorNombre(tipojurado);
-			Jurado jurado = new Jurado(teg, profesorJurado, tipo);
-			jurados.add(jurado);
-		}
-		if (!error) {
-			servicioJurado.guardar(jurados);
-			return true;
-		} else {
-			Messagebox.show("Debe seleccionar un tipo para cada jurado",
-					"Error", Messagebox.OK, Messagebox.ERROR);
-			return false;
-		}
+			if (!error) {
+				servicioJurado.guardar(jurados);
+				return true;
+			} else {
+				Messagebox.show("Debe seleccionar un tipo para cada jurado",
+						"Error", Messagebox.OK, Messagebox.ERROR);
+				return false;
+			}
+		
 	}
 
 	/*

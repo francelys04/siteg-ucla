@@ -1,4 +1,4 @@
-<window id="wdwCatalogoSolicitudDefensa" title="Solicitudes de Defensa" border="normal" width="100%"
+<window id="wdwCatalogoSolicitudDefensa" title="Trabajos con Jurados Asignados" border="normal" width="100%"
 	height="600px" closable="true"
 	apply="controlador.catalogo.CCatalogoSolicitudDefensa">
 	<separator />

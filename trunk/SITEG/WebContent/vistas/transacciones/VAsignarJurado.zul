@@ -73,11 +73,11 @@
 	</popup>
 	<popup id="pupD">
 		<toolbarbutton
-			label="Presione aquí para agregar items" />
+			label="Presione aquí para agregar profesores" />
 	</popup>
 	<popup id="pupI">
 		<toolbarbutton
-			label="Presione aquí para remover items" />
+			label="Presione aquí para remover profesores" />
 	</popup>
 	<popup id="pupBtnGuardar">
 		<toolbarbutton label="Presione aquí para guardar la comision" />
@@ -246,12 +246,12 @@
 												<button
 													id="btnAgregarJurado" sclass="btn"
 													image="/public/imagenes/iconos/right.png"
-													tooltiptext="pupD" />
+													tooltip="pupD" />
 												<separator />
 												<button sclass="btn"
 													id="btnRemoverJurado"
 													image="/public/imagenes/iconos/left.png"
-													tooltiptext="pupI" />
+													tooltip="pupI" />
 
 											</div>
 										</panelchildren>
@@ -266,7 +266,7 @@
 												emptyMessage="No se han seleccionado items">
 												<listhead>
 													<listheader
-														label="Cédula" width="40%"/>
+														label="Cédula" width="30%"/>
 													<listheader
 														label="Nombre" />
 													<listheader
@@ -279,7 +279,7 @@
 													name="model">
 													<listitem>
 														<listcell>												
-																<intbox value="${each.profesor.cedula}" width="98%" readonly="true"/>
+																<intbox value="${each.profesor.cedula}" width="auto%" readonly="true"/>
 														</listcell>
 														<listcell
 															label="${each.profesor.nombre}">

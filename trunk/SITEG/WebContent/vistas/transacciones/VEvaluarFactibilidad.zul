@@ -68,6 +68,12 @@
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí salir" />
 	</popup>
+	<popup id="pupObservacionEvaluarFactibilidad">
+		<toolbarbutton label="Ingrese aquí la observacion" />
+	</popup>
+	<popup id="pupApreciacionEvaluarFactibilidad">
+		<toolbarbutton label="Ingrese aquí la apreciacion" />
+	</popup>
 	<!-- fin de popus -->
 
 	<separator />
@@ -114,7 +120,8 @@
 							style="color:black !important;" width="180px" disabled="true" />
 						<label value="Apellido del Tutor:"
 							style="margin-left:20px;font-weight:bold" />
-						<textbox id="txtApellidoTutorEvaluarFactibilidad"
+						<textbox
+							id="txtApellidoTutorEvaluarFactibilidad"
 							style="margin-left:20px;color:black !important;" width="180px"
 							disabled="true" />
 					</hbox>
@@ -175,7 +182,9 @@
 												label="${each.nombre}">
 											</listcell>
 											<listcell>
-												<textbox width="90%" maxlength="100"/>
+												<textbox width="90%"
+													maxlength="100"
+													tooltip="pupApreciacionEvaluarFactibilidad" />
 
 											</listcell>
 										</listitem>
@@ -234,9 +243,7 @@
 								<textbox
 									id="txtTituloEvaluarFactibilidad"
 									style="color:black !important;" disabled="true" width="620px"
-									rows="4" cols="100"
-									tooltiptext="Ingrese aqui el titulo"	
-								/>
+									rows="4" cols="100" tooltiptext="Ingrese aqui el titulo" />
 							</row>
 						</rows>
 					</grid>
@@ -295,9 +302,8 @@
 
 				<row>
 					<textbox id="txtObservacionEvaluarFactibilidad"
-						width="610px" rows="3" cols="200" 
-						tooltiptext="Ingrese aqui la observacion"
-						/>
+						width="610px" rows="3" cols="200"
+						tooltip="pupObservacionEvaluarFactibilidad" />
 				</row>
 			</rows>
 		</grid>

@@ -46,7 +46,7 @@
 	<!-- Lista de popus -->
 	<popup id="pupDatosProyecto">
 		<toolbarbutton
-			label="Presione aquí para visualizar los datos del proyecto" />
+			label="Presione aquí para visualizar los datos del trabajo" />
 	</popup>
 	<popup id="pupDatosEstudiante">
 		<toolbarbutton
@@ -138,7 +138,7 @@
 		<tabbox style="margin-left:2%;margin-right:1%" width="95%"
 			height="450px">
 			<tabs>
-				<tab label="Datos del Proyecto"
+				<tab label="Datos del Trabajo"
 					tooltip="pupDatosProyecto" />
 				<tab label="Datos del Estudiante"
 					tooltip="pupDatosEstudiante" />
@@ -198,7 +198,7 @@
 							<row>
 								<textbox id="txtTituloRegistrarTeg"
 									width="520px" rows="2" cols="100"
-									tooltiptext="Ingrese aqui el titulo" maxlength="500"/>
+									tooltiptext="Ingrese aqui el titulo" maxlength="500" />
 							</row>
 
 							<row>
@@ -235,8 +235,9 @@
 									<hbox>
 
 										<datebox
-											id="dtbFechaInicioRegistrarTeg" width="130px" format="short"
-											style="margin-left:5px" />
+											id="dtbFechaInicioRegistrarTeg" width="130px"
+											style="margin-left:5px" format="short"
+											onCreate="self.value = new Date()" />
 
 
 										<hlayout width="180px"

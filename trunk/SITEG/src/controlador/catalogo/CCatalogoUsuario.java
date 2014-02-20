@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import modelo.Actividad;
 import modelo.ItemEvaluacion;
 import modelo.seguridad.Usuario;
 
@@ -28,7 +29,7 @@ import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 public class CCatalogoUsuario extends CGeneral {
-	
+
 	private static String vistaRecibida;
 
 	@Wire
@@ -40,34 +41,30 @@ public class CCatalogoUsuario extends CGeneral {
 	@Wire
 	private Window wdwCatalogoUsuario;
 
-
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * usuarios disponibles y se llena el listado del mismo en el componente
 	 * lista de la vista.
 	 */
 	@Override
-	public	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		List<Usuario> usuarios = servicioUsuario.buscarActivos();
 		ltbUsuario.setModel(new ListModelList<Usuario>(usuarios));
-	
+
 	}
+
 	/*
 	 * Metodo que permite filtrar los usuarios disponibles, mediante el
 	 * componente de la lista, donde se podra visualizar el nombre de estos.
 	 */
-	@Listen("onChange = #txtNombreMostarUsuario")
+	@Listen("onChange = #txtNombreMostrarUsuario")
 	public void filtrarDatosCatalogo() {
 		List<Usuario> usuarios = servicioUsuario.buscarActivos();
-		List<Usuario> usuarios1 = servicioUsuario.buscarActivos();
-		
+		List<Usuario> usuarios1 = new ArrayList<Usuario>();
+
 		for (Usuario usuario : usuarios) {
-			if (usuario
-					.getNombre()
-					.toLowerCase()
-					.contains(
-							txtNombreMostrarUsuario.getValue().toLowerCase()))
-			{
+			if (usuario.getNombre().toLowerCase()
+					.contains(txtNombreMostrarUsuario.getValue().toLowerCase())) {
 				usuarios1.add(usuario);
 			}
 
@@ -76,6 +73,7 @@ public class CCatalogoUsuario extends CGeneral {
 		ltbUsuario.setModel(new ListModelList<Usuario>(usuarios1));
 
 	}
+
 	/*
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
@@ -83,32 +81,39 @@ public class CCatalogoUsuario extends CGeneral {
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
-		System.out.println("Recibir vista"+vista);
+		System.out.println("Recibir vista" + vista);
 
 	}
+
 	/*
-	 * Metodo que permite obtener el objeto Usuario al realizar el evento
-	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
-	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 * Metodo que permite obtener el objeto Usuario al realizar el evento doble
+	 * clic sobre un item en especifico en la lista, extrayendo asi su id, para
+	 * luego poder ser mapeada y enviada a la vista asociada a ella.
 	 */
 	@Listen("onDoubleClick = #ltbUsuario")
 	public void mostrarDatosCatalogo() {
-		if(ltbUsuario.getItemCount()!=0){
-		Listitem listItem = ltbUsuario.getSelectedItem();
-		Usuario usuario = (Usuario) listItem.getValue();
-		Usuario usuario1=servicioUsuario.buscarUsuarioPorNombre(usuario.getNombre());
-		String vista = vistaRecibida;
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
-		if(map2!=null)
-			map=map2;
-		map.put("id", usuario1.getId());
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoUsuario.onClose();
 
-	}
+		try {
+
+			if (ltbUsuario.getItemCount() != 0) {
+				Listitem listItem = ltbUsuario.getSelectedItem();
+				Usuario usuario = (Usuario) listItem.getValue();
+				Usuario usuario1 = servicioUsuario
+						.buscarUsuarioPorNombre(usuario.getNombre());
+				String vista = vistaRecibida;
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
+						.getCurrent().getAttribute("itemsCatalogo");
+				if (map2 != null)
+					map = map2;
+				map.put("id", usuario1.getId());
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+				Executions.sendRedirect("/vistas/arbol.zul");
+				wdwCatalogoUsuario.onClose();
+
+			}
+		} catch (NullPointerException e) {
+		}
 	}
 }

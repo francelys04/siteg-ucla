@@ -8,15 +8,16 @@
 		<style src="/public/css/style.css" />
 
 		<!-- Lista de popus -->
-	<popup id="pupSeleccionNoticia">
-		<toolbarbutton
-			label="Doble clic para seleccionar la noticia" />
-	</popup>
-	<!-- Fin de popus -->
-	
-	
+		<popup id="pupSeleccionNoticia">
+			<toolbarbutton
+				label="Doble clic para seleccionar la noticia" />
+		</popup>
+		<!-- Fin de popus -->
 
-		<listbox id="ltbNoticia" width="100%">
+
+
+		<listbox id="ltbNoticia" width="100%" mold="paging"
+			pageSize="10" emptyMessage="No hay noticias registradas">
 
 			<auxhead sclass="category-center">
 				<auxheader colspan="1">

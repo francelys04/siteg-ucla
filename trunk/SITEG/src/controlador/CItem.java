@@ -129,7 +129,7 @@ public class CItem extends CGeneral {
 	 */
 	@Listen("onClick = #btnEliminarItem")
 	public void eliminarItem() {
-		Messagebox.show("Â¿Desea eliminar el Item?", "Dialogo de confirmacion",
+		Messagebox.show("¿Desea eliminar el Item?", "Dialogo de confirmacion",
 				Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {

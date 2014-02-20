@@ -96,7 +96,7 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 	 * el componente de la lista, donde se podra visualizar el nombre y apellido
 	 * del estudiante, la tematica, el titulo y el nombre y apellido del tutor.
 	 */
-	@Listen("onChange = #txtAreaSolicitudDefensa,#txtTematicaSolicitudDefensa,#txtTituloSolicitudDefensa,#txtNombreTutorSolicitudDefensa,#txtApellidoTutorSolicitudDefensa")
+	@Listen("onChange = #txtEstudianteDefensa, #txtFechaSolicitudDefensa, #txtAreaSolicitudDefensa,#txtTematicaSolicitudDefensa,#txtTituloSolicitudDefensa,#txtNombreTutorSolicitudDefensa,#txtApellidoTutorSolicitudDefensa")
 	public void filtrarCatalogo() {
 
 		List<Teg> tegs = new ArrayList<Teg>();
@@ -111,6 +111,15 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 			if (servicioEstudiante.buscarEstudiantePorTeg(teg).get(0)
 					.getNombre().toLowerCase()
 					.contains(txtEstudianteDefensa.getValue().toLowerCase())
+					
+					&& teg.getFecha()
+							.toString()
+							.toLowerCase()
+							.contains(
+									txtFechaSolicitudDefensa.getValue()
+											.toLowerCase())
+					
+					
 					&& teg.getTematica()
 							.getareaInvestigacion()
 							.getNombre()

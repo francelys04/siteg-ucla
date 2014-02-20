@@ -104,7 +104,7 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 	 * estudiante, la fecha, la tematica, el area, el titulo y el nombre y
 	 * apellido del tutor.
 	 */
-	@Listen("onChange = #txtMostrarFechaCalificar,#txtMostrarTematicaCalificar,#txtMostrarAreaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,# txtMostrarApellidoTutorCalificar")
+	@Listen("onChange = #txtEstudianteCalificarDefensa, #txtMostrarFechaCalificar,#txtMostrarTematicaCalificar,#txtMostrarAreaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,#txtMostrarApellidoTutorCalificar")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscar();
 		for (int i = 0; i < teg1.size(); i++) {

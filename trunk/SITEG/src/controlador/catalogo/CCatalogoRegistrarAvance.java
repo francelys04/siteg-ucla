@@ -115,7 +115,7 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	 * visualizar la fecha, el nombre y apellido del estudiante, la fecha, la
 	 * tematica, el area y el titulo de estos.
 	 */
-	@Listen("onChange = #txtFechaRegistrarAvance, #txtTematicaRegistrarAvance,#txtAreaRegistrarAvance,#txtTituloRegistrarAvance")
+	@Listen("onChange = #txtEstudianteAvance, #txtFechaRegistrarAvance, #txtTematicaRegistrarAvance,#txtAreaRegistrarAvance,#txtTituloRegistrarAvance")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
 		for (int i = 0; i < teg1.size(); i++) {

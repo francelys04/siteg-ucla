@@ -97,7 +97,7 @@ public class CCatalogoAsignarJurado extends CGeneral {
 	 * estudiante, la tematica, el area, el titulo y el nombre y apellido del
 	 * tutor.
 	 */
-	@Listen("onChange = #txtAreaSolicitudDefensa,#txtTematicaSolicitudDefensa,#txtTituloSolicitudDefensa,#txtNombreTutorSolicitudDefensa,#txtApellidoTutorSolicitudDefensa")
+	@Listen("onChange = #txtEstudianteJurado, #txtFechaSolicitudDefensa, #txtAreaSolicitudDefensa,#txtTematicaSolicitudDefensa,#txtTituloSolicitudDefensa,#txtNombreTutorSolicitudDefensa,#txtApellidoTutorSolicitudDefensa")
 	public void filtrarCatalogo() {
 
 		List<Teg> tegs = new ArrayList<Teg>();
@@ -112,6 +112,15 @@ public class CCatalogoAsignarJurado extends CGeneral {
 			if (servicioEstudiante.buscarEstudiantePorTeg(teg).get(0)
 					.getNombre().toLowerCase()
 					.contains(txtEstudianteJurado.getValue().toLowerCase())
+					
+					&& teg.getFecha()
+							.toString()
+							.toLowerCase()
+							.contains(
+									txtFechaSolicitudDefensa.getValue()
+											.toLowerCase())
+					
+					
 					&& teg.getTematica()
 							.getareaInvestigacion()
 							.getNombre()
