@@ -330,14 +330,14 @@ public class CReporteProfesorTeg extends CGeneral {
 				String reporteImage = rutaUrl
 						+ "SITEG/public/imagenes/reportes/";
 				System.out.println(reporteSrc);
-//				p.put("logoUcla", reporteImage + "logo ucla.png");
-//				p.put("logoCE", reporteImage + "logo CE.png");
-//				p.put("logoSiteg", reporteImage + "logo.png");
-				JasperReport jasperReport = (JasperReport) JRLoader
-						.loadObject(getClass().getResource(
-								"RProyectosProfesor.jasper"));
-				// JasperReport jasperReport = (JasperReport) JRLoader
-				// .loadObject(reporteSrc);
+				p.put("logoUcla", reporteImage + "logo ucla.png");
+				p.put("logoCE", reporteImage + "logo CE.png");
+				p.put("logoSiteg", reporteImage + "logo.png");
+//				JasperReport jasperReport = (JasperReport) JRLoader
+//						.loadObject(getClass().getResource(
+//								"RProyectosProfesor.jasper"));
+				 JasperReport jasperReport = (JasperReport) JRLoader
+				 .loadObject(reporteSrc);
 
 				JasperPrint jasperPrint = JasperFillManager.fillReport(
 						jasperReport, p, new JRBeanCollectionDataSource(tegs));
