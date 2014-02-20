@@ -60,7 +60,7 @@
 
 						<datebox id="dtbInicioReporteProfesorTeg"
 							cols="12" readonly="true" style="margin-left:50px" width="150px"
-							format="dd/MM/yyyy" onCreate="self.value = new Date()">
+							format="dd/MM/yyyy" >
 						</datebox>
 
 						<label value="Fecha Fin:"
@@ -68,7 +68,7 @@
 
 						<datebox id="dtbFinReporteProfesorTeg" cols="12"
 							width="150px" style="margin-left:30px" readonly="true"
-							format="dd/MM/yyyy" onCreate="self.value = new Date()">
+							format="dd/MM/yyyy">
 						</datebox>
 					</hbox>
 

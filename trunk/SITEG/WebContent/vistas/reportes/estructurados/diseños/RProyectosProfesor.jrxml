@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RProyectosProfesor" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="8e447145-0139-44fc-8f28-9f0b7cdcb48b">
+	<property name="ireport.zoom" value="1.1000000000000043"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nombre" class="java.lang.String"/>
+	<parameter name="cedula" class="java.lang.String"/>
+	<parameter name="apellido" class="java.lang.String"/>
+	<parameter name="fecha1" class="java.util.Date"/>
+	<parameter name="fecha2" class="java.util.Date"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
+	<parameter name="logoSiteg" class="java.lang.String"/>
+	<parameter name="tematica" class="java.lang.String"/>
+	<parameter name="area" class="java.lang.String"/>
+	<parameter name="estatus" class="java.lang.String"/>
+	<parameter name="modeloReporte" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="fecha" class="java.util.Date"/>
+	<field name="estatus" class="java.lang.String"/>
+	<field name="tematica.nombre" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="280" splitType="Stretch">
+			<staticText>
+				<reportElement x="105" y="13" width="357" height="47" uuid="6d70012c-6548-4aea-a1f9-363f4a3dc351"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado	Decanato de Ciencias y Tecnología            ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="32" y="10" width="56" height="50" uuid="ed87dc75-9703-40b1-969a-a4c66b1d5117"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="488" y="10" width="42" height="50" uuid="2ef5ee92-1df6-4f58-96d9-9a6852112369"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="460" y="78" width="110" height="20" uuid="13f3d0fe-052a-4330-ab3b-33e01ff98b82"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="222" width="100" height="20" uuid="e4c80273-d332-49c5-869e-d086fdf69f0f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="238" y="222" width="100" height="20" uuid="d8eae7a8-8f36-43e1-b2f3-615cfe7460ad"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="222" width="113" height="20" uuid="1074de56-59a0-49c8-b610-353b92a1fdcd"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{apellido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="416" y="78" width="46" height="20" uuid="4b6f9c16-1676-4e0c-8b1b-da8b22bccd37"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="202" width="58" height="20" uuid="cc5945b3-e2a2-412e-807d-14ebb77dba00"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profesor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="222" width="47" height="20" uuid="dee8015d-6776-4e98-ba31-8ae8c988dbe0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="179" y="222" width="59" height="20" uuid="78c498e9-6e6d-4f22-a1fa-740a3dd43fa0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="222" width="64" height="20" uuid="adf13c0a-d35f-4bad-8772-778c0cf884a7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="79" y="98" width="73" height="20" uuid="604c3159-d136-4052-94a8-30655b4c93dd"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha1})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="98" width="47" height="20" uuid="03d087c4-1d0f-4792-9b15-facd7ba5f424"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="177" y="98" width="37" height="20" uuid="30040a75-9798-4a39-be89-7de037495b89"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="218" y="98" width="82" height="20" uuid="f941bdd9-46cf-4a9c-895f-f0e0fb224cda"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fecha2})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="190" y="254" width="200" height="20" uuid="b6bb0715-a0be-4929-8ce7-4b791499bee8"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Estatus de los TEG por profesor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="135" width="59" height="20" uuid="5f356196-56a0-43ef-88ff-a7640771ed94"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tematica:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="135" width="33" height="20" uuid="5647532d-0b67-41b7-a859-fbe31da96b30"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="168" width="102" height="20" uuid="144b2c66-c9b1-4410-afd5-c2c81db6d483"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatus del TEG:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="65" y="135" width="224" height="20" uuid="9f900c1b-b053-4574-84cc-492c147158b5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="135" width="213" height="20" uuid="dfc73b23-3a18-4814-b15f-4f5bfc46eae2"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tematica}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="168" width="326" height="20" uuid="3d00b4d0-37bd-4e9d-94d1-3856aa102589"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{estatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="1" width="300" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="8b1f491f-b382-4f90-ba7a-e7f2d6d69cc6">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("3")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titulo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="1" width="227" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="3afcc5ef-28b4-4ce9-8ff8-5af111488c4c">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titulo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="227" y="1" width="102" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="9fbb8748-3c58-4274-ba31-79cbd014bc58">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="460" y="1" width="112" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="bcaa00d6-db22-4f8d-9edc-fa68ef70f5cf">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatus]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="329" y="1" width="131" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="4597e6e9-7245-4e85-9986-41577efd2c84">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tematica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="472" y="1" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="caa04ac3-593d-4d5c-9491-70131fdabe1d">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("4")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="471" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="9b39e752-2774-423c-9602-0018ef0b96c5">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("4")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titulo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="1" width="300" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="5caa9ef9-fbd3-4774-9f1d-972a5378ef27">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titulo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="301" y="1" width="102" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="3b3419eb-4fa3-4f7c-822d-638a21c17be1">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="402" y="1" width="170" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="c39be62d-454d-4823-9114-3cb3f558ccaf">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatus]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="301" y="1" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="feda406a-c825-4646-ac53-75ec0305ef13">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("3")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="400" y="1" width="172" height="20" isRemoveLineWhenBlank="true" backcolor="#0099FF" uuid="687edfdf-1d37-4fa5-90db-2972302f182c">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("3")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tematica]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="460" y="0" width="112" height="20" isRemoveLineWhenBlank="true" uuid="e26ced57-cbb9-490e-bbf8-c9d46c9b2c20">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="131" height="20" isRemoveLineWhenBlank="true" uuid="9057c03a-cd63-4550-bf1a-f9ea2f293cf1">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tematica.nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="0" width="102" height="20" isRemoveLineWhenBlank="true" uuid="700f9943-a376-462c-815a-00a4208dbac9">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{fecha})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="226" height="20" isRemoveLineWhenBlank="true" uuid="e2ba5565-62b0-4833-a431-21dea8bd7d70">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="0" width="100" height="20" isRemoveLineWhenBlank="true" uuid="729772a2-2a56-46b8-9abb-aa4be2d1f8aa">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("4")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{fecha})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="472" height="20" isRemoveLineWhenBlank="true" uuid="76ea325b-7a52-4a1f-9378-d14cae1a92af">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("4")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="0" width="169" height="20" isRemoveLineWhenBlank="true" uuid="59c25042-fe69-475e-aded-fa80ee385563">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="0" width="102" height="20" isRemoveLineWhenBlank="true" uuid="80014038-b556-40eb-a1fb-95ddf32a8dfd">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{fecha})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="300" height="20" isRemoveLineWhenBlank="true" uuid="d0ab71dc-8e8c-4086-8ac4-ef1e8d2389d0">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="300" height="20" isRemoveLineWhenBlank="true" uuid="bf0f99ec-ca30-4776-b5ea-d865abfcbf30">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("3")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="172" height="20" isRemoveLineWhenBlank="true" uuid="8154767f-baed-461d-a6c6-e9fd22ccfec7">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("3")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tematica.nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="0" width="100" height="20" isRemoveLineWhenBlank="true" uuid="169cc9c5-2999-4270-87d9-ea53263907da">
+					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("3")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{fecha})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="488" y="0" width="42" height="20" uuid="b0da1f07-a7df-467b-b96c-7b0da7f77525"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pagina:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="530" y="0" width="42" height="20" uuid="108725d1-62c3-44f0-9008-820e6d610b7e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54">
+			<staticText>
+				<reportElement x="177" y="18" width="213" height="20" uuid="90c3ab08-a46c-412a-9f6f-a8fc8c908945"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+			<image>
+				<reportElement x="123" y="0" width="42" height="50" uuid="feefc31e-c6f7-4799-a2e5-9dad89c299bb"/>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+</jasperReport>
