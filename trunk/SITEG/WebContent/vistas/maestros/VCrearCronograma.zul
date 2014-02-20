@@ -143,8 +143,8 @@
 					</hlayout>
 
 					<textbox id="txtProgramaCrearCronograma"
-						tooltip="pupProgramaCronograma" readonly="true" width="190px"
-						tabindex="12" style="margin-left:20px">
+						tooltip="pupProgramaCronograma" disabled="true" width="190px"
+						tabindex="12" style="margin-left:20px;color:black !important;">
 					</textbox>
 				</row>
 			</rows>
