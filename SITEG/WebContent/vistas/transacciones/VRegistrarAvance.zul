@@ -35,7 +35,7 @@
 
 		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
 		122); }
-		
+
 		.z-panel-tl, .z-panel-tr, .z-panel-tl-gray, .z-panel-tr-gray,
 		.z-panel-bl, .z-panel-br { background: #3276b1;
 		background-image: none; }
@@ -67,7 +67,7 @@
 	</popup>
 	<popup id="pupDatosObservacion">
 		<toolbarbutton
-			label="Presione aqui para visualizar el campo de observacion" />
+			label="Presione aqui para visualizar los avances" />
 	</popup>
 	<popup id="pupAgregarObservacion">
 		<toolbarbutton
@@ -78,10 +78,13 @@
 			label="Presione aquí para finalizar el registro de avances" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton label="Presione aqui para cancelar la seleccion" />
+		<toolbarbutton label="Presione aqui para limpiar los campos" />
 	</popup>
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
+	<popup id="pupObservacionRegistrarAvances">
+		<toolbarbutton label="Ingrese aquí las observaciones" />
 	</popup>
 	<!-- fin de popus -->
 
@@ -120,7 +123,8 @@
 			style="margin-left:20px;margin-right:20px" border="normal">
 			<panelchildren>
 				<listbox id="lsbEstudiantesTeg" sclass="fgrid"
-					mold="paging" pageSize="1" style="margin-left:3%;margin-right:3%;margin-top:15px"
+					mold="paging" pageSize="1"
+					style="margin-left:3%;margin-right:3%;margin-top:15px"
 					emptyMessage="No hay Estudiantes registrados actualmente">
 
 					<listhead>
@@ -141,7 +145,7 @@
 				</listbox>
 			</panelchildren>
 		</panel>
-		
+
 		<separator />
 		<separator />
 		<separator />
@@ -181,8 +185,7 @@
 								<textbox
 									id="txtObservacionRegistrarAvance" width="570px" rows="3"
 									cols="300" maxlength="500"
-									tooltiptext="Ingrese aqui la observacion"
-									/>
+									tooltip="pupObservacionRegistrarAvances" />
 							</row>
 						</rows>
 					</grid>

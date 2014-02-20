@@ -24,7 +24,7 @@
 		<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox id="txtEstudianteRevision"
-					sclass="search-query" placeholder="Fecha" instant="true"
+					sclass="search-query" placeholder="Nombre" instant="true"
 					width="65%" value="" onChange="" />
 			</auxheader>
 			<auxheader colspan="1">

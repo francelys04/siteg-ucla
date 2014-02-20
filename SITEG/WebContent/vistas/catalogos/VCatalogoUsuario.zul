@@ -6,20 +6,20 @@
 	<style src="/public/css/style.css" />
 	<!-- Lista de popus -->
 	<popup id="pupSeleccionUsuario">
-		<toolbarbutton
-			label="Doble clic para seleccionar el usuario" />
+		<toolbarbutton label="Doble clic para seleccionar el usuario" />
 	</popup>
 	<!-- Fin de popus -->
 
-	<listbox id="ltbUsuario" width="100%">
+	<listbox id="ltbUsuario" width="100%" mold="paging" pageSize="10"
+		emptyMessage="No hay usuarios registradas">
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="80%"
+				<textbox instant="true" width="95%"
 					sclass="search-query" placeholder="Nombre"
 					id="txtNombreMostrarUsuario" />
 			</auxheader>
-			
+
 
 		</auxhead>
 		<listhead>

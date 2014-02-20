@@ -96,7 +96,7 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	 * visualizar el nombre y apellido del estudiante, la fecha, la
 	 * tematica, el area y el titulo, el nombre y apellido del tutor de estos.
 	 */
-	@Listen("onChange = #txtMostrarFecha,#txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,# txtMostrarApellidoTutor")
+	@Listen("onChange = #txtEstudianteProyecto, #txtMostrarFecha,#txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,#txtMostrarApellidoTutor")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
 		for (int i = 0; i < teg1.size(); i++) {

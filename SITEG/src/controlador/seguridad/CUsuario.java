@@ -128,8 +128,9 @@ public class CUsuario extends CGeneral {
 
 	public void inicializar(Component comp) {
 
-//		if (txtNombreUsuario != null)
+
 		ltbGruposDisponibles.setModel(new ListModelList<Grupo>(gruposDisponibles));
+		rdgProfesorEstudianteOtro.setSelectedItem(null);
 
 		txtNombreUsuario.setDisabled(true);
 		txtPasswordUsuario.setDisabled(true);
@@ -374,8 +375,9 @@ public class CUsuario extends CGeneral {
 	
 	
 	@Listen("onClick = #btnSalirUsuario")
-	public void salirUsuario() {
+	public void salirUsuario() throws IOException {
 		
+		cancelarUsuario();
 		wdwCrearUsuario.onClose();
 	}
 	

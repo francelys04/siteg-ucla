@@ -119,7 +119,7 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	 * visualizar el nombre y apellido del estudiante, la fecha, la
 	 * tematica, el area y el titulo, el nombre y apellido del tutor de estos.
 	 */
-	@Listen("onChange = #txtFechaRegistrarRevision, #txtTematicaRegistrarRevision,#txtAreaRegistrarRevision,#txtTituloRegistrarRevision,#txtNombreTutorRegistrarRevision,#txtApellidoTutorRegistrarRevision")
+	@Listen("onChange = #txtEstudianteRevision, #txtFechaRegistrarRevision, #txtTematicaRegistrarRevision,#txtAreaRegistrarRevision,#txtTituloRegistrarRevision")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
 		for (int i = 0; i < teg1.size(); i++) {
@@ -161,19 +161,7 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 							.toLowerCase()
 							.contains(
 									txtTituloRegistrarRevision.getValue()
-											.toLowerCase())
-					&& teg.getTutor()
-							.getNombre()
-							.toLowerCase()
-							.contains(
-									txtNombreTutorRegistrarRevision.getValue()
-											.toLowerCase())
-					&& teg.getTutor()
-							.getApellido()
-							.toLowerCase()
-							.contains(
-									txtApellidoTutorRegistrarRevision
-											.getValue().toLowerCase()))
+											.toLowerCase()))
 
 			{
 				teg2.add(teg);

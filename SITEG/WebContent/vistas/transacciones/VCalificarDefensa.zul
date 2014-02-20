@@ -51,26 +51,28 @@
 		<toolbarbutton
 			label="Presione aquí para visualizar los datos del estudiante" />
 	</popup>
-	<popup id="pupDatosTutor">
-		<toolbarbutton
-			label="Presione aquí para visualizar los datos del tutor" />
-	</popup>
 	<popup id="pupDatosEvaluacion">
 		<toolbarbutton
 			label="Presione aquí para visualizar los datos de la evaluacion" />
 	</popup>
 	<popup id="pupBtnGuardar">
-		<toolbarbutton label="Presione aquí para guardar la comision" />
-	</popup>
-	<popup id="pupBtnFinalizar">
 		<toolbarbutton
-			label="Presione aquí para finalizar la seleccion de las defensas" />
+			label="Presione aquí para guardar los datos de la evaluacion" />
 	</popup>
 	<popup id="pupBtnCancelar">
 		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+	<popup id="pupApreciacion">
+		<toolbarbutton label="Ingrese aquí la aperciacion" />
+	</popup>
+	<popup id="pupMencion">
+		<toolbarbutton label="Seleccione la mencion del trabajo" />
+	</popup>
+	<popup id="pupEstadoTrabajo">
+		<toolbarbutton label="Seleccione el estado del trabajo" />
 	</popup>
 	<!-- fin de popus -->
 
@@ -166,13 +168,13 @@
 
 
 									<combobox id="cmbMencionTeg"
-							readonly="true" autodrop="true" width="140px" tabindex="12"
-							style="margin-left:55px">
-							<template name="model">
-								<comboitem label="${each.nombre}"
-									id="${each.id}" />
-							</template>
-						</combobox>
+										tooltip="pupMencion" readonly="true" autodrop="true"
+										width="140px" tabindex="12" style="margin-left:55px">
+										<template name="model">
+											<comboitem
+												label="${each.nombre}" id="${each.id}" />
+										</template>
+									</combobox>
 
 								</hbox>
 
@@ -197,8 +199,8 @@
 													label="${each.nombre}">
 												</listcell>
 												<listcell>
-													<textbox
-														width="90%"  maxlength="100"/>
+													<textbox width="90%"
+														tooltip="pupApreciacion" maxlength="100" />
 
 												</listcell>
 											</listitem>
@@ -222,9 +224,11 @@
 							<row>
 								<radiogroup id="rdgCalificacion">
 									<radio id="rdoAprobado"
-										label="TEG Aprobado" style="margin-left:200px" tabindex="5" />
+										tooltip="pupEstadoTrabajo" label="TEG Aprobado"
+										style="margin-left:200px" tabindex="5" />
 									<radio id="rdoReprobado"
-										label="TEG Reprobado" style="margin-left:50px" tabindex="6" />
+										tooltip="pupEstadoTrabajo" label="TEG Reprobado"
+										style="margin-left:50px" tabindex="6" />
 								</radiogroup>
 
 							</row>
@@ -377,8 +381,8 @@
 							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
 							tabindex="13" tooltip="pupBtnCancelar">
 						</button>
-						<button id="btnSalirCalificarDefensa" width="110px"
-							label="Salir" sclass="btn"
+						<button id="btnSalirCalificarDefensa"
+							width="110px" label="Salir" sclass="btn"
 							image="/public/imagenes/iconos/salir.png" tabindex="14"
 							tooltip="pupBtnSalir">
 						</button>

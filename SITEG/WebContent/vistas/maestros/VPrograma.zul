@@ -1,5 +1,5 @@
-<window id="wdwPrograma" title="Programa" border="normal" width="100%" height="530px"
-	closable="true" apply="controlador.CPrograma">
+<window id="wdwPrograma" title="Programa" border="normal" width="100%"
+	height="530px" closable="true" apply="controlador.CPrograma">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -76,8 +76,7 @@
 			label="Presione aquí para eliminar los datos de un programa" />
 	</popup>
 	<popup id="pupSalirPrograma">
-		<toolbarbutton
-			label="Presione aquí para salir" />
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<popup id="pupCatalogoPrograma">
 		<toolbarbutton
@@ -109,7 +108,8 @@
 					</hlayout>
 					<hbox>
 
-						<textbox id="txtDirectorPrograma" width="90%" />
+						<textbox id="txtDirectorPrograma"
+							style="color:black !important;" disabled="true" width="180px" />
 
 						<button id="btnCatalogoDirectorPrograma"
 							tooltip="pupCatalogoDirectorPrograma" sclass="btn"
@@ -191,9 +191,10 @@
 							label="Eliminar" sclass="btn" tooltip="pupEliminarPrograma"
 							disabled="true" image="/public/imagenes/iconos/eliminar.png">
 						</button>
-						<button id="btnSalirPrograma" tabindex="9" width="110px"
-							label="Salir" sclass="btn" tooltip="pupSalirPrograma"
-							 image="/public/imagenes/iconos/salir.png">
+						<button id="btnSalirPrograma" tabindex="9"
+							width="110px" label="Salir" sclass="btn"
+							tooltip="pupSalirPrograma"
+							image="/public/imagenes/iconos/salir.png">
 						</button>
 					</div>
 					<separator />

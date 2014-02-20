@@ -1,12 +1,14 @@
 <window title="Catalogo de Descargas" border="normal" width="825px"
 	id="wdwCatalogoArchivoDescarga"
-	apply="controlador.catalogo.CCatalogoArchivoDescarga" closable="true">
+	apply="controlador.catalogo.CCatalogoArchivoDescarga"
+	closable="true">
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
-		<popup id="pupSeleccionArchivoDescarga">
-		<toolbarbutton
-			label="Doble clic para seleccionar un archivo" />
+
+	<!--  popus -->
+	<popup id="pupSeleccionArchivoDescarga">
+		<toolbarbutton label="Doble clic para descargar un archivo" />
 	</popup>
 	<!-- Fin de popus -->
 
@@ -37,7 +39,7 @@
 			<listheader label="Nombre" align="center" />
 			<listheader label="Descripción" align="center" />
 			<listheader label="Programa" align="center" />
-			<listheader label="Descarga" align="center" />
+			<listheader label="Descarga" align="center" width="15%" />
 		</listhead>
 
 

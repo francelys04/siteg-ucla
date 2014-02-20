@@ -76,7 +76,6 @@
 
 		<separator />
 		<separator />
-		<separator />
 		<image id="imagenx" width="80px" height="50px" visible="false" />
 
 		<groupbox width="98%" height="450px"
@@ -102,6 +101,7 @@
 
 						</hbox>
 					</row>
+
 
 					<row>
 						<hbox>

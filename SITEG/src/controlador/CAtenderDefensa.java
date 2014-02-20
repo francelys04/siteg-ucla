@@ -199,7 +199,9 @@ public class CAtenderDefensa extends CGeneral {
 	@Listen("onClick = #btnCancelarDefensa")
 	public void cancelarDefensa() {
 		txtLugarDefensa.setValue("");
-		dtbFechaDefensa.setValue(null);
+		dtbFechaDefensa.setValue(new Date());
+		tmbHoraDefensa.setValue(new Date());
+		
 
 	}
 

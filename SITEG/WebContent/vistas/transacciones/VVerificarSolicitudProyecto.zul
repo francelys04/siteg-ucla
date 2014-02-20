@@ -91,6 +91,12 @@
 	<popup id="pupBtnRemoverRequisitos">
 		<toolbarbutton label="Presione aquí para remover requisitos" />
 	</popup>
+	<popup id="pupEstadoRequisitos">
+		<toolbarbutton label="Seleccione el estado de los requisitos" />
+	</popup>
+	<popup id="pupObservacionRequisitos">
+		<toolbarbutton label="Ingrese aquí la observacion" />
+	</popup>
 
 	<!-- fin de popus -->
 
@@ -266,9 +272,11 @@
 
 					<radiogroup id="rdgRequisitos">
 						<radio id="rdoCompleto"
+							tooltip="pupEstadoRequisitos"
 							label="Requisitos completos y correctos"
 							style="margin-left:100px;color: rgb(0, 84, 122)" tabindex="5" />
 						<radio id="rdoIncompleto"
+							tooltip="pupEstadoRequisitos"
 							label="Requisitos incompletos o incorrectos"
 							style="margin-left:15px;color: rgb(0, 84, 122)" tabindex="6" />
 					</radiogroup>
@@ -381,9 +389,7 @@
 
 				<row>
 					<textbox id="txtObservacion" width="600px" rows="2"
-						cols="100" 
-						tooltiptext="Ingrese aqui la observacion"	
-					/>
+						cols="100" tooltip="pupObservacionRequisitos" />
 				</row>
 			</rows>
 		</grid>

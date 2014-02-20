@@ -120,7 +120,7 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 	 * visualizar el nombre y apellido del estudiante, la fecha, la
 	 * tematica, el area y el titulo, el nombre y apellido del tutor de estos.
 	 */
-	@Listen("onChange = #txtMostrarFechaFactibilidad, #txtMostrarTematicaFactibilidad,#txtMostrarAreaFactibilidad,#txtMostrarTituloFactibilidad,#txtMostrarNombreTutorFactibilidad,# txtMostrarApellidoTutorFactibilidad")
+	@Listen("onChange = #txtEstudianteRegistrarFactibilidad, #txtMostrarFechaFactibilidad, #txtMostrarTematicaFactibilidad,#txtMostrarAreaFactibilidad,#txtMostrarTituloFactibilidad,#txtMostrarNombreTutorFactibilidad,#txtMostrarApellidoTutorFactibilidad")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
 		for (int i = 0; i < teg1.size(); i++) {

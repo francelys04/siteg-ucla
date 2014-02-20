@@ -53,20 +53,17 @@
 		<toolbarbutton
 			label="Presione aquí para visualizar los datos del estudiante" />
 	</popup>
-	<popup id="pupDatosTutor">
-		<toolbarbutton
-			label="Presione aquí para visualizar los datos del tutor" />
-	</popup>
 	<popup id="pupDatosJurado">
 		<toolbarbutton
 			label="Presione aquí para visualizar los datos del jurado" />
 	</popup>
-	<popup id="pupBtnGuardar">
-		<toolbarbutton label="Presione aquí para guardar la comision" />
-	</popup>
-	<popup id="pupBtnFinalizar">
+	<popup id="pupDatosDefensa">
 		<toolbarbutton
-			label="Presione aquí para finalizar la seleccion de las defensas" />
+			label="Presione aquí para visualizar los datos de la defensa" />
+	</popup>
+	<popup id="pupBtnGuardar">
+		<toolbarbutton
+			label="Presione aquí para guardar los datos de la defensa" />
 	</popup>
 	<popup id="pupBtnCancelar">
 		<toolbarbutton label="Presione aquí para limpiar los campos" />
@@ -138,7 +135,7 @@
 			<tabs>
 
 				<tab label="Datos de la Defensa"
-					tooltip="pupDatosJurado" />
+					tooltip="pupDatosDefensa" />
 				<tab label="Datos del Trabajo"
 					tooltip="pupDatosTrabajo" />
 				<tab label="Datos del Estudiante"
@@ -164,15 +161,16 @@
 
 								<hbox>
 									<datebox id="dtbFechaDefensa"
-										width="130px" />
+										width="130px" format="short"
+										onCreate="self.value = new Date()" />
 
 									<label value="Hora:"
 										style="font-weight:bold;margin-left:30px" />
 
 
-									<timebox id="tmbHoraDefensa" width="150px"
-										cols="12" format="hh:mm:ss a" style="margin-left:10px"
-										onCreate="self.value = new Date()" />
+									<timebox id="tmbHoraDefensa"
+										width="150px" cols="12" format="hh:mm:ss a"
+										style="margin-left:10px" onCreate="self.value = new Date()" />
 
 								</hbox>
 
@@ -185,9 +183,8 @@
 
 
 								<textbox id="txtLugarDefensa" rows="4"
-									cols="100" width="500px" 
-									tooltiptext="Ingrese aqui el lugar de la defensa"
-								/>
+									cols="100" width="500px"
+									tooltiptext="Ingrese aqui el lugar de la defensa" />
 							</row>
 							<row>
 

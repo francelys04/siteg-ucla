@@ -50,7 +50,6 @@ public class CCatalogoLapso extends CGeneral {
 	@Wire
 	private Textbox txtFechaFinalMostrarLapso;
 
-
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * disponibles disponibles y se llena el listado del mismo en el componente
@@ -61,6 +60,7 @@ public class CCatalogoLapso extends CGeneral {
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		ltbLapso.setModel(new ListModelList<Lapso>(lapsos));
 	}
+
 	/*
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
@@ -71,17 +71,24 @@ public class CCatalogoLapso extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite filtrar los lapsos disponibles, mediante el
-	 * componente de la lista, donde se podra visualizar el nombre de estos.
+	 * Metodo que permite filtrar los lapsos disponibles, mediante el componente
+	 * de la lista, donde se podra visualizar el nombre de estos.
 	 */
-	@Listen("onChange = #txtNombreMostrarLapso")
+	@Listen("onChange = #txtNombreMostrarLapso,  #txtFechaInicialMostrarLapso, #txtFechaFinalMostrarLapso")
 	public void filtrarDatosCatalogo() {
 		List<Lapso> lapsos1 = servicioLapso.buscarActivos();
 		List<Lapso> lapsos2 = new ArrayList<Lapso>();
 
 		for (Lapso lapso : lapsos1) {
 			if (lapso.getNombre().toLowerCase()
-					.contains(txtNombreMostrarLapso.getValue().toLowerCase())) {
+					.contains(txtNombreMostrarLapso.getValue().toLowerCase())
+					
+					&& 	lapso.getFechaInicial().toString().toLowerCase()
+					.contains(txtFechaInicialMostrarLapso.getValue().toLowerCase())
+					
+					&& lapso.getFechaInicial().toString().toLowerCase()
+					.contains(txtFechaFinalMostrarLapso.getValue().toLowerCase()))
+			{
 				lapsos2.add(lapso);
 			}
 
@@ -92,9 +99,9 @@ public class CCatalogoLapso extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite obtener el objeto Lapso al realizar el evento
-	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
-	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 * Metodo que permite obtener el objeto Lapso al realizar el evento doble
+	 * clic sobre un item en especifico en la lista, extrayendo asi su id, para
+	 * luego poder ser mapeada y enviada a la vista asociada a ella.
 	 */
 	@Listen("onDoubleClick = #ltbLapso")
 	public void mostrarDatosCatalogo() {
@@ -104,22 +111,22 @@ public class CCatalogoLapso extends CGeneral {
 			vistaRecibida = "maestros/VLapsoAcademico";
 
 		} else {
-			if( ltbLapso.getSelectedCount()!=0){
-			Listitem listItem = ltbLapso.getSelectedItem();
-			Lapso lapsoDatosCatalogo = (Lapso) listItem.getValue();
-			final HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", lapsoDatosCatalogo.getId());
-			String vista = vistaRecibida;
-			map.put("vista", vista);
-			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			Executions.sendRedirect("/vistas/arbol.zul");
-			wdwCatalogoLapso.onClose();
-		}
+			if (ltbLapso.getSelectedCount() != 0) {
+				Listitem listItem = ltbLapso.getSelectedItem();
+				Lapso lapsoDatosCatalogo = (Lapso) listItem.getValue();
+				final HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("id", lapsoDatosCatalogo.getId());
+				String vista = vistaRecibida;
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+				Executions.sendRedirect("/vistas/arbol.zul");
+				wdwCatalogoLapso.onClose();
+			}
 		}
 	}
-	
+
 	@Listen("onClick = #btnImprimir")
-	public void imprimir() throws SQLException {	
+	public void imprimir() throws SQLException {
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		JasperReport jasperReport;
@@ -127,19 +134,17 @@ public class CCatalogoLapso extends CGeneral {
 			String rutaUrl = obtenerDirectorio();
 			String reporteSrc = rutaUrl
 					+ "SITEG/vistas/reportes/salidas/compilados/RLapsos.jasper";
-			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-		    Map p = new HashMap();
+			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+			Map p = new HashMap();
 			p.put("logoUcla", reporteImage + "logo ucla.png");
 			p.put("logoCE", reporteImage + "logo CE.png");
 			p.put("logoSiteg", reporteImage + "logo.png");
-				
-				
-			 
 
 			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,  new JRBeanCollectionDataSource(lapsos));
+			JasperPrint jasperPrint = JasperFillManager.fillReport(
+					jasperReport, p, new JRBeanCollectionDataSource(lapsos));
 			JasperViewer.viewReport(jasperPrint, false);
-			
+
 		} catch (JRException e) {
 			System.out.println(e);
 			// TODO Auto-generated catch block

@@ -71,7 +71,10 @@ public class CPrograma extends CGeneral {
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
 			if (map.get("cedula") != null){
-				txtDirectorPrograma.setValue((String) map.get("cedula"));
+				
+				String cedulaProfesor = (String) map.get("cedula");
+				Profesor profesorDirector = servicioProfesor.buscarProfesorPorCedula(cedulaProfesor);
+				txtDirectorPrograma.setValue(profesorDirector.getNombre() + " " + profesorDirector.getApellido());
 				}
 			if(map.get("idPrograma")!=null)
 				id = ((Long) map.get("idPrograma"));

@@ -1,5 +1,6 @@
-<window id="wdwCrearCronograma" title="Crear Cronograma" border="normal" width="130%"
-	height="655px" closable="true" apply="controlador.CCrearCronograma">
+<window id="wdwCrearCronograma" title="Crear Cronograma" border="normal"
+	width="130%" height="655px" closable="true"
+	apply="controlador.CCrearCronograma">
 
 	<separator />
 
@@ -56,7 +57,8 @@
 	<style src="/public/css/style.css" />
 	<!-- Lista de popus -->
 	<popup id="pupLapsoCronograma">
-		<toolbarbutton label="Presione aquí para seleccionar un lapso académico" />
+		<toolbarbutton
+			label="Presione aquí para seleccionar un lapso académico" />
 	</popup>
 	<popup id="pupProgramaCronograma">
 		<toolbarbutton
@@ -67,13 +69,11 @@
 			label="Presione aquí para seleccionar una actividad" />
 	</popup>
 	<popup id="pupAgregarActividadCronograma">
-		<toolbarbutton
-			label="Presione aquí para agregar actividades" />
+		<toolbarbutton label="Presione aquí para agregar actividades" />
 	</popup>
 	<popup id="pupRemoverActividadCronograma">
-		<toolbarbutton
-			label="Presione aquí para remover actividades" />
-	</popup>		
+		<toolbarbutton label="Presione aquí para remover actividades" />
+	</popup>
 	<popup id="pupCancelarCronograma">
 		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
@@ -82,12 +82,17 @@
 			label="Presione aquí para guardar los datos de un cronograma" />
 	</popup>
 	<popup id="pupSalirCronograma">
-		<toolbarbutton
-			label="Presione aquí para salir" />
+		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+	<popup id="pupFechaInicioCronograma">
+		<toolbarbutton label="Ingrese aquí la fecha de inicio" />
+	</popup>
+	<popup id="pupFechaFinCronograma">
+		<toolbarbutton label="Ingrese aquí la fecha de fin" />
 	</popup>
 
 	<!-- Fin de popus -->
-	
+
 
 	<separator />
 
@@ -118,9 +123,9 @@
 						<label value="Lapso:" style="font-weight:bold" />
 					</hlayout>
 
-					<combobox id="cmbLapsoCrearCronograma" tooltip="pupLapsoCronograma"
-						readonly="true" autodrop="true" width="140px" tabindex="12"
-						style="margin-left:20px">
+					<combobox id="cmbLapsoCrearCronograma"
+						tooltip="pupLapsoCronograma" readonly="true" autodrop="true"
+						width="140px" tabindex="12" style="margin-left:20px">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -137,9 +142,9 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtProgramaCrearCronograma" tooltip="pupProgramaCronograma"
-						readonly="true"  width="190px" tabindex="12"
-						style="margin-left:20px">
+					<textbox id="txtProgramaCrearCronograma"
+						tooltip="pupProgramaCronograma" readonly="true" width="190px"
+						tabindex="12" style="margin-left:20px">
 					</textbox>
 				</row>
 			</rows>
@@ -171,7 +176,8 @@
 									</listhead>
 									<template name="model">
 										<listitem>
-											<listcell tooltip="pupSeleccionarActividadCronograma"
+											<listcell
+												tooltip="pupSeleccionarActividadCronograma"
 												label="${each.nombre} ">
 											</listcell>
 											<listcell>
@@ -198,7 +204,7 @@
 							<panelchildren>
 								<div>
 
-									<button id="btnAgregarActividades" 
+									<button id="btnAgregarActividades"
 										sclass="btn" image="/public/imagenes/iconos/right.png"
 										tooltip="pupAgregarActividadCronograma" />
 									<separator />
@@ -233,11 +239,13 @@
 											</listcell>
 											<listcell>
 												<datebox inplace="true"
+													tooltip="pupFechaInicioCronograma"
 													value="${each.fechaInicio}" width="98%" />
 											</listcell>
 											<listcell>
 												<datebox inplace="true"
-													value="${each.fechaFin}" width="98%" />
+													tooltip="pupFechaFinCronograma" value="${each.fechaFin}"
+													width="98%" />
 											</listcell>
 											<listcell>
 												<spinner inplace="true"
@@ -265,12 +273,12 @@
 				<div sclass="alert-info" align="center">
 					<separator />
 					<div sclass="btn-group">
-						<button id="btnCrearCronograma" label="Guardar" tooltip="pupGuardarCronograma"
-							sclass="btn" image="/public/imagenes/iconos/guardar.png"
-							tabindex="12">
+						<button id="btnCrearCronograma" label="Guardar"
+							tooltip="pupGuardarCronograma" sclass="btn"
+							image="/public/imagenes/iconos/guardar.png" tabindex="12">
 						</button>
-						<button id="btnCancelarCronograma" tooltip="pupCancelarCronograma"
-							label="Cancelar" sclass="btn"
+						<button id="btnCancelarCronograma"
+							tooltip="pupCancelarCronograma" label="Cancelar" sclass="btn"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="13">
 						</button>
 						<button id="btnSalirCronograma" width="110px"

@@ -431,7 +431,7 @@ public class CCrearGrupo extends CGeneral {
 	public void cancelarGrupo() {
 		txtNombreGrupo.setValue("");
 		txtNombreGrupo.setDisabled(false);
-		btnEliminarGrupo.setDisabled(false);
+		btnEliminarGrupo.setDisabled(true);
 		btnVisualizarFuncionalidades.setVisible(false);
 		Treechildren treeChildren = treeGrupo.getTreechildren();
 		Collection<Treeitem> lista = treeChildren.getItems();
