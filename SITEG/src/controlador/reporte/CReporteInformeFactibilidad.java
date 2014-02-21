@@ -92,12 +92,15 @@ public class CReporteInformeFactibilidad extends CGeneral {
 	private Textbox  txtProyecto;
 	@Wire
 	private Jasperreport jstVistaPrevia;
+
 	private Connection con;
 	 
 	private String[] estatusproyectos = {"Proyecto Factible","Proyecto No Factible"};
 	
 	long id = 0;
 
+
+    private String reporteFact;
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
@@ -118,8 +121,7 @@ public class CReporteInformeFactibilidad extends CGeneral {
 		
 		Selectors.wireComponents(comp, this, false);
 		
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
-				.getCurrent().getAttribute("itemsCatalogo");
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions.getCurrent().getAttribute("itemsCatalogo");
 		
 		if (map != null) {
 		/*if (map.get("id") != null){
@@ -201,23 +203,31 @@ public class CReporteInformeFactibilidad extends CGeneral {
 	// Metodo que permite abrir la vista VCatalagoinformefact en forma modal //
 		@Listen("onClick = #btnCatalogoProyectoTeg")
 		public void buscarProyecto() {
-			/*	String nombrePrograma = cmbProgramaFactibilidad.getValue();
-			Tematica tematica = servicioTematica.buscarTematica(idTematica);
-			AreaInvestigacion area = tematica.getareaInvestigacion();
-			String nombreArea = cmbArea.getValue();
-			String nombreTematica = cmbTematica.getValue();
-			String nombreTipo = cmbTipoFactibilidad.getValue();
-			Date fechaInicio = dtbFechaInicio.getValue();
-			Date fechaFin = dtbFechaFin.getValue();*/
 			
-			/*if ((cmbProgramaFactibilidad.getValue() =="") || (cmbArea.getValue()=="") || (cmbTematica.getValue()=="")
+			if ((cmbProgramaFactibilidad.getValue() =="") || (cmbArea.getValue()=="") || (cmbTematica.getValue()=="")
 					|| (cmbTipoFactibilidad.getValue()=="")) {
 				    Messagebox.show(
 						  "Datos imcompletos",
 						     "Informacion", Messagebox.OK,
 						   Messagebox.INFORMATION);
-			   }
-			else{
+		   }else {
+			   	String nombrePrograma = cmbProgramaFactibilidad.getValue();
+				String nombreArea = cmbArea.getValue();
+				String nombreTematica = cmbTematica.getValue();
+				String nombreTipoFact = cmbTipoFactibilidad.getValue();
+				Date fechaInicio = dtbFechaInicio.getValue();
+				Date fechaFin = dtbFechaFin.getValue();
+								
+				Window window = (Window) Executions.createComponents(
+						"/vistas/catalogos/VCatalogoReporteInformeFact.zul", null, null);
+				window.doModal();
+				catalogo.recibir("reportes/estructurados/VReporteInformeFactibilidad");
+		   }
+			
+			
+			
+			
+			/*else{
 				List<Teg> TegProyectoFactible = new ArrayList();
 				System.out.println("das:"+TegProyectoFactible.size());
 				
@@ -247,125 +257,68 @@ public class CReporteInformeFactibilidad extends CGeneral {
 
 					}
 				}
-*/			
-			Window window = (Window) Executions.createComponents(
-					"/vistas/catalogos/VCatalogoReporteInformeFact.zul", null, null);
-			window.doModal();
-			catalogo.recibir("reportes/estructurados/VReporteInformeFactibilidad");
-
+*/		
 		}
 		
 		
 	 	@Listen("onClick = #btnGenerarReporteInformeFactibilidad")
 		 public void GenerarInforme()  {	
-	 		Teg teg = servicioTeg.buscarTeg(id);
-		    String estatus = teg.getEstatus();
-		/*    System.out.println(estatus);*/
-		    
-		    if (estatus.equals("Proyecto Factible")){
-		    	GenerarInformeFactible();
-				 System.out.println(estatus);
-			} else{
-					if (estatus.equals("Proyecto No Factible")){
-						GenerarInformeNoFactible();
-				}else {
-			 		if (txtProyecto.getValue()==""){
-						 Messagebox.show( "Debe seleccionar un Proyecto",
-								     "Error", Messagebox.OK,Messagebox.INFORMATION);
+	 		if (txtProyecto.getText().equals("")){ 
+				 Messagebox.show( "Debe seleccionar un Proyecto",
+						     "Error", Messagebox.OK,Messagebox.INFORMATION);
+				 System.out.println("Entro");
+			}else {
+	 		
+		 		Teg teg = servicioTeg.buscarTeg(id);
+			    Long proyecto = teg.getId();
+			    String estatus = teg.getEstatus();
+			    List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
+			    String ndirector = est.get(0).getPrograma().getDirectorPrograma().getNombre();
+			    String adirector = est.get(0).getPrograma().getDirectorPrograma().getApellido();
+			    
+				if (estatus.equals("Proyecto Factible")){
+			    	reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
+					 System.out.println(estatus);
+				} else{
+						if (estatus.equals("Proyecto No Factible")){
+							reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeNoFactible.jasper";
 					}
 				}
+				   
+			    try {
+					Class.forName("org.postgresql.Driver");
+					con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres","equipo2");
+				}catch (ClassNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
+			    
+			    try {
+				    FileSystemView filesys = FileSystemView.getFileSystemView();
+				    Map p = new HashMap();
+					String rutaUrl = obtenerDirectorio();
+					
+					String reporteSrc = rutaUrl + reporteFact;
+					String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+					p.put("fecha", new Date().toLocaleString());
+				    p.put("proyecto", proyecto);
+				    p.put("ndirector", ndirector);
+				    p.put("adirector", adirector);
+				    p.put("logoUcla", reporteImage + "logo ucla.png");
+				 	p.put("logoCE", reporteImage + "logo CE.png");
+				    p.put("logoSiteg", reporteImage + "logo.png");			    
+					JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, con);
+				    JasperViewer.viewReport(jasperPrint);
+				    con.close();
+					
+				    }catch (JRException | SQLException e) {
+						e.printStackTrace();
+				}
 			}
-		} 
-		
-		public void GenerarInformeFactible() {
-			try {
-				Class.forName("org.postgresql.Driver");
-				con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres","equipo2");
-			}catch (ClassNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			Teg teg = servicioTeg.buscarTeg(id);
-		    Long proyecto = teg.getId();
-		    String estatus = teg.getEstatus();
-		    List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
-		    String ndirector = est.get(0).getPrograma().getDirectorPrograma().getNombre();
-		    String adirector = est.get(0).getPrograma().getDirectorPrograma().getApellido();
-		    System.out.println(proyecto);
-		    
-		    try {
-		    FileSystemView filesys = FileSystemView.getFileSystemView();
-		    Map p = new HashMap();
-			String rutaUrl = obtenerDirectorio();
-			
-			String reporteSrc = rutaUrl +  "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
-			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-			p.put("fecha", new Date().toLocaleString());
-		    p.put("proyecto", proyecto);
-		    p.put("ndirector", ndirector);
-		    p.put("adirector", adirector);
-		    p.put("logoUcla", reporteImage + "logo ucla.png");
-		 	p.put("logoCE", reporteImage + "logo CE.png");
-		    p.put("logoSiteg", reporteImage + "logo.png");			    
-			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, con);
-		    JasperViewer.viewReport(jasperPrint);
-		    con.close();
-			
-		    }catch (JRException | SQLException e) {
-				e.printStackTrace();
-			}
-	
-		}
-		
-		public void GenerarInformeNoFactible() {
-			try {
-				Class.forName("org.postgresql.Driver");
-				con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres","equipo2");
-			}catch (ClassNotFoundException | SQLException e1) {
-				e1.printStackTrace();
-			}
-			
-			Teg teg = servicioTeg.buscarTeg(id);
-		    Long proyecto = teg.getId();
-		    String estatus = teg.getEstatus();
-		    List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
-		    String ndirector = est.get(0).getPrograma().getDirectorPrograma().getNombre();
-		    String adirector = est.get(0).getPrograma().getDirectorPrograma().getApellido();
-		    System.out.println(proyecto);
-		    
-		    try {
-		    FileSystemView filesys = FileSystemView.getFileSystemView();
-		    Map p = new HashMap();
-			String rutaUrl = obtenerDirectorio();
-			
-			String reporteSrc = rutaUrl +  "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeNoFactible.jasper";
-			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-			p.put("fecha", new Date().toLocaleString());
-		    p.put("proyecto", proyecto);
-		    p.put("ndirector", ndirector);
-		    p.put("adirector", adirector);
-		    p.put("logoUcla", reporteImage + "logo ucla.png");
-		 	p.put("logoCE", reporteImage + "logo CE.png");
-		    p.put("logoSiteg", reporteImage + "logo.png");			    
-			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, con);
-		    JasperViewer.viewReport(jasperPrint);
-		    con.close();
-			
-		    }catch (JRException | SQLException e) {
-				e.printStackTrace();
-			}
-	
-		}
-		
+	 	} 
 	
 	@Listen("onClick = #btnCancelarReporteInformeFactibilidad")
    public void CancelarInformeFactibilidad(){
-		wdwReporteInformeFactibilidad.onClose();
 		cmbProgramaFactibilidad.setValue("");
 		cmbArea.setValue("");
 		cmbArea.setDisabled(true);
