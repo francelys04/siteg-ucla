@@ -129,17 +129,16 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	public List<Teg> buscarTegPorFechayTematica(Tematica tematica, Date fechaInicio,Date fechaFin);
 
 	/** Querys para buscar la lista de teg dado un area, fecha inicio y fecha fin **/	
-	@Query("select teg from Teg teg where teg.tematica.areaInvestigacion=?1 and fecha between ?2 and ?3 ")
-	public List<Teg> buscarTegPorFechayArea(AreaInvestigacion area1, Date fechaInicio,Date fechaFin);
+//	@Query("select teg from Teg teg where teg.tematica.areaInvestigacion=?1 and fecha between ?2 and ?3 ")
+//	public List<Teg> buscarTegPorFechayArea(AreaInvestigacion area1, Date fechaInicio,Date fechaFin);
 
 	/** Querys para buscar la lista de teg dado varias areas, un programa, un estatus, fecha inicio y fecha fin **/	
-	@Query("select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?1)) and fecha between ?2 and ?3")
-	public List<Teg> buscarTegPorFechayPrograma(Programa programa,Date fechaInicio,Date fechaFin);
+//	@Query("select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?1)) and fecha between ?2 and ?3")
+//	public List<Teg> buscarTegPorFechayPrograma(Programa programa,Date fechaInicio,Date fechaFin);
 
 	/** Querys para buscar la lista de tg dado todos los programas **/
-	@Query("select teg from Teg teg where fecha between ?1 and ?2 Order by teg.tematica.id")
-	public List<Teg> buscarTodosTegporFecha(Date fechaInicio,Date fechaFin);
-
+//	@Query("select teg from Teg teg where fecha between ?1 and ?2 Order by teg.tematica.id")
+//	public List<Teg> buscarTodosTegporFecha(Date fechaInicio,Date fechaFin);
 	
 	
 /******************************   Querys para ordenar segun id tematica segun programa segun area ***********************************************/
