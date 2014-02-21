@@ -238,10 +238,13 @@ public class CReporteProyecto extends CGeneral {
 						&& !nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todas")
 						&& !estatus.equals("Todos")) {
-
+					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
+							.getSelectedItem().getValue()).getId());
+					AreaInvestigacion area1 = servicioArea.buscarArea(Long
+							.parseLong(idArea));
+					
 					teg = servicioTeg
-							.buscarTegPorDosFechasyUnEstatus(
-									estatus, fechaInicio, fechaFin);
+							.buscarTegPorDosFechasyUnEstatus(area1,	estatus, fechaInicio, fechaFin);
 					if (teg.size() == 0) {
 						datosVacios = true;
 					} 
