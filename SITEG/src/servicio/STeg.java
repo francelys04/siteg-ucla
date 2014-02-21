@@ -324,20 +324,9 @@ public class STeg {
 		return tegs;
 	}
 
-	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
-			String estatus, Tematica tematica, Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegPorFechayEstatus(estatus, tematica,
-				fechaInicio, fechaFin);
-	}
-	
 	public List<Teg> buscarTegPorDosFechasyUnEstatus(
 			String estatus, Date fechaInicio, Date fechaFin) {
 		return interfaceTeg.buscarTegPorFecha(estatus,fechaInicio, fechaFin);
-	}
-	
-	public List<Teg> buscarTegPorDosFechasyArea(AreaInvestigacion area1, 
-			 Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegFechaArea(area1, fechaInicio, fechaFin);
 	}
 
 	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyVariosEstatus(
@@ -349,12 +338,6 @@ public class STeg {
 				fechaInicio, fechaFin);
 	}
 
-	public List<Teg> buscarTegPorProgramaVariasAreasUnEstatus(String estatus,
-			Programa programa, Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus,
-				programa, fechaInicio, fechaFin);
-	}
-
 	public List<Teg> buscarTegPorProgramaVariasAreasVariosEstatus(
 			String estatus1, String estatus2, String estatus3, String estatus4,
 			String estatus5, String estatus6, String estatus7,
@@ -362,12 +345,6 @@ public class STeg {
 		return interfaceTeg.buscarTegPorProgramaVariasAreasVariosEstatus(
 				estatus1, estatus2, estatus3, estatus4, estatus5, estatus6,
 				estatus7, programa, fechaInicio, fechaFin);
-	}
-
-	public List<Teg> buscarTegPorVariosProgramaUnEstatus(String estatus,
-			Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegPorVariosProgramaUnEstatus(estatus,
-				fechaInicio, fechaFin);
 	}
 
 	public List<Teg> buscarTegPorVariosProgramasVariosEstatus(String estatus1,
@@ -399,29 +376,6 @@ public class STeg {
 		List<Teg> tegs;
 		tegs = interfaceTeg.buscarTegTodos(fechaInicio, fechaFin);
 		return tegs;
-	}
-
-	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
-			String estatus1, String estatus2, String estatus3, String estatus4,
-			Tematica tematica, Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegporFechayVariosEstatus1(estatus1,
-				estatus2, estatus3, estatus4, tematica, fechaInicio, fechaFin);
-	}
-
-	public List<Teg> buscarTegPorProgramaVariasAreasVariosEstatus1(
-			String estatus1, String estatus2, String estatus3, String estatus4,
-			Programa programa, Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegPorProgramaVariasAreasVariosEstatus1(
-				estatus1, estatus2, estatus3, estatus4, programa, fechaInicio,
-				fechaFin);
-	}
-
-	public List<Teg> buscarTegPorVariosProgramasVariosEstatus1(String estatus1,
-			String estatus2, String estatus3, String estatus4,
-			Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegPorVariosProgramasVariosEstatus1(estatus1,
-				estatus2, estatus3, estatus4, fechaInicio, fechaFin);
-
 	}
 	
 	public List<Teg> buscarTegSegunAreaInvestigacionEstatus(AreaInvestigacion area, String estatus1,String estatus2){
@@ -455,6 +409,77 @@ public class STeg {
 		return tegsSeleccionados;
 	}
 	
+	/*---- Servicios para Reporte Proyecto ----*/
+	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+			String estatus, Tematica tematica, Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegPorFechayEstatus(estatus, tematica,
+				fechaInicio, fechaFin);
+	}
 	
+	public List<Teg> buscarTegPorDosFechasyUnEstatus(
+			AreaInvestigacion area1, String estatus,Date fechaInicio,Date fechaFin) {
+		return interfaceTeg.buscarTegPorFecha(area1, estatus,fechaInicio, fechaFin);
+	}	
+	
+	public List<Teg> buscarTegPorDosFechasyArea(AreaInvestigacion area1, 
+			 Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegFechaArea(area1, fechaInicio, fechaFin);
+	}
+	
+	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
+			String estatus1, String estatus2, String estatus3, String estatus4,
+			Tematica tematica, Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegporFechayVariosEstatus1(estatus1,
+				estatus2, estatus3, estatus4, tematica, fechaInicio, fechaFin);
+	}
+	
+	public List<Teg> buscarTegPorProgramaVariasAreasUnEstatus(String estatus,
+			Programa programa, Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegPorProgramaVariasAreasUnEstatus(estatus,
+				programa, fechaInicio, fechaFin);
+	}
+	
+	public List<Teg> buscarTegPorProgramaVariasAreasVariosEstatus1(
+			String estatus1, String estatus2, String estatus3, String estatus4,
+			Programa programa, Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegPorProgramaVariasAreasVariosEstatus1(
+				estatus1, estatus2, estatus3, estatus4, programa, fechaInicio,
+				fechaFin);
+	}
+	
+	public List<Teg> buscarTegPorVariosProgramaUnEstatus(String estatus,
+			Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegPorVariosProgramaUnEstatus(estatus,
+				fechaInicio, fechaFin);
+	}
+	
+	public List<Teg> buscarTegPorVariosProgramasVariosEstatus1(String estatus1,
+			String estatus2, String estatus3, String estatus4,
+			Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegPorVariosProgramasVariosEstatus1(estatus1,
+				estatus2, estatus3, estatus4, fechaInicio, fechaFin);
+	}
+	
+	/*---- Servicios para Reporte Profesor ----*/	
+	
+	public List<Teg> buscarTegDeUnaTematicaPorDosFechas(
+			Tematica tematica, Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegPorFechayTematica(tematica, fechaInicio, fechaFin);
+	}
+	
+	public List<Teg> buscarTegDeUnAreaPorDosFechas(
+			AreaInvestigacion area1, Date fechaInicio,Date fechaFin) {
+		return interfaceTeg.buscarTegPorFechayArea(area1, fechaInicio, fechaFin);
+	}
+	
+	public List<Teg> buscarTegDeUnProgramaPorDosFechas(
+			Programa programa,Date fechaInicio,Date fechaFin) {
+		return interfaceTeg.buscarTegPorFechayPrograma(programa,fechaInicio, fechaFin);
+	}
+	
+	public List<Teg> buscarTodosTegPorDosFechas(
+			Date fechaInicio,Date fechaFin) {
+		return interfaceTeg.buscarTodosTegporFecha(fechaInicio, fechaFin);
+	}	
 	
 }
