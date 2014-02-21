@@ -25,6 +25,7 @@ import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
 import modelo.reporte.ListaTeg;
+import modelo.reporte.ProfesorTeg;
 import modelo.reporte.Proyecto;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -33,6 +34,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -365,31 +367,34 @@ public class CReporteProyecto extends CGeneral {
 						elementos.add(new ListaTeg(t, nombreEstudiantes));
 
 					}
+				
+					
+					Map<String, Object> mapa = new HashMap<String, Object>();
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					Map p = new HashMap();
+					
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
 							+ "SITEG/vistas/reportes/estructurados/compilados/RReporteProyecto.jasper";
 					String reporteImage = rutaUrl
 							+ "SITEG/public/imagenes/reportes/";
-					p.put("programa", cmbPrograma.getValue());
-					p.put("Fecha", new Date());
-					p.put("FechaInicio", dtbFechaInicio.getValue());
-					p.put("FechaFin", dtbFechaFin.getValue());
-					p.put("Area", cmbArea.getValue());
-					p.put("Programa", cmbPrograma.getValue());
-					p.put("Tematica", cmbTematica.getValue());
-					p.put("Estatus", cmbEstatus.getValue());
-					p.put("logoUcla", reporteImage + "logo ucla.png");
-					p.put("logoCE", reporteImage + "logo CE.png");
-					p.put("logoSiteg", reporteImage + "logo.png");
+					mapa.put("Fecha", new Date());
+					mapa.put("FechaInicio", dtbFechaInicio.getValue());
+					mapa.put("FechaFin", dtbFechaFin.getValue());
+					mapa.put("Area", cmbArea.getValue());
+					mapa.put("Programa", cmbPrograma.getValue());
+					mapa.put("Tematica", cmbTematica.getValue());
+					mapa.put("Estatus", cmbEstatus.getValue());
+					mapa.put("logoUcla", reporteImage + "logo ucla.png");
+					mapa.put("logoCE", reporteImage + "logo CE.png");
+					mapa.put("logoSiteg", reporteImage + "logo.png");
+						
+					JasperReport jasperReport = (JasperReport) JRLoader
+							.loadObject(reporteSrc);
 
-					jstVistaPrevia.setSrc(reporteSrc);
-					jstVistaPrevia
-							.setDatasource(new JRBeanCollectionDataSource(
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, mapa, new JRBeanCollectionDataSource(
 									elementos));
-					jstVistaPrevia.setType("pdf");
-					jstVistaPrevia.setParameters(p);
+					JasperViewer.viewReport(jasperPrint, false);
 				} else {
 					Messagebox
 							.show("No hay informacion disponible para esta seleccion");

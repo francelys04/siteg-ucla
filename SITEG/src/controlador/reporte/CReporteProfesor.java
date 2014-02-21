@@ -36,6 +36,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -231,7 +232,7 @@ public class CReporteProfesor extends CGeneral{
 						&& !nombreTematica.equals("Todas")
 						&& !estatus.equals("Todos")) {
 
-		/*			String idTematica1 = String.valueOf(((Tematica) cmbTematica
+					String idTematica1 = String.valueOf(((Tematica) cmbTematica
 							.getSelectedItem().getValue()).getId());
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica1));
@@ -271,14 +272,14 @@ public class CReporteProfesor extends CGeneral{
 					}
 					if (elementos.size() == 0) {
 						datosVacios = true;
-					} */
+					} 
 				}
 				/*buscar por una carrera, un area, todas las tematica y un estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todas")
 						&& !estatus.equals("Todos")) {
-			/*		String idArea = String.valueOf(((AreaInvestigacion) cmbArea
+					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
 							.getSelectedItem().getValue()).getId());
 					AreaInvestigacion area1 = servicioArea.buscarArea(Long
 							.parseLong(idArea));
@@ -316,14 +317,14 @@ public class CReporteProfesor extends CGeneral{
 					}
 					if (teg.size() == 0) {
 						datosVacios = true;
-					} */
+					}
 				}
 				/*buscar por una carrera, un area, todas las  tematica y todos los estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todas")
 						&& estatus.equals("Todos")) {
-		/*			String idArea = String.valueOf(((AreaInvestigacion) cmbArea
+					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
 							.getSelectedItem().getValue()).getId());
 					AreaInvestigacion area1 = servicioArea.buscarArea(Long
 							.parseLong(idArea));
@@ -355,14 +356,14 @@ public class CReporteProfesor extends CGeneral{
 					}
 					if (teg.size() == 0) {
 						datosVacios = true;
-					} */
+					} 
 				}
 				/*buscar por una carrera, un area, una  tematica y todos los estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& !nombreTematica.equals("Todas")
 						&& estatus.equals("Todos")) {
-		/*			String idTematica = String.valueOf(((Tematica) cmbTematica
+					String idTematica = String.valueOf(((Tematica) cmbTematica
 							.getSelectedItem().getValue()).getId());
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
@@ -393,13 +394,13 @@ public class CReporteProfesor extends CGeneral{
 					}
 					if (teg1.size() == 0) {
 						datosVacios = true;
-					} */
+					} 
 				}
 				/*buscar por una carrera, todas las area y un estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& !estatus.equals("Todos")) {
-			/*		String idPrograma = String.valueOf(((Programa) cmbPrograma
+					String idPrograma = String.valueOf(((Programa) cmbPrograma
 							.getSelectedItem().getValue()).getId());
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
@@ -437,13 +438,13 @@ public class CReporteProfesor extends CGeneral{
 					}
 					if (teg2.size() == 0) {
 						datosVacios = true;
-					}*/
+					}
 				}
 				/*buscar por una carrera, todas las area y todos los estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& estatus.equals("Todos")) {
-			/*		String idPrograma = String.valueOf(((Programa) cmbPrograma
+					String idPrograma = String.valueOf(((Programa) cmbPrograma
 							.getSelectedItem().getValue()).getId());
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
@@ -474,11 +475,11 @@ public class CReporteProfesor extends CGeneral{
 					}
 					if (teg2.size() == 0) {
 						datosVacios = true;
-					}*/
+					}
 				}
 				/*buscar por todas las carrera, y un estatus*/
 				if (nombrePrograma.equals("Todos") && !estatus.equals("Todos")) {
-				/*	List<Teg> teg2 = servicioTeg.buscarTodosTegPorDosFechas(fechaInicio, fechaFin);
+					List<Teg> teg2 = servicioTeg.buscarTodosTegPorDosFechas(fechaInicio, fechaFin);
 					
 					for (Teg tegs : teg2) {
 						Profesor profesorTutor = tegs.getTutor();
@@ -511,11 +512,11 @@ public class CReporteProfesor extends CGeneral{
 					}
 					if (teg2.size() == 0) {
 						datosVacios = true;
-					}*/
+					}
 				}
 				/*buscar por todas las carrera, y todos los estatus*/
 				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
-			/*		List<Teg> teg2 = servicioTeg.buscarTodosTegPorDosFechas(fechaInicio, fechaFin);
+					List<Teg> teg2 = servicioTeg.buscarTodosTegPorDosFechas(fechaInicio, fechaFin);
 					
 					for (Teg tegs : teg2) {
 						Profesor profesorTutor = tegs.getTutor();
@@ -541,7 +542,7 @@ public class CReporteProfesor extends CGeneral{
 					}
 					if (teg2.size() == 0) {
 						datosVacios = true;
-					}*/
+					}
 				}
 				
 				if (!datosVacios) {
@@ -550,32 +551,34 @@ public class CReporteProfesor extends CGeneral{
 						return a.getNombre().compareTo(b.getNombre());
 						}});
 					
-					
+					Map<String, Object> mapa = new HashMap<String, Object>();
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					Map p = new HashMap();
+					
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
 							+ "SITEG/vistas/reportes/estructurados/compilados/RReporteProfesor.jasper";
 					String reporteImage = rutaUrl
 							+ "SITEG/public/imagenes/reportes/";
-					p.put("programa", cmbPrograma.getValue());
-					p.put("Fecha", new Date());
-					p.put("FechaInicio", dtbFechaInicio.getValue());
-					p.put("FechaFin", dtbFechaFin.getValue());
-					p.put("Area", cmbArea.getValue());
-					p.put("Programa", cmbPrograma.getValue());
-					p.put("Tematica", cmbTematica.getValue());
-					p.put("Estatus", cmbEstatus.getValue());
-					p.put("logoUcla", reporteImage + "logo ucla.png");
-					p.put("logoCE", reporteImage + "logo CE.png");
-					p.put("logoSiteg", reporteImage + "logo.png");
+					mapa.put("programa", cmbPrograma.getValue());
+					mapa.put("Fecha", new Date());
+					mapa.put("FechaInicio", dtbFechaInicio.getValue());
+					mapa.put("FechaFin", dtbFechaFin.getValue());
+					mapa.put("Area", cmbArea.getValue());
+					mapa.put("Programa", cmbPrograma.getValue());
+					mapa.put("Tematica", cmbTematica.getValue());
+					mapa.put("Estatus", cmbEstatus.getValue());
+					mapa.put("logoUcla", reporteImage + "logo ucla.png");
+					mapa.put("logoCE", reporteImage + "logo CE.png");
+					mapa.put("logoSiteg", reporteImage + "logo.png");
+						
+					JasperReport jasperReport = (JasperReport) JRLoader
+							.loadObject(reporteSrc);
 
-					jstVistaPrevia.setSrc(reporteSrc);
-					jstVistaPrevia
-							.setDatasource(new JRBeanCollectionDataSource(
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, mapa, new JRBeanCollectionDataSource(
 									elementos));
-					jstVistaPrevia.setType("pdf");
-					jstVistaPrevia.setParameters(p);
+					JasperViewer.viewReport(jasperPrint, false);
+					
 				} else {
 					Messagebox
 							.show("No hay informacion disponible para esta seleccion");
