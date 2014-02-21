@@ -68,8 +68,7 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 	 */
 	public List<Teg> buscarDatos() {
 
-		List<Profesor> profesores = servicioProfesor
-				.buscarActivos();
+		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		List<Teg> tegs = servicioTeg.buscarTegFactibilidad();
 
 		Profesor profesor1 = new Profesor();
@@ -98,8 +97,7 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 	 * operacion correspondiente a este.
 	 */
 	public void recibir(String vista) {
-		vistaReporte = vista;
-		
+		vistaReporte = vista;		
 	}
 	
 
@@ -145,16 +143,12 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 		if (vistaReporte == null) {
 			vistaReporte = "reportes/estructurados/VReporteInformeFactibilidad";
 		} else {
-			// Programa seleccionado en el catalogo VCatalogoPrograma
 			Listitem listItem = ltbListaInformeFactibilidad.getSelectedItem();
 			Teg tegDatosCatalogo = (Teg) listItem.getValue();
-			/*Programa programaDatos = servicioPrograma
-					.buscarPorNombrePrograma(((Programa) listItem.getValue())
-							.getNombre());*/
 			final HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("id", tegDatosCatalogo.getId());
-			String vista = vistaReporte;
-			map.put("vista", vista);
+			/*String vista = vistaReporte;*/
+			map.put("vista", vistaReporte);
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 			Executions.sendRedirect("/vistas/arbol.zul");
 			// Permite cerrar la vista VCatalogo
@@ -163,5 +157,4 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 
 	}
 
-	
 }
