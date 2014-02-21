@@ -1,15 +1,24 @@
 package controlador;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import modelo.Condicion;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.compuesta.CondicionPrograma;
+import modelo.seguridad.Grupo;
+import modelo.seguridad.Usuario;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -18,6 +27,7 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
@@ -56,7 +66,14 @@ public class CPrograma extends CGeneral {
 	private Textbox txtDirectorPrograma;
 	@Wire
 	private Window wdwPrograma;
+	@Wire
+	private Image imagenx;
+
+	
 	long id = 0;
+	
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
@@ -161,6 +178,68 @@ public class CPrograma extends CGeneral {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
+								//cambio kairin
+								Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+								Grupo grupo = servicioGrupo
+										.BuscarPorNombre("ROLE_DIRECTOR");
+								gruposUsuario.add(grupo);
+								byte[] imagenUsuario = null;
+								URL url = getClass().getResource(
+										"/configuracion/usuario.png");
+
+								try {
+									imagenx.setContent(new AImage(url));
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								imagenUsuario = imagenx.getContent()
+										.getByteData();
+								Profesor profesor = servicioProfesor.buscarProfesorPorCedula(txtDirectorPrograma.getValue());
+
+ 									Usuario user = servicioUsuario
+											.buscarUsuarioPorNombre(txtDirectorPrograma.getValue());
+									if (user == null) {
+										Usuario usuario = new Usuario(
+												0,txtDirectorPrograma.getValue()
+												,
+												passwordEncoder
+														.encode(txtDirectorPrograma.getValue()),
+												true, gruposUsuario,
+												imagenUsuario);
+										servicioUsuario
+												.guardar(usuario);
+										user = servicioUsuario
+												.buscarUsuarioPorNombre(txtDirectorPrograma.getValue());
+										profesor.setUsuario(user);
+										servicioProfesor
+												.guardarProfesor(profesor);
+										String mensaje = "Su usuario es: "
+												+ usuario.getNombre()
+												+ "y su contraseña:"
+												+ usuario.getPassword();
+										enviarEmailNotificacion(
+												profesor.getCorreoElectronico(),
+												mensaje);
+									} else {
+
+										List<Grupo> grupino = new ArrayList<Grupo>();
+										grupino = servicioGrupo
+												.buscarGruposDelUsuario(user);
+										Grupo grupo2 = servicioGrupo
+												.BuscarPorNombre("ROLE_DIRECTOR");
+										Set<Grupo> gruposU = new HashSet<Grupo>();
+										for (int f = 0; f < grupino
+												.size(); ++f) {
+											Grupo g = grupino.get(f);
+											gruposU.add(g);
+										}
+										gruposU.add(grupo2);
+
+										user.setGrupos(gruposU);
+
+										servicioUsuario.guardar(user);
+									}
 								String nombre = txtNombrePrograma.getValue();
 								String descripcion = txtDescripcionPrograma
 										.getValue();

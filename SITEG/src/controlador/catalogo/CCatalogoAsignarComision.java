@@ -68,7 +68,9 @@ public class CCatalogoAsignarComision extends CGeneral {
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		List<Teg> tegs = buscarDatos();
+		List<Teg> tegs = servicioTeg
+		.buscarTegPorProgramaParaAsignarComision(servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
 
 		for (int i = 0; i < tegs.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante
@@ -81,44 +83,7 @@ public class CCatalogoAsignarComision extends CGeneral {
 
 	}
 
-	/*
-	 * Metodo que permite cargar una lista de teg dado una condicion booleana
-	 * donde sera igual a "true" cuando la cedula del profesor por cada teg se
-	 * encuentre al recorrer todos los profesores activos y realizar dicha
-	 * comparacion.
-	 */
-	public List<Teg> buscarDatos() {
-
-		List<Profesor> profesores = servicioProfesor.buscarActivos();
-		List<Teg> tegs = servicioTeg.BuscarProyectoRegistrado();
-
-		Profesor profesor1 = new Profesor();
-		List<Teg> tegs1 = new ArrayList<Teg>();
-
-		for (int i = 0; i < tegs.size(); i++) {
-
-			profesor1 = tegs.get(i).getTutor();
-
-			boolean encontre = false;
-
-			for (int j = 0; j < profesores.size(); j++) {
-
-				if (profesores.get(j).getCedula().equals(profesor1.getCedula())) {
-					System.out.print(profesores.get(j).getCedula());
-					encontre = true;
-				}
-			}
-			if (encontre == true) {
-				tegs1.add(tegs.get(i));
-
-			}
-
-		}
-
-		ltbProyectosRegistrados.setModel(new ListModelList<Teg>(tegs1));
-		return tegs1;
-	}
-
+	
 	/*
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra
@@ -127,7 +92,9 @@ public class CCatalogoAsignarComision extends CGeneral {
 	 */
 	@Listen("onChange = #txtEstudianteComision, #txtMostrarFecha, #txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,#txtMostrarApellidoTutor")
 	public void filtrarDatosCatalogo() {
-		List<Teg> teg1 = buscarDatos();
+		List<Teg> teg1 = servicioTeg
+		.buscarTegPorProgramaParaAsignarComision(servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
 		for (int i = 0; i < teg1.size(); i++) {
 			List<Estudiante> es = servicioEstudiante
 					.buscarEstudiantePorTeg(teg1.get(i));
