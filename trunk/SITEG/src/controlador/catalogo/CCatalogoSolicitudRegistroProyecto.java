@@ -80,7 +80,10 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		List<Teg>  tegs = buscarDatos();
+		//hizo kairin nuevo
+		List<Teg>tegs= servicioTeg
+		.buscarTegPorProgramaParaRegistrarTeg(servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
 		for (int i = 0; i < tegs.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
 			String nombre = estudiantes.get(0).getNombre();
@@ -98,7 +101,10 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	 */
 	@Listen("onChange = #txtEstudianteProyecto, #txtMostrarFecha,#txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,#txtMostrarApellidoTutor")
 	public void filtrarDatosCatalogo() {
-		List<Teg> teg1 = buscarDatos();
+		//hizo kairin nuevo
+		List<Teg> teg1 = servicioTeg
+		.buscarTegPorProgramaParaRegistrarTeg(servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
 		for (int i = 0; i < teg1.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
 			String nombre = estudiantes.get(0).getNombre();
@@ -186,31 +192,5 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 		}
 		}
 	}
-	/*
-	 * Metodo que permite retornar una lista de los tegs, donde se recorre tanto
-	 * una lista del teg como los profesores activos, donde se compara si coincide las
-	 * cedulas de cada uno de los profesores para cargar la lista de tegs.
-	 */
-	public List<Teg> buscarDatos()
-	{
-			List<Profesor>  profesores = servicioProfesor.buscarActivos();
-			List<Teg>  tegs = servicioTeg.BuscarTegSolicitandoRegistro();
-			Profesor profesor1 = new Profesor();		
-			List<Teg> tegs1 = new ArrayList<Teg>();			
-			for (int i = 0; i < tegs.size(); i++) {
-				profesor1 = tegs.get(i).getTutor();
-				boolean encontre = false;
-				for (int j = 0; j < profesores.size(); j++) {
-					if (profesores.get(j).getCedula().equals(profesor1.getCedula())) {
-						System.out.print(profesores.get(j).getCedula());
-						encontre = true;
-					}
-				}
-				if (encontre == true) {
-					tegs1.add(tegs.get(i));
-
-				}
-			}
-			return tegs1;
-	}	
+	
 }

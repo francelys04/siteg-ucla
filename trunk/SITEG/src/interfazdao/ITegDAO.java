@@ -65,6 +65,7 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	@Query("select t from Teg t where t.estatus=?2 and t.estudiantes in (select e from Estudiante e where e.programa=?1)")
 	public List<Teg> buscarTegsPorPrograma(Programa programa, String string);
 
+	
 	public List<Teg> findByEstatusAndEstudiantesInOrderByIdAsc(String estatus, List<Estudiante> list);
 
 	public List<Teg> findByTutorAndTematicaAndFechaBetweenOrderByFechaAsc(

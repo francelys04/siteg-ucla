@@ -184,6 +184,34 @@ public class STeg {
 				estatus[9], interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
+	//hizo kairin nuevo
+
+	public List<Teg> buscarTegPorProgramaParaRegistrarFactibilidad(Programa programa) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(
+				estatus[3], interfaceEstudiante.findByPrograma(programa));
+		return tegs;
+	}
+	//hizo kairin nuevo
+
+	public List<Teg> buscarTegPorProgramaParaRegistrarTeg(Programa programa) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(
+				estatus[0], interfaceEstudiante.findByPrograma(programa));
+		return tegs;
+	}
+
+	//hizo kairin nuevo
+
+	public List<Teg> buscarTegPorProgramaParaAsignarComision(Programa programa) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(
+				estatus[1], interfaceEstudiante.findByPrograma(programa));
+		return tegs;
+	}
 
 	public List<Teg> buscarTegPorProgramaParaDefensa2(Programa programa) {
 		// TODO Auto-generated method stub
