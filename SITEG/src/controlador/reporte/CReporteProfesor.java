@@ -239,7 +239,6 @@ public class CReporteProfesor extends CGeneral{
 					List<Teg> teg = servicioTeg
 							.buscarTegDeUnaTematicaPorDosFechas(tematica1, fechaInicio, fechaFin);
 					
-					
 					for (Teg tegs : teg) {
 				 		
 						Profesor profesorTutor = tegs.getTutor();
@@ -285,7 +284,36 @@ public class CReporteProfesor extends CGeneral{
 							.parseLong(idArea));
 					
 					List<Teg> teg = servicioTeg
-							.buscarTegPorDosFechasyUnEstatus(area1,	estatus, fechaInicio, fechaFin);
+							.buscarTegDeUnAreaPorDosFechas(area1, fechaInicio, fechaFin);
+					for (Teg tegs : teg) {
+						Profesor profesorTutor = tegs.getTutor();
+						if (tipoCargo.equals("Tutor")) {
+							elementos.add(new ProfesorTeg(
+									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
+									tegs.getTitulo(),
+									"Tutor", tegs.getEstatus()));
+						}
+						
+						if (tipoCargo.equals("Jurado")) {
+							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
+								Profesor profesorJurado = jurado.getProfesor();
+								elementos.add(new ProfesorTeg(
+										profesorJurado.getNombre() + " " + profesorJurado.getApellido(),
+										tegs.getTitulo(),
+										"Jurado - " + jurado.getTipoJurado().getNombre(), tegs.getEstatus()));
+							}
+						}
+						
+						if (tipoCargo.equals("Comision Evaluadora")) {
+							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
+								elementos.add(new ProfesorTeg(
+										profesorComision.getNombre() + " " + profesorComision.getApellido(),
+										tegs.getTitulo(),
+										"Comision", tegs.getEstatus()));
+							}
+						}
+					
+					}
 					if (teg.size() == 0) {
 						datosVacios = true;
 					} 
@@ -300,12 +328,33 @@ public class CReporteProfesor extends CGeneral{
 					AreaInvestigacion area1 = servicioArea.buscarArea(Long
 							.parseLong(idArea));
 					
-					teg = servicioTeg
-							.buscarTegPorDosFechasyArea(area1, fechaInicio, fechaFin);
-					System.out.println("111");
+					List<Teg> teg = servicioTeg
+							.buscarTegDeUnAreaPorDosFechas(area1, fechaInicio, fechaFin);
+					
+					for (Teg tegs : teg) {
+						Profesor profesorTutor = tegs.getTutor();
+						if (tipoCargo.equals("Todos")) {
+							elementos.add(new ProfesorTeg(
+									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
+									tegs.getTitulo(),
+									"Tutor", tegs.getEstatus()));
+							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
+								Profesor profesorJurado = jurado.getProfesor();
+								elementos.add(new ProfesorTeg(
+										profesorJurado.getNombre() + " " + profesorJurado.getApellido(),
+										tegs.getTitulo(),
+										"Jurado - " + jurado.getTipoJurado().getNombre(), tegs.getEstatus()));
+							}
+							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
+								elementos.add(new ProfesorTeg(
+										profesorComision.getNombre() + " " + profesorComision.getApellido(),
+										tegs.getTitulo(),
+										"Comision", tegs.getEstatus()));
+							}
+						}
+					}
 					if (teg.size() == 0) {
 						datosVacios = true;
-						System.out.println("222");
 					} 
 				}
 				/*buscar por una carrera, un area, una  tematica y todos los estatus*/
@@ -318,16 +367,31 @@ public class CReporteProfesor extends CGeneral{
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
 
-					String estatusTeg1 = "Proyecto Registrado";
-					String estatusTeg2 = "Proyecto Factible";
-					String estatusTeg3 = "Proyecto deTrabajo Especial de Grado en Desarrollo";
-					String estatusTeg4 = "Avances Finalizados del Proyecto";
-					teg = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
-									estatusTeg1, estatusTeg2, estatusTeg3,
-									estatusTeg4, tematica1, fechaInicio,
-									fechaFin);
-					if (teg.size() == 0) {
+					List<Teg> teg1 = servicioTeg.buscarTegDeUnaTematicaPorDosFechas(tematica1, fechaInicio, fechaFin);
+					
+					for (Teg tegs : teg1) {
+						Profesor profesorTutor = tegs.getTutor();
+						if (tipoCargo.equals("Todos")) {
+							elementos.add(new ProfesorTeg(
+									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
+									tegs.getTitulo(),
+									"Tutor", tegs.getEstatus()));
+							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
+								Profesor profesorJurado = jurado.getProfesor();
+								elementos.add(new ProfesorTeg(
+										profesorJurado.getNombre() + " " + profesorJurado.getApellido(),
+										tegs.getTitulo(),
+										"Jurado - " + jurado.getTipoJurado().getNombre(), tegs.getEstatus()));
+							}
+							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
+								elementos.add(new ProfesorTeg(
+										profesorComision.getNombre() + " " + profesorComision.getApellido(),
+										tegs.getTitulo(),
+										"Comision", tegs.getEstatus()));
+							}
+						}
+					}
+					if (teg1.size() == 0) {
 						datosVacios = true;
 					} 
 				}
@@ -340,9 +404,38 @@ public class CReporteProfesor extends CGeneral{
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
 
-					teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(
-							estatus, programa1, fechaInicio, fechaFin);
-					if (teg.size() == 0) {
+					List<Teg> teg2 = servicioTeg.buscarTegDeUnProgramaPorDosFechas(programa1, fechaInicio, fechaFin);
+					
+					for (Teg tegs : teg2) {
+						Profesor profesorTutor = tegs.getTutor();
+						if (tipoCargo.equals("Tutor")) {
+							elementos.add(new ProfesorTeg(
+									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
+									tegs.getTitulo(),
+									"Tutor", tegs.getEstatus()));
+						}
+						
+						if (tipoCargo.equals("Jurado")) {
+							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
+								Profesor profesorJurado = jurado.getProfesor();
+								elementos.add(new ProfesorTeg(
+										profesorJurado.getNombre() + " " + profesorJurado.getApellido(),
+										tegs.getTitulo(),
+										"Jurado - " + jurado.getTipoJurado().getNombre(), tegs.getEstatus()));
+							}
+						}
+						
+						if (tipoCargo.equals("Comision Evaluadora")) {
+							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
+								elementos.add(new ProfesorTeg(
+										profesorComision.getNombre() + " " + profesorComision.getApellido(),
+										tegs.getTitulo(),
+										"Comision", tegs.getEstatus()));
+							}
+						}
+					
+					}
+					if (teg2.size() == 0) {
 						datosVacios = true;
 					}
 				}
@@ -355,38 +448,99 @@ public class CReporteProfesor extends CGeneral{
 							.getSelectedItem().getValue()).getId());
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
-					String estatusTeg1 = "Proyecto Registrado";
-					String estatusTeg2 = "Proyecto Factible";
-					String estatusTeg3 = "Proyecto deTrabajo Especial de Grado en Desarrollo";
-					String estatusTeg4 = "Avances Finalizados del Proyecto";
-					teg = servicioTeg
-							.buscarTegPorProgramaVariasAreasVariosEstatus1(
-									estatusTeg1, estatusTeg2, estatusTeg3,
-									estatusTeg4, programa1, fechaInicio,
-									fechaFin);
-					if (teg.size() == 0) {
+					
+					List<Teg> teg2 = servicioTeg.buscarTegDeUnProgramaPorDosFechas(programa1, fechaInicio, fechaFin);
+					
+					for (Teg tegs : teg2) {
+						Profesor profesorTutor = tegs.getTutor();
+						if (tipoCargo.equals("Todos")) {
+							elementos.add(new ProfesorTeg(
+									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
+									tegs.getTitulo(),
+									"Tutor", tegs.getEstatus()));
+							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
+								Profesor profesorJurado = jurado.getProfesor();
+								elementos.add(new ProfesorTeg(
+										profesorJurado.getNombre() + " " + profesorJurado.getApellido(),
+										tegs.getTitulo(),
+										"Jurado - " + jurado.getTipoJurado().getNombre(), tegs.getEstatus()));
+							}
+							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
+								elementos.add(new ProfesorTeg(
+										profesorComision.getNombre() + " " + profesorComision.getApellido(),
+										tegs.getTitulo(),
+										"Comision", tegs.getEstatus()));
+							}
+						}
+					}
+					if (teg2.size() == 0) {
 						datosVacios = true;
 					}
 				}
 				/*buscar por todas las carrera, y un estatus*/
 				if (nombrePrograma.equals("Todos") && !estatus.equals("Todos")) {
-					teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
-							estatus, fechaInicio, fechaFin);
-					if (teg.size() == 0) {
+					List<Teg> teg2 = servicioTeg.buscarTodosTegPorDosFechas(fechaInicio, fechaFin);
+					
+					for (Teg tegs : teg2) {
+						Profesor profesorTutor = tegs.getTutor();
+						if (tipoCargo.equals("Tutor")) {
+							elementos.add(new ProfesorTeg(
+									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
+									tegs.getTitulo(),
+									"Tutor", tegs.getEstatus()));
+						}
+						
+						if (tipoCargo.equals("Jurado")) {
+							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
+								Profesor profesorJurado = jurado.getProfesor();
+								elementos.add(new ProfesorTeg(
+										profesorJurado.getNombre() + " " + profesorJurado.getApellido(),
+										tegs.getTitulo(),
+										"Jurado - " + jurado.getTipoJurado().getNombre(), tegs.getEstatus()));
+							}
+						}
+						
+						if (tipoCargo.equals("Comision Evaluadora")) {
+							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
+								elementos.add(new ProfesorTeg(
+										profesorComision.getNombre() + " " + profesorComision.getApellido(),
+										tegs.getTitulo(),
+										"Comision", tegs.getEstatus()));
+							}
+						}
+					
+					}
+					if (teg2.size() == 0) {
 						datosVacios = true;
 					}
 				}
 				/*buscar por todas las carrera, y todos los estatus*/
 				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
-					String estatusTeg1 = "Proyecto Registrado";
-					String estatusTeg2 = "Proyecto Factible";
-					String estatusTeg3 = "Proyecto deTrabajo Especial de Grado en Desarrollo";
-					String estatusTeg4 = "Avances Finalizados del Proyecto";
-					teg = servicioTeg
-							.buscarTegPorVariosProgramasVariosEstatus1(
-									estatusTeg1, estatusTeg2, estatusTeg3,
-									estatusTeg4, fechaInicio, fechaFin);
-					if (teg.size() == 0) {
+					List<Teg> teg2 = servicioTeg.buscarTodosTegPorDosFechas(fechaInicio, fechaFin);
+					
+					for (Teg tegs : teg2) {
+						Profesor profesorTutor = tegs.getTutor();
+						if (tipoCargo.equals("Todos")) {
+							elementos.add(new ProfesorTeg(
+									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
+									tegs.getTitulo(),
+									"Tutor", tegs.getEstatus()));
+							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
+								Profesor profesorJurado = jurado.getProfesor();
+								elementos.add(new ProfesorTeg(
+										profesorJurado.getNombre() + " " + profesorJurado.getApellido(),
+										tegs.getTitulo(),
+										"Jurado - " + jurado.getTipoJurado().getNombre(), tegs.getEstatus()));
+							}
+							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
+								elementos.add(new ProfesorTeg(
+										profesorComision.getNombre() + " " + profesorComision.getApellido(),
+										tegs.getTitulo(),
+										"Comision", tegs.getEstatus()));
+							}
+						}
+					}
+					if (teg2.size() == 0) {
 						datosVacios = true;
 					}
 				}
@@ -428,8 +582,7 @@ public class CReporteProfesor extends CGeneral{
 							.show("No hay informacion disponible para esta seleccion");
 				}
 			}
-		
-		}
+		}		
 	}
 
 	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
