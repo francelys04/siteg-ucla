@@ -126,6 +126,10 @@ public class CReporteProyecto extends CGeneral {
 
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
 		cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
+		
+		cmbArea.setDisabled(true);
+		cmbTematica.setDisabled(true);
+		cmbEstatus.setDisabled(true);
 	}
 	/*
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
@@ -138,7 +142,11 @@ public class CReporteProyecto extends CGeneral {
 		if (cmbPrograma.getValue().equals("Todos")) {
 			cmbArea.setValue("Todos");
 			cmbTematica.setValue("Todas");
+			cmbArea.setDisabled(true);
+			cmbTematica.setDisabled(true);
+			cmbEstatus.setDisabled(false);
 		} else {
+			cmbArea.setDisabled(false);
 			cmbArea.setValue("");
 			cmbTematica.setValue("");
 			Programa programa = (Programa) cmbPrograma.getSelectedItem()
@@ -160,9 +168,11 @@ public class CReporteProyecto extends CGeneral {
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
 		if (cmbArea.getValue().equals("Todos")) {
+			cmbTematica.setDisabled(true);
 			cmbTematica.setValue("Todas");
+			cmbEstatus.setDisabled(false);
 		} else {
-			
+			cmbTematica.setDisabled(false);
 			cmbTematica.setValue("");
 			AreaInvestigacion area = (AreaInvestigacion) cmbArea
 					.getSelectedItem().getValue();
@@ -180,8 +190,10 @@ public class CReporteProyecto extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
+		if (!cmbTematica.getValue().equals("Todos")) {
+			cmbEstatus.setDisabled(false);
+		}
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
-		// idTematica = tematica.getId();
 	}
 	/*
 	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
@@ -263,10 +275,8 @@ public class CReporteProyecto extends CGeneral {
 					
 					teg = servicioTeg
 							.buscarTegPorDosFechasyArea(area1, fechaInicio, fechaFin);
-					System.out.println("111");
 					if (teg.size() == 0) {
 						datosVacios = true;
-						System.out.println("222");
 					} 
 				}
 				/*buscar por una carrera, un area, una  tematica y todos los estatus*/
@@ -406,22 +416,20 @@ public class CReporteProyecto extends CGeneral {
 
 	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarReporteProyecto")
-	public void cancelarTematicasSolicitadas() throws JRException {
+	public void cancelarReporteProyecto() throws JRException {
 		cmbEstatus.setValue("");
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbTematica.setValue("");
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
-		jstVistaPrevia.setSrc("");
-		jstVistaPrevia.setDatasource(null);
 	}
 
 	/* Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalirReporteProyecto")
-	public void salirTematicasSolicitadas() throws JRException {
+	public void salirReporteProyecto() throws JRException {
 
-		cancelarTematicasSolicitadas();
+		cancelarReporteProyecto();
 		wdwReporteProyecto.onClose();
 	}
 
