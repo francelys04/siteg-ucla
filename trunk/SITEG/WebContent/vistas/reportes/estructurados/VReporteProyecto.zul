@@ -156,7 +156,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 							
-					<datebox id="dtbFechaInicio" cols="12" width="150px"
+					<datebox id="dtbFechaInicio" cols="12" width="150px" readonly="true"
 						tabindex="3" format="dd/MM/yyyy" tooltip="pupInicioLapso"
 						style="margin-right:15px"  onCreate="self.value = new Date()">
 					</datebox>
@@ -165,7 +165,7 @@
 						<label value="Fecha Fin Registro:"
 							style="font-weight:bold" />
 					</hlayout>
-					<datebox id="dtbFechaFin" cols="12" width="150px"
+					<datebox id="dtbFechaFin" cols="12" width="150px"  readonly="true"
 						tabindex="3" format="dd/MM/yy" tooltip="pupFinLapso"
 						style="margin-right:15px"  onCreate="self.value = new Date()">
 					</datebox>
