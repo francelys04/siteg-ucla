@@ -132,6 +132,10 @@ public class CReporteProfesor extends CGeneral{
 
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
 		cmbEstatus.setModel(new ListModelList<String>(estatusProfesor));
+		
+		cmbArea.setDisabled(true);
+		cmbTematica.setDisabled(true);
+		cmbEstatus.setDisabled(true);
 	}
 	/*
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
@@ -144,7 +148,11 @@ public class CReporteProfesor extends CGeneral{
 		if (cmbPrograma.getValue().equals("Todos")) {
 			cmbArea.setValue("Todos");
 			cmbTematica.setValue("Todas");
+			cmbArea.setDisabled(true);
+			cmbTematica.setDisabled(true);
+			cmbEstatus.setDisabled(false);
 		} else {
+			cmbArea.setDisabled(false);
 			cmbArea.setValue("");
 			cmbTematica.setValue("");
 			Programa programa = (Programa) cmbPrograma.getSelectedItem()
@@ -156,7 +164,6 @@ public class CReporteProfesor extends CGeneral{
 			areas.add(area);
 			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 		}
-
 	}
 	/*
 	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
@@ -166,9 +173,11 @@ public class CReporteProfesor extends CGeneral{
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
 		if (cmbArea.getValue().equals("Todos")) {
+			cmbTematica.setDisabled(true);
 			cmbTematica.setValue("Todas");
+			cmbEstatus.setDisabled(false);
 		} else {
-			
+			cmbTematica.setDisabled(false);
 			cmbTematica.setValue("");
 			AreaInvestigacion area = (AreaInvestigacion) cmbArea
 					.getSelectedItem().getValue();
@@ -186,8 +195,10 @@ public class CReporteProfesor extends CGeneral{
 	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
+		if (!cmbTematica.getValue().equals("Todos")) {
+			cmbEstatus.setDisabled(false);
+		}
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
-		// idTematica = tematica.getId();
 	}
 	/*
 	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
@@ -207,13 +218,12 @@ public class CReporteProfesor extends CGeneral{
 		Date fechaInicio = dtbFechaInicio.getValue();
 		Date fechaFin = dtbFechaFin.getValue();
 		String estatus = cmbEstatus.getValue();
-		String tipoCargo = (String) cmbEstatus.getSelectedItem().getValue();
 		List<ProfesorTeg> elementos = new ArrayList<ProfesorTeg>();
 
 		/*Mensaje para dar cuando falta un dato*/
-		if ((cmbPrograma.getValue() == "") || (cmbArea.getValue() == "")
-				|| (cmbTematica.getValue() == "")
-				|| (cmbEstatus.getValue() == "")) {
+		if (nombrePrograma.equals("") || nombreArea.equals("")
+				|| nombreTematica.equals("")
+				|| estatus.equals("")) {
 			Messagebox.show("Datos imcompletos", "Informacion", Messagebox.OK,
 					Messagebox.INFORMATION);
 		}
@@ -243,14 +253,14 @@ public class CReporteProfesor extends CGeneral{
 					for (Teg tegs : teg) {
 				 		
 						Profesor profesorTutor = tegs.getTutor();
-						if (tipoCargo.equals("Tutor")) {
+						if (estatus.equals("Tutor")) {
 							elementos.add(new ProfesorTeg(
 									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 									tegs.getTitulo(),
 									"Tutor", tegs.getEstatus()));
 						}
 						
-						if (tipoCargo.equals("Jurado")) {
+						if (estatus.equals("Jurado")) {
 							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
 								Profesor profesorJurado = jurado.getProfesor();
 								elementos.add(new ProfesorTeg(
@@ -260,7 +270,7 @@ public class CReporteProfesor extends CGeneral{
 							}
 						}
 						
-						if (tipoCargo.equals("Comision Evaluadora")) {
+						if (estatus.equals("Comision Evaluadora")) {
 							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
 								elementos.add(new ProfesorTeg(
 										profesorComision.getNombre() + " " + profesorComision.getApellido(),
@@ -288,14 +298,14 @@ public class CReporteProfesor extends CGeneral{
 							.buscarTegDeUnAreaPorDosFechas(area1, fechaInicio, fechaFin);
 					for (Teg tegs : teg) {
 						Profesor profesorTutor = tegs.getTutor();
-						if (tipoCargo.equals("Tutor")) {
+						if (estatus.equals("Tutor")) {
 							elementos.add(new ProfesorTeg(
 									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 									tegs.getTitulo(),
 									"Tutor", tegs.getEstatus()));
 						}
 						
-						if (tipoCargo.equals("Jurado")) {
+						if (estatus.equals("Jurado")) {
 							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
 								Profesor profesorJurado = jurado.getProfesor();
 								elementos.add(new ProfesorTeg(
@@ -305,7 +315,7 @@ public class CReporteProfesor extends CGeneral{
 							}
 						}
 						
-						if (tipoCargo.equals("Comision Evaluadora")) {
+						if (estatus.equals("Comision Evaluadora")) {
 							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
 								elementos.add(new ProfesorTeg(
 										profesorComision.getNombre() + " " + profesorComision.getApellido(),
@@ -334,7 +344,7 @@ public class CReporteProfesor extends CGeneral{
 					
 					for (Teg tegs : teg) {
 						Profesor profesorTutor = tegs.getTutor();
-						if (tipoCargo.equals("Todos")) {
+						if (estatus.equals("Todos")) {
 							elementos.add(new ProfesorTeg(
 									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 									tegs.getTitulo(),
@@ -372,7 +382,7 @@ public class CReporteProfesor extends CGeneral{
 					
 					for (Teg tegs : teg1) {
 						Profesor profesorTutor = tegs.getTutor();
-						if (tipoCargo.equals("Todos")) {
+						if (estatus.equals("Todos")) {
 							elementos.add(new ProfesorTeg(
 									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 									tegs.getTitulo(),
@@ -409,14 +419,14 @@ public class CReporteProfesor extends CGeneral{
 					
 					for (Teg tegs : teg2) {
 						Profesor profesorTutor = tegs.getTutor();
-						if (tipoCargo.equals("Tutor")) {
+						if (estatus.equals("Tutor")) {
 							elementos.add(new ProfesorTeg(
 									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 									tegs.getTitulo(),
 									"Tutor", tegs.getEstatus()));
 						}
 						
-						if (tipoCargo.equals("Jurado")) {
+						if (estatus.equals("Jurado")) {
 							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
 								Profesor profesorJurado = jurado.getProfesor();
 								elementos.add(new ProfesorTeg(
@@ -426,7 +436,7 @@ public class CReporteProfesor extends CGeneral{
 							}
 						}
 						
-						if (tipoCargo.equals("Comision Evaluadora")) {
+						if (estatus.equals("Comision Evaluadora")) {
 							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
 								elementos.add(new ProfesorTeg(
 										profesorComision.getNombre() + " " + profesorComision.getApellido(),
@@ -453,7 +463,7 @@ public class CReporteProfesor extends CGeneral{
 					
 					for (Teg tegs : teg2) {
 						Profesor profesorTutor = tegs.getTutor();
-						if (tipoCargo.equals("Todos")) {
+						if (estatus.equals("Todos")) {
 							elementos.add(new ProfesorTeg(
 									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 									tegs.getTitulo(),
@@ -483,14 +493,14 @@ public class CReporteProfesor extends CGeneral{
 					
 					for (Teg tegs : teg2) {
 						Profesor profesorTutor = tegs.getTutor();
-						if (tipoCargo.equals("Tutor")) {
+						if (estatus.equals("Tutor")) {
 							elementos.add(new ProfesorTeg(
 									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 									tegs.getTitulo(),
 									"Tutor", tegs.getEstatus()));
 						}
 						
-						if (tipoCargo.equals("Jurado")) {
+						if (estatus.equals("Jurado")) {
 							for (Jurado jurado : servicioJurado.buscarJuradoDeTeg(tegs)) {
 								Profesor profesorJurado = jurado.getProfesor();
 								elementos.add(new ProfesorTeg(
@@ -500,7 +510,7 @@ public class CReporteProfesor extends CGeneral{
 							}
 						}
 						
-						if (tipoCargo.equals("Comision Evaluadora")) {
+						if (estatus.equals("Comision Evaluadora")) {
 							for (Profesor profesorComision : servicioProfesor.buscarComisionDelTeg(tegs)) {
 								elementos.add(new ProfesorTeg(
 										profesorComision.getNombre() + " " + profesorComision.getApellido(),
@@ -520,7 +530,7 @@ public class CReporteProfesor extends CGeneral{
 					
 					for (Teg tegs : teg2) {
 						Profesor profesorTutor = tegs.getTutor();
-						if (tipoCargo.equals("Todos")) {
+						if (estatus.equals("Todos")) {
 							elementos.add(new ProfesorTeg(
 									profesorTutor.getNombre() + " " + profesorTutor.getApellido(),
 									tegs.getTitulo(),
@@ -589,22 +599,20 @@ public class CReporteProfesor extends CGeneral{
 
 	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarReporteProfesor")
-	public void cancelarTematicasSolicitadas() throws JRException {
+	public void cancelarReporteProfesor() throws JRException {
 		cmbEstatus.setValue("");
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbTematica.setValue("");
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
-		jstVistaPrevia.setSrc("");
-		jstVistaPrevia.setDatasource(null);
 	}
 
 	/* Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalirReporteProfesor")
-	public void salirTematicasSolicitadas() throws JRException {
+	public void salirReporteProfesor() throws JRException {
 
-		cancelarTematicasSolicitadas();
+		cancelarReporteProfesor();
 		wdwReporteProfesor.onClose();
 	}
 
