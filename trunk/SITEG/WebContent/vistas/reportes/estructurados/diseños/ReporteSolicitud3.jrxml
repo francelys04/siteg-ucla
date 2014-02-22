@@ -9,6 +9,7 @@
 	<parameter name="fechafin" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="total" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -137,7 +138,7 @@
 				<text><![CDATA[Estatus]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="121" y="9" width="100" height="20" uuid="d293fcce-0b79-4695-8e5f-72f2ff506eee"/>
+				<reportElement x="133" y="9" width="100" height="20" uuid="d293fcce-0b79-4695-8e5f-72f2ff506eee"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -146,7 +147,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="40" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<textField>
 				<reportElement x="280" y="6" width="106" height="19" uuid="a85ccc87-a9d9-4112-a476-f8b9aaa69aa8"/>
 				<textElement textAlignment="Center">
@@ -176,7 +177,7 @@
 				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="124" y="6" width="100" height="20" uuid="c43904d8-7134-4971-be55-39ab44239344"/>
+				<reportElement x="133" y="5" width="100" height="20" uuid="c43904d8-7134-4971-be55-39ab44239344"/>
 				<textFieldExpression><![CDATA[$F{tituloTeg}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -184,7 +185,22 @@
 		<band height="24"/>
 	</detail>
 	<columnFooter>
-		<band height="52" splitType="Stretch"/>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="386" y="30" width="143" height="20" uuid="c7107120-6c9e-4052-b84b-19cd74ed4df1"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Solicitudes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="529" y="30" width="42" height="20" uuid="f1a437e9-ae12-40a6-81a2-21f37dbc5661"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="73" splitType="Stretch">

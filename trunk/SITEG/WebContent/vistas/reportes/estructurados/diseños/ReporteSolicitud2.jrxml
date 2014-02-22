@@ -9,6 +9,7 @@
 	<parameter name="fechafin" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="total" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -184,7 +185,22 @@
 		<band height="24"/>
 	</detail>
 	<columnFooter>
-		<band height="52" splitType="Stretch"/>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="386" y="32" width="143" height="20" uuid="fa7e0916-0cb3-43ae-9c55-c066708f2257"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Solicitudes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="529" y="32" width="42" height="20" uuid="3fa9d840-3cc8-47b5-93a0-eace754fc1b7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="73" splitType="Stretch">

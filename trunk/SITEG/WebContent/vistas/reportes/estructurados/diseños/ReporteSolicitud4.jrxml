@@ -9,6 +9,7 @@
 	<parameter name="fechafin" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="total" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -132,23 +133,16 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="40" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement x="207" y="7" width="82" height="19" uuid="41b0ec3f-e824-42f5-bd6f-4cdd4ef6589c"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{tematica}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="302" y="7" width="106" height="19" uuid="a85ccc87-a9d9-4112-a476-f8b9aaa69aa8"/>
+				<reportElement x="306" y="0" width="106" height="19" uuid="a85ccc87-a9d9-4112-a476-f8b9aaa69aa8"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombreTutor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="420" y="7" width="99" height="20" uuid="b2ab3c5c-6281-4f11-a0e1-a4251f8ee073"/>
+				<reportElement x="430" y="0" width="99" height="20" uuid="b2ab3c5c-6281-4f11-a0e1-a4251f8ee073"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
@@ -162,18 +156,40 @@
 				<textFieldExpression><![CDATA[$F{programa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="107" y="6" width="100" height="20" uuid="d51cbf82-230f-4a48-a30b-2eeb27fc4fcc"/>
+				<reportElement x="107" y="0" width="100" height="20" uuid="d51cbf82-230f-4a48-a30b-2eeb27fc4fcc"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="207" y="1" width="82" height="19" uuid="41b0ec3f-e824-42f5-bd6f-4cdd4ef6589c"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tematica}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="23"/>
 		<band height="24"/>
 	</detail>
 	<columnFooter>
-		<band height="52" splitType="Stretch"/>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="386" y="32" width="143" height="20" uuid="6029c1da-9f10-42cd-8fa8-a271b0c0c4f7"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Solicitudes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="529" y="32" width="42" height="20" uuid="1218e045-aae9-4cc9-b75f-059acc2256b4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="73" splitType="Stretch">
