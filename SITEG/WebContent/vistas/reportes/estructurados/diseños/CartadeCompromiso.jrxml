@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CartadeCompromiso" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c6e8b270-1fca-4202-8a30-30235068135c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<field name="nombreTutor" class="java.lang.String"/>
+	<field name="cedulaProfesor" class="java.lang.String"/>
+	<field name="tituloTeg" class="java.lang.String"/>
+	<field name="cedulaEstudiante" class="java.lang.String"/>
+	<field name="nombreEstudiante" class="java.lang.String"/>
+	<field name="apellidoEstudiante" class="java.lang.String"/>
+	<field name="apellidoTutor" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="480" y="6" width="63" height="66" uuid="2361ec88-5180-41bb-9bfa-9f8ae75b90c2"/>
+				<imageExpression><![CDATA["C:\\Documents and Settings\\jaimes\\Escritorio\\SITEG\\WebContent\\public\\imagenes\\reportes\\logo dcyt.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="10" y="6" width="81" height="66" uuid="42d09b95-9d1f-4579-9afa-10c0e92d7751"/>
+				<imageExpression><![CDATA["C:\\Documents and Settings\\jaimes\\Escritorio\\SITEG\\WebContent\\public\\imagenes\\reportes\\Dibujo.JPG"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="91" y="6" width="389" height="66" uuid="00ccb7c5-5285-4bc4-8c9d-2440b66d51cf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIVERSIDAD CENTROCCIDENTAL
+“LISANDRO ALVARADO”
+DECANATO DE CIENCIAS Y TECNOLOGÍA
+COMITÉ DE TRABAJO DE GRADO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="433" y="15" width="100" height="20" uuid="e164c0f7-e957-40b6-b09a-4a70d45bbb65"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="354" y="15" width="100" height="20" uuid="4a8de898-a424-42d8-9c2b-4502bdf335f8"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Barquisimeto]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="194" y="22" width="146" height="22" uuid="c6e5c22e-108d-43be-b3f7-b29e64b5601d"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CARTA COMPROMISO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="315" splitType="Stretch">
+			<staticText>
+				<reportElement x="220" y="255" width="100" height="20" uuid="79e4c7e6-6150-4081-8b97-4cf651c56de6"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Atentamente.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="275" width="23" height="20" uuid="ed5de11b-9a35-4c5f-a94c-333ab160216a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Ing. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="295" width="23" height="20" uuid="05e5d05d-70d1-4a7c-b9c0-e550e9c4e7b0"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[C.I.: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="208" y="295" width="146" height="20" uuid="9f62da99-7997-44a6-bae8-00438222f3c5"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cedulaProfesor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="208" y="275" width="146" height="20" uuid="fe047f35-51ef-4f9e-ac2e-ebc8d5806891"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[______________________]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="21" width="100" height="20" uuid="e6624797-4633-4f59-8083-ae73e461e28a"/>
+				<textFieldExpression><![CDATA[$F{nombreTutor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="21" width="100" height="20" uuid="3cdc2457-85ec-43e8-a08d-f06c9b73c1fb"/>
+				<textFieldExpression><![CDATA[$F{apellidoTutor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="53" width="100" height="20" uuid="ccf7d6c6-c8e6-42eb-b0fc-53484427f608"/>
+				<textFieldExpression><![CDATA[$F{cedulaProfesor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="256" y="53" width="54" height="20" uuid="e2fc6da9-ea21-4d5a-bc65-5d4d8709a1d6"/>
+				<textFieldExpression><![CDATA[$F{nombreEstudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="304" y="53" width="64" height="20" uuid="9b6a8190-84fc-4c15-9b83-d3115b2b099f"/>
+				<textFieldExpression><![CDATA[$F{apellidoEstudiante}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="11" width="533" height="194" uuid="83e84b43-312a-4cae-bae0-48a02312d61e"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[
+	Por medio de la presente hago constar que mi persona ______________________
+
+C.I: ________    , acepto ser el tutor del  estudiante ______________         C.I: _______          en la
+
+realización del trabajo especial de grado titulado: ________________________________,
+
+y me comprometo a asumir las funciones y responsabilidades que este trabajo ameriten.
+
+Sin más que agregar, agradeciendo su atención se despide]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="396" y="53" width="58" height="20" uuid="18b7ca1b-7c37-4a2f-9001-4283af0dc290"/>
+				<textFieldExpression><![CDATA[$F{cedulaEstudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="256" y="73" width="283" height="20" uuid="6a00a94a-e18f-448c-8721-6f6594fdf794"/>
+				<textFieldExpression><![CDATA[$F{tituloTeg}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="194" height="20" uuid="1486f0c6-99a2-4d65-af75-4ca45230cf84"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[FOR-TEG-001. REV.00.]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="129" y="0" width="100" height="20" uuid="19f8b432-71c8-4080-af7f-41cb2f0bb0ca"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
