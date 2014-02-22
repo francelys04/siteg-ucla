@@ -421,6 +421,9 @@ public class CReporteProyecto extends CGeneral {
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbTematica.setValue("");
+		cmbArea.setDisabled(true);
+		cmbTematica.setDisabled(true);
+		cmbEstatus.setDisabled(true);
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
 	}
