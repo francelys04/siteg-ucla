@@ -84,7 +84,7 @@ public class CReporteProfesorTeg extends CGeneral {
 	 * recibido del catalogo exista, tambien se buscan todos los programas
 	 * disponibles, adicionando un nuevo item donde se puede seleccionar la
 	 * opcion de "Todos", junto a esto se tiene una lista previamente cargada de
-	 * manera estatica los estatus de la defensa y se llenan los campos
+	 * manera estatica los estatus de proyecto y se llenan los campos
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
 	 * este controlador.
 	 */

@@ -98,7 +98,7 @@ public class CReporteTeg extends CGeneral {
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
 	 * seleccionar la opcion de "Todos", junto a esto se tiene una lista
-	 * previamente cargada de manera estatica, los estatus de la defensa y se
+	 * previamente cargada de manera estatica, los estatus de teg y se
 	 * llena una lista del mismo en el componente de la vista.
 	 */
 	@Override

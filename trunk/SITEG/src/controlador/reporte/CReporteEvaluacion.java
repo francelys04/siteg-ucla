@@ -251,11 +251,9 @@ public class CReporteEvaluacion extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite generar un reporte, dado a un programa, area y
-	 * tematica se generara una lista con las evaluaciones de factibilidad o
-	 * defensa, dependiendo de esta seleccion, mediante el componente
-	 * "Jasperreport" donde se mapea una serie de parametros y una lista
-	 * previamente cargada que seran los datos que se muestra en el documento.
+	 * Metodo que permite dado a un programa, area y tematica, generar una
+	 * lista con las evaluaciones de factibilidad o defensa, dependiendo de esta
+	 * seleccion, donde se cargara un fichero con los datos resultante de esta.
 	 */
 	@Listen("onClick = #btnGenerar")
 	public void generarReporteDefensa() throws JRException {
@@ -2502,7 +2500,7 @@ public class CReporteEvaluacion extends CGeneral {
 	}
 
 	/*
-	 * Metdo que permite exportar en un archivo plano, los datos previamente
+	 * Metodo que permite exportar en un archivo plano, los datos previamente
 	 * cargados.
 	 */
 	@Listen("onClick= #btnExportarPlano")

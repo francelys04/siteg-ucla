@@ -68,19 +68,16 @@ import servicio.SEstudiante;
 @Controller
 public class CReporteProyecto extends CGeneral {
 
-	public CReporteProyecto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-
+	private String[] estatusTeg = { "Todos", "Proyecto Registrado",
+			"Proyecto Factible",
+			"Proyecto deTrabajo Especial de Grado en Desarrollo",
+			"Avances Finalizados del Proyecto" };
+	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
+	List<Tematica> tematicas = new ArrayList<Tematica>();
+	List<Programa> programas = new ArrayList<Programa>();
+	long idTematica = 0;
+	long idArea = 0;
+	
 	@Wire
 	private Window wdwReporteProyecto;
 	@Wire
@@ -98,22 +95,14 @@ public class CReporteProyecto extends CGeneral {
 	@Wire
 	private Jasperreport jstVistaPrevia;
 
-	private String[] estatusTeg = { "Todos", "Proyecto Registrado",
-			"Proyecto Factible",
-			"Proyecto deTrabajo Especial de Grado en Desarrollo",
-			"Avances Finalizados del Proyecto" };
-	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
-	List<Tematica> tematicas = new ArrayList<Tematica>();
-	List<Programa> programas = new ArrayList<Programa>();
-	long idTematica = 0;
-	long idArea = 0;
+	
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista, tambien se buscan todos los programas
 	 * disponibles, adicionando un nuevo item donde se puede seleccionar la
 	 * opcion de "Todos", junto a esto se tiene una lista previamente cargada de
-	 * manera estatica los estatus o roles del profesor y se llenan los campos
+	 * manera estatica los estatus de proyecto y se llenan los campos
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
 	 * este controlador.
 	 */
