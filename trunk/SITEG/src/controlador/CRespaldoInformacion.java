@@ -202,7 +202,7 @@ public class CRespaldoInformacion extends CGeneral {
 			lista.add(archivoBD);
 	            
 	        pb = new ProcessBuilder(lista);
-	        pb.environment().put("PGPASSWORD", ("francelys0412"));
+	        pb.environment().put("PGPASSWORD", ("equipo2"));
 	        pb.redirectErrorStream(true);
 	        p = pb.start();       
 	        Messagebox.show("Restauracion en proceso",
@@ -227,7 +227,7 @@ public class CRespaldoInformacion extends CGeneral {
 		String driver = "org.postgresql.Driver";
 		String connectString = "jdbc:postgresql://localhost:5432/siteg1";
 		String user = "postgres";
-		String password = "francelys0412";
+		String password = "equipo2";
 		    try {
 		Class.forName(driver);
 		Connection con = DriverManager.getConnection(connectString, user , password);
@@ -255,7 +255,7 @@ public class CRespaldoInformacion extends CGeneral {
 		String driver = "org.postgresql.Driver";
 		String connectString = "jdbc:postgresql://localhost:5432/siteg1";
 		String user = "postgres";
-		String password = "francelys0412";
+		String password = "equipo2";
 		    try {
 		Class.forName(driver);
 		Connection con = DriverManager.getConnection(connectString, user , password);
