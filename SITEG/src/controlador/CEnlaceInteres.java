@@ -67,9 +67,8 @@ public class CEnlaceInteres extends CGeneral {
 	@Wire
 	private Media media;
 	@Wire
-	private Button btnEliminarEnlace;
-	@Wire
 	private Window wdwEnlace;
+	private static boolean enlaceCatalogo;
 
 	private long id = 0;
 
@@ -83,6 +82,7 @@ public class CEnlaceInteres extends CGeneral {
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
+		enlaceCatalogo = false;
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -96,11 +96,11 @@ public class CEnlaceInteres extends CGeneral {
 			if (map.get("id") != null) {
 
 				long codigo = (long) map.get("id");
+				enlaceCatalogo = true;
 				EnlaceInteres enlaceInteres = servicioEnlace
 						.buscarEnlace(codigo);
 				txtNombreEnlace.setValue(enlaceInteres.getNombre());
 				txtUrlEnlace.setValue(enlaceInteres.getUrl());
-				btnEliminarEnlace.setDisabled(false);
 				BufferedImage imag;
 				try {
 					imag = ImageIO.read(new ByteArrayInputStream(enlaceInteres
@@ -148,70 +148,86 @@ public class CEnlaceInteres extends CGeneral {
 	@Listen("onClick = #btnGuardarEnlace")
 	public void guardarEnlace() {
 
-		if ((txtNombreEnlace.getText().compareTo("") == 0)
-				|| (txtUrlEnlace.getText().compareTo("") == 0)
-				|| imagen.getSrc() == null) {
-
-			Messagebox.show("Debe completar todos los campos", "Error",
-					Messagebox.OK, Messagebox.ERROR);
+		List<EnlaceInteres> enlaceInteres = servicioEnlace.buscarActivos();
+		if (enlaceInteres.size() == 3 && enlaceCatalogo == false) {
+			Messagebox
+					.show("Ya existen tres enlaces de interes, si desea agregar uno nuevo debe modificar uno ya existente",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
 		} else {
-			Messagebox.show("¿Desea guardar los datos del enlace de interes?",
-					"Dialogo de confirmacion", Messagebox.OK
-							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener<Event>() {
-						public void onEvent(Event evt)
-								throws InterruptedException {
-							if (evt.getName().equals("onOK")) {
 
-								String nombre = txtNombreEnlace.getValue();
-								String url = txtUrlEnlace.getValue();
-								Boolean estatus = true;
-								byte[] image = imagen.getContent()
-										.getByteData();
-								Profesor profesor = ObtenerUsuarioProfesor();
-								Usuario usuario = servicioUsuario
-										.buscarUsuarioPorId(profesor
-												.getUsuario().getId());
-								EnlaceInteres enlace = new EnlaceInteres(id,
-										nombre, url, estatus, image, usuario);
-								servicioEnlace.guardar(enlace);
-								cancelarEnlace();
-								Messagebox
-										.show("Enlace de interes resgistrado satisfactoriamente",
-												"Informacion", Messagebox.OK,
-												Messagebox.INFORMATION);
-							}
-						}
-					});
+			try {
+				if ((txtNombreEnlace.getText().compareTo("") == 0)
+						|| (txtUrlEnlace.getText().compareTo("") == 0)
+						|| imagen.getContent().getByteData() == null) {
 
+					Messagebox.show("Debe completar todos los campos", "Error",
+							Messagebox.OK, Messagebox.ERROR);
+				} else {
+					Messagebox.show(
+							"¿Desea guardar los datos del enlace de interes?",
+							"Dialogo de confirmacion", Messagebox.OK
+									| Messagebox.CANCEL, Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+
+										String nombre = txtNombreEnlace
+												.getValue();
+										String url = txtUrlEnlace.getValue();
+										Boolean estatus = true;
+										byte[] image = imagen.getContent()
+												.getByteData();
+										Profesor profesor = ObtenerUsuarioProfesor();
+										Usuario usuario = servicioUsuario
+												.buscarUsuarioPorId(profesor
+														.getUsuario().getId());
+										EnlaceInteres enlace = new EnlaceInteres(
+												id, nombre, url, estatus,
+												image, usuario);
+										servicioEnlace.guardar(enlace);
+										cancelarEnlace();
+										Messagebox
+												.show("Enlace de interes resgistrado satisfactoriamente",
+														"Informacion",
+														Messagebox.OK,
+														Messagebox.INFORMATION);
+									}
+								}
+							});
+
+				}
+			} catch (Exception e) {
+
+				Messagebox.show("Debe completar todos los campos", "Error",
+						Messagebox.OK, Messagebox.ERROR);
+
+			}
 		}
 
 	}
 
 	/* Metodo que permite la eliminacion logica de una entidad EnlaceInteres */
-	@Listen("onClick = #btnEliminarEnlace")
-	public void eliminarEnlace() {
-
-		Messagebox.show("¿Desea eliminar los datos del enlace de interes?",
-				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event evt) throws InterruptedException {
-						if (evt.getName().equals("onOK")) {
-							EnlaceInteres enlace = servicioEnlace
-									.buscarEnlace(id);
-							enlace.setEstatus(false);
-							servicioEnlace.guardar(enlace);
-							cancelarEnlace();
-							Messagebox.show(
-									"Enlace de interes eliminado exitosamente",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
-
-						}
-					}
-				});
-	}
+	/**
+	 * @Listen("onClick = #btnEliminarEnlace") public void eliminarEnlace() {
+	 * 
+	 *                  Messagebox.show(
+	 *                  "¿Desea eliminar los datos del enlace de interes?",
+	 *                  "Dialogo de confirmacion", Messagebox.OK |
+	 *                  Messagebox.CANCEL, Messagebox.QUESTION, new
+	 *                  org.zkoss.zk.ui.event.EventListener<Event>() { public
+	 *                  void onEvent(Event evt) throws InterruptedException { if
+	 *                  (evt.getName().equals("onOK")) { EnlaceInteres enlace =
+	 *                  servicioEnlace .buscarEnlace(id);
+	 *                  enlace.setEstatus(false);
+	 *                  servicioEnlace.guardar(enlace); cancelarEnlace();
+	 *                  Messagebox.show(
+	 *                  "Enlace de interes eliminado exitosamente",
+	 *                  "Informacion", Messagebox.OK, Messagebox.INFORMATION);
+	 * 
+	 *                  } } }); }
+	 */
 
 	/*
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
@@ -223,7 +239,6 @@ public class CEnlaceInteres extends CGeneral {
 		txtNombreEnlace.setValue("");
 		txtUrlEnlace.setValue("");
 		imagen.setSrc(null);
-		btnEliminarEnlace.setDisabled(true);
 
 	}
 

@@ -8,13 +8,14 @@
 		.pointer { cursor: pointer; }
 		
 		.main {
-            padding : 0 80px;          
+            padding : 0 110px;          
             zoom : 1;
         }
           .main li {
             height: 77px;
             width: 123px;
             position: relative;
+            border-radius: 10px;
             float: left;
             list-style:none outside none;
             margin: 30px 30px 0 0;
@@ -22,9 +23,9 @@
         .main li img {
             height: 77px;
             width: 123px;
-            border:3px solid #DDDDDD;
+            border-radius: 10px;
             position: absolute;
-            -ms-interpolation-mode: bicubic;
+            
         }
 
 	</style>
@@ -317,7 +318,7 @@
 						<script type="text/javascript" src="public/js/zoomer.js" />     
         <script type="text/javascript">      
           zk.afterMount(function() {
-                jq("#zoomArea li").Zoomer({speedView:200,speedRemove:200,altAnim:false,speedTitle:400,debug:false});
+                jq("#zoomArea li").Zoomer({speedView:50,speedRemove:100,altAnim:false,speedTitle:300,debug:false});
             });
         </script>
 		<!-- 	<include src="public/widgets/enlaces.html" /> -->	

@@ -53,8 +53,6 @@ public class CNoticia extends CGeneral {
 	@Wire
 	private Media media;
 	@Wire
-	private Button btnEliminarNoticia;
-	@Wire
 	private Window wdwNoticia;
 
 	private long id = 0;
@@ -82,7 +80,6 @@ public class CNoticia extends CGeneral {
 				Noticia noticia2 = servicioNoticia.buscarNoticia(codigo);
 				txtNombreNoticia.setValue(noticia2.getNombre());
 				txtDescripcionNoticia.setValue(noticia2.getDescripcion());
-				btnEliminarNoticia.setDisabled(false);
 				BufferedImage imag;
 				try {
 					imag = ImageIO.read(new ByteArrayInputStream(noticia2
@@ -118,13 +115,16 @@ public class CNoticia extends CGeneral {
 	public void guardarDescarga() {
 		List<Noticia> noticia = servicioNoticia.buscarActivos();
 		if (noticia.size() == 3 && noticiaCatalogo == false) {
-			Messagebox.show("Ya existen tres noticias debe eliminar una",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			Messagebox
+			.show("Ya existen tres noticias, si desea agregar una nueva debe modificar una ya existente",
+					"Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
 		} else {
 
+			try{
 			if ((txtNombreNoticia.getText().compareTo("") == 0)
 					|| (txtDescripcionNoticia.getText().compareTo("") == 0)
-					|| imagen.getSrc() == null) {
+					|| imagen.getContent().getByteData() == null) {
 				Messagebox.show("Debe completar todos los campos", "Error",
 						Messagebox.OK, Messagebox.ERROR);
 			} else {
@@ -159,10 +159,19 @@ public class CNoticia extends CGeneral {
 							}
 						});
 			}
+			} catch (Exception e) {
+				
+				Messagebox.show("Debe completar todos los campos", "Error",
+						Messagebox.OK, Messagebox.ERROR);
+			
+			}
 		}
+			
+
 	}
 
 	/* Metodo que permite la eliminacion logica de una entidad Noticia */
+	/**
 	@Listen("onClick = #btnEliminarNoticia")
 	public void eliminarNoticia() {
 		Messagebox.show("¿Desea eliminar los datos de la noticia?",
@@ -183,6 +192,7 @@ public class CNoticia extends CGeneral {
 					}
 				});
 	}
+	*/
 
 	/*
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
