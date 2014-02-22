@@ -104,12 +104,12 @@ public class CReporteSolicitudes extends CGeneral {
 	@Listen("onSelect =  #cmbProgramaReporteSolicitud")
 	public void seleccionarPrograma() {
 		if (cmbProgramaReporteSolicitud.getValue().equals("Todos")) {
-			cmbAreaReporteSolicitud.setValue("Todos");
-			cmbTematicaReporteSolicitud.setValue("Todos");
+		
 			areas = servicioArea.buscarActivos();
 			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
 					"", true);
 			areas.add(area);
+			cmbAreaReporteSolicitud.setModel(new ListModelList<AreaInvestigacion>(areas));
 
 		} else {
 			cmbAreaReporteSolicitud.setValue("");
@@ -135,14 +135,10 @@ public class CReporteSolicitudes extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbAreaReporteSolicitud")
 	public void seleccionarArea() {
+		
 		if (cmbAreaReporteSolicitud.getValue().equals("Todos")) {
-
 			cmbTematicaReporteSolicitud.setValue("Todos");
-			tematicas = servicioTematica.buscarActivos();
-			Tematica tema = new Tematica(10000, "Todos", "", true, null);
-			tematicas.add(tema);
-			cmbTematicaReporteSolicitud.setModel(new ListModelList<Tematica>(
-					tematicas));
+			
 		} else {
 			cmbTematicaReporteSolicitud.setValue("");
 			area1 = (AreaInvestigacion) cmbAreaReporteSolicitud
@@ -164,14 +160,7 @@ public class CReporteSolicitudes extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbTematicaReporteSolicitud")
 	public void seleccionarTematica() {
-		if (cmbAreaReporteSolicitud.getValue().equals("Todos")) {
-			Tematica tematica = (Tematica) cmbTematicaReporteSolicitud
-					.getSelectedItem().getValue();
-			cmbAreaReporteSolicitud.setValue(tematica.getareaInvestigacion()
-					.getNombre());
-			System.out.println("pase por el todo");
-
-		}
+		
 		Tematica tematica = (Tematica) cmbTematicaReporteSolicitud
 				.getSelectedItem().getValue();
 		idTematica = tematica.getId();
@@ -256,16 +245,20 @@ public class CReporteSolicitudes extends CGeneral {
 						Map<String, Object> mapa = new HashMap<String, Object>();
 						mapa.put("fechainicio", fechaInicio);
 						mapa.put("fechafin", fechaFin);
+						mapa.put("total", elementos.size());
 
 						// Metodo utilizado para los que de error el preview
 						FileSystemView filesys = FileSystemView
 								.getFileSystemView();
 						String rutaUrl = obtenerDirectorio();
+						System.out.println(rutaUrl);
 						String reporteSrc = rutaUrl
 								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
+						
 
+ 
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);
 
@@ -322,6 +315,7 @@ public class CReporteSolicitudes extends CGeneral {
 						Map<String, Object> mapa = new HashMap<String, Object>();
 						mapa.put("fechainicio", fechaInicio);
 						mapa.put("fechafin", fechaFin);
+						mapa.put("total", elementos.size());
 
 						// Metodo utilizado para los que de error el preview
 						FileSystemView filesys = FileSystemView
@@ -391,6 +385,7 @@ public class CReporteSolicitudes extends CGeneral {
 						Map<String, Object> mapa = new HashMap<String, Object>();
 						mapa.put("fechainicio", fechaInicio);
 						mapa.put("fechafin", fechaFin);
+						mapa.put("total", elementos.size());
 
 						// Metodo utilizado para los que de error el preview
 						FileSystemView filesys = FileSystemView
@@ -460,6 +455,7 @@ public class CReporteSolicitudes extends CGeneral {
 						Map<String, Object> mapa = new HashMap<String, Object>();
 						mapa.put("fechainicio", fechaInicio);
 						mapa.put("fechafin", fechaFin);
+						mapa.put("total", elementos.size());
 
 						// Metodo utilizado para los que de error el preview
 						FileSystemView filesys = FileSystemView
@@ -527,6 +523,7 @@ public class CReporteSolicitudes extends CGeneral {
 						Map<String, Object> mapa = new HashMap<String, Object>();
 						mapa.put("fechainicio", fechaInicio);
 						mapa.put("fechafin", fechaFin);
+						mapa.put("total", elementos.size());
 
 						// Metodo utilizado para los que de error el preview
 						FileSystemView filesys = FileSystemView
@@ -596,6 +593,7 @@ public class CReporteSolicitudes extends CGeneral {
 						Map<String, Object> mapa = new HashMap<String, Object>();
 						mapa.put("fechainicio", fechaInicio);
 						mapa.put("fechafin", fechaFin);
+						mapa.put("total", elementos.size());
 
 						// Metodo utilizado para los que de error el preview
 						FileSystemView filesys = FileSystemView
@@ -665,6 +663,7 @@ public class CReporteSolicitudes extends CGeneral {
 						Map<String, Object> mapa = new HashMap<String, Object>();
 						mapa.put("fechainicio", fechaInicio);
 						mapa.put("fechafin", fechaFin);
+						mapa.put("total", elementos.size());
 
 						// Metodo utilizado para los que de error el preview
 						FileSystemView filesys = FileSystemView
@@ -732,6 +731,7 @@ public class CReporteSolicitudes extends CGeneral {
 						Map<String, Object> mapa = new HashMap<String, Object>();
 						mapa.put("fechainicio", fechaInicio);
 						mapa.put("fechafin", fechaFin);
+						mapa.put("total", elementos.size());
 
 						// Metodo utilizado para los que de error el preview
 						FileSystemView filesys = FileSystemView
@@ -800,6 +800,7 @@ public class CReporteSolicitudes extends CGeneral {
 						Map<String, Object> mapa = new HashMap<String, Object>();
 						mapa.put("fechainicio", fechaInicio);
 						mapa.put("fechafin", fechaFin);
+						mapa.put("total", elementos.size());
 
 						// Metodo utilizado para los que de error el preview
 						FileSystemView filesys = FileSystemView

@@ -189,8 +189,7 @@ public class CReporteSolicitud extends CGeneral {
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() {
 		if (cmbPrograma.getValue().equals("Todos")) {
-			cmbArea.setValue("Todos");
-			cmbTematica.setValue("Todos");
+			
 			areas = servicioArea.buscarActivos();
 			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
 					"", true);
@@ -221,11 +220,7 @@ public class CReporteSolicitud extends CGeneral {
 		if (cmbArea.getValue().equals("Todos")) {
 
 			cmbTematica.setValue("Todos");
-			tematicas = servicioTematica.buscarActivos();
-			Tematica tema = new Tematica(10000, "Todos", "", true, null);
-			tematicas.add(tema);
-			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
-		} else {
+					} else {
 			cmbTematica.setValue("");
 			area1 = (AreaInvestigacion) cmbArea.getSelectedItem().getValue();
 			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
@@ -242,13 +237,7 @@ public class CReporteSolicitud extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
-		if (cmbArea.getValue().equals("Todos")) {
-			Tematica tematica = (Tematica) cmbTematica.getSelectedItem()
-					.getValue();
-			cmbArea.setValue(tematica.getareaInvestigacion().getNombre());
-			System.out.println("pase por el todo");
-
-		}
+		
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
 		idTematica = tematica.getId();
 	}
