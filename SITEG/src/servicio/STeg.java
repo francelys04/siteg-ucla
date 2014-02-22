@@ -184,7 +184,8 @@ public class STeg {
 				estatus[9], interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
-	//hizo kairin nuevo
+	
+	/* Buscar los teg que tengan estatus Factibilidad Evaluada de acuerdo a un programa */
 
 	public List<Teg> buscarTegPorProgramaParaRegistrarFactibilidad(Programa programa) {
 		// TODO Auto-generated method stub
@@ -193,7 +194,8 @@ public class STeg {
 				estatus[3], interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
-	//hizo kairin nuevo
+	
+	/* Buscar los teg que tengan estatus Solicitando Registro de acuerdo a un programa */
 
 	public List<Teg> buscarTegPorProgramaParaRegistrarTeg(Programa programa) {
 		// TODO Auto-generated method stub
@@ -203,7 +205,7 @@ public class STeg {
 		return tegs;
 	}
 
-	//hizo kairin nuevo
+	/* Buscar los teg que tengan estatus Proyecto Registrado de acuerdo a un programa */
 
 	public List<Teg> buscarTegPorProgramaParaAsignarComision(Programa programa) {
 		// TODO Auto-generated method stub
@@ -212,6 +214,8 @@ public class STeg {
 				estatus[1], interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
+	
+	/* Buscar los teg que tengan estatus Jurado Asignado de acuerdo a un programa */
 
 	public List<Teg> buscarTegPorProgramaParaDefensa2(Programa programa) {
 		// TODO Auto-generated method stub
