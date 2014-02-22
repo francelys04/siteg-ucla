@@ -35,6 +35,21 @@ public class Solicitud{
 		this.teg = teg;
 		this.nombreEstudiante = nombreEstudiante;
 	}
+	
+	public Solicitud(String tituloTeg, Date fechaTeg, String cedulaProfesor,
+			String nombreTutor, String apellidoTutor, String cedulaEstudiante,
+			String apellidoEstudiante, String nombreEstudiante) {
+		super();
+		this.tituloTeg = tituloTeg;
+		this.fechaTeg = fechaTeg;
+		this.cedulaProfesor = cedulaProfesor;
+		this.nombreTutor = nombreTutor;
+		this.apellidoTutor = apellidoTutor;
+		this.cedulaEstudiante = cedulaEstudiante;
+		this.apellidoEstudiante = apellidoEstudiante;
+		this.nombreEstudiante = nombreEstudiante;
+	}
+
 	public Solicitud(String tituloTeg, String nombreTutor,
 			String nombreEstudiante,
 			String programa, String tematica, String area) {
@@ -62,9 +77,12 @@ public class Solicitud{
 		this.area = area;
 		this.estatus = estatus;
 	}
+
+	
 	
 	
 
+	
 	public Teg getTeg() {
 		return teg;
 	}
@@ -227,6 +245,9 @@ public class Solicitud{
 		this.area = area;
 		this.descripcionArea = descripcionArea;
 	}
+	
+	
+	
 	
 	
 	
