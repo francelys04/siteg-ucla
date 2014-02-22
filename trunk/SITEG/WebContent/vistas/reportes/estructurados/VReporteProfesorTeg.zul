@@ -1,5 +1,6 @@
-<window id="wdwReporteProfesorTeg" title="Trabajos Especiales de Grado asociados a un profesor"
-	border="normal" width="100%" height="525px" closable="true"
+<window id="wdwReporteProfesorTeg"
+	title="Trabajos Especiales de Grado asociados a un profesor"
+	border="normal" width="100%" height="565px" closable="true"
 	apply="controlador.reporte.CReporteProfesorTeg">
 
 	<style dynamic="true">
@@ -42,6 +43,17 @@
 
 	<separator />
 	<separator />
+	<label value="(*) "
+		style="font-weight:bold;color:red;margin-left:2%">
+	</label>
+	<label value="Campos Obligatorios"
+		style="font-weight:bold;color: rgb(0, 84, 122)">
+	</label>
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+	<separator />
 
 	<groupbox width="95%" height="450px"
 		style="margin-left:2%;margin-right:1%">
@@ -55,16 +67,27 @@
 
 				<row>
 					<hbox>
-						<label value="Fecha Inicio:"
-							style="font-weight:bold" />
+
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red">
+							</label>
+							<label value="Fecha Inicio:"
+								style="font-weight:bold" />
+						</hlayout>
 
 						<datebox id="dtbInicioReporteProfesorTeg"
 							cols="12" readonly="true" style="margin-left:50px" width="150px"
-							format="dd/MM/yyyy" >
+							format="dd/MM/yyyy">
 						</datebox>
 
-						<label value="Fecha Fin:"
-							style="font-weight:bold;margin-left:60px" />
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red;margin-left:60px">
+							</label>
+							<label value="Fecha Fin:"
+								style="font-weight:bold" />
+						</hlayout>
 
 						<datebox id="dtbFinReporteProfesorTeg" cols="12"
 							width="150px" style="margin-left:30px" readonly="true"
@@ -83,7 +106,11 @@
 			<rows>
 
 				<row>
+
 					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
 						<label value="Programa:"
 							style="font-weight:bold" />
 					</hlayout>
@@ -98,8 +125,13 @@
 				</row>
 
 				<row>
-					<label value="Área: " style="font-weight:bold" />
 
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label value="Área: " style="font-weight:bold" />
+					</hlayout>
 
 					<hbox>
 
@@ -112,9 +144,13 @@
 						</combobox>
 
 						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red;margin-left:50px">
+							</label>
 							<label value="Temática"
-								style="font-weight:bold;margin-left:50px" />
+								style="font-weight:bold" />
 						</hlayout>
+
 						<combobox id="cmbTematicaReporteProfesorTeg"
 							style="margin-left:30px" width="200px" readonly="true">
 							<template name="model">
@@ -129,7 +165,13 @@
 
 				<row>
 
-					<label value="Profesor:" style="font-weight:bold" />
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label value="Profesor:"
+							style="font-weight:bold" />
+					</hlayout>
 
 					<hbox>
 						<textbox id="txtCedulaReporteProfesorTeg"
@@ -143,9 +185,14 @@
 				</row>
 
 				<row>
+				
 					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
 						<label value="Estatus" style="font-weight:bold" />
 					</hlayout>
+				
 					<combobox id="cmbEstatusReporteProfesorTeg"
 						style="margin-left:5px" width="200px" readonly="true">
 						<template name="model">

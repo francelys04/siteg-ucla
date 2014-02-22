@@ -28,6 +28,7 @@ import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
@@ -110,6 +111,10 @@ public class CReporteEvaluacion extends CGeneral {
 	private Listbox ltbElegiProgramaAreaTematica1;
 	@Wire
 	private Button btnExportarPlano;
+	@Wire
+	private Window wdwReporteEvaluaciones;
+	@Wire
+	private Groupbox grbReporteEvaluaciones;
 	private static String NombreTxt;
 
 	/*
@@ -300,7 +305,11 @@ public class CReporteEvaluacion extends CGeneral {
 						nombreestatus, fechaInicio, fechaFin);
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
 					elementos1.clear();
+
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
 								.buscarEstudiantePorTeg(t);
@@ -347,7 +356,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -367,7 +376,7 @@ public class CReporteEvaluacion extends CGeneral {
 									.getObservacion();
 							String nombreprofesor1 = t.getFactibilidad()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getFactibilidad().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -378,8 +387,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -395,7 +404,7 @@ public class CReporteEvaluacion extends CGeneral {
 
 				} else {
 					Messagebox
-							.show("No ha informacion disponible para este intervalo");
+							.show("No hay informacion disponible para este intervalo");
 				}
 			}
 			/*
@@ -411,6 +420,10 @@ public class CReporteEvaluacion extends CGeneral {
 						programa1, fechaInicio, fechaFin);
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -457,7 +470,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -477,7 +490,7 @@ public class CReporteEvaluacion extends CGeneral {
 									.getObservacion();
 							String nombreprofesor1 = t.getFactibilidad()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getFactibilidad().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -488,8 +501,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -525,6 +538,10 @@ public class CReporteEvaluacion extends CGeneral {
 						nombreestatus, tematica1, fechaInicio, fechaFin);
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -571,7 +588,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -591,7 +608,7 @@ public class CReporteEvaluacion extends CGeneral {
 									.getObservacion();
 							String nombreprofesor1 = t.getFactibilidad()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getFactibilidad().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -602,8 +619,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -638,6 +655,10 @@ public class CReporteEvaluacion extends CGeneral {
 						fechaInicio, fechaFin, nombreestatus);
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -684,7 +705,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -704,7 +725,7 @@ public class CReporteEvaluacion extends CGeneral {
 									.getObservacion();
 							String nombreprofesor1 = t.getFactibilidad()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getFactibilidad().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -715,8 +736,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -753,6 +774,10 @@ public class CReporteEvaluacion extends CGeneral {
 						fechaInicio, fechaFin, nombreestatus);
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -799,7 +824,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -819,7 +844,7 @@ public class CReporteEvaluacion extends CGeneral {
 									.getObservacion();
 							String nombreprofesor1 = t.getFactibilidad()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getFactibilidad().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -830,8 +855,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -870,6 +895,10 @@ public class CReporteEvaluacion extends CGeneral {
 						nombreestatus, tematica1, fechaInicio, fechaFin);
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -916,7 +945,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -936,7 +965,7 @@ public class CReporteEvaluacion extends CGeneral {
 									.getObservacion();
 							String nombreprofesor1 = t.getFactibilidad()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getFactibilidad().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -947,8 +976,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -992,6 +1021,10 @@ public class CReporteEvaluacion extends CGeneral {
 				}
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -1039,7 +1072,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -1059,7 +1092,7 @@ public class CReporteEvaluacion extends CGeneral {
 									.getObservacion();
 							String nombreprofesor1 = t.getFactibilidad()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getFactibilidad().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -1070,8 +1103,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -1109,6 +1142,10 @@ public class CReporteEvaluacion extends CGeneral {
 				}
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -1155,7 +1192,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -1175,7 +1212,7 @@ public class CReporteEvaluacion extends CGeneral {
 									.getObservacion();
 							String nombreprofesor1 = t.getFactibilidad()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getFactibilidad().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -1186,8 +1223,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -1232,6 +1269,10 @@ public class CReporteEvaluacion extends CGeneral {
 				}
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -1278,7 +1319,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -1309,8 +1350,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -1355,6 +1396,10 @@ public class CReporteEvaluacion extends CGeneral {
 				}
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -1401,7 +1446,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -1421,7 +1466,7 @@ public class CReporteEvaluacion extends CGeneral {
 									.getObservacion();
 							String nombreprofesor1 = t.getFactibilidad()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getFactibilidad().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -1432,8 +1477,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -1479,6 +1524,10 @@ public class CReporteEvaluacion extends CGeneral {
 				}
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -1525,7 +1574,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -1545,7 +1594,7 @@ public class CReporteEvaluacion extends CGeneral {
 									.getObservacion();
 							String nombreprofesor1 = t.getFactibilidad()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getFactibilidad().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -1556,8 +1605,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}
@@ -1605,6 +1654,10 @@ public class CReporteEvaluacion extends CGeneral {
 				}
 
 				if (teg.size() != 0) {
+
+					wdwReporteEvaluaciones.setWidth("3200px");
+					grbReporteEvaluaciones.setWidth("3150px");
+
 					elementos1.clear();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -1651,7 +1704,7 @@ public class CReporteEvaluacion extends CGeneral {
 							Date hora = t.getDefensa().getHora();
 							String nombreprofesor = t.getDefensa()
 									.getProfesor().getNombre()
-									+ ""
+									+ " "
 									+ t.getDefensa().getProfesor()
 											.getApellido();
 							elementos1.add(new Proyecto(titulo, descripcionTeg,
@@ -1682,8 +1735,8 @@ public class CReporteEvaluacion extends CGeneral {
 									direccionEstudiante, programa,
 									correoPrograma, descripcionPrograma,
 									tematica, descripcionTematica, area,
-									descripcionArea, fecha2, observacion,
-									nombreprofesor1));
+									descripcionArea, fecha2, nombreprofesor1,
+									observacion));
 
 						}
 					}

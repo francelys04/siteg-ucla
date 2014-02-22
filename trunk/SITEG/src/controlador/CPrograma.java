@@ -68,6 +68,7 @@ public class CPrograma extends CGeneral {
 	private Window wdwPrograma;
 	@Wire
 	private Image imagenx;
+	private static String cedulaProfesor;
 
 	
 	long id = 0;
@@ -89,7 +90,7 @@ public class CPrograma extends CGeneral {
 		if (map != null) {
 			if (map.get("cedula") != null){
 				
-				String cedulaProfesor = (String) map.get("cedula");
+				cedulaProfesor = (String) map.get("cedula");
 				Profesor profesorDirector = servicioProfesor.buscarProfesorPorCedula(cedulaProfesor);
 				txtDirectorPrograma.setValue(profesorDirector.getNombre() + " " + profesorDirector.getApellido());
 				}
@@ -107,7 +108,8 @@ public class CPrograma extends CGeneral {
 				txtNombrePrograma.setValue(programa.getNombre());
 				txtDescripcionPrograma.setValue(programa.getDescripcion());
 				txtCorreoPrograma.setValue(programa.getCorreo());
-				txtDirectorPrograma.setValue(programa.getDirectorPrograma().getCedula());
+				Profesor profesorDirector = servicioProfesor.buscarProfesorPorCedula(cedulaProfesor);
+				txtDirectorPrograma.setValue(profesorDirector.getNombre() + " " + profesorDirector.getApellido());
 				btnEliminarPrograma.setDisabled(false);
 				map.clear();
 				map = null;

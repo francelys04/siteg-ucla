@@ -270,7 +270,8 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-								.show("No ha informacion disponible para este intervalo");
+						.show("No hay informacion disponible para esta seleccion",
+								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 					}
 				}
 
@@ -337,7 +338,8 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-								.show("No ha informacion disponible para este intervalo");
+						.show("No hay informacion disponible para esta seleccion",
+								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 					}
 				}
 				/*
@@ -407,7 +409,8 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-								.show("No ha informacion disponible para este intervalo");
+						.show("No hay informacion disponible para esta seleccion",
+								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 					}
 				}
 				/*
@@ -476,9 +479,14 @@ public class CReporteSolicitudes extends CGeneral {
 						JasperViewer.viewReport(jasperPrint, false);
 
 					} else {
+						
 						Messagebox
-								.show("No ha informacion disponible para este intervalo");
+						.show("No hay informacion disponible para esta seleccion",
+								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+						
+						
 					}
+					
 				}
 				/*
 				 * seleccione solo un area diferente
@@ -545,7 +553,8 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-								.show("No ha informacion disponible para este intervalo");
+						.show("No hay informacion disponible para esta seleccion",
+								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 					}
 				}
 
@@ -615,7 +624,8 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-								.show("No ha informacion disponible para este intervalo");
+						.show("No hay informacion disponible para esta seleccion",
+								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 					}
 				}
 				/*
@@ -685,7 +695,8 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-								.show("No ha informacion disponible para este intervalo");
+						.show("No hay informacion disponible para esta seleccion",
+								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 					}
 				}
 				/*
@@ -753,7 +764,8 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-								.show("No ha informacion disponible para este intervalo");
+						.show("No hay informacion disponible para esta seleccion",
+								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 					}
 				}
 				/*
@@ -821,9 +833,14 @@ public class CReporteSolicitudes extends CGeneral {
 						JasperViewer.viewReport(jasperPrint, false);
 
 					} else {
+						
+						
 						Messagebox
-								.show("No ha informacion disponible para este intervalo");
+						.show("No hay informacion disponible para esta seleccion",
+								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+						
 					}
+
 				}
 
 			}
