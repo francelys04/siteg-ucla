@@ -305,7 +305,6 @@ public class CReporteDefensa extends CGeneral {
 
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
-		cmbArea.setDisabled(true);
 		cmbTematica.setValue("");
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());

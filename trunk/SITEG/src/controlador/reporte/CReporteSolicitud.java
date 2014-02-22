@@ -153,8 +153,8 @@ public class CReporteSolicitud extends CGeneral {
 
 		cancelar();
 		btnExportarPlano.setDisabled(true);
-		Programa programaa = new Programa(987, "Todos", "", "", true, null);
 		programas = servicioPrograma.buscarActivas();
+		Programa programaa = new Programa(987, "Todos", "", "", true, null);
 		programas.add(programaa);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
 

@@ -1,8 +1,9 @@
 <window id="wdwReporteProfesor"
 	title="Profesores con los roles que desempeñan en los Trabajos Especiales de Grado"
-	border="normal" width="100%" height="400px" closable="true"  apply="controlador.reporte.CReporteProfesor">
+	border="normal" width="100%" height="400px" closable="true"
+	apply="controlador.reporte.CReporteProfesor">
 
-	
+
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
 		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
@@ -82,7 +83,8 @@
 		style="font-weight:bold;color:red;margin-center:2%">
 		</label> -->
 
-	<label value="Profesores con los roles que desempeñan en los Trabajos Especiales de Grado"
+	<label
+		value="Profesores con los roles que desempeñan en los Trabajos Especiales de Grado"
 		style="font-weight:bold;margin-left:25%;margin-right:25%">
 	</label>
 	<separator />
@@ -138,7 +140,7 @@
 						</template>
 					</combobox>
 					<hlayout>
-					
+
 						<label value="Rol del profesor::"
 							style="font-weight:bold" />
 					</hlayout>
@@ -156,19 +158,21 @@
 						<label value="Fecha Inicio Registro:"
 							style="font-weight:bold" />
 					</hlayout>
-							
-					<datebox id="dtbFechaInicio" cols="12" width="150px" readonly="true"
-						tabindex="3" format="dd/MM/yyyy" tooltip="pupInicioLapso"
-						style="margin-right:15px"  onCreate="self.value = new Date()">
+
+					<datebox id="dtbFechaInicio" cols="12" width="150px"
+						readonly="true" tabindex="3" format="dd/MM/yyyy"
+						tooltip="pupInicioLapso" style="margin-right:15px"
+						onCreate="self.value = new Date()">
 					</datebox>
 
 					<hlayout width="100%">
 						<label value="Fecha Fin Registro:"
 							style="font-weight:bold" />
 					</hlayout>
-					<datebox id="dtbFechaFin" cols="12" width="150px" readonly="true"
-						tabindex="3" format="dd/MM/yy" tooltip="pupFinLapso"
-						style="margin-right:15px"  onCreate="self.value = new Date()">
+					<datebox id="dtbFechaFin" cols="12" width="150px"
+						readonly="true" tabindex="3" format="dd/MM/yy"
+						tooltip="pupFinLapso" style="margin-right:15px"
+						onCreate="self.value = new Date()">
 					</datebox>
 
 				</row>
@@ -192,19 +196,19 @@
 				<separator />
 				<div sclass="btn-group">
 
-						<button id="btnGenerarReporteProfesor"
-							label="Generar" sclass="btn" tooltip="pupGenerarReporte"
-							image="/public/imagenes/iconos/generar.png" tabindex="13">
-						</button>
-						<button id="btnCancelarReporteProfesor"
-							label="Cancelar" sclass="btn" tooltip="pupCancelarReporte"
-							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
-						</button>
-						<button id="btnSalirReporteProfesor" width="110px"
-							label="Salir" sclass="btn" tooltip="pupSalirReporte"
-							image="/public/imagenes/iconos/salir.png" tabindex="14">
-						</button>
-					
+					<button id="btnGenerarReporteProfesor"
+						label="Generar" sclass="btn" tooltip="pupGenerarReporte"
+						image="/public/imagenes/iconos/generar.png" tabindex="13">
+					</button>
+					<button id="btnCancelarReporteProfesor"
+						label="Cancelar" sclass="btn" tooltip="pupCancelarReporte"
+						image="/public/imagenes/iconos/limpiar.png" tabindex="14">
+					</button>
+					<button id="btnSalirReporteProfesor" width="110px"
+						label="Salir" sclass="btn" tooltip="pupSalirReporte"
+						image="/public/imagenes/iconos/salir.png" tabindex="14">
+					</button>
+
 					<separator />
 				</div>
 

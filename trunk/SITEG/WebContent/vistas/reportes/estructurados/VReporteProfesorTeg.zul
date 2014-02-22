@@ -77,8 +77,8 @@
 						</hlayout>
 
 						<datebox id="dtbInicioReporteProfesorTeg"
-							cols="12" readonly="true" style="margin-left:50px" width="150px"
-							format="dd/MM/yyyy">
+							cols="12" style="margin-left:50px" width="150px" readonly="true"
+							format="dd/MM/yyyy" onCreate="self.value = new Date()">
 						</datebox>
 
 						<hlayout>
@@ -91,7 +91,7 @@
 
 						<datebox id="dtbFinReporteProfesorTeg" cols="12"
 							width="150px" style="margin-left:30px" readonly="true"
-							format="dd/MM/yyyy">
+							format="dd/MM/yyyy" onCreate="self.value = new Date()">
 						</datebox>
 					</hbox>
 
@@ -101,7 +101,7 @@
 
 		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 			<columns>
-				<column width="15%" height="60px" />
+				<column width="135px" height="60px" />
 			</columns>
 			<rows>
 
@@ -185,14 +185,15 @@
 				</row>
 
 				<row>
-				
+
 					<hlayout>
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Estatus" style="font-weight:bold" />
+						<label value="Estatus:"
+							style="font-weight:bold" />
 					</hlayout>
-				
+
 					<combobox id="cmbEstatusReporteProfesorTeg"
 						style="margin-left:5px" width="200px" readonly="true">
 						<template name="model">

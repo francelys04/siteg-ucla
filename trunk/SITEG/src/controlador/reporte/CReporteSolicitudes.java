@@ -84,9 +84,9 @@ public class CReporteSolicitudes extends CGeneral {
 	public void inicializar(Component comp) {
 		cmbEstatusReporteSolicitud.setModel(new ListModelList<String>(
 				estatusSolicitud));
-
-		Programa programaa = new Programa(987, "Todos", "", "", true, null);
+		
 		programas = servicioPrograma.buscarActivas();
+		Programa programaa = new Programa(987, "Todos", "", "", true, null);
 		programas.add(programaa);
 		cmbProgramaReporteSolicitud.setModel(new ListModelList<Programa>(
 				programas));
