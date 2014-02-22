@@ -64,7 +64,6 @@ import org.zkoss.zul.Window;
 
 import configuracion.GeneradorBeans;
 import controlador.CGeneral;
-import controlador.catalogo.CCatalogoTeg;
 
 import servicio.SAreaInvestigacion;
 import servicio.SPrograma;
@@ -79,7 +78,6 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 	Programa programa = new Programa();
 	AreaInvestigacion area = new AreaInvestigacion();
 	Tematica tematica = new Tematica();
-	CCatalogoTeg catalogo = new CCatalogoTeg();
 	List<Teg> tegs = new ArrayList();
 	long idTeg = 0;
 

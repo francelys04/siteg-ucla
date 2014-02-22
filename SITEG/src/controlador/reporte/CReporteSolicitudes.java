@@ -49,7 +49,6 @@ public class CReporteSolicitudes extends CGeneral {
 	long idTematica = 0;
 	private static Date fechaInicio;
 	private static Date fechaFin;
-
 	private String[] estatusSolicitud = { "Aceptada", "Rechazada",
 			"Por Revisar", "Todos" };
 	private static Programa programa1;
@@ -57,10 +56,9 @@ public class CReporteSolicitudes extends CGeneral {
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
-	SSolicitudTutoria servicioSolicitud = GeneradorBeans.getServicioTutoria();
 	List<SolicitudTutoria> solicitud = new ArrayList<SolicitudTutoria>();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
 	private static long idarea;
+	
 	@Wire
 	private Datebox dtbInicioReporteSolicitud;
 	@Wire
@@ -212,7 +210,7 @@ public class CReporteSolicitudes extends CGeneral {
 						&& nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
 						&& nombreEstatus.equals("Todos")) {
-					solicitud = servicioSolicitud
+					solicitud = servicioSolicitudTutoria
 							.buscarTodasSolicitudesEntreFechas(fechaInicio,
 									fechaFin);
 					if (solicitud.size() != 0) {
@@ -283,7 +281,7 @@ public class CReporteSolicitudes extends CGeneral {
 						&& nombreTematica.equals("Todos")
 						&& !nombreEstatus.equals("Todos")) {
 
-					solicitud = servicioSolicitud
+					solicitud = servicioSolicitudTutoria
 							.buscarSolicitudesPorEstatusEntreFechas(
 									nombreEstatus, fechaInicio, fechaFin);
 					if (solicitud.size() != 0) {
@@ -353,7 +351,7 @@ public class CReporteSolicitudes extends CGeneral {
 					Tematica tematica1 = servicioTematica
 							.buscarTematica(idTematica);
 
-					solicitud = servicioSolicitud
+					solicitud = servicioSolicitudTutoria
 							.buscarSolicitudesPorTematicaEstatusEntreFechas(
 									tematica1, nombreEstatus, fechaInicio,
 									fechaFin);
@@ -424,7 +422,7 @@ public class CReporteSolicitudes extends CGeneral {
 					Tematica tematica1 = servicioTematica
 							.buscarTematica(idTematica);
 
-					solicitud = servicioSolicitud
+					solicitud = servicioSolicitudTutoria
 							.buscarSolicitudesPorTematicaEstatusEntreFechas(
 									tematica1, nombreEstatus, fechaInicio,
 									fechaFin);
@@ -498,7 +496,7 @@ public class CReporteSolicitudes extends CGeneral {
 
 					AreaInvestigacion area1 = servicioArea.buscarArea(idarea);
 
-					solicitud = servicioSolicitud
+					solicitud = servicioSolicitudTutoria
 							.buscarSolicitudSegunAreaUnEstatus1(area1,
 									fechaInicio, fechaFin, nombreEstatus);
 					if (solicitud.size() != 0) {
@@ -569,7 +567,7 @@ public class CReporteSolicitudes extends CGeneral {
 					Tematica tematica1 = servicioTematica
 							.buscarTematica(idTematica);
 
-					solicitud = servicioSolicitud
+					solicitud = servicioSolicitudTutoria
 							.buscarSolicitudesPorTematicaEntreFechas(tematica1,
 									fechaInicio, fechaFin);
 					if (solicitud.size() != 0) {
@@ -639,7 +637,7 @@ public class CReporteSolicitudes extends CGeneral {
 					Tematica tematica1 = servicioTematica
 							.buscarTematica(idTematica);
 
-					solicitud = servicioSolicitud
+					solicitud = servicioSolicitudTutoria
 							.buscarSolicitudPorProgramaUnEstatus1(
 									nombreEstatus, programa1, fechaInicio,
 									fechaFin);
@@ -710,7 +708,7 @@ public class CReporteSolicitudes extends CGeneral {
 					Tematica tematica1 = servicioTematica
 							.buscarTematica(idTematica);
 
-					solicitud = servicioSolicitud.buscarSolicitudPorPrograma(
+					solicitud = servicioSolicitudTutoria.buscarSolicitudPorPrograma(
 							programa1, fechaInicio, fechaFin);
 					if (solicitud.size() != 0) {
 						elementos.clear();
@@ -779,7 +777,7 @@ public class CReporteSolicitudes extends CGeneral {
 					Tematica tematica1 = servicioTematica
 							.buscarTematica(idTematica);
 
-					solicitud = servicioSolicitud
+					solicitud = servicioSolicitudTutoria
 							.buscarSolicitudesPorTematicaEntreFechas(tematica1,
 									fechaInicio, fechaFin);
 					if (solicitud.size() != 0) {

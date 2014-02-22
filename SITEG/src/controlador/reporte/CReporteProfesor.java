@@ -73,19 +73,15 @@ import servicio.SEstudiante;
 @Controller
 public class CReporteProfesor extends CGeneral{
 
-	public CReporteProfesor() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SProgramaArea servicioProgramaArea = GeneradorBeans.getServicioProgramaArea();
-	SEstudiante servicioEstudiante = GeneradorBeans.getServicioEstudiante();
-	SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-
+	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
+	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
+	private String[] estatusProfesor = { "Tutor", "Comision Evaluadora", "Jurado", "Todos" };
+	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
+	List<Tematica> tematicas = new ArrayList<Tematica>();
+	List<Programa> programas = new ArrayList<Programa>();
+	long idTematica = 0;
+	long idArea = 0;
+	
 	@Wire
 	private Window wdwReporteProfesor;
 	@Wire
@@ -103,16 +99,6 @@ public class CReporteProfesor extends CGeneral{
 	@Wire
 	private Jasperreport jstVistaPrevia;
 
-	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
-	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
-	private String[] estatusProfesor = { "Tutor", "Comision Evaluadora", "Jurado", "Todos" };
-	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
-	List<Tematica> tematicas = new ArrayList<Tematica>();
-	List<Programa> programas = new ArrayList<Programa>();
-	long idTematica = 0;
-	long idArea = 0;
-	
-	
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa

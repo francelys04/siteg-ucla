@@ -144,8 +144,7 @@ public class CReporteSolicitud extends CGeneral {
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
-	 * seleccionar la opcion de "Todos", asi mismo se setea el valor "Todos",
-	 * para el programa, area y tematica y se llena una lista del mismo en el
+	 * seleccionar la opcion de "Todos", y se llena una lista del mismo en el
 	 * componente de la vista.
 	 */
 	@Override
@@ -190,7 +189,7 @@ public class CReporteSolicitud extends CGeneral {
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() {
 		if (cmbPrograma.getValue().equals("Todos")) {
-			
+
 			areas = servicioArea.buscarActivos();
 			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
 					"", true);
@@ -221,7 +220,7 @@ public class CReporteSolicitud extends CGeneral {
 		if (cmbArea.getValue().equals("Todos")) {
 
 			cmbTematica.setValue("Todos");
-					} else {
+		} else {
 			cmbTematica.setValue("");
 			area1 = (AreaInvestigacion) cmbArea.getSelectedItem().getValue();
 			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
@@ -238,18 +237,16 @@ public class CReporteSolicitud extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
-		
+
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
 		idTematica = tematica.getId();
 	}
 
 	/*
-	 * Metodo que permite generar un reporte, dado a un programa, area y
-	 * tematica se generara una lista con las solicitudes de tutorias,
-	 * proyectos,tegs o defensas, dependiendo de esta seleccion, mediante el
-	 * componente "Jasperreport" donde se mapea una serie de parametros y una
-	 * lista previamente cargada que seran los datos que se muestra en el
-	 * documento.
+	 * Metodo que permite dado a un programa, area y
+	 * tematica, generar una lista con las solicitudes de tutorias,
+	 * proyectos,tegs o defensas, dependiendo de esta seleccion, donde se
+	 * cargara un fichero con los datos resultante de esta.
 	 */
 	@Listen("onClick = #btnGenerar")
 	public void generarReporteDefensa() throws JRException {
@@ -344,10 +341,10 @@ public class CReporteSolicitud extends CGeneral {
 								}
 
 								if (teg.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos1.clear();
 									for (Teg t : teg) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -462,10 +459,10 @@ public class CReporteSolicitud extends CGeneral {
 								}
 
 								if (teg.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos1.clear();
 									for (Teg t : teg) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -585,10 +582,10 @@ public class CReporteSolicitud extends CGeneral {
 								}
 
 								if (teg.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos1.clear();
 									for (Teg t : teg) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -707,11 +704,10 @@ public class CReporteSolicitud extends CGeneral {
 								}
 
 								if (teg.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
-									
+
 									elementos1.clear();
 									for (Teg t : teg) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -834,10 +830,10 @@ public class CReporteSolicitud extends CGeneral {
 								}
 
 								if (teg.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos1.clear();
 									for (Teg t : teg) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -960,10 +956,10 @@ public class CReporteSolicitud extends CGeneral {
 								}
 
 								if (teg.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos1.clear();
 									for (Teg t : teg) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -1088,10 +1084,10 @@ public class CReporteSolicitud extends CGeneral {
 												fechaInicio, fechaFin);
 
 								if (solicitud.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos.clear();
 									for (SolicitudTutoria s : solicitud) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -1192,10 +1188,10 @@ public class CReporteSolicitud extends CGeneral {
 												fechaFin);
 
 								if (solicitud.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos.clear();
 									for (SolicitudTutoria s : solicitud) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -1300,10 +1296,10 @@ public class CReporteSolicitud extends CGeneral {
 												fechaFin);
 
 								if (solicitud.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos.clear();
 									for (SolicitudTutoria s : solicitud) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -1406,10 +1402,10 @@ public class CReporteSolicitud extends CGeneral {
 												area1, fechaInicio, fechaFin);
 
 								if (solicitud.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos.clear();
 									for (SolicitudTutoria s : solicitud) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -1513,10 +1509,10 @@ public class CReporteSolicitud extends CGeneral {
 												area1, fechaInicio, fechaFin);
 
 								if (solicitud.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos.clear();
 									for (SolicitudTutoria s : solicitud) {
 										List<Estudiante> estudiantes = servicioEstudiante
@@ -1622,10 +1618,10 @@ public class CReporteSolicitud extends CGeneral {
 												fechaFin);
 
 								if (solicitud.size() != 0) {
-									
+
 									wdwReporteSolicitud.setWidth("3200px");
 									grbReporteSolicitud.setWidth("3150px");
-									
+
 									elementos.clear();
 									for (SolicitudTutoria s : solicitud) {
 										List<Estudiante> estudiantes = servicioEstudiante
