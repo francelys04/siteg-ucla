@@ -70,7 +70,7 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 		// TODO Auto-generated method stub
 		//hizo kairin nuevo
 		List<Teg> tegs = servicioTeg
-		.buscarTegPorProgramaParaDefensa(servicioPrograma
+		. buscarTegPorProgramaParaRegistrarFactibilidad(servicioPrograma
 				.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
 		for (int i = 0; i < tegs.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante
