@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-
+import modelo.EnlaceInteres;
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Noticia;
@@ -15,6 +15,7 @@ import modelo.Programa;
 import modelo.compuesta.Cronograma;
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -72,6 +73,16 @@ public class CInicio extends CGeneral {
 	private Button btnIniciar;
 	@Wire
 	private Button btnParar;
+	@Wire
+	private Image  img1;
+	@Wire
+	private Image  img2;
+	@Wire
+	private Image  img3;
+	private static String url1;
+	private static String url2;
+	private static String url3;
+	
 
 	/*
 	 * Metodo heredado del Controlador CGeneral se llenan los campos y combos
@@ -81,17 +92,56 @@ public class CInicio extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-
+		//Combo programa de Cronogrma de actividades
 		List<Programa> programa = servicioPrograma.buscarActivas();
 		if (cmbPrograma != null) {
 			cmbPrograma.setModel(new ListModelList<Programa>(programa));
 
 		}
+		//Slide de Noticias
 		if (imgNoticiaUno != null) {
 			imgNoticiaUno.setContent(getImagen());
 			imgNoticiaDos.setContent(getImagen());
 			imgNoticiaTres.setContent(getImagen());
 		}
+		//Enlaces de Interes
+		if (img1 != null) {
+			List <EnlaceInteres> enlace = servicioEnlace.buscarActivos();
+			url1= enlace.get(0).getUrl();
+			url2= enlace.get(1).getUrl();
+			url3= enlace.get(2).getUrl();
+			try {
+				img1.setContent(ImageIO.read(new ByteArrayInputStream(
+								enlace.get(0).getImagen())));
+				img2.setContent(ImageIO.read(new ByteArrayInputStream(
+						enlace.get(1).getImagen())));
+				img3.setContent(ImageIO.read(new ByteArrayInputStream(
+						enlace.get(2).getImagen())));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	/*
+	 * Metodos que permite llenar enviar a una pagina
+	 * de segun la catidad de enlaces
+	 */
+	@Listen("onClick = #img1")
+	public void enlaceUno(){
+		 Execution exec = Executions.getCurrent();
+		  	exec.sendRedirect(url1);		
+	}
+	@Listen("onClick = #img2")
+	public void enlaceDos(){
+		 Execution exec = Executions.getCurrent();
+		  	exec.sendRedirect(url2);		
+	}
+	@Listen("onClick = #img3")
+	public void enlaceTres(){
+		 Execution exec = Executions.getCurrent();
+		  	exec.sendRedirect(url3);		
 	}
 
 	/*
