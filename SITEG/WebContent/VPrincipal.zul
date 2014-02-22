@@ -6,6 +6,26 @@
 	<style>
 
 		.pointer { cursor: pointer; }
+		
+		.main {
+            padding : 0 80px;          
+            zoom : 1;
+        }
+          .main li {
+            height: 77px;
+            width: 123px;
+            position: relative;
+            float: left;
+            list-style:none outside none;
+            margin: 30px 30px 0 0;
+        }
+        .main li img {
+            height: 77px;
+            width: 123px;
+            border:3px solid #DDDDDD;
+            position: absolute;
+            -ms-interpolation-mode: bicubic;
+        }
 
 	</style>
 
@@ -20,12 +40,13 @@
 		<script type="text/javascript" defer="true">
 			window.onload = DP.inicio;
 		</script>
+		
 	</html>
 
 
 
 
-	<borderlayout height="120%">
+	<borderlayout height="160%">
 		<!-- norte y Encabezado -->
 		<north size="130px">
 
@@ -274,9 +295,32 @@
 				<separator />
 				<separator />
 				<separator />
+				<div style="text-align:center;margin-left:20px" apply="controlador.CInicio">
 
-
-				<include src="public/widgets/enlaces.html" />
+								<h:ul id="zoomArea" class="main">
+									<h:li>
+									 <image id="img1" />
+									 
+									</h:li>
+									<h:li>
+										<image id="img2" />
+										 
+									</h:li>
+									<h:li>
+										<image id="img3" />
+										
+									</h:li>
+								</h:ul>
+								
+		
+							</div>
+						<script type="text/javascript" src="public/js/zoomer.js" />     
+        <script type="text/javascript">      
+          zk.afterMount(function() {
+                jq("#zoomArea li").Zoomer({speedView:200,speedRemove:200,altAnim:false,speedTitle:400,debug:false});
+            });
+        </script>
+		<!-- 	<include src="public/widgets/enlaces.html" /> -->	
 
 			</div>
 		</center>
