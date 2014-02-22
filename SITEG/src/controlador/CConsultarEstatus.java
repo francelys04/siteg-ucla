@@ -423,10 +423,7 @@ public class CConsultarEstatus extends CGeneral {
 				imgDefensaAsignada.detach();
 				imgTrabajoEspecial.detach();
 				imgJuradoAsignado.detach();
-				Messagebox
-						.show("Estudiante apto para realizar un Trabajo Especial de Grado",
-								"Información", Messagebox.OK,
-								Messagebox.INFORMATION);
+				
 			}
 		}
 

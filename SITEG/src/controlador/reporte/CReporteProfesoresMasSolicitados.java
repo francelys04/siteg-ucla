@@ -173,7 +173,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		if (fechaFin == null || fechaInicio == null
 				|| fechaInicio.after(fechaFin)) {
 			Messagebox.show(
-					"La fecha de inicio debe ser primero que la fecha de fin",
+					"La fecha de fin debe ser posterior a la fecha de inicio",
 					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			if (cmbTematicaReporteProfesoresSolicitados.getValue().equals(
@@ -296,7 +296,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				JasperViewer.viewReport(jasperPrint, false);
 			} else {
 				Messagebox
-						.show("No hay informacion disponible para esta selecci�n");
+						.show("No hay informacion disponible para esta seleccion");
 			}
 		}
 	}

@@ -41,6 +41,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
@@ -103,7 +104,8 @@ public class CReporteSolicitud extends CGeneral {
 	private Combobox cmbArea;
 	@Wire
 	private Combobox cmbTematica;
-
+	@Wire
+	private Groupbox grbReporteSolicitud;
 	@Wire
 	private Jasperreport jstVistaPrevia;
 	@Wire
@@ -136,6 +138,8 @@ public class CReporteSolicitud extends CGeneral {
 	private Listbox ltbElegiAreaTematica;
 	@Wire
 	private Button btnExportarPlano;
+	private static Date fechaInicio;
+	private static Date fechaFin;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
@@ -154,9 +158,6 @@ public class CReporteSolicitud extends CGeneral {
 		programas = servicioPrograma.buscarActivas();
 		programas.add(programaa);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
-		cmbPrograma.setValue("Todos");
-		cmbArea.setValue("Todos");
-		cmbTematica.setValue("Todos");
 
 	}
 
@@ -253,1117 +254,1473 @@ public class CReporteSolicitud extends CGeneral {
 	@Listen("onClick = #btnGenerar")
 	public void generarReporteDefensa() throws JRException {
 		cancelar();
-		if ((rdoDefensa.isChecked() == false)
-				&& (rdoTutoria.isChecked() == false)
-				&& (rdoProyecto.isChecked() == false)
-				&& (rdoTEG.isChecked() == false)) {
-			Messagebox
-					.show("Debe Seleccionar el tipo de solicitud que quiere consultar",
-							"Error", Messagebox.OK, Messagebox.ERROR);
-		}
-		if (rdoTutoria.isChecked() == true) {
-			cancelar();
-		}
 
-		/*
-		 * Solicitudes de Proyecto, teg o Defensa
-		 */
-		else if ((rdoProyecto.isChecked() == true)
-				|| (rdoTEG.isChecked() == true)
-				|| (rdoDefensa.isChecked() == true)) {
-			String nombreArea = cmbArea.getValue();
-			String nombrePrograma = cmbPrograma.getValue();
-			String nombreTematica = cmbTematica.getValue();
-			Date fechaInicio = dtbDesde.getValue();
-			Date fechaFin = dtbHasta.getValue();
+		if (cmbPrograma.getText().compareTo("") == 0
+				|| cmbArea.getText().compareTo("") == 0
+				|| cmbTematica.getText().compareTo("") == 0) {
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
 
-			Tematica tematica1 = servicioTematica.buscarTematica(idTematica);
+		} else {
 
-			List<Teg> teg = null;
-			if (fechaFin == null || fechaInicio == null
-					|| fechaInicio.after(fechaFin)) {
+			if ((rdoDefensa.isChecked() == false)
+					&& (rdoTutoria.isChecked() == false)
+					&& (rdoProyecto.isChecked() == false)
+					&& (rdoTEG.isChecked() == false)) {
 				Messagebox
-						.show("La fecha de inicio debe ser primero que la fecha de fin",
+						.show("Debe Seleccionar el tipo de solicitud que quiere consultar",
 								"Error", Messagebox.OK, Messagebox.ERROR);
-				btnExportarPlano.setDisabled(true);
+
 			} else {
-				btnExportarPlano.setDisabled(false);
-				/*
-				 * SELECIONO TODO TODO
-				 */
-				if (nombrePrograma.equals("Todos")
-						&& nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 6;
 
-					if (rdoProyecto.isChecked() == true) {
-						teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
-								estatusProyecto, fechaInicio, fechaFin);
-						NombreTxt = "SolicitudesProyecto";
-					} else if (rdoTEG.isChecked() == true) {
-						teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
-								estatusTeg, fechaInicio, fechaFin);
-						NombreTxt = "SolicitudesTEG";
-					} else if (rdoDefensa.isChecked() == true) {
-						teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
-								estatusDefensa, fechaInicio, fechaFin);
-						NombreTxt = "SolicitudesDefensa";
+				Date fechaInicio = dtbDesde.getValue();
+				Date fechaFin = dtbHasta.getValue();
+
+				if (fechaInicio.after(fechaFin)) {
+
+					Messagebox
+							.show("La fecha de fin debe ser posterior a la fecha de inicio",
+									"Error", Messagebox.OK, Messagebox.ERROR);
+
+				} else {
+
+					if (rdoTutoria.isChecked() == true) {
+						cancelar();
 					}
 
-					if (teg.size() != 0) {
-						elementos1.clear();
-						for (Teg t : teg) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarEstudiantePorTeg(t);
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
+					/*
+					 * Solicitudes de Proyecto, teg o Defensa
+					 */
+					else if ((rdoProyecto.isChecked() == true)
+							|| (rdoTEG.isChecked() == true)
+							|| (rdoDefensa.isChecked() == true)) {
+
+						String nombreArea = cmbArea.getValue();
+						String nombrePrograma = cmbPrograma.getValue();
+						String nombreTematica = cmbTematica.getValue();
+						fechaInicio = dtbDesde.getValue();
+						fechaFin = dtbHasta.getValue();
+
+						Tematica tematica1 = servicioTematica
+								.buscarTematica(idTematica);
+
+						List<Teg> teg = null;
+						if (fechaFin == null || fechaInicio == null
+								|| fechaInicio.after(fechaFin)) {
+							Messagebox
+									.show("La fecha de inicio debe ser primero que la fecha de fin",
+											"Error", Messagebox.OK,
+											Messagebox.ERROR);
+							btnExportarPlano.setDisabled(true);
+						} else {
+							btnExportarPlano.setDisabled(false);
+							/*
+							 * SELECIONO TODO TODO
+							 */
+							if (nombrePrograma.equals("Todos")
+									&& nombreArea.equals("Todos")
+									&& nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 6;
+
+								if (rdoProyecto.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegPorVariosProgramaUnEstatus(
+													estatusProyecto,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesProyecto";
+								} else if (rdoTEG.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegPorVariosProgramaUnEstatus(
+													estatusTeg, fechaInicio,
+													fechaFin);
+									NombreTxt = "SolicitudesTEG";
+								} else if (rdoDefensa.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegPorVariosProgramaUnEstatus(
+													estatusDefensa,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesDefensa";
+								}
+
+								if (teg.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos1.clear();
+									for (Teg t : teg) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarEstudiantePorTeg(t);
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String titulo = t.getTitulo();
+										String descripcionTeg = t
+												.getDescripcion();
+										Date fecha = t.getFecha();
+										String area = t.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = t
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = t.getTematica()
+												.getNombre();
+										String descripcionTematica = t
+												.getTematica().getDescripcion();
+										String cedulaTutor = t.getTutor()
+												.getCedula();
+										String nombreTutor = t.getTutor()
+												.getNombre();
+										String apellidoTutor = t.getTutor()
+												.getApellido();
+										String correoTutor = t.getTutor()
+												.getCorreoElectronico();
+										String direccionTutor = t.getTutor()
+												.getDireccion();
+
+										elementos1.add(new Proyecto(titulo,
+												descripcionTeg, fecha,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbTodo.setModel(new ListModelList<Proyecto>(
+											elementos1));
+									ltbTodo.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
+							}
+							/*
+							 * seleccione un programa
+							 */
+							else if (!nombrePrograma.equals("Todos")
+									&& nombreArea.equals("Todos")
+									&& nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 1;
+								if (rdoProyecto.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegPorProgramaUnEstatus(
+													estatusProyecto, programa1,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesProyecto";
+								} else if (rdoTEG.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegPorProgramaUnEstatus(
+													estatusTeg, programa1,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesTEG";
+								} else if (rdoDefensa.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegPorProgramaUnEstatus(
+													estatusDefensa, programa1,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesDefensa";
+								}
+
+								if (teg.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos1.clear();
+									for (Teg t : teg) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarEstudiantePorTeg(t);
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String titulo = t.getTitulo();
+										String descripcionTeg = t
+												.getDescripcion();
+										Date fecha = t.getFecha();
+										String area = t.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = t
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = t.getTematica()
+												.getNombre();
+										String descripcionTematica = t
+												.getTematica().getDescripcion();
+										String cedulaTutor = t.getTutor()
+												.getCedula();
+										String nombreTutor = t.getTutor()
+												.getNombre();
+										String apellidoTutor = t.getTutor()
+												.getApellido();
+										String correoTutor = t.getTutor()
+												.getCorreoElectronico();
+										String direccionTutor = t.getTutor()
+												.getDireccion();
+
+										elementos1.add(new Proyecto(titulo,
+												descripcionTeg, fecha,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbElegiPrograma
+											.setModel(new ListModelList<Proyecto>(
+													elementos1));
+									ltbElegiPrograma.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
+							}
+							/*
+							 * Elijo uno de cada cosa
+							 */
+							else if (!nombrePrograma.equals("Todos")
+									&& !nombreArea.equals("Todos")
+									&& !nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 3;
+
+								tematica1 = servicioTematica
+										.buscarTematica(idTematica);
+
+								if (rdoProyecto.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+													estatusProyecto, tematica1,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesProyecto";
+								} else if (rdoTEG.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+													estatusTeg, tematica1,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesTEG";
+								} else if (rdoDefensa.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+													estatusDefensa, tematica1,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesDefensa";
+								}
+
+								if (teg.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos1.clear();
+									for (Teg t : teg) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarEstudiantePorTeg(t);
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String titulo = t.getTitulo();
+										String descripcionTeg = t
+												.getDescripcion();
+										Date fecha = t.getFecha();
+										String area = t.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = t
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = t.getTematica()
+												.getNombre();
+										String descripcionTematica = t
+												.getTematica().getDescripcion();
+										String cedulaTutor = t.getTutor()
+												.getCedula();
+										String nombreTutor = t.getTutor()
+												.getNombre();
+										String apellidoTutor = t.getTutor()
+												.getApellido();
+										String correoTutor = t.getTutor()
+												.getCorreoElectronico();
+										String direccionTutor = t.getTutor()
+												.getDireccion();
+
+										elementos1.add(new Proyecto(titulo,
+												descripcionTeg, fecha,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbElegiProgramaAreaTematica
+											.setModel(new ListModelList<Proyecto>(
+													elementos1));
+									ltbElegiProgramaAreaTematica
+											.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
+							}
+							/*
+							 * Eligi� programa area pero todos las tematicas
+							 */
+							else if (!nombrePrograma.equals("Todos")
+									&& !nombreArea.equals("Todos")
+									&& nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 2;
+								if (rdoProyecto.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegsSegunAreaUnEstatus(
+													area1, fechaInicio,
+													fechaFin, estatusProyecto);
+									NombreTxt = "SolicitudesProyecto";
+								} else
+
+								if (rdoTEG.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegsSegunAreaUnEstatus(
+													area1, fechaInicio,
+													fechaFin, estatusTeg);
+									NombreTxt = "SolicitudesTEG";
+								} else if (rdoDefensa.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegsSegunAreaUnEstatus(
+													area1, fechaInicio,
+													fechaFin, estatusDefensa);
+									NombreTxt = "SolicitudesDefensa";
+								}
+
+								if (teg.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									
+									elementos1.clear();
+									for (Teg t : teg) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarEstudiantePorTeg(t);
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String titulo = t.getTitulo();
+										String descripcionTeg = t
+												.getDescripcion();
+										Date fecha = t.getFecha();
+										String area = t.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = t
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = t.getTematica()
+												.getNombre();
+										String descripcionTematica = t
+												.getTematica().getDescripcion();
+										String cedulaTutor = t.getTutor()
+												.getCedula();
+										String nombreTutor = t.getTutor()
+												.getNombre();
+										String apellidoTutor = t.getTutor()
+												.getApellido();
+										String correoTutor = t.getTutor()
+												.getCorreoElectronico();
+										String direccionTutor = t.getTutor()
+												.getDireccion();
+
+										elementos1.add(new Proyecto(titulo,
+												descripcionTeg, fecha,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbElegiProgramaArea
+											.setModel(new ListModelList<Proyecto>(
+													elementos1));
+									ltbElegiProgramaArea.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
+
+							}
+							/*
+							 * Eligi� todo los programas una area y todos los
+							 * tematicos
+							 */
+
+							else if (nombrePrograma.equals("Todos")
+									&& !nombreArea.equals("Todos")
+									&& nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 4;
+								if (rdoProyecto.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegsSegunAreaUnEstatus(
+													area1, fechaInicio,
+													fechaFin, estatusProyecto);
+									NombreTxt = "SolicitudesProyecto";
+								} else
+
+								if (rdoTEG.isChecked() == true) {
+
+									teg = servicioTeg
+											.buscarTegsSegunAreaUnEstatus(
+													area1, fechaInicio,
+													fechaFin, estatusTeg);
+									NombreTxt = "SolicitudesTEG";
+								} else if (rdoDefensa.isChecked() == true) {
+
+									teg = servicioTeg
+											.buscarTegsSegunAreaUnEstatus(
+													area1, fechaInicio,
+													fechaFin, estatusProyecto);
+									NombreTxt = "SolicitudesDefensa";
+								}
+
+								if (teg.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos1.clear();
+									for (Teg t : teg) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarEstudiantePorTeg(t);
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String titulo = t.getTitulo();
+										String descripcionTeg = t
+												.getDescripcion();
+										Date fecha = t.getFecha();
+										String area = t.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = t
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = t.getTematica()
+												.getNombre();
+										String descripcionTematica = t
+												.getTematica().getDescripcion();
+										String cedulaTutor = t.getTutor()
+												.getCedula();
+										String nombreTutor = t.getTutor()
+												.getNombre();
+										String apellidoTutor = t.getTutor()
+												.getApellido();
+										String correoTutor = t.getTutor()
+												.getCorreoElectronico();
+										String direccionTutor = t.getTutor()
+												.getDireccion();
+
+										elementos1.add(new Proyecto(titulo,
+												descripcionTeg, fecha,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbElegiProgramaArea
+											.setModel(new ListModelList<Proyecto>(
+													elementos1));
+									ltbElegiProgramaArea.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
+
+							}
+							/*
+							 * Eligio todo los programas una area y una tematica
+							 */
+							else if (nombrePrograma.equals("Todos")
+									&& !nombreArea.equals("Todos")
+									&& !nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 5;
+								tematica1 = servicioTematica
+										.buscarTematica(idTematica);
+								if (rdoProyecto.isChecked() == true) {
+									teg = servicioTeg
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+													estatusProyecto, tematica1,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesProyecto";
+								} else
+
+								if (rdoTEG.isChecked() == true) {
+
+									teg = servicioTeg
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+													estatusTeg, tematica1,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesTEG";
+								} else if (rdoDefensa.isChecked() == true) {
+
+									teg = servicioTeg
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+													estatusDefensa, tematica1,
+													fechaInicio, fechaFin);
+									NombreTxt = "SolicitudesDefensa";
+								}
+
+								if (teg.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos1.clear();
+									for (Teg t : teg) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarEstudiantePorTeg(t);
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String titulo = t.getTitulo();
+										String descripcionTeg = t
+												.getDescripcion();
+										Date fecha = t.getFecha();
+										String area = t.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = t
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = t.getTematica()
+												.getNombre();
+										String descripcionTematica = t
+												.getTematica().getDescripcion();
+										String cedulaTutor = t.getTutor()
+												.getCedula();
+										String nombreTutor = t.getTutor()
+												.getNombre();
+										String apellidoTutor = t.getTutor()
+												.getApellido();
+										String correoTutor = t.getTutor()
+												.getCorreoElectronico();
+										String direccionTutor = t.getTutor()
+												.getDireccion();
+
+										elementos1.add(new Proyecto(titulo,
+												descripcionTeg, fecha,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbElegiAreaTematica
+											.setModel(new ListModelList<Proyecto>(
+													elementos1));
+									ltbElegiAreaTematica.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
 							}
 
-							String titulo = t.getTitulo();
-							String descripcionTeg = t.getDescripcion();
-							Date fecha = t.getFecha();
-							String area = t.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = t.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = t.getTematica().getNombre();
-							String descripcionTematica = t.getTematica()
-									.getDescripcion();
-							String cedulaTutor = t.getTutor().getCedula();
-							String nombreTutor = t.getTutor().getNombre();
-							String apellidoTutor = t.getTutor().getApellido();
-							String correoTutor = t.getTutor()
-									.getCorreoElectronico();
-							String direccionTutor = t.getTutor().getDireccion();
-
-							elementos1.add(new Proyecto(titulo, descripcionTeg,
-									fecha, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
 						}
-						ltbTodo.setModel(new ListModelList<Proyecto>(elementos1));
-						ltbTodo.setVisible(true);
 
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
 					}
-				}
-				/*
-				 * seleccione un programa
-				 */
-				else if (!nombrePrograma.equals("Todos")
-						&& nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 1;
-					if (rdoProyecto.isChecked() == true) {
-						teg = servicioTeg.buscarTegPorProgramaUnEstatus(
-								estatusProyecto, programa1, fechaInicio,
-								fechaFin);
-						NombreTxt = "SolicitudesProyecto";
-					} else if (rdoTEG.isChecked() == true) {
-						teg = servicioTeg.buscarTegPorProgramaUnEstatus(
-								estatusTeg, programa1, fechaInicio, fechaFin);
-						NombreTxt = "SolicitudesTEG";
-					} else if (rdoDefensa.isChecked() == true) {
-						teg = servicioTeg.buscarTegPorProgramaUnEstatus(
-								estatusDefensa, programa1, fechaInicio,
-								fechaFin);
-						NombreTxt = "SolicitudesDefensa";
-					}
+					if (rdoTutoria.isChecked() == true) {
 
-					if (teg.size() != 0) {
-						elementos1.clear();
-						for (Teg t : teg) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarEstudiantePorTeg(t);
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
+						String nombreArea = cmbArea.getValue();
+						String nombrePrograma = cmbPrograma.getValue();
+						String nombreTematica = cmbTematica.getValue();
+						fechaInicio = dtbDesde.getValue();
+						fechaFin = dtbHasta.getValue();
+
+						Tematica tematica1 = servicioTematica
+								.buscarTematica(idTematica);
+
+						List<SolicitudTutoria> solicitud = null;
+						if (fechaFin == null || fechaInicio == null
+								|| fechaInicio.after(fechaFin)) {
+							Messagebox
+									.show("La fecha de inicio debe ser primero que la fecha de fin",
+											"Error", Messagebox.OK,
+											Messagebox.ERROR);
+							btnExportarPlano.setDisabled(true);
+						} else {
+							btnExportarPlano.setDisabled(false);
+							/*
+							 * SELECIONO TODO TODO
+							 */
+							if (nombrePrograma.equals("Todos")
+									&& nombreArea.equals("Todos")
+									&& nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 7;
+								solicitud = servicioSolicitudTutoria
+										.buscarSolicitudPorVariosProgramaUnEstatus(
+												fechaInicio, fechaFin);
+
+								if (solicitud.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos.clear();
+									for (SolicitudTutoria s : solicitud) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarSolicitudesEstudiante(s);
+
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String descripcionTeg = s
+												.getDescripcion();
+										Date fecha = s.getFecha();
+										String estatus = s.getEstatus();
+										String area = s.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = s
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = s.getTematica()
+												.getNombre();
+										String descripcionTematica = s
+												.getTematica().getDescripcion();
+										String cedulaTutor = s.getProfesor()
+												.getCedula();
+										String nombreTutor = s.getProfesor()
+												.getNombre();
+										String apellidoTutor = s.getProfesor()
+												.getApellido();
+										String correoTutor = s.getProfesor()
+												.getCorreoElectronico();
+										String direccionTutor = s.getProfesor()
+												.getDireccion();
+
+										elementos.add(new Solicitud(
+												descripcionTeg, fecha, estatus,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbTodo1.setModel(new ListModelList<Solicitud>(
+											elementos));
+									ltbTodo1.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
+							}
+							/*
+							 * seleccione un programa
+							 */
+							else if (!nombrePrograma.equals("Todos")
+									&& nombreArea.equals("Todos")
+									&& nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 8;
+								solicitud = servicioSolicitudTutoria
+										.buscarSolicitudPorProgramaUnEstatus(
+												programa1, fechaInicio,
+												fechaFin);
+
+								if (solicitud.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos.clear();
+									for (SolicitudTutoria s : solicitud) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarSolicitudesEstudiante(s);
+
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String descripcionTeg = s
+												.getDescripcion();
+										Date fecha = s.getFecha();
+										String estatus = s.getEstatus();
+										String area = s.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = s
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = s.getTematica()
+												.getNombre();
+										String descripcionTematica = s
+												.getTematica().getDescripcion();
+										String cedulaTutor = s.getProfesor()
+												.getCedula();
+										String nombreTutor = s.getProfesor()
+												.getNombre();
+										String apellidoTutor = s.getProfesor()
+												.getApellido();
+										String correoTutor = s.getProfesor()
+												.getCorreoElectronico();
+										String direccionTutor = s.getProfesor()
+												.getDireccion();
+
+										elementos.add(new Solicitud(
+												descripcionTeg, fecha, estatus,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbElegiPrograma1
+											.setModel(new ListModelList<Solicitud>(
+													elementos));
+									ltbElegiPrograma1.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
+							}
+							/*
+							 * Elijo uno de cada cosa
+							 */
+							else if (!nombrePrograma.equals("Todos")
+									&& !nombreArea.equals("Todos")
+									&& !nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 9;
+								tematica1 = servicioTematica
+										.buscarTematica(idTematica);
+
+								solicitud = servicioSolicitudTutoria
+										.buscarSolicitudDeUnaTematicaPorDosFechasyUnEstatus(
+												tematica1, fechaInicio,
+												fechaFin);
+
+								if (solicitud.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos.clear();
+									for (SolicitudTutoria s : solicitud) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarSolicitudesEstudiante(s);
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String descripcionTeg = s
+												.getDescripcion();
+										Date fecha = s.getFecha();
+										String estatus = s.getEstatus();
+										String area = s.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = s
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = s.getTematica()
+												.getNombre();
+										String descripcionTematica = s
+												.getTematica().getDescripcion();
+										String cedulaTutor = s.getProfesor()
+												.getCedula();
+										String nombreTutor = s.getProfesor()
+												.getNombre();
+										String apellidoTutor = s.getProfesor()
+												.getApellido();
+										String correoTutor = s.getProfesor()
+												.getCorreoElectronico();
+										String direccionTutor = s.getProfesor()
+												.getDireccion();
+
+										elementos.add(new Solicitud(
+												descripcionTeg, fecha, estatus,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbElegiProgramaAreaTematica1
+											.setModel(new ListModelList<Solicitud>(
+													elementos));
+									ltbElegiProgramaAreaTematica1
+											.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+									;
+								}
+							}
+							/*
+							 * Eligi programa area pero todos las tematicas
+							 */
+							else if (!nombrePrograma.equals("Todos")
+									&& !nombreArea.equals("Todos")
+									&& nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 10;
+
+								solicitud = servicioSolicitudTutoria
+										.buscarSolicitudSegunAreaUnEstatus(
+												area1, fechaInicio, fechaFin);
+
+								if (solicitud.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos.clear();
+									for (SolicitudTutoria s : solicitud) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarSolicitudesEstudiante(s);
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String descripcionTeg = s
+												.getDescripcion();
+										Date fecha = s.getFecha();
+										String estatus = s.getEstatus();
+										String area = s.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = s
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = s.getTematica()
+												.getNombre();
+										String descripcionTematica = s
+												.getTematica().getDescripcion();
+										String cedulaTutor = s.getProfesor()
+												.getCedula();
+										String nombreTutor = s.getProfesor()
+												.getNombre();
+										String apellidoTutor = s.getProfesor()
+												.getApellido();
+										String correoTutor = s.getProfesor()
+												.getCorreoElectronico();
+										String direccionTutor = s.getProfesor()
+												.getDireccion();
+
+										elementos.add(new Solicitud(
+												descripcionTeg, fecha, estatus,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbElegiProgramaArea1
+											.setModel(new ListModelList<Solicitud>(
+													elementos));
+									ltbElegiProgramaArea1.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
+
+							}
+							/*
+							 * Eligio todo los programas una area y todos los
+							 * tematicos
+							 */
+
+							else if (nombrePrograma.equals("Todos")
+									&& !nombreArea.equals("Todos")
+									&& nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 11;
+
+								solicitud = servicioSolicitudTutoria
+										.buscarSolicitudSegunAreaUnEstatus(
+												area1, fechaInicio, fechaFin);
+
+								if (solicitud.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos.clear();
+									for (SolicitudTutoria s : solicitud) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarSolicitudesEstudiante(s);
+
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String descripcionTeg = s
+												.getDescripcion();
+										Date fecha = s.getFecha();
+										String estatus = s.getEstatus();
+										String area = s.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = s
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = s.getTematica()
+												.getNombre();
+										String descripcionTematica = s
+												.getTematica().getDescripcion();
+										String cedulaTutor = s.getProfesor()
+												.getCedula();
+										String nombreTutor = s.getProfesor()
+												.getNombre();
+										String apellidoTutor = s.getProfesor()
+												.getApellido();
+										String correoTutor = s.getProfesor()
+												.getCorreoElectronico();
+										String direccionTutor = s.getProfesor()
+												.getDireccion();
+
+										elementos.add(new Solicitud(
+												descripcionTeg, fecha, estatus,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbElegiProgramaArea1
+											.setModel(new ListModelList<Solicitud>(
+													elementos));
+									ltbElegiProgramaArea1.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
+
+							}
+							/*
+							 * Eligio todo los programas una area y una tematica
+							 */
+							else if (nombrePrograma.equals("Todos")
+									&& !nombreArea.equals("Todos")
+									&& !nombreTematica.equals("Todos")) {
+								cancelar();
+								chequeoEstatus = 12;
+								tematica1 = servicioTematica
+										.buscarTematicaPorNombre(nombreTematica);
+
+								solicitud = servicioSolicitudTutoria
+										.buscarSolicitudDeUnaTematicaPorDosFechasyUnEstatus(
+												tematica1, fechaInicio,
+												fechaFin);
+
+								if (solicitud.size() != 0) {
+									
+									wdwReporteSolicitud.setWidth("3200px");
+									grbReporteSolicitud.setWidth("3150px");
+									
+									elementos.clear();
+									for (SolicitudTutoria s : solicitud) {
+										List<Estudiante> estudiantes = servicioEstudiante
+												.buscarSolicitudesEstudiante(s);
+
+										String programa = "";
+										String descripcionPrograma = "";
+										String correoPrograma = "";
+										String cedulaEstudiante = "";
+										String nombreEstudiante = "";
+										String apellidoEstudiante = "";
+										String correoEstudiante = "";
+										String direccionEstudiante = "";
+										for (Estudiante e : estudiantes) {
+											cedulaEstudiante = e.getCedula();
+											nombreEstudiante = e.getNombre();
+											apellidoEstudiante = e
+													.getApellido();
+											correoEstudiante = e
+													.getCorreoElectronico();
+											direccionEstudiante = e
+													.getDireccion();
+											programa = e.getPrograma()
+													.getNombre();
+											descripcionPrograma = e
+													.getPrograma()
+													.getDescripcion();
+											correoPrograma = e.getPrograma()
+													.getCorreo();
+										}
+
+										String descripcionTeg = s
+												.getDescripcion();
+										Date fecha = s.getFecha();
+										String estatus = s.getEstatus();
+										String area = s.getTematica()
+												.getareaInvestigacion()
+												.getNombre();
+										String descripcionArea = s
+												.getTematica()
+												.getareaInvestigacion()
+												.getDescripcion();
+										String tematica = s.getTematica()
+												.getNombre();
+										String descripcionTematica = s
+												.getTematica().getDescripcion();
+										String cedulaTutor = s.getProfesor()
+												.getCedula();
+										String nombreTutor = s.getProfesor()
+												.getNombre();
+										String apellidoTutor = s.getProfesor()
+												.getApellido();
+										String correoTutor = s.getProfesor()
+												.getCorreoElectronico();
+										String direccionTutor = s.getProfesor()
+												.getDireccion();
+
+										elementos.add(new Solicitud(
+												descripcionTeg, fecha, estatus,
+												cedulaTutor, nombreTutor,
+												apellidoTutor, correoTutor,
+												direccionTutor,
+												cedulaEstudiante,
+												nombreEstudiante,
+												apellidoEstudiante,
+												correoEstudiante,
+												direccionEstudiante, programa,
+												correoPrograma,
+												descripcionPrograma, tematica,
+												descripcionTematica, area,
+												descripcionArea));
+
+									}
+									ltbElegiAreaTematica1
+											.setModel(new ListModelList<Solicitud>(
+													elementos));
+									ltbElegiAreaTematica1.setVisible(true);
+
+								} else {
+									Messagebox
+											.show("No ha informacion disponible para este intervalo",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									btnExportarPlano.setDisabled(true);
+								}
 							}
 
-							String titulo = t.getTitulo();
-							String descripcionTeg = t.getDescripcion();
-							Date fecha = t.getFecha();
-							String area = t.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = t.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = t.getTematica().getNombre();
-							String descripcionTematica = t.getTematica()
-									.getDescripcion();
-							String cedulaTutor = t.getTutor().getCedula();
-							String nombreTutor = t.getTutor().getNombre();
-							String apellidoTutor = t.getTutor().getApellido();
-							String correoTutor = t.getTutor()
-									.getCorreoElectronico();
-							String direccionTutor = t.getTutor().getDireccion();
-
-							elementos1.add(new Proyecto(titulo, descripcionTeg,
-									fecha, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
 						}
-						ltbElegiPrograma.setModel(new ListModelList<Proyecto>(
-								elementos1));
-						ltbElegiPrograma.setVisible(true);
 
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-					}
-				}
-				/*
-				 * Elijo uno de cada cosa
-				 */
-				else if (!nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")
-						&& !nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 3;
-
-					tematica1 = servicioTematica.buscarTematica(idTematica);
-
-					if (rdoProyecto.isChecked() == true) {
-						teg = servicioTeg
-								.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
-										estatusProyecto, tematica1,
-										fechaInicio, fechaFin);
-						NombreTxt = "SolicitudesProyecto";
-					} else if (rdoTEG.isChecked() == true) {
-						teg = servicioTeg
-								.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
-										estatusTeg, tematica1, fechaInicio,
-										fechaFin);
-						NombreTxt = "SolicitudesTEG";
-					} else if (rdoDefensa.isChecked() == true) {
-						teg = servicioTeg
-								.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
-										estatusDefensa, tematica1, fechaInicio,
-										fechaFin);
-						NombreTxt = "SolicitudesDefensa";
 					}
 
-					if (teg.size() != 0) {
-						elementos1.clear();
-						for (Teg t : teg) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarEstudiantePorTeg(t);
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
-							}
-
-							String titulo = t.getTitulo();
-							String descripcionTeg = t.getDescripcion();
-							Date fecha = t.getFecha();
-							String area = t.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = t.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = t.getTematica().getNombre();
-							String descripcionTematica = t.getTematica()
-									.getDescripcion();
-							String cedulaTutor = t.getTutor().getCedula();
-							String nombreTutor = t.getTutor().getNombre();
-							String apellidoTutor = t.getTutor().getApellido();
-							String correoTutor = t.getTutor()
-									.getCorreoElectronico();
-							String direccionTutor = t.getTutor().getDireccion();
-
-							elementos1.add(new Proyecto(titulo, descripcionTeg,
-									fecha, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
-						}
-						ltbElegiProgramaAreaTematica
-								.setModel(new ListModelList<Proyecto>(
-										elementos1));
-						ltbElegiProgramaAreaTematica.setVisible(true);
-
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-					}
-				}
-				/*
-				 * Eligi� programa area pero todos las tematicas
-				 */
-				else if (!nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 2;
-					if (rdoProyecto.isChecked() == true) {
-						teg = servicioTeg.buscarTegsSegunAreaUnEstatus(area1,
-								fechaInicio, fechaFin, estatusProyecto);
-						NombreTxt = "SolicitudesProyecto";
-					} else
-
-					if (rdoTEG.isChecked() == true) {
-						teg = servicioTeg.buscarTegsSegunAreaUnEstatus(area1,
-								fechaInicio, fechaFin, estatusTeg);
-						NombreTxt = "SolicitudesTEG";
-					} else if (rdoDefensa.isChecked() == true) {
-						teg = servicioTeg.buscarTegsSegunAreaUnEstatus(area1,
-								fechaInicio, fechaFin, estatusDefensa);
-						NombreTxt = "SolicitudesDefensa";
-					}
-
-					if (teg.size() != 0) {
-						elementos1.clear();
-						for (Teg t : teg) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarEstudiantePorTeg(t);
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
-							}
-
-							String titulo = t.getTitulo();
-							String descripcionTeg = t.getDescripcion();
-							Date fecha = t.getFecha();
-							String area = t.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = t.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = t.getTematica().getNombre();
-							String descripcionTematica = t.getTematica()
-									.getDescripcion();
-							String cedulaTutor = t.getTutor().getCedula();
-							String nombreTutor = t.getTutor().getNombre();
-							String apellidoTutor = t.getTutor().getApellido();
-							String correoTutor = t.getTutor()
-									.getCorreoElectronico();
-							String direccionTutor = t.getTutor().getDireccion();
-
-							elementos1.add(new Proyecto(titulo, descripcionTeg,
-									fecha, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
-						}
-						ltbElegiProgramaArea
-								.setModel(new ListModelList<Proyecto>(
-										elementos1));
-						ltbElegiProgramaArea.setVisible(true);
-
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-					}
-
-				}
-				/*
-				 * Eligi� todo los programas una area y todos los tematicos
-				 */
-
-				else if (nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 4;
-					if (rdoProyecto.isChecked() == true) {
-						teg = servicioTeg.buscarTegsSegunAreaUnEstatus(area1,
-								fechaInicio, fechaFin, estatusProyecto);
-						NombreTxt = "SolicitudesProyecto";
-					} else
-
-					if (rdoTEG.isChecked() == true) {
-
-						teg = servicioTeg.buscarTegsSegunAreaUnEstatus(area1,
-								fechaInicio, fechaFin, estatusTeg);
-						NombreTxt = "SolicitudesTEG";
-					} else if (rdoDefensa.isChecked() == true) {
-
-						teg = servicioTeg.buscarTegsSegunAreaUnEstatus(area1,
-								fechaInicio, fechaFin, estatusProyecto);
-						NombreTxt = "SolicitudesDefensa";
-					}
-
-					if (teg.size() != 0) {
-						elementos1.clear();
-						for (Teg t : teg) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarEstudiantePorTeg(t);
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
-							}
-
-							String titulo = t.getTitulo();
-							String descripcionTeg = t.getDescripcion();
-							Date fecha = t.getFecha();
-							String area = t.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = t.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = t.getTematica().getNombre();
-							String descripcionTematica = t.getTematica()
-									.getDescripcion();
-							String cedulaTutor = t.getTutor().getCedula();
-							String nombreTutor = t.getTutor().getNombre();
-							String apellidoTutor = t.getTutor().getApellido();
-							String correoTutor = t.getTutor()
-									.getCorreoElectronico();
-							String direccionTutor = t.getTutor().getDireccion();
-
-							elementos1.add(new Proyecto(titulo, descripcionTeg,
-									fecha, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
-						}
-						ltbElegiProgramaArea
-								.setModel(new ListModelList<Proyecto>(
-										elementos1));
-						ltbElegiProgramaArea.setVisible(true);
-
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-					}
-
-				}
-				/*
-				 * Eligio todo los programas una area y una tematica
-				 */
-				else if (nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")
-						&& !nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 5;
-					tematica1 = servicioTematica.buscarTematica(idTematica);
-					if (rdoProyecto.isChecked() == true) {
-						teg = servicioTeg
-								.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
-										estatusProyecto, tematica1,
-										fechaInicio, fechaFin);
-						NombreTxt = "SolicitudesProyecto";
-					} else
-
-					if (rdoTEG.isChecked() == true) {
-
-						teg = servicioTeg
-								.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
-										estatusTeg, tematica1, fechaInicio,
-										fechaFin);
-						NombreTxt = "SolicitudesTEG";
-					} else if (rdoDefensa.isChecked() == true) {
-
-						teg = servicioTeg
-								.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
-										estatusDefensa, tematica1, fechaInicio,
-										fechaFin);
-						NombreTxt = "SolicitudesDefensa";
-					}
-
-					if (teg.size() != 0) {
-						elementos1.clear();
-						for (Teg t : teg) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarEstudiantePorTeg(t);
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
-							}
-
-							String titulo = t.getTitulo();
-							String descripcionTeg = t.getDescripcion();
-							Date fecha = t.getFecha();
-							String area = t.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = t.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = t.getTematica().getNombre();
-							String descripcionTematica = t.getTematica()
-									.getDescripcion();
-							String cedulaTutor = t.getTutor().getCedula();
-							String nombreTutor = t.getTutor().getNombre();
-							String apellidoTutor = t.getTutor().getApellido();
-							String correoTutor = t.getTutor()
-									.getCorreoElectronico();
-							String direccionTutor = t.getTutor().getDireccion();
-
-							elementos1.add(new Proyecto(titulo, descripcionTeg,
-									fecha, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
-						}
-						ltbElegiAreaTematica
-								.setModel(new ListModelList<Proyecto>(
-										elementos1));
-						ltbElegiAreaTematica.setVisible(true);
-
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-					}
 				}
 
 			}
-
-		}
-		if (rdoTutoria.isChecked() == true) {
-			String nombreArea = cmbArea.getValue();
-			String nombrePrograma = cmbPrograma.getValue();
-			String nombreTematica = cmbTematica.getValue();
-			Date fechaInicio = dtbDesde.getValue();
-			Date fechaFin = dtbHasta.getValue();
-
-			Tematica tematica1 = servicioTematica.buscarTematica(idTematica);
-
-			List<SolicitudTutoria> solicitud = null;
-			if (fechaFin == null || fechaInicio == null
-					|| fechaInicio.after(fechaFin)) {
-				Messagebox
-						.show("La fecha de inicio debe ser primero que la fecha de fin",
-								"Error", Messagebox.OK, Messagebox.ERROR);
-				btnExportarPlano.setDisabled(true);
-			} else {
-				btnExportarPlano.setDisabled(false);
-				/*
-				 * SELECIONO TODO TODO
-				 */
-				if (nombrePrograma.equals("Todos")
-						&& nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 7;
-					solicitud = servicioSolicitudTutoria
-							.buscarSolicitudPorVariosProgramaUnEstatus(
-									fechaInicio, fechaFin);
-
-					if (solicitud.size() != 0) {
-						elementos.clear();
-						for (SolicitudTutoria s : solicitud) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarSolicitudesEstudiante(s);
-
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
-							}
-
-							String descripcionTeg = s.getDescripcion();
-							Date fecha = s.getFecha();
-							String estatus = s.getEstatus();
-							String area = s.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = s.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = s.getTematica().getNombre();
-							String descripcionTematica = s.getTematica()
-									.getDescripcion();
-							String cedulaTutor = s.getProfesor().getCedula();
-							String nombreTutor = s.getProfesor().getNombre();
-							String apellidoTutor = s.getProfesor()
-									.getApellido();
-							String correoTutor = s.getProfesor()
-									.getCorreoElectronico();
-							String direccionTutor = s.getProfesor()
-									.getDireccion();
-
-							elementos.add(new Solicitud(descripcionTeg, fecha,
-									estatus, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
-						}
-						ltbTodo1.setModel(new ListModelList<Solicitud>(
-								elementos));
-						ltbTodo1.setVisible(true);
-
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-					}
-				}
-				/*
-				 * seleccione un programa
-				 */
-				else if (!nombrePrograma.equals("Todos")
-						&& nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 8;
-					solicitud = servicioSolicitudTutoria
-							.buscarSolicitudPorProgramaUnEstatus(programa1,
-									fechaInicio, fechaFin);
-
-					if (solicitud.size() != 0) {
-						elementos.clear();
-						for (SolicitudTutoria s : solicitud) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarSolicitudesEstudiante(s);
-
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
-							}
-
-							String descripcionTeg = s.getDescripcion();
-							Date fecha = s.getFecha();
-							String estatus = s.getEstatus();
-							String area = s.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = s.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = s.getTematica().getNombre();
-							String descripcionTematica = s.getTematica()
-									.getDescripcion();
-							String cedulaTutor = s.getProfesor().getCedula();
-							String nombreTutor = s.getProfesor().getNombre();
-							String apellidoTutor = s.getProfesor()
-									.getApellido();
-							String correoTutor = s.getProfesor()
-									.getCorreoElectronico();
-							String direccionTutor = s.getProfesor()
-									.getDireccion();
-
-							elementos.add(new Solicitud(descripcionTeg, fecha,
-									estatus, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
-						}
-						ltbElegiPrograma1
-								.setModel(new ListModelList<Solicitud>(
-										elementos));
-						ltbElegiPrograma1.setVisible(true);
-
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-					}
-				}
-				/*
-				 * Elijo uno de cada cosa
-				 */
-				else if (!nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")
-						&& !nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 9;
-					tematica1 = servicioTematica.buscarTematica(idTematica);
-
-					solicitud = servicioSolicitudTutoria
-							.buscarSolicitudDeUnaTematicaPorDosFechasyUnEstatus(
-									tematica1, fechaInicio, fechaFin);
-
-					if (solicitud.size() != 0) {
-						elementos.clear();
-						for (SolicitudTutoria s : solicitud) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarSolicitudesEstudiante(s);
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
-							}
-
-							String descripcionTeg = s.getDescripcion();
-							Date fecha = s.getFecha();
-							String estatus = s.getEstatus();
-							String area = s.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = s.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = s.getTematica().getNombre();
-							String descripcionTematica = s.getTematica()
-									.getDescripcion();
-							String cedulaTutor = s.getProfesor().getCedula();
-							String nombreTutor = s.getProfesor().getNombre();
-							String apellidoTutor = s.getProfesor()
-									.getApellido();
-							String correoTutor = s.getProfesor()
-									.getCorreoElectronico();
-							String direccionTutor = s.getProfesor()
-									.getDireccion();
-
-							elementos.add(new Solicitud(descripcionTeg, fecha,
-									estatus, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
-						}
-						ltbElegiProgramaAreaTematica1
-								.setModel(new ListModelList<Solicitud>(
-										elementos));
-						ltbElegiProgramaAreaTematica1.setVisible(true);
-
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-						;
-					}
-				}
-				/*
-				 * Eligi programa area pero todos las tematicas
-				 */
-				else if (!nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 10;
-
-					solicitud = servicioSolicitudTutoria
-							.buscarSolicitudSegunAreaUnEstatus(area1,
-									fechaInicio, fechaFin);
-
-					if (solicitud.size() != 0) {
-						elementos.clear();
-						for (SolicitudTutoria s : solicitud) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarSolicitudesEstudiante(s);
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
-							}
-
-							String descripcionTeg = s.getDescripcion();
-							Date fecha = s.getFecha();
-							String estatus = s.getEstatus();
-							String area = s.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = s.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = s.getTematica().getNombre();
-							String descripcionTematica = s.getTematica()
-									.getDescripcion();
-							String cedulaTutor = s.getProfesor().getCedula();
-							String nombreTutor = s.getProfesor().getNombre();
-							String apellidoTutor = s.getProfesor()
-									.getApellido();
-							String correoTutor = s.getProfesor()
-									.getCorreoElectronico();
-							String direccionTutor = s.getProfesor()
-									.getDireccion();
-
-							elementos.add(new Solicitud(descripcionTeg, fecha,
-									estatus, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
-						}
-						ltbElegiProgramaArea1
-								.setModel(new ListModelList<Solicitud>(
-										elementos));
-						ltbElegiProgramaArea1.setVisible(true);
-
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-					}
-
-				}
-				/*
-				 * Eligio todo los programas una area y todos los tematicos
-				 */
-
-				else if (nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 11;
-
-					solicitud = servicioSolicitudTutoria
-							.buscarSolicitudSegunAreaUnEstatus(area1,
-									fechaInicio, fechaFin);
-
-					if (solicitud.size() != 0) {
-						elementos.clear();
-						for (SolicitudTutoria s : solicitud) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarSolicitudesEstudiante(s);
-
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
-							}
-
-							String descripcionTeg = s.getDescripcion();
-							Date fecha = s.getFecha();
-							String estatus = s.getEstatus();
-							String area = s.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = s.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = s.getTematica().getNombre();
-							String descripcionTematica = s.getTematica()
-									.getDescripcion();
-							String cedulaTutor = s.getProfesor().getCedula();
-							String nombreTutor = s.getProfesor().getNombre();
-							String apellidoTutor = s.getProfesor()
-									.getApellido();
-							String correoTutor = s.getProfesor()
-									.getCorreoElectronico();
-							String direccionTutor = s.getProfesor()
-									.getDireccion();
-
-							elementos.add(new Solicitud(descripcionTeg, fecha,
-									estatus, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
-						}
-						ltbElegiProgramaArea1
-								.setModel(new ListModelList<Solicitud>(
-										elementos));
-						ltbElegiProgramaArea1.setVisible(true);
-
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-					}
-
-				}
-				/*
-				 * Eligio todo los programas una area y una tematica
-				 */
-				else if (nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")
-						&& !nombreTematica.equals("Todos")) {
-					cancelar();
-					chequeoEstatus = 12;
-					tematica1 = servicioTematica
-							.buscarTematicaPorNombre(nombreTematica);
-
-					solicitud = servicioSolicitudTutoria
-							.buscarSolicitudDeUnaTematicaPorDosFechasyUnEstatus(
-									tematica1, fechaInicio, fechaFin);
-
-					if (solicitud.size() != 0) {
-						elementos.clear();
-						for (SolicitudTutoria s : solicitud) {
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarSolicitudesEstudiante(s);
-
-							String programa = "";
-							String descripcionPrograma = "";
-							String correoPrograma = "";
-							String cedulaEstudiante = "";
-							String nombreEstudiante = "";
-							String apellidoEstudiante = "";
-							String correoEstudiante = "";
-							String direccionEstudiante = "";
-							for (Estudiante e : estudiantes) {
-								cedulaEstudiante = e.getCedula();
-								nombreEstudiante = e.getNombre();
-								apellidoEstudiante = e.getApellido();
-								correoEstudiante = e.getCorreoElectronico();
-								direccionEstudiante = e.getDireccion();
-								programa = e.getPrograma().getNombre();
-								descripcionPrograma = e.getPrograma()
-										.getDescripcion();
-								correoPrograma = e.getPrograma().getCorreo();
-							}
-
-							String descripcionTeg = s.getDescripcion();
-							Date fecha = s.getFecha();
-							String estatus = s.getEstatus();
-							String area = s.getTematica()
-									.getareaInvestigacion().getNombre();
-							String descripcionArea = s.getTematica()
-									.getareaInvestigacion().getDescripcion();
-							String tematica = s.getTematica().getNombre();
-							String descripcionTematica = s.getTematica()
-									.getDescripcion();
-							String cedulaTutor = s.getProfesor().getCedula();
-							String nombreTutor = s.getProfesor().getNombre();
-							String apellidoTutor = s.getProfesor()
-									.getApellido();
-							String correoTutor = s.getProfesor()
-									.getCorreoElectronico();
-							String direccionTutor = s.getProfesor()
-									.getDireccion();
-
-							elementos.add(new Solicitud(descripcionTeg, fecha,
-									estatus, cedulaTutor, nombreTutor,
-									apellidoTutor, correoTutor, direccionTutor,
-									cedulaEstudiante, nombreEstudiante,
-									apellidoEstudiante, correoEstudiante,
-									direccionEstudiante, programa,
-									correoPrograma, descripcionPrograma,
-									tematica, descripcionTematica, area,
-									descripcionArea));
-
-						}
-						ltbElegiAreaTematica1
-								.setModel(new ListModelList<Solicitud>(
-										elementos));
-						ltbElegiAreaTematica1.setVisible(true);
-
-					} else {
-						Messagebox
-								.show("No ha informacion disponible para este intervalo",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-						btnExportarPlano.setDisabled(true);
-					}
-				}
-
-			}
-
 		}
 
 	}
@@ -1380,9 +1737,9 @@ public class CReporteSolicitud extends CGeneral {
 		cmbTematica.setValue("");
 		dtbDesde.setValue(new Date());
 		dtbHasta.setValue(new Date());
-		cmbPrograma.setValue("Todos");
-		cmbArea.setValue("Todos");
-		cmbTematica.setValue("Todos");
+		wdwReporteSolicitud.setWidth("auto");
+		grbReporteSolicitud.setWidth("auto");
+
 		btnExportarPlano.setDisabled(true);
 	}
 

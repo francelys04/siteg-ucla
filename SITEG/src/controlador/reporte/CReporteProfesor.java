@@ -224,8 +224,8 @@ public class CReporteProfesor extends CGeneral{
 		if (nombrePrograma.equals("") || nombreArea.equals("")
 				|| nombreTematica.equals("")
 				|| estatus.equals("")) {
-			Messagebox.show("Datos imcompletos", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			Messagebox.show("Debe completar todos los campos", "Error", Messagebox.OK,
+					Messagebox.ERROR);
 		}
 
 		else {
@@ -233,7 +233,7 @@ public class CReporteProfesor extends CGeneral{
 			if (fechaFin == null || fechaInicio == null
 					|| fechaInicio.after(fechaFin)) {
 				Messagebox
-						.show("La fecha de inicio debe ser primero que la fecha de fin",
+						.show("La fecha de fin debe ser posterior a la fecha de inicio",
 								"Error", Messagebox.OK, Messagebox.ERROR);
 			} else {
 				/*buscar por una carrera, un area, una tematica y un rol*/
@@ -590,8 +590,11 @@ public class CReporteProfesor extends CGeneral{
 					JasperViewer.viewReport(jasperPrint, false);
 					
 				} else {
+					
 					Messagebox
-							.show("No hay informacion disponible para esta seleccion");
+					.show("No hay informacion disponible para esta seleccion",
+							"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+					
 				}
 			}
 		}		
