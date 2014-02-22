@@ -9,6 +9,7 @@
 	<parameter name="fechafin" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="total" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -90,7 +91,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="35" splitType="Stretch">
+		<band height="33" splitType="Stretch">
 			<staticText>
 				<reportElement x="114" y="11" width="67" height="22" uuid="3706c4ab-848a-43c6-9790-11e59ef1fec3"/>
 				<textElement textAlignment="Center">
@@ -136,7 +137,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="40" splitType="Stretch">
+		<band height="29" splitType="Stretch">
 			<textField>
 				<reportElement x="114" y="9" width="72" height="19" uuid="41b0ec3f-e824-42f5-bd6f-4cdd4ef6589c"/>
 				<textElement textAlignment="Center">
@@ -181,7 +182,22 @@
 		<band height="24"/>
 	</detail>
 	<columnFooter>
-		<band height="52" splitType="Stretch"/>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="376" y="32" width="143" height="20" uuid="1f862425-d187-44f9-9288-51c86d14b0a6"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Solicitudes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="519" y="32" width="42" height="20" uuid="f70fc2a3-cee4-40f9-9459-a41133294ab6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="73" splitType="Stretch">
