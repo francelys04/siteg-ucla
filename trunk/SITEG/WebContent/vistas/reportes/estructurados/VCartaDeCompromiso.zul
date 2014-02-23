@@ -1,5 +1,5 @@
 <window id="wdwCarta" title="Carta de Compromiso"
-	border="normal" width="100%" height="200px" closable="true"
+	border="normal" width="100%" height="800px" closable="true"
 	apply="controlador.reporte.CCartaDeCompromiso">
 
 	<style dynamic="true">
@@ -76,6 +76,10 @@
 				</div>
 			</panelchildren>
 		</panel>
+		<separator />
+	<jasperreport id="jstVistaPrevia"></jasperreport>
+	<separator />
+		
 	</groupbox>
 	<separator />
 	<separator />
