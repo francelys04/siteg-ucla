@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -37,6 +38,8 @@ public class CCartaDeCompromiso extends CGeneral {
 	
 	@Wire
 	private Window wdwCarta;	
+	@Wire
+	private Jasperreport jstVistaPrevia;
 	
 	@Override
 	public void inicializar(Component comp)  {
@@ -79,18 +82,21 @@ public class CCartaDeCompromiso extends CGeneral {
 	String reporteImage = rutaUrl
 			+ "SITEG/public/imagenes/reportes/";
 	
-	JasperReport jasperReport = (JasperReport) JRLoader
-	.loadObject(getClass().getResource(
-		"CartadeCompromiso.jasper"));
+
 
 	//JasperReport jasperReport = (JasperReport) JRLoader
 		//	.loadObject(reporteSrc);
 
-	JasperPrint jasperPrint = JasperFillManager.fillReport(
-			jasperReport,null,
-			new JRBeanCollectionDataSource(elementos));
+	//JasperPrint jasperPrint = JasperFillManager.fillReport(
+		//	jasperReport,null,
+			//new JRBeanCollectionDataSource(elementos));
 
-	JasperViewer.viewReport(jasperPrint, false);
+	//JasperViewer.viewReport(jasperPrint, false);
+	jstVistaPrevia.setSrc(reporteSrc);
+	 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+			 elementos));
+	 jstVistaPrevia.setType("pdf");
+	 jstVistaPrevia.setParameters(null);
 
   }
 	@Listen("onClick = #btnSalir")
