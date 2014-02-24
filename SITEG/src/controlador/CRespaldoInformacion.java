@@ -87,7 +87,7 @@ public class CRespaldoInformacion extends CGeneral {
 			String valor = sdf.format(cal.getTime());
 			String nombre = "SITEG" + valor + ".backup";
 			try {
-				ruta+="/";
+			//	ruta+="/";
 				System.out.println(ruta);
 				Runtime.getRuntime().exec(
 						"pg_dump -i -h localhost -p 5432 -U postgres -F c -v -f "
