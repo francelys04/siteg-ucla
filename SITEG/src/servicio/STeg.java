@@ -114,6 +114,14 @@ public class STeg {
 		teg = interfaceTeg.findByEstudiantes(estudiante);
 		return teg;
 	}
+	public List<Teg> buscarTegPorProfesor(String estatus1,String estatus2, Profesor profesor)
+	{
+		List<Teg> teg;
+		teg = interfaceTeg.findByEstatusOrEstatusLikeAndTutor(estatus1,estatus2,
+				profesor);
+		return teg;
+		
+	}
 
 	/*
 	 * Busca un teg asociado a un estudiante que tengan estatus avances
