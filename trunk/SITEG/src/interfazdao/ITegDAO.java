@@ -35,6 +35,7 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 
 	/*Busca los teg asociados al Estudiante*/
 	public List<Teg> findByEstudiantes(Estudiante estudiante);
+	
 		
 	/*Busca los teg asociados al Profesor*/
 	public List<Teg> findByTutor(Profesor profesor);
@@ -60,7 +61,8 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	
 
 	public Teg findByEstatusAndEstudiantes(String string, Estudiante estudiante);
-
+	public List<Teg> findByEstatusOrEstatusLikeAndTutor(String estatus1,String estatus2, Profesor profesor);
+	
 	//Busca los tegs de los estudiantes del programa dado y con estatus dado
 	@Query("select t from Teg t where t.estatus=?2 and t.estudiantes in (select e from Estudiante e where e.programa=?1)")
 	public List<Teg> buscarTegsPorPrograma(Programa programa, String string);
