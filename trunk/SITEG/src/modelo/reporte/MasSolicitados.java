@@ -19,6 +19,14 @@ public class MasSolicitados {
 		this.tutor = profesor;
 		this.tematica = tematica;
 	}
+	
+	public MasSolicitados(long primerValor, long segundoValor, long tercerValor) {
+		super();
+		this.primerValor = primerValor;
+		this.segundoValor = segundoValor;
+		this.tercerValor = tercerValor;
+	}
+
 	public MasSolicitados() {
 		super();
 		// TODO Auto-generated constructor stub
