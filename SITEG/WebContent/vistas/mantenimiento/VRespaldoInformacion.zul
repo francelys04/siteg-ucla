@@ -31,6 +31,9 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
+		
+		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
+		122); }
 
 	</style>
 
@@ -48,7 +51,7 @@
 		<separator />
 		<separator />
 		<panel border="normal" width="95%"
-			style="margin-left:2%;margin-right:3%" height="60%">
+			style="margin-left:2%;margin-right:3%" height="90%">
 			<panelchildren>
 				<groupbox style="margin:5px;" width="99%" mold="3d">
 					<grid width="100%" style="border:normal;"
@@ -67,7 +70,7 @@
 														id="rbLocal">
 														<attribute name="onCheck">
 															<![CDATA[
-																gbDispositivo.setVisible(true);
+																gbSistema.setVisible(true);
 																btnRespaldar.setVisible(true);
 																btnRestaurar.setVisible(false);
 															]]>
@@ -82,7 +85,7 @@
 														id="rbDispositivo">
 														<attribute name="onCheck">
 														<![CDATA[
-															gbDispositivo.setVisible(true);
+															gbSistema.setVisible(true);
 															btnRestaurar.setVisible(true);
 															btnRespaldar.setVisible(false);
 															
@@ -97,6 +100,50 @@
 										</rows>
 									</grid>
 								</radiogroup>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox style="margin:5px;" width="99%" mold="3d"
+					id="gbSistema" visible="false">
+					<caption label="Seleccione el Sistema Operativo" />
+					<grid>
+						<rows>
+							<row>
+								<radiogroup id="rgSistema">
+									<grid>
+										<rows>
+											<row>
+												<hbox>
+													<radio
+														id="rbWindows">
+														<attribute name="onCheck">
+															<![CDATA[
+																gbDispositivo.setVisible(true);
+															]]>
+														</attribute>
+													</radio>
+													<label
+														value="Windows" />
+												</hbox>
+
+												<hbox>
+													<radio
+														id="rbLinux">
+														<attribute name="onCheck">
+														<![CDATA[
+															gbDispositivo.setVisible(true);		
+															
+														]]>
+														</attribute>
+													</radio>
+													<label
+														value="Linux" />
+												</hbox>
+											</row>
+										</rows>
+									</grid>
+								</radiogroup>	
 							</row>
 						</rows>
 					</grid>
