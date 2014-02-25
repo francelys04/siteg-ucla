@@ -81,17 +81,12 @@ public class CCartaDeCompromiso extends CGeneral {
 			+ "SITEG/vistas/reportes/estructurados/compilados/CartadeCompromiso.jasper";
 	String reporteImage = rutaUrl
 			+ "SITEG/public/imagenes/reportes/";
+	mapa.put("logoUcla", reporteImage + "logo ucla.png");
+	mapa.put("logoCE", reporteImage + "logo CE.png");
+	mapa.put("logoSiteg", reporteImage + "logo.png");
+
+
 	
-
-
-	//JasperReport jasperReport = (JasperReport) JRLoader
-		//	.loadObject(reporteSrc);
-
-	//JasperPrint jasperPrint = JasperFillManager.fillReport(
-		//	jasperReport,null,
-			//new JRBeanCollectionDataSource(elementos));
-
-	//JasperViewer.viewReport(jasperPrint, false);
 	jstVistaPrevia.setSrc(reporteSrc);
 	 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
 			 elementos));
