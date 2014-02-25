@@ -38,13 +38,11 @@
 
 	</style>
 
-	<separator />
-	<separator />
-	<separator />
 
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+
 	<!-- Lista de popus -->
 	<popup id="pupSeleccionTeg">
 		<toolbarbutton
@@ -52,24 +50,51 @@
 	</popup>
 	<!-- Fin de popus -->
 
+
+	<separator />
+	<separator />
+	<label value="(*) "
+		style="font-weight:bold;color:red;margin-left:2%">
+	</label>
+	<label value="Campos Obligatorios"
+		style="font-weight:bold;color: rgb(0, 84, 122)">
+	</label>
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+
 	<groupbox width="98%" height="auto"
 		style="margin-left:1%;margin-right:1%">
 
 		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 			<columns>
-				<column width="95%" height="40px" />
+				<column width="800px" height="60px" />
 			</columns>
 			<rows>
 				<row>
-					<radiogroup id="rdgEtapa"
-						style="margin-left:30px">
+					<hbox>
 
-						<radio id="rdoProyecto" label="Proyecto"
-							style="margin-left:10px;color: rgb(0, 100, 122)" />
-						<radio id="rdoTEG"
-							label="Trabajo Especial de Grado"
-							style="margin-left:60px;color: rgb(0, 84, 122)" />
-					</radiogroup>
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red">
+							</label>
+							<label value="Etapa TEG:"
+								style="font-weight:bold;color: rgb(0, 84, 122)" />
+						</hlayout>
+
+
+						<radiogroup id="rdgEtapa"
+							style="margin-left:30px">
+
+							<radio id="rdoProyecto" label="Proyecto"
+								style="margin-left:20px;color: rgb(0, 100, 122)" />
+							<radio id="rdoTEG"
+								label="Trabajo Especial de Grado"
+								style="margin-left:60px;color: rgb(0, 84, 122)" />
+						</radiogroup>
+					</hbox>
 
 				</row>
 			</rows>
@@ -81,12 +106,20 @@
 
 		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 			<columns>
-				<column width="15%" height="40px" />
+				<column width="125px" height="60px" />
 			</columns>
 
 			<rows>
 				<row>
-					<label value="Estatus:" style="font-weight:bold;margin-left:35px" />
+
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label value="Estatus:"
+							style="font-weight:bold;color: rgb(0, 84, 122)" />
+					</hlayout>
+
 					<combobox id="cmbEstatus" readonly="true"
 						width="190px">
 						<template name="model">
@@ -100,6 +133,8 @@
 		</grid>
 
 
+		<separator />
+		<separator />
 		<separator />
 		<separator />
 
@@ -163,7 +198,7 @@
 				<listheader label="Fecha" align="center" />
 				<listheader label="Área" align="center" />
 				<listheader label="Temática" align="center" />
-				<listheader label="Título" align="center" width="25%" />
+				<listheader label="Título" align="center" width="20%" />
 				<listheader label="Nombre Tutor" align="center" />
 				<listheader label="Apellido Tutor" align="center" />
 			</listhead>

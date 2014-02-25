@@ -17,21 +17,12 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	
 	public Teg findById(long id);
 
-
-
-	//Evaluar Revisiones
-//	@Query("select t from Teg t where t.estatus='TEGRegistrado'")
-//	public List<Teg> buscarTegRegistrado();
 	
 	//Buscar tegs por profesores
 	public List<Teg> findByTutor(List<Profesor> profesores);
 	
 	public List<Teg> findByProfesores(Profesor p);
-//	@Query("select t from Teg t where t.estatus='Proyecto Registrado'")
-//	public List<Teg> ProyectoRegistrado();	
-	
-//	@Query("select t from Teg t where t.estatus='Solicitando Registro'")
-//	public List<Teg> TegSolicitandoRegistro();	
+
 
 	/*Busca los teg asociados al Estudiante*/
 	public List<Teg> findByEstudiantes(Estudiante estudiante);

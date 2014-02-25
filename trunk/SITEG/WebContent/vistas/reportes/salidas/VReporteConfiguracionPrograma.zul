@@ -1,5 +1,5 @@
 <window id="wdwReporteConfigurar" title="Configuraciones de un Programa"
-	border="normal" width="100%" height="390px" closable="true"
+	border="normal" width="100%" height="450px" closable="true"
 	apply="controlador.reporte.CReporteConfiguracionPrograma">
 
 	<style dynamic="true">
@@ -62,13 +62,13 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="275px"
+	<groupbox width="95%" height="330px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
 		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 			<columns>
-				<column width="10%" height="40px" />
+				<column width="125px" height="60px" />
 			</columns>
 			<rows>
 
@@ -120,7 +120,7 @@
 
 		<grid sclass="fgrid" style="margin-left:2%;margin-right:1%">
 			<columns>
-				<column width="700px" height="40px" />
+				<column width="800px" height="60px" />
 			</columns>
 			<rows>
 				<row>
@@ -136,7 +136,7 @@
 						<radiogroup id="rdgConfiguracion">
 
 							<radio id="rdocondicion" label="Condiciones"
-								style="margin-left:30px;color: rgb(0, 84, 122)" />
+								style="margin-left:70px;color: rgb(0, 84, 122)" />
 							<radio id="rdoitem"
 								label="Items de Evaluación"
 								style="margin-left:40px;color: rgb(0, 100, 122)" />

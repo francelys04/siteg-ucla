@@ -145,7 +145,7 @@ public class CReporteProfesor extends CGeneral{
 					.getValue();
 			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
 					.buscar(programa.getId()));
-			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
+			AreaInvestigacion area = new AreaInvestigacion(10000001, "Todos",
 					"", true);
 			areas.add(area);
 			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
