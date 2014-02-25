@@ -60,8 +60,7 @@ public class CReporteEvaluacion extends CGeneral {
 	private static String estatus3 = "TEG Aprobado";
 	private static String estatus4 = "TEG Reprobado";
 
-	@Wire
-	private Window wdwReporteSolicitud;
+	
 	@Wire
 	private Radiogroup rdgEvaluaciones;
 	@Wire
@@ -1791,9 +1790,7 @@ public class CReporteEvaluacion extends CGeneral {
 		cmbTematica.setValue("");
 		dtbDesde.setValue(new Date());
 		dtbHasta.setValue(new Date());
-		cmbPrograma.setValue("Todos");
-		cmbArea.setValue("Todos");
-		cmbTematica.setValue("Todos");
+		
 		btnExportarPlano.setDisabled(true);
 	}
 
@@ -2496,7 +2493,7 @@ public class CReporteEvaluacion extends CGeneral {
 	/* Metodo que permite cerrar la vista. */
 	@Listen("onClick= #btnSalir")
 	public void salir() {
-		wdwReporteSolicitud.onClose();
+		wdwReporteEvaluaciones.onClose();
 	}
 
 	/*

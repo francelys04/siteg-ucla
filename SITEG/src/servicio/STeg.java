@@ -299,15 +299,6 @@ public class STeg {
 	}
 
 
-	// Acomodar
-	// public Teg buscarTegUnicoPorEstudiante(Estudiante
-	// obtenerUsuarioEstudiante) {
-	// // TODO Auto-generated method stub
-	// Teg teg;
-	// teg = interfaceTeg.findByEstudiantes(obtenerUsuarioEstudiante);
-	// return teg;
-	// }
-
 	public List<Teg> buscarTegsDeTematicaPorDosFechas(Tematica tematica,
 			Date fechaInicio, Date fechaFin) {
 		return interfaceTeg.findByTematicaAndFechaBetween(tematica,
@@ -520,5 +511,8 @@ public class STeg {
 	public List<Teg> buscarTodosTegPorDosFechas(
 			Date fechaInicio,Date fechaFin) {
 		return interfaceTeg.buscarTodosTegporFecha(fechaInicio, fechaFin);
-	}	
+	}
+	
+	
+	
 }

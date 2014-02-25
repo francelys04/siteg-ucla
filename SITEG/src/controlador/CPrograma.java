@@ -69,12 +69,12 @@ public class CPrograma extends CGeneral {
 	@Wire
 	private Image imagenx;
 	private static String cedulaProfesor;
+	private static boolean programaModificable = false;
+	private static boolean programaExistente = false;
 
-	
 	long id = 0;
-	
-	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
@@ -83,33 +83,45 @@ public class CPrograma extends CGeneral {
 	 */
 	public void inicializar(Component comp) {
 
+		programaModificable = false;
+		programaExistente = false;
 		txtDirectorPrograma.setDisabled(true);
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
-			if (map.get("cedula") != null){
-				
+			if (map.get("cedula") != null) {
+
 				cedulaProfesor = (String) map.get("cedula");
-				Profesor profesorDirector = servicioProfesor.buscarProfesorPorCedula(cedulaProfesor);
-				txtDirectorPrograma.setValue(profesorDirector.getNombre() + " " + profesorDirector.getApellido());
-				}
-			if(map.get("idPrograma")!=null)
+				Profesor profesorDirector = servicioProfesor
+						.buscarProfesorPorCedula(cedulaProfesor);
+				txtDirectorPrograma.setValue(profesorDirector.getNombre() + " "
+						+ profesorDirector.getApellido());
+			}
+
+			if (map.get("idPrograma") != null)
 				id = ((Long) map.get("idPrograma"));
-			if(map.get("nombrePrograma")!=null)
+			if (map.get("nombrePrograma") != null)
 				txtNombrePrograma.setValue((String) map.get("nombrePrograma"));
-			if(map.get("descripcionPrograma")!=null)
-				txtDescripcionPrograma.setValue((String) map.get("descripcionPrograma"));
-			if(map.get("correoPrograma")!=null)
+			if (map.get("descripcionPrograma") != null)
+				txtDescripcionPrograma.setValue((String) map
+						.get("descripcionPrograma"));
+			if (map.get("correoPrograma") != null)
 				txtCorreoPrograma.setValue((String) map.get("correoPrograma"));
 			if ((Long) map.get("id") != null) {
+				programaModificable = true;
 				id = ((Long) map.get("id"));
 				Programa programa = servicioPrograma.buscar(id);
 				txtNombrePrograma.setValue(programa.getNombre());
 				txtDescripcionPrograma.setValue(programa.getDescripcion());
 				txtCorreoPrograma.setValue(programa.getCorreo());
-				Profesor profesorDirector = servicioProfesor.buscarProfesorPorCedula(cedulaProfesor);
-				txtDirectorPrograma.setValue(profesorDirector.getNombre() + " " + profesorDirector.getApellido());
+
+				cedulaProfesor = (String) programa.getDirectorPrograma()
+						.getCedula();
+				Profesor profesorDirector = servicioProfesor
+						.buscarProfesorPorCedula(cedulaProfesor);
+				txtDirectorPrograma.setValue(profesorDirector.getNombre() + " "
+						+ profesorDirector.getApellido());
 				btnEliminarPrograma.setDisabled(false);
 				map.clear();
 				map = null;
@@ -132,37 +144,40 @@ public class CPrograma extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite abrir el catalogo de profesores que no son directores de programa
-	 * se envia al metodo del catalogo el nombre de la vista a la que deben regresar los valores,
-	 * asi como los valores q se encuentran en la vista actualmente para que no sean eliminados cuando
-	 * regrese el catalogo con la informacion
+	 * Metodo que permite abrir el catalogo de profesores que no son directores
+	 * de programa se envia al metodo del catalogo el nombre de la vista a la
+	 * que deben regresar los valores, asi como los valores q se encuentran en
+	 * la vista actualmente para que no sean eliminados cuando regrese el
+	 * catalogo con la informacion
 	 */
 	@Listen("onClick = #btnCatalogoDirectorPrograma")
 	public void buscarDirector() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("director", "director");
 		if ((txtNombrePrograma.getText().compareTo("") != 0))
-		map.put("nombrePrograma", txtNombrePrograma.getValue());
+			map.put("nombrePrograma", txtNombrePrograma.getValue());
 
-		if(id!=0)
-		map.put("idPrograma", id);
-		
-		if((txtDescripcionPrograma.getText().compareTo("") != 0))
-		map.put("descripcionPrograma", txtDescripcionPrograma
-				.getValue());
-		if((txtCorreoPrograma.getText().compareTo("") != 0))
-		map.put("correoPrograma", txtCorreoPrograma.getValue());
-		
+		if (id != 0)
+			map.put("idPrograma", id);
+
+		if ((txtDescripcionPrograma.getText().compareTo("") != 0))
+			map.put("descripcionPrograma", txtDescripcionPrograma.getValue());
+		if ((txtCorreoPrograma.getText().compareTo("") != 0))
+			map.put("correoPrograma", txtCorreoPrograma.getValue());
+
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoDirectorPrograma.zul", null, null);
 		window.doModal();
-		
+
 		catalogoProfesor.recibir("maestros/VPrograma");
 	}
 
-	/* Metodo que permite el guardado o modificacion de una entidad Programa, asi como la asignacion, de ser
-	 * necesario, de las condiciones vigentes a dicho programa */
+	/*
+	 * Metodo que permite el guardado o modificacion de una entidad Programa,
+	 * asi como la asignacion, de ser necesario, de las condiciones vigentes a
+	 * dicho programa
+	 */
 	@Listen("onClick = #btnGuardarPrograma")
 	public void guardarPrograma() {
 		if ((txtNombrePrograma.getText().compareTo("") == 0)
@@ -173,52 +188,65 @@ public class CPrograma extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("¿Desea guardar los datos del programa?",
-					"Dialogo de confirmacion", Messagebox.OK
-							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener<Event>() {
-						public void onEvent(Event evt)
-								throws InterruptedException {
-							if (evt.getName().equals("onOK")) {
-								//cambio kairin
-								Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-								Grupo grupo = servicioGrupo
-										.BuscarPorNombre("ROLE_DIRECTOR");
-								gruposUsuario.add(grupo);
-								byte[] imagenUsuario = null;
-								URL url = getClass().getResource(
-										"/configuracion/usuario.png");
 
-								try {
-									imagenx.setContent(new AImage(url));
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								imagenUsuario = imagenx.getContent()
-										.getByteData();
-								Profesor profesor = servicioProfesor.buscarProfesorPorCedula(txtDirectorPrograma.getValue());
+			Programa programaRegistrado = servicioPrograma
+					.buscarPorNombrePrograma(txtNombrePrograma.getValue());
 
- 									Usuario user = servicioUsuario
-											.buscarUsuarioPorNombre(txtDirectorPrograma.getValue());
+			if ((programaRegistrado != null) && (programaModificable == false)) {
+
+				programaExistente = true;
+
+			}
+
+			if (programaExistente == false) {
+
+				Messagebox.show("¿Desea guardar los datos del programa?",
+						"Dialogo de confirmacion", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
+							public void onEvent(Event evt)
+									throws InterruptedException {
+								if (evt.getName().equals("onOK")) {
+
+									Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+									Grupo grupo = servicioGrupo
+											.BuscarPorNombre("ROLE_DIRECTOR");
+									gruposUsuario.add(grupo);
+									byte[] imagenUsuario = null;
+									URL url = getClass().getResource(
+											"/configuracion/usuario.png");
+
+									try {
+										imagenx.setContent(new AImage(url));
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									imagenUsuario = imagenx.getContent()
+											.getByteData();
+									Profesor profesor = servicioProfesor
+											.buscarProfesorPorCedula(txtDirectorPrograma
+													.getValue());
+
+									Usuario user = servicioUsuario
+											.buscarUsuarioPorNombre(cedulaProfesor);
 									if (user == null) {
 										Usuario usuario = new Usuario(
-												0,txtDirectorPrograma.getValue()
-												,
+												0,
+												cedulaProfesor,
 												passwordEncoder
-														.encode(txtDirectorPrograma.getValue()),
+														.encode(cedulaProfesor),
 												true, gruposUsuario,
 												imagenUsuario);
-										servicioUsuario
-												.guardar(usuario);
+										servicioUsuario.guardar(usuario);
 										user = servicioUsuario
-												.buscarUsuarioPorNombre(txtDirectorPrograma.getValue());
+												.buscarUsuarioPorNombre(cedulaProfesor);
 										profesor.setUsuario(user);
 										servicioProfesor
 												.guardarProfesor(profesor);
 										String mensaje = "Su usuario es: "
 												+ usuario.getNombre()
-												+ "y su contraseÃ±a:"
+												+ "y su contrasena:"
 												+ usuario.getPassword();
 										enviarEmailNotificacion(
 												profesor.getCorreoElectronico(),
@@ -231,8 +259,7 @@ public class CPrograma extends CGeneral {
 										Grupo grupo2 = servicioGrupo
 												.BuscarPorNombre("ROLE_DIRECTOR");
 										Set<Grupo> gruposU = new HashSet<Grupo>();
-										for (int f = 0; f < grupino
-												.size(); ++f) {
+										for (int f = 0; f < grupino.size(); ++f) {
 											Grupo g = grupino.get(f);
 											gruposU.add(g);
 										}
@@ -242,44 +269,58 @@ public class CPrograma extends CGeneral {
 
 										servicioUsuario.guardar(user);
 									}
-								String nombre = txtNombrePrograma.getValue();
-								String descripcion = txtDescripcionPrograma
-										.getValue();
-								String correo = txtCorreoPrograma.getValue();
-								Boolean estatus = true;
-								Profesor directorPrograma = servicioProfesor.buscarProfesorPorCedula(txtDirectorPrograma.getValue());
-								Programa programa = new Programa(id, nombre,
-										descripcion, correo, estatus,
-										directorPrograma);
-								servicioPrograma.guardar(programa);
-								Programa p = servicioPrograma
-										.buscarPorNombrePrograma(nombre);
-								if(servicioLapso.buscarActivos().size()!=0){
-								List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
-								List<Condicion> condiciones = servicioCondicion
-										.buscarActivos();
-								for (int i = 0; i < condiciones.size(); i++) {
-									Condicion condicion = condiciones.get(i);
-									CondicionPrograma condicionPrograma = new CondicionPrograma();
-									condicionPrograma.setPrograma(p);
-									condicionPrograma.setLapso(servicioLapso.BuscarLapsoActual());
-									condicionPrograma.setCondicion(condicion);
-									condicionPrograma.setValor(0);
-									condicionesPrograma.add(condicionPrograma);
-								}
+									String nombre = txtNombrePrograma
+											.getValue();
+									String descripcion = txtDescripcionPrograma
+											.getValue();
+									String correo = txtCorreoPrograma
+											.getValue();
+									Boolean estatus = true;
+									Profesor directorPrograma = servicioProfesor
+											.buscarProfesorPorCedula(cedulaProfesor);
+									Programa programa = new Programa(id,
+											nombre, descripcion, correo,
+											estatus, directorPrograma);
+									servicioPrograma.guardar(programa);
+									Programa p = servicioPrograma
+											.buscarPorNombrePrograma(nombre);
+									if (servicioLapso.buscarActivos().size() != 0) {
+										List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
+										List<Condicion> condiciones = servicioCondicion
+												.buscarActivos();
+										for (int i = 0; i < condiciones.size(); i++) {
+											Condicion condicion = condiciones
+													.get(i);
+											CondicionPrograma condicionPrograma = new CondicionPrograma();
+											condicionPrograma.setPrograma(p);
+											condicionPrograma.setLapso(servicioLapso
+													.BuscarLapsoActual());
+											condicionPrograma
+													.setCondicion(condicion);
+											condicionPrograma.setValor(0);
+											condicionesPrograma
+													.add(condicionPrograma);
+										}
 
-								servicioCondicionPrograma
-										.guardar(condicionesPrograma);
+										servicioCondicionPrograma
+												.guardar(condicionesPrograma);
+									}
+									cancelarPrograma();
+									Messagebox.show(
+											"Programa registrado exitosamente",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
+									id = 0;
 								}
-								cancelarPrograma();
-								Messagebox.show(
-										"Programa registrado exitosamente",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-								id = 0;
 							}
-						}
-					});
+						});
+
+			} else {
+
+				Messagebox.show("El programa ya se encuentra registrado",
+						"Error", Messagebox.OK, Messagebox.ERROR);
+
+			}
 
 		}
 	}
@@ -289,7 +330,8 @@ public class CPrograma extends CGeneral {
 	public void eliminarPrograma() {
 		Messagebox.show("¿Desea eliminar los datos del programa?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Programa programa = servicioPrograma.buscar(id);
@@ -317,8 +359,10 @@ public class CPrograma extends CGeneral {
 		txtCorreoPrograma.setValue("");
 		btnEliminarPrograma.setDisabled(true);
 		txtDirectorPrograma.setValue("");
+		programaModificable = false;
+		programaExistente = false;
 	}
-	
+
 	/* Metodo que permite cerrar la ventana correspondiente a los programas */
 	@Listen("onClick = #btnSalirPrograma")
 	public void salirPrograma() {

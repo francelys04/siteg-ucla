@@ -58,7 +58,7 @@
 		<grid sclass="fgrid"
 			style="margin-left:15px;margin-right:15px">
 			<columns>
-				<column width="800px" height="40px" />
+				<column width="800px" height="60px" />
 			</columns>
 			<rows>
 				<row>
@@ -78,9 +78,9 @@
 
 							<radio id="rdoFactibilidad"
 								label="Factibilidad"
-								style="margin-left:30px;color: rgb(0, 84, 122)" />
+								style="margin-left:60px;color: rgb(0, 84, 122)" />
 							<radio id="rdoDefensa" label="Defensa"
-								style="margin-left:40px;color: rgb(0, 84, 122)" />
+								style="margin-left:60px;color: rgb(0, 84, 122)" />
 						</radiogroup>
 
 					</hbox>
@@ -105,19 +105,19 @@
 						<hlayout>
 							<label value="*"
 								style="font-weight:bold;color:red" />
-							<label value="Desde:"
+							<label value="Fecha Inicio Registro:"
 								style="font-weight:bold" />
 						</hlayout>
 
 						<datebox id="dtbDesde" readonly="true"
-							style="margin-left:40px" width="150px" format="yyyy/MM/dd"
+							style="margin-left:20px" width="150px" format="yyyy/MM/dd"
 							onCreate="self.value = new Date()">
 						</datebox>
 
 						<hlayout>
 							<label value="*"
 								style="font-weight:bold;color:red;margin-left:50px" />
-							<label value="Hasta:"
+							<label value="Fecha Fin Registro:"
 								style="font-weight:bold" />
 						</hlayout>
 						<datebox id="dtbHasta" readonly="true"
@@ -136,7 +136,7 @@
 		<grid sclass="fgrid"
 			style="margin-left:15px;margin-right:15px">
 			<columns>
-				<column width="90px" height="60px" />
+				<column width="135px" height="60px" />
 			</columns>
 			<rows>
 				<row>

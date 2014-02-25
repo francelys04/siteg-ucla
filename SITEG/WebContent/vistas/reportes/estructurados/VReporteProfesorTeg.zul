@@ -72,12 +72,12 @@
 							<label value="*"
 								style="font-weight:bold;color:red">
 							</label>
-							<label value="Fecha Inicio:"
+							<label value="Fecha Inicio Registro:"
 								style="font-weight:bold" />
 						</hlayout>
 
 						<datebox id="dtbInicioReporteProfesorTeg"
-							cols="12" style="margin-left:50px" width="150px" readonly="true"
+							cols="12" style="margin-left:20px" width="150px" readonly="true"
 							format="dd/MM/yyyy" onCreate="self.value = new Date()">
 						</datebox>
 
@@ -85,7 +85,7 @@
 							<label value="*"
 								style="font-weight:bold;color:red;margin-left:60px">
 							</label>
-							<label value="Fecha Fin:"
+							<label value="Fecha Fin Registro:"
 								style="font-weight:bold" />
 						</hlayout>
 
