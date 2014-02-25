@@ -122,11 +122,11 @@
 						<hbox>
 							<button id="btnRespaldar" tabindex="1"
 								sclass="btn" tooltip="pupRespaldar" label="Respaldar"
-								image="/public/imagenes/iconos/guardar.png" visible="false">
+								image="/public/imagenes/iconos/respaldar.png" visible="false">
 							</button>
 							<button id="btnRestaurar" tabindex="1"
 								sclass="btn" tooltip="pupRestaurar" label="Restaurar"
-								image="/public/imagenes/iconos/guardar.png" visible="false">
+								image="/public/imagenes/iconos/restaurar.png" visible="false">
 							</button>
 							
 							<separator />
