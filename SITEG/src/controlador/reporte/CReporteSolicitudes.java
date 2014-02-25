@@ -1,3 +1,4 @@
+
 package controlador.reporte;
 
 import java.sql.Connection;
@@ -101,6 +102,7 @@ public class CReporteSolicitudes extends CGeneral {
 	 */
 	@Listen("onSelect =  #cmbProgramaReporteSolicitud")
 	public void seleccionarPrograma() {
+		try{
 		if (cmbProgramaReporteSolicitud.getValue().equals("Todos")) {
 		
 			areas = servicioArea.buscarActivos();
@@ -123,6 +125,10 @@ public class CReporteSolicitudes extends CGeneral {
 					.setModel(new ListModelList<AreaInvestigacion>(areas));
 
 		}
+		}catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
+		}
 	}
 
 	/*
@@ -133,7 +139,7 @@ public class CReporteSolicitudes extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbAreaReporteSolicitud")
 	public void seleccionarArea() {
-		
+		try{
 		if (cmbAreaReporteSolicitud.getValue().equals("Todos")) {
 			cmbTematicaReporteSolicitud.setValue("Todos");
 			
@@ -147,6 +153,9 @@ public class CReporteSolicitudes extends CGeneral {
 			tematicas.add(tema);
 			cmbTematicaReporteSolicitud.setModel(new ListModelList<Tematica>(
 					tematicas));
+		}}catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
 		}
 		idarea = Long.parseLong(cmbAreaReporteSolicitud.getSelectedItem()
 				.getId());

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteEstadisticoDefensa" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d42763ff-7296-4cf5-bb66-dc9e931c08ad">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="77"/>
+	<subDataset name="Table Dataset 1" uuid="47d709d8-8296-4698-ab2f-21a0ae3b6013"/>
+	<parameter name="programa" class="java.lang.String"/>
+	<parameter name="area" class="java.lang.String"/>
+	<parameter name="tematica" class="java.lang.String"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
+	<parameter name="logoSiteg" class="java.lang.String"/>
+	<field name="primerValor" class="java.lang.Long"/>
+	<field name="tercerValor" class="java.lang.Long"/>
+	<field name="segundoValor" class="java.lang.Long"/>
+	<variable name="primerValor_SUM" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{primerValor}]]></variableExpression>
+	</variable>
+	<variable name="segundoValor_SUM" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{segundoValor}]]></variableExpression>
+	</variable>
+	<variable name="tercerValor_SUM" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{tercerValor}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="65" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="14" y="3" width="88" height="62" uuid="b4a8345b-939a-40bd-96ec-cd2c1da4c4b7"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame">
+				<reportElement x="466" y="0" width="85" height="62" uuid="4c768cf0-ae07-4f8e-9d43-814fb9f12346"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="102" y="3" width="347" height="62" uuid="c39048c0-60d0-4401-aba2-cccdd1a30c5d"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado
+Decanato de Ciencias y Tecnología
+Gestión de Trabajos Especiales de Grado
+]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="183" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="184" y="123" width="87" height="20" backcolor="#0099FF" uuid="639c164c-1c9d-4118-aeef-8570c14197df"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Con Jurado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="355" y="123" width="46" height="20" backcolor="#0099FF" uuid="92d81d24-e930-4512-b7fe-8da8932cca09"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="102" y="123" width="82" height="20" backcolor="#0099FF" uuid="71468103-5567-4c61-a444-c345674abe3a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitadas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="271" y="123" width="84" height="20" backcolor="#0099FF" uuid="0ff23ad7-4fe2-4d05-98cc-29c6f7cdd503"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="102" y="100" width="299" height="23" backcolor="#0099FF" uuid="0f5f320e-8f8c-46ca-86d7-cdc469fe1b68"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Defensas]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="451" y="11" width="100" height="20" uuid="61518913-3a92-4ef8-9ef5-775a5031136b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="391" y="11" width="83" height="20" uuid="c95db154-2757-47f4-8c33-43ccbe6c27e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="31" width="101" height="20" uuid="8bc7f60c-4fff-489d-86a5-2165a7e284f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="70" width="101" height="20" uuid="5efc3ffd-3d77-410e-88f1-c73607a39b1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="70" width="101" height="20" uuid="6f76396e-a643-401a-aa5c-3642f2b99dc4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tematica:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="128" y="70" width="100" height="20" uuid="72a8e61d-3eb2-4d8e-856d-ce2d088c8543"/>
+				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="70" width="100" height="20" uuid="bf702896-95c5-4749-9786-7d29ea057dc2"/>
+				<textFieldExpression><![CDATA[$P{tematica}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="128" y="31" width="263" height="20" uuid="f0fb1b8d-7dd2-4f2e-a71c-bb9d965d7b85"/>
+				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="143" width="46" height="32" uuid="3b3e6a34-1d7f-4c68-abe8-757690973cf8"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{primerValor}+$F{tercerValor}+$F{segundoValor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="102" y="143" width="82" height="32" uuid="f1695b81-eade-4e14-9a88-3d7c01b86ba6"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tercerValor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="143" width="87" height="32" uuid="74aab517-b8d3-4114-9193-e1e940751d31"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{segundoValor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="143" width="83" height="32" uuid="f5b5e22b-35c2-45cd-9d0f-b7b22902b1e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tercerValor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="282" splitType="Stretch">
+			<pie3DChart>
+				<chart>
+					<reportElement x="41" y="21" width="453" height="251" uuid="1794dd3b-6f0e-46ac-bb41-02e68f639237"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<pieSeries>
+						<keyExpression><![CDATA["Teg Solicitando Defensa"]]></keyExpression>
+						<valueExpression><![CDATA[$F{primerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})]]></valueExpression>
+						<labelExpression><![CDATA[(100*( $F{primerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor}))).toString() +"%"]]></labelExpression>
+					</pieSeries>
+					<pieSeries>
+						<keyExpression><![CDATA["Teg con Jurado Asignado"]]></keyExpression>
+						<valueExpression><![CDATA[$F{segundoValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})]]></valueExpression>
+						<labelExpression><![CDATA[(100 *( $F{segundoValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor}))).toString() +"%"]]></labelExpression>
+					</pieSeries>
+					<pieSeries>
+						<keyExpression><![CDATA["Teg con Defensa Programada"]]></keyExpression>
+						<valueExpression><![CDATA[$F{tercerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})]]></valueExpression>
+						<labelExpression><![CDATA[(100 * ($F{tercerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor}))).toString() + "%"]]></labelExpression>
+					</pieSeries>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="41" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="496" y="0" width="51" height="20" uuid="72dc28c7-5280-45ed-a357-ec9865981a13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="451" y="0" width="73" height="20" uuid="b9bf401b-3d6f-416c-9e34-9ac369e00515"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+ "de"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="175" y="0" width="216" height="20" uuid="9d0b151f-4d11-4983-b500-a4ac4a4e8bc8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="94" y="4" width="48" height="37" uuid="332d515b-edf2-42d7-a8e9-9ba4e39a4c5e"/>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -188,6 +188,7 @@ public class CReporteSolicitud extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() {
+		try{
 		if (cmbPrograma.getValue().equals("Todos")) {
 
 			areas = servicioArea.buscarActivos();
@@ -207,6 +208,10 @@ public class CReporteSolicitud extends CGeneral {
 			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 
 		}
+		}catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
+		}
 	}
 
 	/*
@@ -217,6 +222,8 @@ public class CReporteSolicitud extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
+		try{
+	
 		if (cmbArea.getValue().equals("Todos")) {
 
 			cmbTematica.setValue("Todos");
@@ -228,6 +235,9 @@ public class CReporteSolicitud extends CGeneral {
 			Tematica tema = new Tematica(10000, "Todos", "", true, null);
 			tematicas.add(tema);
 			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
+		}}catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
 		}
 	}
 
