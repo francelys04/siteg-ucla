@@ -2,7 +2,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CartadeCompromiso" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c6e8b270-1fca-4202-8a30-30235068135c">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<parameter name="logoCE" class="java.lang.String"/>
+	<parameter name="logoSiteg" class="java.lang.String"/>
 	<field name="nombreTutor" class="java.lang.String"/>
 	<field name="cedulaProfesor" class="java.lang.String"/>
 	<field name="tituloTeg" class="java.lang.String"/>
@@ -15,14 +18,6 @@
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<image>
-				<reportElement x="480" y="6" width="63" height="66" uuid="2361ec88-5180-41bb-9bfa-9f8ae75b90c2"/>
-				<imageExpression><![CDATA["C:\\Documents and Settings\\jaimes\\Escritorio\\SITEG\\WebContent\\public\\imagenes\\reportes\\logo dcyt.png"]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="10" y="6" width="81" height="66" uuid="42d09b95-9d1f-4579-9afa-10c0e92d7751"/>
-				<imageExpression><![CDATA["C:\\Documents and Settings\\jaimes\\Escritorio\\SITEG\\WebContent\\public\\imagenes\\reportes\\Dibujo.JPG"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="91" y="6" width="389" height="66" uuid="00ccb7c5-5285-4bc4-8c9d-2440b66d51cf"/>
 				<textElement textAlignment="Center">
@@ -33,6 +28,14 @@
 DECANATO DE CIENCIAS Y TECNOLOGÍA
 COMITÉ DE TRABAJO DE GRADO]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="6" width="91" height="66" uuid="5851f66c-fd56-48fe-9c9b-b9e2024608b3"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="480" y="6" width="75" height="66" uuid="87c85f88-c082-449e-8de3-b5340af164c9"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
