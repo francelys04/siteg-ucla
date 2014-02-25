@@ -47,6 +47,7 @@ import org.zkoss.zul.Window;
 @Controller
 public class CAsignarJurado extends CGeneral {
 
+	private static final long serialVersionUID = -5599367529884634981L;
 	private static String vistaRecibida;
 	long idTeg = 0;
 	private static Programa programa;
@@ -130,7 +131,8 @@ public class CAsignarJurado extends CGeneral {
 
 	/*
 	 * Metodo que permite mover uno o varios profesores hacia la lista de
-	 * integrantes del jurado.
+	 * integrantes del jurado. Y verifica que la cantidad de jurados asignados
+	 * no supere el limite establecido en la configuracion del programa
 	 */
 	@Listen("onClick = #btnAgregarJurado")
 	public void moverDerechaJurado() {
@@ -139,17 +141,29 @@ public class CAsignarJurado extends CGeneral {
 		List<Listitem> listItem = ltbJuradoDisponible.getItems();
 		if (listItem.size() != 0) {
 			for (int i = 0; i < listItem.size(); i++) {
-
 				if (listItem.get(i).isSelected()) {
-
-					Profesor profesor = listItem.get(i).getValue();
-					juradoDisponible.remove(profesor);
-					Jurado jurado = new Jurado();
-					jurado.setProfesor(profesor);
-					juradoOcupado.add(jurado);
-					ltbJuradoSeleccionado.setModel(new ListModelList<Jurado>(
-							juradoOcupado));
-					listitemEliminar.add(listItem.get(i));
+					if ((juradoOcupado.size() + 1) <= buscarCondicionVigenteEspecifica(
+							"Numero de integrantes del jurado", programa)
+							.getValor()) {
+						Profesor profesor = listItem.get(i).getValue();
+						juradoDisponible.remove(profesor);
+						Jurado jurado = new Jurado();
+						jurado.setProfesor(profesor);
+						juradoOcupado.add(jurado);
+						ltbJuradoSeleccionado
+								.setModel(new ListModelList<Jurado>(
+										juradoOcupado));
+						listitemEliminar.add(listItem.get(i));
+					} else {
+						Messagebox
+								.show("Ha excedido el limite de integrantes del jurado. El limite es de: "
+										+ buscarCondicionVigenteEspecifica(
+												"Numero de integrantes del jurado",
+												programa).getValor()
+										+ " integrante(s)", "Error",
+										Messagebox.OK, Messagebox.ERROR);
+						i = listItem.size();
+					}
 				}
 			}
 		}
@@ -241,21 +255,14 @@ public class CAsignarJurado extends CGeneral {
 	@Listen("onClick = #btnAceptarDefensa")
 	public void aceptarDefensaDefinitiva() {
 
-		if (validarJurado() && guardardatos()) {
-
-			System.out.println(tutorEnJurado);
-
-			if (tutorEnJurado) {
-
-				System.out.println(tutorEnJurado);
-
 				Messagebox.show("¿Desea guardar los miembros del jurado?",
 						"Dialogo de confirmacion", Messagebox.OK
 								| Messagebox.CANCEL, Messagebox.QUESTION,
-						new org.zkoss.zk.ui.event.EventListener() {
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
 							public void onEvent(Event evt)
 									throws InterruptedException {
 								if (evt.getName().equals("onOK")) {
+									if (validarJurado() && guardardatos()) {
 									String estatus = "Jurado Asignado";
 									java.util.Date fechaEstatus = new Date();
 									Teg teg = servicioTeg.buscarTeg(idTeg);
@@ -270,23 +277,11 @@ public class CAsignarJurado extends CGeneral {
 											"Información", Messagebox.OK,
 											Messagebox.INFORMATION);
 									salirAsignarJurado();
-
+									}
 								}
 							}
 						});
-			} else {
-				Messagebox.show("El tutor debe pertenecer al jurado", "Error",
-						Messagebox.OK, Messagebox.ERROR);
-			}
-		} else {
-			Messagebox.show(
-					"El numero de profesores en el jurado no es el correcto, debe ser: "
-							+ buscarCondicionVigenteEspecifica(
-									"Numero de integrantes del jurado",
-									programa).getValor(), "Error",
-					Messagebox.OK, Messagebox.ERROR);
-		}
-
+			
 	}
 
 	/*
@@ -369,6 +364,12 @@ public class CAsignarJurado extends CGeneral {
 				"Numero de integrantes del jurado", programa).getValor()) {
 			return true;
 		} else
+			Messagebox.show(
+					"El numero de profesores en el jurado no es el correcto, debe ser: "
+							+ buscarCondicionVigenteEspecifica(
+									"Numero de integrantes del jurado",
+									programa).getValor(), "Error",
+					Messagebox.OK, Messagebox.ERROR);
 			return false;
 	}
 
@@ -379,45 +380,48 @@ public class CAsignarJurado extends CGeneral {
 	 */
 	public boolean guardardatos() {
 
+		Teg teg = servicioTeg.buscarTeg(idTeg);
+		List<Jurado> jurados = new ArrayList<Jurado>();
+		boolean error = false;
+		jurados = servicioJurado.buscarJuradoDeTeg(teg);
+		if (!jurados.isEmpty()) {
+			servicioJurado.limpiar(jurados);
+			jurados.clear();
+		}
+		for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
 
-			Teg teg = servicioTeg.buscarTeg(idTeg);
-			List<Jurado> jurados = new ArrayList<Jurado>();
-			boolean error = false;
-			jurados = servicioJurado.buscarJuradoDeTeg(teg);
-			if (!jurados.isEmpty()) {
-				servicioJurado.limpiar(jurados);
-				jurados.clear();
+			Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
+			String tipojurado = ((Combobox) ((listItem.getChildren().get(3)))
+					.getFirstChild()).getValue();
+			if (tipojurado == "") {
+				error = true;
 			}
-			for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
-
-				Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
-				String tipojurado = ((Combobox) ((listItem.getChildren().get(3)))
-						.getFirstChild()).getValue();
-				if (tipojurado == "") {
-					error = true;
-				}
-				long cedula = ((Intbox) ((listItem.getChildren().get(0)))
-						.getFirstChild()).getValue();
-				Profesor profesorJurado = servicioProfesor
-						.buscarProfesorPorCedula(String.valueOf(cedula));
-				if (tutor.getCedula().equals(
-						String.valueOf(profesorJurado.getCedula()))) {
-					tutorEnJurado = true;
-				}
-				TipoJurado tipo = servicioTipoJurado
-						.buscarPorNombre(tipojurado);
-				Jurado jurado = new Jurado(teg, profesorJurado, tipo);
-				jurados.add(jurado);
+			long cedula = ((Intbox) ((listItem.getChildren().get(0)))
+					.getFirstChild()).getValue();
+			Profesor profesorJurado = servicioProfesor
+					.buscarProfesorPorCedula(String.valueOf(cedula));
+			if (tutor.getCedula().equals(
+					String.valueOf(profesorJurado.getCedula()))) {
+				tutorEnJurado = true;
 			}
-			if (!error) {
-				servicioJurado.guardar(jurados);
-				return true;
+			TipoJurado tipo = servicioTipoJurado.buscarPorNombre(tipojurado);
+			Jurado jurado = new Jurado(teg, profesorJurado, tipo);
+			jurados.add(jurado);
+		}
+		if (!error && tutorEnJurado) {
+			servicioJurado.guardar(jurados);
+			tutorEnJurado = false;
+			return true;
+		} else {
+			if (!tutorEnJurado) {
+				Messagebox.show("El tutor debe formar parte del jurado",
+						"Error", Messagebox.OK, Messagebox.ERROR);
 			} else {
 				Messagebox.show("Debe seleccionar un tipo para cada jurado",
 						"Error", Messagebox.OK, Messagebox.ERROR);
-				return false;
 			}
-		
+			return false;
+		}
 	}
 
 	/*
