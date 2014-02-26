@@ -1,4 +1,5 @@
-<window id="wdwReporteEvaluaciones" title="Evaluaciones de los Trabajos Especiales de Grado"
+<window id="wdwReporteEvaluaciones"
+	title="Evaluaciones de los Trabajos Especiales de Grado"
 	border="normal" width="auto" height="auto" closable="true"
 	apply="controlador.reporte.CReporteEvaluacion">
 
@@ -37,6 +38,58 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
+
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionarPrograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
+	</popup>
+	<popup id="pupSeleccionarArea">
+		<toolbarbutton label="Presione aquí para seleccionar el area" />
+	</popup>
+	<popup id="pupSeleccionarTematica">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la temática" />
+	</popup>
+
+	<popup id="pupInicioReporte">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de inicio" />
+	</popup>
+	<popup id="pupFinReporte">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de fin" />
+	</popup>
+	<popup id="pupEstatusReporte">
+		<toolbarbutton
+			label="Presione aqui para seleccionar el estatus" />
+	</popup>
+
+	<popup id="pupGenerarReporte">
+		<toolbarbutton label="Presione aqui para mostrar el reporte" />
+	</popup>
+	<popup id="pupCancelarReporte">
+		<toolbarbutton label="Presione aqui para limpiar los campos" />
+	</popup>
+	<popup id="pupSalirReporte">
+		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
+	<popup id="pupExportarReporte">
+		<toolbarbutton label="Presione aqui para exportar el reporte" />
+	</popup>
+	<popup id="pupTipoEvaluacion">
+		<toolbarbutton
+			label="Presione aqui para seleccionar el tipo de evaluacion" />
+	</popup>
+	<popup id="pupSeleccionEvaluacion">
+		<toolbarbutton
+			label="Doble clic para seleccionar una solicitud" />
+	</popup>
+
+	<!-- Fin de popus -->
+
+
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -74,7 +127,8 @@
 						</hlayout>
 
 
-						<radiogroup id="rdgEvaluaciones">
+						<radiogroup id="rdgEvaluaciones"
+							tooltip="pupTipoEvaluacion">
 
 							<radio id="rdoFactibilidad"
 								label="Factibilidad"
@@ -110,8 +164,8 @@
 						</hlayout>
 
 						<datebox id="dtbDesde" readonly="true"
-							style="margin-left:20px" width="150px" format="yyyy/MM/dd"
-							onCreate="self.value = new Date()">
+							tooltip="pupInicioReporte" style="margin-left:20px" width="150px"
+							format="dd/MM/yyyy" onCreate="self.value = new Date()">
 						</datebox>
 
 						<hlayout>
@@ -121,8 +175,8 @@
 								style="font-weight:bold" />
 						</hlayout>
 						<datebox id="dtbHasta" readonly="true"
-							style="margin-left:30px" width="150px" format="yyyy/MM/dd"
-							onCreate="self.value = new Date()">
+							tooltip="pupFinReporte" style="margin-left:30px" width="150px"
+							format="dd/MM/yyyy" onCreate="self.value = new Date()">
 						</datebox>
 					</hbox>
 
@@ -149,28 +203,10 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<combobox id="cmbPrograma" readonly="true"
-						width="250px">
-						<template name="model">
-							<comboitem label="${each.nombre}"
-								id="${each.id}" />
-						</template>
-					</combobox>
-
-				</row>
-
-				<row>
-
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red">
-						</label>
-						<label value="Área:" style="font-weight:bold" />
-					</hlayout>
-
 					<hbox>
-						<combobox id="cmbArea" readonly="true"
-							width="250px">
+
+						<combobox id="cmbPrograma" readonly="true"
+							tooltip="pupSeleccionarPrograma" width="250px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -181,34 +217,60 @@
 							<label value="*"
 								style="font-weight:bold;color:red;margin-left:60px">
 							</label>
-							<label value="Temática:"
+							<label value="Área:"
 								style="font-weight:bold" />
 						</hlayout>
 
-						<combobox style="margin-left:30px"
-							id="cmbTematica" readonly="true" width="250px">
+
+						<combobox id="cmbArea" readonly="true"
+							tooltip="pupSeleccionarArea" style="margin-left:40px"
+							width="250px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
 							</template>
 						</combobox>
 					</hbox>
+
+
 				</row>
 
 				<row>
+
 					<hlayout>
 						<label value="*"
-							style="font-weight:bold;color:red" />
-						<label value="Estatus "
+							style="font-weight:bold;color:red">
+						</label>
+						<label value="Temática:"
 							style="font-weight:bold" />
 					</hlayout>
-					<combobox id="cmbEstatus" width="200px"
-						readonly="true">
-						<template name="model">
-							<comboitem label="${each}" />
-						</template>
-					</combobox>
 
+					<hbox>
+
+						<combobox id="cmbTematica" readonly="true"
+							tooltip="pupSeleccionarTematica" width="250px">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
+
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red;margin-left:60px" />
+							<label value="Estatus: "
+								style="font-weight:bold" />
+						</hlayout>
+						<combobox id="cmbEstatus" width="200px"
+							tooltip="pupEstatusReporte" style="margin-left:30px"
+							readonly="true">
+							<template name="model">
+								<comboitem label="${each}" />
+							</template>
+						</combobox>
+
+
+					</hbox>
 				</row>
 
 			</rows>
@@ -216,7 +278,7 @@
 		<separator />
 		<separator />
 
-		<listbox id="ltbTodo" rows="4" width="3100px"
+		<listbox id="ltbTodo" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
@@ -250,7 +312,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -281,7 +343,7 @@
 
 		<separator />
 
-		<listbox id="ltbElegiPrograma" rows="4" width="3100px"
+		<listbox id="ltbElegiPrograma" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 
@@ -311,7 +373,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -340,7 +402,7 @@
 			</template>
 		</listbox>
 		<separator />
-		<listbox id="ltbElegiArea" rows="4" width="3100px"
+		<listbox id="ltbElegiArea" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 
@@ -372,7 +434,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -402,7 +464,7 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiProgramaArea" rows="4" width="3100px"
+		<listbox id="ltbElegiProgramaArea" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 
@@ -434,7 +496,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -464,7 +526,7 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiProgramaAreaTematica" rows="4"
+		<listbox id="ltbElegiProgramaAreaTematica" mold="paging" pageSize="4"
 			width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
@@ -496,7 +558,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -525,7 +587,7 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiAreaTematica" rows="4" width="3100px"
+		<listbox id="ltbElegiAreaTematica" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
@@ -552,7 +614,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -582,7 +644,7 @@
 
 		<separator />
 
-		<listbox id="ltbTodo1" rows="4" width="3100px"
+		<listbox id="ltbTodo1" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
@@ -618,7 +680,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -649,7 +711,7 @@
 
 		<separator />
 
-		<listbox id="ltbElegiPrograma1" rows="4" width="3100px"
+		<listbox id="ltbElegiPrograma1" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 
@@ -680,7 +742,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -709,7 +771,7 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiArea1" rows="4" width="3100px"
+		<listbox id="ltbElegiArea1" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
@@ -741,7 +803,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -771,7 +833,7 @@
 
 		<separator />
 
-		<listbox id="ltbElegiProgramaArea1" rows="4" width="3100px"
+		<listbox id="ltbElegiProgramaArea1" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
@@ -800,7 +862,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -829,7 +891,7 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiProgramaAreaTematica1" rows="4"
+		<listbox id="ltbElegiProgramaAreaTematica1" mold="paging" pageSize="4"
 			width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
@@ -861,7 +923,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -889,7 +951,7 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiAreaTematica1" rows="4" width="3100px"
+		<listbox id="ltbElegiAreaTematica1" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
@@ -916,7 +978,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -953,21 +1015,21 @@
 					<separator />
 					<div sclass="btn-group">
 						<button id="btnGenerar" label="Generar"
-							sclass="btn" image="/public/imagenes/iconos/generar.png"
-							tabindex="13">
+							tooltip="pupGenerarReporte" sclass="btn"
+							image="/public/imagenes/iconos/generar.png" tabindex="13">
 						</button>
 
 						<button id="btnExportarPlano" label="Exportar"
-							sclass="btn" width="110px"
+							tooltip="pupExportarReporte" sclass="btn" width="110px"
 							image="/public/imagenes/iconos/exportar.png" tabindex="14">
 						</button>
 						<button id="btnCancelar" label="Cancelar"
-							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
-							tabindex="15">
+							tooltip="pupCancelarReporte" sclass="btn"
+							image="/public/imagenes/iconos/limpiar.png" tabindex="15">
 						</button>
 						<button id="btnSalir" label="Salir" sclass="btn"
-							width="110px" image="/public/imagenes/iconos/salir.png"
-							tabindex="16">
+							tooltip="pupSalirReporte" width="110px"
+							image="/public/imagenes/iconos/salir.png" tabindex="16">
 						</button>
 						<separator />
 					</div>

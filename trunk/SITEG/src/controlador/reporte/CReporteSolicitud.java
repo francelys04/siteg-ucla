@@ -158,9 +158,12 @@ public class CReporteSolicitud extends CGeneral {
 		programas.add(programaa);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
 
+		cmbArea.setDisabled(true);
+		cmbTematica.setDisabled(true);
+
 	}
 
-	/* Metodo que permite limpiar los campos de la vista. */
+	/* Metodo que permite limpiar todas las listas de la vista. */
 	public void cancelar() {
 
 		ltbElegiPrograma.setVisible(false);
@@ -188,27 +191,30 @@ public class CReporteSolicitud extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() {
-		try{
-		if (cmbPrograma.getValue().equals("Todos")) {
+		try {
+			if (cmbPrograma.getValue().equals("Todos")) {
 
-			areas = servicioArea.buscarActivos();
-			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
-					"", true);
-			areas.add(area);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
-		} else {
-			cmbArea.setValue("");
-			cmbTematica.setValue("");
-			programa1 = (Programa) cmbPrograma.getSelectedItem().getValue();
-			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
-					.buscar(programa1.getId()));
-			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
-					"", true);
-			areas.add(area);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+				areas = servicioArea.buscarActivos();
+				AreaInvestigacion area = new AreaInvestigacion(10000000,
+						"Todos", "", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+				cmbArea.setDisabled(false);
+			} else {
+				cmbArea.setDisabled(false);
+				cmbArea.setValue("");
+				cmbTematica.setValue("");
+				programa1 = (Programa) cmbPrograma.getSelectedItem().getValue();
+				areas = servicioProgramaArea
+						.buscarAreasDePrograma(servicioPrograma
+								.buscar(programa1.getId()));
+				AreaInvestigacion area = new AreaInvestigacion(10000000,
+						"Todos", "", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 
-		}
-		}catch (Exception e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle.e exception
 		}
@@ -222,20 +228,25 @@ public class CReporteSolicitud extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
-		try{
-	
-		if (cmbArea.getValue().equals("Todos")) {
+		try {
 
-			cmbTematica.setValue("Todos");
-		} else {
-			cmbTematica.setValue("");
-			area1 = (AreaInvestigacion) cmbArea.getSelectedItem().getValue();
-			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-					.buscarArea(area1.getId()));
-			Tematica tema = new Tematica(10000, "Todos", "", true, null);
-			tematicas.add(tema);
-			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
-		}}catch (Exception e) {
+			if (cmbArea.getValue().equals("Todos")) {
+
+				cmbTematica.setValue("Todos");
+				cmbTematica.setDisabled(true);
+
+			} else {
+				cmbTematica.setDisabled(false);
+				cmbTematica.setValue("");
+				area1 = (AreaInvestigacion) cmbArea.getSelectedItem()
+						.getValue();
+				tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
+						.buscarArea(area1.getId()));
+				Tematica tema = new Tematica(10000, "Todos", "", true, null);
+				tematicas.add(tema);
+				cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle.e exception
 		}
@@ -253,10 +264,10 @@ public class CReporteSolicitud extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite dado a un programa, area y
-	 * tematica, generar una lista con las solicitudes de tutorias,
-	 * proyectos,tegs o defensas, dependiendo de esta seleccion, donde se
-	 * cargara un fichero con los datos resultante de esta.
+	 * Metodo que permite dado a un programa, area y tematica, generar una lista
+	 * con las solicitudes de tutorias, proyectos,tegs o defensas, dependiendo
+	 * de esta seleccion, donde se cargara un fichero con los datos resultante
+	 * de esta.
 	 */
 	@Listen("onClick = #btnGenerar")
 	public void generarReporteDefensa() throws JRException {
@@ -275,7 +286,7 @@ public class CReporteSolicitud extends CGeneral {
 					&& (rdoProyecto.isChecked() == false)
 					&& (rdoTEG.isChecked() == false)) {
 				Messagebox
-						.show("Debe Seleccionar el tipo de solicitud que quiere consultar",
+						.show("Debe Seleccionar el tipo de solicitud que desea consultar",
 								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			} else {
@@ -315,7 +326,7 @@ public class CReporteSolicitud extends CGeneral {
 						if (fechaFin == null || fechaInicio == null
 								|| fechaInicio.after(fechaFin)) {
 							Messagebox
-									.show("La fecha de inicio debe ser primero que la fecha de fin",
+									.show("La fecha de fin debe ser posterior a la fecha de inicio",
 											"Error", Messagebox.OK,
 											Messagebox.ERROR);
 							btnExportarPlano.setDisabled(true);
@@ -433,10 +444,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
@@ -552,10 +562,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
@@ -676,10 +685,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
@@ -797,10 +805,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 
@@ -923,10 +930,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 
@@ -1049,10 +1055,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
@@ -1177,10 +1182,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
@@ -1282,10 +1286,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
@@ -1390,10 +1393,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 									;
 								}
@@ -1495,10 +1497,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 
@@ -1603,10 +1604,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 
@@ -1712,10 +1712,9 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-											.show("No ha informacion disponible para este intervalo",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									.show("No hay informacion disponible para esta seleccion",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
@@ -1741,6 +1740,8 @@ public class CReporteSolicitud extends CGeneral {
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbTematica.setValue("");
+		cmbTematica.setDisabled(true);
+		cmbArea.setDisabled(true);
 		dtbDesde.setValue(new Date());
 		dtbHasta.setValue(new Date());
 		wdwReporteSolicitud.setWidth("auto");

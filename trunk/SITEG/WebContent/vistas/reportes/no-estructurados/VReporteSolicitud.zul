@@ -1,4 +1,5 @@
-<window id="wdwReporteSolicitud" title="Solicitudes de los Trabajos Especiales de Grado" border="normal"
+<window id="wdwReporteSolicitud"
+	title="Solicitudes de los Trabajos Especiales de Grado" border="normal"
 	width="auto" height="auto" closable="true"
 	apply="controlador.reporte.CReporteSolicitud">
 
@@ -38,6 +39,52 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
+
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionarPrograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
+	</popup>
+	<popup id="pupSeleccionarArea">
+		<toolbarbutton label="Presione aquí para seleccionar el area" />
+	</popup>
+	<popup id="pupSeleccionarTematica">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la temática" />
+	</popup>
+
+	<popup id="pupInicioReporte">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de inicio" />
+	</popup>
+	<popup id="pupFinReporte">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de fin" />
+	</popup>
+
+	<popup id="pupGenerarReporte">
+		<toolbarbutton label="Presione aqui para mostrar el reporte" />
+	</popup>
+	<popup id="pupCancelarReporte">
+		<toolbarbutton label="Presione aqui para limpiar los campos" />
+	</popup>
+	<popup id="pupSalirReporte">
+		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
+	<popup id="pupExportarReporte">
+		<toolbarbutton label="Presione aqui para exportar el reporte" />
+	</popup>
+	<popup id="pupTipoSolicitud">
+		<toolbarbutton label="Presione aqui para seleccionar el tipo de solicitud" />
+	</popup>
+	<popup id="pupSeleccionSolicitud">
+		<toolbarbutton
+			label="Doble clic para seleccionar una solicitud" />
+	</popup>
+
+	<!-- Fin de popus -->
+
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -56,7 +103,8 @@
 		style="margin-left:15px;margin-right:15px">
 		<separator />
 		<separator />
-		<grid sclass="fgrid" style="margin-left:15px;margin-right:15px">
+		<grid sclass="fgrid"
+			style="margin-left:15px;margin-right:15px">
 			<columns>
 				<column width="800px" height="60px" />
 			</columns>
@@ -74,7 +122,7 @@
 						</hlayout>
 
 
-						<radiogroup id="rdgTutoria">
+						<radiogroup id="rdgTutoria" tooltip="pupTipoSolicitud">
 
 							<radio id="rdoTutoria" label="Tutoria"
 								style="margin-left:70px;color: rgb(0, 84, 122)" />
@@ -96,7 +144,8 @@
 		<separator />
 		<separator />
 
-		<grid sclass="fgrid" style="margin-left:15px;margin-right:15px">
+		<grid sclass="fgrid"
+			style="margin-left:15px;margin-right:15px">
 			<columns>
 				<column width="800px" height="60px" />
 			</columns>
@@ -113,8 +162,8 @@
 						</hlayout>
 
 						<datebox id="dtbDesde" readonly="true"
-							style="margin-left:20px" width="150px" format="yyyy/MM/dd"
-							onCreate="self.value = new Date()">
+							tooltip="pupInicioReporte" style="margin-left:20px" width="150px"
+							format="dd/MM/yyyy" onCreate="self.value = new Date()">
 						</datebox>
 
 						<hlayout>
@@ -124,8 +173,8 @@
 								style="font-weight:bold" />
 						</hlayout>
 						<datebox id="dtbHasta" readonly="true"
-							style="margin-left:30px" width="150px" format="yyyy/MM/dd"
-							onCreate="self.value = new Date()">
+							tooltip="pupFinReporte" style="margin-left:30px" width="150px"
+							format="dd/MM/yyyy" onCreate="self.value = new Date()">
 						</datebox>
 					</hbox>
 
@@ -136,7 +185,8 @@
 
 		<separator />
 
-		<grid sclass="fgrid" style="margin-left:15px;margin-right:15px">
+		<grid sclass="fgrid"
+			style="margin-left:15px;margin-right:15px">
 			<columns>
 				<column width="135px" height="60px" />
 			</columns>
@@ -152,7 +202,7 @@
 					</hlayout>
 
 					<combobox id="cmbPrograma" readonly="true"
-						width="250px">
+						tooltip="pupSeleccionarPrograma" width="250px">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -172,7 +222,7 @@
 
 					<hbox>
 						<combobox id="cmbArea" readonly="true"
-							width="250px">
+							tooltip="pupSeleccionarArea" width="250px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -188,7 +238,8 @@
 						</hlayout>
 
 						<combobox style="margin-left:30px"
-							id="cmbTematica" readonly="true" width="250px">
+							tooltip="pupSeleccionarTematica" id="cmbTematica" readonly="true"
+							width="250px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -206,7 +257,7 @@
 		<separator />
 		<separator />
 
-		<listbox id="ltbTodo1" rows="4" width="3100px"
+		<listbox id="ltbTodo1" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
@@ -237,7 +288,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.estatus}" />
@@ -265,21 +316,21 @@
 
 		<separator />
 
-		<listbox id="ltbElegiPrograma1" rows="4" width="3100px"
+		<listbox id="ltbElegiPrograma1" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 
 				<listheader label="Descripcion" align="center"
-					width="20%" />
-				<listheader label="Fecha" align="center" width="20%" />
-				<listheader label="Estatus" align="center" width="20%" />
+					/>
+				<listheader label="Fecha" align="center" />
+				<listheader label="Estatus" align="center"  />
 				<listheader label="Cedula Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Nombre Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Apellido Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Profesor" align="center" />
 				<listheader label="Direccion Profesor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -297,7 +348,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.estatus}" />
@@ -322,21 +373,21 @@
 
 		<separator />
 
-		<listbox id="ltbElegiArea1" rows="4" width="3100px"
+		<listbox id="ltbElegiArea1" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 
 				<listheader label="Descripcion" align="center"
-					width="20%" />
-				<listheader label="Fecha" align="center" width="20%" />
-				<listheader label="Estatus" align="center" width="20%" />
+					 />
+				<listheader label="Fecha" align="center"  />
+				<listheader label="Estatus" align="center"  />
 				<listheader label="Cedula Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Nombre Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Apellido Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Profesor" align="center" />
 				<listheader label="Direccion Profesor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -355,7 +406,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.estatus}" />
@@ -381,22 +432,21 @@
 
 		<separator />
 
-		<listbox id="ltbElegiProgramaArea1" rows="4"
-			width="3100px"
+		<listbox id="ltbElegiProgramaArea1" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 
 				<listheader label="Descripcion" align="center"
-					width="20%" />
-				<listheader label="Fecha" align="center" width="20%" />
-				<listheader label="Estatus" align="center" width="20%" />
+					 />
+				<listheader label="Fecha" align="center"  />
+				<listheader label="Estatus" align="center" />
 				<listheader label="Cedula Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Nombre Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Apellido Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Profesor" align="center" />
 				<listheader label="Direccion Profesor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -412,7 +462,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.estatus}" />
@@ -435,7 +485,7 @@
 
 		<separator />
 
-		<listbox id="ltbElegiProgramaAreaTematica1" rows="4"
+		<listbox id="ltbElegiProgramaAreaTematica1" mold="paging" pageSize="4"
 			width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
@@ -443,15 +493,15 @@
 			<listhead>
 
 				<listheader label="Descripcion" align="center"
-					width="20%" />
-				<listheader label="Fecha" align="center" width="20%" />
-				<listheader label="Estatus" align="center" width="20%" />
+					 />
+				<listheader label="Fecha" align="center"  />
+				<listheader label="Estatus" align="center"  />
 				<listheader label="Cedula Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Nombre Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Apellido Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Profesor" align="center" />
 				<listheader label="Direccion Profesor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -463,7 +513,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.estatus}" />
@@ -483,22 +533,21 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiAreaTematica1" rows="4"
-			width="3100px"
+		<listbox id="ltbElegiAreaTematica1" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 
 				<listheader label="Descripcion" align="center"
-					width="20%" />
-				<listheader label="Fecha" align="center" width="20%" />
-				<listheader label="Estatus" align="center" width="20%" />
+					 />
+				<listheader label="Fecha" align="center"  />
+				<listheader label="Estatus" align="center"  />
 				<listheader label="Cedula Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Nombre Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Apellido Profesor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Profesor" align="center" />
 				<listheader label="Direccion Profesor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -513,7 +562,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.estatus}" />
@@ -537,21 +586,21 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbTodo" rows="4" width="3100px"
+		<listbox id="ltbTodo" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
-				<listheader label="Titulo" align="center" width="20%" />
+				<listheader label="Titulo" align="center"  />
 				<listheader label="Descripcion Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Fecha Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Cedula Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Nombre Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Apellido Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Tutor" align="center" />
 				<listheader label="Direccion Tutor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -571,7 +620,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -598,25 +647,25 @@
 
 		<separator />
 
-		<listbox id="ltbElegiPrograma" rows="4" width="3100px"
-			style="margin-left:4%;margin-right:4%" mold="paging" pageSize="10"
+		<listbox id="ltbElegiPrograma" mold="paging" pageSize="4" width="3100px"
+			style="margin-left:4%;margin-right:4%" 
 			emptyMessage="No hay datos Disponiles">
 
 
 
 
 			<listhead>
-				<listheader label="Titulo" align="center" width="20%" />
+				<listheader label="Titulo" align="center"  />
 				<listheader label="Descripcion Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Fecha Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Cedula Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Nombre Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Apellido Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Tutor" align="center" />
 				<listheader label="Direccion Tutor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -632,7 +681,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -656,22 +705,22 @@
 
 		<separator />
 
-		<listbox id="ltbElegiArea" rows="4" width="3100px"
+		<listbox id="ltbElegiArea" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
-			mold="paging" pageSize="10" emptyMessage="No hay datos Disponiles">
+			 emptyMessage="No hay datos Disponiles">
 
 			<listhead>
-				<listheader label="Titulo" align="center" width="20%" />
+				<listheader label="Titulo" align="center"  />
 				<listheader label="Descripcion Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Fecha Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Cedula Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Nombre Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Apellido Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Tutor" align="center" />
 				<listheader label="Direccion Tutor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -689,7 +738,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -712,21 +761,21 @@
 			</template>
 		</listbox>
 		<separator />
-		<listbox id="ltbElegiProgramaArea" rows="4" width="3100px"
+		<listbox id="ltbElegiProgramaArea" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
-				<listheader label="Titulo" align="center" width="20%" />
+				<listheader label="Titulo" align="center"  />
 				<listheader label="Descripcion Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Fecha Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Cedula Tutor" align="center"
-					width="20%" />
+					/>
 				<listheader label="Nombre Tutor" align="center"
-					width="20%" />
+					/>
 				<listheader label="Apellido Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Tutor" align="center" />
 				<listheader label="Direccion Tutor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -741,7 +790,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -762,23 +811,23 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiProgramaAreaTematica" rows="4"
+		<listbox id="ltbElegiProgramaAreaTematica" mold="paging" pageSize="4"
 			width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 
 			<listhead>
-				<listheader label="Titulo" align="center" width="20%" />
+				<listheader label="Titulo" align="center"  />
 				<listheader label="Descripcion Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Fecha Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Cedula Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Nombre Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Apellido Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Tutor" align="center" />
 				<listheader label="Direccion Tutor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -792,7 +841,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
@@ -809,21 +858,21 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiAreaTematica" rows="4" width="3100px"
+		<listbox id="ltbElegiAreaTematica" mold="paging" pageSize="4" width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
-				<listheader label="Titulo" align="center" width="20%" />
+				<listheader label="Titulo" align="center"  />
 				<listheader label="Descripcion Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Fecha Teg" align="center"
-					width="20%" />
+					 />
 				<listheader label="Cedula Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Nombre Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Apellido Tutor" align="center"
-					width="20%" />
+					 />
 				<listheader label="Correo Tutor" align="center" />
 				<listheader label="Direccion Tutor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
@@ -838,7 +887,7 @@
 
 
 			<template name="model">
-				<listitem>
+				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
@@ -867,19 +916,19 @@
 				<div sclass="alert-info" align="center">
 					<separator />
 					<div sclass="btn-group">
-						<button id="btnGenerar" label="Generar"
+						<button id="btnGenerar" label="Generar" tooltip="pupGenerarReporte"
 							sclass="btn" image="/public/imagenes/iconos/generar.png"
 							tabindex="13">
 						</button>
-						<button id="btnExportarPlano" width="110px"
+						<button id="btnExportarPlano" width="110px" tooltip="pupExportarReporte"
 							label="Exportar" sclass="btn"
 							image="/public/imagenes/iconos/exportar.png" tabindex="13">
 						</button>
-						<button id="btnCancelar" label="Cancelar"
+						<button id="btnCancelar" label="Cancelar" tooltip="pupCancelarReporte"
 							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
 							tabindex="14">
 						</button>
-						<button id="btnSalir" label="Salir" sclass="btn"
+						<button id="btnSalir" label="Salir" sclass="btn" tooltip="pupSalirReporte"
 							width="110px" image="/public/imagenes/iconos/salir.png"
 							tabindex="15">
 						</button>
