@@ -92,6 +92,11 @@ public class CReporteDefensa extends CGeneral {
 	private Combobox cmbEstatus;
 	@Wire
 	private Jasperreport jstVistaPrevia;
+	private static Programa programa1;
+	private static AreaInvestigacion area1;
+	private static long idarea;
+	private static Date fechaInicio;
+	private static Date fechaFin;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
@@ -107,6 +112,9 @@ public class CReporteDefensa extends CGeneral {
 		programas.add(programaa);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
 		cmbEstatus.setModel(new ListModelList<String>(estatusDefensa));
+		cmbArea.setDisabled(true);
+		cmbTematica.setDisabled(true);
+		cmbEstatus.setDisabled(true);
 
 	}
 
@@ -118,21 +126,34 @@ public class CReporteDefensa extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() {
-		if (cmbPrograma.getValue().equals("Todos")) {
-			cmbArea.setValue("Todos");
-			cmbTematica.setValue("Todos");
-		} else {
-			cmbArea.setValue("");
-			cmbTematica.setValue("");
-			Programa programa = (Programa) cmbPrograma.getSelectedItem()
-					.getValue();
-			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
-					.buscar(programa.getId()));
-			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
-					"", true);
-			areas.add(area);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+		try {
+			if (cmbPrograma.getValue().equals("Todos")) {
 
+				areas = servicioArea.buscarActivos();
+				AreaInvestigacion area = new AreaInvestigacion(10000000,
+						"Todos", "", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+				cmbArea.setDisabled(false);
+
+			} else {
+
+				cmbArea.setDisabled(false);
+				cmbArea.setValue("");
+				cmbTematica.setValue("");
+				programa1 = (Programa) cmbPrograma.getSelectedItem().getValue();
+				areas = servicioProgramaArea
+						.buscarAreasDePrograma(servicioPrograma
+								.buscar(programa1.getId()));
+				AreaInvestigacion area = new AreaInvestigacion(10000000,
+						"Todos", "", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
 		}
 	}
 
@@ -143,16 +164,31 @@ public class CReporteDefensa extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
-		if (cmbArea.getValue().equals("Todos")) {
-			cmbTematica.setValue("Todos");
-		} else {
-			cmbTematica.setValue("");
-			AreaInvestigacion tematica = (AreaInvestigacion) cmbArea
-					.getSelectedItem().getValue();
-			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-					.buscarArea(tematica.getId()));
-			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
+		try {
+			if (cmbArea.getValue().equals("Todos")) {
+
+				cmbTematica.setValue("Todos");
+				cmbTematica.setDisabled(true);
+				cmbEstatus.setDisabled(false);
+
+			} else {
+
+				cmbTematica.setDisabled(false);
+				cmbTematica.setValue("");
+				area1 = (AreaInvestigacion) cmbArea.getSelectedItem()
+						.getValue();
+				tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
+						.buscarArea(area1.getId()));
+				Tematica tema = new Tematica(10000, "Todos", "", true, null);
+				tematicas.add(tema);
+				cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
 		}
+		idarea = Long.parseLong(cmbArea.getSelectedItem().getId());
 	}
 
 	/*
@@ -161,8 +197,11 @@ public class CReporteDefensa extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
+
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
 		idTematica = tematica.getId();
+		cmbEstatus.setDisabled(false);
+
 	}
 
 	/*
@@ -174,131 +213,152 @@ public class CReporteDefensa extends CGeneral {
 	 */
 	@Listen("onClick = #btnGenerarReporteDefensa")
 	public void generarReporteDefensa() throws JRException {
-		Date fechaInicio = dtbFechaInicio.getValue();
-		Date fechaFin = dtbFechaFin.getValue();
-		String nombreArea = cmbArea.getValue();
-		String nombreTematica = cmbTematica.getValue();
-		String nombrePrograma = cmbPrograma.getValue();
-		AreaInvestigacion area = servicioArea.buscarArea(idArea);
-		Tematica tematica = servicioTematica.buscarTematica(idTematica);
-		String tipoDefensa = cmbEstatus.getValue();
-		System.out.println(tipoDefensa);
-		System.out.println(nombrePrograma);
-		System.out.println(nombreTematica);
 
-		List<Defensa> defensas = new ArrayList();
-		List<DefensaTeg> elementos = new ArrayList<DefensaTeg>();
-
-		if (fechaFin == null || fechaInicio == null
-				|| fechaInicio.after(fechaFin)) {
-			Messagebox.show(
-					"La fecha de inicio debe ser primero que la fecha de fin",
-					"Error", Messagebox.OK, Messagebox.ERROR);
-		} else { 
-			if (!tipoDefensa.equals("Todos")) {
-
-			if (nombrePrograma.equals("Todos")) {
-
-				defensas = servicioDefensa.buscarDefensaTegSegunEstatus2(
-						tipoDefensa, fechaInicio, fechaFin);
-			} else if (!nombrePrograma.equals("Todos")
-					&& nombreArea.equals("Todos")) {
-				defensas = servicioDefensa
-						.buscarDefensaTegSegunEstatusPrograma2(tipoDefensa,
-								programa, fechaInicio, fechaFin);
-			} else if (!nombrePrograma.equals("Todos")
-					&& !nombreArea.equals("Todos")
-					&& !nombreTematica.equals("Todos")) {
-				tematica = servicioTematica
-						.buscarTematicaPorNombre(nombreTematica);
-				defensas = servicioDefensa
-						.buscarDefensaTegSegunEstatusTematica2(tipoDefensa,
-								tematica, fechaInicio, fechaFin);
-			} else if (!nombrePrograma.equals("Todos")
-					&& !nombreArea.equals("Todos")
-					&& nombreTematica.equals("Todos")) {
-				defensas = servicioDefensa.buscarDefensaTegSegunEstatusArea2(
-						tipoDefensa, area, fechaInicio, fechaFin);
-			}
+		if ((cmbPrograma.getText().compareTo("") == 0)
+				|| (cmbArea.getText().compareTo("") == 0)
+				|| (cmbTematica.getText().compareTo("") == 0)
+				|| (cmbEstatus.getText().compareTo("") == 0)
+				|| (dtbFechaInicio.getValue() == null)
+				|| (dtbFechaFin.getValue() == null)) {
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
 		} else {
-			if (nombrePrograma.equals("Todos")) {
 
-				defensas = servicioDefensa.buscarDefensaTeg(fechaInicio,
-						fechaFin);
-			} else if (!nombrePrograma.equals("Todos")
-					&& nombreArea.equals("Todos")) {
-				defensas = servicioDefensa.buscarDefensaTegSegunPrograma(
-						programa, fechaInicio, fechaFin);
-			} else if (!nombrePrograma.equals("Todos")
-					&& !nombreArea.equals("Todos")
-					&& !nombreTematica.equals("Todos")) {
-				tematica = servicioTematica
-						.buscarTematicaPorNombre(nombreTematica);
-				defensas = servicioDefensa.buscarDefensaTegSegunTematica(
-						tematica, fechaInicio, fechaFin);
-			} else if (!nombrePrograma.equals("Todos")
-					&& !nombreArea.equals("Todos")
-					&& nombreTematica.equals("Todos")) {
-				defensas = servicioDefensa.buscarDefensaTegSegunArea(area,
-						fechaInicio, fechaFin);
-			}
-		}
+			fechaInicio = dtbFechaInicio.getValue();
+			fechaFin = dtbFechaFin.getValue();
 
-		if (defensas.size() != 0) {
-			for (Defensa defensa : defensas) {
-				List<Estudiante> estudiantes = servicioEstudiante
-						.buscarEstudiantePorTeg(defensa.getTeg());
+			if (fechaInicio.after(fechaFin)) {
 
-				String nombreEstudiantes = "";
-				for (Estudiante e : estudiantes) {
-					nombreEstudiantes += e.getNombre() + " " + e.getApellido()
-							+ " ";
+				Messagebox
+						.show("La fecha de fin debe ser posterior a la fecha de inicio",
+								"Error", Messagebox.OK, Messagebox.ERROR);
+
+			} else {
+
+				Date fechaInicio = dtbFechaInicio.getValue();
+				Date fechaFin = dtbFechaFin.getValue();
+				String nombreArea = cmbArea.getValue();
+				String nombreTematica = cmbTematica.getValue();
+				String nombrePrograma = cmbPrograma.getValue();
+				AreaInvestigacion area = servicioArea.buscarArea(idArea);
+				Tematica tematica = servicioTematica.buscarTematica(idTematica);
+				String tipoDefensa = cmbEstatus.getValue();
+
+				List<Defensa> defensas = new ArrayList();
+				List<DefensaTeg> elementos = new ArrayList<DefensaTeg>();
+
+				if (!tipoDefensa.equals("Todos")) {
+
+					if (nombrePrograma.equals("Todos")) {
+
+						defensas = servicioDefensa
+								.buscarDefensaTegSegunEstatus2(tipoDefensa,
+										fechaInicio, fechaFin);
+					} else if (!nombrePrograma.equals("Todos")
+							&& nombreArea.equals("Todos")) {
+						defensas = servicioDefensa
+								.buscarDefensaTegSegunEstatusPrograma2(
+										tipoDefensa, programa, fechaInicio,
+										fechaFin);
+					} else if (!nombrePrograma.equals("Todos")
+							&& !nombreArea.equals("Todos")
+							&& !nombreTematica.equals("Todos")) {
+						tematica = servicioTematica
+								.buscarTematicaPorNombre(nombreTematica);
+						defensas = servicioDefensa
+								.buscarDefensaTegSegunEstatusTematica2(
+										tipoDefensa, tematica, fechaInicio,
+										fechaFin);
+					} else if (!nombrePrograma.equals("Todos")
+							&& !nombreArea.equals("Todos")
+							&& nombreTematica.equals("Todos")) {
+						defensas = servicioDefensa
+								.buscarDefensaTegSegunEstatusArea2(tipoDefensa,
+										area, fechaInicio, fechaFin);
+					}
+				} else {
+					if (nombrePrograma.equals("Todos")) {
+
+						defensas = servicioDefensa.buscarDefensaTeg(
+								fechaInicio, fechaFin);
+					} else if (!nombrePrograma.equals("Todos")
+							&& nombreArea.equals("Todos")) {
+						defensas = servicioDefensa
+								.buscarDefensaTegSegunPrograma(programa,
+										fechaInicio, fechaFin);
+					} else if (!nombrePrograma.equals("Todos")
+							&& !nombreArea.equals("Todos")
+							&& !nombreTematica.equals("Todos")) {
+						tematica = servicioTematica
+								.buscarTematicaPorNombre(nombreTematica);
+						defensas = servicioDefensa
+								.buscarDefensaTegSegunTematica(tematica,
+										fechaInicio, fechaFin);
+					} else if (!nombrePrograma.equals("Todos")
+							&& !nombreArea.equals("Todos")
+							&& nombreTematica.equals("Todos")) {
+						defensas = servicioDefensa.buscarDefensaTegSegunArea(
+								area, fechaInicio, fechaFin);
+					}
 				}
-				elementos.add(new DefensaTeg(defensa.getTeg().getTitulo(),
-						defensa.getProfesor().getNombre() + " "
-								+ defensa.getProfesor().getApellido(),
-						nombreEstudiantes, defensa.getEstatus(), defensa
-								.getFecha()));
-			}
 
-			FileSystemView filesys = FileSystemView.getFileSystemView();
-			Map<String, Object> p = new HashMap<String, Object>();
-			String rutaUrl = obtenerDirectorio();
-			String reporteSrc = rutaUrl
-					+ "SITEG/vistas/reportes/estructurados/compilados/RReporteDefensa.jasper";
-			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+				if (defensas.size() != 0) {
+					for (Defensa defensa : defensas) {
+						List<Estudiante> estudiantes = servicioEstudiante
+								.buscarEstudiantePorTeg(defensa.getTeg());
 
-			p.put("fecha", new Date());
-			p.put("fecha1", fechaInicio);
-			p.put("fecha2", fechaFin);
-			p.put("area", nombreArea);
-			p.put("tematica", nombreTematica);
-			p.put("programa", nombrePrograma);
-			p.put("estatus", tipoDefensa);
-			p.put("logoUcla", reporteImage + "logo ucla.png");
-			p.put("logoCE", reporteImage + "logo CE.png");
-			p.put("logoSiteg", reporteImage + "logo.png");
+						String nombreEstudiantes = "";
+						for (Estudiante e : estudiantes) {
+							nombreEstudiantes += e.getNombre() + " "
+									+ e.getApellido() + " ";
+						}
+						elementos.add(new DefensaTeg(defensa.getTeg()
+								.getTitulo(), defensa.getProfesor().getNombre()
+								+ " " + defensa.getProfesor().getApellido(),
+								nombreEstudiantes, defensa.getEstatus(),
+								defensa.getFecha()));
+					}
 
-			JasperReport jasperReport = (JasperReport) JRLoader
-					.loadObject(reporteSrc);
+					FileSystemView filesys = FileSystemView.getFileSystemView();
+					Map<String, Object> p = new HashMap<String, Object>();
+					String rutaUrl = obtenerDirectorio();
+					String reporteSrc = rutaUrl
+							+ "SITEG/vistas/reportes/estructurados/compilados/RReporteDefensa.jasper";
+					String reporteImage = rutaUrl
+							+ "SITEG/public/imagenes/reportes/";
 
-			JasperPrint jasperPrint = JasperFillManager
-					.fillReport(jasperReport, p,
-							new JRBeanCollectionDataSource(
+					p.put("fecha", new Date());
+					p.put("fecha1", fechaInicio);
+					p.put("fecha2", fechaFin);
+					p.put("area", nombreArea);
+					p.put("tematica", nombreTematica);
+					p.put("programa", nombrePrograma);
+					p.put("estatus", tipoDefensa);
+					p.put("logoUcla", reporteImage + "logo ucla.png");
+					p.put("logoCE", reporteImage + "logo CE.png");
+					p.put("logoSiteg", reporteImage + "logo.png");
+
+					JasperReport jasperReport = (JasperReport) JRLoader
+							.loadObject(reporteSrc);
+
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, p, new JRBeanCollectionDataSource(
 									elementos));
 
-			JasperViewer.viewReport(jasperPrint, false);
-			
-		} else {
-			Messagebox.show(
-					"No hay informacion disponible para este intervalo.",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+					JasperViewer.viewReport(jasperPrint, false);
+
+				} else {
+					Messagebox
+							.show("No hay informacion disponible para esta seleccion",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
+				}
+
+			}
+
 		}
-		
-	  }
 	}
 
-	
 	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarReporteDefensa")
 	public void cancelarReporteDefensa() throws JRException {
@@ -309,17 +369,19 @@ public class CReporteDefensa extends CGeneral {
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
 		cmbEstatus.setValue("");
+		cmbArea.setDisabled(true);
+		cmbTematica.setDisabled(true);
+		cmbEstatus.setDisabled(true);
 
 	}
 
-	
 	/* Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalirReporteDefensa")
 	public void salirReporteDefensa() throws JRException {
-		
+
 		cancelarReporteDefensa();
 		wdwReporteDefensa.onClose();
-		
+
 	}
 
 }

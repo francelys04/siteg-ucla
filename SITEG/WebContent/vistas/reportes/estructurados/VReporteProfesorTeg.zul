@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesorTeg"
 	title="Trabajos Especiales de Grado asociados a un profesor"
-	border="normal" width="100%" height="565px" closable="true"
+	border="normal" width="100%" height="535px" closable="true"
 	apply="controlador.reporte.CReporteProfesorTeg">
 
 	<style dynamic="true">
@@ -36,10 +36,54 @@
 		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
 		122); }
 
+
 	</style>
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
+
+
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionarPrograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
+	</popup>
+	<popup id="pupSeleccionarArea">
+		<toolbarbutton label="Presione aquí para seleccionar el area" />
+	</popup>
+	<popup id="pupSeleccionarTematica">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la temática" />
+	</popup>
+	<popup id="pupSeleccionarEstatus">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el estatus" />
+	</popup>
+	<popup id="pupInicioLapso">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de inicio" />
+	</popup>
+	<popup id="pupFinLapso">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de fin" />
+	</popup>
+
+	<popup id="pupGenerarReporte">
+		<toolbarbutton label="Presione aqui para mostrar el reporte" />
+	</popup>
+	<popup id="pupCancelarReporte">
+		<toolbarbutton label="Presione aqui para limpiar los campos" />
+	</popup>
+	<popup id="pupSalirReporte">
+		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
+	<popup id="pupCatalogoProfesor">
+		<toolbarbutton
+			label="Presione aquí para ver la lista de profesores" />
+	</popup>
+
+	<!-- Fin de popus -->
+
 
 	<separator />
 	<separator />
@@ -54,8 +98,10 @@
 	<separator />
 	<separator />
 	<separator />
+	<separator />
 
-	<groupbox width="95%" height="450px"
+
+	<groupbox width="95%" height="410px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -77,8 +123,9 @@
 						</hlayout>
 
 						<datebox id="dtbInicioReporteProfesorTeg"
-							cols="12" style="margin-left:20px" width="150px" readonly="true"
-							format="dd/MM/yyyy" onCreate="self.value = new Date()">
+							tooltip="pupInicioLapso" readonly="true" style="margin-left:20px"
+							width="150px" format="dd/MM/yyyy"
+							onCreate="self.value = new Date()">
 						</datebox>
 
 						<hlayout>
@@ -89,9 +136,10 @@
 								style="font-weight:bold" />
 						</hlayout>
 
-						<datebox id="dtbFinReporteProfesorTeg" cols="12"
-							width="150px" style="margin-left:30px" readonly="true"
-							format="dd/MM/yyyy" onCreate="self.value = new Date()">
+						<datebox id="dtbFinReporteProfesorTeg"
+							tooltip="pupFinLapso" readonly="true" width="150px"
+							style="margin-left:30px" format="dd/MM/yyyy"
+							onCreate="self.value = new Date()">
 						</datebox>
 					</hbox>
 
@@ -115,28 +163,10 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<combobox id="cmbProgramaReporteProfesorTeg"
-						readonly="true" width="250px">
-						<template name="model">
-							<comboitem label="${each.nombre}"
-								id="${each.id}" />
-						</template>
-					</combobox>
-				</row>
-
-				<row>
-
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red">
-						</label>
-						<label value="Área: " style="font-weight:bold" />
-					</hlayout>
-
 					<hbox>
 
-						<combobox id="cmbAreaReporteProfesorTeg"
-							readonly="true" width="250px">
+						<combobox id="cmbProgramaReporteProfesorTeg"
+							tooltip="pupSeleccionarPrograma" readonly="true" width="250px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -147,12 +177,13 @@
 							<label value="*"
 								style="font-weight:bold;color:red;margin-left:50px">
 							</label>
-							<label value="Temática"
+							<label value="Área:"
 								style="font-weight:bold" />
 						</hlayout>
 
-						<combobox id="cmbTematicaReporteProfesorTeg"
-							style="margin-left:30px" width="200px" readonly="true">
+						<combobox id="cmbAreaReporteProfesorTeg"
+							tooltip="pupSeleccionarArea" style="margin-left:40px"
+							width="250px" readonly="true">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -160,8 +191,46 @@
 						</combobox>
 
 					</hbox>
+
 				</row>
 
+				<row>
+
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label value="Temática:"
+							style="font-weight:bold" />
+					</hlayout>
+
+					<hbox>
+						<combobox id="cmbTematicaReporteProfesorTeg"
+							tooltip="pupSeleccionarTematica" width="250px" readonly="true">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
+
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red;margin-left:50px">
+							</label>
+							<label value="Estatus:"
+								style="font-weight:bold" />
+						</hlayout>
+
+						<combobox id="cmbEstatusReporteProfesorTeg"
+							style="margin-left:30px" tooltip="pupSeleccionarEstatus"
+							width="200px" readonly="true">
+							<template name="model">
+								<comboitem label="${each}" />
+							</template>
+						</combobox>
+
+					</hbox>
+				</row>
 
 				<row>
 
@@ -177,30 +246,14 @@
 						<textbox id="txtCedulaReporteProfesorTeg"
 							disabled="true" tabindex="1" />
 						<button id="btnProfesorReporteProfesorTeg"
-							style="margin-left:20px" sclass="btn"
-							image="/public/imagenes/iconos/catalogo.png">
+							tooltip="pupCatalogoProfesor" style="margin-left:20px"
+							sclass="btn" image="/public/imagenes/iconos/catalogo.png">
 						</button>
 					</hbox>
 
+
 				</row>
 
-				<row>
-
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red">
-						</label>
-						<label value="Estatus:"
-							style="font-weight:bold" />
-					</hlayout>
-
-					<combobox id="cmbEstatusReporteProfesorTeg"
-						style="margin-left:5px" width="200px" readonly="true">
-						<template name="model">
-							<comboitem label="${each}" />
-						</template>
-					</combobox>
-				</row>
 			</rows>
 		</grid>
 
@@ -208,7 +261,10 @@
 		<separator />
 		<separator />
 		<separator />
-
+		<separator />
+		<separator />
+		<separator />
+		<separator />
 
 		<panel border="normal" width="95%"
 			style="margin-left:2%;margin-right:3%">
@@ -218,16 +274,17 @@
 					<div sclass="btn-group">
 
 						<button id="btnGenerarReporteProfesorTeg"
-							label="Generar" sclass="btn"
+							tooltip="pupGenerarReporte" label="Generar" sclass="btn"
 							image="/public/imagenes/iconos/generar.png" tabindex="13">
 						</button>
 						<button id="btnCancelarReporteProfesorTeg"
-							label="Cancelar" sclass="btn"
+							tooltip="pupCancelarReporte" label="Cancelar" sclass="btn"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 						</button>
 						<button id="btnSalirReporteProfesorTeg"
-							width="110px" label="Salir" sclass="btn"
-							image="/public/imagenes/iconos/salir.png" tabindex="14">
+							tooltip="pupSalirReporte" width="110px" label="Salir"
+							sclass="btn" image="/public/imagenes/iconos/salir.png"
+							tabindex="14">
 						</button>
 						<separator />
 					</div>

@@ -1,12 +1,16 @@
-<window title="Catalogo Tutores Disponibles" border="normal"
-	width="900px" id="wdwCatalogoProfesorArea"
-	apply="controlador.catalogo.CCatalogoProfesorTematica">
+<window title="Catalogo Profesor" border="normal" width="900px"
+	id="wdwCatalogoProfesorArea" apply="controlador.catalogo.CCatalogoProfesorTematica"
+	closable="true">
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 	<!-- Lista de popus -->
-	<popup id="pupSeleccionTutor">
-		<toolbarbutton label="Doble clic para seleccionar el profesor" />
+	<popup id="pupSeleccionProfesor">
+		<toolbarbutton label="Doble clic para seleccionar un profesor" />
+	</popup>
+	<popup id="pupImprimirProfesores">
+		<toolbarbutton
+			label="Presione aquí para imprimir la lista de Profesores" />
 	</popup>
 	<popup id="pupSalirCatalogo">
 		<toolbarbutton label="Presione aquí para salir" />
@@ -18,25 +22,31 @@
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="60%"
 					sclass="search-query" placeholder="Cédula"
 					id="txtCedulaMostrarProfesor" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
 					sclass="search-query" placeholder="Nombre"
 					id="txtNombreMostrarProfesor" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
 					sclass="search-query" placeholder="Apellido"
 					id="txtApellidoMostrarProfesor" />
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
+				<textbox instant="true" width="65%"
+					sclass="search-query" placeholder="Categoría"
+					id="txtCategoriaMostrarProfesor" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="75%"
 					sclass="search-query" placeholder="Correo"
 					id="txtCorreoMostrarProfesor" />
 			</auxheader>
@@ -45,26 +55,30 @@
 			<listheader label="Cédula" align="center" width="15%" />
 			<listheader label="Nombre" align="center" />
 			<listheader label="Apellido" align="center" />
-			<listheader label="Correo" align="center" width="28%" />
+			<listheader label="Categoría" align="center" width="20%"/>
+			<listheader label="Correo" align="center" width="28%"/>
 		</listhead>
 
+
 		<template name="model">
-			<listitem>
+			<listitem tooltip="pupSeleccionProfesor">
 				<listcell label="${each.cedula}" />
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.apellido}" />
+				<listcell label="${each.categoria.nombre}" />
 				<listcell label="${each.correoElectronico}" />
 			</listitem>
 		</template>
 	</listbox>
+
 	<separator />
+
 	<panel border="normal" width="100%">
 		<panelchildren>
 			<div sclass="alert-info" align="center">
 				<separator />
 				<div sclass="btn-group">
-
-					<button id="btnSalir" label="Salir" width="110px"
+					<button id="btnSalirReporte" label="Salir" width="110px"
 						tooltip="pupSalirCatalogo" sclass="btn"
 						image="/public/imagenes/iconos/salir.png" tabindex="7">
 					</button>
@@ -76,4 +90,5 @@
 	</panel>
 	
 	<separator />
+
 </window>

@@ -42,6 +42,7 @@ import controlador.CGeneral;
 public class CCatalogoProfesor extends CGeneral {
 
 	private static String vistaRecibida;
+	private static boolean botonApagado = false;
 	public static List<Profesor> profesores;
 	public static boolean variable2 = false;
 	public static boolean esDirector = false;
@@ -51,7 +52,7 @@ public class CCatalogoProfesor extends CGeneral {
 	@Wire
 	private Window wdwCatalogoProfesor;
 	@Wire
-	private Window  wdwCatalogoDirectorPrograma;
+	private Window wdwCatalogoDirectorPrograma;
 	@Wire
 	private Textbox txtCedulaMostrarProfesor;
 	@Wire
@@ -64,14 +65,15 @@ public class CCatalogoProfesor extends CGeneral {
 	private Textbox txtCategoriaMostrarProfesor;
 	@Wire
 	private Button btnSalir;
-
+	@Wire
+	private Button btnImprimir;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el map
 	 * recibido del catalogo exista y se llenan las listas correspondientes de
 	 * la vista dado una condicional, que si se cumple se mostrara los
-	 * profesores sin usuarios sino todos los profesores activos y sino todos los
-	 * profesores activos.
+	 * profesores sin usuarios sino todos los profesores activos y sino todos
+	 * los profesores activos.
 	 */
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
@@ -106,6 +108,7 @@ public class CCatalogoProfesor extends CGeneral {
 		}
 		Selectors.wireComponents(comp, this, false);
 	}
+
 	/*
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
@@ -114,6 +117,7 @@ public class CCatalogoProfesor extends CGeneral {
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
+
 
 	/*
 	 * Metodo que permite filtrar los profesores disponibles, dado a la
@@ -177,8 +181,8 @@ public class CCatalogoProfesor extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite obtener el objeto Profesor al realizar el evento
-	 * doble clic sobre un item en especifico en la lista, extrayendo asi su cedula,
+	 * Metodo que permite obtener el objeto Profesor al realizar el evento doble
+	 * clic sobre un item en especifico en la lista, extrayendo asi su cedula,
 	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
 	 */
 	@Listen("onDoubleClick = #ltbProfesor")
@@ -213,9 +217,9 @@ public class CCatalogoProfesor extends CGeneral {
 		}
 
 	}
-	
+
 	@Listen("onClick = #btnImprimir")
-	public void imprimir() throws SQLException {	
+	public void imprimir() throws SQLException {
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		List<Profesor> profesores = servicioProfesor.buscarActivos();
 		JasperReport jasperReport;
@@ -223,19 +227,18 @@ public class CCatalogoProfesor extends CGeneral {
 			String rutaUrl = obtenerDirectorio();
 			String reporteSrc = rutaUrl
 					+ "SITEG/vistas/reportes/salidas/compilados/RProfesores.jasper";
-			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-		    Map p = new HashMap();
+			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+			Map p = new HashMap();
 			p.put("logoUcla", reporteImage + "logo ucla.png");
 			p.put("logoCE", reporteImage + "logo CE.png");
 			p.put("logoSiteg", reporteImage + "logo.png");
-				
-				
-			 
 
 			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,  new JRBeanCollectionDataSource(profesores));
+			JasperPrint jasperPrint = JasperFillManager
+					.fillReport(jasperReport, p,
+							new JRBeanCollectionDataSource(profesores));
 			JasperViewer.viewReport(jasperPrint, false);
-			
+
 		} catch (JRException e) {
 			System.out.println(e);
 			// TODO Auto-generated catch block
@@ -243,18 +246,17 @@ public class CCatalogoProfesor extends CGeneral {
 		}
 
 	}
-	
+
 	/* Metodo que permite cerrar la ventana correspondiente al catalogo */
 	@Listen("onClick = #btnSalirCatalogoProfesor")
 	public void salirCatalogo() {
 		wdwCatalogoProfesor.onClose();
 	}
-	
+
 	/* Metodo que permite cerrar la ventana correspondiente al catalogo */
 	@Listen("onClick = #btnSalirCatalogoDirector")
 	public void salirCatalogoDirector() {
-		 wdwCatalogoDirectorPrograma.onClose();
+		wdwCatalogoDirectorPrograma.onClose();
 	}
-	
 
 }

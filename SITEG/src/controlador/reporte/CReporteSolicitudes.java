@@ -91,6 +91,9 @@ public class CReporteSolicitudes extends CGeneral {
 		programas.add(programaa);
 		cmbProgramaReporteSolicitud.setModel(new ListModelList<Programa>(
 				programas));
+		cmbAreaReporteSolicitud.setDisabled(true);
+		cmbTematicaReporteSolicitud.setDisabled(true);
+		cmbEstatusReporteSolicitud.setDisabled(true);
 
 	}
 
@@ -110,8 +113,10 @@ public class CReporteSolicitudes extends CGeneral {
 					"", true);
 			areas.add(area);
 			cmbAreaReporteSolicitud.setModel(new ListModelList<AreaInvestigacion>(areas));
+			cmbAreaReporteSolicitud.setDisabled(false);
 
 		} else {
+			cmbAreaReporteSolicitud.setDisabled(false);
 			cmbAreaReporteSolicitud.setValue("");
 			cmbTematicaReporteSolicitud.setValue("");
 			programa1 = (Programa) cmbProgramaReporteSolicitud
@@ -142,8 +147,12 @@ public class CReporteSolicitudes extends CGeneral {
 		try{
 		if (cmbAreaReporteSolicitud.getValue().equals("Todos")) {
 			cmbTematicaReporteSolicitud.setValue("Todos");
+			cmbTematicaReporteSolicitud.setDisabled(true);
+			cmbEstatusReporteSolicitud.setDisabled(false);
+			
 			
 		} else {
+			cmbTematicaReporteSolicitud.setDisabled(false);
 			cmbTematicaReporteSolicitud.setValue("");
 			area1 = (AreaInvestigacion) cmbAreaReporteSolicitud
 					.getSelectedItem().getValue();
@@ -170,6 +179,7 @@ public class CReporteSolicitudes extends CGeneral {
 		
 		Tematica tematica = (Tematica) cmbTematicaReporteSolicitud
 				.getSelectedItem().getValue();
+		cmbEstatusReporteSolicitud.setDisabled(false);
 		idTematica = tematica.getId();
 	}
 
@@ -198,8 +208,8 @@ public class CReporteSolicitudes extends CGeneral {
 
 			if (fechaInicio.after(fechaFin)) {
 
-				Messagebox.show(
-						"La fecha de inicio no puede ser mayor a la fecha fin",
+				Messagebox
+				.show("La fecha de fin debe ser posterior a la fecha de inicio",
 						"Error", Messagebox.OK, Messagebox.ERROR);
 
 			} else {
@@ -865,6 +875,9 @@ public class CReporteSolicitudes extends CGeneral {
 		cmbTematicaReporteSolicitud.setValue("");
 		dtbInicioReporteSolicitud.setValue(new Date());
 		dtbFinReporteSolicitud.setValue(new Date());
+		cmbAreaReporteSolicitud.setDisabled(true);
+		cmbTematicaReporteSolicitud.setDisabled(true);
+		cmbEstatusReporteSolicitud.setDisabled(true);
 
 	}
 
