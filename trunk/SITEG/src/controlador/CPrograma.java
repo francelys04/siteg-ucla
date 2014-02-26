@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import modelo.Condicion;
+import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.compuesta.CondicionPrograma;
@@ -288,16 +289,21 @@ public class CPrograma extends CGeneral {
 										List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
 										List<Condicion> condiciones = servicioCondicion
 												.buscarActivos();
+										Lapso lapso = servicioLapso
+												.BuscarLapsoActual();
 										for (int i = 0; i < condiciones.size(); i++) {
 											Condicion condicion = condiciones
 													.get(i);
 											CondicionPrograma condicionPrograma = new CondicionPrograma();
+											condicionPrograma = servicioCondicionPrograma.buscarPorCondicionProgramaYLapso(condicion,p,lapso);
+											if(condicionPrograma == null){
+											condicionPrograma = new CondicionPrograma();
 											condicionPrograma.setPrograma(p);
-											condicionPrograma.setLapso(servicioLapso
-													.BuscarLapsoActual());
+											condicionPrograma.setLapso(lapso);
 											condicionPrograma
 													.setCondicion(condicion);
 											condicionPrograma.setValor(0);
+											}
 											condicionesPrograma
 													.add(condicionPrograma);
 										}
