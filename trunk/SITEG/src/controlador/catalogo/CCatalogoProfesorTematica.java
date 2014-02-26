@@ -220,7 +220,20 @@ public class CCatalogoProfesorTematica extends CGeneral {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 		window.doModal();
+		
+
+	}
+	
+	
+	/*Metodo que permite cerrar la vista y abrir la vista del catalogo*/
+	@Listen("onClick = #btnSalirReporte")
+	public void salirReporte() {
+		
 		wdwCatalogoProfesorArea.onClose();
 
 	}
+	
+	
+	
+	
 }

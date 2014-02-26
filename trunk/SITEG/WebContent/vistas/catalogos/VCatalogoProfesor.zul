@@ -55,8 +55,8 @@
 			<listheader label="Cédula" align="center" width="15%" />
 			<listheader label="Nombre" align="center" />
 			<listheader label="Apellido" align="center" />
-			<listheader label="Categoría" align="center" width="20%"/>
-			<listheader label="Correo" align="center" width="28%"/>
+			<listheader label="Categoría" align="center" width="20%" />
+			<listheader label="Correo" align="center" width="28%" />
 		</listhead>
 
 
@@ -79,12 +79,12 @@
 				<separator />
 				<div sclass="btn-group">
 
-					<button id="btnImprimir" label="Imprimir" width="110px"
-						tooltip="pupImprimirProfesores" sclass="btn"
+					<button id="btnImprimir" label="Imprimir"
+						width="110px" tooltip="pupImprimirProfesores" sclass="btn"
 						image="/public/imagenes/iconos/imprimir.png" tabindex="7">
 					</button>
-					<button id="btnSalirCatalogoProfesor" label="Salir" width="110px"
-						tooltip="pupSalirCatalogo" sclass="btn"
+					<button id="btnSalirCatalogoProfesor" label="Salir"
+						width="110px" tooltip="pupSalirCatalogo" sclass="btn"
 						image="/public/imagenes/iconos/salir.png" tabindex="7">
 					</button>
 					<separator />
@@ -93,7 +93,7 @@
 			</div>
 		</panelchildren>
 	</panel>
-	
+
 	<separator />
 
 </window>
