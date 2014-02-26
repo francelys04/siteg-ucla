@@ -5,6 +5,7 @@ import java.util.List;
 import interfazdao.ICondicionProgramaDAO;
 import interfazdao.ILapsoDAO;
 
+import modelo.Condicion;
 import modelo.Lapso;
 import modelo.Programa;
 import modelo.compuesta.CondicionPrograma;
@@ -35,6 +36,14 @@ public class SCondicionPrograma {
 		List<CondicionPrograma> condiciones;
 		condiciones = interfaceCondicionPrograma.buscarCondicionesActuales(programa, interfaceLapso.buscarLapsoVigente());
 		return condiciones;
+	}
+
+	public CondicionPrograma buscarPorCondicionProgramaYLapso(
+			Condicion condicion, Programa p, Lapso lapso) {
+		// TODO Auto-generated method stub
+		CondicionPrograma condicionPrograma;
+		condicionPrograma = interfaceCondicionPrograma.findByCondicionAndProgramaAndLapso(condicion, p, lapso);
+		return condicionPrograma;
 	}
 	
 	
