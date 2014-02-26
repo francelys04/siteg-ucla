@@ -102,7 +102,7 @@ public class CReinicioClave extends CGeneral {
 	}
 	
 	/*
-	 * Metodo que permite cerrar la vista de reiniciar contraseña
+	 * Metodo que permite cerrar la vista
 	 */
 	@Listen("onClick = #btnSalirReninicioClave")
 	public void salirReinicioClave() {
