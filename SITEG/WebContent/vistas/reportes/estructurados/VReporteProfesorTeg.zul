@@ -223,7 +223,7 @@
 
 						<combobox id="cmbEstatusReporteProfesorTeg"
 							style="margin-left:30px" tooltip="pupSeleccionarEstatus"
-							width="200px" readonly="true">
+							width="250px" readonly="true">
 							<template name="model">
 								<comboitem label="${each}" />
 							</template>
@@ -243,7 +243,7 @@
 					</hlayout>
 
 					<hbox>
-						<textbox id="txtCedulaReporteProfesorTeg"
+						<textbox id="txtCedulaReporteProfesorTeg" width="180px"
 							disabled="true" tabindex="1" />
 						<button id="btnProfesorReporteProfesorTeg"
 							tooltip="pupCatalogoProfesor" style="margin-left:20px"

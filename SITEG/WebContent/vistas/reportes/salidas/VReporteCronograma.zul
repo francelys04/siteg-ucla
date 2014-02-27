@@ -41,12 +41,23 @@
 	<style src="/public/css/style.css" />
 
 	<!-- Lista de popus -->
-	<popup id="pupGenerarCronograma">
-		<toolbarbutton label="Generar Cronograma" />
+	<popup id="pupSeleccionarPrograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
 	</popup>
-	<popup id="pupCancelarReporteCronograma">
-		<toolbarbutton label="Salir" />
+	<popup id="pupSeleccionarLapso">
+		<toolbarbutton label="Presione aquí para seleccionar el lapso" />
 	</popup>
+	<popup id="pupGenerarReporte">
+		<toolbarbutton label="Presione aqui para mostrar el reporte" />
+	</popup>
+	<popup id="pupCancelarReporte">
+		<toolbarbutton label="Presione aqui para limpiar los campos" />
+	</popup>
+	<popup id="pupSalirReporte">
+		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
+
 	<!-- Fin de popus -->
 
 
@@ -86,7 +97,8 @@
 					</hlayout>
 
 					<combobox id="cmbCronogramaPrograma" autodrop="true"
-						width="250px" tabindex="12" readonly="true">
+						tooltip="pupSeleccionarPrograma" width="250px" tabindex="12"
+						readonly="true">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -105,7 +117,8 @@
 					</hlayout>
 
 					<combobox id="cmbCronogramaLapso" readonly="true"
-						autodrop="true" width="180px" tabindex="12">
+						tooltip="pupSeleccionarLapso" autodrop="true" width="180px"
+						tabindex="12">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -131,17 +144,16 @@
 					<div sclass="btn-group">
 
 						<button id="btnGenerarReporteCronograma"
-							label="Generar" sclass="btn" tooltip="pupGenerarCronograma"
+							label="Generar" sclass="btn" tooltip="pupGenerarReporte"
 							image="/public/imagenes/iconos/generar.png" tabindex="13">
 						</button>
 						<button id="btnCancelarReporteCronograma"
-							label="Cancelar" sclass="btn"
-							tooltip="pupCancelarReporteCronograma"
+							label="Cancelar" sclass="btn" tooltip="pupCancelarReporte"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 						</button>
 						<button id="btnSalirReporteCronograma"
 							width="110px" label="Salir" sclass="btn"
-							tooltip="pupCancelarReporteCronograma"
+							tooltip="pupSalirReporte"
 							image="/public/imagenes/iconos/salir.png" tabindex="14">
 						</button>
 						<separator />

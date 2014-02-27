@@ -218,7 +218,7 @@
 						</hlayout>
 
 						<combobox id="cmbEstatus"  style="margin-left:40px"
-							tooltip="pupSeleccionarEstatus" width="200px" readonly="true">
+							tooltip="pupSeleccionarEstatus" width="250px" readonly="true">
 							<template name="model">
 								<comboitem label="${each}" />
 							</template>
