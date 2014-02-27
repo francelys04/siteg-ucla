@@ -1,6 +1,5 @@
-<window id="wdwReporteTeg"
-	title="Trabajos Especiales de Grado" border="normal"
-	width="100%" height="500px" closable="true"
+<window id="wdwReporteTeg" title="Trabajos Especiales de Grado"
+	border="normal" width="100%" height="500px" closable="true"
 	apply="controlador.reporte.CReporteTeg">
 
 	<style dynamic="true">
@@ -50,33 +49,36 @@
 	<!-- Lista de popus -->
 	<popup id="pupSeleccionarPrograma">
 		<toolbarbutton
-			label="Presione aquÃ­ para seleccionar el programa" />
+			label="Presione aqui para seleccionar el programa" />
 	</popup>
 	<popup id="pupSeleccionarArea">
-		<toolbarbutton label="Presione aquÃ­ para seleccionar el area" />
+		<toolbarbutton label="Presione aqui para seleccionar el area" />
 	</popup>
 	<popup id="pupSeleccionarTematica">
 		<toolbarbutton
-			label="Presione aquÃ­ para seleccionar la temÃ¡tica" />
+			label="Presione aqui para seleccionar la tematica" />
 	</popup>
 	<popup id="pupSeleccionarEstatus">
 		<toolbarbutton
-			label="Presione aquÃ­ para seleccionar el estatus" />
+			label="Presione aqui para seleccionar el estatus" />
 	</popup>
 	<popup id="pupInicioLapso">
 		<toolbarbutton
-			label="Presione aqui para seleccionar la fecha de inicio de defensas" />
+			label="Presione aqui para seleccionar la fecha de inicio" />
 	</popup>
 	<popup id="pupFinLapso">
 		<toolbarbutton
-			label="Presione aqui para seleccionar la fecha de fin de defensas" />
+			label="Presione aqui para seleccionar la fecha de fin" />
 	</popup>
-
+	<popup id="pupSeleccionarEtapa">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la etapa del TEG" />
+	</popup>
 	<popup id="pupGenerarReporte">
 		<toolbarbutton label="Presione aqui para mostrar el reporte" />
 	</popup>
 	<popup id="pupCancelarReporte">
-		<toolbarbutton label="Presione aqui para cancelar el reporte" />
+		<toolbarbutton label="Presione aqui para limpiar los campos" />
 	</popup>
 	<popup id="pupSalirReporte">
 		<toolbarbutton label="Presione aqui para salir" />
@@ -120,8 +122,9 @@
 						</hlayout>
 
 						<datebox id="dtbFechaInicio" cols="12"
-							readonly="true" style="margin-left:20px" width="150px"
-							format="dd/MM/yyyy" onCreate="self.value = new Date()">
+							tooltip="pupInicioLapso" readonly="true" style="margin-left:20px"
+							width="150px" format="dd/MM/yyyy"
+							onCreate="self.value = new Date()">
 						</datebox>
 
 						<hlayout>
@@ -133,8 +136,9 @@
 						</hlayout>
 
 						<datebox id="dtbFechaFin" cols="12"
-							width="150px" style="margin-left:30px" readonly="true"
-							format="dd/MM/yyyy" onCreate="self.value = new Date()">
+							tooltip="pupFinLapso" width="150px" style="margin-left:30px"
+							readonly="true" format="dd/MM/yyyy"
+							onCreate="self.value = new Date()">
 						</datebox>
 					</hbox>
 
@@ -158,7 +162,7 @@
 					</hlayout>
 
 					<combobox id="cmbPrograma" readonly="true"
-						width="250px">
+						tooltip="pupSeleccionarPrograma" width="250px">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -178,7 +182,7 @@
 					<hbox>
 
 						<combobox id="cmbArea" readonly="true"
-							width="250px">
+							tooltip="pupSeleccionarArea" width="250px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -197,7 +201,7 @@
 
 						<combobox id="cmbTematica"
 							tooltip="pupSeleccionarTematica" style="margin-left:30px"
-							width="200px" readonly="true">
+							width="250px" readonly="true">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -208,21 +212,21 @@
 				</row>
 
 				<row>
-
 					<hlayout>
 						<label value="*"
-							style="font-weight:bold;color:red"/>
+							style="font-weight:bold;color:red" />
 						<label value="Estatus:"
 							style="font-weight:bold" />
 					</hlayout>
 
 					<combobox id="cmbEstatus"
-						tooltip="pupSeleccionarEstatus" style="margin-left:5px"
-						width="200px" readonly="true">
+						tooltip="pupSeleccionarEstatus"
+						width="250px" readonly="true">
 						<template name="model">
 							<comboitem label="${each}" />
 						</template>
 					</combobox>
+
 				</row>
 			</rows>
 		</grid>
@@ -240,18 +244,17 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button id="btnGenerarReporteDefensa"
+						<button id="btnGenerarReporteTeg"
 							label="Generar" sclass="btn" tooltip="pupGenerarReporte"
 							image="/public/imagenes/iconos/generar.png" tabindex="13">
 						</button>
-						<button id="btnCancelarReporteDefensa"
-							label="Cancelar" sclass="btn" tooltip="pupSalirReporte"
+						<button id="btnCancelarReporteTeg"
+							label="Cancelar" sclass="btn" tooltip="pupCancelarReporte"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 						</button>
-						<button id="btnSalirReporteDefensa"
-							label="Salir" sclass="btn" tooltip="pupSalirReporte"
-							width="110px" image="/public/imagenes/iconos/salir.png"
-							tabindex="14">
+						<button id="btnSalirReporteTeg" label="Salir"
+							sclass="btn" tooltip="pupSalirReporte" width="110px"
+							image="/public/imagenes/iconos/salir.png" tabindex="14">
 						</button>
 						<separator />
 					</div>

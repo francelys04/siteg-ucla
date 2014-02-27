@@ -187,7 +187,7 @@
 					</hlayout>
 
 					<combobox id="cmbEtapaTeg" readonly="true"
-						tooltip="pupSeleccionarEtapa" width="180px">
+						tooltip="pupSeleccionarEtapa" width="250px">
 						<comboitem label="Proyecto" />
 						<comboitem label="Teg" />
 					</combobox>

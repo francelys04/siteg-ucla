@@ -90,6 +90,9 @@ public class CReporteAvances extends CGeneral {
 	/* Metodo heredado del Controlador General */
 	@Override
 	public void inicializar(Component comp) {
+		
+		
+		cmbEstatus.setDisabled(true);
 
 	}
 
@@ -100,9 +103,13 @@ public class CReporteAvances extends CGeneral {
 	 */
 	@Listen("onCheck = #rdgEtapa")
 	public void llenarCombo() {
+		
+		cmbEstatus.setValue("");
+		ltbReporteItemTeg.getItems().clear();
+		
 		if (rdoProyecto.isChecked() == true) {
 			try {
-				cmbEstatus.setValue("");
+				cmbEstatus.setDisabled(false);
 				cmbEstatus.setModel(new ListModelList<String>(estatusProyecto));
 			} catch (Exception e) {
 				System.out.println(e);
@@ -111,7 +118,7 @@ public class CReporteAvances extends CGeneral {
 			}
 		} else if (rdoTEG.isChecked() == true) {
 			try {
-				cmbEstatus.setValue("");
+				cmbEstatus.setDisabled(false);
 				cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
 			} catch (Exception e) {
 				System.out.println(e);
@@ -335,9 +342,26 @@ public class CReporteAvances extends CGeneral {
 			}
 		}
 	}
+	
+	
+	@Listen("onClick = #btnCancelarReporteAvances")
+	   public void limpiarCampos(){
+		  
+		
+		cmbEstatus.setValue("");
+		ltbReporteItemTeg.getItems().clear();
+		rdgEtapa.setSelectedItem(null);
+		cmbEstatus.setDisabled(false);
+		
+		
+	   
+	   }
+	
+	
+	
 
 	/* Metodo que permite cerrar la vista */
-	@Listen("onClick = #btnSalir")
+	@Listen("onClick = #btnSalirReporteAvances")
 	public void salirActividad() {
 		wdwReporteAvances.onClose();
 	}

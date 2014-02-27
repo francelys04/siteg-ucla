@@ -79,6 +79,8 @@ public class CReporteItemTeg extends CGeneral {
 	private Radio rdoTEG;
 	@Wire
 	private Radio rdoProyecto;
+	@Wire
+	private Window wdwReporteItemTeg;
 	String estatusTeg[] = { "TEG Aprobado", "TEG Reprobado" };
 	String estatusProyecto[] = { "Proyecto Factible", "Proyecto No Factible" };
 
@@ -87,6 +89,10 @@ public class CReporteItemTeg extends CGeneral {
 	 */
 	@Override
 	public void inicializar(Component comp) {
+		
+		
+		cmbEstatus.setDisabled(true);
+		
 
 	}
 
@@ -97,9 +103,14 @@ public class CReporteItemTeg extends CGeneral {
 	 */
 	@Listen("onCheck = #rdgEtapa")
 	public void llenarCombo() {
+		
+		cmbEstatus.setValue("");
+		ltbReporteItemTeg.getItems().clear();
+		
 		if (rdoProyecto.isChecked() == true) {
 			try {
 				cmbEstatus.setModel(new ListModelList<String>(estatusProyecto));
+				cmbEstatus.setDisabled(false);
 			} catch (Exception e) {
 				System.out.println(e);
 				// TODO Auto-generated catch block
@@ -108,6 +119,7 @@ public class CReporteItemTeg extends CGeneral {
 		} else if (rdoTEG.isChecked() == true) {
 			try {
 				cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
+				cmbEstatus.setDisabled(false);
 			} catch (Exception e) {
 				System.out.println(e);
 				// TODO Auto-generated catch block
@@ -332,4 +344,32 @@ public class CReporteItemTeg extends CGeneral {
 			}
 		}
 	}
+	
+	
+	@Listen("onClick = #btnCancelarReporteItemTeg")
+	   public void limpiarCampos(){
+		  
+		
+		cmbEstatus.setValue("");
+		ltbReporteItemTeg.getItems().clear();
+		rdgEtapa.setSelectedItem(null);
+		cmbEstatus.setDisabled(false);
+		
+		
+	   
+	   }
+	
+	
+	@Listen("onClick = #btnSalirReporteReporteItemTeg")
+	   public void salir(){
+		  
+		
+		wdwReporteItemTeg.onClose();
+		
+		
+	   
+	   }
+	
+	
+	
 }

@@ -41,12 +41,29 @@
 	<style src="/public/css/style.css" />
 
 	<!-- Lista de popus -->
-	<popup id="pupGenerarConfiguracion">
-		<toolbarbutton label="Generar Reporte" />
+	<popup id="pupSeleccionarPrograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
 	</popup>
-	<popup id="pupCancelarReporteConfiguracion">
-		<toolbarbutton label="Salir" />
+	<popup id="pupSeleccionarLapso">
+		<toolbarbutton label="Presione aquí para seleccionar el lapso" />
 	</popup>
+	<popup id="pupSeleccionarConfiguracion">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la configuracion" />
+	</popup>
+
+	<popup id="pupGenerarReporte">
+		<toolbarbutton label="Presione aqui para mostrar el reporte" />
+	</popup>
+	<popup id="pupCancelarReporte">
+		<toolbarbutton label="Presione aqui para limpiar los campos" />
+	</popup>
+	<popup id="pupSalirReporte">
+		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
+
+	<!-- Fin de popus -->
 
 	<separator />
 	<separator />
@@ -83,7 +100,8 @@
 
 
 
-					<combobox id="cmbConfiguracionPrograma" style="margin-left:30px"
+					<combobox id="cmbConfiguracionPrograma"
+						style="margin-left:30px" tooltip="pupSeleccionarPrograma"
 						autodrop="true" width="250px" tabindex="12" readonly="true">
 						<template name="model">
 							<comboitem label="${each.nombre}"
@@ -102,8 +120,8 @@
 					</hlayout>
 
 					<combobox id="cmbConfiguracionLapso" readonly="true"
-						autodrop="true" width="150px" tabindex="12"
-						style="margin-left:30px">
+						tooltip="pupSeleccionarLapso" autodrop="true" width="180px"
+						tabindex="12" style="margin-left:30px">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -133,7 +151,8 @@
 								style="font-weight:bold" />
 						</hlayout>
 
-						<radiogroup id="rdgConfiguracion">
+						<radiogroup id="rdgConfiguracion"
+							tooltip="pupSeleccionarConfiguracion">
 
 							<radio id="rdocondicion" label="Condiciones"
 								style="margin-left:70px;color: rgb(0, 84, 122)" />
@@ -163,11 +182,11 @@
 					<div sclass="btn-group">
 
 						<button id="btnGenerarReporteConfiguracion"
-							label="Generar" sclass="btn" tooltip="pupGenerarConfiguracion"
+							label="Generar" sclass="btn" tooltip="pupGenerarReporte"
 							image="/public/imagenes/iconos/generar.png" tabindex="13">
 						</button>
 						<button id="btnCancelarReporteConfiguracion"
-							label="Cancelar" sclass="btn"
+							label="Cancelar" sclass="btn" tooltip="pupCancelarReporte"
 							image="/public/imagenes/iconos/limpiar.png" tabindex="14">
 						</button>
 						<button id="btnSalirReporteConfigurcion"

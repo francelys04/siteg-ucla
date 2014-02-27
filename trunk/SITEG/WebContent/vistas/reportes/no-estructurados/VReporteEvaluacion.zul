@@ -261,8 +261,8 @@
 							<label value="Estatus: "
 								style="font-weight:bold" />
 						</hlayout>
-						<combobox id="cmbEstatus" width="200px"
-							tooltip="pupEstatusReporte" style="margin-left:30px"
+						<combobox id="cmbEstatus" width="250px"
+							tooltip="pupEstatusReporte" style="margin-left:25px"
 							readonly="true">
 							<template name="model">
 								<comboitem label="${each}" />
