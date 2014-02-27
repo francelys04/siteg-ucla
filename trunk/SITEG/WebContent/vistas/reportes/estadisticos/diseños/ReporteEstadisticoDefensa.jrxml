@@ -2,8 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteEstadisticoDefensa" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d42763ff-7296-4cf5-bb66-dc9e931c08ad">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="77"/>
+	<property name="ireport.y" value="0"/>
 	<subDataset name="Table Dataset 1" uuid="47d709d8-8296-4698-ab2f-21a0ae3b6013"/>
+	<subDataset name="dataset1" uuid="ebce39f8-9254-43e0-b31d-a1ef95f0feb0"/>
 	<parameter name="programa" class="java.lang.String"/>
 	<parameter name="area" class="java.lang.String"/>
 	<parameter name="tematica" class="java.lang.String"/>
@@ -27,14 +28,6 @@
 	</background>
 	<title>
 		<band height="65" splitType="Stretch">
-			<image scaleImage="FillFrame">
-				<reportElement x="14" y="3" width="88" height="62" uuid="b4a8345b-939a-40bd-96ec-cd2c1da4c4b7"/>
-				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
-			</image>
-			<image scaleImage="FillFrame">
-				<reportElement x="466" y="0" width="85" height="62" uuid="4c768cf0-ae07-4f8e-9d43-814fb9f12346"/>
-				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="102" y="3" width="347" height="62" uuid="c39048c0-60d0-4401-aba2-cccdd1a30c5d"/>
 				<textElement textAlignment="Center">
@@ -45,6 +38,14 @@ Decanato de Ciencias y Tecnología
 Gestión de Trabajos Especiales de Grado
 ]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="3" width="100" height="62" uuid="3bd7e936-f21f-4365-8097-cd85234c7a08"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="447" y="3" width="100" height="62" uuid="28c7394f-8228-4ea4-95b8-860cc8c3933f"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -52,6 +53,18 @@ Gestión de Trabajos Especiales de Grado
 	</pageHeader>
 	<columnHeader>
 		<band height="183" splitType="Stretch">
+			<rectangle>
+				<reportElement x="185" y="143" width="86" height="31" uuid="9c48ed05-db16-4908-8082-2f10a248d873"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="102" y="143" width="82" height="31" uuid="d728c47b-844b-48ec-bf26-c5974b05e794"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="272" y="143" width="83" height="31" uuid="6ce9aa18-92e9-46b2-99fc-2c497549a2ec"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="355" y="143" width="94" height="31" uuid="e06b8c5f-3f69-4b73-b33a-7337809673e3"/>
+			</rectangle>
 			<staticText>
 				<reportElement mode="Opaque" x="184" y="123" width="87" height="20" backcolor="#0099FF" uuid="639c164c-1c9d-4118-aeef-8570c14197df"/>
 				<box>
@@ -66,7 +79,7 @@ Gestión de Trabajos Especiales de Grado
 				<text><![CDATA[Con Jurado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="355" y="123" width="46" height="20" backcolor="#0099FF" uuid="92d81d24-e930-4512-b7fe-8da8932cca09"/>
+				<reportElement mode="Opaque" x="355" y="123" width="94" height="20" backcolor="#0099FF" uuid="92d81d24-e930-4512-b7fe-8da8932cca09"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -76,7 +89,7 @@ Gestión de Trabajos Especiales de Grado
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Total]]></text>
+				<text><![CDATA[Total Cantidad]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="102" y="123" width="82" height="20" backcolor="#0099FF" uuid="71468103-5567-4c61-a444-c345674abe3a"/>
@@ -105,7 +118,7 @@ Gestión de Trabajos Especiales de Grado
 				<text><![CDATA[Programada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="102" y="100" width="299" height="23" backcolor="#0099FF" uuid="0f5f320e-8f8c-46ca-86d7-cdc469fe1b68"/>
+				<reportElement mode="Opaque" x="102" y="100" width="347" height="23" backcolor="#0099FF" uuid="0f5f320e-8f8c-46ca-86d7-cdc469fe1b68"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -115,7 +128,7 @@ Gestión de Trabajos Especiales de Grado
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Defensas]]></text>
+				<text><![CDATA[Cantidad de Defensas]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="451" y="11" width="100" height="20" uuid="61518913-3a92-4ef8-9ef5-775a5031136b"/>
@@ -163,28 +176,28 @@ Gestión de Trabajos Especiales de Grado
 				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="355" y="143" width="46" height="32" uuid="3b3e6a34-1d7f-4c68-abe8-757690973cf8"/>
+				<reportElement mode="Opaque" x="359" y="144" width="90" height="27" backcolor="#FFFFFF" uuid="3b3e6a34-1d7f-4c68-abe8-757690973cf8"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font isBold="true"/>
+					<font isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{primerValor}+$F{tercerValor}+$F{segundoValor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="102" y="143" width="82" height="32" uuid="f1695b81-eade-4e14-9a88-3d7c01b86ba6"/>
+				<reportElement mode="Opaque" x="124" y="146" width="51" height="27" uuid="f1695b81-eade-4e14-9a88-3d7c01b86ba6"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tercerValor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{primerValor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="185" y="143" width="87" height="32" uuid="74aab517-b8d3-4114-9193-e1e940751d31"/>
+				<reportElement mode="Opaque" x="198" y="144" width="73" height="27" uuid="74aab517-b8d3-4114-9193-e1e940751d31"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{segundoValor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="272" y="143" width="83" height="32" uuid="f5b5e22b-35c2-45cd-9d0f-b7b22902b1e1"/>
+				<reportElement mode="Opaque" x="285" y="144" width="56" height="27" uuid="f5b5e22b-35c2-45cd-9d0f-b7b22902b1e1"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font isBold="true"/>
 				</textElement>
@@ -245,8 +258,8 @@ Gestión de Trabajos Especiales de Grado
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
 			</staticText>
-			<image scaleImage="FillFrame">
-				<reportElement x="94" y="4" width="48" height="37" uuid="332d515b-edf2-42d7-a8e9-9ba4e39a4c5e"/>
+			<image>
+				<reportElement x="102" y="0" width="43" height="21" uuid="c69168e0-93ea-4f37-97a7-9a6bc774b62a"/>
 				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
 			</image>
 		</band>
