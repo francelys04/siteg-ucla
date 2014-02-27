@@ -77,6 +77,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 
 	Programa programa = new Programa();
 	AreaInvestigacion area = new AreaInvestigacion();
+	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	Tematica tematica = new Tematica();
 	List<Teg> tegs = new ArrayList();
 	long idTeg = 0;
@@ -110,6 +111,10 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 				null);
 		programas.add(programaTodos);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
+
+		cmbArea.setDisabled(true);
+		cmbTematica.setDisabled(true);
+
 	}
 
 	/*
@@ -126,143 +131,161 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 	@Listen("onClick = #btnGenerarReportePromedioTiempoTeg")
 	public void generarPromedioTiempoTeg() throws JRException {
 
-		List<String> nombreEstatus = new ArrayList();
-		nombreEstatus.add("Solicitando Registro");
-		nombreEstatus.add("Proyecto Registrado");
-		nombreEstatus.add("Comision Asignada");
-		nombreEstatus.add("Factibilidad Evaluada");
-		nombreEstatus.add("Proyecto Factible");
-		nombreEstatus.add("Proyecto en Desarrollo");
-		nombreEstatus.add("Avances Finalizados");
-		nombreEstatus.add("TEG Registrado");
-		nombreEstatus.add("Trabajo en Desarrollo");
-		nombreEstatus.add("Revisiones Finalizadas");
-		nombreEstatus.add("Solicitando Defensa");
-		nombreEstatus.add("Jurado Asignado");
-		nombreEstatus.add("Defensa Asignada");
-		nombreEstatus.add("TEG Aprobado");
-		nombreEstatus.add("TEG Reprobado");
-
-		long contador13 = 0;
-		long contador46 = 0;
-		long contador7 = 0;
-		long cantidadTotal = 0;
-		String estatus1 = "";
-		String estatus2 = "";
-		List<PromedioTiempoTeg> tegsPromedios = new ArrayList();
-		int tamanioListaEstatus = nombreEstatus.size();
-
-		if (tamanioListaEstatus % 2 != 0) {
-			tamanioListaEstatus = tamanioListaEstatus - 3;
-		}
-		filtrarDatosBusqueda();
-		if (tegs.size() != 0) {
-			for (int i = 0; i < nombreEstatus.size(); i++) {
-
-				List<TegEstatus> tegEstatus1 = servicioTegEstatus
-						.buscarEstatusSegunTeg(nombreEstatus.get(i), tegs);
-				List<TegEstatus> tegEstatus2 = servicioTegEstatus
-						.buscarEstatusSegunTeg(nombreEstatus.get(i + 1), tegs);
-
-				if (nombreEstatus.size() % 2 != 0 && tamanioListaEstatus == i) {
-					List<TegEstatus> tegEstatus3 = servicioTegEstatus
-							.buscarEstatusSegunTeg(nombreEstatus.get(i + 2),
-									tegs);
-					if (tegEstatus3.size() != 0) {
-						for (int q = 0; q < tegEstatus3.size(); q++) {
-							tegEstatus2.add(tegEstatus3.get(q));
-						}
-
-					}
-					estatus1 = nombreEstatus.get(i);
-					estatus2 = nombreEstatus.get(i + 1) + "/"
-							+ nombreEstatus.get(i + 2);
-
-					i = nombreEstatus.size();
-
-				} else {
-
-					estatus1 = nombreEstatus.get(i);
-					estatus2 = nombreEstatus.get(i + 1);
-				}
-
-				for (int j = 0; j < tegEstatus1.size(); j++) {
-					for (int v = 0; v < tegEstatus2.size(); v++) {
-						if (tegEstatus1.get(j).getTeg().getId() == tegEstatus1
-								.get(v).getTeg().getId()) {
-
-							Date fecha1 = tegEstatus1.get(j).getFechaEstatus();
-							Date fecha2 = tegEstatus2.get(v).getFechaEstatus();
-
-							Calendar calendarioFecha1 = Calendar.getInstance();
-							calendarioFecha1.setTime(fecha1);
-
-							Calendar calendarioFecha2 = Calendar.getInstance();
-							calendarioFecha2.setTime(fecha2);
-
-							long miliSegundoFecha1 = calendarioFecha1
-									.getTimeInMillis();
-							long miliSegundoFecha2 = calendarioFecha2
-									.getTimeInMillis();
-							long diferenciaFecha = miliSegundoFecha2
-									- miliSegundoFecha1;
-							long direfenciaDias = Math.abs(diferenciaFecha
-									/ (24 * 60 * 60 * 1000));
-
-							cantidadTotal = cantidadTotal + 1;
-
-							if (direfenciaDias >= 0 && direfenciaDias <= 3) {
-								contador13 = contador13 + 1;
-							} else if (direfenciaDias >= 4
-									&& direfenciaDias <= 6) {
-								contador46 = contador46 + 1;
-							} else {
-								contador7 = contador7 + 1;
-							}
-						}
-
-					}
-				}
-				PromedioTiempoTeg promedio = new PromedioTiempoTeg(estatus1
-						+ "-" + estatus2, contador13, contador46, contador7);
-				tegsPromedios.add(promedio);
-
-				contador13 = 0;
-				contador46 = 0;
-				contador7 = 0;
-				cantidadTotal = 0;
-
-				i = i + 1;
-			}
-			FileSystemView filesys = FileSystemView.getFileSystemView();
-			Map parametro = new HashMap();
-			String rutaUrl = obtenerDirectorio();
-			String reporteSrc = rutaUrl
-					+ "SITEG/vistas/reportes/estadisticos/compilados/RPromedioTiempoTeg.jasper";
-			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-			parametro.put("titulo",
-					"UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
-							+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
-							+ "DIRECCION DE PROGRAMA");
-			parametro.put("programaNombre", cmbPrograma.getValue());
-			parametro.put("areaNombre", cmbArea.getValue());
-			parametro.put("tematicaNombre", cmbTematica.getValue());
-			parametro.put("logoUcla", reporteImage + "logo ucla.png");
-			parametro.put("logoCE", reporteImage + "logo CE.png");
-			parametro.put("logoSiteg", reporteImage + "logo.png");
-
-			JasperReport jasperReport = (JasperReport) JRLoader
-					.loadObject(reporteSrc);
-
-			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					jasperReport, parametro, new JRBeanCollectionDataSource(
-							tegsPromedios));
-
-			JasperViewer.viewReport(jasperPrint, false);
+		if ((cmbPrograma.getText().compareTo("") == 0)
+				|| (cmbArea.getText().compareTo("") == 0)
+				|| (cmbTematica.getText().compareTo("") == 0)) {
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show("No hay informacion disponible");
-			cancelarPromedioTiempoTeg();
+
+			List<String> nombreEstatus = new ArrayList();
+			nombreEstatus.add("Solicitando Registro");
+			nombreEstatus.add("Proyecto Registrado");
+			nombreEstatus.add("Comision Asignada");
+			nombreEstatus.add("Factibilidad Evaluada");
+			nombreEstatus.add("Proyecto Factible");
+			nombreEstatus.add("Proyecto en Desarrollo");
+			nombreEstatus.add("Avances Finalizados");
+			nombreEstatus.add("TEG Registrado");
+			nombreEstatus.add("Trabajo en Desarrollo");
+			nombreEstatus.add("Revisiones Finalizadas");
+			nombreEstatus.add("Solicitando Defensa");
+			nombreEstatus.add("Jurado Asignado");
+			nombreEstatus.add("Defensa Asignada");
+			nombreEstatus.add("TEG Aprobado");
+			nombreEstatus.add("TEG Reprobado");
+
+			long contador13 = 0;
+			long contador46 = 0;
+			long contador7 = 0;
+			long cantidadTotal = 0;
+			String estatus1 = "";
+			String estatus2 = "";
+			List<PromedioTiempoTeg> tegsPromedios = new ArrayList();
+			int tamanioListaEstatus = nombreEstatus.size();
+
+			if (tamanioListaEstatus % 2 != 0) {
+				tamanioListaEstatus = tamanioListaEstatus - 3;
+			}
+			filtrarDatosBusqueda();
+			if (tegs.size() != 0) {
+				for (int i = 0; i < nombreEstatus.size(); i++) {
+
+					List<TegEstatus> tegEstatus1 = servicioTegEstatus
+							.buscarEstatusSegunTeg(nombreEstatus.get(i), tegs);
+					List<TegEstatus> tegEstatus2 = servicioTegEstatus
+							.buscarEstatusSegunTeg(nombreEstatus.get(i + 1),
+									tegs);
+
+					if (nombreEstatus.size() % 2 != 0
+							&& tamanioListaEstatus == i) {
+						List<TegEstatus> tegEstatus3 = servicioTegEstatus
+								.buscarEstatusSegunTeg(
+										nombreEstatus.get(i + 2), tegs);
+						if (tegEstatus3.size() != 0) {
+							for (int q = 0; q < tegEstatus3.size(); q++) {
+								tegEstatus2.add(tegEstatus3.get(q));
+							}
+
+						}
+						estatus1 = nombreEstatus.get(i);
+						estatus2 = nombreEstatus.get(i + 1) + "/"
+								+ nombreEstatus.get(i + 2);
+
+						i = nombreEstatus.size();
+
+					} else {
+
+						estatus1 = nombreEstatus.get(i);
+						estatus2 = nombreEstatus.get(i + 1);
+					}
+
+					for (int j = 0; j < tegEstatus1.size(); j++) {
+						for (int v = 0; v < tegEstatus2.size(); v++) {
+							if (tegEstatus1.get(j).getTeg().getId() == tegEstatus1
+									.get(v).getTeg().getId()) {
+
+								Date fecha1 = tegEstatus1.get(j)
+										.getFechaEstatus();
+								Date fecha2 = tegEstatus2.get(v)
+										.getFechaEstatus();
+
+								Calendar calendarioFecha1 = Calendar
+										.getInstance();
+								calendarioFecha1.setTime(fecha1);
+
+								Calendar calendarioFecha2 = Calendar
+										.getInstance();
+								calendarioFecha2.setTime(fecha2);
+
+								long miliSegundoFecha1 = calendarioFecha1
+										.getTimeInMillis();
+								long miliSegundoFecha2 = calendarioFecha2
+										.getTimeInMillis();
+								long diferenciaFecha = miliSegundoFecha2
+										- miliSegundoFecha1;
+								long direfenciaDias = Math.abs(diferenciaFecha
+										/ (24 * 60 * 60 * 1000));
+
+								cantidadTotal = cantidadTotal + 1;
+
+								if (direfenciaDias >= 0 && direfenciaDias <= 3) {
+									contador13 = contador13 + 1;
+								} else if (direfenciaDias >= 4
+										&& direfenciaDias <= 6) {
+									contador46 = contador46 + 1;
+								} else {
+									contador7 = contador7 + 1;
+								}
+							}
+
+						}
+					}
+					PromedioTiempoTeg promedio = new PromedioTiempoTeg(estatus1
+							+ "-" + estatus2, contador13, contador46, contador7);
+					tegsPromedios.add(promedio);
+
+					contador13 = 0;
+					contador46 = 0;
+					contador7 = 0;
+					cantidadTotal = 0;
+
+					i = i + 1;
+				}
+				FileSystemView filesys = FileSystemView.getFileSystemView();
+				Map parametro = new HashMap();
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl
+						+ "SITEG/vistas/reportes/estadisticos/compilados/RPromedioTiempoTeg.jasper";
+				String reporteImage = rutaUrl
+						+ "SITEG/public/imagenes/reportes/";
+				parametro.put("titulo",
+						"UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
+								+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
+								+ "DIRECCION DE PROGRAMA");
+				parametro.put("programaNombre", cmbPrograma.getValue());
+				parametro.put("areaNombre", cmbArea.getValue());
+				parametro.put("tematicaNombre", cmbTematica.getValue());
+				parametro.put("logoUcla", reporteImage + "logo ucla.png");
+				parametro.put("logoCE", reporteImage + "logo CE.png");
+				parametro.put("logoSiteg", reporteImage + "logo.png");
+
+				JasperReport jasperReport = (JasperReport) JRLoader
+						.loadObject(reporteSrc);
+
+				JasperPrint jasperPrint = JasperFillManager.fillReport(
+						jasperReport, parametro,
+						new JRBeanCollectionDataSource(tegsPromedios));
+
+				JasperViewer.viewReport(jasperPrint, false);
+			} else {
+				Messagebox.show(
+						"No hay informacion disponible para esta seleccion",
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			}
+
 		}
+
 	}
 
 	/*
@@ -273,24 +296,34 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() throws JRException {
-		String idPrograma = cmbPrograma.getSelectedItem().getId();
-		String nombrePrograma = cmbPrograma.getValue();
-		if (nombrePrograma.equals("Todos")) {
-			cmbArea.setValue("Todos");
-			cmbTematica.setValue("Todos");
-			cmbArea.setDisabled(true);
-			cmbTematica.setDisabled(true);
+		try {
+			String idPrograma = cmbPrograma.getSelectedItem().getId();
+			String nombrePrograma = cmbPrograma.getValue();
+			if (nombrePrograma.equals("Todos")) {
 
-		} else {
-			cmbArea.setDisabled(false);
-			cmbArea.setValue("");
-			programa = servicioPrograma.buscar(Long.parseLong(idPrograma));
-			List<AreaInvestigacion> programaAreas = servicioProgramaArea
-					.buscarAreasDePrograma(programa);
-			AreaInvestigacion areaInvestigacion = new AreaInvestigacion(
-					1000000, "Todos", "", true);
-			programaAreas.add(areaInvestigacion);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(programaAreas));
+				areas = servicioArea.buscarActivos();
+				AreaInvestigacion area = new AreaInvestigacion(100000001,
+						"Todos", "", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+				cmbArea.setDisabled(false);
+
+			} else {
+
+				cmbArea.setDisabled(false);
+				cmbArea.setValue("");
+				cmbTematica.setValue("");
+				programa = servicioPrograma.buscar(Long.parseLong(idPrograma));
+				areas = servicioProgramaArea.buscarAreasDePrograma(programa);
+				AreaInvestigacion area = new AreaInvestigacion(100000001,
+						"Todos", "", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
 		}
 	}
 
@@ -305,9 +338,13 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		String idArea = cmbArea.getSelectedItem().getId();
 		String nombreArea = cmbArea.getValue();
 		if (nombreArea.equals("Todos")) {
+			
 			cmbTematica.setValue("Todos");
 			cmbTematica.setDisabled(true);
+			
+			
 		} else {
+			
 			cmbTematica.setDisabled(false);
 			cmbTematica.setValue("");
 			area = servicioArea.buscarArea(Long.parseLong(idArea));
@@ -317,6 +354,8 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 					null);
 			tematicasTodos.add(tematicaTodos);
 			cmbTematica.setModel(new ListModelList<Tematica>(tematicasTodos));
+				
+	
 		}
 	}
 
