@@ -57,6 +57,7 @@ public class CAsignarJurado extends CGeneral {
 	Profesor tutor = new Profesor();
 	Jurado jurado = new Jurado();
 	Boolean tutorEnJurado = false;
+	ListModelList<TipoJurado> tipos;
 
 	@Wire
 	private Textbox txtProgramaAtenderDefensa;
@@ -84,6 +85,16 @@ public class CAsignarJurado extends CGeneral {
 	private Textbox txtApellidoTutorAsignarJurado;
 	@Wire
 	private Image imagenx;
+
+	/*
+	 * Metodo que permite asignar una lista a un combo de manera dinamica, de
+	 * tal forma que el id del combo no se repita
+	 */
+	public ListModelList<TipoJurado> getTipos() {
+		tipos = new ListModelList<TipoJurado>(
+				servicioTipoJurado.buscarActivos());
+		return tipos;
+	}
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
@@ -255,33 +266,32 @@ public class CAsignarJurado extends CGeneral {
 	@Listen("onClick = #btnAceptarDefensa")
 	public void aceptarDefensaDefinitiva() {
 
-				Messagebox.show("¿Desea guardar los miembros del jurado?",
-						"Dialogo de confirmacion", Messagebox.OK
-								| Messagebox.CANCEL, Messagebox.QUESTION,
-						new org.zkoss.zk.ui.event.EventListener<Event>() {
-							public void onEvent(Event evt)
-									throws InterruptedException {
-								if (evt.getName().equals("onOK")) {
-									if (validarJurado() && guardardatos()) {
-									String estatus = "Jurado Asignado";
-									java.util.Date fechaEstatus = new Date();
-									Teg teg = servicioTeg.buscarTeg(idTeg);
-									TegEstatus tegEstatus = new TegEstatus(0,
-											teg, estatus, fechaEstatus);
-									servicioTegEstatus.guardar(tegEstatus);
-									teg.setEstatus(estatus);
-									servicioTeg.guardar(teg);
-									crearUsuariosJurado();
-									Messagebox.show(
-											"Jurados asignados exitosamente",
-											"Información", Messagebox.OK,
-											Messagebox.INFORMATION);
-									salirAsignarJurado();
-									}
-								}
+		Messagebox.show("¿Desea guardar los miembros del jurado?",
+				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+							if (validarJurado() && guardardatos()) {
+								String estatus = "Jurado Asignado";
+								java.util.Date fechaEstatus = new Date();
+								Teg teg = servicioTeg.buscarTeg(idTeg);
+								TegEstatus tegEstatus = new TegEstatus(0, teg,
+										estatus, fechaEstatus);
+								servicioTegEstatus.guardar(tegEstatus);
+								teg.setEstatus(estatus);
+								servicioTeg.guardar(teg);
+								crearUsuariosJurado();
+								Messagebox.show(
+										"Jurados asignados exitosamente",
+										"Información", Messagebox.OK,
+										Messagebox.INFORMATION);
+								salirAsignarJurado();
 							}
-						});
-			
+						}
+					}
+				});
+
 	}
 
 	/*
@@ -291,7 +301,6 @@ public class CAsignarJurado extends CGeneral {
 	 */
 	void crearUsuariosJurado() {
 		Usuario user = new Usuario();
-		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
 		List<Grupo> grupos = new ArrayList<Grupo>();
 		Grupo grupo = new Grupo();
 		grupo = servicioGrupo.BuscarPorNombre("ROLE_JURADO");
@@ -304,8 +313,9 @@ public class CAsignarJurado extends CGeneral {
 			e.printStackTrace();
 		}
 		imagenUsuario = imagenx.getContent().getByteData();
-		gruposUsuario.add(grupo);
 		for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
+			Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+			gruposUsuario.add(grupo);
 			Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
 			long cedula = ((Intbox) ((listItem.getChildren().get(0)))
 					.getFirstChild()).getValue();
@@ -370,7 +380,7 @@ public class CAsignarJurado extends CGeneral {
 									"Numero de integrantes del jurado",
 									programa).getValor(), "Error",
 					Messagebox.OK, Messagebox.ERROR);
-			return false;
+		return false;
 	}
 
 	/*
