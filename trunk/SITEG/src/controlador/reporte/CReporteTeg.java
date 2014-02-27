@@ -67,11 +67,7 @@ import servicio.SEstudiante;
 @Controller
 public class CReporteTeg extends CGeneral {
 
-	private String[] estatusTeg = { "Todos", "Solicitando Registro",
-			"Proyecto Registrado", "Comision Asignada",
-			"Factibilidad Evaluada", "Proyecto Factible",
-			"Proyecto No Factible", "Proyecto en Desarrollo",
-			"Avances Finalizados", "TEG Registrado", "Trabajo en Desarrollo",
+	private String[] estatusTeg = {"Todos","TEG Registrado", "Trabajo en Desarrollo",
 			"Revisiones Finalizadas", "Solicitando Defensa", "Jurado Asignado",
 			"Defensa Asignada", "TEG Aprobado", "TEG Reprobado" };
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
@@ -316,23 +312,15 @@ public class CReporteTeg extends CGeneral {
 							.parseLong(idTematica));
 					
 								
+					String estatusTeg1 = "TEG Registrado";
+					String estatusTeg2 = "Trabajo en Desarrollo";
+					String estatusTeg3 = "Revisiones Finalizadas";
+					String estatusTeg4 = "Solicitando Defensa";
+					String estatusTeg5 = "Jurado Asignado";
+					String estatusTeg6 = "Defensa Asignada";
+					String estatusTeg7 = "TEG Aprobado";
+					String estatusTeg8 = "TEG Reprobado";
 					
-					String estatusTeg1 = "Solicitando Registro";
-					String estatusTeg2 = "Proyecto Registrado";
-					String estatusTeg3 = "Comision Asignada";
-					String estatusTeg4 = "Factibilidad Evaluada";
-					String estatusTeg5 = "Proyecto Factible";
-					String estatusTeg6 = "Proyecto No Factible";
-					String estatusTeg7 = "Proyecto en Desarrollo";
-					String estatusTeg8 = "Avances Finalizados";
-					String estatusTeg9 = "TEG Registrado";
-					String estatusTeg10 = "Trabajo en Desarrollo";
-					String estatusTeg11 = "Revisiones Finalizadas";
-					String estatusTeg12 = "Solicitando Defensa";
-					String estatusTeg13 = "Defensa Asignada";
-					String estatusTeg14 = "TEG Aprobado";
-					String estatusTeg15 = "TEG Reprobado";
-					String estatusTeg16 = "Jurado Asignado";
 					teg = servicioTeg
 							.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus(
 									estatusTeg1, estatusTeg2, estatusTeg3,
@@ -361,22 +349,16 @@ public class CReporteTeg extends CGeneral {
 					String idPrograma = cmbPrograma.getSelectedItem().getId();
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
-					String estatusTeg1 = "Solicitando Registro";
-					String estatusTeg2 = "Proyecto Registrado";
-					String estatusTeg3 = "Comision Asignada";
-					String estatusTeg4 = "Factibilidad Evaluada";
-					String estatusTeg5 = "Proyecto Factible";
-					String estatusTeg6 = "Proyecto No Factible";
-					String estatusTeg7 = "Proyecto en Desarrollo";
-					String estatusTeg8 = "Avances Finalizados";
-					String estatusTeg9 = "TEG Registrado";
-					String estatusTeg10 = "Trabajo en Desarrollo";
-					String estatusTeg11 = "Revisiones Finalizadas";
-					String estatusTeg12 = "Solicitando Defensa";
-					String estatusTeg13 = "Defensa Asignada";
-					String estatusTeg14 = "TEG Aprobado";
-					String estatusTeg15 = "TEG Reprobado";
-					String estatusTeg16 = "Jurado Asignado";
+					
+					String estatusTeg1 = "TEG Registrado";
+					String estatusTeg2 = "Trabajo en Desarrollo";
+					String estatusTeg3 = "Revisiones Finalizadas";
+					String estatusTeg4 = "Solicitando Defensa";
+					String estatusTeg5 = "Jurado Asignado";
+					String estatusTeg6 = "Defensa Asignada";
+					String estatusTeg7 = "TEG Aprobado";
+					String estatusTeg8 = "TEG Reprobado";
+					
 					teg = servicioTeg
 							.buscarTegPorProgramaVariasAreasVariosEstatus(
 									estatusTeg1, estatusTeg2, estatusTeg3,
@@ -393,22 +375,16 @@ public class CReporteTeg extends CGeneral {
 
 				/* buscar por todas las carrera, y todos los estatus */
 				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
-					String estatusTeg1 = "Solicitando Registro";
-					String estatusTeg2 = "Proyecto Registrado";
-					String estatusTeg3 = "Comision Asignada";
-					String estatusTeg4 = "Factibilidad Evaluada";
-					String estatusTeg5 = "Proyecto Factible";
-					String estatusTeg6 = "Proyecto No Factible";
-					String estatusTeg7 = "Proyecto en Desarrollo";
-					String estatusTeg8 = "Avances Finalizados";
-					String estatusTeg9 = "TEG Registrado";
-					String estatusTeg10 = "Trabajo en Desarrollo";
-					String estatusTeg11 = "Revisiones Finalizadas";
-					String estatusTeg12 = "Solicitando Defensa";
-					String estatusTeg13 = "Defensa Asignada";
-					String estatusTeg14 = "TEG Aprobado";
-					String estatusTeg15 = "TEG Reprobado";
-					String estatusTeg16 = "Jurado Asignado";
+					
+					String estatusTeg1 = "TEG Registrado";
+					String estatusTeg2 = "Trabajo en Desarrollo";
+					String estatusTeg3 = "Revisiones Finalizadas";
+					String estatusTeg4 = "Solicitando Defensa";
+					String estatusTeg5 = "Jurado Asignado";
+					String estatusTeg6 = "Defensa Asignada";
+					String estatusTeg7 = "TEG Aprobado";
+					String estatusTeg8 = "TEG Reprobado";
+					
 					teg = servicioTeg.buscarTegPorVariosProgramasVariosEstatus(
 							estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4,
 							estatusTeg5, estatusTeg6, estatusTeg7, fechaInicio,
