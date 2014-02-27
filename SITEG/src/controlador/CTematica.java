@@ -38,17 +38,7 @@ public class CTematica extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionTematica;
 	@Wire
-	private Listbox ltbTematica;
-	@Wire
 	private Window wdwCatalogoTematica;
-	@Wire
-	private Textbox txtCodigoMostrarTematica;
-	@Wire
-	private Textbox txtNombreMostrarTematica;
-	@Wire
-	private Textbox txtAreaMostrarTematica;
-	@Wire
-	private Textbox txtDescripcionMostrarTematica;
 	@Wire
 	private Button btnEliminarTematica;
 	@Wire

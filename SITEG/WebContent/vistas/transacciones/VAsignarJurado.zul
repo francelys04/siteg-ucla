@@ -223,13 +223,12 @@
 															label="${each.apellido}">
 														</listcell>
 														<listcell>
-															<combobox
-																readonly="true" inplace="true" width="70px">
-																<comboitem
-																	label="Principal" />
-																<comboitem
-																	label="Asistente" />
-															</combobox>
+															<combobox model="${$composer.tipos}" style="background-color:white;border:none" readonly="true" >
+										<template name="model">
+											<comboitem
+												label="${each.nombre}" description="${each.id}"/>
+										</template>
+									</combobox>
 														</listcell>
 													</listitem>
 												</template>
@@ -272,7 +271,7 @@
 													<listheader
 														label="Apellido" />
 													<listheader
-														label="Tipo de Jurado" width="25%" />
+														label="Tipo de Jurado" width="30%" />
 												</listhead>
 
 												<template
@@ -288,14 +287,12 @@
 															label="${each.profesor.apellido}">
 														</listcell>
 														<listcell>
-															<combobox
-																readonly="true" value="${each.tipoJurado.nombre}"
-																inplace="true">
-																<comboitem
-																	label="Principal" />
-																<comboitem
-																	label="Asistente" />
-															</combobox>
+															<combobox value="${each.tipoJurado.nombre}" model="${$composer.tipos}" style="background-color:white;border:none" width="100%" readonly="true" >
+										<template name="model">
+											<comboitem
+												label="${each.nombre}"/>
+										</template>
+									</combobox>
 														</listcell>
 													</listitem>
 												</template>
