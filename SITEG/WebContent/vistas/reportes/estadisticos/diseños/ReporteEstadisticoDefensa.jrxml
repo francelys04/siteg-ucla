@@ -39,11 +39,11 @@ Gestión de Trabajos Especiales de Grado
 ]]></text>
 			</staticText>
 			<image>
-				<reportElement x="0" y="3" width="100" height="62" uuid="3bd7e936-f21f-4365-8097-cd85234c7a08"/>
+				<reportElement x="2" y="3" width="100" height="62" uuid="fb639286-d45b-410d-8e18-b3dd6f9ae4ab"/>
 				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="447" y="3" width="100" height="62" uuid="28c7394f-8228-4ea4-95b8-860cc8c3933f"/>
+				<reportElement x="447" y="3" width="100" height="62" uuid="1ef83944-80a6-4cdd-a0a4-8e8dbb5799aa"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
 		</band>
@@ -54,19 +54,19 @@ Gestión de Trabajos Especiales de Grado
 	<columnHeader>
 		<band height="183" splitType="Stretch">
 			<rectangle>
-				<reportElement x="185" y="143" width="86" height="31" uuid="9c48ed05-db16-4908-8082-2f10a248d873"/>
+				<reportElement x="185" y="143" width="100" height="31" uuid="9c48ed05-db16-4908-8082-2f10a248d873"/>
 			</rectangle>
 			<rectangle>
 				<reportElement x="102" y="143" width="82" height="31" uuid="d728c47b-844b-48ec-bf26-c5974b05e794"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="272" y="143" width="83" height="31" uuid="6ce9aa18-92e9-46b2-99fc-2c497549a2ec"/>
+				<reportElement x="285" y="143" width="83" height="31" uuid="6ce9aa18-92e9-46b2-99fc-2c497549a2ec"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="355" y="143" width="94" height="31" uuid="e06b8c5f-3f69-4b73-b33a-7337809673e3"/>
+				<reportElement x="369" y="144" width="94" height="31" uuid="e06b8c5f-3f69-4b73-b33a-7337809673e3"/>
 			</rectangle>
 			<staticText>
-				<reportElement mode="Opaque" x="184" y="123" width="87" height="20" backcolor="#0099FF" uuid="639c164c-1c9d-4118-aeef-8570c14197df"/>
+				<reportElement mode="Opaque" x="184" y="123" width="101" height="20" backcolor="#0099FF" uuid="639c164c-1c9d-4118-aeef-8570c14197df"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -76,10 +76,10 @@ Gestión de Trabajos Especiales de Grado
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Con Jurado]]></text>
+				<text><![CDATA[Jurado Asignado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="355" y="123" width="94" height="20" backcolor="#0099FF" uuid="92d81d24-e930-4512-b7fe-8da8932cca09"/>
+				<reportElement mode="Opaque" x="369" y="123" width="94" height="20" backcolor="#0099FF" uuid="92d81d24-e930-4512-b7fe-8da8932cca09"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -105,7 +105,7 @@ Gestión de Trabajos Especiales de Grado
 				<text><![CDATA[Solicitadas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="271" y="123" width="84" height="20" backcolor="#0099FF" uuid="0ff23ad7-4fe2-4d05-98cc-29c6f7cdd503"/>
+				<reportElement mode="Opaque" x="285" y="123" width="83" height="20" backcolor="#0099FF" uuid="0ff23ad7-4fe2-4d05-98cc-29c6f7cdd503"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -118,7 +118,7 @@ Gestión de Trabajos Especiales de Grado
 				<text><![CDATA[Programada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="102" y="100" width="347" height="23" backcolor="#0099FF" uuid="0f5f320e-8f8c-46ca-86d7-cdc469fe1b68"/>
+				<reportElement mode="Opaque" x="102" y="100" width="361" height="23" backcolor="#0099FF" uuid="0f5f320e-8f8c-46ca-86d7-cdc469fe1b68"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -176,7 +176,7 @@ Gestión de Trabajos Especiales de Grado
 				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="359" y="144" width="90" height="27" backcolor="#FFFFFF" uuid="3b3e6a34-1d7f-4c68-abe8-757690973cf8"/>
+				<reportElement mode="Opaque" x="373" y="146" width="90" height="27" backcolor="#FFFFFF" uuid="3b3e6a34-1d7f-4c68-abe8-757690973cf8"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
@@ -197,7 +197,7 @@ Gestión de Trabajos Especiales de Grado
 				<textFieldExpression><![CDATA[$F{segundoValor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="285" y="144" width="56" height="27" uuid="f5b5e22b-35c2-45cd-9d0f-b7b22902b1e1"/>
+				<reportElement mode="Opaque" x="299" y="146" width="56" height="25" uuid="f5b5e22b-35c2-45cd-9d0f-b7b22902b1e1"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font isBold="true"/>
 				</textElement>
@@ -218,17 +218,17 @@ Gestión de Trabajos Especiales de Grado
 					<pieSeries>
 						<keyExpression><![CDATA["Teg Solicitando Defensa"]]></keyExpression>
 						<valueExpression><![CDATA[$F{primerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})]]></valueExpression>
-						<labelExpression><![CDATA[(100*( $F{primerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor}))).toString() +"%"]]></labelExpression>
+						<labelExpression><![CDATA[(100*$F{primerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})).toString() +"%"]]></labelExpression>
 					</pieSeries>
 					<pieSeries>
 						<keyExpression><![CDATA["Teg con Jurado Asignado"]]></keyExpression>
 						<valueExpression><![CDATA[$F{segundoValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})]]></valueExpression>
-						<labelExpression><![CDATA[(100 *( $F{segundoValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor}))).toString() +"%"]]></labelExpression>
+						<labelExpression><![CDATA[(100*$F{segundoValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})).toString()+"%"]]></labelExpression>
 					</pieSeries>
 					<pieSeries>
 						<keyExpression><![CDATA["Teg con Defensa Programada"]]></keyExpression>
 						<valueExpression><![CDATA[$F{tercerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})]]></valueExpression>
-						<labelExpression><![CDATA[(100 * ($F{tercerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor}))).toString() + "%"]]></labelExpression>
+						<labelExpression><![CDATA[(100*$F{tercerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})).toString()+"%"]]></labelExpression>
 					</pieSeries>
 				</pieDataset>
 				<pie3DPlot>
@@ -259,7 +259,7 @@ Gestión de Trabajos Especiales de Grado
 				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
 			</staticText>
 			<image>
-				<reportElement x="102" y="0" width="43" height="21" uuid="c69168e0-93ea-4f37-97a7-9a6bc774b62a"/>
+				<reportElement x="124" y="0" width="44" height="20" uuid="da4be128-e771-41e9-a29f-1cc1f5463e3a"/>
 				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
 			</image>
 		</band>
