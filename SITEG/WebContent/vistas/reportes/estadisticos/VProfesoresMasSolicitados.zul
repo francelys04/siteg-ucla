@@ -41,6 +41,43 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionarPrograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
+	</popup>
+	<popup id="pupSeleccionarArea">
+		<toolbarbutton label="Presione aquí para seleccionar el area" />
+	</popup>
+	<popup id="pupSeleccionarTematica">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la temática" />
+	</popup>
+
+	<popup id="pupInicioLapso">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de inicio" />
+	</popup>
+	<popup id="pupFinLapso">
+		<toolbarbutton
+			label="Presione aqui para seleccionar la fecha de fin" />
+	</popup>
+
+	<popup id="pupGenerarReporte">
+		<toolbarbutton label="Presione aqui para mostrar el reporte" />
+	</popup>
+	<popup id="pupCancelarReporte">
+		<toolbarbutton label="Presione aqui para limpiar los campos" />
+	</popup>
+	<popup id="pupSalirReporte">
+		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
+
+	<!-- Fin de popus -->
+
+
+
+
 	<separator />
 	<separator />
 	<label value="(*) "
@@ -78,9 +115,10 @@
 						</hlayout>
 
 						<datebox
-							id="dtbInicioReporteProfesoresSolicitados" cols="12"
-							readonly="true" style="margin-left:20px" width="150px"
-							format="dd/MM/yyyy" onCreate="self.value = new Date()">
+							id="dtbInicioReporteProfesoresSolicitados"
+							tooltip="pupInicioLapso" readonly="true" style="margin-left:20px"
+							width="150px" format="dd/MM/yyyy"
+							onCreate="self.value = new Date()">
 						</datebox>
 
 						<hlayout>
@@ -93,8 +131,9 @@
 						</hlayout>
 
 						<datebox id="dtbFinReporteProfesoresSolicitados"
-							cols="12" style="margin-left:30px" readonly="true" width="150px"
-							format="dd/MM/yyyy" onCreate="self.value = new Date()">
+							tooltip="pupFinLapso" style="margin-left:30px" readonly="true"
+							width="150px" format="dd/MM/yyyy"
+							onCreate="self.value = new Date()">
 						</datebox>
 					</hbox>
 
@@ -117,7 +156,7 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<combobox
+					<combobox tooltip="pupSeleccionarPrograma"
 						id="cmbProgramaReporteProfesoresSolicitados" readonly="true"
 						width="250px">
 						<template name="model">
@@ -138,7 +177,7 @@
 					</hlayout>
 
 					<hbox>
-						<combobox
+						<combobox tooltip="pupSeleccionarArea"
 							id="cmbAreaReporteProfesoresSolicitados" readonly="true"
 							width="250px">
 							<template name="model">
@@ -156,6 +195,7 @@
 						</hlayout>
 
 						<combobox style="margin-left:30px"
+							tooltip="pupSeleccionarTematica"
 							id="cmbTematicaReporteProfesoresSolicitados" readonly="true"
 							width="250px">
 							<template name="model">
@@ -180,20 +220,20 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button
+						<button tooltip="pupGenerarReporte"
 							id="btnGenerarReporteProfesoresSolicitados" label="Generar"
 							sclass="btn" image="/public/imagenes/iconos/generar.png"
 							tabindex="13">
 						</button>
-						<button
+						<button tooltip="pupCancelarReporte"
 							id="btnCancelarReporteProfesoresSolicitados" label="Cancelar"
 							sclass="btn" image="/public/imagenes/iconos/limpiar.png"
 							tabindex="14">
 						</button>
-						<button
+						<button tooltip="pupSalirReporte"
 							id="btnSalirReporteProfesoresSolicitados" width="120px"
-							tooltip="pupSalirReporte" label="Salir" sclass="btn"
-							image="/public/imagenes/iconos/salir.png" tabindex="14">
+							label="Salir" sclass="btn"
+							image="/public/imagenes/iconos/salir.png" tabindex="15">
 						</button>
 						<separator />
 					</div>

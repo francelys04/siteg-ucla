@@ -74,6 +74,10 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 		Programa programaa = new Programa(987, "Todos", "", "", true, null);
 		programas.add(programaa);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
+		
+		cmbArea.setDisabled(true);
+		cmbTematica.setDisabled(true);
+		
 
 	}
 
@@ -90,10 +94,12 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 					"", true);
 			areas.add(area);
 			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+			cmbArea.setDisabled(false);
 			}
 		
 		else {
 			cmbArea.setValue("");
+			cmbArea.setDisabled(false);
 			cmbTematica.setValue("");
 			programa1 = (Programa) cmbPrograma.getSelectedItem().getValue();
 			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
@@ -122,8 +128,10 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 		if (cmbArea.getValue().equals("Todos")) {
 
 			cmbTematica.setValue("Todos");
+			cmbTematica.setDisabled(true);
 		} else {
 			cmbTematica.setValue("");
+			cmbTematica.setDisabled(false);
 			area1 = (AreaInvestigacion) cmbArea.getSelectedItem().getValue();
 			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
 					.buscarArea(area1.getId()));
@@ -325,8 +333,8 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 									masSolicitados));
 					JasperViewer.viewReport(jasperPrint, false);
 				} else {
-					Messagebox.show(
-							"No ha informacion disponible para este intervalo",
+					Messagebox
+					.show("No hay informacion disponible para esta seleccion",
 							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
 
@@ -342,8 +350,9 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
-	
 		cmbTematica.setValue("");
+		cmbArea.setDisabled(true);
+		cmbTematica.setDisabled(true);
 		dtbInicio.setValue(new Date());
 		dtbFin.setValue(new Date());
 

@@ -59,7 +59,7 @@
 		<toolbarbutton label="Presione aqui para limpiar los campos" />
 	</popup>
 	<popup id="pupSalirReporte">
-		<toolbarbutton label="Presione aqui para salir del reporte" />
+		<toolbarbutton label="Presione aqui para salir" />
 	</popup>
 
 	<separator />
@@ -98,7 +98,7 @@
 					</hlayout>
 
 					<combobox id="cmbPrograma" readonly="true"
-						width="250px">
+						tooltip="pupSeleccionarPrograma" width="250px">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -118,7 +118,7 @@
 
 					<hbox>
 						<combobox id="cmbArea" readonly="true"
-							width="250px">
+							tooltip="pupSeleccionarArea" width="250px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -134,7 +134,8 @@
 						</hlayout>
 
 						<combobox style="margin-left:30px"
-							id="cmbTematica" readonly="true" width="250px">
+							tooltip="pupSeleccionarTematica" id="cmbTematica" readonly="true"
+							width="250px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
