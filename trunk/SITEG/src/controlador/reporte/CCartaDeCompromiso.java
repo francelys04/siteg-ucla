@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileSystemView;
 
 import modelo.Estudiante;
 import modelo.SolicitudTutoria;
+import modelo.reporte.MasSolicitados;
 import modelo.reporte.Proyecto;
 import modelo.reporte.Solicitud;
 import net.sf.jasperreports.engine.JRException;
@@ -85,13 +86,22 @@ public class CCartaDeCompromiso extends CGeneral {
 	mapa.put("logoCE", reporteImage + "logo CE.png");
 	mapa.put("logoSiteg", reporteImage + "logo.png");
 
+	JasperReport jasperReport = (JasperReport) JRLoader
+			 .loadObject(reporteSrc);
+			
 
+			
+			JasperPrint jasperPrint = JasperFillManager.fillReport(
+					jasperReport, mapa, new JRBeanCollectionDataSource(
+							elementos));
+			JasperViewer.viewReport(jasperPrint, false);
+		
 	
-	jstVistaPrevia.setSrc(reporteSrc);
-	 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-			 elementos));
-	 jstVistaPrevia.setType("pdf");
-	 jstVistaPrevia.setParameters(null);
+	//jstVistaPrevia.setSrc(reporteSrc);
+	 //jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+		//	 elementos));
+	 //jstVistaPrevia.setType("pdf");
+	 //jstVistaPrevia.setParameters(null);
 
   }
 	@Listen("onClick = #btnSalir")
