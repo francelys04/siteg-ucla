@@ -124,12 +124,14 @@ public class CSolicitarTutor extends CGeneral {
 		} else {
 			cmbAreaSolicitud.setValue(combo1);
 			combo1 = null;
+			cmbAreaSolicitud.setDisabled(true);
 		}
 		if (combo2 == null) {
 			// cmbTematicaSolicitud.setDisabled(true);
 		} else {
 			cmbTematicaSolicitud.setValue(combo2);
 			combo2 = null;
+			cmbTematicaSolicitud.setDisabled(true);
 		}
 		if (descripcion != null) {
 			txtTituloSolicitud.setValue(descripcion);
