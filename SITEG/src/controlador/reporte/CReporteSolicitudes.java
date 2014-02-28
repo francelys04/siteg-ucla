@@ -273,7 +273,9 @@ public class CReporteSolicitudes extends CGeneral {
 								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
-						
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
 
  
 						JasperReport jasperReport = (JasperReport) JRLoader
@@ -343,6 +345,9 @@ public class CReporteSolicitudes extends CGeneral {
 								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud4.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
 
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);
@@ -414,6 +419,9 @@ public class CReporteSolicitudes extends CGeneral {
 								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud5.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
 
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);
@@ -485,6 +493,9 @@ public class CReporteSolicitudes extends CGeneral {
 								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud3.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
 
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);
@@ -558,6 +569,9 @@ public class CReporteSolicitudes extends CGeneral {
 								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud2.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
 
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);
@@ -629,6 +643,9 @@ public class CReporteSolicitudes extends CGeneral {
 								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud5.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
 
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);
@@ -700,6 +717,9 @@ public class CReporteSolicitudes extends CGeneral {
 								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
 
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);
@@ -769,6 +789,9 @@ public class CReporteSolicitudes extends CGeneral {
 								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud1.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
 
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);
@@ -839,6 +862,9 @@ public class CReporteSolicitudes extends CGeneral {
 								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud3.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
 
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);

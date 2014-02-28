@@ -297,8 +297,17 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 					valor3 = teg3.size();
 
 				}
-				if (valor1 != 0 && valor2 != 0 && valor3 != 0) {
+				System.out.println(valor1);
+				System.out.println(valor2);
+				System.out.println(valor3);
+				if ((valor1 == 0) && (valor2 == 0) && (valor3 == 0)) {
+					Messagebox
+					.show("No hay informacion disponible para esta seleccion",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
 					
+					
+				} else {
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
 					+ "SITEG/vistas/reportes/estadisticos/compilados/ReporteEstadisticoDefensa.jasper";
@@ -332,12 +341,6 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 							jasperReport, mapa, new JRBeanCollectionDataSource(
 									masSolicitados));
 					JasperViewer.viewReport(jasperPrint, false);
-				} else {
-					Messagebox
-					.show("No hay informacion disponible para esta seleccion",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-
 				}
 
 			}

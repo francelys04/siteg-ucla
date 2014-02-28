@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteEstadisticoDefensa" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d42763ff-7296-4cf5-bb66-dc9e931c08ad">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="249"/>
 	<subDataset name="Table Dataset 1" uuid="47d709d8-8296-4698-ab2f-21a0ae3b6013"/>
 	<subDataset name="dataset1" uuid="ebce39f8-9254-43e0-b31d-a1ef95f0feb0"/>
 	<parameter name="programa" class="java.lang.String"/>
@@ -30,8 +30,8 @@
 		<band height="65" splitType="Stretch">
 			<staticText>
 				<reportElement x="102" y="3" width="347" height="62" uuid="c39048c0-60d0-4401-aba2-cccdd1a30c5d"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Universidad Centroccidental Lisandro Alvarado
 Decanato de Ciencias y Tecnología
@@ -54,19 +54,19 @@ Gestión de Trabajos Especiales de Grado
 	<columnHeader>
 		<band height="183" splitType="Stretch">
 			<rectangle>
-				<reportElement x="185" y="143" width="100" height="31" uuid="9c48ed05-db16-4908-8082-2f10a248d873"/>
+				<reportElement x="158" y="146" width="138" height="31" uuid="9c48ed05-db16-4908-8082-2f10a248d873"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="102" y="143" width="82" height="31" uuid="d728c47b-844b-48ec-bf26-c5974b05e794"/>
+				<reportElement x="15" y="146" width="143" height="31" uuid="d728c47b-844b-48ec-bf26-c5974b05e794"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="285" y="143" width="83" height="31" uuid="6ce9aa18-92e9-46b2-99fc-2c497549a2ec"/>
+				<reportElement x="296" y="146" width="136" height="31" uuid="6ce9aa18-92e9-46b2-99fc-2c497549a2ec"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="369" y="144" width="94" height="31" uuid="e06b8c5f-3f69-4b73-b33a-7337809673e3"/>
+				<reportElement x="432" y="147" width="92" height="31" uuid="e06b8c5f-3f69-4b73-b33a-7337809673e3"/>
 			</rectangle>
 			<staticText>
-				<reportElement mode="Opaque" x="184" y="123" width="101" height="20" backcolor="#0099FF" uuid="639c164c-1c9d-4118-aeef-8570c14197df"/>
+				<reportElement mode="Opaque" x="157" y="126" width="139" height="20" backcolor="#0099FF" uuid="639c164c-1c9d-4118-aeef-8570c14197df"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -76,10 +76,10 @@ Gestión de Trabajos Especiales de Grado
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Jurado Asignado]]></text>
+				<text><![CDATA[Defensa con Jurado Asignado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="369" y="123" width="94" height="20" backcolor="#0099FF" uuid="92d81d24-e930-4512-b7fe-8da8932cca09"/>
+				<reportElement mode="Opaque" x="430" y="127" width="94" height="20" backcolor="#0099FF" uuid="92d81d24-e930-4512-b7fe-8da8932cca09"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -92,7 +92,7 @@ Gestión de Trabajos Especiales de Grado
 				<text><![CDATA[Total Cantidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="102" y="123" width="82" height="20" backcolor="#0099FF" uuid="71468103-5567-4c61-a444-c345674abe3a"/>
+				<reportElement mode="Opaque" x="14" y="126" width="143" height="20" backcolor="#0099FF" uuid="71468103-5567-4c61-a444-c345674abe3a"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -102,10 +102,10 @@ Gestión de Trabajos Especiales de Grado
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Solicitadas]]></text>
+				<text><![CDATA[Solicitando Defensa]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="285" y="123" width="83" height="20" backcolor="#0099FF" uuid="0ff23ad7-4fe2-4d05-98cc-29c6f7cdd503"/>
+				<reportElement mode="Opaque" x="296" y="126" width="136" height="20" backcolor="#0099FF" uuid="0ff23ad7-4fe2-4d05-98cc-29c6f7cdd503"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -115,20 +115,7 @@ Gestión de Trabajos Especiales de Grado
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Programada]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="102" y="100" width="361" height="23" backcolor="#0099FF" uuid="0f5f320e-8f8c-46ca-86d7-cdc469fe1b68"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cantidad de Defensas]]></text>
+				<text><![CDATA[Defensas Programada]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="451" y="11" width="100" height="20" uuid="61518913-3a92-4ef8-9ef5-775a5031136b"/>
@@ -176,28 +163,28 @@ Gestión de Trabajos Especiales de Grado
 				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="373" y="146" width="90" height="27" backcolor="#FFFFFF" uuid="3b3e6a34-1d7f-4c68-abe8-757690973cf8"/>
+				<reportElement mode="Opaque" x="443" y="150" width="81" height="27" backcolor="#FFFFFF" uuid="3b3e6a34-1d7f-4c68-abe8-757690973cf8"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{primerValor}+$F{tercerValor}+$F{segundoValor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="124" y="146" width="51" height="27" uuid="f1695b81-eade-4e14-9a88-3d7c01b86ba6"/>
+				<reportElement mode="Opaque" x="50" y="147" width="51" height="27" uuid="f1695b81-eade-4e14-9a88-3d7c01b86ba6"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{primerValor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="198" y="144" width="73" height="27" uuid="74aab517-b8d3-4114-9193-e1e940751d31"/>
+				<reportElement mode="Opaque" x="171" y="147" width="73" height="27" uuid="74aab517-b8d3-4114-9193-e1e940751d31"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{segundoValor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="299" y="146" width="56" height="25" uuid="f5b5e22b-35c2-45cd-9d0f-b7b22902b1e1"/>
+				<reportElement mode="Opaque" x="346" y="149" width="56" height="25" uuid="f5b5e22b-35c2-45cd-9d0f-b7b22902b1e1"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font isBold="true"/>
 				</textElement>
@@ -209,7 +196,7 @@ Gestión de Trabajos Especiales de Grado
 		<band height="282" splitType="Stretch">
 			<pie3DChart>
 				<chart>
-					<reportElement x="41" y="21" width="453" height="251" uuid="1794dd3b-6f0e-46ac-bb41-02e68f639237"/>
+					<reportElement x="15" y="12" width="532" height="251" uuid="1794dd3b-6f0e-46ac-bb41-02e68f639237"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -231,9 +218,11 @@ Gestión de Trabajos Especiales de Grado
 						<labelExpression><![CDATA[(100*$F{tercerValor}/($F{primerValor}+$F{segundoValor}+$F{tercerValor})).toString()+"%"]]></labelExpression>
 					</pieSeries>
 				</pieDataset>
-				<pie3DPlot>
+				<pie3DPlot isShowLabels="true">
 					<plot/>
-					<itemLabel/>
+					<itemLabel>
+						<font size="8"/>
+					</itemLabel>
 				</pie3DPlot>
 			</pie3DChart>
 		</band>
