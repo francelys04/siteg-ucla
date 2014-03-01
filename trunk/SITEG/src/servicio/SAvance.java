@@ -22,7 +22,7 @@ public class SAvance {
 	public Avance buscarAvancePorId(long id) {
 		// TODO Auto-generated method stub
 		Avance avance;
-		avance = interfazAvance.findById(id);
+		avance = interfazAvance.findOne(id);
 		return avance;
 	}
 	

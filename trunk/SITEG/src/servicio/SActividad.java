@@ -22,7 +22,7 @@ public class SActividad {
 	}
 
 	public Actividad buscarActividad(long id) {
-		return interfaceActividad.findById(id);
+		return interfaceActividad.findOne(id);
 	}
 
 	public List<Actividad> buscarActivos() {

@@ -14,10 +14,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	
-	
-	public Teg findById(long id);
-
-	
+		
 	//Buscar tegs por profesores
 	public List<Teg> findByTutor(List<Profesor> profesores);
 	

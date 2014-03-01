@@ -19,7 +19,7 @@ public class SLapso {
 	}
 
 	public Lapso buscarLapso(long codigo) {
-		return interfaceLapso.findById(codigo);
+		return interfaceLapso.findOne(codigo);
 	}
 
 	public List<Lapso> buscarLapsos() {
@@ -47,7 +47,7 @@ public class SLapso {
 	
 	public Lapso BuscarLapsoActual(){
 		Lapso lapso;
-		lapso = interfaceLapso.findById(interfaceLapso.lapsoActual());
+		lapso = interfaceLapso.findOne(interfaceLapso.lapsoActual());
 		return lapso;
 	}
 }

@@ -15,10 +15,7 @@ public interface ITematicaDAO extends JpaRepository<Tematica, Long> {
 
 	 public Tematica findByNombre(String nombre);
 	//busco todos los que su estado es true	
-	 public List<Tematica> findByEstatusTrueOrderByAreaInvestigacionAsc();
-	
-	public Tematica findById(long codigo);
-	
+	 public List<Tematica> findByEstatusTrueOrderByAreaInvestigacionAsc();	
 	/*
 	 * Busca las tematicas por Areas*/
 	public List<Tematica> findByAreaInvestigacion(AreaInvestigacion area2);

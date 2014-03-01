@@ -26,7 +26,7 @@ public List<ItemEvaluacion> buscarItemsActivos(){
 	return items;
 }
 public ItemEvaluacion buscarItem(long codigo){
-	return interfaceItem.findById(codigo);
+	return interfaceItem.findOne(codigo);
 }
 
 public List<ItemEvaluacion> buscarItemsDisponibles(Programa programa,

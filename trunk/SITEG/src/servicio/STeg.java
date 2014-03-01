@@ -167,7 +167,7 @@ public class STeg {
 	/* Buscar ultimo teg registrado */
 	public Teg buscarUltimoTeg() {
 		Teg ultimoTeg;
-		ultimoTeg = interfaceTeg.findById(interfaceTeg.ultimoTegRegistrado());
+		ultimoTeg = interfaceTeg.findOne(interfaceTeg.ultimoTegRegistrado());
 		return ultimoTeg;
 	}
 

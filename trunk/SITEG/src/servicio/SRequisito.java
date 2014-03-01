@@ -18,7 +18,7 @@ public void guardar(Requisito requisito){
 	interfaceRequisito.save(requisito);
 }
 public Requisito buscarRequisito(long id){
-	return interfaceRequisito.findById(id);
+	return interfaceRequisito.findOne(id);
 }
 public List<Requisito> buscarRequisito(){
 	return interfaceRequisito.findAll();

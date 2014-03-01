@@ -13,8 +13,6 @@ public interface ITipoJuradoDAO extends JpaRepository<TipoJurado, Long> {
 
 	public List<TipoJurado> findByEstatusTrueOrderByNombreAsc();
 
-	public TipoJurado findById(long id);
-
 	public TipoJurado findByNombre(String tipojurado);
 	
 }
