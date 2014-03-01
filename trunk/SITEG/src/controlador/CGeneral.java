@@ -1,8 +1,12 @@
 package controlador;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.mail.Address;
 import javax.mail.Message;
@@ -15,13 +19,18 @@ import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.compuesta.CondicionPrograma;
+import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zul.Image;
 
 import servicio.SActividad;
 import servicio.SArchivo;
@@ -71,6 +80,7 @@ import configuracion.GeneradorBeans;
 public abstract class CGeneral extends SelectorComposer<Component> {
 
 	private static final long serialVersionUID = 445877799825285911L;
+	protected PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	protected SActividad servicioActividad = GeneradorBeans
 			.getServicioActividad();
 	protected SArbol servicioArbol = GeneradorBeans.getServicioArbol();
@@ -236,5 +246,48 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 				.getLocation();
 		String ruta = rutaURL.getPath();
 		return "/" + ruta.substring(1, ruta.indexOf("SITEG"));
+	}
+
+	/*
+	 * Metodo generico que permite la creacion de un usuario para un profesor,
+	 * que recibe la imagen que tendra dicho usuario, asi como el rol y el
+	 * objeto profesor al que se le asignara el usuario
+	 */
+	public void crearUsuarioProfesor(Image imagenTutor, Profesor profesor,
+			String rol) {
+		Usuario usuario = new Usuario();
+		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+		List<Grupo> grupos = new ArrayList<Grupo>();
+		Grupo grupo = new Grupo();
+		grupo = servicioGrupo.BuscarPorNombre(rol);
+		byte[] imagenUsuario = null;
+		URL url = getClass().getResource("/configuracion/usuario.png");
+		try {
+			imagenTutor.setContent(new AImage(url));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		imagenUsuario = imagenTutor.getContent().getByteData();
+		gruposUsuario.add(grupo);
+		usuario = servicioUsuario.buscarUsuarioPorNombre(profesor.getCedula());
+		if (usuario == null) {
+			usuario = new Usuario(0, profesor.getCedula(),
+					passwordEncoder.encode(profesor.getCedula()), true,
+					gruposUsuario, imagenUsuario);
+			servicioUsuario.guardar(usuario);
+			usuario = servicioUsuario.buscarUsuarioPorNombre(profesor
+					.getCedula());
+			profesor.setUsuario(usuario);
+			servicioProfesor.guardarProfesor(profesor);
+		} else {
+			usuario = profesor.getUsuario();
+			grupos = servicioGrupo.buscarGruposDelUsuario(usuario);
+			for (int j = 0; j < grupos.size(); j++) {
+				gruposUsuario.add(grupos.get(j));
+			}
+			usuario.setGrupos(gruposUsuario);
+			servicioUsuario.guardar(usuario);
+		}
 	}
 }
