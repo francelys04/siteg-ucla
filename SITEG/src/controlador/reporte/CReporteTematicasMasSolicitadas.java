@@ -144,7 +144,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			} else {
-
+				Map parametro = new HashMap();
 				String nombreArea = cmbArea.getValue();
 				String nombrePrograma = cmbPrograma.getValue();
 				String etapaTeg = cmbEtapaTeg.getValue();
@@ -157,7 +157,10 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 				System.out.println("estatus1:" + estatusProyectoTeg1);
 				System.out.println("estatus2:" + estatusProyectoTeg2);
 
-				if (!nombrePrograma.equals("Todos") && nombreArea != "Todos") {
+				if (!nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						|| nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")) {
 					String idArea = cmbArea.getSelectedItem().getId();
 					AreaInvestigacion area1 = servicioArea.buscarArea(Long
 							.parseLong(idArea));
@@ -165,12 +168,17 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 							.buscarUltimasTematicasProgramaAreaEstatus(
 									estatusProyectoTeg1, estatusProyectoTeg2,
 									area1, fechaInicio, fechaFin);
+
+					parametro.put("modeloReporte", "2");
 				}
 
-				if (nombrePrograma.equals("Todos")) {
+				if (nombrePrograma.equals("Todos")
+						&& nombreArea.equals("Todos")) {
 					tematicasSeleccionadas = servicioTeg.buscarUltimasEstatus(
 							estatusProyectoTeg1, estatusProyectoTeg2,
 							fechaInicio, fechaFin);
+
+					parametro.put("modeloReporte", "1");
 				}
 
 				if (!nombrePrograma.equals("Todos")
@@ -183,6 +191,8 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 							.buscarUltimasTematicasProgramaEstatus(
 									estatusProyectoTeg1, estatusProyectoTeg2,
 									programa1, fechaInicio, fechaFin);
+
+					parametro.put("modeloReporte", "2");
 				}
 				if (tematicasSeleccionadas.size() != 0) {
 					System.out
@@ -249,10 +259,6 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 					}
 					System.out.println("tematicas." + tematicasFinales.size());
 
-					List<Teg> tegsSegunUltimasTematicas = servicioTeg
-							.buscarUltimasOrdenadasEstatus(estatusProyectoTeg1,
-									estatusProyectoTeg2, tematicasFinales,
-									fechaInicio, fechaFin);
 					List<Teg> tegsTematicasComparativo = new ArrayList();
 					long contadorFactibleAprobado = 0, contadorNoFactibleReprobado = 0;
 					for (int i = 0; i < tematicasFinales.size(); i++) {
@@ -270,6 +276,12 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 						contadorFactibleAprobado = 0;
 						contadorNoFactibleReprobado = 0;
 					}
+					List<Programa> programas = new ArrayList<Programa>();
+					/*
+					 * Operacion la cual consiste hallar el programa de cada
+					 * estudiante asociados a un teg mediante la tematica
+					 * encontrada
+					 */
 					for (int i = 0; i < tegsTematicasComparativo.size(); i++) {
 						System.out.println("tematicasAprobados:"
 								+ tegsTematicasComparativo.get(i).getId());
@@ -278,10 +290,79 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 										+ tegsTematicasComparativo.get(i)
 												.getDuracion());
 
+						List<Teg> tegsSegunTematicas = servicioTeg
+								.buscarUltimasOrdenadasEstatus(
+										estatusProyectoTeg1,
+										estatusProyectoTeg2, tematicasFinales,
+										fechaInicio, fechaFin);
+
+						System.out.println("tegsSegunTematica:"
+								+ tegsSegunTematicas.size());
+
+						System.out.println("tematica numerda:"
+								+ tegsTematicasComparativo.get(i).getTematica()
+										.getNombre());
+
+						for (int j = 0; j < tegsSegunTematicas.size(); j++) {
+
+							if (tegsSegunTematicas
+									.get(j)
+									.getTematica()
+									.getNombre()
+									.equals(tegsTematicasComparativo.get(i)
+											.getTematica().getNombre())) {
+								System.out.println("entro1");
+
+								List<Estudiante> estudiantes = servicioEstudiante
+										.buscarEstudiantePorTeg(tegsSegunTematicas
+												.get(j));
+
+								if (estudiantes.size() != 0
+										&& programas.size() == 0) {
+									programas.add(estudiantes.get(0)
+											.getPrograma());
+									System.out.println("entro2");
+								}
+								for (int z = 0; z < programas.size(); z++) {
+									System.out.println("entro3");
+									if (!programas
+											.get(z)
+											.getNombre()
+											.equals(estudiantes.get(0)
+													.getPrograma().getNombre())) {
+										programas.add(estudiantes.get(0)
+												.getPrograma());
+										System.out.println("entro4");
+									}
+
+								}
+							}
+						}
+						String programaTemp = "";
+						for (int j = 0; j < programas.size(); j++) {
+
+							if (j + 1 != programas.size()) {
+								System.out.println("entro");
+								programaTemp += programas.get(j).getNombre()
+										+ ",";
+
+							} else {
+								tegsTematicasComparativo.get(i).setTitulo(
+										programaTemp += programas.get(j)
+												.getNombre());
+
+							}
+						}
+						tegsTematicasComparativo.get(i).setTitulo(programaTemp);
+						programas.clear();
+
 					}
+					System.out.println("tamaño1:" + tematicasFinales.size()
+							+ "-" + "tamaño2:"
+							+ tegsTematicasComparativo.size());
 
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					Map parametro = new HashMap();
+
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
 							+ "SITEG/vistas/reportes/estadisticos/compilados/RTematicasMasSolicitadas.jasper";
@@ -335,30 +416,19 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 	public void seleccionarPrograma() throws JRException {
 		String idPrograma = cmbPrograma.getSelectedItem().getId();
 		String nombrePrograma = cmbPrograma.getValue();
+		cmbArea.setDisabled(false);
 		if (nombrePrograma.equals("Todos")) {
-			
 			areas = servicioArea.buscarActivos();
-			AreaInvestigacion areaInvestigacion = new AreaInvestigacion(
-					1000000, "Todos", "", true);
-			areas.add(areaInvestigacion);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
-			cmbArea.setDisabled(false);
-			
-			
 		} else {
-			
-			cmbArea.setDisabled(false);
 			cmbArea.setValue("");
 			programa = servicioPrograma.buscar(Long.parseLong(idPrograma));
-			areas =  servicioProgramaArea
-					.buscarAreasDePrograma(programa);
-			AreaInvestigacion area = new AreaInvestigacion(10000000,
-					"Todos", "", true);
-			areas.add(area);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
-			
-			
+			areas = servicioProgramaArea.buscarAreasDePrograma(programa);
 		}
+		AreaInvestigacion areaInvestigacion = new AreaInvestigacion(
+				1000000, "Todos", "", true);
+		areas.add(areaInvestigacion);
+		cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+		
 	}
 
 	/*
@@ -379,19 +449,16 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 			estatusProyectoTeg2 = "TEG Reprobado";
 		}
 	}
-	
-	
+
 	/*
 	 * Metodo que permite dado a la seleccion del area de investigacion, para
 	 * activar posteriormente el combo de etapa del teg
 	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() throws JRException {
-		
+
 		cmbEtapaTeg.setDisabled(false);
 	}
-	
-	
 
 	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarTematicasSolicitadas")
