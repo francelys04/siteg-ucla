@@ -12,7 +12,5 @@ public interface INoticiaDAO extends JpaRepository<Noticia, Long> {
 
 	@Query("select a from Noticia a where a.estatus=true")
 	public List<Noticia> buscarNoticiasActivas();
-
-	public Noticia findById(long id);
 	
 }

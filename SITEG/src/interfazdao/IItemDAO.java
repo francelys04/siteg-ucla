@@ -9,11 +9,9 @@ import modelo.Programa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface IItemDAO extends JpaRepository<ItemEvaluacion, String> {
+public interface IItemDAO extends JpaRepository<ItemEvaluacion, Long> {
 
 	public List<ItemEvaluacion> findByEstatusTrueOrderByTipoAsc();
-
-	public ItemEvaluacion findById(long codigo);
 	
 	@Query("select i from ItemEvaluacion i where i.id not in (select pi.item from ProgramaItem pi where pi.programa = ?1 and pi.lapso = ?2)")
 	public List<ItemEvaluacion> buscarDisponibles(Programa programa, Lapso lapso);

@@ -17,7 +17,7 @@ public void guardar(TipoJurado tipoJurado){
 	interfaceTipoJurado.save(tipoJurado);
 }
 public TipoJurado buscarTipoJurado(long id){
-	return interfaceTipoJurado.findById(id);
+	return interfaceTipoJurado.findOne(id);
 }
 public List<TipoJurado> buscarTipoJurado(){
 	return interfaceTipoJurado.findAll();

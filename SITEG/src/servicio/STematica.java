@@ -21,7 +21,7 @@ public void guardar(Tematica tematica){
 }
 //busca por nombre
 public Tematica buscarTematica(long codigo){
-	return interfaceTematica.findById(codigo);
+	return interfaceTematica.findOne(codigo);
 }
 //busca todas las tematicas
 public List<Tematica> buscarTematicas(){

@@ -17,7 +17,7 @@ public void guardar(Noticia noticia){
 	interfaceNoticia.save(noticia);
 }
 public Noticia buscarNoticia(long id){
-	return interfaceNoticia.findById(id);
+	return interfaceNoticia.findOne(id);
 }
 
 public List<Noticia> buscarActivos(){

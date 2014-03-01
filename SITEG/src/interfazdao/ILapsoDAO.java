@@ -8,11 +8,9 @@ import modelo.Lapso;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface ILapsoDAO extends JpaRepository<Lapso, String> {
+public interface ILapsoDAO extends JpaRepository<Lapso, Long> {
 
 	public List<Lapso> findByEstatusTrueOrderByNombreAsc();
-
-	public Lapso findById(long codigo);
 
 	public Lapso findByNombre(String value);
 	
