@@ -164,7 +164,7 @@
 							<label value="*"
 								style="font-weight:bold;color:red;margin-left:60px">
 							</label>
-							<label value="Área:"
+							<label value="Area:"
 								style="font-weight:bold" />
 						</hlayout>
 						<combobox style="margin-left:30px" id="cmbArea"

@@ -141,13 +141,13 @@
 	<columnHeader>
 		<band height="29" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="2" width="258" height="27" forecolor="#000000" backcolor="#0099FF" uuid="8bd4b856-7049-47db-8603-ab48b23347d2"/>
+				<reportElement x="0" y="2" width="258" height="27" forecolor="#000000" backcolor="#99CCFF" uuid="8bd4b856-7049-47db-8603-ab48b23347d2"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="258" y="2" width="99" height="27" forecolor="#000000" backcolor="#0099FF" uuid="980e494e-8ab2-49a7-a264-26b78f15dfef"/>
+				<reportElement x="258" y="2" width="99" height="27" forecolor="#000000" backcolor="#99CCFF" uuid="980e494e-8ab2-49a7-a264-26b78f15dfef"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="357" y="2" width="103" height="27" forecolor="#000000" backcolor="#0099FF" uuid="ceb48c03-206b-4f93-bfb5-7788660177b3"/>
+				<reportElement x="357" y="2" width="103" height="27" forecolor="#000000" backcolor="#99CCFF" uuid="ceb48c03-206b-4f93-bfb5-7788660177b3"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="112" y="6" width="39" height="20" uuid="e3b3edd0-5a50-4c76-ab84-fcff9a150a4f"/>
@@ -171,7 +171,7 @@
 				<text><![CDATA[4-6 dias]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="460" y="2" width="112" height="27" forecolor="#000000" backcolor="#0099FF" uuid="b01a9f1d-6df1-48c6-8b87-d8ee8f7bdf8a"/>
+				<reportElement x="460" y="2" width="112" height="27" forecolor="#000000" backcolor="#99CCFF" uuid="b01a9f1d-6df1-48c6-8b87-d8ee8f7bdf8a"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="468" y="6" width="80" height="20" uuid="56fe563b-0f7d-4663-9c96-5fe5632eb40d"/>
