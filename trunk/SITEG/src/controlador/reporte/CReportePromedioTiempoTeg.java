@@ -211,12 +211,6 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			System.out.println("tegs:"+tegs.size());
 			if (tegs.size() != 0) {
 			
-				for (int i = 0; i < tegs.size(); i++) {
-				
-						System.out.println("tegsssssss:"+tegs.get(i).getId());
-				}
-
-				
 				for (int i = 0; i < nombreEstatus.size(); i++) {
 
 					List<TegEstatus> tegEstatus1 = servicioTegEstatus
@@ -225,8 +219,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 							.buscarEstatusSegunTeg(nombreEstatus.get(i + 1),
 									tegs);
 
-					System.out.println(tegEstatus1.get(0).getTeg().getId());
-					
+				
 					if (nombreEstatus.size() % 2 != 0
 							&& tamanioListaEstatus == i) {
 						List<TegEstatus> tegEstatus3 = servicioTegEstatus

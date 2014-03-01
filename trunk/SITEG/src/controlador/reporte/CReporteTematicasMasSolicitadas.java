@@ -283,25 +283,14 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 					 * encontrada
 					 */
 					for (int i = 0; i < tegsTematicasComparativo.size(); i++) {
-						System.out.println("tematicasAprobados:"
-								+ tegsTematicasComparativo.get(i).getId());
-						System.out
-								.println("tematicasReprobados:"
-										+ tegsTematicasComparativo.get(i)
-												.getDuracion());
-
+					
 						List<Teg> tegsSegunTematicas = servicioTeg
 								.buscarUltimasOrdenadasEstatus(
 										estatusProyectoTeg1,
 										estatusProyectoTeg2, tematicasFinales,
 										fechaInicio, fechaFin);
 
-						System.out.println("tegsSegunTematica:"
-								+ tegsSegunTematicas.size());
-
-						System.out.println("tematica numerda:"
-								+ tegsTematicasComparativo.get(i).getTematica()
-										.getNombre());
+				
 
 						for (int j = 0; j < tegsSegunTematicas.size(); j++) {
 
@@ -311,7 +300,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 									.getNombre()
 									.equals(tegsTematicasComparativo.get(i)
 											.getTematica().getNombre())) {
-								System.out.println("entro1");
+							
 
 								List<Estudiante> estudiantes = servicioEstudiante
 										.buscarEstudiantePorTeg(tegsSegunTematicas
@@ -321,10 +310,10 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 										&& programas.size() == 0) {
 									programas.add(estudiantes.get(0)
 											.getPrograma());
-									System.out.println("entro2");
+								
 								}
 								for (int z = 0; z < programas.size(); z++) {
-									System.out.println("entro3");
+								
 									if (!programas
 											.get(z)
 											.getNombre()
@@ -332,7 +321,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 													.getPrograma().getNombre())) {
 										programas.add(estudiantes.get(0)
 												.getPrograma());
-										System.out.println("entro4");
+										
 									}
 
 								}
@@ -342,7 +331,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 						for (int j = 0; j < programas.size(); j++) {
 
 							if (j + 1 != programas.size()) {
-								System.out.println("entro");
+								
 								programaTemp += programas.get(j).getNombre()
 										+ ",";
 
@@ -357,9 +346,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 						programas.clear();
 
 					}
-					System.out.println("tamaño1:" + tematicasFinales.size()
-							+ "-" + "tamaño2:"
-							+ tegsTematicasComparativo.size());
+				
 
 					FileSystemView filesys = FileSystemView.getFileSystemView();
 
