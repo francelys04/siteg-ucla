@@ -1,5 +1,5 @@
 <window id="wdwReporteTeg" title="Trabajos Especiales de Grado"
-	border="normal" width="100%" height="500px" closable="true"
+	border="normal" width="100%" height="460px" closable="true"
 	apply="controlador.reporte.CReporteTeg">
 
 	<style dynamic="true">
@@ -100,7 +100,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="385px"
+	<groupbox width="95%" height="345px"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -161,28 +161,10 @@
 							style="font-weight:bold" />
 					</hlayout>
 
-					<combobox id="cmbPrograma" readonly="true"
-						tooltip="pupSeleccionarPrograma" width="250px">
-						<template name="model">
-							<comboitem label="${each.nombre}"
-								id="${each.id}" />
-						</template>
-					</combobox>
-				</row>
-
-				<row>
-
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red">
-						</label>
-						<label value="Área:" style="font-weight:bold" />
-					</hlayout>
-
 					<hbox>
 
-						<combobox id="cmbArea" readonly="true"
-							tooltip="pupSeleccionarArea" width="250px">
+						<combobox id="cmbPrograma" readonly="true"
+							tooltip="pupSeleccionarPrograma" width="250px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -193,44 +175,67 @@
 							<label value="*"
 								style="font-weight:bold;color:red;margin-left:50px">
 							</label>
-							<label value="Temática:"
+							<label value="Área:"
 								style="font-weight:bold" />
 						</hlayout>
 
+						<combobox id="cmbArea" readonly="true"
+							style="margin-left:30px" tooltip="pupSeleccionarArea"
+							width="250px">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
+					</hbox>
 
+				</row>
 
+				<row>
+
+					<hlayout>
+						<label value="*"
+							style="font-weight:bold;color:red">
+						</label>
+						<label value="Temática:"
+							style="font-weight:bold" />
+					</hlayout>
+
+					<hbox>
 						<combobox id="cmbTematica"
-							tooltip="pupSeleccionarTematica" style="margin-left:30px"
-							width="250px" readonly="true">
+							tooltip="pupSeleccionarTematica" width="250px" readonly="true">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
 							</template>
 						</combobox>
 
+						<hlayout>
+							<label value="*"
+								style="font-weight:bold;color:red;margin-left:50px" />
+							<label value="Estatus:"
+								style="font-weight:bold" />
+						</hlayout>
+
+						<combobox id="cmbEstatus"
+							style="margin-left:20px" tooltip="pupSeleccionarEstatus"
+							width="250px" readonly="true">
+							<template name="model">
+								<comboitem label="${each}" />
+							</template>
+						</combobox>
+
 					</hbox>
 				</row>
 
-				<row>
-					<hlayout>
-						<label value="*"
-							style="font-weight:bold;color:red" />
-						<label value="Estatus:"
-							style="font-weight:bold" />
-					</hlayout>
 
-					<combobox id="cmbEstatus"
-						tooltip="pupSeleccionarEstatus"
-						width="250px" readonly="true">
-						<template name="model">
-							<comboitem label="${each}" />
-						</template>
-					</combobox>
-
-				</row>
 			</rows>
 		</grid>
 
+		<separator />
+		<separator />
+		<separator />
+		<separator />
 		<separator />
 		<separator />
 		<separator />

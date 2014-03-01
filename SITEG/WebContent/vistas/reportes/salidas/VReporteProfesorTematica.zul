@@ -125,7 +125,7 @@
 
 							<button id="btnCatalogoProfesorTematica"
 								tooltip="pupCatalogoProfesoresTematica" sclass="btn"
-								style="margin-left:10%"
+								style="margin-left:20px"
 								image="/public/imagenes/iconos/catalogo.png">
 							</button>
 						</hbox>

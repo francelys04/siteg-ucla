@@ -1,4 +1,4 @@
-<window id="wdwReporteItemTeg" title="Items de evaluación de un TEG" border="normal"
+<window id="wdwReporteItemTeg" title="Items de Evaluación de los Trabajos Especiales de Grado" border="normal"
 	width="100%" height="auto" closable="true"
 	apply="controlador.reporte.CReporteItemTeg">
 
