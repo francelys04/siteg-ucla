@@ -36,8 +36,6 @@ public class CRegistrarTeg extends CGeneral {
 	@Wire
 	private Textbox txtProgramaRegistraTeg;
 	@Wire
-	private Datebox dtbFechaTeg;
-	@Wire
 	private Textbox txtAreaRegistrarTeg;
 	@Wire
 	private Textbox txtTematicaRegistrarTeg;
@@ -50,11 +48,9 @@ public class CRegistrarTeg extends CGeneral {
 	@Wire
 	private Textbox txtApellidoTutorRegistrarTrabajo;
 	@Wire
-	private Datebox dtbFechaInicioRegistrarTeg;
+	private Datebox dtbFechaRegistroTeg;
 	@Wire
 	private Datebox dtbFechaEntregaRegistrarTeg;
-	@Wire
-	private Spinner spnDuracionRegistrarTeg;
 	@Wire
 	private Listbox lsbEstudiantesRegistrarTeg;
 	@Wire
@@ -63,6 +59,8 @@ public class CRegistrarTeg extends CGeneral {
 	private Button btnGuardarRegistrarTeg;
 	@Wire
 	private Button btnCancelarRegistrarTeg;
+	@Wire
+	private Spinner spnDuracionRegistrarTeg;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
@@ -103,14 +101,6 @@ public class CRegistrarTeg extends CGeneral {
 				lsbEstudiantesRegistrarTeg
 						.setModel(new ListModelList<Estudiante>(estudiantes));
 
-				Lapso lapsoVigente = servicioLapso.buscarLapsoVigente();
-				Actividad actividadFechaTeg = servicioActividad
-						.buscarActividadPorNombre("Fecha de entrega del trabajo especial de grado");
-				Cronograma cronogramaActividad = servicioCronograma
-						.buscarCronogramaPorLapsoProgramaYActividad(programa,
-								lapsoVigente, actividadFechaTeg);
-				dtbFechaEntregaRegistrarTeg.setValue(cronogramaActividad
-						.getFechaFin());
 			}
 
 		} catch (Exception e) {
@@ -131,20 +121,20 @@ public class CRegistrarTeg extends CGeneral {
 
 		if ((txtTituloRegistrarTeg.getText().compareTo("") == 0)
 				|| (txtDescripcionRegistrarTeg.getText().compareTo("") == 0)
-				|| (dtbFechaInicioRegistrarTeg.getText().compareTo("") == 0)
+				|| (dtbFechaEntregaRegistrarTeg == null)
 				|| (spnDuracionRegistrarTeg.getText().compareTo("") == 0)) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
 
-			Date fechaInicio = dtbFechaInicioRegistrarTeg.getValue();
+			Date fechaInicio = dtbFechaRegistroTeg.getValue();
 			Date fechaFin = dtbFechaEntregaRegistrarTeg.getValue();
 
 			if (fechaInicio.after(fechaFin)) {
 
-				Messagebox.show(
-						"La fecha de inicio no puede ser mayor a la fecha de entrega",
-						"Error", Messagebox.OK, Messagebox.ERROR);
+				Messagebox
+						.show("La fecha de entrega debe ser posterior a la fecha de inicio",
+								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			} else {
 
@@ -167,14 +157,15 @@ public class CRegistrarTeg extends CGeneral {
 													.setDescripcion(txtDescripcionRegistrarTeg
 															.getValue());
 											tegRegistrado
-													.setFechaInicio(dtbFechaInicioRegistrarTeg
+													.setFechaInicio(dtbFechaRegistroTeg
 															.getValue());
 											tegRegistrado
 													.setFechaEntrega(dtbFechaEntregaRegistrarTeg
 															.getValue());
-											tegRegistrado
-													.setDuracion(spnDuracionRegistrarTeg
-															.getValue());
+											
+											tegRegistrado.setDuracion(spnDuracionRegistrarTeg.getValue());
+											
+
 											tegRegistrado
 													.setEstatus("TEG Registrado");
 
@@ -204,6 +195,7 @@ public class CRegistrarTeg extends CGeneral {
 								});
 
 			}
+
 		}
 
 	}
@@ -214,9 +206,10 @@ public class CRegistrarTeg extends CGeneral {
 	@Listen("onClick = #btnCancelarRegistrarTeg")
 	public void cancelarRegistroTeg() {
 		txtDescripcionRegistrarTeg.setValue("");
-		txtTituloRegistrarTeg.setValue("");
-		dtbFechaInicioRegistrarTeg.setValue(new Date());
+		dtbFechaEntregaRegistrarTeg.setValue(new Date());
 		spnDuracionRegistrarTeg.setValue(null);
+		
+
 	}
 
 	/* Metodo que permite cerrar la vista */
