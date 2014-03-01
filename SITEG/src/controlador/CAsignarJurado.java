@@ -300,48 +300,16 @@ public class CAsignarJurado extends CGeneral {
 	 * usuario y la contraseña a cada integrante via email
 	 */
 	void crearUsuariosJurado() {
-		Usuario user = new Usuario();
-		List<Grupo> grupos = new ArrayList<Grupo>();
-		Grupo grupo = new Grupo();
-		grupo = servicioGrupo.BuscarPorNombre("ROLE_JURADO");
-		byte[] imagenUsuario = null;
-		URL url = getClass().getResource("/configuracion/usuario.png");
-		try {
-			imagenx.setContent(new AImage(url));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		imagenUsuario = imagenx.getContent().getByteData();
+
 		for (int i = 0; i < ltbJuradoSeleccionado.getItemCount(); i++) {
-			Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-			gruposUsuario.add(grupo);
 			Listitem listItem = ltbJuradoSeleccionado.getItemAtIndex(i);
 			long cedula = ((Intbox) ((listItem.getChildren().get(0)))
 					.getFirstChild()).getValue();
 			Profesor profesorJurado = servicioProfesor
 					.buscarProfesorPorCedula(String.valueOf(cedula));
-			user = servicioUsuario.buscarUsuarioPorNombre(String
-					.valueOf(cedula));
-			if (user == null) {
-				Usuario usuario = new Usuario(0, String.valueOf(cedula),
-						passwordEncoder.encode(String.valueOf(cedula)), true,
-						gruposUsuario, imagenUsuario);
-				servicioUsuario.guardar(usuario);
-				user = servicioUsuario.buscarUsuarioPorNombre(String
-						.valueOf(cedula));
-				profesorJurado.setUsuario(user);
-				servicioProfesor.guardarProfesor(profesorJurado);
-			} else {
-				grupos = servicioGrupo.buscarGruposDelUsuario(user);
-				for (int j = 0; j < grupos.size(); j++) {
-					gruposUsuario.add(grupos.get(j));
-				}
-				user.setGrupos(gruposUsuario);
-				servicioUsuario.guardar(user);
-			}
+			crearUsuarioProfesor(imagenx, profesorJurado, "ROLE_JURADO");
 			String mensaje = "Usted foma parte del Jurado de un nuevo teg su usuario es: "
-					+ user.getNombre()
+					+ profesorJurado.getCedula()
 					+ " y su contrasena: "
 					+ profesorJurado.getCedula();
 			enviarEmailNotificacion(profesorJurado.getCorreoElectronico(),

@@ -58,4 +58,11 @@ public class SPrograma {
 		return programa;
 	}
 
+	public Programa buscarUltimo() {
+		// TODO Auto-generated method stub
+		Programa programa;
+		programa = interfacePrograma.findOne(interfacePrograma.buscarUltimoPrograma());
+		return programa;
+	}
+
 }

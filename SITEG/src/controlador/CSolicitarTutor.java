@@ -308,7 +308,7 @@ public class CSolicitarTutor extends CGeneral {
 
 										servicioSolicitudTutoria
 												.guardarSolicitud(solicitud2);
-										crearUsuarioProfesor(profesor);
+										crearUsuarioProfesor(imagenTutor, profesor, "ROLE_TUTOR");
 										enviarEmailNotificacion();
 										cancelarSolicitud();
 										Messagebox
@@ -323,45 +323,6 @@ public class CSolicitarTutor extends CGeneral {
 				}
 			}
 		}
-	}
-
-	/*
-	 * Metodo que permite crear un usuario (en caso de que no lo posea) al
-	 * profesor que recibe la solicitud de tutoria. Este usuario pertenece al
-	 * grupo tutor
-	 */
-	private void crearUsuarioProfesor(Profesor profesor) {
-		// TODO Auto-generated method stub
-		Usuario usuario = new Usuario();
-		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-		List<Grupo> grupos = new ArrayList<Grupo>();
-		Grupo grupo = new Grupo();
-		grupo = servicioGrupo.BuscarPorNombre("ROLE_TUTOR");
-		byte[] imagenUsuario = null;
-		URL url = getClass().getResource("/configuracion/usuario.png");
-		try {
-			imagenTutor.setContent(new AImage(url));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		imagenUsuario = imagenTutor.getContent().getByteData();
-		gruposUsuario.add(grupo);
-		if (profesor.getUsuario() == null) {
-			usuario = new Usuario(0, profesor.getCedula(),
-					passwordEncoder.encode(profesor.getCedula()), true,
-					gruposUsuario, imagenUsuario);
-			Usuario usuario1 = servicioUsuario.buscarUsuarioPorNombre(profesor.getCedula());
-			profesor.setUsuario(usuario1);
-		} else {
-			usuario = profesor.getUsuario();
-			grupos = servicioGrupo.buscarGruposDelUsuario(usuario);
-			for (int j = 0; j < grupos.size(); j++) {
-				gruposUsuario.add(grupos.get(j));
-			}
-			usuario.setGrupos(gruposUsuario);
-		}
-		servicioUsuario.guardar(usuario);
 	}
 
 	/*

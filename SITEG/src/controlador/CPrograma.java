@@ -190,16 +190,16 @@ public class CPrograma extends CGeneral {
 
 		} else {
 
-			Programa programaRegistrado = servicioPrograma
-					.buscarPorNombrePrograma(txtNombrePrograma.getValue());
-
-			if ((programaRegistrado != null) && (programaModificable == false)) {
-
-				programaExistente = true;
-
-			}
-
-			if (programaExistente == false) {
+//			Programa programaRegistrado = servicioPrograma
+//					.buscarPorNombrePrograma(txtNombrePrograma.getValue());
+//
+//			if ((programaRegistrado != null) && (programaModificable == false)) {
+//
+//				programaExistente = true;
+//
+//			}
+//
+//			if (programaExistente == false) {
 
 				Messagebox.show("¿Desea guardar los datos del programa?",
 						"Dialogo de confirmacion", Messagebox.OK
@@ -209,66 +209,37 @@ public class CPrograma extends CGeneral {
 									throws InterruptedException {
 								if (evt.getName().equals("onOK")) {
 
-									Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-									Grupo grupo = servicioGrupo
-											.BuscarPorNombre("ROLE_DIRECTOR");
-									gruposUsuario.add(grupo);
-									byte[] imagenUsuario = null;
-									URL url = getClass().getResource(
-											"/configuracion/usuario.png");
-
-									try {
-										imagenx.setContent(new AImage(url));
-									} catch (IOException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									imagenUsuario = imagenx.getContent()
-											.getByteData();
-									Profesor profesor = servicioProfesor
-											.buscarProfesorPorCedula(txtDirectorPrograma
-													.getValue());
-
-									Usuario user = servicioUsuario
-											.buscarUsuarioPorNombre(cedulaProfesor);
-									if (user == null) {
-										Usuario usuario = new Usuario(
-												0,
-												cedulaProfesor,
-												passwordEncoder
-														.encode(cedulaProfesor),
-												true, gruposUsuario,
-												imagenUsuario);
-										servicioUsuario.guardar(usuario);
-										user = servicioUsuario
-												.buscarUsuarioPorNombre(cedulaProfesor);
-										profesor.setUsuario(user);
-										servicioProfesor
-												.guardarProfesor(profesor);
-										String mensaje = "Su usuario es: "
-												+ usuario.getNombre()
-												+ "y su contrasena:"
-												+ usuario.getPassword();
-										enviarEmailNotificacion(
-												profesor.getCorreoElectronico(),
-												mensaje);
-									} else {
-
-										List<Grupo> grupino = new ArrayList<Grupo>();
-										grupino = servicioGrupo
-												.buscarGruposDelUsuario(user);
-										Grupo grupo2 = servicioGrupo
+									Profesor directorPrograma = servicioProfesor
+											.buscarProfesorPorCedula(cedulaProfesor);
+									crearUsuarioProfesor(imagenx, directorPrograma,
+											"ROLE_DIRECTOR");
+									String mensaje = "Su usuario es: "
+											+ directorPrograma.getCedula()
+											+ "y su contrasena:"
+											+ directorPrograma.getCedula();
+									enviarEmailNotificacion(
+											directorPrograma.getCorreoElectronico(),
+											mensaje);
+									Programa programaBuscado = servicioPrograma
+											.buscar(id);
+									if (programaBuscado != null) {
+										Grupo grupo = servicioGrupo
 												.BuscarPorNombre("ROLE_DIRECTOR");
-										Set<Grupo> gruposU = new HashSet<Grupo>();
-										for (int f = 0; f < grupino.size(); ++f) {
-											Grupo g = grupino.get(f);
-											gruposU.add(g);
+										Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+										Usuario usuario = programaBuscado
+												.getDirectorPrograma()
+												.getUsuario();
+										List<Grupo> grupos = servicioGrupo
+												.buscarGruposDelUsuario(usuario);
+										for (int i = 0; i < grupos.size(); i++) {
+											if (grupos.get(i).getId() == grupo
+													.getId()) {
+												grupos.remove(i);
+											} else
+												gruposUsuario.add(grupos.get(i));
 										}
-										gruposU.add(grupo2);
-
-										user.setGrupos(gruposU);
-
-										servicioUsuario.guardar(user);
+									usuario.setGrupos(gruposUsuario);
+									servicioUsuario.guardar(usuario);
 									}
 									String nombre = txtNombrePrograma
 											.getValue();
@@ -277,14 +248,16 @@ public class CPrograma extends CGeneral {
 									String correo = txtCorreoPrograma
 											.getValue();
 									Boolean estatus = true;
-									Profesor directorPrograma = servicioProfesor
-											.buscarProfesorPorCedula(cedulaProfesor);
+									
 									Programa programa = new Programa(id,
 											nombre, descripcion, correo,
 											estatus, directorPrograma);
 									servicioPrograma.guardar(programa);
-									Programa p = servicioPrograma
-											.buscarPorNombrePrograma(nombre);
+									if(programaBuscado == null){
+										programaBuscado = servicioPrograma.buscarUltimo();
+									}
+//									Programa p = servicioPrograma
+//											.buscarPorNombrePrograma(nombre);
 									if (servicioLapso.buscarActivos().size() != 0) {
 										List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
 										List<Condicion> condiciones = servicioCondicion
@@ -295,14 +268,18 @@ public class CPrograma extends CGeneral {
 											Condicion condicion = condiciones
 													.get(i);
 											CondicionPrograma condicionPrograma = new CondicionPrograma();
-											condicionPrograma = servicioCondicionPrograma.buscarPorCondicionProgramaYLapso(condicion,p,lapso);
-											if(condicionPrograma == null){
-											condicionPrograma = new CondicionPrograma();
-											condicionPrograma.setPrograma(p);
-											condicionPrograma.setLapso(lapso);
-											condicionPrograma
-													.setCondicion(condicion);
-											condicionPrograma.setValor(0);
+											condicionPrograma = servicioCondicionPrograma
+													.buscarPorCondicionProgramaYLapso(
+															condicion, programaBuscado, lapso);
+											if (condicionPrograma == null) {
+												condicionPrograma = new CondicionPrograma();
+												condicionPrograma
+														.setPrograma(programaBuscado);
+												condicionPrograma
+														.setLapso(lapso);
+												condicionPrograma
+														.setCondicion(condicion);
+												condicionPrograma.setValor(0);
 											}
 											condicionesPrograma
 													.add(condicionPrograma);
@@ -321,12 +298,12 @@ public class CPrograma extends CGeneral {
 							}
 						});
 
-			} else {
-
-				Messagebox.show("El programa ya se encuentra registrado",
-						"Error", Messagebox.OK, Messagebox.ERROR);
-
-			}
+//			} else {
+//
+//				Messagebox.show("El programa ya se encuentra registrado",
+//						"Error", Messagebox.OK, Messagebox.ERROR);
+//
+//			}
 
 		}
 	}

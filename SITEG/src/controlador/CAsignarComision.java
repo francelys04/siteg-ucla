@@ -338,11 +338,6 @@ public class CAsignarComision extends CGeneral {
 
 									Set<Profesor> profesores = null;
 									tegSeleccionado.setProfesores(profesores);
-
-									/*
-									 * Metodo para eliminar integrantes de la
-									 * comision
-									 */
 									Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
 
 									for (int i = 0; i < lsbProfesoresSeleccionados
@@ -397,77 +392,22 @@ public class CAsignarComision extends CGeneral {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-										Grupo grupo = servicioGrupo
-												.BuscarPorNombre("ROLE_COMISION");
-										gruposUsuario.add(grupo);
-										byte[] imagenUsuario = null;
-										URL url = getClass().getResource(
-												"/configuracion/usuario.png");
-										try {
-											imagenx.setContent(new AImage(url));
-										} catch (IOException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-										imagenUsuario = imagenx.getContent()
-												.getByteData();
-
 										Set<Profesor> profesoresSeleccionados = new HashSet<Profesor>();
 										for (int i = 0; i < lsbProfesoresSeleccionados
 												.getItemCount(); i++) {
 											Profesor profesor = lsbProfesoresSeleccionados
 													.getItems().get(i)
 													.getValue();
+											crearUsuarioProfesor(imagenx, profesor, "ROLE_COMISION");
 											profesoresSeleccionados
 													.add(profesor);
-											Usuario user = servicioUsuario
-													.buscarUsuarioPorNombre(profesor
-															.getCedula());
-											if (user == null) {
-												Usuario usuario = new Usuario(
-														0,
-														profesor.getCedula(),
-														passwordEncoder
-																.encode(profesor
-																		.getCedula()),
-														true, gruposUsuario,
-														imagenUsuario);
-												servicioUsuario
-														.guardar(usuario);
-												user = servicioUsuario
-														.buscarUsuarioPorNombre(profesor
-																.getCedula());
-												profesor.setUsuario(user);
-												servicioProfesor
-														.guardarProfesor(profesor);
 												String mensaje = "Su usuario es: "
-														+ usuario.getNombre()
+														+ profesor.getCedula()
 														+ "y su contraseña:"
-														+ usuario.getPassword();
+														+ profesor.getCedula();
 												enviarEmailNotificacion(
 														profesor.getCorreoElectronico(),
 														mensaje);
-											} else {
-
-												List<Grupo> grupino = new ArrayList<Grupo>();
-												grupino = servicioGrupo
-														.buscarGruposDelUsuario(user);
-												Grupo grupo2 = servicioGrupo
-														.BuscarPorNombre("ROLE_COMISION");
-												Set<Grupo> gruposU = new HashSet<Grupo>();
-												for (int f = 0; f < grupino
-														.size(); ++f) {
-													Grupo g = grupino.get(f);
-													gruposU.add(g);
-												}
-												gruposU.add(grupo2);
-
-												user.setGrupos(gruposU);
-
-												servicioUsuario.guardar(user);
-											}
-
 										}
 
 										Teg tegSeleccionado = servicioTeg
@@ -477,8 +417,6 @@ public class CAsignarComision extends CGeneral {
 
 										tegSeleccionado
 												.setEstatus("Comision Asignada");
-
-										/* Guardar datos en la tabla teg_estatus */
 										java.util.Date fechaEstatus = new Date();
 										TegEstatus tegEstatus = new TegEstatus(
 												0, tegSeleccionado,

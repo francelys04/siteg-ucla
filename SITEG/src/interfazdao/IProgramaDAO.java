@@ -20,6 +20,9 @@ public interface IProgramaDAO extends JpaRepository<Programa, Long> {
 	public Programa findByNombreAndEstatusTrue(String programas);
 
 	public Programa findByDirectorPrograma(Profesor profesor);
+
+	@Query("select max(p.id) from Programa p where p.estatus=true")
+	public Long buscarUltimoPrograma();
 		
 }
 
