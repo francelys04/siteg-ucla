@@ -37,8 +37,6 @@ public class CSubirTeg extends CGeneral {
 	@Wire
 	private Media media;
 	@Wire
-	private Combobox cmbPrograma;
-	@Wire
 	private Window wdwSubirTeg;
 	public static Programa programaUsuario;
 
@@ -146,7 +144,6 @@ public class CSubirTeg extends CGeneral {
 
 		txtNombreArchivo.setValue("");
 		txtDescripcionArchivo.setValue("");
-		cmbPrograma.setValue("");
 		archivo.equals(null);
 
 	}
@@ -173,7 +170,7 @@ public class CSubirTeg extends CGeneral {
 			Messagebox.show("Debe completar los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show("ï¿½Desea guardar los datos del archivo?",
+			Messagebox.show("¿Desea guardar los datos del archivo?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
@@ -181,13 +178,8 @@ public class CSubirTeg extends CGeneral {
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
 
-								String idPrograma = cmbPrograma
-										.getSelectedItem().getId();
-								long idPrograma1 = Long.parseLong(idPrograma);
-								Programa programa = servicioPrograma
-										.buscarPorId(idPrograma1);
 								archivo.setId(id);
-								archivo.setPrograma(programa);
+								archivo.setPrograma(programaUsuario);
 								archivo.setDescripcion(txtDescripcionArchivo
 										.getValue());
 								archivo.setEstatus(true);
