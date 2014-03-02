@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTematicasMasSolicitadas" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" uuid="36ffbc72-cbd9-445b-a96c-f98bc807a7c7">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="125"/>
+	<property name="ireport.y" value="142"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<subDataset name="dataset1" uuid="c666fdd0-72bf-4a97-9beb-4ec2760da0c1"/>
 	<parameter name="titulo" class="java.lang.String"/>
@@ -16,12 +16,10 @@
 	<parameter name="estatusProyectoTeg1" class="java.lang.String"/>
 	<parameter name="estatusProyectoTeg2" class="java.lang.String"/>
 	<parameter name="logoSiteg" class="java.lang.String"/>
-	<parameter name="modeloReporte" class="java.lang.String"/>
 	<field name="tematica.nombre" class="java.lang.String"/>
 	<field name="tematica.areaInvestigacion.nombre" class="java.lang.String"/>
 	<field name="id" class="java.lang.Number"/>
 	<field name="duracion" class="java.lang.Number"/>
-	<field name="titulo" class="java.lang.String"/>
 	<variable name="duracion_SUM" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{duracion}]]></variableExpression>
 	</variable>
@@ -74,27 +72,19 @@
 				<text><![CDATA[Hasta:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="6" y="47" width="54" height="20" isRemoveLineWhenBlank="true" uuid="c00655d8-8e85-49af-a7c2-1cc52eb408fc">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="6" y="47" width="54" height="20" uuid="c00655d8-8e85-49af-a7c2-1cc52eb408fc"/>
 				<text><![CDATA[Programa:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="285" y="47" width="26" height="20" isRemoveLineWhenBlank="true" uuid="4481bacb-9ab2-4089-9261-ee6093a9ec65">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="285" y="47" width="26" height="20" uuid="4481bacb-9ab2-4089-9261-ee6093a9ec65"/>
 				<text><![CDATA[Area:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="60" y="47" width="225" height="20" isRemoveLineWhenBlank="true" uuid="a38369d3-58ff-4adb-b228-57349c4b77c5">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="60" y="47" width="225" height="20" uuid="a38369d3-58ff-4adb-b228-57349c4b77c5"/>
 				<textFieldExpression><![CDATA[$P{programaNombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="311" y="47" width="255" height="20" isRemoveLineWhenBlank="true" uuid="3aea677b-39b9-45c7-96bc-0124eb887c26">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="311" y="47" width="255" height="20" uuid="3aea677b-39b9-45c7-96bc-0124eb887c26"/>
 				<textFieldExpression><![CDATA[$P{areaNombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -140,11 +130,9 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="85" splitType="Stretch">
+		<band height="65" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="252" y="43" width="93" height="42" forecolor="#000000" backcolor="#99CCFF" uuid="cb3c2b57-a27a-4158-bd6e-8b2f6b13f650">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
+				<reportElement mode="Opaque" x="60" y="43" width="134" height="22" forecolor="#000000" backcolor="#99CCFF" uuid="cb3c2b57-a27a-4158-bd6e-8b2f6b13f650"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -152,174 +140,106 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Tematica]]></text>
 			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="194" y="43" width="116" height="22" forecolor="#000000" backcolor="#99CCFF" uuid="e4d51fb6-4ab4-4e43-9fbc-aeebb55a34c6"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{estatusProyectoTeg1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="310" y="43" width="143" height="22" forecolor="#000000" backcolor="#99CCFF" uuid="47a73247-b073-4f36-8da6-7cf8dba6ee2a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{estatusProyectoTeg2}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="222" y="8" width="173" height="20" uuid="819817ed-367d-421f-ae48-a6fec3caca6e"/>
+				<reportElement mode="Opaque" x="453" y="42" width="100" height="22" forecolor="#000000" backcolor="#99CCFF" uuid="57da7b6b-340b-4591-b8e8-460f14ffc43c"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="15" width="173" height="20" uuid="819817ed-367d-421f-ae48-a6fec3caca6e"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Tematicas más Solicitadas ]]></text>
 			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="7" y="43" width="150" height="42" forecolor="#000000" backcolor="#99CCFF" uuid="f2ebdd13-a16c-45e8-adcc-636cee6d7a28">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Programa]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="157" y="43" width="95" height="42" forecolor="#000000" backcolor="#99CCFF" uuid="abface55-9af7-4e45-aaea-7c9a1e28ae93">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Area]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement mode="Opaque" x="433" y="43" width="81" height="42" forecolor="#000000" backcolor="#99CCFF" uuid="8ec6f6f5-868e-4dab-8a9f-60fc78671853">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{estatusProyectoTeg2}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Opaque" x="515" y="43" width="55" height="42" forecolor="#000000" backcolor="#99CCFF" uuid="5ea64f47-9e1e-4afa-80d3-0308a0073c54">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Total]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement mode="Opaque" x="345" y="43" width="88" height="42" forecolor="#000000" backcolor="#99CCFF" uuid="d4751731-2b54-4bec-beed-a4169881f545">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{estatusProyectoTeg1}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement mode="Opaque" x="345" y="55" width="138" height="30" forecolor="#000000" backcolor="#99CCFF" uuid="3de57a10-9075-457c-8a6a-49475f8637fa">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{estatusProyectoTeg2}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Opaque" x="16" y="55" width="191" height="30" forecolor="#000000" backcolor="#99CCFF" uuid="9d7bb482-d31e-425c-8427-f6eae3afa576">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Tematica]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement mode="Opaque" x="207" y="55" width="138" height="30" forecolor="#000000" backcolor="#99CCFF" uuid="23cdf4d4-eaa2-47e7-9b1d-e0ca4b049cca">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{estatusProyectoTeg1}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Opaque" x="483" y="55" width="71" height="30" forecolor="#000000" backcolor="#99CCFF" uuid="ce0997e9-76da-4c32-81eb-a678f4b25c8e">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Total]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band splitType="Stretch"/>
-		<band height="50">
+		<band height="21">
 			<elementGroup/>
+			<textField>
+				<reportElement x="194" y="0" width="116" height="20" uuid="c5103248-da90-4f9b-b6a0-2b7e8479ce41"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="0" width="142" height="20" uuid="7faaefb8-dedb-46e1-ae20-37af428d8fb5"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{duracion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="453" y="-1" width="100" height="22" backcolor="#FFFFFF" uuid="6c9d42df-0210-4cdc-8a53-83bef128ddb7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}+$F{duracion}]]></textFieldExpression>
+			</textField>
 			<elementGroup>
 				<elementGroup>
 					<textField>
-						<reportElement stretchType="RelativeToBandHeight" x="252" y="0" width="93" height="50" uuid="41e0cc77-4e6b-4057-914a-66855f7456ec">
-							<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-						</reportElement>
+						<reportElement x="60" y="0" width="134" height="20" uuid="41e0cc77-4e6b-4057-914a-66855f7456ec"/>
 						<box>
 							<pen lineWidth="1.0"/>
 							<topPen lineWidth="1.0"/>
@@ -327,149 +247,17 @@
 							<bottomPen lineWidth="1.0"/>
 							<rightPen lineWidth="1.0"/>
 						</box>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="9"/>
-						</textElement>
+						<textElement textAlignment="Center"/>
 						<textFieldExpression><![CDATA[$F{tematica.nombre}]]></textFieldExpression>
 					</textField>
 				</elementGroup>
 			</elementGroup>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="7" y="0" width="150" height="50" uuid="63160ee4-58a9-48ad-bf14-e22840999ee9">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="515" y="0" width="55" height="50" backcolor="#FFFFFF" uuid="07e96f27-b0a8-4aa9-8283-0c5144212fce">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{id}+$F{duracion}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="433" y="0" width="82" height="50" uuid="7f82563a-307a-46ce-b4ec-9ca56bb221b6">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{duracion}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="345" y="0" width="88" height="50" uuid="e8677667-c000-4fac-84a5-2f9120f4da1e">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="157" y="0" width="95" height="50" uuid="120bded3-d775-47bc-8535-e7040fc8a6fd">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{tematica.areaInvestigacion.nombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="207" y="0" width="138" height="50" uuid="ac565427-2f55-49f4-bb80-3cc66c70c784">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="483" y="0" width="71" height="50" backcolor="#FFFFFF" uuid="5b129dd0-c931-4f1d-af5f-dc222532e198">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{id}+$F{duracion}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="16" y="0" width="191" height="50" uuid="8c9c50c2-336d-4fa9-ad5d-0bb3c9337869">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{tematica.nombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="345" y="0" width="138" height="50" uuid="dcda9449-1e99-4f1c-a0fa-b859d04f024e">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{duracion}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="38">
+		<band height="21">
 			<staticText>
-				<reportElement mode="Opaque" x="7" y="0" width="338" height="20" backcolor="#99CCFF" uuid="2833fabc-8023-4079-bd49-d8849a050fa1">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
+				<reportElement mode="Opaque" x="60" y="-1" width="134" height="20" backcolor="#99CCFF" uuid="2833fabc-8023-4079-bd49-d8849a050fa1"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -483,9 +271,7 @@
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="515" y="0" width="55" height="20" backcolor="#FFFFFF" uuid="e5b37011-63e2-4be4-b80e-8a6842e83fb3">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
+				<reportElement mode="Opaque" x="453" y="-1" width="100" height="20" backcolor="#FFFFFF" uuid="7e7ddf84-a71d-46c5-b137-74e8ef65ca09"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -497,9 +283,7 @@
 				<textFieldExpression><![CDATA[$V{id_SUM}+$V{duracion_SUM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="0" width="82" height="20" uuid="85b7c903-6a5e-402a-b186-580d61dae8c9">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="311" y="0" width="142" height="19" uuid="2adf0ab5-b95c-41e6-926e-192290eb3a2e"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -511,9 +295,7 @@
 				<textFieldExpression><![CDATA[$V{duracion_SUM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="345" y="0" width="88" height="20" uuid="d1026c41-8d92-47b5-b9e2-5eddedfa087c">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("1")]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="194" y="-1" width="116" height="20" uuid="b634c54a-51c1-4f4e-8e55-5f7beb4b5e8e"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -523,64 +305,6 @@
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{id_SUM}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Opaque" x="16" y="0" width="191" height="20" backcolor="#99CCFF" uuid="e8b473df-8df2-452c-9e82-1ce9e0775738">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Total]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="207" y="0" width="138" height="20" uuid="1a8a85bb-f03c-42a0-a245-e1e3fa07ec8b">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{id_SUM}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement mode="Opaque" x="483" y="0" width="71" height="20" backcolor="#FFFFFF" uuid="7b89ce05-9936-48a3-8bb8-9fd5e5c943d3">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{id_SUM}+$V{duracion_SUM}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="345" y="0" width="138" height="20" uuid="bca00d45-fa58-47f4-9aee-f05003136967">
-					<printWhenExpression><![CDATA[$P{modeloReporte}.equals("2")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{duracion_SUM}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
@@ -601,10 +325,10 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="267" splitType="Stretch">
+		<band height="254" splitType="Stretch">
 			<bar3DChart>
 				<chart>
-					<reportElement x="-12" y="10" width="599" height="252" uuid="1cc284cc-f44b-45e9-9ed6-542c35c2b3bd"/>
+					<reportElement x="-15" y="10" width="599" height="244" uuid="1cc284cc-f44b-45e9-9ed6-542c35c2b3bd"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>

@@ -131,7 +131,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 	 */
 	@Listen("onClick = #btnGenerarReportePromedioTiempoTeg")
 	public void generarPromedioTiempoTeg() throws JRException {
-	
+
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
 		String nombreTematica = cmbTematica.getValue();
@@ -176,14 +176,14 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			}
 			if (nombrePrograma.equals("Todos") && nombreArea.equals("Todos")
 					&& nombreTematica.equals("Todos")) {
-				tegs = servicioTeg.buscarTegSegunEstatus(estatusAprobado,
-						estatusReprobado);
+				tegs = servicioTeg.buscarSegunDosEstatus(estatusAprobado,estatusReprobado);
 
 			} else if (!nombrePrograma.equals("Todos")
-					&& nombreArea.equals("Todos") && nombreTematica.equals("Todos")) {
-				tegs = servicioTeg.buscarTegSegunProgramaEstatus(programa,
-						estatusAprobado, estatusReprobado);
-			
+					&& nombreArea.equals("Todos")
+					&& nombreTematica.equals("Todos")) {
+
+				tegs = servicioTeg.buscarTegSegunProgramaDosEstatus(programa,estatusAprobado,estatusReprobado);
+					
 			} else if (!nombrePrograma.equals("Todos")
 					&& !nombreArea.equals("Todos")
 					&& !nombreTematica.equals("Todos")
@@ -208,9 +208,13 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 						estatusAprobado, estatusReprobado);
 
 			}
-			System.out.println("tegs:"+tegs.size());
+			System.out.println("tegs:" + tegs.size());
 			if (tegs.size() != 0) {
-			
+				
+				for (int i = 0; i < tegs.size(); i++) {
+					System.out.println("tegsssss:"+tegs.get(i).getId());
+				}
+
 				for (int i = 0; i < nombreEstatus.size(); i++) {
 
 					List<TegEstatus> tegEstatus1 = servicioTegEstatus
@@ -219,7 +223,6 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 							.buscarEstatusSegunTeg(nombreEstatus.get(i + 1),
 									tegs);
 
-				
 					if (nombreEstatus.size() % 2 != 0
 							&& tamanioListaEstatus == i) {
 						List<TegEstatus> tegEstatus3 = servicioTegEstatus
@@ -349,20 +352,20 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			if (nombrePrograma.equals("Todos")) {
 
 				areas = servicioArea.buscarActivos();
-			
+
 			} else {
 
 				cmbArea.setValue("");
 				cmbTematica.setValue("");
 				programa = servicioPrograma.buscar(Long.parseLong(idPrograma));
 				areas = servicioProgramaArea.buscarAreasDePrograma(programa);
-			
+
 			}
-			AreaInvestigacion area = new AreaInvestigacion(100000001,
-					"Todos", "", true);
+			AreaInvestigacion area = new AreaInvestigacion(100000001, "Todos",
+					"", true);
 			areas.add(area);
 			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle.e exception
@@ -379,22 +382,20 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 	public void seleccionarArea() throws JRException {
 		String idArea = cmbArea.getSelectedItem().getId();
 		String nombreArea = cmbArea.getValue();
-		List<Tematica> tematicasTodos= new ArrayList<Tematica>();
+		List<Tematica> tematicasTodos = new ArrayList<Tematica>();
 		cmbTematica.setDisabled(false);
 		if (nombreArea.equals("Todos")) {
 
-			tematicasTodos=servicioTematica.buscarActivos();
+			tematicasTodos = servicioTematica.buscarActivos();
 
 		} else {
 
 			cmbTematica.setValue("");
 			area = servicioArea.buscarArea(Long.parseLong(idArea));
-			tematicasTodos = servicioTematica
-					.buscarTematicasDeArea(area);
-			
+			tematicasTodos = servicioTematica.buscarTematicasDeArea(area);
+
 		}
-		Tematica tematicaTodos = new Tematica(10000000, "Todos", "", true,
-				null);
+		Tematica tematicaTodos = new Tematica(10000000, "Todos", "", true, null);
 		tematicasTodos.add(tematicaTodos);
 		cmbTematica.setModel(new ListModelList<Tematica>(tematicasTodos));
 
@@ -418,6 +419,5 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		cancelarPromedioTiempoTeg();
 		wdwReportePromedioTiempoTeg.onClose();
 	}
-
 
 }
