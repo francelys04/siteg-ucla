@@ -33,7 +33,14 @@ public class STeg {
 		return interfaceTeg.findOne(id);
 
 	}
+	/* Buscar los teg que tengan estatus Aprobado/Reprobado */
+	public List<Teg> buscarSegunDosEstatus(String estatus1,String estatus2) {
 
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatusOrEstatus(estatus1, estatus2);
+		return tegs;
+
+	}
 	public List<Teg> BuscarTegCalificandoDefensa() {
 
 		List<Teg> tegs;
@@ -316,14 +323,13 @@ public class STeg {
 		return tegs;
 	}
 
-	public List<Long> buscarUltimasTematicasProgramaEstatus(
-			String estatusProyectoTeg1, String estatusProyectoTeg2,
-			Programa programa, Date fechaInicio, Date fechaFin) {
+	public List<Teg> buscarUltimasTematicasProgramaEstatus(
+			String estatus1,String estatus2,Programa programa,Date fecha1,Date fecha2) {
 		// TODO Auto-generated method stub
-		List<Long> tegs;
-		tegs = interfaceTeg.buscarUltimasTematicasProgramaEstatus(
-				estatusProyectoTeg1, estatusProyectoTeg2, programa,
-				fechaInicio, fechaFin);
+		List<Teg> tegs;
+		tegs = interfaceTeg.findByEstatusOrEstatusAndEstudiantesInAndFechaBetweenOrderByTematicaIdAsc(
+				estatus1, estatus2, interfaceEstudiante.findByPrograma(programa),
+				fecha1, fecha2);
 		return tegs;
 	}
 
@@ -424,9 +430,9 @@ public class STeg {
 		tegs= interfaceTeg.buscarTegSegunTematica(tematica, estatus1,estatus2);
 		return tegs;
 	}
-	public List<Teg> buscarTegSegunProgramaEstatus(Programa programa, String estatus1,String estatus2){
+	public List<Teg> buscarTegSegunProgramaDosEstatus(Programa programa, String estatus1,String estatus2){
 		List<Teg> tegs;
-		tegs= interfaceTeg.buscarTegSegunPrograma(programa, estatus1,estatus2);
+		tegs= interfaceTeg.findByEstatusOrEstatusAndEstudiantesIn(estatus1,estatus2,interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
 	public List<Teg> buscarSegunTegs(List<Teg> tegs){
@@ -511,6 +517,11 @@ public class STeg {
 	public List<Teg> buscarTodosTegPorDosFechas(
 			Date fechaInicio,Date fechaFin) {
 		return interfaceTeg.buscarTodosTegporFecha(fechaInicio, fechaFin);
+	}
+	public List<Teg> buscarTegSegunProgramaEstatus(Programa programa, String estatus1,String estatus2){
+		List<Teg> tegs;
+		tegs= interfaceTeg.buscarTegSegunPrograma(programa, estatus1,estatus2);
+		return tegs;
 	}
 	
 	

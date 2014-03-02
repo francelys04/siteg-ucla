@@ -144,7 +144,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			} else {
-				Map parametro = new HashMap();
+				
 				String nombreArea = cmbArea.getValue();
 				String nombrePrograma = cmbPrograma.getValue();
 				String etapaTeg = cmbEtapaTeg.getValue();
@@ -154,6 +154,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 				fechaInicio = dtbFechaInicio.getValue();
 				fechaFin = dtbFechaFin.getValue();
 				List<Long> tematicasSeleccionadas = new ArrayList();
+				List<Teg> tematicasSeleccionadas1 = new ArrayList<Teg>();
 				System.out.println("estatus1:" + estatusProyectoTeg1);
 				System.out.println("estatus2:" + estatusProyectoTeg2);
 
@@ -164,21 +165,20 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 					String idArea = cmbArea.getSelectedItem().getId();
 					AreaInvestigacion area1 = servicioArea.buscarArea(Long
 							.parseLong(idArea));
-					tematicasSeleccionadas = servicioTeg
-							.buscarUltimasTematicasProgramaAreaEstatus(
-									estatusProyectoTeg1, estatusProyectoTeg2,
-									area1, fechaInicio, fechaFin);
-
-					parametro.put("modeloReporte", "2");
+							
+					tematicasSeleccionadas= servicioTeg.buscarUltimasTematicasProgramaAreaEstatus(
+												estatusProyectoTeg1, estatusProyectoTeg2,
+												area1, fechaInicio, fechaFin);
+		
 				}
 
 				if (nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")) {
+			
 					tematicasSeleccionadas = servicioTeg.buscarUltimasEstatus(
 							estatusProyectoTeg1, estatusProyectoTeg2,
 							fechaInicio, fechaFin);
-
-					parametro.put("modeloReporte", "1");
+	
 				}
 
 				if (!nombrePrograma.equals("Todos")
@@ -186,17 +186,16 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 					String idPrograma = cmbPrograma.getSelectedItem().getId();
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
-					System.out.println("programa" + programa1.getNombre());
-					tematicasSeleccionadas = servicioTeg
-							.buscarUltimasTematicasProgramaEstatus(
-									estatusProyectoTeg1, estatusProyectoTeg2,
-									programa1, fechaInicio, fechaFin);
-
-					parametro.put("modeloReporte", "2");
+		
+					tematicasSeleccionadas1=servicioTeg.buscarUltimasTematicasProgramaEstatus(estatusProyectoTeg1,estatusProyectoTeg2,programa1, fechaInicio, fechaFin);
+					
+					for(int i=0;i<tematicasSeleccionadas1.size();i++){
+						tematicasSeleccionadas.add(tematicasSeleccionadas1.get(i).getTematica().getId());
+					}
 				}
+				
+				
 				if (tematicasSeleccionadas.size() != 0) {
-					System.out
-							.println("entro:" + tematicasSeleccionadas.size());
 
 					/*************************** Contador de Lista ************* ******************/
 					List<Long> tematicas = new ArrayList();
@@ -257,7 +256,6 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 								.buscarTematica(tematicasOrdenados.get(i));
 						tematicasFinales.add(tematicaFinal);
 					}
-					System.out.println("tematicas." + tematicasFinales.size());
 
 					List<Teg> tegsTematicasComparativo = new ArrayList();
 					long contadorFactibleAprobado = 0, contadorNoFactibleReprobado = 0;
@@ -276,77 +274,6 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 						contadorFactibleAprobado = 0;
 						contadorNoFactibleReprobado = 0;
 					}
-					List<Programa> programas = new ArrayList<Programa>();
-					/*
-					 * Operacion la cual consiste hallar el programa de cada
-					 * estudiante asociados a un teg mediante la tematica
-					 * encontrada
-					 */
-					for (int i = 0; i < tegsTematicasComparativo.size(); i++) {
-					
-						List<Teg> tegsSegunTematicas = servicioTeg
-								.buscarUltimasOrdenadasEstatus(
-										estatusProyectoTeg1,
-										estatusProyectoTeg2, tematicasFinales,
-										fechaInicio, fechaFin);
-
-				
-
-						for (int j = 0; j < tegsSegunTematicas.size(); j++) {
-
-							if (tegsSegunTematicas
-									.get(j)
-									.getTematica()
-									.getNombre()
-									.equals(tegsTematicasComparativo.get(i)
-											.getTematica().getNombre())) {
-							
-
-								List<Estudiante> estudiantes = servicioEstudiante
-										.buscarEstudiantePorTeg(tegsSegunTematicas
-												.get(j));
-
-								if (estudiantes.size() != 0
-										&& programas.size() == 0) {
-									programas.add(estudiantes.get(0)
-											.getPrograma());
-								
-								}
-								for (int z = 0; z < programas.size(); z++) {
-								
-									if (!programas
-											.get(z)
-											.getNombre()
-											.equals(estudiantes.get(0)
-													.getPrograma().getNombre())) {
-										programas.add(estudiantes.get(0)
-												.getPrograma());
-										
-									}
-
-								}
-							}
-						}
-						String programaTemp = "";
-						for (int j = 0; j < programas.size(); j++) {
-
-							if (j + 1 != programas.size()) {
-								
-								programaTemp += programas.get(j).getNombre()
-										+ ",";
-
-							} else {
-								tegsTematicasComparativo.get(i).setTitulo(
-										programaTemp += programas.get(j)
-												.getNombre());
-
-							}
-						}
-						tegsTematicasComparativo.get(i).setTitulo(programaTemp);
-						programas.clear();
-
-					}
-				
 
 					FileSystemView filesys = FileSystemView.getFileSystemView();
 
@@ -355,7 +282,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 							+ "SITEG/vistas/reportes/estadisticos/compilados/RTematicasMasSolicitadas.jasper";
 					String reporteImage = rutaUrl
 							+ "SITEG/public/imagenes/reportes/";
-
+					Map parametro = new HashMap();
 					parametro.put("titulo",
 							"UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
 									+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
