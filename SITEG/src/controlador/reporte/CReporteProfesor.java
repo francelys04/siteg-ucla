@@ -138,16 +138,14 @@ public class CReporteProfesor extends CGeneral {
 	public void seleccinarPrograma() {
 		try {
 			if (cmbPrograma.getValue().equals("Todos")) {
-
+				cmbArea.setDisabled(false);
+				cmbArea.setValue("");
 				areas = servicioArea.buscarActivos();
-				AreaInvestigacion area = new AreaInvestigacion(10000000,
+				AreaInvestigacion area = new AreaInvestigacion(989,
 						"Todos", "", true);
 				areas.add(area);
 				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
-				cmbArea.setDisabled(false);
-
 			} else {
-
 				cmbArea.setDisabled(false);
 				cmbArea.setValue("");
 				cmbTematica.setValue("");
@@ -155,11 +153,10 @@ public class CReporteProfesor extends CGeneral {
 				areas = servicioProgramaArea
 						.buscarAreasDePrograma(servicioPrograma
 								.buscar(programa1.getId()));
-				AreaInvestigacion area = new AreaInvestigacion(10000000,
+				AreaInvestigacion area = new AreaInvestigacion(1001,
 						"Todos", "", true);
 				areas.add(area);
 				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -189,7 +186,7 @@ public class CReporteProfesor extends CGeneral {
 						.getValue();
 				tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
 						.buscarArea(area1.getId()));
-				Tematica tema = new Tematica(10000, "Todos", "", true, null);
+				Tematica tema = new Tematica(1000, "Todos", "", true, null);
 				tematicas.add(tema);
 				cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
 
@@ -258,6 +255,11 @@ public class CReporteProfesor extends CGeneral {
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica1));
 
+					String idPrograma = String.valueOf(((Programa) cmbPrograma
+							.getSelectedItem().getValue()).getId());
+					Programa programa1 = servicioPrograma.buscar(Long
+							.parseLong(idPrograma));
+					
 					List<Teg> teg = servicioTeg
 							.buscarTegDeUnaTematicaPorDosFechas(tematica1,
 									fechaInicio, fechaFin);
@@ -304,10 +306,7 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/*
-				 * buscar por una carrera, un area, Todos las tematica y un
-				 * estatus
-				 */
+				/* buscar por una carrera, un area, Todos las tematica y un estatus */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
@@ -360,10 +359,7 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/*
-				 * buscar por una carrera, un area, Todos las tematica y todos
-				 * los estatus
-				 */
+				/*  buscar por una carrera, un area, Todos las tematica y todos los estatus */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
@@ -410,10 +406,7 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/*
-				 * buscar por una carrera, un area, una tematica y todos los
-				 * estatus
-				 */
+				/* buscar por una carrera, un area, una tematica y todos los estatus */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& !nombreTematica.equals("Todos")
@@ -423,6 +416,11 @@ public class CReporteProfesor extends CGeneral {
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
 
+					String idPrograma = String.valueOf(((Programa) cmbPrograma
+							.getSelectedItem().getValue()).getId());
+					Programa programa1 = servicioPrograma.buscar(Long
+							.parseLong(idPrograma));
+					
 					List<Teg> teg1 = servicioTeg
 							.buscarTegDeUnaTematicaPorDosFechas(tematica1,
 									fechaInicio, fechaFin);
@@ -461,7 +459,7 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/* buscar por una carrera, Todos las area y un estatus */
+				/* buscar por una carrera, Todos las area, todas las tematicas y un estatus */
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& !estatus.equals("Todos")) {
@@ -515,7 +513,7 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/* buscar por una carrera, Todos las area y todos los estatus */
+				/* buscar por una carrera, Todos las area, Todas las tematicas y todos los estatus */
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& estatus.equals("Todos")) {
@@ -562,8 +560,11 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/* buscar por Todos las carrera, y un estatus */
-				if (nombrePrograma.equals("Todos") && !estatus.equals("Todos")) {
+				/* buscar por Todos las carrera, Todos las Areas, Todas las tematicas y un estatus */
+				if (nombrePrograma.equals("Todos")
+						&& nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& !estatus.equals("Todos")) {
 					List<Teg> teg2 = servicioTeg.buscarTodosTegPorDosFechas(
 							fechaInicio, fechaFin);
 
@@ -608,8 +609,11 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/* buscar por Todos las carrera, y todos los estatus */
-				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
+				/* buscar por Todos las carrera, Todos las Areas, Todas las tematicas y todos los estatus */
+				if (nombrePrograma.equals("Todos")
+					&& nombreArea.equals("Todos")
+					&& nombreTematica.equals("Todos")
+					&& estatus.equals("Todos")) {
 					List<Teg> teg2 = servicioTeg.buscarTodosTegPorDosFechas(
 							fechaInicio, fechaFin);
 
@@ -648,6 +652,54 @@ public class CReporteProfesor extends CGeneral {
 					}
 				}
 
+				
+				
+				
+				
+				
+				
+				
+				/*Todos los programas, una area, una tematica, un estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& !nombreTematica.equals("Todos")
+						&& !estatus.equals("Todos")) {
+
+				}
+                
+				/*Todos los programas, una area, una tematica, todos los estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& !nombreTematica.equals("Todos")
+						&& estatus.equals("Todos")) {
+				
+				}
+				
+				/*Todos los programas, una area, todas las tematicas, un estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& !estatus.equals("Todos")) {
+			
+				}
+				
+				/*Todos los programas, un area, todas las tematicas, todos los estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& estatus.equals("Todos")) {
+				
+				}
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				if (!datosVacios) {
 					Collections.sort(elementos, new Comparator<ProfesorTeg>() {
 						public int compare(ProfesorTeg a, ProfesorTeg b) {

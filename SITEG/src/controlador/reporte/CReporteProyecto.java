@@ -94,7 +94,9 @@ public class CReporteProyecto extends CGeneral {
 	private Combobox cmbTematica;
 	@Wire
 	private Jasperreport jstVistaPrevia;
-
+	private static Programa programa1;
+	private static AreaInvestigacion area1;
+	private static long idarea;
 	
 
 	/*
@@ -115,11 +117,13 @@ public class CReporteProyecto extends CGeneral {
 
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
 		cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
-		
+
 		cmbArea.setDisabled(true);
 		cmbTematica.setDisabled(true);
 		cmbEstatus.setDisabled(true);
+
 	}
+
 	/*
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
@@ -128,27 +132,34 @@ public class CReporteProyecto extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccinarPrograma() {
-		if (cmbPrograma.getValue().equals("Todos")) {
-			cmbArea.setValue("Todos");
-			cmbTematica.setValue("Todos");
-			cmbArea.setDisabled(true);
-			cmbTematica.setDisabled(true);
-			cmbEstatus.setDisabled(false);
-		} else {
-			cmbArea.setDisabled(false);
-			cmbArea.setValue("");
-			cmbTematica.setValue("");
-			Programa programa = (Programa) cmbPrograma.getSelectedItem()
-					.getValue();
-			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
-					.buscar(programa.getId()));
-			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
-					"", true);
-			areas.add(area);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+		try {
+			if (cmbPrograma.getValue().equals("Todos")) {
+				cmbArea.setDisabled(false);
+				cmbArea.setValue("");
+				areas = servicioArea.buscarActivos();
+				AreaInvestigacion area = new AreaInvestigacion(989,
+						"Todos", "", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+			} else {
+				cmbArea.setDisabled(false);
+				cmbArea.setValue("");
+				cmbTematica.setValue("");
+				programa1 = (Programa) cmbPrograma.getSelectedItem().getValue();
+				areas = servicioProgramaArea
+						.buscarAreasDePrograma(servicioPrograma
+								.buscar(programa1.getId()));
+				AreaInvestigacion area = new AreaInvestigacion(1001,
+						"Todos", "", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
 		}
-
 	}
+
 	/*
 	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
@@ -156,33 +167,42 @@ public class CReporteProyecto extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
-		if (cmbArea.getValue().equals("Todos")) {
-			cmbTematica.setDisabled(true);
-			cmbTematica.setValue("Todos");
-			cmbEstatus.setDisabled(false);
-		} else {
-			cmbTematica.setDisabled(false);
-			cmbTematica.setValue("");
-			AreaInvestigacion area = (AreaInvestigacion) cmbArea
-					.getSelectedItem().getValue();
-			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-					.buscarArea(area.getId()));
-			Tematica Todostematica = new Tematica(10000000, "Todos",
-					"", true, area);
-			tematicas.add(Todostematica);
-			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
+		try {
+			if (cmbArea.getValue().equals("Todos")) {
+
+				cmbTematica.setValue("Todos");
+				cmbTematica.setDisabled(true);
+				cmbEstatus.setDisabled(false);
+
+			} else {
+
+				cmbTematica.setDisabled(false);
+				cmbTematica.setValue("");
+				area1 = (AreaInvestigacion) cmbArea.getSelectedItem()
+						.getValue();
+				tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
+						.buscarArea(area1.getId()));
+				Tematica tema = new Tematica(1000, "Todos", "", true, null);
+				tematicas.add(tema);
+				cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
 		}
+		idarea = Long.parseLong(cmbArea.getSelectedItem().getId());
 	}
+
 	/*
 	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
 	 * uno en el campo del mismo.
 	 */
 	@Listen("onSelect = #cmbTematica")
 	public void seleccionarTematica() {
-		if (!cmbTematica.getValue().equals("Todos")) {
-			cmbEstatus.setDisabled(false);
-		}
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
+		idTematica = tematica.getId();
+		cmbEstatus.setDisabled(false);
 	}
 	/*
 	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
