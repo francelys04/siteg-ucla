@@ -524,6 +524,31 @@ public class STeg {
 		return tegs;
 	}
 	
-	
+	/*---- Servicios para Reporte Teg ----*/
+	public List<Teg> buscarTodosProgramasUnAreaUnaTematicaUnEstatus(Tematica tematica,
+				String estatus,Date fechaInicio,Date fechaFin){
+			return interfaceTeg.buscarTodosProgramasUnAreaUnaTematicaUnEstatus(tematica,
+					estatus, fechaInicio, fechaFin);
+		}
+		
+		public List<Teg> buscarTodosProgramasUnAreaUnaTematicaTodosEstatus(Tematica tematica,
+				Date fechaInicio,Date fechaFin){
+			return interfaceTeg.buscarTodosProgramasUnAreaUnaTematicaTodosEstatus(tematica,
+					fechaInicio,fechaFin);		
+		}
+		
+		public List<Teg> buscarTodosProgramasUnAreaTodasTematicaUnEstatus(AreaInvestigacion areaInvestigacion, 
+				String estatus, Date fechaInicio, Date fechaFin){
+			return interfaceTeg.buscarTodosProgramasUnAreaTodasTematicaUnEstatus(areaInvestigacion, 
+					 estatus, fechaInicio, fechaFin);
+			
+		}
+		
+		public List<Teg> buscarTodosProgramasUnAreaTodasTematicaTodosEstatus(AreaInvestigacion areaInvestigacion, 
+				Date fechaInicio, Date fechaFin){
+			return interfaceTeg.buscarTodosProgramasUnAreaTodasTematicaTodosEstatus(areaInvestigacion,
+					fechaInicio, fechaFin);
+		}
+		
 	
 }

@@ -113,7 +113,7 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	@Query("select teg from Teg teg where (teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4) and fecha between ?5 and ?6 Order by teg.tematica.id")
 	public List<Teg> buscarTegPorVariosProgramasVariosEstatus1(String estatus1,String estatus2,String estatus3,String estatus4, Date fechaInicio,Date fechaFin);
 
-	/************************************ Query para el Reporte Profesor************************************************************************/
+	/************************************ Query para el Reporte Profesor********************************************/
 
 	/** Querys para buscar la lista de teg dado una tematica un estatus, fecha inicio y fecha fin **/	
 	@Query("select teg from Teg teg where teg.tematica=?1 and fecha between ?2 and ?3 ")
@@ -132,6 +132,23 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	public List<Teg> buscarTodosTegporFecha(Date fechaInicio,Date fechaFin);
 	
 	
+	/************************************ Query para el Reporte TEG********************************************/
+	/** Querys para buscar la lista de teg dado todos los programas, un área, una tematica y un estatus **/
+		@Query("select teg from Teg teg where teg.tematica=?1 and teg.estatus=?2 and fecha between ?3 and ?4 Order by teg.tematica.id") 
+		public List<Teg> buscarTodosProgramasUnAreaUnaTematicaUnEstatus(Tematica tematica,String estatus,Date fechaInicio,Date fechaFin);
+		
+		/** Querys para buscar la lista de teg dado todos los programas, un área, una tematica y todos los estatus **/
+		@Query("select teg from Teg teg where teg.tematica=?1 and fecha between ?2 and ?3 Order by teg.tematica.id") 
+		public List<Teg> buscarTodosProgramasUnAreaUnaTematicaTodosEstatus(Tematica tematica,Date fechaInicio,Date fechaFin);
+
+		/** Querys para buscar la lista de teg dado todos los programas, un área, todas las tematicas y un estatus **/
+		@Query("select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?1) and teg.estatus=?2 and fecha between ?3 and ?4 Order by teg.tematica.id")
+		public List<Teg> buscarTodosProgramasUnAreaTodasTematicaUnEstatus(AreaInvestigacion areaInvestigacion, String estatus, Date fechaInicio, Date fechaFin);
+		
+		/** Querys para buscar la lista de teg dado todos los programas, un área, todas las tematicas y todos los estatus **/
+		@Query("select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?1) and fecha between ?2 and ?3 Order by teg.tematica.id")
+		public List<Teg> buscarTodosProgramasUnAreaTodasTematicaTodosEstatus(AreaInvestigacion areaInvestigacion, Date fechaInicio, Date fechaFin);
+		
 /******************************   Querys para ordenar segun id tematica segun programa segun area ***********************************************/
 	
 	//Lista para ordenar los ids de las tematicas segun un programa  segun un estatus y fecha inicio y fecha fin

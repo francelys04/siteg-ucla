@@ -130,7 +130,7 @@ public class CReporteProyecto extends CGeneral {
 	public void seleccinarPrograma() {
 		if (cmbPrograma.getValue().equals("Todos")) {
 			cmbArea.setValue("Todos");
-			cmbTematica.setValue("Todas");
+			cmbTematica.setValue("Todos");
 			cmbArea.setDisabled(true);
 			cmbTematica.setDisabled(true);
 			cmbEstatus.setDisabled(false);
@@ -158,7 +158,7 @@ public class CReporteProyecto extends CGeneral {
 	public void seleccionarArea() {
 		if (cmbArea.getValue().equals("Todos")) {
 			cmbTematica.setDisabled(true);
-			cmbTematica.setValue("Todas");
+			cmbTematica.setValue("Todos");
 			cmbEstatus.setDisabled(false);
 		} else {
 			cmbTematica.setDisabled(false);
@@ -167,9 +167,9 @@ public class CReporteProyecto extends CGeneral {
 					.getSelectedItem().getValue();
 			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
 					.buscarArea(area.getId()));
-			Tematica todastematica = new Tematica(10000000, "Todas",
+			Tematica Todostematica = new Tematica(10000000, "Todos",
 					"", true, area);
-			tematicas.add(todastematica);
+			tematicas.add(Todostematica);
 			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
 		}
 	}
@@ -221,7 +221,7 @@ public class CReporteProyecto extends CGeneral {
 				/*buscar por una carrera, un area, una tematica y un estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& !nombreTematica.equals("Todas")
+						&& !nombreTematica.equals("Todos")
 						&& !estatus.equals("Todos")) {
 
 					String idTematica = String.valueOf(((Tematica) cmbTematica
@@ -236,10 +236,10 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					} 
 				}
-				/*buscar por una carrera, un area, todas las tematica y un estatus*/
+				/*buscar por una carrera, un area, Todos las tematica y un estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todas")
+						&& nombreTematica.equals("Todos")
 						&& !estatus.equals("Todos")) {
 					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
 							.getSelectedItem().getValue()).getId());
@@ -252,10 +252,10 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					} 
 				}
-				/*buscar por una carrera, un area, todas las  tematica y todos los estatus*/
+				/*buscar por una carrera, un area, Todos las  tematica y todos los estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todas")
+						&& nombreTematica.equals("Todos")
 						&& estatus.equals("Todos")) {
 					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
 							.getSelectedItem().getValue()).getId());
@@ -271,7 +271,7 @@ public class CReporteProyecto extends CGeneral {
 				/*buscar por una carrera, un area, una  tematica y todos los estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& !nombreTematica.equals("Todas")
+						&& !nombreTematica.equals("Todos")
 						&& estatus.equals("Todos")) {
 					String idTematica = String.valueOf(((Tematica) cmbTematica
 							.getSelectedItem().getValue()).getId());
@@ -291,7 +291,7 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					} 
 				}
-				/*buscar por una carrera, todas las area y un estatus*/
+				/*buscar por una carrera, Todos las area y un estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& !estatus.equals("Todos")) {
@@ -306,7 +306,7 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/*buscar por una carrera, todas las area y todos los estatus*/
+				/*buscar por una carrera, Todos las area y todos los estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& estatus.equals("Todos")) {
@@ -328,7 +328,7 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/*buscar por todas las carrera, y un estatus*/
+				/*buscar por Todos las carrera, y un estatus*/
 				if (nombrePrograma.equals("Todos") && !estatus.equals("Todos")) {
 					teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
 							estatus, fechaInicio, fechaFin);
@@ -336,7 +336,7 @@ public class CReporteProyecto extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/*buscar por todas las carrera, y todos los estatus*/
+				/*buscar por Todos las carrera, y todos los estatus*/
 				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
 					String estatusTeg1 = "Proyecto Registrado";
 					String estatusTeg2 = "Proyecto Factible";

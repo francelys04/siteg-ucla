@@ -246,13 +246,14 @@ public class CReporteTeg extends CGeneral {
 				Date fechaFin = dtbFechaFin.getValue();
 				String estatus = cmbEstatus.getValue();
 				List<Teg> teg = null;
+				boolean combinacion = false;
 
 				/*
 				 * buscar por una carrera, un area, una tematica y un estatus
 				 */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& !nombreTematica.equals("Todas")
+						&& !nombreTematica.equals("Todos")
 						&& !estatus.equals("Todos")) {
 					String idTematica = cmbTematica.getSelectedItem().getId();
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
@@ -269,7 +270,7 @@ public class CReporteTeg extends CGeneral {
 				 */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todas")
+						&& nombreTematica.equals("Todos")
 						&& !estatus.equals("Todos")) {
 
 					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
@@ -288,7 +289,7 @@ public class CReporteTeg extends CGeneral {
 				 */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& nombreTematica.equals("Todas")
+						&& nombreTematica.equals("Todos")
 						&& estatus.equals("Todos")) {
 					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
 							.getSelectedItem().getValue()).getId());
@@ -305,7 +306,7 @@ public class CReporteTeg extends CGeneral {
 				 */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
-						&& !nombreTematica.equals("Todas")
+						&& !nombreTematica.equals("Todos")
 						&& estatus.equals("Todos")) {
 					String idTematica = cmbTematica.getSelectedItem().getId();
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
@@ -367,14 +368,21 @@ public class CReporteTeg extends CGeneral {
 									fechaFin);
 				}
 
-				/* buscar por todas las carrera, y un estatus */
-				if (nombrePrograma.equals("Todos") && !estatus.equals("Todos")) {
+				/* buscar por todas las carrera, todas las areas, todas las tematicas y un estatus */
+					if (nombrePrograma.equals("Todos")
+							&& nombreArea.equals("Todos")
+							&& nombreTematica.equals("Todos")
+							&& !estatus.equals("Todos")) {
 					teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
 							estatus, fechaInicio, fechaFin);
+					combinacion= true;
 				}
 
-				/* buscar por todas las carrera, y todos los estatus */
-				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
+				/* buscar por todas las carrera, todas las areas, todas las tematicas y todos los estatus */
+					if (nombrePrograma.equals("Todos")
+							&& nombreArea.equals("Todos")
+							&& nombreTematica.equals("Todos")
+							&& estatus.equals("Todos")){
 					
 					String estatusTeg1 = "TEG Registrado";
 					String estatusTeg2 = "Trabajo en Desarrollo";
@@ -389,6 +397,62 @@ public class CReporteTeg extends CGeneral {
 							estatusTeg1, estatusTeg2, estatusTeg3, estatusTeg4,
 							estatusTeg5, estatusTeg6, estatusTeg7, fechaInicio,
 							fechaFin);
+					combinacion= true;
+				}
+				
+				//AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+				/*Todos los programas, una area, una tematica, un estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& !nombreTematica.equals("Todos")
+						&& !estatus.equals("Todos")) {
+					String idTematica = cmbTematica.getSelectedItem().getId();
+					Tematica tematica1 = servicioTematica.buscarTematica(Long
+							.parseLong(idTematica));
+					teg = servicioTeg
+							.buscarTodosProgramasUnAreaUnaTematicaUnEstatus(tematica1,
+									estatus, fechaInicio, fechaFin);
+				}
+                
+				/*Todos los programas, una area, una tematica, todos los estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& !nombreTematica.equals("Todos")
+						&& estatus.equals("Todos")) {
+					String idTematica = cmbTematica.getSelectedItem().getId();
+					Tematica tematica1 = servicioTematica.buscarTematica(Long
+							.parseLong(idTematica));
+					teg = servicioTeg
+							.buscarTodosProgramasUnAreaUnaTematicaTodosEstatus(tematica1,
+									fechaInicio,fechaFin);
+				}
+				
+				/*Todos los programas, una area, todas las tematicas, un estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& !estatus.equals("Todos")) {
+					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
+							.getSelectedItem().getValue()).getId());
+					AreaInvestigacion area1 = servicioArea.buscarArea(Long
+							.parseLong(idArea));
+					teg = servicioTeg
+							.buscarTodosProgramasUnAreaTodasTematicaUnEstatus(area1, 
+									 estatus, fechaInicio, fechaFin);
+				}
+				
+				/*Todos los programas, un area, todas las tematicas, todos los estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& estatus.equals("Todos")) {
+					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
+							.getSelectedItem().getValue()).getId());
+					AreaInvestigacion area1 = servicioArea.buscarArea(Long
+							.parseLong(idArea));
+					teg = servicioTeg
+							.buscarTodosProgramasUnAreaTodasTematicaTodosEstatus(area1,
+									fechaInicio, fechaFin);
 				}
 
 				List<ListaTeg> elementos = new ArrayList<ListaTeg>();
@@ -410,35 +474,48 @@ public class CReporteTeg extends CGeneral {
 					FileSystemView filesys = FileSystemView.getFileSystemView();
 					Map p = new HashMap();
 					String rutaUrl = obtenerDirectorio();
-					String reporteSrc = rutaUrl
+					if (!combinacion){
+					     String reporteSrc = rutaUrl
+                                + "SITEG/vistas/reportes/estructurados/compilados/ReporteTEG.jasper";
+					     String reporteImage = rutaUrl
+							    + "SITEG/public/imagenes/reportes/";
+					     p.put("programa", cmbPrograma.getValue());
+					     p.put("FechaInicio", dtbFechaInicio.getValue());
+					     p.put("FechaFin", dtbFechaFin.getValue());
+					     p.put("Area", cmbArea.getValue());
+					     p.put("Tematica", cmbTematica.getValue());
+					     p.put("Estatus", cmbEstatus.getValue());
+					     p.put("logoUcla", reporteImage + "logo ucla.png");
+					     p.put("logoCE", reporteImage + "logo CE.png");
+					     p.put("logoSiteg", reporteImage + "logo.png");
+					     p.put("total", elementos.size());
+					 	JasperReport jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
 
-							+ "SITEG/vistas/reportes/salidas/compilados/ReporteTEG.jasper";
-					String reporteImage = rutaUrl
-							+ "SITEG/public/imagenes/reportes/";
-					p.put("programa", cmbPrograma.getValue());
-					p.put("FechaInicio", dtbFechaInicio.getValue());
-					p.put("FechaFin", dtbFechaFin.getValue());
-					p.put("Area", cmbArea.getValue());
-					p.put("Tematica", cmbTematica.getValue());
-					p.put("Estatus", cmbEstatus.getValue());
-					p.put("logoUcla", reporteImage + "logo ucla.png");
-					p.put("logoCE", reporteImage + "logo CE.png");
-					p.put("logoSiteg", reporteImage + "logo.png");
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, p, new JRBeanCollectionDataSource(
+										elementos));
+						JasperViewer.viewReport(jasperPrint, false);
+					 }
+					else{
+						 String reporteSrc = rutaUrl
+	                                + "SITEG/vistas/reportes/estructurados/compilados/ReporteTEG1.jasper";
+						     String reporteImage = rutaUrl
+								    + "SITEG/public/imagenes/reportes/";
+						     p.put("FechaInicio", dtbFechaInicio.getValue());
+						     p.put("FechaFin", dtbFechaFin.getValue());
+						     p.put("logoUcla", reporteImage + "logo ucla.png");
+						     p.put("logoCE", reporteImage + "logo CE.png");
+						     p.put("logoSiteg", reporteImage + "logo.png");
+						     p.put("total", elementos.size());
+						 	JasperReport jasperReport = (JasperReport) JRLoader
+									.loadObject(reporteSrc);
 
-					JasperReport jasperReport = (JasperReport) JRLoader
-							.loadObject(reporteSrc);
-
-					JasperPrint jasperPrint = JasperFillManager.fillReport(
-							jasperReport, p, new JRBeanCollectionDataSource(
-									elementos));
-					JasperViewer.viewReport(jasperPrint, false);
-
-					// jstVistaPrevia.setSrc(reporteSrc);
-					// jstVistaPrevia.setDatasource(new
-					// JRBeanCollectionDataSource(
-					// elementos));
-					// jstVistaPrevia.setType("pdf");
-					// jstVistaPrevia.setParameters(p);
+							JasperPrint jasperPrint = JasperFillManager.fillReport(
+									jasperReport, p, new JRBeanCollectionDataSource(
+											elementos));
+							JasperViewer.viewReport(jasperPrint, false);
+					}
 				} else {
 					Messagebox
 							.show("No hay informacion disponible para esta seleccion",
