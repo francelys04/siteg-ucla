@@ -64,15 +64,12 @@ public class CCatalogoProfesorTematica extends CGeneral {
 	 */
 	public void inicializar(Component comp) {
 
-		// List<Profesor> profe = llenarprofesores();
-		// ltbProfesor.setModel(new ListModelList<Profesor>(profe));
-		//
+		 List<Profesor> profe = llenarprofesores();
+		 ltbProfesor.setModel(new ListModelList<Profesor>(profe));
+		
 
-		// TODO Auto-generated method stub
-		List<Profesor> profesores = servicioProfesor
-				.buscarProfesoresPorTematica(servicioTematica
-						.buscarTematica(tematicaRecibida));
-		ltbProfesor.setModel(new ListModelList<Profesor>(profesores));
+		
+		
 
 	}
 

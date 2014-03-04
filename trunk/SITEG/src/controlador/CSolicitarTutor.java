@@ -10,12 +10,15 @@ import java.util.List;
 import java.util.Set;
 
 import modelo.AreaInvestigacion;
+import modelo.Condicion;
 import modelo.Estudiante;
+import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
+import modelo.compuesta.CondicionPrograma;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
@@ -176,11 +179,12 @@ public class CSolicitarTutor extends CGeneral {
 	 * menos un estudiante es agregado a la solicitud
 	 */
 	public void llenarcombo() {
+	
 		idcombo = programa.getId();
 		List<AreaInvestigacion> a = servicioProgramaArea
 				.buscarAreasDePrograma(programa);
 		cmbAreaSolicitud.setModel(new ListModelList<AreaInvestigacion>(a));
-
+		
 	}
 
 	/* Metodo que permite llenar el combo de areas */
@@ -195,6 +199,7 @@ public class CSolicitarTutor extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbAreaSolicitud")
 	public void tematicaSolicitud() {
+		
 		String area = cmbAreaSolicitud.getValue();
 		AreaInvestigacion area2 = servicioArea.buscarAreaPorNombre(area);
 		List<Tematica> tematicas = servicioTematica
@@ -391,6 +396,18 @@ public class CSolicitarTutor extends CGeneral {
 									"Advertencia", Messagebox.OK,
 									Messagebox.EXCLAMATION);
 						} else {
+							String condicion = "Numero de estudiantes por trabajo";
+							
+							CondicionPrograma cm = buscarCondicionVigenteEspecifica(condicion,
+									estudiante.getPrograma());
+							int valor = cm.getValor();
+							if (ltbEstudiantes.getItemCount()>= valor)
+							{
+								Messagebox.show("No se permiten mas estudiantes por Trabajo Especial de Grado",
+										"Advertencia", Messagebox.OK,
+										Messagebox.EXCLAMATION);
+							}
+							else{
 							if (programa != null) {
 
 								if (estudiante.getPrograma().getId() != programa
@@ -423,6 +440,7 @@ public class CSolicitarTutor extends CGeneral {
 					}
 				}
 			}
+		  }
 		}
 	}
 
