@@ -17,7 +17,7 @@
 	</popup>
 	<!-- Fin de popus -->
 
-	<listbox id="ltbProfesor" width="100%" mold="paging" pageSize="10"
+	<listbox id="ltbProfesor" width="100%" mold="paging" pageSize="8"
 		emptyMessage="No hay profesores registrados">
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">

@@ -19,7 +19,7 @@
 	<!-- Fin de popus -->
 
 
-	<listbox id="ltbActividad" width="100%" mold="paging" pageSize="10"
+	<listbox id="ltbActividad" width="100%" mold="paging" pageSize="8"
 		emptyMessage="No hay actividades registradas">
 
 
