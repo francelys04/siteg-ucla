@@ -32,7 +32,7 @@
 		</combobox>
 
 	</hbox>
-	<listbox id="ltbArea" width="100%" mold="paging" pageSize="10"
+	<listbox id="ltbArea" width="100%" mold="paging" pageSize="8"
 		emptyMessage="No hay areas de investigación registradas">
 
 

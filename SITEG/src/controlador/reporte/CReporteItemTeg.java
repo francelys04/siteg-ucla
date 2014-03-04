@@ -276,6 +276,8 @@ public class CReporteItemTeg extends CGeneral {
 					p.put("tutor", tutor);
 					p.put("tematica", teg.getTematica().getNombre());
 					p.put("titulo", teg.getTitulo());
+					p.put("programa", estudiantes.get(0).getPrograma());
+					p.put("area", teg.getTematica().getareaInvestigacion().getNombre());
 
 					try {
 						jasperReport = (JasperReport) JRLoader

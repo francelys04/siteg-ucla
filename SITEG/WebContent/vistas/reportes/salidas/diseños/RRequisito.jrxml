@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="db8faee9-7e3e-4b36-b0b5-048315993d1f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="96"/>
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoSiteg" class="java.lang.String"/>
 	<parameter name="logoCE" class="java.lang.String"/>
@@ -16,14 +16,6 @@
 	</background>
 	<title>
 		<band height="97" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="11" width="100" height="67" uuid="798b01b1-e252-4c47-a84e-c84a82b55117"/>
-				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="472" y="0" width="100" height="78" uuid="ed09169c-2a5d-4790-9371-4204644f40f8"/>
-				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="121" y="12" width="327" height="66" uuid="bd5a30fc-3033-4f64-af42-20f890dec2ba"/>
 				<textElement textAlignment="Center">
@@ -34,6 +26,14 @@
 DECANATO DE CIENCIAS Y TECNOLOGÍA
 GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="7" width="100" height="72" uuid="94890a73-aa89-4ad9-ae3f-f25a3d5f30fa"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="472" y="0" width="100" height="85" uuid="ae981b30-0ac3-4227-8522-7c8291fffa92"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -121,17 +121,24 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				</textElement>
 				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="4" width="100" height="50" uuid="11110de7-8c85-4f3d-856e-fb4c2449e3f3"/>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="475" y="34" width="73" height="20" uuid="09f39066-49dc-49fc-a730-dcefc3f893de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+ "de"]]></textFieldExpression>
+			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="521" y="34" width="51" height="20" uuid="7836edf7-c8e8-4fcb-be5a-ce4306de3405"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<reportElement x="521" y="34" width="51" height="20" uuid="b4450236-c8e5-46d5-b8e1-0fe74fe23e92"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="0" y="4" width="100" height="50" uuid="1a7287bc-c88c-4542-8b99-eb5e3a7f9808"/>
-				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
-			</image>
 		</band>
 	</pageFooter>
 	<summary>

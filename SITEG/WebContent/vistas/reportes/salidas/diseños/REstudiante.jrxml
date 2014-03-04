@@ -13,22 +13,13 @@
 	<field name="apellido" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String"/>
 	<field name="programa.nombre" class="java.lang.String"/>
-	<field name="correoElectronico" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="99" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="15" width="100" height="66" uuid="798b01b1-e252-4c47-a84e-c84a82b55117"/>
-				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="472" y="1" width="100" height="81" uuid="ed09169c-2a5d-4790-9371-4204644f40f8"/>
-				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement x="134" y="23" width="324" height="66" uuid="34173e51-e95b-4447-a62a-59b5802e7d01"/>
+				<reportElement x="122" y="13" width="324" height="66" uuid="34173e51-e95b-4447-a62a-59b5802e7d01"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
@@ -37,12 +28,20 @@
 DECANATO DE CIENCIAS Y TECNOLOGÍA
 GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="7" width="100" height="72" uuid="16240375-bb50-4999-9184-279f62ce289b"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="472" y="0" width="100" height="85" uuid="bef1cab3-6968-4cab-b29b-a2b138bdc5be"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="144" splitType="Stretch">
+		<band height="129" splitType="Stretch">
 			<staticText>
-				<reportElement x="152" y="103" width="241" height="31" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
+				<reportElement x="163" y="81" width="241" height="31" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
@@ -62,20 +61,6 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="79" y="61" width="148" height="20" uuid="1a7b5841-262b-46c2-9a7f-f4374b820622"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{programa.nombre}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="2" y="51" width="87" height="30" uuid="d1312fdd-41ab-4e6f-b1a2-70da4f13927f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
-				</textElement>
-				<text><![CDATA[Programa:]]></text>
-			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -111,7 +96,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[Correo]]></text>
+				<text><![CDATA[Programa]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="122" y="18" width="124" height="18" uuid="131c116d-9f41-4090-9a47-f7387ff23f5e"/>
@@ -137,32 +122,32 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement x="2" y="0" width="120" height="43" uuid="6bfee6cd-eab3-4530-a4ad-8e63518f8f09"/>
 			</rectangle>
 			<textField>
-				<reportElement x="258" y="0" width="95" height="32" uuid="2a18dbb6-0ec1-40e8-b351-ea44db910a4b"/>
+				<reportElement x="258" y="0" width="95" height="43" uuid="2a18dbb6-0ec1-40e8-b351-ea44db910a4b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="375" y="0" width="184" height="32" uuid="b47a15b7-0385-4f56-8a0d-e5494040662b"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{correoElectronico}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="13" y="0" width="96" height="32" uuid="ba90ada8-2906-4823-ad51-12c191759242"/>
+				<reportElement x="13" y="0" width="96" height="43" uuid="ba90ada8-2906-4823-ad51-12c191759242"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="134" y="0" width="94" height="32" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
+				<reportElement x="134" y="0" width="94" height="43" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="364" y="0" width="208" height="43" uuid="1a7b5841-262b-46c2-9a7f-f4374b820622"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{programa.nombre}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -178,17 +163,24 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				</textElement>
 				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="4" width="100" height="50" uuid="3983708d-de1a-40ed-bd70-46922014b169"/>
+				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="475" y="34" width="73" height="20" uuid="6269539e-f0a5-477d-aa32-66bf02e2cd67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+ "de"]]></textFieldExpression>
+			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="521" y="34" width="51" height="20" uuid="7836edf7-c8e8-4fcb-be5a-ce4306de3405"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<reportElement x="521" y="34" width="51" height="20" uuid="320ba349-a053-4fff-b2f0-ae81748d86c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[""+ $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="0" y="4" width="100" height="50" uuid="1a7287bc-c88c-4542-8b99-eb5e3a7f9808"/>
-				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
-			</image>
 		</band>
 	</pageFooter>
 	<summary>

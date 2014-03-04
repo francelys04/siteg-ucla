@@ -17,7 +17,7 @@
 	</popup>
 	<!-- Fin de popus -->
 
-	<listbox id="ltbTematica" width="100%" mold="paging" pageSize="15"
+	<listbox id="ltbTematica" width="100%" mold="paging" pageSize="8"
 		emptyMessage="No hay tematicas registradas">
 
 		<auxhead sclass="category-center">
