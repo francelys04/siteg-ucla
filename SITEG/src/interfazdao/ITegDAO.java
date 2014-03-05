@@ -164,14 +164,24 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 		
 /******************************   Querys para ordenar segun id tematica segun programa segun area ***********************************************/
 	
-	//Lista para ordenar los ids de las tematicas segun un programa  segun un estatus y fecha inicio y fecha fin
-	@Query("select teg.tematica.id from Teg teg where (teg.estatus=?1 or teg.estatus=?2) and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?3 ) and fecha between ?4 and ?5 Order by teg.tematica.id")
-	public List<Long> buscarUltimasTematicasProgramaAreaEstatus(String estatusProyectoTeg1,String estatusProyectoTeg2,AreaInvestigacion area,Date fechaInicio,Date fechaFin);
+//	//Lista para ordenar los ids de las tematicas segun un programa  segun un estatus y fecha inicio y fecha fin
+//	@Query("select teg.tematica.id from Teg teg where (teg.estatus=?1 or teg.estatus=?2) and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?3 ) and fecha between ?4 and ?5 Order by teg.tematica.id")
+//	public List<Long> buscarUltimasTematicasProgramaAreaEstatus(String estatusProyectoTeg1,String estatusProyectoTeg2,AreaInvestigacion area,Date fechaInicio,Date fechaFin);
+//	
+//	
 	
+	
+	@Query("SELECT DISTINCT teg FROM Teg teg INNER JOIN teg.estudiantes estudiante WHERE teg.tematica.areaInvestigacion IN (SELECT programaarea.area FROM ProgramaArea programaarea WHERE programaarea.programa=?1) AND estudiante.programa=?1 and teg.tematica.areaInvestigacion=?2 and fecha between ?3 and ?4 and (teg.estatus=?5 or teg.estatus=?6) Order by teg.tematica.id")
+	public List<Teg> buscarUltimasTematicasProgramaAreaEstatus(Programa programa, AreaInvestigacion area1, Date fechaInicio,Date fechaFin,String estatusProyectoTeg1,String estatusProyectoTeg2);
+
 
 /******************************   Querys para ordenar segun id tematica segun programa para todas las areas ***********************************************/
 	
-	public List<Teg> findByEstatusOrEstatusAndEstudiantesInAndFechaBetweenOrderByTematicaIdAsc(String estatus1,String estatus2,List<Estudiante> estudiantes,Date fecha1,Date fecha2);
+//	public List<Teg> findByEstatusOrEstatusAndEstudiantesInAndFechaBetweenOrderByTematicaIdAsc(String estatus1,String estatus2,List<Estudiante> estudiantes,Date fecha1,Date fecha2);
+
+	
+	@Query("SELECT DISTINCT teg FROM Teg teg INNER JOIN teg.estudiantes estudiante WHERE teg.tematica.areaInvestigacion IN (SELECT programaarea.area FROM ProgramaArea programaarea WHERE programaarea.programa=?1) AND estudiante.programa=?1 AND fecha BETWEEN ?2 AND ?3 and (teg.estatus=?4 or teg.estatus=?5) Order by teg.tematica.id" )
+	public List<Teg> buscarUltimasTematicasProgramaEstatus(Programa programa,Date fechaInicio,Date fechaFin,String estatusProyectoTeg1,String estatusProyectoTeg2);
 
 
 	/*******************************   Querys para ordenar las ids tematicas para todos los programas *******************************/
@@ -248,17 +258,32 @@ public List<Teg> buscarTegPrograma(Programa programa, Date fechaInicio,Date fech
 @Query("select teg from Teg teg where teg.fecha between ?1 and ?2")
 public List<Teg> buscarTegTodos(Date fechaInicio,Date fechaFin);
 
-@Query("select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?1) and (teg.estatus=?2 or teg.estatus=?3)")
-public List<Teg> buscarTegSegunArea(AreaInvestigacion area,String estatus1,String estatus2);
+//@Query("select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?1) and (teg.estatus=?2 or teg.estatus=?3)")
+//public List<Teg> buscarTegSegunArea(AreaInvestigacion area,String estatus1,String estatus2);
+//
 
-@Query("select teg from Teg teg where teg.tematica=?1 and (teg.estatus=?2 or teg.estatus=?3)")
-public List<Teg> buscarTegSegunTematica(Tematica tematica,String estatus1,String estatus2);
-
-@Query("select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?1)) and (teg.estatus=?2 or teg.estatus=?3)")
-public List<Teg> buscarTegSegunPrograma(Programa programa,String estatus1,String estatus2);
+@Query("SELECT DISTINCT teg FROM Teg teg INNER JOIN teg.estudiantes estudiante WHERE teg.tematica.areaInvestigacion IN (SELECT programaarea.area FROM ProgramaArea programaarea WHERE programaarea.programa=?1) AND estudiante.programa=?1 and teg.tematica.areaInvestigacion=?2 and (teg.estatus=?3 or teg.estatus=?4)")
+public List<Teg> buscarTegSegunAreaProgramaDosEstatus(Programa programa, AreaInvestigacion area1,String estatusProyectoTeg1,String estatusProyectoTeg2);
 
 
-public List<Teg> findByEstatusOrEstatusAndEstudiantesIn(String estatus1,String estatus2,List<Estudiante> listasEstudiante);
+//@Query("select teg from Teg teg where teg.tematica=?1 and (teg.estatus=?2 or teg.estatus=?3)")
+//public List<Teg> buscarTegSegunTematicaProgramaDosEstatus(Programa programa,Tematica tematica,String estatus1,String estatus2);
+//
+//	
+@Query("SELECT DISTINCT teg FROM Teg teg INNER JOIN teg.estudiantes estudiante WHERE teg.tematica.areaInvestigacion IN (SELECT programaarea.area FROM ProgramaArea programaarea WHERE programaarea.programa=?1) AND estudiante.programa=?1 and teg.tematica=?2 and (teg.estatus=?3 or teg.estatus=?4) ")
+public List<Teg> buscarTegSegunTematicaProgramaDosEstatus(Programa programa, Tematica tematica,String estatusProyectoTeg1,String estatusProyectoTeg2);
+
+
+//@Query("select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?1)) and (teg.estatus=?2 or teg.estatus=?3)")
+//public List<Teg> buscarTegSegunPrograma(Programa programa,String estatus1,String estatus2);
+//
+
+//public List<Teg> findByEstatusOrEstatusAndEstudiantesIn(String estatus1,String estatus2,List<Estudiante> listasEstudiante);
+
+
+@Query("SELECT DISTINCT teg FROM Teg teg INNER JOIN teg.estudiantes estudiante WHERE teg.tematica.areaInvestigacion IN (SELECT programaarea.area FROM ProgramaArea programaarea WHERE programaarea.programa=?1) AND estudiante.programa=?1 and (teg.estatus=?2 or teg.estatus=?3)" )
+public List<Teg> buscarTegSegunProgramaDosEstatus(Programa programa,String estatusProyectoTeg1,String estatusProyectoTeg2);
+
 
 @Query("select teg from Teg teg where teg in ?1")
 public List<Teg> buscarSegunTegs(List<Teg> tegs);
