@@ -116,16 +116,22 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	/************************************ Query para el Reporte Profesor********************************************/
 
 	/** Querys para buscar la lista de teg dado una tematica un estatus, fecha inicio y fecha fin **/	
-	@Query("select teg from Teg teg where teg.tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?1) and teg.tematica=?2 and fecha between ?3 and ?4 ")
+	@Query("SELECT DISTINCT teg FROM Teg teg INNER JOIN teg.estudiantes estudiante WHERE teg.tematica.areaInvestigacion IN (SELECT programaarea.area FROM ProgramaArea programaarea WHERE programaarea.programa=?1) AND estudiante.programa=?1 and teg.tematica=?2 and fecha between ?3 and ?4 ")
 	public List<Teg> buscarTegPorFechaTematicaPrograma(Programa programa, Tematica tematica, Date fechaInicio,Date fechaFin);
 
 	/** Querys para buscar la lista de teg dado un area, fecha inicio y fecha fin **/	
-	@Query("select teg from Teg teg where teg.tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?1) and teg.tematica.areaInvestigacion=?2 and fecha between ?3 and ?4 ")
+	@Query("SELECT DISTINCT teg FROM Teg teg INNER JOIN teg.estudiantes estudiante WHERE teg.tematica.areaInvestigacion IN (SELECT programaarea.area FROM ProgramaArea programaarea WHERE programaarea.programa=?1) AND estudiante.programa=?1 and teg.tematica.areaInvestigacion=?2 and fecha between ?3 and ?4 ")
 	public List<Teg> buscarTegPorFechaAreaPrograma(Programa programa, AreaInvestigacion area1, Date fechaInicio,Date fechaFin);
 
-	/** Querys para buscar la lista de teg dado varias areas, un programa, un estatus, fecha inicio y fecha fin **/	
-	@Query("select teg from Teg teg where teg.tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?1) and fecha between ?2 and ?3")
+	
+	/** Querys para buscar la lista de teg dado varias areas, un programa, fecha inicio y fecha fin **/
+	@Query("SELECT DISTINCT teg FROM Teg teg INNER JOIN teg.estudiantes estudiante WHERE teg.tematica.areaInvestigacion IN (SELECT programaarea.area FROM ProgramaArea programaarea WHERE programaarea.programa=?1) AND estudiante.programa=?1 AND fecha BETWEEN ?2 AND ?3")
 	public List<Teg> buscarTegPorFechayPrograma(Programa programa,Date fechaInicio,Date fechaFin);
+
+
+	/* Querys para buscar la lista de teg dado varias areas, un programa, un estatus, fecha inicio y fecha fin **
+	@Query("select teg from Teg teg where teg.tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?1) and fecha between ?2 and ?3")
+	public List<Teg> buscarTegPorFechayPrograma(Programa programa,Date fechaInicio,Date fechaFin);*/
 
 	/** Querys para buscar la lista de tg dado todos los programas **/
 	@Query("select teg from Teg teg where fecha between ?1 and ?2 Order by teg.tematica.id")
@@ -138,6 +144,7 @@ public interface ITegDAO extends JpaRepository <Teg, Long>  {
 	/** Querys para buscar la lista de teg dado un area, fecha inicio y fecha fin **/	
 	@Query("select teg from Teg teg where teg.tematica.areaInvestigacion=?1 and fecha between ?2 and ?3 ")
 	public List<Teg> buscarTegPorFechaArea(AreaInvestigacion area1, Date fechaInicio,Date fechaFin);
+	
 	/************************************ Query para el Reporte TEG********************************************/
 	/** Querys para buscar la lista de teg dado todos los programas, un área, una tematica y un estatus **/
 		@Query("select teg from Teg teg where teg.tematica=?1 and teg.estatus=?2 and fecha between ?3 and ?4 Order by teg.tematica.id") 

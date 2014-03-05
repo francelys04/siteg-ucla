@@ -521,11 +521,7 @@ public class STeg {
 			Date fechaInicio,Date fechaFin) {
 		return interfaceTeg.buscarTodosTegporFecha(fechaInicio, fechaFin);
 	}
-	public List<Teg> buscarTegSegunProgramaEstatus(Programa programa, String estatus1,String estatus2){
-		List<Teg> tegs;
-		tegs= interfaceTeg.buscarTegSegunPrograma(programa, estatus1,estatus2);
-		return tegs;
-	}
+
 	
 	public List<Teg> buscarTegUnaTematicaPorDosFechas(
 			Tematica tematica, Date fechaInicio, Date fechaFin) {
