@@ -21,6 +21,8 @@ import modelo.AreaInvestigacion;
 import modelo.Programa;
 import modelo.Teg;
 import modelo.compuesta.id.ProgramaAreaId;
+import modelo.reporte.InformeFactibilidad;
+import modelo.reporte.Solicitud;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
@@ -193,13 +195,7 @@ public class CReporteInformeFactibilidad extends CGeneral {
 			cmbTematica.setModel(new ListModelList<Tematica>(tematicasTodos));
 		}
 	}
-	
-	/*@Listen("onSelect = #cmbTematica")
-	public void tomarIdTematica() {
-		idTematica = Long.parseLong(cmbTematica.getSelectedItem().getId());
-	}*/
-
-	
+		
 	// Metodo que permite abrir la vista VCatalagoinformefact en forma modal //
 		@Listen("onClick = #btnCatalogoProyectoTeg")
 		public void buscarProyecto() {
@@ -222,47 +218,11 @@ public class CReporteInformeFactibilidad extends CGeneral {
 						"/vistas/catalogos/VCatalogoReporteInformeFact.zul", null, null);
 				window.doModal();
 				catalogo.recibir("reportes/estructurados/VReporteInformeFactibilidad");
-		   }
-			
-			
-			
-			
-			/*else{
-				List<Teg> TegProyectoFactible = new ArrayList();
-				System.out.println("das:"+TegProyectoFactible.size());
-				
-				if (fechaFin == null || fechaInicio == null
-						|| fechaInicio.after(fechaFin)) {
-					Messagebox.show(
-							"La fecha de inicio debe ser menor que la fecha de fin",
-							"Error", Messagebox.OK, Messagebox.ERROR);
-					
-					} else {
-						if (nombrePrograma.equals("Todos")) {
-							
-							TegProyectoFactible = servicioTeg.buscarTegSegunEstatus(estatus,fechaInicio,fechaFin);
-						}
-						else
-						if (!nombrePrograma.equals("Todos") && nombreArea.equals("Todos")) {
-							TegProyectoFactible=servicioTeg.buscarDefensaTegSegunEstatusPrograma(estatus, programa, fechaInicio, fechaFin);
-							}
-						else
-						if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && !nombreTematica.equals("Todos")) {
-							    Tematica tematica= servicioTematica.buscarTematicaPorNombre(nombreTematica);
-							    TegProyectoFactible=servicioTeg.buscarDefensaTegSegunEstatusTematica(estatus, tematica, fechaInicio, fechaFin);
-							}else
-						if(!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && nombreTematica.equals("Todos")){
-							TegProyectoFactible=servicioTeg.buscarDefensaTegSegunEstatusArea(estatus, area, fechaInicio, fechaFin);
-							}
-
-					}
-				}
-*/		
+		   }	
 		}
 		
-		
 	 	@Listen("onClick = #btnGenerarReporteInformeFactibilidad")
-		 public void GenerarInforme()  {	
+		 public void GenerarInforme() throws JRException  {	
 	 		if (txtProyecto.getText().equals("")){ 
 				 Messagebox.show( "Debe seleccionar un Proyecto",
 						     "Error", Messagebox.OK,Messagebox.INFORMATION);
@@ -273,8 +233,19 @@ public class CReporteInformeFactibilidad extends CGeneral {
 			    Long proyecto = teg.getId();
 			    String estatus = teg.getEstatus();
 			    List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
+			    String nprofesor = teg.getTutor().getNombre();
+			    String aprofesor = teg.getTutor().getApellido();
+			    String nestudiante = est.get(0).getNombre();
+			    String aestudiante = est.get(0).getApellido();
+			    String cestudiante = est.get(0).getCedula();
+			    String titulo = teg.getTitulo();
+			    String observacion = teg.getFactibilidad().getObservacion();
+			    String programateg = est.get(0).getPrograma().getNombre(); 
 			    String ndirector = est.get(0).getPrograma().getDirectorPrograma().getNombre();
 			    String adirector = est.get(0).getPrograma().getDirectorPrograma().getApellido();
+			    List<InformeFactibilidad> elementos = new ArrayList<InformeFactibilidad>();
+				elementos.add(new InformeFactibilidad(  estatus,  nestudiante, aestudiante,  cestudiante,  titulo,
+						 programateg,  nprofesor,  aprofesor, observacion,  ndirector,  adirector));
 			    
 				if (estatus.equals("Proyecto Factible")){
 			    	reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
@@ -285,35 +256,44 @@ public class CReporteInformeFactibilidad extends CGeneral {
 					}
 				}
 				   
-			    try {
+			  /*  try {
 					Class.forName("org.postgresql.Driver");
 					con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres","equipo2");
 				}catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();
-				}
+				}*/
 			    
-			    try {
+			   /* try {*/
 				    FileSystemView filesys = FileSystemView.getFileSystemView();
-				    Map p = new HashMap();
+				    
 					String rutaUrl = obtenerDirectorio();
-					
 					String reporteSrc = rutaUrl + reporteFact;
 					String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+					
+					Map p = new HashMap();
 					p.put("fecha", new Date().toLocaleString());
-				    p.put("proyecto", proyecto);
+					/*p.put("proyecto", proyecto);
+				    p.put("nprofesor", nprofesor);
+				    p.put("aprofesor", aprofesor);
+				    p.put("nestudiante", nestudiante);
+				    p.put("aestudiante", aestudiante);
+				    p.put("cestudiante", cestudiante);
+				    p.put("titulo", titulo);
+				    p.put("observacion", observacion);
+				    p.put("programateg", programateg);
 				    p.put("ndirector", ndirector);
-				    p.put("adirector", adirector);
+				    p.put("adirector", adirector);*/
 				    p.put("logoUcla", reporteImage + "logo ucla.png");
 				 	p.put("logoCE", reporteImage + "logo CE.png");
 				    p.put("logoSiteg", reporteImage + "logo.png");			    
 					JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p, con);
+					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,new JRBeanCollectionDataSource(elementos));
 				    JasperViewer.viewReport(jasperPrint);
-				    con.close();
+				 /*   con.close();*/
 					
-				    }catch (JRException | SQLException e) {
+				   /* }catch (JRException | SQLException e) {
 						e.printStackTrace();
-				}
+				}*/
 			}
 	 	} 
 	
