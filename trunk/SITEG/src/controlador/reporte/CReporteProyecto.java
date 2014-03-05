@@ -50,6 +50,8 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Radio;
+import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -68,10 +70,14 @@ import servicio.SEstudiante;
 @Controller
 public class CReporteProyecto extends CGeneral {
 
-	private String[] estatusTeg = { "Todos", "Proyecto Registrado",
-			"Proyecto Factible",
-			"Proyecto deTrabajo Especial de Grado en Desarrollo",
-			"Avances Finalizados del Proyecto" };
+	private String[] estatusProyecto = {"Solicitando Registro", "Proyecto Registrado",
+			"Comision Asignada", "Factibilidad Evaluada", "Proyecto Factible", "Proyecto No Factible",
+			"Proyecto en Desarrollo", "Avances Finalizados", "Todos" };
+
+	private String[] estatusTeg = {"TEG Registrado", "Trabajo en Desarrollo",
+			"Revisiones Finalizadas", "Solicitando Defensa", "Jurado Asignado", "Defensa Asignada",
+			"TEG Aprobado", "TEG Reprobado", "Todos" };
+	private String[] estatusAmbos = {"Todos"};
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
@@ -80,6 +86,14 @@ public class CReporteProyecto extends CGeneral {
 	
 	@Wire
 	private Window wdwReporteProyecto;
+	@Wire
+	private Radiogroup rdgEtapa;
+	@Wire
+	private Radio rdoProyecto;
+	@Wire
+	private Radio rdoTeg;
+	@Wire
+	private Radio rdoAmbos;
 	@Wire
 	private Datebox dtbFechaInicio;
 	@Wire
@@ -116,7 +130,7 @@ public class CReporteProyecto extends CGeneral {
 		programas.add(programaa);
 
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
-		cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
+		cmbEstatus.setModel(new ListModelList<String>(estatusProyecto));
 
 		cmbArea.setDisabled(true);
 		cmbTematica.setDisabled(true);
@@ -297,16 +311,22 @@ public class CReporteProyecto extends CGeneral {
 							.getSelectedItem().getValue()).getId());
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
-
-					String estatusTeg1 = "Proyecto Registrado";
-					String estatusTeg2 = "Proyecto Factible";
-					String estatusTeg3 = "Proyecto deTrabajo Especial de Grado en Desarrollo";
-					String estatusTeg4 = "Avances Finalizados del Proyecto";
+										
+					String estatusTeg1 = "Solicitando Registro";
+					String estatusTeg2 = "Proyecto Registrado";
+					String estatusTeg3 = "Comision Asignada";
+					String estatusTeg4 = "Factibilidad Evaluada";
+					String estatusTeg5 = "Proyecto Factible";
+					String estatusTeg6 = "Proyecto No Factible";
+					String estatusTeg7 = "Proyecto en Desarrollo";
+					String estatusTeg8 = "Avances Finalizados";
+					
 					teg = servicioTeg
 							.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
 									estatusTeg1, estatusTeg2, estatusTeg3,
-									estatusTeg4, tematica1, fechaInicio,
-									fechaFin);
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, estatusTeg8, tematica1, 
+									fechaInicio, fechaFin);
 					if (teg.size() == 0) {
 						datosVacios = true;
 					} 
@@ -335,15 +355,20 @@ public class CReporteProyecto extends CGeneral {
 							.getSelectedItem().getValue()).getId());
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
-					String estatusTeg1 = "Proyecto Registrado";
-					String estatusTeg2 = "Proyecto Factible";
-					String estatusTeg3 = "Proyecto deTrabajo Especial de Grado en Desarrollo";
-					String estatusTeg4 = "Avances Finalizados del Proyecto";
+					String estatusTeg1 = "Solicitando Registro";
+					String estatusTeg2 = "Proyecto Registrado";
+					String estatusTeg3 = "Comision Asignada";
+					String estatusTeg4 = "Factibilidad Evaluada";
+					String estatusTeg5 = "Proyecto Factible";
+					String estatusTeg6 = "Proyecto No Factible";
+					String estatusTeg7 = "Proyecto en Desarrollo";
+					String estatusTeg8 = "Avances Finalizados";
 					teg = servicioTeg
 							.buscarTegPorProgramaVariasAreasVariosEstatus1(
 									estatusTeg1, estatusTeg2, estatusTeg3,
-									estatusTeg4, programa1, fechaInicio,
-									fechaFin);
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, estatusTeg8, programa1,
+									fechaInicio, fechaFin);
 					if (teg.size() == 0) {
 						datosVacios = true;
 					}
@@ -358,14 +383,19 @@ public class CReporteProyecto extends CGeneral {
 				}
 				/*buscar por Todos las carrera, y todos los estatus*/
 				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
-					String estatusTeg1 = "Proyecto Registrado";
-					String estatusTeg2 = "Proyecto Factible";
-					String estatusTeg3 = "Proyecto deTrabajo Especial de Grado en Desarrollo";
-					String estatusTeg4 = "Avances Finalizados del Proyecto";
+					String estatusTeg1 = "Solicitando Registro";
+					String estatusTeg2 = "Proyecto Registrado";
+					String estatusTeg3 = "Comision Asignada";
+					String estatusTeg4 = "Factibilidad Evaluada";
+					String estatusTeg5 = "Proyecto Factible";
+					String estatusTeg6 = "Proyecto No Factible";
+					String estatusTeg7 = "Proyecto en Desarrollo";
+					String estatusTeg8 = "Avances Finalizados";
 					teg = servicioTeg
 							.buscarTegPorVariosProgramasVariosEstatus1(
 									estatusTeg1, estatusTeg2, estatusTeg3,
-									estatusTeg4, fechaInicio, fechaFin);
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, estatusTeg8, fechaInicio, fechaFin);
 					if (teg.size() == 0) {
 						datosVacios = true;
 					}
