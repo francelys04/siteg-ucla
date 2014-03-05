@@ -69,7 +69,7 @@ import servicio.SEstudiante;
 
 @Controller
 public class CReporteProyecto extends CGeneral {
-
+	
 	private String[] estatusProyecto = {"Solicitando Registro", "Proyecto Registrado",
 			"Comision Asignada", "Factibilidad Evaluada", "Proyecto Factible", "Proyecto No Factible",
 			"Proyecto en Desarrollo", "Avances Finalizados", "Todos" };
@@ -77,7 +77,9 @@ public class CReporteProyecto extends CGeneral {
 	private String[] estatusTeg = {"TEG Registrado", "Trabajo en Desarrollo",
 			"Revisiones Finalizadas", "Solicitando Defensa", "Jurado Asignado", "Defensa Asignada",
 			"TEG Aprobado", "TEG Reprobado", "Todos" };
+	
 	private String[] estatusAmbos = {"Todos"};
+	
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
@@ -138,6 +140,36 @@ public class CReporteProyecto extends CGeneral {
 
 	}
 
+	@Listen("onCheck = #rdgEvaluaciones")
+	public void llenarCombo() {
+		if (rdoProyecto.isChecked() == true) {
+			try {
+				cmbEstatus.setModel(new ListModelList<String>(estatusProyecto));
+			} catch (Exception e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (rdoTeg.isChecked() == true) {
+			try {
+				cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
+			} catch (Exception e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (rdoAmbos.isChecked() == true) {
+			try {
+				cmbEstatus.setModel(new ListModelList<String>(estatusAmbos));
+			} catch (Exception e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
 	/*
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
@@ -436,7 +468,8 @@ public class CReporteProyecto extends CGeneral {
 					mapa.put("logoUcla", reporteImage + "logo ucla.png");
 					mapa.put("logoCE", reporteImage + "logo CE.png");
 					mapa.put("logoSiteg", reporteImage + "logo.png");
-						
+					mapa.put("Cantidad", elementos.size());	
+					
 					JasperReport jasperReport = (JasperReport) JRLoader
 							.loadObject(reporteSrc);
 

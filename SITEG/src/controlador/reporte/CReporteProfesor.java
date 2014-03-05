@@ -360,7 +360,7 @@ public class CReporteProfesor extends CGeneral {
 						}
 
 					}
-					if (teg.size() == 0) {
+					if (elementos.size() == 0) {
 						datosVacios = true;
 					}
 				}
@@ -412,7 +412,7 @@ public class CReporteProfesor extends CGeneral {
 							}
 						}
 					}
-					if (teg.size() == 0) {
+					if (elementos.size() == 0) {
 						datosVacios = true;
 					}
 				}
@@ -465,7 +465,7 @@ public class CReporteProfesor extends CGeneral {
 							}
 						}
 					}
-					if (teg1.size() == 0) {
+					if (elementos.size() == 0) {
 						datosVacios = true;
 					}
 				}
@@ -520,7 +520,7 @@ public class CReporteProfesor extends CGeneral {
 						}
 
 					}
-					if (teg2.size() == 0) {
+					if (elementos.size() == 0) {
 						datosVacios = true;
 					}
 				}
@@ -568,7 +568,7 @@ public class CReporteProfesor extends CGeneral {
 							}
 						}
 					}
-					if (teg2.size() == 0) {
+					if (elementos.size() == 0) {
 						datosVacios = true;
 					}
 				}
@@ -617,7 +617,7 @@ public class CReporteProfesor extends CGeneral {
 						}
 
 					}
-					if (teg2.size() == 0) {
+					if (elementos.size() == 0) {
 						datosVacios = true;
 					}
 				}
@@ -659,18 +659,11 @@ public class CReporteProfesor extends CGeneral {
 							}
 						}
 					}
-					if (teg2.size() == 0) {
+					if (elementos.size() == 0) {
 						datosVacios = true;
 					}
 				}
 
-				
-				
-				
-				
-				
-				
-				
 				/*Todos los programas, una area, una tematica, un estatus*/
 				if (nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
@@ -774,7 +767,7 @@ public class CReporteProfesor extends CGeneral {
 							}
 						}
 					}
-					if (teg1.size() == 0) {
+					if (elementos.size() == 0) {
 						datosVacios = true;
 					}
 				}
@@ -828,7 +821,7 @@ public class CReporteProfesor extends CGeneral {
 						}
 
 					}
-					if (teg.size() == 0) {
+					if (elementos.size() == 0) {
 						datosVacios = true;
 					}
 				}
@@ -876,20 +869,12 @@ public class CReporteProfesor extends CGeneral {
 							}
 						}
 					}
-					if (teg.size() == 0) {
+					if (elementos.size() == 0) {
 						datosVacios = true;
 					}
 				}
 
-				
-				
-				
-				
-				
-				
-				
-				
-				
+
 				if (!datosVacios) {
 					Collections.sort(elementos, new Comparator<ProfesorTeg>() {
 						public int compare(ProfesorTeg a, ProfesorTeg b) {
@@ -916,6 +901,7 @@ public class CReporteProfesor extends CGeneral {
 					mapa.put("logoUcla", reporteImage + "logo ucla.png");
 					mapa.put("logoCE", reporteImage + "logo CE.png");
 					mapa.put("logoSiteg", reporteImage + "logo.png");
+					mapa.put("Cantidad", elementos.size());
 
 					JasperReport jasperReport = (JasperReport) JRLoader
 							.loadObject(reporteSrc);

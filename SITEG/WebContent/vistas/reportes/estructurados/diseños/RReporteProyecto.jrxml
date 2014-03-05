@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReporteProyecto" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86643447-ad29-4b3c-8409-5f8e59397c3f">
-	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="871"/>
+	<property name="ireport.y" value="48"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#0099CC"/>
@@ -35,6 +35,7 @@
 	<parameter name="logoCE" class="java.lang.String"/>
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoSiteg" class="java.lang.String"/>
+	<parameter name="Cantidad" class="java.lang.String"/>
 	<field name="teg.titulo" class="java.lang.String"/>
 	<field name="nombreEstudiantes" class="java.lang.String"/>
 	<field name="teg.tutor.nombre" class="java.lang.String"/>
@@ -259,21 +260,33 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band splitType="Stretch"/>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="503" y="9" width="65" height="20" uuid="c939e5f7-5b76-4bcd-9192-336afac4caac"/>
+				<textFieldExpression><![CDATA[$P{Cantidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="370" y="9" width="123" height="20" uuid="a8405dce-69ad-4841-bee8-5eb87e1c585e"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Elementos:]]></text>
+			</staticText>
+		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="40" splitType="Stretch">
+		<band height="48" splitType="Stretch">
 			<textField>
-				<reportElement x="468" y="13" width="100" height="17" uuid="fe301ea2-cc2d-4e12-847b-fd4f95d8c77a"/>
+				<reportElement x="468" y="18" width="100" height="17" uuid="fe301ea2-cc2d-4e12-847b-fd4f95d8c77a"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="173" y="20" width="216" height="20" uuid="de7304aa-ac27-4131-b24a-f8b60500ee25"/>
+				<reportElement x="173" y="25" width="216" height="20" uuid="de7304aa-ac27-4131-b24a-f8b60500ee25"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Av. las Industrias, Núcleo Obelisco]]></text>
 			</staticText>
 			<image>
-				<reportElement x="8" y="0" width="62" height="40" uuid="040b8093-7f73-4965-ae35-fde2aed6332a"/>
+				<reportElement x="8" y="5" width="62" height="40" uuid="040b8093-7f73-4965-ae35-fde2aed6332a"/>
 				<imageExpression><![CDATA[$P{logoSiteg}]]></imageExpression>
 			</image>
 		</band>
