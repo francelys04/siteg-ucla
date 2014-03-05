@@ -36,6 +36,7 @@
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoSiteg" class="java.lang.String"/>
 	<parameter name="Cantidad" class="java.lang.String"/>
+	<parameter name="Etapa" class="java.lang.String"/>
 	<field name="teg.titulo" class="java.lang.String"/>
 	<field name="nombreEstudiantes" class="java.lang.String"/>
 	<field name="teg.tutor.nombre" class="java.lang.String"/>
@@ -68,30 +69,30 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="142" splitType="Stretch">
+		<band height="167" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="42" width="49" height="20" uuid="eb41311e-92e3-4213-84e8-3d6fe439f408"/>
+				<reportElement x="1" y="68" width="49" height="20" uuid="eb41311e-92e3-4213-84e8-3d6fe439f408"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Desde:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="50" y="42" width="92" height="20" uuid="97c0d305-331f-4e24-a6c3-8e72d30ad399"/>
+				<reportElement x="50" y="68" width="92" height="20" uuid="97c0d305-331f-4e24-a6c3-8e72d30ad399"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{FechaInicio})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="77" width="37" height="20" uuid="6a1873cb-9395-41b9-95fb-6d79bcc4fb81"/>
+				<reportElement x="0" y="103" width="37" height="20" uuid="6a1873cb-9395-41b9-95fb-6d79bcc4fb81"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hasta:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="50" y="77" width="92" height="20" uuid="67e38e60-488e-4d5e-aa77-742c4a5324a3"/>
+				<reportElement x="50" y="103" width="92" height="20" uuid="67e38e60-488e-4d5e-aa77-742c4a5324a3"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -112,68 +113,82 @@
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{Fecha})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="379" y="42" width="34" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
+				<reportElement x="379" y="68" width="34" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Area:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="178" y="77" width="59" height="20" uuid="e99113b9-b056-4d57-983a-8ed5e3c4c7b3"/>
+				<reportElement x="178" y="103" width="59" height="20" uuid="e99113b9-b056-4d57-983a-8ed5e3c4c7b3"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tematica:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="416" y="42" width="155" height="20" uuid="2fe181fc-7880-4a61-895e-d8da6a80c9ee"/>
+				<reportElement x="416" y="68" width="155" height="20" uuid="2fe181fc-7880-4a61-895e-d8da6a80c9ee"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Area}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="243" y="77" width="136" height="20" uuid="897dd153-9e78-4624-bd76-fac2acdbeb24"/>
+				<reportElement x="243" y="103" width="136" height="20" uuid="897dd153-9e78-4624-bd76-fac2acdbeb24"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Tematica}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="178" y="42" width="65" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
+				<reportElement x="178" y="68" width="65" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Programa:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="245" y="42" width="134" height="20" uuid="e666f2ac-f82d-4323-8fc6-1161f175a172"/>
+				<reportElement x="245" y="68" width="134" height="20" uuid="e666f2ac-f82d-4323-8fc6-1161f175a172"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Programa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="77" width="138" height="20" uuid="8b96cf9c-bdc1-47e1-9f32-7789a4c1a7af"/>
+				<reportElement x="433" y="103" width="138" height="20" uuid="8b96cf9c-bdc1-47e1-9f32-7789a4c1a7af"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Estatus}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="379" y="77" width="54" height="20" uuid="e6a9d5b1-86ad-4226-a242-47577ed23a53"/>
+				<reportElement x="379" y="103" width="54" height="20" uuid="e6a9d5b1-86ad-4226-a242-47577ed23a53"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estatus:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="37" y="110" width="500" height="20" backcolor="#000000" uuid="d39052b0-54ca-421f-b947-929fe0b39cd0"/>
+				<reportElement x="37" y="136" width="500" height="20" backcolor="#000000" uuid="d39052b0-54ca-421f-b947-929fe0b39cd0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[Lista de Proyectos]]></text>
+				<text><![CDATA[Lista de Trabajos Especiales de Grado]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="1" y="36" width="49" height="20" uuid="fbf9ec67-5653-46c3-bba7-72a46aad96a2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Etapa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="51" y="36" width="259" height="20" uuid="5f6a3b32-72af-467d-9420-8b2f8515c659"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Etapa}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
