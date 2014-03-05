@@ -3,28 +3,23 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="170"/>
-	<parameter name="proyecto" class="java.lang.Long">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
 	<parameter name="fecha" class="java.lang.String"/>
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoCE" class="java.lang.String"/>
 	<parameter name="logoSiteg" class="java.lang.String"/>
-	<parameter name="ndirector" class="java.lang.String"/>
-	<parameter name="adirector" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[Select estudiante.nombre ne, estudiante.apellido ae, estudiante.cedula ce, teg.titulo te, programa.nombre pn, profesor.nombre np, profesor.apellido ap, profesor.nombre dn , profesor.apellido da, factibilidad.observacion ob from estudiante, teg, programa, profesor,factibilidad, estudiante_teg,tematica,area_investigacion,programa_area where estudiante.cedula= estudiante_teg.estudiante_cedula and estudiante_teg.teg_id=teg.id and estudiante.programa_id = programa.id and teg.profesor_cedula = profesor.cedula and teg.id=$P{proyecto} and teg.tematica_id = tematica.id and tematica.area_investigacion_id = area_investigacion.id and area_investigacion.id = programa_area.area_investigacion_id and programa_area.programa_id = programa.id and teg.id = factibilidad.teg_id;]]>
+		<![CDATA[]]>
 	</queryString>
-	<field name="ne" class="java.lang.String"/>
-	<field name="ae" class="java.lang.String"/>
-	<field name="ce" class="java.lang.String"/>
-	<field name="te" class="java.lang.String"/>
-	<field name="pn" class="java.lang.String"/>
-	<field name="np" class="java.lang.String"/>
-	<field name="ap" class="java.lang.String"/>
-	<field name="dn" class="java.lang.String"/>
-	<field name="da" class="java.lang.String"/>
-	<field name="ob" class="java.lang.String"/>
+	<field name="ndirector" class="java.lang.String"/>
+	<field name="adirector" class="java.lang.String"/>
+	<field name="nprofesor" class="java.lang.String"/>
+	<field name="aprofesor" class="java.lang.String"/>
+	<field name="aestudiante" class="java.lang.String"/>
+	<field name="nestudiante" class="java.lang.String"/>
+	<field name="cestudiante" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="observacion" class="java.lang.String"/>
+	<field name="programateg" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -60,131 +55,92 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="342" splitType="Stretch">
+		<band height="354" splitType="Stretch">
 			<staticText>
 				<reportElement x="354" y="12" width="67" height="14" uuid="a477c8e7-48d8-4fe2-a4e7-0eb3eac8d07b"/>
 				<text><![CDATA[Barquisimeto, ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="15" y="29" width="68" height="16" uuid="87f8011a-342f-4963-8eb9-7656a1e19892"/>
+				<reportElement x="6" y="29" width="68" height="16" uuid="87f8011a-342f-4963-8eb9-7656a1e19892"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Ciudadado(a)]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="15" y="44" width="34" height="17" uuid="2902e208-510d-43b3-97c9-8c165ecd3d0f"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{np}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="49" y="45" width="50" height="16" uuid="7cdf1c7f-0123-4c59-8cbb-c06e2aa4b3e2"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{ap}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="15" y="61" width="100" height="16" uuid="ee859871-190f-4dc8-b135-caefad742ebd"/>
+				<reportElement x="6" y="61" width="100" height="16" uuid="ee859871-190f-4dc8-b135-caefad742ebd"/>
 				<text><![CDATA[Departamento de]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="15" y="77" width="100" height="16" uuid="bc302fdf-0eef-4ec6-a207-ab0394f367b2"/>
+				<reportElement x="6" y="77" width="100" height="16" uuid="bc302fdf-0eef-4ec6-a207-ab0394f367b2"/>
 				<text><![CDATA[Presente.-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="59" y="118" width="510" height="16" uuid="cd78b985-77d7-49fb-bcf2-7189edbde888"/>
+				<reportElement x="53" y="134" width="510" height="16" uuid="cd78b985-77d7-49fb-bcf2-7189edbde888"/>
 				<text><![CDATA[Anexo a la presente las observaciones menores al Proyecto de Trabajo Especial de Grado presentado ante ]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="161" y="134" width="36" height="15" uuid="4151dc34-73ef-4aec-9bc6-2b93538e20a2"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{ne}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="194" y="134" width="43" height="15" uuid="20c601a9-b189-4a64-8d30-609a43749e7c"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{ae}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="416" y="135" width="61" height="15" uuid="b1420fe4-e56b-4992-a3be-6bbe0a69bb38"/>
-				<textFieldExpression><![CDATA[$F{ce}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="245" y="135" width="179" height="15" uuid="e5778904-8775-41a1-a5b9-e80253e78a72"/>
+				<reportElement x="245" y="151" width="179" height="15" uuid="e5778904-8775-41a1-a5b9-e80253e78a72"/>
 				<text><![CDATA[titular de la Cédula de Identidad N° ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="478" y="135" width="86" height="15" uuid="622f79d4-d664-49b3-8753-96ca6de80732"/>
+				<reportElement x="478" y="151" width="86" height="15" uuid="622f79d4-d664-49b3-8753-96ca6de80732"/>
 				<text><![CDATA[, la cual lleva por ]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="37" y="149" width="247" height="15" uuid="170a9c38-e185-4eea-8896-14c6a67b57af"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{te}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="31" y="179" width="478" height="14" uuid="1ed1c212-9ee6-488a-a4d2-c3d7156db7b5"/>
+				<reportElement x="31" y="197" width="478" height="14" uuid="1ed1c212-9ee6-488a-a4d2-c3d7156db7b5"/>
 				<text><![CDATA[Para mejorar la versión definitiva del proyecto, debe considerar la la siguiente observación:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="34" y="231" width="168" height="15" uuid="d83e59a3-ba0b-4a29-8e42-dc4b986794b8"/>
+				<reportElement x="34" y="249" width="168" height="15" uuid="d83e59a3-ba0b-4a29-8e42-dc4b986794b8"/>
 				<text><![CDATA[Deseandoles el mayor de los exitos.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="258" width="572" height="13" uuid="3f6d723d-09cf-4208-93d3-d3ba872a6e94"/>
+				<reportElement x="0" y="288" width="572" height="13" uuid="3f6d723d-09cf-4208-93d3-d3ba872a6e94"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Atentamente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="223" y="282" width="47" height="13" uuid="0bae8493-dae8-4929-b90d-c0aa61b260b8"/>
+				<reportElement x="223" y="312" width="47" height="13" uuid="0bae8493-dae8-4929-b90d-c0aa61b260b8"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Profesor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="295" width="572" height="14" uuid="0683124d-a078-45f3-8cb7-12e38bf5857b"/>
+				<reportElement x="0" y="325" width="572" height="14" uuid="0683124d-a078-45f3-8cb7-12e38bf5857b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Director de Programa]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="0" y="308" width="572" height="14" uuid="b91570d3-f077-42e2-86b0-d089dc976bc0"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{pn}]]></textFieldExpression>
-			</textField>
 			<line>
-				<reportElement x="142" y="149" width="103" height="1" uuid="c962f008-f402-4d3c-912a-b02b7a754057"/>
+				<reportElement x="142" y="165" width="103" height="1" uuid="c962f008-f402-4d3c-912a-b02b7a754057"/>
 			</line>
 			<line>
-				<reportElement x="26" y="205" width="525" height="1" uuid="0d5049cd-9b8c-486d-81d1-dd242afbba92"/>
+				<reportElement x="26" y="223" width="525" height="1" uuid="0d5049cd-9b8c-486d-81d1-dd242afbba92"/>
 			</line>
 			<line>
-				<reportElement x="37" y="164" width="247" height="1" uuid="d8603d9d-6155-4c59-9e5a-a7be7eeb5abc"/>
+				<reportElement x="33" y="180" width="247" height="1" uuid="d8603d9d-6155-4c59-9e5a-a7be7eeb5abc"/>
 			</line>
 			<line>
-				<reportElement x="403" y="149" width="75" height="1" uuid="d4413dde-bd14-4bbf-97ca-66fb64d722cb"/>
+				<reportElement x="403" y="165" width="75" height="1" uuid="d4413dde-bd14-4bbf-97ca-66fb64d722cb"/>
 			</line>
 			<staticText>
-				<reportElement x="165" y="98" width="242" height="20" uuid="df462bbc-26e4-47f4-a7ed-619fca83364a"/>
+				<reportElement x="165" y="101" width="242" height="20" uuid="df462bbc-26e4-47f4-a7ed-619fca83364a"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[Informe de Factibilidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="8" y="134" width="144" height="15" uuid="197df748-ac0e-4510-bd4a-7604890ca3d3"/>
-				<text><![CDATA[esta Dirección por la bachiller]]></text>
+				<reportElement x="2" y="150" width="144" height="15" uuid="197df748-ac0e-4510-bd4a-7604890ca3d3"/>
+				<text><![CDATA[esta Dirección por el bachiller]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="150" width="26" height="15" uuid="d23ef89d-17ce-4775-92ca-12d11cfda144"/>
+				<reportElement x="4" y="166" width="26" height="15" uuid="d23ef89d-17ce-4775-92ca-12d11cfda144"/>
 				<text><![CDATA[titulo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="32" y="206" width="530" height="15" uuid="c8c634a6-5692-4094-b1ae-a10fc283851d"/>
+				<reportElement x="32" y="224" width="530" height="15" uuid="c8c634a6-5692-4094-b1ae-a10fc283851d"/>
 				<text><![CDATA[Debe entregar dicha versión mejorada según el cronograma de actividades correspondiente a su Programa.]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="103" y="191" width="366" height="15" uuid="b57faa5a-ee9d-47e0-b928-0d166958f7ad"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{ob}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="284" y="151" width="109" height="15" uuid="415acbdd-55bb-4f63-9cfd-629d5ff2c4e4"/>
+				<reportElement x="284" y="167" width="109" height="15" uuid="415acbdd-55bb-4f63-9cfd-629d5ff2c4e4"/>
 				<text><![CDATA[, el cual es no factible. ]]></text>
 			</staticText>
 			<textField>
@@ -193,13 +149,53 @@
 				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="262" y="282" width="55" height="13" uuid="a216117a-6530-4cfa-b887-c5019409a30a"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$P{ndirector}]]></textFieldExpression>
+				<reportElement x="6" y="45" width="68" height="16" uuid="c1251297-f499-4ef7-b67a-477d2211d0eb"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nprofesor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="317" y="282" width="55" height="13" uuid="befd893d-b292-4f19-86ba-41accf093ed9"/>
-				<textFieldExpression><![CDATA[$P{adirector}]]></textFieldExpression>
+				<reportElement x="55" y="45" width="70" height="16" uuid="d117fe48-97f1-45bf-9f36-55fa1b1e6e71"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{aprofesor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="150" width="66" height="16" uuid="37468965-d95d-4c02-9c6c-aa1c8cc87afb"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nestudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="150" width="61" height="16" uuid="d6af29bc-bacc-4217-afd6-fc177421a7e1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{aestudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="407" y="149" width="71" height="16" uuid="4d40dfec-4dfa-4a9f-8fca-8485ced31fc4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cestudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="165" width="247" height="16" uuid="853169b4-7c29-448c-8e7f-ca639db7ea9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="210" width="521" height="13" uuid="2d47c93d-c9ba-4822-8e86-81783449cf1e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="311" width="67" height="14" uuid="8209a3c0-8c99-4781-baea-e156c8af08ac"/>
+				<textFieldExpression><![CDATA[$F{adirector}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="311" width="58" height="14" uuid="0db0b417-cf2c-4905-84a7-29f64cd0f3cc"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ndirector}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="339" width="572" height="14" uuid="c9122bb4-da8c-4801-bac2-2d526825579d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{programateg}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
