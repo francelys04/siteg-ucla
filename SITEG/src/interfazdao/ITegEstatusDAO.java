@@ -2,6 +2,7 @@ package interfazdao;
 
 import java.util.List;
 
+import modelo.Actividad;
 import modelo.Teg;
 import modelo.TegEstatus;
 
@@ -14,6 +15,8 @@ public interface ITegEstatusDAO extends JpaRepository<TegEstatus, Long> {
 	@Query("select tegEstatus from TegEstatus tegEstatus where tegEstatus.nombre=?1 and tegEstatus.teg in ?2")
 	public List<TegEstatus> buscarEstatusSegunTeg(String nombre,List<Teg> teg);
 	
+	
+	public List<TegEstatus> findByNombre(String nombre);
 	
 	
 	

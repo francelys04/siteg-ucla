@@ -1,5 +1,6 @@
-<window id="wdwCrearGrupo" title="Crear Grupo" border="normal" width="100%" height="auto"
-	closable="true" apply="controlador.seguridad.CCrearGrupo">
+<window id="wdwCrearGrupo" title="Crear Grupo" border="normal"
+	width="100%" height="auto" closable="true"
+	apply="controlador.seguridad.CCrearGrupo">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -59,6 +60,10 @@
 			label="Presione aquí para eliminar los datos de un grupo" />
 	</popup>
 	<popup id="pupAgregarFuncionalidadGrupo">
+		<toolbarbutton
+			label="Presione aquí para agregar una funcionalidad" />
+	</popup>
+	<popup id="pupVisualizarFuncionalidadGrupo">
 		<toolbarbutton
 			label="Presione aquí para agregar una funcionalidad" />
 	</popup>
@@ -126,7 +131,8 @@
 			<rows>
 				<row>
 					<button id="btnVisualizarFuncionalidades"
-						sclass="btn" label="Visualizar Funcionalidades">
+						tooltip="pupVisualizarFuncionalidadGrupo" sclass="btn"
+						label="Visualizar Funcionalidades">
 					</button>
 				</row>
 

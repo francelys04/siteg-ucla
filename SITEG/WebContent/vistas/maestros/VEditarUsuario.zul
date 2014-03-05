@@ -140,7 +140,7 @@
 					<hbox>
 
 						<fileupload id="fudImagenUsuarioEditar"
-							label="Cargar Imagen">
+							label="Subir Imagen">
 						</fileupload>
 
 						<image id="imagenUsuarioEditar" width="80px"

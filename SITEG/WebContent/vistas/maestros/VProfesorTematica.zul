@@ -1,4 +1,4 @@
-<window  id="wdwProfesorTematica" title="Temáticas de un profesor" border="normal" width="100%"
+<window  id="wdwProfesorTematica" title="Temáticas de un Profesor" border="normal" width="100%"
 	height="600px" closable="true"
 	apply="controlador.CProfesorTematicas">
 	<separator />
