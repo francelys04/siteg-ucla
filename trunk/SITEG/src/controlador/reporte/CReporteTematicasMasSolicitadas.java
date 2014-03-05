@@ -157,7 +157,10 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 				List<Teg> tematicasSeleccionadas1 = new ArrayList<Teg>();
 				System.out.println("estatus1:" + estatusProyectoTeg1);
 				System.out.println("estatus2:" + estatusProyectoTeg2);
-
+				String idPrograma = cmbPrograma.getSelectedItem().getId();
+				Programa programa1 = servicioPrograma.buscar(Long
+						.parseLong(idPrograma));
+				
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						|| nombrePrograma.equals("Todos")
@@ -166,9 +169,9 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 					AreaInvestigacion area1 = servicioArea.buscarArea(Long
 							.parseLong(idArea));
 							
-					tematicasSeleccionadas= servicioTeg.buscarUltimasTematicasProgramaAreaEstatus(
-												estatusProyectoTeg1, estatusProyectoTeg2,
-												area1, fechaInicio, fechaFin);
+					tematicasSeleccionadas1= servicioTeg.buscarUltimasTematicasProgramaAreaEstatus(programa1,area1
+												,fechaInicio, fechaFin,estatusProyectoTeg1, estatusProyectoTeg2
+												);
 		
 				}
 
@@ -183,17 +186,15 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")) {
-					String idPrograma = cmbPrograma.getSelectedItem().getId();
-					Programa programa1 = servicioPrograma.buscar(Long
-							.parseLong(idPrograma));
-		
-					tematicasSeleccionadas1=servicioTeg.buscarUltimasTematicasProgramaEstatus(estatusProyectoTeg1,estatusProyectoTeg2,programa1, fechaInicio, fechaFin);
 					
-					for(int i=0;i<tematicasSeleccionadas1.size();i++){
-						tematicasSeleccionadas.add(tematicasSeleccionadas1.get(i).getTematica().getId());
-					}
+		
+					tematicasSeleccionadas1=servicioTeg.buscarUltimasTematicasProgramaEstatus(programa1,fechaInicio, fechaFin,estatusProyectoTeg1,estatusProyectoTeg2);
+					
+					
 				}
-				
+				for(int i=0;i<tematicasSeleccionadas1.size();i++){
+					tematicasSeleccionadas.add(tematicasSeleccionadas1.get(i).getTematica().getId());
+				}
 				
 				if (tematicasSeleccionadas.size() != 0) {
 

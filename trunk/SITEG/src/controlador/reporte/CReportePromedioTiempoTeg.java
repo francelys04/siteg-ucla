@@ -195,7 +195,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 					&& !nombreTematica.equals("Todos")) {
 				Tematica tematica = servicioTematica
 						.buscarTematicaPorNombre(nombreTematica);
-				tegs = servicioTeg.buscarTegSegunTematicaEstatus(tematica,
+				tegs = servicioTeg.buscarTegSegunTematicaDosEstatus(programa,tematica,
 						estatusAprobado, estatusReprobado);
 
 			} else if (!nombrePrograma.equals("Todos")
@@ -204,7 +204,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 					|| nombrePrograma.equals("Todos")
 					&& !nombreArea.equals("Todos")
 					&& nombreTematica.equals("Todos")) {
-				tegs = servicioTeg.buscarTegSegunAreaInvestigacionEstatus(area,
+				tegs = servicioTeg.buscarTegSegunAreaProgramaDosEstatus(programa,area,
 						estatusAprobado, estatusReprobado);
 
 			}
