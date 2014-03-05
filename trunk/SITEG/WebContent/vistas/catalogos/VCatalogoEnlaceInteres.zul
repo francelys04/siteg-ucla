@@ -1,48 +1,45 @@
-<?page id="wdwCatalogoEnlace"  title="Catalogo Descarga" contentType="text/html;charset=UTF-8"?>
-<zk>
-	<window title="Catalogo Enlace de Interes" border="normal"
-		width="800px" id="wdwCatalogoEnlace"
-		apply="controlador.catalogo.CCatalogoEnlaceInteres" closable="true">
+<window title="Catalogo Enlace de Interes" border="normal" width="800px"
+	id="wdwCatalogoEnlace"
+	apply="controlador.catalogo.CCatalogoEnlaceInteres" closable="true">
 
-		<style src="/public/css/bootstrap.css" />
-		<style src="/public/css/style.css" />
-		<!-- Lista de popus -->
-		<popup id="pupSeleccionEnlace">
-			<toolbarbutton
-				label="Doble clic para seleccionar el enlace de interés" />
-		</popup>
-		<!-- Fin de popus -->
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
+	<!-- Lista de popus -->
+	<popup id="pupSeleccionEnlace">
+		<toolbarbutton
+			label="Doble clic para seleccionar el enlace de interés" />
+	</popup>
+	<!-- Fin de popus -->
 
-		<listbox id="ltbEnlace" width="100%" mold="paging" pageSize="10"
-			emptyMessage="No hay enlaces de interes registrados">
+	<listbox id="ltbEnlace" width="100%" mold="paging" pageSize="10"
+		emptyMessage="No hay enlaces de interes registrados">
 
-			<auxhead sclass="category-center">
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="80%"
-						sclass="search-query" placeholder="Nombre"
-						id="txtNombreMostrarEnlace" />
-				</auxheader>
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="80%"
-						sclass="search-query" placeholder="Url" id="txtUrlMostrarEnlace" />
-				</auxheader>
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="80%"
+					sclass="search-query" placeholder="Nombre"
+					id="txtNombreMostrarEnlace" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="80%"
+					sclass="search-query" placeholder="Url" id="txtUrlMostrarEnlace" />
+			</auxheader>
 
-			</auxhead>
-			<listhead>
-				<listheader label="Nombre" align="center" />
-				<listheader label="Url" align="center" />
-			</listhead>
+		</auxhead>
+		<listhead>
+			<listheader label="Nombre" align="center" />
+			<listheader label="Url" align="center" />
+		</listhead>
 
 
-			<template name="model">
-				<listitem tooltip="pupSeleccionEnlace">
-					<listcell label="${each.nombre}" />
-					<listcell label="${each.url}" />
+		<template name="model">
+			<listitem tooltip="pupSeleccionEnlace">
+				<listcell label="${each.nombre}" />
+				<listcell label="${each.url}" />
 
-				</listitem>
-			</template>
-		</listbox>
-	</window>
-</zk>
+			</listitem>
+		</template>
+	</listbox>
+</window>

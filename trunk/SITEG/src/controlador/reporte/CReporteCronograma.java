@@ -118,7 +118,10 @@ public class CReporteCronograma extends CGeneral {
 				JasperViewer.viewReport(jasperPrint, false);
 
 			} else {
-				Messagebox.show("No hay información disponible");
+				Messagebox
+				.show("No hay informacion disponible para esta seleccion",
+						"Informacion", Messagebox.OK,
+						Messagebox.INFORMATION);
 				Cancelar();
 			}
 

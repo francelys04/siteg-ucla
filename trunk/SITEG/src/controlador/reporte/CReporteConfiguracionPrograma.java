@@ -114,7 +114,7 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 			lapso = servicioLapso.buscarLapso(idlapso);
 			if (rdocondicion.isChecked() == true) {
 
-				System.out.println("pase por donde era");
+				
 				List<CondicionPrograma> condicion = servicioCondicionPrograma
 						.buscarCondicionesPrograma(programa, lapso);
 				if (condicion.size() != 0) {
@@ -124,26 +124,40 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 					mapa.put("nombreprograma",
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
-
+					
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					String rutaUrl = obtenerDirectorio();
-					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaCondicion.jasper";
-					String reporteImage = rutaUrl
-							+ "SITEG/public/imagenes/reportes/";
+					JasperReport jasperReport;		
 
-					JasperReport jasperReport = (JasperReport) JRLoader
-							.loadObject(reporteSrc);
+					try {
+						
+						String rutaUrl = obtenerDirectorio();
+						String reporteSrc = rutaUrl
+								+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaCondicion.jasper";
+						  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
+							
+							
+						 
 
-					JasperPrint jasperPrint = JasperFillManager.fillReport(
-							jasperReport, mapa, new JRBeanCollectionDataSource(
-									condicion));
-
-					JasperViewer.viewReport(jasperPrint, false);
+						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(condicion));
+						JasperViewer.viewReport(jasperPrint, false);
+						
+				
+					} catch (JRException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
 
 				} else {
 					Messagebox
-							.show("No ha informacion disponible para este intervalo");
+					.show("No hay informacion disponible para esta seleccion",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
 				}
 			} else if (rdoarea.isChecked() == true) {
 				List<AreaInvestigacion> programaarea = servicioProgramaArea
@@ -155,26 +169,43 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 					mapa.put("nombreprograma",
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
-
+					
+					
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					String rutaUrl = obtenerDirectorio();
-					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaArea.jasper";
-					String reporteImage = rutaUrl
-							+ "SITEG/public/imagenes/reportes/";
+					JasperReport jasperReport;		
 
-					JasperReport jasperReport = (JasperReport) JRLoader
-							.loadObject(reporteSrc);
+					try {
+						
+						String rutaUrl = obtenerDirectorio();
+						String reporteSrc = rutaUrl
+								+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaArea.jasper";
+						  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
+							
+							
+						 
 
-					JasperPrint jasperPrint = JasperFillManager.fillReport(
-							jasperReport, mapa, new JRBeanCollectionDataSource(
-									programaarea));
-
-					JasperViewer.viewReport(jasperPrint, false);
+						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(programaarea));
+						JasperViewer.viewReport(jasperPrint, false);
+						
+				
+					} catch (JRException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					
+					
 
 				} else {
 					Messagebox
-							.show("No ha informacion disponible para este intervalo");
+					.show("No hay informacion disponible para esta seleccion",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
 				}
 
 			} else if (rdoitem.isChecked() == true) {
@@ -187,26 +218,40 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 					mapa.put("nombreprograma",
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
-
+					
+					
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					String rutaUrl = obtenerDirectorio();
-					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaItem.jasper";
-					String reporteImage = rutaUrl
-							+ "SITEG/public/imagenes/reportes/";
+					JasperReport jasperReport;		
 
-					JasperReport jasperReport = (JasperReport) JRLoader
-							.loadObject(reporteSrc);
+					try {
+						
+						String rutaUrl = obtenerDirectorio();
+						String reporteSrc = rutaUrl
+								+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaItem.jasper";
+						  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
+							
+							
+						 
 
-					JasperPrint jasperPrint = JasperFillManager.fillReport(
-							jasperReport, mapa, new JRBeanCollectionDataSource(
-									programaitem));
-
-					JasperViewer.viewReport(jasperPrint, false);
+						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(programaitem));
+						JasperViewer.viewReport(jasperPrint, false);
+						
+				
+					} catch (JRException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 
 				} else {
 					Messagebox
-							.show("No ha informacion disponible para este intervalo");
+					.show("No hay informacion disponible para esta seleccion",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
 				}
 
 			}
@@ -221,26 +266,40 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 					mapa.put("nombreprograma",
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
-
+					
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					String rutaUrl = obtenerDirectorio();
-					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaRequisito.jasper";
-					String reporteImage = rutaUrl
-							+ "SITEG/public/imagenes/reportes/";
+					JasperReport jasperReport;		
 
-					JasperReport jasperReport = (JasperReport) JRLoader
-							.loadObject(reporteSrc);
+					try {
+						
+						String rutaUrl = obtenerDirectorio();
+						String reporteSrc = rutaUrl
+								+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaRequisito.jasper";
+						  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
+							
+							
+						 
 
-					JasperPrint jasperPrint = JasperFillManager.fillReport(
-							jasperReport, mapa, new JRBeanCollectionDataSource(
-									programarequisito));
-
-					JasperViewer.viewReport(jasperPrint, false);
+						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(programarequisito));
+						JasperViewer.viewReport(jasperPrint, false);
+						
+				
+					} catch (JRException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
 
 				} else {
 					Messagebox
-							.show("No ha informacion disponible para este intervalo");
+					.show("No hay informacion disponible para esta seleccion",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
 				}
 
 			}

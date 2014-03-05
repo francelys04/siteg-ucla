@@ -1,4 +1,3 @@
-<?page id="wdwEstudiante" title="Gestion Estudiante" contentType="text/html;charset=UTF-8"?>
 <window id="wdwEstudiante" title="Estudiante" border="normal"
 	width="100%" height="600px" closable="true"
 	apply="controlador.CEstudiante">

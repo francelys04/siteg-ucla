@@ -1,59 +1,54 @@
-<?page  title="Biblioteca Virtual" contentType="text/html;charset=UTF-8"?>
-<zk>
-	<window title="Biblioteca Virtual" border="normal" width="90%"
-		id="wdwCatalogoArchivo" apply="controlador.catalogo.CCatalogoArchivo"
-		closable="true">
+<window title="Biblioteca Virtual" border="normal" width="90%"
+	id="wdwCatalogoArchivo" apply="controlador.catalogo.CCatalogoArchivo"
+	closable="true">
 
-		<style src="/public/css/bootstrap.css" />
-		<style src="/public/css/style.css" />
+	<style src="/public/css/bootstrap.css" />
+	<style src="/public/css/style.css" />
 
-		<!--  popus  -->
-		<popup id="pupSeleccionArchivo">
-			<toolbarbutton
-				label="Doble clic para seleccionar un archivo" />
-		</popup>
-		<!-- Fin de popus -->
+	<!--  popus  -->
+	<popup id="pupSeleccionArchivo">
+		<toolbarbutton label="Doble clic para seleccionar un archivo" />
+	</popup>
+	<!-- Fin de popus -->
 
-		<listbox id="ltbArchivo" width="100%" mold="paging"
-			pageSize="10" emptyMessage="No hay archivos registrados">
-			<auxhead sclass="category-center">
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="80%"
-						sclass="search-query" placeholder="Nombre"
-						id="txtNombreMostrarArchivo" />
-				</auxheader>
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="80%"
-						sclass="search-query" placeholder="Descripción"
-						id="txtDescripcionMostrarArchivo" />
-				</auxheader>
-				<auxheader colspan="1">
-					<image src="/public/imagenes/iconos/filtro.png" />
-					<textbox instant="true" width="80%"
-						sclass="search-query" placeholder="Programa"
-						id="txtProgramaMostrarArchivo" />
-				</auxheader>
-				<auxheader colspan="1"></auxheader>
-			</auxhead>
-			<listhead>
-				<listheader label="Nombre" align="center" />
-				<listheader label="Descripción" align="center" />
-				<listheader label="Programa" align="center" />
-				<listheader label="Descarga" align="center" width="15%" />
-			</listhead>
+	<listbox id="ltbArchivo" width="100%" mold="paging" pageSize="10"
+		emptyMessage="No hay archivos registrados">
+		<auxhead sclass="category-center">
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="80%"
+					sclass="search-query" placeholder="Nombre"
+					id="txtNombreMostrarArchivo" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="80%"
+					sclass="search-query" placeholder="Descripción"
+					id="txtDescripcionMostrarArchivo" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/public/imagenes/iconos/filtro.png" />
+				<textbox instant="true" width="80%"
+					sclass="search-query" placeholder="Programa"
+					id="txtProgramaMostrarArchivo" />
+			</auxheader>
+			<auxheader colspan="1"></auxheader>
+		</auxhead>
+		<listhead>
+			<listheader label="Nombre" align="center" />
+			<listheader label="Descripción" align="center" />
+			<listheader label="Programa" align="center" />
+			<listheader label="Descarga" align="center" width="15%" />
+		</listhead>
 
 
-			<template name="model">
-				<listitem tooltip="pupSeleccionArchivo">
-					<listcell label="${each.nombre}" />
-					<listcell label="${each.descripcion}" />
-					<listcell label="${each.programa.nombre}" />
-					<listcell
-						image="/public/imagenes/iconos/descarga.png" />
-				</listitem>
-			</template>
-		</listbox>
-	</window>
-</zk>
+		<template name="model">
+			<listitem tooltip="pupSeleccionArchivo">
+				<listcell label="${each.nombre}" />
+				<listcell label="${each.descripcion}" />
+				<listcell label="${each.programa.nombre}" />
+				<listcell image="/public/imagenes/iconos/descarga.png" />
+			</listitem>
+		</template>
+	</listbox>
+</window>

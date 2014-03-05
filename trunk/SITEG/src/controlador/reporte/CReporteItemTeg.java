@@ -16,9 +16,12 @@ import modelo.Estudiante;
 import modelo.Factibilidad;
 import modelo.Profesor;
 import modelo.Programa;
+import modelo.Requisito;
 import modelo.Teg;
+import modelo.TegEstatus;
 import modelo.compuesta.ItemDefensa;
 import modelo.compuesta.ItemFactibilidad;
+import modelo.compuesta.TegRequisito;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -46,6 +49,7 @@ import org.zkoss.zul.Window;
 import servicio.SJurado;
 import servicio.SProfesor;
 import servicio.STeg;
+import servicio.STegEstatus;
 import configuracion.GeneradorBeans;
 import controlador.CCalificarDefensa;
 import controlador.CGeneral;
@@ -89,10 +93,8 @@ public class CReporteItemTeg extends CGeneral {
 	 */
 	@Override
 	public void inicializar(Component comp) {
-		
-		
+
 		cmbEstatus.setDisabled(true);
-		
 
 	}
 
@@ -103,10 +105,10 @@ public class CReporteItemTeg extends CGeneral {
 	 */
 	@Listen("onCheck = #rdgEtapa")
 	public void llenarCombo() {
-		
+
 		cmbEstatus.setValue("");
 		ltbReporteItemTeg.getItems().clear();
-		
+
 		if (rdoProyecto.isChecked() == true) {
 			try {
 				cmbEstatus.setModel(new ListModelList<String>(estatusProyecto));
@@ -139,7 +141,38 @@ public class CReporteItemTeg extends CGeneral {
 	 */
 	@Listen("onSelect= #cmbEstatus")
 	public List<Teg> buscar() {
-		List<Teg> tegs = servicioTeg.buscarTegs(cmbEstatus.getValue());
+		ltbReporteItemTeg.getItems().clear();
+		List<Teg> tegs = new ArrayList<Teg>();
+
+		if (rdoProyecto.isChecked() == true) {
+			try {
+
+				List<TegEstatus> tegEstatus = servicioTegEstatus
+						.buscarTegEstatusPorNombre(cmbEstatus.getValue());
+
+				for (int i = 0; i < tegEstatus.size(); i++) {
+
+					Teg teg = tegEstatus.get(i).getTeg();
+					tegs.add(teg);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			try {
+
+				tegs = servicioTeg.buscarTegs(cmbEstatus.getValue());
+
+			} catch (Exception e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		for (int i = 0; i < tegs.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante
 					.buscarEstudiantePorTeg(tegs.get(i));
@@ -150,6 +183,7 @@ public class CReporteItemTeg extends CGeneral {
 		if (!tegs.isEmpty()) {
 			ltbReporteItemTeg.setModel(new ListModelList<Teg>(tegs));
 		}
+
 		return tegs;
 	}
 
@@ -159,7 +193,7 @@ public class CReporteItemTeg extends CGeneral {
 	 * el nombre y apellido del estudiante, la fecha, la tematica, el area, el
 	 * titulo, el nombre y apellido del tutor de estos.
 	 */
-	@Listen("onChange = #txtMostrarFechaCalificar,#txtMostrarTematicaCalificar,#txtMostrarAreaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,# txtMostrarApellidoTutorCalificar")
+	@Listen("onChange = #txtEstudianteCalificarDefensa,#txtMostrarFechaCalificar,#txtMostrarAreaCalificar,#txtMostrarTematicaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,#txtMostrarApellidoTutorCalificar")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscar();
 		for (int i = 0; i < teg1.size(); i++) {
@@ -188,18 +222,18 @@ public class CReporteItemTeg extends CGeneral {
 											.toLowerCase())
 
 					&& teg.getTematica()
-							.getNombre()
-							.toLowerCase()
-							.contains(
-									txtMostrarTematicaCalificar.getValue()
-											.toLowerCase())
-
-					&& teg.getTematica()
 							.getareaInvestigacion()
 							.getNombre()
 							.toLowerCase()
 							.contains(
 									txtMostrarAreaCalificar.getValue()
+											.toLowerCase())
+
+					&& teg.getTematica()
+							.getNombre()
+							.toLowerCase()
+							.contains(
+									txtMostrarTematicaCalificar.getValue()
 											.toLowerCase())
 
 					&& teg.getTitulo()
@@ -264,7 +298,7 @@ public class CReporteItemTeg extends CGeneral {
 							+ teg.getTutor().getApellido();
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/salidas/compilados/RItemTegDefensa.jasper";
+							+ "SITEG/vistas/reportes/salidas/compilados/RItemTeg.jasper";
 					String reporteImage = rutaUrl
 							+ "SITEG/public/imagenes/reportes/";
 
@@ -276,8 +310,11 @@ public class CReporteItemTeg extends CGeneral {
 					p.put("tutor", tutor);
 					p.put("tematica", teg.getTematica().getNombre());
 					p.put("titulo", teg.getTitulo());
-					p.put("programa", estudiantes.get(0).getPrograma());
-					p.put("area", teg.getTematica().getareaInvestigacion().getNombre());
+					p.put("programa", estudiantes.get(0).getPrograma()
+							.getNombre());
+					p.put("area", teg.getTematica().getareaInvestigacion()
+							.getNombre());
+					p.put("observacion", factibilidad.getObservacion());
 
 					try {
 						jasperReport = (JasperReport) JRLoader
@@ -314,8 +351,7 @@ public class CReporteItemTeg extends CGeneral {
 							+ teg.getTutor().getApellido();
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/salidas/compilados/RItemTeg.jasper";
-
+							+ "SITEG/vistas/reportes/salidas/compilados/RItemTegDefensa.jasper";
 					String reporteImage = rutaUrl
 							+ "SITEG/public/imagenes/reportes/";
 
@@ -327,6 +363,10 @@ public class CReporteItemTeg extends CGeneral {
 					p.put("tutor", tutor);
 					p.put("tematica", teg.getTematica().getNombre());
 					p.put("titulo", teg.getTitulo());
+					p.put("programa", estudiantes.get(0).getPrograma()
+							.getNombre());
+					p.put("area", teg.getTematica().getareaInvestigacion()
+							.getNombre());
 
 					try {
 						jasperReport = (JasperReport) JRLoader
@@ -346,32 +386,22 @@ public class CReporteItemTeg extends CGeneral {
 			}
 		}
 	}
-	
-	
+
 	@Listen("onClick = #btnCancelarReporteItemTeg")
-	   public void limpiarCampos(){
-		  
-		
+	public void limpiarCampos() {
+
 		cmbEstatus.setValue("");
 		ltbReporteItemTeg.getItems().clear();
 		rdgEtapa.setSelectedItem(null);
 		cmbEstatus.setDisabled(false);
-		
-		
-	   
-	   }
-	
-	
+
+	}
+
 	@Listen("onClick = #btnSalirReporteReporteItemTeg")
-	   public void salir(){
-		  
-		
+	public void salir() {
+
 		wdwReporteItemTeg.onClose();
-		
-		
-	   
-	   }
-	
-	
-	
+
+	}
+
 }
