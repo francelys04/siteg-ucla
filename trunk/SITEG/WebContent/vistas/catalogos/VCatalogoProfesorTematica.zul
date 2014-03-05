@@ -1,4 +1,4 @@
-<window title="Catalogo Profesor" border="normal" width="900px"
+<window title="Catalogo Tutores Disponibles" border="normal" width="900px"
 	id="wdwCatalogoProfesorArea" apply="controlador.catalogo.CCatalogoProfesorTematica"
 	closable="true">
 
@@ -40,22 +40,15 @@
 			</auxheader>
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="65%"
-					sclass="search-query" placeholder="Categoría"
-					id="txtCategoriaMostrarProfesor" />
-			</auxheader>
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox instant="true" width="75%"
 					sclass="search-query" placeholder="Correo"
 					id="txtCorreoMostrarProfesor" />
 			</auxheader>
 		</auxhead>
 		<listhead>
-			<listheader label="Cédula" align="center" width="15%" />
+			<listheader label="Cédula" align="center" width="20%" />
 			<listheader label="Nombre" align="center" />
 			<listheader label="Apellido" align="center" />
-			<listheader label="Categoría" align="center" width="20%"/>
 			<listheader label="Correo" align="center" width="28%"/>
 		</listhead>
 
@@ -65,7 +58,6 @@
 				<listcell label="${each.cedula}" />
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.apellido}" />
-				<listcell label="${each.categoria.nombre}" />
 				<listcell label="${each.correoElectronico}" />
 			</listitem>
 		</template>
