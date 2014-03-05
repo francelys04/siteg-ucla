@@ -4,7 +4,9 @@ import java.util.*;
 
 import javax.swing.filechooser.FileSystemView;
 
+import modelo.Actividad;
 import modelo.AreaInvestigacion;
+import modelo.Categoria;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
@@ -18,6 +20,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -48,225 +51,153 @@ import servicio.STematica;
 @Controller
 public class CReporteProfesorTematica extends CGeneral {
 
-	CCatalogoProfesorTematica catalogo = new CCatalogoProfesorTematica();
-	CCatalogoProfesor catalogoProfesor = new CCatalogoProfesor();
-	private String[] estatusProfesor = { "Todos", "true", "false" };
-	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
-	List<Tematica> tematicas = new ArrayList<Tematica>();
-	List<Programa> programas = new ArrayList<Programa>();
-	long idTematica = 0;
+	CCatalogoProfesor catalogo = new CCatalogoProfesor();
 
 	@Wire
 	private Window wdwReporteProfesorTematica;
 	@Wire
-	private Textbox txtCedulaProfesor;
+	private Textbox txtCedulaProfesorTematica;
 	@Wire
-	private Combobox cmbEstatus;
+	private Textbox txtNombreProfesorTematica;
 	@Wire
-	private Combobox cmbPrograma;
-	@Wire
-	private Combobox cmbArea;
-	@Wire
-	private Combobox cmbTematica;
+	private Textbox txtApellidoProfesorTematica;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
-	 * recibido del catalogo exista, tambien se buscan todos los programas
-	 * disponibles, adicionando un nuevo item donde se puede seleccionar la
-	 * opcion de "Todos", junto a esto se tiene una lista previamente cargada de
-	 * manera estatica los estatus o roles del profesor y se llenan los campos
-	 * correspondientes de la vista, asi como los objetos empleados dentro de
-	 * este controlador.
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
 	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		programas = servicioPrograma.buscarActivas();
-		Programa programaa = new Programa(987, "Todos", "", "", true, null);
-		programas.add(programaa);
-		cmbPrograma.setModel(new ListModelList<Programa>(
-				programas));
-		cmbEstatus.setModel(new ListModelList<String>(
-				estatusProfesor));
 
 		Selectors.wireComponents(comp, this, false);
+
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 
 		if (map != null) {
 			if ((String) map.get("cedula") != null) {
-				Profesor profesor = servicioProfesor
-						.buscarProfesorPorCedula((String) map.get("cedula"));
-				txtCedulaProfesor.setValue(profesor.getCedula());
-				if (map.get("area").equals(estatusProfesor[0])) {
-					cmbPrograma.setValue((String) map
-							.get("programa"));
-					cmbArea
-							.setValue((String) map.get("area"));
-					cmbTematica.setValue((String) map
-							.get("tematica"));
-				} else {
-					idTematica = (Long) map.get("tematica");
 
-					Programa programa = servicioPrograma.buscar((Long) map
-							.get("programa"));
-					Tematica tematica = servicioTematica
-							.buscarTematica((Long) map.get("tematica"));
-					cmbPrograma
-							.setValue(programa.getNombre());
-					cmbArea
-							.setValue((String) map.get("area"));
-					cmbTematica
-							.setValue(tematica.getNombre());
-				}
+				txtCedulaProfesorTematica.setValue((String) map.get("cedula"));
+				Profesor profesor = servicioProfesor
+						.buscarProfesorPorCedula(txtCedulaProfesorTematica
+								.getValue());
+				txtNombreProfesorTematica.setValue(profesor.getNombre());
+				txtApellidoProfesorTematica.setValue(profesor.getApellido());
+
 			}
 			map.clear();
 			map = null;
 		}
+
 	}
+
 	/*
-	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
-	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
-	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
-	 * se puede seleccionar la opcion de "Todos" en el combo de las areas.
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
-	@Listen("onSelect = #cmbPrograma")
-	public void seleccinarPrograma() {
-		cmbArea.setValue("");
-		cmbTematica.setValue("");
-		if (cmbPrograma.getValue().equals(estatusProfesor[0])) {
-			cmbArea.setValue("Todos");
-			cmbTematica.setValue("Todos");
-		} else {
-			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
-					.buscar(Long.parseLong(cmbPrograma
-							.getSelectedItem().getId())));
-			cmbArea
-					.setModel(new ListModelList<AreaInvestigacion>(areas));
-		}
-	}
-	/*
-	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
-	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
-	 * valor en el campo tematica
-	 */
-	@Listen("onSelect = #cmbArea")
-	public void seleccionarArea() {
-		cmbTematica.setValue("");
-		tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-				.buscarArea(Long.parseLong(cmbArea
-						.getSelectedItem().getId())));
-		cmbTematica.setModel(new ListModelList<Tematica>(
-				tematicas));
-	}
-	/*
-	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
-	 * uno en el campo del mismo.
-	 */
-	@Listen("onSelect = #cmbTematica")
-	public void seleccionarTematica() {
-		idTematica = Long.parseLong(cmbTematica
-				.getSelectedItem().getId());
-	}
-	/*
-	 * Metodo que permite dado al condicional, mapear los datos vaciados en la
-	 * vista, para poder ser utilizados en la vista asociada.
-	 */
-	@Listen("onClick = #btnProfesor")
+	@Listen("onClick = #btnCatalogoProfesorTematica")
 	public void buscarProfesor() {
 
-		final HashMap<String, Object> map2 = new HashMap<String, Object>();
-		if (cmbPrograma.getValue().equals(estatusProfesor[0])) {
-			map2.put("area", cmbArea.getValue());
-			map2.put("programa", cmbPrograma.getValue());
-			map2.put("tematica", cmbTematica.getValue());
-			Sessions.getCurrent().setAttribute("itemsCatalogo", map2);
-			Window window = (Window) Executions.createComponents(
-					"/vistas/catalogos/VCatalogoProfesor.zul", null, null);
-			window.doModal();
+		Window window = (Window) Executions.createComponents(
+				"/vistas/catalogos/VCatalogoProfesor.zul", null, null);
+		window.doModal();
 
-			catalogoProfesor.recibir("reportes/no estructurados/VReporteProfesorTeg");
+		catalogo.recibir("reportes/salidas/VReporteProfesorTematica");
+
+	}
+
+	/*
+	 * Metodo que permite generar un reporte, seleccionando un profesor, se
+	 * generara un pdf donde se muestra una lista de tematicas asociadas al
+	 * profesor de esta seleccion, mediante el componente "Jasperreport" donde
+	 * se mapea una serie de parametros y una lista previamente cargada que
+	 * seran los datos que se muestra en el documento.
+	 */
+	@Listen("onClick = #btnGenrerarReporteProfesorTematica")
+	public void generarReporteProfesorTematica() throws JRException {
+
+		if (txtCedulaProfesorTematica.getText().compareTo("") == 0
+				|| txtNombreProfesorTematica.getText().compareTo("") == 0
+				|| txtApellidoProfesorTematica.getText().compareTo("") == 0) {
+			Messagebox.show("Debe seleccionar un profesor", "Error",
+					Messagebox.OK, Messagebox.ERROR);
+
 		} else {
-			map2.put("area", cmbArea.getValue());
-			Sessions.getCurrent().setAttribute("itemsCatalogo", map2);
-			catalogo.recibir("reportes/no estructurados/VReporteProfesorTeg", Long
-					.parseLong(cmbPrograma.getSelectedItem()
-							.getId()), Long
-					.parseLong(cmbTematica.getSelectedItem()
-							.getId()));
 
-			Window window = (Window) Executions.createComponents(
-					"/vistas/catalogos/VCatalogoProfesorTematica.zul", null,
-					null);
-			window.doModal();
+			Profesor profesor = servicioProfesor
+					.buscarProfesorPorCedula(txtCedulaProfesorTematica
+							.getValue());
+			List<Tematica> tematicasProfesor = servicioTematica
+					.buscarTematicasDelProfesor(profesor);
+
+			if (tematicasProfesor.size() != 0) {
+
+				FileSystemView filesys = FileSystemView.getFileSystemView();
+				JasperReport jasperReport;
+				try {
+					String rutaUrl = obtenerDirectorio();
+					String reporteSrc = rutaUrl
+							+ "SITEG/vistas/reportes/salidas/compilados/RProfesorTematica.jasper";
+					String reporteImage = rutaUrl
+							+ "SITEG/public/imagenes/reportes/";
+					Map p = new HashMap();
+					p.put("logoUcla", reporteImage + "logo ucla.png");
+					p.put("logoCE", reporteImage + "logo CE.png");
+					p.put("logoSiteg", reporteImage + "logo.png");
+					
+					p.put("cedulaprofesor", txtCedulaProfesorTematica.getValue() );
+					p.put("profesor", txtNombreProfesorTematica.getValue() + " " + txtApellidoProfesorTematica.getValue());
+
+					jasperReport = (JasperReport) JRLoader
+							.loadObject(reporteSrc);
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, p, new JRBeanCollectionDataSource(
+									tematicasProfesor));
+					JasperViewer.viewReport(jasperPrint, false);
+
+				} catch (JRException e) {
+					System.out.println(e);
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			} else {
+
+				Messagebox.show(
+						"No hay informacion disponible para esta seleccion",
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
+			}
+
 		}
 
 	}
-	/*
-	 * Metodo que permite generar un reporte, dado a una tematica y un estatus
-	 * del proyecto, se generara un pdf donde se muestra una lista de profesores
-	 * asociados a una tematica de esta seleccion, mediante el componente
-	 * "Jasperreport" donde se mapea una serie de parametros y una lista
-	 * previamente cargada que seran los datos que se muestra en el documento.
-	 */
-	@Listen("onClick = #btnGenerarReporte")
-	public void generarReporte() throws JRException {
-		String cedula = txtCedulaProfesor.getValue();
-		String estatus = cmbEstatus.getValue();
-		Tematica tematica = servicioTematica.buscarTematica(idTematica);
-		Profesor profesor = servicioProfesor.buscarProfesorPorCedula(cedula);
-		List<Profesor> profesores = new ArrayList<Profesor>();
 	
-			if (estatus.equals(estatusProfesor[0])) {
-				System.out.println(cmbTematica.getValue());
-				if (cmbTematica.getValue().equals(estatusProfesor[0])) {
-					
-					profesores= servicioProfesor.buscarTodos();
-					System.out.println("Todos"+profesores.size());
-				} else {
-					profesores = servicioProfesor.buscarProfesoresPorTematica(tematica);
-					System.out.println("Todos estatus una tematica"+profesores.size());
-				}
-			} else {
-				if (cmbTematica.getValue().equals(estatusProfesor[0])) {
-					profesores= servicioProfesor.buscarActivos();
-					System.out.println("Todas tematicas un estatus"+profesores.size());
-				} else {
-				//	profesores = servicioProfesor.buscarProfesoresPorTematicayEstatus(tematica,estatus);
-					System.out.println("Una tematica un estatus"+profesores.size());
-				}
-			}
-			FileSystemView filesys = FileSystemView.getFileSystemView();
-			Map<String, Object> p = new HashMap<String, Object>();
-			String rutaUrl = obtenerDirectorio();
-			String reporteSrc = rutaUrl
-					+ "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
-			String reporteImage = rutaUrl
-					+ "SITEG/public/imagenes/reportes/";
-
+	
+	/*
+	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
+	 */
+	@Listen("onClick = #btnCancelarReporteProfesorTematica")
+	public void cancelar() {
 		
-			p.put("titulo", "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
-					+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
-					+ "DIRECCION DE PROGRAMA");
-			p.put("tematica", tematica.getNombre());
-			p.put("area", tematica.getareaInvestigacion().getNombre());
-			p.put("programa", tematica.getareaInvestigacion().getProgramasAreas());
-			p.put("logoUcla", reporteImage + "logo ucla.png");
-			p.put("logoCE", reporteImage + "logo CE.png");
-			p.put("logoSiteg", reporteImage + "logo.png");
-			
-			JasperReport jasperReport = (JasperReport) JRLoader
-					.loadObject(getClass().getResource(
-							"/reporte/RProyectosProfesor.jasper"));
-			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					jasperReport, p, new JRBeanCollectionDataSource(profesores));
-			JasperExportManager.exportReportToPdfFile(jasperPrint, filesys
-					.getHomeDirectory().toString() + "/reporte.pdf");
-
-		}
+		txtCedulaProfesorTematica.setValue("");
+		txtNombreProfesorTematica.setValue("");
+		txtApellidoProfesorTematica.setValue("");
 		
+		
+	}
+	
+	
+	
+	
+	/* Metodo que permite cerrar la ventana correspondiente al reporte */
+	@Listen("onClick = #btnSalirReporteProfesorTematica")
+	public void salirReporte() {
+		wdwReporteProfesorTematica.onClose();
+	}
+	
 	
 
 }
-
