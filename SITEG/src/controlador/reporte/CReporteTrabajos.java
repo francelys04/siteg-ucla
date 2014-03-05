@@ -68,7 +68,7 @@ import servicio.STematica;
 import servicio.SEstudiante;
 
 @Controller
-public class CReporteProyecto extends CGeneral {
+public class CReporteTrabajos extends CGeneral {
 	
 	private String[] estatusProyecto = {"Solicitando Registro", "Proyecto Registrado",
 			"Comision Asignada", "Factibilidad Evaluada", "Proyecto Factible", "Proyecto No Factible",
@@ -87,7 +87,7 @@ public class CReporteProyecto extends CGeneral {
 	long idArea = 0;
 	
 	@Wire
-	private Window wdwReporteProyecto;
+	private Window wdwReporteTrabajos;
 	@Wire
 	private Radiogroup rdgEtapa;
 	@Wire
@@ -108,8 +108,6 @@ public class CReporteProyecto extends CGeneral {
 	private Combobox cmbArea;
 	@Wire
 	private Combobox cmbTematica;
-	@Wire
-	private Jasperreport jstVistaPrevia;
 	private static Programa programa1;
 	private static AreaInvestigacion area1;
 	private static long idarea;
@@ -132,19 +130,19 @@ public class CReporteProyecto extends CGeneral {
 		programas.add(programaa);
 
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
-		cmbEstatus.setModel(new ListModelList<String>(estatusProyecto));
-
+		cmbPrograma.setDisabled(true);
 		cmbArea.setDisabled(true);
 		cmbTematica.setDisabled(true);
 		cmbEstatus.setDisabled(true);
 
 	}
 
-	@Listen("onCheck = #rdgEvaluaciones")
+	@Listen("onCheck = #rdgEtapa")
 	public void llenarCombo() {
 		if (rdoProyecto.isChecked() == true) {
 			try {
 				cmbEstatus.setModel(new ListModelList<String>(estatusProyecto));
+				cmbPrograma.setDisabled(false);
 			} catch (Exception e) {
 				System.out.println(e);
 				// TODO Auto-generated catch block
@@ -153,6 +151,7 @@ public class CReporteProyecto extends CGeneral {
 		} else if (rdoTeg.isChecked() == true) {
 			try {
 				cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
+				cmbPrograma.setDisabled(false);
 			} catch (Exception e) {
 				System.out.println(e);
 				// TODO Auto-generated catch block
@@ -161,6 +160,7 @@ public class CReporteProyecto extends CGeneral {
 		} else if (rdoAmbos.isChecked() == true) {
 			try {
 				cmbEstatus.setModel(new ListModelList<String>(estatusAmbos));
+				cmbPrograma.setDisabled(false);
 			} catch (Exception e) {
 				System.out.println(e);
 				// TODO Auto-generated catch block
@@ -258,8 +258,8 @@ public class CReporteProyecto extends CGeneral {
 	 * "Jasperreport" donde se mapea una serie de parametros y una lista
 	 * previamente cargada que seran los datos que se muestra en el documento.
 	 */
-	@Listen("onClick = #btnGenerarReporteProyecto")
-	public void generarReporteTEG() throws JRException {
+	@Listen("onClick = #btnGenerarReporteTrabajos")
+	public void generarReporteTrabajos() throws JRException {
 		boolean datosVacios = false;
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
@@ -271,9 +271,12 @@ public class CReporteProyecto extends CGeneral {
 		/*Mensaje para dar cuando falta un dato*/
 		if ((cmbPrograma.getValue() == "") || (cmbArea.getValue() == "")
 				|| (cmbTematica.getValue() == "")
-				|| (cmbEstatus.getValue() == "")) {
-			Messagebox.show("Datos imcompletos", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+				|| (cmbEstatus.getValue() == "")
+				|| ((rdoProyecto.isChecked() == false)
+				&& (rdoTeg.isChecked() == false)
+				&& (rdoAmbos.isChecked() == false))) {
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
 		}
 
 		else {
@@ -455,7 +458,7 @@ public class CReporteProyecto extends CGeneral {
 					
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/estructurados/compilados/RReporteProyecto.jasper";
+							+ "SITEG/vistas/reportes/estructurados/compilados/RReporteTrabajos.jasper";
 					String reporteImage = rutaUrl
 							+ "SITEG/public/imagenes/reportes/";
 					mapa.put("Fecha", new Date());
@@ -470,6 +473,32 @@ public class CReporteProyecto extends CGeneral {
 					mapa.put("logoSiteg", reporteImage + "logo.png");
 					mapa.put("Cantidad", elementos.size());	
 					
+					if (rdoProyecto.isChecked() == true) {
+						try {
+							mapa.put("Etapa", "Proyecto");
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoTeg.isChecked() == true) {
+						try {
+							mapa.put("Etapa", "Trabajo Especial de Grado");
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoAmbos.isChecked() == true) {
+						try {
+							mapa.put("Etapa", "Proyecto-Trabajo Especial de Grado");
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
 					JasperReport jasperReport = (JasperReport) JRLoader
 							.loadObject(reporteSrc);
 
@@ -487,25 +516,29 @@ public class CReporteProyecto extends CGeneral {
 	}
 
 	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
-	@Listen("onClick = #btnCancelarReporteProyecto")
-	public void cancelarReporteProyecto() throws JRException {
+	@Listen("onClick = #btnCancelarReporteTrabajos")
+	public void cancelarReporteTrabajos() throws JRException {
 		cmbEstatus.setValue("");
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbTematica.setValue("");
+		cmbPrograma.setDisabled(true);
 		cmbArea.setDisabled(true);
 		cmbTematica.setDisabled(true);
 		cmbEstatus.setDisabled(true);
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
+		rdoProyecto.setChecked(false);
+		rdoTeg.setChecked(false);
+		rdoAmbos.setChecked(false);
 	}
 
 	/* Metodo que permite cerrar la vista. */
-	@Listen("onClick = #btnSalirReporteProyecto")
+	@Listen("onClick = #btnSalirReporteTrabajos")
 	public void salirReporteProyecto() throws JRException {
 
-		cancelarReporteProyecto();
-		wdwReporteProyecto.onClose();
+		cancelarReporteTrabajos();
+		wdwReporteTrabajos.onClose();
 	}
 
 }
