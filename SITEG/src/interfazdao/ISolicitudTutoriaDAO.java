@@ -74,8 +74,8 @@ public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Lo
 	public List<SolicitudTutoria> buscarSolicitudPorFechayEstatus(Tematica tematica,Date fechaInicio,Date fechaFin);
 	
 	/********************************** Query para buscar la lista de solicitud dado a una area de investigacion*******************************************************************/
-	@Query("select solicitud from SolicitudTutoria solicitud where estatus=?4 and  solicitud.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?1) and fecha between ?2 and ?3")
-	public List<SolicitudTutoria> buscarSolicitudAreaestatus1(AreaInvestigacion areaInvestigacion, Date fechaInicio, Date fechaFin, String estatus);
+	@Query("select solicitud from SolicitudTutoria solicitud where solicitud.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?1) and fecha between ?2 and ?3")
+	public List<SolicitudTutoria> buscarSolicitudAreaestatus1(AreaInvestigacion areaInvestigacion, Date fechaInicio, Date fechaFin);
 	
 	@Query("select solicitud from SolicitudTutoria solicitud where  solicitud.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?1) and fecha between ?2 and ?3")
 	public List<SolicitudTutoria> buscarSolicitudAreaestatus(AreaInvestigacion areaInvestigacion, Date fechaInicio, Date fechaFin);

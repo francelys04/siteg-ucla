@@ -218,11 +218,10 @@ public class SSolicitudTutoria {
 	}
 
 	public List<SolicitudTutoria> buscarSolicitudSegunAreaUnEstatus1(
-			AreaInvestigacion area, Date fechaInicio, Date fechaFin,
-			String estatus) {
+			AreaInvestigacion area, Date fechaInicio, Date fechaFin) {
 		List<SolicitudTutoria> solicitudes;
 		solicitudes = interfaceSolicitud.buscarSolicitudAreaestatus1(area,
-				fechaInicio, fechaFin, estatus);
+				fechaInicio, fechaFin);
 		return solicitudes;
 
 	}
