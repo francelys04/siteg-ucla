@@ -503,24 +503,33 @@ public class STeg {
 	}
 	/*************************Fin Report Promedio Gestion de Teg ************************************/
 
-	/*---- Servicios para Reporte Proyecto ----*/
-	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+	/*---- Servicios para Reporte Trabajos ----*/
+	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyUnEstatus(Programa programa,
 			String estatus, Tematica tematica, Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegPorFechayEstatus(estatus, tematica,
+		return interfaceTeg.buscarTegPorFechayEstatus(programa, estatus, tematica,
 				fechaInicio, fechaFin);
 	}
 
-	public List<Teg> buscarTegPorDosFechasyUnEstatus(AreaInvestigacion area1,
+	public List<Teg> buscarTegPorDosFechasyUnEstatus(Programa programa, AreaInvestigacion area1,
 			String estatus, Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegPorFecha(area1, estatus, fechaInicio,
+		return interfaceTeg.buscarTegPorFecha(programa, area1, estatus, fechaInicio,
 				fechaFin);
 	}
 
-	public List<Teg> buscarTegPorDosFechasyArea(AreaInvestigacion area1,
+	public List<Teg> buscarTegPorDosFechasyArea(Programa programa, AreaInvestigacion area1,
 			Date fechaInicio, Date fechaFin) {
-		return interfaceTeg.buscarTegFechaArea(area1, fechaInicio, fechaFin);
+		return interfaceTeg.buscarTegFechaArea(programa, area1, fechaInicio, fechaFin);
 	}
 
+	public List<Teg> buscarTegPorDosFechasAreaEstatus(Programa programa, AreaInvestigacion area1,
+			String estatus1, String estatus2, String estatus3, String estatus4,
+			String estatus5, String estatus6, String estatus7, String estatus8,
+			Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegporFechaVariosEstatusArea(programa, area1, estatus1,
+				estatus2, estatus3, estatus4, estatus5, estatus6, estatus7,
+				estatus8, fechaInicio, fechaFin);
+	}
+	
 	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
 			String estatus1, String estatus2, String estatus3, String estatus4,
 			String estatus5, String estatus6, String estatus7, String estatus8,
@@ -560,6 +569,20 @@ public class STeg {
 				estatus8, fechaInicio, fechaFin);
 	}
 
+	public List<Teg> buscarTegUnaTematicaEstatuPorDosFechas(Tematica tematica,
+			String estatus, Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegPorFechaTematicaEstatu(tematica, estatus, fechaInicio,
+				fechaFin);
+	}
+	public List<Teg> buscarTegUnaTematicaEstatusPorFechas(String estatus1, String estatus2,
+			String estatus3, String estatus4, String estatus5,
+			String estatus6, String estatus7, String estatus8,
+			Tematica tematica, Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegPorFechaTematicaEstatus(estatus1,
+				estatus2, estatus3, estatus4, estatus5, estatus6, estatus7,
+				estatus8, tematica, fechaInicio, fechaFin);
+	}
+	
 	/*---- Servicios para Reporte Profesor ----*/
 
 	public List<Teg> buscarTegDeUnaTematicaPorDosFechas(Programa programa,
