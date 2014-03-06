@@ -342,7 +342,7 @@ public class CReporteEvaluacion extends CGeneral {
 
 								chequeoEstatus = 6;
 
-								teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
+								teg = servicioTeg.buscarTegPorEstatus(
 										nombreestatus, fechaInicio, fechaFin);
 
 								if (teg.size() != 0) {
@@ -459,8 +459,8 @@ public class CReporteEvaluacion extends CGeneral {
 									&& !nombreestatus.equals("Todos")) {
 
 								chequeoEstatus = 1;
-								teg = servicioTeg.buscarTegPorProgramaUnEstatus(nombreestatus,
-										programa1, fechaInicio, fechaFin);
+								teg = servicioTeg.buscarTegPorProgramaEstatus(programa1, 
+										nombreestatus, fechaInicio, fechaFin);
 
 								if (teg.size() != 0) {
 									
