@@ -343,19 +343,19 @@ public class CReporteSolicitud extends CGeneral {
 
 								if (rdoProyecto.isChecked() == true) {
 									teg = servicioTeg
-											.buscarTegPorVariosProgramaUnEstatus(
+											.buscarTegPorEstatus(
 													estatusProyecto,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesProyecto";
 								} else if (rdoTEG.isChecked() == true) {
 									teg = servicioTeg
-											.buscarTegPorVariosProgramaUnEstatus(
+											.buscarTegPorEstatus(
 													estatusTeg, fechaInicio,
 													fechaFin);
 									NombreTxt = "SolicitudesTEG";
 								} else if (rdoDefensa.isChecked() == true) {
 									teg = servicioTeg
-											.buscarTegPorVariosProgramaUnEstatus(
+											.buscarTegPorEstatus(
 													estatusDefensa,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesDefensa";
@@ -460,20 +460,20 @@ public class CReporteSolicitud extends CGeneral {
 								chequeoEstatus = 1;
 								if (rdoProyecto.isChecked() == true) {
 									teg = servicioTeg
-											.buscarTegPorProgramaUnEstatus(
-													estatusProyecto, programa1,
+											.buscarTegPorProgramaEstatus(
+													programa1, estatusProyecto, 
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesProyecto";
 								} else if (rdoTEG.isChecked() == true) {
 									teg = servicioTeg
-											.buscarTegPorProgramaUnEstatus(
-													estatusTeg, programa1,
+											.buscarTegPorProgramaEstatus(
+													programa1, estatusTeg, 
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesTEG";
 								} else if (rdoDefensa.isChecked() == true) {
 									teg = servicioTeg
-											.buscarTegPorProgramaUnEstatus(
-													estatusDefensa, programa1,
+											.buscarTegPorProgramaEstatus(
+													programa1, estatusDefensa, 
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesDefensa";
 								}
