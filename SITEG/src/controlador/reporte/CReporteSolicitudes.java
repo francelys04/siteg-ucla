@@ -119,6 +119,7 @@ public class CReporteSolicitudes extends CGeneral {
 				cmbAreaReporteSolicitud.setDisabled(false);
 				cmbAreaReporteSolicitud.setValue("");
 				cmbTematicaReporteSolicitud.setValue("");
+				cmbEstatusReporteSolicitud.setValue("");
 				programa1 = (Programa) cmbProgramaReporteSolicitud
 						.getSelectedItem().getValue();
 				areas = servicioProgramaArea
