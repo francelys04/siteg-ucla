@@ -223,13 +223,13 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 							.buscarTematica(idTematica);
 
 					teg1 = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 									estatus1, tematica1, fechaInicio, fechaFin);
 					teg2 = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 									estatus2, tematica1, fechaInicio, fechaFin);
 					teg3 = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 									estatus3, tematica1, fechaInicio, fechaFin);
 					valor1 = teg1.size();
 					valor2 = teg2.size();
@@ -284,13 +284,13 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 							.buscarTematica(idTematica);
 
 					teg1 = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 									estatus1, tematica1, fechaInicio, fechaFin);
 					teg2 = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 									estatus2, tematica1, fechaInicio, fechaFin);
 					teg3 = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 									estatus3, tematica1, fechaInicio, fechaFin);
 					valor1 = teg1.size();
 					valor2 = teg2.size();
