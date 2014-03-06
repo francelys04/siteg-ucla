@@ -1,5 +1,5 @@
-<window id="wdwCarta" title="Carta de Compromiso"
-	border="normal" width="100%" height="200px" closable="true"
+<window id="wdwCarta" title="Carta de Compromiso" border="normal"
+	width="100%" height="auto" closable="true"
 	apply="controlador.reporte.CCartaDeCompromiso">
 
 	<style dynamic="true">
@@ -41,16 +41,26 @@
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 
+	<!-- Lista de popus -->
+
+
+	<popup id="pupGenerarReporte">
+		<toolbarbutton label="Presione aqui para mostrar el reporte" />
+	</popup>
+	<popup id="pupSalirReporte">
+		<toolbarbutton label="Presione aqui para salir" />
+	</popup>
+
+	<!-- Fin de popus -->
+
+
+
+
+	<separator />
+	<separator />
 	<separator />
 
-
-
-
-		<separator />
-		<separator />
-		<separator />
-		<separator />
-<groupbox width="95%" height="150px"
+	<groupbox width="95%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 
 		<panel border="normal" width="95%"
@@ -60,15 +70,14 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button id="btnGenerar"
-							label="Carta de Compromiso" sclass="btn"
+						<button id="btnGenerar" label="Generar"
+							tooltip="pupGenerarReporte" sclass="btn"
 							image="/public/imagenes/iconos/generar.png" tabindex="13">
 						</button>
-						
-						<button id="btnSalir"
-							width="110px" tooltip="pupSalirReporte" label="Salir"
-							sclass="btn" image="/public/imagenes/iconos/salir.png"
-							tabindex="14">
+
+						<button id="btnSalir" width="110px"
+							tooltip="pupSalirReporte" label="Salir" sclass="btn"
+							image="/public/imagenes/iconos/salir.png" tabindex="14">
 						</button>
 						<separator />
 					</div>
@@ -76,12 +85,7 @@
 				</div>
 			</panelchildren>
 		</panel>
-		<separator />
-	<jasperreport id="jstVistaPrevia"></jasperreport>
-	<separator />
-		
 	</groupbox>
-	<separator />
 	<separator />
 	<separator />
 </window>

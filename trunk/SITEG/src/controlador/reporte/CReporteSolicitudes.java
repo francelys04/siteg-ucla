@@ -1,4 +1,3 @@
-
 package controlador.reporte;
 
 import java.sql.Connection;
@@ -50,8 +49,8 @@ public class CReporteSolicitudes extends CGeneral {
 	long idTematica = 0;
 	private static Date fechaInicio;
 	private static Date fechaFin;
-	private String[] estatusSolicitud = { "Aceptada", "Rechazada",
-			"Por Revisar", "Todos" };
+	private String[] estatusSolicitud = { "Por Revisar", "Aceptada",
+			"Rechazada", "Finalizada", "Todos" };
 	private static Programa programa1;
 	private static AreaInvestigacion area1;
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
@@ -59,7 +58,7 @@ public class CReporteSolicitudes extends CGeneral {
 	List<Programa> programas = new ArrayList<Programa>();
 	List<SolicitudTutoria> solicitud = new ArrayList<SolicitudTutoria>();
 	private static long idarea;
-	
+
 	@Wire
 	private Datebox dtbInicioReporteSolicitud;
 	@Wire
@@ -85,7 +84,7 @@ public class CReporteSolicitudes extends CGeneral {
 	public void inicializar(Component comp) {
 		cmbEstatusReporteSolicitud.setModel(new ListModelList<String>(
 				estatusSolicitud));
-		
+
 		programas = servicioPrograma.buscarActivas();
 		Programa programaa = new Programa(987, "Todos", "", "", true, null);
 		programas.add(programaa);
@@ -105,32 +104,34 @@ public class CReporteSolicitudes extends CGeneral {
 	 */
 	@Listen("onSelect =  #cmbProgramaReporteSolicitud")
 	public void seleccionarPrograma() {
-		try{
-		if (cmbProgramaReporteSolicitud.getValue().equals("Todos")) {
-		
-			areas = servicioArea.buscarActivos();
-			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
-					"", true);
-			areas.add(area);
-			cmbAreaReporteSolicitud.setModel(new ListModelList<AreaInvestigacion>(areas));
-			cmbAreaReporteSolicitud.setDisabled(false);
+		try {
+			if (cmbProgramaReporteSolicitud.getValue().equals("Todos")) {
 
-		} else {
-			cmbAreaReporteSolicitud.setDisabled(false);
-			cmbAreaReporteSolicitud.setValue("");
-			cmbTematicaReporteSolicitud.setValue("");
-			programa1 = (Programa) cmbProgramaReporteSolicitud
-					.getSelectedItem().getValue();
-			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
-					.buscar(programa1.getId()));
-			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
-					"", true);
-			areas.add(area);
-			cmbAreaReporteSolicitud
-					.setModel(new ListModelList<AreaInvestigacion>(areas));
+				areas = servicioArea.buscarActivos();
+				AreaInvestigacion area = new AreaInvestigacion(10000000,
+						"Todos", "", true);
+				areas.add(area);
+				cmbAreaReporteSolicitud
+						.setModel(new ListModelList<AreaInvestigacion>(areas));
+				cmbAreaReporteSolicitud.setDisabled(false);
 
-		}
-		}catch (Exception e) {
+			} else {
+				cmbAreaReporteSolicitud.setDisabled(false);
+				cmbAreaReporteSolicitud.setValue("");
+				cmbTematicaReporteSolicitud.setValue("");
+				programa1 = (Programa) cmbProgramaReporteSolicitud
+						.getSelectedItem().getValue();
+				areas = servicioProgramaArea
+						.buscarAreasDePrograma(servicioPrograma
+								.buscar(programa1.getId()));
+				AreaInvestigacion area = new AreaInvestigacion(10000000,
+						"Todos", "", true);
+				areas.add(area);
+				cmbAreaReporteSolicitud
+						.setModel(new ListModelList<AreaInvestigacion>(areas));
+
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle.e exception
 		}
@@ -144,25 +145,25 @@ public class CReporteSolicitudes extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbAreaReporteSolicitud")
 	public void seleccionarArea() {
-		try{
-		if (cmbAreaReporteSolicitud.getValue().equals("Todos")) {
-			cmbTematicaReporteSolicitud.setValue("Todos");
-			cmbTematicaReporteSolicitud.setDisabled(true);
-			cmbEstatusReporteSolicitud.setDisabled(false);
-			
-			
-		} else {
-			cmbTematicaReporteSolicitud.setDisabled(false);
-			cmbTematicaReporteSolicitud.setValue("");
-			area1 = (AreaInvestigacion) cmbAreaReporteSolicitud
-					.getSelectedItem().getValue();
-			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-					.buscarArea(area1.getId()));
-			Tematica tema = new Tematica(10000, "Todos", "", true, null);
-			tematicas.add(tema);
-			cmbTematicaReporteSolicitud.setModel(new ListModelList<Tematica>(
-					tematicas));
-		}}catch (Exception e) {
+		try {
+			if (cmbAreaReporteSolicitud.getValue().equals("Todos")) {
+				cmbTematicaReporteSolicitud.setValue("Todos");
+				cmbTematicaReporteSolicitud.setDisabled(true);
+				cmbEstatusReporteSolicitud.setDisabled(false);
+
+			} else {
+				cmbTematicaReporteSolicitud.setDisabled(false);
+				cmbTematicaReporteSolicitud.setValue("");
+				area1 = (AreaInvestigacion) cmbAreaReporteSolicitud
+						.getSelectedItem().getValue();
+				tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
+						.buscarArea(area1.getId()));
+				Tematica tema = new Tematica(10000, "Todos", "", true, null);
+				tematicas.add(tema);
+				cmbTematicaReporteSolicitud
+						.setModel(new ListModelList<Tematica>(tematicas));
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle.e exception
 		}
@@ -176,7 +177,7 @@ public class CReporteSolicitudes extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbTematicaReporteSolicitud")
 	public void seleccionarTematica() {
-		
+
 		Tematica tematica = (Tematica) cmbTematicaReporteSolicitud
 				.getSelectedItem().getValue();
 		cmbEstatusReporteSolicitud.setDisabled(false);
@@ -209,8 +210,8 @@ public class CReporteSolicitudes extends CGeneral {
 			if (fechaInicio.after(fechaFin)) {
 
 				Messagebox
-				.show("La fecha de fin debe ser posterior a la fecha de inicio",
-						"Error", Messagebox.OK, Messagebox.ERROR);
+						.show("La fecha de fin debe ser posterior a la fecha de inicio",
+								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			} else {
 
@@ -277,7 +278,6 @@ public class CReporteSolicitudes extends CGeneral {
 						mapa.put("logoCE", reporteImage + "logo CE.png");
 						mapa.put("logoSiteg", reporteImage + "logo.png");
 
- 
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);
 
@@ -289,8 +289,9 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No hay informacion disponible para esta seleccion",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No hay informacion disponible para esta seleccion",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
 					}
 				}
 
@@ -360,8 +361,9 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No hay informacion disponible para esta seleccion",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No hay informacion disponible para esta seleccion",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
 					}
 				}
 				/*
@@ -434,8 +436,9 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No hay informacion disponible para esta seleccion",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No hay informacion disponible para esta seleccion",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
 					}
 				}
 				/*
@@ -507,14 +510,14 @@ public class CReporteSolicitudes extends CGeneral {
 						JasperViewer.viewReport(jasperPrint, false);
 
 					} else {
-						
+
 						Messagebox
-						.show("No hay informacion disponible para esta seleccion",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
-						
-						
+								.show("No hay informacion disponible para esta seleccion",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+
 					}
-					
+
 				}
 				/*
 				 * seleccione solo un area diferente
@@ -524,12 +527,18 @@ public class CReporteSolicitudes extends CGeneral {
 						&& nombreTematica.equals("Todos")
 						&& nombreEstatus.equals("Todos")) {
 
+					System.out.println("pase por e area");
+					System.out.println(idarea);
+
 					AreaInvestigacion area1 = servicioArea.buscarArea(idarea);
 
 					solicitud = servicioSolicitudTutoria
 							.buscarSolicitudSegunAreaUnEstatus1(area1,
-									fechaInicio, fechaFin, nombreEstatus);
+									fechaInicio, fechaFin);
 					if (solicitud.size() != 0) {
+
+						System.out.println("pase por e area 2");
+
 						elementos.clear();
 						for (SolicitudTutoria s : solicitud) {
 
@@ -584,8 +593,9 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No hay informacion disponible para esta seleccion",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No hay informacion disponible para esta seleccion",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
 					}
 				}
 
@@ -658,8 +668,9 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No hay informacion disponible para esta seleccion",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No hay informacion disponible para esta seleccion",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
 					}
 				}
 				/*
@@ -732,8 +743,9 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No hay informacion disponible para esta seleccion",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No hay informacion disponible para esta seleccion",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
 					}
 				}
 				/*
@@ -747,8 +759,9 @@ public class CReporteSolicitudes extends CGeneral {
 					Tematica tematica1 = servicioTematica
 							.buscarTematica(idTematica);
 
-					solicitud = servicioSolicitudTutoria.buscarSolicitudPorPrograma(
-							programa1, fechaInicio, fechaFin);
+					solicitud = servicioSolicitudTutoria
+							.buscarSolicitudPorPrograma(programa1, fechaInicio,
+									fechaFin);
 					if (solicitud.size() != 0) {
 						elementos.clear();
 						for (SolicitudTutoria s : solicitud) {
@@ -804,8 +817,9 @@ public class CReporteSolicitudes extends CGeneral {
 
 					} else {
 						Messagebox
-						.show("No hay informacion disponible para esta seleccion",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+								.show("No hay informacion disponible para esta seleccion",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
 					}
 				}
 				/*
@@ -876,12 +890,12 @@ public class CReporteSolicitudes extends CGeneral {
 						JasperViewer.viewReport(jasperPrint, false);
 
 					} else {
-						
-						
+
 						Messagebox
-						.show("No hay informacion disponible para esta seleccion",
-								"Informacion", Messagebox.OK, Messagebox.INFORMATION);
-						
+								.show("No hay informacion disponible para esta seleccion",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+
 					}
 
 				}

@@ -51,7 +51,7 @@ public class CCartaDeCompromiso extends CGeneral {
 	@Listen("onClick = #btnGenerar")
 	public void carta() throws JRException{
 		
-	
+	try {
 	Estudiante estudiante= ObtenerUsuarioEstudiante();
 	SolicitudTutoria solicitud = servicioSolicitudTutoria.buscarSolicitudAceptadaEstudiante(estudiante);
 	
@@ -95,13 +95,13 @@ public class CCartaDeCompromiso extends CGeneral {
 					jasperReport, mapa, new JRBeanCollectionDataSource(
 							elementos));
 			JasperViewer.viewReport(jasperPrint, false);
+			
+	} catch (Exception e) {
+		// TODO: handle exception
 		
-	
-	//jstVistaPrevia.setSrc(reporteSrc);
-	 //jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-		//	 elementos));
-	 //jstVistaPrevia.setType("pdf");
-	 //jstVistaPrevia.setParameters(null);
+		System.out.println("");
+	}
+			
 
   }
 	@Listen("onClick = #btnSalir")

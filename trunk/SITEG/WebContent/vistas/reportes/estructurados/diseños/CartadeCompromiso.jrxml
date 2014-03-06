@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CartadeCompromiso" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c6e8b270-1fca-4202-8a30-30235068135c">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="96"/>
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoCE" class="java.lang.String"/>
 	<parameter name="logoSiteg" class="java.lang.String"/>
@@ -17,9 +17,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="122" splitType="Stretch">
 			<staticText>
-				<reportElement x="91" y="6" width="389" height="66" uuid="00ccb7c5-5285-4bc4-8c9d-2440b66d51cf"/>
+				<reportElement x="121" y="20" width="312" height="66" uuid="00ccb7c5-5285-4bc4-8c9d-2440b66d51cf"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
@@ -29,17 +29,17 @@ DECANATO DE CIENCIAS Y TECNOLOGÍA
 COMITÉ DE TRABAJO DE GRADO]]></text>
 			</staticText>
 			<image>
-				<reportElement x="0" y="6" width="91" height="66" uuid="5851f66c-fd56-48fe-9c9b-b9e2024608b3"/>
+				<reportElement x="0" y="7" width="100" height="72" uuid="6971c51b-fba5-47f3-9c22-090a584e4b0f"/>
 				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="480" y="6" width="75" height="66" uuid="87c85f88-c082-449e-8de3-b5340af164c9"/>
+				<reportElement x="454" y="1" width="100" height="85" uuid="f115957d-b5e8-414c-bbf7-a7cd4da63434"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch">
+		<band height="60" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="433" y="15" width="100" height="20" uuid="e164c0f7-e957-40b6-b09a-4a70d45bbb65"/>
 				<textElement textAlignment="Justified">
@@ -48,125 +48,145 @@ COMITÉ DE TRABAJO DE GRADO]]></text>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="354" y="15" width="100" height="20" uuid="4a8de898-a424-42d8-9c2b-4502bdf335f8"/>
+				<reportElement x="359" y="15" width="100" height="20" uuid="4a8de898-a424-42d8-9c2b-4502bdf335f8"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<text><![CDATA[Barquisimeto]]></text>
+				<text><![CDATA[Barquisimeto,]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="69" splitType="Stretch">
+		<band height="81" splitType="Stretch">
 			<staticText>
-				<reportElement x="194" y="22" width="146" height="22" uuid="c6e5c22e-108d-43be-b3f7-b29e64b5601d"/>
+				<reportElement x="194" y="12" width="165" height="22" uuid="c6e5c22e-108d-43be-b3f7-b29e64b5601d"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Times New Roman" size="14" isBold="false"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CARTA COMPROMISO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="194" y="34" width="160" height="22" uuid="5f430be9-6432-46f0-9f3b-205ff1dff047"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TUTOR-ESTUDIANTE]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="315" splitType="Stretch">
+		<band height="376" splitType="Stretch">
 			<staticText>
-				<reportElement x="220" y="255" width="100" height="20" uuid="79e4c7e6-6150-4081-8b97-4cf651c56de6"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[Atentamente.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="185" y="275" width="23" height="20" uuid="ed5de11b-9a35-4c5f-a94c-333ab160216a"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[Ing. ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="185" y="295" width="23" height="20" uuid="05e5d05d-70d1-4a7c-b9c0-e550e9c4e7b0"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[C.I.: ]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="208" y="295" width="146" height="20" uuid="9f62da99-7997-44a6-bae8-00438222f3c5"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{cedulaProfesor}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="208" y="275" width="146" height="20" uuid="fe047f35-51ef-4f9e-ac2e-ebc8d5806891"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[______________________]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="310" y="21" width="100" height="20" uuid="e6624797-4633-4f59-8083-ae73e461e28a"/>
-				<textFieldExpression><![CDATA[$F{nombreTutor}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="354" y="21" width="100" height="20" uuid="3cdc2457-85ec-43e8-a08d-f06c9b73c1fb"/>
-				<textFieldExpression><![CDATA[$F{apellidoTutor}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="29" y="53" width="100" height="20" uuid="ccf7d6c6-c8e6-42eb-b0fc-53484427f608"/>
-				<textFieldExpression><![CDATA[$F{cedulaProfesor}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="256" y="53" width="54" height="20" uuid="e2fc6da9-ea21-4d5a-bc65-5d4d8709a1d6"/>
-				<textFieldExpression><![CDATA[$F{nombreEstudiante}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="304" y="53" width="64" height="20" uuid="9b6a8190-84fc-4c15-9b83-d3115b2b099f"/>
-				<textFieldExpression><![CDATA[$F{apellidoEstudiante}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="10" y="11" width="533" height="194" uuid="83e84b43-312a-4cae-bae0-48a02312d61e"/>
+				<reportElement x="11" y="0" width="533" height="206" uuid="83e84b43-312a-4cae-bae0-48a02312d61e"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[
 	Por medio de la presente hago constar que mi persona ______________________
 
-C.I: ________    , acepto ser el tutor del  estudiante ______________         C.I: _______          en la
+C.I: ___________    , acepto ser el tutor del  estudiante ___________________    C.I: _____________  en la
 
-realización del trabajo especial de grado titulado: ________________________________,
+realización del trabajo especial de grado titulado: ________________________________________________,
 
 y me comprometo a asumir las funciones y responsabilidades que este trabajo ameriten.
 
 Sin más que agregar, agradeciendo su atención se despide]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="220" y="262" width="100" height="20" uuid="79e4c7e6-6150-4081-8b97-4cf651c56de6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Atentamente.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="315" width="23" height="20" uuid="ed5de11b-9a35-4c5f-a94c-333ab160216a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Ing. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="347" width="23" height="20" uuid="05e5d05d-70d1-4a7c-b9c0-e550e9c4e7b0"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[C.I.: ]]></text>
+			</staticText>
 			<textField>
-				<reportElement x="396" y="53" width="58" height="20" uuid="18b7ca1b-7c37-4a2f-9001-4283af0dc290"/>
-				<textFieldExpression><![CDATA[$F{cedulaEstudiante}]]></textFieldExpression>
+				<reportElement x="220" y="343" width="146" height="20" uuid="9f62da99-7997-44a6-bae8-00438222f3c5"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cedulaProfesor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="208" y="321" width="225" height="20" uuid="fe047f35-51ef-4f9e-ac2e-ebc8d5806891"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[___________________________]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="318" y="10" width="100" height="20" uuid="e6624797-4633-4f59-8083-ae73e461e28a"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreTutor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="256" y="73" width="283" height="20" uuid="6a00a94a-e18f-448c-8721-6f6594fdf794"/>
+				<reportElement x="366" y="10" width="100" height="20" uuid="3cdc2457-85ec-43e8-a08d-f06c9b73c1fb"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellidoTutor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="40" width="89" height="20" uuid="ccf7d6c6-c8e6-42eb-b0fc-53484427f608"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cedulaProfesor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="40" width="108" height="20" uuid="e2fc6da9-ea21-4d5a-bc65-5d4d8709a1d6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreEstudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="40" width="113" height="20" uuid="9b6a8190-84fc-4c15-9b83-d3115b2b099f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellidoEstudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="69" width="283" height="19" uuid="6a00a94a-e18f-448c-8721-6f6594fdf794"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{tituloTeg}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="428" y="40" width="100" height="20" uuid="18b7ca1b-7c37-4a2f-9001-4283af0dc290"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cedulaEstudiante}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="208" y="347" width="225" height="20" uuid="dacea121-650b-493b-bc2e-cdda8e341afd"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[___________________________]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="22" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="194" height="20" uuid="1486f0c6-99a2-4d65-af75-4ca45230cf84"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[FOR-TEG-001. REV.00.]]></text>
-			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="129" y="0" width="100" height="20" uuid="19f8b432-71c8-4080-af7f-41cb2f0bb0ca"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="22" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="21" splitType="Stretch"/>
