@@ -161,18 +161,21 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 				Programa programa1 = servicioPrograma.buscar(Long
 						.parseLong(idPrograma));
 				
+				String idArea = cmbArea.getSelectedItem().getId();
+				AreaInvestigacion area1 = servicioArea.buscarArea(Long
+						.parseLong(idArea));
+				
 				if (!nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")
-						|| nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")){
+					
+					tematicasSeleccionadas1=servicioTeg.buscarUltimasTematicasProgramaAreaEstatus(programa1,area1,fechaInicio, fechaFin,estatusProyectoTeg1,estatusProyectoTeg2);
+					
+				}
+				if( nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")) {
-					String idArea = cmbArea.getSelectedItem().getId();
-					AreaInvestigacion area1 = servicioArea.buscarArea(Long
-							.parseLong(idArea));
-							
-					tematicasSeleccionadas1= servicioTeg.buscarUltimasTematicasProgramaAreaEstatus(programa1,area1
-												,fechaInicio, fechaFin,estatusProyectoTeg1, estatusProyectoTeg2
-												);
-		
+					
+					tematicasSeleccionadas1=servicioTeg.buscarUltimasTematicasAreaEstatus(area1,fechaInicio, fechaFin,estatusProyectoTeg1,estatusProyectoTeg2);
+					
 				}
 
 				if (nombrePrograma.equals("Todos")

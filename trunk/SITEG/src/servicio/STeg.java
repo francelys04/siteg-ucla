@@ -323,35 +323,47 @@ public class STeg {
 		return interfaceTeg.findByTematicaAndFechaBetween(tematica,
 				fechaInicio, fechaFin);
 	}
-
-	public List<Teg> buscarUltimasTematicasProgramaAreaEstatus(
-			Programa programa, AreaInvestigacion area1, Date fechaInicio,
-			Date fechaFin, String estatusProyectoTeg1,
-			String estatusProyectoTeg2) {
-		// TODO Auto-generated method stub
-		List<Teg> tegs;
-		tegs = interfaceTeg.buscarUltimasTematicasProgramaAreaEstatus(programa,
-				area1, fechaInicio, fechaFin, estatusProyectoTeg1,
-				estatusProyectoTeg2);
-		return tegs;
-	}
-
+   /***********************Inicio Reporte Tematicas Mas Solicitadas ************************/
+	/*************************** Por Programa **********************************************/
 	public List<Teg> buscarUltimasTematicasProgramaEstatus(Programa programa,
 			Date fechaInicio, Date fechaFin, String estatusProyectoTeg1,
 			String estatusProyectoTeg2) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
 		tegs = interfaceTeg
-				.buscarUltimasTematicasProgramaEstatus(programa, fechaInicio,
+				.buscarUltimasTematicasProgramaDosEstatus(programa, fechaInicio,
 						fechaFin, estatusProyectoTeg1, estatusProyectoTeg2);
 		return tegs;
 	}
-
+	/************************** Por Area  ***************************************************/
+	public List<Teg> buscarUltimasTematicasAreaEstatus(AreaInvestigacion area,
+			Date fechaInicio, Date fechaFin, String estatusProyectoTeg1,
+			String estatusProyectoTeg2) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs = interfaceTeg
+				.buscarUltimasTematicasAreaDosEstatus(area, fechaInicio,
+						fechaFin, estatusProyectoTeg1, estatusProyectoTeg2);
+		return tegs;
+	}
+	/*********************** Por Programa y Area**********************************************/
+	public List<Teg> buscarUltimasTematicasProgramaAreaEstatus(
+			Programa programa, AreaInvestigacion area1, Date fechaInicio,
+			Date fechaFin, String estatusProyectoTeg1,
+			String estatusProyectoTeg2) {
+		// TODO Auto-generated method stub
+		List<Teg> tegs;
+		tegs = interfaceTeg.buscarUltimasTematicasProgramaAreaDosEstatus(programa,
+				area1, fechaInicio, fechaFin, estatusProyectoTeg1,
+				estatusProyectoTeg2);
+		return tegs;
+	}
+	/*************************** Todos ***********************************************************/
 	public List<Long> buscarUltimasEstatus(String estatusProyectoTeg1,
 			String estatusProyectoTeg2, Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<Long> tegs;
-		tegs = interfaceTeg.buscarUltimasEstatus(estatusProyectoTeg1,
+		tegs = interfaceTeg.buscarUltimasDosEstatus(estatusProyectoTeg1,
 				estatusProyectoTeg2, fechaInicio, fechaFin);
 		return tegs;
 	}
@@ -365,7 +377,7 @@ public class STeg {
 				estatusProyectoTeg2, tematicas, fechaInicio, fechaFin);
 		return tegs;
 	}
-
+	/**************************** Fin Reporte Tematicas Mas Solicitadas****************************/
 	public long contadorEstatus(String estatusProyectoTeg, Tematica tematica,
 			Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
