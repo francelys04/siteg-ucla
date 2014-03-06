@@ -184,7 +184,7 @@ public interface ITegDAO extends JpaRepository<Teg, Long> {
 	 * inicio y fecha fin
 	 **/
 	@Query("select teg from Teg teg where teg.tematica=?1 and teg.estatus=?2 and fecha between ?3 and ?4 ")
-	public List<Teg> buscarTegPorFechaTematicaEstatu(Tematica tematica, String estatus,
+	public List<Teg> buscarTegPorTematicaEstatus(Tematica tematica, String estatus,
 			Date fechaInicio, Date fechaFin);
 	
 	/**
@@ -192,9 +192,27 @@ public interface ITegDAO extends JpaRepository<Teg, Long> {
 	 * inicio y fecha fin
 	 **/
 	@Query("select teg from Teg teg where (teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4 or teg.estatus=?5 or teg.estatus=?6 or teg.estatus=?7 or teg.estatus=?8) and teg.tematica=?9 and fecha between ?10 and ?11 ")
-	public List<Teg> buscarTegPorFechaTematicaEstatus(String estatus1,
+	public List<Teg> buscarTegPorTematicaVariosEstatus(String estatus1,
 			String estatus2, String estatus3, String estatus4, String estatus5,
 			String estatus6, String estatus7, String estatus8, Tematica tematica,
+			Date fechaInicio, Date fechaFin);
+	
+	/**
+	 * Querys para buscar la lista de teg dado una area, un estatus, fecha
+	 * inicio y fecha fin
+	 **/
+	@Query("select teg from Teg teg where teg.tematica.areaInvestigacion=?1 and teg.estatus=?2 and fecha between ?3 and ?4 ")
+	public List<Teg> buscarTegPorAreaEstatus(AreaInvestigacion area1, String estatus,
+			Date fechaInicio, Date fechaFin);
+	
+	/**
+	 * Querys para buscar la lista de teg dado una area, varios estatus, fecha
+	 * inicio y fecha fin
+	 **/
+	@Query("select teg from Teg teg where (teg.estatus=?1 or teg.estatus=?2 or teg.estatus=?3 or teg.estatus=?4 or teg.estatus=?5 or teg.estatus=?6 or teg.estatus=?7 or teg.estatus=?8) and teg.tematica.areaInvestigacion=?9 and fecha between ?10 and ?11 ")
+	public List<Teg> buscarTegPorAreaVariosEstatus(String estatus1,
+			String estatus2, String estatus3, String estatus4, String estatus5,
+			String estatus6, String estatus7, String estatus8, AreaInvestigacion area1,
 			Date fechaInicio, Date fechaFin);
 	
 	/************************************ Fin de Query para el Reporte Trabajos *********************************************/
