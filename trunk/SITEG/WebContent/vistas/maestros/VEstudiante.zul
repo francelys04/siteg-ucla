@@ -47,7 +47,8 @@
 		<toolbarbutton label="Ingrese aquí la cédula del estudiante" />
 	</popup>
 	<popup id="pupProgramaEstudiante">
-		<toolbarbutton label="Presione aquí para seleccionar el programa" />
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
 	</popup>
 	<popup id="pupNombreEstudiante">
 		<toolbarbutton label="Ingrese aquí el nombre del estudiante" />
@@ -84,8 +85,7 @@
 			label="Presione aquí para eliminar los datos del estudiante" />
 	</popup>
 	<popup id="pupSalirEstudiante">
-		<toolbarbutton
-			label="Presione aquí para salir" />
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<popup id="pupCatalogoEstudiante">
 		<toolbarbutton
@@ -123,11 +123,14 @@
 						<label value="Programa:"
 							style="font-weight:bold" />
 					</hlayout>
-					<textbox id="txtProgramaEstudiante" disabled="true" style="color:black !important;"
+					<combobox readonly="true" id="cmbProgramaEstudiante"
 						tabindex="1" tooltip="pupProgramaEstudiante">
-						
-					</textbox>
+						<template name="model">
+							<comboitem label="${each.nombre}" />
+						</template>
+					</combobox>
 				</row>
+
 
 				<row>
 					<hlayout>
@@ -235,8 +238,8 @@
 								style="font-weight:bold;margin-left:30px" />
 						</hlayout>
 
-						<textbox id="txtTelefonoFijoEstudiante" maxlength="15"
-							width="90%" style="margin-left:15px" tabindex="10"
+						<textbox id="txtTelefonoFijoEstudiante"
+							maxlength="15" width="90%" style="margin-left:15px" tabindex="10"
 							tooltip="pupTelefonoFijoEstudiante"
 							constraint="/.+[0-9]+/: Debe ingresar un telefono valido" />
 					</hbox>
@@ -249,7 +252,7 @@
 						<label value="Correo:" style="font-weight:bold" />
 					</hlayout>
 
-					<textbox id="txtCorreoEstudiante" width="260px" 
+					<textbox id="txtCorreoEstudiante" width="260px"
 						maxlength="100" tabindex="11" tooltip="pupCorreoEstudiante" />
 				</row>
 
@@ -281,9 +284,10 @@
 							image="/public/imagenes/iconos/eliminar.png" tabindex="14"
 							disabled="true" tooltip="pupEliminarEstudiante">
 						</button>
-						<button id="btnSalirEstudiante" label="Salir" width="110px"
-							sclass="btn" image="/public/imagenes/iconos/salir.png"
-							tabindex="15" tooltip="pupSalirEstudiante">
+						<button id="btnSalirEstudiante" label="Salir"
+							width="110px" sclass="btn"
+							image="/public/imagenes/iconos/salir.png" tabindex="15"
+							tooltip="pupSalirEstudiante">
 						</button>
 					</div>
 
