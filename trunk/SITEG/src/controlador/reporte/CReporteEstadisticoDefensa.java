@@ -184,11 +184,11 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 				if (nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")) {
-					teg1 = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
+					teg1 = servicioTeg.buscarTegPorEstatus(
 							estatus1, fechaInicio, fechaFin);
-					teg2 = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
+					teg2 = servicioTeg.buscarTegPorEstatus(
 							estatus2, fechaInicio, fechaFin);
-					teg3 = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
+					teg3 = servicioTeg.buscarTegPorEstatus(
 							estatus3, fechaInicio, fechaFin);
 					valor1 = teg1.size();
 					valor2 = teg2.size();
@@ -201,12 +201,12 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 						&& nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")) {
 
-					teg1 = servicioTeg.buscarTegPorProgramaUnEstatus(estatus1,
-							programa1, fechaInicio, fechaFin);
-					teg2 = servicioTeg.buscarTegPorProgramaUnEstatus(estatus2,
-							programa1, fechaInicio, fechaFin);
-					teg3 = servicioTeg.buscarTegPorProgramaUnEstatus(estatus3,
-							programa1, fechaInicio, fechaFin);
+					teg1 = servicioTeg.buscarTegPorProgramaEstatus(programa1, 
+							estatus1, fechaInicio, fechaFin);
+					teg2 = servicioTeg.buscarTegPorProgramaEstatus(programa1, 
+							estatus2, fechaInicio, fechaFin);
+					teg3 = servicioTeg.buscarTegPorProgramaEstatus(programa1, 
+							estatus3, fechaInicio, fechaFin);
 					valor1 = teg1.size();
 					valor2 = teg2.size();
 					valor3 = teg3.size();
