@@ -40,7 +40,7 @@ public class CCrearCronograma extends CGeneral {
 	@Wire
 	private Combobox cmbLapsoCrearCronograma;
 	@Wire
-	private Textbox txtProgramaCrearCronograma;
+	private Combobox cmbProgramaCrearCronograma;
 	@Wire
 	private Listbox ltbActividadesDisponibles;
 	@Wire
@@ -59,14 +59,18 @@ public class CCrearCronograma extends CGeneral {
 		// TODO Auto-generated method stub
 		actividadesCargadas = false;
 		actividadesSeleccionadas = false;
+
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
-		if (txtProgramaCrearCronograma.getValue().compareTo("") == 0) {
-			Programa programa1 = servicioPrograma
-					.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
-			txtProgramaCrearCronograma.setValue(programa1.getNombre());
-		}
+		List<Programa> programas = servicioPrograma.buscarActivas();
+
+		// llenarActividades();
 		if (cmbLapsoCrearCronograma != null) {
+
 			cmbLapsoCrearCronograma.setModel(new ListModelList<Lapso>(lapsos));
+
+			cmbProgramaCrearCronograma.setModel(new ListModelList<Programa>(
+					programas));
+
 		}
 
 	}
@@ -118,7 +122,7 @@ public class CCrearCronograma extends CGeneral {
 		} else {
 
 			Messagebox
-					.show("Debe seleccionar el lapso academico del programa al cual se le creara el cronograma",
+					.show("Debe seleccionar el lapso academico y el programa al cual se le creara el cronograma de actividades",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 
 		}
@@ -170,7 +174,7 @@ public class CCrearCronograma extends CGeneral {
 		} else {
 
 			Messagebox
-					.show("Debe seleccionar el lapso academico del programa al cual se le creara el cronograma",
+					.show("Debe seleccionar el lapso academico y el programa al cual se le creara el cronograma de actividades",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		}
 
@@ -187,6 +191,7 @@ public class CCrearCronograma extends CGeneral {
 	@Listen("onClick = #btnCancelarCronograma")
 	public void limpiarCampos() {
 		cmbLapsoCrearCronograma.setValue("");
+		cmbProgramaCrearCronograma.setValue("");
 		ltbActividadesSeleccionadas.getItems().clear();
 		ltbActividadesDisponibles.getItems().clear();
 		actividadesCargadas = false;
@@ -230,8 +235,9 @@ public class CCrearCronograma extends CGeneral {
 								Lapso lapso = servicioLapso.buscarLapso(Long
 										.parseLong(cmbLapsoCrearCronograma
 												.getSelectedItem().getId()));
-								Programa programa = servicioPrograma
-										.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+								Programa programa = servicioPrograma.buscar((Long
+										.parseLong(cmbProgramaCrearCronograma
+												.getSelectedItem().getId())));
 
 								List<Cronograma> cronogramas = servicioCronograma
 										.buscarCronogramaPorLapsoYPrograma(
@@ -285,14 +291,29 @@ public class CCrearCronograma extends CGeneral {
 
 	/*
 	 * Metodo que permite buscar dinamicamente las actividades establecidas para
-	 * cierto lapso que se seleccione y el programa del director de programa en
-	 * sesion
+	 * cierto lapso que se seleccione
 	 */
+
 	@Listen("onChange = #cmbLapsoCrearCronograma")
-	public void buscarLapso() {
-		if (!cmbLapsoCrearCronograma.getValue().equals("")) {
+	public void buscarPrograma() {
+		if (!cmbLapsoCrearCronograma.getValue().equals("")
+				&& !cmbProgramaCrearCronograma.getValue().equals("")) {
 			llenarActividades();
 		}
+	}
+
+	/*
+	 * Metodo que permite buscar dinamicamente las actividades establecidas para
+	 * cierto programa que se seleccione
+	 */
+
+	@Listen("onChange = #cmbProgramaCrearCronograma")
+	public void buscarLapso() {
+		if (!cmbLapsoCrearCronograma.getValue().equals("")
+				&& !cmbProgramaCrearCronograma.getValue().equals("")) {
+			llenarActividades();
+		}
+
 	}
 
 	/*
@@ -309,7 +330,8 @@ public class CCrearCronograma extends CGeneral {
 		Lapso lapso = servicioLapso.buscarLapso(Long
 				.parseLong(cmbLapsoCrearCronograma.getSelectedItem().getId()));
 		Programa programa = servicioPrograma
-				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+				.buscar((Long.parseLong(cmbProgramaCrearCronograma
+						.getSelectedItem().getId())));
 		cronogramas = servicioCronograma.buscarCronogramaPorLapsoYPrograma(
 				programa, lapso);
 		actividades = servicioActividad.buscarActividadSinCronograma(programa,
