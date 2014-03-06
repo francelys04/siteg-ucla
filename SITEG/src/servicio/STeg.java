@@ -34,15 +34,6 @@ public class STeg {
 
 	}
 
-	/* Buscar los teg que tengan estatus Aprobado/Reprobado */
-	public List<Teg> buscarSegunDosEstatus(String estatus1, String estatus2) {
-
-		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatusOrEstatus(estatus1, estatus2);
-		return tegs;
-
-	}
-
 	public List<Teg> BuscarTegCalificandoDefensa() {
 
 		List<Teg> tegs;
@@ -438,51 +429,67 @@ public class STeg {
 		return tegs;
 	}
 
-	public List<Teg> buscarTegSegunAreaProgramaDosEstatus(
-			Programa programa,AreaInvestigacion area, String estatus1, String estatus2) {
-		List<Teg> tegs;
-		tegs = interfaceTeg.buscarTegSegunAreaProgramaDosEstatus(programa,area, estatus1, estatus2);
-		return tegs;
-	}
+	/*************************Inicio Report Promedio Gestion de Teg ************************************/
+	/***************************Todos*******************************************************************/
+	public List<Teg> buscarSegunDosEstatus(String estatus1, String estatus2) {
 
-	public List<Teg> buscarTegSegunAreaInvestigacionPorDosFechasyEstatus(
-			AreaInvestigacion area, String estatus1, String estatus2,
-			String estatus3, String estatus4, Date fechaInicio, Date fechaFin) {
 		List<Teg> tegs;
-		tegs = interfaceTeg
-				.buscarTegSegunAreaInvestigacionPorDosFechasyEstatus(area,
-						estatus1, estatus2, estatus3, estatus4, fechaInicio,
-						fechaFin);
+		tegs = interfaceTeg.findByEstatusOrEstatus(estatus1, estatus2);
 		return tegs;
-	}
 
-	public List<Teg> buscarTegSegunTematicaDosEstatus(Programa programa,Tematica tematica,
-			String estatus1, String estatus2) {
-		List<Teg> tegs;
-		tegs = interfaceTeg
-				.buscarTegSegunTematicaProgramaDosEstatus(programa, tematica, estatus1, estatus2);
-		return tegs;
 	}
-
+	
+	/*********************************Por programa *****************************************************/
 	public List<Teg> buscarTegSegunProgramaDosEstatus(Programa programa,
 			String estatus1, String estatus2) {
 		List<Teg> tegs;
 		tegs = interfaceTeg.buscarTegSegunProgramaDosEstatus(programa,estatus1,estatus2);
 		return tegs;
 	}
-
-	public List<Teg> buscarSegunTegs(List<Teg> tegs) {
-		List<Teg> tegsSeleccionados;
-		tegsSeleccionados = interfaceTeg.buscarSegunTegs(tegs);
-		return tegsSeleccionados;
+	/******************************** Por area   ********************************************************/
+	public List<Teg> buscarTegSegunAreaDosEstatus(AreaInvestigacion area, String estatus1, String estatus2) {
+		List<Teg> tegs;
+		tegs = interfaceTeg.buscarTegSegunAreaDosEstatus(area, estatus1, estatus2);
+		return tegs;
 	}
-
-	public List<Teg> buscarTegSegunEstatus(String estatus1, String estatus2) {
-		List<Teg> tegsSeleccionados;
-		tegsSeleccionados = interfaceTeg.buscarTegSegunEstatus(estatus1,
-				estatus2);
-		return tegsSeleccionados;
+	/******************************** Por tematica ******************************************************/
+	public List<Teg> buscarTegSegunTematicaDosEstatus(Tematica tematica, String estatus1, String estatus2) {
+		List<Teg> tegs;
+		tegs = interfaceTeg.buscarTegSegunTematicaDosEstatus(tematica, estatus1, estatus2);
+		return tegs;
 	}
+	/******************************* Por programa area ***************************************************/
+	public List<Teg> buscarTegSegunAreaProgramaDosEstatus(
+			Programa programa,AreaInvestigacion area, String estatus1, String estatus2) {
+		List<Teg> tegs;
+		tegs = interfaceTeg.buscarTegSegunAreaProgramaDosEstatus(programa,area, estatus1, estatus2);
+		return tegs;
+	}
+	/******************************* Por programa tematica ************************************************/
+	public List<Teg> buscarTegSegunTematicaProgramaDosEstatus(Programa programa,Tematica tematica,
+			String estatus1, String estatus2) {
+		List<Teg> tegs;
+		tegs = interfaceTeg
+				.buscarTegSegunTematicaProgramaDosEstatus(programa, tematica, estatus1, estatus2);
+		return tegs;
+	}
+	/******************************** Por area tematica ****************************************************/
+	public List<Teg> buscarTegSegunTematicaAreaDosEstatus(Tematica tematica,AreaInvestigacion area,
+			String estatus1, String estatus2) {
+		List<Teg> tegs;
+		tegs = interfaceTeg
+				.buscarTegSegunTematicaAreaDosEstatus(tematica,area, estatus1, estatus2);
+		return tegs;
+	}
+	/********************************* Por programa area tematica ******************************************/
+	public List<Teg> buscarTegSegunTematicaAreaProgramaDosEstatus(Programa programa,AreaInvestigacion area,Tematica tematica,
+			String estatus1, String estatus2) {
+		List<Teg> tegs;
+		tegs = interfaceTeg
+				.buscarTegSegunTematicaAreaProgramaDosEstatus(programa,area,tematica, estatus1, estatus2);
+		return tegs;
+	}
+	/*************************Fin Report Promedio Gestion de Teg ************************************/
 
 	/*---- Servicios para Reporte Proyecto ----*/
 	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
