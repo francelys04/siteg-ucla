@@ -1,5 +1,5 @@
 <window id="wdwActividad" title="Actividad" border="normal" width="100%"
-	height="410px" closable="true" apply="controlador.CActividad">
+	height="auto" closable="true" apply="controlador.CActividad">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -83,7 +83,7 @@
 	</popup>
 	<!-- Fin de popus -->
 
-	<groupbox width="95%" height="290px"
+	<groupbox width="95%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -170,7 +170,5 @@
 
 	<separator />
 	<separator />
-	<separator />
-	<separator />
-	<separator />
+
 </window>

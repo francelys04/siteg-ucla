@@ -1,5 +1,5 @@
 <window id="wdwCargarProfesor" title="Cargar Profesores" border="normal"
-	width="100%" height="700px" closable="true"
+	width="100%" height="auto" closable="true"
 	apply="controlador.CCargarProfesor">
 
 	<style dynamic="true">
@@ -74,7 +74,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="96%" style="margin-left:2%" height="560px">
+	<groupbox width="96%" style="margin-left:2%" height="auto">
 		<grid sclass="fgrid" style="margin-left:2%">
 			<columns>
 				<column width="150px" height="30px" />
@@ -182,10 +182,7 @@
 
 	</groupbox>
 
+	<separator />
+	<separator />
 
-	<separator />
-	<separator />
-	<separator />
-	<separator />
-	<separator />
 </window>

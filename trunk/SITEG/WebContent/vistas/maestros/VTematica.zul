@@ -1,5 +1,5 @@
 <window id="wdwTematica" title="Temática" border="normal" width="100%"
-	height="460px" closable="true" apply="controlador.CTematica">
+	height="auto" closable="true" apply="controlador.CTematica">
 
 	<style dynamic="true">
 		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
@@ -85,7 +85,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="340px"
+	<groupbox width="95%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -177,8 +177,8 @@
 							image="/public/imagenes/iconos/eliminar.png" tabindex="7"
 							disabled="true">
 						</button>
-						<button id="btnSalirTematica" label="Salir" width="110px"
-							sclass="btn" tooltip="pupSalirTematica"
+						<button id="btnSalirTematica" label="Salir"
+							width="110px" sclass="btn" tooltip="pupSalirTematica"
 							image="/public/imagenes/iconos/salir.png" tabindex="8">
 						</button>
 						<separator />
@@ -192,7 +192,5 @@
 
 	<separator />
 	<separator />
-	<separator />
-	<separator />
-	<separator />
+
 </window>

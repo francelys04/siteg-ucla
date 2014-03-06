@@ -1,5 +1,5 @@
 <window id="wdwTipoJurado" title="Tipo de Jurado" border="normal"
-	width="100%" height="410px" closable="true"
+	width="100%" height="auto" closable="true"
 	apply="controlador.CTipoJurado">
 
 	<style dynamic="true">
@@ -85,7 +85,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="290px"
+	<groupbox width="95%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -158,7 +158,5 @@
 
 	<separator />
 	<separator />
-	<separator />
-	<separator />
-	<separator />
+
 </window>
