@@ -63,6 +63,10 @@
 		<toolbarbutton
 			label="Presione aquí para seleccionar un lapso académico" />
 	</popup>
+	<popup id="pupProgramaConfigurarPrograma">
+		<toolbarbutton
+			label="Presione aquí para seleccionar un programa" />
+	</popup>
 	<popup id="pupAgregarAreasConfigurarPrograma">
 		<toolbarbutton label="Presione aquí para agregar areas" />
 	</popup>
@@ -168,13 +172,20 @@
 								style="font-weight:bold" />
 						</hlayout>
 
-						<textbox id="txtProgramaConfigurarPrograma" disabled="true"
-							width="190px" tabindex="12" style="margin-left:35px;color:black !important;">
-						</textbox>
+						<combobox id="cmbProgramaConfigurarPrograma"
+							tooltip="pupProgramaConfigurarPrograma" readonly="true"
+							autodrop="true" width="190px" tabindex="12"
+							style="margin-left:35px">
+							<template name="model">
+								<comboitem label="${each.nombre}"
+									id="${each.id}" />
+							</template>
+						</combobox>
 
 					</hbox>
 
 				</row>
+
 
 			</rows>
 		</grid>

@@ -40,7 +40,7 @@ public class CConfigurarPrograma extends CGeneral {
 	@Wire
 	private Combobox cmbLapsoConfigurarPrograma;
 	@Wire
-	private Textbox txtProgramaConfigurarPrograma;
+	private Combobox cmbProgramaConfigurarPrograma;
 	@Wire
 	private Listbox ltbAreasDisponibles;
 	@Wire
@@ -71,17 +71,18 @@ public class CConfigurarPrograma extends CGeneral {
 		listasCargadas = false;
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
-		if (txtProgramaConfigurarPrograma.getValue().compareTo("") == 0) {
-			Programa programa1 = servicioPrograma
-					.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
-			txtProgramaConfigurarPrograma.setValue(programa1.getNombre());
-		}
+		List<Programa> programas = servicioPrograma.buscarActivas();
 
 		if (cmbLapsoConfigurarPrograma != null) {
 
 			cmbLapsoConfigurarPrograma
 					.setModel(new ListModelList<Lapso>(lapsos));
+
+			cmbProgramaConfigurarPrograma.setModel(new ListModelList<Programa>(
+					programas));
+
 		}
+
 	}
 
 	/*
@@ -340,8 +341,9 @@ public class CConfigurarPrograma extends CGeneral {
 		Lapso lapso = servicioLapso
 				.buscarLapso(Long.parseLong(cmbLapsoConfigurarPrograma
 						.getSelectedItem().getId()));
-		Programa programa = servicioPrograma
-				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		Programa programa = servicioPrograma.buscar((Long
+				.parseLong(cmbProgramaConfigurarPrograma.getSelectedItem()
+						.getId())));
 		List<ProgramaArea> programasAreas = new ArrayList<ProgramaArea>();
 		List<AreaInvestigacion> areas = servicioProgramaArea
 				.buscarAreasDePrograma(programa, lapso);
@@ -429,6 +431,7 @@ public class CConfigurarPrograma extends CGeneral {
 	@Listen("onClick = #btnCancelarConfigurarPrograma")
 	public void limpiarCampos() {
 		cmbLapsoConfigurarPrograma.setValue("");
+		cmbProgramaConfigurarPrograma.setValue("");
 		ltbAreasDisponibles.getItems().clear();
 		ltbAreasSeleccionadas.getItems().clear();
 		ltbItemsDisponibles.getItems().clear();
@@ -438,26 +441,37 @@ public class CConfigurarPrograma extends CGeneral {
 		ltbRequisitosSeleccionadas.getItems().clear();
 		listasCargadas = false;
 	}
-	
-	
+
 	/*
 	 * Metodo que permite cerrar la vista de configurar programa
 	 */
 	@Listen("onClick = #btnSalirConfigurarPrograma")
 	public void salirConfigurarPrograma() {
-		
+
 		wdwConfigurarPrograma.onClose();
-	
+
 	}
-	
+
 	/*
 	 * Metodo que permite buscar dinamicamente las configuraciones establecidas
-	 * para cierto lapso que se seleccione y el programa del director de
-	 * programa en sesion
+	 * para cierto lapso que se seleccione
 	 */
 	@Listen("onChange = #cmbLapsoConfigurarPrograma")
 	public void buscarLapso() {
-		if (!cmbLapsoConfigurarPrograma.getValue().equals("")) {
+		if (!cmbLapsoConfigurarPrograma.getValue().equals("")
+				&& !cmbProgramaConfigurarPrograma.getValue().equals("")) {
+			llenarListas();
+		}
+	}
+
+	/*
+	 * Metodo que permite buscar dinamicamente las configuraciones establecidas
+	 * para cierto programa que se seleccione
+	 */
+	@Listen("onChange = #cmbProgramaConfigurarPrograma")
+	public void buscarPrograma() {
+		if (!cmbLapsoConfigurarPrograma.getValue().equals("")
+				&& !cmbProgramaConfigurarPrograma.getValue().equals("")) {
 			llenarListas();
 		}
 	}
@@ -467,14 +481,16 @@ public class CConfigurarPrograma extends CGeneral {
 	 * condiciones para cierto lapso, y cierto programa, para asi llenar las
 	 * listas respectivas de la vista
 	 */
+
 	public void llenarListas() {
 
 		listasCargadas = true;
 		long idLapso = Long.parseLong(cmbLapsoConfigurarPrograma
 				.getSelectedItem().getId());
 		Lapso lapso = servicioLapso.buscarLapso(idLapso);
-		Programa programa = servicioPrograma
-				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		Programa programa = servicioPrograma.buscar((Long
+				.parseLong(cmbProgramaConfigurarPrograma.getSelectedItem()
+						.getId())));
 		List<AreaInvestigacion> areasIzquierda = servicioArea
 				.buscarAreasSinPrograma(programa, lapso);
 		List<AreaInvestigacion> areasDerecha = servicioProgramaArea
@@ -504,16 +520,28 @@ public class CConfigurarPrograma extends CGeneral {
 		ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(
 				requisitosDerecha));
 
+		ltbAreasDisponibles.setMultiple(false);
+		ltbAreasDisponibles.setCheckmark(false);
 		ltbAreasDisponibles.setMultiple(true);
 		ltbAreasDisponibles.setCheckmark(true);
+		ltbAreasSeleccionadas.setMultiple(false);
+		ltbAreasSeleccionadas.setCheckmark(false);
 		ltbAreasSeleccionadas.setMultiple(true);
 		ltbAreasSeleccionadas.setCheckmark(true);
+		ltbRequisitosDisponibles.setMultiple(false);
+		ltbRequisitosDisponibles.setCheckmark(false);
 		ltbRequisitosDisponibles.setMultiple(true);
 		ltbRequisitosDisponibles.setCheckmark(true);
+		ltbRequisitosSeleccionadas.setMultiple(false);
+		ltbRequisitosSeleccionadas.setCheckmark(false);
 		ltbRequisitosSeleccionadas.setMultiple(true);
 		ltbRequisitosSeleccionadas.setCheckmark(true);
+		ltbItemsDisponibles.setMultiple(false);
+		ltbItemsDisponibles.setCheckmark(false);
 		ltbItemsDisponibles.setMultiple(true);
 		ltbItemsDisponibles.setCheckmark(true);
+		ltbItemsSeleccionados.setMultiple(false);
+		ltbItemsSeleccionados.setCheckmark(false);
 		ltbItemsSeleccionados.setMultiple(true);
 		ltbItemsSeleccionados.setCheckmark(true);
 
