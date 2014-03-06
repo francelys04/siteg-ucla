@@ -305,7 +305,7 @@ public class CReporteTrabajos extends CGeneral {
 							.parseLong(idPrograma));
 					
 					teg = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(programa1,
+							.buscarTegPorTematicaEstatusPrograma(programa1,
 									estatus, tematica1, fechaInicio, fechaFin);
 					if (teg.size() == 0) {
 						datosVacios = true;
@@ -328,7 +328,7 @@ public class CReporteTrabajos extends CGeneral {
 							.parseLong(idPrograma));
 					
 					teg = servicioTeg
-							.buscarTegPorDosFechasyUnEstatus(programa1, area1, estatus, fechaInicio, fechaFin);
+							.buscarTegPorAreaEstatusPrograma(programa1, area1, estatus, fechaInicio, fechaFin);
 					if (teg.size() == 0) {
 						datosVacios = true;
 					} 
@@ -359,7 +359,7 @@ public class CReporteTrabajos extends CGeneral {
 							String estatusTeg7 = "Proyecto en Desarrollo";
 							String estatusTeg8 = "Avances Finalizados";
 							
-							teg = servicioTeg.buscarTegPorDosFechasAreaEstatus(programa1, area1, 
+							teg = servicioTeg.buscarTegPorVariosEstatusAreaPrograma(programa1, area1, 
 									estatusTeg1, estatusTeg2, estatusTeg3,
 									estatusTeg4, estatusTeg5, estatusTeg6,
 									estatusTeg7, estatusTeg8, fechaInicio, fechaFin);
@@ -379,7 +379,7 @@ public class CReporteTrabajos extends CGeneral {
 							String estatusTeg7 = "TEG Aprobado";
 							String estatusTeg8 = "TEG Reprobado";
 							
-							teg = servicioTeg.buscarTegPorDosFechasAreaEstatus(programa1, area1, 
+							teg = servicioTeg.buscarTegPorVariosEstatusAreaPrograma(programa1, area1, 
 									estatusTeg1, estatusTeg2, estatusTeg3,
 									estatusTeg4, estatusTeg5, estatusTeg6,
 									estatusTeg7, estatusTeg8, fechaInicio, fechaFin);
@@ -391,7 +391,7 @@ public class CReporteTrabajos extends CGeneral {
 					} else if (rdoAmbos.isChecked() == true) {
 						try {
 							teg = servicioTeg
-									.buscarTegPorDosFechasyArea(programa1, area1, fechaInicio, fechaFin);
+									.buscarTegPorAreaPrograma(programa1, area1, fechaInicio, fechaFin);
 						} catch (Exception e) {
 							System.out.println(e);
 							// TODO Auto-generated catch block
@@ -411,23 +411,68 @@ public class CReporteTrabajos extends CGeneral {
 					String idTematica = String.valueOf(((Tematica) cmbTematica
 							.getSelectedItem().getValue()).getId());
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
-							.parseLong(idTematica));
-										
-					String estatusTeg1 = "Solicitando Registro";
-					String estatusTeg2 = "Proyecto Registrado";
-					String estatusTeg3 = "Comision Asignada";
-					String estatusTeg4 = "Factibilidad Evaluada";
-					String estatusTeg5 = "Proyecto Factible";
-					String estatusTeg6 = "Proyecto No Factible";
-					String estatusTeg7 = "Proyecto en Desarrollo";
-					String estatusTeg8 = "Avances Finalizados";
+							.parseLong(idTematica));				
 					
-					teg = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
-									estatusTeg1, estatusTeg2, estatusTeg3,
-									estatusTeg4, estatusTeg5, estatusTeg6,
-									estatusTeg7, estatusTeg8, tematica1, 
-									fechaInicio, fechaFin);
+					String idPrograma = String.valueOf(((Programa) cmbPrograma
+							.getSelectedItem().getValue()).getId());
+					Programa programa1 = servicioPrograma.buscar(Long
+							.parseLong(idPrograma));
+					
+					if (rdoProyecto.isChecked() == true) {
+						try {
+							String estatusTeg1 = "Solicitando Registro";
+							String estatusTeg2 = "Proyecto Registrado";
+							String estatusTeg3 = "Comision Asignada";
+							String estatusTeg4 = "Factibilidad Evaluada";
+							String estatusTeg5 = "Proyecto Factible";
+							String estatusTeg6 = "Proyecto No Factible";
+							String estatusTeg7 = "Proyecto en Desarrollo";
+							String estatusTeg8 = "Avances Finalizados";
+							
+							teg = servicioTeg
+									.buscarTegPorVariosEstatusTematicaPrograma(programa1, tematica1, 
+											estatusTeg1, estatusTeg2, estatusTeg3,
+											estatusTeg4, estatusTeg5, estatusTeg6,
+											estatusTeg7, estatusTeg8,
+											fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoTeg.isChecked() == true) {
+						try {
+							String estatusTeg1 = "TEG Registrado";
+							String estatusTeg2 = "Trabajo en Desarrollo";
+							String estatusTeg3 = "Revisiones Finalizadas";
+							String estatusTeg4 = "Solicitando Defensa";
+							String estatusTeg5 = "Jurado Asignado";
+							String estatusTeg6 = "Defensa Asignada";
+							String estatusTeg7 = "TEG Aprobado";
+							String estatusTeg8 = "TEG Reprobado";
+							
+							teg = servicioTeg
+									.buscarTegPorVariosEstatusTematicaPrograma(programa1, tematica1, 
+											estatusTeg1, estatusTeg2, estatusTeg3,
+											estatusTeg4, estatusTeg5, estatusTeg6,
+											estatusTeg7, estatusTeg8,
+											fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoAmbos.isChecked() == true) {
+						try {
+							teg = servicioTeg
+									.buscarTegPorTematicaPrograma(programa1, tematica1, fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
 					if (teg.size() == 0) {
 						datosVacios = true;
 					} 
@@ -442,8 +487,8 @@ public class CReporteTrabajos extends CGeneral {
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
 
-					teg = servicioTeg.buscarTegPorProgramaVariasAreasUnEstatus(
-							estatus, programa1, fechaInicio, fechaFin);
+					teg = servicioTeg.buscarTegPorProgramaEstatus(
+							programa1, estatus, fechaInicio, fechaFin);
 					if (teg.size() == 0) {
 						datosVacios = true;
 					}
@@ -458,30 +503,73 @@ public class CReporteTrabajos extends CGeneral {
 							.getSelectedItem().getValue()).getId());
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
-					String estatusTeg1 = "Solicitando Registro";
-					String estatusTeg2 = "Proyecto Registrado";
-					String estatusTeg3 = "Comision Asignada";
-					String estatusTeg4 = "Factibilidad Evaluada";
-					String estatusTeg5 = "Proyecto Factible";
-					String estatusTeg6 = "Proyecto No Factible";
-					String estatusTeg7 = "Proyecto en Desarrollo";
-					String estatusTeg8 = "Avances Finalizados";
-					teg = servicioTeg
-							.buscarTegPorProgramaVariasAreasVariosEstatus1(
-									estatusTeg1, estatusTeg2, estatusTeg3,
-									estatusTeg4, estatusTeg5, estatusTeg6,
-									estatusTeg7, estatusTeg8, programa1,
-									fechaInicio, fechaFin);
+					
+					if (rdoProyecto.isChecked() == true) {
+						try {
+							String estatusTeg1 = "Solicitando Registro";
+							String estatusTeg2 = "Proyecto Registrado";
+							String estatusTeg3 = "Comision Asignada";
+							String estatusTeg4 = "Factibilidad Evaluada";
+							String estatusTeg5 = "Proyecto Factible";
+							String estatusTeg6 = "Proyecto No Factible";
+							String estatusTeg7 = "Proyecto en Desarrollo";
+							String estatusTeg8 = "Avances Finalizados";
+							
+							teg = servicioTeg
+									.buscarTegPorProgramaVariosEstatus(programa1,
+											estatusTeg1, estatusTeg2, estatusTeg3,
+											estatusTeg4, estatusTeg5, estatusTeg6,
+											estatusTeg7, estatusTeg8, 
+											fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoTeg.isChecked() == true) {
+						try {
+							String estatusTeg1 = "TEG Registrado";
+							String estatusTeg2 = "Trabajo en Desarrollo";
+							String estatusTeg3 = "Revisiones Finalizadas";
+							String estatusTeg4 = "Solicitando Defensa";
+							String estatusTeg5 = "Jurado Asignado";
+							String estatusTeg6 = "Defensa Asignada";
+							String estatusTeg7 = "TEG Aprobado";
+							String estatusTeg8 = "TEG Reprobado";
+							
+							teg = servicioTeg
+									.buscarTegPorProgramaVariosEstatus(programa1,
+											estatusTeg1, estatusTeg2, estatusTeg3,
+											estatusTeg4, estatusTeg5, estatusTeg6,
+											estatusTeg7, estatusTeg8, 
+											fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoAmbos.isChecked() == true) {
+						try {
+							teg = servicioTeg
+									.buscarTegPorPrograma(programa1, 
+											fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 					if (teg.size() == 0) {
 						datosVacios = true;
 					}
 				}
+				
 				/*buscar por Todos las carrera, y un estatus*/
 				if (nombrePrograma.equals("Todos") 
 						&& nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
 						&& !estatus.equals("Todos")) {
-					teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
+					teg = servicioTeg.buscarTegPorEstatus(
 							estatus, fechaInicio, fechaFin);
 					if (teg.size() == 0) {
 						datosVacios = true;
@@ -492,19 +580,59 @@ public class CReporteTrabajos extends CGeneral {
 						&& nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
 						&& estatus.equals("Todos")) {
-					String estatusTeg1 = "Solicitando Registro";
-					String estatusTeg2 = "Proyecto Registrado";
-					String estatusTeg3 = "Comision Asignada";
-					String estatusTeg4 = "Factibilidad Evaluada";
-					String estatusTeg5 = "Proyecto Factible";
-					String estatusTeg6 = "Proyecto No Factible";
-					String estatusTeg7 = "Proyecto en Desarrollo";
-					String estatusTeg8 = "Avances Finalizados";
-					teg = servicioTeg
-							.buscarTegPorVariosProgramasVariosEstatus1(
-									estatusTeg1, estatusTeg2, estatusTeg3,
-									estatusTeg4, estatusTeg5, estatusTeg6,
-									estatusTeg7, estatusTeg8, fechaInicio, fechaFin);
+
+					if (rdoProyecto.isChecked() == true) {
+						try {
+							String estatusTeg1 = "Solicitando Registro";
+							String estatusTeg2 = "Proyecto Registrado";
+							String estatusTeg3 = "Comision Asignada";
+							String estatusTeg4 = "Factibilidad Evaluada";
+							String estatusTeg5 = "Proyecto Factible";
+							String estatusTeg6 = "Proyecto No Factible";
+							String estatusTeg7 = "Proyecto en Desarrollo";
+							String estatusTeg8 = "Avances Finalizados";
+							
+							teg = servicioTeg
+									.buscarTegPorVariosEstatus(
+											estatusTeg1, estatusTeg2, estatusTeg3,
+											estatusTeg4, estatusTeg5, estatusTeg6,
+											estatusTeg7, estatusTeg8, fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoTeg.isChecked() == true) {
+						try {
+							String estatusTeg1 = "TEG Registrado";
+							String estatusTeg2 = "Trabajo en Desarrollo";
+							String estatusTeg3 = "Revisiones Finalizadas";
+							String estatusTeg4 = "Solicitando Defensa";
+							String estatusTeg5 = "Jurado Asignado";
+							String estatusTeg6 = "Defensa Asignada";
+							String estatusTeg7 = "TEG Aprobado";
+							String estatusTeg8 = "TEG Reprobado";
+							
+							teg = servicioTeg
+									.buscarTegPorVariosEstatus(
+											estatusTeg1, estatusTeg2, estatusTeg3,
+											estatusTeg4, estatusTeg5, estatusTeg6,
+											estatusTeg7, estatusTeg8, fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoAmbos.isChecked() == true) {
+						try {
+							teg = servicioTeg
+									.buscarTegPorFecha(fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 					if (teg.size() == 0) {
 						datosVacios = true;
 					}
