@@ -209,17 +209,6 @@ public class CPrograma extends CGeneral {
 									throws InterruptedException {
 								if (evt.getName().equals("onOK")) {
 
-									Profesor directorPrograma = servicioProfesor
-											.buscarProfesorPorCedula(cedulaProfesor);
-									crearUsuarioProfesor(imagenx, directorPrograma,
-											"ROLE_DIRECTOR");
-									String mensaje = "Su usuario es: "
-											+ directorPrograma.getCedula()
-											+ "y su contrasena:"
-											+ directorPrograma.getCedula();
-									enviarEmailNotificacion(
-											directorPrograma.getCorreoElectronico(),
-											mensaje);
 									Programa programaBuscado = servicioPrograma
 											.buscar(id);
 									if (programaBuscado != null) {
@@ -232,15 +221,32 @@ public class CPrograma extends CGeneral {
 										List<Grupo> grupos = servicioGrupo
 												.buscarGruposDelUsuario(usuario);
 										for (int i = 0; i < grupos.size(); i++) {
+											System.out.println("prmero"+grupos.get(i).getNombre());
 											if (grupos.get(i).getId() == grupo
 													.getId()) {
 												grupos.remove(i);
-											} else
-												gruposUsuario.add(grupos.get(i));
+												i--;
+											} else{
+												System.out
+														.println("segundo"+grupos.get(i).getNombre());
+												gruposUsuario.add(grupos.get(i));}
 										}
 									usuario.setGrupos(gruposUsuario);
 									servicioUsuario.guardar(usuario);
 									}
+									Profesor directorPrograma = servicioProfesor
+											.buscarProfesorPorCedula(cedulaProfesor);
+									crearUsuarioProfesor(imagenx, directorPrograma,
+											"ROLE_DIRECTOR");
+									String mensaje = "Su usuario es: "
+											+ directorPrograma.getCedula()
+											+ "y su contrasena:"
+											+ directorPrograma.getCedula();
+									enviarEmailNotificacion(
+											directorPrograma.getCorreoElectronico(),
+											mensaje);
+									
+									
 									String nombre = txtNombrePrograma
 											.getValue();
 									String descripcion = txtDescripcionPrograma
