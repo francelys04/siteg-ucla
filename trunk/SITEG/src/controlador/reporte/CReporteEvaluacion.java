@@ -952,7 +952,7 @@ public class CReporteEvaluacion extends CGeneral {
 										.buscarTematicaPorNombre(nombreTematica);
 								chequeoEstatus = 5;
 
-								teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+								teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 										nombreestatus, tematica1, fechaInicio, fechaFin);
 
 								if (teg.size() != 0) {

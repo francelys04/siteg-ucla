@@ -631,6 +631,12 @@ public class STeg {
 				estatus1, estatus2, tematica1,fechaInicio,
 				 fechaFin);
 	}
+	
+	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
+			String estatus, Tematica tematica, Date fechaInicio, Date fechaFin) {
+		return interfaceTeg.buscarTegPorFechayEstatus1(estatus, tematica,
+								fechaInicio, fechaFin);
+	}
 
 	public List<Teg> buscarTegSegunAreaInvestigacionPorDosFechasyEstatus(
 			AreaInvestigacion area1, String estatus1, String estatus2,
