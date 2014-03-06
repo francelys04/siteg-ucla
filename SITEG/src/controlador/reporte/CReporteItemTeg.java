@@ -309,7 +309,6 @@ public class CReporteItemTeg extends CGeneral {
 					p.put("estudiantes", estu);
 					p.put("tutor", tutor);
 					p.put("tematica", teg.getTematica().getNombre());
-					p.put("titulo", teg.getTitulo());
 					p.put("programa", estudiantes.get(0).getPrograma()
 							.getNombre());
 					p.put("area", teg.getTematica().getareaInvestigacion()
@@ -362,7 +361,6 @@ public class CReporteItemTeg extends CGeneral {
 					p.put("estudiantes", estu);
 					p.put("tutor", tutor);
 					p.put("tematica", teg.getTematica().getNombre());
-					p.put("titulo", teg.getTitulo());
 					p.put("programa", estudiantes.get(0).getPrograma()
 							.getNombre());
 					p.put("area", teg.getTematica().getareaInvestigacion()

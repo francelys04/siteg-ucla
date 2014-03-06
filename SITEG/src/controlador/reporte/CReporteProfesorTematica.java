@@ -146,9 +146,11 @@ public class CReporteProfesorTematica extends CGeneral {
 					p.put("logoUcla", reporteImage + "logo ucla.png");
 					p.put("logoCE", reporteImage + "logo CE.png");
 					p.put("logoSiteg", reporteImage + "logo.png");
-					
-					p.put("cedulaprofesor", txtCedulaProfesorTematica.getValue() );
-					p.put("profesor", txtNombreProfesorTematica.getValue() + " " + txtApellidoProfesorTematica.getValue());
+
+					p.put("cedulaprofesor",
+							txtCedulaProfesorTematica.getValue());
+					p.put("profesor", txtNombreProfesorTematica.getValue()
+							+ " " + txtApellidoProfesorTematica.getValue());
 
 					jasperReport = (JasperReport) JRLoader
 							.loadObject(reporteSrc);
@@ -166,7 +168,7 @@ public class CReporteProfesorTematica extends CGeneral {
 			} else {
 
 				Messagebox.show(
-						"No hay informacion disponible para esta seleccion",
+						"No hay tematicas asociadas al profesor seleccionado",
 						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 
 			}
@@ -174,30 +176,23 @@ public class CReporteProfesorTematica extends CGeneral {
 		}
 
 	}
-	
-	
+
 	/*
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 */
 	@Listen("onClick = #btnCancelarReporteProfesorTematica")
 	public void cancelar() {
-		
+
 		txtCedulaProfesorTematica.setValue("");
 		txtNombreProfesorTematica.setValue("");
 		txtApellidoProfesorTematica.setValue("");
-		
-		
+
 	}
-	
-	
-	
-	
+
 	/* Metodo que permite cerrar la ventana correspondiente al reporte */
 	@Listen("onClick = #btnSalirReporteProfesorTematica")
 	public void salirReporte() {
 		wdwReporteProfesorTematica.onClose();
 	}
-	
-	
 
 }
