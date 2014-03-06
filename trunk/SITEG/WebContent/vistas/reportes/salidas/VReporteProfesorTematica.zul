@@ -121,7 +121,8 @@
 
 						<hbox>
 							<textbox id="txtCedulaProfesorTematica"
-								width="150px" style="margin-left:20px" disabled="True" />
+								width="150px" style="margin-left:20px;color:black !important;"
+								disabled="True" />
 
 							<button id="btnCatalogoProfesorTematica"
 								tooltip="pupCatalogoProfesoresTematica" sclass="btn"
@@ -144,7 +145,8 @@
 
 						<hbox>
 							<textbox id="txtNombreProfesorTematica"
-								width="150px" style="margin-left:18px" disabled="True" />
+								width="150px" style="margin-left:18px;color:black !important;"
+								disabled="True" />
 
 							<hlayout>
 								<label value="*"
@@ -155,7 +157,8 @@
 							</hlayout>
 
 							<textbox id="txtApellidoProfesorTematica"
-								width="150px" style="margin-left:20px" disabled="True" />
+								width="150px" style="margin-left:20px;color:black !important;"
+								disabled="True" />
 						</hbox>
 
 					</hbox>

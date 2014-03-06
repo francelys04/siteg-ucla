@@ -139,6 +139,9 @@ public class CReporteAvances extends CGeneral {
 	 */
 	@Listen("onSelect= #cmbEstatus")
 	public List<Teg> buscar() {
+		
+		ltbReporteItemTeg.getItems().clear();
+		
 		List<Teg> tegs = servicioTeg.buscarTegs(cmbEstatus.getValue());
 		for (int i = 0; i < tegs.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante
@@ -159,7 +162,7 @@ public class CReporteAvances extends CGeneral {
 	 * el nombre y apellido del estudiante, la fecha, la tematica, el area, el
 	 * titulo, el nombre y apellido del tutor de estos.
 	 */
-	@Listen("onChange = #txtMostrarFechaCalificar,#txtMostrarTematicaCalificar,#txtMostrarAreaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,# txtMostrarApellidoTutorCalificar")
+	@Listen("onChange = #txtEstudianteCalificarDefensa,#txtMostrarFechaCalificar,#txtMostrarTematicaCalificar,#txtMostrarAreaCalificar,#txtMostrarTituloCalificar,#txtMostrarNombreTutorCalificar,#txtMostrarApellidoTutorCalificar")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscar();
 		for (int i = 0; i < teg1.size(); i++) {
@@ -274,7 +277,10 @@ public class CReporteAvances extends CGeneral {
 					p.put("estudiantes", estu);
 					p.put("tutor", tutor);
 					p.put("tematica", teg.getTematica().getNombre());
-					p.put("titulo", teg.getTitulo());
+					p.put("programa", estudiantes.get(0).getPrograma()
+							.getNombre());
+					p.put("area", teg.getTematica().getareaInvestigacion()
+							.getNombre());
 
 					try {
 						jasperReport = (JasperReport) JRLoader
@@ -322,7 +328,10 @@ public class CReporteAvances extends CGeneral {
 					p.put("estudiantes", estu);
 					p.put("tutor", tutor);
 					p.put("tematica", teg.getTematica().getNombre());
-					p.put("titulo", teg.getTitulo());
+					p.put("programa", estudiantes.get(0).getPrograma()
+							.getNombre());
+					p.put("area", teg.getTematica().getareaInvestigacion()
+							.getNombre());
 
 					try {
 						jasperReport = (JasperReport) JRLoader

@@ -5,7 +5,6 @@
 	<property name="ireport.y" value="0"/>
 	<subDataset name="dataset1" uuid="a1bed596-d8f7-4f9b-b34e-33a7c170fc5c"/>
 	<parameter name="tutor" class="java.lang.String"/>
-	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="tematica" class="java.lang.String"/>
 	<parameter name="estudiantes" class="java.util.List"/>
 	<parameter name="logoUcla" class="java.lang.String"/>
@@ -51,9 +50,9 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="277" splitType="Stretch">
+		<band height="219" splitType="Stretch">
 			<staticText>
-				<reportElement x="158" y="227" width="227" height="22" uuid="d4c8b7df-91d1-418c-8ee9-8ef2916c9fb4"/>
+				<reportElement x="154" y="169" width="227" height="22" uuid="d4c8b7df-91d1-418c-8ee9-8ef2916c9fb4"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
@@ -95,7 +94,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<textFieldExpression><![CDATA[$P{tematica}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="280" y="74" width="60" height="20" uuid="5c72016c-39f6-46cc-9e5b-673c5f2086fa"/>
+				<reportElement x="280" y="74" width="73" height="20" uuid="5c72016c-39f6-46cc-9e5b-673c5f2086fa"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
@@ -115,43 +114,29 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				</textElement>
 				<text><![CDATA[Área:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="87" y="105" width="475" height="30" uuid="d458d9cf-a121-47ed-b85a-e1e5b3e94274"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="14" y="175" width="73" height="20" uuid="ce7025d2-6112-43a1-99c9-25f8b19a373f"/>
+				<reportElement x="280" y="105" width="73" height="20" uuid="ce7025d2-6112-43a1-99c9-25f8b19a373f"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Estudiantes:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="87" y="175" width="239" height="20" uuid="0ae4e607-0868-454c-8b8a-8c02e89ff249"/>
+				<reportElement x="353" y="105" width="209" height="20" uuid="0ae4e607-0868-454c-8b8a-8c02e89ff249"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[""+$P{estudiantes}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="14" y="145" width="73" height="20" uuid="2b91d5a5-9641-426d-81b8-7f3232d264c7"/>
+				<reportElement x="14" y="105" width="73" height="20" uuid="2b91d5a5-9641-426d-81b8-7f3232d264c7"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Tutor:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="14" y="105" width="73" height="20" uuid="4607d68f-bcaa-4b89-a42e-f5d53e326e6c"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Título:]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="87" y="145" width="156" height="20" uuid="109e3994-6c9f-4e7d-afac-7b79aeb590e2"/>
+				<reportElement x="87" y="105" width="156" height="20" uuid="109e3994-6c9f-4e7d-afac-7b79aeb590e2"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
