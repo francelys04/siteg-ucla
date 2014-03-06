@@ -174,45 +174,68 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 			if (tamanioListaEstatus % 2 != 0) {
 				tamanioListaEstatus = tamanioListaEstatus - 3;
 			}
+			Tematica tematica = servicioTematica
+					.buscarTematicaPorNombre(nombreTematica);
 			if (nombrePrograma.equals("Todos") && nombreArea.equals("Todos")
 					&& nombreTematica.equals("Todos")) {
-				tegs = servicioTeg.buscarSegunDosEstatus(estatusAprobado,estatusReprobado);
+				tegs = servicioTeg.buscarSegunDosEstatus(estatusAprobado,
+						estatusReprobado);
 
 			} else if (!nombrePrograma.equals("Todos")
 					&& nombreArea.equals("Todos")
 					&& nombreTematica.equals("Todos")) {
 
-				tegs = servicioTeg.buscarTegSegunProgramaDosEstatus(programa,estatusAprobado,estatusReprobado);
-					
+				tegs = servicioTeg.buscarTegSegunProgramaDosEstatus(programa,
+						estatusAprobado, estatusReprobado);
+
 			} else if (!nombrePrograma.equals("Todos")
 					&& !nombreArea.equals("Todos")
-					&& !nombreTematica.equals("Todos")
-					|| nombrePrograma.equals("Todos")
+					&& !nombreTematica.equals("Todos")) {
+
+				tegs = servicioTeg
+						.buscarTegSegunTematicaAreaProgramaDosEstatus(programa,
+								area, tematica, estatusAprobado,
+								estatusReprobado);
+
+			} else if (nombrePrograma.equals("Todos")
 					&& !nombreArea.equals("Todos")
-					&& !nombreTematica.equals("Todos")
-					|| !nombrePrograma.equals("Todos")
+					&& !nombreTematica.equals("Todos")) {
+
+				tegs = servicioTeg.buscarTegSegunTematicaAreaDosEstatus(
+						tematica, area, estatusAprobado, estatusReprobado);
+			} else if (!nombrePrograma.equals("Todos")
 					&& nombreArea.equals("Todos")
 					&& !nombreTematica.equals("Todos")) {
-				Tematica tematica = servicioTematica
-						.buscarTematicaPorNombre(nombreTematica);
-				tegs = servicioTeg.buscarTegSegunTematicaDosEstatus(programa,tematica,
+
+				tegs = servicioTeg.buscarTegSegunTematicaProgramaDosEstatus(
+						programa, tematica, estatusAprobado, estatusReprobado);
+
+			} else if (nombrePrograma.equals("Todos")
+					&& nombreArea.equals("Todos")
+					&& !nombreTematica.equals("Todos")) {
+
+				tegs = servicioTeg.buscarTegSegunTematicaDosEstatus(tematica,
 						estatusAprobado, estatusReprobado);
 
 			} else if (!nombrePrograma.equals("Todos")
 					&& !nombreArea.equals("Todos")
-					&& nombreTematica.equals("Todos")
-					|| nombrePrograma.equals("Todos")
+					&& nombreTematica.equals("Todos")) {
+
+				tegs = servicioTeg.buscarTegSegunAreaProgramaDosEstatus(
+						programa, area, estatusAprobado, estatusReprobado);
+			} else if (nombrePrograma.equals("Todos")
 					&& !nombreArea.equals("Todos")
 					&& nombreTematica.equals("Todos")) {
-				tegs = servicioTeg.buscarTegSegunAreaProgramaDosEstatus(programa,area,
-						estatusAprobado, estatusReprobado);
+
+				tegs = servicioTeg.buscarTegSegunAreaProgramaDosEstatus(
+						programa, area, estatusAprobado, estatusReprobado);
 
 			}
 			System.out.println("tegs:" + tegs.size());
 			if (tegs.size() != 0) {
-				
+
 				for (int i = 0; i < tegs.size(); i++) {
-					System.out.println("tegsssss:"+tegs.get(i).getId());
+					System.out.println("tegsssss:" + tegs.get(i).getId());
 				}
 
 				for (int i = 0; i < nombreEstatus.size(); i++) {
