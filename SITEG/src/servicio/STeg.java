@@ -622,5 +622,23 @@ public class STeg {
 				.buscarTodosProgramasUnAreaTodasTematicaTodosEstatus(
 						areaInvestigacion, fechaInicio, fechaFin);
 	}
+	
+	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
+			String estatus1, String estatus2, Tematica tematica1, Date fechaInicio,
+			Date fechaFin) {
+		// TODO Auto-generated method stub
+		return interfaceTeg.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
+				estatus1, estatus2, tematica1,fechaInicio,
+				 fechaFin);
+	}
+
+	public List<Teg> buscarTegSegunAreaInvestigacionPorDosFechasyEstatus(
+			AreaInvestigacion area1, String estatus1, String estatus2,
+			String estatus12, String estatus22, Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+		return interfaceTeg.buscarTegSegunAreaInvestigacionPorDosFechasyEstatus(
+				 area1, estatus1,  estatus2,
+				estatus12, estatus22, fechaInicio, fechaFin);
+	}
 
 }
