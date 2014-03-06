@@ -36,7 +36,7 @@ public class CEstudiante extends CGeneral {
 	CCatalogoEstudiante catalogo = new CCatalogoEstudiante();
 
 	@Wire
-	private Textbox txtProgramaEstudiante;
+	private Combobox cmbProgramaEstudiante;
 	@Wire
 	private Textbox txtCedulaEstudiante;
 	@Wire
@@ -86,22 +86,16 @@ public class CEstudiante extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 
-		programaUsuario = servicioPrograma
-				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		List<Programa> programas = servicioPrograma.buscarActivas();
+		List<Estudiante> estudiantes = servicioEstudiante.buscarActivos();
 
-		if (programaUsuario != null) {
-
-			txtProgramaEstudiante.setValue(programaUsuario.getNombre());
-
+		if (cmbProgramaEstudiante == null) {
+			ltbEstudiante.setModel(new ListModelList<Estudiante>(estudiantes));
 		} else {
-
-			Messagebox
-					.show("No tiene permisos para registrar un estudiante",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
-			wdwEstudiante.onClose();
-
+			cmbProgramaEstudiante.setModel(new ListModelList<Programa>(
+					programas));
 		}
+
 
 		Selectors.wireComponents(comp, this, false);
 
@@ -127,7 +121,7 @@ public class CEstudiante extends CGeneral {
 				txtTelefonoFijoEstudiante.setValue(estudiante
 						.getTelefono_fijo());
 				txtCorreoEstudiante.setValue(estudiante.getCorreoElectronico());
-				txtProgramaEstudiante.setValue(estudiante.getPrograma()
+				cmbProgramaEstudiante.setValue(estudiante.getPrograma()
 						.getNombre());
 				btnEliminarEstudiante.setDisabled(false);
 				map.clear();
@@ -159,7 +153,8 @@ public class CEstudiante extends CGeneral {
 	@Listen("onClick = #btnGuardarEstudiante")
 	public void guardarEstudiante() {
 
-		if (txtCedulaEstudiante.getText().compareTo("") == 0
+		if (cmbProgramaEstudiante.getText().compareTo("") == 0 
+				||txtCedulaEstudiante.getText().compareTo("") == 0
 				|| txtNombreEstudiante.getText().compareTo("") == 0
 				|| txtApellidoEstudiante.getText().compareTo("") == 0
 				|| txtCorreoEstudiante.getText().compareTo("") == 0
@@ -190,7 +185,7 @@ public class CEstudiante extends CGeneral {
 										.getValue();
 								String telefonoMovil = txtTelefonoFijoEstudiante
 										.getValue();
-								String programas = txtProgramaEstudiante
+								String programas = cmbProgramaEstudiante
 										.getValue();
 								String sexo = rdgSexoEstudiante
 										.getSelectedItem().getLabel();
@@ -250,6 +245,7 @@ public class CEstudiante extends CGeneral {
 	 */
 	@Listen("onClick = #btnCancelarEstudiante")
 	public void cancelarEstudiante() {
+		cmbProgramaEstudiante.setValue("");
 		txtCedulaEstudiante.setConstraint("");
 		txtCedulaEstudiante.setValue("");
 		txtCedulaEstudiante
