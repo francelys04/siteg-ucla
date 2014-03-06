@@ -78,7 +78,7 @@ public interface ITegDAO extends JpaRepository<Teg, Long> {
 	public List<Teg> findByTematicaAndFechaBetween(Tematica tematica,
 			Date fechaInicio, Date fechaFin);
 
-	/************************************ Query para el Reporte Proyectos ************************************************************************/
+	/************************************ Inicio de Query para el Reporte Trabajos *********************************************/
 
 	/**
 	 * Querys para buscar la lista de teg dado una tematica, un estatus, fecha
@@ -177,7 +177,9 @@ public interface ITegDAO extends JpaRepository<Teg, Long> {
 			String estatus6, String estatus7, String estatus8, Tematica tematica,
 			Date fechaInicio, Date fechaFin);
 	
-	/************************************ Query para el Reporte Profesor ********************************************/
+	/************************************ Fin de Query para el Reporte Trabajos *********************************************/
+	
+	/************************************ Inicio de Query para el Reporte Profesor ********************************************/
 
 	/**
 	 * Querys para buscar la lista de teg dado una tematica un estatus, fecha
@@ -222,6 +224,9 @@ public interface ITegDAO extends JpaRepository<Teg, Long> {
 	public List<Teg> buscarTegPorFechaArea(AreaInvestigacion area1,
 			Date fechaInicio, Date fechaFin);
 
+	/************************************ Fin de Query para el Reporte Profesor ********************************************/
+	
+	
 	/************************************ Query para el Reporte TEG ********************************************/
 	/**
 	 * Querys para buscar la lista de teg dado todos los programas, un área, una
