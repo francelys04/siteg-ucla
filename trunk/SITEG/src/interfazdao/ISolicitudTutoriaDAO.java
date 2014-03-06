@@ -27,12 +27,6 @@ public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Lo
 	
 	public List<SolicitudTutoria> findByEstudiantes(Estudiante estudiante);
 
-	public List<SolicitudTutoria> findByFechaBetweenOrderByProfesorDesc(Date fechaInicio,
-			Date fechaFin);
-
-	public List<SolicitudTutoria> findByTematicaAndFechaBetweenOrderByProfesorDesc(
-			Tematica tematica, Date fechaInicio, Date fechaFin);
-
 //	public List<SolicitudTutoria> findByEstatusAndFechaBetween(String estatus2,
 //			Date fechaInicio, Date fechaFin);
 
@@ -85,6 +79,59 @@ public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Lo
 	
 	@Query("select solicitud from SolicitudTutoria solicitud where  solicitud.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?1) and fecha between ?2 and ?3")
 	public List<SolicitudTutoria> buscarSolicitudAreaestatus(AreaInvestigacion areaInvestigacion, Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findByFechaBetweenOrderByProfesorDesc(Date fechaInicio,
+			Date fechaFin);
+
+	public List<SolicitudTutoria> findByTematicaAndFechaBetweenOrderByProfesorDesc(
+			Tematica tematica, Date fechaInicio, Date fechaFin);
+	
+	public List<SolicitudTutoria> findByTematicaAreaInvestigacionAndFechaBetweenOrderByProfesorDesc(
+			AreaInvestigacion areaI, Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findDistinctByEstudiantesInAndFechaBetween(
+			List<Estudiante> estudiantes, Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findDistinctByEstudiantesInAndTematicaAreaInvestigacionAndFechaBetween(
+			List<Estudiante> estudiantes, AreaInvestigacion areaI,
+			Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findByProfesorAndTematicaAreaInvestigacionAndFechaBetween(
+			Profesor profesor, AreaInvestigacion areaI, Date fechaInicio,
+			Date fechaFin);
+
+	public List<SolicitudTutoria> findDistinctByEstudiantesInAndProfesorAndFechaBetween(
+			List<Estudiante> estudiantes, Profesor profesor, Date fechaInicio,
+			Date fechaFin);
+
+	public List<SolicitudTutoria> findDistinctByEstudiantesInAndProfesorAndTematicaAreaInvestigacionAndFechaBetween(
+			List<Estudiante> estudiantes, Profesor profesor,
+			AreaInvestigacion areaI, Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findByTematicaAndTematicaAreaInvestigacionAndFechaBetweenOrderByProfesorDesc(
+			Tematica tematicaI, AreaInvestigacion areaI, Date fechaInicio,
+			Date fechaFin);
+
+	public List<SolicitudTutoria> findDistinctByEstudiantesInAndTematicaAndFechaBetween(
+			List<Estudiante> estudiantes, Tematica tematicaI, Date fechaInicio,
+			Date fechaFin);
+
+	public List<SolicitudTutoria> findDistinctByEstudiantesInAndTematicaAndTematicaAreaInvestigacionAndFechaBetween(
+			List<Estudiante> estudiantes, Tematica tematicaI,
+			AreaInvestigacion areaI, Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findByTematicaAndProfesorAndTematicaAreaInvestigacionAndFechaBetween(
+			Tematica tematicaI, Profesor profesor, AreaInvestigacion areaI,
+			Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findDistinctByEstudiantesInAndTematicaAndProfesorAndFechaBetween(
+			List<Estudiante> estudiantes, Tematica tematicaI,
+			Profesor profesor, Date fechaInicio, Date fechaFin);
+
+	public List<SolicitudTutoria> findDistinctByEstudiantesInAndTematicaAndTematicaAreaInvestigacionAndProfesorAndFechaBetween(
+			List<Estudiante> estudiantes, Tematica tematicaI,
+			AreaInvestigacion areaI, Profesor profesor, Date fechaInicio,
+			Date fechaFin);
 	
 
 }
