@@ -639,8 +639,6 @@ public class CReporteTrabajos extends CGeneral {
 				}
 				
 				
-				
-				
 				/*Todos los programas, una area, una tematica, un estatus*/
 				if (nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
@@ -653,7 +651,7 @@ public class CReporteTrabajos extends CGeneral {
 							.parseLong(idTematica1));
 
 					teg = servicioTeg
-							.buscarTegUnaTematicaEstatuPorDosFechas(tematica1, estatus,
+							.buscarTegPorTematicaEstatus(tematica1, estatus,
 									fechaInicio, fechaFin);
 
 					if (teg.size() == 0) {
@@ -671,8 +669,7 @@ public class CReporteTrabajos extends CGeneral {
 							.getSelectedItem().getValue()).getId());
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
-					
-	
+						
 					if (rdoProyecto.isChecked() == true) {
 						try {
 							String estatusTeg1 = "Solicitando Registro";
@@ -684,7 +681,7 @@ public class CReporteTrabajos extends CGeneral {
 							String estatusTeg7 = "Proyecto en Desarrollo";
 							String estatusTeg8 = "Avances Finalizados";
 							
-							teg = servicioTeg.buscarTegUnaTematicaEstatusPorFechas(estatusTeg1, estatusTeg2, estatusTeg3,
+							teg = servicioTeg.buscarTegPorTematicaVariosEstatus(estatusTeg1, estatusTeg2, estatusTeg3,
 									estatusTeg4, estatusTeg5, estatusTeg6,
 									estatusTeg7, estatusTeg8, tematica1, fechaInicio, fechaFin);
 						} catch (Exception e) {
@@ -703,7 +700,7 @@ public class CReporteTrabajos extends CGeneral {
 							String estatusTeg7 = "TEG Aprobado";
 							String estatusTeg8 = "TEG Reprobado";
 							
-							teg = servicioTeg.buscarTegUnaTematicaEstatusPorFechas(estatusTeg1, estatusTeg2, estatusTeg3,
+							teg = servicioTeg.buscarTegPorTematicaVariosEstatus(estatusTeg1, estatusTeg2, estatusTeg3,
 									estatusTeg4, estatusTeg5, estatusTeg6,
 									estatusTeg7, estatusTeg8, tematica1, fechaInicio, fechaFin);
 						} catch (Exception e) {
@@ -737,10 +734,11 @@ public class CReporteTrabajos extends CGeneral {
 							.getSelectedItem().getValue()).getId());
 					AreaInvestigacion area1 = servicioArea.buscarArea(Long
 							.parseLong(idArea));
-
-					teg = servicioTeg.buscarTegUnAreaPorDosFechas(
-							area1, fechaInicio, fechaFin);
 	
+					teg = servicioTeg
+							.buscarTegPorAreaEstatus(area1, estatus,
+									fechaInicio, fechaFin);
+					
 					if (teg.size() == 0) {
 						datosVacios = true;
 					}
@@ -756,18 +754,61 @@ public class CReporteTrabajos extends CGeneral {
 					AreaInvestigacion area1 = servicioArea.buscarArea(Long
 							.parseLong(idArea));
 
-					teg = servicioTeg.buscarTegUnAreaPorDosFechas(
-							area1, fechaInicio, fechaFin);
+					if (rdoProyecto.isChecked() == true) {
+						try {
+							String estatusTeg1 = "Solicitando Registro";
+							String estatusTeg2 = "Proyecto Registrado";
+							String estatusTeg3 = "Comision Asignada";
+							String estatusTeg4 = "Factibilidad Evaluada";
+							String estatusTeg5 = "Proyecto Factible";
+							String estatusTeg6 = "Proyecto No Factible";
+							String estatusTeg7 = "Proyecto en Desarrollo";
+							String estatusTeg8 = "Avances Finalizados";
+							
+							teg = servicioTeg.buscarTegPorAreaVariosEstatus(estatusTeg1, estatusTeg2, estatusTeg3,
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, estatusTeg8, area1, fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoTeg.isChecked() == true) {
+						try {
+							String estatusTeg1 = "TEG Registrado";
+							String estatusTeg2 = "Trabajo en Desarrollo";
+							String estatusTeg3 = "Revisiones Finalizadas";
+							String estatusTeg4 = "Solicitando Defensa";
+							String estatusTeg5 = "Jurado Asignado";
+							String estatusTeg6 = "Defensa Asignada";
+							String estatusTeg7 = "TEG Aprobado";
+							String estatusTeg8 = "TEG Reprobado";
+							
+							teg = servicioTeg.buscarTegPorAreaVariosEstatus(estatusTeg1, estatusTeg2, estatusTeg3,
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, estatusTeg8, area1, fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoAmbos.isChecked() == true) {
+						try {
+							teg = servicioTeg
+									.buscarTegUnAreaPorDosFechas(area1,
+											fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 					}
 					if (teg.size() == 0) {
 						datosVacios = true;
 					}
 				}
-				
-				
-				
-				
-				
+						
 				if (!datosVacios) {
 					List<ListaTeg> elementos = new ArrayList<ListaTeg>();
 					for (Teg t : teg) {
