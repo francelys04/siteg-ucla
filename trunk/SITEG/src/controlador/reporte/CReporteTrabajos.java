@@ -24,6 +24,7 @@ import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
+import modelo.compuesta.Jurado;
 import modelo.reporte.ListaTeg;
 import modelo.reporte.ProfesorTeg;
 import modelo.reporte.Proyecto;
@@ -298,8 +299,13 @@ public class CReporteTrabajos extends CGeneral {
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
 					
+					String idPrograma = String.valueOf(((Programa) cmbPrograma
+							.getSelectedItem().getValue()).getId());
+					Programa programa1 = servicioPrograma.buscar(Long
+							.parseLong(idPrograma));
+					
 					teg = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+							.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(programa1,
 									estatus, tematica1, fechaInicio, fechaFin);
 					if (teg.size() == 0) {
 						datosVacios = true;
@@ -310,13 +316,19 @@ public class CReporteTrabajos extends CGeneral {
 						&& !nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
 						&& !estatus.equals("Todos")) {
+					
 					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
 							.getSelectedItem().getValue()).getId());
 					AreaInvestigacion area1 = servicioArea.buscarArea(Long
 							.parseLong(idArea));
 					
+					String idPrograma = String.valueOf(((Programa) cmbPrograma
+							.getSelectedItem().getValue()).getId());
+					Programa programa1 = servicioPrograma.buscar(Long
+							.parseLong(idPrograma));
+					
 					teg = servicioTeg
-							.buscarTegPorDosFechasyUnEstatus(area1,	estatus, fechaInicio, fechaFin);
+							.buscarTegPorDosFechasyUnEstatus(programa1, area1, estatus, fechaInicio, fechaFin);
 					if (teg.size() == 0) {
 						datosVacios = true;
 					} 
@@ -330,9 +342,63 @@ public class CReporteTrabajos extends CGeneral {
 							.getSelectedItem().getValue()).getId());
 					AreaInvestigacion area1 = servicioArea.buscarArea(Long
 							.parseLong(idArea));
+
+					String idPrograma = String.valueOf(((Programa) cmbPrograma
+							.getSelectedItem().getValue()).getId());
+					Programa programa1 = servicioPrograma.buscar(Long
+							.parseLong(idPrograma));
 					
-					teg = servicioTeg
-							.buscarTegPorDosFechasyArea(area1, fechaInicio, fechaFin);
+					if (rdoProyecto.isChecked() == true) {
+						try {
+							String estatusTeg1 = "Solicitando Registro";
+							String estatusTeg2 = "Proyecto Registrado";
+							String estatusTeg3 = "Comision Asignada";
+							String estatusTeg4 = "Factibilidad Evaluada";
+							String estatusTeg5 = "Proyecto Factible";
+							String estatusTeg6 = "Proyecto No Factible";
+							String estatusTeg7 = "Proyecto en Desarrollo";
+							String estatusTeg8 = "Avances Finalizados";
+							
+							teg = servicioTeg.buscarTegPorDosFechasAreaEstatus(programa1, area1, 
+									estatusTeg1, estatusTeg2, estatusTeg3,
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, estatusTeg8, fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoTeg.isChecked() == true) {
+						try {
+							String estatusTeg1 = "TEG Registrado";
+							String estatusTeg2 = "Trabajo en Desarrollo";
+							String estatusTeg3 = "Revisiones Finalizadas";
+							String estatusTeg4 = "Solicitando Defensa";
+							String estatusTeg5 = "Jurado Asignado";
+							String estatusTeg6 = "Defensa Asignada";
+							String estatusTeg7 = "TEG Aprobado";
+							String estatusTeg8 = "TEG Reprobado";
+							
+							teg = servicioTeg.buscarTegPorDosFechasAreaEstatus(programa1, area1, 
+									estatusTeg1, estatusTeg2, estatusTeg3,
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, estatusTeg8, fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoAmbos.isChecked() == true) {
+						try {
+							teg = servicioTeg
+									.buscarTegPorDosFechasyArea(programa1, area1, fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
 					if (teg.size() == 0) {
 						datosVacios = true;
 					} 
@@ -369,6 +435,7 @@ public class CReporteTrabajos extends CGeneral {
 				/*buscar por una carrera, Todos las area y un estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
 						&& !estatus.equals("Todos")) {
 					String idPrograma = String.valueOf(((Programa) cmbPrograma
 							.getSelectedItem().getValue()).getId());
@@ -384,6 +451,7 @@ public class CReporteTrabajos extends CGeneral {
 				/*buscar por una carrera, Todos las area y todos los estatus*/
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
 						&& estatus.equals("Todos")) {
 
 					String idPrograma = String.valueOf(((Programa) cmbPrograma
@@ -409,7 +477,10 @@ public class CReporteTrabajos extends CGeneral {
 					}
 				}
 				/*buscar por Todos las carrera, y un estatus*/
-				if (nombrePrograma.equals("Todos") && !estatus.equals("Todos")) {
+				if (nombrePrograma.equals("Todos") 
+						&& nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& !estatus.equals("Todos")) {
 					teg = servicioTeg.buscarTegPorVariosProgramaUnEstatus(
 							estatus, fechaInicio, fechaFin);
 					if (teg.size() == 0) {
@@ -417,7 +488,10 @@ public class CReporteTrabajos extends CGeneral {
 					}
 				}
 				/*buscar por Todos las carrera, y todos los estatus*/
-				if (nombrePrograma.equals("Todos") && estatus.equals("Todos")) {
+				if (nombrePrograma.equals("Todos") 
+						&& nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& estatus.equals("Todos")) {
 					String estatusTeg1 = "Solicitando Registro";
 					String estatusTeg2 = "Proyecto Registrado";
 					String estatusTeg3 = "Comision Asignada";
@@ -435,6 +509,136 @@ public class CReporteTrabajos extends CGeneral {
 						datosVacios = true;
 					}
 				}
+				
+				
+				
+				
+				/*Todos los programas, una area, una tematica, un estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& !nombreTematica.equals("Todos")
+						&& !estatus.equals("Todos")) {
+
+					String idTematica1 = String.valueOf(((Tematica) cmbTematica
+							.getSelectedItem().getValue()).getId());
+					Tematica tematica1 = servicioTematica.buscarTematica(Long
+							.parseLong(idTematica1));
+
+					teg = servicioTeg
+							.buscarTegUnaTematicaEstatuPorDosFechas(tematica1, estatus,
+									fechaInicio, fechaFin);
+
+					if (teg.size() == 0) {
+						datosVacios = true;
+					}
+				}
+                
+				/*Todos los programas, una area, una tematica, todos los estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& !nombreTematica.equals("Todos")
+						&& estatus.equals("Todos")) {
+				
+					String idTematica = String.valueOf(((Tematica) cmbTematica
+							.getSelectedItem().getValue()).getId());
+					Tematica tematica1 = servicioTematica.buscarTematica(Long
+							.parseLong(idTematica));
+					
+	
+					if (rdoProyecto.isChecked() == true) {
+						try {
+							String estatusTeg1 = "Solicitando Registro";
+							String estatusTeg2 = "Proyecto Registrado";
+							String estatusTeg3 = "Comision Asignada";
+							String estatusTeg4 = "Factibilidad Evaluada";
+							String estatusTeg5 = "Proyecto Factible";
+							String estatusTeg6 = "Proyecto No Factible";
+							String estatusTeg7 = "Proyecto en Desarrollo";
+							String estatusTeg8 = "Avances Finalizados";
+							
+							teg = servicioTeg.buscarTegUnaTematicaEstatusPorFechas(estatusTeg1, estatusTeg2, estatusTeg3,
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, estatusTeg8, tematica1, fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoTeg.isChecked() == true) {
+						try {
+							String estatusTeg1 = "TEG Registrado";
+							String estatusTeg2 = "Trabajo en Desarrollo";
+							String estatusTeg3 = "Revisiones Finalizadas";
+							String estatusTeg4 = "Solicitando Defensa";
+							String estatusTeg5 = "Jurado Asignado";
+							String estatusTeg6 = "Defensa Asignada";
+							String estatusTeg7 = "TEG Aprobado";
+							String estatusTeg8 = "TEG Reprobado";
+							
+							teg = servicioTeg.buscarTegUnaTematicaEstatusPorFechas(estatusTeg1, estatusTeg2, estatusTeg3,
+									estatusTeg4, estatusTeg5, estatusTeg6,
+									estatusTeg7, estatusTeg8, tematica1, fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (rdoAmbos.isChecked() == true) {
+						try {
+							teg = servicioTeg
+									.buscarTegUnaTematicaPorDosFechas(tematica1,
+											fechaInicio, fechaFin);
+						} catch (Exception e) {
+							System.out.println(e);
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					}
+					if (teg.size() == 0) {
+						datosVacios = true;
+					}
+				}
+				
+				/*Todos los programas, una area, todas las tematicas, un estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& !estatus.equals("Todos")) {
+					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
+							.getSelectedItem().getValue()).getId());
+					AreaInvestigacion area1 = servicioArea.buscarArea(Long
+							.parseLong(idArea));
+
+					teg = servicioTeg.buscarTegUnAreaPorDosFechas(
+							area1, fechaInicio, fechaFin);
+	
+					if (teg.size() == 0) {
+						datosVacios = true;
+					}
+				}
+				
+				/*Todos los programas, un area, todas las tematicas, todos los estatus*/
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& estatus.equals("Todos")) {
+					String idArea = String.valueOf(((AreaInvestigacion) cmbArea
+							.getSelectedItem().getValue()).getId());
+					AreaInvestigacion area1 = servicioArea.buscarArea(Long
+							.parseLong(idArea));
+
+					teg = servicioTeg.buscarTegUnAreaPorDosFechas(
+							area1, fechaInicio, fechaFin);
+					}
+					if (teg.size() == 0) {
+						datosVacios = true;
+					}
+				}
+				
+				
+				
+				
 				
 				if (!datosVacios) {
 					List<ListaTeg> elementos = new ArrayList<ListaTeg>();
@@ -512,8 +716,9 @@ public class CReporteTrabajos extends CGeneral {
 				}
 			}
 
-		}
-	}
+		
+	
+	
 
 	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarReporteTrabajos")
