@@ -1202,11 +1202,11 @@ public class CReporteEvaluacion extends CGeneral {
 
 								if (rdoFactibilidad.isChecked() == true) {
 
-									teg = servicioTeg.buscarTegSegunProgramaEstatus(programa1,
+									teg = servicioTeg.buscarTegSegunProgramaDosEstatus(programa1,
 											estatus1, estatus2);
 
 								} else {
-									teg = servicioTeg.buscarTegSegunProgramaEstatus(programa1,
+									teg = servicioTeg.buscarTegSegunProgramaDosEstatus(programa1,
 											estatus3, estatus4);
 								}
 
@@ -1330,13 +1330,13 @@ public class CReporteEvaluacion extends CGeneral {
 								if (rdoFactibilidad.isChecked() == true) {
 									teg = servicioTeg
 											.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
-													estatus1, estatus2, estatus1, estatus2,
+													estatus1, estatus2,
 													tematica1, fechaInicio, fechaFin);
 
 								} else {
 									teg = servicioTeg
 											.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
-													estatus3, estatus4, estatus3, estatus4,
+													estatus3, estatus4, 
 													tematica1, fechaInicio, fechaFin);
 
 								}
@@ -1727,13 +1727,13 @@ public class CReporteEvaluacion extends CGeneral {
 								if (rdoFactibilidad.isChecked() == true) {
 									teg = servicioTeg
 											.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
-													estatus1, estatus2, estatus1, estatus2,
+													estatus1, estatus2, 
 													tematica1, fechaInicio, fechaFin);
 
 								} else {
 									teg = servicioTeg
 											.buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
-													estatus3, estatus4, estatus3, estatus4,
+													estatus3, estatus4, 
 													tematica1, fechaInicio, fechaFin);
 
 								}

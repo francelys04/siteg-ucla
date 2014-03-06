@@ -390,5 +390,9 @@ public interface ITegDAO extends JpaRepository<Teg, Long> {
 
 	@Query("select teg from Teg teg where teg in ?1")
 	public List<Teg> buscarSegunTegs(List<Teg> tegs);
-
+	
+	@Query("select teg from Teg teg where teg.estatus=?1 or teg.estatus=?2 and teg.tematica=?3 and fecha between ?4 and ?5 ")
+	public List<Teg> buscarTegDeUnaTematicaPorDosFechasyVariosEstatus1(
+			String estatus1, String estatus2, Tematica tematica1,
+			Date fechaInicio, Date fechaFin);
 }
