@@ -302,8 +302,7 @@ public class CUsuario extends CGeneral {
 			Messagebox.show("Usuario registrado exitosamente", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
 			cancelarUsuario();
-		}
-		if (id != 0) {
+		}else if (id != 0) {
 
 			usuario.setNombre(nombre);
 			usuario.setGrupos(gruposUsuario);
@@ -313,8 +312,7 @@ public class CUsuario extends CGeneral {
 			
 			cancelarUsuario();
 			
-		}
-		if (id == 0 && usuario != null) {
+		}else if (id == 0 && usuario != null) {
 
 			Messagebox.show("El nombre de usuario no se encuentra disponible",
 					"Informacion", Messagebox.OK, Messagebox.INFORMATION);

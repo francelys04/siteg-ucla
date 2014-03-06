@@ -177,7 +177,7 @@
 					</hlayout>
 
 					<textbox id="txtPasswordUsuario" type="password"
-						tooltip="pupContrasennaUsuario" width="260px" maxlength="20" />
+						tooltip="pupContrasennaUsuario" width="260px" maxlength="100" />
 
 				</row>
 				<row>
