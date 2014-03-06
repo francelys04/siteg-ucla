@@ -59,6 +59,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	private Combobox cmbTematicaReporteProfesoresSolicitados;
 	private static Date fechaInicio;
 	private static Date fechaFin;
+	java.util.Date hoy = new Date();
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
@@ -69,7 +70,8 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-
+		dtbFinReporteProfesoresSolicitados.setValue(hoy);
+		dtbInicioReporteProfesoresSolicitados.setValue(hoy);
 		programas = servicioPrograma.buscarActivas();
 		Programa programaa = new Programa(100000001, "Todos", "", "", true,
 				null);
@@ -89,40 +91,34 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbProgramaReporteProfesoresSolicitados")
 	public void buscarArea() {
-		try {
+		cmbAreaReporteProfesoresSolicitados.setValue("");
+		cmbTematicaReporteProfesoresSolicitados.setValue("");
+		if (cmbProgramaReporteProfesoresSolicitados.getValue().equals("Todos")) {
+
+			areas = servicioArea.buscarActivos();
+			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
+					"", true);
+			areas.add(area);
+			cmbAreaReporteProfesoresSolicitados
+					.setModel(new ListModelList<AreaInvestigacion>(areas));
+			cmbAreaReporteProfesoresSolicitados.setDisabled(false);
+
+		} else {
+
+			cmbAreaReporteProfesoresSolicitados.setDisabled(false);
 			cmbAreaReporteProfesoresSolicitados.setValue("");
 			cmbTematicaReporteProfesoresSolicitados.setValue("");
-			if (cmbProgramaReporteProfesoresSolicitados.getValue().equals(
-					"Todos")) {
 
-				areas = servicioArea.buscarActivos();
-				AreaInvestigacion area = new AreaInvestigacion(10000000,
-						"Todos", "", true);
-				areas.add(area);
-				cmbAreaReporteProfesoresSolicitados
-						.setModel(new ListModelList<AreaInvestigacion>(areas));
-				cmbAreaReporteProfesoresSolicitados.setDisabled(false);
+			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
+					.buscar(Long
+							.parseLong(cmbProgramaReporteProfesoresSolicitados
+									.getSelectedItem().getId())));
+			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
+					"", true);
+			areas.add(area);
+			cmbAreaReporteProfesoresSolicitados
+					.setModel(new ListModelList<AreaInvestigacion>(areas));
 
-			} else {
-
-				cmbAreaReporteProfesoresSolicitados.setDisabled(false);
-				cmbAreaReporteProfesoresSolicitados.setValue("");
-				cmbTematicaReporteProfesoresSolicitados.setValue("");
-
-				areas = servicioProgramaArea
-						.buscarAreasDePrograma(servicioPrograma.buscar(Long
-								.parseLong(cmbProgramaReporteProfesoresSolicitados
-										.getSelectedItem().getId())));
-				AreaInvestigacion area = new AreaInvestigacion(10000000,
-						"Todos", "", true);
-				areas.add(area);
-				cmbAreaReporteProfesoresSolicitados
-						.setModel(new ListModelList<AreaInvestigacion>(areas));
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			// TODO: handle.e exception
 		}
 	}
 
@@ -131,31 +127,39 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbAreaReporteProfesoresSolicitados")
 	public void seleccionarTematica() {
-		try {
-			if (cmbAreaReporteProfesoresSolicitados.getValue().equals("Todos")) {
-
-				cmbTematicaReporteProfesoresSolicitados.setValue("Todos");
-				cmbTematicaReporteProfesoresSolicitados.setDisabled(true);
-
-			} else {
-
-				cmbTematicaReporteProfesoresSolicitados.setDisabled(false);
+		if (cmbAreaReporteProfesoresSolicitados.getValue().equals("Todos")) {
+			if (cmbProgramaReporteProfesoresSolicitados.getValue().equals(
+					"Todos"))
+				tematicas = servicioTematica.buscarActivos();
+			else {
 				cmbTematicaReporteProfesoresSolicitados.setValue("");
-
-				tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-						.buscarArea(Long
-								.parseLong(cmbAreaReporteProfesoresSolicitados
-										.getSelectedItem().getId())));
-				Tematica tema = new Tematica(10000, "Todos", "", true, null);
-				tematicas.add(tema);
-				cmbTematicaReporteProfesoresSolicitados
-						.setModel(new ListModelList<Tematica>(tematicas));
-
+				areas = servicioProgramaArea
+						.buscarAreasDePrograma(servicioPrograma.buscar(Long
+								.parseLong((cmbProgramaReporteProfesoresSolicitados
+										.getSelectedItem().getId()))));
+				List<Tematica> tematicasArea = new ArrayList<Tematica>();
+				for (int i = 0; i < areas.size(); i++) {
+					tematicasArea.addAll(servicioTematica
+							.buscarTematicasDeArea(areas.get(i)));
+				}
+				tematicas.clear();
+				tematicas.addAll(tematicasArea);
+				tematicasArea.clear();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			// TODO: handle.e exception
+		} else {
+			cmbTematicaReporteProfesoresSolicitados.setValue("");
+
+			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
+					.buscarArea(Long
+							.parseLong(cmbAreaReporteProfesoresSolicitados
+									.getSelectedItem().getId())));
+
 		}
+		Tematica tema = new Tematica(10000, "Todos", "", true, null);
+		tematicas.add(tema);
+		cmbTematicaReporteProfesoresSolicitados
+				.setModel(new ListModelList<Tematica>(tematicas));
+		cmbTematicaReporteProfesoresSolicitados.setDisabled(false);
 
 	}
 
@@ -171,7 +175,6 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	 */
 	@Listen("onClick = #btnCancelarReporteProfesoresSolicitados")
 	public void limpiarCampos() {
-		java.util.Date hoy = new Date();
 		cmbAreaReporteProfesoresSolicitados.setValue("");
 		cmbProgramaReporteProfesoresSolicitados.setValue("");
 		cmbTematicaReporteProfesoresSolicitados.setValue("");
@@ -179,7 +182,6 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		dtbInicioReporteProfesoresSolicitados.setValue(hoy);
 		cmbAreaReporteProfesoresSolicitados.setDisabled(true);
 		cmbTematicaReporteProfesoresSolicitados.setDisabled(true);
-
 	}
 
 	/*
@@ -204,7 +206,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	 * muestra en el documento.
 	 */
 	@Listen("onClick = #btnGenerarReporteProfesoresSolicitados")
-	public void generarReporte() throws JRException {
+	public void generarReporte() {
 
 		if ((cmbProgramaReporteProfesoresSolicitados.getText().compareTo("") == 0)
 				|| (cmbAreaReporteProfesoresSolicitados.getText().compareTo("") == 0)
@@ -230,19 +232,60 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				boolean datosVacios = false;
 				fechaInicio = dtbInicioReporteProfesoresSolicitados.getValue();
 				fechaFin = dtbFinReporteProfesoresSolicitados.getValue();
-				Tematica tematica = servicioTematica.buscarTematica(idTematica);
+				AreaInvestigacion areaI = null;
+				Programa programaI = null;
+				Tematica tematicaI = null;
+				if (!cmbTematicaReporteProfesoresSolicitados.getValue().equals(
+						"Todos"))
+					tematicaI = servicioTematica.buscarTematica(idTematica);
+				if (!cmbAreaReporteProfesoresSolicitados.getValue().equals(
+						"Todos"))
+					areaI = servicioArea.buscarArea(Long
+							.parseLong(cmbAreaReporteProfesoresSolicitados
+									.getSelectedItem().getId()));
+				if (!cmbProgramaReporteProfesoresSolicitados.getValue().equals(
+						"Todos"))
+					programaI = servicioPrograma.buscar(Long
+							.parseLong(cmbProgramaReporteProfesoresSolicitados
+									.getSelectedItem().getId()));
 				List<SolicitudTutoria> solicitudes = new ArrayList<SolicitudTutoria>();
 				List<SolicitudTutoria> solicitudesFinales = new ArrayList<SolicitudTutoria>();
 				List<String> profesores = new ArrayList<String>();
 				List<Integer> contadores = new ArrayList<Integer>();
 				List<MasSolicitados> masSolicitados = new ArrayList<MasSolicitados>();
 				Map<String, Object> map = new HashMap<String, Object>();
-
+				int valor = 0;
 				if (cmbTematicaReporteProfesoresSolicitados.getValue().equals(
 						"Todos")) {
-					solicitudes = servicioSolicitudTutoria
-							.buscarTodasSolicitudesEntreFechas(fechaInicio,
-									fechaFin);
+					if (cmbProgramaReporteProfesoresSolicitados.getValue()
+							.equals("Todos")) {
+						if (cmbAreaReporteProfesoresSolicitados.getValue()
+								.equals("Todos")) {
+							valor = 1;
+							solicitudes = servicioSolicitudTutoria
+									.buscarTodasSolicitudesEntreFechas(
+											fechaInicio, fechaFin);
+						} else {
+							valor = 2;
+							solicitudes = servicioSolicitudTutoria
+									.buscarSolicitudesPorAreaYFechas(areaI,
+											fechaInicio, fechaFin);
+						}
+					} else {
+						if (cmbAreaReporteProfesoresSolicitados.getValue()
+								.equals("Todos")) {
+							valor = 3;
+							solicitudes = servicioSolicitudTutoria
+									.buscarSolicitudesPorProgramaYFechas(
+											programaI, fechaInicio, fechaFin);
+						} else {
+							valor = 4;
+							solicitudes = servicioSolicitudTutoria
+									.buscarSolicitudesPorProgramaYAreaYFechas(
+											programaI, areaI, fechaInicio,
+											fechaFin);
+						}
+					}
 					if (solicitudes.size() == 0) {
 						datosVacios = true;
 					} else {
@@ -252,9 +295,36 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 						for (int i = 0; i < profesores.size(); i++) {
 							Profesor profesor = servicioProfesor
 									.buscarProfesorPorCedula(profesores.get(i));
-							solicitudesFinales = servicioSolicitudTutoria
-									.buscarPorProfesorEntreFechas(profesor,
-											fechaInicio, fechaFin);
+							switch (valor) {
+							case 1: {
+								solicitudesFinales = servicioSolicitudTutoria
+										.buscarPorProfesorEntreFechas(profesor,
+												fechaInicio, fechaFin);
+							}
+								break;
+							case 2: {
+								solicitudesFinales = servicioSolicitudTutoria
+										.buscarPorProfesorYAreaEntreFechas(
+												profesor, areaI, fechaInicio,
+												fechaFin);
+							}
+								break;
+							case 3: {
+								solicitudesFinales = servicioSolicitudTutoria
+										.buscarPorProfesorYProgramaEntreFechas(
+												profesor, programaI,
+												fechaInicio, fechaFin);
+							}
+								break;
+							case 4: {
+								solicitudesFinales = servicioSolicitudTutoria
+										.buscarPorProfesorYProgramaYAreaEntreFechas(
+												profesor, programaI, areaI,
+												fechaInicio, fechaFin);
+							}
+								break;
+							}
+
 							long primerValor = 0;
 							long segundoValor = 0;
 							long tercerValor = 0;
@@ -277,9 +347,37 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 						}
 					}
 				} else {
-					solicitudes = servicioSolicitudTutoria
-							.buscarSolicitudesPorTematicaEntreFechas(tematica,
-									fechaInicio, fechaFin);
+					if (cmbProgramaReporteProfesoresSolicitados.getValue()
+							.equals("Todos")) {
+						if (cmbAreaReporteProfesoresSolicitados.getValue()
+								.equals("Todos")) {
+							valor = 1;
+							solicitudes = servicioSolicitudTutoria
+									.buscarSolicitudesPorTematicaEntreFechas(
+											tematicaI, fechaInicio, fechaFin);
+						} else {
+							valor = 2;
+							solicitudes = servicioSolicitudTutoria
+									.buscarSolicitudesPorTematicayAreaYFechas(
+											tematicaI, areaI, fechaInicio,
+											fechaFin);
+						}
+					} else {
+						if (cmbAreaReporteProfesoresSolicitados.getValue()
+								.equals("Todos")) {
+							valor = 3;
+							solicitudes = servicioSolicitudTutoria
+									.buscarSolicitudesPorProgramaYFechas(tematicaI,
+											programaI, fechaInicio, fechaFin);
+						} else {
+							valor = 4;
+							solicitudes = servicioSolicitudTutoria
+									.buscarSolicitudesPorProgramaYAreaYFechas(tematicaI,
+											programaI, areaI, fechaInicio,
+											fechaFin);
+						}
+					}
+
 					if (solicitudes.size() == 0) {
 						datosVacios = true;
 					} else {
@@ -289,10 +387,37 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 						for (int i = 0; i < profesores.size(); i++) {
 							Profesor profesor = servicioProfesor
 									.buscarProfesorPorCedula(profesores.get(i));
-							solicitudesFinales = servicioSolicitudTutoria
-									.buscarPorProfesorTematicaEntreFechas(
-											profesor, tematica, fechaInicio,
-											fechaFin);
+							
+							switch (valor) {
+							case 1: {
+								solicitudesFinales = servicioSolicitudTutoria
+										.buscarPorProfesorTematicaEntreFechas(
+												profesor, tematicaI, fechaInicio,
+												fechaFin);
+							}
+								break;
+							case 2: {
+								solicitudesFinales = servicioSolicitudTutoria
+										.buscarPorTematicaProfesorYAreaEntreFechas(tematicaI,
+												profesor, areaI, fechaInicio,
+												fechaFin);
+							}
+								break;
+							case 3: {
+								solicitudesFinales = servicioSolicitudTutoria
+										.buscarPorTematicaProfesorYProgramaEntreFechas(tematicaI,
+												profesor, programaI,
+												fechaInicio, fechaFin);
+							}
+								break;
+							case 4: {
+								solicitudesFinales = servicioSolicitudTutoria
+										.buscarPorTematicaProfesorYProgramaYAreaEntreFechas(tematicaI,
+												profesor, programaI, areaI,
+												fechaInicio, fechaFin);
+							}
+								break;
+							}
 							long primerValor = 0;
 							long segundoValor = 0;
 							long tercerValor = 0;
@@ -323,7 +448,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 							.equals("Todos"))
 						mapa.put("tematica", "Todas las tematicas");
 					else
-						mapa.put("tematica", tematica.getNombre());
+						mapa.put("tematica", tematicaI.getNombre());
 					if (cmbProgramaReporteProfesoresSolicitados.getValue()
 							.equals("Todos"))
 						mapa.put("programa", "Todos los Programas");
@@ -344,20 +469,31 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 							+ "SITEG/vistas/reportes/estadisticos/compilados/RProfesoresMasSolicitados.jasper";
 					String reporteImage = rutaUrl
 							+ "SITEG/public/imagenes/reportes/";
-					System.out.println(reporteSrc);
 					mapa.put("logoUcla", reporteImage + "logo ucla.png");
 					mapa.put("logoCE", reporteImage + "logo CE.png");
 					mapa.put("logoSiteg", reporteImage + "logo.png");
-					// JasperReport jasperReport = (JasperReport) JRLoader
-					// .loadObject(getClass().getResource(
-					// "RProfesoresMasSolicitados.jasper"));
-					JasperReport jasperReport = (JasperReport) JRLoader
-							.loadObject(reporteSrc);
 
-					JasperPrint jasperPrint = JasperFillManager.fillReport(
-							jasperReport, mapa, new JRBeanCollectionDataSource(
-									masSolicitados));
-					JasperViewer.viewReport(jasperPrint, false);
+					try {
+						JasperReport jasperReport = (JasperReport) JRLoader
+								.loadObject(getClass().getResource(
+										"RProfesoresMasSolicitados.jasper"));
+
+						// JasperReport jasperReport = (JasperReport) JRLoader
+						// .loadObject(reporteSrc);
+						//
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, mapa,
+								new JRBeanCollectionDataSource(masSolicitados));
+
+						JasperViewer.viewReport(jasperPrint, false);
+					} catch (JRException e) {
+						// TODO Auto-generated catch block
+						Messagebox.show(
+								"Error en reporte, casua: " + e.getMessage(),
+								"Informacion", Messagebox.OK,
+								Messagebox.INFORMATION);
+					}
+					limpiarCampos();
 				} else {
 					Messagebox
 							.show("No hay informacion disponible para esta seleccion",
