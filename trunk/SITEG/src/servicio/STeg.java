@@ -583,6 +583,8 @@ public class STeg {
 				estatus8, tematica, fechaInicio, fechaFin);
 	}
 	
+	/*---- Fin de Servicios para Reporte Trabajos ----*/
+	
 	/*---- Servicios para Reporte Profesor ----*/
 
 	public List<Teg> buscarTegDeUnaTematicaPorDosFechas(Programa programa,
@@ -617,6 +619,8 @@ public class STeg {
 			Date fechaInicio, Date fechaFin) {
 		return interfaceTeg.buscarTegPorFechaArea(area1, fechaInicio, fechaFin);
 	}
+	
+	/*----  Fin de Servicios para Reporte Profesor ----*/
 
 	/*---- Servicios para Reporte Teg ----*/
 	public List<Teg> buscarTodosProgramasUnAreaUnaTematicaUnEstatus(
