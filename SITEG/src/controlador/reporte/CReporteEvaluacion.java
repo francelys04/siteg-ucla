@@ -583,7 +583,7 @@ public class CReporteEvaluacion extends CGeneral {
 								tematica1 = servicioTematica
 										.buscarTematicaPorNombre(nombreTematica);
 
-								teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+								teg = servicioTeg.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 										nombreestatus, tematica1, fechaInicio, fechaFin);
 
 								if (teg.size() != 0) {

@@ -582,19 +582,19 @@ public class CReporteSolicitud extends CGeneral {
 
 								if (rdoProyecto.isChecked() == true) {
 									teg = servicioTeg
-											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 													estatusProyecto, tematica1,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesProyecto";
 								} else if (rdoTEG.isChecked() == true) {
 									teg = servicioTeg
-											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 													estatusTeg, tematica1,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesTEG";
 								} else if (rdoDefensa.isChecked() == true) {
 									teg = servicioTeg
-											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 													estatusDefensa, tematica1,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesDefensa";
@@ -949,7 +949,7 @@ public class CReporteSolicitud extends CGeneral {
 										.buscarTematica(idTematica);
 								if (rdoProyecto.isChecked() == true) {
 									teg = servicioTeg
-											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 													estatusProyecto, tematica1,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesProyecto";
@@ -958,14 +958,14 @@ public class CReporteSolicitud extends CGeneral {
 								if (rdoTEG.isChecked() == true) {
 
 									teg = servicioTeg
-											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 													estatusTeg, tematica1,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesTEG";
 								} else if (rdoDefensa.isChecked() == true) {
 
 									teg = servicioTeg
-											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus(
+											.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 													estatusDefensa, tematica1,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesDefensa";
