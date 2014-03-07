@@ -817,10 +817,14 @@ public class CReporteTrabajos extends CGeneral {
 
 						String nombreEstudiantes = "";
 						String programa = "";
+						boolean p = true;
 						for (Estudiante e : estudiantes) {
 							nombreEstudiantes += e.getNombre() + " "
-									+ e.getApellido() + ". ";
-							programa += e.getPrograma().getNombre();
+									+ e.getApellido() + ". "; 
+							if (p == true){
+								programa += e.getPrograma().getNombre();
+								p = false;
+							}
 						}
 
 						elementos.add(new ListaTeg(t, nombreEstudiantes, programa));

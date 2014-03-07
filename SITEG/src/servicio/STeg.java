@@ -317,6 +317,8 @@ public class STeg {
 		return interfaceTeg.findByTematicaAndFechaBetween(tematica,
 				fechaInicio, fechaFin);
 	}
+	
+	
    /***********************Inicio Reporte Tematicas Mas Solicitadas ************************/
 	/*************************** Por Programa **********************************************/
 	public List<Teg> buscarUltimasTematicasProgramaEstatus(Programa programa,
@@ -496,7 +498,7 @@ public class STeg {
 		return tegs;
 	}
 	/*************************Fin Report Promedio Gestion de Teg ************************************/
-
+	
 	/*---- Servicios para Reporte Trabajos ----*/
 	public List<Teg> buscarTegPorTematicaEstatusPrograma(Programa programa,
 			String estatus, Tematica tematica, Date fechaInicio, Date fechaFin) {
