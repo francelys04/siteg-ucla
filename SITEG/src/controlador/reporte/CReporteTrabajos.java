@@ -816,22 +816,28 @@ public class CReporteTrabajos extends CGeneral {
 								.buscarEstudiantePorTeg(t);
 
 						String nombreEstudiantes = "";
+						String programa = "";
 						for (Estudiante e : estudiantes) {
 							nombreEstudiantes += e.getNombre() + " "
 									+ e.getApellido() + ". ";
+							programa += e.getPrograma().getNombre();
 						}
 
-						elementos.add(new ListaTeg(t, nombreEstudiantes));
-
+						elementos.add(new ListaTeg(t, nombreEstudiantes, programa));
 					}
 				
+					Collections.sort(elementos, new Comparator<ListaTeg>() {
+						public int compare(ListaTeg a, ListaTeg b) {
+							return a.getPrograma().compareTo(b.getPrograma());
+						}
+					});
 					
 					Map<String, Object> mapa = new HashMap<String, Object>();
 					FileSystemView filesys = FileSystemView.getFileSystemView();
 					
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/estructurados/compilados/RReporteTrabajos.jasper";
+							+ "SITEG/vistas/reportes/estructurados/compilados/RReporteTrabajos1.jasper";
 					String reporteImage = rutaUrl
 							+ "SITEG/public/imagenes/reportes/";
 					mapa.put("Fecha", new Date());
@@ -884,10 +890,6 @@ public class CReporteTrabajos extends CGeneral {
 							.show("No hay informacion disponible para esta seleccion");
 				}
 			}
-
-		
-	
-	
 
 	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarReporteTrabajos")
