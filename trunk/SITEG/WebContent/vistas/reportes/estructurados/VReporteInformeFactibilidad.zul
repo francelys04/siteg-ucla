@@ -101,7 +101,29 @@
 		<columns>
 			<column width="15%" height="40px" />
 		</columns>
-		<rows>  			
+		<rows>
+		<row>
+				<hlayout width="100%">
+						<label value="Fecha Inicio Registro:"
+						style="font-weight:bold" />
+		        </hlayout>
+				<hbox>
+					<datebox id="dtbFechaInicio" cols="12"
+			     	style="margin-right:30px;color:black !important;" width="250px"
+			     	format="dd/MM/yy" onCreate="self.value = new Date()" mold="rounded" readonly="true"
+			     	tooltip="pupFechaInicioFactibilidad" tabindex="5" >
+					</datebox>
+				
+					<hlayout width="100%">
+						<label value="Fecha Fin Registro:" style="font-weight:bold;margin-left:60px" />
+					</hlayout>
+					<datebox id="dtbFechaFin" cols="12"
+			        style="margin-right:30px;color:black !important;margin-left:25px" width="250px"
+			        format="dd/MM/yy" onCreate="self.value = new Date()" mold="rounded" readonly="true"
+			        tooltip="pupFechaFinFactibilidad" tabindex="6">
+					</datebox>	
+				</hbox>									
+			</row>  			
 			<row>
 				<hlayout>
 					<label value="Programa:" style="font-weight:bold" />
@@ -146,30 +168,8 @@
 						</template>
 					</combobox>
 				</hbox>			
-			</row>
+			</row>		
 			
-			<row>
-				<hlayout width="100%">
-						<label value="Fecha Inicio Registro:"
-						style="font-weight:bold" />
-		        </hlayout>
-				<hbox>
-					<datebox id="dtbFechaInicio" cols="12"
-			     	style="margin-right:30px;color:black !important;" width="250px"
-			     	format="dd/MM/yy" onCreate="self.value = new Date()" mold="rounded" readonly="true"
-			     	tooltip="pupFechaInicioFactibilidad" tabindex="5" >
-					</datebox>
-				
-					<hlayout width="100%">
-						<label value="Fecha Fin Registro:" style="font-weight:bold;margin-left:60px" />
-					</hlayout>
-					<datebox id="dtbFechaFin" cols="12"
-			        style="margin-right:30px;color:black !important;margin-left:25px" width="250px"
-			        format="dd/MM/yy" onCreate="self.value = new Date()" mold="rounded" readonly="true"
-			        tooltip="pupFechaFinFactibilidad" tabindex="6">
-					</datebox>	
-				</hbox>									
-			</row>	
 			<row>
 			  	<hlayout>
 					<label value="*"
