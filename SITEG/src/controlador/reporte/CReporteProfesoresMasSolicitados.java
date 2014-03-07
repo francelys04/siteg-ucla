@@ -451,7 +451,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 						mapa.put("tematica", tematicaI.getNombre());
 					if (cmbProgramaReporteProfesoresSolicitados.getValue()
 							.equals("Todos"))
-						mapa.put("programa", "Todos los Programas");
+						mapa.put("programa", "Todos los programas");
 					else
 						mapa.put("programa",
 								cmbProgramaReporteProfesoresSolicitados
@@ -463,6 +463,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 						mapa.put("area",
 								cmbAreaReporteProfesoresSolicitados.getValue());
 					FileSystemView filesys = FileSystemView.getFileSystemView();
+					JasperReport jasperReport;	
 					String rutaUrl = obtenerDirectorio();
 
 					String reporteSrc = rutaUrl
@@ -474,18 +475,12 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 					mapa.put("logoSiteg", reporteImage + "logo.png");
 
 					try {
-						JasperReport jasperReport = (JasperReport) JRLoader
-								.loadObject(getClass().getResource(
-										"RProfesoresMasSolicitados.jasper"));
-
-						// JasperReport jasperReport = (JasperReport) JRLoader
-						// .loadObject(reporteSrc);
-						//
-						JasperPrint jasperPrint = JasperFillManager.fillReport(
-								jasperReport, mapa,
-								new JRBeanCollectionDataSource(masSolicitados));
-
+						
+						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(masSolicitados));
 						JasperViewer.viewReport(jasperPrint, false);
+						
+						
 					} catch (JRException e) {
 						// TODO Auto-generated catch block
 						Messagebox.show(

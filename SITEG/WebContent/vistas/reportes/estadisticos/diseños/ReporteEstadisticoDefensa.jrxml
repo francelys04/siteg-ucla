@@ -162,7 +162,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 			<textField>
 				<reportElement mode="Opaque" x="467" y="195" width="81" height="35" backcolor="#FFFFFF" uuid="3b3e6a34-1d7f-4c68-abe8-757690973cf8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{primerValor}+$F{tercerValor}+$F{segundoValor}]]></textFieldExpression>
 			</textField>
@@ -237,7 +237,12 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 					</pieSeries>
 				</pieDataset>
 				<pie3DPlot isShowLabels="true">
-					<plot/>
+					<plot>
+						<seriesColor seriesOrder="0" color="#FF0033"/>
+						<seriesColor seriesOrder="1" color="#0000FF"/>
+						<seriesColor seriesOrder="2" color="#009900"/>
+						<seriesColor seriesOrder="3" color="#FF9933"/>
+					</plot>
 					<itemLabel>
 						<font size="8"/>
 					</itemLabel>
