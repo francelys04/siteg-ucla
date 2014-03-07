@@ -5,11 +5,13 @@ import modelo.Teg;
 public class ListaTeg {
 		private Teg teg;
 		private String nombreEstudiantes;
+		private String programa;
 		
-		public ListaTeg(Teg teg, String nombreEstudiantes) {
+		public ListaTeg(Teg teg, String nombreEstudiantes, String programa) {
 			super();
 			this.teg = teg;
 			this.nombreEstudiantes = nombreEstudiantes;
+			this.programa = programa;
 		}
 		public Teg getTeg() {
 			return teg;
@@ -22,6 +24,12 @@ public class ListaTeg {
 		}
 		public void setNombreEstudiantes(String nombreEstudiantes) {
 			this.nombreEstudiantes = nombreEstudiantes;
+		}
+		public String getPrograma() {
+			return programa;
+		}
+		public void setPrograma(String programa) {
+			this.programa = programa;
 		}
 
 }
