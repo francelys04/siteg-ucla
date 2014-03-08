@@ -333,6 +333,7 @@ public class CReporteDefensa extends CGeneral {
 					p.put("area", nombreArea);
 					p.put("tematica", nombreTematica);
 					p.put("programa", nombrePrograma);
+					p.put("total", elementos.size());
 					p.put("estatus", tipoDefensa);
 					p.put("logoUcla", reporteImage + "logo ucla.png");
 					p.put("logoCE", reporteImage + "logo CE.png");

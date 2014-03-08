@@ -421,6 +421,7 @@ public class CReporteProfesorTeg extends CGeneral {
 					p.put("logoUcla", reporteImage + "logo ucla.png");
 					p.put("logoCE", reporteImage + "logo CE.png");
 					p.put("logoSiteg", reporteImage + "logo.png");
+					p.put("total", tegs.size());
 					// JasperReport jasperReport = (JasperReport) JRLoader
 					// .loadObject(getClass().getResource(
 					// "RProyectosProfesor.jasper"));
