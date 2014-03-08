@@ -1,4 +1,5 @@
 package controlador.reporte;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,6 +17,7 @@ import modelo.Categoria;
 import modelo.Defensa;
 import modelo.Estudiante;
 import modelo.Profesor;
+import modelo.TegEstatus;
 import modelo.Tematica;
 import modelo.AreaInvestigacion;
 import modelo.Programa;
@@ -67,258 +69,165 @@ import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 import controlador.catalogo.CCatalogoPrograma;
 import controlador.catalogo.CCatalogoReporteInformeFact;
+
 @Controller
 public class CReporteInformeFactibilidad extends CGeneral {
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SProgramaArea servicioProgramaArea = GeneradorBeans.getServicioProgramaArea();
-	CCatalogoReporteInformeFact catalogo = new CCatalogoReporteInformeFact();
-	
+
 	@Wire
 	private Window wdwReporteInformeFactibilidad;
-	@Wire
-	private Combobox cmbProgramaFactibilidad;
-	@Wire
-	private Combobox  cmbArea;
-	@Wire
-	private Combobox  cmbTematica;
-	@Wire
-	private Combobox  cmbTipoFactibilidad;
-	@Wire
-	private Datebox  dtbFechaInicio;
-	@Wire
-	private Datebox  dtbFechaFin;
-	@Wire
-	private Textbox  txtProyecto;
-	@Wire
-	private Jasperreport jstVistaPrevia;
 
-	private Connection con;
-	 
-	private String[] estatusproyectos = {"Proyecto Factible","Proyecto No Factible"};
-	
+	private static TegEstatus tegestatus;
+
+	private String[] estatusproyectos = { "Proyecto Factible",
+			"Proyecto No Factible" };
+
 	long id = 0;
 
-
-    private String reporteFact;
+	private String reporteFact;
 	List<AreaInvestigacion> areas = new ArrayList<AreaInvestigacion>();
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
 	long idTematica = 0;
-	
+
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		cmbArea.setDisabled(false);
-		cmbTematica.setDisabled(false);
-		programas = servicioPrograma.buscarActivas();
-		Programa programaa = new Programa(10000000, "Todos", "", "", true, null);
-		programas.add(programaa);
-		cmbProgramaFactibilidad.setModel(new ListModelList<Programa>(programas));
-		cmbTipoFactibilidad.setModel(new ListModelList<String>(estatusproyectos));
 
-		
-		Selectors.wireComponents(comp, this, false);
-		
-		HashMap<String, Object> map = (HashMap<String, Object>) Sessions.getCurrent().getAttribute("itemsCatalogo");
-		
-		if (map != null) {
-		/*if (map.get("id") != null){
-				txtProyecto.setValue((String) map.get("id"));
-				}*/
-		if ((Long) map.get("id") != null) {
-			id = ((Long) map.get("id"));
-			/*
-			 * Creacion de objeto cargado con el servicioPrograma mediante
-			 * el metodo buscar dado a su id y asi llenar los textbox de la
-			 * vista VReporteInformeFactibilidad
-			 */
-			Teg teg = servicioTeg.buscarTeg(id);
-			List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
-			txtProyecto.setValue(String.valueOf(teg.getId()));
-			/*Programa programa = servicioPrograma.buscar((Long) map
-					.get("programa"));*/
-			cmbProgramaFactibilidad.setValue(est.get(0).getPrograma().getNombre());
-			cmbProgramaFactibilidad.setModel(new ListModelList<Programa>(programas));
-			cmbArea.setValue(teg.getTematica().getareaInvestigacion().getNombre());
-			cmbTematica.setValue(teg.getTematica().getNombre());
-			/*cmbTipoFactibilidad.setModel(new ListModelList<String>(estatusproyectos));*/
-			cmbTipoFactibilidad.setValue(teg.getEstatus());
-			dtbFechaInicio.setValue(teg.getFechaInicio());
-			dtbFechaFin.setValue(teg.getFechaEntrega());
-			map.clear();
-			map = null;
-			
-		}	
-		}
-	}
-	
-	@Listen("onSelect = #cmbProgramaFactibilidad")
-	public void seleccionarPrograma() throws JRException {
-		String idPrograma = cmbProgramaFactibilidad.getSelectedItem().getId();
-		String nombrePrograma = cmbProgramaFactibilidad.getValue();
-		if (nombrePrograma.equals("Todos")) {
-			cmbArea.setValue("Todos");
-			cmbTematica.setValue("Todos");
-			cmbArea.setDisabled(true);
-			cmbTematica.setDisabled(true);
-
-		} else {
-			Programa programa = servicioPrograma.buscar(Long.parseLong(idPrograma));
-			List<AreaInvestigacion> programaAreas = servicioProgramaArea.buscarAreasDePrograma(programa);
-			AreaInvestigacion areaInvestigacion = new AreaInvestigacion(1000000, "Todos", "", true);
-			programaAreas.add(areaInvestigacion);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(programaAreas));
-			cmbArea.setDisabled(false);
-			cmbTematica.setDisabled(false);
-		}
 	}
 
-	@Listen("onSelect = #cmbArea")
-	public void seleccionarArea() throws JRException {
-		String idArea = cmbArea.getSelectedItem().getId();
-		String nombreArea = cmbArea.getValue();
-		if (nombreArea.equals("Todos")) {
-			cmbTematica.setValue("Todos");
-			cmbTematica.setDisabled(true);
-		} else {
-			cmbTematica.setDisabled(false);
-			AreaInvestigacion area = servicioArea.buscarArea(Long.parseLong(idArea));
-			List<Tematica> tematicasTodos = servicioTematica
-					.buscarTematicasDeArea(area);
-			Tematica tematicaTodos = new Tematica(10000000, "Todos", "", true,
-					null);
-			tematicasTodos.add(tematicaTodos);
-			cmbTematica.setModel(new ListModelList<Tematica>(tematicasTodos));
-		}
-	}
-		
-	// Metodo que permite abrir la vista VCatalagoinformefact en forma modal //
-		@Listen("onClick = #btnCatalogoProyectoTeg")
-		public void buscarProyecto() {
-			
-			if ((cmbProgramaFactibilidad.getValue() =="") || (cmbArea.getValue()=="") || (cmbTematica.getValue()=="")
-					|| (cmbTipoFactibilidad.getValue()=="")) {
-				    Messagebox.show(
-						  "Datos imcompletos",
-						     "Informacion", Messagebox.OK,
-						   Messagebox.INFORMATION);
-		   }else {
-			   	String nombrePrograma = cmbProgramaFactibilidad.getValue();
-				String nombreArea = cmbArea.getValue();
-				String nombreTematica = cmbTematica.getValue();
-				String nombreTipoFact = cmbTipoFactibilidad.getValue();
-				Date fechaInicio = dtbFechaInicio.getValue();
-				Date fechaFin = dtbFechaFin.getValue();
-								
-				Window window = (Window) Executions.createComponents(
-						"/vistas/catalogos/VCatalogoReporteInformeFact.zul", null, null);
-				window.doModal();
-				catalogo.recibir("reportes/estructurados/VReporteInformeFactibilidad");
-		   }	
-		}
-		
-	 	@Listen("onClick = #btnGenerarReporteInformeFactibilidad")
-		 public void GenerarInforme() throws JRException  {	
-	 		if (txtProyecto.getText().equals("")){ 
-				 Messagebox.show( "Debe seleccionar un Proyecto",
-						     "Error", Messagebox.OK,Messagebox.INFORMATION);
-				 System.out.println("Entro");
-			}else {
-	 		
-		 		Teg teg = servicioTeg.buscarTeg(id);
-			    Long proyecto = teg.getId();
-			    String estatus = teg.getEstatus();
-			    List<Estudiante> est = servicioEstudiante.buscarEstudiantesDelTeg(teg);
-			    String nprofesor = teg.getTutor().getNombre();
-			    String aprofesor = teg.getTutor().getApellido();
-			    String nestudiante = est.get(0).getNombre();
-			    String aestudiante = est.get(0).getApellido();
-			    String cestudiante = est.get(0).getCedula();
-			    String titulo = teg.getTitulo();
-			    String observacion = teg.getFactibilidad().getObservacion();
-			    String programateg = est.get(0).getPrograma().getNombre(); 
-			    String ndirector = est.get(0).getPrograma().getDirectorPrograma().getNombre();
-			    String adirector = est.get(0).getPrograma().getDirectorPrograma().getApellido();
-			    List<InformeFactibilidad> elementos = new ArrayList<InformeFactibilidad>();
-				elementos.add(new InformeFactibilidad(  estatus,  nestudiante, aestudiante,  cestudiante,  titulo,
-						 programateg,  nprofesor,  aprofesor, observacion,  ndirector,  adirector));
-			    
-				if (estatus.equals("Proyecto Factible")){
-			    	reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
-					 System.out.println(estatus);
-				} else{
-						if (estatus.equals("Proyecto No Factible")){
-							reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeNoFactible.jasper";
-					}
-				}
-				   
-			  /*  try {
-					Class.forName("org.postgresql.Driver");
-					con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/siteg","postgres","equipo2");
-				}catch (ClassNotFoundException | SQLException e1) {
-					e1.printStackTrace();
-				}*/
-			    
-			   /* try {*/
-				    FileSystemView filesys = FileSystemView.getFileSystemView();
-				    
+	@Listen("onClick = #btnGenerarReporteInformeFactibilidad")
+	public void GenerarInforme() throws JRException {
+
+		Estudiante estudiante = ObtenerUsuarioEstudiante();
+		List<Teg> teg = servicioTeg.buscarTegPorEstudiante(estudiante);
+		if (teg.size() != 0) {
+
+			int n = teg.size() - 1;
+			System.out.println(n);
+			String estatus1 = "Proyecto Factible";
+
+			tegestatus = servicioTegEstatus.buscarTegEstatus(estatus1,
+					teg.get(n));
+			if (tegestatus != null) {
+
+				Long proyecto = teg.get(n).getId();
+				String estatus = teg.get(n).getEstatus();
+
+				String nprofesor = teg.get(n).getTutor().getNombre();
+				String aprofesor = teg.get(n).getTutor().getApellido();
+				String nestudiante = estudiante.getNombre();
+				String aestudiante = estudiante.getApellido();
+				String cestudiante = estudiante.getCedula();
+				String titulo = teg.get(n).getTitulo();
+				String observacion = teg.get(n).getFactibilidad()
+						.getObservacion();
+				String programateg = estudiante.getPrograma().getNombre();
+				String ndirector = estudiante.getPrograma()
+						.getDirectorPrograma().getNombre();
+				String adirector = estudiante.getPrograma()
+						.getDirectorPrograma().getApellido();
+				List<InformeFactibilidad> elementos = new ArrayList<InformeFactibilidad>();
+				elementos
+						.add(new InformeFactibilidad(estatus, nestudiante,
+								aestudiante, cestudiante, titulo, programateg,
+								nprofesor, aprofesor, observacion, ndirector,
+								adirector));
+
+				reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
+
+				FileSystemView filesys = FileSystemView.getFileSystemView();
+
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl + reporteFact;
+				String reporteImage = rutaUrl
+						+ "SITEG/public/imagenes/reportes/";
+
+				Map p = new HashMap();
+				p.put("fecha", new Date().toLocaleString());
+
+				p.put("logoUcla", reporteImage + "logo ucla.png");
+				p.put("logoCE", reporteImage + "logo CE.png");
+				p.put("logoSiteg", reporteImage + "logo.png");
+				JasperReport jasperReport = (JasperReport) JRLoader
+						.loadObject(reporteSrc);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(
+						jasperReport, p, new JRBeanCollectionDataSource(
+								elementos));
+				JasperViewer.viewReport(jasperPrint);
+
+			} else {
+				String estatus2 = "Proyecto No Factible";
+				tegestatus = servicioTegEstatus.buscarTegEstatus(estatus2,
+						teg.get(n));
+				if (tegestatus != null) {
+
+					Long proyecto = teg.get(n).getId();
+					String estatus = teg.get(n).getEstatus();
+
+					String nprofesor = teg.get(n).getTutor().getNombre();
+					String aprofesor = teg.get(n).getTutor().getApellido();
+					String nestudiante = estudiante.getNombre();
+					String aestudiante = estudiante.getApellido();
+					String cestudiante = estudiante.getCedula();
+					String titulo = teg.get(n).getTitulo();
+					String observacion = teg.get(n).getFactibilidad()
+							.getObservacion();
+					String programateg = estudiante.getPrograma().getNombre();
+					String ndirector = estudiante.getPrograma()
+							.getDirectorPrograma().getNombre();
+					String adirector = estudiante.getPrograma()
+							.getDirectorPrograma().getApellido();
+					List<InformeFactibilidad> elementos = new ArrayList<InformeFactibilidad>();
+					elementos.add(new InformeFactibilidad(estatus, nestudiante,
+							aestudiante, cestudiante, titulo, programateg,
+							nprofesor, aprofesor, observacion, ndirector,
+							adirector));
+
+					reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeNoFactible.jasper";
+
+					FileSystemView filesys = FileSystemView.getFileSystemView();
+
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl + reporteFact;
-					String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-					
+					String reporteImage = rutaUrl
+							+ "SITEG/public/imagenes/reportes/";
+
 					Map p = new HashMap();
 					p.put("fecha", new Date().toLocaleString());
-					/*p.put("proyecto", proyecto);
-				    p.put("nprofesor", nprofesor);
-				    p.put("aprofesor", aprofesor);
-				    p.put("nestudiante", nestudiante);
-				    p.put("aestudiante", aestudiante);
-				    p.put("cestudiante", cestudiante);
-				    p.put("titulo", titulo);
-				    p.put("observacion", observacion);
-				    p.put("programateg", programateg);
-				    p.put("ndirector", ndirector);
-				    p.put("adirector", adirector);*/
-				    p.put("logoUcla", reporteImage + "logo ucla.png");
-				 	p.put("logoCE", reporteImage + "logo CE.png");
-				    p.put("logoSiteg", reporteImage + "logo.png");			    
-					JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,new JRBeanCollectionDataSource(elementos));
-				    JasperViewer.viewReport(jasperPrint);
-				 /*   con.close();*/
-					
-				   /* }catch (JRException | SQLException e) {
-						e.printStackTrace();
-				}*/
-			}
-	 	} 
-	
-	@Listen("onClick = #btnCancelarReporteInformeFactibilidad")
-   public void CancelarInformeFactibilidad(){
-		cmbProgramaFactibilidad.setValue("");
-		cmbArea.setValue("");
-		cmbArea.setDisabled(true);
-		cmbTematica.setValue("");
-		cmbTematica.setDisabled(true);
-		cmbTipoFactibilidad.setValue("");
-		dtbFechaInicio.setValue(new Date());
-		dtbFechaFin.setValue(new Date());
-		jstVistaPrevia.setSrc("");
-		jstVistaPrevia.setDatasource(null);
 
-   }
-	
+					p.put("logoUcla", reporteImage + "logo ucla.png");
+					p.put("logoCE", reporteImage + "logo CE.png");
+					p.put("logoSiteg", reporteImage + "logo.png");
+					JasperReport jasperReport = (JasperReport) JRLoader
+							.loadObject(reporteSrc);
+					JasperPrint jasperPrint = JasperFillManager.fillReport(
+							jasperReport, p, new JRBeanCollectionDataSource(
+									elementos));
+					JasperViewer.viewReport(jasperPrint, false);
+
+				}
+				else {
+					Messagebox.show("No hay informacion disponible",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
+				}
+
+			}
+			
+		}
+		else
+		{
+			Messagebox.show("No Tiene TEG Asociado",
+					"Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+
+	}
+
 	@Listen("onClick = #btnSalirReporteInformeFactibilidad")
 	public void salirPromedioTiempoTeg() throws JRException {
-		CancelarInformeFactibilidad();
+
 		wdwReporteInformeFactibilidad.onClose();
 	}
-	
-	
+
 }
-
-

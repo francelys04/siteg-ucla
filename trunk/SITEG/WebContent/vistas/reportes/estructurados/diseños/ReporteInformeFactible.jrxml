@@ -27,25 +27,6 @@
 	</background>
 	<title>
 		<band height="90" splitType="Stretch">
-			<staticText>
-				<reportElement x="113" y="25" width="350" height="39" uuid="be2a96f0-074b-4e5a-b5d7-c025300f6600"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[    Universidad Centroccidental Lisandro Alvarado    Decanato de Ciencias y Tecnología            ]]></text>
-			</staticText>
-			<line>
-				<reportElement x="-21" y="86" width="612" height="1" forecolor="#0066FF" uuid="c47c68e6-53dc-45c1-ad04-89256394e3f9"/>
-				<graphicElement>
-					<pen lineWidth="3.0"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="-20" y="-1" width="610" height="2" forecolor="#0066FF" uuid="766cf580-6afa-4a5b-b121-5992fd643f36"/>
-				<graphicElement>
-					<pen lineWidth="3.0"/>
-				</graphicElement>
-			</line>
 			<image>
 				<reportElement x="0" y="15" width="74" height="58" uuid="364b62f8-c5d4-484a-8bd2-5806d1601559"/>
 				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
@@ -54,6 +35,16 @@
 				<reportElement x="490" y="17" width="82" height="54" uuid="5aec0a33-9560-40e2-9bc4-1ac40b47c360"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="131" y="15" width="312" height="66" uuid="e7615832-10b6-46c8-b48c-de988089fef5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIVERSIDAD CENTROCCIDENTAL
+“LISANDRO ALVARADO”
+DECANATO DE CIENCIAS Y TECNOLOGÍA
+COMITÉ DE TRABAJO DE GRADO]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>

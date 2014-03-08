@@ -18,6 +18,8 @@ public interface ITegEstatusDAO extends JpaRepository<TegEstatus, Long> {
 	
 	public List<TegEstatus> findByNombre(String nombre);
 	
+	public TegEstatus findByNombreAndTeg(String nombre, Teg teg);
+	
 	
 	
 }
