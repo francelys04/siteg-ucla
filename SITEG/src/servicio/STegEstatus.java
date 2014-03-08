@@ -33,4 +33,11 @@ public class STegEstatus {
 		return tegEstatus;
 	}
 	
+	public TegEstatus buscarTegEstatus(String nombre, Teg teg)
+	{
+		TegEstatus tegEstatus;
+		tegEstatus = interfaceTegEstatus.findByNombreAndTeg(nombre,teg);
+		return tegEstatus;
+	}
+	
 }

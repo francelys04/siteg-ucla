@@ -1911,6 +1911,7 @@ public class CReporteEvaluacion extends CGeneral {
 	void exportarDocumento() throws IOException {
 		if ((rdoFactibilidad.isChecked() == true)
 				|| (rdoDefensa.isChecked() == true)) {
+			NombreTxt = "Evaluaciones";
 			if (elementos1.size() != 0) {
 
 				String rutaUrl = obtenerDirectorio();
@@ -2468,6 +2469,7 @@ public class CReporteEvaluacion extends CGeneral {
 
 				} else if (chequeoEstatus == 6) {
 					// ELEGI NADA
+					
 
 					try {
 						BufferedWriter bw = new BufferedWriter(new FileWriter(

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteInformeNoFactible" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb15444e-75ec-4b31-b233-2dc66cb0303a">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="170"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fecha" class="java.lang.String"/>
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoCE" class="java.lang.String"/>
@@ -25,33 +25,24 @@
 	</background>
 	<title>
 		<band height="88" splitType="Stretch">
-			<staticText>
-				<reportElement x="113" y="25" width="350" height="39" uuid="be2a96f0-074b-4e5a-b5d7-c025300f6600"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[    Universidad Centroccidental Lisandro Alvarado    Decanato de Ciencias y Tecnología            ]]></text>
-			</staticText>
-			<line>
-				<reportElement x="-21" y="86" width="612" height="1" forecolor="#0066FF" uuid="c47c68e6-53dc-45c1-ad04-89256394e3f9"/>
-				<graphicElement>
-					<pen lineWidth="3.0"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="-28" y="-1" width="610" height="2" forecolor="#0066FF" uuid="766cf580-6afa-4a5b-b121-5992fd643f36"/>
-				<graphicElement>
-					<pen lineWidth="3.0"/>
-				</graphicElement>
-			</line>
 			<image>
-				<reportElement x="0" y="15" width="74" height="58" uuid="364b62f8-c5d4-484a-8bd2-5806d1601559"/>
+				<reportElement x="11" y="17" width="74" height="58" uuid="364b62f8-c5d4-484a-8bd2-5806d1601559"/>
 				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="489" y="17" width="82" height="54" uuid="5aec0a33-9560-40e2-9bc4-1ac40b47c360"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="125" y="17" width="312" height="66" uuid="56b6bcf5-32ae-4e19-82ea-3b87f541992e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIVERSIDAD CENTROCCIDENTAL
+“LISANDRO ALVARADO”
+DECANATO DE CIENCIAS Y TECNOLOGÍA
+COMITÉ DE TRABAJO DE GRADO]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
