@@ -914,7 +914,7 @@
 		<separator />
 		<separator />
 
-		<panel border="normal" width="96%"
+		<panel border="normal" width="850px"
 			style="margin-left:15px;margin-right:15px">
 			<panelchildren>
 				<div sclass="alert-info" align="center">
