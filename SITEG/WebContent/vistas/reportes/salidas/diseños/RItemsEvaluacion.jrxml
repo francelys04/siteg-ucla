@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="db8faee9-7e3e-4b36-b0b5-048315993d1f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="104"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoSiteg" class="java.lang.String"/>
 	<parameter name="logoCE" class="java.lang.String"/>
@@ -16,7 +16,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="101" splitType="Stretch">
+		<band height="138" splitType="Stretch">
 			<staticText>
 				<reportElement x="123" y="13" width="324" height="66" uuid="817377a8-164a-41df-99fc-97072a6a234a"/>
 				<textElement textAlignment="Center">
@@ -35,30 +35,30 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement x="472" y="0" width="100" height="85" uuid="c7557848-ce1a-449f-9c34-af433a13768d"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="100" splitType="Stretch">
-			<staticText>
-				<reportElement x="156" y="49" width="254" height="29" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Lista de Items de Evaluación]]></text>
-			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="447" y="13" width="100" height="20" uuid="8bccbeae-4a34-41b4-a840-389cef2c46ba"/>
+				<reportElement x="466" y="118" width="100" height="20" uuid="55903545-5886-4f5e-a82e-3490d50cbeee"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="399" y="13" width="83" height="20" uuid="2c21fd98-eb64-4c40-88b0-c62237400137"/>
+				<reportElement x="424" y="118" width="83" height="20" uuid="aea345e1-3fba-46d4-a664-4121621a1a1c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="170" y="19" width="254" height="29" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Lista de Items de Evaluación]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -74,22 +74,22 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement x="0" y="2" width="170" height="36" backcolor="#99CCFF" uuid="b91ab50f-827b-4745-b95c-3bc5b255fd1a"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="10" y="18" width="135" height="20" uuid="131c116d-9f41-4090-9a47-f7387ff23f5e"/>
-				<textElement textAlignment="Center">
+				<reportElement x="0" y="2" width="170" height="36" uuid="131c116d-9f41-4090-9a47-f7387ff23f5e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="178" y="18" width="232" height="20" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
-				<textElement textAlignment="Center">
+				<reportElement x="170" y="2" width="254" height="36" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Descripción]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="436" y="16" width="123" height="22" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
-				<textElement textAlignment="Center">
+				<reportElement x="424" y="2" width="148" height="36" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Tipo]]></text>

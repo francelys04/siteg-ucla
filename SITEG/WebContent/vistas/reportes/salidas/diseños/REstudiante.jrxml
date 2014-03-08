@@ -17,7 +17,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="99" splitType="Stretch">
+		<band height="138" splitType="Stretch">
 			<staticText>
 				<reportElement x="122" y="13" width="324" height="66" uuid="34173e51-e95b-4447-a62a-59b5802e7d01"/>
 				<textElement textAlignment="Center">
@@ -36,31 +36,31 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement x="472" y="0" width="100" height="85" uuid="bef1cab3-6968-4cab-b29b-a2b138bdc5be"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="129" splitType="Stretch">
-			<staticText>
-				<reportElement x="163" y="81" width="241" height="31" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Lista de Estudiantes]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="389" y="21" width="83" height="20" uuid="7c2323c7-d710-4900-bede-f83c64ffff57"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
-				</textElement>
-				<text><![CDATA[Fecha:]]></text>
-			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="439" y="21" width="100" height="20" uuid="169a71b4-f8f8-4b8d-9cfd-dfb0b86b0e0b"/>
+				<reportElement x="468" y="118" width="100" height="20" uuid="97184b8d-2555-4f0b-bfaf-b8d8ac24d1b0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="426" y="118" width="83" height="20" uuid="071cc2cc-6739-45fc-b13a-a507a674083d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="77" splitType="Stretch">
+			<staticText>
+				<reportElement x="167" y="24" width="241" height="31" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Lista de Estudiantes]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>

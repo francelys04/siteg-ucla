@@ -17,7 +17,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="103" splitType="Stretch">
+		<band height="138" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="7" width="100" height="72" uuid="798b01b1-e252-4c47-a84e-c84a82b55117"/>
 				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
@@ -42,35 +42,35 @@
 DECANATO DE CIENCIAS Y TECNOLOGÍA
 GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 			</staticText>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="115" splitType="Stretch">
-			<staticText>
-				<reportElement x="162" y="56" width="232" height="31" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Lista de Programas]]></text>
-			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="448" y="23" width="100" height="20" uuid="6e4a137c-2832-4182-844c-a74306055675"/>
+				<reportElement x="472" y="118" width="100" height="20" uuid="148ef02f-9135-4fb2-916a-ab8705594547"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="402" y="23" width="83" height="20" uuid="bdf86073-11f4-4d2d-8caa-3c4e4c47f0ad"/>
+				<reportElement x="430" y="118" width="83" height="20" uuid="7bff63e8-19a7-4d32-ab1f-e7d1afc68ec6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 		</band>
+	</title>
+	<pageHeader>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="170" y="19" width="232" height="31" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Lista de Programas]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="39" splitType="Stretch">
+		<band height="38" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="2" width="170" height="36" backcolor="#99CCFF" uuid="75ef54da-0fdd-449d-b3e4-052cecc72296"/>
 			</rectangle>
@@ -81,22 +81,22 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement x="386" y="2" width="186" height="36" backcolor="#99CCFF" uuid="687f96b3-c033-4f8d-8d21-15fea7078d55"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="12" y="18" width="141" height="20" uuid="131c116d-9f41-4090-9a47-f7387ff23f5e"/>
-				<textElement textAlignment="Center">
+				<reportElement x="0" y="2" width="170" height="36" uuid="131c116d-9f41-4090-9a47-f7387ff23f5e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="170" y="18" width="216" height="20" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
-				<textElement textAlignment="Center">
+				<reportElement x="170" y="2" width="216" height="36" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Correo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="394" y="18" width="170" height="20" uuid="406d6b3f-e2c9-494f-b5c1-42b0e936673b"/>
-				<textElement textAlignment="Center">
+				<reportElement x="394" y="2" width="170" height="36" uuid="406d6b3f-e2c9-494f-b5c1-42b0e936673b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Director de Programa]]></text>

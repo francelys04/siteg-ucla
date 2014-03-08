@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="db8faee9-7e3e-4b36-b0b5-048315993d1f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="93"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="logoUcla" class="java.lang.String"/>
 	<parameter name="logoSiteg" class="java.lang.String"/>
 	<parameter name="logoCE" class="java.lang.String"/>
@@ -15,7 +15,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="95" splitType="Stretch">
+		<band height="138" splitType="Stretch">
 			<staticText>
 				<reportElement x="119" y="15" width="324" height="66" uuid="85f476fe-245e-44f2-a09f-18d348d6a9a8"/>
 				<textElement textAlignment="Center">
@@ -34,51 +34,51 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement x="472" y="0" width="100" height="85" uuid="9db6dfa3-4ad6-43aa-aef8-d4374300914d"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="95" splitType="Stretch">
-			<staticText>
-				<reportElement x="170" y="52" width="234" height="29" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Tipos de Jurado]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="404" y="19" width="83" height="20" uuid="83eced1a-1e8b-447f-b8ae-adb375f49dc4"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
-				</textElement>
-				<text><![CDATA[Fecha:]]></text>
-			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="455" y="19" width="100" height="20" uuid="150b1cb4-2bc2-4a3e-a050-269ed4cb4f75"/>
+				<reportElement x="469" y="118" width="100" height="20" uuid="64baa010-77ad-4a6f-8e86-99f6e0e22fd7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="427" y="118" width="83" height="20" uuid="a78149d2-31a9-42f6-87fe-5e00537b05c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="65" splitType="Stretch">
+			<staticText>
+				<reportElement x="178" y="18" width="234" height="29" uuid="cb9151f6-29ef-4b2b-ad62-d97d694cd539"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Tipos de Jurado]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="37" splitType="Stretch">
 			<rectangle>
-				<reportElement x="222" y="2" width="350" height="35" backcolor="#99CCFF" uuid="3f4d8e91-b179-489b-b590-1f672644162b"/>
-			</rectangle>
-			<rectangle>
 				<reportElement x="0" y="2" width="222" height="35" backcolor="#99CCFF" uuid="0b87e135-1708-4a2c-9600-5255dc85983a"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="18" width="222" height="19" uuid="131c116d-9f41-4090-9a47-f7387ff23f5e"/>
-				<textElement textAlignment="Center">
+				<reportElement x="0" y="2" width="222" height="35" uuid="131c116d-9f41-4090-9a47-f7387ff23f5e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement x="222" y="2" width="350" height="35" backcolor="#99CCFF" uuid="3b69d25d-def8-4591-a5e2-409624698520"/>
+			</rectangle>
 			<staticText>
-				<reportElement x="222" y="18" width="350" height="19" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
-				<textElement textAlignment="Center">
+				<reportElement x="222" y="1" width="347" height="36" uuid="9852f7a6-d72a-4a68-927d-a4dd76dc73b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Descripción]]></text>
@@ -88,10 +88,10 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 	<detail>
 		<band height="44" splitType="Stretch">
 			<rectangle>
-				<reportElement x="222" y="1" width="350" height="43" uuid="f858e588-44e0-4a96-8f6b-2db23b2597b5"/>
+				<reportElement x="222" y="0" width="350" height="44" uuid="f858e588-44e0-4a96-8f6b-2db23b2597b5"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="0" y="1" width="222" height="43" uuid="cae6ede5-b3e4-4e35-a9d0-a098ade0933c"/>
+				<reportElement x="0" y="0" width="222" height="44" uuid="cae6ede5-b3e4-4e35-a9d0-a098ade0933c"/>
 			</rectangle>
 			<textField>
 				<reportElement x="0" y="1" width="222" height="43" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
