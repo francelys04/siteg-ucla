@@ -846,6 +846,7 @@
 
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
+					<listcell label="${each.tituloTeg}" />
 					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
