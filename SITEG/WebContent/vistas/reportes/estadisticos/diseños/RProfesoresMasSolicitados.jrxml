@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RProfesoresMasSolicitados" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" uuid="89b2ba1e-47e3-46e8-a599-f058ab72e350">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="44"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="tematica" class="java.lang.String"/>
 	<parameter name="inicio" class="java.util.Date"/>
@@ -31,7 +31,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="114" splitType="Stretch">
+		<band height="256" splitType="Stretch">
 			<staticText>
 				<reportElement x="115" y="29" width="324" height="66" uuid="2819cd78-e71b-4325-8561-c9ff4d7d2aaf"/>
 				<textElement textAlignment="Center">
@@ -50,101 +50,101 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement x="472" y="0" width="100" height="85" uuid="5f4683ad-c1ea-4188-9a61-5dddf85a76af"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="219">
-			<staticText>
-				<reportElement x="131" y="145" width="308" height="27" uuid="cd363f2c-7f61-44f7-af67-c13c15519bb6"/>
-				<textElement>
-					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true"/>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="467" y="118" width="100" height="20" uuid="85a3bcfc-e3d2-4668-a4b8-6508d471a42f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<text><![CDATA[Tutores con mas solicitudes de tutoría]]></text>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="425" y="118" width="83" height="20" uuid="dbad030e-e3a6-4dc9-9c41-622652e11665"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="313" y="68" width="42" height="20" uuid="f251195c-6b19-4dab-bd58-e4a87998d0a5"/>
+				<reportElement x="321" y="188" width="42" height="20" uuid="f251195c-6b19-4dab-bd58-e4a87998d0a5"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Área:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="72" y="94" width="269" height="20" uuid="b27e3c66-1864-47d6-bba7-9c8bff7dc358"/>
+				<reportElement x="80" y="214" width="269" height="20" uuid="b27e3c66-1864-47d6-bba7-9c8bff7dc358"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tematica}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="45" y="39" width="108" height="20" uuid="4ba4a5f3-62c6-4fed-a9c6-8e39a65ea11b"/>
+				<reportElement x="53" y="159" width="108" height="20" uuid="4ba4a5f3-62c6-4fed-a9c6-8e39a65ea11b"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{inicio})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="195" y="39" width="100" height="20" uuid="1355b02c-ce6d-4fbf-9ddf-81c60242374d"/>
+				<reportElement x="203" y="159" width="100" height="20" uuid="1355b02c-ce6d-4fbf-9ddf-81c60242374d"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fin})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="3" y="39" width="42" height="20" uuid="d4228faf-31ef-4ef7-b269-771d682788b0"/>
+				<reportElement x="11" y="159" width="42" height="20" uuid="d4228faf-31ef-4ef7-b269-771d682788b0"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Desde:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="153" y="39" width="42" height="20" uuid="ec40f63c-b0a8-417e-9830-41b37ea34457"/>
+				<reportElement x="161" y="159" width="42" height="20" uuid="ec40f63c-b0a8-417e-9830-41b37ea34457"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hasta:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="68" width="69" height="20" uuid="67445e94-1276-4f38-a21c-7c81e1b1044e"/>
+				<reportElement x="11" y="188" width="69" height="20" uuid="67445e94-1276-4f38-a21c-7c81e1b1044e"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Programa:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="72" y="68" width="227" height="20" uuid="656ded7b-7009-4fef-b43e-68f8638c5f92"/>
+				<reportElement x="80" y="188" width="227" height="20" uuid="656ded7b-7009-4fef-b43e-68f8638c5f92"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{programa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="355" y="69" width="205" height="20" uuid="f24a6a56-965c-4288-8d6d-0df42526aae7"/>
+				<reportElement x="363" y="189" width="205" height="20" uuid="f24a6a56-965c-4288-8d6d-0df42526aae7"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="3" y="94" width="69" height="18" uuid="30df3556-4fb7-4483-9b82-e994ceb2d38b"/>
+				<reportElement x="11" y="214" width="69" height="18" uuid="30df3556-4fb7-4483-9b82-e994ceb2d38b"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Temática:]]></text>
 			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="84">
 			<staticText>
-				<reportElement x="413" y="15" width="83" height="20" uuid="0429d3e4-e3bb-43bb-9d44-99a209b0753d"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
+				<reportElement x="142" y="27" width="308" height="27" uuid="cd363f2c-7f61-44f7-af67-c13c15519bb6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true"/>
 				</textElement>
-				<text><![CDATA[Fecha:]]></text>
+				<text><![CDATA[Tutores con más Solicitudes de Tutoría]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="467" y="15" width="100" height="20" uuid="f3132f48-ab29-498f-8442-fcd72dc58179"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -152,20 +152,24 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="23" width="99" height="20" backcolor="#99CCFF" uuid="fb59ca4f-92d5-441b-a01a-95eb64e9d8b0"/>
 				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
+					<pen lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Cedula]]></text>
+				<text><![CDATA[Cédula]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="99" y="23" width="79" height="20" backcolor="#99CCFF" uuid="e54718c9-24b4-4960-acb0-155cb9953e4d"/>
 				<box>
 					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
@@ -176,6 +180,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement mode="Opaque" x="178" y="23" width="95" height="20" backcolor="#99CCFF" uuid="1eec4943-7add-4b65-be75-ccf5143ac56c"/>
 				<box>
 					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
@@ -252,90 +257,93 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20">
+		<band height="32">
 			<textField>
-				<reportElement x="0" y="0" width="99" height="20" uuid="d120340b-9314-4b9a-abe7-73107b8354a8"/>
+				<reportElement x="0" y="0" width="99" height="32" uuid="d120340b-9314-4b9a-abe7-73107b8354a8"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tutor.cedula}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="99" y="0" width="78" height="20" uuid="010ad173-04bd-442a-a9d8-e4000043babd"/>
+				<reportElement x="99" y="0" width="79" height="32" uuid="010ad173-04bd-442a-a9d8-e4000043babd"/>
 				<box>
 					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tutor.nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="178" y="0" width="95" height="20" uuid="ef419085-6601-4032-9503-83f319d25062"/>
+				<reportElement x="178" y="0" width="95" height="32" uuid="ef419085-6601-4032-9503-83f319d25062"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tutor.apellido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="439" y="0" width="87" height="20" uuid="45799331-ef54-49d8-8bec-b7ee667ce34f"/>
+				<reportElement x="439" y="0" width="87" height="32" uuid="45799331-ef54-49d8-8bec-b7ee667ce34f"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{segundoValor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="526" y="0" width="46" height="20" uuid="be2afaee-f249-48a4-bd8d-3cebe08f25c8"/>
+				<reportElement x="526" y="0" width="46" height="32" uuid="be2afaee-f249-48a4-bd8d-3cebe08f25c8"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{primerValor}+$F{segundoValor}+$F{tercerValor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="355" y="0" width="84" height="20" uuid="508b4b7c-50b0-4348-bbc5-5b9a18c63d69"/>
+				<reportElement x="355" y="0" width="84" height="32" uuid="508b4b7c-50b0-4348-bbc5-5b9a18c63d69"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{primerValor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="273" y="0" width="82" height="20" uuid="770bcbd3-04b8-4a24-934c-5b63f99fb849"/>
+				<reportElement x="273" y="0" width="82" height="32" uuid="770bcbd3-04b8-4a24-934c-5b63f99fb849"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tercerValor}]]></textFieldExpression>
@@ -352,7 +360,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Right">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total:]]></text>
@@ -365,7 +373,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{tercerValor_SUM}]]></textFieldExpression>
@@ -378,7 +386,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{segundoValor_SUM}]]></textFieldExpression>
@@ -391,7 +399,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{primerValor_SUM}]]></textFieldExpression>
@@ -404,7 +412,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{tercerValor_SUM}+$V{primerValor_SUM}+$V{segundoValor_SUM}]]></textFieldExpression>
