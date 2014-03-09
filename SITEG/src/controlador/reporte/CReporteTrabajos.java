@@ -142,6 +142,7 @@ public class CReporteTrabajos extends CGeneral {
 	public void llenarCombo() {
 		if (rdoProyecto.isChecked() == true) {
 			try {
+				cmbEstatus.setValue("");
 				cmbEstatus.setModel(new ListModelList<String>(estatusProyecto));
 				cmbPrograma.setDisabled(false);
 			} catch (Exception e) {
@@ -151,6 +152,7 @@ public class CReporteTrabajos extends CGeneral {
 			}
 		} else if (rdoTeg.isChecked() == true) {
 			try {
+				cmbEstatus.setValue("");
 				cmbEstatus.setModel(new ListModelList<String>(estatusTeg));
 				cmbPrograma.setDisabled(false);
 			} catch (Exception e) {
@@ -160,6 +162,7 @@ public class CReporteTrabajos extends CGeneral {
 			}
 		} else if (rdoAmbos.isChecked() == true) {
 			try {
+				cmbEstatus.setValue("");
 				cmbEstatus.setModel(new ListModelList<String>(estatusAmbos));
 				cmbPrograma.setDisabled(false);
 			} catch (Exception e) {
@@ -840,8 +843,8 @@ public class CReporteTrabajos extends CGeneral {
 					FileSystemView filesys = FileSystemView.getFileSystemView();
 					
 					String rutaUrl = obtenerDirectorio();
-					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/estructurados/compilados/RReporteTrabajos1.jasper";
+				//	String reporteSrc = rutaUrl
+					//		+ "SITEG/vistas/reportes/estructurados/compilados/RReporteTrabajos1.jasper";
 					String reporteImage = rutaUrl
 							+ "SITEG/public/imagenes/reportes/";
 					mapa.put("Fecha", new Date());
@@ -882,13 +885,28 @@ public class CReporteTrabajos extends CGeneral {
 						}
 					}
 
-					JasperReport jasperReport = (JasperReport) JRLoader
-							.loadObject(reporteSrc);
+					if (nombrePrograma.equals("Todos")){
+						String reporteSrc = rutaUrl
+								+ "SITEG/vistas/reportes/estructurados/compilados/RReporteTrabajos.jasper";
+						JasperReport jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
 
-					JasperPrint jasperPrint = JasperFillManager.fillReport(
-							jasperReport, mapa, new JRBeanCollectionDataSource(
-									elementos));
-					JasperViewer.viewReport(jasperPrint, false);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, mapa, new JRBeanCollectionDataSource(
+										elementos));
+						JasperViewer.viewReport(jasperPrint, false);
+					}else{
+						String reporteSrc = rutaUrl
+								+ "SITEG/vistas/reportes/estructurados/compilados/RReporteTrabajos1.jasper";
+						JasperReport jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
+
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, mapa, new JRBeanCollectionDataSource(
+										elementos));
+						JasperViewer.viewReport(jasperPrint, false);
+					}
+
 				} else {
 					Messagebox
 							.show("No hay informacion disponible para esta seleccion");
