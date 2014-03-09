@@ -41,7 +41,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="112" splitType="Stretch">
+		<band height="220" splitType="Stretch">
 			<staticText>
 				<reportElement x="122" y="19" width="324" height="66" uuid="20fc6ea0-ffac-418b-a018-b4d091f1cf22"/>
 				<textElement textAlignment="Center">
@@ -60,73 +60,73 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement x="472" y="0" width="100" height="85" uuid="f304a0fb-0419-4a83-91b8-369f3dc52f11"/>
 				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
 			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="188" splitType="Stretch">
 			<staticText>
-				<reportElement x="5" y="78" width="42" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Área:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="298" y="78" width="63" height="20" uuid="e99113b9-b056-4d57-983a-8ed5e3c4c7b3"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Temática:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="3" y="49" width="65" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Programa:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="103" y="136" width="357" height="29" uuid="d39052b0-54ca-421f-b947-929fe0b39cd0"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Promedio de la Gestión del Teg]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="68" y="49" width="348" height="20" uuid="826b853f-a427-47ea-a5ff-cba73a375e36"/>
-				<textElement verticalAlignment="Top">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{programaNombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="47" y="78" width="243" height="20" uuid="7503f9fb-2b5b-4164-ac6e-8bbe82a68190"/>
-				<textElement verticalAlignment="Top">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{areaNombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="361" y="78" width="182" height="20" uuid="6fc728b7-6f72-4818-a88b-aee1d73987af"/>
-				<textElement verticalAlignment="Top">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{tematicaNombre}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="416" y="9" width="83" height="20" uuid="36a6b322-1725-457b-a0b1-ebcc6fcfe732"/>
+				<reportElement x="426" y="118" width="83" height="20" uuid="125b1163-017c-43c9-9543-eaae68dcc62d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="470" y="9" width="100" height="20" uuid="0a3ebf6f-1af8-476c-8b70-e51923cd4724"/>
+				<reportElement x="468" y="118" width="100" height="20" uuid="c768e4d1-c412-4345-b915-b8b214634a5f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="10" y="184" width="42" height="20" uuid="092431f3-768f-4ef0-a42f-652952ba6451"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="184" width="63" height="20" uuid="e99113b9-b056-4d57-983a-8ed5e3c4c7b3"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Temática:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="155" width="65" height="20" uuid="ebc0c641-d732-40ae-9188-9c291bec5627"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="73" y="155" width="348" height="20" uuid="826b853f-a427-47ea-a5ff-cba73a375e36"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{programaNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="184" width="243" height="20" uuid="7503f9fb-2b5b-4164-ac6e-8bbe82a68190"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{areaNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="184" width="182" height="20" uuid="6fc728b7-6f72-4818-a88b-aee1d73987af"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tematicaNombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement x="111" y="22" width="357" height="29" uuid="d39052b0-54ca-421f-b947-929fe0b39cd0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Promedio de la Gestión de los TEG]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
