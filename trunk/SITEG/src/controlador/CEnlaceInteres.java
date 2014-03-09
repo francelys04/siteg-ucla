@@ -3,14 +3,12 @@ package controlador;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.imageio.ImageIO;
 
-import modelo.Actividad;
 import modelo.EnlaceInteres;
-import modelo.Noticia;
 import modelo.Profesor;
 import modelo.seguridad.Usuario;
 
@@ -24,21 +22,13 @@ import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Button;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Image;
-import org.zkoss.zul.Intbox;
-import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-import servicio.SNoticia;
-import servicio.SEnlaceInteres;
-import servicio.seguridad.SUsuario;
-import configuracion.GeneradorBeans;
+
 import controlador.catalogo.CCatalogoEnlaceInteres;
 
 /*Controlador que permite realizar las operaciones basicas (CRUD)
@@ -179,10 +169,7 @@ public class CEnlaceInteres extends CGeneral {
 										Boolean estatus = true;
 										byte[] image = imagen.getContent()
 												.getByteData();
-										Profesor profesor = ObtenerUsuarioProfesor();
-										Usuario usuario = servicioUsuario
-												.buscarUsuarioPorId(profesor
-														.getUsuario().getId());
+										Usuario usuario = ObtenerUsuario();
 										EnlaceInteres enlace = new EnlaceInteres(
 												id, nombre, url, estatus,
 												image, usuario);

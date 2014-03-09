@@ -1,5 +1,6 @@
 package controlador.reporte;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -255,6 +256,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				List<MasSolicitados> masSolicitados = new ArrayList<MasSolicitados>();
 				Map<String, Object> map = new HashMap<String, Object>();
 				int valor = 0;
+				
 				if (cmbTematicaReporteProfesoresSolicitados.getValue().equals(
 						"Todos")) {
 					if (cmbProgramaReporteProfesoresSolicitados.getValue()
@@ -295,6 +297,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 						for (int i = 0; i < profesores.size(); i++) {
 							Profesor profesor = servicioProfesor
 									.buscarProfesorPorCedula(profesores.get(i));
+//							solicitudesFinales = servicioSolicitudTutoria.todas(tematicaI, profesor, programaI, areaI, null, fechaInicio, fechaFin);
 							switch (valor) {
 							case 1: {
 								solicitudesFinales = servicioSolicitudTutoria
@@ -473,9 +476,15 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 					mapa.put("logoUcla", reporteImage + "logo ucla.png");
 					mapa.put("logoCE", reporteImage + "logo CE.png");
 					mapa.put("logoSiteg", reporteImage + "logo.png");
+//					URL url = getClass().getResource("/configuracion/logo ucla.png");
+//					URL url2 = getClass().getResource("/configuracion/logo CE.png");
+//					URL url3 = getClass().getResource("/configuracion/logo.png");
+//					mapa.put("logoUcla", url);
+//					mapa.put("logoCE", url2);
+//					mapa.put("logoSiteg", url3);
 
 					try {
-						
+//						jasperReport = (JasperReport) JRLoader.loadObject(getClass().getResource("RProfesoresMasSolicitados.jasper"));
 						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
 						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(masSolicitados));
 						JasperViewer.viewReport(jasperPrint, false);

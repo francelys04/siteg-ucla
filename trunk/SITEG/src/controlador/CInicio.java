@@ -7,12 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+
 import modelo.EnlaceInteres;
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Noticia;
+import modelo.Profesor;
 import modelo.Programa;
+import modelo.SolicitudTutoria;
+import modelo.Tematica;
 import modelo.compuesta.Cronograma;
+
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
@@ -70,10 +75,6 @@ public class CInicio extends CGeneral {
 	@Wire
 	private Image imgNoticiaTres;
 	@Wire
-	private Button btnIniciar;
-	@Wire
-	private Button btnParar;
-	@Wire
 	private Image  img1;
 	@Wire
 	private Image  img2;
@@ -92,19 +93,16 @@ public class CInicio extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		//Combo programa de Cronogrma de actividades
 		List<Programa> programa = servicioPrograma.buscarActivas();
 		if (cmbPrograma != null) {
 			cmbPrograma.setModel(new ListModelList<Programa>(programa));
 
 		}
-		//Slide de Noticias
 		if (imgNoticiaUno != null) {
 			imgNoticiaUno.setContent(getImagen());
 			imgNoticiaDos.setContent(getImagen());
 			imgNoticiaTres.setContent(getImagen());
 		}
-		//Enlaces de Interes
 		if (img1 != null) {
 			List <EnlaceInteres> enlace = servicioEnlace.buscarActivos();
 			url1= enlace.get(0).getUrl();
@@ -193,6 +191,11 @@ public class CInicio extends CGeneral {
 	/* Metodo que permite abrir la vista de solicitar tutor */
 	@Listen("onClick = #btnSolicitarTutor")
 	public void SolicitarTutor() {
+//		Profesor profesor = servicioProfesor.buscarProfesorPorCedula("1234");
+//		String estatus = null;
+//		Tematica tematica = servicioTematica.buscarTematica(6);
+//		List<SolicitudTutoria> solicitudTutorias = servicioSolicitudTutoria.todas(profesor, tematica, estatus);
+//		System.out.println(solicitudTutorias.size());
 		Window window = (Window) Executions.createComponents(
 				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 		window.doModal();

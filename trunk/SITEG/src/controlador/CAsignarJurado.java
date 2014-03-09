@@ -1,28 +1,21 @@
 package controlador;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import modelo.Estudiante;
 
+import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.Teg;
 import modelo.TegEstatus;
 import modelo.TipoJurado;
 import modelo.compuesta.Jurado;
-import modelo.seguridad.Grupo;
-import modelo.seguridad.Usuario;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;

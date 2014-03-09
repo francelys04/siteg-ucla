@@ -1,7 +1,9 @@
 package controlador;
 
 import java.util.HashMap;
+
 import modelo.AreaInvestigacion;
+
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -14,6 +16,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
+
 import controlador.catalogo.CCatalogoAreaInvestigacion;
 
 /*Controlador que permite realizar las operaciones basicas (CRUD)

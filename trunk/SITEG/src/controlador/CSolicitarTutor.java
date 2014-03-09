@@ -1,7 +1,5 @@
 package controlador;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,22 +8,17 @@ import java.util.List;
 import java.util.Set;
 
 import modelo.AreaInvestigacion;
-import modelo.Condicion;
 import modelo.Estudiante;
-import modelo.Lapso;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.Tematica;
 import modelo.compuesta.CondicionPrograma;
-import modelo.seguridad.Grupo;
-import modelo.seguridad.Usuario;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -236,7 +229,7 @@ public class CSolicitarTutor extends CGeneral {
 					Messagebox.OK, Messagebox.EXCLAMATION);
 		}
 		if ((combo2.compareTo("") != 0)) {
-			catalogo.recibir("transacciones/VSolicitarTutor", idcombo, valor);
+			catalogo.recibir("transacciones/VSolicitarTutor", idcombo, valor,0);
 			Window window = (Window) Executions.createComponents(
 					"/vistas/catalogos/VCatalogoProfesorTematica.zul", null,
 					null);

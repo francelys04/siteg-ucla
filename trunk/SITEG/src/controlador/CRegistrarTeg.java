@@ -3,13 +3,10 @@ package controlador;
 import java.util.Date;
 import java.util.List;
 
-import modelo.Actividad;
 import modelo.Estudiante;
-import modelo.Lapso;
 import modelo.Programa;
 import modelo.Teg;
 import modelo.TegEstatus;
-import modelo.compuesta.Cronograma;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -70,8 +67,9 @@ public class CRegistrarTeg extends CGeneral {
 	 */
 	public void inicializar(Component comp) {
 
-		try {
+		
 			Estudiante estudiante = ObtenerUsuarioEstudiante();
+			if(estudiante!=null){
 			Programa programa = new Programa();
 			programa = estudiante.getPrograma();
 
@@ -103,7 +101,7 @@ public class CRegistrarTeg extends CGeneral {
 
 			}
 
-		} catch (Exception e) {
+		} else {
 			Messagebox.show("No tiene permisos para registrar un TEG",
 					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 			salirRegistroTeg();

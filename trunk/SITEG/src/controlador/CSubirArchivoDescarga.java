@@ -156,7 +156,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 			Messagebox.show("¿Desea guardar los datos del archivo?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -191,7 +191,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 	public void eliminarArchivo() {
 		Messagebox.show("¿Desea eliminar los datos del archivo?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Archivo archivo = servicioArchivo

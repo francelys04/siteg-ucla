@@ -1,6 +1,7 @@
 package controlador;
 
 import java.util.HashMap;
+
 import modelo.Actividad;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
+
 import controlador.catalogo.CCatalogoActividad;
 
 /*Controlador que permite realizar las operaciones basicas (CRUD)

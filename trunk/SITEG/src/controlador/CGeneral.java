@@ -153,13 +153,33 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 	 * sesion
 	 */
 	public Profesor ObtenerUsuarioProfesor() {
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
-		Profesor profesor = servicioProfesor.buscarProfesorLoggeado(u);
+		Profesor profesor = servicioProfesor
+				.buscarProfesorLoggeado(ObtenerUsuario());
 		return profesor;
 	}
 
+	/*
+	 * Metodo que permite obtener el estudiante que se encuentra actualmente en
+	 * sesion
+	 */
+	public Estudiante ObtenerUsuarioEstudiante() {
+		Estudiante estudiante = servicioEstudiante
+				.buscarEstudianteLoggeado(ObtenerUsuario());
+		return estudiante;
+	}
+
+	/*
+	 * Metodo que permite captar el usuario que se encuentra en sesion,
+	 * obteniendolo a traves de la autentificacion del mismo
+	 */
+	public Usuario ObtenerUsuario() {
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		Usuario usuario = servicioUsuario
+				.buscarUsuarioPorNombre(auth.getName());
+		return usuario;
+	}
+	
 	/*
 	 * Metodo que permite obtener cierta condicion dado su nombre, en el lapso
 	 * vigente y para determinado programa
@@ -176,18 +196,6 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 			}
 		}
 		return condicionBuscada;
-	}
-
-	/*
-	 * Metodo que permite obtener el estudiante que se encuentra actualmente en
-	 * sesion
-	 */
-	public Estudiante ObtenerUsuarioEstudiante() {
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
-		Estudiante estudiante = servicioEstudiante.buscarEstudianteLoggeado(u);
-		return estudiante;
 	}
 
 	/* Metodo que permite enviar un correo electronico a cualquier destinatario */

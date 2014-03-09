@@ -61,8 +61,9 @@ public class CRegistrarProyecto extends CGeneral {
 	 */
 	@Override
 	public void inicializar(Component comp) {
-		try {
+		
 			Estudiante estudiante = ObtenerUsuarioEstudiante();
+			if(estudiante !=null){
 			Programa programa = estudiante.getPrograma();
 
 			SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
@@ -138,13 +139,11 @@ public class CRegistrarProyecto extends CGeneral {
 								Messagebox.EXCLAMATION);
 				wdwRegistrarProyecto.onClose();
 			}
-
-		} catch (Exception e) {
-			// TODO: handle exception
+			}else{
 			Messagebox.show("No tiene permisos para registrar un proyecto",
 					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 			salirRegistroProyecto();
-		}
+			}
 
 	}
 

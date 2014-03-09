@@ -26,8 +26,6 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import controlador.CGeneral;
-
 /*
  * Controlador que permite indicar si un proyecto es factible o no,
  * cambiando el estatus del teg
