@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.AreaInvestigacion;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
@@ -39,6 +40,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	private static long programaRecibido;
 	private static long tematicaRecibida;
+	private static long areaRecibida;
 
 	@Wire
 	private Listbox ltbProfesor;
@@ -78,9 +80,9 @@ public class CCatalogoProfesorTematica extends CGeneral {
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
 	 */
-	public void recibir(String vista, long programa, long tematica) {
+	public void recibir(String vista, long programa, long tematica, long area) {
 		vistaRecibida = vista;
-
+		areaRecibida = area;
 		programaRecibido = programa;
 		tematicaRecibida = tematica;
 
@@ -147,15 +149,24 @@ public class CCatalogoProfesorTematica extends CGeneral {
 			if (ltbProfesor.getSelectedCount() != 0) {
 				Listitem listItem = ltbProfesor.getSelectedItem();
 				Profesor profesorDatosCatalogo = (Profesor) listItem.getValue();
-				final HashMap<String, Object> map = new HashMap<String, Object>();
+				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("cedula", profesorDatosCatalogo.getCedula());
 				String vista = vistaRecibida;
 				map.put("vista", vista);
-				if (map2 != null && map2.toString() != "{}") {
-					System.out.println(map2.toString());
-					map.put("area", (String) map2.get("area"));
-					map.put("tematica", tematicaRecibida);
-					map.put("programa", programaRecibido);
+//				if (map2 != null && map2.toString() != "{}") {
+				System.out.println(areaRecibida);
+				if(areaRecibida !=0){
+					map = map2;
+					map.put("cedula", profesorDatosCatalogo.getCedula());
+					map.put("vista", vista);
+//					System.out.println(map2.toString());
+//					System.out.println(map2.get("area"));
+//					if (!map2.get("area").equals("Todos"))
+//						map.put("area", (Long) map2.get("area"));
+//					else 
+//					map.put("area", (String) map2.get("area"));
+//					map.put("tematica", tematicaRecibida);
+//					map.put("programa", programaRecibido);
 					Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 					Executions.sendRedirect("/vistas/arbol.zul");
 					wdwCatalogoProfesorArea.onClose();

@@ -67,10 +67,11 @@ public class CCatalogoAsignarComision extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-
+		Programa programa = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		if(programa != null){
 		List<Teg> tegs = servicioTeg
-		.buscarTegPorProgramaParaAsignarComision(servicioPrograma
-				.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
+		.buscarTegPorProgramaParaAsignarComision(programa);
 
 		for (int i = 0; i < tegs.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante
@@ -80,7 +81,7 @@ public class CCatalogoAsignarComision extends CGeneral {
 			tegs.get(i).setEstatus(nombre + " " + apellido);
 		}
 		ltbProyectosRegistrados.setModel(new ListModelList<Teg>(tegs));
-
+		}
 	}
 
 	

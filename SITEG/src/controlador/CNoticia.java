@@ -5,7 +5,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.imageio.ImageIO;
+
+import modelo.Estudiante;
 import modelo.Noticia;
 import modelo.Profesor;
 import modelo.seguridad.Usuario;
@@ -54,6 +57,8 @@ public class CNoticia extends CGeneral {
 	private Media media;
 	@Wire
 	private Window wdwNoticia;
+	@Wire
+	private Button btnGuardarNoticia;
 
 	private long id = 0;
 	private static boolean noticiaCatalogo;
@@ -72,6 +77,9 @@ public class CNoticia extends CGeneral {
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
+		Profesor profesor = ObtenerUsuarioProfesor();
+		Estudiante estudiante = ObtenerUsuarioEstudiante();
+		
 		if (map != null) {
 			if (map.get("id") != null) {
 
@@ -142,8 +150,7 @@ public class CNoticia extends CGeneral {
 									Boolean estatus = true;
 									byte[] image = imagen.getContent()
 											.getByteData();
-									Profesor profesor = ObtenerUsuarioProfesor();
-									Usuario usuario = profesor.getUsuario();
+									Usuario usuario = ObtenerUsuario();
 									Noticia noticia1 = new Noticia(id, nombre,
 											descripcion, estatus, image,
 											usuario);

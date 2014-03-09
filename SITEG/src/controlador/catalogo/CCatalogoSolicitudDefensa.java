@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Estudiante;
+import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
 
@@ -65,9 +66,11 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 	 */
 	@Override
 	public void inicializar(Component comp) {
+		Programa programa = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		if(programa!=null){
 		tegsDefensa1 = servicioTeg
-				.buscarTegPorProgramaParaDefensa2(servicioPrograma
-						.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
+				.buscarTegPorProgramaParaDefensa2(programa);
 		if (tegsDefensa1.isEmpty()) {
 			ltbSolicitudesDefensa
 					.setEmptyMessage("No hay solicitudes registradas");
@@ -88,6 +91,7 @@ public class CCatalogoSolicitudDefensa extends CGeneral {
 				tegsDefensa.get(i).setEstatus(nombre + " " + apellido);
 			}
 			ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegsDefensa));
+		}
 		}
 	}
 

@@ -69,9 +69,11 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		//hizo kairin nuevo
+		Programa programa = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		if(programa != null){
 		List<Teg> tegs = servicioTeg
-		. buscarTegPorProgramaParaRegistrarFactibilidad(servicioPrograma
-				.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
+		. buscarTegPorProgramaParaRegistrarFactibilidad(programa);
 		for (int i = 0; i < tegs.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante
 					.buscarEstudiantePorTeg(tegs.get(i));
@@ -80,6 +82,7 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 			tegs.get(i).setEstatus(nombre + " " + apellido);
 		}
 		ltbListaFactibilidad.setModel(new ListModelList<Teg>(tegs));
+		}
 	}
 
 	

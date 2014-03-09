@@ -80,10 +80,12 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	public
 	void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		//hizo kairin nuevo
+		//hizo kairin nuevo, estaba malo igual XD
+		Programa programaDirector = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		if(programaDirector!=null){
 		List<Teg>tegs= servicioTeg
-		.buscarTegPorProgramaParaRegistrarTeg(servicioPrograma
-				.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
+		.buscarTegPorProgramaParaRegistrarTeg(programaDirector);
 		for (int i = 0; i < tegs.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
 			String nombre = estudiantes.get(0).getNombre();
@@ -92,6 +94,7 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 		}
 		ltbSolcitudRegistroProyecto.setModel(new ListModelList<Teg> (tegs));
 		Selectors.wireComponents(comp, this, false) ;
+		}
 	}
 	/*
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo

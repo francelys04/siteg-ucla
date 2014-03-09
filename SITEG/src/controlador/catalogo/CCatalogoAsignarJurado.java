@@ -67,9 +67,11 @@ public class CCatalogoAsignarJurado extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
+		Programa programa =servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		if(programa!=null){
 		tegsDefensa1 = servicioTeg
-				.buscarTegPorProgramaParaDefensa(servicioPrograma
-						.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
+				.buscarTegPorProgramaParaDefensa(programa);
 		if (!tegsDefensa1.isEmpty()) {
 
 			tegsDefensa.add(tegsDefensa1.get(0));
@@ -88,6 +90,7 @@ public class CCatalogoAsignarJurado extends CGeneral {
 				tegsDefensa.get(i).setEstatus(nombre + " " + apellido);
 			}
 			ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegsDefensa));
+		}
 		}
 	}
 
