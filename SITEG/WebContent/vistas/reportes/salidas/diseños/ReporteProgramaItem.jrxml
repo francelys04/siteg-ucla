@@ -101,13 +101,6 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement x="0" y="0" width="145" height="36" backcolor="#99CCFF" uuid="1cf0b7fe-012a-4b06-b252-0c8bb5bc48b5"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="145" height="36" uuid="b060aa03-8b06-4a64-a7e2-65d29db0c62a"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nombre]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="156" y="0" width="287" height="36" uuid="51c4f69a-5709-493e-87ec-cdf317c689d4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
@@ -120,6 +113,13 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="145" height="36" uuid="b060aa03-8b06-4a64-a7e2-65d29db0c62a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
