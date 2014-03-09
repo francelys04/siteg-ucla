@@ -117,8 +117,7 @@
 						<datebox
 							id="dtbInicioReporteProfesoresSolicitados"
 							tooltip="pupInicioLapso" readonly="true" style="margin-left:20px"
-							width="150px" format="dd/MM/yyyy"
-							onCreate="self.value = new Date()">
+							width="150px" format="dd/MM/yyyy">
 						</datebox>
 
 						<hlayout>
@@ -132,8 +131,7 @@
 
 						<datebox id="dtbFinReporteProfesoresSolicitados"
 							tooltip="pupFinLapso" style="margin-left:30px" readonly="true"
-							width="150px" format="dd/MM/yyyy"
-							onCreate="self.value = new Date()">
+							width="150px" format="dd/MM/yyyy">
 						</datebox>
 					</hbox>
 
