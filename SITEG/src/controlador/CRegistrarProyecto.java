@@ -68,19 +68,19 @@ public class CRegistrarProyecto extends CGeneral {
 
 			SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
 					.buscarSolicitudAceptadaEstudiante(estudiante);
-
-			List<Teg> tegEstudiante = servicioTeg
-					.buscarTegPorEstudiante(estudiante);
-			if (solicitudAceptada != null) {
-
+			SolicitudTutoria solicitudFinalizada = servicioSolicitudTutoria.buscarFinalizada(estudiante);
+//			List<Teg> tegEstudiante = servicioTeg
+//					.buscarTegPorEstudiante(estudiante);
+			if (solicitudAceptada != null || solicitudFinalizada != null) {
+				if(solicitudFinalizada != null)
+					solicitudAceptada = solicitudFinalizada;
 				idTem = solicitudAceptada.getTematica().getId();
 				idProf = solicitudAceptada.getProfesor().getCedula();
-
-				if (tegEstudiante.size() != 0) {
-
-					for (int i = 0; i < tegEstudiante.size(); i++) {
-						String teg = tegEstudiante.get(i).getEstatus();
-						if (teg != "Proyecto No Factible") {
+				Teg ultimoTeg = servicioTeg.ultimoTeg(estudiante);
+				if (ultimoTeg!=null) {
+//					for (int i = 0; i < tegEstudiante.size(); i++) {
+//						String teg = tegEstudiante.get(i).getEstatus();
+						if (!ultimoTeg.getEstatus().equals("Proyecto No Factible")) {
 
 							Messagebox.show("Ya posee un proyecto registrado",
 									"Advertencia", Messagebox.OK,
@@ -112,7 +112,7 @@ public class CRegistrarProyecto extends CGeneral {
 									.setModel(new ListModelList<Estudiante>(
 											estudiantes));
 						}
-					}
+//					}
 				} else {
 					txtProgramaRegistrarProyecto.setValue(programa.getNombre());
 					txtAreaRegistrarProyecto.setValue(solicitudAceptada

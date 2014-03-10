@@ -116,14 +116,14 @@ public class CSolicitarTutor extends CGeneral {
 
 		cmbAreaSolicitud.setModel(new ListModelList<AreaInvestigacion>());
 		if (combo1 == null) {
-			// cmbAreaSolicitud.setDisabled(true);
+//			 cmbAreaSolicitud.setDisabled(false);
 		} else {
 			cmbAreaSolicitud.setValue(combo1);
 			combo1 = null;
 			cmbAreaSolicitud.setDisabled(true);
 		}
 		if (combo2 == null) {
-			// cmbTematicaSolicitud.setDisabled(true);
+//			 cmbTematicaSolicitud.setDisabled(false);
 		} else {
 			cmbTematicaSolicitud.setValue(combo2);
 			combo2 = null;
@@ -181,10 +181,11 @@ public class CSolicitarTutor extends CGeneral {
 	}
 
 	/* Metodo que permite llenar el combo de areas */
-	@Listen("onClick = #cmbAreaSolicitud")
-	public void llenarAreas() {
-		llenarcombo();
-	}
+//	@Listen("onClick = #cmbAreaSolicitud")
+//	public void llenarAreas() {
+//		if(!cmbAreaSolicitud.getValue().equals(""))
+//		llenarcombo();
+//	}
 
 	/*
 	 * Metodo que permite llenar el combo de tematicas luego de que se
@@ -329,10 +330,13 @@ public class CSolicitarTutor extends CGeneral {
 	@Listen("onClick = #btnCancelarSolicitudTutoria")
 	public void cancelarSolicitud() {
 		id = 0;
+		idcombo = 0;
+		cmbAreaSolicitud.getItems().clear();
+		cmbTematicaSolicitud.getItems().clear();
 		cmbAreaSolicitud.setValue("");
 		cmbTematicaSolicitud.setValue("");
-		cmbAreaSolicitud.setDisabled(true);
-		cmbTematicaSolicitud.setDisabled(true);
+		cmbAreaSolicitud.setDisabled(false);
+		cmbTematicaSolicitud.setDisabled(false);
 		txtTituloSolicitud.setValue("");
 		txtCedulaEstudiante.setValue("");
 		ltbEstudiantes.getItems().clear();
@@ -341,7 +345,9 @@ public class CSolicitarTutor extends CGeneral {
 		txtApellidoProfesor.setValue("");
 		txtCorreoProfesor.setValue("");
 		programa = null;
-		
+		combo1 = null;
+		combo2 = null;
+		gridEstudiante.clear();
 		
 
 	}
@@ -460,6 +466,7 @@ public class CSolicitarTutor extends CGeneral {
 	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirSolicitudTutoria")
 	public void salirSolicitudTutoria() {
+		cancelarSolicitud();
 		wdwSolicitarTutoria.onClose();
 	}
 

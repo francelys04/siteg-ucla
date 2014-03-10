@@ -2,7 +2,16 @@ package servicio;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 import interfazdao.IEstudianteDAO;
 import interfazdao.ISolicitudTutoriaDAO;
@@ -387,5 +396,36 @@ public class SSolicitudTutoria {
 		}
 		return solicitudes;
 	}
+
+	public SolicitudTutoria buscarFinalizada(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		SolicitudTutoria solicitud;
+		solicitud = interfaceSolicitud.findByEstatusLikeAndEstudiantes(Estatus[3], estudiante);
+		return solicitud;
+	}
+
+
+//
+//	public List<SolicitudTutoria> todas(Tematica tematicaI, Profesor profesor, Programa programaI,
+//			AreaInvestigacion areaI, String estatus, Date fechaInicio, Date fechaFin){
+//		
+//		
+//		List<Estudiante> estudiantes = interfaceEstudiante
+//				.findByPrograma(programaI);
+//		List<SolicitudTutoria> solicitudes = new ArrayList<SolicitudTutoria>();
+//		List<SolicitudTutoria> solicitudes2 = new ArrayList<SolicitudTutoria>();
+//		if (!estudiantes.isEmpty()) {
+//			solicitudes = interfaceSolicitud
+//					.findDistinctByEstudiantesInOrTematicaOrTematicaAreaInvestigacionOrProfesorOrEstatus(
+//							estudiantes, tematicaI, areaI, profesor, estatus);
+//			for(int w=0;w<solicitudes.size();w++){
+//				SolicitudTutoria soli = interfaceSolicitud.findByIdAndFechaBetweenOrderByProfesorDesc(solicitudes.get(w).getId(), fechaInicio, fechaFin);
+//				solicitudes2.add(soli);
+//			}
+//		}
+//		System.out.println(solicitudes.size());
+//		System.out.println(solicitudes2.size());
+//		return solicitudes2;
+//	}
 
 }
