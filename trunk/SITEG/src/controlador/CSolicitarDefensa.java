@@ -53,9 +53,9 @@ public class CSolicitarDefensa extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		try {
-			teg = servicioTeg
-					.buscarTegPorEstudiante(ObtenerUsuarioEstudiante()).get(0);
+		Estudiante estudiante = ObtenerUsuarioEstudiante();
+		if(estudiante != null){
+			teg = servicioTeg.ultimoTeg(estudiante);
 			List<Estudiante> estudiantes = servicioEstudiante
 					.buscarEstudiantePorTeg(teg);
 			if (teg.getEstatus().equals(estatus[0])) {
@@ -81,8 +81,7 @@ public class CSolicitarDefensa extends CGeneral {
 					salir();
 				}
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		} else {
 			Messagebox.show("No puede solicitar defensa", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 			salir();

@@ -116,14 +116,14 @@ public class CSolicitarTutor extends CGeneral {
 
 		cmbAreaSolicitud.setModel(new ListModelList<AreaInvestigacion>());
 		if (combo1 == null) {
-//			 cmbAreaSolicitud.setDisabled(false);
+			// cmbAreaSolicitud.setDisabled(false);
 		} else {
 			cmbAreaSolicitud.setValue(combo1);
 			combo1 = null;
 			cmbAreaSolicitud.setDisabled(true);
 		}
 		if (combo2 == null) {
-//			 cmbTematicaSolicitud.setDisabled(false);
+			// cmbTematicaSolicitud.setDisabled(false);
 		} else {
 			cmbTematicaSolicitud.setValue(combo2);
 			combo2 = null;
@@ -172,20 +172,20 @@ public class CSolicitarTutor extends CGeneral {
 	 * menos un estudiante es agregado a la solicitud
 	 */
 	public void llenarcombo() {
-	
+
 		idcombo = programa.getId();
 		List<AreaInvestigacion> a = servicioProgramaArea
 				.buscarAreasDePrograma(programa);
 		cmbAreaSolicitud.setModel(new ListModelList<AreaInvestigacion>(a));
-		
+
 	}
 
 	/* Metodo que permite llenar el combo de areas */
-//	@Listen("onClick = #cmbAreaSolicitud")
-//	public void llenarAreas() {
-//		if(!cmbAreaSolicitud.getValue().equals(""))
-//		llenarcombo();
-//	}
+	// @Listen("onClick = #cmbAreaSolicitud")
+	// public void llenarAreas() {
+	// if(!cmbAreaSolicitud.getValue().equals(""))
+	// llenarcombo();
+	// }
 
 	/*
 	 * Metodo que permite llenar el combo de tematicas luego de que se
@@ -193,9 +193,11 @@ public class CSolicitarTutor extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbAreaSolicitud")
 	public void tematicaSolicitud() {
+
 		
-		String area = cmbAreaSolicitud.getValue();
-		AreaInvestigacion area2 = servicioArea.buscarAreaPorNombre(area);
+//		String area = cmbAreaSolicitud.getValue();
+		cmbTematicaSolicitud.setValue("");
+		AreaInvestigacion area2 = servicioArea.buscarArea(Long.parseLong(cmbAreaSolicitud.getSelectedItem().getId()));
 		List<Tematica> tematicas = servicioTematica
 				.buscarTematicasDeArea(area2);
 		cmbTematicaSolicitud.setModel(new ListModelList<Tematica>(tematicas));
@@ -230,7 +232,7 @@ public class CSolicitarTutor extends CGeneral {
 					Messagebox.OK, Messagebox.EXCLAMATION);
 		}
 		if ((combo2.compareTo("") != 0)) {
-			catalogo.recibir("transacciones/VSolicitarTutor", idcombo, valor,0);
+			catalogo.recibir("transacciones/VSolicitarTutor", idcombo, valor, 0);
 			Window window = (Window) Executions.createComponents(
 					"/vistas/catalogos/VCatalogoProfesorTematica.zul", null,
 					null);
@@ -307,7 +309,8 @@ public class CSolicitarTutor extends CGeneral {
 
 										servicioSolicitudTutoria
 												.guardarSolicitud(solicitud2);
-										crearUsuarioProfesor(imagenTutor, profesor, "ROLE_TUTOR");
+										crearUsuarioProfesor(imagenTutor,
+												profesor, "ROLE_TUTOR");
 										enviarEmailNotificacion();
 										cancelarSolicitud();
 										Messagebox
@@ -348,7 +351,6 @@ public class CSolicitarTutor extends CGeneral {
 		combo1 = null;
 		combo2 = null;
 		gridEstudiante.clear();
-		
 
 	}
 
@@ -388,35 +390,47 @@ public class CSolicitarTutor extends CGeneral {
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 					} else {
-						List<Teg> teg = servicioTeg
-								.buscarTegPorEstudiante(estudiante);
-						if (teg.size() > 0) {
-							Messagebox.show("Ya tiene un TEG en proceso",
-									"Advertencia", Messagebox.OK,
-									Messagebox.EXCLAMATION);
-						} else {
-							String condicion = "Numero de estudiantes por trabajo";
-							
-							CondicionPrograma cm = buscarCondicionVigenteEspecifica(condicion,
-									estudiante.getPrograma());
-							int valor = cm.getValor();
-							if (ltbEstudiantes.getItemCount()>= valor)
-							{
-								Messagebox.show("No se permiten mas estudiantes por Trabajo Especial de Grado",
-										"Advertencia", Messagebox.OK,
-										Messagebox.EXCLAMATION);
+						// List<Teg> teg = servicioTeg
+						// .buscarTegPorEstudiante(estudiante);
+						boolean registro = true;
+						Teg teg = servicioTeg.ultimoTeg(estudiante);
+						if (teg != null) {
+							if (!teg.getEstatus().equals("TEG Reprobado")) {
+								registro = false;
 							}
-							else{
-							if (programa != null) {
+						}
+						if (registro) {
+							// else {
+							String condicion = "Numero de estudiantes por trabajo";
 
-								if (estudiante.getPrograma().getId() != programa
-										.getId()) {
-									Messagebox
-											.show("Los estudiantes deben ser del mismo programa",
-													"Advertencia",
-													Messagebox.OK,
-													Messagebox.EXCLAMATION);
-									txtCedulaEstudiante.setValue("");
+							CondicionPrograma cm = buscarCondicionVigenteEspecifica(
+									condicion, estudiante.getPrograma());
+							int valor = cm.getValor();
+							if (ltbEstudiantes.getItemCount() >= valor) {
+								Messagebox
+										.show("No se permiten mas estudiantes por Trabajo Especial de Grado",
+												"Advertencia", Messagebox.OK,
+												Messagebox.EXCLAMATION);
+							} else {
+								if (programa != null) {
+
+									if (estudiante.getPrograma().getId() != programa
+											.getId()) {
+										Messagebox
+												.show("Los estudiantes deben ser del mismo programa",
+														"Advertencia",
+														Messagebox.OK,
+														Messagebox.EXCLAMATION);
+										txtCedulaEstudiante.setValue("");
+									} else {
+										programa = estudiante.getPrograma();
+										gridEstudiante.add(estudiante);
+										ltbEstudiantes
+												.setModel(new ListModelList<Estudiante>(
+														gridEstudiante));
+										limpiarDatosEstudiante();
+										llenarcombo();
+									}
 								} else {
 									programa = estudiante.getPrograma();
 									gridEstudiante.add(estudiante);
@@ -426,20 +440,15 @@ public class CSolicitarTutor extends CGeneral {
 									limpiarDatosEstudiante();
 									llenarcombo();
 								}
-							} else {
-								programa = estudiante.getPrograma();
-								gridEstudiante.add(estudiante);
-								ltbEstudiantes
-										.setModel(new ListModelList<Estudiante>(
-												gridEstudiante));
-								limpiarDatosEstudiante();
-								llenarcombo();
 							}
+						} else {
+							Messagebox.show("Ya tiene un TEG en proceso",
+									"Advertencia", Messagebox.OK,
+									Messagebox.EXCLAMATION);
 						}
 					}
 				}
 			}
-		  }
 		}
 	}
 

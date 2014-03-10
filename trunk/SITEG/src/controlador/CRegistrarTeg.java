@@ -141,7 +141,7 @@ public class CRegistrarTeg extends CGeneral {
 								"Dialogo de confirmacion", Messagebox.OK
 										| Messagebox.CANCEL,
 								Messagebox.QUESTION,
-								new org.zkoss.zk.ui.event.EventListener() {
+								new org.zkoss.zk.ui.event.EventListener<Event>() {
 									public void onEvent(Event evt)
 											throws InterruptedException {
 										if (evt.getName().equals("onOK")) {
