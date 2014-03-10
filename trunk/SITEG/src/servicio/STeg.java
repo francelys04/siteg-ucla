@@ -1,7 +1,11 @@
 package servicio;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 import interfazdao.IEstudianteDAO;
 import interfazdao.ITegDAO;
 import modelo.AreaInvestigacion;
@@ -124,6 +128,25 @@ public class STeg {
 
 	}
 
+	public Teg ultimoTeg(Estudiante estudiante) {
+		List<Teg> tegs = interfaceTeg.findByEstudiantes(estudiante);
+		
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+		Date mayor = new Date();
+		try {
+			mayor = formato.parse("1900-01-01");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Teg teg = new Teg();
+		for(int i = 0; i<tegs.size(); i ++){
+			if(tegs.get(i).getFecha().after(mayor)){
+				mayor = tegs.get(i).getFecha();
+				teg = tegs.get(i);
+			}
+		}
+		return teg;
+	}
 	/*
 	 * Busca un teg asociado a un estudiante que tengan estatus avances
 	 * finalizados
@@ -131,7 +154,7 @@ public class STeg {
 	public Teg buscarTegEstudiantePorEstatus(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		Teg teg;
-		teg = interfaceTeg.findByEstatusLikeAndEstudiantes(estatus[6],
+		teg = interfaceTeg.findByEstatusAndEstudiantes(estatus[6],
 				estudiante);
 		return teg;
 	}
