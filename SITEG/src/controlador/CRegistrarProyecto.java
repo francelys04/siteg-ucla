@@ -68,19 +68,20 @@ public class CRegistrarProyecto extends CGeneral {
 
 			SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
 					.buscarSolicitudAceptadaEstudiante(estudiante);
-			SolicitudTutoria solicitudFinalizada = servicioSolicitudTutoria.buscarFinalizada(estudiante);
+//			SolicitudTutoria solicitudFinalizada = servicioSolicitudTutoria.buscarFinalizada(estudiante);
 //			List<Teg> tegEstudiante = servicioTeg
 //					.buscarTegPorEstudiante(estudiante);
-			if (solicitudAceptada != null || solicitudFinalizada != null) {
-				if(solicitudFinalizada != null)
-					solicitudAceptada = solicitudFinalizada;
+			if (solicitudAceptada != null ) {
+//				if(solicitudFinalizada != null)
+//					solicitudAceptada = solicitudFinalizada;
 				idTem = solicitudAceptada.getTematica().getId();
 				idProf = solicitudAceptada.getProfesor().getCedula();
 				Teg ultimoTeg = servicioTeg.ultimoTeg(estudiante);
 				if (ultimoTeg!=null) {
 //					for (int i = 0; i < tegEstudiante.size(); i++) {
 //						String teg = tegEstudiante.get(i).getEstatus();
-						if (!ultimoTeg.getEstatus().equals("Proyecto No Factible")) {
+					System.out.println(ultimoTeg.getEstatus()+ultimoTeg.getId());
+						if (!ultimoTeg.getEstatus().equals("Proyecto No Factible") && !ultimoTeg.getEstatus().equals("TEG Reprobado")) {
 
 							Messagebox.show("Ya posee un proyecto registrado",
 									"Advertencia", Messagebox.OK,

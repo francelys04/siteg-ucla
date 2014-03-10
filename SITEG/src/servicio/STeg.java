@@ -133,6 +133,7 @@ public class STeg {
 		
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		Date mayor = new Date();
+		long id = 0;
 		try {
 			mayor = formato.parse("1900-01-01");
 		} catch (ParseException e) {
@@ -140,8 +141,9 @@ public class STeg {
 		}
 		Teg teg = new Teg();
 		for(int i = 0; i<tegs.size(); i ++){
-			if(tegs.get(i).getFecha().after(mayor)){
+			if((tegs.get(i).getFecha().after(mayor)|| tegs.get(i).getFecha().equals(mayor))&& tegs.get(i).getId()>id){
 				mayor = tegs.get(i).getFecha();
+				id = tegs.get(i).getId();
 				teg = tegs.get(i);
 			}
 		}

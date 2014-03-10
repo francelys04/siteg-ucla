@@ -153,7 +153,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	public void aceptarFactibilidad() {
 		Messagebox.show("¿Desea aceptar la factibilidad del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 
@@ -188,17 +188,17 @@ public class CRegistrarFactibilidad extends CGeneral {
 	public void rechazarfactibilidad() {
 		Messagebox.show("¿Desea rechazar factibilidad del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							estudianteTeg = ltbEstudianteRegistrarFactibilidad
 									.getItems().get(0).getValue();
-							SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
-									.buscarSolicitudAceptadaEstudiante(estudianteTeg);
-							System.out.println(solicitudAceptada.getId());
-							String estatusSolicitud = "Finalizada";
-							solicitudAceptada.setEstatus(estatusSolicitud);
-							servicioSolicitudTutoria.guardar(solicitudAceptada);
+//							SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
+//									.buscarSolicitudAceptadaEstudiante(estudianteTeg);
+//							System.out.println(solicitudAceptada.getId());
+//							String estatusSolicitud = "Finalizada";
+//							solicitudAceptada.setEstatus(estatusSolicitud);
+//							servicioSolicitudTutoria.guardar(solicitudAceptada);
 
 							String estatus = "Proyecto No Factible";
 							Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
