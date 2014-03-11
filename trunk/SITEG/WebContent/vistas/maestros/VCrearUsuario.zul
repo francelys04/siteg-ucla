@@ -1,4 +1,4 @@
-<window id="wdwCrearUsuario" title="Crear Usuario" border="normal" width="100%"
+<window id="wdwCrearUsuario" title="Configurar Usuario" border="normal" width="100%"
 	height="720px" closable="true"
 	apply="controlador.seguridad.CUsuario">
 

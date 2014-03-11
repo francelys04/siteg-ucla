@@ -1,4 +1,4 @@
-<window id="wdwCrearGrupo" title="Crear Grupo" border="normal"
+<window id="wdwCrearGrupo" title="Configurar Grupo" border="normal"
 	width="100%" height="auto" closable="true"
 	apply="controlador.seguridad.CCrearGrupo">
 

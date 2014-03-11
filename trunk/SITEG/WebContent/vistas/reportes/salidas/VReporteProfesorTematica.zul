@@ -1,4 +1,4 @@
-<window id="wdwReporteProfesorTematica" title="Temáticas de un profesor"
+<window id="wdwReporteProfesorTematica" title="Temáticas Asociadas a un profesor"
 	border="normal" width="100%" height="400px" closable="true"
 	apply="controlador.reporte.CReporteProfesorTematica">
 	<separator />

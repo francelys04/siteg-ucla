@@ -55,26 +55,33 @@ public class CSubirTeg extends CGeneral {
 	 */
 	public void programaUsuarioLoggeado() {
 
-		Estudiante estudiante = ObtenerUsuarioEstudiante();
-		if (estudiante != null) {
-			programaUsuario = estudiante.getPrograma();
-			Teg tegEstudiante = servicioTeg
-					.buscarTegEstudiantePorEstatusAprobado(estudiante);
+		programaUsuario = servicioPrograma
+				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 
-			if (tegEstudiante == null) {
+		if (programaUsuario == null) {
+
+			Estudiante estudiante = ObtenerUsuarioEstudiante();
+			if (estudiante != null) {
+				programaUsuario = estudiante.getPrograma();
+				Teg tegEstudiante = servicioTeg
+						.buscarTegEstudiantePorEstatusAprobado(estudiante);
+
+				if (tegEstudiante == null) {
+					Messagebox
+							.show("El Trabajo Especial de Grado debe tener el estado de Aprobado",
+									"Advertencia", Messagebox.OK,
+									Messagebox.EXCLAMATION);
+					wdwSubirTeg.onClose();
+
+				}
+			} else {
 				Messagebox
-						.show("El Trabajo Especial de Grado debe tener el estado de Aprobado",
+						.show("No tiene permisos para subir un Trabajo Especial de Grado",
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 				wdwSubirTeg.onClose();
-
 			}
-		} else {
-			Messagebox
-					.show("No tiene permisos para subir un Trabajo Especial de Grado",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
-			wdwSubirTeg.onClose();
+
 		}
 
 	}
