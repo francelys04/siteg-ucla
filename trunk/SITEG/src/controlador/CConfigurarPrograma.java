@@ -24,7 +24,6 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 /*
@@ -398,8 +397,6 @@ public class CConfigurarPrograma extends CGeneral {
 		}
 		programasItems = new ArrayList<ProgramaItem>();
 		for (int i = 0; i < ltbItemsSeleccionados.getItemCount(); i++) {
-			System.out
-					.print(ltbItemsSeleccionados.getItems().get(i).getValue());
 			ItemEvaluacion item = ltbItemsSeleccionados.getItems().get(i)
 					.getValue();
 			ProgramaItem programaItem = new ProgramaItem(programa, item, lapso);

@@ -1,65 +1,30 @@
 package controlador.reporte;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
 
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 
 import modelo.AreaInvestigacion;
-
 import modelo.Defensa;
 import modelo.Estudiante;
 import modelo.Programa;
-import modelo.Teg;
 import modelo.Tematica;
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.springframework.stereotype.Controller;
-import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Iframe;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Window;
-
-import configuracion.GeneradorBeans;
-import controlador.CGeneral;
 
 import servicio.SAreaInvestigacion;
 import servicio.SDefensa;
@@ -67,6 +32,8 @@ import servicio.SPrograma;
 import servicio.SProgramaArea;
 import servicio.STeg;
 import servicio.STematica;
+import configuracion.GeneradorBeans;
+import controlador.CGeneral;
 
 @Controller
 public class CReporteTegAprobadoDefensa extends CGeneral {

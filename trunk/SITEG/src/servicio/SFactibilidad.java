@@ -1,12 +1,13 @@
 package servicio;
-import java.util.List;
+import interfazdao.IFactibilidadDAO;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import modelo.Factibilidad;
 import modelo.Teg;
-import interfazdao.IFactibilidadDAO;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class SFactibilidad {

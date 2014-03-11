@@ -1,7 +1,5 @@
 package modelo.reporte;
 
-import java.sql.Date;
-
 import modelo.Teg;
 
 public class Proyecto{

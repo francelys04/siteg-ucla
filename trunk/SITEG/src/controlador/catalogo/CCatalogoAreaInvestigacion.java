@@ -22,7 +22,6 @@ import net.sf.jasperreports.view.JasperViewer;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
@@ -30,16 +29,10 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Panel;
-import org.zkoss.zul.Popup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SAreaInvestigacion;
-import servicio.SLapso;
-import servicio.SPrograma;
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 public class CCatalogoAreaInvestigacion extends CGeneral {

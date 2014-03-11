@@ -1,12 +1,11 @@
 package servicio;
 
+import interfazdao.IItemDefensaDAO;
+
 import java.util.List;
 
-import interfazdao.IItemDefensaDAO;
 import modelo.Defensa;
-import modelo.Factibilidad;
 import modelo.compuesta.ItemDefensa;
-import modelo.compuesta.ItemFactibilidad;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

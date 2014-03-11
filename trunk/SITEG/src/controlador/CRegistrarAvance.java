@@ -138,8 +138,7 @@ public class CRegistrarAvance extends CGeneral {
 					.show("Debe agregar las observaciones respectivas del avance del Proyecto",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show(
-					"¿Desea guardar el avance del Proyecto?",
+			Messagebox.show("¿Desea guardar el avance del Proyecto?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener<Event>() {

@@ -34,6 +34,7 @@ import controlador.catalogo.CCatalogoItem;
 @Controller
 public class CSubirArchivoDescarga extends CGeneral {
 
+	private static final long serialVersionUID = -6519066706220059853L;
 	private long id = 0;
 	private Archivo archivo = new Archivo();
 	private String nombreDoc;
@@ -191,7 +192,8 @@ public class CSubirArchivoDescarga extends CGeneral {
 	public void eliminarArchivo() {
 		Messagebox.show("¿Desea eliminar los datos del archivo?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Archivo archivo = servicioArchivo

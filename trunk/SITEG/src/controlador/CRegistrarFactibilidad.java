@@ -7,7 +7,6 @@ import java.util.List;
 import modelo.Estudiante;
 import modelo.Factibilidad;
 import modelo.Programa;
-import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.TegEstatus;
 import modelo.compuesta.ItemFactibilidad;
@@ -33,6 +32,7 @@ import org.zkoss.zul.Window;
 @Controller
 public class CRegistrarFactibilidad extends CGeneral {
 
+	private static final long serialVersionUID = -7412081861984890268L;
 	private static String vistaRecibida;
 	private long id = 0;
 	private static long auxiliarId = 0;
@@ -153,7 +153,8 @@ public class CRegistrarFactibilidad extends CGeneral {
 	public void aceptarFactibilidad() {
 		Messagebox.show("¿Desea aceptar la factibilidad del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 
@@ -188,17 +189,19 @@ public class CRegistrarFactibilidad extends CGeneral {
 	public void rechazarfactibilidad() {
 		Messagebox.show("¿Desea rechazar factibilidad del proyecto?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							estudianteTeg = ltbEstudianteRegistrarFactibilidad
 									.getItems().get(0).getValue();
-//							SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
-//									.buscarSolicitudAceptadaEstudiante(estudianteTeg);
-//							System.out.println(solicitudAceptada.getId());
-//							String estatusSolicitud = "Finalizada";
-//							solicitudAceptada.setEstatus(estatusSolicitud);
-//							servicioSolicitudTutoria.guardar(solicitudAceptada);
+							// SolicitudTutoria solicitudAceptada =
+							// servicioSolicitudTutoria
+							// .buscarSolicitudAceptadaEstudiante(estudianteTeg);
+							// System.out.println(solicitudAceptada.getId());
+							// String estatusSolicitud = "Finalizada";
+							// solicitudAceptada.setEstatus(estatusSolicitud);
+							// servicioSolicitudTutoria.guardar(solicitudAceptada);
 
 							String estatus = "Proyecto No Factible";
 							Teg teg2 = servicioTeg.buscarTeg(auxiliarId);

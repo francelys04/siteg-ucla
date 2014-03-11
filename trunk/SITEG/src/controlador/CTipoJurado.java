@@ -25,8 +25,8 @@ import controlador.catalogo.CCatalogoTipoJurado;
 @Controller
 public class CTipoJurado extends CGeneral {
 
+	private static final long serialVersionUID = 8041343315057839186L;
 	CCatalogoTipoJurado catalogo = new CCatalogoTipoJurado();
-
 	@Wire
 	private Textbox txtNombreTipoJurado;
 	@Wire
@@ -50,13 +50,12 @@ public class CTipoJurado extends CGeneral {
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
 	 */
-	public void inicializar(Component comp) { 
-
+	public void inicializar(Component comp) {
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-		
+
 		if (map != null) {
 			if (map.get("id") != null) {
 
@@ -100,7 +99,7 @@ public class CTipoJurado extends CGeneral {
 			Messagebox.show("¿Desea guardar los datos del tipo de jurado?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -133,7 +132,7 @@ public class CTipoJurado extends CGeneral {
 
 		Messagebox.show("¿Desea eliminar los datos del tipo de jurado?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							TipoJurado tipoJurado = servicioTipoJurado
@@ -163,7 +162,10 @@ public class CTipoJurado extends CGeneral {
 		btnEliminarTipoJurado.setDisabled(true);
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente a los tipos de jurado */
+	/*
+	 * Metodo que permite cerrar la ventana correspondiente a los tipos de
+	 * jurado
+	 */
 	@Listen("onClick = #btnSalirTipoJurado")
 	public void salirTipoJurado() {
 		wdwTipoJurado.onClose();

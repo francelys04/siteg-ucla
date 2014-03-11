@@ -362,7 +362,6 @@ public class CConsultarEstatus extends CGeneral {
 							imgTrabajoEspecial.detach();
 							imgJuradoAsignado.detach();
 							imgComisionEvaluadoraAsignada.detach();
-						
 
 						} else {
 							imgSolicitandoRegistro.detach();
@@ -398,7 +397,6 @@ public class CConsultarEstatus extends CGeneral {
 					imgTrabajoEspecial.detach();
 					imgJuradoAsignado.detach();
 					imgComisionEvaluadoraAsignada.detach();
-					
 
 				}
 
@@ -406,7 +404,7 @@ public class CConsultarEstatus extends CGeneral {
 
 		} else {
 			if (teg.isEmpty() == false && indiceSolicitud == -1) {
-			
+
 			} else {
 				imgSolicitandoTutoria.detach();
 				imgTutoriaAceptada.detach();
@@ -422,7 +420,7 @@ public class CConsultarEstatus extends CGeneral {
 				imgDefensaAsignada.detach();
 				imgTrabajoEspecial.detach();
 				imgJuradoAsignado.detach();
-				
+
 			}
 		}
 

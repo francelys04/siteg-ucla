@@ -1,15 +1,15 @@
 package servicio;
 
+import interfazdao.ITematicaDAO;
+
 import java.util.List;
 
+import modelo.AreaInvestigacion;
 import modelo.Profesor;
 import modelo.Tematica;
-import modelo.AreaInvestigacion;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import interfazdao.ITematicaDAO;
 //servicios de la clase 
 @Service
 public class STematica {

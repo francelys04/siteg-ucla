@@ -118,7 +118,8 @@ public class CProfesor extends CGeneral {
 			map.clear();
 			map = null;
 		}
-		txtCorreoProfesor.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
+		txtCorreoProfesor
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 	}
 
 	/*
@@ -227,7 +228,8 @@ public class CProfesor extends CGeneral {
 				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
 		txtCorreoProfesor.setConstraint("");
 		txtCorreoProfesor.setValue("");
-		txtCorreoProfesor.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
+		txtCorreoProfesor
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 		cmbCategoriaProfesor.setValue("");
 		btnEliminarProfesor.setDisabled(true);
 
@@ -239,7 +241,8 @@ public class CProfesor extends CGeneral {
 
 		Messagebox.show("¿Desea eliminar los datos del profesor?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							String cedula = txtCedulaProfesor.getValue();

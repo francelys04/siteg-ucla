@@ -9,7 +9,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import modelo.EnlaceInteres;
-import modelo.Profesor;
 import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;

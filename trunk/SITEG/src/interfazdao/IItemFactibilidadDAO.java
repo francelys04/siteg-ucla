@@ -1,7 +1,9 @@
 package interfazdao;
 import java.util.List;
+
 import modelo.Factibilidad;
 import modelo.compuesta.ItemFactibilidad;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
    public interface IItemFactibilidadDAO extends JpaRepository<ItemFactibilidad, String> {

@@ -29,6 +29,7 @@ import org.zkoss.zul.Window;
 @Controller
 public class CRegistrarTeg extends CGeneral {
 
+	private static final long serialVersionUID = 4776838715306023103L;
 	private static long auxiliarId = 0;
 	@Wire
 	private Textbox txtProgramaRegistraTeg;
@@ -67,9 +68,8 @@ public class CRegistrarTeg extends CGeneral {
 	 */
 	public void inicializar(Component comp) {
 
-		
-			Estudiante estudiante = ObtenerUsuarioEstudiante();
-			if(estudiante!=null){
+		Estudiante estudiante = ObtenerUsuarioEstudiante();
+		if (estudiante != null) {
 			Programa programa = new Programa();
 			programa = estudiante.getPrograma();
 
@@ -138,8 +138,8 @@ public class CRegistrarTeg extends CGeneral {
 
 				Messagebox
 						.show("¿Desea guardar los datos del Trabajo Especial de Grado?",
-								"Dialogo de confirmacion", Messagebox.OK
-										| Messagebox.CANCEL,
+								"Dialogo de confirmacion",
+								Messagebox.OK | Messagebox.CANCEL,
 								Messagebox.QUESTION,
 								new org.zkoss.zk.ui.event.EventListener<Event>() {
 									public void onEvent(Event evt)
@@ -160,9 +160,10 @@ public class CRegistrarTeg extends CGeneral {
 											tegRegistrado
 													.setFechaEntrega(dtbFechaEntregaRegistrarTeg
 															.getValue());
-											
-											tegRegistrado.setDuracion(spnDuracionRegistrarTeg.getValue());
-											
+
+											tegRegistrado
+													.setDuracion(spnDuracionRegistrarTeg
+															.getValue());
 
 											tegRegistrado
 													.setEstatus("TEG Registrado");
@@ -206,7 +207,6 @@ public class CRegistrarTeg extends CGeneral {
 		txtDescripcionRegistrarTeg.setValue("");
 		dtbFechaEntregaRegistrarTeg.setValue(new Date());
 		spnDuracionRegistrarTeg.setValue(null);
-		
 
 	}
 

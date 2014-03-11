@@ -4,32 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.Actividad;
-import modelo.Archivo;
 import modelo.EnlaceInteres;
-import modelo.Lapso;
-import modelo.Noticia;
 
 import org.springframework.stereotype.Controller;
-import org.zkoss.zhtml.Filedownload;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-import servicio.SArchivo;
-import servicio.SNoticia;
-import servicio.SEnlaceInteres;
 
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 @Controller

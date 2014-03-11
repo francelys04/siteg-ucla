@@ -21,7 +21,6 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 /*
@@ -62,8 +61,6 @@ public class CCrearCronograma extends CGeneral {
 
 		List<Lapso> lapsos = servicioLapso.buscarActivos();
 		List<Programa> programas = servicioPrograma.buscarActivas();
-
-		// llenarActividades();
 		if (cmbLapsoCrearCronograma != null) {
 
 			cmbLapsoCrearCronograma.setModel(new ListModelList<Lapso>(lapsos));
@@ -88,9 +85,6 @@ public class CCrearCronograma extends CGeneral {
 			List<Listitem> listItem = ltbActividadesDisponibles.getItems();
 
 			if (listItem.size() != 0) {
-
-				System.out.println("lista distinta de cero");
-
 				for (int i = 0; i < listItem.size(); i++) {
 
 					if (listItem.get(i).isSelected()) {

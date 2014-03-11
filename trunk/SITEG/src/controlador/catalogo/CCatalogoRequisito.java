@@ -8,8 +8,6 @@ import java.util.Map;
 
 import javax.swing.filechooser.FileSystemView;
 
-import modelo.Actividad;
-import modelo.Estudiante;
 import modelo.Requisito;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -23,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -34,9 +31,6 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SRequisito;
-
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 @Controller

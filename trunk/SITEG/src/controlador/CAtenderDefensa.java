@@ -35,6 +35,7 @@ import org.zkoss.zul.Window;
 @Controller
 public class CAtenderDefensa extends CGeneral {
 
+	private static final long serialVersionUID = -4953804421310031410L;
 	private static String vistaRecibida;
 	private static long idTeg = 0;
 	long idDefensa = 0;
@@ -156,7 +157,7 @@ public class CAtenderDefensa extends CGeneral {
 			Messagebox.show("¿Desea guardar los datos de la defensa?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -172,7 +173,6 @@ public class CAtenderDefensa extends CGeneral {
 										fecha, hora, lugar, estatus, profesor);
 								servicioDefensa.guardarDefensa(defensa);
 								String estatus1 = "Defensa Asignada";
-								System.out.println(idTeg);
 								Teg teg1 = servicioTeg.buscarTeg(idTeg);
 								java.util.Date fechaEstatus = new Date();
 								TegEstatus tegEstatus = new TegEstatus(0, teg1,
@@ -201,7 +201,6 @@ public class CAtenderDefensa extends CGeneral {
 		txtLugarDefensa.setValue("");
 		dtbFechaDefensa.setValue(new Date());
 		tmbHoraDefensa.setValue(new Date());
-		
 
 	}
 

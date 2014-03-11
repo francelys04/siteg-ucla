@@ -77,7 +77,6 @@ public class CAsignarComision extends CGeneral {
 	private Button btnGuardarComision;
 	@Wire
 	private Image imagenx;
-	
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
@@ -95,7 +94,7 @@ public class CAsignarComision extends CGeneral {
 		if (map != null) {
 			if (map.get("id") != null) {
 				long codigo = (Long) map.get("id");
-				
+
 				auxiliarId = codigo;
 				Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
 				txtNombreTutorAsignarComision.setValue(teg2.getTutor()
@@ -365,8 +364,8 @@ public class CAsignarComision extends CGeneral {
 	 * Metodo que permite almacenar en la base de datos a los integrantes de la
 	 * comision evaluadora en el respectivo teg, asi como tambien permite el
 	 * cambio de estatus en el trabajo especial de grado, actualizando la tabla
-	 * respectiva de cambios de estatus en la fecha actual. Ademas de que envia un
-	 * usuario a cada miembro de la comision
+	 * respectiva de cambios de estatus en la fecha actual. Ademas de que envia
+	 * un usuario a cada miembro de la comision
 	 */
 	@Listen("onClick = #btnFinalizarComision")
 	public void finalizarComision() {
@@ -393,16 +392,17 @@ public class CAsignarComision extends CGeneral {
 											Profesor profesor = lsbProfesoresSeleccionados
 													.getItems().get(i)
 													.getValue();
-											crearUsuarioProfesor(imagenx, profesor, "ROLE_COMISION");
+											crearUsuarioProfesor(imagenx,
+													profesor, "ROLE_COMISION");
 											profesoresSeleccionados
 													.add(profesor);
-												String mensaje = "Su usuario es: "
-														+ profesor.getCedula()
-														+ "y su contraseña:"
-														+ profesor.getCedula();
-												enviarEmailNotificacion(
-														profesor.getCorreoElectronico(),
-														mensaje);
+											String mensaje = "Ha sido seleccionado como miembro de la Comision Evaluadora. Su usuario es: "
+													+ profesor.getCedula()
+													+ "y su contraseña:"
+													+ profesor.getCedula();
+											enviarEmailNotificacion(profesor
+													.getCorreoElectronico(),
+													mensaje);
 										}
 
 										Teg tegSeleccionado = servicioTeg

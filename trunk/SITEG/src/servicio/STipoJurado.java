@@ -1,13 +1,13 @@
 package servicio;
 
+import interfazdao.ITipoJuradoDAO;
+
 import java.util.List;
 
 import modelo.TipoJurado;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import interfazdao.ITipoJuradoDAO;
 @Service
 public class STipoJurado {
 @Autowired

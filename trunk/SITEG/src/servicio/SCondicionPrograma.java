@@ -1,9 +1,9 @@
 package servicio;
 
-import java.util.List;
-
 import interfazdao.ICondicionProgramaDAO;
 import interfazdao.ILapsoDAO;
+
+import java.util.List;
 
 import modelo.Condicion;
 import modelo.Lapso;

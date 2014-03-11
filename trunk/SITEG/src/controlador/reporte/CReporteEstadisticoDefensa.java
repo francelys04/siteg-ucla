@@ -6,10 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.filechooser.FileSystemView;
-
 import modelo.AreaInvestigacion;
-import modelo.Defensa;
 import modelo.Programa;
 import modelo.Teg;
 import modelo.Tematica;

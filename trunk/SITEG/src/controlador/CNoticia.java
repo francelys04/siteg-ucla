@@ -8,9 +8,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import modelo.Estudiante;
 import modelo.Noticia;
-import modelo.Profesor;
 import modelo.seguridad.Usuario;
 
 import org.springframework.stereotype.Controller;
@@ -77,9 +75,7 @@ public class CNoticia extends CGeneral {
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-		Profesor profesor = ObtenerUsuarioProfesor();
-		Estudiante estudiante = ObtenerUsuarioEstudiante();
-		
+
 		if (map != null) {
 			if (map.get("id") != null) {
 
@@ -124,82 +120,76 @@ public class CNoticia extends CGeneral {
 		List<Noticia> noticia = servicioNoticia.buscarActivos();
 		if (noticia.size() == 3 && noticiaCatalogo == false) {
 			Messagebox
-			.show("Ya existen tres noticias, si desea agregar una nueva debe modificar una ya existente",
-					"Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+					.show("Ya existen tres noticias, si desea agregar una nueva debe modificar una ya existente",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
 		} else {
 
-			try{
-			if ((txtNombreNoticia.getText().compareTo("") == 0)
-					|| (txtDescripcionNoticia.getText().compareTo("") == 0)
-					|| imagen.getContent().getByteData() == null) {
-				Messagebox.show("Debe completar todos los campos", "Error",
-						Messagebox.OK, Messagebox.ERROR);
-			} else {
+			try {
+				if ((txtNombreNoticia.getText().compareTo("") == 0)
+						|| (txtDescripcionNoticia.getText().compareTo("") == 0)
+						|| imagen.getContent().getByteData() == null) {
+					Messagebox.show("Debe completar todos los campos", "Error",
+							Messagebox.OK, Messagebox.ERROR);
+				} else {
 
-				Messagebox.show("¿Desea guardar los datos de la noticia?",
-						"Dialogo de confirmacion", Messagebox.OK
-								| Messagebox.CANCEL, Messagebox.QUESTION,
-						new org.zkoss.zk.ui.event.EventListener<Event>() {
-							public void onEvent(Event evt)
-									throws InterruptedException {
-								if (evt.getName().equals("onOK")) {
-									String nombre = txtNombreNoticia.getValue();
-									String descripcion = txtDescripcionNoticia
-											.getValue();
-									Boolean estatus = true;
-									byte[] image = imagen.getContent()
-											.getByteData();
-									Usuario usuario = ObtenerUsuario();
-									Noticia noticia1 = new Noticia(id, nombre,
-											descripcion, estatus, image,
-											usuario);
-									servicioNoticia.guardar(noticia1);
-									noticiaCatalogo = false;
-									cancelarNoticia();
-									Messagebox
-											.show("Noticia resgistrada satisfactoriamente",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+					Messagebox.show("¿Desea guardar los datos de la noticia?",
+							"Dialogo de confirmacion", Messagebox.OK
+									| Messagebox.CANCEL, Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+										String nombre = txtNombreNoticia
+												.getValue();
+										String descripcion = txtDescripcionNoticia
+												.getValue();
+										Boolean estatus = true;
+										byte[] image = imagen.getContent()
+												.getByteData();
+										Usuario usuario = ObtenerUsuario();
+										Noticia noticia1 = new Noticia(id,
+												nombre, descripcion, estatus,
+												image, usuario);
+										servicioNoticia.guardar(noticia1);
+										noticiaCatalogo = false;
+										cancelarNoticia();
+										Messagebox
+												.show("Noticia resgistrada satisfactoriamente",
+														"Informacion",
+														Messagebox.OK,
+														Messagebox.INFORMATION);
+									}
 								}
-							}
-						});
-			}
+							});
+				}
 			} catch (Exception e) {
-				
+
 				Messagebox.show("Debe completar todos los campos", "Error",
 						Messagebox.OK, Messagebox.ERROR);
-			
+
 			}
 		}
-			
 
 	}
 
 	/* Metodo que permite la eliminacion logica de una entidad Noticia */
 	/**
-	@Listen("onClick = #btnEliminarNoticia")
-	public void eliminarNoticia() {
-		Messagebox.show("¿Desea eliminar los datos de la noticia?",
-				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event evt) throws InterruptedException {
-						if (evt.getName().equals("onOK")) {
-							Noticia noticia = servicioNoticia.buscarNoticia(id);
-							noticia.setEstatus(false);
-							servicioNoticia.guardar(noticia);
-							cancelarNoticia();
-							Messagebox.show(
-									"Noticia eliminada satisfactoriamente",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
-						}
-					}
-				});
-	}
-	*/
+	 * @Listen("onClick = #btnEliminarNoticia") public void eliminarNoticia() {
+	 *                  Messagebox
+	 *                  .show("¿Desea eliminar los datos de la noticia?",
+	 *                  "Dialogo de confirmacion", Messagebox.OK |
+	 *                  Messagebox.CANCEL, Messagebox.QUESTION, new
+	 *                  org.zkoss.zk.ui.event.EventListener<Event>() { public
+	 *                  void onEvent(Event evt) throws InterruptedException { if
+	 *                  (evt.getName().equals("onOK")) { Noticia noticia =
+	 *                  servicioNoticia.buscarNoticia(id);
+	 *                  noticia.setEstatus(false);
+	 *                  servicioNoticia.guardar(noticia); cancelarNoticia();
+	 *                  Messagebox.show( "Noticia eliminada satisfactoriamente",
+	 *                  "Informacion", Messagebox.OK, Messagebox.INFORMATION); }
+	 *                  } }); }
+	 */
 
 	/*
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la

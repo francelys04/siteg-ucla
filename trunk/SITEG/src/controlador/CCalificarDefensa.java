@@ -206,8 +206,8 @@ public class CCalificarDefensa extends CGeneral {
 				if (!dejeenblanco) {
 					Messagebox
 							.show("¿Desea guardar la calificacion del Trabajo Especial de Grado?",
-									"Dialogo de confirmacion", Messagebox.OK
-											| Messagebox.CANCEL,
+									"Dialogo de confirmacion",
+									Messagebox.OK | Messagebox.CANCEL,
 									Messagebox.QUESTION,
 									new org.zkoss.zk.ui.event.EventListener<Event>() {
 										public void onEvent(Event evt)

@@ -7,62 +7,38 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.swing.filechooser.FileSystemView;
 import modelo.AreaInvestigacion;
-import modelo.Defensa;
 import modelo.Estudiante;
+import modelo.Programa;
 import modelo.SolicitudTutoria;
 import modelo.Teg;
-
-import modelo.Programa;
-
 import modelo.Tematica;
+import modelo.reporte.Proyecto;
+import modelo.reporte.Solicitud;
 import net.sf.jasperreports.engine.JRException;
-
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zhtml.Filedownload;
 import org.zkoss.zk.ui.Component;
-
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zkex.zul.Jasperreport;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
-
-import org.zkoss.zul.Button;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
-
 import org.zkoss.zul.Window;
-import configuracion.GeneradorBeans;
+
 import controlador.CGeneral;
-import servicio.SAreaInvestigacion;
-import servicio.SSolicitudTutoria;
-import servicio.STeg;
-import servicio.STematica;
-
-import servicio.SPrograma;
-
-import servicio.SDefensa;
-
-import modelo.reporte.DefensaTeg;
-import modelo.reporte.Proyecto;
-import modelo.reporte.Solicitud;
 
 @Controller
 public class CReporteSolicitud extends CGeneral {

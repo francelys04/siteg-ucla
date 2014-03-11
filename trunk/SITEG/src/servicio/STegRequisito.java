@@ -1,9 +1,9 @@
 package servicio;
 
 
-import java.util.List;
-
 import interfazdao.ITegRequisitoDAO;
+
+import java.util.List;
 
 import modelo.Lapso;
 import modelo.Programa;

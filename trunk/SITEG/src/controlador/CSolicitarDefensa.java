@@ -54,7 +54,7 @@ public class CSolicitarDefensa extends CGeneral {
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		Estudiante estudiante = ObtenerUsuarioEstudiante();
-		if(estudiante != null){
+		if (estudiante != null) {
 			teg = servicioTeg.ultimoTeg(estudiante);
 			List<Estudiante> estudiantes = servicioEstudiante
 					.buscarEstudiantePorTeg(teg);

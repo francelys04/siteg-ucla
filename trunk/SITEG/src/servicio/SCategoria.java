@@ -1,8 +1,8 @@
 package servicio;
 
-import java.util.List;
-
 import interfazdao.ICategoriaDAO;
+
+import java.util.List;
 
 import modelo.Categoria;
 

@@ -29,6 +29,7 @@ import org.zkoss.zul.Window;
 @Controller
 public class CCargarEstudiante extends CGeneral {
 
+	private static final long serialVersionUID = -8115275727397602088L;
 	@Wire
 	private Listbox ltbEstudiantesCargados;
 	@Wire
@@ -154,7 +155,7 @@ public class CCargarEstudiante extends CGeneral {
 
 		Messagebox.show("¿Desea guardar los datos de los estudiantes?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 

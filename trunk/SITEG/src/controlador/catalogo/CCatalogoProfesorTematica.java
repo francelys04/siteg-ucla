@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.AreaInvestigacion;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
@@ -25,12 +23,6 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SAreaInvestigacion;
-import servicio.SProfesor;
-import servicio.SPrograma;
-import servicio.SSolicitudTutoria;
-import servicio.STematica;
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 @Controller

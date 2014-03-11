@@ -38,12 +38,12 @@ import org.zkoss.zul.Window;
 @Controller
 public class CVerificarSolicitudProyecto extends CGeneral {
 
+	private static final long serialVersionUID = 8102725322638413636L;
 	private Programa programa = new Programa();
 	private static long auxId = 0;
 	private static String vistaRecibida;
 	private static int numero;
 	ArrayList<Boolean> valor = new ArrayList<Boolean>();
-
 	@Wire
 	private Textbox txtProgramaRegistrarAvances;
 	@Wire
@@ -187,7 +187,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 						"¿Desea guardar la verificacion de los requisitos?",
 						"Dialogo de confirmacion", Messagebox.OK
 								| Messagebox.CANCEL, Messagebox.QUESTION,
-						new org.zkoss.zk.ui.event.EventListener() {
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
 							public void onEvent(Event evt)
 									throws InterruptedException {
 								if (evt.getName().equals("onOK")) {

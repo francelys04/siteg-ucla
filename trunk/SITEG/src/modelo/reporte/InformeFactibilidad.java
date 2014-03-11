@@ -1,10 +1,5 @@
 package modelo.reporte;
 
-import java.util.Date;
-import java.util.List;
-
-import modelo.Estudiante;
-import modelo.Teg;
 
 public class InformeFactibilidad{
 	private String estatus;

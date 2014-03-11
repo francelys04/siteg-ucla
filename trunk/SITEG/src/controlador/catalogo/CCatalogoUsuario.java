@@ -2,18 +2,13 @@ package controlador.catalogo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import modelo.Actividad;
-import modelo.ItemEvaluacion;
 import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
@@ -22,10 +17,6 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SItem;
-import servicio.seguridad.SUsuario;
-
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 public class CCatalogoUsuario extends CGeneral {

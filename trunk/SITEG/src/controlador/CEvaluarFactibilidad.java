@@ -192,7 +192,6 @@ public class CEvaluarFactibilidad extends CGeneral {
 				Listitem listItem = ltbItemsFactibilidad.getItemAtIndex(i);
 				String valor = ((Textbox) ((listItem.getChildren().get(1)))
 						.getFirstChild()).getValue();
-				System.out.print(valor);
 				if (valor.equals("")) {
 					Messagebox
 							.show("Debe ingresar una Apreciacion en cada uno de los item de evaluacion",
@@ -213,8 +212,8 @@ public class CEvaluarFactibilidad extends CGeneral {
 
 				Messagebox
 						.show("¿Desea guardar los datos de la evaluacion de factibilidad?",
-								"Dialogo de confirmacion", Messagebox.OK
-										| Messagebox.CANCEL,
+								"Dialogo de confirmacion",
+								Messagebox.OK | Messagebox.CANCEL,
 								Messagebox.QUESTION,
 								new org.zkoss.zk.ui.event.EventListener<Event>() {
 									public void onEvent(Event evt)
@@ -227,11 +226,6 @@ public class CEvaluarFactibilidad extends CGeneral {
 											String estatus1 = "Factibilidad Evaluada";
 											tegFactibilidad
 													.setEstatus(estatus1);
-
-											/*
-											 * Guardar datos en la tabla
-											 * teg_estatus
-											 */
 											java.util.Date fechaEstatus = new Date();
 											TegEstatus tegEstatus = new TegEstatus(
 													0, tegFactibilidad,

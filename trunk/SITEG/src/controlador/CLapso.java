@@ -138,7 +138,6 @@ public class CLapso extends CGeneral {
 																.BuscarLapsoActual())
 												.isEmpty()) {
 
-											System.out.println("pase por if2");
 											List<Condicion> condiciones = servicioCondicion
 													.buscarActivos();
 											List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
@@ -186,7 +185,8 @@ public class CLapso extends CGeneral {
 	public void eliminarLapso() {
 		Messagebox.show("¿Desea eliminar los datos del lapso academico?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Lapso lapso = servicioLapso.buscarLapso(id);

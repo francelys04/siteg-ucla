@@ -1,10 +1,12 @@
 package servicio;
 
+import interfazdao.IAvanceDAO;
+
 import java.util.List;
 
 import modelo.Avance;
 import modelo.Teg;
-import interfazdao.IAvanceDAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

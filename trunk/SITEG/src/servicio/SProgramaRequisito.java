@@ -1,12 +1,14 @@
 package servicio;
 
+import interfazdao.IProgramaRequisitoDAO;
+
 import java.util.List;
 
-import interfazdao.IProgramaRequisitoDAO;
 import modelo.Lapso;
 import modelo.Programa;
 import modelo.Requisito;
 import modelo.compuesta.ProgramaRequisito;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

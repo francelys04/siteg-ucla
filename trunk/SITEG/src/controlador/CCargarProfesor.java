@@ -25,7 +25,6 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
-
 /*
  * Controlador que permite almacenar en la base de datos un conjunto de
  * estudiantes desde un archivo plano
@@ -33,6 +32,7 @@ import org.zkoss.zul.Window;
 @Controller
 public class CCargarProfesor extends CGeneral {
 
+	private static final long serialVersionUID = -3323071040844703888L;
 	@Wire
 	private Window wdwCargarProfesor;
 	@Wire
@@ -47,15 +47,12 @@ public class CCargarProfesor extends CGeneral {
 	@Listen("onClick = #btnCargarListaProfesores")
 	public void cargarProfesores() {
 
-		// variables locales
 		String cedula, nombre, apellido, sexo, direccion, telefonomovil, telefonofijo, correo;
 		boolean estatus;
-		long idcategoria, idprograma;
+		long idcategoria;
 
-		
 		javax.swing.JFileChooser j = new javax.swing.JFileChooser();
 
-		
 		int opcion = j.showOpenDialog(j);
 		if (opcion == JFileChooser.APPROVE_OPTION) {
 			String path = j.getSelectedFile().getAbsolutePath();
@@ -63,13 +60,12 @@ public class CCargarProfesor extends CGeneral {
 			f = new File(path);
 
 			try {
-				
+
 				FileReader fr = new FileReader(f);
 				BufferedReader br = new BufferedReader(fr);
 				String linea = null;
 				profesoresCargados = new ArrayList<Profesor>();
 
-				
 				while ((linea = br.readLine()) != null) {
 
 					cedula = linea;
@@ -104,11 +100,9 @@ public class CCargarProfesor extends CGeneral {
 					Usuario usuario = servicioUsuario
 							.buscarUsuarioPorNombre(cedula);
 
-				
 					Categoria categoria = new Categoria();
 					categoria = servicioCategoria.buscarPorId(idcategoria);
 
-					
 					Profesor profesor;
 
 					Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
@@ -150,8 +144,7 @@ public class CCargarProfesor extends CGeneral {
 
 	}
 
-	
-	//Metodo para limpiar los campos
+	/* Metodo que permite limpiar los campos de la vista */
 	@Listen("onClick = #btnCancelarCargarProfesor")
 	public void cancelarCargarProfesor() {
 
@@ -160,15 +153,15 @@ public class CCargarProfesor extends CGeneral {
 	}
 
 	/*
-	 * Metodo que permite guardar a los profesores que se encuentran en la
-	 * lista
+	 * Metodo que permite guardar a los profesores que se encuentran en la lista
 	 */
 	@Listen("onClick = #btnGuardarCargarProfesor")
 	public void CargarEstudiante() {
 
 		Messagebox.show("¿Desea guardar los datos de los profesores?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 
@@ -190,7 +183,7 @@ public class CCargarProfesor extends CGeneral {
 				});
 
 	}
-	
+
 	/*
 	 * Metodo heredado del Controlador CGeneral, en este caso no hay
 	 * instrucciones dentro ya que no se cargan variables al iniciar esta vista

@@ -179,7 +179,7 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 				.buscarUsuarioPorNombre(auth.getName());
 		return usuario;
 	}
-	
+
 	/*
 	 * Metodo que permite obtener cierta condicion dado su nombre, en el lapso
 	 * vigente y para determinado programa

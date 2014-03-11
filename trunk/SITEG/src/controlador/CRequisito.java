@@ -24,8 +24,9 @@ import controlador.catalogo.CCatalogoRequisito;
  * sobre la entidad Requisito*/
 @Controller
 public class CRequisito extends CGeneral {
-	CCatalogoRequisito catalogo = new CCatalogoRequisito();
 
+	private static final long serialVersionUID = -995393394522719964L;
+	CCatalogoRequisito catalogo = new CCatalogoRequisito();
 	@Wire
 	private Textbox txtNombreRequisito;
 	@Wire
@@ -69,7 +70,7 @@ public class CRequisito extends CGeneral {
 		}
 
 	}
-	
+
 	/*
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
@@ -83,6 +84,7 @@ public class CRequisito extends CGeneral {
 		catalogo.recibir("maestros/VRequisito");
 
 	}
+
 	/* Metodo que permite el guardado o modificacion de una entidad Requisito */
 	@Listen("onClick = #btnGuardarRequisito")
 	public void guardarRequisito() {
@@ -96,7 +98,7 @@ public class CRequisito extends CGeneral {
 			Messagebox.show("¿Desea guardar los datos del requisito?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -126,7 +128,7 @@ public class CRequisito extends CGeneral {
 
 		Messagebox.show("¿Desea eliminar los datos del requisito?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 
@@ -135,8 +137,7 @@ public class CRequisito extends CGeneral {
 							requisito.setEstatus(false);
 							servicioRequisito.guardar(requisito);
 							cancelarRequisito();
-							Messagebox.show(
-									"Requisito eliminado exitosamente",
+							Messagebox.show("Requisito eliminado exitosamente",
 									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
 						}
@@ -157,11 +158,11 @@ public class CRequisito extends CGeneral {
 		btnEliminarRequisito.setDisabled(true);
 
 	}
-	
+
 	/* Metodo que permite cerrar la ventana correspondiente a los requisitos */
 	@Listen("onClick = #btnSalirRequisito")
 	public void salirRequisito() {
-		
+
 		wdwRequisito.onClose();
 
 	}

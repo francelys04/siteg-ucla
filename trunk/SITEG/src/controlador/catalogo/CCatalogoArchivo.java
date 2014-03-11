@@ -1,36 +1,21 @@
 package controlador.catalogo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import modelo.Actividad;
 import modelo.Archivo;
 
 import org.springframework.stereotype.Controller;
-import org.zkoss.bind.annotation.BindingParam;
-import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zhtml.Filedownload;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.SelectorComposer;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SActividad;
-import servicio.SArchivo;
-
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 @Controller

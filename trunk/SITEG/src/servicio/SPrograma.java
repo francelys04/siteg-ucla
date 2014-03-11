@@ -1,5 +1,7 @@
 package servicio;
 
+import interfazdao.IProgramaDAO;
+
 import java.util.List;
 
 import modelo.Profesor;
@@ -7,8 +9,6 @@ import modelo.Programa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import interfazdao.IProgramaDAO;
 
 @Service
 public class SPrograma {
