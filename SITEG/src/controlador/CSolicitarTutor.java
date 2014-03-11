@@ -180,13 +180,6 @@ public class CSolicitarTutor extends CGeneral {
 
 	}
 
-	/* Metodo que permite llenar el combo de areas */
-	// @Listen("onClick = #cmbAreaSolicitud")
-	// public void llenarAreas() {
-	// if(!cmbAreaSolicitud.getValue().equals(""))
-	// llenarcombo();
-	// }
-
 	/*
 	 * Metodo que permite llenar el combo de tematicas luego de que se
 	 * selecciona un area
@@ -194,10 +187,9 @@ public class CSolicitarTutor extends CGeneral {
 	@Listen("onSelect = #cmbAreaSolicitud")
 	public void tematicaSolicitud() {
 
-		
-//		String area = cmbAreaSolicitud.getValue();
 		cmbTematicaSolicitud.setValue("");
-		AreaInvestigacion area2 = servicioArea.buscarArea(Long.parseLong(cmbAreaSolicitud.getSelectedItem().getId()));
+		AreaInvestigacion area2 = servicioArea.buscarArea(Long
+				.parseLong(cmbAreaSolicitud.getSelectedItem().getId()));
 		List<Tematica> tematicas = servicioTematica
 				.buscarTematicasDeArea(area2);
 		cmbTematicaSolicitud.setModel(new ListModelList<Tematica>(tematicas));
@@ -390,8 +382,6 @@ public class CSolicitarTutor extends CGeneral {
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 					} else {
-						// List<Teg> teg = servicioTeg
-						// .buscarTegPorEstudiante(estudiante);
 						boolean registro = true;
 						Teg teg = servicioTeg.ultimoTeg(estudiante);
 						if (teg != null) {
@@ -400,7 +390,6 @@ public class CSolicitarTutor extends CGeneral {
 							}
 						}
 						if (registro) {
-							// else {
 							String condicion = "Numero de estudiantes por trabajo";
 
 							CondicionPrograma cm = buscarCondicionVigenteEspecifica(

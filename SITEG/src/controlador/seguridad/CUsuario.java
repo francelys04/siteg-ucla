@@ -12,8 +12,6 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-import modelo.Actividad;
-import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.seguridad.Grupo;
@@ -45,12 +43,6 @@ import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SEstudiante;
-import servicio.SProfesor;
-import servicio.seguridad.SGrupo;
-import servicio.seguridad.SUsuario;
-
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 import controlador.catalogo.CCatalogoEstudiante;
 import controlador.catalogo.CCatalogoProfesor;

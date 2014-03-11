@@ -60,8 +60,7 @@ public class CActividad extends CGeneral {
 		if (map != null) {
 			if (map.get("id") != null) {
 				long codigo = (Long) map.get("id");
-				Actividad actividad = servicioActividad
-						.buscarActividad(codigo);
+				Actividad actividad = servicioActividad.buscarActividad(codigo);
 				txtNombreActividad.setValue(actividad.getNombre());
 				txtDescripcionActividad.setValue(actividad.getDescripcion());
 				id = actividad.getId();
@@ -127,7 +126,8 @@ public class CActividad extends CGeneral {
 	public void eliminarActividad() {
 		Messagebox.show("¿Desea eliminar los datos de la actividad?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Actividad actividad = servicioActividad

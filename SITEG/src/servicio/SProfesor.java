@@ -1,12 +1,14 @@
 package servicio;
 
+import interfazdao.IProfesorDAO;
+
 import java.util.List;
 
-import interfazdao.IProfesorDAO;
 import modelo.Profesor;
 import modelo.Teg;
 import modelo.Tematica;
 import modelo.seguridad.Usuario;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

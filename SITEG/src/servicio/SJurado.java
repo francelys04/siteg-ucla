@@ -1,8 +1,8 @@
 package servicio;
 
-import java.util.List;
-
 import interfazdao.IJuradoDAO;
+
+import java.util.List;
 
 import modelo.Profesor;
 import modelo.Teg;

@@ -61,59 +61,50 @@ public class CRegistrarProyecto extends CGeneral {
 	 */
 	@Override
 	public void inicializar(Component comp) {
-		
-			Estudiante estudiante = ObtenerUsuarioEstudiante();
-			if(estudiante !=null){
+
+		Estudiante estudiante = ObtenerUsuarioEstudiante();
+		if (estudiante != null) {
 			Programa programa = estudiante.getPrograma();
 
 			SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
 					.buscarSolicitudAceptadaEstudiante(estudiante);
-//			SolicitudTutoria solicitudFinalizada = servicioSolicitudTutoria.buscarFinalizada(estudiante);
-//			List<Teg> tegEstudiante = servicioTeg
-//					.buscarTegPorEstudiante(estudiante);
-			if (solicitudAceptada != null ) {
-//				if(solicitudFinalizada != null)
-//					solicitudAceptada = solicitudFinalizada;
+			if (solicitudAceptada != null) {
+
 				idTem = solicitudAceptada.getTematica().getId();
 				idProf = solicitudAceptada.getProfesor().getCedula();
 				Teg ultimoTeg = servicioTeg.ultimoTeg(estudiante);
-				if (ultimoTeg!=null) {
-//					for (int i = 0; i < tegEstudiante.size(); i++) {
-//						String teg = tegEstudiante.get(i).getEstatus();
-					System.out.println(ultimoTeg.getEstatus()+ultimoTeg.getId());
-						if (!ultimoTeg.getEstatus().equals("Proyecto No Factible") && !ultimoTeg.getEstatus().equals("TEG Reprobado")) {
+				if (ultimoTeg != null) {
+					if (!ultimoTeg.getEstatus().equals("Proyecto No Factible")
+							&& !ultimoTeg.getEstatus().equals("TEG Reprobado")) {
 
-							Messagebox.show("Ya posee un proyecto registrado",
-									"Advertencia", Messagebox.OK,
-									Messagebox.EXCLAMATION);
-							wdwRegistrarProyecto.onClose();
-						} else {
+						Messagebox.show("Ya posee un proyecto registrado",
+								"Advertencia", Messagebox.OK,
+								Messagebox.EXCLAMATION);
+						wdwRegistrarProyecto.onClose();
+					} else {
 
-							txtProgramaRegistrarProyecto.setValue(programa
-									.getNombre());
-							txtAreaRegistrarProyecto.setValue(solicitudAceptada
-									.getTematica().getareaInvestigacion()
-									.getNombre());
-							txtTematicaRegistrarProyecto
-									.setValue(solicitudAceptada.getTematica()
-											.getNombre());
-							txtTituloRegistrarProyecto
-									.setValue(solicitudAceptada
-											.getDescripcion());
-							txtNombreTutorRegistrarProyecto
-									.setValue(solicitudAceptada.getProfesor()
-											.getNombre());
-							txtApellidoTutorRegistrarProyecto
-									.setValue(solicitudAceptada.getProfesor()
-											.getApellido());
+						txtProgramaRegistrarProyecto.setValue(programa
+								.getNombre());
+						txtAreaRegistrarProyecto.setValue(solicitudAceptada
+								.getTematica().getareaInvestigacion()
+								.getNombre());
+						txtTematicaRegistrarProyecto.setValue(solicitudAceptada
+								.getTematica().getNombre());
+						txtTituloRegistrarProyecto.setValue(solicitudAceptada
+								.getDescripcion());
+						txtNombreTutorRegistrarProyecto
+								.setValue(solicitudAceptada.getProfesor()
+										.getNombre());
+						txtApellidoTutorRegistrarProyecto
+								.setValue(solicitudAceptada.getProfesor()
+										.getApellido());
 
-							List<Estudiante> estudiantes = servicioEstudiante
-									.buscarSolicitudesEstudiante(solicitudAceptada);
-							lsbEstudiantesRegistrarProyecto
-									.setModel(new ListModelList<Estudiante>(
-											estudiantes));
-						}
-//					}
+						List<Estudiante> estudiantes = servicioEstudiante
+								.buscarSolicitudesEstudiante(solicitudAceptada);
+						lsbEstudiantesRegistrarProyecto
+								.setModel(new ListModelList<Estudiante>(
+										estudiantes));
+					}
 				} else {
 					txtProgramaRegistrarProyecto.setValue(programa.getNombre());
 					txtAreaRegistrarProyecto.setValue(solicitudAceptada
@@ -140,11 +131,11 @@ public class CRegistrarProyecto extends CGeneral {
 								Messagebox.EXCLAMATION);
 				wdwRegistrarProyecto.onClose();
 			}
-			}else{
+		} else {
 			Messagebox.show("No tiene permisos para registrar un proyecto",
 					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 			salirRegistroProyecto();
-			}
+		}
 
 	}
 

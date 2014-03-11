@@ -1,11 +1,12 @@
 package servicio;
 
+import interfazdao.ITegEstatusDAO;
+
 import java.util.List;
 
-import interfazdao.ITegEstatusDAO;
-import modelo.Actividad;
 import modelo.Teg;
 import modelo.TegEstatus;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

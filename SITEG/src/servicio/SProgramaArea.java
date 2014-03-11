@@ -1,8 +1,9 @@
 package servicio;
 
+import interfazdao.IProgramaAreaDAO;
+
 import java.util.List;
 
-import interfazdao.IProgramaAreaDAO;
 import modelo.AreaInvestigacion;
 import modelo.Lapso;
 import modelo.Programa;

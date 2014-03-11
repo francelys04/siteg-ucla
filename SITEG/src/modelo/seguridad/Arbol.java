@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import modelo.seguridad.Grupo;
-
 @Entity
 @Table(name="arbol")
 public class Arbol {

@@ -1,33 +1,20 @@
 package controlador.catalogo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import modelo.Actividad;
 import modelo.AreaInvestigacion;
-import modelo.Estudiante;
 import modelo.Tematica;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.SelectorComposer;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.STematica;
-
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 @Controller

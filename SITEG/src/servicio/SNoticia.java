@@ -1,13 +1,13 @@
 package servicio;
 
+import interfazdao.INoticiaDAO;
+
 import java.util.List;
 
 import modelo.Noticia;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import interfazdao.INoticiaDAO;
 @Service
 public class SNoticia {
 @Autowired

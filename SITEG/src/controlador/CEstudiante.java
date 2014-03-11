@@ -76,7 +76,6 @@ public class CEstudiante extends CGeneral {
 	private Button btnEliminarEstudiante;
 	@Wire
 	private Window wdwEstudiante;
-	private static Programa programaUsuario;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
@@ -95,7 +94,6 @@ public class CEstudiante extends CGeneral {
 			cmbProgramaEstudiante.setModel(new ListModelList<Programa>(
 					programas));
 		}
-
 
 		Selectors.wireComponents(comp, this, false);
 
@@ -153,8 +151,8 @@ public class CEstudiante extends CGeneral {
 	@Listen("onClick = #btnGuardarEstudiante")
 	public void guardarEstudiante() {
 
-		if (cmbProgramaEstudiante.getText().compareTo("") == 0 
-				||txtCedulaEstudiante.getText().compareTo("") == 0
+		if (cmbProgramaEstudiante.getText().compareTo("") == 0
+				|| txtCedulaEstudiante.getText().compareTo("") == 0
 				|| txtNombreEstudiante.getText().compareTo("") == 0
 				|| txtApellidoEstudiante.getText().compareTo("") == 0
 				|| txtCorreoEstudiante.getText().compareTo("") == 0
@@ -206,7 +204,6 @@ public class CEstudiante extends CGeneral {
 										"Informacion", Messagebox.OK,
 										Messagebox.INFORMATION);
 								cancelarEstudiante();
-								// id = 0;
 							}
 						}
 					});

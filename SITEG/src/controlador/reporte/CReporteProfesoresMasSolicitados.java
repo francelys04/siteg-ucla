@@ -1,6 +1,5 @@
 package controlador.reporte;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -297,7 +296,6 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 						for (int i = 0; i < profesores.size(); i++) {
 							Profesor profesor = servicioProfesor
 									.buscarProfesorPorCedula(profesores.get(i));
-//							solicitudesFinales = servicioSolicitudTutoria.todas(tematicaI, profesor, programaI, areaI, null, fechaInicio, fechaFin);
 							switch (valor) {
 							case 1: {
 								solicitudesFinales = servicioSolicitudTutoria

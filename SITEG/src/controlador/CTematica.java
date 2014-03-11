@@ -28,8 +28,8 @@ import controlador.catalogo.CCatalogoTematica;
 @Controller
 public class CTematica extends CGeneral {
 
+	private static final long serialVersionUID = 6592791224493932846L;
 	CCatalogoTematica catalogo = new CCatalogoTematica();
-
 	@Wire
 	private Combobox cmbAreaTematica;
 	@Wire
@@ -104,7 +104,7 @@ public class CTematica extends CGeneral {
 			Messagebox.show("¿Desea guardar los datos de la tematica?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
 						public void onEvent(Event evt)
 								throws InterruptedException {
 							if (evt.getName().equals("onOK")) {
@@ -140,7 +140,7 @@ public class CTematica extends CGeneral {
 	public void eliminarTematica() {
 		Messagebox.show("Â¿Desea eliminar los datos de la tematica?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 

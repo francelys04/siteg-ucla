@@ -10,8 +10,6 @@ import javax.swing.filechooser.FileSystemView;
 
 import modelo.Estudiante;
 import modelo.SolicitudTutoria;
-import modelo.reporte.MasSolicitados;
-import modelo.reporte.Proyecto;
 import modelo.reporte.Solicitud;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -26,10 +24,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zkex.zul.Jasperreport;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
-
-import servicio.SRequisito;
 
 import controlador.CGeneral;
 

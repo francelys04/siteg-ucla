@@ -1,13 +1,15 @@
 package servicio;
 
+import interfazdao.IRequisitoDAO;
+
 import java.util.List;
 
 import modelo.Lapso;
 import modelo.Programa;
 import modelo.Requisito;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import interfazdao.IRequisitoDAO;;
 
 @Service
 public class SRequisito {

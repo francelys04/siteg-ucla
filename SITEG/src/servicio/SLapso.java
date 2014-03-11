@@ -1,13 +1,13 @@
 package servicio;
 
+import interfazdao.ILapsoDAO;
+
 import java.util.List;
 
 import modelo.Lapso;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import interfazdao.ILapsoDAO;
 
 @Service
 public class SLapso {

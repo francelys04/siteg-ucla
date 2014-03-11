@@ -4,7 +4,6 @@ package modelo.seguridad;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.zkoss.zul.Treeitem;
 public class ArbolNodo {
 	private ArbolNodo _parent;
 	private List<ArbolNodo> _children;

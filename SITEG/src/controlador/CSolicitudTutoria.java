@@ -130,6 +130,7 @@ public class CSolicitudTutoria extends CGeneral {
 							imagenUsuario = imagenx.getContent().getByteData();
 							for (int i = 0; i < ltbSolicitudesEstudiantes
 									.getItemCount(); i++) {
+								List<Grupo> grupos = new ArrayList<Grupo>();
 								Estudiante estudiante = ltbSolicitudesEstudiantes
 										.getItems().get(i).getValue();
 								Usuario user = servicioUsuario
@@ -146,6 +147,14 @@ public class CSolicitudTutoria extends CGeneral {
 											.buscarUsuarioPorNombre(estudiante
 													.getCedula());
 									estudiante.setUsuario(user);
+									servicioEstudiante.guardar(estudiante);
+								}else {
+									grupos = servicioGrupo.buscarGruposDelUsuario(user);
+									for (int j = 0; j < grupos.size(); j++) {
+										gruposUsuario.add(grupos.get(j));
+									}
+									user.setGrupos(gruposUsuario);
+									servicioUsuario.guardar(user);
 									servicioEstudiante.guardar(estudiante);
 								}
 								valor.add(enviarEmailNotificacion(

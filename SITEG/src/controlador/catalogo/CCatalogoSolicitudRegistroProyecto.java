@@ -2,21 +2,12 @@ package controlador.catalogo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import modelo.Actividad;
-import modelo.AreaInvestigacion;
 import modelo.Estudiante;
-import modelo.Profesor;
 import modelo.Programa;
-import modelo.Requisito;
 import modelo.Teg;
 
-
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -30,16 +21,6 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SAreaInvestigacion;
-import servicio.SEstudiante;
-import servicio.SProfesor;
-import servicio.SPrograma;
-import servicio.STeg;
-import servicio.seguridad.SUsuario;
-
-
-
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 import controlador.CVerificarSolicitudProyecto;
 

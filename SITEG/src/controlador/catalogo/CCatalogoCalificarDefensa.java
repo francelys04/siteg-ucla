@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Estudiante;
-import modelo.Profesor;
-import modelo.Programa;
 import modelo.Teg;
 import modelo.compuesta.Jurado;
 
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
@@ -23,10 +20,6 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SJurado;
-import servicio.SProfesor;
-import servicio.STeg;
-import configuracion.GeneradorBeans;
 import controlador.CCalificarDefensa;
 import controlador.CGeneral;
 

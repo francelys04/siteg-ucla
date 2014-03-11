@@ -6,7 +6,6 @@ import java.util.List;
 
 import modelo.Estudiante;
 import modelo.Programa;
-import modelo.SolicitudTutoria;
 import modelo.Teg;
 
 import org.springframework.stereotype.Controller;
@@ -18,16 +17,11 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import configuracion.GeneradorBeans;
 import controlador.CAtenderDefensa;
 import controlador.CGeneral;
-
-import servicio.SPrograma;
-import servicio.STeg;
 
 @Controller
 public class CCatalogoSolicitudDefensa extends CGeneral {

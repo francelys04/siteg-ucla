@@ -1,68 +1,39 @@
 package controlador.reporte;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.swing.JOptionPane;
+
 import javax.swing.filechooser.FileSystemView;
+
 import modelo.AreaInvestigacion;
 import modelo.Defensa;
 import modelo.Estudiante;
-import modelo.Profesor;
 import modelo.Programa;
-import modelo.SolicitudTutoria;
-import modelo.Teg;
 import modelo.Tematica;
+import modelo.reporte.DefensaTeg;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.SelectorComposer;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zkex.zul.Jasperreport;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-import configuracion.GeneradorBeans;
+
 import controlador.CGeneral;
-import servicio.SAreaInvestigacion;
-import servicio.SJurado;
-import servicio.SPrograma;
-import servicio.SProgramaArea;
-import servicio.SSolicitudTutoria;
-import servicio.STeg;
-import servicio.STematica;
-import servicio.SDefensa;
-import modelo.Teg;
-import modelo.reporte.DefensaTeg;
 
 @Controller
 public class CReporteDefensa extends CGeneral {

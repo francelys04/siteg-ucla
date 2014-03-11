@@ -301,7 +301,7 @@ public class CAsignarJurado extends CGeneral {
 			Profesor profesorJurado = servicioProfesor
 					.buscarProfesorPorCedula(String.valueOf(cedula));
 			crearUsuarioProfesor(imagenx, profesorJurado, "ROLE_JURADO");
-			String mensaje = "Usted foma parte del Jurado de un nuevo teg su usuario es: "
+			String mensaje = "Ha sido seleccionado para formar parte del Jurado de un nuevo TEG. Su usuario es: "
 					+ profesorJurado.getCedula()
 					+ " y su contrasena: "
 					+ profesorJurado.getCedula();

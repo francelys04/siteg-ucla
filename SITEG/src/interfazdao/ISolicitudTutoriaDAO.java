@@ -8,7 +8,6 @@ import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
-import modelo.Teg;
 import modelo.Tematica;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,9 +25,6 @@ public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Lo
 			String estatusDefensaAsignada);
 	
 	public List<SolicitudTutoria> findByEstudiantes(Estudiante estudiante);
-
-//	public List<SolicitudTutoria> findByEstatusAndFechaBetween(String estatus2,
-//			Date fechaInicio, Date fechaFin);
 
 	public List<SolicitudTutoria> findByTematicaAndEstatusAndFechaBetweenOrderByProfesorDesc(
 			Tematica tematica, String estatus2, Date fechaInicio, Date fechaFin);
@@ -132,6 +128,5 @@ public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Lo
 			List<Estudiante> estudiantes, Tematica tematicaI,
 			AreaInvestigacion areaI, Profesor profesor, Date fechaInicio,
 			Date fechaFin);
-	
 
 }

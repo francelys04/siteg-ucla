@@ -1,5 +1,7 @@
 package servicio;
 
+import interfazdao.IEstudianteDAO;
+
 import java.util.List;
 
 import modelo.Estudiante;
@@ -10,8 +12,6 @@ import modelo.seguridad.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import interfazdao.IEstudianteDAO;
 
 @Service
 public class SEstudiante {

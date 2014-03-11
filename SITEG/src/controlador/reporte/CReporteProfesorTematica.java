@@ -1,20 +1,14 @@
 package controlador.reporte;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.filechooser.FileSystemView;
 
-import modelo.Actividad;
-import modelo.AreaInvestigacion;
-import modelo.Categoria;
-import modelo.Estudiante;
 import modelo.Profesor;
-import modelo.Programa;
-
-import modelo.Teg;
 import modelo.Tematica;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -29,24 +23,12 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Datebox;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 import controlador.catalogo.CCatalogoProfesor;
-import controlador.catalogo.CCatalogoProfesorTematica;
-
-import servicio.SAreaInvestigacion;
-import servicio.SProfesor;
-import servicio.SPrograma;
-import servicio.SProgramaArea;
-import servicio.STeg;
-import servicio.STematica;
 
 @Controller
 public class CReporteProfesorTematica extends CGeneral {

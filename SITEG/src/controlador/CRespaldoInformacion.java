@@ -26,6 +26,7 @@ import org.zkoss.zul.Window;
 @Controller
 public class CRespaldoInformacion extends CGeneral {
 
+	private static final long serialVersionUID = -986552569263113746L;
 	@Wire
 	private Button btnRespaldar;
 	@Wire

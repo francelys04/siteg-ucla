@@ -1,9 +1,5 @@
 package controlador.reporte;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,9 +12,7 @@ import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
-import modelo.Teg;
 import modelo.Tematica;
-import modelo.reporte.Proyecto;
 import modelo.reporte.Solicitud;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -37,10 +31,7 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
-import servicio.SEstudiante;
-import servicio.SPrograma;
-import servicio.SSolicitudTutoria;
-import configuracion.GeneradorBeans;
+
 import controlador.CGeneral;
 
 @Controller

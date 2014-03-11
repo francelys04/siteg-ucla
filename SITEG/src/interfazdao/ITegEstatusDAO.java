@@ -2,7 +2,6 @@ package interfazdao;
 
 import java.util.List;
 
-import modelo.Actividad;
 import modelo.Teg;
 import modelo.TegEstatus;
 

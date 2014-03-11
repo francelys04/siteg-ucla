@@ -1,7 +1,5 @@
 package controlador.catalogo;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,11 +8,8 @@ import java.util.Map;
 
 import javax.swing.filechooser.FileSystemView;
 
-import modelo.Actividad;
-import modelo.AreaInvestigacion;
 import modelo.Programa;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -25,18 +20,14 @@ import net.sf.jasperreports.view.JasperViewer;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import servicio.SPrograma;
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 public class CCatalogoPrograma extends CGeneral {

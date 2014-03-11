@@ -21,7 +21,7 @@ import org.zkoss.zul.Window;
  */
 @Controller
 public class CContactanos extends CGeneral {
-	
+
 	private static final long serialVersionUID = -3009397611972912065L;
 	public static String correoProgramas;
 	@Wire

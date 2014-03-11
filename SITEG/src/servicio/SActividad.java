@@ -1,5 +1,7 @@
 package servicio;
 
+import interfazdao.IActividadDAO;
+
 import java.util.List;
 
 import modelo.Actividad;
@@ -8,8 +10,6 @@ import modelo.Programa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import interfazdao.IActividadDAO;
 
 @Service
 public class SActividad {

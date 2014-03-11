@@ -12,10 +12,7 @@ import modelo.EnlaceInteres;
 import modelo.Estudiante;
 import modelo.Lapso;
 import modelo.Noticia;
-import modelo.Profesor;
 import modelo.Programa;
-import modelo.SolicitudTutoria;
-import modelo.Tematica;
 import modelo.compuesta.Cronograma;
 
 import org.springframework.stereotype.Controller;
@@ -75,15 +72,14 @@ public class CInicio extends CGeneral {
 	@Wire
 	private Image imgNoticiaTres;
 	@Wire
-	private Image  img1;
+	private Image img1;
 	@Wire
-	private Image  img2;
+	private Image img2;
 	@Wire
-	private Image  img3;
+	private Image img3;
 	private static String url1;
 	private static String url2;
 	private static String url3;
-	
 
 	/*
 	 * Metodo heredado del Controlador CGeneral se llenan los campos y combos
@@ -104,42 +100,45 @@ public class CInicio extends CGeneral {
 			imgNoticiaTres.setContent(getImagen());
 		}
 		if (img1 != null) {
-			List <EnlaceInteres> enlace = servicioEnlace.buscarActivos();
-			url1= enlace.get(0).getUrl();
-			url2= enlace.get(1).getUrl();
-			url3= enlace.get(2).getUrl();
+			List<EnlaceInteres> enlace = servicioEnlace.buscarActivos();
+			url1 = enlace.get(0).getUrl();
+			url2 = enlace.get(1).getUrl();
+			url3 = enlace.get(2).getUrl();
 			try {
-				img1.setContent(ImageIO.read(new ByteArrayInputStream(
-								enlace.get(0).getImagen())));
-				img2.setContent(ImageIO.read(new ByteArrayInputStream(
-						enlace.get(1).getImagen())));
-				img3.setContent(ImageIO.read(new ByteArrayInputStream(
-						enlace.get(2).getImagen())));
+				img1.setContent(ImageIO.read(new ByteArrayInputStream(enlace
+						.get(0).getImagen())));
+				img2.setContent(ImageIO.read(new ByteArrayInputStream(enlace
+						.get(1).getImagen())));
+				img3.setContent(ImageIO.read(new ByteArrayInputStream(enlace
+						.get(2).getImagen())));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
+
 	/*
-	 * Metodos que permite llenar enviar a una pagina
-	 * de segun la catidad de enlaces
+	 * Metodos que permite llenar enviar a una pagina de segun la catidad de
+	 * enlaces
 	 */
 	@Listen("onClick = #img1")
-	public void enlaceUno(){
-		 Execution exec = Executions.getCurrent();
-		  	exec.sendRedirect(url1);		
+	public void enlaceUno() {
+		Execution exec = Executions.getCurrent();
+		exec.sendRedirect(url1);
 	}
+
 	@Listen("onClick = #img2")
-	public void enlaceDos(){
-		 Execution exec = Executions.getCurrent();
-		  	exec.sendRedirect(url2);		
+	public void enlaceDos() {
+		Execution exec = Executions.getCurrent();
+		exec.sendRedirect(url2);
 	}
+
 	@Listen("onClick = #img3")
-	public void enlaceTres(){
-		 Execution exec = Executions.getCurrent();
-		  	exec.sendRedirect(url3);		
+	public void enlaceTres() {
+		Execution exec = Executions.getCurrent();
+		exec.sendRedirect(url3);
 	}
 
 	/*
@@ -191,11 +190,6 @@ public class CInicio extends CGeneral {
 	/* Metodo que permite abrir la vista de solicitar tutor */
 	@Listen("onClick = #btnSolicitarTutor")
 	public void SolicitarTutor() {
-//		Profesor profesor = servicioProfesor.buscarProfesorPorCedula("1234");
-//		String estatus = null;
-//		Tematica tematica = servicioTematica.buscarTematica(6);
-//		List<SolicitudTutoria> solicitudTutorias = servicioSolicitudTutoria.todas(profesor, tematica, estatus);
-//		System.out.println(solicitudTutorias.size());
 		Window window = (Window) Executions.createComponents(
 				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 		window.doModal();

@@ -4,19 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.Actividad;
 import modelo.Estudiante;
-import modelo.Profesor;
-import modelo.Programa;
-import modelo.Requisito;
 import modelo.Teg;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
@@ -24,11 +18,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-import servicio.STeg;
-import servicio.SProfesor;
-import servicio.seguridad.SUsuario;
 
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 import controlador.CRegistrarAvance;
 

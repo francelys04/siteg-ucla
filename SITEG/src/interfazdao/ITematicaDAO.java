@@ -7,9 +7,7 @@ import modelo.AreaInvestigacion;
 import modelo.Profesor;
 import modelo.Tematica;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 public interface ITematicaDAO extends JpaRepository<Tematica, Long> {
 

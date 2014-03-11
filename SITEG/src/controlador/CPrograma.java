@@ -187,126 +187,105 @@ public class CPrograma extends CGeneral {
 
 		} else {
 
-//			Programa programaRegistrado = servicioPrograma
-//					.buscarPorNombrePrograma(txtNombrePrograma.getValue());
-//
-//			if ((programaRegistrado != null) && (programaModificable == false)) {
-//
-//				programaExistente = true;
-//
-//			}
-//
-//			if (programaExistente == false) {
+			Messagebox.show("¿Desea guardar los datos del programa?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
 
-				Messagebox.show("¿Desea guardar los datos del programa?",
-						"Dialogo de confirmacion", Messagebox.OK
-								| Messagebox.CANCEL, Messagebox.QUESTION,
-						new org.zkoss.zk.ui.event.EventListener<Event>() {
-							public void onEvent(Event evt)
-									throws InterruptedException {
-								if (evt.getName().equals("onOK")) {
+								Programa programaBuscado = servicioPrograma
+										.buscar(id);
+								if (programaBuscado != null) {
+									Grupo grupo = servicioGrupo
+											.BuscarPorNombre("ROLE_DIRECTOR");
+									Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+									Usuario usuario = programaBuscado
+											.getDirectorPrograma().getUsuario();
+									List<Grupo> grupos = servicioGrupo
+											.buscarGruposDelUsuario(usuario);
+									for (int i = 0; i < grupos.size(); i++) {
 
-									Programa programaBuscado = servicioPrograma
-											.buscar(id);
-									if (programaBuscado != null) {
-										Grupo grupo = servicioGrupo
-												.BuscarPorNombre("ROLE_DIRECTOR");
-										Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-										Usuario usuario = programaBuscado
-												.getDirectorPrograma()
-												.getUsuario();
-										List<Grupo> grupos = servicioGrupo
-												.buscarGruposDelUsuario(usuario);
-										for (int i = 0; i < grupos.size(); i++) {
-											System.out.println("prmero"+grupos.get(i).getNombre());
-											if (grupos.get(i).getId() == grupo
-													.getId()) {
-												grupos.remove(i);
-												i--;
-											} else{
-												System.out
-														.println("segundo"+grupos.get(i).getNombre());
-												gruposUsuario.add(grupos.get(i));}
+										if (grupos.get(i).getId() == grupo
+												.getId()) {
+											grupos.remove(i);
+											i--;
+										} else {
+
+											gruposUsuario.add(grupos.get(i));
 										}
+									}
 									usuario.setGrupos(gruposUsuario);
 									servicioUsuario.guardar(usuario);
-									}
-									Profesor directorPrograma = servicioProfesor
-											.buscarProfesorPorCedula(cedulaProfesor);
-									crearUsuarioProfesor(imagenx, directorPrograma,
-											"ROLE_DIRECTOR");
-									String mensaje = "Su usuario es: "
-											+ directorPrograma.getCedula()
-											+ "y su contrasena:"
-											+ directorPrograma.getCedula();
-									enviarEmailNotificacion(
-											directorPrograma.getCorreoElectronico(),
-											mensaje);
-									
-									
-									String nombre = txtNombrePrograma
-											.getValue();
-									String descripcion = txtDescripcionPrograma
-											.getValue();
-									String correo = txtCorreoPrograma
-											.getValue();
-									Boolean estatus = true;
-									
-									Programa programa = new Programa(id,
-											nombre, descripcion, correo,
-											estatus, directorPrograma);
-									servicioPrograma.guardar(programa);
-									if(programaBuscado == null){
-										programaBuscado = servicioPrograma.buscarUltimo();
-									}
-//									Programa p = servicioPrograma
-//											.buscarPorNombrePrograma(nombre);
-									if (servicioLapso.buscarActivos().size() != 0) {
-										List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
-										List<Condicion> condiciones = servicioCondicion
-												.buscarActivos();
-										Lapso lapso = servicioLapso
-												.BuscarLapsoActual();
-										for (int i = 0; i < condiciones.size(); i++) {
-											Condicion condicion = condiciones
-													.get(i);
-											CondicionPrograma condicionPrograma = new CondicionPrograma();
-											condicionPrograma = servicioCondicionPrograma
-													.buscarPorCondicionProgramaYLapso(
-															condicion, programaBuscado, lapso);
-											if (condicionPrograma == null) {
-												condicionPrograma = new CondicionPrograma();
-												condicionPrograma
-														.setPrograma(programaBuscado);
-												condicionPrograma
-														.setLapso(lapso);
-												condicionPrograma
-														.setCondicion(condicion);
-												condicionPrograma.setValor(0);
-											}
-											condicionesPrograma
-													.add(condicionPrograma);
-										}
-
-										servicioCondicionPrograma
-												.guardar(condicionesPrograma);
-									}
-									cancelarPrograma();
-									Messagebox.show(
-											"Programa registrado exitosamente",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
-									id = 0;
 								}
-							}
-						});
+								Profesor directorPrograma = servicioProfesor
+										.buscarProfesorPorCedula(cedulaProfesor);
+								crearUsuarioProfesor(imagenx, directorPrograma,
+										"ROLE_DIRECTOR");
+								String mensaje = "Ha sido seleccionado como director de programa de:"
+										+ txtNombrePrograma.getValue()
+										+ "Su usuario es: "
+										+ directorPrograma.getCedula()
+										+ "y su contrasena:"
+										+ directorPrograma.getCedula();
+								enviarEmailNotificacion(
+										directorPrograma.getCorreoElectronico(),
+										mensaje);
 
-//			} else {
-//
-//				Messagebox.show("El programa ya se encuentra registrado",
-//						"Error", Messagebox.OK, Messagebox.ERROR);
-//
-//			}
+								String nombre = txtNombrePrograma.getValue();
+								String descripcion = txtDescripcionPrograma
+										.getValue();
+								String correo = txtCorreoPrograma.getValue();
+								Boolean estatus = true;
+
+								Programa programa = new Programa(id, nombre,
+										descripcion, correo, estatus,
+										directorPrograma);
+								servicioPrograma.guardar(programa);
+								if (programaBuscado == null) {
+									programaBuscado = servicioPrograma
+											.buscarUltimo();
+								}
+								if (servicioLapso.buscarActivos().size() != 0) {
+									List<CondicionPrograma> condicionesPrograma = new ArrayList<CondicionPrograma>();
+									List<Condicion> condiciones = servicioCondicion
+											.buscarActivos();
+									Lapso lapso = servicioLapso
+											.BuscarLapsoActual();
+									for (int i = 0; i < condiciones.size(); i++) {
+										Condicion condicion = condiciones
+												.get(i);
+										CondicionPrograma condicionPrograma = new CondicionPrograma();
+										condicionPrograma = servicioCondicionPrograma
+												.buscarPorCondicionProgramaYLapso(
+														condicion,
+														programaBuscado, lapso);
+										if (condicionPrograma == null) {
+											condicionPrograma = new CondicionPrograma();
+											condicionPrograma
+													.setPrograma(programaBuscado);
+											condicionPrograma.setLapso(lapso);
+											condicionPrograma
+													.setCondicion(condicion);
+											condicionPrograma.setValor(0);
+										}
+										condicionesPrograma
+												.add(condicionPrograma);
+									}
+
+									servicioCondicionPrograma
+											.guardar(condicionesPrograma);
+								}
+								cancelarPrograma();
+								Messagebox.show(
+										"Programa registrado exitosamente",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+								id = 0;
+							}
+						}
+					});
 
 		}
 	}

@@ -21,6 +21,7 @@ import org.zkoss.zul.Window;
 @Controller
 public class CSubirTeg extends CGeneral {
 
+	private static final long serialVersionUID = -7446118760957677763L;
 	private long id = 0;
 	private Archivo archivo = new Archivo();
 	private String nombreDoc;
@@ -47,51 +48,33 @@ public class CSubirTeg extends CGeneral {
 		programaUsuarioLoggeado();
 
 	}
-	
-	
 
 	/*
-	 * Metodo que permite obtener el programa del usuario loggeado 
-	 * y validar que un estudiante para subir un teg, este debe tener el estatus TEG Aprobado
+	 * Metodo que permite obtener el programa del usuario loggeado y validar que
+	 * un estudiante para subir un teg, este debe tener el estatus TEG Aprobado
 	 */
 	public void programaUsuarioLoggeado() {
 
-		try {
-			programaUsuario = servicioPrograma
-					.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
+		Estudiante estudiante = ObtenerUsuarioEstudiante();
+		if (estudiante != null) {
+			programaUsuario = estudiante.getPrograma();
+			Teg tegEstudiante = servicioTeg
+					.buscarTegEstudiantePorEstatusAprobado(estudiante);
 
-			if (programaUsuario == null) {
-
-				Estudiante estudiante;
-				estudiante = ObtenerUsuarioEstudiante();
-				programaUsuario = estudiante.getPrograma();
-
-				if (programaUsuario != null) {
-
-					Teg tegEstudiante = servicioTeg
-							.buscarTegEstudiantePorEstatusAprobado(estudiante);
-
-					if (tegEstudiante == null) {
-
-						Messagebox
-								.show("El Trabajo Especial de Grado debe tener el estado de Aprobado",
-										"Advertencia", Messagebox.OK,
-										Messagebox.EXCLAMATION);
-						wdwSubirTeg.onClose();
-
-					}
-
-				}
+			if (tegEstudiante == null) {
+				Messagebox
+						.show("El Trabajo Especial de Grado debe tener el estado de Aprobado",
+								"Advertencia", Messagebox.OK,
+								Messagebox.EXCLAMATION);
+				wdwSubirTeg.onClose();
 
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		} else {
 			Messagebox
 					.show("No tiene permisos para subir un Trabajo Especial de Grado",
 							"Advertencia", Messagebox.OK,
 							Messagebox.EXCLAMATION);
 			wdwSubirTeg.onClose();
-
 		}
 
 	}
@@ -143,7 +126,7 @@ public class CSubirTeg extends CGeneral {
 		archivo.equals(null);
 
 	}
-	
+
 	/*
 	 * Metodo que permite cerrar la vista subir Teg
 	 */
@@ -153,10 +136,6 @@ public class CSubirTeg extends CGeneral {
 		wdwSubirTeg.onClose();
 
 	}
-	
-	
-	
-	
 
 	/* Metodo que permite guardar el archivo del TEG */
 	@Listen("onClick = #btnGuardarArchivo")

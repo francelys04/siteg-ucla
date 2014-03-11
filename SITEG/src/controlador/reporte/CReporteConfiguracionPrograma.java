@@ -1,10 +1,5 @@
 package controlador.reporte;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +11,8 @@ import modelo.ItemEvaluacion;
 import modelo.Lapso;
 import modelo.Programa;
 import modelo.Requisito;
-import modelo.SolicitudTutoria;
 import modelo.compuesta.CondicionPrograma;
-import modelo.compuesta.ProgramaArea;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -40,9 +31,6 @@ import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Window;
 
-import servicio.SLapso;
-import servicio.SPrograma;
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 @Controller
