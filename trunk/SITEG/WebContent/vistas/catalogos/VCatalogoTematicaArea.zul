@@ -25,12 +25,6 @@
 			<auxheader colspan="1">
 				<image src="/public/imagenes/iconos/filtro.png" />
 				<textbox instant="true" width="70%"
-					sclass="search-query" placeholder="Área"
-					id="txtAreaMostrarTematica" />
-			</auxheader>
-			<auxheader colspan="1">
-				<image src="/public/imagenes/iconos/filtro.png" />
-				<textbox instant="true" width="70%"
 					sclass="search-query" placeholder="Descripción"
 					id="txtDescripcionMostrarTematica" />
 			</auxheader>
@@ -38,7 +32,6 @@
 		</auxhead>
 		<listhead>
 			<listheader label="Nombre" align="center" />
-			<listheader label="Area" align="center" />
 			<listheader label="Descripción" align="center" />
 
 
@@ -48,7 +41,6 @@
 		<template name="model">
 			<listitem tooltip="pupSeleccionTematica">
 				<listcell label="${each.nombre}" />
-				<listcell label="${each.areaInvestigacion.nombre}" />
 				<listcell label="${each.descripcion}" />
 			</listitem>
 		</template>

@@ -28,8 +28,6 @@ public class CCatalogoTematicaArea extends CGeneral {
 	@Wire
 	private Textbox txtNombreMostrarTematica;
 	@Wire
-	private Textbox txtAreaMostrarTematica;
-	@Wire
 	private Textbox txtDescripcionMostrarTematica;
 	@Wire
 	private Window wdwCatalogoTematica;
@@ -67,13 +65,6 @@ public class CCatalogoTematicaArea extends CGeneral {
 					.getNombre()
 					.toLowerCase()
 					.contains(txtNombreMostrarTematica.getValue().toLowerCase())
-					&& tematica
-							.getareaInvestigacion()
-							.getNombre()
-							.toLowerCase()
-							.contains(
-									txtAreaMostrarTematica.getValue()
-											.toLowerCase())
 					&& tematica
 							.getDescripcion()
 							.toLowerCase()
