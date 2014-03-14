@@ -11,12 +11,12 @@ import modelo.compuesta.Jurado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SJurado")
 public class SJurado {
 
 	@Autowired
 	IJuradoDAO interfaceJurado;
-	
+
 	public List<Jurado> buscarJuradoDeTeg(Teg teg) {
 		// TODO Auto-generated method stub
 		List<Jurado> jurado;
@@ -28,13 +28,12 @@ public class SJurado {
 		// TODO Auto-generated method stub
 		interfaceJurado.save(jurados);
 	}
-	
-	public List<Jurado> buscarTegDeProfesor(Profesor profesor)
-	{
+
+	public List<Jurado> buscarTegDeProfesor(Profesor profesor) {
 		List<Jurado> j;
-		j = interfaceJurado.findByProfesor( profesor);
+		j = interfaceJurado.findByProfesor(profesor);
 		return j;
-		
+
 	}
 
 	public void limpiar(List<Jurado> jurados) {

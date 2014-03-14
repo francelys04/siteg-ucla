@@ -9,8 +9,9 @@ import modelo.Lapso;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SLapso")
 public class SLapso {
+
 	@Autowired
 	private ILapsoDAO interfaceLapso;
 
@@ -32,20 +33,13 @@ public class SLapso {
 		return lapsos;
 	}
 
-	public Lapso buscarPorNombre(String value) {
-		// TODO Auto-generated method stub
-		Lapso lapso;
-		lapso = interfaceLapso.findByNombre(value);
-		return lapso;
-	}
-
 	public Lapso buscarLapsoVigente() {
 		Lapso lapso;
 		lapso = interfaceLapso.buscarLapsoVigente();
 		return lapso;
 	}
-	
-	public Lapso BuscarLapsoActual(){
+
+	public Lapso BuscarLapsoActual() {
 		Lapso lapso;
 		lapso = interfaceLapso.findOne(interfaceLapso.lapsoActual());
 		return lapso;

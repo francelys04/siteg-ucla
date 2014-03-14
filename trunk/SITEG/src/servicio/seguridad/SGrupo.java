@@ -10,31 +10,33 @@ import modelo.seguridad.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SGrupo")
 public class SGrupo {
 
 	@Autowired
 	private IGrupoDAO interfazGrupo;
-	
-	public void guardarGrupo(Grupo grupo){
+
+	public void guardarGrupo(Grupo grupo) {
 		interfazGrupo.save(grupo);
 	}
-	public List<Grupo> buscarActivos(){
+
+	public List<Grupo> buscarActivos() {
 		List<Grupo> grupos;
 		grupos = interfazGrupo.findByEstatusTrue();
 		return grupos;
 	}
-	public Grupo buscarGrupo(long id){
+
+	public Grupo buscarGrupo(long id) {
 		return interfazGrupo.findOne(id);
 	}
-	
-	public List<Grupo> buscarGruposDelUsuario(Usuario usuario){
+
+	public List<Grupo> buscarGruposDelUsuario(Usuario usuario) {
 		List<Grupo> grupos;
 		grupos = interfazGrupo.findByUsuarios(usuario);
 		return grupos;
 	}
-	
-	public List<Grupo> buscarGruposDisponibles(List<Long> ids){
+
+	public List<Grupo> buscarGruposDisponibles(List<Long> ids) {
 		List<Grupo> grupos;
 		grupos = interfazGrupo.findByIdNotIn(ids);
 		return grupos;
@@ -46,6 +48,5 @@ public class SGrupo {
 		grupito = interfazGrupo.findByNombre(string);
 		return grupito;
 	}
-	
 
 }

@@ -10,8 +10,9 @@ import modelo.Programa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SPrograma")
 public class SPrograma {
+
 	@Autowired
 	private IProgramaDAO interfacePrograma;
 
@@ -22,13 +23,14 @@ public class SPrograma {
 	public Programa buscar(long id) {
 		return interfacePrograma.findOne(id);
 	}
-	
+
 	public Programa buscarPorId(long idprograma) {
 		// TODO Auto-generated method stub
 		Programa programa;
 		programa = interfacePrograma.findOne(idprograma);
 		return programa;
 	}
+
 	public List<Programa> listarPrograma() {
 		return interfacePrograma.findAll();
 	}
@@ -51,8 +53,8 @@ public class SPrograma {
 		programa = interfacePrograma.findByNombreAndEstatusTrue(programas);
 		return programa;
 	}
-	
-	public Programa buscarProgramaDeDirector(Profesor profesor){
+
+	public Programa buscarProgramaDeDirector(Profesor profesor) {
 		Programa programa;
 		programa = interfacePrograma.findByDirectorPrograma(profesor);
 		return programa;
@@ -61,7 +63,8 @@ public class SPrograma {
 	public Programa buscarUltimo() {
 		// TODO Auto-generated method stub
 		Programa programa;
-		programa = interfacePrograma.findOne(interfacePrograma.buscarUltimoPrograma());
+		programa = interfacePrograma.findOne(interfacePrograma
+				.buscarUltimoPrograma());
 		return programa;
 	}
 

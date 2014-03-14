@@ -10,19 +10,18 @@ import modelo.compuesta.ItemDefensa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SItemDefensa")
 public class SItemDefensa {
 	@Autowired
 	private IItemDefensaDAO interfaceItemDefensa;
-	
-	public void guardar(ItemDefensa itemdefensa){
+
+	public void guardar(ItemDefensa itemdefensa) {
 		interfaceItemDefensa.save(itemdefensa);
 	}
-	
+
 	public List<ItemDefensa> buscarItemDefensa(Defensa defensa) {
 		List<ItemDefensa> ItemDefensa;
-		// ItemFactibilidad = interfaceItemFactibilidad.BuscarFactibilidad(factibilidad);
-	    ItemDefensa = interfaceItemDefensa.findByDefensa(defensa);
+		ItemDefensa = interfaceItemDefensa.findByDefensa(defensa);
 		return ItemDefensa;
 	}
 

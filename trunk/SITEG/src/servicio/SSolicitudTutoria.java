@@ -17,7 +17,7 @@ import modelo.Tematica;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SSolicitudTutoria")
 public class SSolicitudTutoria {
 
 	@Autowired
@@ -74,7 +74,6 @@ public class SSolicitudTutoria {
 		return solicitudes;
 	}
 
-	/* Busca las solicitudes asociadas al Estudiante */
 	public List<SolicitudTutoria> buscarSolicitud(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		List<SolicitudTutoria> solicitudTutoria;
@@ -82,12 +81,12 @@ public class SSolicitudTutoria {
 		return solicitudTutoria;
 	}
 
-	public List<SolicitudTutoria> buscarTodasSolicitudesEntreFechas(Date fechaInicio, Date fechaFin) {
+	public List<SolicitudTutoria> buscarTodasSolicitudesEntreFechas(
+			Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
 		List<SolicitudTutoria> solicitudes;
-		solicitudes = interfaceSolicitud
-				.findByFechaBetweenOrderByProfesorDesc(
-						fechaInicio, fechaFin);
+		solicitudes = interfaceSolicitud.findByFechaBetweenOrderByProfesorDesc(
+				fechaInicio, fechaFin);
 		return solicitudes;
 	}
 
@@ -233,11 +232,11 @@ public class SSolicitudTutoria {
 		// TODO Auto-generated method stub
 		List<SolicitudTutoria> solicitudes;
 		solicitudes = interfaceSolicitud
-				.findByTematicaAndTematicaAreaInvestigacionAndFechaBetweenOrderByProfesorDesc(tematicaI,
-						areaI, fechaInicio, fechaFin);
+				.findByTematicaAndTematicaAreaInvestigacionAndFechaBetweenOrderByProfesorDesc(
+						tematicaI, areaI, fechaInicio, fechaFin);
 		return solicitudes;
 	}
-	
+
 	public List<SolicitudTutoria> buscarSolicitudesPorAreaYFechas(
 			AreaInvestigacion areaI, Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
@@ -343,7 +342,8 @@ public class SSolicitudTutoria {
 		if (!estudiantes.isEmpty()) {
 			solicitudes = interfaceSolicitud
 					.findDistinctByEstudiantesInAndTematicaAndTematicaAreaInvestigacionAndFechaBetween(
-							estudiantes, tematicaI, areaI, fechaInicio, fechaFin);
+							estudiantes, tematicaI, areaI, fechaInicio,
+							fechaFin);
 		}
 		return solicitudes;
 	}
@@ -354,8 +354,8 @@ public class SSolicitudTutoria {
 		// TODO Auto-generated method stub
 		List<SolicitudTutoria> solicitudes;
 		solicitudes = interfaceSolicitud
-				.findByTematicaAndProfesorAndTematicaAreaInvestigacionAndFechaBetween(tematicaI,
-						profesor, areaI, fechaInicio, fechaFin);
+				.findByTematicaAndProfesorAndTematicaAreaInvestigacionAndFechaBetween(
+						tematicaI, profesor, areaI, fechaInicio, fechaFin);
 		return solicitudes;
 	}
 
@@ -369,7 +369,8 @@ public class SSolicitudTutoria {
 		if (!estudiantes.isEmpty()) {
 			solicitudes = interfaceSolicitud
 					.findDistinctByEstudiantesInAndTematicaAndProfesorAndFechaBetween(
-							estudiantes, tematicaI, profesor, fechaInicio, fechaFin);
+							estudiantes, tematicaI, profesor, fechaInicio,
+							fechaFin);
 		}
 		return solicitudes;
 	}
@@ -384,7 +385,8 @@ public class SSolicitudTutoria {
 		if (!estudiantes.isEmpty()) {
 			solicitudes = interfaceSolicitud
 					.findDistinctByEstudiantesInAndTematicaAndTematicaAreaInvestigacionAndProfesorAndFechaBetween(
-							estudiantes, tematicaI, areaI, profesor, fechaInicio, fechaFin);
+							estudiantes, tematicaI, areaI, profesor,
+							fechaInicio, fechaFin);
 		}
 		return solicitudes;
 	}
@@ -392,7 +394,8 @@ public class SSolicitudTutoria {
 	public SolicitudTutoria buscarFinalizada(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		SolicitudTutoria solicitud;
-		solicitud = interfaceSolicitud.findByEstatusLikeAndEstudiantes(Estatus[3], estudiante);
+		solicitud = interfaceSolicitud.findByEstatusLikeAndEstudiantes(
+				Estatus[3], estudiante);
 		return solicitud;
 	}
 

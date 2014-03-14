@@ -12,7 +12,7 @@ import modelo.seguridad.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SProfesor")
 public class SProfesor {
 
 	@Autowired
@@ -36,6 +36,7 @@ public class SProfesor {
 		profesores = interfazProfesor.findByEstatusTrueOrderByCategoriaAsc();
 		return profesores;
 	}
+
 	public List<Profesor> buscarTodos() {
 		// TODO Auto-generated method stub
 		List<Profesor> profesores;
@@ -49,6 +50,7 @@ public class SProfesor {
 		profesor = interfazProfesor.findByUsuario(u);
 		return profesor;
 	}
+
 	public List<Profesor> buscarProfesorSinUsuario() {
 		// TODO Auto-generated method stub
 		List<Profesor> profesores;
@@ -63,37 +65,28 @@ public class SProfesor {
 		return profesores;
 	}
 
-	
-	//Busca la comision asociado a un teg
-	public List<Profesor> buscarComisionDelTeg(Teg teg){
+	public List<Profesor> buscarComisionDelTeg(Teg teg) {
 		List<Profesor> profesores;
 		profesores = interfazProfesor.findByTegs(teg);
 		return profesores;
 	}
-	
-	
-	public List<Profesor> buscarProfesoresSinComision(List<String> cedulas){
+
+	public List<Profesor> buscarProfesoresSinComision(List<String> cedulas) {
 		List<Profesor> profesores;
 		profesores = interfazProfesor.findByCedulaNotIn(cedulas);
 		return profesores;
 	}
-	
+
 	public List<Profesor> buscarProfesoresPorTematica(Tematica tematica) {
 		List<Profesor> profesores;
 		profesores = interfazProfesor.findByTematicas(tematica);
 		return profesores;
 	}
-	public List<Profesor> buscarProfesoresSinPrograma(){
+
+	public List<Profesor> buscarProfesoresSinPrograma() {
 		List<Profesor> profesores;
 		profesores = interfazProfesor.profesorSinPrograma();
 		return profesores;
 	}
-	
-	//public List<Profesor> buscarProfesoresPorTematicayEstatus(Tematica tematica, Boolean estatus) {
-		//List<Profesor> profesores;
-		//profesores = interfazProfesor.buscarProfesoresPorTematicasyEstatus(tematica,estatus);
-		//return profesores;
-	//}
-	
-	
+
 }

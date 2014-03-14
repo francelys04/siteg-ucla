@@ -13,28 +13,31 @@ import modelo.compuesta.CondicionPrograma;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SCondicionPrograma")
 public class SCondicionPrograma {
 
 	@Autowired
 	private ICondicionProgramaDAO interfaceCondicionPrograma;
 	@Autowired
 	private ILapsoDAO interfaceLapso;
-	
+
 	public void guardar(List<CondicionPrograma> condicionesProgramas) {
 		interfaceCondicionPrograma.save(condicionesProgramas);
 	}
-	
-	public List<CondicionPrograma> buscarCondicionesPrograma(Programa programa, Lapso lapso){
+
+	public List<CondicionPrograma> buscarCondicionesPrograma(Programa programa,
+			Lapso lapso) {
 		List<CondicionPrograma> condicionesProgramas;
-		condicionesProgramas = interfaceCondicionPrograma.findByProgramaAndLapso(programa, lapso);
+		condicionesProgramas = interfaceCondicionPrograma
+				.findByProgramaAndLapso(programa, lapso);
 		return condicionesProgramas;
 	}
 
 	public List<CondicionPrograma> buscarUltimasCondiciones(Programa programa) {
 		// TODO Auto-generated method stub
 		List<CondicionPrograma> condiciones;
-		condiciones = interfaceCondicionPrograma.buscarCondicionesActuales(programa, interfaceLapso.buscarLapsoVigente());
+		condiciones = interfaceCondicionPrograma.buscarCondicionesActuales(
+				programa, interfaceLapso.buscarLapsoVigente());
 		return condiciones;
 	}
 
@@ -42,9 +45,9 @@ public class SCondicionPrograma {
 			Condicion condicion, Programa p, Lapso lapso) {
 		// TODO Auto-generated method stub
 		CondicionPrograma condicionPrograma;
-		condicionPrograma = interfaceCondicionPrograma.findByCondicionAndProgramaAndLapso(condicion, p, lapso);
+		condicionPrograma = interfaceCondicionPrograma
+				.findByCondicionAndProgramaAndLapso(condicion, p, lapso);
 		return condicionPrograma;
 	}
-	
-	
+
 }

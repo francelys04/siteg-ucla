@@ -26,27 +26,12 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 
-import servicio.SAreaInvestigacion;
-import servicio.SDefensa;
-import servicio.SPrograma;
-import servicio.SProgramaArea;
-import servicio.STeg;
-import servicio.STematica;
-import configuracion.GeneradorBeans;
 import controlador.CGeneral;
 
 @Controller
 public class CReporteTegAprobadoDefensa extends CGeneral {
 
-	STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
-	SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	SAreaInvestigacion servicioArea = GeneradorBeans.getServicioArea();
-	STematica servicioTematica = GeneradorBeans.getSTematica();
-	SDefensa servicioDefensa=GeneradorBeans.getServicioDefensa();
-	
-	
+	private static final long serialVersionUID = 7740151952778333602L;
 	Programa programa = new Programa();
 	AreaInvestigacion area = new AreaInvestigacion();
 	Tematica tematica = new Tematica();

@@ -10,53 +10,43 @@ import modelo.Teg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SAvance")
 public class SAvance {
-	
+
 	@Autowired
 	private IAvanceDAO interfazAvance;
-	private String[] Estatus = { "Avance Proyecto", "Revision TEG"};
+	private String[] Estatus = { "Avance Proyecto", "Revision TEG" };
 
-	public void guardar(Avance avance){
+	public void guardar(Avance avance) {
 		interfazAvance.save(avance);
 	}
-	
+
 	public Avance buscarAvancePorId(long id) {
 		// TODO Auto-generated method stub
 		Avance avance;
 		avance = interfazAvance.findOne(id);
 		return avance;
 	}
-	
+
 	public List<Avance> buscarActivos() {
 		// TODO Auto-generated method stub
 		List<Avance> avance;
 		avance = interfazAvance.findByEstatusTrue();
 		return avance;
 	}
-	
-	
-	
-	/*Busca un teg asociado a un estudiante que tengan estatus avances finalizados*/
+
 	public List<Avance> buscarAvancePorTeg(Teg teg) {
 		// TODO Auto-generated method stub
 		List<Avance> avances;
-		avances = interfazAvance.findByEstatusLikeAndTeg(
-				Estatus[0], teg);
+		avances = interfazAvance.findByEstatusLikeAndTeg(Estatus[0], teg);
 		return avances;
 	}
-	
-	
-	/*Busca un teg asociado a un estudiante que tengan estatus avances finalizados*/
+
 	public List<Avance> buscarRevisionPorTeg(Teg teg) {
 		// TODO Auto-generated method stub
 		List<Avance> revisiones;
-		revisiones = interfazAvance.findByEstatusLikeAndTeg(
-				Estatus[1], teg);
+		revisiones = interfazAvance.findByEstatusLikeAndTeg(Estatus[1], teg);
 		return revisiones;
 	}
-	
-	
-	
-	
+
 }

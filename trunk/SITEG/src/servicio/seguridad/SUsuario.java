@@ -9,7 +9,7 @@ import modelo.seguridad.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SUsuario")
 public class SUsuario {
 
 	@Autowired
@@ -32,7 +32,7 @@ public class SUsuario {
 		// TODO Auto-generated method stub
 		interfazUsuario.save(usuario);
 	}
-	
+
 	public Usuario buscarUsuarioPorNombre(String name) {
 		// TODO Auto-generated method stub
 		Usuario usuario;

@@ -11,7 +11,7 @@ import modelo.Programa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SActividad")
 public class SActividad {
 
 	@Autowired

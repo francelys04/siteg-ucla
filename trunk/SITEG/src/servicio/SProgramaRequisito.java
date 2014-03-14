@@ -12,25 +12,28 @@ import modelo.compuesta.ProgramaRequisito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SProgramaRequisito")
 public class SProgramaRequisito {
 
 	@Autowired
 	private IProgramaRequisitoDAO interfaceProgramaRequisito;
-	
-	public void guardar (List<ProgramaRequisito> programasRequisitos){
+
+	public void guardar(List<ProgramaRequisito> programasRequisitos) {
 		interfaceProgramaRequisito.save(programasRequisitos);
 	}
-	
-	public List<Requisito> buscarRequisitosEnPrograma(Programa programa, Lapso lapso){
+
+	public List<Requisito> buscarRequisitosEnPrograma(Programa programa,
+			Lapso lapso) {
 		List<Requisito> requisitos;
-		requisitos = interfaceProgramaRequisito.buscarRequisitosPrograma(programa, lapso);
+		requisitos = interfaceProgramaRequisito.buscarRequisitosPrograma(
+				programa, lapso);
 		return requisitos;
 	}
-	
-	public List<Requisito> buscarRequisitos(Programa programa, Lapso lapso){
+
+	public List<Requisito> buscarRequisitos(Programa programa, Lapso lapso) {
 		List<Requisito> requisitos;
-		requisitos = interfaceProgramaRequisito.buscarRequistos(programa, lapso);
+		requisitos = interfaceProgramaRequisito
+				.buscarRequistos(programa, lapso);
 		return requisitos;
 	}
 
@@ -38,5 +41,5 @@ public class SProgramaRequisito {
 		// TODO Auto-generated method stub
 		interfaceProgramaRequisito.delete(programasRequisito);
 	}
-	
+
 }

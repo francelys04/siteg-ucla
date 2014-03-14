@@ -30,6 +30,8 @@ import org.springframework.stereotype.Controller;
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.annotation.VariableResolver;
+import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Image;
 
 import servicio.SActividad;
@@ -66,7 +68,6 @@ import servicio.STipoJurado;
 import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
-import configuracion.GeneradorBeans;
 
 /*
  * Controlador heredado por los demas controladores, permite la
@@ -77,63 +78,79 @@ import configuracion.GeneradorBeans;
  * objeto de minimizar codigo y mejorar las practicas de programacion
  */
 @Controller
+@VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public abstract class CGeneral extends SelectorComposer<Component> {
 
 	private static final long serialVersionUID = 445877799825285911L;
 	protected PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	protected SActividad servicioActividad = GeneradorBeans
-			.getServicioActividad();
-	protected SArbol servicioArbol = GeneradorBeans.getServicioArbol();
-	protected SArchivo servicioArchivo = GeneradorBeans.getServicioArchivo();
-	protected SAreaInvestigacion servicioArea = GeneradorBeans
-			.getServicioArea();
-	protected SAvance servicioAvance = GeneradorBeans.getServicioAvance();
-	protected SCategoria servicioCategoria = GeneradorBeans
-			.getServicioCategoria();
-	protected SCondicion servicioCondicion = GeneradorBeans
-			.getServicioCondicion();
-	protected SCondicionPrograma servicioCondicionPrograma = GeneradorBeans
-			.getServicioCondicionPrograma();
-	protected SCronograma servicioCronograma = GeneradorBeans
-			.getServicioCronograma();
-	protected SDefensa servicioDefensa = GeneradorBeans.getServicioDefensa();
-	protected SEnlaceInteres servicioEnlace = GeneradorBeans
-			.getServicioEnlace();
-	protected SEstudiante servicioEstudiante = GeneradorBeans
-			.getServicioEstudiante();
-	protected SFactibilidad servicioFactibilidad = GeneradorBeans
-			.getServicioFactibilidad();
-	protected SGrupo servicioGrupo = GeneradorBeans.getServicioGrupo();
-	protected SItem servicioItem = GeneradorBeans.getServicioItem();
-	protected SItemDefensa servicioItemDefensa = GeneradorBeans
-			.getServicioItemDefensa();
-	protected SItemFactibilidad servicioItemFactibilidad = GeneradorBeans
-			.getServicioItemFactibilidad();
-	protected SJurado servicioJurado = GeneradorBeans.getServicioJurado();
-	protected SLapso servicioLapso = GeneradorBeans.getServicioLapso();
-	protected SMencion servicioMencion = GeneradorBeans.getServicioMencion();
-	protected SNoticia servicioNoticia = GeneradorBeans.getServicioNoticia();
-	protected SProfesor servicioProfesor = GeneradorBeans.getServicioProfesor();
-	protected SPrograma servicioPrograma = GeneradorBeans.getServicioPrograma();
-	protected SProgramaArea servicioProgramaArea = GeneradorBeans
-			.getServicioProgramaArea();
-	protected SProgramaItem servicioProgramaItem = GeneradorBeans
-			.getServicioProgramaItem();
-	protected SProgramaRequisito servicioProgramaRequisito = GeneradorBeans
-			.getServicioProgramaRequisito();
-	protected SRequisito servicioRequisito = GeneradorBeans
-			.getServicioRequisito();
-	protected SSolicitudTutoria servicioSolicitudTutoria = GeneradorBeans
-			.getServicioTutoria();
-	protected STeg servicioTeg = GeneradorBeans.getServicioTeg();
-	protected STegEstatus servicioTegEstatus = GeneradorBeans
-			.getServicioTegEstatus();
-	protected STegRequisito servicioTegRequisito = GeneradorBeans
-			.getServicioTegRequisito();
-	protected STematica servicioTematica = GeneradorBeans.getSTematica();
-	protected STipoJurado servicioTipoJurado = GeneradorBeans
-			.getServicioTipoJurado();
-	protected SUsuario servicioUsuario = GeneradorBeans.getServicioUsuario();
+	@WireVariable("SActividad")
+	protected SActividad servicioActividad;
+	@WireVariable("SArbol")
+	protected SArbol servicioArbol;
+	@WireVariable("SArchivo")
+	protected SArchivo servicioArchivo;
+	@WireVariable("SAreaInvestigacion")
+	protected SAreaInvestigacion servicioArea;
+	@WireVariable("SAvance")
+	protected SAvance servicioAvance;
+	@WireVariable("SCategoria")
+	protected SCategoria servicioCategoria;
+	@WireVariable("SCondicion")
+	protected SCondicion servicioCondicion;
+	@WireVariable("SCondicionPrograma")
+	protected SCondicionPrograma servicioCondicionPrograma;
+	@WireVariable("SCronograma")
+	protected SCronograma servicioCronograma;
+	@WireVariable("SDefensa")
+	protected SDefensa servicioDefensa;
+	@WireVariable("SEnlaceInteres")
+	protected SEnlaceInteres servicioEnlace;
+	@WireVariable("SEstudiante")
+	protected SEstudiante servicioEstudiante;
+	@WireVariable("SFactibilidad")
+	protected SFactibilidad servicioFactibilidad;
+	@WireVariable("SGrupo")
+	protected SGrupo servicioGrupo;
+	@WireVariable("SItem")
+	protected SItem servicioItem;
+	@WireVariable("SItemDefensa")
+	protected SItemDefensa servicioItemDefensa;
+	@WireVariable("SItemFactibilidad")
+	protected SItemFactibilidad servicioItemFactibilidad;
+	@WireVariable("SJurado")
+	protected SJurado servicioJurado;
+	@WireVariable("SLapso")
+	protected SLapso servicioLapso;
+	@WireVariable("SMencion")
+	protected SMencion servicioMencion;
+	@WireVariable("SNoticia")
+	protected SNoticia servicioNoticia;
+	@WireVariable("SProfesor")
+	protected SProfesor servicioProfesor;
+	@WireVariable("SPrograma")
+	protected SPrograma servicioPrograma;
+	@WireVariable("SProgramaArea")
+	protected SProgramaArea servicioProgramaArea;
+	@WireVariable("SProgramaItem")
+	protected SProgramaItem servicioProgramaItem;
+	@WireVariable("SProgramaRequisito")
+	protected SProgramaRequisito servicioProgramaRequisito;
+	@WireVariable("SRequisito")
+	protected SRequisito servicioRequisito;
+	@WireVariable("SSolicitudTutoria")
+	protected SSolicitudTutoria servicioSolicitudTutoria;
+	@WireVariable("STeg")
+	protected STeg servicioTeg;
+	@WireVariable("STegEstatus")
+	protected STegEstatus servicioTegEstatus;
+	@WireVariable("STegRequisito")
+	protected STegRequisito servicioTegRequisito;
+	@WireVariable("STematica")
+	protected STematica servicioTematica;
+	@WireVariable("STipoJurado")
+	protected STipoJurado servicioTipoJurado;
+	@WireVariable("SUsuario")
+	protected SUsuario servicioUsuario;
 
 	/*
 	 * Metodo que permite inicializar los componentes de las vistas, es

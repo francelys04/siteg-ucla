@@ -12,13 +12,13 @@ import modelo.compuesta.ProgramaItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SProgramaItem")
 public class SProgramaItem {
 
 	@Autowired
 	private IProgramaItemDAO interfaceProgramaItem;
-	
-	public void guardar (List<ProgramaItem> programasItems){
+
+	public void guardar(List<ProgramaItem> programasItems) {
 		interfaceProgramaItem.save(programasItems);
 	}
 
