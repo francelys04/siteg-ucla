@@ -14,7 +14,7 @@ import modelo.Tematica;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SDefensa")
 public class SDefensa {
 
 	@Autowired
@@ -57,8 +57,7 @@ public class SDefensa {
 		Date fechaInicio, Date fechaFin) {
 		return interfaceDefensa.findByFechaBetween(fechaInicio, fechaFin);
 	}
-	
-////	
+
 	public List<Defensa> buscarDefensaTeg(Date fechaInicio,Date fechaFin){
 		List<Defensa> defensas;
 		defensas=interfaceDefensa.buscarDefensaTeg(fechaInicio,fechaFin);
@@ -80,8 +79,6 @@ public class SDefensa {
 		defensas=interfaceDefensa.buscarDefensaTegSegunArea(area,fechaInicio,fechaFin);
 		return defensas;
 	}
-	
-	////
 	
 	public List<Defensa> buscarDefensaTegSegunEstatus2(String estatus,Date fechaInicio,Date fechaFin){
 		List<Defensa> defensas;

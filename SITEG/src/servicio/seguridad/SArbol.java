@@ -11,9 +11,9 @@ import modelo.seguridad.Grupo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-@Service
+@Service("SArbol")
 public class SArbol {
+
 	@Autowired
 	private IArbolDAO interfaceArbol;
 
@@ -51,10 +51,6 @@ public class SArbol {
 		return arbol;
 	}
 
-	/*
-	 * public List<Arbol> buscarGrupo(long id){ List<Arbol> arboles;
-	 * arboles=interfaceArbol.buscarPorGrupo(id); return arboles; }
-	 */
 	public List<Arbol> buscarporGrupo(Grupo grupo) {
 		List<Arbol> arboles;
 		arboles = interfaceArbol.findByGrupos(grupo);

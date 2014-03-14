@@ -13,8 +13,9 @@ import modelo.seguridad.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SEstudiante")
 public class SEstudiante {
+
 	@Autowired
 	private IEstudianteDAO interfaceEstudiante;
 
@@ -58,14 +59,11 @@ public class SEstudiante {
 		return estudiantes;
 	}
 
-	// metodo para buscar estudiantes asociados a un treg
 	public List<Estudiante> buscarEstudiantePorTeg(Teg teg) {
 		List<Estudiante> estudiantes1;
 		estudiantes1 = interfaceEstudiante.findByTegs(teg);
 		return estudiantes1;
 	}
-	
-	
 
 	public List<Estudiante> buscarEstudiantesDelTeg(Teg teg) {
 		List<Estudiante> estudiantes;

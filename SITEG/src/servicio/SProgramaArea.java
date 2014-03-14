@@ -12,25 +12,24 @@ import modelo.compuesta.ProgramaArea;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("SProgramaArea")
 public class SProgramaArea {
 
 	@Autowired
 	private IProgramaAreaDAO interfaceProgramaArea;
-	
-	public void guardar (List<ProgramaArea> programasAreas){
+
+	public void guardar(List<ProgramaArea> programasAreas) {
 		interfaceProgramaArea.save(programasAreas);
 	}
-	
-	public List<AreaInvestigacion> buscarAreasDePrograma(Programa programa, Lapso lapso){
+
+	public List<AreaInvestigacion> buscarAreasDePrograma(Programa programa,
+			Lapso lapso) {
 		List<AreaInvestigacion> areas;
 		areas = interfaceProgramaArea.buscarAreasPrograma(programa, lapso);
 		return areas;
 	}
-	
-	/*
-	 * Para listar las areas por Programa*/
-	public List<AreaInvestigacion> buscarAreasDePrograma(Programa programa){
+
+	public List<AreaInvestigacion> buscarAreasDePrograma(Programa programa) {
 		List<AreaInvestigacion> areas;
 		areas = interfaceProgramaArea.buscarAreasPrograma(programa);
 		return areas;
