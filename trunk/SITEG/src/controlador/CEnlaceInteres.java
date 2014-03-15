@@ -138,9 +138,9 @@ public class CEnlaceInteres extends CGeneral {
 	public void guardarEnlace() {
 
 		List<EnlaceInteres> enlaceInteres = servicioEnlace.buscarActivos();
-		if (enlaceInteres.size() == 3 && enlaceCatalogo == false) {
+		if (enlaceInteres.size() == 7 && enlaceCatalogo == false) {
 			Messagebox
-					.show("Ya existen tres enlaces de interes, si desea agregar uno nuevo debe modificar uno ya existente",
+					.show("Ya existen siete enlaces de interes, si desea agregar uno nuevo debe modificar uno ya existente",
 							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
 		} else {
