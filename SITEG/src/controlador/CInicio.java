@@ -77,9 +77,21 @@ public class CInicio extends CGeneral {
 	private Image img2;
 	@Wire
 	private Image img3;
+	@Wire
+	private Image img4;
+	@Wire
+	private Image img5;
+	@Wire
+	private Image img6;
+	@Wire
+	private Image img7;
 	private static String url1;
 	private static String url2;
 	private static String url3;
+	private static String url4;
+	private static String url5;
+	private static String url6;
+	private static String url7;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral se llenan los campos y combos
@@ -104,6 +116,10 @@ public class CInicio extends CGeneral {
 			url1 = enlace.get(0).getUrl();
 			url2 = enlace.get(1).getUrl();
 			url3 = enlace.get(2).getUrl();
+			url4 = enlace.get(3).getUrl();
+			url5 = enlace.get(4).getUrl();
+			url6 = enlace.get(5).getUrl();
+			url7 = enlace.get(6).getUrl();
 			try {
 				img1.setContent(ImageIO.read(new ByteArrayInputStream(enlace
 						.get(0).getImagen())));
@@ -111,6 +127,14 @@ public class CInicio extends CGeneral {
 						.get(1).getImagen())));
 				img3.setContent(ImageIO.read(new ByteArrayInputStream(enlace
 						.get(2).getImagen())));
+				img4.setContent(ImageIO.read(new ByteArrayInputStream(enlace
+						.get(3).getImagen())));
+				img5.setContent(ImageIO.read(new ByteArrayInputStream(enlace
+						.get(4).getImagen())));
+				img6.setContent(ImageIO.read(new ByteArrayInputStream(enlace
+						.get(5).getImagen())));
+				img7.setContent(ImageIO.read(new ByteArrayInputStream(enlace
+						.get(6).getImagen())));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -139,6 +163,26 @@ public class CInicio extends CGeneral {
 	public void enlaceTres() {
 		Execution exec = Executions.getCurrent();
 		exec.sendRedirect(url3);
+	}
+	@Listen("onClick = #img4")
+	public void enlaceCuatro() {
+		Execution exec = Executions.getCurrent();
+		exec.sendRedirect(url4);
+	}
+	@Listen("onClick = #img5")
+	public void enlaceCinco() {
+		Execution exec = Executions.getCurrent();
+		exec.sendRedirect(url5);
+	}
+	@Listen("onClick = #img6")
+	public void enlaceSeis() {
+		Execution exec = Executions.getCurrent();
+		exec.sendRedirect(url6);
+	}
+	@Listen("onClick = #img7")
+	public void enlaceSiete() {
+		Execution exec = Executions.getCurrent();
+		exec.sendRedirect(url7);
 	}
 
 	/*
