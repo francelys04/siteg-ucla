@@ -26,6 +26,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -49,20 +50,20 @@ public class CCatalogoTipoJurado extends CGeneral {
 	private Listbox ltbTipoJurado;
 	@Wire
 	private Window wdwCatalogoTipoJurado;
-	
+
 	/*
-	 * Metodo heredado del Controlador CGeneral donde se buscan todas los
-	 * tipos de jurados disponibles y se llena el listado del mismo en el componente
+	 * Metodo heredado del Controlador CGeneral donde se buscan todas los tipos
+	 * de jurados disponibles y se llena el listado del mismo en el componente
 	 * lista de la vista.
 	 */
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		//llena la lista con los tipos de jurados activos
+		// llena la lista con los tipos de jurados activos
 		List<TipoJurado> tipoJurado = servicioTipoJurado.buscarActivos();
 		ltbTipoJurado.setModel(new ListModelList<TipoJurado>(tipoJurado));
 	}
+
 	/*
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
@@ -102,6 +103,7 @@ public class CCatalogoTipoJurado extends CGeneral {
 		ltbTipoJurado.setModel(new ListModelList<TipoJurado>(tipoJurado2));
 
 	}
+
 	/*
 	 * Metodo que permite obtener el objeto TipoJurado al realizar el evento
 	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
@@ -109,54 +111,67 @@ public class CCatalogoTipoJurado extends CGeneral {
 	 */
 	@Listen("onDoubleClick = #ltbTipoJurado")
 	public void mostrarDatosCatalogo() {
-		if(ltbTipoJurado.getItemCount()!=0){
+		if (ltbTipoJurado.getItemCount() != 0) {
 
-		if (vistaRecibida == null) {
+			if (vistaRecibida == null) {
 
-			vistaRecibida = "maestros/VTipoJurado";
+				vistaRecibida = "maestros/VTipoJurado";
 
-		} else {
+			} else {
 
-			Listitem listItem = ltbTipoJurado.getSelectedItem();
-			TipoJurado tipoJuradoDatosCatalogo = (TipoJurado) listItem
-					.getValue();
-			final HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", tipoJuradoDatosCatalogo.getId());
-			String vista = vistaRecibida;
-			map.put("vista", vista);
-			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			Executions.sendRedirect("/vistas/arbol.zul");
-			wdwCatalogoTipoJurado.onClose();
+				Listitem listItem = ltbTipoJurado.getSelectedItem();
+				TipoJurado tipoJuradoDatosCatalogo = (TipoJurado) listItem
+						.getValue();
+				final HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("id", tipoJuradoDatosCatalogo.getId());
+				String vista = vistaRecibida;
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+				Executions.sendRedirect("/vistas/arbol.zul");
+				wdwCatalogoTipoJurado.onClose();
+			}
 		}
 	}
-	}
-	
+
+	/*
+	 * Metodo que permite generar una lista de los tipos de jurado que se
+	 * encuentran activos en el sistema mediante el componente "Jasperreport"
+	 */
+
 	@Listen("onClick = #btnImprimir")
-	public void imprimir() throws SQLException {	
+	public void imprimir() throws SQLException {
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		List<TipoJurado> tiposJurado = servicioTipoJurado.buscarActivos();
-		JasperReport jasperReport;
-		try {
-			String rutaUrl = obtenerDirectorio();
-			String reporteSrc = rutaUrl
-					+ "SITEG/vistas/reportes/salidas/compilados/RTiposJurados.jasper";
-			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-		    Map p = new HashMap();
-			p.put("logoUcla", reporteImage + "logo ucla.png");
-			p.put("logoCE", reporteImage + "logo CE.png");
-			p.put("logoSiteg", reporteImage + "logo.png");
-				
-				
-			 
 
-			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,  new JRBeanCollectionDataSource(tiposJurado));
-			JasperViewer.viewReport(jasperPrint, false);
-			
-		} catch (JRException e) {
-			System.out.println(e);
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (tiposJurado.size() != 0) {
+
+			JasperReport jasperReport;
+			try {
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl
+						+ "SITEG/vistas/reportes/salidas/compilados/RTiposJurados.jasper";
+				String reporteImage = rutaUrl
+						+ "SITEG/public/imagenes/reportes/";
+				Map p = new HashMap();
+				p.put("logoUcla", reporteImage + "logo ucla.png");
+				p.put("logoCE", reporteImage + "logo CE.png");
+				p.put("logoSiteg", reporteImage + "logo.png");
+
+				jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(
+						jasperReport, p, new JRBeanCollectionDataSource(
+								tiposJurado));
+				JasperViewer.viewReport(jasperPrint, false);
+
+			} catch (JRException e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			Messagebox.show("No hay informacion disponible", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
 		}
 
 	}

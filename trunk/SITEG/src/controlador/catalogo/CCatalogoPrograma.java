@@ -25,6 +25,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -120,32 +121,43 @@ public class CCatalogoPrograma extends CGeneral {
 
 	}
 
+	/*
+	 * Metodo que permite generar una lista de los programas que se encuentran
+	 * activos en el sistema mediante el componente "Jasperreport"
+	 */
 	@Listen("onClick = #btnImprimir")
-	public void imprimir() throws SQLException {	
+	public void imprimir() throws SQLException {
 		FileSystemView filesys = FileSystemView.getFileSystemView();
-		List<Programa> programas = servicioPrograma.buscarActivas(); 
-		JasperReport jasperReport;
-		try {
-			String rutaUrl = obtenerDirectorio();
-			String reporteSrc = rutaUrl
-					+ "SITEG/vistas/reportes/salidas/compilados/RPrograma.jasper";
-			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-		    Map p = new HashMap();
-			p.put("logoUcla", reporteImage + "logo ucla.png");
-			p.put("logoCE", reporteImage + "logo CE.png");
-			p.put("logoSiteg", reporteImage + "logo.png");
-				
-				
-			 
+		List<Programa> programas = servicioPrograma.buscarActivas();
 
-			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,  new JRBeanCollectionDataSource(programas));
-			JasperViewer.viewReport(jasperPrint, false);
-			
-		} catch (JRException e) {
-			System.out.println(e);
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (programas.size() != 0) {
+
+			JasperReport jasperReport;
+			try {
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl
+						+ "SITEG/vistas/reportes/salidas/compilados/RPrograma.jasper";
+				String reporteImage = rutaUrl
+						+ "SITEG/public/imagenes/reportes/";
+				Map p = new HashMap();
+				p.put("logoUcla", reporteImage + "logo ucla.png");
+				p.put("logoCE", reporteImage + "logo CE.png");
+				p.put("logoSiteg", reporteImage + "logo.png");
+
+				jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(
+						jasperReport, p, new JRBeanCollectionDataSource(
+								programas));
+				JasperViewer.viewReport(jasperPrint, false);
+
+			} catch (JRException e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			Messagebox.show("No hay informacion disponible", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
 		}
 
 	}

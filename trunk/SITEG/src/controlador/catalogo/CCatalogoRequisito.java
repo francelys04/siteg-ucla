@@ -28,6 +28,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -54,18 +55,16 @@ public class CCatalogoRequisito extends CGeneral {
 	@Wire
 	private Window wdwCatalogoRequisito;
 
-	
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
-	 * recibido del catalogo exista y se llenan lista
-	 * correspondientes de la vista, asicomo los objetos empleados dentro de
-	 * este controlador.
+	 * recibido del catalogo exista y se llenan lista correspondientes de la
+	 * vista, asicomo los objetos empleados dentro de este controlador.
 	 */
 	public void inicializar(Component comp) {
 
 		List<Requisito> requisito = servicioRequisito.buscarActivos();
 		ltbRequisito.setModel(new ListModelList<Requisito>(requisito));
-		
+
 		Selectors.wireComponents(comp, this, false);
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -85,8 +84,7 @@ public class CCatalogoRequisito extends CGeneral {
 				id = requisito2.getId();
 				map.clear();
 				map = null;
-				
-				
+
 			}
 		}
 	}
@@ -137,52 +135,67 @@ public class CCatalogoRequisito extends CGeneral {
 	 */
 	@Listen("onDoubleClick = #ltbRequisito")
 	public void mostrarDatosCatalogo() {
-		
+
 		if (vistaRecibida == null) {
 
 			vistaRecibida = "maestros/VRequisito";
 
 		} else {
-		if(ltbRequisito.getItemCount()!=0){
-		Listitem listItem = ltbRequisito.getSelectedItem();
-		Requisito requisitoDatosCatalogo = (Requisito) listItem.getValue();
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", requisitoDatosCatalogo.getId());
-		String vista = vistaRecibida;
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoRequisito.onClose();
-		}
+			if (ltbRequisito.getItemCount() != 0) {
+				Listitem listItem = ltbRequisito.getSelectedItem();
+				Requisito requisitoDatosCatalogo = (Requisito) listItem
+						.getValue();
+				final HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("id", requisitoDatosCatalogo.getId());
+				String vista = vistaRecibida;
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+				Executions.sendRedirect("/vistas/arbol.zul");
+				wdwCatalogoRequisito.onClose();
+			}
 		}
 	}
-	
+
+	/*
+	 * Metodo que permite generar una lista de los requisitos que se deben
+	 * consignar para realizar un trabjo especial de grado que se encuentran
+	 * activos en el sistema mediante el componente "Jasperreport"
+	 */
+
 	@Listen("onClick = #btnImprimir")
-	public void imprimir() throws SQLException {	
+	public void imprimir() throws SQLException {
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		List<Requisito> requisitos = servicioRequisito.buscarActivos();
-		JasperReport jasperReport;
-		try {
-			String rutaUrl = obtenerDirectorio();
-			String reporteSrc = rutaUrl
-					+ "SITEG/vistas/reportes/salidas/compilados/RRequisito.jasper";
-			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-		    Map p = new HashMap();
-			p.put("logoUcla", reporteImage + "logo ucla.png");
-			p.put("logoCE", reporteImage + "logo CE.png");
-			p.put("logoSiteg", reporteImage + "logo.png");
-				
-				
-			 
 
-			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,  new JRBeanCollectionDataSource(requisitos));
-			JasperViewer.viewReport(jasperPrint, false);
-			
-		} catch (JRException e) {
-			System.out.println(e);
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (requisitos.size() != 0) {
+
+			JasperReport jasperReport;
+			try {
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl
+						+ "SITEG/vistas/reportes/salidas/compilados/RRequisito.jasper";
+				String reporteImage = rutaUrl
+						+ "SITEG/public/imagenes/reportes/";
+				Map p = new HashMap();
+				p.put("logoUcla", reporteImage + "logo ucla.png");
+				p.put("logoCE", reporteImage + "logo CE.png");
+				p.put("logoSiteg", reporteImage + "logo.png");
+
+				jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(
+						jasperReport, p, new JRBeanCollectionDataSource(
+								requisitos));
+				JasperViewer.viewReport(jasperPrint, false);
+
+			} catch (JRException e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			Messagebox.show("No hay informacion disponible", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
 		}
 
 	}
@@ -192,8 +205,5 @@ public class CCatalogoRequisito extends CGeneral {
 	public void salirCatalogoRequisitos() {
 		wdwCatalogoRequisito.onClose();
 	}
-
-	
-
 
 }

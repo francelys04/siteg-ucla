@@ -29,6 +29,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -70,34 +71,41 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		List<AreaInvestigacion> area = servicioArea.buscarActivos();
 
 		try {
-		if (encontrado == true) {
-			ltbArea.setEmptyMessage("No hay areas de investigacion registradas");
-			ltbArea.setTooltiptext("Doble clic para seleccionar el area");
-			ltbArea.setModel(new ListModelList<AreaInvestigacion>(area));
-			cmbPrograma.setVisible(false);
-			lblPrograma.setVisible(false);
-			
-			
-			
-		} else {
-			ltbArea.setTooltiptext("Doble clic para ver las tematicas del area");
-			ltbArea.setEmptyMessage("Seleccione un programa para ver las areas");
-			cmbPrograma.setVisible(true);
-			palBotones.setVisible(false);
-			
+			if (encontrado == true) {
+				ltbArea.setEmptyMessage("No hay areas de investigacion registradas");
+				ltbArea.setTooltiptext("Doble clic para seleccionar el area");
+				ltbArea.setModel(new ListModelList<AreaInvestigacion>(area));
+				cmbPrograma.setVisible(false);
+				lblPrograma.setVisible(false);
 
-		}
+			} else {
+				ltbArea.setTooltiptext("Doble clic para ver las tematicas del area");
+				ltbArea.setEmptyMessage("Seleccione un programa para ver las areas");
+				cmbPrograma.setVisible(true);
+				palBotones.setVisible(false);
+
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
-					System.out.println("");
+			System.out.println("");
 		}
 	}
 
+	/*
+	 * Metodo que permite asignarle el valor de true a la variable booleana
+	 * "encontrado" cuando el usuario acceda a este catalogo, a traves del
+	 * entorno interno del sistema
+	 */
 	public void metodoPrender() {
 		encontrado = true;
 
 	}
 
+	/*
+	 * Metodo que permite asignarle el valor de false a la variable booleana
+	 * "encontrado" cuando el usuario acceda a este catalogo, a traves del
+	 * portal web del sistema
+	 */
 	public void metodoApagar() {
 		encontrado = false;
 
@@ -165,8 +173,8 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 	/*
 	 * Metodo que permite obtener el objeto Area al realizar el evento doble
 	 * clic sobre un item en especifico en la lista, dado al condicional, donde
-	 * la variable "encontrado" es igual a "false" el metodo recibirId, recibe dicho
-	 * objeto por parametro y es redireccionado a la vista
+	 * la variable "encontrado" es igual a "false" el metodo recibirId, recibe
+	 * dicho objeto por parametro y es redireccionado a la vista
 	 * VCatalogoTematicaArea, en caso contrario, se extrae su id, para luego
 	 * poder ser mapeada y enviada a la vista asociada a ella.
 	 */
@@ -200,32 +208,43 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		}
 	}
 
+	/*
+	 * Metodo que permite generar una lista de las areas de investigacion que se
+	 * encuentran activas en el sistema mediante el componente "Jasperreport"
+	 */
 	@Listen("onClick = #btnImprimir")
-	public void imprimir() throws SQLException {	
+	public void imprimir() throws SQLException {
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		List<AreaInvestigacion> areas = servicioArea.buscarActivos();
-		JasperReport jasperReport;
-		try {
-			String rutaUrl = obtenerDirectorio();
-			String reporteSrc = rutaUrl
-					+ "SITEG/vistas/reportes/salidas/compilados/RAreaInvestigacion.jasper";
-			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-		    Map p = new HashMap();
-			p.put("logoUcla", reporteImage + "logo ucla.png");
-			p.put("logoCE", reporteImage + "logo CE.png");
-			p.put("logoSiteg", reporteImage + "logo.png");
-				
-				
-			 
 
-			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,  new JRBeanCollectionDataSource(areas));
-			JasperViewer.viewReport(jasperPrint, false);
-			
-		} catch (JRException e) {
-			System.out.println(e);
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (areas.size() != 0) {
+
+			JasperReport jasperReport;
+			try {
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl
+						+ "SITEG/vistas/reportes/salidas/compilados/RAreaInvestigacion.jasper";
+				String reporteImage = rutaUrl
+						+ "SITEG/public/imagenes/reportes/";
+				Map p = new HashMap();
+				p.put("logoUcla", reporteImage + "logo ucla.png");
+				p.put("logoCE", reporteImage + "logo CE.png");
+				p.put("logoSiteg", reporteImage + "logo.png");
+
+				jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(
+						jasperReport, p, new JRBeanCollectionDataSource(areas));
+				JasperViewer.viewReport(jasperPrint, false);
+
+			} catch (JRException e) {
+				System.out.println(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			Messagebox.show("No hay informacion disponible", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
 		}
 
 	}
