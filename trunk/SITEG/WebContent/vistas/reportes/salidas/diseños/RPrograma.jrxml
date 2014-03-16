@@ -115,29 +115,29 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<reportElement x="170" y="0" width="216" height="43" uuid="92e389a7-55a9-425a-b36c-d982d032c6f7"/>
 			</rectangle>
 			<textField>
-				<reportElement x="12" y="11" width="152" height="20" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
-				<textElement textAlignment="Center">
+				<reportElement x="0" y="0" width="170" height="43" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="178" y="11" width="192" height="20" uuid="39ae1f72-7cbf-4f86-a6e2-62c0be636c7c"/>
-				<textElement textAlignment="Center">
+				<reportElement x="170" y="0" width="215" height="43" uuid="39ae1f72-7cbf-4f86-a6e2-62c0be636c7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="412" y="11" width="88" height="20" uuid="a35ff3e6-fb9c-489e-b362-bb035cd8ac71"/>
-				<textElement textAlignment="Center">
+				<reportElement x="386" y="0" width="150" height="43" uuid="a35ff3e6-fb9c-489e-b362-bb035cd8ac71"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{directorPrograma.nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="448" y="11" width="82" height="20" uuid="b0d3f699-361d-41d5-80eb-bbe46d2dfc38"/>
-				<textElement textAlignment="Center">
+				<reportElement x="418" y="0" width="154" height="43" uuid="b0d3f699-361d-41d5-80eb-bbe46d2dfc38"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{directorPrograma.apellido}]]></textFieldExpression>
