@@ -25,13 +25,13 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
 public class CCatalogoItem extends CGeneral {
-
 
 	private long id = 0;
 	private static String vistaRecibida;
@@ -55,22 +55,22 @@ public class CCatalogoItem extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionMostrarItem;
 
-	
 	/*
-	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
-	 * items disponibles y se llena el listado del mismo en el componente
-	 * lista de la vista.
+	 * Metodo heredado del Controlador CGeneral donde se buscan todos los items
+	 * disponibles y se llena el listado del mismo en el componente lista de la
+	 * vista.
 	 */
 	@Override
-	public	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 
 		List<ItemEvaluacion> items = servicioItem.buscarItemsActivos();
 		ltbItem.setModel(new ListModelList<ItemEvaluacion>(items));
 	}
+
 	/*
-	 * Metodo que permite filtrar los items disponibles, mediante el
-	 * componente de la lista, donde se podra visualizar el nombre,
-	 * descripcion y tipo de estos.
+	 * Metodo que permite filtrar los items disponibles, mediante el componente
+	 * de la lista, donde se podra visualizar el nombre, descripcion y tipo de
+	 * estos.
 	 */
 	@Listen("onChange = #txtNombreMostrarItem, #txtTipoMostrarItem, #txtDescripcionMostrarItem")
 	public void filtrarDatosCatalogo() {
@@ -78,24 +78,17 @@ public class CCatalogoItem extends CGeneral {
 		List<ItemEvaluacion> item2 = new ArrayList<ItemEvaluacion>();
 
 		for (ItemEvaluacion item1 : item) {
-			if (item1
-					.getNombre()
-					.toLowerCase()
-					.contains(
-							txtNombreMostrarItem.getValue().toLowerCase())
-					&& item1
-							.getDescripcion()
+			if (item1.getNombre().toLowerCase()
+					.contains(txtNombreMostrarItem.getValue().toLowerCase())
+					&& item1.getDescripcion()
 							.toLowerCase()
 							.contains(
 									txtDescripcionMostrarItem.getValue()
 											.toLowerCase())
-				&& item1
-				.getTipo()
-				.toLowerCase()
-				.contains(
-						txtTipoMostrarItem.getValue()
-								.toLowerCase()))
-			{
+					&& item1.getTipo()
+							.toLowerCase()
+							.contains(
+									txtTipoMostrarItem.getValue().toLowerCase())) {
 				item2.add(item1);
 			}
 
@@ -104,6 +97,7 @@ public class CCatalogoItem extends CGeneral {
 		ltbItem.setModel(new ListModelList<ItemEvaluacion>(item2));
 
 	}
+
 	/*
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
@@ -113,58 +107,73 @@ public class CCatalogoItem extends CGeneral {
 		vistaRecibida = vista;
 
 	}
+
 	/*
-	 * Metodo que permite obtener el objeto Item al realizar el evento
-	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
-	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
+	 * Metodo que permite obtener el objeto Item al realizar el evento doble
+	 * clic sobre un item en especifico en la lista, extrayendo asi su id, para
+	 * luego poder ser mapeada y enviada a la vista asociada a ella.
 	 */
 	@Listen("onDoubleClick = #ltbItem")
 	public void mostrarDatosCatalogo() {
-		
+
 		if (vistaRecibida == null) {
 
 			vistaRecibida = "maestros/VItem";
 
 		} else {
-		if( ltbItem.getSelectedCount()!=0){
-		Listitem listItem = ltbItem.getSelectedItem();
-		ItemEvaluacion itemDatosCatalogo = (ItemEvaluacion) listItem.getValue();
-		String vista = vistaRecibida;
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", itemDatosCatalogo.getId());
-		map.put("vista", vista);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Executions.sendRedirect("/vistas/arbol.zul");
-		wdwCatalogoItem.onClose();
-		}
+			if (ltbItem.getSelectedCount() != 0) {
+				Listitem listItem = ltbItem.getSelectedItem();
+				ItemEvaluacion itemDatosCatalogo = (ItemEvaluacion) listItem
+						.getValue();
+				String vista = vistaRecibida;
+				final HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("id", itemDatosCatalogo.getId());
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+				Executions.sendRedirect("/vistas/arbol.zul");
+				wdwCatalogoItem.onClose();
+			}
 		}
 	}
-	
+
+	/*
+	 * Metodo que permite generar una lista de los items de envaluacion que se
+	 * encuentran activos en el sistema, agrupados por tipo mediante el
+	 * componente "Jasperreport"
+	 */
+
 	@Listen("onClick = #btnImprimir")
-	public void imprimir() throws SQLException {	
+	public void imprimir() throws SQLException {
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		List<ItemEvaluacion> items = servicioItem.buscarItemsActivos();
-		JasperReport jasperReport;
-		try {
-			String rutaUrl = obtenerDirectorio();
-			String reporteSrc = rutaUrl
-					+ "SITEG/vistas/reportes/salidas/compilados/RItemsEvaluacion.jasper";
-			  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-		    Map p = new HashMap();
-			p.put("logoUcla", reporteImage + "logo ucla.png");
-			p.put("logoCE", reporteImage + "logo CE.png");
-			p.put("logoSiteg", reporteImage + "logo.png");
-				
-				
-			 
 
-			jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, p,  new JRBeanCollectionDataSource(items));
-			JasperViewer.viewReport(jasperPrint, false);
-			
-		} catch (JRException e) {
-			System.out.println(e);
-			e.printStackTrace();
+		if (items.size() != 0) {
+
+			JasperReport jasperReport;
+			try {
+				String rutaUrl = obtenerDirectorio();
+				String reporteSrc = rutaUrl
+						+ "SITEG/vistas/reportes/salidas/compilados/RItemsEvaluacion.jasper";
+				String reporteImage = rutaUrl
+						+ "SITEG/public/imagenes/reportes/";
+				Map p = new HashMap();
+				p.put("logoUcla", reporteImage + "logo ucla.png");
+				p.put("logoCE", reporteImage + "logo CE.png");
+				p.put("logoSiteg", reporteImage + "logo.png");
+
+				jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(
+						jasperReport, p, new JRBeanCollectionDataSource(items));
+				JasperViewer.viewReport(jasperPrint, false);
+
+			} catch (JRException e) {
+				System.out.println(e);
+				e.printStackTrace();
+			}
+
+		} else {
+			Messagebox.show("No hay informacion disponible", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
 		}
 
 	}

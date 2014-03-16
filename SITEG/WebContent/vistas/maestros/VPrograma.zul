@@ -131,7 +131,7 @@
 						<label value="*"
 							style="font-weight:bold;color:red">
 						</label>
-						<label value="Nombre:" style="font-weight:bold" />
+						<label value="Programa:" style="font-weight:bold" />
 					</hlayout>
 
 					<hbox>
