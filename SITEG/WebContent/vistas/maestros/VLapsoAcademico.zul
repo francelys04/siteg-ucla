@@ -124,7 +124,7 @@
 					</hlayout>
 
 					<datebox id="dtbInicioLapso" cols="12" width="150px"
-						tabindex="3" format="yyyy/MM/dd" tooltip="pupInicioLapso"
+						tabindex="3" format="dd/MM/yyyy" tooltip="pupInicioLapso"
 						style="margin-right:15px">
 					</datebox>
 
@@ -139,7 +139,7 @@
 					</hlayout>
 
 					<datebox id="dtbFinLapso" cols="12" width="150px"
-						tabindex="4" format="yyyy/MM/dd" tooltip="pupFinLapso"
+						tabindex="4" format="dd/MM/yyyy" tooltip="pupFinLapso"
 						style="margin-right:15px">
 					</datebox>
 

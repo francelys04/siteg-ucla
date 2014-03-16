@@ -67,9 +67,6 @@ public class CPrograma extends CGeneral {
 	@Wire
 	private Image imagenx;
 	private static String cedulaProfesor;
-	private static boolean programaModificable = false;
-	private static boolean programaExistente = false;
-
 	long id = 0;
 
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -81,8 +78,6 @@ public class CPrograma extends CGeneral {
 	 */
 	public void inicializar(Component comp) {
 
-		programaModificable = false;
-		programaExistente = false;
 		txtDirectorPrograma.setDisabled(true);
 		Selectors.wireComponents(comp, this, false);
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -107,7 +102,7 @@ public class CPrograma extends CGeneral {
 			if (map.get("correoPrograma") != null)
 				txtCorreoPrograma.setValue((String) map.get("correoPrograma"));
 			if ((Long) map.get("id") != null) {
-				programaModificable = true;
+
 				id = ((Long) map.get("id"));
 				Programa programa = servicioPrograma.buscar(id);
 				txtNombrePrograma.setValue(programa.getNombre());
@@ -126,6 +121,9 @@ public class CPrograma extends CGeneral {
 			}
 		}
 
+		txtCorreoPrograma
+		.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
+		
 	}
 
 	/*
@@ -150,6 +148,8 @@ public class CPrograma extends CGeneral {
 	 */
 	@Listen("onClick = #btnCatalogoDirectorPrograma")
 	public void buscarDirector() {
+
+		txtCorreoPrograma.setConstraint("");
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("director", "director");
 		if ((txtNombrePrograma.getText().compareTo("") != 0))
@@ -162,12 +162,14 @@ public class CPrograma extends CGeneral {
 			map.put("descripcionPrograma", txtDescripcionPrograma.getValue());
 		if ((txtCorreoPrograma.getText().compareTo("") != 0))
 			map.put("correoPrograma", txtCorreoPrograma.getValue());
+		
 
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoDirectorPrograma.zul", null, null);
 		window.doModal();
-
+		txtCorreoPrograma
+		.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 		catalogoProfesor.recibir("maestros/VPrograma");
 	}
 
@@ -223,11 +225,12 @@ public class CPrograma extends CGeneral {
 										.buscarProfesorPorCedula(cedulaProfesor);
 								crearUsuarioProfesor(imagenx, directorPrograma,
 										"ROLE_DIRECTOR");
-								String mensaje = "Ha sido seleccionado como director de programa de:"
+								String mensaje = "Ha sido seleccionado como director de programa de: "
 										+ txtNombrePrograma.getValue()
-										+ "Su usuario es: "
+										+ ","
+										+ " Su usuario es: "
 										+ directorPrograma.getCedula()
-										+ "y su contrasena:"
+										+ " y su contrasena: "
 										+ directorPrograma.getCedula();
 								enviarEmailNotificacion(
 										directorPrograma.getCorreoElectronico(),
@@ -321,11 +324,12 @@ public class CPrograma extends CGeneral {
 		id = 0;
 		txtNombrePrograma.setValue("");
 		txtDescripcionPrograma.setValue("");
-		txtCorreoPrograma.setValue("");
 		btnEliminarPrograma.setDisabled(true);
 		txtDirectorPrograma.setValue("");
-		programaModificable = false;
-		programaExistente = false;
+		txtCorreoPrograma.setConstraint("");
+		txtCorreoPrograma.setValue("");
+		txtCorreoPrograma
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 	}
 
 	/* Metodo que permite cerrar la ventana correspondiente a los programas */

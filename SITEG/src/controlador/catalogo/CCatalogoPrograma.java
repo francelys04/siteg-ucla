@@ -101,23 +101,34 @@ public class CCatalogoPrograma extends CGeneral {
 	@Listen("onDoubleClick = #ltbPrograma")
 	public void mostrarDatosCatalogo() {
 
-		if (vistaRecibida == null) {
+		try {
+			if (vistaRecibida == null) {
 
-			vistaRecibida = "maestros/VPrograma";
+				vistaRecibida = "maestros/VPrograma";
 
-		} else {
-			Listitem listItem = ltbPrograma.getSelectedItem();
-			Programa programaDatos = servicioPrograma
-					.buscarPorNombrePrograma(((Programa) listItem.getValue())
-							.getNombre());
-			final HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", programaDatos.getId());
-			String vista = vistaRecibida;
-			map.put("vista", vista);
-			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			Executions.sendRedirect("/vistas/arbol.zul");
-			wdwCatalogoPrograma.onClose();
+			} else {
+
+				if (ltbPrograma.getItemCount() != 0) {
+
+					Listitem listItem = ltbPrograma.getSelectedItem();
+					Programa programaDatos = servicioPrograma
+							.buscarPorNombrePrograma(((Programa) listItem
+									.getValue()).getNombre());
+					final HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("id", programaDatos.getId());
+					String vista = vistaRecibida;
+					map.put("vista", vista);
+					Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+					Executions.sendRedirect("/vistas/arbol.zul");
+					wdwCatalogoPrograma.onClose();
+
+				}
+			}
+		} catch (NullPointerException e) {
+
+			System.out.println(" ");
 		}
+
 
 	}
 
