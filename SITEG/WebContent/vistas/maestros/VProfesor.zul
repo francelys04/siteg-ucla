@@ -146,7 +146,7 @@
 
 						<textbox id="txtCedulaProfesor" width="90%"
 							maxlength="10"
-							constraint="/.+[0-9]+/: Debe ingresar una cédula válida"
+							constraint="/.+[0-9]+/: Debe ingresar una cedula como: 19482714"
 							tabindex="2" tooltip="pupCedulaProfesor" />
 
 						<button id="btnCatalogoProfesor" sclass="btn"
@@ -229,7 +229,7 @@
 					<hbox>
 						<textbox id="txtTelefonoMovilProfesor"
 							maxlength="15"
-							constraint="/.+[0-9]+/: Debe ingresar un telefono valido"
+							constraint="/.+[0-9]+/: Debe ingresar un telefono como: 04264518973"
 							width="90%" tabindex="9" tooltip="pupTelefonoMovilProfesor" />
 
 						<hlayout>
@@ -239,7 +239,7 @@
 
 						<textbox id="txtTelefonoFijoProfesor"
 							maxlength="15"
-							constraint="/.+[0-9]+/: Debe ingresar un telefono valido"
+							constraint="/.+[0-9]+/: Debe ingresar un telefono como: 02512521309"
 							tooltip="pupTelefonoFijoProfesor" width="90%"
 							style="margin-left:15px" tabindex="10" />
 					</hbox>

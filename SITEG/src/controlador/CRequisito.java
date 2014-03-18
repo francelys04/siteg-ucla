@@ -112,7 +112,7 @@ public class CRequisito extends CGeneral {
 								cancelarRequisito();
 								Messagebox.show(
 										"Requisito registrado exitosamente",
-										"Informaci�n", Messagebox.OK,
+										"Informacion", Messagebox.OK,
 										Messagebox.INFORMATION);
 								id = 0;
 							}

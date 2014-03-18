@@ -111,6 +111,7 @@ public class CCatalogoTipoJurado extends CGeneral {
 	 */
 	@Listen("onDoubleClick = #ltbTipoJurado")
 	public void mostrarDatosCatalogo() {
+		try {
 		if (ltbTipoJurado.getItemCount() != 0) {
 
 			if (vistaRecibida == null) {
@@ -130,6 +131,8 @@ public class CCatalogoTipoJurado extends CGeneral {
 				Executions.sendRedirect("/vistas/arbol.zul");
 				wdwCatalogoTipoJurado.onClose();
 			}
+		}
+		} catch (NullPointerException e) {
 		}
 	}
 

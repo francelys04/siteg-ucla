@@ -168,29 +168,32 @@ public class CCatalogoEstudiante extends CGeneral {
 	@Listen("onDoubleClick = #ltbEstudiante")
 	public void mostrarDatosCatalogo() {
 
-		if (vistaRecibida == null) {
+		try {
+			if (vistaRecibida == null) {
 
-			vistaRecibida = "maestros/VEstudiante";
+				vistaRecibida = "maestros/VEstudiante";
 
-		} else {
-			if (ltbEstudiante.getItemCount() != 0) {
-				Listitem listItem = ltbEstudiante.getSelectedItem();
-				Estudiante estudianteDatosCatalogo = (Estudiante) listItem
-						.getValue();
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
-						.getCurrent().getAttribute("itemsCatalogo");
+			} else {
+				if (ltbEstudiante.getItemCount() != 0) {
+					Listitem listItem = ltbEstudiante.getSelectedItem();
+					Estudiante estudianteDatosCatalogo = (Estudiante) listItem
+							.getValue();
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					HashMap<String, Object> map2 = (HashMap<String, Object>) Sessions
+							.getCurrent().getAttribute("itemsCatalogo");
 
-				if (map2 != null)
-					map = map2;
+					if (map2 != null)
+						map = map2;
 
-				map.put("cedula", estudianteDatosCatalogo.getCedula());
-				String vista = vistaRecibida;
-				map.put("vista", vista);
-				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-				Executions.sendRedirect("/vistas/arbol.zul");
-				wdwCatalogoEstudiante.onClose();
+					map.put("cedula", estudianteDatosCatalogo.getCedula());
+					String vista = vistaRecibida;
+					map.put("vista", vista);
+					Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+					Executions.sendRedirect("/vistas/arbol.zul");
+					wdwCatalogoEstudiante.onClose();
+				}
 			}
+		} catch (NullPointerException e) {
 		}
 	}
 

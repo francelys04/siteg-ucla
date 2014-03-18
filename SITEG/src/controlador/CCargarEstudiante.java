@@ -141,6 +141,7 @@ public class CCargarEstudiante extends CGeneral {
 	public void cancelarCargarEstudiante() {
 
 		ltbEstudiantesCargados.getItems().clear();
+		ltbEstudiantesCargados.setModel(new ListModelList<Estudiante>());
 
 	}
 	

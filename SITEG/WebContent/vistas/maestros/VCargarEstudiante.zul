@@ -48,7 +48,8 @@
 			label="Presione aquí para buscar la lista de los estudiantes" />
 	</popup>
 	<popup id="pupGuardarCargarEstudiante">
-		<toolbarbutton label="Presione aquí para guardar los datos de los estudiantes" />
+		<toolbarbutton
+			label="Presione aquí para guardar los datos de los estudiantes" />
 	</popup>
 	<popup id="pupSalirCargarEstudiante">
 		<toolbarbutton label="Presione aquí para salir" />
@@ -113,14 +114,14 @@
 		<separator />
 
 		<listbox id="ltbEstudiantesCargados" width="90%" mold="paging"
-			height="330px" style="margin-left:30px" pageSize="7"
+			height="auto" style="margin-left:30px" pageSize="7"
 			emptyMessage="No se ha cargado la lista de estudiantes">
 			<listhead>
-				<listheader label="Cédula" align="center" />
+				<listheader label="Cédula" align="center" width="15%"/>
 				<listheader label="Nombre" align="center" />
 				<listheader label="Apellido" align="center" />
-				<listheader label="Programa" align="center" />
-				<listheader label="Correo" align="center" />
+				<listheader label="Programa" align="center" width="20%"/>
+				<listheader label="Correo" align="center" width="28%"/>
 
 
 			</listhead>
@@ -138,10 +139,10 @@
 			</template>
 		</listbox>
 
-
-
-
-
+		<separator />
+		<separator />
+		<separator />
+		<separator />
 		<separator />
 		<separator />
 		<separator />

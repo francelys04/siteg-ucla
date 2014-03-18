@@ -24,7 +24,7 @@
 	<hbox>
 		<label id="lblPrograma" value="Programa:"
 			style="margin-left:15px" />
-		<combobox id="cmbPrograma" width="220px" readonly="true"
+		<combobox id="cmbPrograma" width="250px" readonly="true"
 			style="margin-left:40px" tabindex="10">
 			<template name="model">
 				<comboitem label="${each.nombre}" id="${each.id}" />

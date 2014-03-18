@@ -127,7 +127,7 @@ public class CEstudiante extends CGeneral {
 			}
 		}
 		txtCorreoEstudiante
-				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un correo como: ejemplo@ejemplo.com");
 	}
 
 	/*
@@ -246,7 +246,7 @@ public class CEstudiante extends CGeneral {
 		txtCedulaEstudiante.setConstraint("");
 		txtCedulaEstudiante.setValue("");
 		txtCedulaEstudiante
-				.setConstraint("/.+[0-9]+/: Debe ingresar una cedula valida");
+				.setConstraint("/.+[0-9]+/: Debe ingresar una cedula como: 19482714");
 		txtNombreEstudiante.setValue("");
 		txtApellidoEstudiante.setValue("");
 		rdgSexoEstudiante.setSelectedItem(null);
@@ -254,15 +254,15 @@ public class CEstudiante extends CGeneral {
 		txtTelefonoMovilEstudiante.setConstraint("");
 		txtTelefonoMovilEstudiante.setValue("");
 		txtTelefonoMovilEstudiante
-				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono como: 04264518973");
 		txtTelefonoFijoEstudiante.setConstraint("");
 		txtTelefonoFijoEstudiante.setValue("");
 		txtTelefonoFijoEstudiante
-				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono valido");
+				.setConstraint("/.+[0-9]+/: Debe ingresar un telefono como: 02512521309" );
 		txtCorreoEstudiante.setConstraint("");
 		txtCorreoEstudiante.setValue("");
 		txtCorreoEstudiante
-				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un correo como: ejemplo@ejemplo.com");
 		btnEliminarEstudiante.setDisabled(true);
 
 	}
