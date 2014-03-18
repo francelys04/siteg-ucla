@@ -180,31 +180,34 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 	 */
 	@Listen("onDoubleClick = #ltbArea")
 	public void mostrarDatosCatalogo() {
-		if (ltbArea.getItemCount() != 0) {
-			if (encontrado == false) {
-				Listitem listItem = ltbArea.getSelectedItem();
-				AreaInvestigacion areaDatosCatalogo = (AreaInvestigacion) listItem
-						.getValue();
-				CCatalogoTematicaArea area = new CCatalogoTematicaArea();
-				area.recibirId(areaDatosCatalogo);
-				Window window = (Window) Executions.createComponents(
-						"/vistas/catalogos/VCatalogoTematicaArea.zul", null,
-						null);
-				window.doModal();
+		try {
+			if (ltbArea.getItemCount() != 0) {
+				if (encontrado == false) {
+					Listitem listItem = ltbArea.getSelectedItem();
+					AreaInvestigacion areaDatosCatalogo = (AreaInvestigacion) listItem
+							.getValue();
+					CCatalogoTematicaArea area = new CCatalogoTematicaArea();
+					area.recibirId(areaDatosCatalogo);
+					Window window = (Window) Executions.createComponents(
+							"/vistas/catalogos/VCatalogoTematicaArea.zul",
+							null, null);
+					window.doModal();
 
-			} else {
+				} else {
 
-				Listitem listItem = ltbArea.getSelectedItem();
-				AreaInvestigacion areaDatosCatalogo = (AreaInvestigacion) listItem
-						.getValue();
-				final HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("id", areaDatosCatalogo.getId());
-				String vista = vistaRecibida;
-				map.put("vista", vista);
-				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-				Executions.sendRedirect("/vistas/arbol.zul");
-				wdwCatalogoArea.onClose();
+					Listitem listItem = ltbArea.getSelectedItem();
+					AreaInvestigacion areaDatosCatalogo = (AreaInvestigacion) listItem
+							.getValue();
+					final HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("id", areaDatosCatalogo.getId());
+					String vista = vistaRecibida;
+					map.put("vista", vista);
+					Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+					Executions.sendRedirect("/vistas/arbol.zul");
+					wdwCatalogoArea.onClose();
+				}
 			}
+		} catch (NullPointerException e) {
 		}
 	}
 

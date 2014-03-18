@@ -383,7 +383,7 @@
 							style="margin-left:5px" />
 
 						<combobox id="cmbPrograma" autodrop="true"
-							style="margin-left:10px" width="200px" tabindex="12"
+							style="margin-left:10px" width="250px" tabindex="12"
 							readonly="true">
 							<template name="model">
 								<comboitem label="${each.nombre}"

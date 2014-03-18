@@ -122,7 +122,7 @@ public class CPrograma extends CGeneral {
 		}
 
 		txtCorreoPrograma
-		.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
+		.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un correo como: ejemplo@ejemplo.com");
 		
 	}
 

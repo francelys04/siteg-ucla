@@ -107,6 +107,9 @@ public class CCatalogoActividad extends CGeneral {
 	 */
 	@Listen("onDoubleClick = #ltbActividad")
 	public void mostrarDatosCatalogo() {
+		
+		try {
+		
 		if (ltbActividad.getItemCount() != 0) {
 			Listitem listItem = ltbActividad.getSelectedItem();
 			Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
@@ -118,6 +121,8 @@ public class CCatalogoActividad extends CGeneral {
 			Executions.sendRedirect("/vistas/arbol.zul");
 
 			wdwCatalogoActividad.onClose();
+		}
+		} catch (NullPointerException e) {
 		}
 	}
 

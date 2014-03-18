@@ -14,7 +14,7 @@
 	<!-- Fin de popus -->
 	<hbox>
 		<label value="Programa:" style="margin-left:15px" />
-		<combobox id="cmbProgramaTutores" width="220px" readonly="true"
+		<combobox id="cmbProgramaTutores" width="250px" readonly="true"
 			style="margin-left:40px" tabindex="10">
 			<template name="model">
 				<comboitem label="${each.nombre}" id="${each.id}" />

@@ -170,7 +170,6 @@
 
 					<hbox>
 						<textbox id="txtCorreoPrograma" width="230px"
-							constraint="/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com"
 							maxlength="100" tooltip="pupCorreoPrograma" tabindex="5" />
 					</hbox>
 				</row>

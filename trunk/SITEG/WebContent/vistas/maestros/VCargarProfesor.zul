@@ -118,14 +118,15 @@
 		<separator />
 
 		<listbox id="ltbProfesoresCargados" width="90%" mold="paging"
-			height="330px" style="margin-left:30px" pageSize="7"
+			height="auto" style="margin-left:30px" pageSize="8"
 			emptyMessage="No se ha cargado la lista de profesores">
 			<listhead>
-				<listheader label="Cédula" align="center" />
+				<listheader label="Cédula" align="center" width="15%" />
 				<listheader label="Nombre" align="center" />
 				<listheader label="Apellido" align="center" />
-				<listheader label="Categoría" align="center" />
-				<listheader label="Correo" align="center" />
+				<listheader label="Categoría" align="center"
+					width="20%" />
+				<listheader label="Correo" align="center" width="28%" />
 
 
 			</listhead>
@@ -143,10 +144,10 @@
 			</template>
 		</listbox>
 
-
-
-
-
+		<separator />
+		<separator />
+		<separator />
+		<separator />
 		<separator />
 		<separator />
 		<separator />
@@ -184,5 +185,6 @@
 
 	<separator />
 	<separator />
+
 
 </window>

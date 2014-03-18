@@ -149,7 +149,8 @@ public class CCargarProfesor extends CGeneral {
 	public void cancelarCargarProfesor() {
 
 		ltbProfesoresCargados.getItems().clear();
-
+		ltbProfesoresCargados.setModel(new ListModelList<Profesor>());
+		
 	}
 
 	/*

@@ -135,7 +135,9 @@ public class CCatalogoRequisito extends CGeneral {
 	 */
 	@Listen("onDoubleClick = #ltbRequisito")
 	public void mostrarDatosCatalogo() {
-
+		
+		try {
+		
 		if (vistaRecibida == null) {
 
 			vistaRecibida = "maestros/VRequisito";
@@ -153,6 +155,8 @@ public class CCatalogoRequisito extends CGeneral {
 				Executions.sendRedirect("/vistas/arbol.zul");
 				wdwCatalogoRequisito.onClose();
 			}
+		}
+		} catch (NullPointerException e) {
 		}
 	}
 

@@ -97,32 +97,32 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="43" splitType="Stretch">
+		<band height="71" splitType="Stretch">
 			<rectangle>
-				<reportElement x="424" y="0" width="148" height="43" uuid="efb8b223-78fc-4864-8319-194a356d38b3"/>
+				<reportElement x="424" y="0" width="148" height="71" uuid="efb8b223-78fc-4864-8319-194a356d38b3"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="170" y="0" width="254" height="43" uuid="f647b6df-bfa6-4961-b353-48bc00420f12"/>
+				<reportElement x="170" y="0" width="254" height="71" uuid="f647b6df-bfa6-4961-b353-48bc00420f12"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="0" y="0" width="170" height="43" uuid="0f241c27-ae6a-441d-b358-74f8b6cd6527"/>
+				<reportElement x="0" y="0" width="170" height="71" uuid="0f241c27-ae6a-441d-b358-74f8b6cd6527"/>
 			</rectangle>
 			<textField>
-				<reportElement x="10" y="1" width="146" height="32" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
+				<reportElement x="10" y="1" width="150" height="70" uuid="ccde970c-cc21-4959-96f4-2dac0de1e335"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="186" y="1" width="224" height="42" uuid="e6675813-6f16-4474-bac6-9e1f0a8b35b8"/>
+				<reportElement x="178" y="1" width="236" height="70" uuid="e6675813-6f16-4474-bac6-9e1f0a8b35b8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="436" y="1" width="125" height="42" uuid="fde7b67b-459a-4db8-98b0-ccaa6947bd5c"/>
+				<reportElement x="436" y="1" width="125" height="70" uuid="fde7b67b-459a-4db8-98b0-ccaa6947bd5c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
