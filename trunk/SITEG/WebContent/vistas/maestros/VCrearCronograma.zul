@@ -143,7 +143,7 @@
 
 					<combobox id="cmbProgramaCrearCronograma"
 						tooltip="pupProgramaCronograma" readonly="true" autodrop="true"
-						width="190px" tabindex="12" style="margin-left:20px">
+						width="250px" tabindex="12" style="margin-left:20px">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -243,13 +243,13 @@
 											</listcell>
 											<listcell>
 												<datebox inplace="true"
-													tooltip="pupFechaInicioCronograma"
+													format="dd/MM/yyyy" tooltip="pupFechaInicioCronograma"
 													value="${each.fechaInicio}" width="98%" />
 											</listcell>
 											<listcell>
 												<datebox inplace="true"
-													tooltip="pupFechaFinCronograma" value="${each.fechaFin}"
-													width="98%" />
+													format="dd/MM/yyyy" tooltip="pupFechaFinCronograma"
+													value="${each.fechaFin}" width="98%" />
 											</listcell>
 											<listcell>
 												<spinner inplace="true"

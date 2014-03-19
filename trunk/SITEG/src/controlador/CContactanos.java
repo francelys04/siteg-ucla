@@ -48,6 +48,9 @@ public class CContactanos extends CGeneral {
 		List<Programa> programas = servicioPrograma.buscarActivas();
 		cmbProgramaContactanos.setModel(new ListModelList<Programa>(programas));
 
+		txtCorreo
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un correo como: ejemplo@ejemplo.com");
+
 	}
 
 	/*
@@ -121,10 +124,13 @@ public class CContactanos extends CGeneral {
 	public void cancelarCorreo() {
 
 		txtNombre.setValue("");
-		txtCorreo.setValue("");
 		txtAsunto.setValue("");
 		txtMensaje.setValue("");
 		cmbProgramaContactanos.setValue("");
+		txtCorreo.setConstraint("");
+		txtCorreo.setValue("");
+		txtCorreo
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 
 	}
 

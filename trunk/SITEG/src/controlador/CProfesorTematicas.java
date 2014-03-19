@@ -184,39 +184,51 @@ public class CProfesorTematicas extends CGeneral {
 	 */
 	@Listen("onClick = #btnGuardarProfesorTematicas")
 	public void guardar() {
-		if (lsbTematicasProfesorSeleccionadas.getItemCount() != 0) {
-			Messagebox.show("¿Desea guardar la configuracion realizada?",
-					"Dialogo de confirmacion", Messagebox.OK
-							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener<Event>() {
-						public void onEvent(Event evt)
-								throws InterruptedException {
-							if (evt.getName().equals("onOK")) {
-								Profesor profesor = servicioProfesor
-										.buscarProfesorPorCedula(txtCedulaProfesorTematica
-												.getValue());
 
-								Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
-								for (int i = 0; i < lsbTematicasProfesorSeleccionadas
-										.getItemCount(); i++) {
-									Tematica tema = lsbTematicasProfesorSeleccionadas
-											.getItems().get(i).getValue();
-									tematicasProfesor.add(tema);
+		if (tematicasCargadas == true) {
+
+			if (lsbTematicasProfesorSeleccionadas.getItemCount() != 0) {
+				Messagebox.show("¿Desea guardar la configuracion realizada?",
+						"Dialogo de confirmacion", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
+							public void onEvent(Event evt)
+									throws InterruptedException {
+								if (evt.getName().equals("onOK")) {
+									Profesor profesor = servicioProfesor
+											.buscarProfesorPorCedula(txtCedulaProfesorTematica
+													.getValue());
+
+									Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
+									for (int i = 0; i < lsbTematicasProfesorSeleccionadas
+											.getItemCount(); i++) {
+										Tematica tema = lsbTematicasProfesorSeleccionadas
+												.getItems().get(i).getValue();
+										tematicasProfesor.add(tema);
+									}
+
+									profesor.setTematicas(tematicasProfesor);
+									servicioProfesor.guardarProfesor(profesor);
+									limpiarCampos();
+									Messagebox.show(
+											"Configuracion guardada con exito",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 								}
-
-								profesor.setTematicas(tematicasProfesor);
-								servicioProfesor.guardarProfesor(profesor);
-								limpiarCampos();
-								Messagebox.show(
-										"Configuracion guardada con exito",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
 							}
-						}
-					});
+						});
+			} else {
+				Messagebox
+						.show("Debe asignarle al profesor seleccionado al menos una tematica",
+								"Informacion", Messagebox.OK,
+								Messagebox.INFORMATION);
+
+			}
 		} else {
-			Messagebox.show("Debe seleccionar al menos una tematica",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
+			Messagebox
+					.show("Debe seleccionar una profesor para agregarle las tematicas correspondientes ",
+							"Error", Messagebox.OK, Messagebox.ERROR);
 
 		}
 	}
