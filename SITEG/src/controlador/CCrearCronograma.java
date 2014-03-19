@@ -34,6 +34,7 @@ public class CCrearCronograma extends CGeneral {
 	private static final long serialVersionUID = -5977701710543879084L;
 	private static boolean actividadesCargadas;
 	private static boolean actividadesSeleccionadas;
+	private static List<Cronograma> cronogramaActividad;
 	List<Cronograma> cronogramas = new ArrayList<Cronograma>();
 	List<Actividad> actividades = new ArrayList<Actividad>();
 	@Wire
@@ -210,76 +211,81 @@ public class CCrearCronograma extends CGeneral {
 	@Listen("onClick = #btnCrearCronograma")
 	public void crearCronograma() {
 
-		if (ltbActividadesSeleccionadas.getItemCount() == 0) {
+		if (actividadesCargadas == true) {
 
-			Messagebox.show("Debe seleccionar las actividades del cronograma",
-					"Error", Messagebox.OK, Messagebox.ERROR);
+			if (ltbActividadesSeleccionadas.getItemCount() == 0) {
 
+				Messagebox.show(
+						"Debe seleccionar las actividades del cronograma",
+						"Error", Messagebox.OK, Messagebox.ERROR);
+
+			} else {
+				boolean error = false;
+				Lapso lapso = servicioLapso.buscarLapso(Long
+						.parseLong(cmbLapsoCrearCronograma.getSelectedItem()
+								.getId()));
+				Programa programa = servicioPrograma.buscar((Long
+						.parseLong(cmbProgramaCrearCronograma.getSelectedItem()
+								.getId())));
+
+				cronogramaActividad = servicioCronograma
+						.buscarCronogramaPorLapsoYPrograma(programa, lapso);
+				if (!cronogramaActividad.isEmpty()) {
+					servicioCronograma.limpiar(cronogramaActividad);
+				}
+				cronogramaActividad = new ArrayList<Cronograma>();
+				for (int i = 0; i < ltbActividadesSeleccionadas.getItemCount(); i++) {
+					Listitem listItem = ltbActividadesSeleccionadas
+							.getItemAtIndex(i);
+					Date fechaInicio = ((Datebox) ((listItem.getChildren()
+							.get(1))).getFirstChild()).getValue();
+					Date fechaFin = ((Datebox) ((listItem.getChildren().get(2)))
+							.getFirstChild()).getValue();
+					if (fechaFin == null || fechaInicio == null
+							|| fechaInicio.after(fechaFin)) {
+						error = true;
+					}
+					int id = ((Spinner) ((listItem.getChildren().get(3)))
+							.getFirstChild()).getValue();
+					Actividad actividad = servicioActividad.buscarActividad(id);
+					Cronograma cronograma = new Cronograma(lapso, programa,
+							actividad, fechaInicio, fechaFin);
+					cronogramaActividad.add(cronograma);
+				}
+				if (!error) {
+
+					Messagebox.show(
+							"¿Desea guardar el cronograma de actividades?",
+							"Dialogo de confirmacion", Messagebox.OK
+									| Messagebox.CANCEL, Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+
+										servicioCronograma.guardar(cronogramaActividad);
+										Messagebox
+												.show("Cronograma Registrado con exito",
+														"Informacion",
+														Messagebox.OK,
+														Messagebox.INFORMATION);
+										limpiarCampos();
+
+									}
+								}
+							});
+				} else {
+					Messagebox
+							.show("Debe seleccionar las fechas de las actividades y la fecha de fin de las actividades debe ser posterior a la fecha de inicio",
+									"Error", Messagebox.OK, Messagebox.ERROR);
+				}
+
+			}
 		} else {
 
-			Messagebox.show("¿Desea guardar las actividades del cronograma?",
-					"Dialogo de confirmacion", Messagebox.OK
-							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener<Event>() {
-						public void onEvent(Event evt)
-								throws InterruptedException {
-							if (evt.getName().equals("onOK")) {
-
-								boolean error = false;
-								Lapso lapso = servicioLapso.buscarLapso(Long
-										.parseLong(cmbLapsoCrearCronograma
-												.getSelectedItem().getId()));
-								Programa programa = servicioPrograma.buscar((Long
-										.parseLong(cmbProgramaCrearCronograma
-												.getSelectedItem().getId())));
-
-								List<Cronograma> cronogramas = servicioCronograma
-										.buscarCronogramaPorLapsoYPrograma(
-												programa, lapso);
-								if (!cronogramas.isEmpty()) {
-									servicioCronograma.limpiar(cronogramas);
-								}
-								cronogramas = new ArrayList<Cronograma>();
-								for (int i = 0; i < ltbActividadesSeleccionadas
-										.getItemCount(); i++) {
-									Listitem listItem = ltbActividadesSeleccionadas
-											.getItemAtIndex(i);
-									Date fechaInicio = ((Datebox) ((listItem
-											.getChildren().get(1)))
-											.getFirstChild()).getValue();
-									Date fechaFin = ((Datebox) ((listItem
-											.getChildren().get(2)))
-											.getFirstChild()).getValue();
-									if (fechaFin == null || fechaInicio == null
-											|| fechaInicio.after(fechaFin)) {
-										error = true;
-									}
-									int id = ((Spinner) ((listItem
-											.getChildren().get(3)))
-											.getFirstChild()).getValue();
-									Actividad actividad = servicioActividad
-											.buscarActividad(id);
-									Cronograma cronograma = new Cronograma(
-											lapso, programa, actividad,
-											fechaInicio, fechaFin);
-									cronogramas.add(cronograma);
-								}
-								if (!error) {
-									servicioCronograma.guardar(cronogramas);
-									Messagebox.show(
-											"Cronograma Registrado con exito",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
-									limpiarCampos();
-								} else {
-									Messagebox
-											.show("La fecha de fin de las actividades debe ser posterior a la fecha de inicio",
-													"Error", Messagebox.OK,
-													Messagebox.ERROR);
-								}
-							}
-						}
-					});
+			Messagebox
+					.show("Debe seleccionar el lapso academico y el programa al cual se le creara el cronograma de actividades",
+							"Error", Messagebox.OK, Messagebox.ERROR);
 		}
 	}
 

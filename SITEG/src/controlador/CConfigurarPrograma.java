@@ -1,14 +1,17 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import modelo.AreaInvestigacion;
 import modelo.ItemEvaluacion;
 import modelo.Lapso;
+import modelo.Profesor;
 import modelo.Programa;
 import modelo.Requisito;
+import modelo.Tematica;
 import modelo.compuesta.CondicionPrograma;
 import modelo.compuesta.ProgramaArea;
 import modelo.compuesta.ProgramaItem;
@@ -16,6 +19,7 @@ import modelo.compuesta.ProgramaRequisito;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
@@ -337,89 +341,139 @@ public class CConfigurarPrograma extends CGeneral {
 	 */
 	@Listen("onClick = #btnGuardarConfiguracionPrograma")
 	public void guardar() {
-		Lapso lapso = servicioLapso
-				.buscarLapso(Long.parseLong(cmbLapsoConfigurarPrograma
-						.getSelectedItem().getId()));
-		Programa programa = servicioPrograma.buscar((Long
-				.parseLong(cmbProgramaConfigurarPrograma.getSelectedItem()
-						.getId())));
-		List<ProgramaArea> programasAreas = new ArrayList<ProgramaArea>();
-		List<AreaInvestigacion> areas = servicioProgramaArea
-				.buscarAreasDePrograma(programa, lapso);
-		if (!areas.isEmpty()) {
-			for (int i = 0; i < areas.size(); i++) {
-				ProgramaArea programaArea = new ProgramaArea(programa,
-						areas.get(i), lapso);
-				programasAreas.add(programaArea);
-			}
-			servicioProgramaArea.limpiar(programasAreas);
-		}
-		programasAreas = new ArrayList<ProgramaArea>();
-		for (int i = 0; i < ltbAreasSeleccionadas.getItemCount(); i++) {
-			AreaInvestigacion area = ltbAreasSeleccionadas.getItems().get(i)
-					.getValue();
-			ProgramaArea programaArea = new ProgramaArea(programa, area, lapso);
-			programasAreas.add(programaArea);
-		}
-		servicioProgramaArea.guardar(programasAreas);
 
-		List<ProgramaRequisito> programasRequisito = new ArrayList<ProgramaRequisito>();
-		List<Requisito> requisit = servicioProgramaRequisito.buscarRequisitos(
-				programa, lapso);
-		if (!requisit.isEmpty()) {
-			for (int i = 0; i < requisit.size(); i++) {
-				ProgramaRequisito programaRequisito = new ProgramaRequisito(
-						programa, requisit.get(i), lapso);
-				programasRequisito.add(programaRequisito);
-			}
-			servicioProgramaRequisito.limpiar(programasRequisito);
-		}
-		programasRequisito = new ArrayList<ProgramaRequisito>();
-		for (int i = 0; i < ltbRequisitosSeleccionadas.getItemCount(); i++) {
-			Requisito requisito = ltbRequisitosSeleccionadas.getItems().get(i)
-					.getValue();
-			ProgramaRequisito programaRequisito = new ProgramaRequisito(
-					programa, requisito, lapso);
-			programasRequisito.add(programaRequisito);
-		}
-		servicioProgramaRequisito.guardar(programasRequisito);
+		if (listasCargadas == true) {
+			
+				Messagebox.show("¿Desea guardar la configuracion realizada?",
+						"Dialogo de confirmacion", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
+							public void onEvent(Event evt)
+									throws InterruptedException {
+								if (evt.getName().equals("onOK")) {
 
-		List<ProgramaItem> programasItems = new ArrayList<ProgramaItem>();
-		List<ItemEvaluacion> itemsE = servicioProgramaItem
-				.buscarItemsEnPrograma(programa, lapso);
-		if (!itemsE.isEmpty()) {
-			for (int i = 0; i < itemsE.size(); i++) {
-				ProgramaItem programaItem = new ProgramaItem(programa,
-						itemsE.get(i), lapso);
-				programasItems.add(programaItem);
-			}
-			servicioProgramaItem.limpiar(programasItems);
-		}
-		programasItems = new ArrayList<ProgramaItem>();
-		for (int i = 0; i < ltbItemsSeleccionados.getItemCount(); i++) {
-			ItemEvaluacion item = ltbItemsSeleccionados.getItems().get(i)
-					.getValue();
-			ProgramaItem programaItem = new ProgramaItem(programa, item, lapso);
-			programasItems.add(programaItem);
-		}
-		servicioProgramaItem.guardar(programasItems);
+									Lapso lapso = servicioLapso.buscarLapso(Long
+											.parseLong(cmbLapsoConfigurarPrograma
+													.getSelectedItem().getId()));
+									Programa programa = servicioPrograma.buscar((Long
+											.parseLong(cmbProgramaConfigurarPrograma
+													.getSelectedItem().getId())));
+									List<ProgramaArea> programasAreas = new ArrayList<ProgramaArea>();
+									List<AreaInvestigacion> areas = servicioProgramaArea
+											.buscarAreasDePrograma(programa,
+													lapso);
+									if (!areas.isEmpty()) {
+										for (int i = 0; i < areas.size(); i++) {
+											ProgramaArea programaArea = new ProgramaArea(
+													programa, areas.get(i),
+													lapso);
+											programasAreas.add(programaArea);
+										}
+										servicioProgramaArea
+												.limpiar(programasAreas);
+									}
+									programasAreas = new ArrayList<ProgramaArea>();
+									for (int i = 0; i < ltbAreasSeleccionadas
+											.getItemCount(); i++) {
+										AreaInvestigacion area = ltbAreasSeleccionadas
+												.getItems().get(i).getValue();
+										ProgramaArea programaArea = new ProgramaArea(
+												programa, area, lapso);
+										programasAreas.add(programaArea);
+									}
+									servicioProgramaArea
+											.guardar(programasAreas);
 
-		List<CondicionPrograma> condicionesProgramas = new ArrayList<CondicionPrograma>();
-		for (int i = 0; i < ltbCondiciones.getItemCount(); i++) {
-			Listitem listItem = ltbCondiciones.getItemAtIndex(i);
-			int valor = ((Spinner) ((listItem.getChildren().get(1)))
-					.getFirstChild()).getValue();
-			CondicionPrograma condicionPrograma = ltbCondiciones.getItems()
-					.get(i).getValue();
-			CondicionPrograma condicionProgramaReal = new CondicionPrograma(
-					condicionPrograma.getCondicion(),
-					condicionPrograma.getPrograma(), lapso, valor);
-			condicionesProgramas.add(condicionProgramaReal);
+									List<ProgramaRequisito> programasRequisito = new ArrayList<ProgramaRequisito>();
+									List<Requisito> requisit = servicioProgramaRequisito
+											.buscarRequisitos(programa, lapso);
+									if (!requisit.isEmpty()) {
+										for (int i = 0; i < requisit.size(); i++) {
+											ProgramaRequisito programaRequisito = new ProgramaRequisito(
+													programa, requisit.get(i),
+													lapso);
+											programasRequisito
+													.add(programaRequisito);
+										}
+										servicioProgramaRequisito
+												.limpiar(programasRequisito);
+									}
+									programasRequisito = new ArrayList<ProgramaRequisito>();
+									for (int i = 0; i < ltbRequisitosSeleccionadas
+											.getItemCount(); i++) {
+										Requisito requisito = ltbRequisitosSeleccionadas
+												.getItems().get(i).getValue();
+										ProgramaRequisito programaRequisito = new ProgramaRequisito(
+												programa, requisito, lapso);
+										programasRequisito
+												.add(programaRequisito);
+									}
+									servicioProgramaRequisito
+											.guardar(programasRequisito);
+
+									List<ProgramaItem> programasItems = new ArrayList<ProgramaItem>();
+									List<ItemEvaluacion> itemsE = servicioProgramaItem
+											.buscarItemsEnPrograma(programa,
+													lapso);
+									if (!itemsE.isEmpty()) {
+										for (int i = 0; i < itemsE.size(); i++) {
+											ProgramaItem programaItem = new ProgramaItem(
+													programa, itemsE.get(i),
+													lapso);
+											programasItems.add(programaItem);
+										}
+										servicioProgramaItem
+												.limpiar(programasItems);
+									}
+									programasItems = new ArrayList<ProgramaItem>();
+									for (int i = 0; i < ltbItemsSeleccionados
+											.getItemCount(); i++) {
+										ItemEvaluacion item = ltbItemsSeleccionados
+												.getItems().get(i).getValue();
+										ProgramaItem programaItem = new ProgramaItem(
+												programa, item, lapso);
+										programasItems.add(programaItem);
+									}
+									servicioProgramaItem
+											.guardar(programasItems);
+
+									List<CondicionPrograma> condicionesProgramas = new ArrayList<CondicionPrograma>();
+									for (int i = 0; i < ltbCondiciones
+											.getItemCount(); i++) {
+										Listitem listItem = ltbCondiciones
+												.getItemAtIndex(i);
+										int valor = ((Spinner) ((listItem
+												.getChildren().get(1)))
+												.getFirstChild()).getValue();
+										CondicionPrograma condicionPrograma = ltbCondiciones
+												.getItems().get(i).getValue();
+										CondicionPrograma condicionProgramaReal = new CondicionPrograma(
+												condicionPrograma
+														.getCondicion(),
+												condicionPrograma.getPrograma(),
+												lapso, valor);
+										condicionesProgramas
+												.add(condicionProgramaReal);
+									}
+									servicioCondicionPrograma
+											.guardar(condicionesProgramas);
+
+									Messagebox.show(
+											"Configuracion guardada con exito",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
+									limpiarCampos();
+								}
+							}
+						});
+			
+
+		} else {
+
+			Messagebox
+					.show("Debe seleccionar el lapso academico junto con el programa que se desea configurar ",
+							"Error", Messagebox.OK, Messagebox.ERROR);
 		}
-		servicioCondicionPrograma.guardar(condicionesProgramas);
-		Messagebox.show("Configuraciones guardas exitosamente", "Informacion",
-				Messagebox.OK, Messagebox.INFORMATION);
-		limpiarCampos();
 	}
 
 	/*

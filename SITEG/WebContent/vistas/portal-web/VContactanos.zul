@@ -1,5 +1,5 @@
 <window id="wdwContactanos" title="Contáctanos" width="600px"
-	height="650px" border="normal" closable="true"
+	height="auto" border="normal" closable="true"
 	apply="controlador.CContactanos">
 
 	<style dynamic="true">
@@ -46,7 +46,8 @@
 
 	<!-- Lista de popus -->
 	<popup id="pupProgramaContactanos">
-		<toolbarbutton label="Seleccione el programa" />
+		<toolbarbutton
+			label="Presione aquí para seleccionar el programa" />
 	</popup>
 	<popup id="pupNombreContactanos">
 		<toolbarbutton label="Ingrese aquí el nombre y apellido" />
@@ -74,7 +75,7 @@
 	<separator />
 	<separator />
 
-	<groupbox style="margin-left:2%;margin-right:2%" height="570px">
+	<groupbox style="margin-left:2%;margin-right:2%" height="auto">
 		<grid sclass="fgrid">
 			<columns>
 				<column height="10px" />
@@ -85,7 +86,7 @@
 				</row>
 
 				<row>
-					<combobox readonly="true" tabindex="1"
+					<combobox readonly="true" tabindex="1" width="250px"
 						tooltip="pupProgramaContactanos" id="cmbProgramaContactanos">
 						<template name="model">
 							<comboitem label="${each.nombre}" />
@@ -147,7 +148,7 @@
 					<separator />
 					<div sclass="btn-group">
 
-						<button id="btnEnviarCorreo" sclass="btn" 
+						<button id="btnEnviarCorreo" sclass="btn"
 							tooltip="pupEnviarContactanos" label="Enviar"
 							image="/public/imagenes/iconos/enviar.png" tabindex="6">
 						</button>
@@ -170,7 +171,5 @@
 
 	<separator />
 	<separator />
-	<separator />
-	<separator />
-	<separator />
+
 </window>
