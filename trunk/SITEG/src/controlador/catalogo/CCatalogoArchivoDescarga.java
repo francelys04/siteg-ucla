@@ -47,6 +47,7 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 	public void inicializar(Component comp) {
 		List<Archivo> archivo = servicioArchivo.buscarActivos("Descarga");
 		ltbArchivoDescarga.setModel(new ListModelList<Archivo>(archivo));
+				
 	}
 
 	/*

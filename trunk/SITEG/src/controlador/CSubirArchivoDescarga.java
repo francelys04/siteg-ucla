@@ -38,6 +38,10 @@ public class CSubirArchivoDescarga extends CGeneral {
 	private long id = 0;
 	private Archivo archivo = new Archivo();
 	private String nombreDoc;
+	private byte[] contenido;
+	private String tipo;
+	private Long tamano;
+	
 	private static long idAux;
 	@Wire
 	private Textbox txtNombreArchivoDescarga;
@@ -80,9 +84,12 @@ public class CSubirArchivoDescarga extends CGeneral {
 				txtNombreArchivoDescarga.setValue(archivo.getNombre());
 				txtDescripcionArchivoDescarga
 						.setValue(archivo.getDescripcion());
+				nombreDoc = archivo.getNombre();
+				tipo = archivo.getTipoDocumento();
+				tamano = archivo.getTamanoDocumento();
+				contenido = archivo.getContenidoDocumento();
 				id = archivo.getId();
 				btnArchivoDescarga.setDisabled(true);
-				idAux = id;
 				btnEliminarArchivoDescarga.setDisabled(false);
 				map.clear();
 				map = null;
@@ -118,6 +125,9 @@ public class CSubirArchivoDescarga extends CGeneral {
 				archivo.setTipoDocumento(media.getContentType());
 
 				nombreDoc = archivo.getNombre();
+				tipo = archivo.getTipoDocumento();
+				tamano = archivo.getTamanoDocumento();
+				contenido = archivo.getContenidoDocumento();
 
 				txtNombreArchivoDescarga.setValue(archivo.getNombre());
 
@@ -167,10 +177,15 @@ public class CSubirArchivoDescarga extends CGeneral {
 								long idPrograma1 = Long.parseLong(idPrograma);
 								Programa programa = servicioPrograma
 										.buscarPorId(idPrograma1);
+						
 								archivo.setId(id);
 								archivo.setPrograma(programa);
+								archivo.setNombre(nombreDoc);
+								archivo.setTipoDocumento(tipo);
+								archivo.setTamanoDocumento(tamano);
 								archivo.setDescripcion(txtDescripcionArchivoDescarga
 										.getValue());
+								archivo.setContenidoDocumento(contenido);
 								archivo.setEstatus(true);
 								archivo.setTipoArchivo("Descarga");
 								servicioArchivo.guardar(archivo);
@@ -196,8 +211,12 @@ public class CSubirArchivoDescarga extends CGeneral {
 				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
+							
+							System.out.print(id);
+							System.out.print("eliminar");
+							
 							Archivo archivo = servicioArchivo
-									.buscarArchivo(idAux);
+									.buscarArchivo(id);
 							archivo.setEstatus(false);
 							servicioArchivo.guardar(archivo);
 							cancelar();
