@@ -25,7 +25,7 @@ public class SArchivo {
 
 	public List<Archivo> buscarActivos(String h) {
 		List<Archivo> archivo;
-		archivo = interfaceArchivo.findByEstatusAndTipoArchivo(true, h);
+		archivo = interfaceArchivo.findByEstatusAndTipoArchivoOrderByProgramaAsc(true, h);
 		return archivo;
 	}
 

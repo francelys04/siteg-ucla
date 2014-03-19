@@ -1,5 +1,5 @@
 <window id="wdwInfomacionInteres" title="Información de Interes"
-	border="normal" height="79%" width="85%" closable="true"
+	border="normal" height="638px" width="84%" closable="true"
 	apply="controlador.CInicio">
 
 	<style src="/public/css/bootstrap.css" />
@@ -25,7 +25,7 @@
 
 		</west>
 
-		<center border="none" style="overflow-y:scroll;">
+		<center border="none" autoscroll="true">
 
 			<div>
 				<include id="vistas"></include>

@@ -1,4 +1,4 @@
-<window title="Catalogo de Descargas" border="normal" width="825px"
+<window title="Catalogo de Descargas" border="normal" width="835px"
 	id="wdwCatalogoArchivoDescarga"
 	apply="controlador.catalogo.CCatalogoArchivoDescarga"
 	closable="true">

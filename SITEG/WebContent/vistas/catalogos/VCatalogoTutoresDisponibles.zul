@@ -1,4 +1,4 @@
-<window title="Catalogo Tutores Disponibles" border="normal" width="98%"
+<window title="Catalogo Tutores Disponibles" border="normal" width="100%"
 	id="wdwCatalogoTutores" apply="controlador.catalogo.CCatalogoTutorDisponible"
 	closable="true">
 
