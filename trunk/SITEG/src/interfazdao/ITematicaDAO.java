@@ -18,7 +18,7 @@ public interface ITematicaDAO extends JpaRepository<Tematica, Long> {
 	 * Busca las tematicas por Areas*/
 	public List<Tematica> findByAreaInvestigacion(AreaInvestigacion area2);
 	
-    public List<Tematica> findByProfesores(Profesor profesor);
+    public List<Tematica> findByProfesoresOrderByAreaInvestigacionAsc(Profesor profesor);
 	
 	public List<Tematica> findByIdNotIn(List<Long> ids);
 	

@@ -47,7 +47,7 @@ public class STematica {
 
 	public List<Tematica> buscarTematicasDelProfesor(Profesor profesor) {
 		List<Tematica> tematicas;
-		tematicas = interfaceTematica.findByProfesores(profesor);
+		tematicas = interfaceTematica.findByProfesoresOrderByAreaInvestigacionAsc(profesor);
 		return tematicas;
 	}
 

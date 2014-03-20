@@ -64,7 +64,7 @@ public class CCatalogoArchivo extends CGeneral {
 	 */
 	@Listen("onChange = #txtNombreMostrarArchivo,#txtDescripcionMostrarArchivo,#txtProgramaMostrarArchivo")
 	public void filtrarDatosCatalogo() {
-		List<Archivo> archivo1 = servicioArchivo.buscarActivos("teg");
+		List<Archivo> archivo1 = servicioArchivo.buscarActivos("Teg");
 		List<Archivo> archivo2 = new ArrayList<Archivo>();
 
 		for (Archivo archivo : archivo1) {

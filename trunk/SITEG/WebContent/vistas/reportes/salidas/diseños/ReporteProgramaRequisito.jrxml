@@ -113,22 +113,22 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="43" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<rectangle>
-				<reportElement x="289" y="0" width="282" height="43" uuid="033bd435-d122-428d-b841-b4a87f88cb93"/>
+				<reportElement x="289" y="0" width="282" height="61" uuid="033bd435-d122-428d-b841-b4a87f88cb93"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="0" y="0" width="289" height="43" uuid="6a3829df-3a21-4e4f-b567-33657ea9199a"/>
+				<reportElement x="0" y="0" width="289" height="61" uuid="6a3829df-3a21-4e4f-b567-33657ea9199a"/>
 			</rectangle>
 			<textField>
-				<reportElement x="0" y="0" width="289" height="43" uuid="92a18cef-50c4-4db4-815b-f98bbfaa148f"/>
+				<reportElement x="4" y="0" width="282" height="61" uuid="92a18cef-50c4-4db4-815b-f98bbfaa148f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="289" y="0" width="282" height="43" uuid="71a53d87-d908-4f5b-82f3-b20cf3791122"/>
+				<reportElement x="293" y="0" width="274" height="61" uuid="71a53d87-d908-4f5b-82f3-b20cf3791122"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
