@@ -44,17 +44,40 @@
 	<style src="/public/css/style.css" />
 
 	<!-- Lista de popus -->
+	<popup id="pupDatosEstudiante">
+		<toolbarbutton
+			label="Presione aquí para visualizar los datos del estudiante" />
+	</popup>
+	<popup id="pupDatosTutor">
+		<toolbarbutton
+			label="Presione aquí para visualizar los datos del tutor" />
+	</popup>
 	<popup id="pupBtnAgregar">
 		<toolbarbutton label="Presione aquí para agregar un estudiante" />
 	</popup>
+	<popup id="pupCedula">
+		<toolbarbutton label="Ingrese aquí la cédula del estudiante" />
+	</popup>
 	<popup id="pupBtnGuardar">
-		<toolbarbutton label="Presione aquí para solicitar el tutor" />
+		<toolbarbutton
+			label="Presione aquí para enviar la solicitud de tutoría" />
 	</popup>
 	<popup id="pupBtnCancelar">
-		<toolbarbutton label="Presione aquí para impiar los campos" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupBtnSalir">
 		<toolbarbutton label="Presione aquí para salir" />
+	</popup>
+	<popup id="pupArea">
+		<toolbarbutton label="Presione aquí para seleccionar el área" />
+	</popup>
+	<popup id="pupTematica">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la temática" />
+	</popup>
+	<popup id="pupTitulo">
+		<toolbarbutton
+			label="Ingrese aquí el título tentativo" />
 	</popup>
 	<!-- fin de popus -->
 
@@ -91,8 +114,8 @@
 		<tabbox style="margin-left:1%;margin-right:1%" width="98%"
 			height="250px">
 			<tabs>
-				<tab label="Datos del Estudiante" />
-				<tab label="Datos del Tutor" />
+				<tab label="Datos del Estudiante" tooltip="pupDatosEstudiante"/>
+				<tab label="Datos del Tutor" tooltip="pupDatosTutor"/>
 			</tabs>
 			<tabpanels>
 				<tabpanel height="150px">
@@ -114,8 +137,7 @@
 
 								<hbox>
 									<textbox id="txtCedulaEstudiante"
-										tabindex="5" width="140px"
-										tooltiptext="Ingrese aqui la cedula del estudiante" />
+										tabindex="5" width="140px" tooltip="pupCedula" />
 
 									<button id="btnAgregarEstudiante"
 										tabindex="6" sclass="btn" style="margin-left:10px"
@@ -301,7 +323,8 @@
 						</hlayout>
 
 						<combobox id="cmbAreaSolicitud" readonly="true"
-							width="170px" style="margin-left:40px" tabindex="2">
+							tooltip="pupArea" width="170px" style="margin-left:40px"
+							tabindex="2">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -317,7 +340,7 @@
 						</hlayout>
 
 						<combobox id="cmbTematicaSolicitud"
-							readonly="true" width="230px" tabindex="3"
+							tooltip="pupTematica" readonly="true" width="230px" tabindex="3"
 							style="margin-left:15px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
@@ -339,7 +362,7 @@
 				<row>
 					<textbox id="txtTituloSolicitud" width="590px"
 						tabindex="4" rows="3" cols="100" maxlength="500"
-						tooltiptext="Ingrese aqui el titulo" />
+						tooltip="pupTitulo" />
 				</row>
 
 

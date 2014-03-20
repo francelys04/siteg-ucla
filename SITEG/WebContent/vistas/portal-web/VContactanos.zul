@@ -53,19 +53,19 @@
 		<toolbarbutton label="Ingrese aquí el nombre y apellido" />
 	</popup>
 	<popup id="pupCorreoContactanos">
-		<toolbarbutton label="Ingrese aquí el correo electronico" />
+		<toolbarbutton label="Ingrese aquí el correo electrónico" />
 	</popup>
 	<popup id="pupAsuntoContactanos">
-		<toolbarbutton label="Ingrese aqui el asunto del correo" />
+		<toolbarbutton label="Ingrese aquí el asunto del correo" />
 	</popup>
 	<popup id="pupMensajeContactanos">
-		<toolbarbutton label="Ingrese aqui el mensaje" />
+		<toolbarbutton label="Ingrese aquí el mensaje" />
 	</popup>
 	<popup id="pupSalirContactanos">
 		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<popup id="pupCancelarContactanos">
-		<toolbarbutton label="Presione aquí para limpiar" />
+		<toolbarbutton label="Presione aquí para limpiar los campos" />
 	</popup>
 	<popup id="pupEnviarContactanos">
 		<toolbarbutton label="Presione aquí para enviar el correo" />
