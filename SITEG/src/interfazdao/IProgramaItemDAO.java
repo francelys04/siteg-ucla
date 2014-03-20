@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IProgramaItemDAO extends JpaRepository<ProgramaItem, ProgramaItemId> {
 
-	@Query("select distinct i from ItemEvaluacion i where i.id in (select pi.item from ProgramaItem pi where pi.programa = ?1 and pi.lapso = ?2)")
+	@Query("select distinct i from ItemEvaluacion i where i.id in (select pi.item from ProgramaItem pi where pi.programa = ?1 and pi.lapso = ?2) Order by i.tipo")
 	public List<ItemEvaluacion> buscarItemsPrograma(Programa programa, Lapso lapso);
 }
