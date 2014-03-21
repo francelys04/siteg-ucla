@@ -1,21 +1,31 @@
-<window title="Catalogo Tutores Disponibles" border="normal" width="100%"
-	id="wdwCatalogoTutores" apply="controlador.catalogo.CCatalogoTutorDisponible"
+<window title="Catalogo Tutores Disponibles" border="normal"
+	width="100%" id="wdwCatalogoTutores"
+	apply="controlador.catalogo.CCatalogoTutorDisponible"
 	closable="true">
 
 
 	<style src="/public/css/bootstrap.css" />
 	<style src="/public/css/style.css" />
 	<separator />
-    <!-- Lista de popus -->
-	<popup id="pupSeleccionTutoresDisponibles">
+	<!-- Lista de popus -->
+
+	<popup id="pupSeleccionarPrograma">
 		<toolbarbutton
-			label="Doble clic para seleccionar el profesor" />
+			label="Presione aquí para seleccionar el programa" />
+	</popup>
+	<popup id="pupSeleccionarArea">
+		<toolbarbutton label="Presione aquí para seleccionar el area" />
+	</popup>
+	<popup id="pupSeleccionarTematica">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la temática" />
 	</popup>
 	<!-- Fin de popus -->
 	<hbox>
 		<label value="Programa:" style="margin-left:15px" />
 		<combobox id="cmbProgramaTutores" width="250px" readonly="true"
-			style="margin-left:40px" tabindex="10">
+			style="margin-left:40px" tabindex="10"
+			tooltip="pupSeleccionarPrograma">
 			<template name="model">
 				<comboitem label="${each.nombre}" id="${each.id}" />
 			</template>
@@ -23,9 +33,35 @@
 
 	</hbox>
 	<separator />
-	
+	<separator />
+
+	<hbox>
+		<label value="Área:" style="margin-left:15px" />
+		<combobox id="cmbAreaTutores" width="250px" readonly="true"
+			style="margin-left:70px" tabindex="10"
+			tooltip="pupSeleccionarArea">
+			<template name="model">
+				<comboitem label="${each.nombre}" id="${each.id}" />
+			</template>
+		</combobox>
+
+
+		<label value="Temática:" style="margin-left:25px" />
+		<combobox id="cmbTematicaTutores" width="290px" readonly="true"
+			style="margin-left:20px" tabindex="10"
+			tooltip="pupSeleccionarTematica">
+			<template name="model">
+				<comboitem label="${each.nombre}" id="${each.id}" />
+			</template>
+		</combobox>
+	</hbox>
+
+
+	<separator />
+	<separator />
+
 	<listbox id="ltbTutores" width="100%" mold="paging" pageSize="10"
-		emptyMessage="Seleccione un programa para ver los tutores disponibles">
+		emptyMessage="No hay tutores disponibles">
 
 
 
@@ -63,7 +99,7 @@
 
 
 		<template name="model">
-			<listitem tooltip="pupSeleccionTutoresDisponibles">
+			<listitem>
 				<listcell label="${each.cedula}" />
 				<listcell label="${each.nombre}" />
 				<listcell label="${each.apellido}" />
