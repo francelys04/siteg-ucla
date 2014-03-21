@@ -127,7 +127,8 @@ public class STeg {
 
 	public Teg ultimoTeg(Estudiante estudiante) {
 		List<Teg> tegs = interfaceTeg.findByEstudiantes(estudiante);
-
+		if(tegs.isEmpty())
+			return null;
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		Date mayor = new Date();
 		long id = 0;
