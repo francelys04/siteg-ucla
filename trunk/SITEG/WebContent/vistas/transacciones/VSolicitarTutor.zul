@@ -1,5 +1,5 @@
 <window id="wdwSolicitarTutoria" title="Solicitar Tutor" border="normal"
-	width="750px" height="730px" closable="true"
+	width="750px" height="auto" closable="true"
 	apply="controlador.CSolicitarTutor">
 
 	<separator />
@@ -105,7 +105,7 @@
 	<separator />
 
 
-	<groupbox width="95%" height="570px"
+	<groupbox width="95%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -308,7 +308,7 @@
 
 		<grid sclass="fgrid" style="margin-left:2%">
 			<columns>
-				<column width="610px" height="20px" />
+				<column width="640px" height="20px" />
 			</columns>
 			<rows>
 
@@ -360,7 +360,7 @@
 				</row>
 
 				<row>
-					<textbox id="txtTituloSolicitud" width="590px"
+					<textbox id="txtTituloSolicitud" width="620px"
 						tabindex="4" rows="3" cols="100" maxlength="500"
 						tooltip="pupTitulo" />
 				</row>
@@ -405,9 +405,6 @@
 
 	</groupbox>
 
-	<separator />
-	<separator />
-	<separator />
 	<separator />
 	<separator />
 
