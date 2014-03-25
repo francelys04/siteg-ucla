@@ -36,6 +36,8 @@ import controlador.catalogo.CCatalogoProfesor;
 public class CProfesor extends CGeneral {
 
 	private static final long serialVersionUID = -3439594158179320756L;
+	private static boolean modificarProfesor = false;
+	private static Set<Tematica> tematicasProfesor;
 	CCatalogoProfesor catalogo = new CCatalogoProfesor();
 	@Wire
 	private Combobox cmbCategoriaProfesor;
@@ -95,7 +97,9 @@ public class CProfesor extends CGeneral {
 
 		if (map != null) {
 			if ((String) map.get("cedula") != null) {
+				
 
+				modificarProfesor = true;
 				txtCedulaProfesor.setValue((String) map.get("cedula"));
 				Profesor profesor = servicioProfesor
 						.buscarProfesorPorCedula(txtCedulaProfesor.getValue());
@@ -181,7 +185,29 @@ public class CProfesor extends CGeneral {
 								Boolean estatus = true;
 								Categoria categoria = servicioCategoria
 										.buscarCategoriaPorNombre(categorias);
-								Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
+
+								if (modificarProfesor == true) {
+									
+
+									Profesor profesor = servicioProfesor
+											.buscarProfesorPorCedula(txtCedulaProfesor
+													.getValue());
+									List<Tematica> tematicas = servicioTematica
+											.buscarTematicasDelProfesor(profesor);
+
+									for (int i = 0; i < tematicas
+											.size(); i++) {
+										Tematica tematicasasosiadas = tematicas.get(i);
+										tematicasProfesor.add(tematicasasosiadas);
+									}
+
+								}else{
+									
+								
+									tematicasProfesor = new HashSet<Tematica>();
+									
+								}
+
 								Usuario usuario = servicioUsuario
 										.buscarUsuarioPorNombre(cedula);
 								Profesor profesor = new Profesor(cedula,
@@ -232,6 +258,7 @@ public class CProfesor extends CGeneral {
 				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un correo como: ejemplo@ejemplo.com");
 		cmbCategoriaProfesor.setValue("");
 		btnEliminarProfesor.setDisabled(true);
+		modificarProfesor = false;
 
 	}
 

@@ -228,7 +228,7 @@ public class CPrograma extends CGeneral {
 								String mensaje = "Ha sido seleccionado como director de programa de: "
 										+ txtNombrePrograma.getValue()
 										+ ","
-										+ " Su usuario es: "
+										+ " su usuario es: "
 										+ directorPrograma.getCedula()
 										+ " y su contrasena: "
 										+ directorPrograma.getCedula();
