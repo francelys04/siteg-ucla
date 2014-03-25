@@ -259,10 +259,13 @@ public class CSolicitarTutor extends CGeneral {
 			Messagebox.show("No hay estudiantes agregados", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 		} else {
-			if (area == "Seleccione una Opcion"
-					|| tematica == "Seleccione una Opcion" || titulo == ""
-					|| cedulaProfesor == "" || nombreProfesor == ""
-					|| apellidoProfesor == "" || correoProfesor == "") {
+			if (cmbAreaSolicitud.getText().compareTo("") == 0
+					|| cmbTematicaSolicitud.getText().compareTo("") == 0 
+					|| txtTituloSolicitud.getText().compareTo("") == 0
+					|| txtCedulaProfesor.getText().compareTo("") == 0 
+					|| txtNombreProfesor.getText().compareTo("") == 0
+					|| txtApellidoProfesor.getText().compareTo("") == 0 
+					|| txtCorreoProfesor.getText().compareTo("") == 0) {
 				Messagebox.show("Debes completar todos los campos", "Error",
 						Messagebox.OK, Messagebox.ERROR);
 			} else {
@@ -392,10 +395,17 @@ public class CSolicitarTutor extends CGeneral {
 						if (registro) {
 							String condicion = "Numero de estudiantes por trabajo";
 
+							System.out.println(estudiante.getPrograma().getNombre());
+		
 							CondicionPrograma cm = buscarCondicionVigenteEspecifica(
 									condicion, estudiante.getPrograma());
+							
 							int valor = cm.getValor();
+							
+							System.out.println(ltbEstudiantes.getItemCount());
+							
 							if (ltbEstudiantes.getItemCount() >= valor) {
+								
 								Messagebox
 										.show("No se permiten mas estudiantes por Trabajo Especial de Grado",
 												"Advertencia", Messagebox.OK,
@@ -451,13 +461,15 @@ public class CSolicitarTutor extends CGeneral {
 			Estudiante estudiante = ltbEstudiantes.getItems().get(i).getValue();
 			Profesor profesor = servicioProfesor
 					.buscarProfesorPorCedula(txtCedulaProfesor.getValue());
-			String mensaje = " Solicitud de tutoria \n\n " + "Estudiante: "
-					+ estudiante.getNombre() + " , " + estudiante.getApellido()
-					+ "\n\n con Titulo de Proyecto: "
-					+ txtTituloSolicitud.getValue() + "\n\n Su Usuario es:"
-					+ profesor.getCedula() + " y su contraseña:"
+			String mensaje = "Ha recibido una nueva solicitud de tutoria de un Trabajo Especial de Grado del estudiante: "
+					+ estudiante.getNombre() + ", " + estudiante.getApellido()
+					+ ", titulado: "
+					+ txtTituloSolicitud.getValue() +"."
+					+ "\n\n Su usuario es: "
+					+ profesor.getCedula() + " y su contrasena: "
 					+ profesor.getCedula();
 			enviarEmailNotificacion(profesor.getCorreoElectronico(), mensaje);
+				
 		}
 	}
 

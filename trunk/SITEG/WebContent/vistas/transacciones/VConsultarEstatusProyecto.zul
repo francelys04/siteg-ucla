@@ -1,6 +1,6 @@
 <window id="wdwConsultarEstatusProyecto"
 	title="Consultar Estado del Trabajo Especial de Grado" border="normal"
-	width="700px" height="850px" closable="true"
+	width="700px" height="auto" closable="true"
 	apply="controlador.CConsultarEstatus">
 
 	<style dynamic="true">
@@ -42,7 +42,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="780px"
+	<groupbox width="96%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -61,7 +61,7 @@
 							style="font-weight:bold;color: rgb(0, 84, 122)" />
 					</hlayout>
 
-					<textbox id="txtProgramaEstudiante" width="180px"
+					<textbox id="txtProgramaEstudiante" width="250px"
 						style="color:black !important;" disabled="true" />
 				</row>
 
@@ -73,7 +73,7 @@
 							style="font-weight:bold;color: rgb(0, 84, 122)" />
 					</hlayout>
 
-					<textbox id="txtCedulaEstudiante" width="120px"
+					<textbox id="txtCedulaEstudiante" width="170px"
 						style="color:black !important;" disabled="true" />
 				</row>
 
@@ -95,7 +95,7 @@
 						</hlayout>
 
 						<textbox id="txtApellidoEstudiante"
-							width="170px" style="margin-left:10px;color:black !important;"
+							width="170px" style="margin-left:15px;color:black !important;"
 							disabled="true" />
 
 
@@ -118,8 +118,11 @@
 			<rows>
 				<row>
 					<hbox>
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgSolicitandoTutoriaVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgSolicitandoTutoria" />
+							id="imgSolicitandoTutoria" visible="false" />
 						<label value="Solicitando Tutoria"
 							style="color:black;margin-left:20px" />
 					</hbox>
@@ -129,21 +132,27 @@
 
 					<hbox>
 
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgTutoriaAceptadaVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgTutoriaAceptada" />
+							id="imgTutoriaAceptada" visible="false" />
 						<label value="Tutoria Aceptada"
 							style="color:black;margin-left:20px" />
 
 					</hbox>
 
 				</row>
-				
+
 				<row>
 
 					<hbox>
 
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgSolicitandoRegistroVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgSolicitandoRegistro" />
+							id="imgSolicitandoRegistro" visible="false" />
 						<label value="Solicitando Registro del Proyecto"
 							style="color:black;margin-left:20px" />
 
@@ -153,27 +162,38 @@
 
 				<row>
 					<hbox>
+
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgProyectoRegistradoVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgProyectoRegistrado" />
+							id="imgProyectoRegistrado" visible="false" />
 						<label value="Proyecto Registrado"
-							style="color:black;margin-left:20px" />
-					</hbox>
-				</row>
-				
-				<row>
-					<hbox>
-						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgComisionEvaluadoraAsignada" />
-						<label
-							value="Comision Evaluadora Asignada"
 							style="color:black;margin-left:20px" />
 					</hbox>
 				</row>
 
 				<row>
 					<hbox>
+
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgComisionEvaluadoraAsignadaVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgProyectoFactible" />
+							id="imgComisionEvaluadoraAsignada" visible="false" />
+						<label value="Comision Evaluadora Asignada"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
+
+				<row>
+					<hbox>
+
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgProyectoFactibleVisible" />
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgProyectoFactible" visible="false" />
 						<label value="Proyecto Factible"
 							style="color:black;margin-left:20px" />
 					</hbox>
@@ -181,28 +201,40 @@
 
 				<row>
 					<hbox>
-						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgRevisandoAvances" />
-						<label value="Proyecto de Trabajo Especial de Grado en Desarrollo"
-							style="color:black;margin-left:20px" />
-					</hbox>
-				</row>
 
-
-				<row>
-					<hbox>
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgRevisandoAvancesVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgRevisionesFinalizadasProyecto" />
+							id="imgRevisandoAvances" visible="false" />
 						<label
-							value="Avances del Proyecto Finalizados"
+							value="Proyecto de Trabajo Especial de Grado en Desarrollo"
 							style="color:black;margin-left:20px" />
 					</hbox>
 				</row>
-				
+
+
 				<row>
 					<hbox>
+
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgRevisionesFinalizadasProyectoVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgRegistrarTrabajo" />
+							id="imgRevisionesFinalizadasProyecto" visible="false" />
+						<label value="Avances del Proyecto Finalizados"
+							style="color:black;margin-left:20px" />
+					</hbox>
+				</row>
+
+				<row>
+					<hbox>
+
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgRegistrarTrabajoVisible" />
+						<image src="/public/imagenes/iconos/estatus.png"
+							id="imgRegistrarTrabajo" visible="false" />
 						<label
 							value="Trabajo Especial de Grado Registrado"
 							style="color:black;margin-left:20px" />
@@ -211,8 +243,12 @@
 
 				<row>
 					<hbox>
+
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgRevisionesAvancesVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgRevisionesAvances" />
+							id="imgRevisionesAvances" visible="false" />
 						<label
 							value="Trabajo Especial de Grado en Desarrollo"
 							style="color:black;margin-left:20px" />
@@ -221,8 +257,11 @@
 
 				<row>
 					<hbox>
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgRevisionesFinalizadasTrabajoVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgRevisionesFinalizadasTrabajo" />
+							id="imgRevisionesFinalizadasTrabajo" visible="false" />
 						<label
 							value="Revisiones Finalizadas del Trabajo Especial de Grado"
 							style="color:black;margin-left:20px" />
@@ -231,8 +270,12 @@
 
 				<row>
 					<hbox>
+
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgSolicitandoDefensaVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgSolicitandoDefensa" />
+							id="imgSolicitandoDefensa" visible="false" />
 						<label value="Solicitando Defensa"
 							style="color:black;margin-left:20px" />
 					</hbox>
@@ -240,8 +283,12 @@
 
 				<row>
 					<hbox>
+
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgJuradoAsignadoVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgJuradoAsignado" />
+							id="imgJuradoAsignado" visible="false" />
 						<label value="Jurado Asignado"
 							style="color:black;margin-left:20px" />
 					</hbox>
@@ -249,8 +296,12 @@
 
 				<row>
 					<hbox>
+
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgDefensaAsignadaVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgDefensaAsignada" />
+							id="imgDefensaAsignada" visible="false" />
 						<label value="Defensa Asignada"
 							style="color:black;margin-left:20px" />
 					</hbox>
@@ -258,8 +309,12 @@
 
 				<row>
 					<hbox>
+
+						<image
+							src="/public/imagenes/iconos/sin_estatus.png"
+							id="imgTrabajoEspecialVisible" />
 						<image src="/public/imagenes/iconos/estatus.png"
-							id="imgTrabajoEspecial" />
+							id="imgTrabajoEspecial" visible="false" />
 						<label
 							value="Trabajo Especial de Grado Finalizado"
 							style="color:black;margin-left:20px" />

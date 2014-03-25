@@ -3,6 +3,8 @@ package servicio;
 import interfazdao.IEstudianteDAO;
 import interfazdao.ISolicitudTutoriaDAO;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +14,7 @@ import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Programa;
 import modelo.SolicitudTutoria;
+import modelo.Teg;
 import modelo.Tematica;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +83,34 @@ public class SSolicitudTutoria {
 		solicitudTutoria = interfaceSolicitud.findByEstudiantes(estudiante);
 		return solicitudTutoria;
 	}
+	
+	
+	public SolicitudTutoria ultimaSolicitud(Estudiante estudiante) {
+		List<SolicitudTutoria> solicitudes = interfaceSolicitud.findByEstudiantes(estudiante);
+		if(solicitudes.isEmpty())
+			return null;
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+		Date mayor = new Date();
+		long id = 0;
+		try {
+			mayor = formato.parse("1900-01-01");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		SolicitudTutoria solicitud = new SolicitudTutoria();
+		for (int i = 0; i < solicitudes.size(); i++) {
+			if ((solicitudes.get(i).getFecha().after(mayor) || solicitudes.get(i).getFecha()
+					.equals(mayor))
+					&& solicitudes.get(i).getId() > id) {
+				mayor = solicitudes.get(i).getFecha();
+				id = solicitudes.get(i).getId();
+				solicitud = solicitudes.get(i);
+			}
+		}
+		return solicitud;
+	}
+	
+	
 
 	public List<SolicitudTutoria> buscarTodasSolicitudesEntreFechas(
 			Date fechaInicio, Date fechaFin) {
