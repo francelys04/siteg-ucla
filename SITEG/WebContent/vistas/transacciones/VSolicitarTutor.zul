@@ -308,7 +308,7 @@
 
 		<grid sclass="fgrid" style="margin-left:2%">
 			<columns>
-				<column width="640px" height="20px" />
+				<column width="670px" height="20px" />
 			</columns>
 			<rows>
 
@@ -323,7 +323,7 @@
 						</hlayout>
 
 						<combobox id="cmbAreaSolicitud" readonly="true"
-							tooltip="pupArea" width="170px" style="margin-left:40px"
+							tooltip="pupArea" width="250px" style="margin-left:10px"
 							tabindex="2">
 							<template name="model">
 								<comboitem label="${each.nombre}"
@@ -340,8 +340,8 @@
 						</hlayout>
 
 						<combobox id="cmbTematicaSolicitud"
-							tooltip="pupTematica" readonly="true" width="230px" tabindex="3"
-							style="margin-left:15px">
+							tooltip="pupTematica" readonly="true" width="250px" tabindex="3"
+							style="margin-left:10px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
