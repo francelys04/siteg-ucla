@@ -7,6 +7,7 @@ import java.util.List;
 import modelo.Estudiante;
 import modelo.Factibilidad;
 import modelo.Programa;
+import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.TegEstatus;
 import modelo.compuesta.ItemFactibilidad;
@@ -196,14 +197,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 						if (evt.getName().equals("onOK")) {
 							estudianteTeg = ltbEstudianteRegistrarFactibilidad
 									.getItems().get(0).getValue();
-							// SolicitudTutoria solicitudAceptada =
-							// servicioSolicitudTutoria
-							// .buscarSolicitudAceptadaEstudiante(estudianteTeg);
-							// System.out.println(solicitudAceptada.getId());
-							// String estatusSolicitud = "Finalizada";
-							// solicitudAceptada.setEstatus(estatusSolicitud);
-							// servicioSolicitudTutoria.guardar(solicitudAceptada);
-
+							
 							String estatus = "Proyecto No Factible";
 							Teg teg2 = servicioTeg.buscarTeg(auxiliarId);
 							Factibilidad factibilidad = servicioFactibilidad
@@ -216,6 +210,8 @@ public class CRegistrarFactibilidad extends CGeneral {
 									"Proyecto No Factible", fechaEstatus);
 							servicioTegEstatus.guardar(tegEstatus);
 							servicioTeg.guardar(teg2);
+							actualizarSolicitud();
+							
 							for (int i = 0; i < ltbEstudianteRegistrarFactibilidad
 									.getItemCount(); i++) {
 								estudianteTeg = ltbEstudianteRegistrarFactibilidad
@@ -235,6 +231,23 @@ public class CRegistrarFactibilidad extends CGeneral {
 					}
 				});
 	}
+	
+	
+	/*
+	 * Metodo que permite actualizar el estatus de la solicitud del o los
+	 * estudiantes asociados al teg, a finalizada, para asi indicar que ha
+	 * terminado la tutoria
+	 */
+	public void actualizarSolicitud() {
+		Estudiante estudiante = ltbEstudianteRegistrarFactibilidad.getItems().get(0)
+				.getValue();
+		SolicitudTutoria solicitud = servicioSolicitudTutoria
+				.buscarSolicitudAceptadaEstudiante(estudiante);
+		solicitud.setEstatus("Finalizada");
+		servicioSolicitudTutoria.guardar(solicitud);
+	}
+	
+	
 
 	/* Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirRegistrarFactibilidad")

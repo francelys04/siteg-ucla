@@ -121,6 +121,14 @@ public class CRegistrarTeg extends CGeneral {
 
 				}
 
+			} else {
+
+				Messagebox
+						.show("Debe poseer un proyecto de trabajo especial de grado asociado",
+								"Advertencia", Messagebox.OK,
+								Messagebox.EXCLAMATION);
+				wdwRegistrarTeg.onClose();
+
 			}
 
 		} else {

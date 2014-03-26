@@ -174,7 +174,7 @@
 
 					<grid sclass="fgrid" style="margin-left:2%">
 						<columns>
-							<column width="680px" height="20px" />
+							<column width="620px" height="20px" />
 						</columns>
 						<rows>
 							<row>
@@ -185,7 +185,7 @@
 
 							<row>
 								<textbox
-									id="txtObservacionRegistrarAvance" width="660px" rows="3"
+									id="txtObservacionRegistrarAvance" width="600px" rows="3"
 									cols="300" maxlength="500"
 									tooltip="pupObservacionRegistrarAvances" />
 							</row>

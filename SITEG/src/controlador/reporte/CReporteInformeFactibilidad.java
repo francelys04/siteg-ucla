@@ -11,6 +11,7 @@ import javax.swing.filechooser.FileSystemView;
 import modelo.AreaInvestigacion;
 import modelo.Estudiante;
 import modelo.Programa;
+import modelo.SolicitudTutoria;
 import modelo.Teg;
 import modelo.TegEstatus;
 import modelo.Tematica;
@@ -39,6 +40,8 @@ public class CReporteInformeFactibilidad extends CGeneral {
 	private Window wdwReporteInformeFactibilidad;
 
 	private static TegEstatus tegestatus;
+	private static Teg ultimoTeg;
+	private static Estudiante estudiante;
 
 	private String[] estatusproyectos = { "Proyecto Factible",
 			"Proyecto No Factible" };
@@ -55,97 +58,76 @@ public class CReporteInformeFactibilidad extends CGeneral {
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
+		estudiante = ObtenerUsuarioEstudiante();
+
+		if (estudiante != null) {
+
+			ultimoTeg = servicioTeg.ultimoTeg(estudiante);
+
+			if (ultimoTeg != null) {
+				TegEstatus tegFactible = servicioTegEstatus.buscarTegEstatus(
+						"Proyecto Factible", ultimoTeg);
+
+				TegEstatus tegNoFactible = servicioTegEstatus.buscarTegEstatus(
+						"Proyecto No Factible", ultimoTeg);
+
+				if (tegFactible == null && tegNoFactible == null) {
+
+					Messagebox
+							.show("Para generar el informe de factibilidad, su proyecto debe tener la factibilidad evaluada",
+									"Advertencia", Messagebox.OK,
+									Messagebox.EXCLAMATION);
+					wdwReporteInformeFactibilidad.onClose();
+
+				}
+
+			}
+
+		} else {
+
+			Messagebox
+					.show("No tiene permisos para generar el informe de factibilidad",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+			wdwReporteInformeFactibilidad.onClose();
+		}
 	}
 
 	@Listen("onClick = #btnGenerarReporteInformeFactibilidad")
 	public void GenerarInforme() throws JRException {
 
-		Estudiante estudiante = ObtenerUsuarioEstudiante();
-		List<Teg> teg = servicioTeg.buscarTegPorEstudiante(estudiante);
-		if (teg.size() != 0) {
+		try {
+			if (ultimoTeg != null) {
 
-			int n = teg.size() - 1;
-			System.out.println(n);
-			String estatus1 = "Proyecto Factible";
+				String estatus1 = "Proyecto Factible";
 
-			tegestatus = servicioTegEstatus.buscarTegEstatus(estatus1,
-					teg.get(n));
-			if (tegestatus != null) {
-
-				Long proyecto = teg.get(n).getId();
-				String estatus = teg.get(n).getEstatus();
-
-				String nprofesor = teg.get(n).getTutor().getNombre();
-				String aprofesor = teg.get(n).getTutor().getApellido();
-				String nestudiante = estudiante.getNombre();
-				String aestudiante = estudiante.getApellido();
-				String cestudiante = estudiante.getCedula();
-				String titulo = teg.get(n).getTitulo();
-				String observacion = teg.get(n).getFactibilidad()
-						.getObservacion();
-				String programateg = estudiante.getPrograma().getNombre();
-				String ndirector = estudiante.getPrograma()
-						.getDirectorPrograma().getNombre();
-				String adirector = estudiante.getPrograma()
-						.getDirectorPrograma().getApellido();
-				List<InformeFactibilidad> elementos = new ArrayList<InformeFactibilidad>();
-				elementos
-						.add(new InformeFactibilidad(estatus, nestudiante,
-								aestudiante, cestudiante, titulo, programateg,
-								nprofesor, aprofesor, observacion, ndirector,
-								adirector));
-
-				reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
-
-				FileSystemView filesys = FileSystemView.getFileSystemView();
-
-				String rutaUrl = obtenerDirectorio();
-				String reporteSrc = rutaUrl + reporteFact;
-				String reporteImage = rutaUrl
-						+ "SITEG/public/imagenes/reportes/";
-
-				Map p = new HashMap();
-				p.put("fecha", new Date().toLocaleString());
-
-				p.put("logoUcla", reporteImage + "logo ucla.png");
-				p.put("logoCE", reporteImage + "logo CE.png");
-				p.put("logoSiteg", reporteImage + "logo.png");
-				JasperReport jasperReport = (JasperReport) JRLoader
-						.loadObject(reporteSrc);
-				JasperPrint jasperPrint = JasperFillManager.fillReport(
-						jasperReport, p, new JRBeanCollectionDataSource(
-								elementos));
-				JasperViewer.viewReport(jasperPrint);
-
-			} else {
-				String estatus2 = "Proyecto No Factible";
-				tegestatus = servicioTegEstatus.buscarTegEstatus(estatus2,
-						teg.get(n));
+				tegestatus = servicioTegEstatus.buscarTegEstatus(estatus1,
+						ultimoTeg);
 				if (tegestatus != null) {
 
-					Long proyecto = teg.get(n).getId();
-					String estatus = teg.get(n).getEstatus();
+					Long proyecto = ultimoTeg.getId();
+					String estatus = ultimoTeg.getEstatus();
 
-					String nprofesor = teg.get(n).getTutor().getNombre();
-					String aprofesor = teg.get(n).getTutor().getApellido();
-					String nestudiante = estudiante.getNombre();
-					String aestudiante = estudiante.getApellido();
+					String tutor = ultimoTeg.getTutor().getNombre() + " "
+							+ ultimoTeg.getTutor().getApellido();
+					String nestudiante = estudiante.getNombre() + " "
+							+ estudiante.getApellido();
 					String cestudiante = estudiante.getCedula();
-					String titulo = teg.get(n).getTitulo();
-					String observacion = teg.get(n).getFactibilidad()
+					String titulo = ultimoTeg.getTitulo();
+					String observacion = ultimoTeg.getFactibilidad()
 							.getObservacion();
 					String programateg = estudiante.getPrograma().getNombre();
-					String ndirector = estudiante.getPrograma()
-							.getDirectorPrograma().getNombre();
-					String adirector = estudiante.getPrograma()
-							.getDirectorPrograma().getApellido();
+					String director = estudiante.getPrograma()
+							.getDirectorPrograma().getNombre()
+							+ " "
+							+ estudiante.getPrograma().getDirectorPrograma()
+									.getApellido();
 					List<InformeFactibilidad> elementos = new ArrayList<InformeFactibilidad>();
 					elementos.add(new InformeFactibilidad(estatus, nestudiante,
-							aestudiante, cestudiante, titulo, programateg,
-							nprofesor, aprofesor, observacion, ndirector,
-							adirector));
+							cestudiante, titulo, programateg, tutor,
+							observacion, director));
 
-					reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeNoFactible.jasper";
+					reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
 
 					FileSystemView filesys = FileSystemView.getFileSystemView();
 
@@ -155,7 +137,6 @@ public class CReporteInformeFactibilidad extends CGeneral {
 							+ "SITEG/public/imagenes/reportes/";
 
 					Map p = new HashMap();
-					p.put("fecha", new Date().toLocaleString());
 
 					p.put("logoUcla", reporteImage + "logo ucla.png");
 					p.put("logoCE", reporteImage + "logo CE.png");
@@ -165,23 +146,68 @@ public class CReporteInformeFactibilidad extends CGeneral {
 					JasperPrint jasperPrint = JasperFillManager.fillReport(
 							jasperReport, p, new JRBeanCollectionDataSource(
 									elementos));
-					JasperViewer.viewReport(jasperPrint, false);
+					JasperViewer.viewReport(jasperPrint);
+
+				} else {
+					String estatus2 = "Proyecto No Factible";
+					tegestatus = servicioTegEstatus.buscarTegEstatus(estatus2,
+							ultimoTeg);
+					if (tegestatus != null) {
+
+						Long proyecto = ultimoTeg.getId();
+						String estatus = ultimoTeg.getEstatus();
+
+						String tutor = ultimoTeg.getTutor().getNombre() + " "
+								+ ultimoTeg.getTutor().getApellido();
+						String nestudiante = estudiante.getNombre() + " "
+								+ estudiante.getApellido();
+						String cestudiante = estudiante.getCedula();
+						String titulo = ultimoTeg.getTitulo();
+						String observacion = ultimoTeg.getFactibilidad()
+								.getObservacion();
+						String programateg = estudiante.getPrograma()
+								.getNombre();
+						String director = estudiante.getPrograma()
+								.getDirectorPrograma().getNombre()
+								+ " "
+								+ estudiante.getPrograma()
+										.getDirectorPrograma().getApellido();
+
+						List<InformeFactibilidad> elementos = new ArrayList<InformeFactibilidad>();
+						elementos.add(new InformeFactibilidad(estatus,
+								nestudiante, cestudiante, titulo, programateg,
+								tutor, observacion, director));
+
+						reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeNoFactible.jasper";
+
+						FileSystemView filesys = FileSystemView
+								.getFileSystemView();
+
+						String rutaUrl = obtenerDirectorio();
+						String reporteSrc = rutaUrl + reporteFact;
+						String reporteImage = rutaUrl
+								+ "SITEG/public/imagenes/reportes/";
+
+						Map p = new HashMap();
+						p.put("logoUcla", reporteImage + "logo ucla.png");
+						p.put("logoCE", reporteImage + "logo CE.png");
+						p.put("logoSiteg", reporteImage + "logo.png");
+						
+						JasperReport jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, p,
+								new JRBeanCollectionDataSource(elementos));
+						JasperViewer.viewReport(jasperPrint, false);						
+
+					}
 
 				}
-				else {
-					Messagebox.show("No hay informacion disponible",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-				}
-
 			}
-			
-		}
-		else
-		{
-			Messagebox.show("No Tiene TEG Asociado",
-					"Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+		} catch (Exception e) {
+			// TODO: handle exception
+
+			System.out.println("");
 		}
 
 	}
