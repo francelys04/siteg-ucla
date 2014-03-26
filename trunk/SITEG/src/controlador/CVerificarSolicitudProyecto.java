@@ -40,9 +40,9 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 
 	private static final long serialVersionUID = 8102725322638413636L;
 	private Programa programa = new Programa();
+	private Lapso lapso = new Lapso();
 	private static long auxId = 0;
 	private static String vistaRecibida;
-	private static int numero;
 	ArrayList<Boolean> valor = new ArrayList<Boolean>();
 	@Wire
 	private Textbox txtProgramaRegistrarAvances;
@@ -60,8 +60,6 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 	private Textbox txtApellidoTutorVerificar;
 	@Wire
 	private Listbox ltbSolcitudRegistroProyecto;
-	@Wire
-	private Textbox txtObservacion;
 	@Wire
 	private Listbox ltbEstudiantesTeg;
 	@Wire
@@ -161,7 +159,6 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 		llenarRequisitos(programa, teg1);
 		rdoCompleto.setChecked(false);
 		rdoIncompleto.setChecked(false);
-		txtObservacion.setValue("");
 	}
 
 	/*
@@ -183,6 +180,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 			} else {
+
 				Messagebox.show(
 						"¿Desea guardar la verificacion de los requisitos?",
 						"Dialogo de confirmacion", Messagebox.OK
@@ -207,37 +205,15 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 									}
 									servicioTegRequisito.guardar(tegRequisitos);
 
-									if (rdoCompleto.isChecked() == false) {
-										if (txtObservacion.getValue()
-												.compareTo("") == 0) {
-											txtObservacion
-													.setValue("Sus requisitos estan incorrectos o incompletos");
-										}
-										for (int i = 0; i < ltbEstudiantesTeg
-												.getItemCount(); i++) {
-											Estudiante estudiante = ltbEstudiantesTeg
-													.getItems().get(i)
-													.getValue();
-											valor.add(enviarEmailNotificacion(
-													estudiante
-															.getCorreoElectronico(),
-													txtObservacion.getValue()));
-											Messagebox
-													.show("Datos guardados exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
-											salir();
+									if (rdoCompleto.isChecked() == true) {
 
-										}
-									}
-
-									else if (rdoCompleto.isChecked() == true) {
 										Teg teg = servicioTeg.buscarTeg(auxId2);
 										String estatus = "Proyecto Registrado";
 										teg.setEstatus(estatus);
 
-										/* Guardar datos en la tabla teg_estatus */
+										/*
+										 * Guardar datos en la tabla teg_estatus
+										 */
 										java.util.Date fechaEstatus = new Date();
 										TegEstatus tegEstatus = new TegEstatus(
 												0, teg, "Proyecto Registrado",
@@ -245,16 +221,22 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 										servicioTegEstatus.guardar(tegEstatus);
 
 										servicioTeg.guardar(teg);
-										Messagebox.show(
-												"Datos guardados exitosamente",
-												"Informacion", Messagebox.OK,
-												Messagebox.INFORMATION);
-										salir();
 
 									}
+
+									Messagebox
+											.show("Verificacion de los requisitos guardados exitosamente",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									salir();
+
 								}
+
 							}
+
 						});
+
 			}
 		}
 	}
@@ -265,7 +247,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 	 */
 	public void llenarRequisitos(Programa programa, Teg teg) {
 
-		Lapso lapso = servicioLapso.buscarLapsoVigente();
+		lapso = servicioLapso.buscarLapsoVigente();
 		List<Requisito> requisitosDerecha = servicioTegRequisito
 				.buscarTegRequisitoSeleccionados(teg);
 		List<Requisito> requisitoIzquierda = new ArrayList<Requisito>();
@@ -276,8 +258,10 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 
 		ltbRequisitosSeleccionadas.setModel(new ListModelList<Requisito>(
 				requisitosDerecha));
-		numero = requisitosDerecha.size();
+
+		ltbRequisitosDisponibles.setMultiple(false);
 		ltbRequisitosDisponibles.setMultiple(true);
+		ltbRequisitosSeleccionadas.setMultiple(false);
 		ltbRequisitosSeleccionadas.setMultiple(true);
 
 	}

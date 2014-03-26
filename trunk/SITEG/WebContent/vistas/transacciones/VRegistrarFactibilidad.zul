@@ -1,5 +1,5 @@
 <window id="wdwRegistrarFactibilidad" title="Registrar Factibilidad"
-	border="normal" width="765px" height="835px" closable="true"
+	border="normal" width="765px" height="auto" closable="true"
 	apply="controlador.CRegistrarFactibilidad">
 	<separator />
 
@@ -48,7 +48,7 @@
 	</popup>
 	<popup id="pupDatosEstudiante">
 		<toolbarbutton
-			label="Presione aquí para visualizar los datos del estudiante" />
+			label="Presione aquí para visualizar los datos del estudiante(s)" />
 	</popup>
 	<popup id="pupDatosTutor">
 		<toolbarbutton
@@ -67,15 +67,14 @@
 			label="Presione aquí para rechazar la factibilidad" />
 	</popup>
 	<popup id="pupBtnSalir">
-		<toolbarbutton
-			label="Presione aquí para salir" />
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<!-- fin de popus -->
 
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="760px"
+	<groupbox width="96%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -90,12 +89,12 @@
 				mold="rounded">
 			</datebox>
 		</div>
-		
-		
+
+
 		<label value="Programa:"
 			style="font-weight:bold;color: rgb(0, 84, 122);margin-left:3%" />
 		<textbox id="txtProgramaRegistrarFactibilidad" width="250px"
-			style="margin-left:30px;color:black !important;" disabled="true" />
+			style="margin-left:65px;color:black !important;" disabled="true" />
 
 		<separator />
 		<separator />
@@ -113,11 +112,13 @@
 
 					<hbox>
 
-						<textbox id="txtNombreTutorRegistrarFactibilidad"
+						<textbox
+							id="txtNombreTutorRegistrarFactibilidad"
 							style="color:black !important;" width="180px" disabled="true" />
 						<label value="Apellido del Tutor:"
 							style="margin-left:20px;font-weight:bold" />
-						<textbox id="txtApellidoTutorRegistrarFactibilidad"
+						<textbox
+							id="txtApellidoTutorRegistrarFactibilidad"
 							style="margin-left:20px;color:black !important;" width="180px"
 							disabled="true" />
 					</hbox>
@@ -139,7 +140,7 @@
 					tooltip="pupDatosComision" />
 				<tab label="Datos del Proyecto"
 					tooltip="pupDatosProyecto" />
-				<tab label="Datos del Estudiante"
+				<tab label="Datos Estudiante(s)"
 					tooltip="pupDatosEstudiante" />
 
 
@@ -151,7 +152,7 @@
 					<separator />
 
 					<listbox id="ltbItemsFactibilidad" height="245px"
-						style="margin-left:3%;margin-right:3%" mold="paging" pageSize="6"
+						style="margin-left:3%;margin-right:3%" mold="paging" pageSize="5"
 						emptyMessage="No hay items evaluados">
 
 						<listhead>
@@ -164,7 +165,7 @@
 						<template name="model">
 							<listitem>
 								<listcell label="${each.item.nombre}" />
-								<listcell label="${each.ponderacion}"/>
+								<listcell label="${each.ponderacion}" />
 							</listitem>
 						</template>
 					</listbox>
@@ -189,7 +190,7 @@
 										style="font-weight:bold" />
 
 									<textbox
-										id="txtAreaRegistrarFactibilidad" width="230px"
+										id="txtAreaRegistrarFactibilidad" width="250px"
 										style="margin-left:70px;color:black !important;"
 										disabled="true" />
 
@@ -203,7 +204,7 @@
 										Temática: " style="font-weight:bold" />
 
 									<textbox
-										id="txtTematicaRegistrarFactibilidad" width="270px"
+										id="txtTematicaRegistrarFactibilidad" width="250px"
 										style="margin-left:50px;color:black !important;"
 										disabled="true" />
 								</hbox>
@@ -239,7 +240,8 @@
 
 
 						<listhead>
-							<listheader label="Cédula" align="center" />
+							<listheader label="Cédula" align="center"
+								width="18%" />
 							<listheader label="Nombre" align="center" />
 							<listheader label="Apellido" align="center" />
 							<listheader label="Correo" align="center"
@@ -267,7 +269,7 @@
 
 		<grid sclass="fgrid" style="margin-left:2%">
 			<columns>
-				<column width="620px" height="20px" />
+				<column width="690px" height="20px" />
 			</columns>
 			<rows>
 				<row>
@@ -278,7 +280,7 @@
 
 				<row>
 					<textbox id="txtObservacionRegistrarFactibilidad"
-						width="600px" rows="3" cols="200" style="color:black !important;"
+						width="660px" rows="3" cols="200" style="color:black !important;"
 						disabled="true" />
 				</row>
 			</rows>
@@ -318,5 +320,9 @@
 
 		<separator />
 	</groupbox>
+
+	<separator />
+	<separator />
+
 
 </window>

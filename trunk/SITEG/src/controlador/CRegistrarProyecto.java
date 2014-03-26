@@ -74,13 +74,17 @@ public class CRegistrarProyecto extends CGeneral {
 				idProf = solicitudAceptada.getProfesor().getCedula();
 				Teg ultimoTeg = servicioTeg.ultimoTeg(estudiante);
 				if (ultimoTeg != null) {
-					if (!ultimoTeg.getEstatus().equals("Proyecto No Factible")
-							&& !ultimoTeg.getEstatus().equals("TEG Reprobado")) {
+					TegEstatus tegEstudiante = servicioTegEstatus.buscarTegEstatus(
+							"Proyecto Registrado", ultimoTeg);
 
-						Messagebox.show("Ya posee un proyecto registrado",
+					if (tegEstudiante != null) {
+
+						Messagebox.show(
+								"Ya posee un proyecto registrado",
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 						wdwRegistrarProyecto.onClose();
+
 					} else {
 
 						txtProgramaRegistrarProyecto.setValue(programa

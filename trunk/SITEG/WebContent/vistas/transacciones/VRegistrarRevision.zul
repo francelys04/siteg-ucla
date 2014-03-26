@@ -1,5 +1,5 @@
 <window id="wdwRegistrarRevision" title="Registrar Revisiones"
-	border="normal" width="810px" height="800px" closable="true"
+	border="normal" width="810px" height="auto" closable="true"
 	apply="controlador.CRegistrarRevision">
 	<separator />
 
@@ -91,7 +91,7 @@
 	<separator />
 	<separator />
 
-	<groupbox height="730px" width="760px"
+	<groupbox height="auto" width="96%"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -119,7 +119,7 @@
 		<separator />
 
 
-		<panel height="150px" title="Estudiante(s)"
+		<panel height="150px" title="Datos Estudiante(s)"
 			style="margin-left:20px;margin-right:20px" border="normal">
 			<panelchildren>
 				<listbox id="lsbEstudiantesTeg" mold="paging"
@@ -129,10 +129,10 @@
 
 					<listhead>
 						<listheader label="Cédula" align="center"
-							width="15%" />
+							width="18%" />
 						<listheader label="Nombre" align="center" />
 						<listheader label="Apellido" align="center" />
-						<listheader label="Correo" align="center" />
+						<listheader label="Correo" align="center" width="30%"/>
 					</listhead>
 
 					<template name="model">
@@ -174,7 +174,7 @@
 					<grid sclass="fgrid"
 						style="margin-left:2%;margin-right:2%">
 						<columns>
-							<column width="600px" height="20px" />
+							<column width="680px" height="20px" />
 						</columns>
 						<rows>
 							<row>
@@ -185,7 +185,7 @@
 
 							<row>
 								<textbox
-									id="txtObservacionRegistrarRevision" tabindex="1" width="570px"
+									id="txtObservacionRegistrarRevision" tabindex="1" width="660px"
 									rows="3" cols="100" maxlength="500"
 									tooltip="pupObservaciones" />
 
@@ -198,7 +198,7 @@
 
 
 					<listbox id="ltbRevisionesRegistradas"
-						sclass="fgrid" height="130px"
+						sclass="fgrid" mold="paging" pageSize="2"
 						style="margin-left:2%;margin-right:2%"
 						emptyMessage="No hay revisiones registradas actualmente">
 						<listhead>
@@ -235,7 +235,7 @@
 										style="font-weight:bold" />
 
 									<textbox
-										id="txtAreaRegistrarRevision" width="220px"
+										id="txtAreaRegistrarRevision" width="250px"
 										style="margin-left:70px;color:black !important;"
 										disabled="true" />
 
@@ -249,7 +249,7 @@
 										Temática: " style="font-weight:bold" />
 
 									<textbox
-										id="txtTematicaRegistrarRevision" width="260px"
+										id="txtTematicaRegistrarRevision" width="250px"
 										style="margin-left:45px;color:black !important;"
 										disabled="true" />
 								</hbox>
@@ -263,7 +263,7 @@
 							</row>
 							<row>
 								<textbox id="txtTituloRegistrarRevision"
-									style="color:black !important;" disabled="true" width="580px"
+									style="color:black !important;" disabled="true" width="620px"
 									rows="4" cols="100" />
 							</row>
 						</rows>
@@ -275,9 +275,6 @@
 			</tabpanels>
 
 		</tabbox>
-
-
-
 
 		<separator />
 		<separator />
@@ -322,4 +319,8 @@
 		<separator />
 
 	</groupbox>
+	
+	<separator />
+	<separator />
+	
 </window>

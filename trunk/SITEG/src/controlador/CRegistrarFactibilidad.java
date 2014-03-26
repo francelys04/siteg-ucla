@@ -170,9 +170,10 @@ public class CRegistrarFactibilidad extends CGeneral {
 									"Proyecto Factible", fechaEstatus);
 							servicioTegEstatus.guardar(tegEstatus);
 							servicioTeg.guardar(teg2);
-							Messagebox.show("Datos guardados exitosamente",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
+							Messagebox
+									.show("Datos de la factibilidad guardados exitosamente",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 							salir();
 						}
 					}
@@ -225,9 +226,10 @@ public class CRegistrarFactibilidad extends CGeneral {
 
 							}
 
-							Messagebox.show("Datos guardados exitosamente",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
+							Messagebox
+									.show("Datos de la factibilidad guardados exitosamente",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
 							salir();
 						}
 					}

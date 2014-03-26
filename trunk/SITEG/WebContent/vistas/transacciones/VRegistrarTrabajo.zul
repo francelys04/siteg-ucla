@@ -1,5 +1,5 @@
 <window id="wdwRegistrarTeg" title="Registrar Trabajo Especial de Grado"
-	border="normal" width="100%" height="800px" closable="true"
+	border="normal" width="100%" height="auto" closable="true"
 	apply="controlador.CRegistrarTeg">
 	<separator />
 
@@ -50,11 +50,25 @@
 	</popup>
 	<popup id="pupDatosEstudiante">
 		<toolbarbutton
-			label="Presione aquí para visualizar los datos del estudiante" />
+			label="Presione aquí para visualizar los datos del estudiante(s)" />
 	</popup>
 	<popup id="pupDatosTutor">
 		<toolbarbutton
 			label="Presione aquí para visualizar los datos del tutor" />
+	</popup>
+	<popup id="pupTitulo">
+		<toolbarbutton label="Ingrese aquí el título del trabajo" />
+	</popup>
+	<popup id="pupDescripcion">
+		<toolbarbutton label="Ingrese aquí la descripción del trabajo" />
+	</popup>
+	<popup id="pupFechaEntrega">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la fecha de entrega" />
+	</popup>
+	<popup id="pupDuracion">
+		<toolbarbutton
+			label="Presione aquí para seleccionar la duración" />
 	</popup>
 	<popup id="pupBtnGuardar">
 		<toolbarbutton label="Presione aquí para guardar el trabajo" />
@@ -82,7 +96,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="680px"
+	<groupbox width="96%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -95,11 +109,14 @@
 				style="margin-right:30px;color:black !important;" disabled="true"
 				format="short" onCreate="self.value = new Date()">
 			</datebox>
+
+			<separator />
+
 		</div>
 		<label value="Programa:"
 			style="font-weight:bold;color: rgb(0, 84, 122);margin-left:3%" />
 		<textbox id="txtProgramaRegistraTeg" width="250px"
-			style="margin-left:30px;color:black !important;" disabled="true" />
+			style="margin-left:65px;color:black !important;" disabled="true" />
 
 		<separator />
 
@@ -140,7 +157,7 @@
 			<tabs>
 				<tab label="Datos del Trabajo"
 					tooltip="pupDatosProyecto" />
-				<tab label="Datos del Estudiante"
+				<tab label="Datos Estudiante(s)"
 					tooltip="pupDatosEstudiante" />
 
 
@@ -152,7 +169,7 @@
 					<separator />
 					<grid sclass="fgrid" style="margin-left:1%">
 						<columns>
-							<column width="650px" height="30px" />
+							<column width="680px" height="30px" />
 						</columns>
 						<rows>
 							<row>
@@ -166,7 +183,7 @@
 									<hbox>
 
 										<textbox
-											id="txtAreaRegistrarTeg" width="160px"
+											id="txtAreaRegistrarTeg" width="250px"
 											style="margin-left:15px;margin-right:20px;color:black !important;"
 											disabled="true" />
 
@@ -177,7 +194,7 @@
 										Temática: " style="font-weight:bold" />
 										</hlayout>
 										<textbox
-											id="txtTematicaRegistrarTeg" width="200px"
+											id="txtTematicaRegistrarTeg" width="250px"
 											style="margin-left:15px;color:black !important;"
 											disabled="true" />
 
@@ -189,7 +206,9 @@
 							<row>
 
 								<hlayout>
-
+									<label value="*"
+										style="font-weight:bold;color:red">
+									</label>
 									<label value="Título del Trabajo:"
 										style="font-weight:bold" />
 								</hlayout>
@@ -197,8 +216,8 @@
 							</row>
 							<row>
 								<textbox id="txtTituloRegistrarTeg"
-									width="520px" rows="2" cols="100"
-									tooltiptext="Ingrese aqui el titulo" maxlength="500" />
+									width="660px" rows="2" cols="100" tooltip="pupTitulo"
+									maxlength="500" />
 							</row>
 
 							<row>
@@ -215,8 +234,8 @@
 							</row>
 							<row>
 								<textbox id="txtDescripcionRegistrarTeg"
-									width="520px" rows="2" cols="100" maxlength="500"
-									tooltiptext="Ingrese aqui la descripcion" />
+									width="660px" rows="2" cols="100" maxlength="500"
+									tooltip="pupDescripcion" />
 							</row>
 
 							<row>
@@ -232,19 +251,23 @@
 
 										<datebox
 											id="dtbFechaEntregaRegistrarTeg" width="130px" format="short"
-											onCreate="self.value = new Date()" style="margin-left:20px">
+											onCreate="self.value = new Date()" tooltip="pupFechaEntrega"
+											style="margin-left:20px">
 										</datebox>
 
 										<hlayout>
 											<label value="*"
 												style="font-weight:bold;color:red;margin-left:30px">
 											</label>
-											<label value="Duración:" style="font-weight:bold"/>
+											<label value="Duración:"
+												style="font-weight:bold" />
 										</hlayout>
 
 										<spinner
 											id="spnDuracionRegistrarTeg" width="100px"
-											style="margin-left:20px" />
+											tooltip="pupDuracion" style="margin-left:20px" />
+										<label value="En días"
+											style="font-weight:bold;margin-left:10px" />
 
 									</hbox>
 								</hbox>
@@ -269,10 +292,12 @@
 						emptyMessage="No hay Estudiantes registrados actualmente">
 
 						<listhead>
-							<listheader label="Cédula" align="center" />
+							<listheader label="Cédula" align="center"
+								width="18%" />
 							<listheader label="Nombre" align="center" />
 							<listheader label="Apellido" align="center" />
-							<listheader label="Correo" align="center" />
+							<listheader label="Correo" align="center"
+								width="30%" />
 						</listhead>
 
 						<template name="model">
@@ -328,7 +353,5 @@
 
 	<separator />
 	<separator />
-	<separator />
-
 
 </window>
