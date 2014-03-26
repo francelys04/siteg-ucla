@@ -67,26 +67,53 @@ public class CRegistrarProyecto extends CGeneral {
 			Programa programa = estudiante.getPrograma();
 
 			SolicitudTutoria solicitudAceptada = servicioSolicitudTutoria
-					.buscarSolicitudAceptadaEstudiante(estudiante);
+					.ultimaSolicitud(estudiante);
+
 			if (solicitudAceptada != null) {
 
 				idTem = solicitudAceptada.getTematica().getId();
 				idProf = solicitudAceptada.getProfesor().getCedula();
 				Teg ultimoTeg = servicioTeg.ultimoTeg(estudiante);
-				if (ultimoTeg != null) {
-					TegEstatus tegEstudiante = servicioTegEstatus.buscarTegEstatus(
-							"Proyecto Registrado", ultimoTeg);
 
-					if (tegEstudiante != null) {
+				if (solicitudAceptada.getEstatus().equals("Aceptada")) {
 
-						Messagebox.show(
-								"Ya posee un proyecto registrado",
-								"Advertencia", Messagebox.OK,
-								Messagebox.EXCLAMATION);
-						wdwRegistrarProyecto.onClose();
+					if (ultimoTeg != null) {
+												
 
+						if (!ultimoTeg.getEstatus().equals("Proyecto No Factible") && !ultimoTeg.getEstatus().equals("TEG Reprobado")) {
+
+							Messagebox.show("Ya posee un proyecto registrado",
+									"Advertencia", Messagebox.OK,
+									Messagebox.EXCLAMATION);
+							wdwRegistrarProyecto.onClose();
+
+						} else {
+
+							txtProgramaRegistrarProyecto.setValue(programa
+									.getNombre());
+							txtAreaRegistrarProyecto.setValue(solicitudAceptada
+									.getTematica().getareaInvestigacion()
+									.getNombre());
+							txtTematicaRegistrarProyecto
+									.setValue(solicitudAceptada.getTematica()
+											.getNombre());
+							txtTituloRegistrarProyecto
+									.setValue(solicitudAceptada
+											.getDescripcion());
+							txtNombreTutorRegistrarProyecto
+									.setValue(solicitudAceptada.getProfesor()
+											.getNombre());
+							txtApellidoTutorRegistrarProyecto
+									.setValue(solicitudAceptada.getProfesor()
+											.getApellido());
+
+							List<Estudiante> estudiantes = servicioEstudiante
+									.buscarSolicitudesEstudiante(solicitudAceptada);
+							lsbEstudiantesRegistrarProyecto
+									.setModel(new ListModelList<Estudiante>(
+											estudiantes));
+						}
 					} else {
-
 						txtProgramaRegistrarProyecto.setValue(programa
 								.getNombre());
 						txtAreaRegistrarProyecto.setValue(solicitudAceptada
@@ -102,38 +129,22 @@ public class CRegistrarProyecto extends CGeneral {
 						txtApellidoTutorRegistrarProyecto
 								.setValue(solicitudAceptada.getProfesor()
 										.getApellido());
-
 						List<Estudiante> estudiantes = servicioEstudiante
 								.buscarSolicitudesEstudiante(solicitudAceptada);
 						lsbEstudiantesRegistrarProyecto
 								.setModel(new ListModelList<Estudiante>(
 										estudiantes));
 					}
-				} else {
-					txtProgramaRegistrarProyecto.setValue(programa.getNombre());
-					txtAreaRegistrarProyecto.setValue(solicitudAceptada
-							.getTematica().getareaInvestigacion().getNombre());
-					txtTematicaRegistrarProyecto.setValue(solicitudAceptada
-							.getTematica().getNombre());
-					txtTituloRegistrarProyecto.setValue(solicitudAceptada
-							.getDescripcion());
-					txtNombreTutorRegistrarProyecto.setValue(solicitudAceptada
-							.getProfesor().getNombre());
-					txtApellidoTutorRegistrarProyecto
-							.setValue(solicitudAceptada.getProfesor()
-									.getApellido());
-					List<Estudiante> estudiantes = servicioEstudiante
-							.buscarSolicitudesEstudiante(solicitudAceptada);
-					lsbEstudiantesRegistrarProyecto
-							.setModel(new ListModelList<Estudiante>(estudiantes));
-				}
-			} else {
 
-				Messagebox
-						.show("Para registrar un proyecto su solicitud de tutoria debe ser aceptada",
-								"Advertencia", Messagebox.OK,
-								Messagebox.EXCLAMATION);
-				wdwRegistrarProyecto.onClose();
+				} else {
+
+					Messagebox
+							.show("Para registrar un proyecto su solicitud de tutoria debe ser aceptada",
+									"Advertencia", Messagebox.OK,
+									Messagebox.EXCLAMATION);
+					wdwRegistrarProyecto.onClose();
+				}
+
 			}
 		} else {
 			Messagebox.show("No tiene permisos para registrar un proyecto",

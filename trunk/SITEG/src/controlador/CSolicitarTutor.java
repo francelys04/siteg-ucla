@@ -388,7 +388,7 @@ public class CSolicitarTutor extends CGeneral {
 						boolean registro = true;
 						Teg teg = servicioTeg.ultimoTeg(estudiante);
 						if (teg != null) {
-							if (!teg.getEstatus().equals("TEG Reprobado")) {
+							if (!teg.getEstatus().equals("TEG Reprobado") && !teg.getEstatus().equals("Proyecto No Factible")) {
 								registro = false;
 							}
 						}
