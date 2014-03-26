@@ -1,5 +1,5 @@
 <window id="wdwAtenderDefensa" title="Programar Solicitudes de Defensa"
-	border="normal" width="900px" height="705px" closable="true"
+	border="normal" width="800px" height="auto" closable="true"
 	apply="controlador.CAtenderDefensa">
 	<separator />
 
@@ -51,7 +51,7 @@
 	</popup>
 	<popup id="pupDatosEstudiante">
 		<toolbarbutton
-			label="Presione aquí para visualizar los datos del estudiante" />
+			label="Presione aquí para visualizar los datos del estudiante(s)" />
 	</popup>
 	<popup id="pupDatosJurado">
 		<toolbarbutton
@@ -60,6 +60,15 @@
 	<popup id="pupDatosDefensa">
 		<toolbarbutton
 			label="Presione aquí para visualizar los datos de la defensa" />
+	</popup>
+	<popup id="pupFecha">
+		<toolbarbutton label="Presione aquí para seleccionar la fecha" />
+	</popup>
+	<popup id="pupHora">
+		<toolbarbutton label="Presione aquí para seleccionar la hora" />
+	</popup>
+	<popup id="pupLugar">
+		<toolbarbutton label="Ingrese aquí el lugar de la defensa" />
 	</popup>
 	<popup id="pupBtnGuardar">
 		<toolbarbutton
@@ -76,7 +85,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="860px" height="625px"
+	<groupbox width="96%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 
 		<separator />
@@ -95,7 +104,7 @@
 		<label value="Programa:"
 			style="font-weight:bold;color: rgb(0, 84, 122);margin-left:3%" />
 		<textbox id="txtProgramaAtenderDefensa" width="250px"
-			style="margin-left:30px;color:black !important;" disabled="true" />
+			style="margin-left:65px;color:black !important;" disabled="true" />
 
 		<separator />
 		<separator />
@@ -130,7 +139,7 @@
 		<separator />
 		<separator />
 
-		<tabbox style="margin-left:2%;margin-right:1%" width="810px"
+		<tabbox style="margin-left:2%;margin-right:1%" width="710px"
 			height="340px">
 			<tabs>
 
@@ -138,7 +147,7 @@
 					tooltip="pupDatosDefensa" />
 				<tab label="Datos del Trabajo"
 					tooltip="pupDatosTrabajo" />
-				<tab label="Datos del Estudiante"
+				<tab label="Datos Estudiante(s)"
 					tooltip="pupDatosEstudiante" />
 				<tab label="Integrantes del Jurado"
 					tooltip="pupDatosJurado" />
@@ -156,12 +165,15 @@
 						</columns>
 						<rows>
 							<row>
+								<separator />
+							</row>
+							<row>
 								<label value="Fecha:"
 									style="font-weight:bold" />
 
 								<hbox>
 									<datebox id="dtbFechaDefensa"
-										width="130px" format="short"
+										tooltip="pupFecha" width="130px" format="short"
 										onCreate="self.value = new Date()" />
 
 									<label value="Hora:"
@@ -169,7 +181,7 @@
 
 
 									<timebox id="tmbHoraDefensa"
-										width="150px" cols="12" format="hh:mm:ss a"
+										tooltip="pupHora" width="150px" cols="12" format="hh:mm:ss a"
 										style="margin-left:10px" onCreate="self.value = new Date()" />
 
 								</hbox>
@@ -183,8 +195,7 @@
 
 
 								<textbox id="txtLugarDefensa" rows="4"
-									cols="100" width="500px"
-									tooltiptext="Ingrese aqui el lugar de la defensa" />
+									cols="100" width="500px" tooltip="pupLugar" />
 							</row>
 							<row>
 
@@ -208,7 +219,7 @@
 										style="font-weight:bold" />
 
 									<textbox id="txtAreaAtenderDefensa"
-										width="230px" style="margin-left:70px;color:black !important;"
+										width="250px" style="margin-left:70px;color:black !important;"
 										disabled="true" />
 
 								</hbox>
@@ -221,7 +232,7 @@
 										Temática: " style="font-weight:bold" />
 
 									<textbox
-										id="txtTematicaAtenderDefensa" width="270px"
+										id="txtTematicaAtenderDefensa" width="250px"
 										style="margin-left:50px;color:black !important;"
 										disabled="true" />
 								</hbox>
@@ -289,7 +300,8 @@
 						id="ltbJuradoAtenderDefensa">
 
 						<listhead>
-							<listheader label="Cédula" align="center" />
+							<listheader label="Cédula" align="center"
+								width="18%" />
 							<listheader label="Nombre" align="center" />
 							<listheader label="Apellido" align="center" />
 							<listheader label="Correo" align="center"
@@ -320,11 +332,6 @@
 		<separator />
 
 
-
-
-		<separator />
-		<separator />
-
 		<panel border="normal" width="95%"
 			style="margin-left:2%;margin-right:2%">
 			<panelchildren>
@@ -351,7 +358,9 @@
 				</div>
 			</panelchildren>
 		</panel>
-
-		<separator />
 	</groupbox>
+
+	<separator />
+	<separator />
+
 </window>

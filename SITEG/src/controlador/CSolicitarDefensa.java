@@ -58,31 +58,44 @@ public class CSolicitarDefensa extends CGeneral {
 			teg = servicioTeg.ultimoTeg(estudiante);
 			List<Estudiante> estudiantes = servicioEstudiante
 					.buscarEstudiantePorTeg(teg);
-			if (teg.getEstatus().equals(estatus[0])) {
-				txtProgramaSolicitarDefensa.setValue(estudiantes.get(0)
-						.getPrograma().getNombre());
-				txtAreaSolicitarDefensa.setValue(teg.getTematica()
-						.getareaInvestigacion().getNombre());
-				txtTematicaSolicitarDefensa.setValue(teg.getTematica()
-						.getNombre());
-				txtTituloSolicitarDefensa.setValue(teg.getTitulo());
-				ltbEstudiantesSolicitarDefensa
-						.setModel(new ListModelList<Estudiante>(estudiantes));
-			} else {
-				if (teg.getEstatus().equals(estatus[1])) {
+
+			if (teg != null) {
+				TegEstatus tegEstudiante = servicioTegEstatus.buscarTegEstatus(
+						"Solicitando Defensa", teg);
+
+				if (tegEstudiante != null) {
+
 					Messagebox.show("Ya posee una solicitud de defensa",
 							"Advertencia", Messagebox.OK,
 							Messagebox.EXCLAMATION);
 					salir();
+
 				} else {
-					Messagebox.show("No puede solicitar defensa",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
-					salir();
+
+					if (teg.getEstatus().equals(estatus[0])) {
+						txtProgramaSolicitarDefensa.setValue(estudiantes.get(0)
+								.getPrograma().getNombre());
+						txtAreaSolicitarDefensa.setValue(teg.getTematica()
+								.getareaInvestigacion().getNombre());
+						txtTematicaSolicitarDefensa.setValue(teg.getTematica()
+								.getNombre());
+						txtTituloSolicitarDefensa.setValue(teg.getTitulo());
+						ltbEstudiantesSolicitarDefensa
+								.setModel(new ListModelList<Estudiante>(
+										estudiantes));
+					} else {
+						Messagebox
+								.show("Para realizar la solicitud de defensa el TEG debe tener las revisiones finalizadas",
+										"Advertencia", Messagebox.OK,
+										Messagebox.EXCLAMATION);
+						salir();
+					}
+
 				}
+
 			}
 		} else {
-			Messagebox.show("No puede solicitar defensa", "Advertencia",
+			Messagebox.show("No tiene permisos para solicitar defensa", "Advertencia",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 			salir();
 		}

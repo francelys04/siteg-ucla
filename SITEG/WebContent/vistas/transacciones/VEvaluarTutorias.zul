@@ -161,7 +161,7 @@
 							id="ltbSolicitudesEstudiantes">
 
 							<listhead>
-								<listheader label="Cédula"
+								<listheader label="Cédula" width="18%"
 									align="center" />
 								<listheader label="Nombre"
 									align="center" />

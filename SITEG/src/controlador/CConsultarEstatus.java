@@ -164,7 +164,7 @@ public class CConsultarEstatus extends CGeneral {
 								} else {
 
 									if (teg.getEstatus().equals(
-											"Proyecto Factible")) {
+											"Factibilidad Evaluada")) {
 
 										imgSolicitandoRegistroVisible
 												.setVisible(false);
@@ -172,18 +172,15 @@ public class CConsultarEstatus extends CGeneral {
 												.setVisible(false);
 										imgComisionEvaluadoraAsignadaVisible
 												.setVisible(false);
-										imgProyectoFactibleVisible
-												.setVisible(false);
 										imgSolicitandoRegistro.setVisible(true);
 										imgProyectoRegistrado.setVisible(true);
 										imgComisionEvaluadoraAsignada
 												.setVisible(true);
-										imgProyectoFactible.setVisible(true);
 
 									} else {
 
 										if (teg.getEstatus().equals(
-												"Proyecto en Desarrollo")) {
+												"Proyecto Factible")) {
 
 											imgSolicitandoRegistroVisible
 													.setVisible(false);
@@ -193,8 +190,6 @@ public class CConsultarEstatus extends CGeneral {
 													.setVisible(false);
 											imgProyectoFactibleVisible
 													.setVisible(false);
-											imgRevisandoAvancesVisible
-													.setVisible(false);
 											imgSolicitandoRegistro
 													.setVisible(true);
 											imgProyectoRegistrado
@@ -203,13 +198,11 @@ public class CConsultarEstatus extends CGeneral {
 													.setVisible(true);
 											imgProyectoFactible
 													.setVisible(true);
-											imgRevisandoAvances
-													.setVisible(true);
 
 										} else {
 
 											if (teg.getEstatus().equals(
-													"Avances Finalizados")) {
+													"Proyecto en Desarrollo")) {
 
 												imgSolicitandoRegistroVisible
 														.setVisible(false);
@@ -221,8 +214,6 @@ public class CConsultarEstatus extends CGeneral {
 														.setVisible(false);
 												imgRevisandoAvancesVisible
 														.setVisible(false);
-												imgRevisionesFinalizadasProyectoVisible
-														.setVisible(false);
 												imgSolicitandoRegistro
 														.setVisible(true);
 												imgProyectoRegistrado
@@ -233,13 +224,11 @@ public class CConsultarEstatus extends CGeneral {
 														.setVisible(true);
 												imgRevisandoAvances
 														.setVisible(true);
-												imgRevisionesFinalizadasProyecto
-														.setVisible(true);
 
 											} else {
 
 												if (teg.getEstatus().equals(
-														"TEG Registrado")) {
+														"Avances Finalizados")) {
 
 													imgSolicitandoRegistroVisible
 															.setVisible(false);
@@ -253,8 +242,6 @@ public class CConsultarEstatus extends CGeneral {
 															.setVisible(false);
 													imgRevisionesFinalizadasProyectoVisible
 															.setVisible(false);
-													imgRegistrarTrabajoVisible
-															.setVisible(false);
 													imgSolicitandoRegistro
 															.setVisible(true);
 													imgProyectoRegistrado
@@ -267,13 +254,11 @@ public class CConsultarEstatus extends CGeneral {
 															.setVisible(true);
 													imgRevisionesFinalizadasProyecto
 															.setVisible(true);
-													imgRegistrarTrabajo
-															.setVisible(true);
 
 												} else {
 
 													if (teg.getEstatus()
-															.equals("Trabajo en Desarrollo")) {
+															.equals("TEG Registrado")) {
 
 														imgSolicitandoRegistroVisible
 																.setVisible(false);
@@ -289,8 +274,6 @@ public class CConsultarEstatus extends CGeneral {
 																.setVisible(false);
 														imgRegistrarTrabajoVisible
 																.setVisible(false);
-														imgRevisionesAvancesVisible
-																.setVisible(false);
 														imgSolicitandoRegistro
 																.setVisible(true);
 														imgProyectoRegistrado
@@ -305,13 +288,11 @@ public class CConsultarEstatus extends CGeneral {
 																.setVisible(true);
 														imgRegistrarTrabajo
 																.setVisible(true);
-														imgRevisionesAvances
-																.setVisible(true);
 
 													} else {
 
 														if (teg.getEstatus()
-																.equals("Revisiones Finalizadas")) {
+																.equals("Trabajo en Desarrollo")) {
 
 															imgSolicitandoRegistroVisible
 																	.setVisible(false);
@@ -329,8 +310,6 @@ public class CConsultarEstatus extends CGeneral {
 																	.setVisible(false);
 															imgRevisionesAvancesVisible
 																	.setVisible(false);
-															imgRevisionesFinalizadasTrabajoVisible
-																	.setVisible(false);
 															imgSolicitandoRegistro
 																	.setVisible(true);
 															imgProyectoRegistrado
@@ -347,13 +326,11 @@ public class CConsultarEstatus extends CGeneral {
 																	.setVisible(true);
 															imgRevisionesAvances
 																	.setVisible(true);
-															imgRevisionesFinalizadasTrabajo
-																	.setVisible(true);
 
 														} else {
 
 															if (teg.getEstatus()
-																	.equals("Solicitando Defensa")) {
+																	.equals("Revisiones Finalizadas")) {
 
 																imgSolicitandoRegistroVisible
 																		.setVisible(false);
@@ -373,8 +350,6 @@ public class CConsultarEstatus extends CGeneral {
 																		.setVisible(false);
 																imgRevisionesFinalizadasTrabajoVisible
 																		.setVisible(false);
-																imgSolicitandoDefensaVisible
-																		.setVisible(false);
 																imgSolicitandoRegistro
 																		.setVisible(true);
 																imgProyectoRegistrado
@@ -393,13 +368,11 @@ public class CConsultarEstatus extends CGeneral {
 																		.setVisible(true);
 																imgRevisionesFinalizadasTrabajo
 																		.setVisible(true);
-																imgSolicitandoDefensa
-																		.setVisible(true);
 
 															} else {
 
 																if (teg.getEstatus()
-																		.equals("Jurado Asignado")) {
+																		.equals("Solicitando Defensa")) {
 
 																	imgSolicitandoRegistroVisible
 																			.setVisible(false);
@@ -421,8 +394,6 @@ public class CConsultarEstatus extends CGeneral {
 																			.setVisible(false);
 																	imgSolicitandoDefensaVisible
 																			.setVisible(false);
-																	imgJuradoAsignadoVisible
-																			.setVisible(false);
 																	imgSolicitandoRegistro
 																			.setVisible(true);
 																	imgProyectoRegistrado
@@ -443,13 +414,11 @@ public class CConsultarEstatus extends CGeneral {
 																			.setVisible(true);
 																	imgSolicitandoDefensa
 																			.setVisible(true);
-																	imgJuradoAsignado
-																			.setVisible(true);
 
 																} else {
 
 																	if (teg.getEstatus()
-																			.equals("Defensa Asignada")) {
+																			.equals("Jurado Asignado")) {
 
 																		imgSolicitandoRegistroVisible
 																				.setVisible(false);
@@ -473,8 +442,6 @@ public class CConsultarEstatus extends CGeneral {
 																				.setVisible(false);
 																		imgJuradoAsignadoVisible
 																				.setVisible(false);
-																		imgDefensaAsignadaVisible
-																				.setVisible(false);
 																		imgSolicitandoRegistro
 																				.setVisible(true);
 																		imgProyectoRegistrado
@@ -497,10 +464,64 @@ public class CConsultarEstatus extends CGeneral {
 																				.setVisible(true);
 																		imgJuradoAsignado
 																				.setVisible(true);
-																		imgDefensaAsignadaVisible
-																				.setVisible(true);
 
-																	} 
+																	} else {
+
+																		if (teg.getEstatus()
+																				.equals("Defensa Asignada")) {
+
+																			imgSolicitandoRegistroVisible
+																					.setVisible(false);
+																			imgProyectoRegistradoVisible
+																					.setVisible(false);
+																			imgComisionEvaluadoraAsignadaVisible
+																					.setVisible(false);
+																			imgProyectoFactibleVisible
+																					.setVisible(false);
+																			imgRevisandoAvancesVisible
+																					.setVisible(false);
+																			imgRevisionesFinalizadasProyectoVisible
+																					.setVisible(false);
+																			imgRegistrarTrabajoVisible
+																					.setVisible(false);
+																			imgRevisionesAvancesVisible
+																					.setVisible(false);
+																			imgRevisionesFinalizadasTrabajoVisible
+																					.setVisible(false);
+																			imgSolicitandoDefensaVisible
+																					.setVisible(false);
+																			imgJuradoAsignadoVisible
+																					.setVisible(false);
+																			imgDefensaAsignadaVisible
+																					.setVisible(false);
+																			imgSolicitandoRegistro
+																					.setVisible(true);
+																			imgProyectoRegistrado
+																					.setVisible(true);
+																			imgComisionEvaluadoraAsignada
+																					.setVisible(true);
+																			imgProyectoFactible
+																					.setVisible(true);
+																			imgRevisandoAvances
+																					.setVisible(true);
+																			imgRevisionesFinalizadasProyecto
+																					.setVisible(true);
+																			imgRegistrarTrabajo
+																					.setVisible(true);
+																			imgRevisionesAvances
+																					.setVisible(true);
+																			imgRevisionesFinalizadasTrabajo
+																					.setVisible(true);
+																			imgSolicitandoDefensa
+																					.setVisible(true);
+																			imgJuradoAsignado
+																					.setVisible(true);
+																			imgDefensaAsignada
+																					.setVisible(true);
+
+																		}
+
+																	}
 
 																}
 
@@ -604,9 +625,9 @@ public class CConsultarEstatus extends CGeneral {
 												.setVisible(true);
 										imgSolicitandoDefensa.setVisible(true);
 										imgJuradoAsignado.setVisible(true);
-										imgDefensaAsignadaVisible
+										imgDefensaAsignada
 												.setVisible(true);
-										imgTrabajoEspecialVisible
+										imgTrabajoEspecial
 												.setVisible(true);
 
 									}

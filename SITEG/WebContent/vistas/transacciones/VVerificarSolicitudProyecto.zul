@@ -1,6 +1,6 @@
 <window id="wdwVerificarSolicitudProyecto"
 	title="Verificar Requisitos del proyecto" border="normal" width="800px"
-	height="835px" closable="true"
+	height="auto" closable="true"
 	apply="controlador.CVerificarSolicitudProyecto">
 	<separator />
 
@@ -65,7 +65,7 @@
 	</popup>
 	<popup id="pupDatosEstudiante">
 		<toolbarbutton
-			label="Presione aquí para visualizar los datos del estudiante" />
+			label="Presione aquí para visualizar los datos del estudiante(s)" />
 	</popup>
 	<popup id="pupDatosTutor">
 		<toolbarbutton
@@ -94,9 +94,7 @@
 	<popup id="pupEstadoRequisitos">
 		<toolbarbutton label="Seleccione el estado de los requisitos" />
 	</popup>
-	<popup id="pupObservacionRequisitos">
-		<toolbarbutton label="Ingrese aquí la observacion" />
-	</popup>
+	
 
 	<!-- fin de popus -->
 
@@ -105,7 +103,7 @@
 	<separator />
 	<separator />
 
-	<groupbox width="95%" height="745px"
+	<groupbox width="96%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -124,7 +122,7 @@
 		<label value="Programa:"
 			style="font-weight:bold;color: rgb(0, 84, 122);margin-left:3%" />
 		<textbox id="txtProgramaRegistrarAvances" width="250px"
-			style="margin-left:30px;color:black !important;" disabled="true" />
+			style="margin-left:65px;color:black !important;" disabled="true" />
 
 		<separator />
 		<separator />
@@ -171,7 +169,7 @@
 					tooltip="pupRequisitos" />
 				<tab label="Datos del Proyecto"
 					tooltip="pupDatosProyecto" />
-				<tab label="Datos del Estudiante"
+				<tab label="Datos Estudiante(s)"
 					tooltip="pupDatosEstudiante" />
 
 
@@ -299,7 +297,7 @@
 										style="font-weight:bold" />
 
 									<textbox id="txtAreaVerificar"
-										width="230px" style="margin-left:70px;color:black !important;"
+										width="250px" style="margin-left:70px;color:black !important;"
 										disabled="true" />
 
 								</hbox>
@@ -312,7 +310,7 @@
 										Temática: " style="font-weight:bold" />
 
 									<textbox id="txtTematicaVerificar"
-										width="270px" style="margin-left:47px;color:black !important;"
+										width="250px" style="margin-left:47px;color:black !important;"
 										disabled="true" />
 								</hbox>
 
@@ -344,7 +342,7 @@
 						style="margin-left:30px;margin-right:30px" pageSize="2">
 
 						<listhead>
-							<listheader label="Cédula" align="center" />
+							<listheader label="Cédula" align="center" width="18%" />
 							<listheader label="Nombre" align="center" />
 							<listheader label="Apellido" align="center" />
 							<listheader label="Correo" align="center"
@@ -371,29 +369,7 @@
 
 			</tabpanels>
 		</tabbox>
-
-
-		<separator />
-		<separator />
-
-		<grid sclass="fgrid" style="margin-left:2%">
-			<columns>
-				<column width="620px" height="20px" />
-			</columns>
-			<rows>
-				<row>
-					<label value="Observaciones:"
-						style="font-weight:bold;color: rgb(0, 84, 122)" />
-
-				</row>
-
-				<row>
-					<textbox id="txtObservacion" width="600px" rows="2"
-						cols="100" tooltip="pupObservacionRequisitos" />
-				</row>
-			</rows>
-		</grid>
-
+		
 		<separator />
 		<separator />
 
@@ -428,4 +404,8 @@
 		<separator />
 
 	</groupbox>
+
+	<separator />
+	<separator />
+
 </window>

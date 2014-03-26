@@ -398,7 +398,7 @@ public class CAsignarComision extends CGeneral {
 													.add(profesor);
 											String mensaje = "Ha sido seleccionado como miembro de la Comision Evaluadora. Su usuario es: "
 													+ profesor.getCedula()
-													+ "y su contraseña:"
+													+ " y su contrasena: "
 													+ profesor.getCedula();
 											enviarEmailNotificacion(profesor
 													.getCorreoElectronico(),
@@ -421,7 +421,7 @@ public class CAsignarComision extends CGeneral {
 
 										servicioTeg.guardar(tegSeleccionado);
 										Messagebox
-												.show("Comision asignada exitosamente",
+												.show("Comision evaluadora asignada exitosamente",
 														"Informacion",
 														Messagebox.OK,
 														Messagebox.INFORMATION);

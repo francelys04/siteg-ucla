@@ -73,31 +73,53 @@ public class CRegistrarTeg extends CGeneral {
 			Programa programa = new Programa();
 			programa = estudiante.getPrograma();
 
-			Teg tegEstudiante = servicioTeg
-					.buscarTegEstudiantePorEstatus(estudiante);
-			if (tegEstudiante == null) {
-				Messagebox
-						.show("Para formalizar la inscripcion del Trabajo Especial de Grado deben estar finalizados los avances del mismo",
-								"Advertencia", Messagebox.OK,
-								Messagebox.EXCLAMATION);
-				wdwRegistrarTeg.onClose();
-			} else {
-				auxiliarId = tegEstudiante.getId();
-				txtProgramaRegistraTeg.setValue(programa.getNombre());
-				txtAreaRegistrarTeg.setValue(tegEstudiante.getTematica()
-						.getareaInvestigacion().getNombre());
-				txtTematicaRegistrarTeg.setValue(tegEstudiante.getTematica()
-						.getNombre());
-				txtTituloRegistrarTeg.setValue(tegEstudiante.getTitulo());
-				txtNombreTutorRegistrarTrabajo.setValue(tegEstudiante
-						.getTutor().getNombre());
-				txtApellidoTutorRegistrarTrabajo.setValue(tegEstudiante
-						.getTutor().getApellido());
+			Teg ultimoTeg = servicioTeg.ultimoTeg(estudiante);
+			if (ultimoTeg != null) {
 
-				List<Estudiante> estudiantes = servicioEstudiante
-						.buscarEstudiantesDelTeg(tegEstudiante);
-				lsbEstudiantesRegistrarTeg
-						.setModel(new ListModelList<Estudiante>(estudiantes));
+				TegEstatus tegEstudiante = servicioTegEstatus.buscarTegEstatus(
+						"TEG Registrado", ultimoTeg);
+
+				if (tegEstudiante != null) {
+
+					Messagebox.show(
+							"Ya posee un trabajo especial de grado registrado",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+					wdwRegistrarTeg.onClose();
+
+				} else {
+
+					if (ultimoTeg.getEstatus().equals("Avances Finalizados")) {
+
+						auxiliarId = ultimoTeg.getId();
+						txtProgramaRegistraTeg.setValue(programa.getNombre());
+						txtAreaRegistrarTeg.setValue(ultimoTeg.getTematica()
+								.getareaInvestigacion().getNombre());
+						txtTematicaRegistrarTeg.setValue(ultimoTeg
+								.getTematica().getNombre());
+						txtTituloRegistrarTeg.setValue(ultimoTeg.getTitulo());
+						txtNombreTutorRegistrarTrabajo.setValue(ultimoTeg
+								.getTutor().getNombre());
+						txtApellidoTutorRegistrarTrabajo.setValue(ultimoTeg
+								.getTutor().getApellido());
+
+						List<Estudiante> estudiantes = servicioEstudiante
+								.buscarEstudiantesDelTeg(ultimoTeg);
+						lsbEstudiantesRegistrarTeg
+								.setModel(new ListModelList<Estudiante>(
+										estudiantes));
+
+					} else {
+
+						Messagebox
+								.show("Para registrar un TEG los avances del mismo deben estar finalizados",
+										"Advertencia", Messagebox.OK,
+										Messagebox.EXCLAMATION);
+						wdwRegistrarTeg.onClose();
+
+					}
+
+				}
 
 			}
 

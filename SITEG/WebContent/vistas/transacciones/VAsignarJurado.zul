@@ -1,5 +1,5 @@
 <window id="wdwAsignarJurado" title="Asignar Jurado" border="normal"
-	width="950px" height="790px" closable="true"
+	width="950px" height="auto" closable="true"
 	apply="controlador.CAsignarJurado">
 	<separator />
 
@@ -61,7 +61,7 @@
 	</popup>
 	<popup id="pupDatosEstudiante">
 		<toolbarbutton
-			label="Presione aquí para visualizar los datos del estudiante" />
+			label="Presione aquí para visualizar los datos del estudiante(s)" />
 	</popup>
 	<popup id="pupDatosTutor">
 		<toolbarbutton
@@ -98,7 +98,7 @@
 	<separator />
 	<image id="imagenx" width="80px" height="50px" visible="false" />
 
-	<groupbox height="710px" style="margin-left:2%;margin-right:2%">
+	<groupbox height="auto" style="margin-left:2%;margin-right:2%">
 
 		<separator />
 		<separator />
@@ -116,7 +116,7 @@
 		<label value="Programa:"
 			style="font-weight:bold;color: rgb(0, 84, 122);margin-left:3%" />
 		<textbox id="txtProgramaAtenderDefensa" width="250px"
-			style="margin-left:30px;color:black !important;" disabled="true" />
+			style="margin-left:65px;color:black !important;" disabled="true" />
 
 		<separator />
 		<separator />
@@ -158,7 +158,7 @@
 				<tab label="Jurado" tooltip="pupDatosJurado" />
 				<tab label="Datos del Trabajo"
 					tooltip="pupDatosTrabajo" />
-				<tab label="Datos del Estudiante"
+				<tab label="Datos Estudiante(s)"
 					tooltip="pupDatosEstudiante" />
 
 			</tabs>
@@ -320,7 +320,7 @@
 										style="font-weight:bold" />
 
 									<textbox id="txtAreaAtenderDefensa"
-										width="230px" style="margin-left:70px;color:black !important;"
+										width="250px" style="margin-left:70px;color:black !important;"
 										disabled="true" />
 
 								</hbox>
@@ -333,7 +333,7 @@
 										Temática: " style="font-weight:bold" />
 
 									<textbox
-										id="txtTematicaAtenderDefensa" width="270px"
+										id="txtTematicaAtenderDefensa" width="250px"
 										style="margin-left:50px;color:black !important;"
 										disabled="true" />
 								</hbox>
@@ -367,7 +367,7 @@
 						id="ltbEstudiantesAtenderDefensa">
 
 						<listhead>
-							<listheader label="Cédula" align="center" />
+							<listheader label="Cédula" align="center" width="18%"/>
 							<listheader label="Nombre" align="center" />
 							<listheader label="Apellido" align="center" />
 							<listheader label="Correo" align="center"

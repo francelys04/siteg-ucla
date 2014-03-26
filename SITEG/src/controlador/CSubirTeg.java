@@ -67,10 +67,10 @@ public class CSubirTeg extends CGeneral {
 						.buscarTegEstudiantePorEstatusAprobado(estudiante);
 
 				if (tegEstudiante == null) {
-					Messagebox
-							.show("El Trabajo Especial de Grado debe tener el estado de Aprobado",
-									"Advertencia", Messagebox.OK,
-									Messagebox.EXCLAMATION);
+					Messagebox.show(
+							"Para subir el TEG, el mismo debe estar aprobado",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
 					wdwSubirTeg.onClose();
 
 				}
