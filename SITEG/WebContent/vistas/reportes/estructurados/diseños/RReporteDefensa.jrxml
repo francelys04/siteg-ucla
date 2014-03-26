@@ -177,7 +177,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="97" splitType="Stretch">
+		<band height="43" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="2" width="161" height="41" forecolor="#000000" backcolor="#99CCFF" uuid="aba2cc45-d43a-4261-b3e8-e728018469bd"/>
 			</rectangle>
@@ -228,8 +228,12 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				</textElement>
 				<text><![CDATA[Estatus Defensa]]></text>
 			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement style="table" x="0" y="43" width="161" height="54" uuid="b47d4027-0a55-4895-85dc-f1ad1e21173f"/>
+				<reportElement style="table" x="0" y="0" width="161" height="54" uuid="b47d4027-0a55-4895-85dc-f1ad1e21173f"/>
 				<box>
 					<pen lineColor="#000000"/>
 					<topPen lineColor="#000000"/>
@@ -243,7 +247,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<textFieldExpression><![CDATA[$F{tituloTeg}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table" x="161" y="43" width="112" height="54" uuid="a571b3fc-0a9f-4c6c-96f2-db3f990f79ef"/>
+				<reportElement style="table" x="161" y="0" width="112" height="54" uuid="a571b3fc-0a9f-4c6c-96f2-db3f990f79ef"/>
 				<box>
 					<pen lineColor="#000000"/>
 					<topPen lineColor="#000000"/>
@@ -257,7 +261,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<textFieldExpression><![CDATA[$F{nombreEstudiante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table" x="273" y="43" width="116" height="54" uuid="87c2e0a5-c2f6-4e65-8a0f-af8541edb51e"/>
+				<reportElement style="table" x="273" y="0" width="116" height="54" uuid="87c2e0a5-c2f6-4e65-8a0f-af8541edb51e"/>
 				<box>
 					<pen lineColor="#000000"/>
 					<topPen lineColor="#000000"/>
@@ -271,21 +275,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				<textFieldExpression><![CDATA[$F{nombreTutor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table" x="389" y="43" width="97" height="54" uuid="621cf105-4574-4c62-bd9f-3ddf361d62ad"/>
-				<box>
-					<pen lineColor="#000000"/>
-					<topPen lineColor="#000000"/>
-					<leftPen lineColor="#000000"/>
-					<bottomPen lineColor="#000000"/>
-					<rightPen lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{estatusDefensa}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="table" x="486" y="43" width="87" height="54" uuid="0beaf8f8-7305-4050-be35-25453901e6ac"/>
+				<reportElement style="table" x="486" y="0" width="87" height="54" uuid="0beaf8f8-7305-4050-be35-25453901e6ac"/>
 				<box>
 					<pen lineColor="#000000"/>
 					<topPen lineColor="#000000"/>
@@ -298,10 +288,21 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fechaDefensa}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement style="table" x="389" y="0" width="97" height="54" uuid="621cf105-4574-4c62-bd9f-3ddf361d62ad"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estatusDefensa}]]></textFieldExpression>
+			</textField>
 		</band>
-	</columnHeader>
-	<detail>
-		<band height="22" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
 		<band splitType="Stretch"/>
