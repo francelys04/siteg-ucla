@@ -51,7 +51,7 @@
 
 				<div>
 					<menubar id="menubar" autodrop="true">
-						<menuitem label="Inicio" />
+						<menuitem label="Inicio" id="mitInicio" />
 						<menuitem label="¿Quiénes somos?"
 							id="mitQuienesSomos" />
 						<menuitem label="Contactanos"
@@ -75,8 +75,12 @@
 								<h:ul id="diapos"
 									style="margin-top:7px;">
 									<h:li>
+										<image id="imgNoticiaCuatro"
+											class="img"/>
+									</h:li>
+									<h:li>
 										<image id="imgNoticiaTres"
-											class="img" />
+											class="img"/>
 									</h:li>
 									<h:li>
 										<image id="imgNoticiaDos"

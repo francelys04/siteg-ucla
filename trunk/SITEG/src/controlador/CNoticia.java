@@ -107,7 +107,7 @@ public class CNoticia extends CGeneral {
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
 	@Listen("onClick = #btnCatalogoNoticia")
-	public void buscarDescarga() {
+	public void buscarNoticia() {
 
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoNoticia.zul", null, null);
@@ -116,11 +116,11 @@ public class CNoticia extends CGeneral {
 
 	/* Metodo que permite el guardado o modificacion de una entidad Noticia */
 	@Listen("onClick = #btnGuardarNoticia")
-	public void guardarDescarga() {
+	public void guardarNoticia() {
 		List<Noticia> noticia = servicioNoticia.buscarActivos();
-		if (noticia.size() == 3 && noticiaCatalogo == false) {
+		if (noticia.size() == 4 && noticiaCatalogo == false) {
 			Messagebox
-					.show("Ya existen tres noticias, si desea agregar una nueva debe modificar una ya existente",
+					.show("Ya existen cuatro noticias, debe modificar una ya existente",
 							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
 		} else {
