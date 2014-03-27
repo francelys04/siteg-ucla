@@ -72,6 +72,8 @@ public class CInicio extends CGeneral {
 	@Wire
 	private Image imgNoticiaTres;
 	@Wire
+	private Image imgNoticiaCuatro;
+	@Wire
 	private Image img1;
 	@Wire
 	private Image img2;
@@ -110,6 +112,7 @@ public class CInicio extends CGeneral {
 			imgNoticiaUno.setContent(getImagen());
 			imgNoticiaDos.setContent(getImagen());
 			imgNoticiaTres.setContent(getImagen());
+			imgNoticiaCuatro.setContent(getImagen());
 		}
 		if (img1 != null) {
 			List<EnlaceInteres> enlace = servicioEnlace.buscarActivos();
@@ -147,6 +150,8 @@ public class CInicio extends CGeneral {
 	 * Metodos que permite llenar enviar a una pagina de segun la catidad de
 	 * enlaces
 	 */
+	
+
 	@Listen("onClick = #img1")
 	public void enlaceUno() {
 		Execution exec = Executions.getCurrent();
@@ -264,6 +269,11 @@ public class CInicio extends CGeneral {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/portal-web/VContactanos.zul", null, null);
 		window.doModal();
+	}
+	@Listen("onClick = #mitInicio")
+	public void inicio() {
+		Execution exec = Executions.getCurrent();
+		exec.sendRedirect("http://localhost:8080/SITEG/VPrincipal.zul");
 	}
 
 	/*
