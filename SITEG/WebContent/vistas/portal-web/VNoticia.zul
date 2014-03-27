@@ -105,13 +105,13 @@
 
 					<hbox>
 
-						<textbox id="txtNombreNoticia" width="120%"
+						<textbox id="txtNombreNoticia" width="350px"
 							tooltip="pupNombreNoticia" />
 
 						<button id="btnCatalogoNoticia" sclass="btn"
 							tooltip="pupCatalogoNoticia"
 							image="/public/imagenes/iconos/catalogo.png"
-							style="margin-left:55px">
+							style="margin-left:10px">
 						</button>
 
 					</hbox>

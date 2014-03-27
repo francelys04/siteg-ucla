@@ -86,7 +86,9 @@ COMITÉ DE TRABAJO DE GRADO]]></text>
 
 C.I: ___________    , acepto ser el tutor del  estudiante ___________________    C.I: _____________  en la
 
-realización del trabajo especial de grado titulado: ________________________________________________,
+realización del trabajo especial de grado titulado:
+
+_______________________________________________________________________________________,
 
 y me comprometo a asumir las funciones y responsabilidades que este trabajo ameriten.
 
@@ -135,7 +137,7 @@ Sin más que agregar, agradeciendo su atención se despide]]></text>
 				<textFieldExpression><![CDATA[$F{apellidoTutor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="36" y="40" width="89" height="20" uuid="ccf7d6c6-c8e6-42eb-b0fc-53484427f608"/>
+				<reportElement x="36" y="40" width="64" height="20" uuid="ccf7d6c6-c8e6-42eb-b0fc-53484427f608"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -156,7 +158,7 @@ Sin más que agregar, agradeciendo su atención se despide]]></text>
 				<textFieldExpression><![CDATA[$F{apellidoEstudiante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="250" y="69" width="283" height="19" uuid="6a00a94a-e18f-448c-8721-6f6594fdf794"/>
+				<reportElement x="13" y="94" width="517" height="16" uuid="6a00a94a-e18f-448c-8721-6f6594fdf794"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>

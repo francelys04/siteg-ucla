@@ -74,7 +74,9 @@ public class CRegistrarTeg extends CGeneral {
 			programa = estudiante.getPrograma();
 
 			Teg ultimoTeg = servicioTeg.ultimoTeg(estudiante);
-			if (ultimoTeg != null) {
+			if (ultimoTeg != null
+					&& !ultimoTeg.getEstatus().equals("Proyecto No Factible")
+					&& !ultimoTeg.getEstatus().equals("TEG Reprobado")) {
 
 				TegEstatus tegEstudiante = servicioTegEstatus.buscarTegEstatus(
 						"TEG Registrado", ultimoTeg);
