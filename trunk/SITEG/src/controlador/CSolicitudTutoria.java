@@ -47,7 +47,7 @@ public class CSolicitudTutoria extends CGeneral {
 	private static String vistaRecibida;
 	private static String estatusSolicitud;
 	private String[] mensaje = {
-			"Su solicitud de tutoria ha sido aprobada, ",
+			"Su solicitud de tutoria ha sido aceptada, ",
 			"Su solicitud de tutoria ha sido rechazada, por favor intente con otro tutor" };
 	@Wire
 	private Datebox dtbFechaEvaluarTutoria;

@@ -59,7 +59,9 @@ public class CSolicitarDefensa extends CGeneral {
 			List<Estudiante> estudiantes = servicioEstudiante
 					.buscarEstudiantePorTeg(teg);
 
-			if (teg != null) {
+			if (teg != null && !teg.getEstatus().equals("Proyecto No Factible")
+					&& !teg.getEstatus().equals("TEG Reprobado")) {
+
 				TegEstatus tegEstudiante = servicioTegEstatus.buscarTegEstatus(
 						"Solicitando Defensa", teg);
 
@@ -93,10 +95,18 @@ public class CSolicitarDefensa extends CGeneral {
 
 				}
 
+			} else {
+
+				Messagebox
+						.show("Debe poseer un trabajo especial de grado asociado",
+								"Advertencia", Messagebox.OK,
+								Messagebox.EXCLAMATION);
+				salir();
+
 			}
 		} else {
-			Messagebox.show("No tiene permisos para solicitar defensa", "Advertencia",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			Messagebox.show("No tiene permisos para solicitar defensa",
+					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 			salir();
 		}
 
