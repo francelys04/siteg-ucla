@@ -81,6 +81,14 @@ public class CReporteInformeFactibilidad extends CGeneral {
 
 				}
 
+			}else {
+
+				Messagebox
+						.show("Debe poseer un proyecto de trabajo especial de grado asociado",
+								"Advertencia", Messagebox.OK,
+								Messagebox.EXCLAMATION);
+				 wdwReporteInformeFactibilidad.onClose();
+
 			}
 
 		} else {
@@ -127,26 +135,28 @@ public class CReporteInformeFactibilidad extends CGeneral {
 							cestudiante, titulo, programateg, tutor,
 							observacion, director));
 
-					reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
+					Map<String, Object> p = new HashMap<String, Object>();
 
+					// Metodo utilizado para los que de error el preview
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-
 					String rutaUrl = obtenerDirectorio();
-					String reporteSrc = rutaUrl + reporteFact;
+					System.out.println(rutaUrl);
+					String reporteSrc = rutaUrl
+							+ "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeFactible.jasper";
 					String reporteImage = rutaUrl
 							+ "SITEG/public/imagenes/reportes/";
 
-					Map p = new HashMap();
-
 					p.put("logoUcla", reporteImage + "logo ucla.png");
 					p.put("logoCE", reporteImage + "logo CE.png");
-					p.put("logoSiteg", reporteImage + "logo.png");
 					JasperReport jasperReport = (JasperReport) JRLoader
 							.loadObject(reporteSrc);
+
 					JasperPrint jasperPrint = JasperFillManager.fillReport(
 							jasperReport, p, new JRBeanCollectionDataSource(
 									elementos));
-					JasperViewer.viewReport(jasperPrint);
+					JasperViewer.viewReport(jasperPrint, false);
+
+	
 
 				} else {
 					String estatus2 = "Proyecto No Factible";
@@ -177,28 +187,28 @@ public class CReporteInformeFactibilidad extends CGeneral {
 						elementos.add(new InformeFactibilidad(estatus,
 								nestudiante, cestudiante, titulo, programateg,
 								tutor, observacion, director));
+						
+						Map<String, Object> p = new HashMap<String, Object>();
 
-						reporteFact = "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeNoFactible.jasper";
-
-						FileSystemView filesys = FileSystemView
-								.getFileSystemView();
-
+						// Metodo utilizado para los que de error el preview
+						FileSystemView filesys = FileSystemView.getFileSystemView();
 						String rutaUrl = obtenerDirectorio();
-						String reporteSrc = rutaUrl + reporteFact;
+						System.out.println(rutaUrl);
+						String reporteSrc = rutaUrl
+								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteInformeNoFactible.jasper";
 						String reporteImage = rutaUrl
 								+ "SITEG/public/imagenes/reportes/";
 
-						Map p = new HashMap();
 						p.put("logoUcla", reporteImage + "logo ucla.png");
 						p.put("logoCE", reporteImage + "logo CE.png");
-						p.put("logoSiteg", reporteImage + "logo.png");
-						
 						JasperReport jasperReport = (JasperReport) JRLoader
 								.loadObject(reporteSrc);
+
 						JasperPrint jasperPrint = JasperFillManager.fillReport(
-								jasperReport, p,
-								new JRBeanCollectionDataSource(elementos));
-						JasperViewer.viewReport(jasperPrint, false);						
+								jasperReport, p, new JRBeanCollectionDataSource(
+										elementos));
+						JasperViewer.viewReport(jasperPrint, false);
+						
 
 					}
 

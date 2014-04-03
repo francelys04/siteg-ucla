@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileSystemView;
 
 import modelo.Estudiante;
 import modelo.SolicitudTutoria;
+import modelo.reporte.InformeFactibilidad;
 import modelo.reporte.Solicitud;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -64,18 +65,16 @@ public class CCartaDeCompromiso extends CGeneral {
 			SolicitudTutoria solicitud = servicioSolicitudTutoria
 					.buscarSolicitudAceptadaEstudiante(estudiante);
 
-			String nombre = solicitud.getProfesor().getNombre();
-			String apellido = solicitud.getProfesor().getApellido();
-			String cedula = solicitud.getProfesor().getCedula();
-			String titulo = solicitud.getDescripcion();
-			String cedulae = estudiante.getCedula();
-			String nombree = estudiante.getNombre();
-			String apellidoe = estudiante.getApellido();
-			Date fecha = solicitud.getFecha();
+			String nombreTutor = solicitud.getProfesor().getNombre() + " " + solicitud.getProfesor().getApellido();
+			String cedulaProfesor = solicitud.getProfesor().getCedula();
+			String tituloTeg = solicitud.getDescripcion();
+			String cedulaEstudiante = estudiante.getCedula();
+			String nombreEstudiante = estudiante.getNombre() + " " + estudiante.getApellido();
+			
 			List<Solicitud> elementos = new ArrayList<Solicitud>();
-			elementos.add(new Solicitud(titulo, fecha, cedula, nombre,
-					apellido, cedulae, apellidoe, nombree));
-
+			elementos.add(new Solicitud(tituloTeg,cedulaProfesor,
+					nombreTutor, cedulaEstudiante,nombreEstudiante));
+						
 			Map<String, Object> mapa = new HashMap<String, Object>();
 
 			// Metodo utilizado para los que de error el preview
