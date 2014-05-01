@@ -1,5 +1,5 @@
 <window id="wdwReporteDefensa" title="Defensa" border="normal"
-	width="100%" height="435px" closable="true"
+	width="100%" height="auto" closable="true"
 	apply="controlador.reporte.CReporteEstadisticoDefensa">
 
 	<style dynamic="true">
@@ -93,7 +93,7 @@
 	<separator />
 
 
-	<groupbox width="95%" height="315px"
+	<groupbox width="96%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -185,7 +185,7 @@
 
 						<hlayout>
 							<label value="*"
-								style="font-weight:bold;color:red;margin-left:60px">
+								style="font-weight:bold;color:red;margin-left:30px">
 							</label>
 							<label value="Tematica:"
 								style="font-weight:bold" />
@@ -193,7 +193,7 @@
 
 						<combobox style="margin-left:30px"
 							tooltip="pupSeleccionarTematica" id="cmbTematica" readonly="true"
-							width="250px">
+							width="280px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -235,9 +235,9 @@
 			</panelchildren>
 		</panel>
 	</groupbox>
+
+
 	<separator />
-	<jasperreport id="jstVistaProfesores" height="40%" width="100%">
-	</jasperreport>
 	<separator />
-	<separator />
+	
 </window>
