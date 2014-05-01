@@ -78,11 +78,17 @@ public class Solicitud{
 		this.estatus = estatus;
 	}
 
-	
-	
-	
+		
+	public Solicitud(String tituloTeg, String cedulaProfesor,
+			String nombreTutor, String cedulaEstudiante, String nombreEstudiante) {
+		super();
+		this.tituloTeg = tituloTeg;
+		this.cedulaProfesor = cedulaProfesor;
+		this.nombreTutor = nombreTutor;
+		this.cedulaEstudiante = cedulaEstudiante;
+		this.nombreEstudiante = nombreEstudiante;
+	}
 
-	
 	public Teg getTeg() {
 		return teg;
 	}

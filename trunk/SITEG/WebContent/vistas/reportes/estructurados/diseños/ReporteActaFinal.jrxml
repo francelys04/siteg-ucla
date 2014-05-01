@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteActaFinal" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b486619a-d86b-4f9c-bf32-f6a95fda70bc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logoCE" class="java.lang.String"/>
+	<parameter name="logoUcla" class="java.lang.String"/>
+	<field name="director" class="java.lang.String"/>
+	<field name="nestudiante" class="java.lang.String"/>
+	<field name="cestudiante" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="programateg" class="java.lang.String"/>
+	<field name="estatus" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="122" splitType="Stretch">
+			<staticText>
+				<reportElement x="113" y="22" width="312" height="66" uuid="103e54e2-f649-48d5-8a69-ac456626f675"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIVERSIDAD CENTROCCIDENTAL
+“LISANDRO ALVARADO”
+DECANATO DE CIENCIAS Y TECNOLOGÍA
+COMITÉ DE TRABAJO DE GRADO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="7" width="100" height="72" uuid="efdcbe67-a3f3-442e-b9b5-b688d04fc981"/>
+				<imageExpression><![CDATA[$P{logoUcla}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="455" y="0" width="100" height="85" uuid="7da2d695-472e-424b-ac2b-1bbc4904aed6"/>
+				<imageExpression><![CDATA[$P{logoCE}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="617" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="457" y="11" width="100" height="20" uuid="f89f996a-a42c-4948-8043-e3bfd5282191"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="383" y="11" width="100" height="20" uuid="1e9cf9be-85a4-4131-8f67-2d740223e75b"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Barquisimeto,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="68" width="414" height="20" uuid="b6be9af0-6617-46a8-9abd-34ff649b588e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACTA FINAL DE EVALUACIÓN DEL TRABAJO ESPECIAL  DE GRADO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="425" y="178" width="117" height="1" uuid="aebff2f2-b7ed-45a7-a5eb-eae1dbb7d6fc"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="118" width="529" height="20" uuid="c24c3109-4c29-4d75-9ed9-0ad810d80b9f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[En el día de hoy, constituido el jurado evaluador y teniendo por sede las instalaciones del Decanato de ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="140" width="491" height="20" uuid="301d7a77-a238-457d-89cd-fc691da38192"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Ciencias y Tecnología de la UNIVERSIDAD CENTROCCIDENTAL “LISANDRO ALVARADO”, ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="162" width="412" height="20" uuid="a783548c-e4af-4a19-89ae-74dde89d71c8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[después de realizada la Presentación Pública del Trabajo de Grado del (la)  Bachiller:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="184" width="182" height="16" uuid="4c3dee08-d004-40c2-bae7-a689a45b35b9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Titular de la Cédula de Identidad N° ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="195" y="199" width="88" height="1" uuid="3f4f9278-20cd-4f42-b9fc-14cf57afe3a8"/>
+			</line>
+			<staticText>
+				<reportElement x="296" y="184" width="145" height="17" uuid="5b714cbc-636a-4c89-a8b8-bce508970649"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[. El cual lleva por título:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="13" y="228" width="529" height="1" uuid="44586a51-051d-4b40-8e11-fec7dec01ba1"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="268" width="518" height="20" uuid="0f13c6b0-4350-4dfc-87f3-bb069e312962"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Presente el (la) estudiante y constatado que la actividad de evaluación realizada se ajusta a la Normativa ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="289" width="518" height="20" uuid="e5fbcda2-4d2b-4716-8590-1a55db94775e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[de  Trabajo de Grado establecida por esta institución para tal efecto, se procedió a aplicar la evaluación ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="315" width="491" height="20" uuid="3b228f86-f642-4669-925b-db83a16410af"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[obteniendo como resultado final:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="499" width="93" height="22" uuid="e184de8e-2d14-4ac8-bee3-163e1bf8d0fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Atentamente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="29" y="587" width="447" height="14" uuid="b5723b2b-b299-42a6-82a2-c98604cb8c96"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{programateg}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="174" y="562" width="162" height="14" uuid="24ae9bc3-e3bc-4f75-a8fe-7b2bc414f8f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Director de Programa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="531" width="57" height="20" uuid="952ee165-5af0-4acb-a7e8-65cb2e6513c8"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Profesor]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="245" y="531" width="141" height="20" uuid="df65f93e-2d76-4698-b808-a836d09660c5"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{director}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="153" y="400" width="198" height="1" uuid="aeef41a1-39cf-4608-b5dc-ea410ee71fc8"/>
+			</line>
+			<staticText>
+				<reportElement x="174" y="411" width="162" height="20" uuid="0a2f4ff9-48de-48d3-9194-ceca2543ebed"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Resultado (Aprobado/Aplazado)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="195" y="184" width="88" height="20" uuid="287d9f3d-d420-4a04-9315-8d2cc0437f4b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cestudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="163" width="112" height="20" uuid="1f0fffa4-d3f5-49ab-aac8-747ca89f8111"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nestudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="211" width="529" height="20" uuid="7385bd8f-fb5d-4053-b097-d49fa662c1d9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="153" y="380" width="198" height="20" uuid="4079a4fc-ad08-4ccd-8386-c1e80b9e0e9d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="17" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="12" splitType="Stretch"/>
+	</summary>
+</jasperReport>

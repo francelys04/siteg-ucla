@@ -1,6 +1,6 @@
 <window id="wdwReporteProfesorMasSolicitados"
 	title="Profesores con mas Solicitudes de Tutoria" border="normal"
-	width="100%" height="435px" closable="true"
+	width="100%" height="auto" closable="true"
 	apply="controlador.reporte.CReporteProfesoresMasSolicitados">
 
 	<style dynamic="true">
@@ -93,7 +93,7 @@
 	<separator />
 
 
-	<groupbox width="95%" height="315px"
+	<groupbox width="95%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
@@ -156,7 +156,7 @@
 
 					<combobox tooltip="pupSeleccionarPrograma"
 						id="cmbProgramaReporteProfesoresSolicitados" readonly="true"
-						width="250px">
+						style="margin-left:20px" width="250px">
 						<template name="model">
 							<comboitem label="${each.nombre}"
 								id="${each.id}" />
@@ -176,8 +176,8 @@
 
 					<hbox>
 						<combobox tooltip="pupSeleccionarArea"
-							id="cmbAreaReporteProfesoresSolicitados" readonly="true"
-							width="250px">
+							style="margin-left:20px" id="cmbAreaReporteProfesoresSolicitados"
+							readonly="true" width="250px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -186,16 +186,16 @@
 
 						<hlayout>
 							<label value="*"
-								style="font-weight:bold;color:red;margin-left:60px">
+								style="font-weight:bold;color:red;margin-left:30px">
 							</label>
 							<label value="Temática:"
 								style="font-weight:bold" />
 						</hlayout>
 
-						<combobox style="margin-left:30px"
+						<combobox style="margin-left:20px"
 							tooltip="pupSeleccionarTematica"
 							id="cmbTematicaReporteProfesoresSolicitados" readonly="true"
-							width="250px">
+							width="280px">
 							<template name="model">
 								<comboitem label="${each.nombre}"
 									id="${each.id}" />
@@ -240,9 +240,8 @@
 			</panelchildren>
 		</panel>
 	</groupbox>
-	<separator />
-	<jasperreport id="jstVistaProfesores" height="40%" width="100%">
-	</jasperreport>
+
 	<separator />
 	<separator />
+
 </window>
