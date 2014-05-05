@@ -40,10 +40,8 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	private Textbox txtAreaRegistrarAvance;
 	@Wire
 	private Textbox txtTituloRegistrarAvance;
-	private static String estatus1 ="Proyecto Factible";
-	 private static String estatus2 ="Proyecto en Desarrollo";
-	
-
+	private static String estatus1 = "Proyecto Factible";
+	private static String estatus2 = "Proyecto en Desarrollo";
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
@@ -56,25 +54,36 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		
-		List<Teg> tegs = servicioTeg.buscarTegPorProfesor(estatus1, estatus2, ObtenerUsuarioProfesor());
+
+		List<Teg> tegs = servicioTeg.buscarTegPorProfesor(estatus1, estatus2,
+				ObtenerUsuarioProfesor());
 		System.out.println(tegs.size());
+		List<Teg> tegs2 = new ArrayList<Teg>();
+		long id2 = 0;
+		long id = 0;
 		for (int i = 0; i < tegs.size(); i++) {
-			List<Estudiante> estudiantes = servicioEstudiante
-					.buscarEstudiantePorTeg(tegs.get(i));
-			String nombre = estudiantes.get(0).getNombre();
-			String apellido = estudiantes.get(0).getApellido();
-			tegs.get(i).setEstatus(nombre + " " + apellido);
+			id = tegs.get(i).getId();
+			if (id != id2) {
+				List<Estudiante> estudiantes = servicioEstudiante
+						.buscarEstudiantePorTeg(tegs.get(i));
+				String nombre = estudiantes.get(0).getNombre();
+				String apellido = estudiantes.get(0).getApellido();
+				tegs.get(i).setEstatus(nombre + " " + apellido);
+				tegs2.add(tegs.get(i));
+
+				id2 = id;
+			}
 		}
-		ltbProyectosFactibles.setModel(new ListModelList<Teg>(tegs));
+		ltbProyectosFactibles.setModel(new ListModelList<Teg>(tegs2));
 	}
 
 	/*
 	 * Metodo que permite retornar un lista de los tegs, donde se recorre tanto
-	 * la lista del teg como los profesores activos, donde se compara si coincide las
-	 * cedulas de cada uno de los profesores para cargar la lista de tegs.
+	 * la lista del teg como los profesores activos, donde se compara si
+	 * coincide las cedulas de cada uno de los profesores para cargar la lista
+	 * de tegs.
 	 */
-	
+
 	/*
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra
@@ -83,7 +92,8 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	 */
 	@Listen("onChange = #txtEstudianteAvance, #txtFechaRegistrarAvance, #txtTematicaRegistrarAvance,#txtAreaRegistrarAvance,#txtTituloRegistrarAvance")
 	public void filtrarDatosCatalogo() {
-		List<Teg> teg1 = servicioTeg.buscarTegPorProfesor(estatus1, estatus2, ObtenerUsuarioProfesor());
+		List<Teg> teg1 = servicioTeg.buscarTegPorProfesor(estatus1, estatus2,
+				ObtenerUsuarioProfesor());
 		for (int i = 0; i < teg1.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante
 					.buscarEstudiantePorTeg(teg1.get(i));

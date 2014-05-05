@@ -60,22 +60,31 @@ public class CCatalogoAsignarComision extends CGeneral {
 		// TODO Auto-generated method stub
 		Programa programa = servicioPrograma
 				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
-		if(programa != null){
-		List<Teg> tegs = servicioTeg
-		.buscarTegPorProgramaParaAsignarComision(programa);
+		if (programa != null) {
+			List<Teg> tegs = servicioTeg
+					.buscarTegPorProgramaParaAsignarComision(programa);
+			List<Teg> tegs2 = new ArrayList<Teg>();
+			long id2 = 0;
+			long id = 0;
 
-		for (int i = 0; i < tegs.size(); i++) {
-			List<Estudiante> estudiantes = servicioEstudiante
-					.buscarEstudiantePorTeg(tegs.get(i));
-			String nombre = estudiantes.get(0).getNombre();
-			String apellido = estudiantes.get(0).getApellido();
-			tegs.get(i).setEstatus(nombre + " " + apellido);
-		}
-		ltbProyectosRegistrados.setModel(new ListModelList<Teg>(tegs));
+			for (int i = 0; i < tegs.size(); i++) {
+				id = tegs.get(i).getId();
+				if (id != id2) {
+					List<Estudiante> estudiantes = servicioEstudiante
+							.buscarEstudiantePorTeg(tegs.get(i));
+					String nombre = estudiantes.get(0).getNombre();
+					String apellido = estudiantes.get(0).getApellido();
+					tegs.get(i).setEstatus(nombre + " " + apellido);
+					tegs2.add(tegs.get(i));
+
+					id2 = id;
+				}
+
+			}
+			ltbProyectosRegistrados.setModel(new ListModelList<Teg>(tegs2));
 		}
 	}
 
-	
 	/*
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra
@@ -85,8 +94,8 @@ public class CCatalogoAsignarComision extends CGeneral {
 	@Listen("onChange = #txtEstudianteComision, #txtMostrarFecha, #txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,#txtMostrarApellidoTutor")
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = servicioTeg
-		.buscarTegPorProgramaParaAsignarComision(servicioPrograma
-				.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
+				.buscarTegPorProgramaParaAsignarComision(servicioPrograma
+						.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
 		for (int i = 0; i < teg1.size(); i++) {
 			List<Estudiante> es = servicioEstudiante
 					.buscarEstudiantePorTeg(teg1.get(i));
@@ -141,10 +150,11 @@ public class CCatalogoAsignarComision extends CGeneral {
 		ltbProyectosRegistrados.setModel(new ListModelList<Teg>(teg2));
 
 	}
+
 	/*
-	 * Metodo que permite obtener el objeto Teg al realizar el evento
-	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
-	 * para luego poder ser mapeada y enviada a la vista "VAsignarComision".
+	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
+	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
+	 * poder ser mapeada y enviada a la vista "VAsignarComision".
 	 */
 	@Listen("onDoubleClick = #ltbProyectosRegistrados")
 	public void mostrarDatosCatalogo() {

@@ -44,8 +44,8 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	private Textbox txtNombreTutorRegistrarRevision;
 	@Wire
 	private Textbox txtApellidoTutorRegistrarRevision;
-	private static String estatus1="TEG Registrado";
-	private static String estatus2= "Trabajo en Desarrollo";
+	private static String estatus1 = "TEG Registrado";
+	private static String estatus2 = "Trabajo en Desarrollo";
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
@@ -59,28 +59,37 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		List<Teg> tegs = servicioTeg.buscarTegPorProfesor(estatus1, estatus2, ObtenerUsuarioProfesor());
+		List<Teg> tegs = servicioTeg.buscarTegPorProfesor(estatus1, estatus2,
+				ObtenerUsuarioProfesor());
+		List<Teg> tegs2 = new ArrayList<Teg>();
+		long id2 = 0;
+		long id = 0;
 		for (int i = 0; i < tegs.size(); i++) {
-			List<Estudiante> estudiantes = servicioEstudiante
-					.buscarEstudiantePorTeg(tegs.get(i));
-			String nombre = estudiantes.get(0).getNombre();
-			String apellido = estudiantes.get(0).getApellido();
-			tegs.get(i).setEstatus(nombre + " " + apellido);
+			id = tegs.get(i).getId();
+			if (id != id2) {
+				List<Estudiante> estudiantes = servicioEstudiante
+						.buscarEstudiantePorTeg(tegs.get(i));
+				String nombre = estudiantes.get(0).getNombre();
+				String apellido = estudiantes.get(0).getApellido();
+				tegs.get(i).setEstatus(nombre + " " + apellido);
+				tegs2.add(tegs.get(i));
+
+				id2 = id;
+			}
 		}
 		ltbTrabajosRegistrados.setModel(new ListModelList<Teg>(tegs));
 	}
 
-
-
 	/*
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra
-	 * visualizar el nombre y apellido del estudiante, la fecha, la
-	 * tematica, el area y el titulo, el nombre y apellido del tutor de estos.
+	 * visualizar el nombre y apellido del estudiante, la fecha, la tematica, el
+	 * area y el titulo, el nombre y apellido del tutor de estos.
 	 */
 	@Listen("onChange = #txtEstudianteRevision, #txtFechaRegistrarRevision, #txtTematicaRegistrarRevision,#txtAreaRegistrarRevision,#txtTituloRegistrarRevision")
 	public void filtrarDatosCatalogo() {
-		List<Teg> teg1 = servicioTeg.buscarTegPorProfesor(estatus1, estatus2, ObtenerUsuarioProfesor());
+		List<Teg> teg1 = servicioTeg.buscarTegPorProfesor(estatus1, estatus2,
+				ObtenerUsuarioProfesor());
 		for (int i = 0; i < teg1.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante
 					.buscarEstudiantePorTeg(teg1.get(i));
