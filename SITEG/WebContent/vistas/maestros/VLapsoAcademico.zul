@@ -71,8 +71,7 @@
 			label="Presione aquí para ver la lista de lapsos académicos" />
 	</popup>
 	<popup id="pupSalirLapso">
-		<toolbarbutton
-			label="Presione aquí para salir" />
+		<toolbarbutton label="Presione aquí para salir" />
 	</popup>
 	<!-- Fin de popus -->
 
@@ -125,7 +124,7 @@
 
 					<datebox id="dtbInicioLapso" cols="12" width="150px"
 						tabindex="3" format="dd/MM/yyyy" tooltip="pupInicioLapso"
-						style="margin-right:15px">
+						readonly="true" style="margin-right:15px">
 					</datebox>
 
 				</row>
@@ -139,8 +138,8 @@
 					</hlayout>
 
 					<datebox id="dtbFinLapso" cols="12" width="150px"
-						tabindex="4" format="dd/MM/yyyy" tooltip="pupFinLapso"
-						style="margin-right:15px">
+						readonly="true" tabindex="4" format="dd/MM/yyyy"
+						tooltip="pupFinLapso" style="margin-right:15px">
 					</datebox>
 
 				</row>
@@ -174,8 +173,8 @@
 							image="/public/imagenes/iconos/eliminar.png" disabled="true"
 							tabindex="7">
 						</button>
-						<button id="btnSalirLapso" label="Salir" width="110px"
-							sclass="btn" tooltip="pupSalirLapso"
+						<button id="btnSalirLapso" label="Salir"
+							width="110px" sclass="btn" tooltip="pupSalirLapso"
 							image="/public/imagenes/iconos/salir.png" tabindex="8">
 						</button>
 						<separator />
@@ -189,5 +188,5 @@
 
 	<separator />
 	<separator />
-	
+
 </window>

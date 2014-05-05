@@ -33,6 +33,7 @@ public interface IProfesorDAO extends JpaRepository<Profesor, String> {
 	@Query("select p from Profesor p where p.cedula not in (select pr.directorPrograma from Programa pr where pr.estatus = true)")
 	public List<Profesor> profesorSinPrograma();
 	
+	@Query("Select p from Profesor p order by p.categoria asc, p.cedula asc")
 	public List<Profesor> findByEstatusTrueOrderByCategoriaAsc();
 
 }

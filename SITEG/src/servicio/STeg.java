@@ -119,8 +119,8 @@ public class STeg {
 	public List<Teg> buscarTegPorProfesor(String estatus1, String estatus2,
 			Profesor profesor) {
 		List<Teg> teg;
-		teg = interfaceTeg.findByEstatusOrEstatusLikeAndTutor(estatus1,
-				estatus2, profesor);
+		teg = interfaceTeg.findByTutorAndEstatusOrEstatus(profesor,estatus1,
+				estatus2);
 		return teg;
 
 	}

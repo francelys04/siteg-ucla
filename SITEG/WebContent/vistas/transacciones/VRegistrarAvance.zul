@@ -103,7 +103,7 @@
 			</label>
 			<datebox id="dtbRegistrarAvance" cols="12" width="130px"
 				style="margin-right:30px;color:black !important;" disabled="true"
-				format="short" onCreate="self.value = new Date()" mold="rounded">
+				format="short" onCreate="self.value = new Date()">
 			</datebox>
 		</div>
 
@@ -119,7 +119,7 @@
 		<separator />
 
 
-		<panel height="150px" title="Datos Estudiante(s)"
+		<panel height="170px" title="Datos Estudiante(s)"
 			style="margin-left:20px;margin-right:20px" border="normal">
 			<panelchildren>
 				<listbox id="lsbEstudiantesTeg" sclass="fgrid"

@@ -96,8 +96,7 @@
 			</label>
 			<datebox id="dbfechaRegistrarProyecto" width="130px"
 				cols="12" style="margin-right:40px;color:black !important;"
-				disabled="true" format="short" onCreate="self.value = new Date()"
-				mold="rounded">
+				disabled="true" format="short" onCreate="self.value = new Date()">
 			</datebox>
 		</div>
 

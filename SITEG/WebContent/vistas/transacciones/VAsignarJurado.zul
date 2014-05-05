@@ -72,12 +72,10 @@
 			label="Presione aquí para visualizar los datos del jurado" />
 	</popup>
 	<popup id="pupD">
-		<toolbarbutton
-			label="Presione aquí para agregar profesores" />
+		<toolbarbutton label="Presione aquí para agregar profesores" />
 	</popup>
 	<popup id="pupI">
-		<toolbarbutton
-			label="Presione aquí para remover profesores" />
+		<toolbarbutton label="Presione aquí para remover profesores" />
 	</popup>
 	<popup id="pupBtnGuardar">
 		<toolbarbutton label="Presione aquí para guardar la comision" />
@@ -109,7 +107,7 @@
 			</label>
 			<datebox id="dtbFechaAtenderDefensa" cols="12" width="130px"
 				style="margin-right:30px" format="short"
-				onCreate="self.value = new Date()" mold="rounded" disabled="true">
+				onCreate="self.value = new Date()" disabled="true">
 			</datebox>
 		</div>
 
@@ -203,7 +201,7 @@
 												emptyMessage="No hay items registrados">
 												<listhead>
 													<listheader
-														label="Cédula" width="40%"/>
+														label="Cédula" width="40%" />
 													<listheader
 														label="Nombre" />
 													<listheader
@@ -213,8 +211,11 @@
 													name="model">
 													<listitem>
 														<listcell>
-															
-																<intbox value="${each.cedula}"  width="60px" style="background-color:white;border:none" readonly="true"/>
+
+															<intbox
+																value="${each.cedula}" width="60px"
+																style="background-color:white;border:none"
+																readonly="true" />
 														</listcell>
 														<listcell
 															label="${each.nombre}">
@@ -223,12 +224,16 @@
 															label="${each.apellido}">
 														</listcell>
 														<listcell>
-															<combobox model="${$composer.tipos}" style="background-color:white;border:none" readonly="true" >
-										<template name="model">
-											<comboitem
-												label="${each.nombre}" description="${each.id}"/>
-										</template>
-									</combobox>
+															<combobox
+																model="${$composer.tipos}"
+																style="background-color:white;border:none"
+																readonly="true">
+																<template
+																	name="model">
+																	<comboitem
+																		label="${each.nombre}" description="${each.id}" />
+																</template>
+															</combobox>
 														</listcell>
 													</listitem>
 												</template>
@@ -244,13 +249,11 @@
 
 												<button
 													id="btnAgregarJurado" sclass="btn"
-													image="/public/imagenes/iconos/right.png"
-													tooltip="pupD" />
+													image="/public/imagenes/iconos/right.png" tooltip="pupD" />
 												<separator />
 												<button sclass="btn"
 													id="btnRemoverJurado"
-													image="/public/imagenes/iconos/left.png"
-													tooltip="pupI" />
+													image="/public/imagenes/iconos/left.png" tooltip="pupI" />
 
 											</div>
 										</panelchildren>
@@ -265,7 +268,7 @@
 												emptyMessage="No se han seleccionado items">
 												<listhead>
 													<listheader
-														label="Cédula" width="30%"/>
+														label="Cédula" width="30%" />
 													<listheader
 														label="Nombre" />
 													<listheader
@@ -277,8 +280,11 @@
 												<template
 													name="model">
 													<listitem>
-														<listcell>												
-																<intbox value="${each.profesor.cedula}" style="background-color:white;border:none" width="60px" readonly="true"/>
+														<listcell>
+															<intbox
+																value="${each.profesor.cedula}"
+																style="background-color:white;border:none" width="60px"
+																readonly="true" />
 														</listcell>
 														<listcell
 															label="${each.profesor.nombre}">
@@ -287,12 +293,17 @@
 															label="${each.profesor.apellido}">
 														</listcell>
 														<listcell>
-															<combobox value="${each.tipoJurado.nombre}" model="${$composer.tipos}" style="background-color:white;border:none" width="100%" readonly="true" >
-										<template name="model">
-											<comboitem
-												label="${each.nombre}"/>
-										</template>
-									</combobox>
+															<combobox
+																value="${each.tipoJurado.nombre}"
+																model="${$composer.tipos}"
+																style="background-color:white;border:none" width="100%"
+																readonly="true">
+																<template
+																	name="model">
+																	<comboitem
+																		label="${each.nombre}" />
+																</template>
+															</combobox>
 														</listcell>
 													</listitem>
 												</template>
@@ -367,7 +378,8 @@
 						id="ltbEstudiantesAtenderDefensa">
 
 						<listhead>
-							<listheader label="Cédula" align="center" width="18%"/>
+							<listheader label="Cédula" align="center"
+								width="18%" />
 							<listheader label="Nombre" align="center" />
 							<listheader label="Apellido" align="center" />
 							<listheader label="Correo" align="center"

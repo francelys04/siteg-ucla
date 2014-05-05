@@ -72,12 +72,10 @@
 			label="Presione aquí para visualizar los datos de la comision" />
 	</popup>
 	<popup id="pupD">
-		<toolbarbutton
-			label="Presione aquí para agregar un profesor" />
+		<toolbarbutton label="Presione aquí para agregar un profesor" />
 	</popup>
 	<popup id="pupI">
-		<toolbarbutton
-			label="Presione aquí para remover un profesor" />
+		<toolbarbutton label="Presione aquí para remover un profesor" />
 	</popup>
 	<popup id="pupBtnGuardar">
 		<toolbarbutton label="Presione aquí para guardar la comision" />
@@ -108,7 +106,7 @@
 			</label>
 			<datebox id="dbfecha" cols="12" width="130px"
 				style="margin-right:30px;color:black !important;" disabled="true"
-				format="short" onCreate="self.value = new Date()" mold="rounded">
+				format="short" onCreate="self.value = new Date()">
 			</datebox>
 		</div>
 
@@ -233,15 +231,11 @@
 
 												<button
 													id="btnAgregarProfesoresComision" sclass="btn"
-													image="/public/imagenes/iconos/right.png"
-													tooltip="pupD"
-													/>
+													image="/public/imagenes/iconos/right.png" tooltip="pupD" />
 												<separator />
 												<button
 													id="btnRemoverProfesoresComision" sclass="btn"
-													image="/public/imagenes/iconos/left.png"
-													tooltip="pupI"
-													 />
+													image="/public/imagenes/iconos/left.png" tooltip="pupI" />
 
 											</div>
 										</panelchildren>
@@ -325,8 +319,7 @@
 							<row>
 								<textbox id="txtTituloComision"
 									style="color:black !important;" disabled="true" width="620px"
-									tooltiptext="Ingrese aqui el titulo"
-									rows="4" cols="100" />
+									tooltiptext="Ingrese aqui el titulo" rows="4" cols="100" />
 							</row>
 						</rows>
 					</grid>
@@ -343,10 +336,12 @@
 						emptyMessage="No hay Estudiantes registrados actualmente">
 
 						<listhead>
-							<listheader label="Cédula" align="center" width="18%"/>
+							<listheader label="Cédula" align="center"
+								width="18%" />
 							<listheader label="Nombre" align="center" />
 							<listheader label="Apellido" align="center" />
-							<listheader label="Correo" align="center" width="30%"/>
+							<listheader label="Correo" align="center"
+								width="30%" />
 						</listhead>
 
 						<template name="model">
@@ -406,8 +401,8 @@
 
 		<separator />
 	</groupbox>
-	
+
 	<separator />
 	<separator />
-	
+
 </window>

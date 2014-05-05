@@ -252,7 +252,7 @@
 										<datebox
 											id="dtbFechaEntregaRegistrarTeg" width="130px" format="short"
 											onCreate="self.value = new Date()" tooltip="pupFechaEntrega"
-											style="margin-left:20px">
+											style="margin-left:20px" readonly="true">
 										</datebox>
 
 										<hlayout>

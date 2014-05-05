@@ -76,10 +76,11 @@
 			label="Presione aquí para seleccionar la temática" />
 	</popup>
 	<popup id="pupTitulo">
-		<toolbarbutton
-			label="Ingrese aquí el título tentativo" />
+		<toolbarbutton label="Ingrese aquí el título tentativo" />
 	</popup>
 	<!-- fin de popus -->
+	<separator />
+	<separator />
 
 	<label value="(*) "
 		style="font-weight:bold;color:red;margin-left:2%">
@@ -90,32 +91,34 @@
 	<separator />
 	<separator />
 	<image id="imagenTutor" width="80px" height="50px" visible="false" />
-	<div align="right">
-		<label value="Fecha:"
-			style="margin-right:10px;font-weight:bold;color: rgb(0, 84, 122)">
-		</label>
-		<datebox id="db1" cols="12" style="margin-right:40px"
-			width="120px" disabled="true" format="short"
-			onCreate="self.value = new Date()" mold="rounded">
-		</datebox>
-	</div>
-
 	<separator />
 	<separator />
-	<separator />
-
 
 	<groupbox width="95%" height="auto"
 		style="margin-left:2%;margin-right:1%">
 		<separator />
 		<separator />
 
+		<div align="right">
+			<label value="Fecha:"
+				style="margin-right:10px;font-weight:bold;color: rgb(0, 84, 122)">
+			</label>
+			<datebox id="db1" cols="12"
+				style="margin-right:40px;color:black !important;" width="120px"
+				disabled="true" format="short" onCreate="self.value = new Date()">
+			</datebox>
+		</div>
+
+		<separator />
+		<separator />
+		<separator />
 
 		<tabbox style="margin-left:1%;margin-right:1%" width="98%"
 			height="250px">
 			<tabs>
-				<tab label="Datos Estudiante(s)" tooltip="pupDatosEstudiante"/>
-				<tab label="Datos del Tutor" tooltip="pupDatosTutor"/>
+				<tab label="Datos Estudiante(s)"
+					tooltip="pupDatosEstudiante" />
+				<tab label="Datos del Tutor" tooltip="pupDatosTutor" />
 			</tabs>
 			<tabpanels>
 				<tabpanel height="150px">
