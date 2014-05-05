@@ -57,37 +57,45 @@ public class CCatalogoRegistrarFactibilidad extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		//hizo kairin nuevo
+		// hizo kairin nuevo
 		Programa programa = servicioPrograma
 				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
-		if(programa != null){
-		List<Teg> tegs = servicioTeg
-		. buscarTegPorProgramaParaRegistrarFactibilidad(programa);
-		for (int i = 0; i < tegs.size(); i++) {
-			List<Estudiante> estudiantes = servicioEstudiante
-					.buscarEstudiantePorTeg(tegs.get(i));
-			String nombre = estudiantes.get(0).getNombre();
-			String apellido = estudiantes.get(0).getApellido();
-			tegs.get(i).setEstatus(nombre + " " + apellido);
-		}
-		ltbListaFactibilidad.setModel(new ListModelList<Teg>(tegs));
+		List<Teg> tegs2 = new ArrayList<Teg>();
+		long id2 = 0;
+		long id = 0;
+
+		if (programa != null) {
+			List<Teg> tegs = servicioTeg
+					.buscarTegPorProgramaParaRegistrarFactibilidad(programa);
+			for (int i = 0; i < tegs.size(); i++) {
+				id = tegs.get(i).getId();
+				if (id != id2) {
+					List<Estudiante> estudiantes = servicioEstudiante
+							.buscarEstudiantePorTeg(tegs.get(i));
+					String nombre = estudiantes.get(0).getNombre();
+					String apellido = estudiantes.get(0).getApellido();
+					tegs.get(i).setEstatus(nombre + " " + apellido);
+					tegs2.add(tegs.get(i));
+
+					id2 = id;
+				}
+			}
+			ltbListaFactibilidad.setModel(new ListModelList<Teg>(tegs2));
 		}
 	}
 
-	
-		
 	/*
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra
-	 * visualizar el nombre y apellido del estudiante, la fecha, la
-	 * tematica, el area y el titulo, el nombre y apellido del tutor de estos.
+	 * visualizar el nombre y apellido del estudiante, la fecha, la tematica, el
+	 * area y el titulo, el nombre y apellido del tutor de estos.
 	 */
 	@Listen("onChange = #txtEstudianteRegistrarFactibilidad, #txtMostrarFechaFactibilidad, #txtMostrarTematicaFactibilidad,#txtMostrarAreaFactibilidad,#txtMostrarTituloFactibilidad,#txtMostrarNombreTutorFactibilidad,#txtMostrarApellidoTutorFactibilidad")
 	public void filtrarDatosCatalogo() {
-		//hizo kairin nuevo
+		// hizo kairin nuevo
 		List<Teg> teg1 = servicioTeg
-		.buscarTegPorProgramaParaDefensa(servicioPrograma
-				.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
+				.buscarTegPorProgramaParaDefensa(servicioPrograma
+						.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
 		for (int i = 0; i < teg1.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante
 					.buscarEstudiantePorTeg(teg1.get(i));
