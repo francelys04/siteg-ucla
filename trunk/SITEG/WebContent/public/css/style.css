@@ -58,7 +58,7 @@
 	width: 60px;
 	height: 60px;
 	margin: 0 auto;
-	margin-right: 10px transition:           all 0.3s linear;
+	margin-right: 10px transition:             all 0.3s linear;
 	-webkit-transition: all 0.3s linear;
 	-moz-transition: all 0.3s linear;
 	-o-transition: all 0.3s linear;
@@ -189,4 +189,19 @@
 
 .actionColumn {
 	margin: 70px 34px;
+}
+
+.z-spinner-disd,.z-spinner-disd *,.z-doublespinner-disd,.z-doublespinner-disd *,.z-timebox-disd,.z-timebox-disd *,.z-datebox-disd,.z-datebox-disd *,.z-bandbox-disd,.z-bandbox-disd *,.z-comboitem-disd,.z-comboitem-disd *,.z-combobox-disd,.z-combobox-disd *
+	{
+	cursor: default !important;
+	color: rgb(170, 170, 170) !important;
+	background: none repeat scroll 0% 0% #FFF
+}
+
+.z-window-embedded,.z-window-modal,.z-window-overlapped,.z-window-popup,.z-window-highlighted
+	{
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	background: #f5f5f5;
 }

@@ -85,8 +85,7 @@
 			</label>
 			<datebox id="dbRegistrarFactibilidad" cols="12"
 				width="130px" style="margin-right:30px;color:black !important;"
-				disabled="true" format="short" onCreate="self.value = new Date()"
-				mold="rounded">
+				disabled="true" format="short" onCreate="self.value = new Date()">
 			</datebox>
 		</div>
 

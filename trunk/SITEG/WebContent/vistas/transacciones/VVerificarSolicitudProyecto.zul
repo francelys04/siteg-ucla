@@ -94,7 +94,7 @@
 	<popup id="pupEstadoRequisitos">
 		<toolbarbutton label="Seleccione el estado de los requisitos" />
 	</popup>
-	
+
 
 	<!-- fin de popus -->
 
@@ -114,8 +114,7 @@
 			</label>
 			<datebox id="db1" cols="12"
 				style="margin-right:30px;color:black !important;" width="130px"
-				format="short" onCreate="self.value = new Date()" mold="rounded"
-				disabled="true">
+				format="short" onCreate="self.value = new Date()" disabled="true">
 			</datebox>
 		</div>
 
@@ -342,7 +341,8 @@
 						style="margin-left:30px;margin-right:30px" pageSize="2">
 
 						<listhead>
-							<listheader label="Cédula" align="center" width="18%" />
+							<listheader label="Cédula" align="center"
+								width="18%" />
 							<listheader label="Nombre" align="center" />
 							<listheader label="Apellido" align="center" />
 							<listheader label="Correo" align="center"
@@ -369,7 +369,7 @@
 
 			</tabpanels>
 		</tabbox>
-		
+
 		<separator />
 		<separator />
 

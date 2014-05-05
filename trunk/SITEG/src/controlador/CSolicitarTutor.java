@@ -121,6 +121,8 @@ public class CSolicitarTutor extends CGeneral {
 			cmbAreaSolicitud.setValue(combo1);
 			combo1 = null;
 			cmbAreaSolicitud.setDisabled(true);
+			cmbAreaSolicitud.setStyle("color:black !important;");
+			
 		}
 		if (combo2 == null) {
 			// cmbTematicaSolicitud.setDisabled(false);
@@ -128,6 +130,7 @@ public class CSolicitarTutor extends CGeneral {
 			cmbTematicaSolicitud.setValue(combo2);
 			combo2 = null;
 			cmbTematicaSolicitud.setDisabled(true);
+			cmbTematicaSolicitud.setStyle("color:black !important;");
 		}
 		if (descripcion != null) {
 			txtTituloSolicitud.setValue(descripcion);

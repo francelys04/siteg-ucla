@@ -11,7 +11,7 @@
 	</popup>
 	<!-- Fin de popus -->
 
-	<listbox id="ltbArchivo" width="100%" mold="paging" pageSize="10"
+	<listbox id="ltbArchivo" width="100%" mold="paging" pageSize="6"
 		emptyMessage="No hay archivos registrados">
 		<auxhead sclass="category-center">
 			<auxheader colspan="1">

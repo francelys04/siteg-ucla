@@ -69,8 +69,7 @@
 			</label>
 			<datebox id="dtbFechaSolicitarDefensa" cols="12"
 				width="130px" style="margin-right:40px;color:black !important;"
-				format="short" onCreate="self.value = new Date()" mold="rounded"
-				disabled="true">
+				format="short" onCreate="self.value = new Date()" disabled="true">
 			</datebox>
 		</div>
 

@@ -71,8 +71,8 @@
 				style="margin-right:10px;font-weight:bold;color: rgb(0, 84, 122)">
 			</label>
 			<datebox id="dtbFechaEvaluarTutoria" cols="12" width="130px"
-				style="margin-right:40px" format="short"
-				onCreate="self.value = new Date()" mold="rounded" disabled="true">
+				style="margin-right:40px;color:black !important;" format="short"
+				onCreate="self.value = new Date()" disabled="true">
 			</datebox>
 		</div>
 
