@@ -1,9 +1,15 @@
 package servicio;
 
+import interfazdao.IAreaInvestigacionDAO;
 import interfazdao.IProfesorDAO;
+import interfazdao.IProgramaAreaDAO;
+import interfazdao.IProgramaDAO;
+import interfazdao.ITematicaDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import modelo.AreaInvestigacion;
 import modelo.Profesor;
 import modelo.Teg;
 import modelo.Tematica;
@@ -17,6 +23,12 @@ public class SProfesor {
 
 	@Autowired
 	private IProfesorDAO interfazProfesor;
+	@Autowired
+	private SProgramaArea servicioProgramaArea;
+	@Autowired
+	private ITematicaDAO interfaceTematica;
+	@Autowired
+	private IProgramaDAO interfazPrograma;
 
 	public void guardarProfesor(Profesor profesor) {
 		// TODO Auto-generated method stub
@@ -87,6 +99,30 @@ public class SProfesor {
 		List<Profesor> profesores;
 		profesores = interfazProfesor.profesorSinPrograma();
 		return profesores;
+	}
+
+	public List<Profesor> buscarProfesoresPorPrograma(long programaRecibido) {
+		List<AreaInvestigacion> areas = servicioProgramaArea.buscarAreasDePrograma(interfazPrograma.findOne(programaRecibido));
+		List<Tematica> tematicas = new ArrayList<Tematica>();
+		List<Profesor> profes = new ArrayList<Profesor>();
+		List<String> cedulas = new ArrayList<String>();
+		if(!areas.isEmpty()){
+			for (int i = 0; i < areas.size(); i++) {
+				tematicas.addAll( interfaceTematica.findByAreaInvestigacion(areas.get(i)));
+			}
+			if(!tematicas.isEmpty()){
+				for (int i = 0; i < tematicas.size(); i++) {
+					profes.addAll(interfazProfesor.findByTematicas(tematicas.get(i)));
+				}
+			}
+			if(!profes.isEmpty()){
+				for (int i = 0; i < profes.size(); i++) {
+					cedulas.add(profes.get(i).getCedula());
+				}
+				profes = interfazProfesor.findDistinctByCedulaIn(cedulas);
+			}
+		}
+		return profes;
 	}
 
 }

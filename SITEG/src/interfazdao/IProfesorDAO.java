@@ -36,4 +36,6 @@ public interface IProfesorDAO extends JpaRepository<Profesor, String> {
 	@Query("Select p from Profesor p order by p.categoria asc, p.cedula asc")
 	public List<Profesor> findByEstatusTrueOrderByCategoriaAsc();
 
+	public List<Profesor> findDistinctByCedulaIn(List<String> cedulas);
+
 }

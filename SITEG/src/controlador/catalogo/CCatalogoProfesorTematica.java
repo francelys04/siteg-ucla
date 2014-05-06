@@ -53,17 +53,13 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se se buscan todos los
-	 * profesores disponibles y se llena la lista del mismo en el componente
-	 * de la vista.
+	 * profesores disponibles y se llena la lista del mismo en el componente de
+	 * la vista.
 	 */
 	public void inicializar(Component comp) {
 
-		 List<Profesor> profe = llenarprofesores();
-		 ltbProfesor.setModel(new ListModelList<Profesor>(profe));
-		
-
-		
-		
+		List<Profesor> profe = llenarprofesores();
+		ltbProfesor.setModel(new ListModelList<Profesor>(profe));
 
 	}
 
@@ -145,20 +141,20 @@ public class CCatalogoProfesorTematica extends CGeneral {
 				map.put("cedula", profesorDatosCatalogo.getCedula());
 				String vista = vistaRecibida;
 				map.put("vista", vista);
-//				if (map2 != null && map2.toString() != "{}") {
+				// if (map2 != null && map2.toString() != "{}") {
 				System.out.println(areaRecibida);
-				if(areaRecibida !=0){
+				if (areaRecibida != 0) {
 					map = map2;
 					map.put("cedula", profesorDatosCatalogo.getCedula());
 					map.put("vista", vista);
-//					System.out.println(map2.toString());
-//					System.out.println(map2.get("area"));
-//					if (!map2.get("area").equals("Todos"))
-//						map.put("area", (Long) map2.get("area"));
-//					else 
-//					map.put("area", (String) map2.get("area"));
-//					map.put("tematica", tematicaRecibida);
-//					map.put("programa", programaRecibido);
+					// System.out.println(map2.toString());
+					// System.out.println(map2.get("area"));
+					// if (!map2.get("area").equals("Todos"))
+					// map.put("area", (Long) map2.get("area"));
+					// else
+					// map.put("area", (String) map2.get("area"));
+					// map.put("tematica", tematicaRecibida);
+					// map.put("programa", programaRecibido);
 					Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 					Executions.sendRedirect("/vistas/arbol.zul");
 					wdwCatalogoProfesorArea.onClose();
@@ -181,10 +177,17 @@ public class CCatalogoProfesorTematica extends CGeneral {
 	 * solicitudes de tutorias donde su estatus es aceptada
 	 */
 	public List<Profesor> llenarprofesores() {
-		Tematica tema = servicioTematica.buscarTematica(tematicaRecibida);
+		List<Profesor> profesores = new ArrayList<Profesor>();
+		if (tematicaRecibida != -1) {
+			Tematica tema = servicioTematica.buscarTematica(tematicaRecibida);
+			profesores = servicioProfesor
+					.buscarProfesoresPorTematica(tema);
+		} else {
+			profesores = servicioProfesor
+					.buscarProfesoresPorPrograma(programaRecibido);
+			return profesores;
+		}
 
-		List<Profesor> profesores = servicioProfesor
-				.buscarProfesoresPorTematica(tema);
 		String variable = "Numero de tutorias por profesor";
 		Programa progra = servicioPrograma.buscarPorId(programaRecibido);
 		CondicionPrograma cm = buscarCondicionVigenteEspecifica(variable,
@@ -214,26 +217,22 @@ public class CCatalogoProfesorTematica extends CGeneral {
 		return profe;
 
 	}
-	/*Metodo que permite cerrar la vista y abrir la vista SolicitarTutor*/
+
+	/* Metodo que permite cerrar la vista y abrir la vista SolicitarTutor */
 	@Listen("onClick = #btnSalir")
 	public void salir() {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/transacciones/VSolicitarTutor.zul", null, null);
 		window.doModal();
-		
 
 	}
-	
-	
-	/*Metodo que permite cerrar la vista y abrir la vista del catalogo*/
+
+	/* Metodo que permite cerrar la vista y abrir la vista del catalogo */
 	@Listen("onClick = #btnSalirReporte")
 	public void salirReporte() {
-		
+
 		wdwCatalogoProfesorArea.onClose();
 
 	}
-	
-	
-	
-	
+
 }

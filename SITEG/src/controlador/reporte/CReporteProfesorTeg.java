@@ -1,5 +1,6 @@
 package controlador.reporte;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -77,9 +78,9 @@ public class CReporteProfesorTeg extends CGeneral {
 	@Wire
 	private Button btnProfesorReporteProfesorTeg;
 
-//	private static Programa programa1;
+	// private static Programa programa1;
 	private static AreaInvestigacion area1;
-//	private static long idarea;
+	// private static long idarea;
 	private static String cedulaProfesor;
 	java.util.Date hoy = new Date();
 
@@ -126,9 +127,9 @@ public class CReporteProfesorTeg extends CGeneral {
 				cmbEstatusReporteProfesorTeg.setValue((String) map
 						.get("estatus"));
 				cmbEstatusReporteProfesorTeg.setDisabled(false);
-				System.out.println("programa"+map.get("programa"));
-				System.out.println("area"+map.get("area"));
-				System.out.println("tematica"+map.get("tematica"));
+				System.out.println("programa" + map.get("programa"));
+				System.out.println("area" + map.get("area"));
+				System.out.println("tematica" + map.get("tematica"));
 				if (map.get("programa").equals(estatusProyecto[0]))
 					cmbProgramaReporteProfesorTeg.setValue(estatusProyecto[0]);
 
@@ -168,36 +169,34 @@ public class CReporteProfesorTeg extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbProgramaReporteProfesorTeg")
 	public void seleccinarPrograma() {
-	
-			txtCedulaReporteProfesorTeg.setValue("");
-			cmbAreaReporteProfesorTeg.setValue("");
-			cmbTematicaReporteProfesorTeg.setValue("");
-			cmbEstatusReporteProfesorTeg.setValue("");
-			if (cmbProgramaReporteProfesorTeg.getValue().equals(
-					estatusProyecto[0])) {
 
-				areas = servicioArea.buscarActivos();
-				AreaInvestigacion area = new AreaInvestigacion(-2,
-						"Todos", "", true);
-				areas.add(area);
-				cmbAreaReporteProfesorTeg
-						.setModel(new ListModelList<AreaInvestigacion>(areas));
-				cmbAreaReporteProfesorTeg.setDisabled(false);
+		txtCedulaReporteProfesorTeg.setValue("");
+		cmbAreaReporteProfesorTeg.setValue("");
+		cmbTematicaReporteProfesorTeg.setValue("");
+		cmbEstatusReporteProfesorTeg.setValue("");
+		if (cmbProgramaReporteProfesorTeg.getValue().equals(estatusProyecto[0])) {
 
-			} else {
+			areas = servicioArea.buscarActivos();
+			AreaInvestigacion area = new AreaInvestigacion(-2, "Todos", "",
+					true);
+			areas.add(area);
+			cmbAreaReporteProfesorTeg
+					.setModel(new ListModelList<AreaInvestigacion>(areas));
+			cmbAreaReporteProfesorTeg.setDisabled(false);
 
-				cmbAreaReporteProfesorTeg.setDisabled(false);
-				areas = servicioProgramaArea
-						.buscarAreasDePrograma(servicioPrograma.buscar(Long
-								.parseLong(cmbProgramaReporteProfesorTeg
-										.getSelectedItem().getId())));
-				AreaInvestigacion area = new AreaInvestigacion(-2,
-						"Todos", "", true);
-				areas.add(area);
-				cmbAreaReporteProfesorTeg
-						.setModel(new ListModelList<AreaInvestigacion>(areas));
+		} else {
 
-			}
+			cmbAreaReporteProfesorTeg.setDisabled(false);
+			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
+					.buscar(Long.parseLong(cmbProgramaReporteProfesorTeg
+							.getSelectedItem().getId())));
+			AreaInvestigacion area = new AreaInvestigacion(-2, "Todos", "",
+					true);
+			areas.add(area);
+			cmbAreaReporteProfesorTeg
+					.setModel(new ListModelList<AreaInvestigacion>(areas));
+
+		}
 	}
 
 	/*
@@ -207,27 +206,27 @@ public class CReporteProfesorTeg extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbAreaReporteProfesorTeg")
 	public void seleccionarArea() {
-	
-			if (cmbAreaReporteProfesorTeg.getValue().equals("Todos")) {
 
-				cmbTematicaReporteProfesorTeg.setValue("Todos");
-				cmbTematicaReporteProfesorTeg.setDisabled(true);
-				cmbEstatusReporteProfesorTeg.setDisabled(false);
+		if (cmbAreaReporteProfesorTeg.getValue().equals("Todos")) {
 
-			} else {
+			cmbTematicaReporteProfesorTeg.setValue("Todos");
+			cmbTematicaReporteProfesorTeg.setDisabled(true);
+			cmbEstatusReporteProfesorTeg.setDisabled(false);
 
-				cmbTematicaReporteProfesorTeg.setDisabled(false);
-				cmbTematicaReporteProfesorTeg.setValue("");
-				area1 = (AreaInvestigacion) cmbAreaReporteProfesorTeg
-						.getSelectedItem().getValue();
-				tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-						.buscarArea(area1.getId()));
-				Tematica tema = new Tematica(0, "Todos", "", true, null);
-				tematicas.add(tema);
-				cmbTematicaReporteProfesorTeg
-						.setModel(new ListModelList<Tematica>(tematicas));
+		} else {
 
-			}
+			cmbTematicaReporteProfesorTeg.setDisabled(false);
+			cmbTematicaReporteProfesorTeg.setValue("");
+			area1 = (AreaInvestigacion) cmbAreaReporteProfesorTeg
+					.getSelectedItem().getValue();
+			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
+					.buscarArea(area1.getId()));
+			Tematica tema = new Tematica(0, "Todos", "", true, null);
+			tematicas.add(tema);
+			cmbTematicaReporteProfesorTeg.setModel(new ListModelList<Tematica>(
+					tematicas));
+
+		}
 	}
 
 	/*
@@ -263,14 +262,15 @@ public class CReporteProfesorTeg extends CGeneral {
 				map2.put("tematica", cmbTematicaReporteProfesorTeg.getValue());
 			if (!cmbProgramaReporteProfesorTeg.getValue().equals(
 					estatusProyecto[0]))
-				map2.put("programa", Long.parseLong(cmbProgramaReporteProfesorTeg
-						.getSelectedItem().getId()));
+				map2.put("programa", Long
+						.parseLong(cmbProgramaReporteProfesorTeg
+								.getSelectedItem().getId()));
 			else
 				map2.put("programa", cmbProgramaReporteProfesorTeg.getValue());
 			if (!cmbAreaReporteProfesorTeg.getValue()
 					.equals(estatusProyecto[0]))
-				map2.put("area", Long.parseLong(cmbAreaReporteProfesorTeg.getSelectedItem()
-						.getId()));
+				map2.put("area", Long.parseLong(cmbAreaReporteProfesorTeg
+						.getSelectedItem().getId()));
 			else
 				map2.put("area", cmbAreaReporteProfesorTeg.getValue());
 			map2.put("estatus", cmbEstatusReporteProfesorTeg.getValue());
@@ -284,18 +284,33 @@ public class CReporteProfesorTeg extends CGeneral {
 				catalogoProfesor
 						.recibir("reportes/estructurados/VReporteProfesorTeg");
 			} else {
-				long id = Long.parseLong(cmbAreaReporteProfesorTeg
-						.getSelectedItem().getId());
-				Sessions.getCurrent().setAttribute("itemsCatalogo", map2);
-				catalogo.recibir("reportes/estructurados/VReporteProfesorTeg",
-						Long.parseLong(cmbProgramaReporteProfesorTeg
-								.getSelectedItem().getId()), Long
-								.parseLong(cmbTematicaReporteProfesorTeg
-										.getSelectedItem().getId()),id);
-				Window window = (Window) Executions.createComponents(
-						"/vistas/catalogos/VCatalogoProfesorTematica.zul",
-						null, null);
-				window.doModal();
+				if (cmbAreaReporteProfesorTeg.getValue().equals(
+						estatusProyecto[0])) {
+					long id = -1;
+					Sessions.getCurrent().setAttribute("itemsCatalogo", map2);
+					catalogo.recibir(
+							"reportes/estructurados/VReporteProfesorTeg", Long
+									.parseLong(cmbProgramaReporteProfesorTeg
+											.getSelectedItem().getId()), -1, id);
+					Window window = (Window) Executions.createComponents(
+							"/vistas/catalogos/VCatalogoProfesorTematica.zul",
+							null, null);
+					window.doModal();
+				} else {
+					long id = Long.parseLong(cmbAreaReporteProfesorTeg
+							.getSelectedItem().getId());
+					Sessions.getCurrent().setAttribute("itemsCatalogo", map2);
+					catalogo.recibir(
+							"reportes/estructurados/VReporteProfesorTeg", Long
+									.parseLong(cmbProgramaReporteProfesorTeg
+											.getSelectedItem().getId()), Long
+									.parseLong(cmbTematicaReporteProfesorTeg
+											.getSelectedItem().getId()), id);
+					Window window = (Window) Executions.createComponents(
+							"/vistas/catalogos/VCatalogoProfesorTematica.zul",
+							null, null);
+					window.doModal();
+				}
 			}
 		} else {
 			Messagebox.show("Primero debe seleccionar una tematica");
@@ -372,7 +387,11 @@ public class CReporteProfesorTeg extends CGeneral {
 						tegs = servicioTeg.buscarTodosTegsDeTutorPorDosFechas(
 								profesor, fechaInicio, fechaFin);
 						p.put("tematica", "Todas las Tematicas");
-						p.put("area", "Todas las Areas");
+						if (cmbAreaReporteProfesorTeg.getValue().equals(
+								estatusProyecto[0]))
+							p.put("area", "Todas las Areas");
+						else
+							p.put("area", cmbAreaReporteProfesorTeg.getValue());
 						p.put("modeloReporte", "1");
 					} else {
 						tegs = servicioTeg
@@ -393,7 +412,11 @@ public class CReporteProfesorTeg extends CGeneral {
 										profesor, estatus, fechaInicio,
 										fechaFin);
 						p.put("tematica", "Todas las Tematicas");
-						p.put("area", "Todas las Areas");
+						if (cmbAreaReporteProfesorTeg.getValue().equals(
+								estatusProyecto[0]))
+							p.put("area", "Todas las Areas");
+						else
+							p.put("area", cmbAreaReporteProfesorTeg.getValue());
 						p.put("modeloReporte", "3");
 					} else {
 
@@ -415,16 +438,20 @@ public class CReporteProfesorTeg extends CGeneral {
 					p.put("apellido", profesor.getApellido());
 					p.put("fecha1", fechaInicio);
 					p.put("fecha2", fechaFin);
-					String reporteSrc = rutaUrl
-							+ "SITEG/vistas/reportes/estructurados/compilados/RProyectosProfesor.jasper";
-					String reporteImage = rutaUrl
-							+ "SITEG/public/imagenes/reportes/";
+					 String reporteSrc = rutaUrl
+					 +
+					 "SITEG/vistas/reportes/estructurados/compilados/RProyectosProfesor.jasper";
+					 String reporteImage = rutaUrl
+					 + "SITEG/public/imagenes/reportes/";
 					 p.put("logoUcla", reporteImage + "logo ucla.png");
 					 p.put("logoCE", reporteImage + "logo CE.png");
 					 p.put("logoSiteg", reporteImage + "logo.png");
-//					URL url = getClass().getResource("/configuracion/logo ucla.png");
-//					URL url2 = getClass().getResource("/configuracion/logo CE.png");
-//					URL url3 = getClass().getResource("/configuracion/logo.png");
+//					URL url = getClass().getResource(
+//							"/configuracion/logo ucla.png");
+//					URL url2 = getClass().getResource(
+//							"/configuracion/logo CE.png");
+//					URL url3 = getClass()
+//							.getResource("/configuracion/logo.png");
 //					p.put("logoUcla", url);
 //					p.put("logoCE", url2);
 //					p.put("logoSiteg", url3);
@@ -436,8 +463,8 @@ public class CReporteProfesorTeg extends CGeneral {
 //								.loadObject(getClass().getResource(
 //										"RProyectosProfesor.jasper"));
 						JasperPrint jasperPrint = JasperFillManager.fillReport(
-								jasperReport, p, new JRBeanCollectionDataSource(
-										tegs));
+								jasperReport, p,
+								new JRBeanCollectionDataSource(tegs));
 						JasperViewer.viewReport(jasperPrint, false);
 					} catch (JRException e) {
 						// TODO Auto-generated catch block
@@ -446,9 +473,7 @@ public class CReporteProfesorTeg extends CGeneral {
 								"Informacion", Messagebox.OK,
 								Messagebox.INFORMATION);
 					}
-					
 
-					
 					p.clear();
 					p = null;
 					limpiarCampos();
