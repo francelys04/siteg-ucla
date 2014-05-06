@@ -38,14 +38,14 @@ public class SAvance {
 	public List<Avance> buscarAvancePorTeg(Teg teg) {
 		// TODO Auto-generated method stub
 		List<Avance> avances;
-		avances = interfazAvance.findByEstatusLikeAndTeg(Estatus[0], teg);
+		avances = interfazAvance.findByEstatusLikeAndTegOrderByFechaAsc(Estatus[0], teg);
 		return avances;
 	}
 
 	public List<Avance> buscarRevisionPorTeg(Teg teg) {
 		// TODO Auto-generated method stub
 		List<Avance> revisiones;
-		revisiones = interfazAvance.findByEstatusLikeAndTeg(Estatus[1], teg);
+		revisiones = interfazAvance.findByEstatusLikeAndTegOrderByFechaAsc(Estatus[1], teg);
 		return revisiones;
 	}
 

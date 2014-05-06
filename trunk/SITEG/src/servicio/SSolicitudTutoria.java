@@ -42,7 +42,7 @@ public class SSolicitudTutoria {
 
 	public List<SolicitudTutoria> buscarSolicitudPorRevisar(Profesor profesor) {
 		List<SolicitudTutoria> solicitudes;
-		solicitudes = interfaceSolicitud.findByEstatusLikeAndProfesor(
+		solicitudes = interfaceSolicitud.findByEstatusLikeAndProfesorOrderByFechaAsc(
 				Estatus[0], profesor);
 		return solicitudes;
 	}

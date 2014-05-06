@@ -11,6 +11,6 @@ public interface IAvanceDAO extends JpaRepository<Avance, Long> {
 
 	public List<Avance> findByEstatusTrue();
 	
-	public List<Avance> findByEstatusLikeAndTeg(
+	public List<Avance> findByEstatusLikeAndTegOrderByFechaAsc(
 			String estatusAvanceProyecto, Teg teg);
 }

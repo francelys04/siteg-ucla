@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Estudiante;
+import modelo.Profesor;
 import modelo.Teg;
+import modelo.compuesta.Jurado;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -55,35 +57,39 @@ public class CCatalogoRegistrarAvance extends CGeneral {
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		List<Teg> tegs = servicioTeg.buscarTegPorProfesor(estatus1, estatus2,
-				ObtenerUsuarioProfesor());
-		System.out.println(tegs.size());
-		List<Teg> tegs2 = new ArrayList<Teg>();
-		long id2 = 0;
-		long id = 0;
-		for (int i = 0; i < tegs.size(); i++) {
-			id = tegs.get(i).getId();
-			if (id != id2) {
-				List<Estudiante> estudiantes = servicioEstudiante
-						.buscarEstudiantePorTeg(tegs.get(i));
-				String nombre = estudiantes.get(0).getNombre();
-				String apellido = estudiantes.get(0).getApellido();
-				tegs.get(i).setEstatus(nombre + " " + apellido);
-				tegs2.add(tegs.get(i));
-
-				id2 = id;
-			}
+		List<Teg> teg = buscar();
+		for (int i = 0; i < teg.size(); i++) {
+			List<Estudiante> estudiante = servicioEstudiante
+					.buscarEstudiantePorTeg(teg.get(i));
+			String nombre = estudiante.get(0).getNombre();
+			String apellido = estudiante.get(0).getApellido();
+			teg.get(i).setEstatus(nombre + " " + apellido);
 		}
-		ltbProyectosFactibles.setModel(new ListModelList<Teg>(tegs2));
+
+		ltbProyectosFactibles.setModel(new ListModelList<Teg>(teg));
 	}
+		
 
 	/*
-	 * Metodo que permite retornar un lista de los tegs, donde se recorre tanto
-	 * la lista del teg como los profesores activos, donde se compara si
-	 * coincide las cedulas de cada uno de los profesores para cargar la lista
-	 * de tegs.
+	 * Metodo que permite retornar una lista de tegs dado a un profesor, donde
+	 * el estatus sea "Proyecto Factible o Proyecto en Desarrollo"
 	 */
+	public List<Teg> buscar() {
+		List<Teg> tegProfesor = servicioTeg.
+				buscarTutoriaProfesor(ObtenerUsuarioProfesor());
 
+		List<Teg> tegs = new ArrayList<Teg>();
+		for (int i = 0; i < tegProfesor.size(); i++) {
+		
+			if (tegProfesor.get(i).getEstatus().equals(estatus1) || tegProfesor.get(i).getEstatus().equals(estatus2)) {
+
+				tegs.add(tegProfesor.get(i));
+			}
+		}
+		return tegs;
+	}
+	
+	
 	/*
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra

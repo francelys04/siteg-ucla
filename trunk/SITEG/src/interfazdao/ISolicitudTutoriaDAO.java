@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ISolicitudTutoriaDAO extends JpaRepository<SolicitudTutoria, Long> {
 
-	public List<SolicitudTutoria> findByEstatusLikeAndProfesor(
+	public List<SolicitudTutoria> findByEstatusLikeAndProfesorOrderByFechaAsc(
 			String estatusPorRevisar, Profesor profesor);
 	
 	public SolicitudTutoria findByEstatusLikeAndEstudiantes(

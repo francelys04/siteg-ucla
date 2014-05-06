@@ -105,7 +105,7 @@ public class STeg {
 
 	public List<Teg> buscarTutoriaProfesor(Profesor profesor) {
 		List<Teg> teg;
-		teg = interfaceTeg.findByTutor(profesor);
+		teg = interfaceTeg.findByTutorOrderByFechaAsc(profesor);
 		return teg;
 	}
 
@@ -119,7 +119,7 @@ public class STeg {
 	public List<Teg> buscarTegPorProfesor(String estatus1, String estatus2,
 			Profesor profesor) {
 		List<Teg> teg;
-		teg = interfaceTeg.findByTutorAndEstatusOrEstatus(profesor,estatus1,
+		teg = interfaceTeg.findByTutorAndEstatusOrEstatusOrderByFechaAsc(profesor,estatus1,
 				estatus2);
 		return teg;
 
@@ -204,7 +204,7 @@ public class STeg {
 	public List<Teg> buscarTegPorProgramaParaDefensa(Programa programa) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(
+		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByFechaAsc(
 				estatus[9], interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
@@ -213,7 +213,7 @@ public class STeg {
 			Programa programa) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(
+		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByFechaAsc(
 				estatus[3], interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
@@ -221,7 +221,7 @@ public class STeg {
 	public List<Teg> buscarTegPorProgramaParaRegistrarTeg(Programa programa) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(
+		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByFechaAsc(
 				estatus[0], interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
@@ -229,7 +229,7 @@ public class STeg {
 	public List<Teg> buscarTegPorProgramaParaAsignarComision(Programa programa) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(
+		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByFechaAsc(
 				estatus[1], interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
@@ -237,7 +237,7 @@ public class STeg {
 	public List<Teg> buscarTegPorProgramaParaDefensa2(Programa programa) {
 		// TODO Auto-generated method stub
 		List<Teg> tegs;
-		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByIdAsc(
+		tegs = interfaceTeg.findByEstatusAndEstudiantesInOrderByFechaAsc(
 				estatus[13], interfaceEstudiante.findByPrograma(programa));
 		return tegs;
 	}
