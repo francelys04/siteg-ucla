@@ -58,7 +58,7 @@ public class CUsuario extends CGeneral {
 	private String profesorEstudiante;
 	private String cedulaProfesorEstudiante;
 	URL url = getClass().getResource("/configuracion/usuario.png");
-	List<Grupo> gruposDisponibles  = new ArrayList<Grupo>();
+	List<Grupo> gruposDisponibles = new ArrayList<Grupo>();
 	List<Grupo> gruposSeleccionados = new ArrayList<Grupo>();
 	ArrayList<Boolean> valorCorreo = new ArrayList<Boolean>();
 	private String mensaje = "Su solicitud ha sido exitosamente procesada, le enviamos su usuario y contraseña,";
@@ -233,86 +233,106 @@ public class CUsuario extends CGeneral {
 
 	@Listen("onClick = #btnGuardarUsuario")
 	public void guardarUsuario() throws IOException {
+		if (txtCorreo.getText().compareTo("") == 0
+				|| txtNombreUsuario.getText().compareTo("") == 0
+				|| txtPasswordUsuario.getText().compareTo("") == 0)
+			Messagebox.show("Debe completar todos los campos", "Error",
+					Messagebox.OK, Messagebox.ERROR);
+		else {
+			if (ltbGruposAgregados.getItemCount() == 0)
+				Messagebox.show(
+						"Debe seleccionar al menos un grupo para el usuario",
+						"Error", Messagebox.OK, Messagebox.ERROR);
+			else {
+				gruposDisponibles = servicioGrupo.buscarActivos();
+				String nombre = txtNombreUsuario.getValue();
+				String password = txtPasswordUsuario.getValue();
+				String correoUsuario = txtCorreo.getValue();
 
-		gruposDisponibles = servicioGrupo.buscarActivos();
-		String nombre = txtNombreUsuario.getValue();
-		String password = txtPasswordUsuario.getValue();
-		String correoUsuario = txtCorreo.getValue();
+				Boolean estatus = true;
+				Set<Grupo> gruposUsuario = new HashSet<Grupo>();
+				byte[] imagenUsuario = null;
+				if (media instanceof org.zkoss.image.Image) {
+					imagenUsuario = imagen.getContent().getByteData();
 
-		Boolean estatus = true;
-		Set<Grupo> gruposUsuario = new HashSet<Grupo>();
-		byte[] imagenUsuario = null;
-		if (media instanceof org.zkoss.image.Image) {
-			imagenUsuario = imagen.getContent().getByteData();
+				} else {
 
-		} else {
+					imagen.setContent(new AImage(url));
+					imagenUsuario = imagen.getContent().getByteData();
+				}
+				for (int i = 0; i < ltbGruposAgregados.getItemCount(); i++) {
+					Grupo grupo = ltbGruposAgregados.getItems().get(i)
+							.getValue();
+					gruposUsuario.add(grupo);
+				}
+				Usuario usuario = servicioUsuario
+						.buscarUsuarioPorNombre(nombre);
 
-			imagen.setContent(new AImage(url));
-			imagenUsuario = imagen.getContent().getByteData();
-		}
-		for (int i = 0; i < ltbGruposAgregados.getItemCount(); i++) {
-			Grupo grupo = ltbGruposAgregados.getItems().get(i).getValue();
-			gruposUsuario.add(grupo);
-		}
-		Usuario usuario = servicioUsuario.buscarUsuarioPorNombre(nombre);
+				if (id == 0 && usuario == null) {
 
-		if (id == 0 && usuario == null) {
+					Usuario usuario1 = new Usuario(id, nombre,
+							passwordEncoder.encode(password), estatus,
+							gruposUsuario, imagenUsuario);
+					servicioUsuario.guardar(usuario1);
 
-			Usuario usuario1 = new Usuario(id, nombre,
-					passwordEncoder.encode(password), estatus, gruposUsuario,
-					imagenUsuario);
-			servicioUsuario.guardar(usuario1);
+					Usuario usuario2 = servicioUsuario
+							.buscarUsuarioPorNombre(nombre);
 
-			Usuario usuario2 = servicioUsuario.buscarUsuarioPorNombre(nombre);
+					cedulaProfesorEstudiante = nombre;
 
-			cedulaProfesorEstudiante = nombre;
+					if (rdgProfesorEstudianteOtro.getSelectedItem().getLabel()
+							.equals("Estudiante")) {
 
-			if (rdgProfesorEstudianteOtro.getSelectedItem().getLabel()
-					.equals("Estudiante")) {
+						Estudiante estudiante = servicioEstudiante
+								.buscarEstudiante(cedulaProfesorEstudiante);
+						estudiante.setUsuario(usuario2);
+						servicioEstudiante.guardar(estudiante);
 
-				Estudiante estudiante = servicioEstudiante
-						.buscarEstudiante(cedulaProfesorEstudiante);
-				estudiante.setUsuario(usuario2);
-				servicioEstudiante.guardar(estudiante);
+					}
+					if (rdgProfesorEstudianteOtro.getSelectedItem().getLabel()
+							.equals("Profesor")) {
+						Profesor profesor = servicioProfesor
+								.buscarProfesorPorCedula(cedulaProfesorEstudiante);
+						profesor.setUsuario(usuario2);
+						servicioProfesor.guardarProfesor(profesor);
+					}
+					valorCorreo.add(enviarEmailNotificacion(correoUsuario,
+							mensaje + " Usuario: " + nombre + "  "
+									+ "Contraseña: " + nombre));
+					// confirmacion(valorCorreo);
 
+					Messagebox.show("Usuario registrado exitosamente",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
+					cancelarUsuario();
+				} else if (id != 0) {
+
+					usuario.setNombre(nombre);
+					usuario.setGrupos(gruposUsuario);
+					usuario.setImagen(imagenUsuario);
+
+					servicioUsuario.guardar(usuario);
+
+					cancelarUsuario();
+
+				} else if (id == 0 && usuario != null) {
+
+					Messagebox.show(
+							"El nombre de usuario no se encuentra disponible",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
+
+					txtPasswordUsuario.setValue("");
+					txtNombreUsuario.setValue("");
+					txtCorreo.setValue("");
+					ltbGruposAgregados.getItems().clear();
+					imagen.setContent(new AImage(url));
+					ltbGruposDisponibles.setModel(new ListModelList<Grupo>(
+							gruposDisponibles));
+				}
 			}
-			if (rdgProfesorEstudianteOtro.getSelectedItem().getLabel()
-					.equals("Profesor")) {
-				Profesor profesor = servicioProfesor
-						.buscarProfesorPorCedula(cedulaProfesorEstudiante);
-				profesor.setUsuario(usuario2);
-				servicioProfesor.guardarProfesor(profesor);
-			}
-			valorCorreo.add(enviarEmailNotificacion(correoUsuario, mensaje
-					+ " Usuario: " + nombre + "  " + "Contraseña: " + nombre));
-			// confirmacion(valorCorreo);
-
-			Messagebox.show("Usuario registrado exitosamente", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
-			cancelarUsuario();
-		} else if (id != 0) {
-
-			usuario.setNombre(nombre);
-			usuario.setGrupos(gruposUsuario);
-			usuario.setImagen(imagenUsuario);
-
-			servicioUsuario.guardar(usuario);
-
-			cancelarUsuario();
-
-		} else if (id == 0 && usuario != null) {
-
-			Messagebox.show("El nombre de usuario no se encuentra disponible",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
-
-			txtPasswordUsuario.setValue("");
-			txtNombreUsuario.setValue("");
-			txtCorreo.setValue("");
-			ltbGruposAgregados.getItems().clear();
-			imagen.setContent(new AImage(url));
-			ltbGruposDisponibles.setModel(new ListModelList<Grupo>(
-					gruposDisponibles));
 		}
+
 	}
 
 	@Listen("onClick = #btnCancelarUsuario")
@@ -329,7 +349,9 @@ public class CUsuario extends CGeneral {
 		rdoEstudiante.setDisabled(false);
 		rdoProfesor.setDisabled(false);
 		txtNombreUsuario.setDisabled(false);
+		txtNombreUsuario.setDisabled(true);
 		txtPasswordUsuario.setDisabled(false);
+		txtPasswordUsuario.setDisabled(true);
 		btnEliminarUsuario.setDisabled(true);
 		btnCatalogoUsuario.setVisible(false);
 		txtCorreo.setConstraint("");
@@ -375,7 +397,8 @@ public class CUsuario extends CGeneral {
 
 		Messagebox.show("Desea eliminar el usuario?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							Usuario usuario = servicioUsuario
