@@ -150,7 +150,7 @@ public class CCargarProfesor extends CGeneral {
 
 		ltbProfesoresCargados.getItems().clear();
 		ltbProfesoresCargados.setModel(new ListModelList<Profesor>());
-		
+
 	}
 
 	/*
@@ -159,29 +159,42 @@ public class CCargarProfesor extends CGeneral {
 	@Listen("onClick = #btnGuardarCargarProfesor")
 	public void CargarEstudiante() {
 
-		Messagebox.show("¿Desea guardar los datos de los profesores?",
-				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event evt) throws InterruptedException {
-						if (evt.getName().equals("onOK")) {
+		if (ltbProfesoresCargados.getItemCount() != 0) {
 
-							for (int i = 0; i < profesoresCargados.size(); i++) {
+			Messagebox.show("¿Desea guardar los datos de los profesores?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
 
-								Profesor profesor = profesoresCargados.get(i);
-								servicioProfesor.guardarProfesor(profesor);
+								for (int i = 0; i < profesoresCargados.size(); i++) {
+
+									Profesor profesor = profesoresCargados
+											.get(i);
+									servicioProfesor.guardarProfesor(profesor);
+
+								}
+
+								Messagebox
+										.show("Datos de los profesores guardados esxitosamente",
+												"Informacion", Messagebox.OK,
+												Messagebox.INFORMATION);
+								cancelarCargarProfesor();
 
 							}
-
-							Messagebox
-									.show("Datos de los profesores guardados esxitosamente",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
-							cancelarCargarProfesor();
-
 						}
-					}
-				});
+					});
+
+		} else {
+
+			Messagebox
+					.show("Debe seleccionar la lista de profesores que desea registrar",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+
+		}
 
 	}
 
