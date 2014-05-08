@@ -180,8 +180,9 @@ public class CCatalogoProfesorTematica extends CGeneral {
 		List<Profesor> profesores = new ArrayList<Profesor>();
 		if (tematicaRecibida != -1) {
 			Tematica tema = servicioTematica.buscarTematica(tematicaRecibida);
-			profesores = servicioProfesor
-					.buscarProfesoresPorTematica(tema);
+			profesores = servicioProfesor.buscarProfesoresPorTematica(tema);
+			if(areaRecibida != 0)
+				return profesores;
 		} else {
 			profesores = servicioProfesor
 					.buscarProfesoresPorPrograma(programaRecibido);
