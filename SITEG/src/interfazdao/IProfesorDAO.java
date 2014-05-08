@@ -18,7 +18,7 @@ public interface IProfesorDAO extends JpaRepository<Profesor, String> {
 
 	public Profesor findByUsuario(Usuario u);
 	
-	@Query("select p from Profesor p where p.usuario=null")
+	@Query("select p from Profesor p where p.estatus=true and p.usuario=null")
 	public List<Profesor> buscarSinUsuario();
 	
 	public List<Profesor> findByTegs(Teg teg);
@@ -30,10 +30,10 @@ public interface IProfesorDAO extends JpaRepository<Profesor, String> {
 	@Query("select p from Profesor p where p.cedula not in (select j.profesor from Jurado j where j.teg = ?1)")
 	public List<Profesor> buscarProfesorEnJurado(Teg teg);
 	
-	@Query("select p from Profesor p where p.cedula not in (select pr.directorPrograma from Programa pr where pr.estatus = true)")
+	@Query("select p from Profesor p where p.estatus=true and p.cedula not in (select pr.directorPrograma from Programa pr where pr.estatus = true)")
 	public List<Profesor> profesorSinPrograma();
 	
-	@Query("Select p from Profesor p order by p.categoria asc, p.cedula asc")
+	@Query("Select p from Profesor p where p.estatus = true order by p.categoria asc, p.cedula asc")
 	public List<Profesor> findByEstatusTrueOrderByCategoriaAsc();
 
 	public List<Profesor> findDistinctByCedulaIn(List<String> cedulas);

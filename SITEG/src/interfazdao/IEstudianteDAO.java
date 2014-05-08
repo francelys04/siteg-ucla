@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IEstudianteDAO extends JpaRepository<Estudiante, String> {
 
-	@Query("Select e from Estudiante e order by e.programa asc, e.cedula asc")
+	@Query("Select e from Estudiante e where e.estatus = true order by e.programa asc, e.cedula asc")
 	public List<Estudiante> findByEstatusTrueOrderByProgramaAsc();
 
 	public List<Estudiante> findBySolicitudesTutorias(SolicitudTutoria solicitud);

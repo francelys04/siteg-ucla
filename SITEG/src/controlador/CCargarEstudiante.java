@@ -135,7 +135,7 @@ public class CCargarEstudiante extends CGeneral {
 		wdwCargarEstudiante.onClose();
 
 	}
-	
+
 	/* Metodo que permite limpiar los campos de la vista */
 	@Listen("onClick = #btnCancelarCargarEstudiante")
 	public void cancelarCargarEstudiante() {
@@ -144,8 +144,6 @@ public class CCargarEstudiante extends CGeneral {
 		ltbEstudiantesCargados.setModel(new ListModelList<Estudiante>());
 
 	}
-	
-	
 
 	/*
 	 * Metodo que permite guardar a los estudiantes que se encuentran en la
@@ -154,29 +152,42 @@ public class CCargarEstudiante extends CGeneral {
 	@Listen("onClick = #btnGuardarCargarEstudiante")
 	public void CargarEstudiante() {
 
-		Messagebox.show("¿Desea guardar los datos de los estudiantes?",
-				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event evt) throws InterruptedException {
-						if (evt.getName().equals("onOK")) {
+		if (ltbEstudiantesCargados.getItemCount() != 0) {
 
-							for (int i = 0; i < estudiantesCargados.size(); i++) {
+			Messagebox.show("¿Desea guardar los datos de los estudiantes?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
 
-								Estudiante estudiante = estudiantesCargados
-										.get(i);
-								servicioEstudiante.guardar(estudiante);
+								for (int i = 0; i < estudiantesCargados.size(); i++) {
+
+									Estudiante estudiante = estudiantesCargados
+											.get(i);
+									servicioEstudiante.guardar(estudiante);
+
+								}
+
+								Messagebox
+										.show("Datos de los estudiantes guardados esxitosamente",
+												"Informacion", Messagebox.OK,
+												Messagebox.INFORMATION);
+								cancelarCargarEstudiante();
 
 							}
-
-							Messagebox
-									.show("Datos de los estudiantes guardados esxitosamente",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
-							cancelarCargarEstudiante();
-
 						}
-					}
-				});
+					});
+
+		} else {
+
+			Messagebox
+					.show("Debe seleccionar la lista de estudiantes que desea registrar",
+							"Advertencia", Messagebox.OK,
+							Messagebox.EXCLAMATION);
+
+		}
 
 	}
 
