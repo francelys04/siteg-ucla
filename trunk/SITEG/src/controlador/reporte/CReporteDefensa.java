@@ -331,7 +331,7 @@ public class CReporteDefensa extends CGeneral {
 									elementos));
 
 					JasperViewer.viewReport(jasperPrint, false);
-
+					cancelarReporteDefensa();
 				} else {
 					Messagebox
 							.show("No hay informacion disponible para esta seleccion",
