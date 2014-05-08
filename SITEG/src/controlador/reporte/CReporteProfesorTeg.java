@@ -275,7 +275,8 @@ public class CReporteProfesorTeg extends CGeneral {
 				map2.put("area", cmbAreaReporteProfesorTeg.getValue());
 			map2.put("estatus", cmbEstatusReporteProfesorTeg.getValue());
 			if (cmbProgramaReporteProfesorTeg.getValue().equals(
-					estatusProyecto[0])) {
+					estatusProyecto[0])&& cmbAreaReporteProfesorTeg.getValue().equals(
+							estatusProyecto[0])) {
 				Sessions.getCurrent().setAttribute("itemsCatalogo", map2);
 				Window window = (Window) Executions.createComponents(
 						"/vistas/catalogos/VCatalogoProfesor.zul", null, null);
