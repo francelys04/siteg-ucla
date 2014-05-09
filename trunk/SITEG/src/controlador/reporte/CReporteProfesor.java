@@ -871,7 +871,7 @@ public class CReporteProfesor extends CGeneral {
 					mapa.put("logoUcla", reporteImage + "logo ucla.png");
 					mapa.put("logoCE", reporteImage + "logo CE.png");
 					mapa.put("logoSiteg", reporteImage + "logo.png");
-					mapa.put("Cantidad", elementos.size());
+					
 
 					JasperReport jasperReport = (JasperReport) JRLoader
 							.loadObject(reporteSrc);

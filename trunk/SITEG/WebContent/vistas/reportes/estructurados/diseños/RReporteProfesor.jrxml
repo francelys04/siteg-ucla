@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReporteProfesor" language="groovy" pageWidth="700" pageHeight="842" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d4756b1-cdc7-4534-8045-8ef41d35d23e">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="179"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#0099CC"/>
@@ -31,7 +31,6 @@
 	<parameter name="Area" class="java.lang.String"/>
 	<parameter name="Tematica" class="java.lang.String"/>
 	<parameter name="Estatus" class="java.lang.String"/>
-	<parameter name="Cantidad" class="java.lang.String"/>
 	<parameter name="Programa" class="java.lang.String"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="cargo" class="java.lang.String"/>
@@ -161,7 +160,7 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="75" splitType="Stretch">
+		<band height="69" splitType="Stretch">
 			<staticText>
 				<reportElement x="129" y="19" width="411" height="32" backcolor="#000000" uuid="eb5dbe52-ec47-48f2-8fa6-18f6c854bb9d"/>
 				<textElement textAlignment="Center">
@@ -276,25 +275,10 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="51" splitType="Stretch">
-			<staticText>
-				<reportElement x="475" y="31" width="118" height="20" uuid="ee88190b-ec68-44d2-a2bc-f0805e08403f"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total de elementos:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="590" y="31" width="70" height="20" uuid="76868bfa-aaa6-4754-8870-654b36d464a0"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{Cantidad}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="59" splitType="Stretch">
+		<band height="69" splitType="Stretch">
 			<staticText>
 				<reportElement x="213" y="38" width="216" height="20" uuid="2d616b61-fc65-4a44-8f2e-3d9c3ca531a4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
