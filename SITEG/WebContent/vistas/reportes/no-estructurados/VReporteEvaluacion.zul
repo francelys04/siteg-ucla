@@ -32,7 +32,7 @@
 
 		.fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
 		background: white; border-top: none; }
-		
+
 		tr.z-row-over > td.z-row-inner > .z-row-cnt { color: rgb(0, 84,
 		122); }
 
@@ -286,7 +286,6 @@
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
 				<listheader label="Fecha Teg" align="center" />
 				<listheader label="Cedula Tutor" align="center" />
 				<listheader label="Nombre Tutor" align="center" />
@@ -297,13 +296,7 @@
 				<listheader label="Nombre Estudiante" align="center" />
 				<listheader label="Apellido Estudiante" align="center" />
 				<listheader label="Correo Estudiante" align="center" />
-				<listheader label="Programa" align="center" />
-				<listheader label="Correo Programa" align="center" />
-				<listheader label="Descripcion Programa" align="center" />
-				<listheader label="Area" align="center" />
-				<listheader label="Descripcion Area" align="center" />
-				<listheader label="Tematica" align="center" />
-				<listheader label="Descripcion Tematica" align="center" />
+
 				<listheader label="Fecha Defensa" align="center" />
 				<listheader label="Hora defensa" align="center" />
 				<listheader label="Lugar defensa" align="center" />
@@ -317,7 +310,6 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -328,13 +320,7 @@
 					<listcell label="${each.nombreEstudiante}" />
 					<listcell label="${each.apellidoEstudiante}" />
 					<listcell label="${each.correoEstudiante}" />
-					<listcell label="${each.programa}" />
-					<listcell label="${each.correoPrograma}" />
-					<listcell label="${each.descripcionPrograma}" />
-					<listcell label="${each.area}" />
-					<listcell label="${each.descripcionArea}" />
-					<listcell label="${each.tematica}" />
-					<listcell label="${each.descripcionTematica}" />
+
 					<listcell label="${each.fechadefensa}" />
 					<listcell label="${each.horadefensa}" />
 					<listcell label="${each.lugardefensa}" />
@@ -346,197 +332,128 @@
 
 		<separator />
 
-		<listbox id="ltbElegiPrograma" mold="paging" pageSize="4" width="3100px"
-			style="margin-left:15px;margin-right:15px;overflow: scroll;"
-			emptyMessage="No hay datos Disponiles">
-
-			<listhead>
-				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
-				<listheader label="Fecha Teg" align="center" />
-				<listheader label="Cedula Tutor" align="center" />
-				<listheader label="Nombre Tutor" align="center" />
-				<listheader label="Apellido Tutor" align="center" />
-				<listheader label="Correo Tutor" align="center" />
-				<listheader label="Direccion Tutor" align="center" />
-				<listheader label="Cedula Estudiante" align="center" />
-				<listheader label="Nombre Estudiante" align="center" />
-				<listheader label="Apellido Estudiante" align="center" />
-				<listheader label="Correo Estudiante" align="center" />
-				<listheader label="Area" align="center" />
-				<listheader label="Descripcion Area" align="center" />
-				<listheader label="Tematica" align="center" />
-				<listheader label="Descripcion Tematica" align="center" />
-				<listheader label="Fecha Defensa" align="center" />
-				<listheader label="Hora defensa" align="center" />
-				<listheader label="Lugar defensa" align="center" />
-				<listheader label="Profesor defensa" align="center" />
-
-			</listhead>
-
-
-			<template name="model">
-				<listitem tooltip="pupSeleccionEvaluacion">
-					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
-					<listcell label="${each.fechaTeg}" />
-					<listcell label="${each.cedulaProfesor}" />
-					<listcell label="${each.nombreTutor}" />
-					<listcell label="${each.apellidoTutor}" />
-					<listcell label="${each.correoTutor}" />
-					<listcell label="${each.direccionTutor}" />
-					<listcell label="${each.cedulaEstudiante}" />
-					<listcell label="${each.nombreEstudiante}" />
-					<listcell label="${each.apellidoEstudiante}" />
-					<listcell label="${each.correoEstudiante}" />
-					<listcell label="${each.programa}" />
-					<listcell label="${each.correoPrograma}" />
-					<listcell label="${each.descripcionPrograma}" />
-					<listcell label="${each.area}" />
-					<listcell label="${each.descripcionArea}" />
-					<listcell label="${each.tematica}" />
-					<listcell label="${each.descripcionTematica}" />
-					<listcell label="${each.fechadefensa}" />
-					<listcell label="${each.horadefensa}" />
-					<listcell label="${each.lugardefensa}" />
-					<listcell label="${each.profesordefensa}" />
-
-				</listitem>
-			</template>
-		</listbox>
-		<separator />
-		<listbox id="ltbElegiArea" mold="paging" pageSize="4" width="3100px"
-			style="margin-left:15px;margin-right:15px;overflow: scroll;"
-			emptyMessage="No hay datos Disponiles">
-
-			<listhead>
-				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
-				<listheader label="Fecha Teg" align="center" />
-				<listheader label="Cedula Tutor" align="center" />
-				<listheader label="Nombre Tutor" align="center" />
-				<listheader label="Apellido Tutor" align="center" />
-				<listheader label="Correo Tutor" align="center" />
-				<listheader label="Direccion Tutor" align="center" />
-				<listheader label="Cedula Estudiante" align="center" />
-				<listheader label="Nombre Estudiante" align="center" />
-				<listheader label="Apellido Estudiante" align="center" />
-				<listheader label="Correo Estudiante" align="center" />
-				<listheader label="Programa" align="center" />
-				<listheader label="Correo Programa" align="center" />
-				<listheader label="Descripcion Programa" align="center" />
-				<listheader label="Tematica" align="center" />
-				<listheader label="Descripcion Tematica" align="center" />
-				<listheader label="Fecha Defensa" align="center" />
-				<listheader label="Hora defensa" align="center" />
-				<listheader label="Lugar defensa" align="center" />
-				<listheader label="Profesor defensa" align="center" />
-
-
-			</listhead>
-
-
-			<template name="model">
-				<listitem tooltip="pupSeleccionEvaluacion">
-					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
-					<listcell label="${each.fechaTeg}" />
-					<listcell label="${each.cedulaProfesor}" />
-					<listcell label="${each.nombreTutor}" />
-					<listcell label="${each.apellidoTutor}" />
-					<listcell label="${each.correoTutor}" />
-					<listcell label="${each.direccionTutor}" />
-					<listcell label="${each.cedulaEstudiante}" />
-					<listcell label="${each.nombreEstudiante}" />
-					<listcell label="${each.apellidoEstudiante}" />
-					<listcell label="${each.correoEstudiante}" />
-					<listcell label="${each.programa}" />
-					<listcell label="${each.correoPrograma}" />
-					<listcell label="${each.descripcionPrograma}" />
-					<listcell label="${each.area}" />
-					<listcell label="${each.descripcionArea}" />
-					<listcell label="${each.tematica}" />
-					<listcell label="${each.descripcionTematica}" />
-					<listcell label="${each.fechadefensa}" />
-					<listcell label="${each.horadefensa}" />
-					<listcell label="${each.lugardefensa}" />
-					<listcell label="${each.profesordefensa}" />
-
-				</listitem>
-			</template>
-		</listbox>
-		<separator />
-
-		<listbox id="ltbElegiProgramaArea" mold="paging" pageSize="4" width="3100px"
-			style="margin-left:15px;margin-right:15px;overflow: scroll;"
-			emptyMessage="No hay datos Disponiles">
-
-
-
-
-			<listhead>
-				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
-				<listheader label="Fecha Teg" align="center" />
-				<listheader label="Cedula Tutor" align="center" />
-				<listheader label="Nombre Tutor" align="center" />
-				<listheader label="Apellido Tutor" align="center" />
-				<listheader label="Correo Tutor" align="center" />
-				<listheader label="Direccion Tutor" align="center" />
-				<listheader label="Cedula Estudiante" align="center" />
-				<listheader label="Nombre Estudiante" align="center" />
-				<listheader label="Correo Estudiante" align="center" />
-				<listheader label="Apellido Estudiante" align="center" />
-				<listheader label="Tematica" align="center" />
-				<listheader label="Descripcion Tematica" align="center" />
-				<listheader label="Fecha Defensa" align="center" />
-				<listheader label="Hora defensa" align="center" />
-				<listheader label="Lugar defensa" align="center" />
-				<listheader label="Profesor defensa" align="center" />
-
-
-			</listhead>
-
-
-			<template name="model">
-				<listitem tooltip="pupSeleccionEvaluacion">
-					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
-					<listcell label="${each.fechaTeg}" />
-					<listcell label="${each.cedulaProfesor}" />
-					<listcell label="${each.nombreTutor}" />
-					<listcell label="${each.apellidoTutor}" />
-					<listcell label="${each.correoTutor}" />
-					<listcell label="${each.direccionTutor}" />
-					<listcell label="${each.cedulaEstudiante}" />
-					<listcell label="${each.nombreEstudiante}" />
-					<listcell label="${each.apellidoEstudiante}" />
-					<listcell label="${each.correoEstudiante}" />
-					<listcell label="${each.programa}" />
-					<listcell label="${each.correoPrograma}" />
-					<listcell label="${each.descripcionPrograma}" />
-					<listcell label="${each.area}" />
-					<listcell label="${each.descripcionArea}" />
-					<listcell label="${each.tematica}" />
-					<listcell label="${each.descripcionTematica}" />
-					<listcell label="${each.fechadefensa}" />
-					<listcell label="${each.horadefensa}" />
-					<listcell label="${each.lugardefensa}" />
-					<listcell label="${each.profesordefensa}" />
-
-				</listitem>
-			</template>
-		</listbox>
-		<separator />
-
-		<listbox id="ltbElegiProgramaAreaTematica" mold="paging" pageSize="4"
+		<listbox id="ltbElegiPrograma" mold="paging" pageSize="4"
 			width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 
 			<listhead>
 				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
+				<listheader label="Fecha Teg" align="center" />
+				<listheader label="Cedula Tutor" align="center" />
+				<listheader label="Nombre Tutor" align="center" />
+				<listheader label="Apellido Tutor" align="center" />
+				<listheader label="Correo Tutor" align="center" />
+				<listheader label="Direccion Tutor" align="center" />
+				<listheader label="Cedula Estudiante" align="center" />
+				<listheader label="Nombre Estudiante" align="center" />
+				<listheader label="Apellido Estudiante" align="center" />
+				<listheader label="Correo Estudiante" align="center" />
+				<listheader label="Programa" align="center" />
+				<listheader label="Correo Programa" align="center" />
+				<listheader label="Descripcion Programa" align="center" />
+
+				<listheader label="Fecha Defensa" align="center" />
+				<listheader label="Hora defensa" align="center" />
+				<listheader label="Lugar defensa" align="center" />
+				<listheader label="Profesor defensa" align="center" />
+
+			</listhead>
+
+
+			<template name="model">
+				<listitem tooltip="pupSeleccionEvaluacion">
+					<listcell label="${each.tituloTeg}" />
+					<listcell label="${each.fechaTeg}" />
+					<listcell label="${each.cedulaProfesor}" />
+					<listcell label="${each.nombreTutor}" />
+					<listcell label="${each.apellidoTutor}" />
+					<listcell label="${each.correoTutor}" />
+					<listcell label="${each.direccionTutor}" />
+					<listcell label="${each.cedulaEstudiante}" />
+					<listcell label="${each.nombreEstudiante}" />
+					<listcell label="${each.apellidoEstudiante}" />
+					<listcell label="${each.correoEstudiante}" />
+					<listcell label="${each.programa}" />
+					<listcell label="${each.correoPrograma}" />
+					<listcell label="${each.descripcionPrograma}" />
+
+					<listcell label="${each.fechadefensa}" />
+					<listcell label="${each.horadefensa}" />
+					<listcell label="${each.lugardefensa}" />
+					<listcell label="${each.profesordefensa}" />
+
+				</listitem>
+			</template>
+		</listbox>
+		<separator />
+		<listbox id="ltbElegiArea" mold="paging" pageSize="4"
+			width="3100px"
+			style="margin-left:15px;margin-right:15px;overflow: scroll;"
+			emptyMessage="No hay datos Disponiles">
+
+			<listhead>
+				<listheader label="Titulo" align="center" />
+				<listheader label="Fecha Teg" align="center" />
+				<listheader label="Cedula Tutor" align="center" />
+				<listheader label="Nombre Tutor" align="center" />
+				<listheader label="Apellido Tutor" align="center" />
+				<listheader label="Correo Tutor" align="center" />
+				<listheader label="Direccion Tutor" align="center" />
+				<listheader label="Cedula Estudiante" align="center" />
+				<listheader label="Nombre Estudiante" align="center" />
+				<listheader label="Apellido Estudiante" align="center" />
+				<listheader label="Correo Estudiante" align="center" />
+				<listheader label="Area" align="center" />
+
+				<listheader label="Descripcion Area" align="center" />
+
+				<listheader label="Fecha Defensa" align="center" />
+				<listheader label="Hora defensa" align="center" />
+				<listheader label="Lugar defensa" align="center" />
+				<listheader label="Profesor defensa" align="center" />
+
+
+			</listhead>
+
+
+			<template name="model">
+				<listitem tooltip="pupSeleccionEvaluacion">
+					<listcell label="${each.tituloTeg}" />
+					<listcell label="${each.fechaTeg}" />
+					<listcell label="${each.cedulaProfesor}" />
+					<listcell label="${each.nombreTutor}" />
+					<listcell label="${each.apellidoTutor}" />
+					<listcell label="${each.correoTutor}" />
+					<listcell label="${each.direccionTutor}" />
+					<listcell label="${each.cedulaEstudiante}" />
+					<listcell label="${each.nombreEstudiante}" />
+					<listcell label="${each.apellidoEstudiante}" />
+					<listcell label="${each.correoEstudiante}" />
+
+					<listcell label="${each.area}" />
+					<listcell label="${each.descripcionArea}" />
+
+					<listcell label="${each.fechadefensa}" />
+					<listcell label="${each.horadefensa}" />
+					<listcell label="${each.lugardefensa}" />
+					<listcell label="${each.profesordefensa}" />
+
+				</listitem>
+			</template>
+		</listbox>
+		<separator />
+
+		<listbox id="ltbElegiProgramaArea" mold="paging" pageSize="4"
+			width="3100px"
+			style="margin-left:15px;margin-right:15px;overflow: scroll;"
+			emptyMessage="No hay datos Disponiles">
+
+
+
+
+			<listhead>
+				<listheader label="Titulo" align="center" />
 				<listheader label="Fecha Teg" align="center" />
 				<listheader label="Cedula Tutor" align="center" />
 				<listheader label="Nombre Tutor" align="center" />
@@ -547,13 +464,80 @@
 				<listheader label="Nombre Estudiante" align="center" />
 				<listheader label="Correo Estudiante" align="center" />
 				<listheader label="Apellido Estudiante" align="center" />
+				<listheader label="Programa" align="center" />
+				<listheader label="Correo Programa" align="center" />
+				<listheader label="Descripcion Programa" align="center" />
+				<listheader label="Area" align="center" />
+				<listheader label="Descripcion Area" align="center" />
+
+				<listheader label="Fecha Defensa" align="center" />
+				<listheader label="Hora defensa" align="center" />
+				<listheader label="Lugar defensa" align="center" />
+				<listheader label="Profesor defensa" align="center" />
+
+
+			</listhead>
+
+
+			<template name="model">
+				<listitem tooltip="pupSeleccionEvaluacion">
+					<listcell label="${each.tituloTeg}" />
+					<listcell label="${each.fechaTeg}" />
+					<listcell label="${each.cedulaProfesor}" />
+					<listcell label="${each.nombreTutor}" />
+					<listcell label="${each.apellidoTutor}" />
+					<listcell label="${each.correoTutor}" />
+					<listcell label="${each.direccionTutor}" />
+					<listcell label="${each.cedulaEstudiante}" />
+					<listcell label="${each.nombreEstudiante}" />
+					<listcell label="${each.apellidoEstudiante}" />
+					<listcell label="${each.correoEstudiante}" />
+					<listcell label="${each.programa}" />
+					<listcell label="${each.correoPrograma}" />
+					<listcell label="${each.descripcionPrograma}" />
+					<listcell label="${each.area}" />
+					<listcell label="${each.descripcionArea}" />
+
+					<listcell label="${each.fechadefensa}" />
+					<listcell label="${each.horadefensa}" />
+					<listcell label="${each.lugardefensa}" />
+					<listcell label="${each.profesordefensa}" />
+
+				</listitem>
+			</template>
+		</listbox>
+		<separator />
+
+		<listbox id="ltbElegiProgramaAreaTematica" mold="paging"
+			pageSize="4" width="3100px"
+			style="margin-left:15px;margin-right:15px;overflow: scroll;"
+			emptyMessage="No hay datos Disponiles">
+
+			<listhead>
+				<listheader label="Titulo" align="center" />
+				<listheader label="Fecha Teg" align="center" />
+				<listheader label="Cedula Tutor" align="center" />
+				<listheader label="Nombre Tutor" align="center" />
+				<listheader label="Apellido Tutor" align="center" />
+				<listheader label="Correo Tutor" align="center" />
+				<listheader label="Direccion Tutor" align="center" />
+				<listheader label="Cedula Estudiante" align="center" />
+				<listheader label="Nombre Estudiante" align="center" />
+				<listheader label="Apellido Estudiante" align="center" />
+				<listheader label="Correo Estudiante" align="center" />
+
+				<listheader label="Programa" align="center" />
+				<listheader label="Correo Programa" align="center" />
+				<listheader label="Descripcion Programa" align="center" />
+				<listheader label="Area" align="center" />
+				<listheader label="Descripcion Area" align="center" />
 				<listheader label="Tematica" align="center" />
 				<listheader label="Descripcion Tematica" align="center" />
 				<listheader label="Fecha Defensa" align="center" />
 				<listheader label="Hora defensa" align="center" />
 				<listheader label="Lugar defensa" align="center" />
 				<listheader label="Profesor defensa" align="center" />
-				<listheader label="Correo Estudiante" align="center" />
+				
 
 
 
@@ -563,7 +547,6 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -590,12 +573,12 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiAreaTematica" mold="paging" pageSize="4" width="3100px"
+		<listbox id="ltbElegiAreaTematica" mold="paging" pageSize="4"
+			width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 				<listheader label="Titulo" align="center" width="20%" />
-				<listheader label="Descripcion Teg" align="center" />
 				<listheader label="Fecha Teg" align="center" />
 				<listheader label="Cedula Tutor" align="center" />
 				<listheader label="Nombre Tutor" align="center" />
@@ -604,8 +587,11 @@
 				<listheader label="Direccion Tutor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
 				<listheader label="Nombre Estudiante" align="center" />
-				<listheader label="Correo Estudiante" align="center" />
 				<listheader label="Apellido Estudiante" align="center" />
+				<listheader label="Correo Estudiante" align="center" />
+				
+				<listheader label="Area" align="center" />
+				<listheader label="Descripcion Area" align="center" />
 				<listheader label="Tematica" align="center" />
 				<listheader label="Descripcion Tematica" align="center" />
 				<listheader label="Fecha Defensa" align="center" />
@@ -619,7 +605,6 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -630,9 +615,7 @@
 					<listcell label="${each.nombreEstudiante}" />
 					<listcell label="${each.apellidoEstudiante}" />
 					<listcell label="${each.correoEstudiante}" />
-					<listcell label="${each.programa}" />
-					<listcell label="${each.correoPrograma}" />
-					<listcell label="${each.descripcionPrograma}" />
+					
 					<listcell label="${each.area}" />
 					<listcell label="${each.descripcionArea}" />
 					<listcell label="${each.tematica}" />
@@ -652,7 +635,7 @@
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
+
 				<listheader label="Fecha Teg" align="center" />
 				<listheader label="Cedula Tutor" align="center" />
 				<listheader label="Nombre Tutor" align="center" />
@@ -663,13 +646,7 @@
 				<listheader label="Nombre Estudiante" align="center" />
 				<listheader label="Apellido Estudiante" align="center" />
 				<listheader label="Correo Estudiante" align="center" />
-				<listheader label="Programa" align="center" />
-				<listheader label="Correo Programa" align="center" />
-				<listheader label="Descripcion Programa" align="center" />
-				<listheader label="Area" align="center" />
-				<listheader label="Descripcion Area" align="center" />
-				<listheader label="Tematica" align="center" />
-				<listheader label="Descripcion Tematica" align="center" />
+
 				<listheader label="Fecha Factibilidad" align="center" />
 				<listheader label="Profesor Factibilidad"
 					align="center" />
@@ -685,7 +662,6 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -696,13 +672,7 @@
 					<listcell label="${each.nombreEstudiante}" />
 					<listcell label="${each.apellidoEstudiante}" />
 					<listcell label="${each.correoEstudiante}" />
-					<listcell label="${each.programa}" />
-					<listcell label="${each.correoPrograma}" />
-					<listcell label="${each.descripcionPrograma}" />
-					<listcell label="${each.area}" />
-					<listcell label="${each.descripcionArea}" />
-					<listcell label="${each.tematica}" />
-					<listcell label="${each.descripcionTematica}" />
+
 					<listcell label="${each.fechadefensa}" />
 					<listcell label="${each.profesordefensa}" />
 					<listcell label="${each.observacionfactibilidad}" />
@@ -714,194 +684,13 @@
 
 		<separator />
 
-		<listbox id="ltbElegiPrograma1" mold="paging" pageSize="4" width="3100px"
-			style="margin-left:15px;margin-right:15px;overflow: scroll;"
-			emptyMessage="No hay datos Disponiles">
-
-			<listhead>
-				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
-				<listheader label="Fecha Teg" align="center" />
-				<listheader label="Cedula Tutor" align="center" />
-				<listheader label="Nombre Tutor" align="center" />
-				<listheader label="Apellido Tutor" align="center" />
-				<listheader label="Correo Tutor" align="center" />
-				<listheader label="Direccion Tutor" align="center" />
-				<listheader label="Cedula Estudiante" align="center" />
-				<listheader label="Nombre Estudiante" align="center" />
-				<listheader label="Apellido Estudiante" align="center" />
-				<listheader label="Correo Estudiante" align="center" />
-				<listheader label="Area" align="center" />
-				<listheader label="Descripcion Area" align="center" />
-				<listheader label="Tematica" align="center" />
-				<listheader label="Descripcion Tematica" align="center" />
-				<listheader label="Fecha Factibilidad" align="center" />
-				<listheader label="Profesor Factibilidad"
-					align="center" />
-				<listheader label="Observacion Factibilidad"
-					align="center" />
-
-			</listhead>
-
-
-			<template name="model">
-				<listitem tooltip="pupSeleccionEvaluacion">
-					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
-					<listcell label="${each.fechaTeg}" />
-					<listcell label="${each.cedulaProfesor}" />
-					<listcell label="${each.nombreTutor}" />
-					<listcell label="${each.apellidoTutor}" />
-					<listcell label="${each.correoTutor}" />
-					<listcell label="${each.direccionTutor}" />
-					<listcell label="${each.cedulaEstudiante}" />
-					<listcell label="${each.nombreEstudiante}" />
-					<listcell label="${each.apellidoEstudiante}" />
-					<listcell label="${each.correoEstudiante}" />
-					<listcell label="${each.programa}" />
-					<listcell label="${each.correoPrograma}" />
-					<listcell label="${each.descripcionPrograma}" />
-					<listcell label="${each.area}" />
-					<listcell label="${each.descripcionArea}" />
-					<listcell label="${each.tematica}" />
-					<listcell label="${each.descripcionTematica}" />
-					<listcell label="${each.fechadefensa}" />
-					<listcell label="${each.profesordefensa}" />
-					<listcell label="${each.observacionfactibilidad}" />
-
-				</listitem>
-			</template>
-		</listbox>
-		<separator />
-
-		<listbox id="ltbElegiArea1" mold="paging" pageSize="4" width="3100px"
-			style="margin-left:15px;margin-right:15px;overflow: scroll;"
-			emptyMessage="No hay datos Disponiles">
-			<listhead>
-				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
-				<listheader label="Fecha Teg" align="center" />
-				<listheader label="Cedula Tutor" align="center" />
-				<listheader label="Nombre Tutor" align="center" />
-				<listheader label="Apellido Tutor" align="center" />
-				<listheader label="Correo Tutor" align="center" />
-				<listheader label="Direccion Tutor" align="center" />
-				<listheader label="Cedula Estudiante" align="center" />
-				<listheader label="Nombre Estudiante" align="center" />
-				<listheader label="Apellido Estudiante" align="center" />
-				<listheader label="Correo Estudiante" align="center" />
-				<listheader label="Programa" align="center" />
-				<listheader label="Correo Programa" align="center" />
-				<listheader label="Descripcion Programa" align="center" />
-				<listheader label="Tematica" align="center" />
-				<listheader label="Descripcion Tematica" align="center" />
-				<listheader label="Fecha Factibilidad" align="center" />
-				<listheader label="Profesor Factibilidad"
-					align="center" />
-				<listheader label="Observacion Factibilidad"
-					align="center" />
-
-
-			</listhead>
-
-
-			<template name="model">
-				<listitem tooltip="pupSeleccionEvaluacion">
-					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
-					<listcell label="${each.fechaTeg}" />
-					<listcell label="${each.cedulaProfesor}" />
-					<listcell label="${each.nombreTutor}" />
-					<listcell label="${each.apellidoTutor}" />
-					<listcell label="${each.correoTutor}" />
-					<listcell label="${each.direccionTutor}" />
-					<listcell label="${each.cedulaEstudiante}" />
-					<listcell label="${each.nombreEstudiante}" />
-					<listcell label="${each.apellidoEstudiante}" />
-					<listcell label="${each.correoEstudiante}" />
-					<listcell label="${each.programa}" />
-					<listcell label="${each.correoPrograma}" />
-					<listcell label="${each.descripcionPrograma}" />
-					<listcell label="${each.area}" />
-					<listcell label="${each.descripcionArea}" />
-					<listcell label="${each.tematica}" />
-					<listcell label="${each.descripcionTematica}" />
-					<listcell label="${each.fechadefensa}" />
-					<listcell label="${each.profesordefensa}" />
-					<listcell label="${each.observacionfactibilidad}" />
-
-				</listitem>
-			</template>
-		</listbox>
-
-		<separator />
-
-		<listbox id="ltbElegiProgramaArea1" mold="paging" pageSize="4" width="3100px"
-			style="margin-left:15px;margin-right:15px;overflow: scroll;"
-			emptyMessage="No hay datos Disponiles">
-			<listhead>
-				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
-				<listheader label="Fecha Teg" align="center" />
-				<listheader label="Cedula Tutor" align="center" />
-				<listheader label="Nombre Tutor" align="center" />
-				<listheader label="Apellido Tutor" align="center" />
-				<listheader label="Correo Tutor" align="center" />
-				<listheader label="Direccion Tutor" align="center" />
-				<listheader label="Cedula Estudiante" align="center" />
-				<listheader label="Nombre Estudiante" align="center" />
-				<listheader label="Correo Estudiante" align="center" />
-				<listheader label="Apellido Estudiante" align="center" />
-				<listheader label="Tematica" align="center" />
-				<listheader label="Descripcion Tematica" align="center" />
-				<listheader label="Fecha Factibilidad" align="center" />
-				<listheader label="Profesor Factibilidad"
-					align="center" />
-				<listheader label="Observacion Factibilidad"
-					align="center" />
-
-
-			</listhead>
-
-
-			<template name="model">
-				<listitem tooltip="pupSeleccionEvaluacion">
-					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
-					<listcell label="${each.fechaTeg}" />
-					<listcell label="${each.cedulaProfesor}" />
-					<listcell label="${each.nombreTutor}" />
-					<listcell label="${each.apellidoTutor}" />
-					<listcell label="${each.correoTutor}" />
-					<listcell label="${each.direccionTutor}" />
-					<listcell label="${each.cedulaEstudiante}" />
-					<listcell label="${each.nombreEstudiante}" />
-					<listcell label="${each.apellidoEstudiante}" />
-					<listcell label="${each.correoEstudiante}" />
-					<listcell label="${each.programa}" />
-					<listcell label="${each.correoPrograma}" />
-					<listcell label="${each.descripcionPrograma}" />
-					<listcell label="${each.area}" />
-					<listcell label="${each.descripcionArea}" />
-					<listcell label="${each.tematica}" />
-					<listcell label="${each.descripcionTematica}" />
-					<listcell label="${each.fechadefensa}" />
-					<listcell label="${each.profesordefensa}" />
-					<listcell label="${each.observacionfactibilidad}" />
-
-				</listitem>
-			</template>
-		</listbox>
-		<separator />
-
-		<listbox id="ltbElegiProgramaAreaTematica1" mold="paging" pageSize="4"
+		<listbox id="ltbElegiPrograma1" mold="paging" pageSize="4"
 			width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 
 			<listhead>
 				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
 				<listheader label="Fecha Teg" align="center" />
 				<listheader label="Cedula Tutor" align="center" />
 				<listheader label="Nombre Tutor" align="center" />
@@ -910,8 +699,189 @@
 				<listheader label="Direccion Tutor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
 				<listheader label="Nombre Estudiante" align="center" />
-				<listheader label="Correo Estudiante" align="center" />
 				<listheader label="Apellido Estudiante" align="center" />
+				<listheader label="Correo Estudiante" align="center" />
+				<listheader label="Programa" align="center" />
+				<listheader label="Correo Programa" align="center" />
+				<listheader label="Descripcion Programa" align="center" />
+				<listheader label="Fecha Factibilidad" align="center" />
+				<listheader label="Profesor Factibilidad"
+					align="center" />
+				<listheader label="Observacion Factibilidad"
+					align="center" />
+
+			</listhead>
+
+
+			<template name="model">
+				<listitem tooltip="pupSeleccionEvaluacion">
+					<listcell label="${each.tituloTeg}" />
+					<listcell label="${each.fechaTeg}" />
+					<listcell label="${each.cedulaProfesor}" />
+					<listcell label="${each.nombreTutor}" />
+					<listcell label="${each.apellidoTutor}" />
+					<listcell label="${each.correoTutor}" />
+					<listcell label="${each.direccionTutor}" />
+					<listcell label="${each.cedulaEstudiante}" />
+					<listcell label="${each.nombreEstudiante}" />
+					<listcell label="${each.apellidoEstudiante}" />
+					<listcell label="${each.correoEstudiante}" />
+					<listcell label="${each.programa}" />
+					<listcell label="${each.correoPrograma}" />
+					<listcell label="${each.descripcionPrograma}" />
+
+					<listcell label="${each.fechadefensa}" />
+					<listcell label="${each.profesordefensa}" />
+					<listcell label="${each.observacionfactibilidad}" />
+
+				</listitem>
+			</template>
+		</listbox>
+		<separator />
+
+		<listbox id="ltbElegiArea1" mold="paging" pageSize="4"
+			width="3100px"
+			style="margin-left:15px;margin-right:15px;overflow: scroll;"
+			emptyMessage="No hay datos Disponiles">
+			<listhead>
+				<listheader label="Titulo" align="center" />
+				<listheader label="Fecha Teg" align="center" />
+				<listheader label="Cedula Tutor" align="center" />
+				<listheader label="Nombre Tutor" align="center" />
+				<listheader label="Apellido Tutor" align="center" />
+				<listheader label="Correo Tutor" align="center" />
+				<listheader label="Direccion Tutor" align="center" />
+				<listheader label="Cedula Estudiante" align="center" />
+				<listheader label="Nombre Estudiante" align="center" />
+				<listheader label="Apellido Estudiante" align="center" />
+				<listheader label="Correo Estudiante" align="center" />
+
+				<listheader label="Area" align="center" />
+				<listheader label="Descripcion Area" align="center" />
+				<listheader label="Fecha Factibilidad" align="center" />
+				<listheader label="Profesor Factibilidad"
+					align="center" />
+				<listheader label="Observacion Factibilidad"
+					align="center" />
+
+
+			</listhead>
+
+
+			<template name="model">
+				<listitem tooltip="pupSeleccionEvaluacion">
+					<listcell label="${each.tituloTeg}" />
+					<listcell label="${each.fechaTeg}" />
+					<listcell label="${each.cedulaProfesor}" />
+					<listcell label="${each.nombreTutor}" />
+					<listcell label="${each.apellidoTutor}" />
+					<listcell label="${each.correoTutor}" />
+					<listcell label="${each.direccionTutor}" />
+					<listcell label="${each.cedulaEstudiante}" />
+					<listcell label="${each.nombreEstudiante}" />
+					<listcell label="${each.apellidoEstudiante}" />
+					<listcell label="${each.correoEstudiante}" />
+
+					<listcell label="${each.area}" />
+					<listcell label="${each.descripcionArea}" />
+
+					<listcell label="${each.fechadefensa}" />
+					<listcell label="${each.profesordefensa}" />
+					<listcell label="${each.observacionfactibilidad}" />
+
+				</listitem>
+			</template>
+		</listbox>
+
+		<separator />
+
+		<listbox id="ltbElegiProgramaArea1" mold="paging" pageSize="4"
+			width="3100px"
+			style="margin-left:15px;margin-right:15px;overflow: scroll;"
+			emptyMessage="No hay datos Disponiles">
+			<listhead>
+				<listheader label="Titulo" align="center" />
+				<listheader label="Fecha Teg" align="center" />
+				<listheader label="Cedula Tutor" align="center" />
+				<listheader label="Nombre Tutor" align="center" />
+				<listheader label="Apellido Tutor" align="center" />
+				<listheader label="Correo Tutor" align="center" />
+				<listheader label="Direccion Tutor" align="center" />
+				<listheader label="Cedula Estudiante" align="center" />
+				<listheader label="Nombre Estudiante" align="center" />
+
+				<listheader label="Apellido Estudiante" align="center" />
+				<listheader label="Correo Estudiante" align="center" />
+				<listheader label="Programa" align="center" />
+				<listheader label="Correo Programa" align="center" />
+				<listheader label="Descripcion Programa" align="center" />
+				<listheader label="Area" align="center" />
+				<listheader label="Descripcion Area" align="center" />
+
+
+				<listheader label="Fecha Factibilidad" align="center" />
+				<listheader label="Profesor Factibilidad"
+					align="center" />
+				<listheader label="Observacion Factibilidad"
+					align="center" />
+
+
+			</listhead>
+
+
+			<template name="model">
+				<listitem tooltip="pupSeleccionEvaluacion">
+					<listcell label="${each.tituloTeg}" />
+					<listcell label="${each.fechaTeg}" />
+					<listcell label="${each.cedulaProfesor}" />
+					<listcell label="${each.nombreTutor}" />
+					<listcell label="${each.apellidoTutor}" />
+					<listcell label="${each.correoTutor}" />
+					<listcell label="${each.direccionTutor}" />
+					<listcell label="${each.cedulaEstudiante}" />
+					<listcell label="${each.nombreEstudiante}" />
+					<listcell label="${each.apellidoEstudiante}" />
+					<listcell label="${each.correoEstudiante}" />
+					<listcell label="${each.programa}" />
+					<listcell label="${each.correoPrograma}" />
+					<listcell label="${each.descripcionPrograma}" />
+					<listcell label="${each.area}" />
+					<listcell label="${each.descripcionArea}" />
+
+					<listcell label="${each.fechadefensa}" />
+					<listcell label="${each.profesordefensa}" />
+					<listcell label="${each.observacionfactibilidad}" />
+
+				</listitem>
+			</template>
+		</listbox>
+		<separator />
+
+		<listbox id="ltbElegiProgramaAreaTematica1" mold="paging"
+			pageSize="4" width="3100px"
+			style="margin-left:15px;margin-right:15px;overflow: scroll;"
+			emptyMessage="No hay datos Disponiles">
+
+			<listhead>
+				<listheader label="Titulo" align="center" />
+				<listheader label="Fecha Teg" align="center" />
+				<listheader label="Cedula Tutor" align="center" />
+				<listheader label="Nombre Tutor" align="center" />
+				<listheader label="Apellido Tutor" align="center" />
+				<listheader label="Correo Tutor" align="center" />
+				<listheader label="Direccion Tutor" align="center" />
+				<listheader label="Cedula Estudiante" align="center" />
+				<listheader label="Nombre Estudiante" align="center" />
+
+				<listheader label="Apellido Estudiante" align="center" />
+				<listheader label="Correo Estudiante" align="center" />
+				<listheader label="Programa" align="center" />
+				<listheader label="Correo Programa" align="center" />
+				<listheader label="Descripcion Programa" align="center" />
+				<listheader label="Area" align="center" />
+				<listheader label="Descripcion Area" align="center" />
+				<listheader label="Tematica" align="center" />
+				<listheader label="Descripcion Tematica" align="center" />
 				<listheader label="Tematica" align="center" />
 				<listheader label="Descripcion Tematica" align="center" />
 				<listheader label="Fecha Factibilidad" align="center" />
@@ -928,7 +898,6 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -954,12 +923,12 @@
 		</listbox>
 		<separator />
 
-		<listbox id="ltbElegiAreaTematica1" mold="paging" pageSize="4" width="3100px"
+		<listbox id="ltbElegiAreaTematica1" mold="paging" pageSize="4"
+			width="3100px"
 			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 				<listheader label="Titulo" align="center" />
-				<listheader label="Descripcion Teg" align="center" />
 				<listheader label="Fecha Teg" align="center" />
 				<listheader label="Cedula Tutor" align="center" />
 				<listheader label="Nombre Tutor" align="center" />
@@ -968,8 +937,11 @@
 				<listheader label="Direccion Tutor" align="center" />
 				<listheader label="Cedula Estudiante" align="center" />
 				<listheader label="Nombre Estudiante" align="center" />
-				<listheader label="Correo Estudiante" align="center" />
+
 				<listheader label="Apellido Estudiante" align="center" />
+				<listheader label="Correo Estudiante" align="center" />
+				<listheader label="Area" align="center" />
+				<listheader label="Descripcion Area" align="center" />
 				<listheader label="Tematica" align="center" />
 				<listheader label="Descripcion Tematica" align="center" />
 				<listheader label="Fecha Factibilidad" align="center" />
@@ -983,7 +955,6 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionEvaluacion">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -994,9 +965,7 @@
 					<listcell label="${each.nombreEstudiante}" />
 					<listcell label="${each.apellidoEstudiante}" />
 					<listcell label="${each.correoEstudiante}" />
-					<listcell label="${each.programa}" />
-					<listcell label="${each.correoPrograma}" />
-					<listcell label="${each.descripcionPrograma}" />
+
 					<listcell label="${each.area}" />
 					<listcell label="${each.descripcionArea}" />
 					<listcell label="${each.tematica}" />
