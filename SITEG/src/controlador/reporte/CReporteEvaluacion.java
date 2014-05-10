@@ -274,7 +274,8 @@ public class CReporteEvaluacion extends CGeneral {
 
 		if (cmbPrograma.getText().compareTo("") == 0
 				|| cmbArea.getText().compareTo("") == 0
-				|| cmbTematica.getText().compareTo("") == 0) {
+				|| cmbTematica.getText().compareTo("") == 0
+				|| cmbEstatus.getText().compareTo("") == 0) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
@@ -282,7 +283,7 @@ public class CReporteEvaluacion extends CGeneral {
 			if ((rdoFactibilidad.isChecked() == false)
 					&& (rdoDefensa.isChecked() == false)) {
 				Messagebox
-						.show("Debe Seleccionar el tipo de evaluacio que desea consultar",
+						.show("Debe Seleccionar el tipo de evaluacion que desea consultar",
 								"Error", Messagebox.OK, Messagebox.ERROR);
 			} else {
 
@@ -333,7 +334,7 @@ public class CReporteEvaluacion extends CGeneral {
 										Messagebox.ERROR);
 					} else if (!nombreestatus.equals("Todos")) {
 						/*
-						 * SELECIONO TODO TODO
+						 * SELECIONO un estatus
 						 */
 						if (nombrePrograma.equals("Todos")
 								&& nombreArea.equals("Todos")
@@ -378,7 +379,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -475,7 +476,7 @@ public class CReporteEvaluacion extends CGeneral {
 							}
 						}
 						/*
-						 * seleccione un programa
+						 * seleccione un programa y un estatus
 						 */
 						else if (!nombrePrograma.equals("Todos")
 								&& nombreArea.equals("Todos")
@@ -522,7 +523,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -669,7 +670,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -771,7 +772,7 @@ public class CReporteEvaluacion extends CGeneral {
 							}
 						}
 						/*
-						 * Eligió programa area pero todos las tematicas
+						 * Eligiï¿½ programa area pero todos las tematicas
 						 */
 						else if (!nombrePrograma.equals("Todos")
 								&& !nombreArea.equals("Todos")
@@ -815,7 +816,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -916,7 +917,7 @@ public class CReporteEvaluacion extends CGeneral {
 
 						}
 						/*
-						 * Eligió todo los programas una area y todos los
+						 * Eligiï¿½ todo los programas una area y todos los
 						 * tematicos
 						 */
 
@@ -964,7 +965,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -1115,7 +1116,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -1276,7 +1277,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -1427,7 +1428,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -1582,7 +1583,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -1684,7 +1685,7 @@ public class CReporteEvaluacion extends CGeneral {
 							}
 						}
 						/*
-						 * Eligió programa area pero todos las tematicas
+						 * Eligiï¿½ programa area pero todos las tematicas
 						 */
 						else if (!nombrePrograma.equals("Todos")
 								&& !nombreArea.equals("Todos")
@@ -1735,7 +1736,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -1836,7 +1837,7 @@ public class CReporteEvaluacion extends CGeneral {
 
 						}
 						/*
-						 * Eligió todo los programas una area y todos los
+						 * Eligiï¿½ todo los programas una area y todos los
 						 * tematicos
 						 */
 
@@ -1893,7 +1894,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
@@ -2050,7 +2051,7 @@ public class CReporteEvaluacion extends CGeneral {
 									}
 
 									String titulo = t.getTitulo();
-									String descripcionTeg = t.getDescripcion();
+									String descripcionTeg = t.getEstatus();
 									Date fecha = t.getFecha();
 									String area = t.getTematica()
 											.getareaInvestigacion().getNombre();
