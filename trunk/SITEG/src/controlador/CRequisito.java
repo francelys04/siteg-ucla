@@ -2,6 +2,8 @@ package controlador;
 
 import java.util.HashMap;
 
+import modelo.Profesor;
+import modelo.Programa;
 import modelo.Requisito;
 
 import org.springframework.stereotype.Controller;
@@ -166,4 +168,25 @@ public class CRequisito extends CGeneral {
 		wdwRequisito.onClose();
 
 	}
+	
+	/*
+	 * Metodo que permite buscar si un requisito existe, de acuerdo al nombre del
+	 * requisito
+	 */
+	@Listen("onChange = #txtNombreRequisito")
+	public void buscarNombreRequisito() {
+		Requisito requisito = servicioRequisito.buscarPorNombreRequisito(txtNombreRequisito.getValue());
+		if (requisito != null) {
+
+			txtNombreRequisito.setValue(requisito.getNombre());
+			txtDescripcionRequisito.setValue(requisito.getDescripcion());
+			id = requisito.getId();
+			btnEliminarRequisito.setDisabled(false);
+				
+		}
+
+	}
+	
+	
+	
 }

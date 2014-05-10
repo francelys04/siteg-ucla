@@ -3,6 +3,7 @@ package controlador;
 import java.util.HashMap;
 
 import modelo.Actividad;
+import modelo.Requisito;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -163,4 +164,23 @@ public class CActividad extends CGeneral {
 	public void salirActividad() {
 		wdwActividad.onClose();
 	}
+	
+	/*
+	 * Metodo que permite buscar si una actividad existe, de acuerdo al nombre de la
+	 * actividad
+	 */
+	@Listen("onChange = #txtNombreActividad")
+	public void buscarNombreActividad() {
+		Actividad actividad = servicioActividad.buscarActividadPorNombre(txtNombreActividad.getValue());
+		if (actividad != null) {
+			txtNombreActividad.setValue(actividad.getNombre());
+			txtDescripcionActividad.setValue(actividad.getDescripcion());
+			id = actividad.getId();
+			btnEliminarActividad.setDisabled(false);
+				
+		}
+
+	}
+	
+	
 }

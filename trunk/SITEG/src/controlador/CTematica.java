@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.AreaInvestigacion;
+import modelo.Profesor;
+import modelo.Programa;
 import modelo.Tematica;
 
 import org.springframework.stereotype.Controller;
@@ -138,7 +140,7 @@ public class CTematica extends CGeneral {
 	/* Metodo que permite la eliminacion logica de una entidad Tematica */
 	@Listen("onClick = #btnEliminarTematica")
 	public void eliminarTematica() {
-		Messagebox.show("Â¿Desea eliminar los datos de la tematica?",
+		Messagebox.show("¿Desea eliminar los datos de la tematica?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
@@ -178,5 +180,28 @@ public class CTematica extends CGeneral {
 	public void salirTematica() {
 		wdwTematica.onClose();
 	}
+	
+	
+	
+	/*
+	 * Metodo que permite buscar si una tematica existe, de acuerdo al nombre de la
+	 * tematica
+	 */
+	@Listen("onChange = #txtNombreTematica")
+	public void buscarNombreTematica() {
+		Tematica tematica = servicioTematica.buscarTematicaPorNombre(txtNombreTematica.getValue());
+		if (tematica != null) {
+			
+			cmbAreaTematica.setValue(tematica.getareaInvestigacion()
+						.getNombre());
+			txtNombreTematica.setValue(tematica.getNombre());
+			txtDescripcionTematica.setValue(tematica.getDescripcion());
+			id = tematica.getId();
+			btnEliminarTematica.setDisabled(false);
+
+		}
+
+	}
+	
 
 }

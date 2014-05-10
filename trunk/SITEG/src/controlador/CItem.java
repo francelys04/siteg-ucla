@@ -3,6 +3,7 @@ package controlador;
 import java.util.HashMap;
 
 import modelo.ItemEvaluacion;
+import modelo.TipoJurado;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -172,5 +173,26 @@ public class CItem extends CGeneral {
 		wdwItem.onClose();
 
 	}
+	
+	
+	/*
+	 * Metodo que permite buscar si un item de evaluacion existe, de acuerdo al nombre y tipo
+	 * del item
+	 */
+	@Listen("onChange = #cmbTipoItem")
+	public void buscarNombreItem() {
+		ItemEvaluacion itemEvaluacion = servicioItem.buscarPorNombreYTipo(txtNombreItem.getValue(), cmbTipoItem.getValue());
+		if (itemEvaluacion != null) {
+
+			txtNombreItem.setValue(itemEvaluacion.getNombre());
+			cmbTipoItem.setValue(itemEvaluacion.getTipo());
+			txtDescripcionItem.setValue(itemEvaluacion.getDescripcion());
+			id = itemEvaluacion.getId();
+			btnEliminarItem.setDisabled(false);	
+		}
+
+	}
+	
+	
 
 }

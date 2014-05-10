@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.Estudiante;
+import modelo.Profesor;
 import modelo.Programa;
 import modelo.seguridad.Usuario;
 
@@ -179,9 +180,9 @@ public class CEstudiante extends CGeneral {
 								String correo = txtCorreoEstudiante.getValue();
 								String direccion = txtDireccionEstudiante
 										.getValue();
-								String telefonoFijo = txtTelefonoMovilEstudiante
+								String telefonoFijo = txtTelefonoFijoEstudiante
 										.getValue();
-								String telefonoMovil = txtTelefonoFijoEstudiante
+								String telefonoMovil = txtTelefonoMovilEstudiante
 										.getValue();
 								String programas = cmbProgramaEstudiante
 										.getValue();
@@ -272,5 +273,38 @@ public class CEstudiante extends CGeneral {
 	public void salirEstudiante() {
 		wdwEstudiante.onClose();
 	}
+	
+	
+	
+	/*
+	 * Metodo que permite buscar si un estudiante existe, de acuerdo al numero de
+	 * cedula del estudiante
+	 */
+	@Listen("onChange = #txtCedulaEstudiante")
+	public void buscarCedulaEstudiante() {
+		Estudiante estudiante = servicioEstudiante.buscarEstudiante(txtCedulaEstudiante.getValue());
+		if (estudiante != null) {
+			
+			cmbProgramaEstudiante.setValue(estudiante.getPrograma().getNombre());
+			txtCedulaEstudiante.setValue(estudiante.getCedula());
+			txtNombreEstudiante.setValue(estudiante.getNombre());
+			txtApellidoEstudiante.setValue(estudiante.getApellido());
+			
+			if (estudiante.getSexo().equals("Masculino")) {
+				rdoSexoMEstudiante.setChecked(true);
+			} else
+				rdoSexoFEstudiante.setChecked(true);
+			
+			txtDireccionEstudiante.setValue(estudiante.getDireccion());
+			txtTelefonoMovilEstudiante.setValue(estudiante.getTelefono());
+			txtTelefonoFijoEstudiante.setValue(estudiante.getTelefono_fijo());
+			txtCorreoEstudiante.setValue(estudiante.getCorreoElectronico());
+			btnEliminarEstudiante.setDisabled(false);
+		}
+
+	}
+
+	
+	
 
 }

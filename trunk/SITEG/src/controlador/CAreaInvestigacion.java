@@ -3,6 +3,8 @@ package controlador;
 import java.util.HashMap;
 
 import modelo.AreaInvestigacion;
+import modelo.Profesor;
+import modelo.Programa;
 
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
@@ -171,4 +173,23 @@ public class CAreaInvestigacion extends CGeneral {
 	public void salirArea() {
 		wdwArea.onClose();
 	}
+
+	/*
+	 * Metodo que permite buscar si un area de investigacion existe, de acuerdo
+	 * al nombre ingresado
+	 */
+	@Listen("onChange = #txtNombreArea")
+	public void buscarNombreArea() {
+		AreaInvestigacion area = servicioArea.buscarAreaPorNombre(txtNombreArea
+				.getValue());
+		if (area != null) {
+
+			txtNombreArea.setValue(area.getNombre());
+			txtDescripcionArea.setValue(area.getDescripcion());
+			id = area.getId();
+			btnEliminarArea.setDisabled(false);
+
+		}
+	}
+
 }

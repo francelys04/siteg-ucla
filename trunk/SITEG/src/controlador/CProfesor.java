@@ -7,6 +7,7 @@ import java.util.Set;
 
 import modelo.Categoria;
 import modelo.Profesor;
+import modelo.Requisito;
 import modelo.Tematica;
 import modelo.seguridad.Usuario;
 
@@ -97,7 +98,6 @@ public class CProfesor extends CGeneral {
 
 		if (map != null) {
 			if ((String) map.get("cedula") != null) {
-				
 
 				modificarProfesor = true;
 				txtCedulaProfesor.setValue((String) map.get("cedula"));
@@ -187,7 +187,6 @@ public class CProfesor extends CGeneral {
 										.buscarCategoriaPorNombre(categorias);
 
 								if (modificarProfesor == true) {
-									
 
 									Profesor profesor = servicioProfesor
 											.buscarProfesorPorCedula(txtCedulaProfesor
@@ -195,17 +194,17 @@ public class CProfesor extends CGeneral {
 									List<Tematica> tematicas = servicioTematica
 											.buscarTematicasDelProfesor(profesor);
 
-									for (int i = 0; i < tematicas
-											.size(); i++) {
-										Tematica tematicasasosiadas = tematicas.get(i);
-										tematicasProfesor.add(tematicasasosiadas);
+									for (int i = 0; i < tematicas.size(); i++) {
+										Tematica tematicasasosiadas = tematicas
+												.get(i);
+										tematicasProfesor
+												.add(tematicasasosiadas);
 									}
 
-								}else{
-									
-								
+								} else {
+
 									tematicasProfesor = new HashSet<Tematica>();
-									
+
 								}
 
 								Usuario usuario = servicioUsuario
@@ -294,4 +293,33 @@ public class CProfesor extends CGeneral {
 		wdwProfesor.onClose();
 
 	}
+
+	/*
+	 * Metodo que permite buscar si un profesor existe, de acuerdo al numero de
+	 * cedula del profesor
+	 */
+	@Listen("onChange = #txtCedulaProfesor")
+	public void buscarCedulaProfesor() {
+		Profesor profesor = servicioProfesor.buscarProfesorPorCedula(txtCedulaProfesor.getValue());
+		if (profesor != null) {
+			
+			cmbCategoriaProfesor.setValue(profesor.getCategoria().getNombre());
+			txtCedulaProfesor.setValue(profesor.getCedula());
+			txtNombreProfesor.setValue(profesor.getNombre());
+			txtApellidoProfesor.setValue(profesor.getApellido());
+			
+			if (profesor.getSexo().equals("Masculino")) {
+				rdoSexoMProfesor.setChecked(true);
+			} else
+				rdoSexoFProfesor.setChecked(true);
+			
+			txtDireccionProfesor.setValue(profesor.getDireccion());
+			txtTelefonoMovilProfesor.setValue(profesor.getTelefono_movil());
+			txtTelefonoFijoProfesor.setValue(profesor.getTelefono_fijo());
+			txtCorreoProfesor.setValue(profesor.getCorreoElectronico());
+			btnEliminarProfesor.setDisabled(false);
+		}
+
+	}
+
 }
