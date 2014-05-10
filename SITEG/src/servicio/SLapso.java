@@ -5,6 +5,7 @@ import interfazdao.ILapsoDAO;
 import java.util.List;
 
 import modelo.Lapso;
+import modelo.Programa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,4 +45,14 @@ public class SLapso {
 		lapso = interfaceLapso.findOne(interfaceLapso.lapsoActual());
 		return lapso;
 	}
+	
+	public Lapso buscarPorNombreLapso(String nombre) {
+		Lapso lapso;
+		lapso = interfaceLapso.findByNombre(nombre);
+		return lapso;
+	}
+
+	
+	
+	
 }

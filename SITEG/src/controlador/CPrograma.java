@@ -31,6 +31,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+
 import controlador.catalogo.CCatalogoProfesor;
 import controlador.catalogo.CCatalogoPrograma;
 
@@ -337,4 +338,30 @@ public class CPrograma extends CGeneral {
 	public void salirPrograma() {
 		wdwPrograma.onClose();
 	}
+	
+	/*
+	 * Metodo que permite buscar si un programa existe, de acuerdo al nombre del
+	 * programa
+	 */
+	@Listen("onChange = #txtNombrePrograma")
+	public void buscarNombrePrograma() {
+		Programa programa = servicioPrograma
+				.buscarPorNombrePrograma(txtNombrePrograma.getValue());
+		if (programa != null) {
+
+			Profesor profesorDirector = servicioProfesor
+					.buscarProfesorPorCedula(programa.getDirectorPrograma()
+							.getCedula());
+			txtDirectorPrograma.setValue(profesorDirector.getNombre() + " "
+					+ profesorDirector.getApellido());
+			txtNombrePrograma.setValue(programa.getNombre());
+			txtDescripcionPrograma.setValue(programa.getDescripcion());
+			txtCorreoPrograma.setValue(programa.getCorreo());
+			id = programa.getId();
+			btnEliminarPrograma.setDisabled(false);
+
+		}
+
+	}
+	
 }

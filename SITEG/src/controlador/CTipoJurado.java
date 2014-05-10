@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.HashMap;
 
+import modelo.Requisito;
 import modelo.TipoJurado;
 
 import org.springframework.stereotype.Controller;
@@ -170,5 +171,26 @@ public class CTipoJurado extends CGeneral {
 	public void salirTipoJurado() {
 		wdwTipoJurado.onClose();
 	}
+	
+	
+	
+	/*
+	 * Metodo que permite buscar si un tipo de jurado existe, de acuerdo al nombre del
+	 * tipo de jurado
+	 */
+	@Listen("onChange = #txtNombreTipoJurado")
+	public void buscarNombreTipoJurado() {
+		TipoJurado tipoJurado = servicioTipoJurado.buscarPorNombre(txtNombreTipoJurado.getValue());
+		if (tipoJurado != null) {
+
+			txtNombreTipoJurado.setValue(tipoJurado.getNombre());
+			txtDescripcionTipoJurado.setValue(tipoJurado.getDescripcion());
+			id = tipoJurado.getId();
+			btnEliminarTipoJurado.setDisabled(false);
+				
+		}
+
+	}
+	
 
 }

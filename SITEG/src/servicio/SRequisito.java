@@ -28,6 +28,14 @@ public class SRequisito {
 	public List<Requisito> buscarRequisito() {
 		return interfaceRequisito.findAll();
 	}
+	
+	
+	public Requisito buscarPorNombreRequisito(String nombre) {
+		Requisito requisito;
+		requisito = interfaceRequisito.findByNombre(nombre);
+		return requisito;
+	}
+	
 
 	public List<Requisito> buscarActivos() {
 		List<Requisito> requisitos;

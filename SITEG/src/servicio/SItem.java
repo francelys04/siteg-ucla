@@ -38,5 +38,13 @@ public class SItem {
 		items = interfaceItem.buscarDisponibles(programa, lapso);
 		return items;
 	}
+	
+	public ItemEvaluacion buscarPorNombreYTipo(String nombre, String tipo) {
+		ItemEvaluacion item;
+		item = interfaceItem.findByNombreAndTipo(nombre, tipo);
+		return item;
+	}
+	
+	
 
 }

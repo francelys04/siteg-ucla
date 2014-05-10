@@ -7,6 +7,7 @@ import java.util.List;
 
 import modelo.Condicion;
 import modelo.Lapso;
+import modelo.TipoJurado;
 import modelo.compuesta.CondicionPrograma;
 
 import org.springframework.stereotype.Controller;
@@ -103,7 +104,8 @@ public class CLapso extends CGeneral {
 				|| (dtbFinLapso.getText().compareTo("") == 0)) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
-		} else if (dtbInicioLapso.getValue().after(dtbFinLapso.getValue())) {
+		} else if (dtbInicioLapso.getValue().after(dtbFinLapso.getValue())
+				|| ((dtbInicioLapso.getValue().equals(dtbFinLapso.getValue())))) {
 			Messagebox
 					.show("La fecha de fin de lapso debe ser posterior a la fecha de inicio",
 							"Error", Messagebox.OK, Messagebox.ERROR);
@@ -225,6 +227,26 @@ public class CLapso extends CGeneral {
 	@Listen("onClick = #btnSalirLapso")
 	public void salirLapso() {
 		wdwLapsoAcademico.onClose();
+	}
+
+	/*
+	 * Metodo que permite buscar si un lapso academico existe, de acuerdo al
+	 * nombre del lapso academico
+	 */
+	@Listen("onChange = #txtNombreLapso")
+	public void buscarNombreLapso() {
+		Lapso lapso = servicioLapso.buscarPorNombreLapso(txtNombreLapso
+				.getValue());
+		if (lapso != null) {
+
+			txtNombreLapso.setValue(lapso.getNombre());
+			dtbInicioLapso.setValue(lapso.getFechaInicial());
+			dtbFinLapso.setValue(lapso.getFechaFinal());
+			id = lapso.getId();
+			btnEliminarLapso.setDisabled(false);
+
+		}
+
 	}
 
 }
