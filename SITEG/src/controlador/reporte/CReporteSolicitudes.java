@@ -603,8 +603,7 @@ public class CReporteSolicitudes extends CGeneral {
 							.buscarTematica(idTematica);
 
 					solicitud = servicioSolicitudTutoria
-							.buscarSolicitudesPorTematicaEntreFechas(tematica1,
-									fechaInicio, fechaFin);
+							.buscarSolicitudSegunProgramaunAreaunaTematicadosFechas(programa1, tematica1, fechaInicio, fechaFin);
 					if (solicitud.size() != 0) {
 						elementos.clear();
 						for (SolicitudTutoria s : solicitud) {
@@ -666,7 +665,7 @@ public class CReporteSolicitudes extends CGeneral {
 					}
 				}
 				/*
-				 * seleccionno solo programa y estatus
+				 * selecciono solo programa y estatus
 				 */
 				else if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
@@ -818,7 +817,7 @@ public class CReporteSolicitudes extends CGeneral {
 				 * seleccionan solo tematica
 				 */
 				else if (nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")
+						&& nombreArea.equals("Todos")
 						&& !nombreTematica.equals("Todos")
 						&& nombreEstatus.equals("Todos")) {
 
@@ -891,6 +890,82 @@ public class CReporteSolicitudes extends CGeneral {
 					}
 
 				}
+				/*
+				 * seleccionan programa area y estatus
+				 */
+				else if (!nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& !nombreEstatus.equals("Todos")) {
+
+					
+
+					solicitud = servicioSolicitudTutoria
+							.buscarSolicitudSegunProgramaAreaUnEstatus1(nombreEstatus, programa1, area1, fechaInicio, fechaFin);
+					if (solicitud.size() != 0) {
+						elementos.clear();
+						for (SolicitudTutoria s : solicitud) {
+
+							String titulo = s.getDescripcion();
+							String tutor = s.getProfesor().getNombre() + " "
+									+ s.getProfesor().getApellido() + " ";
+							List<Estudiante> estudiantes = servicioEstudiante
+									.buscarSolicitudesEstudiante(s);
+
+							String programa = "";
+							String nombreEstudiante = "";
+							for (Estudiante e : estudiantes) {
+								nombreEstudiante = e.getNombre() + " "
+										+ e.getApellido() + " ";
+								programa = e.getPrograma().getNombre();
+							}
+
+							String tematica = s.getTematica().getNombre();
+							String area = s.getTematica()
+									.getareaInvestigacion().getNombre();
+							String estatus = s.getEstatus();
+							elementos.add(new Solicitud(titulo, tutor,
+									nombreEstudiante, programa, tematica, area,
+									estatus));
+
+						}
+						Map<String, Object> mapa = new HashMap<String, Object>();
+						mapa.put("fechainicio", fechaInicio);
+						mapa.put("fechafin", fechaFin);
+						mapa.put("total", elementos.size());
+
+						// Metodo utilizado para los que de error el preview
+						FileSystemView filesys = FileSystemView
+								.getFileSystemView();
+						String rutaUrl = obtenerDirectorio();
+						String reporteSrc = rutaUrl
+								+ "SITEG/vistas/reportes/estructurados/compilados/ReporteSolicitud1.jasper";
+						String reporteImage = rutaUrl
+								+ "SITEG/public/imagenes/reportes/";
+						mapa.put("logoUcla", reporteImage + "logo ucla.png");
+						mapa.put("logoCE", reporteImage + "logo CE.png");
+						mapa.put("logoSiteg", reporteImage + "logo.png");
+
+						JasperReport jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
+
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, mapa,
+								new JRBeanCollectionDataSource(elementos));
+
+						JasperViewer.viewReport(jasperPrint, false);
+
+					} else {
+
+						Messagebox
+								.show("No hay informacion disponible para esta seleccion",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+
+					}
+
+				}
+				
 
 			}
 

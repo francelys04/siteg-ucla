@@ -247,6 +247,14 @@ public class SSolicitudTutoria {
 		return solicitudes;
 
 	}
+	
+	public List<SolicitudTutoria> buscarSolicitudSegunProgramaunAreaunaTematicadosFechas(
+		Programa programa,Tematica tematica, Date fechaInicio, Date fechaFin) {
+		List<SolicitudTutoria> solicitudes;
+		solicitudes = interfaceSolicitud.buscarSolicitudPorProgramaporTematicayFecha(programa, tematica, fechaInicio, fechaFin);
+		return solicitudes;
+
+	}
 
 	public List<SolicitudTutoria> buscarSolicitudSegunAreaUnEstatus1(
 			AreaInvestigacion area, Date fechaInicio, Date fechaFin) {
@@ -256,7 +264,18 @@ public class SSolicitudTutoria {
 		return solicitudes;
 
 	}
+	
+	public List<SolicitudTutoria> buscarSolicitudSegunProgramaAreaUnEstatus1(String estatus,Programa programa,
+			AreaInvestigacion area, Date fechaInicio, Date fechaFin) {
+		List<SolicitudTutoria> solicitudes;
+		solicitudes = interfaceSolicitud.buscarSolicitudPorProgramaAreasUnEstatus1(estatus, programa, area, fechaInicio, fechaFin);
+		return solicitudes;
 
+	}
+
+
+	
+	
 	public List<SolicitudTutoria> buscarSolicitudesPorTematicayAreaYFechas(
 			Tematica tematicaI, AreaInvestigacion areaI, Date fechaInicio,
 			Date fechaFin) {
