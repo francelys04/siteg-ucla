@@ -30,6 +30,7 @@ import org.zkoss.zul.Window;
 public class CRegistrarTeg extends CGeneral {
 
 	private static final long serialVersionUID = 4776838715306023103L;
+	private static final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000;
 	private static long auxiliarId = 0;
 	@Wire
 	private Textbox txtProgramaRegistraTeg;
@@ -58,7 +59,7 @@ public class CRegistrarTeg extends CGeneral {
 	@Wire
 	private Button btnCancelarRegistrarTeg;
 	@Wire
-	private Spinner spnDuracionRegistrarTeg;
+	private Textbox txtDuracionRegistrarTeg;
 
 	/*
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
@@ -152,7 +153,7 @@ public class CRegistrarTeg extends CGeneral {
 		if ((txtTituloRegistrarTeg.getText().compareTo("") == 0)
 				|| (txtDescripcionRegistrarTeg.getText().compareTo("") == 0)
 				|| (dtbFechaEntregaRegistrarTeg == null)
-				|| (spnDuracionRegistrarTeg.getText().compareTo("") == 0)) {
+				|| (txtDuracionRegistrarTeg.getText().compareTo("") == 0)) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
@@ -194,8 +195,8 @@ public class CRegistrarTeg extends CGeneral {
 															.getValue());
 
 											tegRegistrado
-													.setDuracion(spnDuracionRegistrarTeg
-															.getValue());
+													.setDuracion(Integer.parseInt(txtDuracionRegistrarTeg
+															.getValue()));
 
 											tegRegistrado
 													.setEstatus("TEG Registrado");
@@ -234,11 +235,22 @@ public class CRegistrarTeg extends CGeneral {
 	/*
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
+	@Listen("onChange = #dtbFechaEntregaRegistrarTeg")
+	public void calcularDuracionTeg() {
+		
+		txtDuracionRegistrarTeg.setText(Long.toString((dtbFechaEntregaRegistrarTeg.getValue().getTime() - 
+				dtbFechaRegistroTeg.getValue().getTime()) / MILLSECS_PER_DAY));
+		
+	}
+	
+	/*
+	 * Metodo que permite reiniciar los campos de la vista a su estado original
+	 */
 	@Listen("onClick = #btnCancelarRegistrarTeg")
 	public void cancelarRegistroTeg() {
 		txtDescripcionRegistrarTeg.setValue("");
 		dtbFechaEntregaRegistrarTeg.setValue(new Date());
-		spnDuracionRegistrarTeg.setValue(null);
+		txtDuracionRegistrarTeg.setValue("");
 
 	}
 
