@@ -252,20 +252,18 @@
 										<datebox
 											id="dtbFechaEntregaRegistrarTeg" width="130px" format="short"
 											onCreate="self.value = new Date()" tooltip="pupFechaEntrega"
-											style="margin-left:20px" readonly="true">
+											style="margin-left:20px">
 										</datebox>
 
 										<hlayout>
-											<label value="*"
-												style="font-weight:bold;color:red;margin-left:30px">
-											</label>
+											
 											<label value="Duración:"
-												style="font-weight:bold" />
+												style="font-weight:bold;margin-left:30px" />
 										</hlayout>
 
-										<spinner
-											id="spnDuracionRegistrarTeg" width="100px"
-											tooltip="pupDuracion" style="margin-left:20px" />
+										<textbox
+											id="txtDuracionRegistrarTeg" width="20px"
+											style="color:black !important;" disabled="true"/>
 										<label value="En días"
 											style="font-weight:bold;margin-left:10px" />
 
