@@ -235,6 +235,7 @@ public class CReporteTrabajos extends CGeneral {
 	@Listen("onClick = #btnGenerarReporteTrabajos")
 	public void generarReporteTrabajos() throws JRException {
 		boolean datosVacios = false;
+		boolean msj = false;
 		String nombreArea = cmbArea.getValue();
 		String nombrePrograma = cmbPrograma.getValue();
 		String nombreTematica = cmbTematica.getValue();
@@ -251,6 +252,7 @@ public class CReporteTrabajos extends CGeneral {
 				&& (rdoAmbos.isChecked() == false))) {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
+			msj = true;
 		}
 
 		else {
@@ -260,6 +262,7 @@ public class CReporteTrabajos extends CGeneral {
 				Messagebox
 						.show("La fecha de inicio debe ser primero que la fecha de fin",
 								"Error", Messagebox.OK, Messagebox.ERROR);
+				msj = true;
 			} else {
 				/*buscar por una carrera, un area, una tematica y un estatus*/
 				if (!nombrePrograma.equals("Todos")
@@ -783,6 +786,7 @@ public class CReporteTrabajos extends CGeneral {
 				}
 						
 				if (!datosVacios) {
+					if (!msj){
 					List<ListaTeg> elementos = new ArrayList<ListaTeg>();
 					for (Teg t : teg) {
 						List<Estudiante> estudiantes = servicioEstudiante
@@ -877,9 +881,10 @@ public class CReporteTrabajos extends CGeneral {
 						JasperViewer.viewReport(jasperPrint, false);
 					}
 
-				} else {
-					Messagebox
-							.show("No hay informacion disponible para esta seleccion");
+				} 
+					}else {
+						Messagebox
+						.show("No hay informacion disponible para esta seleccion");
 				}
 			}
 
