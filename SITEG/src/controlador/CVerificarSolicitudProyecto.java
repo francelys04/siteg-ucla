@@ -43,6 +43,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 	private Lapso lapso = new Lapso();
 	private static long auxId = 0;
 	private static String vistaRecibida;
+	private static int requisitosDisponibles = 0;
 	ArrayList<Boolean> valor = new ArrayList<Boolean>();
 	@Wire
 	private Textbox txtProgramaRegistrarAvances;
@@ -113,6 +114,12 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 				ltbEstudiantesTeg.setModel(new ListModelList<Estudiante>(est));
 				programa = est.get(0).getPrograma();
 				llenarRequisitos(programa, teg2);
+				lapso = servicioLapso.buscarLapsoVigente();
+				requisitosDisponibles = (servicioProgramaRequisito
+						.buscarRequisitos(programa, lapso)).size();
+				System.out.println(requisitosDisponibles);
+				System.out.println("Pase por el map");
+				System.out.println(ltbRequisitosSeleccionadas.getItemCount());
 				map.clear();
 				map = null;
 			}
@@ -181,61 +188,94 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 								Messagebox.EXCLAMATION);
 			} else {
 
-				Messagebox.show(
-						"¿Desea guardar la verificacion de los requisitos?",
-						"Dialogo de confirmacion", Messagebox.OK
-								| Messagebox.CANCEL, Messagebox.QUESTION,
-						new org.zkoss.zk.ui.event.EventListener<Event>() {
-							public void onEvent(Event evt)
-									throws InterruptedException {
-								if (evt.getName().equals("onOK")) {
+				System.out.println(requisitosDisponibles);
+				System.out.println(ltbRequisitosSeleccionadas.getItemCount());
 
-									long auxId2;
-									auxId2 = auxId;
-									Teg teg1 = servicioTeg.buscarTeg(auxId2);
-									List<TegRequisito> tegRequisitos = new ArrayList<TegRequisito>();
-									for (int i = 0; i < ltbRequisitosSeleccionadas
-											.getItemCount(); i++) {
-										Requisito requisitos = ltbRequisitosSeleccionadas
-												.getItems().get(i).getValue();
-										TegRequisito teg = new TegRequisito(
-												requisitos, teg1, db1
-														.getValue());
-										tegRequisitos.add(teg);
-									}
-									servicioTegRequisito.guardar(tegRequisitos);
+				if ((rdoCompleto.isChecked() == true)
+						&& (requisitosDisponibles != ltbRequisitosSeleccionadas
+								.getItemCount())) {
 
-									if (rdoCompleto.isChecked() == true) {
+					Messagebox
+							.show("Todos los requisitos deben ser verificados para seleccionar la opcion de requisitos completos y correctos",
+									"Advertencia", Messagebox.OK,
+									Messagebox.EXCLAMATION);
 
-										Teg teg = servicioTeg.buscarTeg(auxId2);
-										String estatus = "Proyecto Registrado";
-										teg.setEstatus(estatus);
+				} else {
 
-										/*
-										 * Guardar datos en la tabla teg_estatus
-										 */
-										java.util.Date fechaEstatus = new Date();
-										TegEstatus tegEstatus = new TegEstatus(
-												0, teg, "Proyecto Registrado",
-												fechaEstatus);
-										servicioTegEstatus.guardar(tegEstatus);
+					Messagebox
+							.show("¿Desea guardar la verificacion de los requisitos?",
+									"Dialogo de confirmacion",
+									Messagebox.OK | Messagebox.CANCEL,
+									Messagebox.QUESTION,
+									new org.zkoss.zk.ui.event.EventListener<Event>() {
+										public void onEvent(Event evt)
+												throws InterruptedException {
+											if (evt.getName().equals("onOK")) {
 
-										servicioTeg.guardar(teg);
+												long auxId2;
+												auxId2 = auxId;
+												Teg teg1 = servicioTeg
+														.buscarTeg(auxId2);
+												List<TegRequisito> tegRequisitos = new ArrayList<TegRequisito>();
+												for (int i = 0; i < ltbRequisitosSeleccionadas
+														.getItemCount(); i++) {
+													Requisito requisitos = ltbRequisitosSeleccionadas
+															.getItems().get(i)
+															.getValue();
+													TegRequisito teg = new TegRequisito(
+															requisitos, teg1,
+															db1.getValue());
+													tegRequisitos.add(teg);
+												}
+												servicioTegRequisito
+														.guardar(tegRequisitos);
 
-									}
+												if (rdoCompleto.isChecked() == true) {
 
-									Messagebox
-											.show("Verificacion de los requisitos guardados exitosamente",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
-									salir();
+													Teg teg = servicioTeg
+															.buscarTeg(auxId2);
+													String estatus = "Proyecto Registrado";
+													teg.setEstatus(estatus);
 
-								}
+													/*
+													 * Guardar datos en la tabla
+													 * teg_estatus
+													 */
+													java.util.Date fechaEstatus = new Date();
+													TegEstatus tegEstatus = new TegEstatus(
+															0,
+															teg,
+															"Proyecto Registrado",
+															fechaEstatus);
+													servicioTegEstatus
+															.guardar(tegEstatus);
 
-							}
+													servicioTeg.guardar(teg);
+													Messagebox
+															.show("Verificacion de los requisitos guardados exitosamente",
+																	"Informacion",
+																	Messagebox.OK,
+																	Messagebox.INFORMATION);
+													salir();
 
-						});
+												} else {
+
+													Messagebox
+															.show("Verificacion de los requisitos guardados exitosamente, pero todavia faltan requisitos por verificar",
+																	"Informacion",
+																	Messagebox.OK,
+																	Messagebox.INFORMATION);
+													salir();
+
+												}
+
+											}
+
+										}
+
+									});
+
+				}
 
 			}
 		}
