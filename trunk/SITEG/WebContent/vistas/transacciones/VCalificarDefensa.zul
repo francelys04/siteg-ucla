@@ -167,8 +167,9 @@
 
 
 									<combobox id="cmbMencionTeg"
-										tooltip="pupMencion" readonly="true" autodrop="true"
-										width="180px" tabindex="12" style="margin-left:55px">
+										disabled="true" tooltip="pupMencion" readonly="true"
+										autodrop="true" width="180px" tabindex="12"
+										style="margin-left:55px;color:black !important;">
 										<template name="model">
 											<comboitem
 												label="${each.nombre}" id="${each.id}" />

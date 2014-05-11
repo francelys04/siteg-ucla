@@ -273,7 +273,7 @@ public class CCalificarDefensa extends CGeneral {
 		wdwCalificarDefensa.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelar")
@@ -281,6 +281,8 @@ public class CCalificarDefensa extends CGeneral {
 
 		rdoAprobado.setChecked(false);
 		rdoReprobado.setChecked(false);
+		cmbMencionTeg.setDisabled(true);
+		cmbMencionTeg.setValue("");
 		for (int i = 0; i < ltbitem.getItemCount(); i++) {
 
 			Listitem listItem = ltbitem.getItemAtIndex(i);
@@ -297,5 +299,36 @@ public class CCalificarDefensa extends CGeneral {
 		wdwCalificarDefensa.onClose();
 
 	}
+
+	/**
+	 * Metodo que permite habilitar el combo para seleccionar la mencion del
+	 * trabajo
+	 */
+	@Listen("onCheck  = #rdoAprobado")
+	public void habilitarMencion() {
+
+		cmbMencionTeg.setValue("");
+		cmbMencionTeg.setDisabled(false);
+		cmbMencionTeg.setStyle("margin-left:55px");
+
+	}
+	
+	
+	/**
+	 * Metodo que permite deshabilitar el combo para seleccionar la mencion del
+	 * trabajo
+	 */
+	@Listen("onCheck  = #rdoReprobado")
+	public void deshabilitarMencion() {
+
+		cmbMencionTeg.setValue("");
+		cmbMencionTeg.setStyle("margin-left:55px;color:black !important;");
+		cmbMencionTeg.setDisabled(true);
+		cmbMencionTeg.setValue("No aplica");
+
+	}
+
+	
+	
 
 }
