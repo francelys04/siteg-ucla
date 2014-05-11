@@ -1,5 +1,6 @@
 package controlador;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -68,6 +69,8 @@ public class CAtenderDefensa extends CGeneral {
 	private Textbox txtApellidoTutorProgramarDefensa;
 	@Wire
 	private Listbox ltbJuradoAtenderDefensa;
+	private static SimpleDateFormat formatoFecha = new SimpleDateFormat(
+			"dd-MM-yyyy");
 
 	/*
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
@@ -146,6 +149,12 @@ public class CAtenderDefensa extends CGeneral {
 	 */
 	@Listen("onClick = #btnAceptarDefensa")
 	public void aceptarDefensa() {
+
+		String fechaActual = String.valueOf(formatoFecha.format(new Date()));
+		String fechaDefensa = String.valueOf(formatoFecha
+				.format(dtbFechaDefensa.getValue()));
+
+
 		if (tmbHoraDefensa.getValue() == null
 				|| txtLugarDefensa.getText().compareTo("") == 0
 				|| dtbFechaDefensa.getValue() == null) {
@@ -154,41 +163,56 @@ public class CAtenderDefensa extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("¿Desea guardar los datos de la defensa?",
-					"Dialogo de confirmacion", Messagebox.OK
-							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener<Event>() {
-						public void onEvent(Event evt)
-								throws InterruptedException {
-							if (evt.getName().equals("onOK")) {
 
-								Teg teg = servicioTeg.buscarTeg(idTeg);
-								Date fecha = dtbFechaDefensa.getValue();
-								Date hora = tmbHoraDefensa.getValue();
-								String lugar = txtLugarDefensa.getValue();
-								Profesor profesor = ObtenerUsuarioProfesor();
+			if (dtbFechaAtenderDefensa.getValue().after(
+					dtbFechaDefensa.getValue())
+					|| fechaActual.equals(fechaDefensa)) {
 
-								String estatus = "Defensa Programada";
-								Defensa defensa = new Defensa(idDefensa, teg,
-										fecha, hora, lugar, estatus, profesor);
-								servicioDefensa.guardarDefensa(defensa);
-								String estatus1 = "Defensa Asignada";
-								Teg teg1 = servicioTeg.buscarTeg(idTeg);
-								java.util.Date fechaEstatus = new Date();
-								TegEstatus tegEstatus = new TegEstatus(0, teg1,
-										estatus1, fechaEstatus);
-								servicioTegEstatus.guardar(tegEstatus);
-								teg1.setEstatus(estatus1);
-								servicioTeg.guardar(teg1);
-								Messagebox
-										.show("Datos de la defensa guardados con exito",
-												"Informacion", Messagebox.OK,
-												Messagebox.INFORMATION);
-								salir();
+				Messagebox
+						.show("La fecha de defensa debe ser posterior a la fecha actual",
+								"Error", Messagebox.OK, Messagebox.ERROR);
+			} else {
 
+				Messagebox.show("¿Desea guardar los datos de la defensa?",
+						"Dialogo de confirmacion", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
+							public void onEvent(Event evt)
+									throws InterruptedException {
+								if (evt.getName().equals("onOK")) {
+
+									Teg teg = servicioTeg.buscarTeg(idTeg);
+									Date fecha = dtbFechaDefensa.getValue();
+									Date hora = tmbHoraDefensa.getValue();
+									String lugar = txtLugarDefensa.getValue();
+									Profesor profesor = ObtenerUsuarioProfesor();
+
+									String estatus = "Defensa Programada";
+									Defensa defensa = new Defensa(idDefensa,
+											teg, fecha, hora, lugar, estatus,
+											profesor);
+									servicioDefensa.guardarDefensa(defensa);
+									String estatus1 = "Defensa Asignada";
+									Teg teg1 = servicioTeg.buscarTeg(idTeg);
+									java.util.Date fechaEstatus = new Date();
+									TegEstatus tegEstatus = new TegEstatus(0,
+											teg1, estatus1, fechaEstatus);
+									servicioTegEstatus.guardar(tegEstatus);
+									teg1.setEstatus(estatus1);
+									servicioTeg.guardar(teg1);
+									Messagebox
+											.show("Datos de la defensa guardados con exito",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
+									salir();
+
+								}
 							}
-						}
-					});
+						});
+
+			}
+
 		}
 
 	}

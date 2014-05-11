@@ -96,7 +96,7 @@
 				style="margin-right:10px;font-weight:bold;color: rgb(0, 84, 122)">
 			</label>
 			<datebox id="dtbFechaAtenderDefensa" cols="12" width="130px"
-				style="margin-right:30px" format="short"
+				style="margin-right:30px;color:black !important;" format="short"
 				onCreate="self.value = new Date()" disabled="true">
 			</datebox>
 		</div>
@@ -172,9 +172,9 @@
 									style="font-weight:bold" />
 
 								<hbox>
-									<datebox id="dtbFechaDefensa" readonly="true"
-										tooltip="pupFecha" width="130px" format="short"
-										onCreate="self.value = new Date()" />
+									<datebox id="dtbFechaDefensa"
+										readonly="true" tooltip="pupFecha" width="130px"
+										format="short" onCreate="self.value = new Date()" />
 
 									<label value="Hora:"
 										style="font-weight:bold;margin-left:30px" />
