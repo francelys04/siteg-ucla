@@ -105,7 +105,8 @@ public class CLapso extends CGeneral {
 			Messagebox.show("Debe completar todos los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else if (dtbInicioLapso.getValue().after(dtbFinLapso.getValue())
-				|| ((dtbInicioLapso.getValue().equals(dtbFinLapso.getValue())))) {
+				|| (dtbInicioLapso.getValue().equals(dtbFinLapso.getValue()))) {
+
 			Messagebox
 					.show("La fecha de fin de lapso debe ser posterior a la fecha de inicio",
 							"Error", Messagebox.OK, Messagebox.ERROR);

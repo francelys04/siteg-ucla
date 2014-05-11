@@ -117,9 +117,6 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 				lapso = servicioLapso.buscarLapsoVigente();
 				requisitosDisponibles = (servicioProgramaRequisito
 						.buscarRequisitos(programa, lapso)).size();
-				System.out.println(requisitosDisponibles);
-				System.out.println("Pase por el map");
-				System.out.println(ltbRequisitosSeleccionadas.getItemCount());
 				map.clear();
 				map = null;
 			}
@@ -187,9 +184,6 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 								"Advertencia", Messagebox.OK,
 								Messagebox.EXCLAMATION);
 			} else {
-
-				System.out.println(requisitosDisponibles);
-				System.out.println(ltbRequisitosSeleccionadas.getItemCount());
 
 				if ((rdoCompleto.isChecked() == true)
 						&& (requisitosDisponibles != ltbRequisitosSeleccionadas
