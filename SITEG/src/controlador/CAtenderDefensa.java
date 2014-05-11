@@ -39,6 +39,7 @@ public class CAtenderDefensa extends CGeneral {
 	private static final long serialVersionUID = -4953804421310031410L;
 	private static String vistaRecibida;
 	private static long idTeg = 0;
+	private static Estudiante estudianteTeg;
 	long idDefensa = 0;
 	private static Programa programa;
 	@Wire
@@ -71,6 +72,9 @@ public class CAtenderDefensa extends CGeneral {
 	private Listbox ltbJuradoAtenderDefensa;
 	private static SimpleDateFormat formatoFecha = new SimpleDateFormat(
 			"dd-MM-yyyy");
+	private static SimpleDateFormat formatoHora = new SimpleDateFormat(
+			"hh:mm:ss a");
+
 
 	/*
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
@@ -154,7 +158,6 @@ public class CAtenderDefensa extends CGeneral {
 		String fechaDefensa = String.valueOf(formatoFecha
 				.format(dtbFechaDefensa.getValue()));
 
-
 		if (tmbHoraDefensa.getValue() == null
 				|| txtLugarDefensa.getText().compareTo("") == 0
 				|| dtbFechaDefensa.getValue() == null) {
@@ -187,6 +190,20 @@ public class CAtenderDefensa extends CGeneral {
 									String lugar = txtLugarDefensa.getValue();
 									Profesor profesor = ObtenerUsuarioProfesor();
 
+									for (int i = 0; i < ltbEstudiantesAtenderDefensa
+											.getItemCount(); i++) {
+										estudianteTeg = ltbEstudiantesAtenderDefensa
+												.getItems().get(i).getValue();
+										
+										enviarEmailNotificacion(estudianteTeg
+												.getCorreoElectronico(),
+												"La defensa de su Trabajo Especial de Grado fue programada para el: "
+														+formatoFecha.format(fecha) + " "
+														+"a las: " 
+														+formatoHora.format(hora) + " "
+														+"en la: " + lugar);
+									}
+
 									String estatus = "Defensa Programada";
 									Defensa defensa = new Defensa(idDefensa,
 											teg, fecha, hora, lugar, estatus,
@@ -210,7 +227,6 @@ public class CAtenderDefensa extends CGeneral {
 								}
 							}
 						});
-
 			}
 
 		}
