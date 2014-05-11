@@ -5,6 +5,7 @@ import interfazdao.ITegDAO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,11 @@ public class STeg {
 
 	}
 
+	public List<Teg> buscarTegNoCulminadosEstudiante(Estudiante estudiante){
+		List<Teg> tegsNoCulminados = interfaceTeg.findByEstatusOrEstatusAndEstudiantes(this.estatus[11], this.estatus[12], estudiante);
+		return tegsNoCulminados;
+	}
+	
 	public List<Teg> BuscarTegCalificandoDefensa() {
 
 		List<Teg> tegs;

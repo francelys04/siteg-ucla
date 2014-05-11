@@ -166,7 +166,7 @@ public class CEstudiante extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("¿Desea guardar datos del estudiante?",
+			Messagebox.show("ï¿½Desea guardar datos del estudiante?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -215,27 +215,36 @@ public class CEstudiante extends CGeneral {
 	/* Metodo que permite la eliminacion logica de una entidad Estudiante */
 	@Listen("onClick = #btnEliminarEstudiante")
 	public void eliminarEstudiante() {
-		Messagebox.show("¿Desea eliminar los datos del estudiante?",
-				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event evt) throws InterruptedException {
-						if (evt.getName().equals("onOK")) {
-							String cedula = txtCedulaEstudiante.getValue();
-							Estudiante estudiante = servicioEstudiante
-									.buscarEstudiante(cedula);
-							estudiante.setEstatus(false);
-							servicioEstudiante.guardar(estudiante);
-							cancelarEstudiante();
-							Messagebox.show(
-									"Estudiante eliminado exitosamente",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
-							btnEliminarEstudiante.setDisabled(false);
+		String cedula = txtCedulaEstudiante.getValue();
+		final Estudiante estudiante = servicioEstudiante
+				.buscarEstudiante(cedula);
+		List tegsNoCulminados = servicioTeg
+				.buscarTegNoCulminadosEstudiante(estudiante);
+		if (tegsNoCulminados.size() == 0) {
+			Messagebox.show("ï¿½Desea eliminar los datos del estudiante?",
+					"Dialogo de confirmacion", Messagebox.OK
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+								estudiante.setEstatus(false);
+								servicioEstudiante.guardar(estudiante);
+								cancelarEstudiante();
+								Messagebox.show(
+										"Estudiante eliminado exitosamente",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+								btnEliminarEstudiante.setDisabled(false);
+							}
 						}
-					}
-				});
-
+					});
+		} else {
+			Messagebox
+					.show("Este estudiante no puede ser eliminado no ha culminado el TEG",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
+		}
 	}
 
 	/*
