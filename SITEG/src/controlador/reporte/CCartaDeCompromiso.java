@@ -37,22 +37,34 @@ public class CCartaDeCompromiso extends CGeneral {
 	private Window wdwCarta;
 	@Wire
 	private Jasperreport jstVistaPrevia;
+	private static Estudiante estudiante;
 
 	@Override
 	public void inicializar(Component comp) {
 
-		Estudiante estudiante = ObtenerUsuarioEstudiante();
-		SolicitudTutoria solicitud = servicioSolicitudTutoria
-				.ultimaSolicitud(estudiante);
+		estudiante = ObtenerUsuarioEstudiante();
 
-		if (!solicitud.getEstatus().equals("Aceptada")) {
+		if (estudiante != null) {
 
-			Messagebox
-					.show("Para generar la carta de compromiso su solicitud de tutoria debe ser aceptada",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+			SolicitudTutoria solicitud = servicioSolicitudTutoria
+					.ultimaSolicitud(estudiante);
+
+			if (!solicitud.getEstatus().equals("Aceptada")) {
+
+				Messagebox
+						.show("Para generar la carta de compromiso su solicitud de tutoria debe ser aceptada",
+								"Advertencia", Messagebox.OK,
+								Messagebox.EXCLAMATION);
+				wdwCarta.onClose();
+
+			}
+
+		} else {
+
+			Messagebox.show(
+					"No tiene permisos para generar la carta de compromiso",
+					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 			wdwCarta.onClose();
-
 		}
 
 	}
@@ -65,16 +77,18 @@ public class CCartaDeCompromiso extends CGeneral {
 			SolicitudTutoria solicitud = servicioSolicitudTutoria
 					.buscarSolicitudAceptadaEstudiante(estudiante);
 
-			String nombreTutor = solicitud.getProfesor().getNombre() + " " + solicitud.getProfesor().getApellido();
+			String nombreTutor = solicitud.getProfesor().getNombre() + " "
+					+ solicitud.getProfesor().getApellido();
 			String cedulaProfesor = solicitud.getProfesor().getCedula();
 			String tituloTeg = solicitud.getDescripcion();
 			String cedulaEstudiante = estudiante.getCedula();
-			String nombreEstudiante = estudiante.getNombre() + " " + estudiante.getApellido();
-			
+			String nombreEstudiante = estudiante.getNombre() + " "
+					+ estudiante.getApellido();
+
 			List<Solicitud> elementos = new ArrayList<Solicitud>();
-			elementos.add(new Solicitud(tituloTeg,cedulaProfesor,
-					nombreTutor, cedulaEstudiante,nombreEstudiante));
-						
+			elementos.add(new Solicitud(tituloTeg, cedulaProfesor, nombreTutor,
+					cedulaEstudiante, nombreEstudiante));
+
 			Map<String, Object> mapa = new HashMap<String, Object>();
 
 			// Metodo utilizado para los que de error el preview
