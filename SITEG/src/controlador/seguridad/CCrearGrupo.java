@@ -38,7 +38,7 @@ import org.zkoss.zul.Window;
 import controlador.CGeneral;
 import controlador.catalogo.CCatalogoGrupo;
 
-/*
+/**
  * Controlador que permite crear un nuevo grupo, a su vez se asocian a este un
  * subconjunto de las funcionalidades del sistema
  */
@@ -66,7 +66,7 @@ public class CCrearGrupo extends CGeneral {
 	@Wire
 	private Window wdwCrearGrupo;
 
-	/*
+	/**
 	 * Metodo heredado del controlador CGeneral, se hace el llamado al metodo
 	 * que crea el arbol de las funcionalidades del sistema
 	 */
@@ -97,7 +97,7 @@ public class CCrearGrupo extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite retornar el modelo del arbol
 	 */
 	public TreeModel getModel() {
@@ -108,7 +108,7 @@ public class CCrearGrupo extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite crear el arbol-menu del sistema, en el cual cada
 	 * funcionalidad esta representada por un nodo hoja de este
 	 */
@@ -182,7 +182,7 @@ public class CCrearGrupo extends CGeneral {
 		return root;
 	}
 
-	/*
+	/**
 	 * Metodo que permite verificar que solo sean seleccionados los nodos hoja,
 	 * para evitar añadir funcionalidades erroneas
 	 */
@@ -219,7 +219,7 @@ public class CCrearGrupo extends CGeneral {
 		return encontrado;
 	}
 
-	/*
+	/**
 	 * Metodo que permite mostrar un resumen de las funcionalidades que han sido
 	 * seleccionadas para el grupo
 	 */
@@ -248,7 +248,7 @@ public class CCrearGrupo extends CGeneral {
 				funcionalidades));
 	}
 
-	/*
+	/**
 	 * Metodo que permite que al seleccionar un nodo hoja del arbol, se marquen
 	 * con el check su respectivos antecesores. Se verifica que si existe un
 	 * nodo hermano marcado los antecesores no son desmarcados
@@ -364,7 +364,7 @@ public class CCrearGrupo extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que se encarga de guardar el grupo, asi como tambien todas las
 	 * funcionalidades que fueron asociadas a este
 	 */
@@ -423,7 +423,7 @@ public class CCrearGrupo extends CGeneral {
 				});
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 * limpieza del arbol de las funcionalidades
 	 */
@@ -464,7 +464,7 @@ public class CCrearGrupo extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite visualizar las funcionalidades asociadas a un
 	 * determinado grupo. Este boton aparece una vez que se ha buscado un grupo
 	 * desde el catalogo
@@ -503,7 +503,7 @@ public class CCrearGrupo extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad Grupo */
+	/** Metodo que permite la eliminacion logica de una entidad Grupo */
 	@Listen("onClick = #btnEliminarGrupo")
 	public void eliminarGrupo() {
 		Grupo grupo = servicioGrupo.buscarGrupo(id);
@@ -511,19 +511,16 @@ public class CCrearGrupo extends CGeneral {
 		servicioGrupo.guardarGrupo(grupo);
 		cancelarGrupo();
 	}
-	
-	
-	/* Metodo que permite cerrar la vista crear grupo*/
+
+	/** Metodo que permite cerrar la vista crear grupo */
 	@Listen("onClick = #btnSalirCrearGrupo")
 	public void salirGrupo() {
-		
+
 		wdwCrearGrupo.onClose();
-	
+
 	}
 
-	
-
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
