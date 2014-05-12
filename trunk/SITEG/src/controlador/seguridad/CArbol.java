@@ -18,6 +18,7 @@ import modelo.seguridad.Usuario;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
@@ -31,11 +32,12 @@ import org.zkoss.zul.TreeModel;
 
 import controlador.CGeneral;
 
-/*
+/**
  * Controlador que permite crear dinamicamente un arbol desde la base de
  * datos, la profundidad y cantidad de nodos de dicho arbol se basa segun
  * los permisos que tiene el grupo del usuario que se encuentra en sesion
  */
+@Controller
 public class CArbol extends CGeneral {
 
 	private static final long serialVersionUID = -4579514009690299069L;
@@ -49,7 +51,7 @@ public class CArbol extends CGeneral {
 	@Wire
 	private Image imagenes;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral que permite inicializar los
 	 * componentes de la vista, asi como tambien permite la creacion del
 	 * arbol-menu del sistema.
@@ -90,7 +92,7 @@ public class CArbol extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite retornar el modelo del arbol
 	 */
 	public TreeModel getModel() {
@@ -100,7 +102,7 @@ public class CArbol extends CGeneral {
 		return _model;
 	}
 
-	/*
+	/**
 	 * Metodo que se encarga de la creacion de los nodos del arbol, basandose en
 	 * los permisos otorgados a los grupos del usuario que se encuentra en
 	 * sesion
@@ -197,7 +199,7 @@ public class CArbol extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mostrar la ventana asociada al nombre del nodo del
 	 * arbol
 	 */

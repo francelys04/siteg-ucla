@@ -46,6 +46,10 @@ import controlador.catalogo.CCatalogoEstudiante;
 import controlador.catalogo.CCatalogoProfesor;
 import controlador.catalogo.CCatalogoUsuario;
 
+/**
+ * Controlador que permite realizar las operaciones basicas (CRUD) sobre la
+ * entidad Usuario
+ */
 @Controller
 public class CUsuario extends CGeneral {
 
@@ -103,6 +107,11 @@ public class CUsuario extends CGeneral {
 	@Wire
 	private Window wdwCrearUsuario;
 
+	/**
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos correspondientes de
+	 * la vista, asi como los objetos empleados dentro de este controlador.
+	 */
 	public void inicializar(Component comp) {
 
 		gruposDisponibles = servicioGrupo.buscarActivos();
@@ -210,6 +219,10 @@ public class CUsuario extends CGeneral {
 				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 	}
 
+	/**
+	 * Metodo que permite verificar si el usuario slecciono la opcion de otro
+	 * para habilitar o deshabilitar ciertos campos en la vista
+	 */
 	@Listen("onClick = #rdoOtro,#rdoEstudiante,#rdoProfesor")
 	public void seleccionarOtro() {
 
@@ -231,6 +244,7 @@ public class CUsuario extends CGeneral {
 
 	}
 
+	/** Metodo que permite el guardado o modificacion de un usuario */
 	@Listen("onClick = #btnGuardarUsuario")
 	public void guardarUsuario() throws IOException {
 		if (txtCorreo.getText().compareTo("") == 0
@@ -335,6 +349,9 @@ public class CUsuario extends CGeneral {
 
 	}
 
+	/**
+	 * Metodo que permite limpiar los campos de la vista
+	 */
 	@Listen("onClick = #btnCancelarUsuario")
 	public void cancelarUsuario() throws IOException {
 		gruposDisponibles = servicioGrupo.buscarActivos();
@@ -385,6 +402,10 @@ public class CUsuario extends CGeneral {
 
 	}
 
+	/**
+	 * Metodo que permite cerrar la ventana correspondiente a la configuracion
+	 * del usuario
+	 */
 	@Listen("onClick = #btnSalirUsuario")
 	public void salirUsuario() throws IOException {
 
@@ -392,6 +413,7 @@ public class CUsuario extends CGeneral {
 		wdwCrearUsuario.onClose();
 	}
 
+	/** Metodo que permite la eliminacion logica de una entidad Usuario */
 	@Listen("onClick = #btnEliminarUsuario")
 	public void eliminarUsuario() throws IOException {
 
@@ -421,16 +443,10 @@ public class CUsuario extends CGeneral {
 
 	}
 
-	/*
-	 * private int confirmacion(ArrayList<Boolean> valor2) { // TODO
-	 * Auto-generated method stub for(int w=0; w<valor2.size();w++){
-	 * if(valor2.get(w).equals(false)){ //return
-	 * Messagebox.show("Correo electronico no enviado", "Error", Messagebox.OK,
-	 * Messagebox.ERROR); } } //return
-	 * Messagebox.show("Correo electronico enviado","Informacion",
-	 * Messagebox.OK,Messagebox.INFORMATION); }
+	/**
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
-
 	@Listen("onClick = #btnCatalogoUsuario")
 	public void buscarUsuario() {
 
@@ -456,6 +472,10 @@ public class CUsuario extends CGeneral {
 		}
 	}
 
+	/**
+	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
+	 * del catalogo el nombre de la vista a la que deben regresar los valores
+	 */
 	@Listen("onClick = #btnCatalogoProfesorEstudiante")
 	public void buscarProfesorEstudiante() {
 
@@ -499,6 +519,10 @@ public class CUsuario extends CGeneral {
 		}
 	}
 
+	/**
+	 * Metodo que permite agregar los grupos que le seran asignados al usuario
+	 */
+
 	@Listen("onClick = #pasar1")
 	public void moverDerecha() {
 		gruposDisponibles = servicioGrupo.buscarActivos();
@@ -530,6 +554,10 @@ public class CUsuario extends CGeneral {
 		ltbGruposAgregados.setMultiple(true);
 		ltbGruposAgregados.setCheckmark(true);
 	}
+
+	/**
+	 * Metodo que permite remover los grupos que se le asignaron al usuario
+	 */
 
 	@Listen("onClick = #pasar2")
 	public void moverIzquierda() {
@@ -567,6 +595,9 @@ public class CUsuario extends CGeneral {
 
 	}
 
+	/**
+	 * Metodo que permite obtener la imagen del usuario subida al sistema
+	 */
 	@Listen("onUpload = #fudImagenUsuario")
 	public void processMedia(UploadEvent event) {
 		media = event.getMedia();
@@ -574,6 +605,11 @@ public class CUsuario extends CGeneral {
 
 	}
 
+	/**
+	 * Metodo que permite buscar los grupos que tiene asignados el suario y los
+	 * que no para cargar las listas de grupos seleccionados y grupos
+	 * disponibles
+	 */
 	public void llenarGrupos(Usuario usuario) {
 		gruposDisponibles = servicioGrupo.buscarActivos();
 		gruposSeleccionados = servicioGrupo.buscarGruposDelUsuario(usuario);

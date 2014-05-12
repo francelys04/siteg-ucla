@@ -19,7 +19,7 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
-/*
+/**
  * Controlador que permite reiniciar la constraseña de acceso al sistema a
  * cierto usuario
  */
@@ -43,7 +43,7 @@ public class CReinicioClave extends CGeneral {
 	@Wire
 	private Checkbox cbxClave;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral que inicializa los componentes
 	 * de la vista
 	 */
@@ -52,7 +52,7 @@ public class CReinicioClave extends CGeneral {
 		// TODO Auto-generated method stub
 	}
 
-	/*
+	/**
 	 * Metodo que genera una clave alfanumerica de manera aleatoria y sustituye
 	 * la contraseña actual del usuario por dicha clave, ademas se envia dicha
 	 * clave al correo del usuario
@@ -76,9 +76,12 @@ public class CReinicioClave extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite confirmar que se logro enviar efectivamente el correo
 	 * electronico
+	 * 
+	 * @param valor2
+	 *            arreglo de valores booleanos
 	 */
 	private int confirmacion(ArrayList<Boolean> valor2) {
 		// TODO Auto-generated method stub
@@ -92,7 +95,7 @@ public class CReinicioClave extends CGeneral {
 				Messagebox.OK, Messagebox.INFORMATION);
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista
 	 */
 	@Listen("onClick = #btnCancelarCorreo")
@@ -100,18 +103,15 @@ public class CReinicioClave extends CGeneral {
 		txtNombreUsuario.setValue("");
 		txtCorreoUsuario.setValue("");
 	}
-	
-	/*
+
+	/**
 	 * Metodo que permite cerrar la vista
 	 */
 	@Listen("onClick = #btnSalirReninicioClave")
 	public void salirReinicioClave() {
-		
+
 		wdwReinicioClave.onClose();
-	
+
 	}
-	
-	
-	
 
 }
