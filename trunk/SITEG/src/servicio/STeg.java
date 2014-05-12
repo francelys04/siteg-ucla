@@ -722,4 +722,9 @@ public class STeg {
 						fechaFin);
 	}
 
+	public List<Teg> buscarTegNoCulminadosProfesor(Profesor profesor) {
+		List<Teg> tegsNoCulminados = interfaceTeg.findByEstatusOrEstatusAndTutor(this.estatus[11], this.estatus[12], profesor);
+		return tegsNoCulminados;
+	}
+
 }
