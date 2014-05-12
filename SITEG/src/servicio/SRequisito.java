@@ -32,7 +32,7 @@ public class SRequisito {
 	
 	public Requisito buscarPorNombreRequisito(String nombre) {
 		Requisito requisito;
-		requisito = interfaceRequisito.findByNombre(nombre);
+		requisito = interfaceRequisito.findByNombreAllIgnoreCase(nombre);
 		return requisito;
 	}
 	

@@ -48,7 +48,7 @@ public class SLapso {
 	
 	public Lapso buscarPorNombreLapso(String nombre) {
 		Lapso lapso;
-		lapso = interfaceLapso.findByNombre(nombre);
+		lapso = interfaceLapso.findByNombreAllIgnoreCase(nombre);
 		return lapso;
 	}
 

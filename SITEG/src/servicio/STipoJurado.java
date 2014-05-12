@@ -32,7 +32,7 @@ public class STipoJurado {
 	public TipoJurado buscarPorNombre(String tipojurado) {
 		// TODO Auto-generated method stub
 		TipoJurado tipo;
-		tipo = interfaceTipoJurado.findByNombre(tipojurado);
+		tipo = interfaceTipoJurado.findByNombreAllIgnoreCase(tipojurado);
 		return tipo;
 	}
 
