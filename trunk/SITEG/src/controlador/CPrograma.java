@@ -31,12 +31,13 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-
 import controlador.catalogo.CCatalogoProfesor;
 import controlador.catalogo.CCatalogoPrograma;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
- * sobre la entidad Programa*/
+/**
+ * Controlador que permite realizar las operaciones basicas (CRUD) sobre la
+ * entidad Programa
+ */
 @Controller
 public class CPrograma extends CGeneral {
 
@@ -72,7 +73,7 @@ public class CPrograma extends CGeneral {
 
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -123,11 +124,11 @@ public class CPrograma extends CGeneral {
 		}
 
 		txtCorreoPrograma
-		.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un correo como: ejemplo@ejemplo.com");
-		
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un correo como: ejemplo@ejemplo.com");
+
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -140,7 +141,7 @@ public class CPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo de profesores que no son directores
 	 * de programa se envia al metodo del catalogo el nombre de la vista a la
 	 * que deben regresar los valores, asi como los valores q se encuentran en
@@ -163,18 +164,17 @@ public class CPrograma extends CGeneral {
 			map.put("descripcionPrograma", txtDescripcionPrograma.getValue());
 		if ((txtCorreoPrograma.getText().compareTo("") != 0))
 			map.put("correoPrograma", txtCorreoPrograma.getValue());
-		
 
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Window window = (Window) Executions.createComponents(
 				"/vistas/catalogos/VCatalogoDirectorPrograma.zul", null, null);
 		window.doModal();
 		txtCorreoPrograma
-		.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
+				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 		catalogoProfesor.recibir("maestros/VPrograma");
 	}
 
-	/*
+	/**
 	 * Metodo que permite el guardado o modificacion de una entidad Programa,
 	 * asi como la asignacion, de ser necesario, de las condiciones vigentes a
 	 * dicho programa
@@ -294,7 +294,7 @@ public class CPrograma extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad Programa */
+	/** Metodo que permite la eliminacion logica de una entidad Programa */
 	@Listen("onClick = #btnEliminarPrograma")
 	public void eliminarPrograma() {
 		Messagebox.show("¿Desea eliminar los datos del programa?",
@@ -316,7 +316,7 @@ public class CPrograma extends CGeneral {
 				});
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 * variable global id
 	 */
@@ -333,13 +333,13 @@ public class CPrograma extends CGeneral {
 				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un texto como: ejemplo@ejemplo.com");
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente a los programas */
+	/** Metodo que permite cerrar la ventana correspondiente a los programas */
 	@Listen("onClick = #btnSalirPrograma")
 	public void salirPrograma() {
 		wdwPrograma.onClose();
 	}
-	
-	/*
+
+	/**
 	 * Metodo que permite buscar si un programa existe, de acuerdo al nombre del
 	 * programa
 	 */
@@ -363,5 +363,5 @@ public class CPrograma extends CGeneral {
 		}
 
 	}
-	
+
 }

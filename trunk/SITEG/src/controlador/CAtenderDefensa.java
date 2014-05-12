@@ -31,8 +31,10 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Window;
 
-/*Controlador que permite atender las solicitudes de defensa
- * asignadole un lugar una fecha y una hora*/
+/**
+ * Controlador que permite atender las solicitudes de defensa asignadole un
+ * lugar una fecha y una hora
+ */
 @Controller
 public class CAtenderDefensa extends CGeneral {
 
@@ -75,8 +77,7 @@ public class CAtenderDefensa extends CGeneral {
 	private static SimpleDateFormat formatoHora = new SimpleDateFormat(
 			"hh:mm:ss a");
 
-
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -125,18 +126,25 @@ public class CAtenderDefensa extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite llenar la lista de los estudiantes pertenecientes al
 	 * teg
+	 * 
+	 * @param teg
+	 *            trabajo especial de grado seleccionado para realizar la
+	 *            programacion de la defensa
 	 */
 	public void llenarListas(Teg teg) {
 		List<Estudiante> estudiantesTeg = servicioEstudiante
@@ -145,7 +153,7 @@ public class CAtenderDefensa extends CGeneral {
 				estudiantesTeg));
 	}
 
-	/*
+	/**
 	 * Metodo que permite aceptar la solicitud de defensa, cambiando el estatus
 	 * del teg. Ademas se logra guardar en la respectiva tabla de historial de
 	 * cambios de estatus y se almacena en la base de datos la defensa referente
@@ -194,14 +202,19 @@ public class CAtenderDefensa extends CGeneral {
 											.getItemCount(); i++) {
 										estudianteTeg = ltbEstudiantesAtenderDefensa
 												.getItems().get(i).getValue();
-										
-										enviarEmailNotificacion(estudianteTeg
-												.getCorreoElectronico(),
+
+										enviarEmailNotificacion(
+												estudianteTeg
+														.getCorreoElectronico(),
 												"La defensa de su Trabajo Especial de Grado fue programada para el: "
-														+formatoFecha.format(fecha) + " "
-														+"a las: " 
-														+formatoHora.format(hora) + " "
-														+"en la: " + lugar);
+														+ formatoFecha
+																.format(fecha)
+														+ " "
+														+ "a las: "
+														+ formatoHora
+																.format(hora)
+														+ " " + "en la: "
+														+ lugar);
 									}
 
 									String estatus = "Defensa Programada";
@@ -233,7 +246,7 @@ public class CAtenderDefensa extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarDefensa")
@@ -244,7 +257,7 @@ public class CAtenderDefensa extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana, actualizando los cambios realizados
 	 * en el resto del sistema
 	 */
@@ -257,7 +270,7 @@ public class CAtenderDefensa extends CGeneral {
 		wdwAtenderDefensa.onClose();
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirDefensa")
 	public void SalirDefensa() {
 

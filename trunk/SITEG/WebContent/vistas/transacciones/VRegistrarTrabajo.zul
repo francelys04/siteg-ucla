@@ -262,10 +262,10 @@
 										</hlayout>
 
 										<textbox
-											id="txtDuracionRegistrarTeg" width="20px"
+											id="txtDuracionRegistrarTeg" width="50px"
 											style="color:black !important;" disabled="true"/>
 										<label value="En días"
-											style="font-weight:bold;margin-left:10px" />
+											style="font-weight:bold;margin-left:20px" />
 
 									</hbox>
 								</hbox>

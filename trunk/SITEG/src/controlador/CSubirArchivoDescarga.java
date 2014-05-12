@@ -27,9 +27,9 @@ import org.zkoss.zul.Window;
 import controlador.catalogo.CCatalogoArchivoDescarga;
 import controlador.catalogo.CCatalogoItem;
 
-/*
- * Controlador que permite subir un archivo para ser mostrado en la seccion
- * de descargas
+/**
+ * Controlador que permite subir un archivo para ser mostrado en la seccion de
+ * descargas
  */
 @Controller
 public class CSubirArchivoDescarga extends CGeneral {
@@ -41,7 +41,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 	private byte[] contenido;
 	private String tipo;
 	private Long tamano;
-	
+
 	private static long idAux;
 	@Wire
 	private Textbox txtNombreArchivoDescarga;
@@ -60,7 +60,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 	@Wire
 	private Window wdwSubirArchivoDescarga;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -98,9 +98,12 @@ public class CSubirArchivoDescarga extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite validar que el documento posee una extension adecuada
 	 * asi como tambien permite subirlo a la vista
+	 * 
+	 * @param event
+	 *            archivo subido al sistema por el usuario
 	 */
 	@Listen("onUpload = #btnArchivoDescarga")
 	public void subirArchivo(UploadEvent event) {
@@ -139,7 +142,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
 	 */
 	@Listen("onClick = #btnCancelarArchivoDescarga")
@@ -154,7 +157,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 
 	}
 
-	/* Metodo que permite guardar un archivo para luego ser descargado */
+	/** Metodo que permite guardar un archivo para luego ser descargado */
 	@Listen("onClick = #btnGuardarArchivoDescarga")
 	public void guardarDescarga() {
 		if (archivo == null
@@ -177,7 +180,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 								long idPrograma1 = Long.parseLong(idPrograma);
 								Programa programa = servicioPrograma
 										.buscarPorId(idPrograma1);
-						
+
 								archivo.setId(id);
 								archivo.setPrograma(programa);
 								archivo.setNombre(nombreDoc);
@@ -202,7 +205,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite eliminar de manera logica un archivo */
+	/** Metodo que permite eliminar de manera logica un archivo */
 	@Listen("onClick = #btnEliminarArchivoDescarga")
 	public void eliminarArchivo() {
 		Messagebox.show("¿Desea eliminar los datos del archivo?",
@@ -211,12 +214,11 @@ public class CSubirArchivoDescarga extends CGeneral {
 				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-							
+
 							System.out.print(id);
 							System.out.print("eliminar");
-							
-							Archivo archivo = servicioArchivo
-									.buscarArchivo(id);
+
+							Archivo archivo = servicioArchivo.buscarArchivo(id);
 							archivo.setEstatus(false);
 							servicioArchivo.guardar(archivo);
 							cancelar();
@@ -230,7 +232,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 				});
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -244,7 +246,7 @@ public class CSubirArchivoDescarga extends CGeneral {
 		CCatalogoItem catalogo = new CCatalogoItem();
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana correspondiente a la subida de
 	 * archivos
 	 */

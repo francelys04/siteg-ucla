@@ -29,8 +29,10 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
- * sobre la entidad Noticia*/
+/**
+ * Controlador que permite realizar las operaciones basicas (CRUD) sobre la
+ * entidad Noticia
+ */
 @Controller
 public class CNoticia extends CGeneral {
 
@@ -61,7 +63,7 @@ public class CNoticia extends CGeneral {
 	private long id = 0;
 	private static boolean noticiaCatalogo;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -102,7 +104,7 @@ public class CNoticia extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -114,7 +116,7 @@ public class CNoticia extends CGeneral {
 		window.doModal();
 	}
 
-	/* Metodo que permite el guardado o modificacion de una entidad Noticia */
+	/** Metodo que permite el guardado o modificacion de una entidad Noticia */
 	@Listen("onClick = #btnGuardarNoticia")
 	public void guardarNoticia() {
 		List<Noticia> noticia = servicioNoticia.buscarActivos();
@@ -173,25 +175,7 @@ public class CNoticia extends CGeneral {
 
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad Noticia */
 	/**
-	 * @Listen("onClick = #btnEliminarNoticia") public void eliminarNoticia() {
-	 *                  Messagebox
-	 *                  .show("¿Desea eliminar los datos de la noticia?",
-	 *                  "Dialogo de confirmacion", Messagebox.OK |
-	 *                  Messagebox.CANCEL, Messagebox.QUESTION, new
-	 *                  org.zkoss.zk.ui.event.EventListener<Event>() { public
-	 *                  void onEvent(Event evt) throws InterruptedException { if
-	 *                  (evt.getName().equals("onOK")) { Noticia noticia =
-	 *                  servicioNoticia.buscarNoticia(id);
-	 *                  noticia.setEstatus(false);
-	 *                  servicioNoticia.guardar(noticia); cancelarNoticia();
-	 *                  Messagebox.show( "Noticia eliminada satisfactoriamente",
-	 *                  "Informacion", Messagebox.OK, Messagebox.INFORMATION); }
-	 *                  } }); }
-	 */
-
-	/*
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 * variable global id
 	 */
@@ -205,8 +189,11 @@ public class CNoticia extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite subir una imagen al formulario
+	 * 
+	 * @param event
+	 *            imagen de la noticia subida al sistema por el usuario
 	 */
 	@Listen("onUpload = #fudImagenNoticia")
 	public void processMedia(UploadEvent event) {
@@ -215,7 +202,7 @@ public class CNoticia extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente a las noticias */
+	/** Metodo que permite cerrar la ventana correspondiente a las noticias */
 	@Listen("onClick = #btnSalirNoticia")
 	public void salirNoticia() {
 

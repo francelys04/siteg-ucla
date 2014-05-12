@@ -37,7 +37,7 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoProfesorTematica;
 
-/*
+/**
  * Controlador que permite enviar una solicitud de tutoria a determinado
  * profesor, esta debe realizarla un estudiante previamente registrado
  * dentro del sistema SITEG
@@ -106,7 +106,7 @@ public class CSolicitarTutor extends CGeneral {
 
 	List<Estudiante> gridEstudiante = new ArrayList<Estudiante>();
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -162,14 +162,14 @@ public class CSolicitarTutor extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	public void limpiarDatosEstudiante() {
 		txtCedulaEstudiante.setValue("");
 	}
 
-	/*
+	/**
 	 * Metodo que permite llenar el combo de areas asociadas al programa de los
 	 * estudiantes de la solicitud; este combo se puede llenar luego de que al
 	 * menos un estudiante es agregado a la solicitud
@@ -183,7 +183,7 @@ public class CSolicitarTutor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite llenar el combo de tematicas luego de que se
 	 * selecciona un area
 	 */
@@ -199,7 +199,7 @@ public class CSolicitarTutor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el id de la tematica seleccionada en el combo
 	 * respectivo
 	 */
@@ -209,7 +209,7 @@ public class CSolicitarTutor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mostrar el catalogo de profesores asociados a la
 	 * tematica expuesta en la solicitud
 	 */
@@ -237,7 +237,7 @@ public class CSolicitarTutor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite enviar una solicitud de tutoria a determinado
 	 * profesor, donde se hace el llamado a varios metodos dentro de este
 	 * controlador
@@ -325,7 +325,7 @@ public class CSolicitarTutor extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarSolicitudTutoria")
@@ -352,7 +352,7 @@ public class CSolicitarTutor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite añadir un estudiante a la solicitud, se puede añadir
 	 * mas de un estudiante segun la cantidad de estudiantes que pueden realizar
 	 * un mismo teg configurada en el programa correspondiente al estudiante
@@ -454,7 +454,7 @@ public class CSolicitarTutor extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que envia un correo electronico al profesor de la solicitud de
 	 * tutoria para informarle que posee una nueva solicitud, asi como su
 	 * usuario y contrasenia
@@ -476,7 +476,7 @@ public class CSolicitarTutor extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirSolicitudTutoria")
 	public void salirSolicitudTutoria() {
 		cancelarSolicitud();

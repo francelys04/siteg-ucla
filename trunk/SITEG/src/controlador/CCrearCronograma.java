@@ -23,7 +23,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Window;
 
-/*
+/**
  * Controlador que le permite al director de programa configurar las
  * actividades, es decir, crear el cronograma por el cual se regira dicho
  * programa para un determinado lapso academico
@@ -48,7 +48,7 @@ public class CCrearCronograma extends CGeneral {
 	@Wire
 	private Window wdwCrearCronograma;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -73,7 +73,7 @@ public class CCrearCronograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover una o varias actividades hacia la lista de
 	 * actividades del cronograma.
 	 */
@@ -129,7 +129,7 @@ public class CCrearCronograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover una o varias actividades asignadas al cronograma
 	 * a la lista de la izquierda (actividades disponibles).
 	 */
@@ -180,7 +180,7 @@ public class CCrearCronograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarCronograma")
@@ -194,7 +194,7 @@ public class CCrearCronograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la vista de crear cronograma
 	 */
 	@Listen("onClick = #btnSalirCronograma")
@@ -204,7 +204,7 @@ public class CCrearCronograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite guardar las actividades seleccionadas para el programa
 	 * en determinado lapso, creando asi el cronograma para el programa
 	 */
@@ -289,7 +289,7 @@ public class CCrearCronograma extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar dinamicamente las actividades establecidas para
 	 * cierto lapso que se seleccione
 	 */
@@ -302,7 +302,7 @@ public class CCrearCronograma extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar dinamicamente las actividades establecidas para
 	 * cierto programa que se seleccione
 	 */
@@ -316,7 +316,7 @@ public class CCrearCronograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar las actividades para cierto lapso, y cierto
 	 * programa, para asi llenar las listas respectivas de la vista
 	 */

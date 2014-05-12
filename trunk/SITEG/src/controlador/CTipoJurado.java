@@ -21,8 +21,10 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoTipoJurado;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
- * sobre la entidad TipoJurado*/
+/**
+ * Controlador que permite realizar las operaciones basicas (CRUD) sobre la
+ * entidad TipoJurado
+ */
 @Controller
 public class CTipoJurado extends CGeneral {
 
@@ -46,7 +48,7 @@ public class CTipoJurado extends CGeneral {
 	private Window wdwTipoJurado;
 	private long id = 0;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -73,7 +75,7 @@ public class CTipoJurado extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -87,7 +89,7 @@ public class CTipoJurado extends CGeneral {
 
 	}
 
-	/* Metodo que permite el guardado o modificacion de una entidad TipoJurado */
+	/** Metodo que permite el guardado o modificacion de una entidad TipoJurado */
 	@Listen("onClick = #btnGuardarTipoJurado")
 	public void guardarTipoJurado() {
 
@@ -127,13 +129,14 @@ public class CTipoJurado extends CGeneral {
 
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad TipoJurado */
+	/** Metodo que permite la eliminacion logica de una entidad TipoJurado */
 	@Listen("onClick = #btnEliminarTipoJurado")
 	public void eliminarTipoJurado() {
 
 		Messagebox.show("¿Desea eliminar los datos del tipo de jurado?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener<Event>() {
+				Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
 							TipoJurado tipoJurado = servicioTipoJurado
@@ -151,7 +154,7 @@ public class CTipoJurado extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 * variable global id
 	 */
@@ -163,7 +166,7 @@ public class CTipoJurado extends CGeneral {
 		btnEliminarTipoJurado.setDisabled(true);
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana correspondiente a los tipos de
 	 * jurado
 	 */
@@ -171,26 +174,24 @@ public class CTipoJurado extends CGeneral {
 	public void salirTipoJurado() {
 		wdwTipoJurado.onClose();
 	}
-	
-	
-	
-	/*
-	 * Metodo que permite buscar si un tipo de jurado existe, de acuerdo al nombre del
-	 * tipo de jurado
+
+	/**
+	 * Metodo que permite buscar si un tipo de jurado existe, de acuerdo al
+	 * nombre del tipo de jurado
 	 */
 	@Listen("onChange = #txtNombreTipoJurado")
 	public void buscarNombreTipoJurado() {
-		TipoJurado tipoJurado = servicioTipoJurado.buscarPorNombre(txtNombreTipoJurado.getValue());
+		TipoJurado tipoJurado = servicioTipoJurado
+				.buscarPorNombre(txtNombreTipoJurado.getValue());
 		if (tipoJurado != null) {
 
 			txtNombreTipoJurado.setValue(tipoJurado.getNombre());
 			txtDescripcionTipoJurado.setValue(tipoJurado.getDescripcion());
 			id = tipoJurado.getId();
 			btnEliminarTipoJurado.setDisabled(false);
-				
+
 		}
 
 	}
-	
 
 }

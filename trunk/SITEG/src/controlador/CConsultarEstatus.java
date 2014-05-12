@@ -13,9 +13,9 @@ import org.zkoss.zul.Image;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
- * Controlador que permite verificar el estatus en que se encuentra la
- * solicitud de tutoria, proyectro o TEG de cierto estudiante
+/**
+ * Controlador que permite verificar el estatus en que se encuentra la solicitud
+ * de tutoria, proyectro o TEG de cierto estudiante
  */
 public class CConsultarEstatus extends CGeneral {
 
@@ -93,7 +93,7 @@ public class CConsultarEstatus extends CGeneral {
 	@Wire
 	private Image imgTrabajoEspecialVisible;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -625,10 +625,8 @@ public class CConsultarEstatus extends CGeneral {
 												.setVisible(true);
 										imgSolicitandoDefensa.setVisible(true);
 										imgJuradoAsignado.setVisible(true);
-										imgDefensaAsignada
-												.setVisible(true);
-										imgTrabajoEspecial
-												.setVisible(true);
+										imgDefensaAsignada.setVisible(true);
+										imgTrabajoEspecial.setVisible(true);
 
 									}
 								}
@@ -646,9 +644,13 @@ public class CConsultarEstatus extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener la cedula del estudiante que desea consultar
 	 * el estatus y ademas permite abrir la vista
+	 * 
+	 * @param cedula
+	 *            cedula del estudiante que desea consultar el estatus del
+	 *            trabajo especial de grado
 	 */
 	public void recibirCedula(String cedula) {
 		cedulaRecibida = cedula;

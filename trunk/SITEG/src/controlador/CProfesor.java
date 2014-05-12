@@ -31,7 +31,7 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoProfesor;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
+/**Controlador que permite realizar las operaciones basicas (CRUD)
  * sobre la entidad Profesor*/
 @Controller
 public class CProfesor extends CGeneral {
@@ -81,7 +81,7 @@ public class CProfesor extends CGeneral {
 	@Wire
 	private Button btnEliminarProfesor;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -126,7 +126,7 @@ public class CProfesor extends CGeneral {
 				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un correo como: ejemplo@ejemplo.com");
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -141,7 +141,7 @@ public class CProfesor extends CGeneral {
 
 	}
 
-	/* Metodo que permite el guardado o modificacion de una entidad Profesor */
+	/** Metodo que permite el guardado o modificacion de una entidad Profesor */
 	@Listen("onClick = #btnGuardarProfesor")
 	public void guardarProfesor() {
 
@@ -229,7 +229,7 @@ public class CProfesor extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista
 	 */
 	@Listen("onClick = #btnCancelarProfesor")
@@ -261,7 +261,7 @@ public class CProfesor extends CGeneral {
 
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad Profesor */
+	/** Metodo que permite la eliminacion logica de una entidad Profesor */
 	@Listen("onClick = #btnEliminarProfesor")
 	public void eliminarProfesor() {
 
@@ -286,7 +286,7 @@ public class CProfesor extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente a los profesores */
+	/** Metodo que permite cerrar la ventana correspondiente a los profesores */
 	@Listen("onClick = #btnSalirProfesor")
 	public void salirProfesor() {
 
@@ -294,25 +294,26 @@ public class CProfesor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar si un profesor existe, de acuerdo al numero de
 	 * cedula del profesor
 	 */
 	@Listen("onChange = #txtCedulaProfesor")
 	public void buscarCedulaProfesor() {
-		Profesor profesor = servicioProfesor.buscarProfesorPorCedula(txtCedulaProfesor.getValue());
+		Profesor profesor = servicioProfesor
+				.buscarProfesorPorCedula(txtCedulaProfesor.getValue());
 		if (profesor != null) {
-			
+
 			cmbCategoriaProfesor.setValue(profesor.getCategoria().getNombre());
 			txtCedulaProfesor.setValue(profesor.getCedula());
 			txtNombreProfesor.setValue(profesor.getNombre());
 			txtApellidoProfesor.setValue(profesor.getApellido());
-			
+
 			if (profesor.getSexo().equals("Masculino")) {
 				rdoSexoMProfesor.setChecked(true);
 			} else
 				rdoSexoFProfesor.setChecked(true);
-			
+
 			txtDireccionProfesor.setValue(profesor.getDireccion());
 			txtTelefonoMovilProfesor.setValue(profesor.getTelefono_movil());
 			txtTelefonoFijoProfesor.setValue(profesor.getTelefono_fijo());

@@ -69,13 +69,13 @@ import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
 
-/*
- * Controlador heredado por los demas controladores, permite la
- * inicializacion de los componentes de la vista, ademas de que posee la
- * declaracion de todos los servicios para que sean utilizados por los demas
- * controladores como atributos obtenidos por herencia. Ademas posee ciertos
- * metodos genericos, que son empleados en algunos controladores con el
- * objeto de minimizar codigo y mejorar las practicas de programacion
+/**
+ * Controlador heredado por los demas controladores, permite la inicializacion
+ * de los componentes de la vista, ademas de que posee la declaracion de todos
+ * los servicios para que sean utilizados por los demas controladores como
+ * atributos obtenidos por herencia. Ademas posee ciertos metodos genericos, que
+ * son empleados en algunos controladores con el objeto de minimizar codigo y
+ * mejorar las practicas de programacion
  */
 @Controller
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -152,7 +152,7 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 	@WireVariable("SUsuario")
 	protected SUsuario servicioUsuario;
 
-	/*
+	/**
 	 * Metodo que permite inicializar los componentes de las vistas, es
 	 * implementado en todos los controladores
 	 */
@@ -165,7 +165,7 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 
 	public abstract void inicializar(Component comp);
 
-	/*
+	/**
 	 * Metodo que permite obtener el profesor que se encuentra actualmente en
 	 * sesion
 	 */
@@ -175,7 +175,7 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		return profesor;
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el estudiante que se encuentra actualmente en
 	 * sesion
 	 */
@@ -185,7 +185,7 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		return estudiante;
 	}
 
-	/*
+	/**
 	 * Metodo que permite captar el usuario que se encuentra en sesion,
 	 * obteniendolo a traves de la autentificacion del mismo
 	 */
@@ -197,9 +197,14 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		return usuario;
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener cierta condicion dado su nombre, en el lapso
 	 * vigente y para determinado programa
+	 * 
+	 * @param nombre
+	 *            nombre de la condicion
+	 * @param programa
+	 *            nombre del programa
 	 */
 	public CondicionPrograma buscarCondicionVigenteEspecifica(String nombre,
 			Programa programa) {
@@ -215,7 +220,14 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		return condicionBuscada;
 	}
 
-	/* Metodo que permite enviar un correo electronico a cualquier destinatario */
+	/**
+	 * Metodo que permite enviar un correo electronico a cualquier destinatario
+	 * 
+	 * @param correo
+	 *            correo electronico del destinatario
+	 * @param mensajes
+	 *            mensaje que se le enviara a el, o los destinatarios
+	 */
 	public boolean enviarEmailNotificacion(String correo, String mensajes) {
 		try {
 
@@ -265,7 +277,7 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		}
 	}
 
-	/* Metodo que permite obtener el directorio actual del proyecto */
+	/** Metodo que permite obtener el directorio actual del proyecto */
 	public static String obtenerDirectorio() {
 		URL rutaURL = CGeneral.class.getProtectionDomain().getCodeSource()
 				.getLocation();
@@ -273,10 +285,17 @@ public abstract class CGeneral extends SelectorComposer<Component> {
 		return "/" + ruta.substring(1, ruta.indexOf("SITEG"));
 	}
 
-	/*
+	/**
 	 * Metodo generico que permite la creacion de un usuario para un profesor,
 	 * que recibe la imagen que tendra dicho usuario, asi como el rol y el
 	 * objeto profesor al que se le asignara el usuario
+	 * 
+	 * @param imagenTutor
+	 *            imagen que tendra el usuario
+	 * @param profesor
+	 *            objeto del profesor al cual se le creara el usuario
+	 * @param rol
+	 *            rol que se le asignara al profesor
 	 */
 	public void crearUsuarioProfesor(Image imagenTutor, Profesor profesor,
 			String rol) {

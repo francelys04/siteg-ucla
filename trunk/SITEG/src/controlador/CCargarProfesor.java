@@ -25,7 +25,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
-/*
+/**
  * Controlador que permite almacenar en la base de datos un conjunto de
  * estudiantes desde un archivo plano
  */
@@ -40,7 +40,7 @@ public class CCargarProfesor extends CGeneral {
 	private static List<Profesor> profesoresCargados;
 	private File f;
 
-	/*
+	/**
 	 * Metodo que permite buscar el archivo plano de los profesores en la
 	 * computadora y los carga en una lista
 	 */
@@ -136,7 +136,7 @@ public class CCargarProfesor extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirCargarProfesor")
 	public void salirCargarProfesor() {
 
@@ -144,7 +144,7 @@ public class CCargarProfesor extends CGeneral {
 
 	}
 
-	/* Metodo que permite limpiar los campos de la vista */
+	/** Metodo que permite limpiar los campos de la vista */
 	@Listen("onClick = #btnCancelarCargarProfesor")
 	public void cancelarCargarProfesor() {
 
@@ -153,7 +153,7 @@ public class CCargarProfesor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite guardar a los profesores que se encuentran en la lista
 	 */
 	@Listen("onClick = #btnGuardarCargarProfesor")
@@ -198,7 +198,7 @@ public class CCargarProfesor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral, en este caso no hay
 	 * instrucciones dentro ya que no se cargan variables al iniciar esta vista
 	 */

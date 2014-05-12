@@ -32,7 +32,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
+/**
  * Controlador que permite al tutor aceptar o rechazar una solicitud de
  * tutoria
  */
@@ -66,7 +66,7 @@ public class CSolicitudTutoria extends CGeneral {
 	@Wire
 	private Window wdwEvaluarTutorias;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -98,7 +98,7 @@ public class CSolicitudTutoria extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite aceptar la solicitud de tutoria donde se cambia el
 	 * estatus de la solicitud a Aceptada. Ademas se crea un usuario para cada
 	 * estudiante que integra la solicitud y este es enviado a su correo
@@ -173,7 +173,7 @@ public class CSolicitudTutoria extends CGeneral {
 				});
 	}
 
-	/*
+	/**
 	 * Metodo que permite rechazar la solicitud de tutoria, donde se cambia el
 	 * estatus de la solicitud a Rechazada y se envia un correo a los
 	 * integrantes de la solicitud notificando la novedad
@@ -205,9 +205,10 @@ public class CSolicitudTutoria extends CGeneral {
 				});
 	}
 
-	/*
+	/**
 	 * Metodo que permite confirmar que se logro enviar efectivamente cada
 	 * correo electronico
+	 * @param valor2 arreglo de valores booleanos
 	 */
 	private int confirmacion(ArrayList<Boolean> valor2) {
 		// TODO Auto-generated method stub
@@ -223,16 +224,19 @@ public class CSolicitudTutoria extends CGeneral {
 				"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 * @param teg
+	 *            trabajo especial de grado seleccionado para realizar la
+	 *            asignacion del jurado
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana, actualizando los cambios realizados
 	 * en el resto del sistema
 	 */
@@ -245,7 +249,7 @@ public class CSolicitudTutoria extends CGeneral {
 		wdwEvaluarTutorias.onClose();
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirTutoria")
 	public void salirTutoria() {
 		wdwEvaluarTutorias.onClose();

@@ -30,7 +30,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Window;
 
-/*
+/**
  * Controlador que le permite al director de programa configurar los
  * requisitos, areas, items de evaluacion y condiciones que tendra dicho
  * programa para un determinado lapso academico
@@ -61,7 +61,7 @@ public class CConfigurarPrograma extends CGeneral {
 	@Wire
 	private Window wdwConfigurarPrograma;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -88,7 +88,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover uno o varios requisitos hacia la lista de
 	 * requisitos del programa a configurar.
 	 */
@@ -128,7 +128,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover uno o varios requisitos asignados al programa a
 	 * la lista de la izquierda (requisitos disponibles).
 	 */
@@ -168,7 +168,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover una o varias areas hacia la lista de areas del
 	 * programa a configurar.
 	 */
@@ -211,7 +211,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover una o varias areas asignadas al programa a la
 	 * lista de la izquierda (areas disponibles).
 	 */
@@ -253,7 +253,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover uno o varios items de evaluacion hacia la lista
 	 * de items de evaluacion del programa a configurar.
 	 */
@@ -294,7 +294,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover uno o varios items de evaluacion asignados al
 	 * programa a la lista de la izquierda (items de evaluacion disponibles).
 	 */
@@ -334,7 +334,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite guardar las areas, requisitos e items de evaluacion
 	 * seleccionados para dicho programa. Asi como tambien los valores de las
 	 * condiciones respectivas
@@ -476,7 +476,7 @@ public class CConfigurarPrograma extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarConfigurarPrograma")
@@ -493,7 +493,7 @@ public class CConfigurarPrograma extends CGeneral {
 		listasCargadas = false;
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la vista de configurar programa
 	 */
 	@Listen("onClick = #btnSalirConfigurarPrograma")
@@ -503,7 +503,7 @@ public class CConfigurarPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar dinamicamente las configuraciones establecidas
 	 * para cierto lapso que se seleccione
 	 */
@@ -515,7 +515,7 @@ public class CConfigurarPrograma extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar dinamicamente las configuraciones establecidas
 	 * para cierto programa que se seleccione
 	 */
@@ -527,7 +527,7 @@ public class CConfigurarPrograma extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar los requisitos, areas, items de evaluacion y
 	 * condiciones para cierto lapso, y cierto programa, para asi llenar las
 	 * listas respectivas de la vista

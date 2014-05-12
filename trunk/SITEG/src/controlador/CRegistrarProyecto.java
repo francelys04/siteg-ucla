@@ -54,7 +54,7 @@ public class CRegistrarProyecto extends CGeneral {
 	@Wire
 	private Listbox lsbEstudiantesRegistrarProyecto;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -154,7 +154,7 @@ public class CRegistrarProyecto extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite registrar un proyecto especial de grado por
 	 * determinado estudiante, ademas de que se registra un cambio en el
 	 * historal del teg
@@ -235,7 +235,7 @@ public class CRegistrarProyecto extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarRegistrarProyecto")
@@ -243,7 +243,7 @@ public class CRegistrarProyecto extends CGeneral {
 		txtTituloRegistrarProyecto.setValue("");
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirRegistrarProyecto")
 	public void salirRegistroProyecto() {
 		wdwRegistrarProyecto.onClose();

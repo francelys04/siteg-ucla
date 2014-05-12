@@ -19,9 +19,9 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
- * Controlador que permite solicitar la defensa del trabajo especial de
- * grado una vez que el teg tiene el estatus Solicitando Defensa
+/**
+ * Controlador que permite solicitar la defensa del trabajo especial de grado
+ * una vez que el teg tiene el estatus Solicitando Defensa
  */
 @Controller
 public class CSolicitarDefensa extends CGeneral {
@@ -45,7 +45,7 @@ public class CSolicitarDefensa extends CGeneral {
 	@Wire
 	private Window wdwSolicitarDefensa;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -97,10 +97,9 @@ public class CSolicitarDefensa extends CGeneral {
 
 			} else {
 
-				Messagebox
-						.show("Debe poseer un trabajo especial de grado asociado",
-								"Advertencia", Messagebox.OK,
-								Messagebox.EXCLAMATION);
+				Messagebox.show(
+						"Debe poseer un trabajo especial de grado asociado",
+						"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
 				salir();
 
 			}
@@ -112,13 +111,13 @@ public class CSolicitarDefensa extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirSolicitarDefensa")
 	public void salir() {
 		wdwSolicitarDefensa.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite solicitar la defensa por determinado estudiante,
 	 * cambiando asi el estatus del teg, asi como se actualiza el historial de
 	 * cambios del teg

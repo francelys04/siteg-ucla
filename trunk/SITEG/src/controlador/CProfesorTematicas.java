@@ -25,7 +25,7 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoProfesor;
 
-/*
+/**
  * Metodo que permite asociar un conjunto de tematicas a determinado
  * profesor
  */
@@ -48,7 +48,7 @@ public class CProfesorTematicas extends CGeneral {
 	@Wire
 	private Window wdwProfesorTematica;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -80,7 +80,7 @@ public class CProfesorTematicas extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -95,7 +95,7 @@ public class CProfesorTematicas extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover una o varias tematicas hacia la lista de
 	 * tematicas seleccionadas
 	 */
@@ -137,7 +137,7 @@ public class CProfesorTematicas extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover una o varias tematicas de la lista de
 	 * seleccionadas a la lista de la izquierda (tematicas disponibles).
 	 */
@@ -178,7 +178,7 @@ public class CProfesorTematicas extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite guardar la asociacion de las tematicas seleccionadas
 	 * con determinado profesor
 	 */
@@ -233,7 +233,7 @@ public class CProfesorTematicas extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
 	 */
 	@Listen("onClick = #btnCancelarProfesorTematicas")
@@ -250,7 +250,7 @@ public class CProfesorTematicas extends CGeneral {
 		tematicasCargadas = false;
 	}
 
-	/*
+	/**
 	 * Metodo que permite llenar las listas de tematicas tanto disponibles como
 	 * seleccionadas para un determinado profesor
 	 */
@@ -299,7 +299,7 @@ public class CProfesorTematicas extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirProfesorTematicas")
 	public void salirProfesorTematicas() {
 

@@ -35,10 +35,10 @@ import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
- * Controlador que permite ponderar un conjunto de items asociados
- * a la defensa del teg, asi como tambien asignarle una mencion e 
- * indicar si se aprueba o reprueba dicho teg
+/**
+ * Controlador que permite ponderar un conjunto de items asociados a la defensa
+ * del teg, asi como tambien asignarle una mencion e indicar si se aprueba o
+ * reprueba dicho teg
  */
 @Controller
 public class CCalificarDefensa extends CGeneral {
@@ -79,7 +79,7 @@ public class CCalificarDefensa extends CGeneral {
 	@Wire
 	private Listbox ltbitem;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
 	 * recibido del catalogo exista yse llenan los campos y listas
 	 * correspondientes de la vista, asicomo los objetos empleados dentro de
@@ -136,16 +136,19 @@ public class CCalificarDefensa extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite actualizar el estatus de la solicitud del o los
 	 * estudiantes asociados al teg, a finalizada, para asi indicar que ha
 	 * terminado la tutoria
@@ -159,7 +162,7 @@ public class CCalificarDefensa extends CGeneral {
 		servicioSolicitudTutoria.guardar(solicitud);
 	}
 
-	/*
+	/**
 	 * Metodo que permite guardar la calificacion de la defensa, cambiando el
 	 * estatus del teg, almacenando el cambio en la tabla respectivas, ademas se
 	 * actualiza el estatus de la defensa
@@ -260,7 +263,7 @@ public class CCalificarDefensa extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana, actualizando los cambios realizados
 	 * en el resto del sistema
 	 */
@@ -292,7 +295,7 @@ public class CCalificarDefensa extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirCalificarDefensa")
 	public void salirCalificarDefensa() {
 
@@ -312,8 +315,7 @@ public class CCalificarDefensa extends CGeneral {
 		cmbMencionTeg.setStyle("margin-left:55px");
 
 	}
-	
-	
+
 	/**
 	 * Metodo que permite deshabilitar el combo para seleccionar la mencion del
 	 * trabajo
@@ -327,8 +329,5 @@ public class CCalificarDefensa extends CGeneral {
 		cmbMencionTeg.setValue("No aplica");
 
 	}
-
-	
-	
 
 }
