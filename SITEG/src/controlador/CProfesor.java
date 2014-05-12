@@ -8,6 +8,8 @@ import java.util.Set;
 import modelo.Categoria;
 import modelo.Profesor;
 import modelo.Requisito;
+import modelo.SolicitudTutoria;
+import modelo.Teg;
 import modelo.Tematica;
 import modelo.seguridad.Usuario;
 
@@ -159,7 +161,7 @@ public class CProfesor extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("¿Desea guardar los datos del profesor?",
+			Messagebox.show("ï¿½Desea guardar los datos del profesor?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -264,25 +266,41 @@ public class CProfesor extends CGeneral {
 	/** Metodo que permite la eliminacion logica de una entidad Profesor */
 	@Listen("onClick = #btnEliminarProfesor")
 	public void eliminarProfesor() {
-
-		Messagebox.show("¿Desea eliminar los datos del profesor?",
-				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event evt) throws InterruptedException {
-						if (evt.getName().equals("onOK")) {
-							String cedula = txtCedulaProfesor.getValue();
-							Profesor profesor = servicioProfesor
-									.buscarProfesorPorCedula(cedula);
-							profesor.setEstatus(false);
-							servicioProfesor.guardarProfesor(profesor);
-							cancelarProfesor();
-							Messagebox.show("Profesor eliminado exitosamente",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
+		String cedula = txtCedulaProfesor.getValue();
+		Profesor profesor = servicioProfesor
+				.buscarProfesorPorCedula(cedula);
+		List<SolicitudTutoria> solicitudes = servicioSolicitudTutoria.buscarPorProfesorYEstatus(profesor);
+		List<Teg> tegNoCulminados = servicioTeg.buscarTegNoCulminadosProfesor(profesor);
+		if (solicitudes.size() == 0 && tegNoCulminados.size() == 0) {
+			Messagebox.show("ï¿½Desea eliminar los datos del profesor?",
+					"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
+					Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event evt) throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+								String cedula = txtCedulaProfesor.getValue();
+								Profesor profesor = servicioProfesor
+										.buscarProfesorPorCedula(cedula);
+								profesor.setEstatus(false);
+								servicioProfesor.guardarProfesor(profesor);
+								cancelarProfesor();
+								Messagebox.show("Profesor eliminado exitosamente",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+								}
 						}
-					}
-				});
+					});
+		} else if(solicitudes.size() !=0){
+			Messagebox.show("No se puede Eliminar el Profesor tiene Solicitudes de Tutoria aceptadas ",
+					"Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}else if(tegNoCulminados.size() != 0){
+			System.out.println("pasooooooo");
+			Messagebox.show("No se puede Eliminar el Profesor tiene TEG asignados  ",
+					"Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+		
 
 	}
 

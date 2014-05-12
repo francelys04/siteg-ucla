@@ -196,7 +196,13 @@ public class SSolicitudTutoria {
 				profesor, fechaInicio, fechaFin);
 		return solicitudes;
 	}
-
+	
+	public List<SolicitudTutoria> buscarPorProfesorYEstatus(Profesor profesor){
+		List<SolicitudTutoria> solicitudesProfesor = interfaceSolicitud.findByEstatusAndProfesor(Estatus[1], profesor);
+		return solicitudesProfesor;
+		
+	}
+	
 	public Long contarSolicitudes(Profesor profesor) {
 		long valor = 0;
 		valor = interfaceSolicitud.countByProfesor(profesor);
