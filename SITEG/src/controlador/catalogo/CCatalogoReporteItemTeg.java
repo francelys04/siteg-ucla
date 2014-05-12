@@ -36,6 +36,12 @@ import org.zkoss.zul.Textbox;
 import controlador.CCalificarDefensa;
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo item teg que permite mostrar los
+ * trabajos especiales de grado con los estatus "Proyecto Factible",
+ * "Proyecto No Factible", "TEG Aprobado", "TEG Reprobado" segun sea el caso,
+ * traves de un listado
+ */
 @Controller
 public class CCatalogoReporteItemTeg extends CGeneral {
 
@@ -68,7 +74,7 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 	String estatusTeg[] = { "TEG Aprobado", "TEG Reprobado" };
 	String estatusProyecto[] = { "Proyecto Factible", "Proyecto No Factible" };
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral
 	 */
 	@Override
@@ -76,7 +82,7 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar todos los tegs disponibles con el item
 	 * seleccionado de la lista dado al evento onSelect, recorriendolo uno a uno
 	 * para luego cargar una lista de estudiantes por teg donde mediante la
@@ -117,13 +123,13 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 			String apellido = estudiantes.get(0).getApellido();
 			tegs.get(i).setEstatus(nombre + " " + apellido);
 		}
-		if(!tegs.isEmpty()){
-		ltbReporteItemTeg.setModel(new ListModelList<Teg>(tegs));
+		if (!tegs.isEmpty()) {
+			ltbReporteItemTeg.setModel(new ListModelList<Teg>(tegs));
 		}
 		return tegs;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscar()", mediante el componente de la lista, donde se podra visualizar
 	 * la fecha, el nombre y apellido del estudiante, la fecha, la tematica, el
@@ -205,11 +211,13 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 			Listitem listItem = ltbReporteItemTeg.getSelectedItem();
 			if (listItem != null) {
 				Teg teg = (Teg) listItem.getValue();
-				if(rdoProyecto.isChecked() == true){
-				Factibilidad factibilidad =servicioFactibilidad.buscarFactibilidadPorTeg(teg);
-				 List <ItemFactibilidad> itemsFactibilidad = servicioItemFactibilidad.buscarItemFactibilidad(factibilidad);
-				 FileSystemView filesys = FileSystemView.getFileSystemView();
-				 JasperReport jasperReport;
+				if (rdoProyecto.isChecked() == true) {
+					Factibilidad factibilidad = servicioFactibilidad
+							.buscarFactibilidadPorTeg(teg);
+					List<ItemFactibilidad> itemsFactibilidad = servicioItemFactibilidad
+							.buscarItemFactibilidad(factibilidad);
+					FileSystemView filesys = FileSystemView.getFileSystemView();
+					JasperReport jasperReport;
 
 					Map p = new HashMap();
 					List<Estudiante> estudiantes = servicioEstudiante
@@ -226,82 +234,82 @@ public class CCatalogoReporteItemTeg extends CGeneral {
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
 							+ "SITEG/vistas/reportes/salidas/compilados/RItemTegDefensa.jasper";
-					  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-					
+					String reporteImage = rutaUrl
+							+ "SITEG/public/imagenes/reportes/";
+
 					p.put("logoUcla", reporteImage + "logo ucla.png");
 					p.put("logoCE", reporteImage + "logo CE.png");
 					p.put("logoSiteg", reporteImage + "logo.png");
-						
+
 					p.put("estudiantes", estu);
 					p.put("tutor", tutor);
 					p.put("tematica", teg.getTematica().getNombre());
 					p.put("titulo", teg.getTitulo());
 
-				
 					try {
-						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
+						jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
 						JasperPrint jasperPrint;
 						jasperPrint = JasperFillManager.fillReport(
-						jasperReport, p, new JRBeanCollectionDataSource(itemsFactibilidad));
+								jasperReport, p,
+								new JRBeanCollectionDataSource(
+										itemsFactibilidad));
 						JasperViewer.viewReport(jasperPrint, false);
 					} catch (JRException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-								 
-				 }else if(rdoTEG.isChecked() == true){
-					Defensa defensa =servicioDefensa.buscarDefensaDadoTeg(teg);
-					List<ItemDefensa> itemsDefensa = servicioItemDefensa.buscarItemDefensa(defensa);
+
+				} else if (rdoTEG.isChecked() == true) {
+					Defensa defensa = servicioDefensa.buscarDefensaDadoTeg(teg);
+					List<ItemDefensa> itemsDefensa = servicioItemDefensa
+							.buscarItemDefensa(defensa);
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					 JasperReport jasperReport;
+					JasperReport jasperReport;
 
-						Map p = new HashMap();
-						List<Estudiante> estudiantes = servicioEstudiante
-								.buscarEstudiantePorTeg(teg);
-						List<String> estu = new ArrayList<String>();
-						for (int i = 0; i < estudiantes.size(); i++) {
-							String nombre = estudiantes.get(i).getNombre();
-							String apellido = estudiantes.get(i).getApellido();
-							estu.add(nombre + " " + apellido);
+					Map p = new HashMap();
+					List<Estudiante> estudiantes = servicioEstudiante
+							.buscarEstudiantePorTeg(teg);
+					List<String> estu = new ArrayList<String>();
+					for (int i = 0; i < estudiantes.size(); i++) {
+						String nombre = estudiantes.get(i).getNombre();
+						String apellido = estudiantes.get(i).getApellido();
+						estu.add(nombre + " " + apellido);
 
-						}
-						String tutor = teg.getTutor().getNombre() + " "
-								+ teg.getTutor().getApellido();
-						String rutaUrl = obtenerDirectorio();
-						String reporteSrc = rutaUrl
-								+ "SITEG/vistas/reportes/salidas/compilados/RItemTeg.jasper";
-						
-						String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-							
-						p.put("logoUcla", reporteImage + "logo ucla.png");
-						p.put("logoCE", reporteImage + "logo CE.png");
-						p.put("logoSiteg", reporteImage + "logo.png");
-				
-						p.put("estudiantes", estu);
-						p.put("tutor", tutor);
-						p.put("tematica", teg.getTematica().getNombre());
-						p.put("titulo", teg.getTitulo());
+					}
+					String tutor = teg.getTutor().getNombre() + " "
+							+ teg.getTutor().getApellido();
+					String rutaUrl = obtenerDirectorio();
+					String reporteSrc = rutaUrl
+							+ "SITEG/vistas/reportes/salidas/compilados/RItemTeg.jasper";
 
-					
-						try {
-							jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-							JasperPrint jasperPrint;
-							jasperPrint = JasperFillManager.fillReport(
-							jasperReport, p, new JRBeanCollectionDataSource(itemsDefensa));
-							JasperViewer.viewReport(jasperPrint, false);
-						} catch (JRException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					
-					
-					
-					
-					
-					
+					String reporteImage = rutaUrl
+							+ "SITEG/public/imagenes/reportes/";
+
+					p.put("logoUcla", reporteImage + "logo ucla.png");
+					p.put("logoCE", reporteImage + "logo CE.png");
+					p.put("logoSiteg", reporteImage + "logo.png");
+
+					p.put("estudiantes", estu);
+					p.put("tutor", tutor);
+					p.put("tematica", teg.getTematica().getNombre());
+					p.put("titulo", teg.getTitulo());
+
+					try {
+						jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
+						JasperPrint jasperPrint;
+						jasperPrint = JasperFillManager.fillReport(
+								jasperReport, p,
+								new JRBeanCollectionDataSource(itemsDefensa));
+						JasperViewer.viewReport(jasperPrint, false);
+					} catch (JRException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
-				
-				
+
 			}
 		}
 	}

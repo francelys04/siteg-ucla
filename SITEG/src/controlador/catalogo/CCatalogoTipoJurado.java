@@ -32,6 +32,10 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo tipo jurado que permite mostrar los tipos de jurados
+ * disponibles a traves de un listado
+ */
 @Controller
 public class CCatalogoTipoJurado extends CGeneral {
 
@@ -51,7 +55,7 @@ public class CCatalogoTipoJurado extends CGeneral {
 	@Wire
 	private Window wdwCatalogoTipoJurado;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todas los tipos
 	 * de jurados disponibles y se llena el listado del mismo en el componente
 	 * lista de la vista.
@@ -64,17 +68,19 @@ public class CCatalogoTipoJurado extends CGeneral {
 		ltbTipoJurado.setModel(new ListModelList<TipoJurado>(tipoJurado));
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tipos de jurados disponibles, mediante el
 	 * componente de la lista, donde se podra visualizar el nombre y la
 	 * descripcion de estas.
@@ -104,7 +110,7 @@ public class CCatalogoTipoJurado extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto TipoJurado al realizar el evento
 	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
 	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
@@ -112,31 +118,31 @@ public class CCatalogoTipoJurado extends CGeneral {
 	@Listen("onDoubleClick = #ltbTipoJurado")
 	public void mostrarDatosCatalogo() {
 		try {
-		if (ltbTipoJurado.getItemCount() != 0) {
+			if (ltbTipoJurado.getItemCount() != 0) {
 
-			if (vistaRecibida == null) {
+				if (vistaRecibida == null) {
 
-				vistaRecibida = "maestros/VTipoJurado";
+					vistaRecibida = "maestros/VTipoJurado";
 
-			} else {
+				} else {
 
-				Listitem listItem = ltbTipoJurado.getSelectedItem();
-				TipoJurado tipoJuradoDatosCatalogo = (TipoJurado) listItem
-						.getValue();
-				final HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("id", tipoJuradoDatosCatalogo.getId());
-				String vista = vistaRecibida;
-				map.put("vista", vista);
-				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-				Executions.sendRedirect("/vistas/arbol.zul");
-				wdwCatalogoTipoJurado.onClose();
+					Listitem listItem = ltbTipoJurado.getSelectedItem();
+					TipoJurado tipoJuradoDatosCatalogo = (TipoJurado) listItem
+							.getValue();
+					final HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("id", tipoJuradoDatosCatalogo.getId());
+					String vista = vistaRecibida;
+					map.put("vista", vista);
+					Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+					Executions.sendRedirect("/vistas/arbol.zul");
+					wdwCatalogoTipoJurado.onClose();
+				}
 			}
-		}
 		} catch (NullPointerException e) {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar una lista de los tipos de jurado que se
 	 * encuentran activos en el sistema mediante el componente "Jasperreport"
 	 */
@@ -179,7 +185,7 @@ public class CCatalogoTipoJurado extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al Catalogo */
 	@Listen("onClick = #btnSalirCatalogoTipoJurado")
 	public void salirCatalogoTipoJurado() {
 		wdwCatalogoTipoJurado.onClose();

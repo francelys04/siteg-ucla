@@ -23,6 +23,11 @@ import org.zkoss.zul.Window;
 import controlador.CAsignarComision;
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo asignar comision  que permite mostrar los
+ * trabajos especiales de grado con el estatus "Proyecto Registrado" a
+ * traves de un listado
+ */
 @Controller
 public class CCatalogoAsignarComision extends CGeneral {
 
@@ -47,7 +52,7 @@ public class CCatalogoAsignarComision extends CGeneral {
 	@Wire
 	private Textbox txtMostrarApellidoTutor;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
 	 * disponibles mediante el metodo "buscarDatos()", recorriendolo uno a uno
 	 * para luego cargar una lista de estudiantes por teg donde mediante la
@@ -85,7 +90,7 @@ public class CCatalogoAsignarComision extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra
 	 * visualizar el nombre y apellido del estudiante, la tematica, el area, el
@@ -151,7 +156,7 @@ public class CCatalogoAsignarComision extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
 	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
 	 * poder ser mapeada y enviada a la vista "VAsignarComision".

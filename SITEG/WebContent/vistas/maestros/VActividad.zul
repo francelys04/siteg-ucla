@@ -102,7 +102,7 @@
 
 					<hbox>
 
-						<textbox id="txtNombreActividad" width="270px"
+						<textbox id="txtNombreActividad" width="300px"
 							maxlength="100" tooltip="pupNombreActividad" tabindex="1" />
 
 
@@ -124,7 +124,7 @@
 					</hlayout>
 
 					<textbox id="txtDescripcionActividad" rows="5"
-						maxlength="500" tabindex="3" cols="100" width="52%"
+						maxlength="500" tabindex="3" cols="100" width="55%"
 						tooltip="pupDescripcionActividad" />
 				</row>
 

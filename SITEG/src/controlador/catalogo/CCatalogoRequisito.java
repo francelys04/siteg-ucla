@@ -34,6 +34,10 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo requisito que permite mostrar los
+ * requisitos disponibles a traves de un listado
+ */
 @Controller
 public class CCatalogoRequisito extends CGeneral {
 
@@ -55,7 +59,7 @@ public class CCatalogoRequisito extends CGeneral {
 	@Wire
 	private Window wdwCatalogoRequisito;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan lista correspondientes de la
 	 * vista, asicomo los objetos empleados dentro de este controlador.
@@ -69,7 +73,7 @@ public class CCatalogoRequisito extends CGeneral {
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("requisitoCatalogo");
-		/*
+		/**
 		 * Validacion para vaciar la informacion del VActividad a la vista
 		 * VActividad.zul si la varible map tiene algun dato contenido
 		 */
@@ -89,16 +93,19 @@ public class CCatalogoRequisito extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los requisitos disponibles, mediante el
 	 * componente de la lista, donde se podra visualizar el nombre y la
 	 * descripcion de estos.
@@ -128,39 +135,39 @@ public class CCatalogoRequisito extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Requisito al realizar el evento
 	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
 	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
 	 */
 	@Listen("onDoubleClick = #ltbRequisito")
 	public void mostrarDatosCatalogo() {
-		
+
 		try {
-		
-		if (vistaRecibida == null) {
 
-			vistaRecibida = "maestros/VRequisito";
+			if (vistaRecibida == null) {
 
-		} else {
-			if (ltbRequisito.getItemCount() != 0) {
-				Listitem listItem = ltbRequisito.getSelectedItem();
-				Requisito requisitoDatosCatalogo = (Requisito) listItem
-						.getValue();
-				final HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("id", requisitoDatosCatalogo.getId());
-				String vista = vistaRecibida;
-				map.put("vista", vista);
-				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-				Executions.sendRedirect("/vistas/arbol.zul");
-				wdwCatalogoRequisito.onClose();
+				vistaRecibida = "maestros/VRequisito";
+
+			} else {
+				if (ltbRequisito.getItemCount() != 0) {
+					Listitem listItem = ltbRequisito.getSelectedItem();
+					Requisito requisitoDatosCatalogo = (Requisito) listItem
+							.getValue();
+					final HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("id", requisitoDatosCatalogo.getId());
+					String vista = vistaRecibida;
+					map.put("vista", vista);
+					Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+					Executions.sendRedirect("/vistas/arbol.zul");
+					wdwCatalogoRequisito.onClose();
+				}
 			}
-		}
 		} catch (NullPointerException e) {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar una lista de los requisitos que se deben
 	 * consignar para realizar un trabjo especial de grado que se encuentran
 	 * activos en el sistema mediante el componente "Jasperreport"
@@ -204,7 +211,7 @@ public class CCatalogoRequisito extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al Catalogo */
 	@Listen("onClick = #btnSalirCatalogoRequisito")
 	public void salirCatalogoRequisitos() {
 		wdwCatalogoRequisito.onClose();

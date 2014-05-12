@@ -17,6 +17,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo tematica area que permite mostrar
+ * las tematicas disponibles de acuerdo a un area seleccionada, a traves de un
+ * listado
+ */
 @Controller
 public class CCatalogoTematicaArea extends CGeneral {
 
@@ -32,27 +37,31 @@ public class CCatalogoTematicaArea extends CGeneral {
 	@Wire
 	private Window wdwCatalogoTematica;
 
-	
-
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todas las
-	 * tematicas por area disponibles y se llena el listado del mismo en el componente
-	 * lista de la vista.
+	 * tematicas por area disponibles y se llena el listado del mismo en el
+	 * componente lista de la vista.
 	 */
 	public void inicializar(Component comp) {
 
 		List<Tematica> tematica = servicioTematica.buscarTematicasDeArea(area);
 		ltbTematica.setModel(new ListModelList<Tematica>(tematica));
-	
 
 	}
-	public void recibirId (AreaInvestigacion a) {
+
+	/**
+	 * Metodo que permite recibir un area de investigacion
+	 * 
+	 * @param a
+	 *            objeto de area de investigacion
+	 */
+	public void recibirId(AreaInvestigacion a) {
 		area = a;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar las tematicas disponibles, mediante el
-	 * componente de la lista, donde se podra visualizar el nombre, area y 
+	 * componente de la lista, donde se podra visualizar el nombre, area y
 	 * descripcion de estas.
 	 */
 	@Listen("onChange = #txtNombreMostrarTematica,#txtAreaMostrarTematica,#txtDescripcionMostrarTematica")
@@ -79,8 +88,5 @@ public class CCatalogoTematicaArea extends CGeneral {
 		ltbTematica.setModel(new ListModelList<Tematica>(tematicas2));
 
 	}
-
-	
-	
 
 }

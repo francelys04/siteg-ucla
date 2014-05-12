@@ -21,6 +21,11 @@ import org.zkoss.zul.Textbox;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo tutores disponibles que permite
+ * mostrar los profesores disponibles a traves de un listad, de acuerdo a un
+ * progra, area y tematica seleccionada
+ */
 @Controller
 public class CCatalogoTutorDisponible extends CGeneral {
 
@@ -47,7 +52,7 @@ public class CCatalogoTutorDisponible extends CGeneral {
 	@Wire
 	private Combobox cmbTematicaTutores;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles y se llena el listado del mismo en el componente
 	 * lista de la vista.
@@ -61,7 +66,7 @@ public class CCatalogoTutorDisponible extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las areas dado al programa seleccionado
 	 */
 	@Listen("onSelect = #cmbProgramaTutores")
@@ -85,7 +90,7 @@ public class CCatalogoTutorDisponible extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las tematicas dado al area seleccionado
 	 */
 	@Listen("onSelect = #cmbAreaTutores")
@@ -102,17 +107,17 @@ public class CCatalogoTutorDisponible extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar la lista de tutores disponibles
 	 */
 	@Listen("onSelect = #cmbTematicaTutores")
 	public void seleccionarTematica() {
-		
+
 		llenarLista();
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite retornar una lista de profesores, donde se va
 	 * recorriendo los profesores cuyas cedulas coincidan con las que se
 	 * encuentran en las solicitudes de tutorias generedas, para asi cargar una
@@ -160,7 +165,7 @@ public class CCatalogoTutorDisponible extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los profesores disponibles, mediante el
 	 * componente de la lista, donde se podra visualizar el nombre y la apellido
 	 * de estos.

@@ -21,6 +21,10 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo enlace interes que permite mostrar
+ * los enlaces de interes disponibles a traves de un listado
+ */
 @Controller
 public class CCatalogoEnlaceInteres extends CGeneral {
 
@@ -37,7 +41,7 @@ public class CCatalogoEnlaceInteres extends CGeneral {
 	@Wire
 	private Image imagen;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todas los
 	 * enlaces de interes disponibles y se llena el listado del mismo en el
 	 * componente lista de la vista.
@@ -50,20 +54,22 @@ public class CCatalogoEnlaceInteres extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
-	 * Metodo que permite filtrar los enlaces de interes disponibles, mediante el
-	 * componente de la lista, donde se podra visualizar el nombre y la
-	 * url de estas.
+	/**
+	 * Metodo que permite filtrar los enlaces de interes disponibles, mediante
+	 * el componente de la lista, donde se podra visualizar el nombre y la url
+	 * de estas.
 	 */
 	@Listen("onChange = #txtNombreMostrarEnlace, #txtUrlMostrarEnlace")
 	public void filtrarDatosCatalogo() {
@@ -85,7 +91,7 @@ public class CCatalogoEnlaceInteres extends CGeneral {
 		ltbEnlace.setModel(new ListModelList<EnlaceInteres>(enlace2));
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto EnlaceInteres al realizar el evento
 	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
 	 * para luego poder ser mapeada y enviada a la vista asociada a ella.

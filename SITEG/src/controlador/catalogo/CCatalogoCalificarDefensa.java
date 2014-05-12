@@ -23,6 +23,11 @@ import org.zkoss.zul.Window;
 import controlador.CCalificarDefensa;
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo calificar defensa  que permite mostrar los
+ * trabajos especiales de grado con el estatus "Defensa Asignada" a
+ * traves de un listado
+ */
 @Controller
 public class CCatalogoCalificarDefensa extends CGeneral {
 
@@ -45,10 +50,10 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 	@Wire
 	private Textbox txtMostrarApellidoTutorCalificar;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
-	 * disponibles mediante el metodo "buscar()", recorriendolo uno a uno
-	 * para luego cargar una lista de estudiantes por teg donde mediante la
+	 * disponibles mediante el metodo "buscar()", recorriendolo uno a uno para
+	 * luego cargar una lista de estudiantes por teg donde mediante la
 	 * implementacion del servicio de busqueda se va obteniendo su nombre y su
 	 * apellido y se va seteando temporalmente en la variable estatus del teg
 	 * para poder visualizarlo en el componente lista de teg de la vista.
@@ -68,7 +73,7 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 		ltbCalificarDefensa.setModel(new ListModelList<Teg>(teg));
 	}
 
-	/*
+	/**
 	 * Metodo que permite retornar una lista de tegs dado a un profesor, donde
 	 * el estatus sea "Defensa Asignada"
 	 */
@@ -88,7 +93,7 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 		return tegs;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tegs disponibles, donde dado a una lista
 	 * de estudiantes que se carga con la implementacion del servicio de
 	 * busqueda, se obtiene a su vez el nombre y apellido del estudiante y se
@@ -167,10 +172,10 @@ public class CCatalogoCalificarDefensa extends CGeneral {
 
 	}
 
-	/*
-	 * Metodo que permite obtener el objeto Teg al realizar el evento
-	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
-	 * para luego poder ser mapeado dado a su id y enviada a la vista asociada a ella.
+	/**
+	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
+	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
+	 * poder ser mapeado dado a su id y enviada a la vista asociada a ella.
 	 */
 	@Listen("onDoubleClick = #ltbCalificarDefensa")
 	public void mostrarDatosCatalogo() {

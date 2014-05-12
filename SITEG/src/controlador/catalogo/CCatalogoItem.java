@@ -17,6 +17,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -31,6 +32,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo item que permite mostrar los items
+ * de evaluacion disponibles a traves de un listado
+ */
+@Controller
 public class CCatalogoItem extends CGeneral {
 
 	private long id = 0;
@@ -55,7 +61,7 @@ public class CCatalogoItem extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionMostrarItem;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los items
 	 * disponibles y se llena el listado del mismo en el componente lista de la
 	 * vista.
@@ -67,7 +73,7 @@ public class CCatalogoItem extends CGeneral {
 		ltbItem.setModel(new ListModelList<ItemEvaluacion>(items));
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los items disponibles, mediante el componente
 	 * de la lista, donde se podra visualizar el nombre, descripcion y tipo de
 	 * estos.
@@ -98,17 +104,19 @@ public class CCatalogoItem extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 *  @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Item al realizar el evento doble
 	 * clic sobre un item en especifico en la lista, extrayendo asi su id, para
 	 * luego poder ser mapeada y enviada a la vista asociada a ella.
@@ -136,7 +144,7 @@ public class CCatalogoItem extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar una lista de los items de envaluacion que se
 	 * encuentran activos en el sistema, agrupados por tipo mediante el
 	 * componente "Jasperreport"
@@ -178,7 +186,7 @@ public class CCatalogoItem extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al Catalogo */
 	@Listen("onClick = #btnSalirCatalogoItems")
 	public void salirCatalogoItems() {
 		wdwCatalogoItem.onClose();

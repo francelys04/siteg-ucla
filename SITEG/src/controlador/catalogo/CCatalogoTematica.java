@@ -32,6 +32,10 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo tematica que permite mostrar las tematicas
+ * disponibles a traves de un listado
+ */
 @Controller
 public class CCatalogoTematica extends CGeneral {
 
@@ -49,7 +53,7 @@ public class CCatalogoTematica extends CGeneral {
 	@Wire
 	private Window wdwCatalogoTematica;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todas las
 	 * tematicas disponibles y se llena el listado del mismo en el componente
 	 * lista de la vista.
@@ -60,16 +64,18 @@ public class CCatalogoTematica extends CGeneral {
 		ltbTematica.setModel(new ListModelList<Tematica>(tematica));
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 *  @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar las tematicas disponibles, mediante el
 	 * componente de la lista, donde se podra visualizar el nombre, area y *
 	 * descripcion de estas.
@@ -106,7 +112,7 @@ public class CCatalogoTematica extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Tematica al realizar el evento doble
 	 * clic sobre un item en especifico en la lista, extrayendo asi su id, para
 	 * luego poder ser mapeada y enviada a la vista asociada a ella.
@@ -142,7 +148,7 @@ public class CCatalogoTematica extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar una lista de las tematicas que se encuentran
 	 * activas en el sistema, agrupadas por areas de investigacion mediante el
 	 * componente "Jasperreport"
@@ -184,7 +190,7 @@ public class CCatalogoTematica extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al Catalogo */
 	@Listen("onClick = #btnSalirCatalogoTematica")
 	public void salirCatalogoTematica() {
 		wdwCatalogoTematica.onClose();

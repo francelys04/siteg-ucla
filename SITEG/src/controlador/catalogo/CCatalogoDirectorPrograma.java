@@ -6,6 +6,7 @@ import java.util.List;
 
 import modelo.Profesor;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -21,6 +22,12 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo director programa que permite
+ * mostrar los profesores disponibles que no son directores de programa a traves
+ * de un listado
+ */
+@Controller
 public class CCatalogoDirectorPrograma extends CGeneral {
 
 	private static String vistaRecibida;
@@ -46,7 +53,7 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 	@Wire
 	private Textbox txtCategoriaMostrarProfesor;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el map
 	 * recibido del catalogo exista y se llenan las listas correspondientes de
 	 * la vista dado una condicional, que si se cumple se mostrara los
@@ -77,19 +84,22 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los profesores disponibles, mediante el
-	 * componente de la lista, donde se podra visualizar la cedula, nombre, apellido,
-	 * correo y categoria.
+	 * componente de la lista, donde se podra visualizar la cedula, nombre,
+	 * apellido, correo y categoria.
 	 */
 	@Listen("onChange = #txtCedulaMostrarProfesor,#txtNombreMostrarProfesor,#txtApellidoMostrarProfesor,#txtCorreoMostrarProfesor,#txtProgramaMostrarProfesor")
 	public void filtrarDatosCatalogo() {
@@ -135,9 +145,9 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 
 	}
 
-	/*
-	 * Metodo que permite obtener el objeto Profesor al realizar el evento
-	 * doble clic sobre un item en especifico en la lista, extrayendo asi su cedula,
+	/**
+	 * Metodo que permite obtener el objeto Profesor al realizar el evento doble
+	 * clic sobre un item en especifico en la lista, extrayendo asi su cedula,
 	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
 	 */
 	@Listen("onDoubleClick = #ltbProfesor")
@@ -167,15 +177,11 @@ public class CCatalogoDirectorPrograma extends CGeneral {
 			}
 		}
 	}
-	
-	
-	/* Metodo que permite cerrar la ventana correspondiente a las actividades */
+
+	/** Metodo que permite cerrar la ventana correspondiente a las actividades */
 	@Listen("onClick = #btnSalirCatalogoDirector")
 	public void salirCatalogo() {
-		 wdwCatalogoDirectorPrograma.onClose();
+		wdwCatalogoDirectorPrograma.onClose();
 	}
-	
-	
-	
 
 }

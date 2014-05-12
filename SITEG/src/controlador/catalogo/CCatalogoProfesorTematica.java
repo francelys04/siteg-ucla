@@ -25,11 +25,15 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo profesor tematica que permite
+ * mostrar los profesores disponibles asociados a una tematica en especifico
+ * traves de un listado
+ */
 @Controller
 public class CCatalogoProfesorTematica extends CGeneral {
 
 	private static String vistaRecibida;
-
 	private static long programaRecibido;
 	private static long tematicaRecibida;
 	private static long areaRecibida;
@@ -41,7 +45,6 @@ public class CCatalogoProfesorTematica extends CGeneral {
 	private Combobox cmbProgramaSolicitud;
 	@Wire
 	private Window wdwCatalogoProfesorArea;
-
 	@Wire
 	private Textbox txtCedulaMostrarProfesor;
 	@Wire
@@ -51,7 +54,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 	@Wire
 	private Textbox txtCorreoMostrarProfesor;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se se buscan todos los
 	 * profesores disponibles y se llena la lista del mismo en el componente de
 	 * la vista.
@@ -63,10 +66,19 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
+	 * @param promaga
+	 *            id del programa
+	 * @param tematica
+	 *            id de la tematica
+	 * @param area
+	 *            id del area de investigacion
 	 */
 	public void recibir(String vista, long programa, long tematica, long area) {
 		vistaRecibida = vista;
@@ -76,7 +88,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los profesores disponibles, mediante el
 	 * componente de la lista, donde se podra visualizar la
 	 * cedula,nombre,apellido y correo de estas.
@@ -118,7 +130,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Profesor al realizar el evento doble
 	 * clic sobre un item en especifico en la lista, extrayendo asi su cedula,
 	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
@@ -141,20 +153,11 @@ public class CCatalogoProfesorTematica extends CGeneral {
 				map.put("cedula", profesorDatosCatalogo.getCedula());
 				String vista = vistaRecibida;
 				map.put("vista", vista);
-				// if (map2 != null && map2.toString() != "{}") {
 				System.out.println(areaRecibida);
 				if (areaRecibida != 0) {
 					map = map2;
 					map.put("cedula", profesorDatosCatalogo.getCedula());
 					map.put("vista", vista);
-					// System.out.println(map2.toString());
-					// System.out.println(map2.get("area"));
-					// if (!map2.get("area").equals("Todos"))
-					// map.put("area", (Long) map2.get("area"));
-					// else
-					// map.put("area", (String) map2.get("area"));
-					// map.put("tematica", tematicaRecibida);
-					// map.put("programa", programaRecibido);
 					Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 					Executions.sendRedirect("/vistas/arbol.zul");
 					wdwCatalogoProfesorArea.onClose();
@@ -172,7 +175,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar una lista de profesores dado a una lista de
 	 * solicitudes de tutorias donde su estatus es aceptada
 	 */
@@ -181,7 +184,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 		if (tematicaRecibida != -1) {
 			Tematica tema = servicioTematica.buscarTematica(tematicaRecibida);
 			profesores = servicioProfesor.buscarProfesoresPorTematica(tema);
-			if(areaRecibida != 0)
+			if (areaRecibida != 0)
 				return profesores;
 		} else {
 			profesores = servicioProfesor
@@ -219,7 +222,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista y abrir la vista SolicitarTutor */
+	/** Metodo que permite cerrar la vista y abrir la vista SolicitarTutor */
 	@Listen("onClick = #btnSalir")
 	public void salir() {
 		Window window = (Window) Executions.createComponents(
@@ -228,7 +231,7 @@ public class CCatalogoProfesorTematica extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista y abrir la vista del catalogo */
+	/** Metodo que permite cerrar la vista y abrir la vista del catalogo */
 	@Listen("onClick = #btnSalirReporte")
 	public void salirReporte() {
 

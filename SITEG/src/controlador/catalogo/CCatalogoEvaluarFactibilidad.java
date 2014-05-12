@@ -22,6 +22,11 @@ import org.zkoss.zul.Window;
 import controlador.CEvaluarFactibilidad;
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo evaluar factibilidad que permite
+ * mostrar los trabajos especiales de grado con el estatus "Comision Asignada" a
+ * traves de un listado
+ */
 @Controller
 public class CCatalogoEvaluarFactibilidad extends CGeneral {
 
@@ -45,7 +50,7 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 	@Wire
 	private Textbox txtMostrarApellidoTutorFactibilidad;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
 	 * disponibles mediante el metodo "buscarDatos()", recorriendolo uno a uno
 	 * para luego cargar una lista de estudiantes por teg donde mediante la
@@ -68,7 +73,7 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 		ltbListaFactibilidad.setModel(new ListModelList<Teg>(tegs));
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener una lista de los tegs, de acuerdo al programa
 	 * del profesor que se encuentra loggeado y a su vez verificando que su
 	 * estatus sea "Comision Asignada"
@@ -90,7 +95,7 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra
 	 * visualizar la fecha, el nombre y apellido del estudiante, la tematica, el
@@ -165,7 +170,7 @@ public class CCatalogoEvaluarFactibilidad extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
 	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
 	 * poder ser mapeada y enviada a la vista asociada a ella.
