@@ -17,6 +17,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -31,6 +32,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo programa que permite mostrar los programas
+ * disponibles a traves de un listado
+ */
+@Controller
 public class CCatalogoPrograma extends CGeneral {
 
 	private static String vistaRecibida;
@@ -44,7 +50,7 @@ public class CCatalogoPrograma extends CGeneral {
 	@Wire
 	private Textbox txtDescripcionMostrarPrograma;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles y se llena el listado del mismo en el componente
 	 * lista de la vista.
@@ -54,17 +60,19 @@ public class CCatalogoPrograma extends CGeneral {
 		ltbPrograma.setModel(new ListModelList<Programa>(programas));
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los programas disponibles, mediante el
 	 * componente de la lista, donde se podra visualizar el nombre y la
 	 * descripcion de estos.
@@ -93,7 +101,7 @@ public class CCatalogoPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Progrma al realizar el evento doble
 	 * clic sobre un item en especifico en la lista, extrayendo asi su id, para
 	 * luego poder ser mapeada y enviada a la vista asociada a ella.
@@ -132,7 +140,7 @@ public class CCatalogoPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar una lista de los programas que se encuentran
 	 * activos en el sistema mediante el componente "Jasperreport"
 	 */
@@ -173,7 +181,7 @@ public class CCatalogoPrograma extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al Catalogo */
 	@Listen("onClick = #btnSalir")
 	public void salirCatalogoPrograma() {
 		wdwCatalogoPrograma.onClose();

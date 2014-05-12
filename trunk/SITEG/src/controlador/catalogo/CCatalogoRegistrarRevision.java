@@ -22,6 +22,11 @@ import org.zkoss.zul.Window;
 import controlador.CGeneral;
 import controlador.CRegistrarRevision;
 
+/***
+ * Controlador asociado a la vista catalogo registrar revision que permite
+ * mostrar los trabajos especiales de grado con el estatus "TEG Registrado" o
+ * "Trabajo en Desarrollo" a traves de un listado
+ */
 @Controller
 public class CCatalogoRegistrarRevision extends CGeneral {
 
@@ -47,7 +52,7 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	private static String estatus1 = "TEG Registrado";
 	private static String estatus2 = "Trabajo en Desarrollo";
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
 	 * disponibles mediante el metodo "buscarDatos()", recorriendolo uno a uno
 	 * para luego cargar una lista de estudiantes por teg donde mediante la
@@ -59,7 +64,6 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
-		
 		List<Teg> teg = buscar();
 		for (int i = 0; i < teg.size(); i++) {
 			List<Estudiante> estudiante = servicioEstudiante
@@ -70,31 +74,30 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 		}
 
 		ltbTrabajosRegistrados.setModel(new ListModelList<Teg>(teg));
-		
+
 	}
-	
-	/*
+
+	/**
 	 * Metodo que permite retornar una lista de tegs dado a un profesor, donde
 	 * el estatus sea "Trabajo Registrado o Trabajo en Desarrollo"
 	 */
 	public List<Teg> buscar() {
-		List<Teg> tegProfesor = servicioTeg.
-				buscarTutoriaProfesor(ObtenerUsuarioProfesor());
+		List<Teg> tegProfesor = servicioTeg
+				.buscarTutoriaProfesor(ObtenerUsuarioProfesor());
 
 		List<Teg> tegs = new ArrayList<Teg>();
 		for (int i = 0; i < tegProfesor.size(); i++) {
-		
-			if (tegProfesor.get(i).getEstatus().equals(estatus1) || tegProfesor.get(i).getEstatus().equals(estatus2)) {
+
+			if (tegProfesor.get(i).getEstatus().equals(estatus1)
+					|| tegProfesor.get(i).getEstatus().equals(estatus2)) {
 
 				tegs.add(tegProfesor.get(i));
 			}
 		}
 		return tegs;
 	}
-	
-	
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra
 	 * visualizar el nombre y apellido del estudiante, la fecha, la tematica, el
@@ -154,7 +157,7 @@ public class CCatalogoRegistrarRevision extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
 	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
 	 * poder ser mapeada y enviada a la vista asociada a ella.

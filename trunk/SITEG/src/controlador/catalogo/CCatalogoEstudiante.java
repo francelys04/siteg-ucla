@@ -17,6 +17,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -32,6 +33,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo estudiante que permite mostrar los
+ * estudiantes disponibles a traves de un listado
+ */
+@Controller
 public class CCatalogoEstudiante extends CGeneral {
 
 	List<Estudiante> estudiantes = new ArrayList();
@@ -54,7 +60,7 @@ public class CCatalogoEstudiante extends CGeneral {
 	@Wire
 	private Textbox txtProgramaMostrarEstudiante;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el map
 	 * recibido del catalogo exista y se llenan las listas correspondientes de
 	 * la vista dado una condicional, que si se cumple se mostrara los
@@ -91,7 +97,7 @@ public class CCatalogoEstudiante extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los estudiantes disponibles, dado a la
 	 * condicional de la variable booleana si es igual a "true" se mostraran los
 	 * estudiantes sin usuario sino si es "false" seran todos los estudiantes
@@ -149,17 +155,19 @@ public class CCatalogoEstudiante extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Estudiante al realizar el evento
 	 * doble clic sobre un item en especifico en la lista, extrayendo asi su
 	 * cedula, para luego poder ser mapeada y enviada a la vista asociada a
@@ -197,7 +205,7 @@ public class CCatalogoEstudiante extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar una lista de los estudiantes que se encuentran
 	 * activos en el sistema, agrupados por programa mediante el componente
 	 * "Jasperreport"
@@ -241,7 +249,7 @@ public class CCatalogoEstudiante extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al Catalogo */
 	@Listen("onClick = #btnSalirCatalogoEstudiante")
 	public void salirCatalogoEstudiante() {
 		wdwCatalogoEstudiante.onClose();

@@ -23,6 +23,11 @@ import org.zkoss.zul.Window;
 import controlador.CAsignarJurado;
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo asignar jurado que permite mostrar
+ * los trabajos especiales de grado con el estatus "Solicitando Defensa" a
+ * traves de un listado
+ */
 @Controller
 public class CCatalogoAsignarJurado extends CGeneral {
 
@@ -49,7 +54,7 @@ public class CCatalogoAsignarJurado extends CGeneral {
 	@Wire
 	private Window wdwCatalogoAsignarJurado;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
 	 * disponibles dado el programa segun sea el profesor loggeado,
 	 * recorriendolo uno a uno para luego cargar una lista de estudiantes por
@@ -61,34 +66,35 @@ public class CCatalogoAsignarJurado extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		Programa programa =servicioPrograma
+		Programa programa = servicioPrograma
 				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
-		if(programa!=null){
-		tegsDefensa1 = servicioTeg
-				.buscarTegPorProgramaParaDefensa(programa);
-		if (!tegsDefensa1.isEmpty()) {
+		if (programa != null) {
+			tegsDefensa1 = servicioTeg
+					.buscarTegPorProgramaParaDefensa(programa);
+			if (!tegsDefensa1.isEmpty()) {
 
-			tegsDefensa.add(tegsDefensa1.get(0));
-			for (int i = 1; i < tegsDefensa1.size(); i++) {
-				long temp = tegsDefensa1.get(i - 1).getId();
-				if (temp != tegsDefensa1.get(i).getId()) {
-					tegsDefensa.add(tegsDefensa1.get(i));
+				tegsDefensa.add(tegsDefensa1.get(0));
+				for (int i = 1; i < tegsDefensa1.size(); i++) {
+					long temp = tegsDefensa1.get(i - 1).getId();
+					if (temp != tegsDefensa1.get(i).getId()) {
+						tegsDefensa.add(tegsDefensa1.get(i));
+					}
+
 				}
-
+				for (int i = 0; i < tegsDefensa.size(); i++) {
+					List<Estudiante> estudiantes = servicioEstudiante
+							.buscarEstudiantePorTeg(tegsDefensa.get(i));
+					String nombre = estudiantes.get(0).getNombre();
+					String apellido = estudiantes.get(0).getApellido();
+					tegsDefensa.get(i).setEstatus(nombre + " " + apellido);
+				}
+				ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(
+						tegsDefensa));
 			}
-			for (int i = 0; i < tegsDefensa.size(); i++) {
-				List<Estudiante> estudiantes = servicioEstudiante
-						.buscarEstudiantePorTeg(tegsDefensa.get(i));
-				String nombre = estudiantes.get(0).getNombre();
-				String apellido = estudiantes.get(0).getApellido();
-				tegsDefensa.get(i).setEstatus(nombre + " " + apellido);
-			}
-			ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegsDefensa));
-		}
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tegs disponibles, mediante el componente
 	 * de la lista, donde se podra visualizar la fecha, el nombre y apellido del
 	 * estudiante, la tematica, el area, el titulo y el nombre y apellido del
@@ -109,15 +115,14 @@ public class CCatalogoAsignarJurado extends CGeneral {
 			if (servicioEstudiante.buscarEstudiantePorTeg(teg).get(0)
 					.getNombre().toLowerCase()
 					.contains(txtEstudianteJurado.getValue().toLowerCase())
-					
+
 					&& teg.getFecha()
 							.toString()
 							.toLowerCase()
 							.contains(
 									txtFechaSolicitudDefensa.getValue()
 											.toLowerCase())
-					
-					
+
 					&& teg.getTematica()
 							.getareaInvestigacion()
 							.getNombre()
@@ -149,7 +154,7 @@ public class CCatalogoAsignarJurado extends CGeneral {
 		ltbSolicitudesDefensa.setModel(new ListModelList<Teg>(tegs));
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
 	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
 	 * poder ser mapeada y enviada a la vista asociada a ella.

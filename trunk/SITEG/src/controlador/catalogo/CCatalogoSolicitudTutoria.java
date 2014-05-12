@@ -22,6 +22,11 @@ import org.zkoss.zul.Window;
 import controlador.CGeneral;
 import controlador.CSolicitudTutoria;
 
+/**
+ * Controlador asociado a la vista catalogo solicitud tutorias  que permite mostrar las
+ * solicitudes de tutorias con el estatus "Por Revisar" a
+ * traves de un listado
+ */
 @Controller
 public class CCatalogoSolicitudTutoria extends CGeneral {
 
@@ -40,7 +45,7 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 	@Wire
 	private Textbox txtNombreEstudianteSolicitud;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todas las
 	 * solicitudes de tutorias disponibles, recorriendolo uno a uno para luego
 	 * cargar una lista de estudiantes por solicitud donde mediante la
@@ -69,7 +74,7 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar las solicitudes de tutorias disponibles,
 	 * mediante el componente de la lista, donde se podra visualizar el nombre y
 	 * apellido del estudiante, la tematica, el area de estas.
@@ -121,7 +126,7 @@ public class CCatalogoSolicitudTutoria extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto SolicitudTutoria al realizar el
 	 * evento doble clic sobre un item en especifico en la lista, extrayendo asi
 	 * su id, para luego poder ser mapeada y enviada a la vista asociado a ella.

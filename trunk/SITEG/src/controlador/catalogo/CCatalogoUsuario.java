@@ -6,6 +6,7 @@ import java.util.List;
 
 import modelo.seguridad.Usuario;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -19,6 +20,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo usuarioque permite mostrar los
+ * usuarios disponibles a traves de un listado
+ */
+@Controller
 public class CCatalogoUsuario extends CGeneral {
 
 	private static String vistaRecibida;
@@ -32,7 +38,7 @@ public class CCatalogoUsuario extends CGeneral {
 	@Wire
 	private Window wdwCatalogoUsuario;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * usuarios disponibles y se llena el listado del mismo en el componente
 	 * lista de la vista.
@@ -44,7 +50,7 @@ public class CCatalogoUsuario extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los usuarios disponibles, mediante el
 	 * componente de la lista, donde se podra visualizar el nombre de estos.
 	 */
@@ -65,10 +71,13 @@ public class CCatalogoUsuario extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
@@ -76,7 +85,7 @@ public class CCatalogoUsuario extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Usuario al realizar el evento doble
 	 * clic sobre un item en especifico en la lista, extrayendo asi su id, para
 	 * luego poder ser mapeada y enviada a la vista asociada a ella.

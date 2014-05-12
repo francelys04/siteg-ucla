@@ -25,6 +25,11 @@ import org.zkoss.zul.Window;
 import controlador.CGeneral;
 import controlador.CVerificarSolicitudProyecto;
 
+/**
+ * Controlador asociado a la vista catalogo solicitud registro proyecto que
+ * permite mostrar los trabajos especiales de grado con el estatus
+ * "Solicitando Registro" a traves de un listado
+ */
 @Controller
 public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 
@@ -49,7 +54,7 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	@Wire
 	private Textbox txtMostrarApellidoTutor;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
 	 * disponibles mediante el metodo "buscarDatos()", recorriendolo uno a uno
 	 * para luego cargar una lista de estudiantes por teg donde mediante la
@@ -60,7 +65,6 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
-		// hizo kairin nuevo, estaba malo igual XD
 		Programa programaDirector = servicioPrograma
 				.buscarProgramaDeDirector(ObtenerUsuarioProfesor());
 		System.out.println("programa" + programaDirector.getNombre());
@@ -92,7 +96,7 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra
 	 * visualizar el nombre y apellido del estudiante, la fecha, la tematica, el
@@ -100,7 +104,6 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 	 */
 	@Listen("onChange = #txtEstudianteProyecto, #txtMostrarFecha,#txtMostrarTematica,#txtMostrarArea,#txtMostrarTitulo,#txtMostrarNombreTutor,#txtMostrarApellidoTutor")
 	public void filtrarDatosCatalogo() {
-		// hizo kairin nuevo
 		List<Teg> teg1 = servicioTeg
 				.buscarTegPorProgramaParaRegistrarTeg(servicioPrograma
 						.buscarProgramaDeDirector(ObtenerUsuarioProfesor()));
@@ -155,7 +158,7 @@ public class CCatalogoSolicitudRegistroProyecto extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
 	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
 	 * poder ser mapeada y enviada a la vista a la vista asociada.

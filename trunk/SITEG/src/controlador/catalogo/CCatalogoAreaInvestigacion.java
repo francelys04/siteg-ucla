@@ -19,6 +19,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -36,6 +37,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo area que permite mostrar las areas
+ * de investigacion disponibles a traves de un listado
+ */
+@Controller
 public class CCatalogoAreaInvestigacion extends CGeneral {
 
 	private long id = 0;
@@ -59,7 +65,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 	@Wire
 	private Panel palBotones;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todas las areas
 	 * disponibles, condicionado por la variable "encontrado" donde si es igual
 	 * a "true" se llena el listado del mismo en el componente lista de la
@@ -91,7 +97,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite asignarle el valor de true a la variable booleana
 	 * "encontrado" cuando el usuario acceda a este catalogo, a traves del
 	 * entorno interno del sistema
@@ -101,7 +107,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite asignarle el valor de false a la variable booleana
 	 * "encontrado" cuando el usuario acceda a este catalogo, a traves del
 	 * portal web del sistema
@@ -111,7 +117,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 
 	}
 
-	/* Metodo que permite cargar una lista de areas dado un programa y un lapso */
+	/** Metodo que permite cargar una lista de areas dado un programa y un lapso */
 	@Listen("onSelect = #cmbPrograma")
 	public void llenarLista() {
 
@@ -124,7 +130,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar las areas disponibles, mediante el componente
 	 * de la lista, donde se podra visualizar el nombre y la descripcion de
 	 * estas.
@@ -160,17 +166,19 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Area al realizar el evento doble
 	 * clic sobre un item en especifico en la lista, dado al condicional, donde
 	 * la variable "encontrado" es igual a "false" el metodo recibirId, recibe
@@ -211,7 +219,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar una lista de las areas de investigacion que se
 	 * encuentran activas en el sistema mediante el componente "Jasperreport"
 	 */
@@ -252,7 +260,7 @@ public class CCatalogoAreaInvestigacion extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al Catalogo */
 	@Listen("onClick = #btnSalirCatalogoArea")
 	public void salirCatalogoAreas() {
 		wdwCatalogoArea.onClose();

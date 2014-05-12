@@ -17,6 +17,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -31,6 +32,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo lapso que permite mostrar los
+ * lapsos academicos disponibles a traves de un listado
+ */
+@Controller
 public class CCatalogoLapso extends CGeneral {
 
 	private static String vistaRecibida;
@@ -48,7 +54,7 @@ public class CCatalogoLapso extends CGeneral {
 	@Wire
 	private Textbox txtFechaFinalMostrarLapso;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * disponibles disponibles y se llena el listado del mismo en el componente
 	 * lista de la vista.
@@ -59,16 +65,18 @@ public class CCatalogoLapso extends CGeneral {
 		ltbLapso.setModel(new ListModelList<Lapso>(lapsos));
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 *  @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los lapsos disponibles, mediante el componente
 	 * de la lista, donde se podra visualizar el nombre de estos.
 	 */
@@ -103,7 +111,7 @@ public class CCatalogoLapso extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Lapso al realizar el evento doble
 	 * clic sobre un item en especifico en la lista, extrayendo asi su id, para
 	 * luego poder ser mapeada y enviada a la vista asociada a ella.
@@ -130,7 +138,7 @@ public class CCatalogoLapso extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar una lista de los lapsos academicos que se
 	 * encuentran activos en el sistema mediante el componente "Jasperreport"
 	 */
@@ -173,7 +181,7 @@ public class CCatalogoLapso extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al Catalogo */
 	@Listen("onClick = #btnSalirCatalogoLapso")
 	public void salirCatalogoLapso() {
 		wdwCatalogoLapso.onClose();

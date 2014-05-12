@@ -18,6 +18,10 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo  archivo que permite mostrar los archivos de
+ * trabajos especiales de grado disponibles a traves de un listado
+ */
 @Controller
 public class CCatalogoArchivo extends CGeneral {
 
@@ -35,7 +39,7 @@ public class CCatalogoArchivo extends CGeneral {
 	@Wire
 	private Window wdwCatalogoArchivo;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se se buscan todos los
 	 * archivos disponibles de Teg y se llena el listado del mismo en el
 	 * componente lista de la vista.
@@ -47,17 +51,19 @@ public class CCatalogoArchivo extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los archivos disponibles del Teg, mediante el
 	 * componente de la lista, donde se podra visualizar el nombre, la
 	 * descripcion y el programa de estos.
@@ -91,12 +97,12 @@ public class CCatalogoArchivo extends CGeneral {
 
 	}
 
-	/*
-	 * Metodo que permite obtener el objeto Archivo al realizar el evento
-	 * doble clic sobre un item en especifico en la lista, extrayendo asi su
-	 * id, donde para luego implementar el servicio de busqueda y cargar otro
-	 * objeto Archivo la cual mediante la instruccion Filedownload.save podra
-	 * ser descargado en una ubicacion que le indique el usuario.
+	/**
+	 * Metodo que permite obtener el objeto Archivo al realizar el evento doble
+	 * clic sobre un item en especifico en la lista, extrayendo asi su id, donde
+	 * para luego implementar el servicio de busqueda y cargar otro objeto
+	 * Archivo la cual mediante la instruccion Filedownload.save podra ser
+	 * descargado en una ubicacion que le indique el usuario.
 	 */
 	@Listen("onDoubleClick = #ltbArchivo")
 	public void descargarArchivo() {

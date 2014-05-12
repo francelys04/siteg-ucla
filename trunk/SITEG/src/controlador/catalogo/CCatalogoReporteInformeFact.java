@@ -8,6 +8,7 @@ import modelo.Estudiante;
 import modelo.Profesor;
 import modelo.Teg;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -21,7 +22,10 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
-
+/**
+ * Controlador asociado a la vista catalogo reporte informe fact
+ */
+@Controller
 public class CCatalogoReporteInformeFact extends CGeneral {
 
 	private static String vistaReporte;
@@ -34,8 +38,8 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 	private Textbox txtEstudianteInformeFactibilidad;
 	@Wire
 	private Textbox txtTituloInformeFactibilidad;
-	
-	/*
+
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los tegs
 	 * disponibles mediante el metodo "buscarDatos()", recorriendolo uno a uno
 	 * para luego cargar una lista de estudiantes por teg donde mediante la
@@ -48,19 +52,21 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 		// TODO Auto-generated method stub
 		List<Teg> tegs = buscarDatos();
 		for (int i = 0; i < tegs.size(); i++) {
-			List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(tegs.get(i));
+			List<Estudiante> estudiantes = servicioEstudiante
+					.buscarEstudiantePorTeg(tegs.get(i));
 			String nombre = estudiantes.get(0).getNombre();
 			String apellido = estudiantes.get(0).getApellido();
-			tegs.get(i).setEstatus(nombre+" "+apellido);
+			tegs.get(i).setEstatus(nombre + " " + apellido);
 		}
 		ltbListaInformeFactibilidad.setModel(new ListModelList<Teg>(tegs));
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite retornar un lista de los tegs, donde se recorre tanto
-	 * la lista del teg como los profesores activos, donde se compara si coincide las
-	 * cedulas de cada uno de los profesores para cargar la lista de tegs.
+	 * la lista del teg como los profesores activos, donde se compara si
+	 * coincide las cedulas de cada uno de los profesores para cargar la lista
+	 * de tegs.
 	 */
 	public List<Teg> buscarDatos() {
 
@@ -87,17 +93,20 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 		ltbListaInformeFactibilidad.setModel(new ListModelList<Teg>(tegs1));
 		return tegs1;
 	}
-	/*
+
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
-		vistaReporte = vista;		
+		vistaReporte = vista;
 	}
-	
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscarDatos()", mediante el componente de la lista, donde se podra
 	 * visualizar el nombre y apellido del estudiante y el titulo de estos.
@@ -106,21 +115,28 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 	public void filtrarDatosCatalogo() {
 		List<Teg> teg1 = buscarDatos();
 		for (int i = 0; i < teg1.size(); i++) {
-			List<Estudiante> es = servicioEstudiante.buscarEstudiantePorTeg(teg1.get(i));
+			List<Estudiante> es = servicioEstudiante
+					.buscarEstudiantePorTeg(teg1.get(i));
 			String nombre = es.get(0).getNombre();
 			String apellido = es.get(0).getApellido();
-			teg1.get(i).setEstatus(nombre+" "+apellido);
+			teg1.get(i).setEstatus(nombre + " " + apellido);
 		}
 		List<Teg> teg2 = new ArrayList<Teg>();
 
 		for (Teg teg : teg1) {
-			if (servicioEstudiante.buscarEstudiantePorTeg(teg)
-					.get(0).getNombre().toLowerCase()
-					.contains(txtEstudianteInformeFactibilidad.getValue().toLowerCase())
-					&& 
-					teg.getTitulo().toLowerCase()
-					.contains(txtTituloInformeFactibilidad.getValue().toLowerCase()))
-			{
+			if (servicioEstudiante
+					.buscarEstudiantePorTeg(teg)
+					.get(0)
+					.getNombre()
+					.toLowerCase()
+					.contains(
+							txtEstudianteInformeFactibilidad.getValue()
+									.toLowerCase())
+					&& teg.getTitulo()
+							.toLowerCase()
+							.contains(
+									txtTituloInformeFactibilidad.getValue()
+											.toLowerCase())) {
 				teg2.add(teg);
 			}
 		}
@@ -128,8 +144,8 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 		ltbListaInformeFactibilidad.setModel(new ListModelList<Teg>(teg2));
 
 	}
-	
-	/*
+
+	/**
 	 * Metodo que permite obtener el objeto Teg al realizar el evento doble clic
 	 * sobre un item en especifico en la lista, extrayendo asi su id, para luego
 	 * poder ser mapeada y enviada a la vista asociada a ella.
@@ -143,7 +159,7 @@ public class CCatalogoReporteInformeFact extends CGeneral {
 			Teg tegDatosCatalogo = (Teg) listItem.getValue();
 			final HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("id", tegDatosCatalogo.getId());
-			/*String vista = vistaReporte;*/
+			/** String vista = vistaReporte; */
 			map.put("vista", vistaReporte);
 			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 			Executions.sendRedirect("/vistas/arbol.zul");

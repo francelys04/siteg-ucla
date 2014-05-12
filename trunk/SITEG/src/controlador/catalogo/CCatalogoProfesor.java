@@ -17,6 +17,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -33,6 +34,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/***
+ * Controlador asociado a la vista catalogo profesor que permite mostrar los
+ * profesores disponibles a traves de un listado
+ */
+@Controller
 public class CCatalogoProfesor extends CGeneral {
 
 	private static String vistaRecibida;
@@ -62,7 +68,7 @@ public class CCatalogoProfesor extends CGeneral {
 	@Wire
 	private Button btnImprimir;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el map
 	 * recibido del catalogo exista y se llenan las listas correspondientes de
 	 * la vista dado una condicional, que si se cumple se mostrara los
@@ -103,16 +109,18 @@ public class CCatalogoProfesor extends CGeneral {
 		Selectors.wireComponents(comp, this, false);
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los profesores disponibles, dado a la
 	 * condicional de la variable booleana "variable" si es igual a "true" se
 	 * mostraran los profesores sin usuario, si la variable booleana
@@ -173,7 +181,7 @@ public class CCatalogoProfesor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Profesor al realizar el evento doble
 	 * clic sobre un item en especifico en la lista, extrayendo asi su cedula,
 	 * para luego poder ser mapeada y enviada a la vista asociada a ella.
@@ -211,9 +219,9 @@ public class CCatalogoProfesor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar una lista de los profesores que se encuentran
-	 * activos en el sistema mediante el componente "Jasperreport" 
+	 * activos en el sistema mediante el componente "Jasperreport"
 	 */
 	@Listen("onClick = #btnImprimir")
 	public void imprimir() throws SQLException {
@@ -253,13 +261,13 @@ public class CCatalogoProfesor extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al catalogo */
 	@Listen("onClick = #btnSalirCatalogoProfesor")
 	public void salirCatalogo() {
 		wdwCatalogoProfesor.onClose();
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al catalogo */
 	@Listen("onClick = #btnSalirCatalogoDirector")
 	public void salirCatalogoDirector() {
 		wdwCatalogoDirectorPrograma.onClose();

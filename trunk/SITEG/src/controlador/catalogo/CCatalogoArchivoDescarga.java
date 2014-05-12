@@ -21,6 +21,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo archivo descarga que permite mostrar
+ * los archivos de interes de gestion de trabajos especiales de grado
+ * disponibles a traves de un listado
+ */
 @Controller
 public class CCatalogoArchivoDescarga extends CGeneral {
 
@@ -39,7 +44,7 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 	@Wire
 	private Window wdwCatalogoArchivoDescarga;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se se buscan todos los
 	 * archivos disponibles de Descarga y se llena el listado del mismo en el
 	 * componente lista de la vista.
@@ -47,28 +52,42 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 	public void inicializar(Component comp) {
 		List<Archivo> archivo = servicioArchivo.buscarActivos("Descarga");
 		ltbArchivoDescarga.setModel(new ListModelList<Archivo>(archivo));
-				
+
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
+	/**
+	 * Metodo que permite asignarle el valor de false a la variable booleana
+	 * encontrado, para verificar si el usuario esta accediendo a traves del
+	 * sistema o del protal web
+	 */
 	public void metodoApagar() {
 		encontrado = false;
 	}
 
+	
+	/**
+	 * Metodo que permite asignarle el valor de true a la variable booleana
+	 * encontrado, para verificar si el usuario esta accediendo a traves del
+	 * sistema o del protal web
+	 */
 	public void metodoPrender() {
 		encontrado = true;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los archivos disponibles de Teg, mediante el
 	 * componente de la lista, donde se podra visualizar el nombre, la
 	 * descripcion y el programa de estos.
@@ -106,16 +125,15 @@ public class CCatalogoArchivoDescarga extends CGeneral {
 
 	}
 
-	/*
-	 * Metodo que permite dado al retorno de la variable booleana de
-	 * encontrado, si es "true", se obtendra el objeto Archivo al realizar el
-	 * evento doble clic sobre un item en especifico en la lista, y se extraera
-	 * su id, para luego implementar el servicio de busqueda y cargar otro
-	 * objeto Archivo la cual mediante la instruccion Filedownload.save podra
-	 * ser descargado en una ubicacion que le indique el usuario. Sino, si la
-	 * variable encontrado es igual a "false" el objeto extraido al seleccionar
-	 * un item de la lista, sera mapeada con su id para ser enviada a la vista
-	 * VSubirArchivoDescarga.
+	/**
+	 * Metodo que permite dado al retorno de la variable booleana de encontrado,
+	 * si es "true", se obtendra el objeto Archivo al realizar el evento doble
+	 * clic sobre un item en especifico en la lista, y se extraera su id, para
+	 * luego implementar el servicio de busqueda y cargar otro objeto Archivo la
+	 * cual mediante la instruccion Filedownload.save podra ser descargado en
+	 * una ubicacion que le indique el usuario. Sino, si la variable encontrado
+	 * es igual a "false" el objeto extraido al seleccionar un item de la lista,
+	 * sera mapeada con su id para ser enviada a la vista VSubirArchivoDescarga.
 	 */
 	@Listen("onDoubleClick = #ltbArchivoDescarga")
 	public void descargarArchivo() {

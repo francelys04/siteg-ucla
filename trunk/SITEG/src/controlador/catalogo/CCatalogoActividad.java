@@ -32,6 +32,10 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador asociado a la vista catalogo actividad que permite mostrar las actividades
+ * disponibles a traves de un listado
+ */
 @Controller
 public class CCatalogoActividad extends CGeneral {
 
@@ -49,7 +53,7 @@ public class CCatalogoActividad extends CGeneral {
 	@Wire
 	private Window wdwActividad;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se se buscan todas las
 	 * actividades disponibles y se llena el listado del mismo en el componente
 	 * lista de la vista.
@@ -60,17 +64,20 @@ public class CCatalogoActividad extends CGeneral {
 		ltbActividad.setModel(new ListModelList<Actividad>(actividad));
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre de la vista a la cual esta asociado
 	 * este catalogo para poder redireccionar al mismo luego de realizar la
 	 * operacion correspondiente a este.
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar las actividades disponibles, mediante el
 	 * componente de la lista, donde se podra visualizar el nombre y la
 	 * descripcion de estas.
@@ -100,33 +107,34 @@ public class CCatalogoActividad extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el objeto Actividad al realizar el evento
 	 * doble clic sobre un item en especifico en la lista, extrayendo asi su id,
 	 * para luego poder ser enviada mediante un map a la vista asociada a ella.
 	 */
 	@Listen("onDoubleClick = #ltbActividad")
 	public void mostrarDatosCatalogo() {
-		
-		try {
-		
-		if (ltbActividad.getItemCount() != 0) {
-			Listitem listItem = ltbActividad.getSelectedItem();
-			Actividad actividadDatosCatalogo = (Actividad) listItem.getValue();
-			final HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", actividadDatosCatalogo.getId());
-			String vista = vistaRecibida;
-			map.put("vista", vista);
-			Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-			Executions.sendRedirect("/vistas/arbol.zul");
 
-			wdwCatalogoActividad.onClose();
-		}
+		try {
+
+			if (ltbActividad.getItemCount() != 0) {
+				Listitem listItem = ltbActividad.getSelectedItem();
+				Actividad actividadDatosCatalogo = (Actividad) listItem
+						.getValue();
+				final HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("id", actividadDatosCatalogo.getId());
+				String vista = vistaRecibida;
+				map.put("vista", vista);
+				Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+				Executions.sendRedirect("/vistas/arbol.zul");
+
+				wdwCatalogoActividad.onClose();
+			}
 		} catch (NullPointerException e) {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar una lista de las actividades que se encuentran
 	 * activos en el sistema mediante el componente "Jasperreport"
 	 */
@@ -169,7 +177,7 @@ public class CCatalogoActividad extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al Catalogo */
+	/** Metodo que permite cerrar la ventana correspondiente al Catalogo */
 	@Listen("onClick = #btnSalirCatalogoActividad")
 	public void salirCatalogoActividad() {
 		wdwCatalogoActividad.onClose();
