@@ -35,7 +35,7 @@ public class SSolicitudTutoria {
 	}
 
 	public List<SolicitudTutoria> buscarSolicitudesTutoriaNoCulminadasEstudiante(Estudiante estudiante){
-		List<SolicitudTutoria> solNoCulminadas = interfaceSolicitud.findByEstatusOrEstatusOrEstatusAndEstudiantes(this.Estatus[1], this.Estatus[2],this.Estatus[3], estudiante);
+		List<SolicitudTutoria> solNoCulminadas = interfaceSolicitud.findByEstatusOrEstatusOrEstatusAndEstudiantes(this.Estatus[0], this.Estatus[1],this.Estatus[3], estudiante);
 		return solNoCulminadas;
 	}
 	
