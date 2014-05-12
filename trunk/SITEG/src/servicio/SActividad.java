@@ -41,7 +41,7 @@ public class SActividad {
 
 	public Actividad buscarActividadPorNombre(String label) {
 		Actividad actividad;
-		actividad = interfaceActividad.findByNombre(label);
+		actividad = interfaceActividad.findByNombreAllIgnoreCase(label);
 		return actividad;
 	}
 

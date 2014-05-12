@@ -36,7 +36,7 @@ public class SAreaInvestigacion {
 
 	public AreaInvestigacion buscarAreaPorNombre(String areas) {
 		AreaInvestigacion area;
-		area = interfaceArea.findByNombre(areas);
+		area = interfaceArea.findByNombreAllIgnoreCase(areas);
 		return area;
 	}
 

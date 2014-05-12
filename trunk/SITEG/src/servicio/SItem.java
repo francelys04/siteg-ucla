@@ -41,7 +41,7 @@ public class SItem {
 	
 	public ItemEvaluacion buscarPorNombreYTipo(String nombre, String tipo) {
 		ItemEvaluacion item;
-		item = interfaceItem.findByNombreAndTipo(nombre, tipo);
+		item = interfaceItem.findByNombreAndTipoAllIgnoreCase(nombre, tipo);
 		return item;
 	}
 	

@@ -43,7 +43,7 @@ public class SPrograma {
 
 	public Programa buscarPorNombrePrograma(String nombre) {
 		Programa programa;
-		programa = interfacePrograma.findByNombre(nombre);
+		programa = interfacePrograma.findByNombreAllIgnoreCase(nombre);
 		return programa;
 	}
 

@@ -18,6 +18,6 @@ public interface IActividadDAO extends JpaRepository<Actividad, Long> {
 	public List<Actividad> buscarActividadDisponible(Programa programa,
 			Lapso lapso);
 
-	public Actividad findByNombre(String label);
+	public Actividad findByNombreAllIgnoreCase(String label);
 }
 

@@ -41,7 +41,7 @@ public class STematica {
 	public Tematica buscarTematicaPorNombre(String tematica) {
 		// TODO Auto-generated method stub
 		Tematica tema;
-		tema = interfaceTematica.findByNombre(tematica);
+		tema = interfaceTematica.findByNombreAllIgnoreCase(tematica);
 		return tema;
 	}
 

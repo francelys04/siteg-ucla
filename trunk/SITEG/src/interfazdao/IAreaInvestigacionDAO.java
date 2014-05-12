@@ -13,8 +13,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface IAreaInvestigacionDAO extends JpaRepository<AreaInvestigacion, Long> {
 
 
-	 public AreaInvestigacion findByNombre(String nombre);
-
 	public List<AreaInvestigacion> findByEstatusTrueOrderByNombreAsc();
 	
 	@Query("select a from AreaInvestigacion a where a.id not in (select aa.area from ProgramaArea aa where aa.programa = ?1 and aa.lapso = ?2)")
@@ -22,6 +20,8 @@ public interface IAreaInvestigacionDAO extends JpaRepository<AreaInvestigacion, 
 	
 	@Query("select a from AreaInvestigacion a where a.id in (select aa.area from ProgramaArea aa where aa.programa = ?1 and aa.lapso = ?2)")
 	public List<AreaInvestigacion> buscarAreasPrograma(Programa programa, Lapso lapso);
+
+	public AreaInvestigacion findByNombreAllIgnoreCase(String areas);
 	
 	
 }

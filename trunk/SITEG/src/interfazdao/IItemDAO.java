@@ -17,7 +17,8 @@ public interface IItemDAO extends JpaRepository<ItemEvaluacion, Long> {
 	@Query("select i from ItemEvaluacion i where i.id not in (select pi.item from ProgramaItem pi where pi.programa = ?1 and pi.lapso = ?2)")
 	public List<ItemEvaluacion> buscarDisponibles(Programa programa, Lapso lapso);
 
-	public ItemEvaluacion findByNombreAndTipo(String nombre, String tipo);
+	public ItemEvaluacion findByNombreAndTipoAllIgnoreCase(String nombre,
+			String tipo);
 	
 	
 }
