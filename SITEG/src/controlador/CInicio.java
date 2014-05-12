@@ -35,9 +35,9 @@ import org.zkoss.zul.Window;
 import controlador.catalogo.CCatalogoArchivoDescarga;
 import controlador.catalogo.CCatalogoAreaInvestigacion;
 
-/*
- * Controlador que permite activar las funcionalidades del portal web; desde
- * la apertura de ventanas, como el llenado del cronograma
+/**
+ * Controlador que permite activar las funcionalidades del portal web; desde la
+ * apertura de ventanas, como el llenado del cronograma
  */
 @Controller
 public class CInicio extends CGeneral {
@@ -95,7 +95,7 @@ public class CInicio extends CGeneral {
 	private static String url6;
 	private static String url7;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral se llenan los campos y combos
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
 	 * este controlador.
@@ -146,11 +146,10 @@ public class CInicio extends CGeneral {
 
 	}
 
-	/*
-	 * Metodos que permite llenar enviar a una pagina de segun la catidad de
-	 * enlaces
+	/**
+	 * Metodos que permite redireccionar a una pagina de acuerdo al url del
+	 * enlace
 	 */
-	
 
 	@Listen("onClick = #img1")
 	public void enlaceUno() {
@@ -158,39 +157,73 @@ public class CInicio extends CGeneral {
 		exec.sendRedirect(url1);
 	}
 
+	/**
+	 * Metodos que permite redireccionar a una pagina de acuerdo al url del
+	 * enlace
+	 */
+
 	@Listen("onClick = #img2")
 	public void enlaceDos() {
 		Execution exec = Executions.getCurrent();
 		exec.sendRedirect(url2);
 	}
 
+	/**
+	 * Metodos que permite redireccionar a una pagina de acuerdo al url del
+	 * enlace
+	 */
+
 	@Listen("onClick = #img3")
 	public void enlaceTres() {
 		Execution exec = Executions.getCurrent();
 		exec.sendRedirect(url3);
 	}
+
+	/**
+	 * Metodos que permite redireccionar a una pagina de acuerdo al url del
+	 * enlace
+	 */
+
 	@Listen("onClick = #img4")
 	public void enlaceCuatro() {
 		Execution exec = Executions.getCurrent();
 		exec.sendRedirect(url4);
 	}
+
+	/**
+	 * Metodos que permite redireccionar a una pagina de acuerdo al url del
+	 * enlace
+	 */
+
 	@Listen("onClick = #img5")
 	public void enlaceCinco() {
 		Execution exec = Executions.getCurrent();
 		exec.sendRedirect(url5);
 	}
+
+	/**
+	 * Metodos que permite redireccionar a una pagina de acuerdo al url del
+	 * enlace
+	 */
+
 	@Listen("onClick = #img6")
 	public void enlaceSeis() {
 		Execution exec = Executions.getCurrent();
 		exec.sendRedirect(url6);
 	}
+
+	/**
+	 * Metodos que permite redireccionar a una pagina de acuerdo al url del
+	 * enlace
+	 */
+
 	@Listen("onClick = #img7")
 	public void enlaceSiete() {
 		Execution exec = Executions.getCurrent();
 		exec.sendRedirect(url7);
 	}
 
-	/*
+	/**
 	 * Metodo que permite llenar la lista de imagenes correspondientes a las
 	 * noticias y esta lista a su vez es retornada
 	 */
@@ -211,7 +244,7 @@ public class CInicio extends CGeneral {
 		return listaImagenes;
 	}
 
-	/*
+	/**
 	 * Metodo que permite tomar la imagen en la posicion "index" de la lista de
 	 * imagenes para las noticias y la retorna
 	 */
@@ -221,7 +254,7 @@ public class CInicio extends CGeneral {
 		return imagen;
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar el cronograma academico de determinado programa
 	 * en el lapso actual
 	 */
@@ -236,7 +269,7 @@ public class CInicio extends CGeneral {
 		wdwCrono.setVisible(false);
 	}
 
-	/* Metodo que permite abrir la vista de solicitar tutor */
+	/** Metodo que permite abrir la vista de solicitar tutor */
 	@Listen("onClick = #btnSolicitarTutor")
 	public void SolicitarTutor() {
 		Window window = (Window) Executions.createComponents(
@@ -244,7 +277,7 @@ public class CInicio extends CGeneral {
 		window.doModal();
 	}
 
-	/* Metodo que permite abrir la vista de reinicio de contrasenia */
+	/** Metodo que permite abrir la vista de reinicio de contrasenia */
 	@Listen("onClick = #lblOlvidoClave")
 	public void reiniciarClave() {
 		Window window = (Window) Executions.createComponents(
@@ -252,7 +285,7 @@ public class CInicio extends CGeneral {
 		window.doModal();
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir la vista de informacion del "Quienes Somos" de
 	 * SITEG
 	 */
@@ -263,20 +296,25 @@ public class CInicio extends CGeneral {
 		window.doModal();
 	}
 
-	/* Metodo que permite abrir la vista de "Quienes Somos" de SITEG */
+	/** Metodo que permite abrir la vista de "Quienes Somos" de SITEG */
 	@Listen("onClick = #mitContactanos")
 	public void contactanos() {
 		Window window = (Window) Executions.createComponents(
 				"/vistas/portal-web/VContactanos.zul", null, null);
 		window.doModal();
 	}
+
+	/**
+	 * Metodo que permite redireccionar al usuario a la pagina principal del
+	 * sistema
+	 */
 	@Listen("onClick = #mitInicio")
 	public void inicio() {
 		Execution exec = Executions.getCurrent();
 		exec.sendRedirect("http://localhost:8080/SITEG/VPrincipal.zul");
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir la vista de la biblioteca virtual de TEG
 	 */
 	@Listen("onClick = #btnBiblioteca")
@@ -286,7 +324,7 @@ public class CInicio extends CGeneral {
 		window.doModal();
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir la vista de informacion de interes sobre la
 	 * gestion de trabajos especiales de grado
 	 */
@@ -301,7 +339,7 @@ public class CInicio extends CGeneral {
 		areas.metodoApagar();
 	}
 
-	/* Metodo que permite abrir la vista de consultar estatus del TEG */
+	/** Metodo que permite abrir la vista de consultar estatus del TEG */
 	@Listen("onClick = #btnConsultarEstatus")
 	public void ventanaEmergente(Event e) {
 

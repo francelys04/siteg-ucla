@@ -25,9 +25,9 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
- * Controlador que permite guardar los avances realizados entre el tutor y
- * el estudiante durante el proyecto
+/**
+ * Controlador que permite guardar los avances realizados entre el tutor y el
+ * estudiante durante el proyecto
  */
 @Controller
 public class CRegistrarAvance extends CGeneral {
@@ -63,7 +63,7 @@ public class CRegistrarAvance extends CGeneral {
 	@Wire
 	private Button btnFinalizarRegistrarAvance;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -104,15 +104,17 @@ public class CRegistrarAvance extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 *  @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana, actualizando los cambios realizados
 	 * en el resto del sistema
 	 */
@@ -125,7 +127,7 @@ public class CRegistrarAvance extends CGeneral {
 		wdwRegistrarAvance.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite guardar un avance al proyecto, pudiendo agregar mas
 	 * avances en el futuro, cambia el estatus del teg, y almacena el estatus en
 	 * la tabla de historial
@@ -193,7 +195,7 @@ public class CRegistrarAvance extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite finalizar los avances del proyecto, al accionar este
 	 * evento se cambia el estatus del teg y el estudiante ya puede registrar su
 	 * trabajo especial de grado. Tambien en este metodo se actualiza el cambio
@@ -228,7 +230,7 @@ public class CRegistrarAvance extends CGeneral {
 				});
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarRegistrarAvance")
@@ -238,7 +240,7 @@ public class CRegistrarAvance extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite llenar la lista con los avances ya realizados en el
 	 * proyecto
 	 */
@@ -266,7 +268,7 @@ public class CRegistrarAvance extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirRegistrarAvance")
 	public void salirRegistrarAvance() {
 		wdwRegistrarAvance.onClose();

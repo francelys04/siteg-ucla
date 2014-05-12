@@ -31,9 +31,9 @@ import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
- * Controlador que permite verificar si un proyecto de trabajo de grado
- * cumple con los requisitos establecidos por el programa
+/**
+ * Controlador que permite verificar si un proyecto de trabajo de grado cumple
+ * con los requisitos establecidos por el programa
  */
 @Controller
 public class CVerificarSolicitudProyecto extends CGeneral {
@@ -80,7 +80,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 	@Wire
 	private Datebox db1;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -124,7 +124,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover uno o varios requisitos hacia la lista de
 	 * requisitos entregados
 	 */
@@ -138,7 +138,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 				.removeAll(selectedItems);
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover uno o varios requisitos de la lista de
 	 * requisitos entregados a la lista de la izquierda (requisitos
 	 * disponibles).
@@ -153,7 +153,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 				.removeAll(selectedItems);
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
 	 */
 	@Listen("onClick = #btnCancelar")
@@ -165,7 +165,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 		rdoIncompleto.setChecked(false);
 	}
 
-	/*
+	/**
 	 * Metodo que permite guardar los requisitos que han sido entregados por el
 	 * estudiante, cambiando el estatus de TEG asi como tambien actualizando los
 	 * cambios en la respectiva tabla de historial. Ademas se envia un correo al
@@ -231,7 +231,7 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 													String estatus = "Proyecto Registrado";
 													teg.setEstatus(estatus);
 
-													/*
+													/**
 													 * Guardar datos en la tabla
 													 * teg_estatus
 													 */
@@ -275,9 +275,15 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite llenar las listas de requisitos consignados y no
 	 * consignados para el teg
+	 * 
+	 * @param programa
+	 *            objeto del programa
+	 * @param teg
+	 *            trabajo especial de grado seleccionado para verificar los
+	 *            requisitos
 	 */
 	public void llenarRequisitos(Programa programa, Teg teg) {
 
@@ -300,7 +306,9 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la pantalla actualizando los cambios realizados */
+	/**
+	 * Metodo que permite cerrar la pantalla actualizando los cambios realizados
+	 */
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -310,16 +318,18 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 		wdwVerificarSolicitudProyecto.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 *  @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirVerificarSolicitud")
 	public void salirVerificarSolicitud() {
 

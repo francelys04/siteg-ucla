@@ -21,7 +21,7 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoItem;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
+/**Controlador que permite realizar las operaciones basicas (CRUD)
  * sobre la entidad Item de evaluacion*/
 @Controller
 public class CItem extends CGeneral {
@@ -41,7 +41,7 @@ public class CItem extends CGeneral {
 	private Window wdwItem;
 	private long id = 0;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -70,7 +70,7 @@ public class CItem extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite el guardado o modificacion de una entidad Item de
 	 * evaluacion
 	 */
@@ -111,7 +111,7 @@ public class CItem extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 * variable global id
 	 */
@@ -124,7 +124,7 @@ public class CItem extends CGeneral {
 		id = 0;
 	}
 
-	/*
+	/**
 	 * Metodo que permite la eliminacion logica de una entidad Item de
 	 * evaluacion
 	 */
@@ -150,7 +150,7 @@ public class CItem extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -164,7 +164,7 @@ public class CItem extends CGeneral {
 		catalogo.recibir("maestros/VItem");
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana correspondiente a los items de
 	 * evaluacion
 	 */
@@ -175,7 +175,7 @@ public class CItem extends CGeneral {
 	}
 	
 	
-	/*
+	/**
 	 * Metodo que permite buscar si un item de evaluacion existe, de acuerdo al nombre y tipo
 	 * del item
 	 */

@@ -26,7 +26,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
+/**
  * Controlador que permite indicar si un proyecto es factible o no,
  * cambiando el estatus del teg
  */
@@ -67,7 +67,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	@Wire
 	private Window wdwCatalogoRegistrarFactibilidad;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -126,16 +126,18 @@ public class CRegistrarFactibilidad extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 *  @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/* Metodo que permite cerrar la pantalla actualizando los cambios realizados */
+	/** Metodo que permite cerrar la pantalla actualizando los cambios realizados */
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -145,7 +147,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 		wdwRegistrarFactibilidad.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite aceptar la factibilidad de un determinado proyecto,
 	 * cambiando asi el estatus del proyecto a Proyecto Factible. Ademas se
 	 * actualiza la tabla de cambios de estatus del teg
@@ -182,7 +184,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite rechazar la factibilidad de un determinado proyecto,
 	 * cambiando asi el estatus del proyecto a Proyecto No Factible. Ademas se
 	 * actualiza la tabla de cambios de estatus del teg
@@ -233,7 +235,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	}
 	
 	
-	/*
+	/**
 	 * Metodo que permite actualizar el estatus de la solicitud del o los
 	 * estudiantes asociados al teg, a finalizada, para asi indicar que ha
 	 * terminado la tutoria
@@ -249,7 +251,7 @@ public class CRegistrarFactibilidad extends CGeneral {
 	
 	
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirRegistrarFactibilidad")
 	public void salirRegistrarFactibilidad() {
 		wdwRegistrarFactibilidad.onClose();

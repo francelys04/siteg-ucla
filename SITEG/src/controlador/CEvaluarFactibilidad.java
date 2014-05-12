@@ -30,7 +30,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
+/**
  * Controlador que permite asignar una ponderacion cualitativa a los items
  * de evaluacion de factibilidad de un proyecto. Esta accion es realizada
  * por parte de los integrantes de la comision evaluadora
@@ -70,7 +70,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 	@Wire
 	private Window wdwCatalogoEvaluarFactibilidad;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral dondese verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -125,16 +125,18 @@ public class CEvaluarFactibilidad extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 *  @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/* Metodo que permite cerrar la pantalla actualizando los cambios realizados */
+	/** Metodo que permite cerrar la pantalla actualizando los cambios realizados */
 	private void salir() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		String vista = vistaRecibida;
@@ -144,7 +146,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 		wdwEvaluarFactibilidad.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite guardar las ponderaciones de los items de
 	 * factibilidad, creando un nuevo registro de factibilidad, de ser el caso y
 	 * se actualiza el estatus del TEG y la correspondiente tabla de historico
@@ -252,7 +254,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
 	 */
 	@Listen("onClick = #btnCancelarEvaluacionFactibilidad")
@@ -267,7 +269,7 @@ public class CEvaluarFactibilidad extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirEvaluacionFactibilidad")
 	public void salirEvaluarFactibilidad() {
 

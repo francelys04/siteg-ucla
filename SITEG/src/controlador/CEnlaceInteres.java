@@ -30,8 +30,10 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoEnlaceInteres;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
- * sobre la entidad EnlaceInteres*/
+/**
+ * Controlador que permite realizar las operaciones basicas (CRUD) sobre la
+ * entidad EnlaceInteres
+ */
 @Controller
 public class CEnlaceInteres extends CGeneral {
 
@@ -61,7 +63,7 @@ public class CEnlaceInteres extends CGeneral {
 
 	private long id = 0;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -76,7 +78,7 @@ public class CEnlaceInteres extends CGeneral {
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
-		/*
+		/**
 		 * Validacion para vaciar la informacion del catalogo a la vista
 		 * VEnlacesInteres.zul si la varible map tiene algun dato contenido
 		 */
@@ -108,7 +110,7 @@ public class CEnlaceInteres extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -121,7 +123,7 @@ public class CEnlaceInteres extends CGeneral {
 		window.doModal();
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la vista de registrar el enlace de interes
 	 */
 	@Listen("onClick = #btnSalirEnlace")
@@ -130,7 +132,7 @@ public class CEnlaceInteres extends CGeneral {
 		wdwEnlace.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite el guardado o modificacion de una entidad
 	 * EnlaceInteres
 	 */
@@ -194,28 +196,7 @@ public class CEnlaceInteres extends CGeneral {
 
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad EnlaceInteres */
 	/**
-	 * @Listen("onClick = #btnEliminarEnlace") public void eliminarEnlace() {
-	 * 
-	 *                  Messagebox.show(
-	 *                  "¿Desea eliminar los datos del enlace de interes?",
-	 *                  "Dialogo de confirmacion", Messagebox.OK |
-	 *                  Messagebox.CANCEL, Messagebox.QUESTION, new
-	 *                  org.zkoss.zk.ui.event.EventListener<Event>() { public
-	 *                  void onEvent(Event evt) throws InterruptedException { if
-	 *                  (evt.getName().equals("onOK")) { EnlaceInteres enlace =
-	 *                  servicioEnlace .buscarEnlace(id);
-	 *                  enlace.setEstatus(false);
-	 *                  servicioEnlace.guardar(enlace); cancelarEnlace();
-	 *                  Messagebox.show(
-	 *                  "Enlace de interes eliminado exitosamente",
-	 *                  "Informacion", Messagebox.OK, Messagebox.INFORMATION);
-	 * 
-	 *                  } } }); }
-	 */
-
-	/*
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 * variable global id
 	 */
@@ -228,8 +209,9 @@ public class CEnlaceInteres extends CGeneral {
 
 	}
 
-	/*
-	 * Metodo que permite subir una imagen al formulario
+	/**
+	 * Metodo que permite subir una imagen al formulario param event imagen
+	 * subida por el usuario al sistema
 	 */
 	@Listen("onUpload = #fudImagenEnlace")
 	public void processMedia(UploadEvent event) {

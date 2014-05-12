@@ -26,7 +26,7 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoLapso;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
+/**Controlador que permite realizar las operaciones basicas (CRUD)
  * sobre la entidad Lapso*/
 @Controller
 public class CLapso extends CGeneral {
@@ -49,7 +49,7 @@ public class CLapso extends CGeneral {
 	private Button btnGuardarLapso;
 	private long id = 0;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -77,7 +77,7 @@ public class CLapso extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -91,7 +91,7 @@ public class CLapso extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite el guardado o modificacion de una entidad Lapso, asi
 	 * como la asignacion, de ser necesaria, de las condiciones por programa
 	 * para el lapso actual
@@ -183,7 +183,7 @@ public class CLapso extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad Lapso */
+	/** Metodo que permite la eliminacion logica de una entidad Lapso */
 	@Listen("onClick = #btnEliminarLapso")
 	public void eliminarLapso() {
 		Messagebox.show("¿Desea eliminar los datos del lapso academico?",
@@ -207,7 +207,7 @@ public class CLapso extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 * variable global id
 	 */
@@ -221,7 +221,7 @@ public class CLapso extends CGeneral {
 		id = 0;
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana correspondiente a los lapsos
 	 * academicos
 	 */
@@ -230,7 +230,7 @@ public class CLapso extends CGeneral {
 		wdwLapsoAcademico.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar si un lapso academico existe, de acuerdo al
 	 * nombre del lapso academico
 	 */

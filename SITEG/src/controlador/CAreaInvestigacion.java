@@ -21,8 +21,10 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoAreaInvestigacion;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
- * sobre la entidad AreaInvestigacion*/
+/**
+ * Controlador que permite realizar las operaciones basicas (CRUD) sobre la
+ * entidad AreaInvestigacion
+ */
 @Controller
 public class CAreaInvestigacion extends CGeneral {
 
@@ -43,7 +45,7 @@ public class CAreaInvestigacion extends CGeneral {
 	private Window wdwArea;
 	private long id = 0;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -72,7 +74,7 @@ public class CAreaInvestigacion extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -88,7 +90,7 @@ public class CAreaInvestigacion extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite el guardado o modificacion de una entidad
 	 * AreaInvestigacion
 	 */
@@ -126,7 +128,9 @@ public class CAreaInvestigacion extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad AreaInvestigacion */
+	/**
+	 * Metodo que permite la eliminacion logica de una entidad AreaInvestigacion
+	 */
 	@Listen("onClick = #btnEliminarArea")
 	public void eliminarArea() {
 		Messagebox.show(
@@ -152,7 +156,7 @@ public class CAreaInvestigacion extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 * variable global id
 	 */
@@ -165,7 +169,7 @@ public class CAreaInvestigacion extends CGeneral {
 		id = 0;
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana correspondiente a las areas de
 	 * investigacion
 	 */
@@ -174,7 +178,7 @@ public class CAreaInvestigacion extends CGeneral {
 		wdwArea.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar si un area de investigacion existe, de acuerdo
 	 * al nombre ingresado
 	 */

@@ -28,7 +28,7 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoEstudiante;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
+/**Controlador que permite realizar las operaciones basicas (CRUD)
  * sobre la entidad Estudiante*/
 @Controller
 public class CEstudiante extends CGeneral {
@@ -78,7 +78,7 @@ public class CEstudiante extends CGeneral {
 	@Wire
 	private Window wdwEstudiante;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -131,7 +131,7 @@ public class CEstudiante extends CGeneral {
 				.setConstraint("/.+@.+\\.[a-z]+/: Debe ingresar un correo como: ejemplo@ejemplo.com");
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -145,7 +145,7 @@ public class CEstudiante extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite el guardado o modificacion de una entidad Estudiante,
 	 * asi como la verificacion y guardado de su respectivo objeto usuario
 	 */
@@ -212,7 +212,7 @@ public class CEstudiante extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad Estudiante */
+	/** Metodo que permite la eliminacion logica de una entidad Estudiante */
 	@Listen("onClick = #btnEliminarEstudiante")
 	public void eliminarEstudiante() {
 		String cedula = txtCedulaEstudiante.getValue();
@@ -254,7 +254,7 @@ public class CEstudiante extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista
 	 */
 	@Listen("onClick = #btnCancelarEstudiante")
@@ -284,7 +284,7 @@ public class CEstudiante extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente a los estudiantes */
+	/** Metodo que permite cerrar la ventana correspondiente a los estudiantes */
 	@Listen("onClick = #btnSalirEstudiante")
 	public void salirEstudiante() {
 		wdwEstudiante.onClose();
@@ -292,7 +292,7 @@ public class CEstudiante extends CGeneral {
 	
 	
 	
-	/*
+	/**
 	 * Metodo que permite buscar si un estudiante existe, de acuerdo al numero de
 	 * cedula del estudiante
 	 */

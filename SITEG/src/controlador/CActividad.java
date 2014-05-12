@@ -21,8 +21,10 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoActividad;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
- * sobre la entidad Actividad*/
+/**
+ * Controlador que permite realizar las operaciones basicas (CRUD) sobre la
+ * entidad Actividad
+ */
 @Controller
 public class CActividad extends CGeneral {
 
@@ -48,7 +50,7 @@ public class CActividad extends CGeneral {
 	@Wire
 	private Window wdwActividad;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -72,7 +74,7 @@ public class CActividad extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -86,7 +88,7 @@ public class CActividad extends CGeneral {
 		catalogo.recibir("maestros/VActividad");
 	}
 
-	/* Metodo que permite el guardado o modificacion de una entidad Actividad */
+	/** Metodo que permite el guardado o modificacion de una entidad Actividad */
 	@Listen("onClick = #btnGuardarActividad")
 	public void guardarActividad() {
 		if ((txtNombreActividad.getText().compareTo("") == 0)
@@ -122,7 +124,7 @@ public class CActividad extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad Actividad */
+	/** Metodo que permite la eliminacion logica de una entidad Actividad */
 	@Listen("onClick = #btnEliminarActividad")
 	public void eliminarActividad() {
 		Messagebox.show("¿Desea eliminar los datos de la actividad?",
@@ -146,7 +148,7 @@ public class CActividad extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 * variable global id
 	 */
@@ -159,28 +161,28 @@ public class CActividad extends CGeneral {
 		btnEliminarActividad.setDisabled(true);
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente a las actividades */
+	/** Metodo que permite cerrar la ventana correspondiente a las actividades */
 	@Listen("onClick = #btnSalirActividad")
 	public void salirActividad() {
 		wdwActividad.onClose();
 	}
-	
-	/*
-	 * Metodo que permite buscar si una actividad existe, de acuerdo al nombre de la
-	 * actividad
+
+	/**
+	 * Metodo que permite buscar si una actividad existe, de acuerdo al nombre
+	 * de la actividad
 	 */
 	@Listen("onChange = #txtNombreActividad")
 	public void buscarNombreActividad() {
-		Actividad actividad = servicioActividad.buscarActividadPorNombre(txtNombreActividad.getValue());
+		Actividad actividad = servicioActividad
+				.buscarActividadPorNombre(txtNombreActividad.getValue());
 		if (actividad != null) {
 			txtNombreActividad.setValue(actividad.getNombre());
 			txtDescripcionActividad.setValue(actividad.getDescripcion());
 			id = actividad.getId();
 			btnEliminarActividad.setDisabled(false);
-				
+
 		}
 
 	}
-	
-	
+
 }

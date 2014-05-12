@@ -17,7 +17,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/* Controlador que permite subir un TEG una vez que ha sido aprobado */
+/** Controlador que permite subir un TEG una vez que ha sido aprobado */
 @Controller
 public class CSubirTeg extends CGeneral {
 
@@ -37,7 +37,7 @@ public class CSubirTeg extends CGeneral {
 	private Window wdwSubirTeg;
 	public static Programa programaUsuario;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se llenan los objetos
 	 * empleados dentro de este controlador.
 	 */
@@ -49,7 +49,7 @@ public class CSubirTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite obtener el programa del usuario loggeado y validar que
 	 * un estudiante para subir un teg, este debe tener el estatus TEG Aprobado
 	 */
@@ -86,9 +86,12 @@ public class CSubirTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite validar que el documento posee una extension adecuada
 	 * asi como tambien permite subirlo a la vista
+	 * 
+	 * @param event
+	 *            archivo subido al sistema por el usuario
 	 */
 	@Listen("onUpload = #btnArchivo")
 	public void subirArchivo(UploadEvent event) {
@@ -122,7 +125,7 @@ public class CSubirTeg extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarArchivo")
@@ -134,7 +137,7 @@ public class CSubirTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la vista subir Teg
 	 */
 	@Listen("onClick = #btnSalirSubirTeg")
@@ -144,7 +147,7 @@ public class CSubirTeg extends CGeneral {
 
 	}
 
-	/* Metodo que permite guardar el archivo del TEG */
+	/** Metodo que permite guardar el archivo del TEG */
 	@Listen("onClick = #btnGuardarArchivo")
 	public void guardarDescarga() {
 		if (archivo == null || txtNombreArchivo.getText().compareTo("") == 0

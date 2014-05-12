@@ -25,7 +25,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
+/**
  * Controlador que permite guardar las revisiones realizadas por el tutor y
  * el estudiante durante el teg
  */
@@ -62,7 +62,7 @@ public class CRegistrarRevision extends CGeneral {
 	@Wire
 	private Button btnFinalizarRegistrarRevision;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -104,16 +104,18 @@ public class CRegistrarRevision extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 *  @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana, actualizando los cambios realizados
 	 * en el resto del sistema
 	 */
@@ -126,7 +128,7 @@ public class CRegistrarRevision extends CGeneral {
 		wdwRegistrarRevision.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite guardar una revision realizada al teg, pudiendo
 	 * agregar mas revisiones en el futuro, cambia el estatus del teg, y
 	 * almacena el estatus en la tabla de historial
@@ -193,7 +195,7 @@ public class CRegistrarRevision extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite finalizar las revisiones del proyecto, al accionar
 	 * este evento se cambia el estatus del teg, ademas en este metodo se
 	 * actualiza la tabla de historial del teg
@@ -230,7 +232,7 @@ public class CRegistrarRevision extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarRegistrarRevision")
@@ -238,7 +240,7 @@ public class CRegistrarRevision extends CGeneral {
 		txtObservacionRegistrarRevision.setValue("");
 	}
 
-	/*
+	/**
 	 * Metodo que permite llenar la lista con las revisiones ya realizados en el
 	 * teg
 	 */
@@ -259,7 +261,7 @@ public class CRegistrarRevision extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirRegistrarRevision")
 	public void salirRegistrarRevision() {
 		wdwRegistrarRevision.onClose();

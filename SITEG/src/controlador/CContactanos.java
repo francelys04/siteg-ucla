@@ -15,7 +15,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
+/**
  * Metodo que permite enviar un correo electronico con sugerencias a un
  * determinado programa
  */
@@ -37,7 +37,7 @@ public class CContactanos extends CGeneral {
 	@Wire
 	private Window wdwContactanos;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se llena el combo
 	 * correspondiente a la vista
 	 */
@@ -53,7 +53,7 @@ public class CContactanos extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que se encarga de validar que los cambios esten completos y se
 	 * hace llamado del metodo de envio de correo en el controlador CGeneral,
 	 * para enviar un correo electronico
@@ -117,7 +117,7 @@ public class CContactanos extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarCorreo")
@@ -134,7 +134,7 @@ public class CContactanos extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirCorreo")
 	public void salirCorreo() {
 		wdwContactanos.onClose();

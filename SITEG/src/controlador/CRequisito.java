@@ -22,7 +22,7 @@ import org.zkoss.zul.Window;
 
 import controlador.catalogo.CCatalogoRequisito;
 
-/*Controlador que permite realizar las operaciones basicas (CRUD)
+/**Controlador que permite realizar las operaciones basicas (CRUD)
  * sobre la entidad Requisito*/
 @Controller
 public class CRequisito extends CGeneral {
@@ -47,7 +47,7 @@ public class CRequisito extends CGeneral {
 	private Window wdwRequisito;
 	private long id = 0;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -73,7 +73,7 @@ public class CRequisito extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -87,7 +87,7 @@ public class CRequisito extends CGeneral {
 
 	}
 
-	/* Metodo que permite el guardado o modificacion de una entidad Requisito */
+	/** Metodo que permite el guardado o modificacion de una entidad Requisito */
 	@Listen("onClick = #btnGuardarRequisito")
 	public void guardarRequisito() {
 
@@ -124,7 +124,7 @@ public class CRequisito extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite la eliminacion logica de una entidad Requisito */
+	/** Metodo que permite la eliminacion logica de una entidad Requisito */
 	@Listen("onClick = #btnEliminarRequisito")
 	public void eliminarRequisito() {
 
@@ -148,7 +148,7 @@ public class CRequisito extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 * variable global id
 	 */
@@ -161,7 +161,7 @@ public class CRequisito extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente a los requisitos */
+	/** Metodo que permite cerrar la ventana correspondiente a los requisitos */
 	@Listen("onClick = #btnSalirRequisito")
 	public void salirRequisito() {
 
@@ -169,7 +169,7 @@ public class CRequisito extends CGeneral {
 
 	}
 	
-	/*
+	/**
 	 * Metodo que permite buscar si un requisito existe, de acuerdo al nombre del
 	 * requisito
 	 */

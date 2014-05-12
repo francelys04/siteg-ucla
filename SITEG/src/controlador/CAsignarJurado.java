@@ -35,8 +35,10 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*Controlador asociado a la vista de asignar jurado, que permite
- * agregar los integrantes del jurado a un determinado TEG*/
+/**
+ * Controlador asociado a la vista de asignar jurado, que permite agregar los
+ * integrantes del jurado a un determinado TEG
+ */
 @Controller
 public class CAsignarJurado extends CGeneral {
 
@@ -79,7 +81,7 @@ public class CAsignarJurado extends CGeneral {
 	@Wire
 	private Image imagenx;
 
-	/*
+	/**
 	 * Metodo que permite asignar una lista a un combo de manera dinamica, de
 	 * tal forma que el id del combo no se repita
 	 */
@@ -89,7 +91,7 @@ public class CAsignarJurado extends CGeneral {
 		return tipos;
 	}
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -133,7 +135,7 @@ public class CAsignarJurado extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover uno o varios profesores hacia la lista de
 	 * integrantes del jurado. Y verifica que la cantidad de jurados asignados
 	 * no supere el limite establecido en la configuracion del programa
@@ -182,7 +184,7 @@ public class CAsignarJurado extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite mover uno o varios profesores integrantes del jurado
 	 * hacia la lista de la izquierda (profesores disponibles).
 	 */
@@ -213,18 +215,25 @@ public class CAsignarJurado extends CGeneral {
 		ltbJuradoDisponible.setCheckmark(true);
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite llenar las listas de jurados disponibles, es decir,
 	 * por asignar al teg, como los integrantes actuales del jurado
+	 * 
+	 * @param teg
+	 *            trabajo especial de grado seleccionado para realizar la
+	 *            asignacion del jurado
 	 */
 	public void llenarListas(Teg teg) {
 		List<Estudiante> estudiantesTeg = servicioEstudiante
@@ -249,7 +258,7 @@ public class CAsignarJurado extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite finalizar la asignacion del jurado al teg, en el cual
 	 * se cambia de estatus al teg, ademas de que se actualiza el historial de
 	 * cambios del teg y se asignan usuarios a los integrantes del jurado. Todo
@@ -287,7 +296,7 @@ public class CAsignarJurado extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite la creacion de usuarios a todos los integrantes del
 	 * jurado. Estos usuarios cuentan con el rol de jurado. Ademas se envia el
 	 * usuario y la contraseña a cada integrante via email
@@ -310,7 +319,7 @@ public class CAsignarJurado extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite guardar de manera temporal la asignacion de jurados,
 	 * si y solo, el metodo de validacion retorna verdadero
 	 */
@@ -325,7 +334,7 @@ public class CAsignarJurado extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite validar que la cantidad de integrantes del jurado sea
 	 * la misma que la configurada para el programa en el lapso actual, retorna
 	 * verdadero si se cumple y falso si no se cumple
@@ -344,7 +353,7 @@ public class CAsignarJurado extends CGeneral {
 		return false;
 	}
 
-	/*
+	/**
 	 * Metodo que permite almacenar los datos de los jurados en la base de
 	 * datos, si y solo si, se cumple que cada integrante del jurado posee un
 	 * tipo asociado. Retorna verdadero si se cumple y falso en caso contrario
@@ -395,8 +404,8 @@ public class CAsignarJurado extends CGeneral {
 		}
 	}
 
-	/*
-	 * Metodo que permite reiniciar los campos de la vista a su estado origianl
+	/**
+	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarDefensa")
 	public void cancelarDefensa() {
@@ -406,7 +415,9 @@ public class CAsignarJurado extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la pantalla actualizando los cambios realizados */
+	/**
+	 * Metodo que permite cerrar la pantalla actualizando los cambios realizados
+	 */
 	@Listen("onClick = #btnSalirAsignarJurado")
 	public void salirAsignarJurado() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();

@@ -34,8 +34,10 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*Controlador que se encarga de añadir los profesores integrantes de la
- * comision evaluadura para un determinado teg*/
+/**
+ * Controlador que se encarga de añadir los profesores integrantes de la
+ * comision evaluadura para un determinado teg
+ */
 @Controller
 public class CAsignarComision extends CGeneral {
 
@@ -78,7 +80,7 @@ public class CAsignarComision extends CGeneral {
 	@Wire
 	private Image imagenx;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -130,7 +132,7 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que se encarga de llenar la lista de profesores disponibles, asi
 	 * como la lista de los profesores que integran la comision evaluadora
 	 */
@@ -174,16 +176,19 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite recibir el nombre del catalogo a la cual esta asociada
 	 * esta vista para asi poder realizar las operaciones sobre dicha vista
+	 * 
+	 * @param vista
+	 *            nombre de la vista a la cual se hace referencia
 	 */
 	public void recibir(String vista) {
 		vistaRecibida = vista;
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite buscar la cantidad de integrantes de la comision en el
 	 * lapso actual y para el programa del trabajo asociado
 	 */
@@ -202,7 +207,7 @@ public class CAsignarComision extends CGeneral {
 		return valor;
 	}
 
-	/*
+	/**
 	 * Metodo que permite cerrar la ventana, actualizando los cambios realizados
 	 * en el resto del sistema
 	 */
@@ -215,7 +220,7 @@ public class CAsignarComision extends CGeneral {
 		wdwAsignarComision.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite añadir a los profesores de la lista de disponibles
 	 * hacia la lista de integrantes de la comision
 	 */
@@ -254,7 +259,7 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite añadir a los profesores de la lista de integrantes de
 	 * la comision hacia la lista de profesores disponibles
 	 */
@@ -279,7 +284,7 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite hacer un llamado al metodo de actualizacion de las
 	 * listas
 	 */
@@ -288,7 +293,7 @@ public class CAsignarComision extends CGeneral {
 		llenarListas();
 	}
 
-	/*
+	/**
 	 * Metodo que permite almacenar en la base de datos a los integrantes de la
 	 * comision evaluadora en el respectivo teg
 	 */
@@ -360,7 +365,7 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite almacenar en la base de datos a los integrantes de la
 	 * comision evaluadora en el respectivo teg, asi como tambien permite el
 	 * cambio de estatus en el trabajo especial de grado, actualizando la tabla
@@ -443,7 +448,7 @@ public class CAsignarComision extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirComision")
 	public void salirComision() {
 

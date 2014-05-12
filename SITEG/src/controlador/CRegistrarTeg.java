@@ -22,7 +22,7 @@ import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/*
+/**
  * Metodo que permite formalizar el registro de un TEG por parte de un
  * estudiante
  */
@@ -61,7 +61,7 @@ public class CRegistrarTeg extends CGeneral {
 	@Wire
 	private Textbox txtDuracionRegistrarTeg;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos y listas
 	 * correspondientes de la vista, asi como los objetos empleados dentro de
@@ -142,7 +142,7 @@ public class CRegistrarTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite registrar un teg, cambiando el estado al teg en la
 	 * base de datos y almacenando los datos en el historico de cambios de
 	 * estatus del teg
@@ -194,14 +194,14 @@ public class CRegistrarTeg extends CGeneral {
 													.setFechaEntrega(dtbFechaEntregaRegistrarTeg
 															.getValue());
 
-											tegRegistrado
-													.setDuracion(Integer.parseInt(txtDuracionRegistrarTeg
+											tegRegistrado.setDuracion(Integer
+													.parseInt(txtDuracionRegistrarTeg
 															.getValue()));
 
 											tegRegistrado
 													.setEstatus("TEG Registrado");
 
-											/*
+											/**
 											 * Guardar datos en la tabla
 											 * teg_estatus
 											 */
@@ -232,18 +232,21 @@ public class CRegistrarTeg extends CGeneral {
 
 	}
 
-	/*
-	 * Metodo que permite reiniciar los campos de la vista a su estado original
+	/**
+	 * Metodo que permite calcular la duracion en dias de un trabajo especial de
+	 * grado
 	 */
 	@Listen("onChange = #dtbFechaEntregaRegistrarTeg")
 	public void calcularDuracionTeg() {
-		
-		txtDuracionRegistrarTeg.setText(Long.toString((dtbFechaEntregaRegistrarTeg.getValue().getTime() - 
-				dtbFechaRegistroTeg.getValue().getTime()) / MILLSECS_PER_DAY));
-		
+
+		txtDuracionRegistrarTeg
+				.setText(Long.toString((dtbFechaEntregaRegistrarTeg.getValue()
+						.getTime() - dtbFechaRegistroTeg.getValue().getTime())
+						/ MILLSECS_PER_DAY));
+
 	}
-	
-	/*
+
+	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
 	@Listen("onClick = #btnCancelarRegistrarTeg")
@@ -254,7 +257,7 @@ public class CRegistrarTeg extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirRegistrarTeg")
 	public void salirRegistroTeg() {
 

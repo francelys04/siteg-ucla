@@ -23,7 +23,10 @@ import org.zkoss.zul.Radio;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-
+/**
+ * Controlador asociado a la vista de respald de informacion, que permite
+ * realizar el respaldo o restauracion de la base de datos
+ */
 @Controller
 public class CRespaldoInformacion extends CGeneral {
 
@@ -54,12 +57,22 @@ public class CRespaldoInformacion extends CGeneral {
 	boolean encontrad = true;
 	private static String extension;
 
+	/**
+	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
+	 * recibido del catalogo exista y se llenan los campos y listas
+	 * correspondientes de la vista, asi como los objetos empleados dentro de
+	 * este controlador.
+	 */
 	@Override
 	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Metodo que permite seleccionar en que sistema operativo se realizara el
+	 * respaldo de la informacion
+	 */
 	@Listen("onClick = #btnRespaldar")
 	public void respaldarInformacion() {
 		if (rbLinux.isChecked()) {
@@ -70,6 +83,9 @@ public class CRespaldoInformacion extends CGeneral {
 
 	}
 
+	/**
+	 * Metodo que permite cerrar la pantalla actualizando los cambios realizados
+	 */
 	@Listen("onClick = #btnSalir")
 	public void salir() {
 		wdwRespaldoInformacion.onClose();
@@ -84,7 +100,7 @@ public class CRespaldoInformacion extends CGeneral {
 		}
 	}
 
-	/**
+	/***
 	 * Metodo que respalda la informacion contenida en el Sistema
 	 * 
 	 */
@@ -117,11 +133,14 @@ public class CRespaldoInformacion extends CGeneral {
 							Messagebox.OK, Messagebox.ERROR);
 					cancelar();
 				}
-				
+
 			}
 		}
 	}
 
+	/**
+	 * Metodo que permite seleccionar la ruta del archivo
+	 */
 	@Listen("onClick = #btnSleccionar")
 	public void seleccionar() {
 		if (rbLocal.isChecked()) {
@@ -132,7 +151,7 @@ public class CRespaldoInformacion extends CGeneral {
 
 	}
 
-	/**
+	/***
 	 * Metodo que selecciona la ruta para la carpeta
 	 */
 	public void seleccionarRuta() {
@@ -152,9 +171,9 @@ public class CRespaldoInformacion extends CGeneral {
 		}
 	}
 
-	// ************************************************************************************
-	// METODO QUE PERMITE RESPALDAR LA BD EN WINDOW
-	// ************************************************************************************
+	/***
+	 * Metodo que permite respaldar la base de datos en windows
+	 */
 	public void ejecutarComandos() {
 		if (txtRuta.getText().equals("")) {
 			Messagebox.show("Debe indicar la ruta", "Error", Messagebox.OK,
@@ -197,8 +216,8 @@ public class CRespaldoInformacion extends CGeneral {
 				pb.redirectErrorStream(true);
 
 				p = pb.start();
-				Messagebox.show("Respaldo en proceso",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+				Messagebox.show("Respaldo en proceso", "Informacion",
+						Messagebox.OK, Messagebox.INFORMATION);
 				cancelar();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -211,7 +230,11 @@ public class CRespaldoInformacion extends CGeneral {
 		}
 
 	}
-	public void cancelar(){
+
+	/**
+	 * Metodo que permite reiniciar los campos de la vista a su estado original
+	 */
+	public void cancelar() {
 		rbDispositivo.setChecked(false);
 		rbLocal.setChecked(false);
 		rbLinux.setChecked(false);
@@ -221,24 +244,22 @@ public class CRespaldoInformacion extends CGeneral {
 		gbSistema.setVisible(false);
 		btnRespaldar.setVisible(false);
 		btnRestaurar.setVisible(false);
-		
-	}
-	
-	
 
-	// ************************************************************************************
-	// METODO QUE PERMITE SELECCIONAR EL ARCHIVO A RESTAURAR
-	// ************************************************************************************
+	}
+
+	/***
+	 * Metodo que permite seleccionar el archivo a restaurar
+	 */
 	public void seleccionarArchivo() {
 
 		JFileChooser chooser = new JFileChooser();
 		// Titulo que llevara la ventana
 		chooser.setDialogTitle("Seleccione...");
-		
+
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		chooser.showOpenDialog(null);
 
-		// Si seleccionamos algún archivo retornaremos su ubicacion
+		// Si seleccionamos algunn archivo retornaremos su ubicacion
 		if (chooser.getSelectedFile() != null) {
 			extension = chooser.getSelectedFile().getName();
 			txtRuta.setValue(chooser.getSelectedFile().getPath());
@@ -246,60 +267,59 @@ public class CRespaldoInformacion extends CGeneral {
 
 	}
 
-	// ************************************************************************************
-	// METODO QUE PERMITE RESTAURAR LA BD
-	// ************************************************************************************
+	/***
+	 * Metodo que permite restaurar la base de datos
+	 */
 	public void restaurarBD(String rutapg) {
 		if ((txtRuta.getValue().equals(""))) {
 			Messagebox.show("Debe seleccionar un archivo", "Error",
 					Messagebox.OK, Messagebox.ERROR);
-				
-		}else if (!extension.contains("backup")) {
-			Messagebox.show("Debe seleccionar un archivo de tipo .backup", "Advertencia",
-					Messagebox.OK, Messagebox.EXCLAMATION);
-		}
-		else{
-		try {
-			borrarEsquema("public");
-			crearEsquema("public");
-			Runtime r = Runtime.getRuntime();
-			String archivoBD = "";
-			archivoBD = txtRuta.getValue();
-			Process p;
-			ProcessBuilder pb;
-			r = Runtime.getRuntime();
-			List lista = new ArrayList();
-			lista.add(rutapg);
-			lista.add("-i");
-			lista.add("-h");
-			lista.add("localhost");
-			lista.add("-p");
-			lista.add("5432");
-			lista.add("-U");
-			lista.add("postgres");
-			lista.add("-d");
-			lista.add("siteg");
-			lista.add("-v");
-			lista.add(archivoBD);
 
-			pb = new ProcessBuilder(lista);
-			pb.environment().put("PGPASSWORD", ("equipo2"));
-			pb.redirectErrorStream(true);
-			p = pb.start();
-			Messagebox.show("Restauracion en proceso", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
-			cancelar();
-		} catch (Exception e) {
-			Messagebox.show("No se pudo realizar la restauracion", "Error",
-					Messagebox.OK, Messagebox.ERROR);
-			cancelar();
-		}
+		} else if (!extension.contains("backup")) {
+			Messagebox.show("Debe seleccionar un archivo de tipo .backup",
+					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+		} else {
+			try {
+				borrarEsquema("public");
+				crearEsquema("public");
+				Runtime r = Runtime.getRuntime();
+				String archivoBD = "";
+				archivoBD = txtRuta.getValue();
+				Process p;
+				ProcessBuilder pb;
+				r = Runtime.getRuntime();
+				List lista = new ArrayList();
+				lista.add(rutapg);
+				lista.add("-i");
+				lista.add("-h");
+				lista.add("localhost");
+				lista.add("-p");
+				lista.add("5432");
+				lista.add("-U");
+				lista.add("postgres");
+				lista.add("-d");
+				lista.add("siteg");
+				lista.add("-v");
+				lista.add(archivoBD);
+
+				pb = new ProcessBuilder(lista);
+				pb.environment().put("PGPASSWORD", ("equipo2"));
+				pb.redirectErrorStream(true);
+				p = pb.start();
+				Messagebox.show("Restauracion en proceso", "Informacion",
+						Messagebox.OK, Messagebox.INFORMATION);
+				cancelar();
+			} catch (Exception e) {
+				Messagebox.show("No se pudo realizar la restauracion", "Error",
+						Messagebox.OK, Messagebox.ERROR);
+				cancelar();
+			}
 		}
 	}
 
-	// ****************************************************
-	// METODO QUE PERMITE BORRAR LOS ESQUEMAS DE LA BASE DE DATOS
-	// ****************************************************
+	/***
+	 * Metodo que permite borrar los esquemas de la base de datos
+	 */
 	public void borrarEsquema(String nombreEsquema) {
 		String driver = "org.postgresql.Driver";
 		String connectString = "jdbc:postgresql://localhost:5432/siteg";
@@ -324,9 +344,9 @@ public class CRespaldoInformacion extends CGeneral {
 		}
 	}
 
-	// ****************************************************
-	// METODO QUE PERMITE CREAR LOS ESQUEMAS DE LA BASE DE DATOS
-	// ****************************************************
+	/***
+	 * Metodo que permite crear los esquemas de la base de datos
+	 */
 	public void crearEsquema(String nombreEsquema) {
 		String driver = "org.postgresql.Driver";
 		String connectString = "jdbc:postgresql://localhost:5432/siteg";
@@ -350,7 +370,5 @@ public class CRespaldoInformacion extends CGeneral {
 			System.err.println("SQLException: " + e.getMessage());
 		}
 	}
-
-
 
 }
