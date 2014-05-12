@@ -1,5 +1,6 @@
 package controlador;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -111,7 +112,7 @@ public class CLapso extends CGeneral {
 					.show("La fecha de fin de lapso debe ser posterior a la fecha de inicio",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show("¿Desea guardar los datos del lapso academico?",
+			Messagebox.show("ï¿½Desea guardar los datos del lapso academico?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -186,25 +187,48 @@ public class CLapso extends CGeneral {
 	/** Metodo que permite la eliminacion logica de una entidad Lapso */
 	@Listen("onClick = #btnEliminarLapso")
 	public void eliminarLapso() {
-		Messagebox.show("¿Desea eliminar los datos del lapso academico?",
-				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event evt) throws InterruptedException {
-						if (evt.getName().equals("onOK")) {
-							Lapso lapso = servicioLapso.buscarLapso(id);
-							lapso.setEstatus(false);
-							servicioLapso.guardar(lapso);
-							cancelarLapso();
-							Messagebox.show(
-									"Lapso academico eliminado exitosamente",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
+		Lapso lapso = servicioLapso.BuscarLapsoActual();
+		Date fechaI = lapso.getFechaInicial();
+		Date fechaF = lapso.getFechaFinal();
+		Date fecha = new Date();
+		try {
+			SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+			String fechaSistema = formateador.format(fecha);
+			Date fechaActual;
+			fechaActual = formateador.parse(fechaSistema);
 
-						}
-					}
-				});
+			if (fechaActual.after(fechaI) && fechaActual.before(fechaF)) {
+				Messagebox.show("El Lapso Academico se esta ejecutando",
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			} else {
+				Messagebox.show(
+						"ï¿½Desea eliminar los datos del lapso academico?",
+						"Dialogo de confirmacion", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
+							public void onEvent(Event evt)
+									throws InterruptedException {
+								if (evt.getName().equals("onOK")) {
+									Lapso lapso = servicioLapso.buscarLapso(id);
+									lapso.setEstatus(false);
+									servicioLapso.guardar(lapso);
+									cancelarLapso();
+									Messagebox
+											.show("Lapso academico eliminado exitosamente",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 
+								}
+							}
+						});
+			}
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+  
 	}
 
 	/**
