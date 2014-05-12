@@ -363,6 +363,7 @@ public class CAsignarJurado extends CGeneral {
 		Teg teg = servicioTeg.buscarTeg(idTeg);
 		List<Jurado> jurados = new ArrayList<Jurado>();
 		boolean error = false;
+		int contadorPrincipal = 0;
 		jurados = servicioJurado.buscarJuradoDeTeg(teg);
 		if (!jurados.isEmpty()) {
 			servicioJurado.limpiar(jurados);
@@ -376,6 +377,9 @@ public class CAsignarJurado extends CGeneral {
 			if (tipojurado == "") {
 				error = true;
 			}
+			if (tipojurado.equals("Principal")) {
+				contadorPrincipal++;
+			}
 			long cedula = ((Intbox) ((listItem.getChildren().get(0)))
 					.getFirstChild()).getValue();
 			Profesor profesorJurado = servicioProfesor
@@ -388,7 +392,7 @@ public class CAsignarJurado extends CGeneral {
 			Jurado jurado = new Jurado(teg, profesorJurado, tipo);
 			jurados.add(jurado);
 		}
-		if (!error && tutorEnJurado) {
+		if (!error && tutorEnJurado && contadorPrincipal != 0) {
 			servicioJurado.guardar(jurados);
 			tutorEnJurado = false;
 			return true;
@@ -397,8 +401,14 @@ public class CAsignarJurado extends CGeneral {
 				Messagebox.show("El tutor debe formar parte del jurado",
 						"Error", Messagebox.OK, Messagebox.ERROR);
 			} else {
-				Messagebox.show("Debe seleccionar un tipo para cada jurado",
-						"Error", Messagebox.OK, Messagebox.ERROR);
+				if (contadorPrincipal == 0)
+					Messagebox
+							.show("Debe seleccionar al menos a un profesor como Jurado Principal",
+									"Error", Messagebox.OK, Messagebox.ERROR);
+				else
+					Messagebox.show(
+							"Debe seleccionar un tipo para cada jurado",
+							"Error", Messagebox.OK, Messagebox.ERROR);
 			}
 			return false;
 		}
