@@ -61,7 +61,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	private static Date fechaFin;
 	java.util.Date hoy = new Date();
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
 	 * seleccionar la opcion de "Todos" y se llena una lista del mismo en el
@@ -83,7 +83,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
@@ -122,7 +122,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las tematicas dado al area seleccionado.
 	 */
 	@Listen("onSelect = #cmbAreaReporteProfesoresSolicitados")
@@ -163,13 +163,13 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirReporteProfesoresSolicitados")
 	public void salir() {
 		wdwReporteProfesorMasSolicitados.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista y colocarlos en el
 	 * estado inicial
 	 */
@@ -184,7 +184,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		cmbTematicaReporteProfesoresSolicitados.setDisabled(true);
 	}
 
-	/*
+	/**
 	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
 	 * uno en el campo del mismo.
 	 */
@@ -195,7 +195,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				.getSelectedItem().getId());
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
 	 * se generara un pdf donde se muestra una lista de los cinco profesores con
 	 * mas solicitades de esta seleccion, por medio de unos condicionales seran
@@ -255,7 +255,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 				List<MasSolicitados> masSolicitados = new ArrayList<MasSolicitados>();
 				Map<String, Object> map = new HashMap<String, Object>();
 				int valor = 0;
-				
+
 				if (cmbTematicaReporteProfesoresSolicitados.getValue().equals(
 						"Todos")) {
 					if (cmbProgramaReporteProfesoresSolicitados.getValue()
@@ -368,14 +368,15 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 								.equals("Todos")) {
 							valor = 3;
 							solicitudes = servicioSolicitudTutoria
-									.buscarSolicitudesPorProgramaYFechas(tematicaI,
-											programaI, fechaInicio, fechaFin);
+									.buscarSolicitudesPorProgramaYFechas(
+											tematicaI, programaI, fechaInicio,
+											fechaFin);
 						} else {
 							valor = 4;
 							solicitudes = servicioSolicitudTutoria
-									.buscarSolicitudesPorProgramaYAreaYFechas(tematicaI,
-											programaI, areaI, fechaInicio,
-											fechaFin);
+									.buscarSolicitudesPorProgramaYAreaYFechas(
+											tematicaI, programaI, areaI,
+											fechaInicio, fechaFin);
 						}
 					}
 
@@ -388,34 +389,34 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 						for (int i = 0; i < profesores.size(); i++) {
 							Profesor profesor = servicioProfesor
 									.buscarProfesorPorCedula(profesores.get(i));
-							
+
 							switch (valor) {
 							case 1: {
 								solicitudesFinales = servicioSolicitudTutoria
 										.buscarPorProfesorTematicaEntreFechas(
-												profesor, tematicaI, fechaInicio,
-												fechaFin);
+												profesor, tematicaI,
+												fechaInicio, fechaFin);
 							}
 								break;
 							case 2: {
 								solicitudesFinales = servicioSolicitudTutoria
-										.buscarPorTematicaProfesorYAreaEntreFechas(tematicaI,
-												profesor, areaI, fechaInicio,
-												fechaFin);
+										.buscarPorTematicaProfesorYAreaEntreFechas(
+												tematicaI, profesor, areaI,
+												fechaInicio, fechaFin);
 							}
 								break;
 							case 3: {
 								solicitudesFinales = servicioSolicitudTutoria
-										.buscarPorTematicaProfesorYProgramaEntreFechas(tematicaI,
-												profesor, programaI,
+										.buscarPorTematicaProfesorYProgramaEntreFechas(
+												tematicaI, profesor, programaI,
 												fechaInicio, fechaFin);
 							}
 								break;
 							case 4: {
 								solicitudesFinales = servicioSolicitudTutoria
-										.buscarPorTematicaProfesorYProgramaYAreaEntreFechas(tematicaI,
-												profesor, programaI, areaI,
-												fechaInicio, fechaFin);
+										.buscarPorTematicaProfesorYProgramaYAreaEntreFechas(
+												tematicaI, profesor, programaI,
+												areaI, fechaInicio, fechaFin);
 							}
 								break;
 							}
@@ -464,7 +465,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 						mapa.put("area",
 								cmbAreaReporteProfesoresSolicitados.getValue());
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					JasperReport jasperReport;	
+					JasperReport jasperReport;
 					String rutaUrl = obtenerDirectorio();
 
 					String reporteSrc = rutaUrl
@@ -474,20 +475,26 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 					mapa.put("logoUcla", reporteImage + "logo ucla.png");
 					mapa.put("logoCE", reporteImage + "logo CE.png");
 					mapa.put("logoSiteg", reporteImage + "logo.png");
-//					URL url = getClass().getResource("/configuracion/logo ucla.png");
-//					URL url2 = getClass().getResource("/configuracion/logo CE.png");
-//					URL url3 = getClass().getResource("/configuracion/logo.png");
-//					mapa.put("logoUcla", url);
-//					mapa.put("logoCE", url2);
-//					mapa.put("logoSiteg", url3);
+					// URL url =
+					// getClass().getResource("/configuracion/logo ucla.png");
+					// URL url2 =
+					// getClass().getResource("/configuracion/logo CE.png");
+					// URL url3 =
+					// getClass().getResource("/configuracion/logo.png");
+					// mapa.put("logoUcla", url);
+					// mapa.put("logoCE", url2);
+					// mapa.put("logoSiteg", url3);
 
 					try {
-//						jasperReport = (JasperReport) JRLoader.loadObject(getClass().getResource("RProfesoresMasSolicitados.jasper"));
-						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(masSolicitados));
+						// jasperReport = (JasperReport)
+						// JRLoader.loadObject(getClass().getResource("RProfesoresMasSolicitados.jasper"));
+						jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, mapa,
+								new JRBeanCollectionDataSource(masSolicitados));
 						JasperViewer.viewReport(jasperPrint, false);
-						
-						
+
 					} catch (JRException e) {
 						// TODO Auto-generated catch block
 						Messagebox.show(
@@ -507,7 +514,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite mapear dos listas ordenadas de profesores y
 	 * contadores, donde es cargada mediante dos operaciones internas, la
 	 * primera es para contar la ocurrencia con respecto a los profesores en
@@ -539,7 +546,7 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 		profesores.add(profesor);
 		contadores.add(contadorProfesores);
 		solicitudesTutoria.add(solicitud);
-		/*************************** Ordenado de Lista ************* ******************/
+		/**************************** Ordenado de Lista ************* ******************/
 		List<String> profesoresOrdenados = new ArrayList<String>();
 		List<Integer> contadoresOrdenados = new ArrayList<Integer>();
 		List<SolicitudTutoria> solicitudesFinales = new ArrayList<SolicitudTutoria>();

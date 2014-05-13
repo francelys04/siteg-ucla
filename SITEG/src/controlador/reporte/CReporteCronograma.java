@@ -29,6 +29,10 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador que permite generar a traves de un listado el cronograma de las
+ * actividades de un programa de acuerdo a un lapso academico determinado
+ */
 @Controller
 public class CReporteCronograma extends CGeneral {
 
@@ -39,7 +43,7 @@ public class CReporteCronograma extends CGeneral {
 	@Wire
 	private Window wdwReporteCronograma;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas y lapsos disponibles y se llena una lista del mismo en el
 	 * componente de la vista
@@ -55,7 +59,7 @@ public class CReporteCronograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dado un programa y un lapso se
 	 * generara un pdf donde se muestra una lista de las actividades de esta
 	 * seleccion, mediante el componente "Jasperreport" donde se mapea una serie
@@ -101,10 +105,9 @@ public class CReporteCronograma extends CGeneral {
 				JasperViewer.viewReport(jasperPrint, false);
 
 			} else {
-				Messagebox
-				.show("No hay informacion disponible para esta seleccion",
-						"Informacion", Messagebox.OK,
-						Messagebox.INFORMATION);
+				Messagebox.show(
+						"No hay informacion disponible para esta seleccion",
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 				Cancelar();
 			}
 
@@ -112,14 +115,14 @@ public class CReporteCronograma extends CGeneral {
 
 	}
 
-	/* Metodo que permite limpiar los campos de los filtros de busqueda */
+	/** Metodo que permite limpiar los campos de los filtros de busqueda */
 	@Listen("onClick = #btnCancelarReporteCronograma")
 	public void Cancelar() {
 		cmbCronogramaPrograma.setValue("");
 		cmbCronogramaLapso.setValue("");
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirReporteCronograma")
 	public void Salir() {
 		wdwReporteCronograma.onClose();

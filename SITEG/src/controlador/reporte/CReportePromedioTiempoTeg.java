@@ -61,7 +61,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 	@Wire
 	private Jasperreport jstVistaPrevia;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
 	 * seleccionar la opcion de "Todos" y se llena una lista del mismo en el
@@ -81,7 +81,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dado a una lista de tegs
 	 * previamente cargada al seleccionar un programa, area y tematica, se
 	 * generara un pdf donde se muestra una lista de las etapas del teg con la
@@ -322,7 +322,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
@@ -358,7 +358,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo tematica, ademas se adiciona un nuevo item donde se
@@ -387,7 +387,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 
 	}
 
-	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
+	/** Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarReportePromedioTiempoTeg")
 	public void cancelarPromedioTiempoTeg() throws JRException {
 		cmbPrograma.setValue("");
@@ -399,7 +399,7 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		jstVistaPrevia.setDatasource(null);
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirReportePromedioTiempoTeg")
 	public void salirPromedioTiempoTeg() throws JRException {
 		cancelarPromedioTiempoTeg();

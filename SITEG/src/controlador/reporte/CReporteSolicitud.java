@@ -117,7 +117,7 @@ public class CReporteSolicitud extends CGeneral {
 	private static Date fechaInicio;
 	private static Date fechaFin;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
 	 * seleccionar la opcion de "Todos", y se llena una lista del mismo en el
@@ -139,7 +139,7 @@ public class CReporteSolicitud extends CGeneral {
 
 	}
 
-	/* Metodo que permite limpiar todas las listas de la vista. */
+	/** Metodo que permite limpiar todas las listas de la vista. */
 	public void cancelar() {
 
 		ltbElegiPrograma.setVisible(false);
@@ -159,7 +159,7 @@ public class CReporteSolicitud extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
@@ -196,7 +196,7 @@ public class CReporteSolicitud extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo tematica, ademas se adiciona un nuevo item donde se
@@ -228,7 +228,7 @@ public class CReporteSolicitud extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
 	 * uno en el campo del mismo.
 	 */
@@ -239,7 +239,7 @@ public class CReporteSolicitud extends CGeneral {
 		idTematica = tematica.getId();
 	}
 
-	/*
+	/**
 	 * Metodo que permite dado a un programa, area y tematica, generar una lista
 	 * con las solicitudes de tutorias, proyectos,tegs o defensas, dependiendo
 	 * de esta seleccion, donde se cargara un fichero con los datos resultante
@@ -282,7 +282,7 @@ public class CReporteSolicitud extends CGeneral {
 						cancelar();
 					}
 
-					/*
+					/**
 					 * Solicitudes de Proyecto, teg o Defensa
 					 */
 					else if ((rdoProyecto.isChecked() == true)
@@ -308,7 +308,7 @@ public class CReporteSolicitud extends CGeneral {
 							btnExportarPlano.setDisabled(true);
 						} else {
 							btnExportarPlano.setDisabled(false);
-							/*
+							/**
 							 * SELECIONO TODO TODO
 							 */
 							if (nombrePrograma.equals("Todos")
@@ -318,22 +318,18 @@ public class CReporteSolicitud extends CGeneral {
 								chequeoEstatus = 6;
 
 								if (rdoProyecto.isChecked() == true) {
-									teg = servicioTeg
-											.buscarTegPorEstatus(
-													estatusProyecto,
-													fechaInicio, fechaFin);
+									teg = servicioTeg.buscarTegPorEstatus(
+											estatusProyecto, fechaInicio,
+											fechaFin);
 									NombreTxt = "SolicitudesProyecto";
 								} else if (rdoTEG.isChecked() == true) {
-									teg = servicioTeg
-											.buscarTegPorEstatus(
-													estatusTeg, fechaInicio,
-													fechaFin);
+									teg = servicioTeg.buscarTegPorEstatus(
+											estatusTeg, fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesTEG";
 								} else if (rdoDefensa.isChecked() == true) {
-									teg = servicioTeg
-											.buscarTegPorEstatus(
-													estatusDefensa,
-													fechaInicio, fechaFin);
+									teg = servicioTeg.buscarTegPorEstatus(
+											estatusDefensa, fechaInicio,
+											fechaFin);
 									NombreTxt = "SolicitudesDefensa";
 								}
 
@@ -420,13 +416,14 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
-							/*
+							/**
 							 * seleccione un programa
 							 */
 							else if (!nombrePrograma.equals("Todos")
@@ -437,19 +434,19 @@ public class CReporteSolicitud extends CGeneral {
 								if (rdoProyecto.isChecked() == true) {
 									teg = servicioTeg
 											.buscarTegPorProgramaEstatus(
-													programa1, estatusProyecto, 
+													programa1, estatusProyecto,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesProyecto";
 								} else if (rdoTEG.isChecked() == true) {
 									teg = servicioTeg
 											.buscarTegPorProgramaEstatus(
-													programa1, estatusTeg, 
+													programa1, estatusTeg,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesTEG";
 								} else if (rdoDefensa.isChecked() == true) {
 									teg = servicioTeg
 											.buscarTegPorProgramaEstatus(
-													programa1, estatusDefensa, 
+													programa1, estatusDefensa,
 													fechaInicio, fechaFin);
 									NombreTxt = "SolicitudesDefensa";
 								}
@@ -538,13 +535,14 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
-							/*
+							/**
 							 * Elijo uno de cada cosa
 							 */
 							else if (!nombrePrograma.equals("Todos")
@@ -661,13 +659,14 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
-							/*
+							/**
 							 * Eligi� programa area pero todos las tematicas
 							 */
 							else if (!nombrePrograma.equals("Todos")
@@ -781,14 +780,15 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 
 							}
-							/*
+							/**
 							 * Eligi� todo los programas una area y todos los
 							 * tematicos
 							 */
@@ -906,14 +906,15 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 
 							}
-							/*
+							/**
 							 * Eligio todo los programas una area y una tematica
 							 */
 							else if (nombrePrograma.equals("Todos")
@@ -1031,9 +1032,10 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
@@ -1062,7 +1064,7 @@ public class CReporteSolicitud extends CGeneral {
 							btnExportarPlano.setDisabled(true);
 						} else {
 							btnExportarPlano.setDisabled(false);
-							/*
+							/**
 							 * SELECIONO TODO TODO
 							 */
 							if (nombrePrograma.equals("Todos")
@@ -1158,13 +1160,14 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
-							/*
+							/**
 							 * seleccione un programa
 							 */
 							else if (!nombrePrograma.equals("Todos")
@@ -1262,13 +1265,14 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
-							/*
+							/**
 							 * Elijo uno de cada cosa
 							 */
 							else if (!nombrePrograma.equals("Todos")
@@ -1369,14 +1373,15 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 									;
 								}
 							}
-							/*
+							/**
 							 * Eligi programa area pero todos las tematicas
 							 */
 							else if (!nombrePrograma.equals("Todos")
@@ -1473,14 +1478,15 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 
 							}
-							/*
+							/**
 							 * Eligio todo los programas una area y todos los
 							 * tematicos
 							 */
@@ -1580,14 +1586,15 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 
 							}
-							/*
+							/**
 							 * Eligio todo los programas una area y una tematica
 							 */
 							else if (nombrePrograma.equals("Todos")
@@ -1688,9 +1695,10 @@ public class CReporteSolicitud extends CGeneral {
 
 								} else {
 									Messagebox
-									.show("No hay informacion disponible para esta seleccion",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+											.show("No hay informacion disponible para esta seleccion",
+													"Informacion",
+													Messagebox.OK,
+													Messagebox.INFORMATION);
 									btnExportarPlano.setDisabled(true);
 								}
 							}
@@ -3129,13 +3137,13 @@ public class CReporteSolicitud extends CGeneral {
 		}
 	}
 
-	/* Metdo que permite cerrar la vista. */
+	/** Metdo que permite cerrar la vista. */
 	@Listen("onClick= #btnSalir")
 	public void salir() {
 		wdwReporteSolicitud.onClose();
 	}
 
-	/*
+	/**
 	 * Metdo que permite exportar en un archivo plano, los datos previamente
 	 * cargados.
 	 */

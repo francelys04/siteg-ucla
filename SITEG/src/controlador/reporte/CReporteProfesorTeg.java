@@ -84,7 +84,7 @@ public class CReporteProfesorTeg extends CGeneral {
 	private static String cedulaProfesor;
 	java.util.Date hoy = new Date();
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista, tambien se buscan todos los programas
 	 * disponibles, adicionando un nuevo item donde se puede seleccionar la
@@ -161,7 +161,7 @@ public class CReporteProfesorTeg extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
@@ -199,7 +199,7 @@ public class CReporteProfesorTeg extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo tematica
@@ -229,7 +229,7 @@ public class CReporteProfesorTeg extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
 	 * uno en el campo del mismo.
 	 */
@@ -242,7 +242,7 @@ public class CReporteProfesorTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite dado al condicional, mapear los datos vaciados en la
 	 * vista, para poder ser utilizados en la vista asociada.
 	 */
@@ -319,13 +319,13 @@ public class CReporteProfesorTeg extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista */
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirReporteProfesorTeg")
 	public void salir() {
 		wdwReporteProfesorTeg.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista y colocarlos en el
 	 * estado inicial
 	 */
@@ -345,7 +345,7 @@ public class CReporteProfesorTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dado a una tematica y un estatus
 	 * del proyecto, se generara un pdf donde se muestra una lista de teg
 	 * asociados a un profesor de esta seleccion, mediante el componente

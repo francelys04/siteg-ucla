@@ -156,7 +156,7 @@ public class CEnlaceInteres extends CGeneral {
 							Messagebox.OK, Messagebox.ERROR);
 				} else {
 					Messagebox.show(
-							"ï¿½Desea guardar los datos del enlace de interes?",
+							"¿Desea guardar los datos del enlace de interes?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {

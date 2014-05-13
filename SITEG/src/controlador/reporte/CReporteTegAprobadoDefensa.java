@@ -36,7 +36,7 @@ public class CReporteTegAprobadoDefensa extends CGeneral {
 	AreaInvestigacion area = new AreaInvestigacion();
 	Tematica tematica = new Tematica();
 
-	/********** Promedio Teg Fecha Entrega **************/
+	/*********** Promedio Teg Fecha Entrega **************/
 
 	@Wire
 	private Datebox dtbFechaInicio;
@@ -52,8 +52,7 @@ public class CReporteTegAprobadoDefensa extends CGeneral {
 	private Jasperreport jstVistaPrevia;
 
 	@Override
-	public
-	void inicializar(Component comp) {
+	public void inicializar(Component comp) {
 		// TODO Auto-generated method stub
 		List<Programa> programas = servicioPrograma.buscarActivas();
 		Programa programaTodos = new Programa(10000, "Todos", "", "", true,
@@ -76,9 +75,9 @@ public class CReporteTegAprobadoDefensa extends CGeneral {
 		fechaFin = dtbFechaFin.getValue();
 
 		List<Defensa> defensasSeleccionadas = new ArrayList();
-		String estatus="Aprobado";
-		
-		System.out.println("das:"+defensasSeleccionadas.size());
+		String estatus = "Aprobado";
+
+		System.out.println("das:" + defensasSeleccionadas.size());
 		if (fechaFin == null || fechaInicio == null
 				|| fechaInicio.after(fechaFin)) {
 			Messagebox.show(
@@ -86,68 +85,73 @@ public class CReporteTegAprobadoDefensa extends CGeneral {
 					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			if (nombrePrograma.equals("Todos")) {
-				
-			defensasSeleccionadas = servicioDefensa.buscarDefensaTegSegunEstatus(estatus,fechaInicio,fechaFin);
+
+				defensasSeleccionadas = servicioDefensa
+						.buscarDefensaTegSegunEstatus(estatus, fechaInicio,
+								fechaFin);
+			} else if (!nombrePrograma.equals("Todos")
+					&& nombreArea.equals("Todos")) {
+				defensasSeleccionadas = servicioDefensa
+						.buscarDefensaTegSegunEstatusPrograma(estatus,
+								programa, fechaInicio, fechaFin);
+			} else if (!nombrePrograma.equals("Todos")
+					&& !nombreArea.equals("Todos")
+					&& !nombreTematica.equals("Todos")) {
+				Tematica tematica = servicioTematica
+						.buscarTematicaPorNombre(nombreTematica);
+				defensasSeleccionadas = servicioDefensa
+						.buscarDefensaTegSegunEstatusTematica(estatus,
+								tematica, fechaInicio, fechaFin);
+			} else if (!nombrePrograma.equals("Todos")
+					&& !nombreArea.equals("Todos")
+					&& nombreTematica.equals("Todos")) {
+				defensasSeleccionadas = servicioDefensa
+						.buscarDefensaTegSegunEstatusArea(estatus, area,
+								fechaInicio, fechaFin);
 			}
-			else
-			if (!nombrePrograma.equals("Todos") && nombreArea.equals("Todos")) {
-				defensasSeleccionadas=servicioDefensa.buscarDefensaTegSegunEstatusPrograma(estatus, programa, fechaInicio, fechaFin);
-				}
-			else
-			if (!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && !nombreTematica.equals("Todos")) {
-				    Tematica tematica= servicioTematica.buscarTematicaPorNombre(nombreTematica);
-					defensasSeleccionadas=servicioDefensa.buscarDefensaTegSegunEstatusTematica(estatus, tematica, fechaInicio, fechaFin);
-				}else
-			if(!nombrePrograma.equals("Todos") && !nombreArea.equals("Todos") && nombreTematica.equals("Todos")){
-				defensasSeleccionadas=servicioDefensa.buscarDefensaTegSegunEstatusArea(estatus, area, fechaInicio, fechaFin);
-				}
 
 		}
-		if(defensasSeleccionadas.size()!=0){
-			
+		if (defensasSeleccionadas.size() != 0) {
 
 			for (int i = 0; i < defensasSeleccionadas.size(); i++) {
-				List<Estudiante> estudiantes = servicioEstudiante.buscarEstudiantePorTeg(defensasSeleccionadas.get(i).getTeg());
-				
-				if(estudiantes.size()!=0){
-				
-				String nombre = estudiantes.get(0).getNombre();
-				String apellido = estudiantes.get(0).getApellido();
-				defensasSeleccionadas.get(i).getTeg().setEstatus(nombre+" "+apellido);
+				List<Estudiante> estudiantes = servicioEstudiante
+						.buscarEstudiantePorTeg(defensasSeleccionadas.get(i)
+								.getTeg());
+
+				if (estudiantes.size() != 0) {
+
+					String nombre = estudiantes.get(0).getNombre();
+					String apellido = estudiantes.get(0).getApellido();
+					defensasSeleccionadas.get(i).getTeg()
+							.setEstatus(nombre + " " + apellido);
 				}
 			}
-			
-			
-			
-			
-			
-			 FileSystemView filesys = FileSystemView.getFileSystemView();
-			 Map parametro = new HashMap();
-			 String rutaUrl = obtenerDirectorio();
-			 String reporteSrc = rutaUrl
-			 +
-			 "SITEG/vistas/reportes/estructurados/compilados/RTegAprobadoDefensa.jasper";
-			 String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
-			
-			 parametro.put("titulo",
-			 "UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
-			 + "DECANATO DE CIENCIAS Y TECNOLOGIA"
-			 + "DIRECCION DE PROGRAMA");
-			 parametro.put("programaNombre", cmbPrograma.getValue());
-			 parametro.put("areaNombre", cmbArea.getValue());
-			 parametro.put("tematicaNombre", cmbTematica.getValue());
-			 parametro.put("fechaInicio", fechaInicio);
-			 parametro.put("fechaFin", fechaFin);
-			 parametro.put("logoUcla", reporteImage + "logo ucla.png");
-			 parametro.put("logoCE", reporteImage + "logo CE.png");
-			 jstVistaPrevia.setSrc(reporteSrc);
-			 jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
-			 defensasSeleccionadas));
-			 jstVistaPrevia.setType("pdf");
-			 jstVistaPrevia.setParameters(parametro);
-			
-		}
-		else{
+
+			FileSystemView filesys = FileSystemView.getFileSystemView();
+			Map parametro = new HashMap();
+			String rutaUrl = obtenerDirectorio();
+			String reporteSrc = rutaUrl
+					+ "SITEG/vistas/reportes/estructurados/compilados/RTegAprobadoDefensa.jasper";
+			String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+
+			parametro.put("titulo",
+					"UNIVERSIDAD CENTROCCIDENTAL LISANDRO ALVARADO"
+							+ "DECANATO DE CIENCIAS Y TECNOLOGIA"
+							+ "DIRECCION DE PROGRAMA");
+			parametro.put("programaNombre", cmbPrograma.getValue());
+			parametro.put("areaNombre", cmbArea.getValue());
+			parametro.put("tematicaNombre", cmbTematica.getValue());
+			parametro.put("fechaInicio", fechaInicio);
+			parametro.put("fechaFin", fechaFin);
+			parametro.put("logoUcla", reporteImage + "logo ucla.png");
+			parametro.put("logoCE", reporteImage + "logo CE.png");
+			jstVistaPrevia.setSrc(reporteSrc);
+			jstVistaPrevia.setDatasource(new JRBeanCollectionDataSource(
+					defensasSeleccionadas));
+			jstVistaPrevia.setType("pdf");
+			jstVistaPrevia.setParameters(parametro);
+
+		} else {
 			Messagebox.show("No ha informacion disponible para este intervalo");
 		}
 	}

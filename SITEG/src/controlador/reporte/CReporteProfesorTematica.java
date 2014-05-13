@@ -44,7 +44,7 @@ public class CReporteProfesorTematica extends CGeneral {
 	@Wire
 	private Textbox txtApellidoProfesorTematica;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista y se llenan los campos correspondientes de
 	 * la vista, asi como los objetos empleados dentro de este controlador.
@@ -75,7 +75,7 @@ public class CReporteProfesorTematica extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite abrir el catalogo correspondiente y se envia al metodo
 	 * del catalogo el nombre de la vista a la que deben regresar los valores
 	 */
@@ -90,7 +90,7 @@ public class CReporteProfesorTematica extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, seleccionando un profesor, se
 	 * generara un pdf donde se muestra una lista de tematicas asociadas al
 	 * profesor de esta seleccion, mediante el componente "Jasperreport" donde
@@ -159,7 +159,7 @@ public class CReporteProfesorTematica extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
 	 */
 	@Listen("onClick = #btnCancelarReporteProfesorTematica")
@@ -171,7 +171,7 @@ public class CReporteProfesorTematica extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la ventana correspondiente al reporte */
+	/** Metodo que permite cerrar la ventana correspondiente al reporte */
 	@Listen("onClick = #btnSalirReporteProfesorTematica")
 	public void salirReporte() {
 		wdwReporteProfesorTematica.onClose();

@@ -55,7 +55,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 	private static Date fechaInicio;
 	private static Date fechaFin;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
 	 * seleccionar la opcion de "Todos" y se llena una lista del mismo en el
@@ -74,7 +74,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
 	 * se generara un pdf donde se muestra una lista de las cinco tematicas mas
 	 * solicitadas de esta seleccion, para esto se realiza varias operaciones
@@ -107,7 +107,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 								"Error", Messagebox.OK, Messagebox.ERROR);
 
 			} else {
-				
+
 				String nombreArea = cmbArea.getValue();
 				String nombrePrograma = cmbPrograma.getValue();
 				String etapaTeg = cmbEtapaTeg.getValue();
@@ -123,48 +123,56 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 				String idPrograma = cmbPrograma.getSelectedItem().getId();
 				Programa programa1 = servicioPrograma.buscar(Long
 						.parseLong(idPrograma));
-				
+
 				String idArea = cmbArea.getSelectedItem().getId();
 				AreaInvestigacion area1 = servicioArea.buscarArea(Long
 						.parseLong(idArea));
-				
+
 				if (!nombrePrograma.equals("Todos")
-						&& !nombreArea.equals("Todos")){
-					
-					tematicasSeleccionadas1=servicioTeg.buscarUltimasTematicasProgramaAreaEstatus(programa1,area1,fechaInicio, fechaFin,estatusProyectoTeg1,estatusProyectoTeg2);
-					
-				}
-				if( nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")) {
-					
-					tematicasSeleccionadas1=servicioTeg.buscarUltimasTematicasAreaEstatus(area1,fechaInicio, fechaFin,estatusProyectoTeg1,estatusProyectoTeg2);
-					
+
+					tematicasSeleccionadas1 = servicioTeg
+							.buscarUltimasTematicasProgramaAreaEstatus(
+									programa1, area1, fechaInicio, fechaFin,
+									estatusProyectoTeg1, estatusProyectoTeg2);
+
+				}
+				if (nombrePrograma.equals("Todos")
+						&& !nombreArea.equals("Todos")) {
+
+					tematicasSeleccionadas1 = servicioTeg
+							.buscarUltimasTematicasAreaEstatus(area1,
+									fechaInicio, fechaFin, estatusProyectoTeg1,
+									estatusProyectoTeg2);
+
 				}
 
 				if (nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")) {
-			
+
 					tematicasSeleccionadas = servicioTeg.buscarUltimasEstatus(
 							estatusProyectoTeg1, estatusProyectoTeg2,
 							fechaInicio, fechaFin);
-	
+
 				}
 
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")) {
-					
-		
-					tematicasSeleccionadas1=servicioTeg.buscarUltimasTematicasProgramaEstatus(programa1,fechaInicio, fechaFin,estatusProyectoTeg1,estatusProyectoTeg2);
-					
-					
+
+					tematicasSeleccionadas1 = servicioTeg
+							.buscarUltimasTematicasProgramaEstatus(programa1,
+									fechaInicio, fechaFin, estatusProyectoTeg1,
+									estatusProyectoTeg2);
+
 				}
-				for(int i=0;i<tematicasSeleccionadas1.size();i++){
-					tematicasSeleccionadas.add(tematicasSeleccionadas1.get(i).getTematica().getId());
+				for (int i = 0; i < tematicasSeleccionadas1.size(); i++) {
+					tematicasSeleccionadas.add(tematicasSeleccionadas1.get(i)
+							.getTematica().getId());
 				}
-				
+
 				if (tematicasSeleccionadas.size() != 0) {
 
-					/*************************** Contador de Lista ************* ******************/
+					/**************************** Contador de Lista ************* ******************/
 					List<Long> tematicas = new ArrayList();
 					List<Integer> contadores = new ArrayList();
 					long tematica = tematicasSeleccionadas.get(0);
@@ -181,7 +189,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 					}
 					tematicas.add(tematica);
 					contadores.add(contadorTematicas);
-					/*************************** Ordenado de Lista ************* ******************/
+					/**************************** Ordenado de Lista ************* ******************/
 					List<Long> tematicasOrdenados = new ArrayList();
 					List<Integer> contadoresOrdenados = new ArrayList();
 					List<Tematica> tematicasFinales = new ArrayList();
@@ -287,7 +295,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo area, ademas se adiciona un nuevo item donde se puede
@@ -305,14 +313,14 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 			programa = servicioPrograma.buscar(Long.parseLong(idPrograma));
 			areas = servicioProgramaArea.buscarAreasDePrograma(programa);
 		}
-		AreaInvestigacion areaInvestigacion = new AreaInvestigacion(
-				1000000, "Todos", "", true);
+		AreaInvestigacion areaInvestigacion = new AreaInvestigacion(1000000,
+				"Todos", "", true);
 		areas.add(areaInvestigacion);
 		cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
-		
+
 	}
 
-	/*
+	/**
 	 * Metodo que permite dado a la seleccion de la "Etapa del Teg", cargar en
 	 * dos variables los estatus que seran enviados por parametro
 	 * posteriormente.
@@ -331,7 +339,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite dado a la seleccion del area de investigacion, para
 	 * activar posteriormente el combo de etapa del teg
 	 */
@@ -341,7 +349,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		cmbEtapaTeg.setDisabled(false);
 	}
 
-	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
+	/** Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarTematicasSolicitadas")
 	public void cancelarTematicasSolicitadas() throws JRException {
 
@@ -356,7 +364,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista. */
+	/** Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalirTematicasSolicitadas")
 	public void salirTematicasSolicitadas() throws JRException {
 

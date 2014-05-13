@@ -31,6 +31,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador que permite generar a traves de un listado el reporte de las
+ * defensas de los trabajos especiales de grado de acuerdo a las opciones
+ * seleccionadas
+ */
 @Controller
 public class CReporteEstadisticoDefensa extends CGeneral {
 
@@ -71,48 +76,46 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 		Programa programaa = new Programa(987, "Todos", "", "", true, null);
 		programas.add(programaa);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
-		
+
 		cmbArea.setDisabled(true);
 		cmbTematica.setDisabled(true);
-		
 
 	}
 
 	@Listen("onSelect = #cmbPrograma")
-	
 	public void seleccionarPrograma() {
-		
-		try{
-			if (cmbPrograma.getValue().equals("Todos")) {
-		
 
-			areas = servicioArea.buscarActivos();
-			AreaInvestigacion area = new AreaInvestigacion(1000, "Todos",
-					"", true);
-			areas.add(area);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
-			cmbArea.setDisabled(false);
+		try {
+			if (cmbPrograma.getValue().equals("Todos")) {
+
+				areas = servicioArea.buscarActivos();
+				AreaInvestigacion area = new AreaInvestigacion(1000, "Todos",
+						"", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+				cmbArea.setDisabled(false);
 			}
-		
-		else {
-			cmbArea.setValue("");
-			cmbArea.setDisabled(false);
-			cmbTematica.setValue("");
-			programa1 = (Programa) cmbPrograma.getSelectedItem().getValue();
-			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
-					.buscar(programa1.getId()));
-			AreaInvestigacion area = new AreaInvestigacion(1000, "Todos",
-					"", true);
-			areas.add(area);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
-		}}catch (Exception e) {
+
+			else {
+				cmbArea.setValue("");
+				cmbArea.setDisabled(false);
+				cmbTematica.setValue("");
+				programa1 = (Programa) cmbPrograma.getSelectedItem().getValue();
+				areas = servicioProgramaArea
+						.buscarAreasDePrograma(servicioPrograma
+								.buscar(programa1.getId()));
+				AreaInvestigacion area = new AreaInvestigacion(1000, "Todos",
+						"", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle.e exception
 		}
-		}
+	}
 
-
-	/*
+	/**
 	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo tematica, ademas se adiciona un nuevo item donde se
@@ -121,28 +124,29 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 	@Listen("onSelect = #cmbArea")
 	public void seleccionarArea() {
 
-		try{
-		if (cmbArea.getValue().equals("Todos")) {
+		try {
+			if (cmbArea.getValue().equals("Todos")) {
 
-			cmbTematica.setValue("Todos");
-			cmbTematica.setDisabled(true);
-		} else {
-			cmbTematica.setValue("");
-			cmbTematica.setDisabled(false);
-			area1 = (AreaInvestigacion) cmbArea.getSelectedItem().getValue();
-			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-					.buscarArea(area1.getId()));
-			Tematica tema = new Tematica(10000, "Todos", "", true, null);
-			tematicas.add(tema);
-			cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
-		}
-		}catch (Exception e) {
+				cmbTematica.setValue("Todos");
+				cmbTematica.setDisabled(true);
+			} else {
+				cmbTematica.setValue("");
+				cmbTematica.setDisabled(false);
+				area1 = (AreaInvestigacion) cmbArea.getSelectedItem()
+						.getValue();
+				tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
+						.buscarArea(area1.getId()));
+				Tematica tema = new Tematica(10000, "Todos", "", true, null);
+				tematicas.add(tema);
+				cmbTematica.setModel(new ListModelList<Tematica>(tematicas));
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle.e exception
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
 	 * uno en el campo del mismo.
 	 */
@@ -181,35 +185,35 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 				if (nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")) {
-					teg1 = servicioTeg.buscarTegPorEstatus(
-							estatus1, fechaInicio, fechaFin);
-					teg2 = servicioTeg.buscarTegPorEstatus(
-							estatus2, fechaInicio, fechaFin);
-					teg3 = servicioTeg.buscarTegPorEstatus(
-							estatus3, fechaInicio, fechaFin);
+					teg1 = servicioTeg.buscarTegPorEstatus(estatus1,
+							fechaInicio, fechaFin);
+					teg2 = servicioTeg.buscarTegPorEstatus(estatus2,
+							fechaInicio, fechaFin);
+					teg3 = servicioTeg.buscarTegPorEstatus(estatus3,
+							fechaInicio, fechaFin);
 					valor1 = teg1.size();
 					valor2 = teg2.size();
 					valor3 = teg3.size();
 				}
-				/*
+				/**
 				 * seleccione un programa
 				 */
 				else if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")) {
 
-					teg1 = servicioTeg.buscarTegPorProgramaEstatus(programa1, 
+					teg1 = servicioTeg.buscarTegPorProgramaEstatus(programa1,
 							estatus1, fechaInicio, fechaFin);
-					teg2 = servicioTeg.buscarTegPorProgramaEstatus(programa1, 
+					teg2 = servicioTeg.buscarTegPorProgramaEstatus(programa1,
 							estatus2, fechaInicio, fechaFin);
-					teg3 = servicioTeg.buscarTegPorProgramaEstatus(programa1, 
+					teg3 = servicioTeg.buscarTegPorProgramaEstatus(programa1,
 							estatus3, fechaInicio, fechaFin);
 					valor1 = teg1.size();
 					valor2 = teg2.size();
 					valor3 = teg3.size();
 
 				}
-				/*
+				/**
 				 * Elijo uno de cada cosa
 				 */
 				else if (!nombrePrograma.equals("Todos")
@@ -233,7 +237,7 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 					valor3 = teg3.size();
 
 				}
-				/*
+				/**
 				 * Eligi� programa area pero todos las tematicas
 				 */
 				else if (!nombrePrograma.equals("Todos")
@@ -251,7 +255,7 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 					valor3 = teg3.size();
 
 				}
-				/*
+				/**
 				 * Eligi� todo los programas una area y todos los tematicos
 				 */
 
@@ -270,7 +274,7 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 					valor3 = teg3.size();
 
 				}
-				/*
+				/**
 				 * Eligio todo los programas una area y una tematica
 				 */
 				else if (nombrePrograma.equals("Todos")
@@ -299,18 +303,17 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 				System.out.println(valor3);
 				if ((valor1 == 0) && (valor2 == 0) && (valor3 == 0)) {
 					Messagebox
-					.show("No hay informacion disponible para esta seleccion",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-					
-					
+							.show("No hay informacion disponible para esta seleccion",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
+
 				} else {
 					String rutaUrl = obtenerDirectorio();
 					String reporteSrc = rutaUrl
-					+ "SITEG/vistas/reportes/estadisticos/compilados/ReporteEstadisticoDefensa.jasper";
-			String reporteImage = rutaUrl
-					+ "SITEG/public/imagenes/reportes/";
-			System.out.println(reporteSrc);
+							+ "SITEG/vistas/reportes/estadisticos/compilados/ReporteEstadisticoDefensa.jasper";
+					String reporteImage = rutaUrl
+							+ "SITEG/public/imagenes/reportes/";
+					System.out.println(reporteSrc);
 					List<MasSolicitados> masSolicitados = new ArrayList<MasSolicitados>();
 					Map<String, Object> mapa = new HashMap<String, Object>();
 					mapa.put("programa", cmbPrograma.getValue());
@@ -320,16 +323,11 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 					mapa.put("logoCE", reporteImage + "logo CE.png");
 					mapa.put("logoSiteg", reporteImage + "logo.png");
 
-					
-
-					
-
-					//JasperReport jasperReport = (JasperReport) JRLoader
-						//	.loadObject(getClass().getResource(
-							//		"ReporteEstadisticoDefensa.jasper"));
+					// JasperReport jasperReport = (JasperReport) JRLoader
+					// .loadObject(getClass().getResource(
+					// "ReporteEstadisticoDefensa.jasper"));
 					JasperReport jasperReport = (JasperReport) JRLoader
-					 .loadObject(reporteSrc);
-					
+							.loadObject(reporteSrc);
 
 					MasSolicitados masSolicita = new MasSolicitados(valor1,
 							valor2, valor3);
@@ -344,7 +342,8 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 
 		}
 	}
-	/* Metodo que permite limpiar los campos de los filtros de busqueda */
+
+	/** Metodo que permite limpiar los campos de los filtros de busqueda */
 	@Listen("onClick = #btnCancelar")
 	public void cancelar() throws JRException {
 
@@ -358,7 +357,7 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista. */
+	/** Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalir")
 	public void salirReporteSolicitud() throws JRException {
 

@@ -135,7 +135,7 @@ public class CNoticia extends CGeneral {
 							Messagebox.OK, Messagebox.ERROR);
 				} else {
 
-					Messagebox.show("ï¿½Desea guardar los datos de la noticia?",
+					Messagebox.show("¿Desea guardar los datos de la noticia?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {

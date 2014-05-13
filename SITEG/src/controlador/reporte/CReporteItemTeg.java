@@ -72,7 +72,7 @@ public class CReporteItemTeg extends CGeneral {
 	String estatusTeg[] = { "TEG Aprobado", "TEG Reprobado" };
 	String estatusProyecto[] = { "Proyecto Factible", "Proyecto No Factible" };
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral
 	 */
 	@Override
@@ -82,7 +82,7 @@ public class CReporteItemTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite dado a esta seleccion, cargar los estatus del teg en
 	 * el componente de la vista, con respecto a la etapa previamente
 	 * especificado.
@@ -115,7 +115,7 @@ public class CReporteItemTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite dado a el estatus seleccionado, se buscan los tegs
 	 * disponibles recorriendolo uno a uno para luego cargar una lista de
 	 * estudiantes por teg donde mediante la implementacion del servicio de
@@ -171,7 +171,7 @@ public class CReporteItemTeg extends CGeneral {
 		return tegs;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscar()", mediante el componente de la lista, donde se podra visualizar
 	 * el nombre y apellido del estudiante, la fecha, la tematica, el area, el
@@ -247,7 +247,7 @@ public class CReporteItemTeg extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dado a si es Proyecto o Teg, se
 	 * generara un pdf donde se muestra una lista de items de factibilidad de
 	 * esta seleccion, mediante el componente "Jasperreport" donde se mapea una
