@@ -156,7 +156,7 @@ public class CEnlaceInteres extends CGeneral {
 							Messagebox.OK, Messagebox.ERROR);
 				} else {
 					Messagebox.show(
-							"¿Desea guardar los datos del enlace de interes?",
+							"ï¿½Desea guardar los datos del enlace de interes?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -211,13 +211,31 @@ public class CEnlaceInteres extends CGeneral {
 
 	/**
 	 * Metodo que permite subir una imagen al formulario param event imagen
+	 * validando que el formato sea el jpeg o png
 	 * subida por el usuario al sistema
 	 */
+	
 	@Listen("onUpload = #fudImagenEnlace")
-	public void processMedia(UploadEvent event) {
-		media = event.getMedia();
-		imagen.setContent((org.zkoss.image.Image) media);
+	public void subirArchivo(UploadEvent event) {
 
+		media = event.getMedia();
+		if (media != null) {
+
+			if (media.getContentType().equals("image/jpeg")
+					|| media.getContentType().equals("application/png"))
+
+			{
+
+				media = event.getMedia();
+				imagen.setContent((org.zkoss.image.Image) media);
+
+			} else {
+				Messagebox.show(media.getName()
+						+ " No es un tipo de archivo valido!", "Error",
+						Messagebox.OK, Messagebox.ERROR);
+			}
+		}
 	}
+	
 
 }
