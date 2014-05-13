@@ -135,7 +135,7 @@ public class CNoticia extends CGeneral {
 							Messagebox.OK, Messagebox.ERROR);
 				} else {
 
-					Messagebox.show("¿Desea guardar los datos de la noticia?",
+					Messagebox.show("ï¿½Desea guardar los datos de la noticia?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -190,17 +190,39 @@ public class CNoticia extends CGeneral {
 	}
 
 	/**
-	 * Metodo que permite subir una imagen al formulario
+	 * Metodo que permite subir una imagen al formulario validando que el formato
+	 * sea jpeg o png
 	 * 
 	 * @param event
 	 *            imagen de la noticia subida al sistema por el usuario
 	 */
+	
+	
+	
 	@Listen("onUpload = #fudImagenNoticia")
-	public void processMedia(UploadEvent event) {
-		media = event.getMedia();
-		imagen.setContent((org.zkoss.image.Image) media);
+	public void subirArchivo(UploadEvent event) {
 
+		media = event.getMedia();
+		if (media != null) {
+
+			if (media.getContentType().equals("image/jpeg")
+					|| media.getContentType().equals("application/png"))
+
+			{
+
+				media = event.getMedia();
+				imagen.setContent((org.zkoss.image.Image) media);
+
+			} else {
+				Messagebox.show(media.getName()
+						+ " No es un tipo de archivo valido!", "Error",
+						Messagebox.OK, Messagebox.ERROR);
+			}
+		}
 	}
+	
+	
+
 
 	/** Metodo que permite cerrar la ventana correspondiente a las noticias */
 	@Listen("onClick = #btnSalirNoticia")
