@@ -116,7 +116,7 @@ public class CReporteEvaluacion extends CGeneral {
 	private static Date fechaInicio;
 	private static Date fechaFin;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
 	 * seleccionar la opcion de "Todos" y se llena una lista del mismo en el
@@ -154,7 +154,7 @@ public class CReporteEvaluacion extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo area, ademas se adiciona un nuevo item donde se puede
@@ -193,7 +193,7 @@ public class CReporteEvaluacion extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo tematica, ademas se adiciona un nuevo item donde se
@@ -226,7 +226,7 @@ public class CReporteEvaluacion extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
 	 * uno en el campo del mismo.
 	 */
@@ -237,7 +237,7 @@ public class CReporteEvaluacion extends CGeneral {
 		cmbEstatus.setDisabled(false);
 	}
 
-	/*
+	/**
 	 * Metodo que permite dado a la seleccion se cargara el combo estatus con
 	 * los posibles resultados, donde sea factible o no, asi como si esta
 	 * aprobado o no.
@@ -264,7 +264,7 @@ public class CReporteEvaluacion extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite dado a un programa, area y tematica, generar una lista
 	 * con las evaluaciones de factibilidad o defensa, dependiendo de esta
 	 * seleccion, donde se cargara un fichero con los datos resultante de esta.
@@ -333,7 +333,7 @@ public class CReporteEvaluacion extends CGeneral {
 										"Error", Messagebox.OK,
 										Messagebox.ERROR);
 					} else if (!nombreestatus.equals("Todos")) {
-						/*
+						/**
 						 * SELECIONO un estatus
 						 */
 						if (nombrePrograma.equals("Todos")
@@ -475,7 +475,7 @@ public class CReporteEvaluacion extends CGeneral {
 								btnExportarPlano.setDisabled(true);
 							}
 						}
-						/*
+						/**
 						 * seleccione un programa y un estatus
 						 */
 						else if (!nombrePrograma.equals("Todos")
@@ -622,7 +622,7 @@ public class CReporteEvaluacion extends CGeneral {
 								btnExportarPlano.setDisabled(true);
 							}
 						}
-						/*
+						/**
 						 * Elijo uno de cada cosa
 						 */
 						else if (!nombrePrograma.equals("Todos")
@@ -635,7 +635,9 @@ public class CReporteEvaluacion extends CGeneral {
 									.buscarTematicaPorNombre(nombreTematica);
 
 							teg = servicioTeg
-									.buscarTegPorTematicaEstatusPrograma(programa1, nombreestatus,tematica1, fechaInicio, fechaFin);
+									.buscarTegPorTematicaEstatusPrograma(
+											programa1, nombreestatus,
+											tematica1, fechaInicio, fechaFin);
 
 							if (teg.size() != 0) {
 
@@ -771,7 +773,7 @@ public class CReporteEvaluacion extends CGeneral {
 								btnExportarPlano.setDisabled(true);
 							}
 						}
-						/*
+						/**
 						 * Eligi� programa area pero todos las tematicas
 						 */
 						else if (!nombrePrograma.equals("Todos")
@@ -780,8 +782,9 @@ public class CReporteEvaluacion extends CGeneral {
 								&& !nombreestatus.equals("Todos")) {
 
 							chequeoEstatus = 5;
-							teg = servicioTeg
-									.buscarTegPorAreaEstatusPrograma(programa1, area1, nombreestatus, fechaInicio, fechaFin);						
+							teg = servicioTeg.buscarTegPorAreaEstatusPrograma(
+									programa1, area1, nombreestatus,
+									fechaInicio, fechaFin);
 
 							if (teg.size() != 0) {
 
@@ -916,7 +919,7 @@ public class CReporteEvaluacion extends CGeneral {
 							}
 
 						}
-						/*
+						/**
 						 * Eligi� todo los programas una area y todos los
 						 * tematicos
 						 */
@@ -1065,7 +1068,7 @@ public class CReporteEvaluacion extends CGeneral {
 							}
 
 						}
-						/*
+						/**
 						 * Eligio todo los programas una area y una tematica
 						 */
 						else if (nombrePrograma.equals("Todos")
@@ -1078,8 +1081,7 @@ public class CReporteEvaluacion extends CGeneral {
 							chequeoEstatus = 5;
 
 							teg = servicioTeg
-									.
-									buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
+									.buscarTegDeUnaTematicaPorDosFechasyUnEstatus1(
 											nombreestatus, tematica1,
 											fechaInicio, fechaFin);
 
@@ -1218,11 +1220,11 @@ public class CReporteEvaluacion extends CGeneral {
 
 					} else {
 
-						/**
+						/***
 						 * a partir de aqui el estatus es todos.
 						 */
-						/*
-						 * SELECIONO TODO TODO 
+						/**
+						 * SELECIONO TODO TODO
 						 */
 						if (nombrePrograma.equals("Todos")
 								&& nombreArea.equals("Todos")
@@ -1375,7 +1377,7 @@ public class CReporteEvaluacion extends CGeneral {
 								btnExportarPlano.setDisabled(true);
 							}
 						}
-						/*
+						/**
 						 * seleccione un programa
 						 */
 						else if (!nombrePrograma.equals("Todos")
@@ -1527,7 +1529,7 @@ public class CReporteEvaluacion extends CGeneral {
 								btnExportarPlano.setDisabled(true);
 							}
 						}
-						/*
+						/**
 						 * Elijo uno de cada cosa
 						 */
 						else if (!nombrePrograma.equals("Todos")
@@ -1539,14 +1541,22 @@ public class CReporteEvaluacion extends CGeneral {
 									.buscarTematicaPorNombre(nombreTematica);
 							if (rdoFactibilidad.isChecked() == true) {
 								teg = servicioTeg
-										.buscarTegPorVariosEstatusTematicaPrograma(programa1, tematica1, estatus1, estatus1, estatus1, estatus2, estatus2, estatus2, estatus2, estatus2, fechaInicio, fechaFin);
-										
-								
-								System.out.println("pase por donde era"+teg.size());
+										.buscarTegPorVariosEstatusTematicaPrograma(
+												programa1, tematica1, estatus1,
+												estatus1, estatus1, estatus2,
+												estatus2, estatus2, estatus2,
+												estatus2, fechaInicio, fechaFin);
+
+								System.out.println("pase por donde era"
+										+ teg.size());
 
 							} else {
 								teg = servicioTeg
-										.buscarTegPorVariosEstatusTematicaPrograma(programa1, tematica1, estatus4, estatus3, estatus3, estatus3, estatus3, estatus4, estatus4, estatus4, fechaInicio, fechaFin);
+										.buscarTegPorVariosEstatusTematicaPrograma(
+												programa1, tematica1, estatus4,
+												estatus3, estatus3, estatus3,
+												estatus3, estatus4, estatus4,
+												estatus4, fechaInicio, fechaFin);
 
 							}
 
@@ -1684,7 +1694,7 @@ public class CReporteEvaluacion extends CGeneral {
 								btnExportarPlano.setDisabled(true);
 							}
 						}
-						/*
+						/**
 						 * Eligi� programa area pero todos las tematicas
 						 */
 						else if (!nombrePrograma.equals("Todos")
@@ -1694,12 +1704,19 @@ public class CReporteEvaluacion extends CGeneral {
 							if (rdoFactibilidad.isChecked() == true) {
 
 								teg = servicioTeg
-										.buscarTegPorVariosEstatusAreaPrograma(programa1, area1, estatus1, estatus1,estatus2, estatus2, estatus2,estatus2, estatus2, estatus1, fechaInicio, fechaFin);
-										
+										.buscarTegPorVariosEstatusAreaPrograma(
+												programa1, area1, estatus1,
+												estatus1, estatus2, estatus2,
+												estatus2, estatus2, estatus2,
+												estatus1, fechaInicio, fechaFin);
 
 							} else {
 								teg = servicioTeg
-										.buscarTegPorVariosEstatusAreaPrograma(programa1, area1, estatus3, estatus3,estatus3, estatus4, estatus4,estatus4, estatus3, estatus4, fechaInicio, fechaFin);
+										.buscarTegPorVariosEstatusAreaPrograma(
+												programa1, area1, estatus3,
+												estatus3, estatus3, estatus4,
+												estatus4, estatus4, estatus3,
+												estatus4, fechaInicio, fechaFin);
 
 							}
 
@@ -1836,7 +1853,7 @@ public class CReporteEvaluacion extends CGeneral {
 							}
 
 						}
-						/*
+						/**
 						 * Eligi� todo los programas una area y todos los
 						 * tematicos
 						 */
@@ -1994,7 +2011,7 @@ public class CReporteEvaluacion extends CGeneral {
 							}
 
 						}
-						/*
+						/**
 						 * Eligio todo los programas una area y una tematica
 						 */
 						else if (nombrePrograma.equals("Todos")
@@ -2895,13 +2912,13 @@ public class CReporteEvaluacion extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista. */
+	/** Metodo que permite cerrar la vista. */
 	@Listen("onClick= #btnSalir")
 	public void salir() {
 		wdwReporteEvaluaciones.onClose();
 	}
 
-	/*
+	/**
 	 * Metodo que permite exportar en un archivo plano, los datos previamente
 	 * cargados.
 	 */

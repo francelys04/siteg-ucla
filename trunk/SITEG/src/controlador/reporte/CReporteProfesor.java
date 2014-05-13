@@ -73,7 +73,7 @@ public class CReporteProfesor extends CGeneral {
 	private static AreaInvestigacion area1;
 	private static long idarea;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se verifica que el mapa
 	 * recibido del catalogo exista, tambien se buscan todos los programas
 	 * disponibles, adicionando un nuevo item donde se puede seleccionar la
@@ -98,7 +98,7 @@ public class CReporteProfesor extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
@@ -111,8 +111,8 @@ public class CReporteProfesor extends CGeneral {
 				cmbArea.setDisabled(false);
 				cmbArea.setValue("");
 				areas = servicioArea.buscarActivos();
-				AreaInvestigacion area = new AreaInvestigacion(989,
-						"Todos", "", true);
+				AreaInvestigacion area = new AreaInvestigacion(989, "Todos",
+						"", true);
 				areas.add(area);
 				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 			} else {
@@ -123,8 +123,8 @@ public class CReporteProfesor extends CGeneral {
 				areas = servicioProgramaArea
 						.buscarAreasDePrograma(servicioPrograma
 								.buscar(programa1.getId()));
-				AreaInvestigacion area = new AreaInvestigacion(1001,
-						"Todos", "", true);
+				AreaInvestigacion area = new AreaInvestigacion(1001, "Todos",
+						"", true);
 				areas.add(area);
 				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 			}
@@ -134,7 +134,7 @@ public class CReporteProfesor extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo tematica
@@ -168,7 +168,7 @@ public class CReporteProfesor extends CGeneral {
 		idarea = Long.parseLong(cmbArea.getSelectedItem().getId());
 	}
 
-	/*
+	/**
 	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
 	 * uno en el campo del mismo.
 	 */
@@ -179,7 +179,7 @@ public class CReporteProfesor extends CGeneral {
 		cmbEstatus.setDisabled(false);
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
 	 * y tipo de cargo, se generara un pdf donde se muestra una lista de
 	 * profesores especificando tanto datos basicos como su rol en el teg de
@@ -199,7 +199,7 @@ public class CReporteProfesor extends CGeneral {
 		String estatus = cmbEstatus.getValue();
 		List<ProfesorTeg> elementos = new ArrayList<ProfesorTeg>();
 
-		/* Mensaje para dar cuando falta un dato */
+		/** Mensaje para dar cuando falta un dato */
 		if (nombrePrograma.equals("") || nombreArea.equals("")
 				|| nombreTematica.equals("") || estatus.equals("")) {
 			Messagebox.show("Debe completar todos los campos", "Error",
@@ -207,14 +207,14 @@ public class CReporteProfesor extends CGeneral {
 		}
 
 		else {
-			/* Si las fechas estan malas */
+			/** Si las fechas estan malas */
 			if (fechaFin == null || fechaInicio == null
 					|| fechaInicio.after(fechaFin)) {
 				Messagebox
 						.show("La fecha de fin debe ser posterior a la fecha de inicio",
 								"Error", Messagebox.OK, Messagebox.ERROR);
 			} else {
-				/* buscar por una carrera, un area, una tematica y un rol */
+				/** buscar por una carrera, un area, una tematica y un rol */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& !nombreTematica.equals("Todos")
@@ -229,10 +229,10 @@ public class CReporteProfesor extends CGeneral {
 							.getSelectedItem().getValue()).getId());
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
-					
+
 					List<Teg> teg = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechas(programa1, tematica1,
-									fechaInicio, fechaFin);
+							.buscarTegDeUnaTematicaPorDosFechas(programa1,
+									tematica1, fechaInicio, fechaFin);
 
 					for (Teg tegs : teg) {
 
@@ -276,7 +276,7 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/* buscar por una carrera, un area, Todos las tematica y un rol */
+				/** buscar por una carrera, un area, Todos las tematica y un rol */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
@@ -290,9 +290,9 @@ public class CReporteProfesor extends CGeneral {
 							.getSelectedItem().getValue()).getId());
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
-					
-					List<Teg> teg = servicioTeg.buscarTegDeUnAreaPorDosFechas(programa1,
-							area1, fechaInicio, fechaFin);
+
+					List<Teg> teg = servicioTeg.buscarTegDeUnAreaPorDosFechas(
+							programa1, area1, fechaInicio, fechaFin);
 					for (Teg tegs : teg) {
 						Profesor profesorTutor = tegs.getTutor();
 						if (estatus.equals("Tutor")) {
@@ -334,7 +334,10 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/*  buscar por una carrera, un area, Todos las tematica y todos los estatus */
+				/**
+				 * buscar por una carrera, un area, Todos las tematica y todos
+				 * los estatus
+				 */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
@@ -348,9 +351,9 @@ public class CReporteProfesor extends CGeneral {
 							.getSelectedItem().getValue()).getId());
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
-					
-					List<Teg> teg = servicioTeg.buscarTegDeUnAreaPorDosFechas(programa1,
-							area1, fechaInicio, fechaFin);
+
+					List<Teg> teg = servicioTeg.buscarTegDeUnAreaPorDosFechas(
+							programa1, area1, fechaInicio, fechaFin);
 
 					for (Teg tegs : teg) {
 						Profesor profesorTutor = tegs.getTutor();
@@ -386,7 +389,10 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/* buscar por una carrera, un area, una tematica y todos los estatus */
+				/**
+				 * buscar por una carrera, un area, una tematica y todos los
+				 * estatus
+				 */
 				if (!nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& !nombreTematica.equals("Todos")
@@ -400,10 +406,10 @@ public class CReporteProfesor extends CGeneral {
 							.getSelectedItem().getValue()).getId());
 					Programa programa1 = servicioPrograma.buscar(Long
 							.parseLong(idPrograma));
-					
+
 					List<Teg> teg1 = servicioTeg
-							.buscarTegDeUnaTematicaPorDosFechas(programa1, tematica1,
-									fechaInicio, fechaFin);
+							.buscarTegDeUnaTematicaPorDosFechas(programa1,
+									tematica1, fechaInicio, fechaFin);
 
 					for (Teg tegs : teg1) {
 						Profesor profesorTutor = tegs.getTutor();
@@ -439,7 +445,10 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/* buscar por una carrera, Todos las area, todas las tematicas y un estatus */
+				/**
+				 * buscar por una carrera, Todos las area, todas las tematicas y
+				 * un estatus
+				 */
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& nombreArea.equals("Todos")
@@ -494,7 +503,10 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/* buscar por una carrera, Todos las area, Todas las tematicas y todos los estatus */
+				/**
+				 * buscar por una carrera, Todos las area, Todas las tematicas y
+				 * todos los estatus
+				 */
 				if (!nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& nombreArea.equals("Todos")
@@ -542,7 +554,10 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/* buscar por Todos las carrera, Todos las Areas, Todas las tematicas y un estatus */
+				/**
+				 * buscar por Todos las carrera, Todos las Areas, Todas las
+				 * tematicas y un estatus
+				 */
 				if (nombrePrograma.equals("Todos")
 						&& nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
@@ -591,11 +606,14 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				/* buscar por Todos las carrera, Todos las Areas, Todas las tematicas y todos los estatus */
+				/**
+				 * buscar por Todos las carrera, Todos las Areas, Todas las
+				 * tematicas y todos los estatus
+				 */
 				if (nombrePrograma.equals("Todos")
-					&& nombreArea.equals("Todos")
-					&& nombreTematica.equals("Todos")
-					&& estatus.equals("Todos")) {
+						&& nombreArea.equals("Todos")
+						&& nombreTematica.equals("Todos")
+						&& estatus.equals("Todos")) {
 					List<Teg> teg2 = servicioTeg.buscarTodosTegPorDosFechas(
 							fechaInicio, fechaFin);
 
@@ -634,7 +652,7 @@ public class CReporteProfesor extends CGeneral {
 					}
 				}
 
-				/*Todos los programas, una area, una tematica, un estatus*/
+				/** Todos los programas, una area, una tematica, un estatus */
 				if (nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& !nombreTematica.equals("Todos")
@@ -691,18 +709,21 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-                
-				/*Todos los programas, una area, una tematica, todos los estatus*/
+
+				/**
+				 * Todos los programas, una area, una tematica, todos los
+				 * estatus
+				 */
 				if (nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& !nombreTematica.equals("Todos")
 						&& estatus.equals("Todos")) {
-				
+
 					String idTematica = String.valueOf(((Tematica) cmbTematica
 							.getSelectedItem().getValue()).getId());
 					Tematica tematica1 = servicioTematica.buscarTematica(Long
 							.parseLong(idTematica));
-					
+
 					List<Teg> teg1 = servicioTeg
 							.buscarTegUnaTematicaPorDosFechas(tematica1,
 									fechaInicio, fechaFin);
@@ -741,8 +762,11 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				
-				/*Todos los programas, una area, todas las tematicas, un estatus*/
+
+				/**
+				 * Todos los programas, una area, todas las tematicas, un
+				 * estatus
+				 */
 				if (nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
@@ -795,8 +819,11 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-				
-				/*Todos los programas, un area, todas las tematicas, todos los estatus*/
+
+				/**
+				 * Todos los programas, un area, todas las tematicas, todos los
+				 * estatus
+				 */
 				if (nombrePrograma.equals("Todos")
 						&& !nombreArea.equals("Todos")
 						&& nombreTematica.equals("Todos")
@@ -843,7 +870,6 @@ public class CReporteProfesor extends CGeneral {
 						datosVacios = true;
 					}
 				}
-
 
 				if (!datosVacios) {
 					Collections.sort(elementos, new Comparator<ProfesorTeg>() {
@@ -871,7 +897,6 @@ public class CReporteProfesor extends CGeneral {
 					mapa.put("logoUcla", reporteImage + "logo ucla.png");
 					mapa.put("logoCE", reporteImage + "logo CE.png");
 					mapa.put("logoSiteg", reporteImage + "logo.png");
-					
 
 					JasperReport jasperReport = (JasperReport) JRLoader
 							.loadObject(reporteSrc);
@@ -893,10 +918,10 @@ public class CReporteProfesor extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
+	/** Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarReporteProfesor")
 	public void cancelarReporteProfesor() throws JRException {
-		
+
 		cmbPrograma.setValue("");
 		cmbArea.setValue("");
 		cmbTematica.setValue("");
@@ -908,7 +933,7 @@ public class CReporteProfesor extends CGeneral {
 		cmbEstatus.setDisabled(true);
 	}
 
-	/* Metodo que permite cerrar la vista. */
+	/** Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalirReporteProfesor")
 	public void salirReporteProfesor() throws JRException {
 

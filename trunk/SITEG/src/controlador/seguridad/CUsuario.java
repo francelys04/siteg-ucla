@@ -65,7 +65,7 @@ public class CUsuario extends CGeneral {
 	List<Grupo> gruposDisponibles = new ArrayList<Grupo>();
 	List<Grupo> gruposSeleccionados = new ArrayList<Grupo>();
 	ArrayList<Boolean> valorCorreo = new ArrayList<Boolean>();
-	private String mensaje = "Su solicitud ha sido exitosamente procesada, le enviamos su usuario y contraseï¿½a,";
+	private String mensaje = "Su solicitud ha sido exitosamente procesada, le enviamos su usuario y contrasena,";
 
 	@Wire
 	private Textbox txtNombreUsuario;
@@ -312,7 +312,7 @@ public class CUsuario extends CGeneral {
 					}
 					valorCorreo.add(enviarEmailNotificacion(correoUsuario,
 							mensaje + " Usuario: " + nombre + "  "
-									+ "Contraseï¿½a: " + nombre));
+									+ "Contrasena: " + nombre));
 					// confirmacion(valorCorreo);
 
 					Messagebox.show("Usuario registrado exitosamente",
@@ -417,7 +417,7 @@ public class CUsuario extends CGeneral {
 	@Listen("onClick = #btnEliminarUsuario")
 	public void eliminarUsuario() throws IOException {
 
-		Messagebox.show("Desea eliminar el usuario?",
+		Messagebox.show("¿Desea eliminar el usuario?",
 				"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION,
 				new org.zkoss.zk.ui.event.EventListener<Event>() {

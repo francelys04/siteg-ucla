@@ -35,6 +35,11 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador que permite generar a traves de un listado el reporte de las
+ * defensas de los trabajos especiales de grado de acuerdo a las opciones
+ * seleccionadas
+ */
 @Controller
 public class CReporteDefensa extends CGeneral {
 
@@ -69,7 +74,7 @@ public class CReporteDefensa extends CGeneral {
 	private static Date fechaInicio;
 	private static Date fechaFin;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
 	 * seleccionar la opcion de "Todos", junto a esto se tiene una lista
@@ -89,7 +94,7 @@ public class CReporteDefensa extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo area, ademas se adiciona un nuevo item donde se puede
@@ -128,7 +133,7 @@ public class CReporteDefensa extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo tematica
@@ -162,7 +167,7 @@ public class CReporteDefensa extends CGeneral {
 		idarea = Long.parseLong(cmbArea.getSelectedItem().getId());
 	}
 
-	/*
+	/**
 	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
 	 * uno en el campo del mismo.
 	 */
@@ -175,7 +180,7 @@ public class CReporteDefensa extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
 	 * y tipo de defensa se generara un pdf donde se muestra una lista de las
 	 * defensas de esta seleccion, mediante el componente "Jasperreport" donde
@@ -221,22 +226,22 @@ public class CReporteDefensa extends CGeneral {
 				// ESTATUS DIFERENTE DE TODOS
 				if (!tipoDefensa.equals("Todos")) {
 
-					//TODOS LOS PROGRAMAS
+					// TODOS LOS PROGRAMAS
 					if (nombrePrograma.equals("Todos")) {
 
 						defensas = servicioDefensa
 								.buscarDefensaTegSegunEstatus2(tipoDefensa,
 										fechaInicio, fechaFin);
-						
-					//UN PROGRAMA Y TODAS LAS AREAS
+
+						// UN PROGRAMA Y TODAS LAS AREAS
 					} else if (!nombrePrograma.equals("Todos")
 							&& nombreArea.equals("Todos")) {
 						defensas = servicioDefensa
 								.buscarDefensaTegSegunEstatusPrograma2(
 										tipoDefensa, programa1, fechaInicio,
 										fechaFin);
-					
-					//UN PROGRAMA, UN AREA, UNA TEMATICA
+
+						// UN PROGRAMA, UN AREA, UNA TEMATICA
 					} else if (!nombrePrograma.equals("Todos")
 							&& !nombreArea.equals("Todos")
 							&& !nombreTematica.equals("Todos")) {
@@ -246,29 +251,29 @@ public class CReporteDefensa extends CGeneral {
 								.buscarDefensaTegSegunEstatusTematica2(
 										tipoDefensa, tematica, fechaInicio,
 										fechaFin);
-					//UN PROGRAMA, UN AREA, TODAS LAS TEMATICAS
+						// UN PROGRAMA, UN AREA, TODAS LAS TEMATICAS
 					} else if (!nombrePrograma.equals("Todos")
 							&& !nombreArea.equals("Todos")
 							&& nombreTematica.equals("Todos")) {
-						
+
 						defensas = servicioDefensa
 								.buscarDefensaTegSegunEstatusArea2(tipoDefensa,
 										area, fechaInicio, fechaFin);
 					}
 				} else {
-					//TODOS LOS PROGRAMAS, TODOS LOS ESTATUS
+					// TODOS LOS PROGRAMAS, TODOS LOS ESTATUS
 					if (nombrePrograma.equals("Todos")) {
 
 						defensas = servicioDefensa.buscarDefensaTeg(
 								fechaInicio, fechaFin);
-					//UN PROGRAMA, TODAS LAS AREAS
+						// UN PROGRAMA, TODAS LAS AREAS
 					} else if (!nombrePrograma.equals("Todos")
 							&& nombreArea.equals("Todos")) {
 						defensas = servicioDefensa
 								.buscarDefensaTegSegunPrograma(programa1,
 										fechaInicio, fechaFin);
-						
-					//UN PROGRAMA, UN AREA, TODAS LAS TEMATICAS
+
+						// UN PROGRAMA, UN AREA, TODAS LAS TEMATICAS
 					} else if (!nombrePrograma.equals("Todos")
 							&& !nombreArea.equals("Todos")
 							&& !nombreTematica.equals("Todos")) {
@@ -277,7 +282,7 @@ public class CReporteDefensa extends CGeneral {
 						defensas = servicioDefensa
 								.buscarDefensaTegSegunTematica(tematica,
 										fechaInicio, fechaFin);
-					//UN PROGRAMA, UN AREA, TODAS LAS TEMATICAS
+						// UN PROGRAMA, UN AREA, TODAS LAS TEMATICAS
 					} else if (!nombrePrograma.equals("Todos")
 							&& !nombreArea.equals("Todos")
 							&& nombreTematica.equals("Todos")) {
@@ -344,7 +349,7 @@ public class CReporteDefensa extends CGeneral {
 		}
 	}
 
-	/* Metodo que permite limpiar los campos de los filtros de busqueda. */
+	/** Metodo que permite limpiar los campos de los filtros de busqueda. */
 	@Listen("onClick = #btnCancelarReporteDefensa")
 	public void cancelarReporteDefensa() throws JRException {
 
@@ -360,7 +365,7 @@ public class CReporteDefensa extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista. */
+	/** Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalirReporteDefensa")
 	public void salirReporteDefensa() throws JRException {
 

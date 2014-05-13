@@ -112,7 +112,7 @@ public class CLapso extends CGeneral {
 					.show("La fecha de fin de lapso debe ser posterior a la fecha de inicio",
 							"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show("ï¿½Desea guardar los datos del lapso academico?",
+			Messagebox.show("¿Desea guardar los datos del lapso academico?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -202,7 +202,7 @@ public class CLapso extends CGeneral {
 						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 			} else {
 				Messagebox.show(
-						"ï¿½Desea eliminar los datos del lapso academico?",
+						"¿Desea eliminar los datos del lapso academico?",
 						"Dialogo de confirmacion", Messagebox.OK
 								| Messagebox.CANCEL, Messagebox.QUESTION,
 						new org.zkoss.zk.ui.event.EventListener<Event>() {

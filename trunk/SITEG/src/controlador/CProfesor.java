@@ -161,7 +161,7 @@ public class CProfesor extends CGeneral {
 					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
-			Messagebox.show("ï¿½Desea guardar los datos del profesor?",
+			Messagebox.show("¿Desea guardar los datos del profesor?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -272,7 +272,7 @@ public class CProfesor extends CGeneral {
 		List<SolicitudTutoria> solicitudes = servicioSolicitudTutoria.buscarPorProfesorYEstatus(profesor);
 		List<Teg> tegNoCulminados = servicioTeg.buscarTegNoCulminadosProfesor(profesor);
 		if (solicitudes.size() == 0 && tegNoCulminados.size() == 0) {
-			Messagebox.show("ï¿½Desea eliminar los datos del profesor?",
+			Messagebox.show("¿Desea eliminar los datos del profesor?",
 					"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 					Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener<Event>() {

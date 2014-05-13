@@ -120,7 +120,7 @@ public class CEditarUsuario extends CGeneral {
 
 		if (txtClaveUsuarioNueva.getValue().equals(
 				txtClaveUsuarioConfirmar.getValue())) {
-			Messagebox.show("ï¿½Desea guardar los cambios?",
+			Messagebox.show("¿Desea guardar los cambios?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {

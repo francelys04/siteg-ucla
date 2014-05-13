@@ -65,7 +65,7 @@ public class CReporteSolicitudes extends CGeneral {
 	@Wire
 	private Window wdwReporteSolicitudesTutoria;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
 	 * programas disponibles, ademas se adiciona un nuevo item donde se puede
 	 * seleccionar la opcion de "Todos" y se llena una lista del mismo en el
@@ -87,7 +87,7 @@ public class CReporteSolicitudes extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las areas dado al programa seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo area y tematica, ademas se adiciona un nuevo item donde
@@ -129,7 +129,7 @@ public class CReporteSolicitudes extends CGeneral {
 		}
 	}
 
-	/*
+	/**
 	 * Metodo que permite cargar las tematicas dado al area seleccionado, donde
 	 * si selecciona la opcion de "Todos", automaticamente se seteara ese mismo
 	 * valor en el campo tematica, ademas se adiciona un nuevo item donde se
@@ -163,7 +163,7 @@ public class CReporteSolicitudes extends CGeneral {
 				.getId());
 	}
 
-	/*
+	/**
 	 * Metodo que permite extraer el valor del id de la tematica al seleccionar
 	 * uno en el campo del mismo.
 	 */
@@ -176,7 +176,7 @@ public class CReporteSolicitudes extends CGeneral {
 		idTematica = tematica.getId();
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dado a un programa, area, tematica
 	 * y estatus de solicitud, se generara un pdf donde se muestra una lista de
 	 * las solicitudes de tutorias de esta seleccion, mediante el componente
@@ -215,7 +215,7 @@ public class CReporteSolicitudes extends CGeneral {
 				fechaFin = dtbFinReporteSolicitud.getValue();
 				List<Solicitud> elementos = new ArrayList<Solicitud>();
 
-				/*
+				/**
 				 * SELECIONO TODO TODO
 				 */
 				if (nombrePrograma.equals("Todos")
@@ -287,7 +287,7 @@ public class CReporteSolicitudes extends CGeneral {
 					}
 				}
 
-				/*
+				/**
 				 * seleccione un estatus y todo en todo
 				 */
 				else if (nombrePrograma.equals("Todos")
@@ -358,7 +358,7 @@ public class CReporteSolicitudes extends CGeneral {
 										Messagebox.INFORMATION);
 					}
 				}
-				/*
+				/**
 				 * seleccione uno de cada uno
 				 */
 				else if (!nombrePrograma.equals("Todos")
@@ -433,7 +433,7 @@ public class CReporteSolicitudes extends CGeneral {
 										Messagebox.INFORMATION);
 					}
 				}
-				/*
+				/**
 				 * seleccione area tematica y estatus
 				 */
 				else if (nombrePrograma.equals("Todos")
@@ -511,7 +511,7 @@ public class CReporteSolicitudes extends CGeneral {
 					}
 
 				}
-				/*
+				/**
 				 * seleccione solo un area diferente
 				 */
 				else if (nombrePrograma.equals("Todos")
@@ -591,7 +591,7 @@ public class CReporteSolicitudes extends CGeneral {
 					}
 				}
 
-				/*
+				/**
 				 * seleccione programa area tematica
 				 */
 				else if (!nombrePrograma.equals("Todos")
@@ -603,7 +603,8 @@ public class CReporteSolicitudes extends CGeneral {
 							.buscarTematica(idTematica);
 
 					solicitud = servicioSolicitudTutoria
-							.buscarSolicitudSegunProgramaunAreaunaTematicadosFechas(programa1, tematica1, fechaInicio, fechaFin);
+							.buscarSolicitudSegunProgramaunAreaunaTematicadosFechas(
+									programa1, tematica1, fechaInicio, fechaFin);
 					if (solicitud.size() != 0) {
 						elementos.clear();
 						for (SolicitudTutoria s : solicitud) {
@@ -664,7 +665,7 @@ public class CReporteSolicitudes extends CGeneral {
 										Messagebox.INFORMATION);
 					}
 				}
-				/*
+				/**
 				 * selecciono solo programa y estatus
 				 */
 				else if (!nombrePrograma.equals("Todos")
@@ -739,7 +740,7 @@ public class CReporteSolicitudes extends CGeneral {
 										Messagebox.INFORMATION);
 					}
 				}
-				/*
+				/**
 				 * seleccionan solo programa
 				 */
 				else if (!nombrePrograma.equals("Todos")
@@ -813,7 +814,7 @@ public class CReporteSolicitudes extends CGeneral {
 										Messagebox.INFORMATION);
 					}
 				}
-				/*
+				/**
 				 * seleccionan solo tematica
 				 */
 				else if (nombrePrograma.equals("Todos")
@@ -890,7 +891,7 @@ public class CReporteSolicitudes extends CGeneral {
 					}
 
 				}
-				/*
+				/**
 				 * seleccionan programa area y estatus
 				 */
 				else if (!nombrePrograma.equals("Todos")
@@ -898,10 +899,10 @@ public class CReporteSolicitudes extends CGeneral {
 						&& nombreTematica.equals("Todos")
 						&& !nombreEstatus.equals("Todos")) {
 
-					
-
 					solicitud = servicioSolicitudTutoria
-							.buscarSolicitudSegunProgramaAreaUnEstatus1(nombreEstatus, programa1, area1, fechaInicio, fechaFin);
+							.buscarSolicitudSegunProgramaAreaUnEstatus1(
+									nombreEstatus, programa1, area1,
+									fechaInicio, fechaFin);
 					if (solicitud.size() != 0) {
 						elementos.clear();
 						for (SolicitudTutoria s : solicitud) {
@@ -965,14 +966,13 @@ public class CReporteSolicitudes extends CGeneral {
 					}
 
 				}
-				
 
 			}
 
 		}
 	}
 
-	/* Metodo que permite limpiar los campos de los filtros de busqueda */
+	/** Metodo que permite limpiar los campos de los filtros de busqueda */
 	@Listen("onClick = #btnCancelarReporteSolicitud")
 	public void cancelar() throws JRException {
 
@@ -988,7 +988,7 @@ public class CReporteSolicitudes extends CGeneral {
 
 	}
 
-	/* Metodo que permite cerrar la vista. */
+	/** Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalirReporteSolicitud")
 	public void salirReporteSolicitud() throws JRException {
 

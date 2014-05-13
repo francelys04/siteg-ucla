@@ -33,6 +33,10 @@ import org.zkoss.zul.Window;
 
 import controlador.CGeneral;
 
+/**
+ * Controlador que permite generar a traves de un listado el reporte de las
+ * configuraciones realizadas a un programa en un lapso academico determinado
+ */
 @Controller
 public class CReporteConfiguracionPrograma extends CGeneral {
 
@@ -56,10 +60,10 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 	@Wire
 	private Radio rdorequisito;
 
-	/*
+	/**
 	 * Metodo heredado del Controlador CGeneral donde se buscan todos los
-	 * programas y lapsos disponibles y se llena una lista del mismo en el componente de
-	 * la vista
+	 * programas y lapsos disponibles y se llena una lista del mismo en el
+	 * componente de la vista
 	 */
 	@Override
 	public void inicializar(Component comp) {
@@ -72,13 +76,12 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dependiendo de la opcion que elija
-	 * , ya sea por condicion. por area, por item o por requisito se
-	 * generara un pdf donde se muestra una lista del mismo, mediante el
-	 * componente "Jasperreport" donde se mapea una serie de parametros y una
-	 * lista previamente cargada que seran los datos que se muestra en el
-	 * documento.
+	 * , ya sea por condicion. por area, por item o por requisito se generara un
+	 * pdf donde se muestra una lista del mismo, mediante el componente
+	 * "Jasperreport" donde se mapea una serie de parametros y una lista
+	 * previamente cargada que seran los datos que se muestra en el documento.
 	 */
 	@Listen("onClick = #btnGenerarReporteConfiguracion")
 	public void GenerarReporte() throws JRException {
@@ -102,7 +105,6 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 			lapso = servicioLapso.buscarLapso(idlapso);
 			if (rdocondicion.isChecked() == true) {
 
-				
 				List<CondicionPrograma> condicion = servicioCondicionPrograma
 						.buscarCondicionesPrograma(programa, lapso);
 				if (condicion.size() != 0) {
@@ -112,40 +114,38 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 					mapa.put("nombreprograma",
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
-					
+
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					JasperReport jasperReport;		
+					JasperReport jasperReport;
 
 					try {
-						
+
 						String rutaUrl = obtenerDirectorio();
 						String reporteSrc = rutaUrl
 								+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaCondicion.jasper";
-						  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+						String reporteImage = rutaUrl
+								+ "SITEG/public/imagenes/reportes/";
 						mapa.put("logoUcla", reporteImage + "logo ucla.png");
 						mapa.put("logoCE", reporteImage + "logo CE.png");
 						mapa.put("logoSiteg", reporteImage + "logo.png");
-							
-							
-						 
 
-						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(condicion));
+						jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, mapa,
+								new JRBeanCollectionDataSource(condicion));
 						JasperViewer.viewReport(jasperPrint, false);
-						
-				
+
 					} catch (JRException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
-					
 
 				} else {
 					Messagebox
-					.show("No hay informacion disponible para esta seleccion",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+							.show("No hay informacion disponible para esta seleccion",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
 				}
 			} else if (rdoarea.isChecked() == true) {
 				List<AreaInvestigacion> programaarea = servicioProgramaArea
@@ -157,43 +157,38 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 					mapa.put("nombreprograma",
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
-					
-					
+
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					JasperReport jasperReport;		
+					JasperReport jasperReport;
 
 					try {
-						
+
 						String rutaUrl = obtenerDirectorio();
 						String reporteSrc = rutaUrl
 								+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaArea.jasper";
-						  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+						String reporteImage = rutaUrl
+								+ "SITEG/public/imagenes/reportes/";
 						mapa.put("logoUcla", reporteImage + "logo ucla.png");
 						mapa.put("logoCE", reporteImage + "logo CE.png");
 						mapa.put("logoSiteg", reporteImage + "logo.png");
-							
-							
-						 
 
-						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(programaarea));
+						jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, mapa,
+								new JRBeanCollectionDataSource(programaarea));
 						JasperViewer.viewReport(jasperPrint, false);
-						
-				
+
 					} catch (JRException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
-					
-					
-					
 
 				} else {
 					Messagebox
-					.show("No hay informacion disponible para esta seleccion",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+							.show("No hay informacion disponible para esta seleccion",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
 				}
 
 			} else if (rdoitem.isChecked() == true) {
@@ -206,40 +201,38 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 					mapa.put("nombreprograma",
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
-					
-					
+
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					JasperReport jasperReport;		
+					JasperReport jasperReport;
 
 					try {
-						
+
 						String rutaUrl = obtenerDirectorio();
 						String reporteSrc = rutaUrl
 								+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaItem.jasper";
-						  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+						String reporteImage = rutaUrl
+								+ "SITEG/public/imagenes/reportes/";
 						mapa.put("logoUcla", reporteImage + "logo ucla.png");
 						mapa.put("logoCE", reporteImage + "logo CE.png");
 						mapa.put("logoSiteg", reporteImage + "logo.png");
-							
-							
-						 
 
-						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(programaitem));
+						jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, mapa,
+								new JRBeanCollectionDataSource(programaitem));
 						JasperViewer.viewReport(jasperPrint, false);
-						
-				
+
 					} catch (JRException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 
 				} else {
 					Messagebox
-					.show("No hay informacion disponible para esta seleccion",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+							.show("No hay informacion disponible para esta seleccion",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
 				}
 
 			}
@@ -254,40 +247,39 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 					mapa.put("nombreprograma",
 							cmbConfiguracionPrograma.getValue());
 					mapa.put("nombrelapso", cmbConfiguracionLapso.getValue());
-					
+
 					FileSystemView filesys = FileSystemView.getFileSystemView();
-					JasperReport jasperReport;		
+					JasperReport jasperReport;
 
 					try {
-						
+
 						String rutaUrl = obtenerDirectorio();
 						String reporteSrc = rutaUrl
 								+ "SITEG/vistas/reportes/salidas/compilados/ReporteProgramaRequisito.jasper";
-						  String reporteImage = rutaUrl + "SITEG/public/imagenes/reportes/";
+						String reporteImage = rutaUrl
+								+ "SITEG/public/imagenes/reportes/";
 						mapa.put("logoUcla", reporteImage + "logo ucla.png");
 						mapa.put("logoCE", reporteImage + "logo CE.png");
 						mapa.put("logoSiteg", reporteImage + "logo.png");
-							
-							
-						 
 
-						jasperReport = (JasperReport) JRLoader.loadObject(reporteSrc);
-						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mapa,  new JRBeanCollectionDataSource(programarequisito));
+						jasperReport = (JasperReport) JRLoader
+								.loadObject(reporteSrc);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(
+								jasperReport, mapa,
+								new JRBeanCollectionDataSource(
+										programarequisito));
 						JasperViewer.viewReport(jasperPrint, false);
-						
-				
+
 					} catch (JRException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
-					
 
 				} else {
 					Messagebox
-					.show("No hay informacion disponible para esta seleccion",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+							.show("No hay informacion disponible para esta seleccion",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
 				}
 
 			}
@@ -295,7 +287,7 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 
 	}
 
-	/* Metodo que permite limpiar los campos de los filtros de busqueda */
+	/** Metodo que permite limpiar los campos de los filtros de busqueda */
 	@Listen("onClick = #btnCancelarReporteConfiguracion")
 	public void cancelar() throws JRException {
 
@@ -304,7 +296,8 @@ public class CReporteConfiguracionPrograma extends CGeneral {
 		rdgConfiguracion.setSelectedItem(null);
 
 	}
-	/*Metodo que permite cerrar la vista*/
+
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirReporteConfigurcion")
 	public void salir() throws JRException {
 

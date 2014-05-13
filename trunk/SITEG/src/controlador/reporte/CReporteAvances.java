@@ -34,6 +34,11 @@ import org.zkoss.zul.Window;
 import controlador.CCalificarDefensa;
 import controlador.CGeneral;
 
+/**
+ * Controlador que permite generar a traves de un listado el reporte de los
+ * avances realizados a un proyecto o revisiones realizas a un trabajo especial
+ * de grado
+ */
 @Controller
 public class CReporteAvances extends CGeneral {
 
@@ -70,26 +75,25 @@ public class CReporteAvances extends CGeneral {
 	@Wire
 	private Radio rdoProyecto;
 
-	/* Metodo heredado del Controlador General */
+	/** Metodo heredado del Controlador General */
 	@Override
 	public void inicializar(Component comp) {
-		
-		
+
 		cmbEstatus.setDisabled(true);
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite dado a esta seleccion, cargar los estatus del teg en
 	 * el componente de la vista, con respecto a la etapa previamente
 	 * especificado.
 	 */
 	@Listen("onCheck = #rdgEtapa")
 	public void llenarCombo() {
-		
+
 		cmbEstatus.setValue("");
 		ltbReporteItemTeg.getItems().clear();
-		
+
 		if (rdoProyecto.isChecked() == true) {
 			try {
 				cmbEstatus.setDisabled(false);
@@ -112,7 +116,7 @@ public class CReporteAvances extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite dado a el estatus seleccionado, se buscan los tegs
 	 * disponibles recorriendolo uno a uno para luego cargar una lista de
 	 * estudiantes por teg donde mediante la implementacion del servicio de
@@ -122,9 +126,9 @@ public class CReporteAvances extends CGeneral {
 	 */
 	@Listen("onSelect= #cmbEstatus")
 	public List<Teg> buscar() {
-		
+
 		ltbReporteItemTeg.getItems().clear();
-		
+
 		List<Teg> tegs = servicioTeg.buscarTegs(cmbEstatus.getValue());
 		for (int i = 0; i < tegs.size(); i++) {
 			List<Estudiante> estudiantes = servicioEstudiante
@@ -139,7 +143,7 @@ public class CReporteAvances extends CGeneral {
 		return tegs;
 	}
 
-	/*
+	/**
 	 * Metodo que permite filtrar los tegs disponibles dado el metodo
 	 * "buscar()", mediante el componente de la lista, donde se podra visualizar
 	 * el nombre y apellido del estudiante, la fecha, la tematica, el area, el
@@ -215,7 +219,7 @@ public class CReporteAvances extends CGeneral {
 
 	}
 
-	/*
+	/**
 	 * Metodo que permite generar un reporte, dado a si es Proyecto o Teg, se
 	 * generara un pdf donde se muestra una lista de avances de esta seleccion,
 	 * mediante el componente "Jasperreport" donde se mapea una serie de
@@ -334,25 +338,18 @@ public class CReporteAvances extends CGeneral {
 			}
 		}
 	}
-	
-	
+
 	@Listen("onClick = #btnCancelarReporteAvances")
-	   public void limpiarCampos(){
-		  
-		
+	public void limpiarCampos() {
+
 		cmbEstatus.setValue("");
 		ltbReporteItemTeg.getItems().clear();
 		rdgEtapa.setSelectedItem(null);
 		cmbEstatus.setDisabled(false);
-		
-		
-	   
-	   }
-	
-	
-	
 
-	/* Metodo que permite cerrar la vista */
+	}
+
+	/** Metodo que permite cerrar la vista */
 	@Listen("onClick = #btnSalirReporteAvances")
 	public void salirActividad() {
 		wdwReporteAvances.onClose();
