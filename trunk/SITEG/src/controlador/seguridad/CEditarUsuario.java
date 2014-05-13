@@ -83,14 +83,33 @@ public class CEditarUsuario extends CGeneral {
 
 	/**
 	 * Metodo que permite obtener la imagen del usuario subida al sistema
+	 * validando que sea jpeg o png
 	 */
+	
+	
 	@Listen("onUpload = #fudImagenUsuarioEditar")
-	public void processMedia(UploadEvent event) {
-		mediaUsuarioEditar = event.getMedia();
-		imagenUsuarioEditar
-				.setContent((org.zkoss.image.Image) mediaUsuarioEditar);
+	public void subirArchivo(UploadEvent event) {
 
+		mediaUsuarioEditar = event.getMedia();
+		if (mediaUsuarioEditar != null) {
+
+			if (mediaUsuarioEditar.getContentType().equals("image/jpeg")
+					|| mediaUsuarioEditar.getContentType().equals("application/png"))
+
+			{
+
+				mediaUsuarioEditar = event.getMedia();
+				imagenUsuarioEditar.setContent((org.zkoss.image.Image) mediaUsuarioEditar);
+
+			} else {
+				Messagebox.show(mediaUsuarioEditar.getName()
+						+ " No es un tipo de archivo valido!", "Error",
+						Messagebox.OK, Messagebox.ERROR);
+			}
+		}
 	}
+	
+
 
 	/**
 	 * Metodo que permite el guardado o modificacion de un datso en la entidad
@@ -101,7 +120,7 @@ public class CEditarUsuario extends CGeneral {
 
 		if (txtClaveUsuarioNueva.getValue().equals(
 				txtClaveUsuarioConfirmar.getValue())) {
-			Messagebox.show("¿Desea guardar los cambios?",
+			Messagebox.show("ï¿½Desea guardar los cambios?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
 					new org.zkoss.zk.ui.event.EventListener() {
