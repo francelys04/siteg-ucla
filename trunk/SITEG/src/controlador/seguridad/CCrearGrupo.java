@@ -376,47 +376,59 @@ public class CCrearGrupo extends CGeneral {
 				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
+							if (txtNombreGrupo.getText().compareTo("") == 0
+									|| ltbFuncionalidadesSeleccionados
+											.getItemCount() == 0)
+								Messagebox.show(
+										"Debe completar todos los campos",
+										"Error", Messagebox.OK,
+										Messagebox.ERROR);
+							else {
+								List<Arbol> listaArbol = servicioArbol
+										.listarArbol();
+								Set<Arbol> arboles = new HashSet<Arbol>();
+								Treechildren treeChildren = treeGrupo
+										.getTreechildren();
+								Collection<Treeitem> lista = treeChildren
+										.getItems();
+								String nombreGrupo = txtNombreGrupo.getValue();
+								Grupo grupo = servicioGrupo
+										.BuscarPorNombre(nombreGrupo);
+								if (id == 0 && grupo == null || id != 0) {
+									for (int i = 0; i < listaArbol.size(); i++) {
+										for (Iterator<?> iterator = lista
+												.iterator(); iterator.hasNext();) {
+											Treeitem treeitem = (Treeitem) iterator
+													.next();
+											if (listaArbol
+													.get(i)
+													.getNombre()
+													.equals(treeitem.getLabel())) {
+												if (treeitem.isSelected()) {
 
-							List<Arbol> listaArbol = servicioArbol
-									.listarArbol();
-							Set<Arbol> arboles = new HashSet<Arbol>();
-							Treechildren treeChildren = treeGrupo
-									.getTreechildren();
-							Collection<Treeitem> lista = treeChildren
-									.getItems();
-							String nombreGrupo = txtNombreGrupo.getValue();
-							Grupo grupo = servicioGrupo
-									.BuscarPorNombre(nombreGrupo);
-							if (id == 0 && grupo == null || id != 0) {
-								for (int i = 0; i < listaArbol.size(); i++) {
-									for (Iterator<?> iterator = lista
-											.iterator(); iterator.hasNext();) {
-										Treeitem treeitem = (Treeitem) iterator
-												.next();
-										if (listaArbol.get(i).getNombre()
-												.equals(treeitem.getLabel())) {
-											if (treeitem.isSelected()) {
-
-												Arbol arbol = listaArbol.get(i);
-												arboles.add(arbol);
+													Arbol arbol = listaArbol
+															.get(i);
+													arboles.add(arbol);
+												}
 											}
 										}
 									}
+									Boolean estatus = true;
+									String nombre = txtNombreGrupo.getValue();
+									Grupo grupo1 = new Grupo(id, nombre,
+											estatus, arboles);
+									servicioGrupo.guardarGrupo(grupo1);
+									Messagebox.show(
+											"Grupo registrado exitosamente",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
+									cancelarGrupo();
+								} else {
+									Messagebox.show("Grupo no disponible",
+											"Error", Messagebox.OK,
+											Messagebox.ERROR);
+									cancelarGrupo();
 								}
-								Boolean estatus = true;
-								String nombre = txtNombreGrupo.getValue();
-								Grupo grupo1 = new Grupo(id, nombre, estatus,
-										arboles);
-								servicioGrupo.guardarGrupo(grupo1);
-								Messagebox.show(
-										"Grupo registrado exitosamente",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-								cancelarGrupo();
-							} else {
-								Messagebox.show("Grupo no disponible", "Error",
-										Messagebox.OK, Messagebox.ERROR);
-								cancelarGrupo();
 							}
 						}
 					}
