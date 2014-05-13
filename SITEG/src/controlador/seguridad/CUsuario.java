@@ -65,7 +65,7 @@ public class CUsuario extends CGeneral {
 	List<Grupo> gruposDisponibles = new ArrayList<Grupo>();
 	List<Grupo> gruposSeleccionados = new ArrayList<Grupo>();
 	ArrayList<Boolean> valorCorreo = new ArrayList<Boolean>();
-	private String mensaje = "Su solicitud ha sido exitosamente procesada, le enviamos su usuario y contraseña,";
+	private String mensaje = "Su solicitud ha sido exitosamente procesada, le enviamos su usuario y contraseï¿½a,";
 
 	@Wire
 	private Textbox txtNombreUsuario;
@@ -312,7 +312,7 @@ public class CUsuario extends CGeneral {
 					}
 					valorCorreo.add(enviarEmailNotificacion(correoUsuario,
 							mensaje + " Usuario: " + nombre + "  "
-									+ "Contraseña: " + nombre));
+									+ "Contraseï¿½a: " + nombre));
 					// confirmacion(valorCorreo);
 
 					Messagebox.show("Usuario registrado exitosamente",
@@ -597,13 +597,32 @@ public class CUsuario extends CGeneral {
 
 	/**
 	 * Metodo que permite obtener la imagen del usuario subida al sistema
+	 * validando que el formato sea jpeg o png
 	 */
+	
 	@Listen("onUpload = #fudImagenUsuario")
-	public void processMedia(UploadEvent event) {
-		media = event.getMedia();
-		imagen.setContent((org.zkoss.image.Image) media);
+	public void subirArchivo(UploadEvent event) {
 
+		media = event.getMedia();
+		if (media != null) {
+
+			if (media.getContentType().equals("image/jpeg")
+					|| media.getContentType().equals("application/png"))
+
+			{
+
+				media = event.getMedia();
+				imagen.setContent((org.zkoss.image.Image) media);
+
+			} else {
+				Messagebox.show(media.getName()
+						+ " No es un tipo de archivo valido!", "Error",
+						Messagebox.OK, Messagebox.ERROR);
+			}
+		}
 	}
+	
+
 
 	/**
 	 * Metodo que permite buscar los grupos que tiene asignados el suario y los
