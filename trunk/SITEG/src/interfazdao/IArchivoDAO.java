@@ -10,4 +10,6 @@ public interface IArchivoDAO extends JpaRepository<Archivo, Long> {
 	public List<Archivo> findByEstatusTrue();
 
 	public List<Archivo> findByEstatusAndTipoArchivoOrderByProgramaAsc(boolean b, String h);
+
+	public Archivo findByNombre(String nombre);
 }

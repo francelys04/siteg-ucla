@@ -155,31 +155,38 @@ public class CSubirTeg extends CGeneral {
 			Messagebox.show("Debe completar los campos", "Error",
 					Messagebox.OK, Messagebox.ERROR);
 		} else {
-			Messagebox.show("¿Desea guardar los datos del archivo?",
-					"Dialogo de confirmacion", Messagebox.OK
-							| Messagebox.CANCEL, Messagebox.QUESTION,
-					new org.zkoss.zk.ui.event.EventListener() {
-						public void onEvent(Event evt)
-								throws InterruptedException {
-							if (evt.getName().equals("onOK")) {
-
-								archivo.setId(id);
-								archivo.setPrograma(programaUsuario);
-								archivo.setDescripcion(txtDescripcionArchivo
-										.getValue());
-								archivo.setEstatus(true);
-								archivo.setTipoArchivo("Teg");
-								servicioArchivo.guardar(archivo);
-								cancelar();
-								Messagebox.show(
-										"Archivo guardado exitosamente",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-
-							}
+				
+				String nombreInterfaz = txtNombreArchivo.getText();
+				Archivo nuevoArchivo = servicioArchivo.buscarNombreArchivo(nombreInterfaz);
+				String archivoEncontrado = nuevoArchivo.getNombre();
+					if (archivoEncontrado.equals(nombreInterfaz)){
+						Messagebox.show("El archivo ya existe", "Error",
+						Messagebox.OK, Messagebox.ERROR);
+					} else {
+				Messagebox.show("¿Desea guardar los datos del archivo?",
+						"Dialogo de confirmacion", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new org.zkoss.zk.ui.event.EventListener() {
+							public void onEvent(Event evt)
+									throws InterruptedException {
+								if (evt.getName().equals("onOK")) {
+	
+									archivo.setId(id);
+									archivo.setPrograma(programaUsuario);
+									archivo.setDescripcion(txtDescripcionArchivo
+											.getValue());
+									archivo.setEstatus(true);
+									archivo.setTipoArchivo("Teg");
+									servicioArchivo.guardar(archivo);
+									cancelar();
+									Messagebox.show(
+											"Archivo guardado exitosamente",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
+								}
 						}
-					});
-
+				});
+					}
 		}
 	}
 }
