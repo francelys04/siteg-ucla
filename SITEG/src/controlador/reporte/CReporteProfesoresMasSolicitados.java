@@ -44,7 +44,8 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	List<Tematica> tematicas = new ArrayList<Tematica>();
 	List<Programa> programas = new ArrayList<Programa>();
 	long idTematica = 0;
-
+	static Programa programa1 = new Programa();
+	static AreaInvestigacion area1 = new AreaInvestigacion();
 	@Wire
 	private Window wdwReporteProfesorMasSolicitados;
 	@Wire
@@ -91,34 +92,36 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbProgramaReporteProfesoresSolicitados")
 	public void buscarArea() {
-		cmbAreaReporteProfesoresSolicitados.setValue("");
-		cmbTematicaReporteProfesoresSolicitados.setValue("");
-		if (cmbProgramaReporteProfesoresSolicitados.getValue().equals("Todos")) {
+		try {
+			if (cmbProgramaReporteProfesoresSolicitados.getValue().equals("Todos")) {
 
-			areas = servicioArea.buscarActivos();
-			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
-					"", true);
-			areas.add(area);
-			cmbAreaReporteProfesoresSolicitados
-					.setModel(new ListModelList<AreaInvestigacion>(areas));
-			cmbAreaReporteProfesoresSolicitados.setDisabled(false);
+				areas = servicioArea.buscarActivos();
+				AreaInvestigacion area = new AreaInvestigacion(10000000,
+						"Todos", "", true);
+				areas.add(area);
+				cmbAreaReporteProfesoresSolicitados.setModel(new ListModelList<AreaInvestigacion>(areas));
+				cmbAreaReporteProfesoresSolicitados.setDisabled(false);
+				cmbTematicaReporteProfesoresSolicitados.setValue("");
+				cmbAreaReporteProfesoresSolicitados.setValue("");
+				
+				
+			} else {
+				cmbAreaReporteProfesoresSolicitados.setDisabled(false);
+				cmbAreaReporteProfesoresSolicitados.setValue("");
+				cmbTematicaReporteProfesoresSolicitados.setValue("");
+				programa1 = (Programa) cmbProgramaReporteProfesoresSolicitados.getSelectedItem().getValue();
+				areas = servicioProgramaArea
+						.buscarAreasDePrograma(servicioPrograma
+								.buscar(programa1.getId()));
+				AreaInvestigacion area = new AreaInvestigacion(10000000,
+						"Todos", "", true);
+				areas.add(area);
+				cmbAreaReporteProfesoresSolicitados.setModel(new ListModelList<AreaInvestigacion>(areas));
 
-		} else {
-
-			cmbAreaReporteProfesoresSolicitados.setDisabled(false);
-			cmbAreaReporteProfesoresSolicitados.setValue("");
-			cmbTematicaReporteProfesoresSolicitados.setValue("");
-
-			areas = servicioProgramaArea.buscarAreasDePrograma(servicioPrograma
-					.buscar(Long
-							.parseLong(cmbProgramaReporteProfesoresSolicitados
-									.getSelectedItem().getId())));
-			AreaInvestigacion area = new AreaInvestigacion(10000000, "Todos",
-					"", true);
-			areas.add(area);
-			cmbAreaReporteProfesoresSolicitados
-					.setModel(new ListModelList<AreaInvestigacion>(areas));
-
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
 		}
 	}
 
@@ -127,40 +130,28 @@ public class CReporteProfesoresMasSolicitados extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbAreaReporteProfesoresSolicitados")
 	public void seleccionarTematica() {
-		if (cmbAreaReporteProfesoresSolicitados.getValue().equals("Todos")) {
-			if (cmbProgramaReporteProfesoresSolicitados.getValue().equals(
-					"Todos"))
-				tematicas = servicioTematica.buscarActivos();
-			else {
+		try {
+
+			if (cmbAreaReporteProfesoresSolicitados.getValue().equals("Todos")) {
+
+				cmbTematicaReporteProfesoresSolicitados.setValue("Todos");
+				cmbTematicaReporteProfesoresSolicitados.setDisabled(true);
+
+			} else {
+				cmbTematicaReporteProfesoresSolicitados.setDisabled(false);
 				cmbTematicaReporteProfesoresSolicitados.setValue("");
-				areas = servicioProgramaArea
-						.buscarAreasDePrograma(servicioPrograma.buscar(Long
-								.parseLong((cmbProgramaReporteProfesoresSolicitados
-										.getSelectedItem().getId()))));
-				List<Tematica> tematicasArea = new ArrayList<Tematica>();
-				for (int i = 0; i < areas.size(); i++) {
-					tematicasArea.addAll(servicioTematica
-							.buscarTematicasDeArea(areas.get(i)));
-				}
-				tematicas.clear();
-				tematicas.addAll(tematicasArea);
-				tematicasArea.clear();
+				area1 = (AreaInvestigacion) cmbAreaReporteProfesoresSolicitados.getSelectedItem()
+						.getValue();
+				tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
+						.buscarArea(area1.getId()));
+				Tematica tema = new Tematica(10000, "Todos", "", true, null);
+				tematicas.add(tema);
+				cmbTematicaReporteProfesoresSolicitados.setModel(new ListModelList<Tematica>(tematicas));
 			}
-		} else {
-			cmbTematicaReporteProfesoresSolicitados.setValue("");
-
-			tematicas = servicioTematica.buscarTematicasDeArea(servicioArea
-					.buscarArea(Long
-							.parseLong(cmbAreaReporteProfesoresSolicitados
-									.getSelectedItem().getId())));
-
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
 		}
-		Tematica tema = new Tematica(10000, "Todos", "", true, null);
-		tematicas.add(tema);
-		cmbTematicaReporteProfesoresSolicitados
-				.setModel(new ListModelList<Tematica>(tematicas));
-		cmbTematicaReporteProfesoresSolicitados.setDisabled(false);
-
 	}
 
 	/** Metodo que permite cerrar la vista */

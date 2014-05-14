@@ -111,6 +111,7 @@ public class CReporteDefensa extends CGeneral {
 				areas.add(area);
 				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 				cmbArea.setDisabled(false);
+				cmbTematica.setValue("");
 
 			} else {
 
@@ -364,7 +365,7 @@ public class CReporteDefensa extends CGeneral {
 		cmbEstatus.setDisabled(true);
 
 	}
-
+ 
 	/** Metodo que permite cerrar la vista. */
 	@Listen("onClick = #btnSalirReporteDefensa")
 	public void salirReporteDefensa() throws JRException {

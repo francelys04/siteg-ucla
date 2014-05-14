@@ -147,6 +147,7 @@ public class CReporteEvaluacion extends CGeneral {
 		programas = servicioPrograma.buscarActivas();
 		programas.add(programaa);
 		cmbPrograma.setModel(new ListModelList<Programa>(programas));
+		cmbPrograma.setDisabled(true);
 		cmbArea.setDisabled(true);
 		cmbTematica.setDisabled(true);
 		cmbEstatus.setDisabled(true);
@@ -169,8 +170,12 @@ public class CReporteEvaluacion extends CGeneral {
 				AreaInvestigacion area = new AreaInvestigacion(10000000,
 						"Todos", "", true);
 				areas.add(area);
+				cmbArea.setValue("");
+				cmbTematica.setValue("");
 				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 				cmbArea.setDisabled(false);
+				
+				
 
 			} else {
 
@@ -234,7 +239,7 @@ public class CReporteEvaluacion extends CGeneral {
 	public void seleccionarTematica() {
 		Tematica tematica = (Tematica) cmbTematica.getSelectedItem().getValue();
 		idTematica = tematica.getId();
-		cmbEstatus.setDisabled(false);
+		
 	}
 
 	/**
@@ -246,7 +251,10 @@ public class CReporteEvaluacion extends CGeneral {
 	public void llenarCombo() {
 		if (rdoFactibilidad.isChecked() == true) {
 			try {
+				cmbEstatus.setValue("");
 				cmbEstatus.setModel(new ListModelList<String>(estatusproyecto));
+				cmbPrograma.setDisabled(false);
+				cmbEstatus.setDisabled(false);
 			} catch (Exception e) {
 				System.out.println(e);
 				// TODO Auto-generated catch block
@@ -254,7 +262,10 @@ public class CReporteEvaluacion extends CGeneral {
 			}
 		} else if (rdoDefensa.isChecked() == true) {
 			try {
+				cmbEstatus.setValue("");
 				cmbEstatus.setModel(new ListModelList<String>(estatusdefensa));
+				cmbPrograma.setDisabled(false);
+				cmbEstatus.setDisabled(false);
 			} catch (Exception e) {
 				System.out.println(e);
 				// TODO Auto-generated catch block
@@ -2208,6 +2219,7 @@ public class CReporteEvaluacion extends CGeneral {
 		dtbDesde.setValue(new Date());
 		dtbHasta.setValue(new Date());
 		btnExportarPlano.setDisabled(true);
+		cmbPrograma.setDisabled(true);
 		cmbArea.setDisabled(true);
 		cmbTematica.setDisabled(true);
 		cmbEstatus.setDisabled(true);
