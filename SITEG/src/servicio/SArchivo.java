@@ -22,6 +22,11 @@ public class SArchivo {
 	public Archivo buscarArchivo(long id) {
 		return interfaceArchivo.findOne(id);
 	}
+	
+	public Archivo buscarNombreArchivo(String nombre) {
+		Archivo archivo = interfaceArchivo.findByNombre(nombre); 
+		return archivo;
+	}
 
 	public List<Archivo> buscarActivos(String h) {
 		List<Archivo> archivo;
