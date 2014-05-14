@@ -115,6 +115,7 @@ public class CReporteProfesor extends CGeneral {
 						"", true);
 				areas.add(area);
 				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+				cmbTematica.setValue("");
 			} else {
 				cmbArea.setDisabled(false);
 				cmbArea.setValue("");

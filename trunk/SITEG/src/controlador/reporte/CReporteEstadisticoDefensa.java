@@ -94,6 +94,8 @@ public class CReporteEstadisticoDefensa extends CGeneral {
 				areas.add(area);
 				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 				cmbArea.setDisabled(false);
+				cmbTematica.setValue("");
+				cmbArea.setValue("");
 			}
 
 			else {

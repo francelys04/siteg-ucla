@@ -105,12 +105,13 @@ public class CReporteSolicitudes extends CGeneral {
 				cmbAreaReporteSolicitud
 						.setModel(new ListModelList<AreaInvestigacion>(areas));
 				cmbAreaReporteSolicitud.setDisabled(false);
+				cmbTematicaReporteSolicitud.setValue("");
 
 			} else {
 				cmbAreaReporteSolicitud.setDisabled(false);
 				cmbAreaReporteSolicitud.setValue("");
 				cmbTematicaReporteSolicitud.setValue("");
-				cmbEstatusReporteSolicitud.setValue("");
+				
 				programa1 = (Programa) cmbProgramaReporteSolicitud
 						.getSelectedItem().getValue();
 				areas = servicioProgramaArea

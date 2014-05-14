@@ -170,12 +170,14 @@ public class CReporteSolicitud extends CGeneral {
 		try {
 			if (cmbPrograma.getValue().equals("Todos")) {
 
+				cmbArea.setValue("");
 				areas = servicioArea.buscarActivos();
 				AreaInvestigacion area = new AreaInvestigacion(10000000,
 						"Todos", "", true);
 				areas.add(area);
 				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 				cmbArea.setDisabled(false);
+				cmbTematica.setValue("");
 			} else {
 				cmbArea.setDisabled(false);
 				cmbArea.setValue("");

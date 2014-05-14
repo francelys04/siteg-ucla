@@ -308,6 +308,9 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		cmbArea.setDisabled(false);
 		if (nombrePrograma.equals("Todos")) {
 			areas = servicioArea.buscarActivos();
+			cmbArea.setValue("");
+			
+			
 		} else {
 			cmbArea.setValue("");
 			programa = servicioPrograma.buscar(Long.parseLong(idPrograma));
@@ -359,7 +362,7 @@ public class CReporteTematicasMasSolicitadas extends CGeneral {
 		cmbEtapaTeg.setValue("");
 		dtbFechaInicio.setValue(new Date());
 		dtbFechaFin.setValue(new Date());
-		cmbArea.setDisabled(true);
+		
 		cmbEtapaTeg.setDisabled(true);
 
 	}

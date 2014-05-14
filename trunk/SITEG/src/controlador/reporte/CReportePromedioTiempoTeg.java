@@ -330,27 +330,38 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbPrograma")
 	public void seleccionarPrograma() throws JRException {
-		try {
+		
 			String idPrograma = cmbPrograma.getSelectedItem().getId();
 			String nombrePrograma = cmbPrograma.getValue();
-			cmbArea.setDisabled(false);
+		
 
-			if (nombrePrograma.equals("Todos")) {
+			try {	
+				if (cmbPrograma.getValue().equals("Todos")) {
 
 				areas = servicioArea.buscarActivos();
+				AreaInvestigacion area = new AreaInvestigacion(10000000,
+						"Todos", "", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+				cmbArea.setDisabled(false);
+				cmbArea.setValue("");
+				cmbTematica.setValue("");
 
 			} else {
+				cmbArea.setDisabled(false);
+				
 
 				cmbArea.setValue("");
 				cmbTematica.setValue("");
 				programa = servicioPrograma.buscar(Long.parseLong(idPrograma));
 				areas = servicioProgramaArea.buscarAreasDePrograma(programa);
+				AreaInvestigacion area = new AreaInvestigacion(10000000,
+						"Todos", "", true);
+				areas.add(area);
+				cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
 
 			}
-			AreaInvestigacion area = new AreaInvestigacion(100000001, "Todos",
-					"", true);
-			areas.add(area);
-			cmbArea.setModel(new ListModelList<AreaInvestigacion>(areas));
+		
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -370,20 +381,28 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		String nombreArea = cmbArea.getValue();
 		List<Tematica> tematicasTodos = new ArrayList<Tematica>();
 		cmbTematica.setDisabled(false);
-		if (nombreArea.equals("Todos")) {
-
-			tematicasTodos = servicioTematica.buscarActivos();
-
+		try {
+		if (cmbArea.getValue().equals("Todos")) {
+			cmbTematica.setValue("Todos");
+			cmbTematica.setDisabled(true);
+			
 		} else {
+			cmbTematica.setDisabled(false);
 
 			cmbTematica.setValue("");
 			area = servicioArea.buscarArea(Long.parseLong(idArea));
 			tematicasTodos = servicioTematica.buscarTematicasDeArea(area);
+			Tematica tematicaTodos = new Tematica(10000002, "Todos", "", true, null);
+			tematicasTodos.add(tematicaTodos);
+			cmbTematica.setModel(new ListModelList<Tematica>(tematicasTodos));
 
 		}
-		Tematica tematicaTodos = new Tematica(10000000, "Todos", "", true, null);
-		tematicasTodos.add(tematicaTodos);
-		cmbTematica.setModel(new ListModelList<Tematica>(tematicasTodos));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle.e exception
+		}
+	
 
 	}
 

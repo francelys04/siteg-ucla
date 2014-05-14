@@ -183,6 +183,7 @@ public class CReporteProfesorTeg extends CGeneral {
 			cmbAreaReporteProfesorTeg
 					.setModel(new ListModelList<AreaInvestigacion>(areas));
 			cmbAreaReporteProfesorTeg.setDisabled(false);
+			cmbTematicaReporteProfesorTeg.setValue("");
 
 		} else {
 
@@ -206,6 +207,7 @@ public class CReporteProfesorTeg extends CGeneral {
 	 */
 	@Listen("onSelect = #cmbAreaReporteProfesorTeg")
 	public void seleccionarArea() {
+		System.out.println("pase en area ");
 
 		if (cmbAreaReporteProfesorTeg.getValue().equals("Todos")) {
 
@@ -236,6 +238,7 @@ public class CReporteProfesorTeg extends CGeneral {
 	@Listen("onSelect = #cmbTematicaReporteProfesorTeg")
 	public void seleccionarTematica() {
 
+		System.out.println("pase en tematica ");
 		idTematica = Long.parseLong(cmbTematicaReporteProfesorTeg
 				.getSelectedItem().getId());
 		cmbEstatusReporteProfesorTeg.setDisabled(false);
@@ -483,7 +486,11 @@ public class CReporteProfesorTeg extends CGeneral {
 							.show("No hay informacion disponible para esta seleccion",
 									"Informacion", Messagebox.OK,
 									Messagebox.INFORMATION);
-					limpiarCampos();
+					
+					
+					 
+					 
+				
 				}
 			}
 
