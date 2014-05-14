@@ -40,7 +40,7 @@ public class CProfesor extends CGeneral {
 
 	private static final long serialVersionUID = -3439594158179320756L;
 	private static boolean modificarProfesor = false;
-	private static Set<Tematica> tematicasProfesor;
+	private static Set<Tematica> tematicasProfesor = new HashSet<Tematica>();
 	CCatalogoProfesor catalogo = new CCatalogoProfesor();
 	@Wire
 	private Combobox cmbCategoriaProfesor;
@@ -195,10 +195,14 @@ public class CProfesor extends CGeneral {
 													.getValue());
 									List<Tematica> tematicas = servicioTematica
 											.buscarTematicasDelProfesor(profesor);
+									
+									System.out.println(tematicas);
 
 									for (int i = 0; i < tematicas.size(); i++) {
+										System.out.println(tematicas.size());
 										Tematica tematicasasosiadas = tematicas
 												.get(i);
+										System.out.println(tematicasasosiadas.getId());
 										tematicasProfesor
 												.add(tematicasasosiadas);
 									}

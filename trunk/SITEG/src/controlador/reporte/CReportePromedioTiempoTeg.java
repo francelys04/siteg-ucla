@@ -395,8 +395,6 @@ public class CReportePromedioTiempoTeg extends CGeneral {
 		cmbArea.setDisabled(true);
 		cmbTematica.setValue("");
 		cmbTematica.setDisabled(true);
-		jstVistaPrevia.setSrc("");
-		jstVistaPrevia.setDatasource(null);
 	}
 
 	/** Metodo que permite cerrar la vista */
