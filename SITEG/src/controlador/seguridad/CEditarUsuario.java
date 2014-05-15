@@ -94,7 +94,7 @@ public class CEditarUsuario extends CGeneral {
 		if (mediaUsuarioEditar != null) {
 
 			if (mediaUsuarioEditar.getContentType().equals("image/jpeg")
-					|| mediaUsuarioEditar.getContentType().equals("application/png"))
+					|| mediaUsuarioEditar.getContentType().equals("image/png"))
 
 			{
 
