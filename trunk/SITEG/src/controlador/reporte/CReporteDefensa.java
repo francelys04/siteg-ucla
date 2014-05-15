@@ -253,8 +253,7 @@ public class CReporteDefensa extends CGeneral {
 							&& nombreTematica.equals("Todos")) {
 						System.out.println("error");
 						defensas = servicioDefensa
-								.buscarDefensaTegSegunEstatusArea2(
-										area, fechaInicio, fechaFin,programa1,tipoDefensa);
+								.buscardefensasegunareaprogramaareayestatus(tipoDefensa, programa1, area1, fechaInicio, fechaFin);
 					}
 				} else {
 					//TODOS LOS PROGRAMAS, TODOS LOS ESTATUS
@@ -288,8 +287,8 @@ public class CReporteDefensa extends CGeneral {
 							&& !nombreArea.equals("Todos")
 							&& nombreTematica.equals("Todos")) {
 						System.out.println("UN programa, una area, todas las tematicas,todos los estatus");
-						defensas = servicioDefensa.buscarDefensaTegSegunArea(
-								area, fechaInicio, fechaFin, programa1);
+						defensas = servicioDefensa.buscardefensasegunareaprogramaareay(programa1, area1, fechaInicio, fechaFin);
+
 					}
 				}
 
