@@ -130,7 +130,7 @@
 				<tabpanel height="200px">
 					<separator />
 					<listbox id="ltbPrograma" width="100%" mold="paging"
-						pageSize="8" emptyMessage="No hay programas registrados">
+						pageSize="8" emptyMessage="No hay programas eliminados">
 						<auxhead sclass="category-center">
 							<auxheader colspan="1">
 								<image
@@ -267,7 +267,7 @@
 
 					<listbox id="ltbRequisito" width="100%"
 						mold="paging" pageSize="8"
-						emptyMessage="No hay requisitos registrados">
+						emptyMessage="No hay requisitos eliminados">
 						<auxhead sclass="category-center">
 							<auxheader colspan="1">
 								<image
@@ -348,7 +348,7 @@
 					<separator />
 					<listbox id="ltbItem" width="100%" mold="paging"
 						pageSize="8"
-						emptyMessage="No hay items de evaluación registrados">
+						emptyMessage="No hay items de evaluación eliminados">
 						<auxhead sclass="category-center">
 							<auxheader colspan="1">
 								<image
@@ -394,7 +394,7 @@
 					<separator />
 
 					<listbox id="ltbProfesor" width="100%" mold="paging"
-						pageSize="8" emptyMessage="No hay profesores registrados">
+						pageSize="8" emptyMessage="No hay profesores eliminados">
 						<auxhead sclass="category-center">
 							<auxheader colspan="1">
 								<image
@@ -462,7 +462,7 @@
 
 					<listbox id="ltbEstudiante" width="100%"
 						mold="paging" pageSize="8"
-						emptyMessage="No hay estudiantes registrados">
+						emptyMessage="No hay estudiantes eliminados">
 						<auxhead sclass="category-center">
 							<auxheader colspan="1">
 								<image
@@ -535,7 +535,7 @@
 					<separator />
 					<listbox id="ltbTipoJurado" width="100%"
 						mold="paging" pageSize="10"
-						emptyMessage="No hay tipos de jurado registrados">
+						emptyMessage="No hay tipos de jurado eliminados">
 						<auxhead sclass="category-center">
 							<auxheader colspan="1">
 								<image
@@ -573,7 +573,7 @@
 
 					<listbox id="ltbLapso" width="100%" mold="paging"
 						pageSize="10"
-						emptyMessage="No hay lapsos académicos registrados">
+						emptyMessage="No hay lapsos académicos eliminados">
 						<auxhead sclass="category-center">
 							<auxheader colspan="1">
 								<image
