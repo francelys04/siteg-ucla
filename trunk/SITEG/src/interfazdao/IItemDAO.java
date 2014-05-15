@@ -19,6 +19,8 @@ public interface IItemDAO extends JpaRepository<ItemEvaluacion, Long> {
 
 	public ItemEvaluacion findByNombreAndTipoAllIgnoreCase(String nombre,
 			String tipo);
+
+	public List<ItemEvaluacion> findByEstatusFalseOrderByTipoAsc();
 	
 	
 }

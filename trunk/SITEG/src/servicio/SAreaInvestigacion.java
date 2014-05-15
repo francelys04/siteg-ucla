@@ -33,6 +33,12 @@ public class SAreaInvestigacion {
 		area = interfaceArea.findByEstatusTrueOrderByNombreAsc();
 		return area;
 	}
+	
+	public List<AreaInvestigacion> buscarInactivos() {
+		List<AreaInvestigacion> area;
+		area = interfaceArea.findByEstatusFalseOrderByNombreAsc();
+		return area;
+	}
 
 	public AreaInvestigacion buscarAreaPorNombre(String areas) {
 		AreaInvestigacion area;

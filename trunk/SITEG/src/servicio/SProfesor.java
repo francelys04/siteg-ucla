@@ -48,6 +48,16 @@ public class SProfesor {
 		profesores = interfazProfesor.findByEstatusTrueOrderByCategoriaAsc();
 		return profesores;
 	}
+	
+	
+	public List<Profesor> buscarInactivos() {
+		// TODO Auto-generated method stub
+		List<Profesor> profesores;
+		profesores = interfazProfesor.findByEstatusFalseOrderByCategoriaAsc();
+		return profesores;
+	}
+	
+	
 
 	public List<Profesor> buscarTodos() {
 		// TODO Auto-generated method stub

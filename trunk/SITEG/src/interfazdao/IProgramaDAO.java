@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IProgramaDAO extends JpaRepository<Programa, Long> {
 
+
 	@Query("select p from Programa p where p.estatus=true")
 	public List<Programa> buscarProgramasActiva();
 	
@@ -22,6 +23,10 @@ public interface IProgramaDAO extends JpaRepository<Programa, Long> {
 	public Long buscarUltimoPrograma();
 
 	public Programa findByNombreAllIgnoreCase(String nombre);
+
+	public List<Programa> findByEstatusTrueOrderByNombreAsc();
+
+	public List<Programa> findByEstatusFalseOrderByNombreAsc();
 		
 }
 

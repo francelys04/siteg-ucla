@@ -28,6 +28,8 @@ public interface IEstudianteDAO extends JpaRepository<Estudiante, String> {
 
 	public List<Estudiante> findByPrograma(Programa programa);
 
+	public List<Estudiante> findByEstatusFalseOrderByProgramaAsc();
+
 			
 	
 }

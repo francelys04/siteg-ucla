@@ -36,6 +36,13 @@ public class SEstudiante {
 		estudiantes = interfaceEstudiante.findByEstatusTrueOrderByProgramaAsc();
 		return estudiantes;
 	}
+	
+	public List<Estudiante> buscarInactivos() {
+		List<Estudiante> estudiantes;
+		estudiantes = interfaceEstudiante.findByEstatusFalseOrderByProgramaAsc();
+		return estudiantes;
+	}
+	
 
 	public List<Estudiante> buscarSolicitudesEstudiante(
 			SolicitudTutoria solicitud) {

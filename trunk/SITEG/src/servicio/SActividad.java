@@ -44,5 +44,14 @@ public class SActividad {
 		actividad = interfaceActividad.findByNombreAllIgnoreCase(label);
 		return actividad;
 	}
+	
+	
+	public List<Actividad> buscarInactivos() {
+		List<Actividad> actividades;
+		actividades = interfaceActividad.findByEstatusFalseOrderByNombreAsc();
+		return actividades;
+	}
+
+	
 
 }

@@ -26,7 +26,13 @@ public class SItem {
 		items = interfaceItem.findByEstatusTrueOrderByTipoAsc();
 		return items;
 	}
-
+	
+	public List<ItemEvaluacion> buscarItemsInactivos() {
+		List<ItemEvaluacion> items;
+		items = interfaceItem.findByEstatusFalseOrderByTipoAsc();
+		return items;
+	}
+	
 	public ItemEvaluacion buscarItem(long codigo) {
 		return interfaceItem.findOne(codigo);
 	}

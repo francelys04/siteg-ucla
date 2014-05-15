@@ -28,6 +28,15 @@ public class STipoJurado {
 		tipoJurados = interfaceTipoJurado.findByEstatusTrueOrderByNombreAsc();
 		return tipoJurados;
 	}
+	
+	
+	public List<TipoJurado> buscarInactivos() {
+		List<TipoJurado> tipoJurados;
+		tipoJurados = interfaceTipoJurado.findByEstatusFalseOrderByNombreAsc();
+		return tipoJurados;
+	}
+	
+	
 
 	public TipoJurado buscarPorNombre(String tipojurado) {
 		// TODO Auto-generated method stub
