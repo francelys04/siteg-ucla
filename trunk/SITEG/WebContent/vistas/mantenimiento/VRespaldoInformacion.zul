@@ -1,7 +1,7 @@
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native"
 	xmlns:h="http://www.w3.org/1999/xhtml">
 	<window id="wdwRespaldoInformacion"
-		title="Respaldo/Restauracion de Informacion" border="normal"
+		title="Respaldo/Restauracion de la base de datos" border="normal"
 		width="100%" height="auto" closable="true"
 		apply="controlador.CRespaldoInformacion">
 		<style dynamic="true">
@@ -169,7 +169,7 @@
 					<groupbox style="margin:5px;" width="99%" mold="3d"
 						id="gbDispositivo" visible="false">
 						<caption
-							label="Seleccione el la ruta o archivo" />
+							label="Seleccione la ruta o el archivo" />
 						<grid sclass="fgrid" style="border:normal;">
 							<rows>
 								<row>
