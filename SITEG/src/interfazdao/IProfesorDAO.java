@@ -38,4 +38,6 @@ public interface IProfesorDAO extends JpaRepository<Profesor, String> {
 
 	public List<Profesor> findDistinctByCedulaIn(List<String> cedulas);
 
+	public List<Profesor> findByEstatusFalseOrderByCategoriaAsc();
+
 }

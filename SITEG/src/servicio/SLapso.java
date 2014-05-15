@@ -33,6 +33,13 @@ public class SLapso {
 		lapsos = interfaceLapso.findByEstatusTrueOrderByNombreAsc();
 		return lapsos;
 	}
+	
+	
+	public List<Lapso> buscarInactivos() {
+		List<Lapso> lapsos;
+		lapsos = interfaceLapso.findByEstatusFalseOrderByNombreAsc();
+		return lapsos;
+	}
 
 	public Lapso buscarLapsoVigente() {
 		Lapso lapso;

@@ -17,6 +17,8 @@ public interface IRequisitoDAO extends JpaRepository<Requisito, Long> {
 
 	public Requisito findByNombreAllIgnoreCase(String nombre);
 
+	public List<Requisito> findByEstatusFalseOrderByNombreAsc();
+
 	
 }
 

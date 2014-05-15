@@ -31,6 +31,15 @@ public class STematica {
 				.findByEstatusTrueOrderByAreaInvestigacionAsc();
 		return tematicas;
 	}
+	
+	public List<Tematica> buscarInactivos() {
+		List<Tematica> tematicas;
+		tematicas = interfaceTematica
+				.findByEstatusFalseOrderByAreaInvestigacionAsc();
+		return tematicas;
+	}
+	
+	
 
 	public List<Tematica> buscarTematicasDeArea(AreaInvestigacion area2) {
 		List<Tematica> tematicas;

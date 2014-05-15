@@ -42,6 +42,14 @@ public class SRequisito {
 		requisitos = interfaceRequisito.findByEstatusTrueOrderByNombreAsc();
 		return requisitos;
 	}
+	
+	public List<Requisito> buscarInactivos() {
+		List<Requisito> requisitos;
+		requisitos = interfaceRequisito.findByEstatusFalseOrderByNombreAsc();
+		return requisitos;
+	}
+	
+	
 
 	public List<Requisito> buscarRequisitosDisponibles(Programa programa,
 			Lapso lapso) {

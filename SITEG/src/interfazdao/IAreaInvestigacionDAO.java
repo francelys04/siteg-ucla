@@ -22,6 +22,8 @@ public interface IAreaInvestigacionDAO extends JpaRepository<AreaInvestigacion, 
 	public List<AreaInvestigacion> buscarAreasPrograma(Programa programa, Lapso lapso);
 
 	public AreaInvestigacion findByNombreAllIgnoreCase(String areas);
+
+	public List<AreaInvestigacion> findByEstatusFalseOrderByNombreAsc();
 	
 	
 }

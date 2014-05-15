@@ -196,13 +196,9 @@ public class CProfesor extends CGeneral {
 									List<Tematica> tematicas = servicioTematica
 											.buscarTematicasDelProfesor(profesor);
 									
-									System.out.println(tematicas);
-
 									for (int i = 0; i < tematicas.size(); i++) {
-										System.out.println(tematicas.size());
 										Tematica tematicasasosiadas = tematicas
 												.get(i);
-										System.out.println(tematicasasosiadas.getId());
 										tematicasProfesor
 												.add(tematicasasosiadas);
 									}

@@ -4,6 +4,7 @@ import interfazdao.IProgramaDAO;
 
 import java.util.List;
 
+import modelo.AreaInvestigacion;
 import modelo.Profesor;
 import modelo.Programa;
 
@@ -37,10 +38,17 @@ public class SPrograma {
 
 	public List<Programa> buscarActivas() {
 		List<Programa> programas;
-		programas = interfacePrograma.buscarProgramasActiva();
+		programas = interfacePrograma.findByEstatusTrueOrderByNombreAsc();
 		return programas;
 	}
-
+	
+	
+	public List<Programa> buscarInactivos() {
+		List<Programa> programas;
+		programas = interfacePrograma.findByEstatusFalseOrderByNombreAsc();
+		return programas;
+	}
+	
 	public Programa buscarPorNombrePrograma(String nombre) {
 		Programa programa;
 		programa = interfacePrograma.findByNombreAllIgnoreCase(nombre);

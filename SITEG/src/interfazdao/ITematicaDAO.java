@@ -24,6 +24,8 @@ public interface ITematicaDAO extends JpaRepository<Tematica, Long> {
 	
 	public Tematica findByNombreAllIgnoreCase(String tematica);
 	
+	public List<Tematica> findByEstatusFalseOrderByAreaInvestigacionAsc();
+	
 	
 }
 

@@ -19,5 +19,7 @@ public interface IActividadDAO extends JpaRepository<Actividad, Long> {
 			Lapso lapso);
 
 	public Actividad findByNombreAllIgnoreCase(String label);
+
+	public List<Actividad> findByEstatusFalseOrderByNombreAsc();
 }
 

@@ -18,6 +18,8 @@ public interface ILapsoDAO extends JpaRepository<Lapso, Long> {
 	public Long lapsoActual();
 
 	public Lapso findByNombreAllIgnoreCase(String nombre);
+
+	public List<Lapso> findByEstatusFalseOrderByNombreAsc();
 }
 
 
