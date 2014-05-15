@@ -607,7 +607,7 @@ public class CUsuario extends CGeneral {
 		if (media != null) {
 
 			if (media.getContentType().equals("image/jpeg")
-					|| media.getContentType().equals("application/png"))
+					|| media.getContentType().equals("image/png"))
 
 			{
 
