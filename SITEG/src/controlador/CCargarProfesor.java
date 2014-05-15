@@ -191,8 +191,8 @@ public class CCargarProfesor extends CGeneral {
 
 			Messagebox
 					.show("Debe seleccionar la lista de profesores que desea registrar",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 
 		}
 

@@ -223,8 +223,8 @@ public class CSolicitarTutor extends CGeneral {
 			EstudiantesColocados.add(e);
 		}
 		if (combo2.compareTo("") == 0) {
-			Messagebox.show("Debe elegir la tematica", "Advertencia",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			Messagebox.show("Debe elegir la tematica", "Error",
+					Messagebox.OK, Messagebox.ERROR);
 		}
 		if ((combo2.compareTo("") != 0)) {
 			catalogo.recibir("transacciones/VSolicitarTutor", idcombo, valor, 0);
@@ -259,8 +259,8 @@ public class CSolicitarTutor extends CGeneral {
 			gridEstudiante.add(estudiante);
 		}
 		if (gridEstudiante.size() == 0) {
-			Messagebox.show("No hay estudiantes agregados", "Advertencia",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			Messagebox.show("Debe agregar al menos un estudiante", "Error",
+					Messagebox.OK, Messagebox.ERROR);
 		} else {
 			if (cmbAreaSolicitud.getText().compareTo("") == 0
 					|| cmbTematicaSolicitud.getText().compareTo("") == 0 
@@ -362,14 +362,14 @@ public class CSolicitarTutor extends CGeneral {
 
 		String cedulaEstudiante = txtCedulaEstudiante.getValue();
 		if (cedulaEstudiante == "") {
-			Messagebox.show("Debe ingresar su cedula", "Advertencia",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			Messagebox.show("Debe ingresar su cedula", "Error",
+					Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Estudiante estudiante = servicioEstudiante
 					.buscarEstudiante(cedulaEstudiante);
 			if (estudiante == null) {
 				Messagebox.show("Debe estar previamente Registrado",
-						"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+						"Error", Messagebox.OK, Messagebox.ERROR);
 				txtCedulaEstudiante.setValue("");
 			} else {
 				SolicitudTutoria solicitud = servicioSolicitudTutoria
@@ -411,8 +411,8 @@ public class CSolicitarTutor extends CGeneral {
 								
 								Messagebox
 										.show("No se permiten mas estudiantes por Trabajo Especial de Grado",
-												"Advertencia", Messagebox.OK,
-												Messagebox.EXCLAMATION);
+												"Error", Messagebox.OK,
+												Messagebox.ERROR);
 							} else {
 								if (programa != null) {
 
@@ -420,9 +420,9 @@ public class CSolicitarTutor extends CGeneral {
 											.getId()) {
 										Messagebox
 												.show("Los estudiantes deben ser del mismo programa",
-														"Advertencia",
+														"Error",
 														Messagebox.OK,
-														Messagebox.EXCLAMATION);
+														Messagebox.ERROR);
 										txtCedulaEstudiante.setValue("");
 									} else {
 										programa = estudiante.getPrograma();

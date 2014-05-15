@@ -184,8 +184,8 @@ public class CCargarEstudiante extends CGeneral {
 
 			Messagebox
 					.show("Debe seleccionar la lista de estudiantes que desea registrar",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 
 		}
 

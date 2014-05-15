@@ -112,8 +112,8 @@ public class CProfesorTematicas extends CGeneral {
 				if (selectedItems.size() == 0) {
 
 					Messagebox.show("Debe seleccionar una tematica ",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 
 				} else {
 
@@ -154,8 +154,8 @@ public class CProfesorTematicas extends CGeneral {
 				if (selectedItems.size() == 0) {
 
 					Messagebox.show("Debe seleccionar una tematica ",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 
 				} else {
 
