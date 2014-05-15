@@ -266,7 +266,7 @@
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 
-				<listheader label="Descripcion" align="center" />
+				
 				<listheader label="Fecha" align="center" />
 				<listheader label="Estatus" align="center" />
 				<listheader label="Cedula Profesor" align="center" />
@@ -293,7 +293,7 @@
 
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
-					<listcell label="${each.descripcionTeg}" />
+					
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.estatus}" />
 					<listcell label="${each.cedulaProfesor}" />
@@ -325,8 +325,7 @@
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 
-				<listheader label="Descripcion" align="center"
-					/>
+				
 				<listheader label="Fecha" align="center" />
 				<listheader label="Estatus" align="center"  />
 				<listheader label="Cedula Profesor" align="center"
@@ -382,8 +381,7 @@
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 
-				<listheader label="Descripcion" align="center"
-					 />
+				
 				<listheader label="Fecha" align="center"  />
 				<listheader label="Estatus" align="center"  />
 				<listheader label="Cedula Profesor" align="center"
@@ -411,7 +409,7 @@
 
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
-					<listcell label="${each.descripcionTeg}" />
+					
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.estatus}" />
 					<listcell label="${each.cedulaProfesor}" />
@@ -441,8 +439,7 @@
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 
-				<listheader label="Descripcion" align="center"
-					 />
+				
 				<listheader label="Fecha" align="center"  />
 				<listheader label="Estatus" align="center" />
 				<listheader label="Cedula Profesor" align="center"
@@ -496,8 +493,7 @@
 
 			<listhead>
 
-				<listheader label="Descripcion" align="center"
-					 />
+				
 				<listheader label="Fecha" align="center"  />
 				<listheader label="Estatus" align="center"  />
 				<listheader label="Cedula Profesor" align="center"
@@ -518,7 +514,7 @@
 
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
-					<listcell label="${each.descripcionTeg}" />
+					
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.estatus}" />
 					<listcell label="${each.cedulaProfesor}" />
@@ -542,8 +538,7 @@
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 
-				<listheader label="Descripcion" align="center"
-					 />
+				
 				<listheader label="Fecha" align="center"  />
 				<listheader label="Estatus" align="center"  />
 				<listheader label="Cedula Profesor" align="center"
@@ -567,7 +562,7 @@
 
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
-					<listcell label="${each.descripcionTeg}" />
+					
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.estatus}" />
 					<listcell label="${each.cedulaProfesor}" />
@@ -595,8 +590,7 @@
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 				<listheader label="Titulo" align="center"  />
-				<listheader label="Descripcion Teg" align="center"
-					 />
+				
 				<listheader label="Fecha Teg" align="center"
 					 />
 				<listheader label="Cedula Tutor" align="center"
@@ -626,7 +620,7 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
+					
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -652,7 +646,7 @@
 		<separator />
 
 		<listbox id="ltbElegiPrograma" mold="paging" pageSize="4" width="3100px"
-			style="margin-left:4%;margin-right:4%" 
+			style="margin-left:15px;margin-right:15px;overflow: scroll;"
 			emptyMessage="No hay datos Disponiles">
 
 
@@ -660,8 +654,7 @@
 
 			<listhead>
 				<listheader label="Titulo" align="center"  />
-				<listheader label="Descripcion Teg" align="center"
-					 />
+				
 				<listheader label="Fecha Teg" align="center"
 					 />
 				<listheader label="Cedula Tutor" align="center"
@@ -687,7 +680,7 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
+					
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -715,8 +708,7 @@
 
 			<listhead>
 				<listheader label="Titulo" align="center"  />
-				<listheader label="Descripcion Teg" align="center"
-					 />
+				
 				<listheader label="Fecha Teg" align="center"
 					 />
 				<listheader label="Cedula Tutor" align="center"
@@ -744,7 +736,7 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
+				
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -770,8 +762,7 @@
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 				<listheader label="Titulo" align="center"  />
-				<listheader label="Descripcion Teg" align="center"
-					 />
+				
 				<listheader label="Fecha Teg" align="center"
 					 />
 				<listheader label="Cedula Tutor" align="center"
@@ -796,7 +787,7 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
+					
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -822,8 +813,7 @@
 
 			<listhead>
 				<listheader label="Titulo" align="center"  />
-				<listheader label="Descripcion Teg" align="center"
-					 />
+				
 				<listheader label="Fecha Teg" align="center"
 					 />
 				<listheader label="Cedula Tutor" align="center"
@@ -847,7 +837,7 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
+					
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
@@ -868,8 +858,7 @@
 			emptyMessage="No hay datos Disponiles">
 			<listhead>
 				<listheader label="Titulo" align="center"  />
-				<listheader label="Descripcion Teg" align="center"
-					 />
+				
 				<listheader label="Fecha Teg" align="center"
 					 />
 				<listheader label="Cedula Tutor" align="center"
@@ -894,7 +883,7 @@
 			<template name="model">
 				<listitem tooltip="pupSeleccionSolicitud">
 					<listcell label="${each.tituloTeg}" />
-					<listcell label="${each.descripcionTeg}" />
+					
 					<listcell label="${each.fechaTeg}" />
 					<listcell label="${each.cedulaProfesor}" />
 					<listcell label="${each.nombreTutor}" />
