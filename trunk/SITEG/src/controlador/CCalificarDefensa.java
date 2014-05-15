@@ -172,14 +172,14 @@ public class CCalificarDefensa extends CGeneral {
 		dejeenblanco = false;
 		if (cmbMencionTeg.getValue().equals("")) {
 			Messagebox.show("Debe Seleccionar una mencion para el TEG",
-					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			if ((rdoAprobado.isChecked() == false)
 					&& (rdoReprobado.isChecked() == false)) {
 				Messagebox
 						.show("Debe indicar si el TEG se encuentra Aprobado o Reprobado",
-								"Advertencia", Messagebox.OK,
-								Messagebox.EXCLAMATION);
+								"Error", Messagebox.OK,
+								Messagebox.ERROR);
 			} else {
 				long auxId2;
 				auxId2 = auxId;

@@ -234,8 +234,8 @@ public class CAsignarComision extends CGeneral {
 
 			if (selectedItems.size() == 0) {
 
-				Messagebox.show("Debe seleccionar un profesor ", "Advertencia",
-						Messagebox.OK, Messagebox.EXCLAMATION);
+				Messagebox.show("Debe seleccionar un profesor ", "Error",
+						Messagebox.OK, Messagebox.ERROR);
 
 			} else {
 
@@ -270,8 +270,8 @@ public class CAsignarComision extends CGeneral {
 
 		if (selectedItems.size() == 0) {
 
-			Messagebox.show("Debe seleccionar un profesor ", "Advertencia",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			Messagebox.show("Debe seleccionar un profesor ", "Error",
+					Messagebox.OK, Messagebox.ERROR);
 
 		} else {
 

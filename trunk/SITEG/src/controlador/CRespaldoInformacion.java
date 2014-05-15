@@ -277,7 +277,7 @@ public class CRespaldoInformacion extends CGeneral {
 
 		} else if (!extension.contains("backup")) {
 			Messagebox.show("Debe seleccionar un archivo de tipo .backup",
-					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			try {
 				borrarEsquema("public");

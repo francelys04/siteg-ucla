@@ -104,8 +104,8 @@ public class CConfigurarPrograma extends CGeneral {
 				if (selectedItems.size() == 0) {
 
 					Messagebox.show("Debe seleccionar un requisito ",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 
 				} else {
 
@@ -144,8 +144,8 @@ public class CConfigurarPrograma extends CGeneral {
 				if (selectedItems.size() == 0) {
 
 					Messagebox.show("Debe seleccionar un requisito ",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 
 				} else {
 
@@ -186,8 +186,8 @@ public class CConfigurarPrograma extends CGeneral {
 
 					Messagebox.show(
 							"Debe seleccionar un area de investigacion ",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 
 				} else {
 
@@ -229,8 +229,8 @@ public class CConfigurarPrograma extends CGeneral {
 
 					Messagebox.show(
 							"Debe seleccionar un area de investigacion ",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 
 				} else {
 
@@ -270,8 +270,8 @@ public class CConfigurarPrograma extends CGeneral {
 				if (selectedItems.size() == 0) {
 
 					Messagebox.show("Debe seleccionar un item de evaluacion ",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 
 				} else {
 
@@ -311,8 +311,8 @@ public class CConfigurarPrograma extends CGeneral {
 				if (selectedItems.size() == 0) {
 
 					Messagebox.show("Debe seleccionar un item de evaluacion ",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 
 				} else {
 

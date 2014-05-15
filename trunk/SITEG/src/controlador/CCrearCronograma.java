@@ -106,7 +106,7 @@ public class CCrearCronograma extends CGeneral {
 
 			if (actividadesSeleccionadas == false) {
 				Messagebox.show("Debe seleccionar una actividad ",
-						"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+						"Error", Messagebox.OK, Messagebox.ERROR);
 			}
 
 			for (int i = 0; i < listitemEliminar.size(); i++) {
@@ -157,7 +157,7 @@ public class CCrearCronograma extends CGeneral {
 
 			if (actividadesSeleccionadas == false) {
 				Messagebox.show("Debe seleccionar una actividad ",
-						"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+						"Error", Messagebox.OK, Messagebox.ERROR);
 
 			}
 

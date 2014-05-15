@@ -69,16 +69,16 @@ public class CSubirTeg extends CGeneral {
 				if (tegEstudiante == null) {
 					Messagebox.show(
 							"Para subir el TEG, el mismo debe estar aprobado",
-							"Advertencia", Messagebox.OK,
-							Messagebox.EXCLAMATION);
+							"Error", Messagebox.OK,
+							Messagebox.ERROR);
 					wdwSubirTeg.onClose();
 
 				}
 			} else {
 				Messagebox
 						.show("No tiene permisos para subir un Trabajo Especial de Grado",
-								"Advertencia", Messagebox.OK,
-								Messagebox.EXCLAMATION);
+								"Error", Messagebox.OK,
+								Messagebox.ERROR);
 				wdwSubirTeg.onClose();
 			}
 

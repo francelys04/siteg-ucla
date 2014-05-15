@@ -175,14 +175,14 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 	public void GuardarVerificacion() {
 		if (ltbRequisitosSeleccionadas.getItems().size() == 0) {
 			Messagebox.show("Debe seleccionar al menos un requisito",
-					"Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
+					"Error", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			if ((rdoCompleto.isChecked() == false)
 					&& (rdoIncompleto.isChecked() == false)) {
 				Messagebox
 						.show("Debe indicar si los requisitos estan completos o incompletos",
-								"Advertencia", Messagebox.OK,
-								Messagebox.EXCLAMATION);
+								"Error", Messagebox.OK,
+								Messagebox.ERROR);
 			} else {
 
 				if ((rdoCompleto.isChecked() == true)
@@ -191,8 +191,8 @@ public class CVerificarSolicitudProyecto extends CGeneral {
 
 					Messagebox
 							.show("Todos los requisitos deben ser verificados para seleccionar la opcion de requisitos completos y correctos",
-									"Advertencia", Messagebox.OK,
-									Messagebox.EXCLAMATION);
+									"Error", Messagebox.OK,
+									Messagebox.ERROR);
 
 				} else {
 
