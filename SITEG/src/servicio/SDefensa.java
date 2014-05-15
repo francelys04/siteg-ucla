@@ -36,6 +36,19 @@ public class SDefensa {
 		defensas=interfaceDefensa.buscarDefensaTegSegunEstatus(estatus,fechaInicio,fechaFin);
 		return defensas;
 	}
+	
+	public List<Defensa> buscardefensasegunareaprogramaareayestatus(String estatus,Programa programa,AreaInvestigacion area,Date fechaInicio,Date fechaFin){
+		List<Defensa> defensas;
+		defensas=interfaceDefensa.buscarDefensaTegSegunEstatusProgramayarea(estatus, programa, area, fechaInicio, fechaFin);
+		return defensas;
+	}
+	
+	public List<Defensa> buscardefensasegunareaprogramaareay(Programa programa,AreaInvestigacion area,Date fechaInicio,Date fechaFin){
+		List<Defensa> defensas;
+		defensas=interfaceDefensa.buscarDefensaTegSegunProgramayarea( programa, area, fechaInicio, fechaFin);
+		return defensas;
+	}
+
 
 	public List<Defensa> buscarDefensaTegSegunEstatusTematica(String estatus,Tematica tematica,Date fechaInicio,Date fechaFin){
 		List<Defensa> defensas;

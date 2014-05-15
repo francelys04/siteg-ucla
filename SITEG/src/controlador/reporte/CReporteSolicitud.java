@@ -677,18 +677,15 @@ public class CReporteSolicitud extends CGeneral {
 								cancelar();
 								chequeoEstatus = 2;
 								if (rdoProyecto.isChecked() == true) {
-									teg = servicioTeg
-											.buscarTegsSegunAreaUnEstatus(
-													area1, fechaInicio,
-													fechaFin, estatusProyecto);
+									teg = servicioTeg.buscarTegPorAreaEstatusPrograma(programa1, area1, estatusProyecto, fechaInicio, fechaFin);
+											
 									NombreTxt = "SolicitudesProyecto";
 								} else
 
 								if (rdoTEG.isChecked() == true) {
-									teg = servicioTeg
-											.buscarTegsSegunAreaUnEstatus(
-													area1, fechaInicio,
-													fechaFin, estatusTeg);
+									teg = servicioTeg.buscarTegPorAreaEstatusPrograma(programa1, area1, estatusTeg, fechaInicio, fechaFin);
+									
+											
 									NombreTxt = "SolicitudesTEG";
 								} else if (rdoDefensa.isChecked() == true) {
 									teg = servicioTeg

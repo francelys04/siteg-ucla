@@ -16,17 +16,27 @@ public interface IDefensaDAO extends JpaRepository<Defensa, Long> {
 
 	Defensa findByTeg(Teg teg);
 
-	@Query("select defensa from Defensa defensa where defensa.teg in (select teg from Teg teg where teg.estatus=?1 and teg.fecha between ?2 and ?3)")
+	@Query("select defensa from Defensa defensa where defensa.estatus =?1 and defensa.teg in (select teg from Teg teg where teg.fecha between ?2 and ?3)")
 	public List<Defensa> buscarDefensaTegSegunEstatus(String estatus,Date fechaInicio,Date fechaFin);
 
-	@Query("select defensa from Defensa defensa where defensa.teg in (select teg from Teg teg where teg.estatus=?1 and teg.tematica=?2 and teg.fecha between ?3 and ?4 )")
+	@Query("select defensa from Defensa defensa where defensa.estatus =?1 and defensa.teg in (select teg from Teg teg where teg.tematica=?2 and teg.fecha between ?3 and ?4 )")
 	public List<Defensa> buscarDefensaTegSegunEstatusTematica(String estatus,Tematica tematica,Date fechaInicio,Date fechaFin);
 
-	@Query("select defensa from Defensa defensa where defensa.teg in (select teg from Teg teg where teg.estatus=?1 and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?2) and teg.fecha between ?3 and ?4 )")
+	@Query("select defensa from Defensa defensa where defensa.estatus =?1 and defensa.teg in (select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion=?2) and teg.fecha between ?3 and ?4 )")
 	public List<Defensa> buscarDefensaTegSegunEstatusArea(String estatus,AreaInvestigacion area,Date fechaInicio,Date fechaFin);
 
-	@Query("select defensa from Defensa defensa where defensa.teg in (select teg from Teg teg where teg.estatus=?1 and teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?2)) and teg.fecha between ?3 and ?4 )")
+	@Query("select defensa from Defensa defensa where defensa.estatus =?1 and defensa.teg in (select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?2)) and teg.fecha between ?3 and ?4 )")
 	public List<Defensa> buscarDefensaTegSegunEstatusPrograma(String estatus,Programa programa,Date fechaInicio,Date fechaFin);
+	
+	
+	@Query("select defensa from Defensa defensa where defensa.estatus =?1 and defensa.teg in (select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion =?3 and  tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?2)) and teg.fecha between ?4 and ?5 )")
+	public List<Defensa> buscarDefensaTegSegunEstatusProgramayarea(String estatus,Programa programa,AreaInvestigacion area,Date fechaInicio,Date fechaFin);
+	
+	
+	@Query("select defensa from Defensa defensa where defensa.teg in (select teg from Teg teg where teg.tematica in (select tematica from Tematica tematica where tematica.areaInvestigacion =?2 and  tematica.areaInvestigacion in (select programaarea.area from ProgramaArea programaarea where programaarea.programa=?1)) and teg.fecha between ?3 and ?4 )")
+	public List<Defensa> buscarDefensaTegSegunProgramayarea(Programa programa,AreaInvestigacion area,Date fechaInicio,Date fechaFin);
+	
+	
 	
 	public List<Defensa> findByFechaBetween(Date fechaInicio, Date fechaFin);
 	
