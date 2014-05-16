@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReporteProyecto" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86643447-ad29-4b3c-8409-5f8e59397c3f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="264"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#0099CC"/>
@@ -252,6 +252,13 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 		<band height="51" splitType="Stretch">
 			<textField>
 				<reportElement style="table" x="350" y="0" width="135" height="51" backcolor="#009999" uuid="6ff28970-f3b7-4be4-b01c-c8366f7bd092"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -259,6 +266,13 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement style="table" x="614" y="0" width="138" height="51" uuid="8a0bea56-7b55-415d-8432-09e6253901ac"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -266,6 +280,13 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 			</textField>
 			<textField>
 				<reportElement style="table" x="214" y="0" width="136" height="51" uuid="8c4b84ae-3011-4c20-8ca9-ea8b4da0b896"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -273,6 +294,13 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement style="table" x="485" y="0" width="129" height="51" uuid="0130c7e4-ceef-4c2a-a6ac-05692e8dbfe5"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -280,6 +308,13 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 			</textField>
 			<textField>
 				<reportElement style="table" x="1" y="0" width="213" height="51" uuid="d991c65c-a0c2-4a8b-8f9e-c4355c284dcb"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
