@@ -218,11 +218,6 @@ public class CEstudiante extends CGeneral {
 		String cedula = txtCedulaEstudiante.getValue();
 		final Estudiante estudiante = servicioEstudiante
 				.buscarEstudiante(cedula);
-		List tegsNoCulminados = servicioTeg
-				.buscarTegNoCulminadosEstudiante(estudiante);
-		List solNoCulminadas = servicioSolicitudTutoria
-				.buscarSolicitudesTutoriaNoCulminadasEstudiante(estudiante);
-		if (tegsNoCulminados.size() == 0 && solNoCulminadas.size() == 0) {
 			Messagebox.show("¿Desea eliminar los datos del estudiante?",
 					"Dialogo de confirmacion", Messagebox.OK
 							| Messagebox.CANCEL, Messagebox.QUESTION,
@@ -241,17 +236,7 @@ public class CEstudiante extends CGeneral {
 							}
 						}
 					});
-		} else if (tegsNoCulminados.size() != 0) {
-			Messagebox
-					.show("Este estudiante no puede ser eliminado no ha culminado el TEG",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-		} else if (solNoCulminadas.size() != 0) {
-			Messagebox
-					.show("Este estudiante no puede ser eliminado ya que posee solicitudes de tutoria no cerradas",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-		}
+		
 	}
 
 	/**
