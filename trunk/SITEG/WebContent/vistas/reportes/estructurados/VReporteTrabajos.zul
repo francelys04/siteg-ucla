@@ -258,7 +258,7 @@
 								style="font-weight:bold" />
 						</hlayout>
 
-						<combobox id="cmbEstatus"  style="margin-left:40px"
+						<combobox id="cmbEstatus"  style="margin-left:20px"
 							tooltip="pupSeleccionarEstatus" width="250px" readonly="true">
 							<template name="model">
 								<comboitem label="${each}" />

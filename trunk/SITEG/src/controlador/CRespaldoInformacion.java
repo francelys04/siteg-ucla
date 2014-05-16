@@ -234,6 +234,7 @@ public class CRespaldoInformacion extends CGeneral {
 	/**
 	 * Metodo que permite reiniciar los campos de la vista a su estado original
 	 */
+	
 	public void cancelar() {
 		rbDispositivo.setChecked(false);
 		rbLocal.setChecked(false);
@@ -246,6 +247,20 @@ public class CRespaldoInformacion extends CGeneral {
 		btnRestaurar.setVisible(false);
 
 	}
+	
+	
+	/**
+	 * Metodo que permite limpiar los campos de la vista, asi como tambien la
+	 * variable global id
+	 */
+	@Listen("onClick = #btnCancelar")
+	public void cancelarRespaldo() {
+		
+		
+		cancelar();
+		
+	}
+	
 
 	/***
 	 * Metodo que permite seleccionar el archivo a restaurar
