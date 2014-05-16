@@ -269,9 +269,12 @@ public class CProfesor extends CGeneral {
 		String cedula = txtCedulaProfesor.getValue();
 		Profesor profesor = servicioProfesor
 				.buscarProfesorPorCedula(cedula);
-		List<SolicitudTutoria> solicitudes = servicioSolicitudTutoria.buscarPorProfesorYEstatus(profesor);
-		List<Teg> tegNoCulminados = servicioTeg.buscarTegNoCulminadosProfesor(profesor);
-		if (solicitudes.size() == 0 && tegNoCulminados.size() == 0) {
+		List<SolicitudTutoria> solicitudes = null;
+		List<Teg> tegNoCulminados = null;
+		 solicitudes = servicioSolicitudTutoria.buscarPorProfesorYEstatus(profesor);
+		 tegNoCulminados = servicioTeg.buscarTegNoCulminadosProfesor(profesor);
+		
+		if (solicitudes.size() == 0) {
 			Messagebox.show("¿Desea eliminar los datos del profesor?",
 					"Dialogo de confirmacion", Messagebox.OK | Messagebox.CANCEL,
 					Messagebox.QUESTION,
@@ -290,13 +293,8 @@ public class CProfesor extends CGeneral {
 								}
 						}
 					});
-		} else if(solicitudes.size() !=0){
+		} else if (solicitudes.size() !=0){
 			Messagebox.show("No se puede Eliminar el Profesor tiene Solicitudes de Tutoria aceptadas ",
-					"Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
-		}else if(tegNoCulminados.size() != 0){
-			System.out.println("pasooooooo");
-			Messagebox.show("No se puede Eliminar el Profesor tiene TEG asignados  ",
 					"Informacion", Messagebox.OK,
 					Messagebox.INFORMATION);
 		}
