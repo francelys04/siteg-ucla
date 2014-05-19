@@ -107,11 +107,11 @@ GESTION DE TRABAJOS ESPECIALES DE GRADO]]></text>
 	<pageHeader>
 		<band height="75" splitType="Stretch">
 			<staticText>
-				<reportElement x="170" y="19" width="232" height="31" uuid="638d873b-c8d2-44ba-880a-6050fe178af8"/>
+				<reportElement x="132" y="18" width="285" height="31" uuid="638d873b-c8d2-44ba-880a-6050fe178af8"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[Defensas]]></text>
+				<text><![CDATA[Estados de los TEG Finalizados]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
