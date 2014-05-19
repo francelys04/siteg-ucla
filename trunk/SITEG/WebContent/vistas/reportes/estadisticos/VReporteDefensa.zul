@@ -1,5 +1,5 @@
-<window id="wdwReporteDefensa" title="Defensa" border="normal"
-	width="100%" height="auto" closable="true"
+<window id="wdwReporteDefensa" title="Estados de los TEG Finalizados"
+	border="normal" width="100%" height="auto" closable="true"
 	apply="controlador.reporte.CReporteEstadisticoDefensa">
 
 	<style dynamic="true">
@@ -130,8 +130,8 @@
 						</hlayout>
 
 						<datebox id="dtbFin" cols="12"
-							tooltip= "pupFinLapso" style="margin-left:30px"
-							readonly="true" width="150px" format="dd/MM/yyyy"
+							tooltip="pupFinLapso" style="margin-left:30px" readonly="true"
+							width="150px" format="dd/MM/yyyy"
 							onCreate="self.value = new Date()">
 						</datebox>
 					</hbox>
@@ -239,5 +239,5 @@
 
 	<separator />
 	<separator />
-	
+
 </window>
